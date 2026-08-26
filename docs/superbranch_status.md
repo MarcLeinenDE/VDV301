@@ -32,11 +32,20 @@ IBIS-IP_AnalogRadioService_V2.4.xsd
 IBIS-IP_VideoRecordingService_V2.4.xsd
 ```
 
+Additional isolated upstream fix integrated for the working schema set:
+
+```text
+IBIS-IP_common_V2.3.xsd InternationalTextType type fix from VDVde/VDV301#30
+```
+
 ## Upstream PR relationship
 
 - `VDVde/VDV301#31` is the clean draft PR for the DMS V2.4 schema candidate.
+- `VDVde/VDV301#30` is an isolated V2.3 common-structure fix and has been applied to this working branch.
+- `VDVde/VDV301#29` largely represents the broader V2.4 candidate aggregation; its visible file set is already represented in this superbranch, but its own PR body states that no comparison with the VDV301 documents was made.
+- `VDVde/VDV301#27` contributes AnalogRadioService V2.4 and VideoRecordingService V2.4; those files are represented here, but the include-version suggestions in the PR discussion still need local validation in the final schema pool.
+- `VDVde/VDV301#25` contributes CustomerInformationService V2.4, DeviceManagementService V2.3 and common V2.4; those areas are represented here, but the PR is broad and still needs individual source/diff review.
 - This superbranch may contain broader material than PR #31 and must therefore remain separate.
-- Further open PRs such as #25, #27, #29, and #30 still need individual source/diff review before their content is treated as fully validated.
 
 ## Validation helpers
 
