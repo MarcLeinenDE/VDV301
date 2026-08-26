@@ -38,6 +38,7 @@ Integrated as fork candidate:
 ## Known gaps after integrating public candidates
 
 - `IBIS-IP_DeviceManagementService_V2.4.xsd` still has to be derived and validated.
+- The derivation and PR decision points are documented in `docs/dms_v2_4_derivation_plan.md`.
 
 ## Checked non-gap
 
