@@ -1,0 +1,14 @@
+area,pdf_observation,xsd_observation,classification,next_step
+source,"VDV-Schrift 301-2-3 CustomerInformationService V2.0, 02/2018","IBIS-IP_CustomerInformationService_V2.0.xsd imported from official VDVde/VDV301 tag VDV-301-2.0",historical_official_release_material,compile_selected_pool_later
+dependency_pool,"CIS V2.0 service PDF","includes IBIS-IP_common_V2.0.xsd and IBIS-IP_Enumerations_V2.0.xsd",aligned,compile_CIS_V2_0_pool
+operation_overview,"PDF lists Get, Subscribe, Unsubscribe and RetrievePartialStopSequence operations","XSD group contains concrete Get response and RetrievePartialStopSequence request/response elements only",candidate_note_CIS_002,check_generic_subscribe_model_across_general_conventions_and_services
+GetAllDataResponse,"choice AllData or OperationErrorMessage","choice AllData or OperationErrorMessage",aligned,local_positive_sample
+AllData.TripInformation,"1:2","maxOccurs=2 and default minOccurs=1",aligned,local_positive_sample
+AllData.VehicleInformationGroup,"RouteDeviation mandatory; DoorState/InPanic/VehicleStopRequested/ExitSide/MovingDirectionForward/VehicleMode/SpeakerActive/StopInformationActive optional","same first-pass structure observed",aligned,local_positive_sample
+CurrentConnectionInformationData.CurrentConnection,"0:*","minOccurs=0 maxOccurs=unbounded",aligned,local_zero_and_multiple_samples
+CurrentDisplayContentData.CurrentDisplayContent,"1:*","maxOccurs=unbounded and default minOccurs=1",aligned,local_positive_and_negative_samples
+TripData.TripInformation,"1:1","default 1:1",aligned,local_positive_sample
+VehicleData.VehicleInformationGroup,"VehicleInformationGroup reused","VehicleInformationGroup reused",aligned,local_positive_sample
+PartialStopSequenceData.StopSequence,"1:1","default 1:1",aligned,local_positive_sample
+GetCurrentConnectionInformation naming,"PDF operation overview uses GetCurrentConnectionInformation; detailed table heading says GetCurrentConnectionResponse","XSD uses CustomerInformationService.GetCurrentConnectionInformationResponse",candidate_note_CIS_003,provider_facing_documentation_note
+RetrievePartialStopSequence naming,"PDF operation overview uses RetrievePartialStopSequence; detailed request table says RetrievePartialStopRequest","XSD uses CustomerInformationService.RetrievePartialStopSequenceRequest",candidate_note_CIS_004,provider_facing_documentation_note
