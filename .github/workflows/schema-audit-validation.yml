@@ -21,7 +21,7 @@ jobs:
       - name: Install validation dependency
         run: python -m pip install --disable-pip-version-check lxml
 
-      - name: Run superbranch compile and legacy-root checks
+      - name: Run schema audit checks
         shell: bash
         run: |
           set +e
@@ -38,19 +38,27 @@ jobs:
             > audit-results/legacy_v1_root_adapters.log 2>&1
           legacy_status=$?
 
+          python tools/validate_pcs_v21_operation_not_supported.py \
+            > audit-results/pcs_001_operation_not_supported.log 2>&1
+          pcs_status=$?
+
           {
             echo 'check,authority,target,exit_code'
             echo "root_compile_plus_dms_v24,mixed_inventory_with_candidate_tests,repository_root,$root_status"
             echo "legacy_v1_root_adapters,official_root_mapping_plus_official_service_xsds,schema_profiles/VDV-301-1.0-root-map.csv,$legacy_status"
+            echo "pcs_001_operation_not_supported,official_PCS_V2.1_exact_route_plus_enum_control,PCS_V2.1_Common_V1.0_Enums_V1.0,$pcs_status"
           } > audit-results/validation_status.csv
 
           echo "root_compile_plus_dms_v24 exit=$root_status"
           cat audit-results/root_pool_and_dms_v24.log
           echo "legacy_v1_root_adapters exit=$legacy_status"
           cat audit-results/legacy_v1_root_adapters.log
+          echo "pcs_001_operation_not_supported exit=$pcs_status"
+          cat audit-results/pcs_001_operation_not_supported.log
 
           echo "$root_status" > audit-results/root_status.txt
           echo "$legacy_status" > audit-results/legacy_status.txt
+          echo "$pcs_status" > audit-results/pcs_status.txt
 
       - name: Upload validation evidence
         if: always()
@@ -65,9 +73,11 @@ jobs:
         run: |
           root_status=$(cat audit-results/root_status.txt)
           legacy_status=$(cat audit-results/legacy_status.txt)
+          pcs_status=$(cat audit-results/pcs_status.txt)
           echo "root_status=$root_status"
           echo "legacy_status=$legacy_status"
-          if [ "$root_status" -ne 0 ] || [ "$legacy_status" -ne 0 ]; then
+          echo "pcs_status=$pcs_status"
+          if [ "$root_status" -ne 0 ] || [ "$legacy_status" -ne 0 ] || [ "$pcs_status" -ne 0 ]; then
             echo "Validation evidence contains failures; inspect uploaded logs."
           else
             echo "All validation checks passed."
