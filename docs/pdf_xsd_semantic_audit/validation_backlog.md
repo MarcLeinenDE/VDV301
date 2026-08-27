@@ -79,6 +79,7 @@ Source:
 
 ```text
 docs/pdf_xsd_semantic_audit/02_dms_v2_4_pdf_xsd_audit.md
+docs/pdf_xsd_semantic_audit/02a_dms_v2_2_v2_3_v2_4_history_compare.md
 ```
 
 Scope:
@@ -257,8 +258,26 @@ Started; first pass completed for the V2.4 documented technical correction scope
 No new DMS-specific CE finding opened in the first pass.
 ```
 
-Next semantic follow-up:
+### SB-009 - DMS V2.2 / V2.3 / V2.4 history comparison
+
+Source:
 
 ```text
-Compare DMS V2.2 / V2.3 / V2.4 history to confirm that the DMS V2.4 candidate only applies the documented V2.4 correction scope and does not accidentally include unrelated changes.
+docs/pdf_xsd_semantic_audit/02a_dms_v2_2_v2_3_v2_4_history_compare.md
+```
+
+Status:
+
+```text
+Completed first pass.
+No new DMS-specific CE finding opened.
+DMS V2.4 candidate remains limited to the documented DMS V2.4 technical correction scope plus V2.4 dependency-family alignment.
+DMS V2.3 remains labelled as integration/fork/candidate comparison material, not an official authority.
+```
+
+Follow-up:
+
+```text
+Run VB-005 later for actual schema compilation and targeted XML samples.
+Continue with next non-visual service block, recommended: TicketValidationService V2.2 / V2.3 / V2.4 include and semantic history.
 ```
