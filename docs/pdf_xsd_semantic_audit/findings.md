@@ -73,7 +73,7 @@ Continue table-level checks beyond the V2.4-changed areas: full datatype, struct
 
 ### CE-004 - ServiceNameEnumeration V2.4 PDF table vs XSD/version-history discrepancy
 
-State: discrepancy noted; likely documentation/table inconsistency, not an immediate XSD defect.
+State: confirmed PDF/XSD table discrepancy; likely documentation/table inconsistency, not an immediate XSD defect.
 
 Observation:
 
@@ -85,7 +85,7 @@ The V2.4 ServiceNameEnumeration PDF table still lists SystemDocumentationService
 SystemManagementService and SystemMonitoringService.
 
 IBIS-IP_Enumerations_V2.4.xsd contains SystemMonitoringService but does not contain
-SystemDocumentationService or SystemManagementService in the checked ServiceNameEnumeration snippet.
+SystemDocumentationService or SystemManagementService.
 ```
 
 Impact:
@@ -144,7 +144,7 @@ If fixed, scope it as a separate schema-correction candidate and do not mix it i
 
 ### CE-006 - DeviceStateEnumeration contains XSD-only warning value
 
-State: discrepancy candidate.
+State: confirmed PDF/XSD table discrepancy.
 
 Observation:
 
@@ -170,7 +170,7 @@ Check earlier Common/Enums PDFs and service-specific usage before classifying as
 
 ### CE-007 - Common enumeration case-sensitive PDF/XSD differences
 
-State: discrepancy candidate.
+State: confirmed PDF/XSD value discrepancies.
 
 Observation:
 
@@ -200,7 +200,7 @@ For actual XML validation, the tool must follow XSD values.
 
 ### CE-008 - Submode enumeration case mismatches
 
-State: discrepancy candidate.
+State: confirmed PDF/XSD value discrepancies.
 
 Observation:
 
@@ -222,6 +222,60 @@ All observed differences are case-sensitive. Payloads using the PDF spelling wou
 Next action:
 
 ```text
-Complete machine-generated extraction of all V2.4 enumeration values from IBIS-IP_Enumerations_V2.4.xsd,
-then compare against the PDF tables 65-104 before proposing any correction.
+Check historical XSD values and examples before deciding whether the PDF or XSD should be treated as authoritative for documentation.
+For actual XML validation, the tool must follow XSD values.
+```
+
+### CE-009 - RailSubmodeEnumeration specialRail vs specialTrain
+
+State: confirmed PDF/XSD value discrepancy.
+
+Observation:
+
+```text
+VDV 301-2-1 V2.4 RailSubmodeEnumeration table lists:
+specialRail.
+
+IBIS-IP_Enumerations_V2.4.xsd contains:
+specialTrain.
+```
+
+Impact:
+
+```text
+This is not a case-only difference. Payloads using specialRail according to the PDF table
+will not validate against the current XSD; payloads using specialTrain validate but are not
+listed in the V2.4 PDF table.
+```
+
+Next action:
+
+```text
+Check earlier Common/Enums PDFs/XSDs and external TPEG/NeTEx terminology before proposing a correction.
+```
+
+### CE-010 - AirSubmodeEnumeration canalBarge XSD-only value
+
+State: confirmed PDF/XSD value discrepancy.
+
+Observation:
+
+```text
+VDV 301-2-1 V2.4 AirSubmodeEnumeration table does not list canalBarge.
+
+IBIS-IP_Enumerations_V2.4.xsd contains:
+canalBarge
+with an XSD annotation that it is not in TPEG.
+```
+
+Impact:
+
+```text
+Payloads using canalBarge validate against the current XSD but are not visible in the V2.4 PDF table.
+```
+
+Next action:
+
+```text
+Check historical XSD/fork origin and whether the value is intentionally retained as an extension.
 ```
