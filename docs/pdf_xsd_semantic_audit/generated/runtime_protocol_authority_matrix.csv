@@ -29,7 +29,7 @@ DISC-V06,gc-2.2+,vdv_normative,VDV 301-2 General Conventions V2.2+,mandatory,run
 TS-V01,time-v1.0,vdv_normative,VDV 301-2-10 V1.0,mandatory,discovery_validation,service type _ibisip_udp._udp,error,"non-XSD TimeService"
 TS-V02,time-v1.0,vdv_normative,VDV 301-2-10 V1.0,mandatory,discovery_validation,TXT sntp-server contains selected profile IP address,error,"separate metadata validity from reachability"
 TS-V03,time-v1.0,vdv_normative,VDV 301-2-10 V1.0,profile_metadata,discovery_validation,TXT timezone handled without silent normalization,profile_check,"retain raw VDV value"
-SNTP-X01,time-v1.0,external_normative_referenced_by_vdv,RFC 4330,protocol,http_transport_validation,SNTP exchange semantics,profile_check,"RFC 4330 is the VDV-selected external protocol source despite being obsolete today"
+SNTP-X01,time-v1.0,external_normative_referenced_by_vdv,RFC 4330,protocol,time_runtime_validation,SNTP exchange semantics,profile_check,"RFC 4330 is the VDV-selected external protocol source despite being obsolete today"
 SNTP-X02,time-v1.0,external_normative_referenced_by_vdv,RFC 4330,should,udp_runtime_validation,client request destination UDP port 123,profile_check,"RFC-derived, not VDV-PDF-derived"
 SNTP-X03,modern-control,external_normative,RFC 5905,control_only,time_runtime_validation,current NTPv4 compatibility observation,informational,"RFC 5905 obsoletes RFC 4330; do not substitute it silently for TimeService V1.0"
 VIDEO-V01,video-live-v2.0,vdv_normative,VDV 301-2-11 V2.0,mandatory,video_runtime_validation,use returned rtspURI for live stream access,error,"media control is separate from IBIS-IP XML operation"
