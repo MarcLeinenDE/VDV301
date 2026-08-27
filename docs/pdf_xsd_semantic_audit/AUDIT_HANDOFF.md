@@ -25,6 +25,7 @@ At the start of a new chat, read these files first:
 docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF.md
 docs/pdf_xsd_semantic_audit/00_index.md
 docs/pdf_xsd_semantic_audit/AUDIT_SCOPE_MATRIX.md
+docs/pdf_xsd_semantic_audit/MIXED_VERSION_VALIDATION_PREMISE.md
 docs/pdf_xsd_semantic_audit/VALIDATION_AUTHORITY.md
 docs/pdf_xsd_semantic_audit/findings.md
 docs/pdf_xsd_semantic_audit/validation_backlog.md
@@ -50,6 +51,8 @@ docs/pdf_xsd_semantic_audit/01l_common_enums_v2_4_deferred_scope_resolution.md
 docs/pdf_xsd_semantic_audit/02_dms_v2_4_pdf_xsd_audit.md
 docs/pdf_xsd_semantic_audit/02a_dms_v2_2_v2_3_v2_4_history_compare.md
 docs/pdf_xsd_semantic_audit/03_tvs_v2_2_v2_3_v2_4_include_semantic_audit.md
+docs/pdf_xsd_semantic_audit/04_common_enums_historical_v1_0_to_v2_4_plan.md
+docs/pdf_xsd_semantic_audit/04a_common_enums_v1_0_v2_0_history.md
 ```
 
 Supporting generated inventories and matrices:
@@ -84,8 +87,9 @@ Current active direction:
 
 ```text
 Use AUDIT_SCOPE_MATRIX.md as the coverage checklist.
+Apply MIXED_VERSION_VALIDATION_PREMISE.md to every service/version pair.
 Continue non-visual audit work while user-specific visual PDF checks are deferred.
-Next foundation block: Common/Enums historical audit V1.0 -> V2.4.
+Current foundation block: Common/Enums historical audit V1.0 -> V2.4.
 ```
 
 ## Core method and authority
@@ -97,6 +101,31 @@ Next foundation block: Common/Enums historical audit V1.0 -> V2.4.
 4. No schema correction is made during audit without an explicit separate approval.
 5. Potential official PR candidates are collected only for end-of-audit review.
 6. Missing PDF/XSD version pairs are routing signals, not automatic defects.
+7. Do not apply latest-version XSD rules globally to older or mixed-version systems.
+```
+
+## Mixed-version premise
+
+File:
+
+```text
+docs/pdf_xsd_semantic_audit/MIXED_VERSION_VALIDATION_PREMISE.md
+```
+
+Key rule:
+
+```text
+Every service version that is or was published must be independently auditable and, where an XSD exists, independently validatable.
+A real IBIS-IP system may expose different services with different VDV301 versions.
+Validation must therefore be service-version scoped and dependency-pool scoped.
+```
+
+Tool/SDK consequence:
+
+```text
+No latest-wins validation.
+No global Common/Enums substitution.
+Per service: identify or select service version, load matching service XSD and exact dependency pool, then validate.
 ```
 
 ## Audit scope matrix
@@ -115,16 +144,9 @@ Track every public VDV301 service/scope and the published PDF versions listed by
 Use this as the master checklist for complete audit coverage.
 ```
 
-Important current matrix decisions:
+## Current Common/Enums status
 
-```text
-Common/Enums V1.0-V2.4 is the next foundation block.
-CIS has public PDFs through V2.3, while the branch also has a V2.4 candidate; provenance must be checked.
-Several V1.0 service PDFs have no corresponding V1.0 XSD observed in this branch; classify later as absent, special/no-XSD, renamed, or unresolved.
-Special/no-XSD candidates include TimeService and HTMLDisplayService; do not call them gaps until confirmed.
-```
-
-## Current Common/Enums V2.4 result
+V2.4 first-pass result:
 
 ```text
 01g: wrapper datatypes, InternationalTextType and NetexMode documented.
@@ -143,6 +165,15 @@ CE-017 TSPPoint Desciption vs expected Description spelling.
 ZoneType first-field casing/spelling if PDF differs from XSD FarezoneTypeID.
 ```
 
+Historical block:
+
+```text
+04_common_enums_historical_v1_0_to_v2_4_plan.md created.
+04a_common_enums_v1_0_v2_0_history.md started.
+V1.0 and V2.0 XSD-side include-family observation is clean.
+No new CE finding opened from the first V1.0 -> V2.0 observation.
+```
+
 ## Current DMS result
 
 Files:
@@ -158,12 +189,6 @@ Result:
 No new DMS-specific PDF/XSD mismatch opened.
 DMS V2.4 candidate remains limited to the documented DMS V2.4 technical correction scope plus V2.4 dependency-family alignment.
 DMS V2.3 remains labelled as integration/fork/candidate comparison material, not official authority.
-```
-
-Validation task:
-
-```text
-VB-005 DMS V2.4 schema compile and targeted positive/negative XML samples.
 ```
 
 ## Current TVS result
@@ -200,23 +225,19 @@ DMS first-pass: no DMS-specific finding opened.
 
 ## Next recommended task
 
-Next non-visual audit step:
+Continue Common/Enums historical audit:
 
 ```text
-Common/Enums historical audit V1.0 -> V2.4.
+04a_common_enums_v1_0_v2_0_history.md
 ```
 
-Reason:
+Next sub-steps:
 
 ```text
-Common/Enums is shared by nearly every service. Historical closure here prevents duplicate service-level misclassification and gives a reliable base for all remaining service audits.
-```
-
-Suggested next files:
-
-```text
-docs/pdf_xsd_semantic_audit/04_common_enums_historical_v1_0_to_v2_4_plan.md
-docs/pdf_xsd_semantic_audit/04a_common_enums_v1_0_v2_0_history.md
+1. Generate/record XSD enumeration inventories for V1.0 and V2.0.
+2. Compare V1.0 vs V2.0 XSD enumeration values.
+3. Extract/check V1.0 and V2.0 PDF enumeration tables/version histories.
+4. Decide whether existing CE findings need affected-version ranges updated.
 ```
 
 ## Working style for continuity
