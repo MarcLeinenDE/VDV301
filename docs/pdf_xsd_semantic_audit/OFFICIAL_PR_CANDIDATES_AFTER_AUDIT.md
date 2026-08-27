@@ -39,7 +39,7 @@ VDVde/VDV301 PR #31
 Add DeviceManagementService V2.4 schema candidate
 ```
 
-Do not mix unrelated Common/Enums corrections into that DMS V2.4 PR.
+Do not mix unrelated Common/Enums or TVS corrections into that DMS V2.4 PR.
 
 Potential typo/correction PRs should be separate, narrow branches after the audit.
 
@@ -52,6 +52,7 @@ Potential typo/correction PRs should be separate, narrow branches after the audi
 | cardinality mismatch | PDF says different occurrence count than XSD | not a typo; needs semantic/history review |
 | PDF-only value/name | PDF lists item omitted by XSD | likely documentation or XSD question; needs history |
 | XSD-only value/name | XSD permits item omitted by PDF | likely documentation or XSD question; needs history |
+| operation-group omission | XSD defines an operation top-level but omits it from the service operation group | possible schema consistency PR; needs compile/sample/codegen impact review |
 
 ## Current possible PR candidates
 
@@ -108,16 +109,6 @@ Initial assessment:
 Potential typo-like candidate, but not yet mature enough for a PR because PDF visual confirmation and history are still pending.
 ```
 
-Required before PR decision:
-
-```text
-- visually confirm V2.4 PDF table spelling,
-- check V1.0-V2.4 history,
-- search current official repo/forks for `Desciption` and `Description`,
-- run sample validation,
-- decide whether change is safe or whether provider-facing note is preferable.
-```
-
 ### PR-CAND-003 - AdditionalAnnouncement `InformationAtSpecificPoint` vs `SpecificPoint`
 
 Linked finding:
@@ -155,12 +146,78 @@ Initial assessment:
 Not typo candidates. These need compatibility/history and real-world usage review before any official PR consideration.
 ```
 
+### PR-CAND-005 - TVS V2.4 `GetCurrentShortHaulStopsResponse` operation-group omission
+
+Linked finding:
+
+```text
+TVS-001
+```
+
+Current observation:
+
+```text
+IBIS-IP_TicketValidationService_V2.4.xsd defines top-level element:
+TicketValidationService.GetCurrentShortHaulStopsResponse
+
+It also defines the response/data structures.
+
+However, the `TicketValidationServiceOperations` group does not list that new V2.4 operation.
+```
+
+Initial assessment:
+
+```text
+Potential narrow schema consistency candidate.
+It may affect consumers that derive operation inventory from the service group, even if direct top-level element validation still works.
+```
+
+Required before PR decision:
+
+```text
+- re-fetch current official upstream TVS V2.4 file,
+- check whether another open PR already fixes the group omission,
+- compile TVS V2.4 with the intended dependency pool,
+- run operation-inventory checks comparing top-level TicketValidationService.* elements and group members,
+- create a minimal patch only if the omission remains confirmed,
+- ask the user explicitly before preparing or opening any official PR.
+```
+
+### PR-CAND-006 - TVS V2.4 `VehicleData.RouteDeviation` PDF type-name mismatch
+
+Linked finding:
+
+```text
+TVS-002
+```
+
+Current observation:
+
+```text
+PDF table: RouteDeviation 0:1 RouteDirectionEnumeration
+XSD: RouteDeviation type="RouteDeviationEnumeration"
+```
+
+Initial assessment:
+
+```text
+Likely documentation correction candidate, not an XSD correction candidate. Validation follows XSD.
+```
+
+Required before PR decision:
+
+```text
+- check TVS V2.1/V2.2/V2.3 PDFs,
+- check examples and implementations if available,
+- decide whether provider-facing note is sufficient or documentation issue should be raised separately.
+```
+
 ## End-of-audit review checklist
 
 At the end of the full PDF/XSD audit, perform a dedicated review block:
 
 ```text
-1. List all CE findings.
+1. List all CE/TVS/service findings.
 2. Split them into documentation notes, tool-only notes, validation backlog items and possible official PR candidates.
 3. For each possible PR candidate, re-fetch current official upstream state.
 4. Check whether another open PR already covers the same issue.
