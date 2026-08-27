@@ -41,7 +41,7 @@ jobs:
           trainset_status=$?
           python tools/validate_analog_radio_ev105.py > audit-results/ev_105_analog_radio.log 2>&1
           analog_status=$?
-          python tools/validate_http_runtime_ev25b.py > audit-results/ev_25b_http_runtime.log 2>&1
+          python tools/validate_http_runtime_ev25b.py > audit-results/rv_001_http_runtime.log 2>&1
           http_status=$?
 
           {
@@ -53,7 +53,7 @@ jobs:
             echo "ev_103_video_compositors,official_video_V2.0_plus_candidate_VRS_V2.4_control,VLS_VRS_VDS,$video_status"
             echo "ev_104_trainset,official_TrainSet_V2.2_exact_contexts,TSM_002_TSD_003,$trainset_status"
             echo "ev_105_analog_radio,candidate_AnalogRadio_V2.4,ARA_003,$analog_status"
-            echo "ev_25b_http_runtime,VDV_HTTP_profile_plus_RFC9110_RFC7303,deterministic_classifier,$http_status"
+            echo "rv_001_http_runtime,VDV_HTTP_profile_plus_RFC9110_RFC7303,deterministic_classifier,$http_status"
           } > audit-results/validation_status.csv
 
           for log in audit-results/*.log; do
