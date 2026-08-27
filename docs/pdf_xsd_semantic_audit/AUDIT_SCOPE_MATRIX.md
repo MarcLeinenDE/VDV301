@@ -1,6 +1,6 @@
 # PDF/XSD audit scope matrix
 
-Status: active control matrix; refreshed after Ticketing / TicketInformation V1.0 first-pass closure.
+Status: active control matrix; refreshed after TimeService V1.0 first-pass closure.
 
 Purpose:
 
@@ -18,6 +18,7 @@ Open PR/candidate material remains candidate/integration.
 A public document without a dedicated XSD is not automatically a gap.
 Historical aggregate XSDs may be part of a version's official root-validation family.
 If the same versioned path has different official blobs in different releases, release_context/schema_revision must remain distinguishable.
+Intentionally non-XSD services must route to explicit protocol/discovery profiles instead of fabricated schemas.
 ```
 
 | Area | VDV part | Published PDF versions | Relevant XSD/routing state | Audit status | Notes |
@@ -33,8 +34,8 @@ If the same versioned path has different official blobs in different releases, r
 | NetworkLocationService | 301-2-7 | 1.0 | V1.0 | first pass completed | |
 | PassengerCountingService | 301-2-8 | 1.0, 2.1 | V1.0 official historical backfill + Common V1.0 + Enums V1.0; V1.0 roots in official IBIS_IP_V1.0 aggregate; V2.1 official + Common V1.0 + Enums V1.0 | first pass completed | PCS-001 dependency/value-set conflict; PCS-002 aggregate routing OK with note; local validation pending. |
 | Ticketing / TicketInformation | 301-2-9 | 1.0 | original V1.0: service blob 017ca646 + Common/Enums V1.0 + IBIS_IP_V1.0 aggregate roots; later official V1.0 revision blob 3fda66d8 self-contained roots + Common/Enums V1.0 | first pass completed | TKT-001..TKT-009; executable identity TicketingService; release-context key required; local validation pending. |
-| TimeService | 301-2-10 | 1.0 | no dedicated XSD observed | **next** | Confirm intentional non-XSD model and exact protocol/discovery profile. |
-| VideoLiveService | 301-2-11 | 1.0, 2.0 | V2.0 observed | pending | V1.0 provenance/backfill needed. |
+| TimeService | 301-2-10 | 1.0 | intentional non-XSD `sntp_dns_sd_profile`; `_ibisip_udp._udp`; SNTP RFC 4330; shared ServiceNameEnumeration identity | first pass completed | TS-001 OK with note; TS-002 PDF reference-number candidate; runtime validation pending. |
+| VideoLiveService | 301-2-11 | 1.0, 2.0 | V2.0 observed | **next** | Resolve V1.0 provenance/backfill and compare exact media/control dependency profiles. |
 | VideoRecordingService | 301-2-12 | 1.0, 2.0, 2.4 | V2.0 official; V2.4 candidate/integration | pending | V1.0 provenance needed. |
 | VideoDisplayService | 301-2-13 | 1.0, 2.0 | V2.0 observed | pending | V1.0 provenance needed. |
 | TrainSet services | 301-2-14 | 2.1, 2.2 | V2.1 historical official; V2.2 observed | pending | Three service schemas separately routed. |
@@ -59,21 +60,22 @@ PassengerCountingService V2.1 -> Common V1.0 + Enums V1.0; do not substitute V2.
 TicketingService V1.0 original release -> TicketInformationService-named service blob 017ca646 + Common V1.0 + Enums V1.0 + IBIS_IP_V1.0 aggregate roots.
 TicketingService V1.0 later official revision -> same filename blob 3fda66d8 + Common V1.0 + Enums V1.0; roots/group in service XSD.
 TicketingService executable XML identity is TicketingService, not TicketInformationService.
+TimeService V1.0 -> non-XSD SNTP/DNS-SD profile; do not invent TimeService XML operations/schema.
 ```
 
 ## Current priority
 
 ```text
-docs/pdf_xsd_semantic_audit/15_time_service_historical_start.md
+docs/pdf_xsd_semantic_audit/16_video_live_service_historical_start.md
 ```
 
 First actions:
 
 ```text
 1. Re-fetch branch head.
-2. Read public VDV 301-2-10 TimeService V1.0.
-3. Check VDV-301-1.0 and later official release trees for any TimeService-specific XSD.
-4. Determine exact discovery/protocol model and dependencies.
-5. Classify absence of a dedicated XSD as intentional non-XSD modelling or a genuine provenance gap.
-6. Do not invent a TimeService schema and do not claim protocol validation without an executed test.
+2. Check official VDV release tags for VideoLiveService V1.0 and V2.0 schemas.
+3. Backfill V1.0 only from an official release tag if missing from dev/schema-integration.
+4. Map exact Common/Enums dependencies for each VideoLive version.
+5. Separate XML control/configuration semantics from actual video/media transport semantics.
+6. Do not claim compile/sample/runtime validation unless actually executed.
 ```
