@@ -25,6 +25,7 @@ Important limits:
 - Semantic PDF/XSD checks are performed in small, traceable blocks.
 - Local XSD compilation and sample XML validation remain a later technical validation step.
 - Possible official correction PRs are tracked only as post-audit candidates and are not opened during the audit.
+- Manual/visual PDF checks are explicitly allowed to remain deferred while non-visual audit work continues.
 
 ## Validation authority
 
@@ -87,6 +88,7 @@ OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
 01j_common_enums_v2_4_remaining_data_structures_part2.md
 01k_common_enums_v2_4_structure_closure.md
 01l_common_enums_v2_4_deferred_scope_resolution.md
+02_dms_v2_4_pdf_xsd_audit.md
 findings.md
 validation_backlog.md
 generated/enumerations_v2_4_xsd_inventory.csv
@@ -113,12 +115,13 @@ tools/export_xsd_enumerations.py
 | Common/Enums V2.4 PDF enumeration inventory | available | PDF-side inventory exists for VDV 301-2-1 V2.4 tables 65-104. |
 | Common/Enums V2.4 PDF/XSD enumeration diff | completed first pass | Exact/case-sensitive diff exists; findings CE-004 and CE-006 through CE-010 remain open for historical classification. |
 | Common/Enums V2.4 datatypes/core structures | mostly completed first pass | Datatype inventory, InternationalTextType and NetexMode are documented in 01g. |
-| Common/Enums V2.4 common structures | first-pass almost closed | 01h/01i/01j completed; 01k closure started; 01l resolved SB-005. Visual confirmation remains for CE-015/CE-017/ZoneType. |
+| Common/Enums V2.4 common structures | visual checks deferred | 01h, 01i, 01j, 01k and 01l cover most structures; SB-005 resolved; CE-015/CE-017/ZoneType visual checks deferred. |
+| DeviceManagementService V2.4 | first pass completed | `02_dms_v2_4_pdf_xsd_audit.md`; no new DMS-specific mismatch opened; validation backlog VB-005 created. |
+| DMS V2.2/V2.3/V2.4 history | next | Needs version-history comparison to confirm candidate scope. |
 | Common structures / enumerations V1.0-V2.3 | pending | Needs older PDF/table extraction and XSD comparison. |
-| DeviceManagementService | pending | DMS V2.4 candidate already has a separate derivation document; needs integration into this audit format. |
 | TicketValidationService | pending | Must account for upstream V2.4 include state and open PR/candidate material. |
 | CustomerInformationService | pending | Coverage and provenance unclear for older versions. |
-| Remaining services | pending | To be split into small blocks after Common/Enums. |
+| Remaining services | pending | To be split into small blocks after Common/Enums/DMS. |
 
 ## Evidence policy
 
