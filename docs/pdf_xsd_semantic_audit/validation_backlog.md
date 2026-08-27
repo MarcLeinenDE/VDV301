@@ -11,6 +11,8 @@ These checks require a local checkout or downloaded XSD pool.
 Scope:
 
 ```text
+IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd
+IBIS-IP_common_V2.0.xsd + IBIS-IP_Enumerations_V2.0.xsd
 IBIS-IP_common_V2.1.xsd + IBIS-IP_Enumerations_V2.1.xsd
 IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd
 IBIS-IP_common_V2.3.xsd + IBIS-IP_Enumerations_V2.2.xsd
@@ -20,9 +22,10 @@ IBIS-IP_common_V2.4.xsd + IBIS-IP_Enumerations_V2.4.xsd
 Goal:
 
 ```text
-All includes resolve.
+All includes resolve per selected version pool.
 No duplicate type definition conflicts within a selected version pool.
 XSD parser accepts every selected schema.
+Do not mix pools unless the selected service version explicitly does so.
 ```
 
 ### VB-002 - targeted XML samples for Common/Enums V2.4
@@ -43,6 +46,7 @@ Goal:
 ```text
 Confirm whether common V2.3 intentionally uses Enumerations V2.2.
 Confirm V2.4 service candidates consistently use common V2.4 / Enumerations V2.4 when semantically required.
+Record every mixed dependency family as a version-specific fact, not as a global defect.
 ```
 
 ### VB-004 - end-of-audit local validation for official PR candidates
@@ -106,10 +110,34 @@ IBIS-IP_Enumerations_V2.4.xsd
 Goal:
 
 ```text
-Confirm TVS V2.4 compiles with the V2.4 dependency pool.
+Confirm TVS V2.4 compiles with the selected V2.4 dependency pool.
 Validate targeted positive/negative samples for the V2.4 GetCurrentShortHaulStops operation.
 Cross-check top-level TicketValidationService.* elements against TicketValidationServiceOperations group.
 Validate that VehicleData.RouteDeviation follows RouteDeviationEnumeration as required by XSD.
+```
+
+### VB-007 - mixed-version validation matrix
+
+Source:
+
+```text
+docs/pdf_xsd_semantic_audit/MIXED_VERSION_VALIDATION_PREMISE.md
+docs/pdf_xsd_semantic_audit/AUDIT_SCOPE_MATRIX.md
+```
+
+Goal:
+
+```text
+Create a later executable validation matrix that maps each service/version to its exact XSD dependency pool.
+```
+
+Required properties:
+
+```text
+No latest-wins validation.
+No global Common/Enums substitution.
+Each service payload is validated against the selected service version and dependency pool.
+Special/no-XSD services are marked explicitly instead of failing as missing files.
 ```
 
 ## Semantic audit backlog
@@ -229,13 +257,6 @@ No XSD changes made.
 
 ### SB-011 - Audit scope matrix
 
-Source:
-
-```text
-docs/pdf_xsd_semantic_audit/AUDIT_SCOPE_MATRIX.md
-docs/pdf_xsd_semantic_audit/generated/audit_scope_matrix.csv
-```
-
 Status:
 
 ```text
@@ -243,19 +264,21 @@ Initial matrix created.
 Use as master checklist for full VDV301 PDF/XSD audit coverage.
 ```
 
-Purpose:
-
-```text
-Track public VDV301 PDF versions from the VDV publication index against XSD files observed in dev/schema-integration.
-Classify missing version pairs as routing signals, not immediate defects.
-```
-
 ### SB-012 - Common/Enums historical audit V1.0 -> V2.4
 
 Status:
 
 ```text
-Next foundation block.
+Started.
+Plan file created.
+V1.0 -> V2.0 XSD-side first observation started.
+```
+
+Sources:
+
+```text
+docs/pdf_xsd_semantic_audit/04_common_enums_historical_v1_0_to_v2_4_plan.md
+docs/pdf_xsd_semantic_audit/04a_common_enums_v1_0_v2_0_history.md
 ```
 
 Reason:
@@ -264,9 +287,24 @@ Reason:
 Common/Enums is shared by nearly every service. Historical closure here prevents duplicated or misclassified service-level findings.
 ```
 
-Recommended next files:
+### SB-013 - mixed-version validation premise
+
+Source:
 
 ```text
-docs/pdf_xsd_semantic_audit/04_common_enums_historical_v1_0_to_v2_4_plan.md
-docs/pdf_xsd_semantic_audit/04a_common_enums_v1_0_v2_0_history.md
+docs/pdf_xsd_semantic_audit/MIXED_VERSION_VALIDATION_PREMISE.md
+```
+
+Status:
+
+```text
+Added as audit premise.
+Use it when classifying every PDF/XSD version pair and when designing later SDK validation behaviour.
+```
+
+Key rule:
+
+```text
+Every service version must remain independently auditable and validatable against its own selected XSD dependency pool.
+Do not use latest-version schema rules globally.
 ```
