@@ -1,0 +1,153 @@
+{
+  "manifest_version": "0.1",
+  "kind": "routing-overrides",
+  "rule": "Only record routing facts that cannot safely be inferred from ordinary XSD filenames/includes alone.",
+  "aliases": [
+    {
+      "public_service_name": "TicketingService",
+      "schema_filename_token": "TicketInformationService",
+      "service_version": "1.0",
+      "kind": "legacy_alias",
+      "note": "Executable XML/service identity uses TicketingService while repository filename is IBIS-IP_TicketInformationService_V1.0.xsd."
+    }
+  ],
+  "legacy_root_profiles": [
+    {
+      "service_name": "CustomerInformationService",
+      "service_version": "1.0",
+      "service_xsd": "IBIS-IP_CustomerInformationService_V1.0.xsd",
+      "root_map": "schema_profiles/VDV-301-1.0-root-map.csv",
+      "authority": "official"
+    },
+    {
+      "service_name": "DeviceManagementService",
+      "service_version": "1.0",
+      "service_xsd": "IBIS-IP_DeviceManagementService_V1.0.xsd",
+      "root_map": "schema_profiles/VDV-301-1.0-root-map.csv",
+      "authority": "official"
+    },
+    {
+      "service_name": "SystemDocumentationService",
+      "service_version": "1.0",
+      "service_xsd": "IBIS-IP_SystemDocumentationService_v1.0.xsd",
+      "root_map": "schema_profiles/VDV-301-1.0-root-map.csv",
+      "authority": "official"
+    }
+  ],
+  "document_to_schema_routes": [
+    {
+      "service_name": "TicketValidationService",
+      "document_version": "2.3",
+      "schema_version": "2.2",
+      "authority": "official",
+      "reason": "V2.3 is treated as documentation correction with no separate V2.3 schema semantics in the official route established by the audit."
+    }
+  ],
+  "unresolved_strict_xsd_profiles": [
+    {
+      "service_name": "CustomerInformationService",
+      "document_version": "1.1"
+    },
+    {
+      "service_name": "VideoLiveService",
+      "document_version": "1.0"
+    },
+    {
+      "service_name": "VideoRecordingService",
+      "document_version": "1.0"
+    },
+    {
+      "service_name": "VideoDisplayService",
+      "document_version": "1.0"
+    }
+  ],
+  "candidate_gates": [
+    {
+      "service_name": "AnalogRadioService",
+      "service_version": "2.4",
+      "schema": "IBIS-IP_AnalogRadioService_V2.4.xsd",
+      "authority": "candidate",
+      "source": "open upstream VDVde/VDV301 PR #27",
+      "explicit_opt_in_required": true
+    },
+    {
+      "service_name": "VideoRecordingService",
+      "service_version": "2.4",
+      "schema": "IBIS-IP_VideoRecordingService_V2.4.xsd",
+      "authority": "candidate",
+      "source": "open upstream VDVde/VDV301 PR #27",
+      "explicit_opt_in_required": true
+    },
+    {
+      "service_name": "DeviceManagementService",
+      "service_version": "2.4",
+      "schema": "IBIS-IP_DeviceManagementService_V2.4.xsd",
+      "authority": "candidate",
+      "explicit_opt_in_required": true
+    },
+    {
+      "service_name": "TicketValidationService",
+      "service_version": "2.4",
+      "schema": "IBIS-IP_TicketValidationService_V2.4.xsd",
+      "authority": "candidate",
+      "explicit_opt_in_required": true
+    }
+  ],
+  "operation_context_overrides": [
+    {
+      "service_name": "TrainSetManagementService",
+      "service_version": "2.2",
+      "finding": "TSM-002",
+      "operation": "GetTrainSetComposition",
+      "preferred_global_response_root": "TrainSetManagementService.GetTrainSetCompositionResponse",
+      "do_not_use_as_inventory_authority": "TrainSetManagementServiceOperations",
+      "reason": "Official V2.2 operation group retains stale old name while corrected global response root is valid."
+    },
+    {
+      "service_name": "TrainSetDataService",
+      "service_version": "2.2",
+      "finding": "TSD-003",
+      "operation": "SubscribeTripRef",
+      "contexts": {
+        "immediate_acknowledgement": "SubscribeResponseStructure",
+        "subscription_data_event": "TrainSetDataService.RetrieveTripRefResponseStructure"
+      }
+    },
+    {
+      "service_name": "TrainSetDataService",
+      "service_version": "2.2",
+      "finding": "TSD-003",
+      "operation": "SubscribeTripInformation",
+      "contexts": {
+        "immediate_acknowledgement": "SubscribeResponseStructure",
+        "subscription_data_event": "TrainSetDataService.RetrieveTripInformationResponseStructure"
+      }
+    }
+  ],
+  "non_xsd_routes": [
+    {
+      "service_name": "TimeService",
+      "service_version": "1.0",
+      "validation_kind": "protocol_discovery_profile",
+      "profile_sources": [
+        "VDV 301-2-10 V1.0",
+        "RFC 4330"
+      ]
+    },
+    {
+      "service_name": "HTMLDisplayService",
+      "service_version": "2.1",
+      "validation_kind": "discovery_http_profile"
+    },
+    {
+      "service_name": "HTMLDisplayService",
+      "service_version": "2.2",
+      "validation_kind": "discovery_http_profile"
+    },
+    {
+      "service_name": "HTMLDisplayService",
+      "service_version": "2.2a",
+      "validation_kind": "discovery_http_profile"
+    }
+  ]
+}

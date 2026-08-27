@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/vdv301-sdk/public-result-contract-v0.1.schema.json",
+  "title": "VDV301 SDK public validation result v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifest_version",
+    "check_id",
+    "status",
+    "severity",
+    "authority",
+    "message"
+  ],
+  "properties": {
+    "manifest_version": {
+      "type": "string"
+    },
+    "check_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable public check/finding identifier, not an internal field traversal identifier."
+    },
+    "category": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pass",
+        "pass_with_note",
+        "warning",
+        "error",
+        "not_applicable",
+        "informational",
+        "unresolved"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "none",
+        "info",
+        "warning",
+        "error"
+      ]
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "class",
+        "source"
+      ],
+      "properties": {
+        "class": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "source_version": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "service": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": ["string", "null"]
+        },
+        "profile_id": {
+          "type": ["string", "null"]
+        },
+        "profile_authority": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "operation": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": ["string", "null"]
+        },
+        "context": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "message": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "observed": {},
+        "expected": {},
+        "evidence_ref": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "provider_note": {
+      "type": ["string", "null"]
+    }
+  },
+  "description": "Public contract intentionally omits field_validated/validated_fields/internal_field_inventory/internal_rule_path/schema_traversal_state. A concrete XML validation message may identify the failing XML element/value when needed, but the contract does not expose the SDK's internal field-by-field traversal model."
+}

@@ -1,0 +1,142 @@
+{
+  "manifest_version": "0.1",
+  "manifest_kind": "vdv301-audit-derived-sdk-baseline",
+  "status": "baseline",
+  "source_branch": "dev/schema-integration",
+  "source_documents": {
+    "scope": "docs/pdf_xsd_semantic_audit/AUDIT_SCOPE_MATRIX.md",
+    "handoff": "docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF.md",
+    "findings": "docs/pdf_xsd_semantic_audit/findings.md",
+    "validation_backlog": "docs/pdf_xsd_semantic_audit/validation_backlog.md",
+    "live_backlog": "docs/pdf_xsd_semantic_audit/26_live_integration_validation_backlog.md",
+    "runtime_authority_matrix": "docs/pdf_xsd_semantic_audit/generated/runtime_protocol_authority_matrix.csv"
+  },
+  "invariants": {
+    "xsd_is_executable_xml_authority_when_profile_exists": true,
+    "pdf_xsd_difference_is_finding_not_silent_rewrite": true,
+    "latest_xsd_wins": false,
+    "latest_dependency_wins": false,
+    "latest_external_protocol_version_wins": false,
+    "candidate_selection_is_explicit_only": true,
+    "operation_inventory_from_xsd_group_only": false,
+    "unexecuted_live_test_is_failure": false,
+    "superbranch_is_official_release": false
+  },
+  "resolver": {
+    "required_dimensions": [
+      "service_name",
+      "service_version",
+      "validation_kind",
+      "authority"
+    ],
+    "conditional_dimensions": [
+      "schema_profile_id",
+      "release_context",
+      "operation_name",
+      "response_context",
+      "endpoint_identity",
+      "candidate_profile_id"
+    ],
+    "endpoint_identity_dimensions": [
+      "host_or_ip",
+      "port",
+      "path"
+    ],
+    "mixed_service_versions_supported": true,
+    "parallel_versions_of_same_service_supported": true,
+    "ordinary_schema_profile_source": "generated from stored XSD include graph",
+    "override_source": "sdk_manifest/routing_overrides_v0.1.json"
+  },
+  "authority_classes": [
+    "official",
+    "candidate",
+    "integration",
+    "unresolved"
+  ],
+  "runtime_authority_classes": [
+    "vdv_normative",
+    "external_normative",
+    "external_normative_referenced_by_vdv",
+    "vdv_profile_exception_or_specialization",
+    "combined_semantics",
+    "diagnostic_heuristic"
+  ],
+  "validation_kinds": [
+    "xsd_profile",
+    "protocol_discovery_profile",
+    "discovery_http_profile",
+    "runtime_protocol_profile",
+    "network_diagnostic",
+    "architecture_inventory"
+  ],
+  "storage_model": {
+    "byte_identical_historical_xsd_stored_once": true,
+    "packaging_only_same_version_revision_may_be_deduplicated_after_semantic_diff": true,
+    "semantic_constraint_difference_requires_separate_routing": true,
+    "historical_backfill_source": "exact official VDVde/VDV301 release tags only",
+    "legacy_root_metadata": "schema_profiles/VDV-301-1.0-root-map.csv"
+  },
+  "operation_model": {
+    "separate_manifest_required": true,
+    "minimum_dimensions": [
+      "service_id",
+      "service_version",
+      "operation_name",
+      "operation_kind",
+      "transport",
+      "request_payload_schema_ref",
+      "immediate_response_schema_ref",
+      "callback_payload_schema_ref",
+      "response_context",
+      "callback_endpoint_fields",
+      "heartbeat_supported",
+      "selection_parameters",
+      "schema_authority",
+      "source_reference"
+    ]
+  },
+  "public_result_contract": {
+    "schema": "sdk_manifest/public_result_contract_v0.1.schema.json",
+    "stable_check_ids_required": true,
+    "authority_and_severity_separate": true,
+    "internal_field_inventory_public": false,
+    "forbidden_contract_fields": [
+      "field_validated",
+      "validated_fields",
+      "internal_field_inventory",
+      "internal_rule_path",
+      "schema_traversal_state"
+    ]
+  },
+  "evidence_namespaces": {
+    "EV": "executable XML/XSD evidence",
+    "RV": "deterministic runtime/protocol evidence",
+    "LI": "open live/integration task"
+  },
+  "completed_evidence": {
+    "EV-001+EV-002": "33109011670",
+    "EV-101": "33109367265",
+    "EV-102": "33109768872",
+    "EV-103": "33111119723",
+    "EV-104": "33111644388",
+    "EV-105": "33111831627",
+    "RV-001": "33112730418",
+    "RV-002": "33119080288",
+    "RV-003": "33119337775",
+    "RV-004": "33119694991"
+  },
+  "non_xsd_profiles": {
+    "TimeService@1.0": "protocol_discovery_profile",
+    "HTMLDisplayService@2.1": "discovery_http_profile",
+    "HTMLDisplayService@2.2": "discovery_http_profile",
+    "HTMLDisplayService@2.2a": "discovery_http_profile"
+  },
+  "known_architecture_guards": [
+    "Content-Type checks must retain external HTTP/XML authority when VDV does not explicitly state the media-type rule.",
+    "DNS-SD must not be equated with mandatory mDNS.",
+    "TimeService V1.0 must not synthesize XML operations.",
+    "RTSP version is observed external protocol state; current VDV evidence does not pin RTSP/1.0 or RTSP/2.0.",
+    "Valid VideoLive XML metadata does not imply RTSP/RTP media availability.",
+    "TrainSetData Subscribe response schema selection requires acknowledgement-vs-data-event context."
+  ]
+}
