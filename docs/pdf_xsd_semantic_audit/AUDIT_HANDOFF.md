@@ -48,6 +48,7 @@ docs/pdf_xsd_semantic_audit/01f_common_enums_v2_4_pdf_vs_xsd_enum_diff.md
 docs/pdf_xsd_semantic_audit/01g_common_enums_v2_4_datatypes_core_structures.md
 docs/pdf_xsd_semantic_audit/01h_common_enums_v2_4_core_data_structures.md
 docs/pdf_xsd_semantic_audit/01i_common_enums_v2_4_remaining_data_structures_part1.md
+docs/pdf_xsd_semantic_audit/01j_common_enums_v2_4_remaining_data_structures_part2.md
 ```
 
 Also read the broader branch context when needed:
@@ -144,6 +145,7 @@ CE-013: AdditionalAnnouncement third choice PDF InformationAtSpecificPoint vs XS
 CE-014: DataVersionList cardinality PDF 1:* vs XSD 0:*. Confirmed discrepancy candidate.
 CE-015: FareZoneInformation PDF extraction casing Farezone* vs XSD FareZone*. Visual PDF confirmation required.
 CE-016: GlobalCardStatusID vs XSD GlobalCardStausID spelling difference. Confirmed discrepancy candidate.
+CE-017: TSPPoint Desciption spelling candidate. XSD observation confirmed; PDF visual confirmation required.
 ```
 
 The authoritative text for these findings is `findings.md`.
@@ -232,20 +234,43 @@ CE-015 FareZoneInformation casing difference needs visual confirmation.
 CE-016 GlobalCardStatusID vs XSD GlobalCardStausID.
 ```
 
-## Next recommended task
-
-Continue with common data structures from GNSSCoordinate onward:
+## Current result of 01j
 
 ```text
-01j_common_enums_v2_4_remaining_data_structures_part2.md
-
+Remaining V2.4 common structures part 2 checked:
 GNSSCoordinate
-JourneyStopInformation
-LocationState
+JourneyStopInformation checked core fields
+Point / PointType checked core shape
+SpecificPoint
+StopSequence
+TimingPoint
+ViaPoint
+ZoneType with casing note
+
+New finding:
+CE-017 TSPPoint Desciption spelling candidate.
+
+Deferred scope resolution in validation_backlog.md:
 NetworkLocationPoint
 OperationalInformation
-PassengerCounting / PassengerCountingData family
-PathDestination / Point / Route / SpecificPoint / StopSequence / TimingPoint / ViaPoint / ZoneType
+PassengerCounting
+PassengerCountingData
+PathDestination
+Route
+```
+
+## Next recommended task
+
+Create a Common/Enums V2.4 structure closure pass:
+
+```text
+01k_common_enums_v2_4_structure_closure.md
+
+Tasks:
+- resolve deferred structure names from SB-005,
+- visually confirm CE-015 and CE-017 from the PDF,
+- classify all Common/Enums V2.4 structure tables as closed / partial / pending,
+- then decide whether to move next to Common/Enums V2.3 history or DMS V2.4 audit integration.
 ```
 
 Use the same evidence style:
@@ -257,12 +282,6 @@ finding classification
 validation follows XSD
 PDF discrepancy becomes provider-facing note
 no schema changes during audit
-```
-
-Alternative if we want to close known enum findings first:
-
-```text
-Check CE-006, CE-009 and CE-010 against older Common/Enums PDFs/XSDs and external TPEG/NeTEx terminology.
 ```
 
 ## Working style for continuity
