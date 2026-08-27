@@ -102,37 +102,42 @@ Check V2.2/V2.3 PDFs and official repository history, then decide whether this s
 reported as documentation inconsistency or tracked as a schema issue.
 ```
 
-### CE-005 - TripInformation AdditionalTextMessage cardinality mismatch
+### CE-005 - TripInformation AdditionalTextMessage cardinality mismatch across V2.0 to V2.4
 
-State: schema/PDF discrepancy; needs confirmation before any schema change.
+State: confirmed historical mismatch; do not auto-correct yet.
 
 Observation:
 
 ```text
-VDV 301-2-1 V2.4 TripInformation table lists:
+The V2.4 consolidated PDF history says that in V2.0 TripInformation/AdditionalTextMessage
+was updated to maxOccurs="unbounded".
+
+The current V2.4 TripInformation table states:
+
 AdditionalTextMessage     0:* +InternationalTextType
 AdditionalTextMessage(n)  0:* +InternationalTextType, n = 1 to 9
 
-IBIS-IP_common_V2.4.xsd contains:
-AdditionalTextMessage, AdditionalTextMessage1 ... AdditionalTextMessage9
-as optional elements without maxOccurs.
+XSD history in dev/schema-integration:
 
-In XML Schema, missing maxOccurs means default maxOccurs="1".
+V1.0: AdditionalTextMessage type IBIS-IP.string, minOccurs="0", no maxOccurs.
+V2.0: AdditionalTextMessage type InternationalTextType, minOccurs="0", no maxOccurs.
+V2.1: same as V2.0.
+V2.2: same as V2.0.
+V2.3: AdditionalTextMessage plus AdditionalTextMessage1..9, all minOccurs="0", no maxOccurs.
+V2.4: same as V2.3.
 ```
 
 Impact:
 
 ```text
-The XSD allows at most one occurrence of each named AdditionalTextMessage field.
-The PDF appears to allow multiple occurrences for the base field and each numbered field.
-This may matter for multilingual or repeated passenger text messages because InternationalTextType
-itself represents one language/value pair.
+Current XSD validation allows at most one occurrence of each named AdditionalTextMessage field.
+The PDF appears to allow repeated elements. Therefore repeated AdditionalTextMessage payloads
+may be valid according to the PDF table but invalid against the current XSD pool.
 ```
 
 Next action:
 
 ```text
-Compare V2.0, V2.1, V2.2 and V2.3 common XSD history for this field.
-Check examples and PR/fork history.
-Do not change the schema until intent is confirmed.
+Check examples, upstream/fork history and consumer practice before changing any XSD.
+If fixed, scope it as a separate schema-correction candidate and do not mix it into the DMS V2.4 PR.
 ```
