@@ -1,6 +1,6 @@
 # VideoRecordingService findings register addendum
 
-Status: first-pass closure completed.
+Status: first-pass closure completed. VRS-003 is now executable-confirmed for official V2.0.
 
 ## VRS-001 - V1.0 public PDF without official release-tag XSD
 
@@ -26,8 +26,29 @@ validation: candidate/integration profile only
 classification: xsd_structure_modelling_error_candidate
 confidence: high
 scope: official V2.0 XSD
+state: executable-confirmed
 behavior: xs:choice permits only one of State/AlarmArchiveFillLevel/OperationErrorMessage/StartStopMode
 historical evidence: V2.4 candidate restructures response and V2.4 history records clarification of GetVideoRecordingState
+```
+
+Executable evidence:
+
+```text
+GitHub Actions run 33111119723
+head d4ffe09067cb38bf7f78ba295e029902078ed18d
+V2.0 State-only response: valid
+V2.0 State + AlarmArchiveFillLevel: rejected; AlarmArchiveFillLevel not expected
+V2.0 State + StartStopMode: rejected; StartStopMode not expected
+V2.4 candidate explanatory control with grouped State + FillLevel + StartStopMode: valid
+EV-103 status: PASS
+```
+
+The V2.4 result is corroborative control evidence only. The candidate XSD is not promoted to official authority and does not replace V2.0 validation.
+
+Evidence document:
+
+```text
+docs/pdf_xsd_semantic_audit/24c_executable_validation_video_compositors.md
 ```
 
 ## VRS-004 - SubscribeDisplayState headings
