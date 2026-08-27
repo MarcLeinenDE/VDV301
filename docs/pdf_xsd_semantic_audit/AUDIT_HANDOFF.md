@@ -59,6 +59,9 @@ Supporting generated inventories and matrices:
 
 ```text
 docs/pdf_xsd_semantic_audit/generated/audit_scope_matrix.csv
+docs/pdf_xsd_semantic_audit/generated/enumerations_v1_0_v2_0_xsd_inventory.csv
+docs/pdf_xsd_semantic_audit/generated/enumerations_v1_0_vs_v2_0_xsd_diff.csv
+docs/pdf_xsd_semantic_audit/generated/enumerations_v1_0_vs_v2_0_xsd_diff.md
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.md
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.csv
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_inventory.csv
@@ -120,30 +123,6 @@ A real IBIS-IP system may expose different services with different VDV301 versio
 Validation must therefore be service-version scoped and dependency-pool scoped.
 ```
 
-Tool/SDK consequence:
-
-```text
-No latest-wins validation.
-No global Common/Enums substitution.
-Per service: identify or select service version, load matching service XSD and exact dependency pool, then validate.
-```
-
-## Audit scope matrix
-
-Files:
-
-```text
-docs/pdf_xsd_semantic_audit/AUDIT_SCOPE_MATRIX.md
-docs/pdf_xsd_semantic_audit/generated/audit_scope_matrix.csv
-```
-
-Purpose:
-
-```text
-Track every public VDV301 service/scope and the published PDF versions listed by VDV against the XSD files observed in dev/schema-integration.
-Use this as the master checklist for complete audit coverage.
-```
-
 ## Current Common/Enums status
 
 V2.4 first-pass result:
@@ -169,9 +148,27 @@ Historical block:
 
 ```text
 04_common_enums_historical_v1_0_to_v2_4_plan.md created.
-04a_common_enums_v1_0_v2_0_history.md started.
+04a_common_enums_v1_0_v2_0_history.md updated.
 V1.0 and V2.0 XSD-side include-family observation is clean.
-No new CE finding opened from the first V1.0 -> V2.0 observation.
+V1.0 -> V2.0 XSD-side enumeration inventory and first diff are recorded.
+No new CE finding opened from the V1.0 -> V2.0 XSD-side diff alone.
+```
+
+Important V1.0 -> V2.0 XSD deltas now recorded:
+
+```text
+DataIntervallEnumeration -> DataIntervalEnumeration naming.
+IBIS-IP-VersionEnumeration no longer observed in V2.0.
+DeviceStateEnumeration adds readyForShutdown.
+RouteDirectionEnumeration appears in V2.0.
+ServiceNameEnumeration adds PassengerCountingService, VideoLiveService, VideoRecordingService and VideoDisplayService.
+ServiceStateEnumeration adds starting.
+```
+
+Next required Common/Enums step:
+
+```text
+Check VDV 301-2-1 V1.0 and V2.0 PDF version histories/tables against the recorded XSD deltas.
 ```
 
 ## Current DMS result
@@ -234,10 +231,11 @@ Continue Common/Enums historical audit:
 Next sub-steps:
 
 ```text
-1. Generate/record XSD enumeration inventories for V1.0 and V2.0.
-2. Compare V1.0 vs V2.0 XSD enumeration values.
-3. Extract/check V1.0 and V2.0 PDF enumeration tables/version histories.
+1. Extract/check VDV 301-2-1 V1.0 PDF version history and enumeration tables.
+2. Extract/check VDV 301-2-1 V2.0 PDF version history and enumeration tables.
+3. Compare PDF-side facts to recorded XSD-side deltas.
 4. Decide whether existing CE findings need affected-version ranges updated.
+5. Then continue with V2.0 -> V2.1.
 ```
 
 ## Working style for continuity
