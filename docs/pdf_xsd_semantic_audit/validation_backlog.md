@@ -170,6 +170,42 @@ Do not mix V1.0 and V2.0 Common/Enums definitions.
 Later add targeted samples for deltas such as DeviceStateEnumeration readyForShutdown and DataIntervall/DataInterval type naming if referenced by service schemas.
 ```
 
+### VB-009 - Common/Enums V2.1 and V2.2 targeted compile/sample set
+
+Source:
+
+```text
+docs/pdf_xsd_semantic_audit/04b_common_enums_v2_0_v2_1_history.md
+docs/pdf_xsd_semantic_audit/04c_common_enums_v2_1_v2_2_history.md
+```
+
+Scope:
+
+```text
+Common/Enums V2.1 pool:
+  IBIS-IP_common_V2.1.xsd
+  IBIS-IP_Enumerations_V2.1.xsd
+
+Common/Enums V2.2 pool:
+  IBIS-IP_common_V2.2.xsd
+  IBIS-IP_Enumerations_V2.2.xsd
+```
+
+Initial targeted samples:
+
+```text
+V2.0 negative / V2.1 positive: DeviceClassEnumeration MultiFunctionalDisplay.
+V2.0 negative / V2.1 positive: ErrorCodeEnumeration OperationNotSupported.
+V2.0 negative / V2.1 positive: ServiceNameEnumeration TicketValidationService.
+V2.1 negative / V2.2 positive: DeviceClassEnumeration CombiDevice.
+V2.1 negative / V2.2 positive: ServiceNameEnumeration SystemMonitoringService.
+V2.1 positive / V2.2 negative: ServiceNameEnumeration SystemDocumentationService.
+V2.1 positive / V2.2 negative: ServiceNameEnumeration SystemManagementService.
+V2.2 positive but PDF-note: DeviceStateEnumeration warning.
+V2.2 negative for PDF spelling: RailSubmodeEnumeration specialRail.
+V2.2 positive for XSD spelling: RailSubmodeEnumeration specialTrain.
+```
+
 ## Semantic audit backlog
 
 ### SB-001 - Common/Enums V2.4 affected table check
@@ -193,6 +229,13 @@ TripInformation
 
 ### SB-003 - Common/Enums V2.2 affected table check
 
+Status:
+
+```text
+Completed first pass in 04c_common_enums_v2_1_v2_2_history.md.
+No new CE opened, but CE-004, CE-006, CE-008, CE-009 and CE-010 receive V2.2 historical context.
+```
+
 Tables/sections:
 
 ```text
@@ -205,6 +248,13 @@ ServiceNameEnumeration
 ```
 
 ### SB-004 - Common/Enums V2.1 affected table check
+
+Status:
+
+```text
+Completed first pass in 04b_common_enums_v2_0_v2_1_history.md.
+No new CE opened.
+```
 
 Tables/sections:
 
@@ -301,8 +351,10 @@ Status:
 ```text
 Started.
 Plan file created.
-V1.0 -> V2.0 XSD-side enumeration inventory and first diff completed.
-PDF-side V1.0/V2.0 check pending.
+V1.0/V1.x -> V2.0 first pass completed.
+V2.0 -> V2.1 first pass completed.
+V2.1 -> V2.2 first pass completed.
+V2.2 -> V2.3 pending.
 ```
 
 Sources:
@@ -310,17 +362,22 @@ Sources:
 ```text
 docs/pdf_xsd_semantic_audit/04_common_enums_historical_v1_0_to_v2_4_plan.md
 docs/pdf_xsd_semantic_audit/04a_common_enums_v1_0_v2_0_history.md
+docs/pdf_xsd_semantic_audit/04b_common_enums_v2_0_v2_1_history.md
+docs/pdf_xsd_semantic_audit/04c_common_enums_v2_1_v2_2_history.md
 docs/pdf_xsd_semantic_audit/generated/enumerations_v1_0_v2_0_xsd_inventory.csv
 docs/pdf_xsd_semantic_audit/generated/enumerations_v1_0_vs_v2_0_xsd_diff.csv
 docs/pdf_xsd_semantic_audit/generated/enumerations_v1_0_vs_v2_0_xsd_diff.md
+docs/pdf_xsd_semantic_audit/generated/enumerations_v2_0_vs_v2_1_xsd_diff.csv
+docs/pdf_xsd_semantic_audit/generated/enumerations_v2_0_vs_v2_1_xsd_diff.md
+docs/pdf_xsd_semantic_audit/generated/enumerations_v2_1_vs_v2_2_xsd_diff.csv
+docs/pdf_xsd_semantic_audit/generated/enumerations_v2_1_vs_v2_2_xsd_diff.md
 ```
 
 Current result:
 
 ```text
-No new CE finding opened yet.
-Recorded XSD-side deltas include DataIntervall -> DataInterval naming, DeviceState readyForShutdown, RouteDirectionEnumeration, ServiceName video additions, PassengerCountingService and ServiceState starting.
-These deltas require V1.0/V2.0 PDF-side confirmation before findings or version-range updates.
+No new CE finding opened yet from the historical first-pass blocks.
+Known findings receive historical support and should get final affected-version ranges only during the Common/Enums historical closure step.
 ```
 
 ### SB-013 - mixed-version validation premise
