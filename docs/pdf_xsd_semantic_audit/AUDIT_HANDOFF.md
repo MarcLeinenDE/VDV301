@@ -47,6 +47,7 @@ docs/pdf_xsd_semantic_audit/01e_common_enums_v2_4_enumeration_second_pass.md
 docs/pdf_xsd_semantic_audit/01f_common_enums_v2_4_pdf_vs_xsd_enum_diff.md
 docs/pdf_xsd_semantic_audit/01g_common_enums_v2_4_datatypes_core_structures.md
 docs/pdf_xsd_semantic_audit/01h_common_enums_v2_4_core_data_structures.md
+docs/pdf_xsd_semantic_audit/01i_common_enums_v2_4_remaining_data_structures_part1.md
 ```
 
 Also read the broader branch context when needed:
@@ -139,6 +140,10 @@ CE-009: RailSubmodeEnumeration PDF specialRail vs XSD specialTrain. Confirmed di
 CE-010: AirSubmodeEnumeration XSD-only canalBarge. Confirmed discrepancy.
 CE-011: Connection TransportMode/ConnectionMode cardinality PDF 0:* vs XSD 0:1. Confirmed discrepancy candidate.
 CE-012: DeviceSpecificationWithStateList cardinality PDF 1:* vs XSD 0:*. Confirmed discrepancy candidate.
+CE-013: AdditionalAnnouncement third choice PDF InformationAtSpecificPoint vs XSD SpecificPoint, plus optional XSD choice. Confirmed discrepancy candidate.
+CE-014: DataVersionList cardinality PDF 1:* vs XSD 0:*. Confirmed discrepancy candidate.
+CE-015: FareZoneInformation PDF extraction casing Farezone* vs XSD FareZone*. Visual PDF confirmation required.
+CE-016: GlobalCardStatusID vs XSD GlobalCardStausID spelling difference. Confirmed discrepancy candidate.
 ```
 
 The authoritative text for these findings is `findings.md`.
@@ -199,26 +204,48 @@ CE-012 DeviceSpecificationWithStateList PDF 1:* vs XSD 0:*.
 No new mismatch found for DisplayContent, LineInformation V2.4 additions, StopInformation V2.4 additions or TripInformation V2.4 additions beyond CE-005.
 ```
 
-## Next recommended task
-
-Continue with remaining Common/Enums V2.4 structures in table order:
+## Current result of 01i
 
 ```text
-01i_common_enums_v2_4_remaining_data_structures_part1.md
-
+Remaining V2.4 common structures part 1 checked:
 AdditionalAnnouncement
 Announcement
 BayArea
 BeaconPoint
 CardApplInformation
 CardTicketData
-CardType
 DataAcceptedResponse
 DataAcceptedResponseData
 DataVersion
 DataVersionList
 Destination
-DoorCounting / DoorInformation / DoorState family
+DoorCounting / DoorCountingList / DoorInformation
+DoorOpenState / DoorOperationState / DoorState
+FareZoneInformation
+GlobalCardStatus
+GNSSPoint
+
+New findings:
+CE-013 AdditionalAnnouncement PDF choice InformationAtSpecificPoint vs XSD SpecificPoint, and choice cardinality note.
+CE-014 DataVersionList PDF 1:* vs XSD 0:*.
+CE-015 FareZoneInformation casing difference needs visual confirmation.
+CE-016 GlobalCardStatusID vs XSD GlobalCardStausID.
+```
+
+## Next recommended task
+
+Continue with common data structures from GNSSCoordinate onward:
+
+```text
+01j_common_enums_v2_4_remaining_data_structures_part2.md
+
+GNSSCoordinate
+JourneyStopInformation
+LocationState
+NetworkLocationPoint
+OperationalInformation
+PassengerCounting / PassengerCountingData family
+PathDestination / Point / Route / SpecificPoint / StopSequence / TimingPoint / ViaPoint / ZoneType
 ```
 
 Use the same evidence style:
