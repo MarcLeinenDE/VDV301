@@ -279,3 +279,59 @@ Next action:
 ```text
 Check historical XSD/fork origin and whether the value is intentionally retained as an extension.
 ```
+
+### CE-011 - Connection TransportMode / ConnectionMode cardinality PDF 0:* vs XSD 0:1
+
+State: confirmed PDF/XSD cardinality discrepancy candidate; needs historical classification before any schema change.
+
+Observation:
+
+```text
+VDV 301-2-1 V2.4 table 8 lists:
+TransportMode  0:* +Vehicle, deprecated
+ConnectionMode 0:* NetexMode
+
+IBIS-IP_common_V2.4.xsd contains both elements with minOccurs="0" but without maxOccurs.
+In XML Schema, missing maxOccurs means maxOccurs="1".
+```
+
+Impact:
+
+```text
+Repeated TransportMode or ConnectionMode entries may look permitted by the PDF table,
+but they fail against the XSD. Validation follows XSD.
+```
+
+Next action:
+
+```text
+Check V2.2/V2.3 common XSD/PDF history for the same fields and decide whether this is
+an inherited documentation issue, an XSD omission, or a deliberate XSD restriction.
+```
+
+### CE-012 - DeviceSpecificationWithStateList cardinality PDF 1:* vs XSD 0:*
+
+State: confirmed PDF/XSD cardinality discrepancy candidate; needs historical classification before any schema change.
+
+Observation:
+
+```text
+VDV 301-2-1 V2.4 table 18 lists:
+DeviceSpecificationWithState 1:*.
+
+IBIS-IP_common_V2.4.xsd contains:
+DeviceSpecificationWithState minOccurs="0" maxOccurs="unbounded".
+```
+
+Impact:
+
+```text
+An empty DeviceSpecificationWithStateList may validate against XSD although the PDF table
+indicates at least one entry. Validation follows XSD.
+```
+
+Next action:
+
+```text
+Check historical XSD/PDF and usage in DMS/SystemMonitoring contexts before proposing any change.
+```
