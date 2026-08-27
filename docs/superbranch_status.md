@@ -10,20 +10,53 @@ dev/schema-integration
 
 Purpose:
 
-- collect the practically usable VDV301 XSD state from the official repository, open upstream pull requests, and documented V2.4 schema candidates;
-- provide a stable working source for the VDV301 Tool while the official `VDVde/VDV301` repository still lacks several V2.4 schema files;
-- keep review notes and validation helpers together with the integration state.
+- collect the practically usable VDV301 XSD state from official releases, current upstream and traceable open candidates;
+- provide a stable working source for the VDV301 Tool/SDK;
+- keep audit provenance and validation helpers with the integration state;
+- avoid redundant historical schema copies where they do not change executable payload semantics.
 
-Do not open this branch as a pull request against `VDVde/VDV301`. It intentionally contains working documentation and helper scripts in addition to schema files.
+Do not open this branch as a pull request against `VDVde/VDV301` as a whole.
 
-## Included schema candidate areas
+## Historical V1.0 integration model
 
-Currently integrated against the upstream master baseline used by this fork:
+The superbranch is now deduplicated rather than carrying a complete second copy of the `VDV-301-1.0` tag.
+
+Rules:
+
+```text
+byte-identical historical XSDs -> one copy
+packaging-only same-version official revisions -> later self-contained official copy after diff review
+genuine semantic differences -> keep separately routable
+legacy aggregate-only operation roots -> provenance-backed schema profile metadata
+```
+
+Current V1.0 additions/selections include:
+
+```text
+CustomerInformationService V1.0      official tag1.0 type-XSD
+DeviceManagementService V1.0         official tag1.0 type-XSD
+SystemDocumentationService V1.0      official tag1.0 type-XSD
+JourneyInformationService V1.0       self-contained official tag2.0 V1.0 revision
+PassengerCountingService V1.0        self-contained official tag2.0 V1.0 revision
+SystemManagementService V1.0         self-contained official tag2.0 V1.0 revision
+TicketInformationService V1.0        self-contained official tag2.0 V1.0 revision
+GNSS/Distance/Beacon V1.0             standalone official files
+```
+
+The old combined `IBIS-IP_LocationService_V1.0.xsd` and the complete `IBIS_IP_V1.0.xsd` release mirror are not active superbranch runtime files.
+
+Legacy root mappings for CIS/DMS/SystemDocumentation are in:
+
+```text
+schema_profiles/VDV-301-1.0-root-map.csv
+```
+
+## Included newer candidate areas
 
 ```text
 IBIS-IP_common_V2.4.xsd
 IBIS-IP_Enumerations_V2.4.xsd
-IBIS-IP_TicketValidationService_V2.4.xsd include alignment
+IBIS-IP_TicketValidationService_V2.4.xsd
 IBIS-IP_DeviceManagementService_V2.4.xsd
 IBIS-IP_DeviceManagementService_V2.3.xsd
 IBIS-IP_TicketValidationService_V2.3.xsd
@@ -32,25 +65,17 @@ IBIS-IP_AnalogRadioService_V2.4.xsd
 IBIS-IP_VideoRecordingService_V2.4.xsd
 ```
 
-Additional isolated upstream fix integrated for the working schema set:
-
-```text
-IBIS-IP_common_V2.3.xsd InternationalTextType type fix from VDVde/VDV301#30
-```
-
-## Upstream PR relationship
-
-- `VDVde/VDV301#31` is the clean draft PR for the DMS V2.4 schema candidate.
-- `VDVde/VDV301#30` is an isolated V2.3 common-structure fix and has been applied to this working branch.
-- `VDVde/VDV301#29` largely represents the broader V2.4 candidate aggregation; its visible file set is already represented in this superbranch, but its own PR body states that no comparison with the VDV301 documents was made.
-- `VDVde/VDV301#27` contributes AnalogRadioService V2.4 and VideoRecordingService V2.4; those files are represented here, but the include-version suggestions in the PR discussion still need local validation in the final schema pool.
-- `VDVde/VDV301#25` contributes CustomerInformationService V2.4, DeviceManagementService V2.3 and common V2.4; those areas are represented here, but the PR is broad and still needs individual source/diff review.
-- This superbranch may contain broader material than PR #31 and must therefore remain separate.
+Candidate/integration material remains explicitly non-release authority.
 
 ## Validation helpers
 
-The branch includes local helper scripts under `tools/` for derivation and XSD-pool validation. These tools are intended for local review and for the VDV301 Tool workflow; they are not intended to be submitted in a schema-only upstream PR.
+```text
+tools/validate_xsd_pool.py
+tools/validate_legacy_v1_roots.py
+```
+
+The legacy-root validator builds temporary adapter schemas from official root mappings; those adapters are not official VDV XSDs.
 
 ## Current caution
 
-This branch is an integration candidate, not an official VDV release. For user-facing Tool output, label it as an integrated working schema set and keep the official VDV master plus open PR provenance visible.
+This branch is an integration working set, not a historical tag archive and not an official VDV release. Tool output must preserve official/candidate provenance and the exact selected service/dependency profile.

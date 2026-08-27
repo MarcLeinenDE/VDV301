@@ -1,178 +1,132 @@
 # Base / General Conventions historical schema-family closure
 
-Status: historical first pass completed.
+Status: historical first pass completed; superbranch storage model refined after tag-to-tag diff review.
 
-Scope:
-
-```text
-VDV 301-2 general/base release packaging
-Official VDVde/VDV301 tags VDV-301-1.0 and VDV-301-2.0 as the decisive aggregate-family transition
-Original aggregate root IBIS_IP_V1.0.xsd
-Exact historical release-pool routing for the future SDK/tool
-```
-
-Authority rules:
+## Authority rule
 
 ```text
 Validation follows the selected executable XSD family.
-Historical backfill uses official VDVde/VDV301 release tags only.
-No latest-wins substitution.
-No XSD is modified in this audit block.
-A same-version filename is not sufficient identity when different official release tags contain different blobs.
+Historical source provenance uses official VDVde/VDV301 tags.
+The superbranch is a deduplicated operational integration set, not a byte-for-byte archive of every release tag.
+No latest-wins substitution across service versions.
+No XSD content is silently corrected.
 ```
 
-## 1. Original VDV-301-1.0 aggregate family
+## 1. What the original VDV-301-1.0 aggregate did
 
-The official tag `VDV-301-1.0` contains `IBIS_IP_V1.0.xsd`, blob:
+Official tag `VDV-301-1.0` contains:
 
 ```text
-41289eaed2674a169fdf77a10a2eff293c76d5c4
+IBIS_IP_V1.0.xsd
+blob 41289eaed2674a169fdf77a10a2eff293c76d5c4
 ```
 
-The aggregate directly includes these eleven files:
+The aggregate includes Common/Enums and multiple service XSDs. For several early service files it also supplies the global operation elements and service groups that are not present in the service file itself.
+
+This is a packaging property of the original release.
+
+## 2. Tag 1.0 -> tag 2.0 diff result
+
+The earlier assumption that four same-name V1.0 service files represented four independently different historical payload models was too conservative.
+
+Detailed diff shows:
 
 ```text
-IBIS-IP_common_V1.0.xsd
-IBIS-IP_Enumerations_V1.0.xsd
-IBIS-IP_CustomerInformationService_V1.0.xsd
-IBIS-IP_JourneyInformationService_V1.0.xsd
-IBIS-IP_DeviceManagementService_V1.0.xsd
-IBIS-IP_LocationService_V1.0.xsd
-IBIS-IP_NetworkLocationService_V1.0.xsd
-IBIS-IP_SystemManagementService_V1.0.xsd
-IBIS-IP_SystemDocumentationService_v1.0.xsd
-IBIS-IP_TicketInformationService_V1.0.xsd
-IBIS-IP_PassengerCountingService_V1.0.xsd
+JourneyInformationService V1.0:
+  later official file mainly moves global roots/group from aggregate into service XSD.
+
+PassengerCountingService V1.0:
+  later official file moves the four operation roots/group into service XSD; checked payload structures stay the same.
+
+SystemManagementService V1.0:
+  later official file moves the two operation roots/group into service XSD; checked payload structures stay the same.
+
+TicketInformationService V1.0:
+  later official file becomes self-contained and additionally drops unused SetRazziaResponse* types; original aggregate did not expose a SetRazziaResponse global root.
 ```
 
-The aggregate itself supplies global operation roots/groups for multiple services. Therefore the original V1.0 family is not faithfully represented by selecting a service XSD in isolation where the service file only supplies structures.
+Therefore the operational superbranch does not need duplicate copies of both packaging revisions.
 
-## 2. Exact official V1.0 pool preserved side by side
+## 3. LocationService V1.0 packaging transition
 
-To preserve relative includes and exact official blob identity, the complete twelve-XSD family from tag `VDV-301-1.0` is stored unchanged under:
+Original `IBIS-IP_LocationService_V1.0.xsd` contains the GNSS and Distance global roots/types plus Beacon structures.
+
+The official VDV-301-2.0 tag publishes the same service-version areas as standalone XSDs:
 
 ```text
-schema_pools/official/VDV-301-1.0/
+IBIS-IP_GNSSLocationService_V1.0.xsd
+IBIS-IP_DistanceLocationService_V1.0.xsd
+IBIS-IP_BeaconLocationService_V1.0.xsd
 ```
 
-This directory is a release-context pool, not a corrected schema family. Original filenames are preserved inside the directory.
+The superbranch keeps those standalone files and does not keep the old combined LocationService packaging file.
 
-No root-level XSD was replaced to create this pool.
+## 4. Deduplicated V1.0 superbranch model
 
-## 3. Same-path official revision collisions
-
-Comparison of official `VDV-301-1.0` and `VDV-301-2.0` release trees shows four files whose filename/version token stays V1.0 while the official blob changes:
+Operational root set:
 
 ```text
-IBIS-IP_JourneyInformationService_V1.0.xsd
-  VDV-301-1.0 -> 1ee4d7aeb15f3269c5335313be9e214bdb519d2e
-  VDV-301-2.0 -> 8c303db5a9c0548d66b90174d9c329d33092ad24
-
-IBIS-IP_PassengerCountingService_V1.0.xsd
-  VDV-301-1.0 -> 600a3ee6290c630a4435fb06ca9803dabaceb788
-  VDV-301-2.0 -> 4161872be76740abfdd1cddf96f8a736333fc8be
-
-IBIS-IP_SystemManagementService_V1.0.xsd
-  VDV-301-1.0 -> 85390f99d6c19c88923ed9a5fc8a5706137708af
-  VDV-301-2.0 -> 2d32630a0f1981e980e6a466e3f6a69136410f24
-
-IBIS-IP_TicketInformationService_V1.0.xsd
-  VDV-301-1.0 -> 017ca64666e25d757fc0cde1f1be817f06a743fc
-  VDV-301-2.0 -> 3fda66d872ab0d1c511247f13e715cf3ad56afe7
+Common V1.0 and Enums V1.0: single shared copies.
+NetworkLocation V1.0: single shared copy.
+GNSS/Distance/Beacon V1.0: standalone official files.
+JIS/PCS/SystemManagement/TicketInformation V1.0: later official self-contained V1.0 revisions from VDV-301-2.0.
+CIS/DMS/SystemDocumentation V1.0: original official type-XSDs from VDV-301-1.0.
 ```
 
-Consequence:
+For the three type-only files, root declarations are carried as resolver metadata sourced exactly from `IBIS_IP_V1.0.xsd`:
 
 ```text
-(service, advertised_version) is not always sufficient to select an exact historical schema.
-release_context/schema_revision must be available to the resolver where official same-path collisions exist.
+schema_profiles/VDV-301-1.0-root-map.csv
 ```
 
-## 4. Aggregate packaging transition at V2.0
+## 5. Same-path collision interpretation
 
-The official VDV-301-2.0 release tree no longer contains `IBIS_IP_V1.0.xsd` and does not introduce a corresponding `IBIS_IP_V2.0.xsd` aggregate root. At the same time several service files are renamed/versioned or expanded.
-
-Interpretation:
+`BG-001` remains useful as a provenance warning:
 
 ```text
-The original V1.0 aggregate-root packaging is a release-family property, not a universal VDV301 validation pattern.
-Do not force later service families through IBIS_IP_V1.0.xsd.
-Do not reconstruct a synthetic V2.0 aggregate.
+same filename/version token does not guarantee byte identity across official release tags.
 ```
 
-## 5. Findings
+But for the four reviewed V1.0 cases, the diff now distinguishes packaging/self-containment changes from actual payload-constraint changes. They do not require duplicate operational storage merely because the blobs differ.
 
-### BG-001 - official same-path V1.0 blob collisions across release contexts
+Strict byte-for-byte release reconstruction remains a separate archival use case and can use the official tag plus recorded blob inventory.
 
-Classification:
+## 6. Aggregate-root interpretation
+
+`BG-002` is refined:
 
 ```text
-mismatch_kind: schema_family_or_provenance
-likely_source_issue: schema_family_or_provenance_gap
-validation_behavior: exact release-context pool required where strict historical identity matters
-final_handling_bucket: official_schema_family_clarification_candidate / local_validation_required
+IBIS_IP_V1.0.xsd is authoritative historical packaging evidence and source of legacy root declarations.
+It is not an active runtime dependency of the deduplicated superbranch.
 ```
 
-This is not an assertion that either official revision is wrong. Both are official in their own release contexts.
-
-### BG-002 - V1.0 aggregate root is release-specific packaging
-
-Classification:
+Reason:
 
 ```text
-mismatch_kind: ok_note
-likely_source_issue: ok_with_note
-validation_behavior: use IBIS_IP_V1.0.xsd only with its exact VDV-301-1.0 pool
-final_handling_bucket: no_action_note
+Combining the original aggregate with later self-contained same-name V1.0 service files would create duplicate declarations / mixed packaging.
 ```
 
-## 6. SDK/tool resolver consequences
+## 7. SDK/tool resolver consequence
 
-Required resolver dimensions now include:
+Required dimensions remain:
 
 ```text
 service identity
 service/document version
-release_context or immutable pool_id where needed
-schema authority: official_release | candidate_integration | non_xsd_protocol_profile
-root model: service_xsd | aggregate_xsd | protocol_profile
+schema authority
 exact dependency pool
+operation/root mapping
+candidate vs official state
 ```
 
-For the original release:
+A separate release_context key is required only where an actual semantic constraint differs or where strict release reproduction is explicitly requested; blob difference alone is not enough.
+
+## 8. Validation status
+
+The source/diff decision is complete. Technical compilation of the deduplicated superbranch and generated legacy root adapters remains pending until an executable validation run succeeds.
+
+See:
 
 ```text
-pool_id: official:VDV-301-1.0
-pool_dir: schema_pools/official/VDV-301-1.0/
-aggregate_root: IBIS_IP_V1.0.xsd
-```
-
-The SDK must never combine the original aggregate root with later same-name V1.0 service revisions from another official release context.
-
-## 7. Validation status
-
-Not yet executed in this block:
-
-```text
-local XSD compilation of schema_pools/official/VDV-301-1.0/IBIS_IP_V1.0.xsd
-positive/negative XML sample validation through the aggregate root
-comparison compile using intentionally mixed same-name revisions
-```
-
-Therefore this block does not claim technical validation.
-
-## 8. Closure
-
-```text
-Base/general historical schema-family first pass completed.
-Original VDV-301-1.0 release pool preserved byte-identically and isolated.
-Aggregate-root transition documented.
-Same-path collision rule generalized beyond Ticketing.
-No schema correction performed.
-```
-
-Next block:
-
-```text
-22_network_infrastructure_discovery_context.md
+docs/pdf_xsd_semantic_audit/24_executable_validation_matrix_start.md
 ```

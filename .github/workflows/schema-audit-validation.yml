@@ -24,16 +24,11 @@ jobs:
       - name: Install validation dependency
         run: python -m pip install --disable-pip-version-check lxml
 
-      - name: Run exact-pool and root compile checks
+      - name: Run superbranch compile and legacy-root checks
         shell: bash
         run: |
           set +e
           mkdir -p audit-results
-
-          python tools/validate_xsd_pool.py \
-            --repo-root schema_pools/official/VDV-301-1.0 \
-            > audit-results/official_vdv_301_1_0.log 2>&1
-          v1_status=$?
 
           python tools/validate_xsd_pool.py \
             --repo-root . \
@@ -41,19 +36,24 @@ jobs:
             > audit-results/root_pool_and_dms_v24.log 2>&1
           root_status=$?
 
+          python tools/validate_legacy_v1_roots.py \
+            --repo-root . \
+            > audit-results/legacy_v1_root_adapters.log 2>&1
+          legacy_status=$?
+
           {
             echo 'check,authority,target,exit_code'
-            echo "official_vdv_301_1_0,official_release,schema_pools/official/VDV-301-1.0,$v1_status"
             echo "root_compile_plus_dms_v24,mixed_inventory_with_candidate_tests,repository_root,$root_status"
+            echo "legacy_v1_root_adapters,official_root_mapping_plus_official_service_xsds,schema_profiles/VDV-301-1.0-root-map.csv,$legacy_status"
           } > audit-results/validation_status.csv
 
-          echo "official_vdv_301_1_0 exit=$v1_status"
-          cat audit-results/official_vdv_301_1_0.log
           echo "root_compile_plus_dms_v24 exit=$root_status"
           cat audit-results/root_pool_and_dms_v24.log
+          echo "legacy_v1_root_adapters exit=$legacy_status"
+          cat audit-results/legacy_v1_root_adapters.log
 
-          echo "$v1_status" > audit-results/v1_status.txt
           echo "$root_status" > audit-results/root_status.txt
+          echo "$legacy_status" > audit-results/legacy_status.txt
 
       - name: Upload validation evidence
         if: always()
@@ -66,9 +66,9 @@ jobs:
       - name: Enforce validation result
         shell: bash
         run: |
-          v1_status=$(cat audit-results/v1_status.txt)
           root_status=$(cat audit-results/root_status.txt)
-          if [ "$v1_status" -ne 0 ] || [ "$root_status" -ne 0 ]; then
+          legacy_status=$(cat audit-results/legacy_status.txt)
+          if [ "$root_status" -ne 0 ] || [ "$legacy_status" -ne 0 ]; then
             echo "One or more validation checks failed. See uploaded evidence/logs."
             exit 1
           fi

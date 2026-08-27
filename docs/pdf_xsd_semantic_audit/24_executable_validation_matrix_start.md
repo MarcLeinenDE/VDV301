@@ -1,63 +1,29 @@
 # Executable validation matrix - start
 
-Status: technical execution phase started.
-
-Parent audit commit:
-
-```text
-ab495095a353dabb6239c3ebd3a37f5fd1853511
-```
+Status: technical execution phase prepared; no compile/sample result is claimed yet.
 
 Purpose:
 
 ```text
-Convert the historical semantic/provenance audit into reproducible executable evidence.
+Convert semantic/provenance audit decisions into reproducible executable evidence.
 No row is called compiled or validated until a real compiler/sample run exists.
 ```
 
-## Execution environment
+## Current superbranch model
 
-The interactive audit container cannot resolve github.com, so it cannot clone the repository directly.
+The former complete `schema_pools/official/VDV-301-1.0/` mirror has been removed from the operational branch after detailed dedup review.
 
-To make validation reproducible against the actual branch contents, this block adds a branch-scoped GitHub Actions workflow:
-
-```text
-.github/workflows/schema-audit-validation.yml
-```
-
-It runs only on `dev/schema-integration` pushes or explicit workflow dispatch and has read-only contents permission.
-
-## Initial checks
-
-### EV-001 - exact original VDV-301-1.0 aggregate pool compile
-
-Target:
+The superbranch now stores:
 
 ```text
-schema_pools/official/VDV-301-1.0/
+one operational official XSD per required service/version packaging choice
+shared Common/Enums once
+legacy V1.0 operation-root metadata in schema_profiles/VDV-301-1.0-root-map.csv
 ```
 
-Command:
+Strict byte-for-byte VDV-301-1.0 release reconstruction remains available from the upstream official tag and recorded blob inventory, but is not the normal runtime layout.
 
-```text
-python tools/validate_xsd_pool.py --repo-root schema_pools/official/VDV-301-1.0
-```
-
-Authority:
-
-```text
-official release pool only
-pool_id official:VDV-301-1.0
-```
-
-Expected evidence:
-
-```text
-all twelve original XSDs compiled by lxml XMLSchema
-aggregate IBIS_IP_V1.0.xsd resolves only relative includes from the isolated official pool
-```
-
-### EV-002 - current integration root sanity compile + DMS V2.4 candidate samples
+## EV-001 - superbranch root-file compile sanity
 
 Command:
 
@@ -65,37 +31,64 @@ Command:
 python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
 ```
 
-Authority warning:
+Interpretation:
 
 ```text
-The repository root is an integration inventory containing official historical/current and candidate files.
-A successful broad compile is only a syntax/dependency sanity result per root file; it does not make candidate files official and does not replace exact resolver-pool classification.
+Each root-level XSD is compiled with its declared dependencies.
+DMS V2.4 sample tests remain candidate/integration tests.
+A broad root compile does not change candidate authority labels.
 ```
 
-The DMS V2.4 sample harness remains candidate/integration validation because DMS V2.4 itself is candidate material.
+## EV-002 - legacy V1.0 operation-root adapter compile
+
+Command:
+
+```text
+python tools/validate_legacy_v1_roots.py --repo-root .
+```
+
+The tool reads:
+
+```text
+schema_profiles/VDV-301-1.0-root-map.csv
+```
+
+and creates temporary harness XSDs for:
+
+```text
+CustomerInformationService V1.0
+DeviceManagementService V1.0
+SystemDocumentationService V1.0
+```
+
+Each harness:
+
+```text
+includes the unchanged official service XSD
+uses Common V1.0 + Enums V1.0 through that XSD
+re-declares only the exact official root element/type pairs taken from IBIS_IP_V1.0.xsd
+```
+
+The harness is an integration validation adapter, not an official schema file.
 
 ## Evidence handling
 
-Workflow artifact:
+The branch-scoped workflow `.github/workflows/schema-audit-validation.yml` records:
 
 ```text
-schema-audit-validation-results
-```
-
-Expected files:
-
-```text
-official_vdv_301_1_0.log
 root_pool_and_dms_v24.log
+legacy_v1_root_adapters.log
 validation_status.csv
 ```
 
-## Next after first execution
+GitHub Actions had not executed successfully at the previous checkpoint, so this document does not claim any passed technical test yet.
+
+## Next after first real execution
 
 ```text
-1. Record workflow run ID, runner/Python/lxml context and exact pass/fail results.
-2. If EV-001 passes, mark the original V1.0 aggregate family compiled.
-3. If any row fails, keep the error verbatim enough for diagnosis; do not silently alter schemas.
-4. Expand into exact official V2.0/V2.1/V2.2 service-pool harnesses.
-5. Add targeted positive/negative XML samples for high-impact findings.
+1. Record runner/Python/lxml versions and exact commands.
+2. Mark EV-001/EV-002 passed only from actual logs.
+3. Add representative positive/negative XML samples for legacy V1.0 roots.
+4. Continue exact official V2.0/V2.1/V2.2 service-pool tests.
+5. Keep candidate pool tests explicitly candidate-labelled.
 ```

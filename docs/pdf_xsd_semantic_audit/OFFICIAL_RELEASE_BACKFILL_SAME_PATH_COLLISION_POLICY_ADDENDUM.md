@@ -1,70 +1,60 @@
 # Official release backfill same-path collision policy addendum
 
-Status: active supplement to `OFFICIAL_RELEASE_BACKFILL_POLICY.md`; release-pool isolation now implemented for the original VDV-301-1.0 family.
+Status: active supplement to `OFFICIAL_RELEASE_BACKFILL_POLICY.md`; refined for deduplicated superbranch storage.
 
-Purpose: handle cases where multiple official VDVde/VDV301 release tags contain the same repository path/versioned filename with different Git blobs.
+## Two distinct goals
 
-## Rule
-
-If two official release tags contain:
+Do not conflate:
 
 ```text
-same repository path
-same filename/version token
-but different blob SHA/content
+A. exact historical release reconstruction
+B. operational superbranch schema storage
 ```
 
-then the integration branch must not silently overwrite one official revision with the other and must not treat the newest blob as universal authority for the older release context.
+For A, every official tag/blob mapping remains authoritative and may be reconstructed exactly from the official tag.
 
-Required handling:
+For B, the integration branch may avoid duplicate storage when a detailed diff proves that a later official same-version file only changes packaging/self-containment and does not change the relevant payload constraints.
+
+## Same-path rule
+
+If two official release tags contain the same path/version token but different blobs:
 
 ```text
-1. Record every observed official tag -> blob mapping.
-2. Keep the currently integrated root blob's provenance explicit.
-3. Do not overwrite an existing different official blob merely to backfill an older tag.
-4. Record the collision as a schema-family/provenance routing fact.
-5. Model strict future validation with an additional release_context/schema_revision key when service+version is insufficient.
-6. Preserve original aggregate/root packaging facts where the release family differs.
-7. When relative includes or same-path collisions make a flat layout ambiguous, preserve the complete official release family in an isolated immutable pool directory.
-8. Files inside an isolated official pool keep their original filenames and content unchanged.
+1. Record both tag -> blob mappings.
+2. Diff the files semantically, not only by SHA.
+3. Classify changes as payload constraint, operation/root packaging, comments/formatting, or dead/unexposed schema material.
+4. Never collapse revisions if field types, cardinalities, value sets, ordering, compositors, or reachable operation payload semantics differ.
+5. If the change is packaging/self-containment only, the superbranch may store the later official self-contained revision once.
+6. Preserve the original historical source relationship in audit metadata.
+7. Strict tag reproduction must use the official tag/blob inventory rather than assuming the superbranch is a release snapshot.
 ```
 
-## Implemented pool layout
+## Reviewed V1.0 collisions
+
+Between `VDV-301-1.0` and `VDV-301-2.0`:
 
 ```text
-schema_pools/official/<official-tag>/
+JIS V1.0
+  1ee4d7a... -> 8c303db...
+  classification: aggregate-to-service self-containment packaging
+
+PCS V1.0
+  600a3ee... -> 4161872...
+  classification: aggregate-to-service self-containment packaging
+
+SystemManagement V1.0
+  85390f9... -> 2d32630...
+  classification: aggregate-to-service self-containment packaging
+
+TicketInformation V1.0
+  017ca64... -> 3fda66d...
+  classification: self-containment packaging + removal of unused SetRazziaResponse* types
 ```
 
-First implemented complete pool:
+These reviewed cases do not require duplicate operational storage in the superbranch.
 
-```text
-schema_pools/official/VDV-301-1.0/
-root: IBIS_IP_V1.0.xsd
-pool_id: official:VDV-301-1.0
-```
+## Legacy aggregate
 
-## Confirmed same-path collisions
+`IBIS_IP_V1.0.xsd` remains official historical evidence but is not stored as an active superbranch XSD. Exact legacy rootname/type mappings needed by type-only V1.0 service files are recorded in `schema_profiles/VDV-301-1.0-root-map.csv` with source tag/blob provenance.
 
-Between official tags `VDV-301-1.0` and `VDV-301-2.0`:
-
-```text
-IBIS-IP_JourneyInformationService_V1.0.xsd
-  1ee4d7aeb15f3269c5335313be9e214bdb519d2e
-  8c303db5a9c0548d66b90174d9c329d33092ad24
-
-IBIS-IP_PassengerCountingService_V1.0.xsd
-  600a3ee6290c630a4435fb06ca9803dabaceb788
-  4161872be76740abfdd1cddf96f8a736333fc8be
-
-IBIS-IP_SystemManagementService_V1.0.xsd
-  85390f99d6c19c88923ed9a5fc8a5706137708af
-  2d32630a0f1981e980e6a466e3f6a69136410f24
-
-IBIS-IP_TicketInformationService_V1.0.xsd
-  017ca64666e25d757fc0cde1f1be817f06a743fc
-  3fda66d872ab0d1c511247f13e715cf3ad56afe7
-```
-
-These are official revisions in different release contexts; this policy does not label either revision incorrect.
-
-This addendum does not authorize any schema modification.
+This addendum does not authorize modifying any official XSD contents.
