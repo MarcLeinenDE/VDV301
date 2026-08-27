@@ -1,0 +1,14 @@
+area,pdf_v2_2,xsd_v2_2,classification,notes
+AllData.GlobalDisplayContent,0:*,minOccurs=0 maxOccurs=unbounded,aligned,Added in V2.2 PDF history and present in XSD
+AllData.TripInformation,0:2,minOccurs=0 maxOccurs=2,aligned,PDF history says TripInformation changed from 1:2 to 0:2
+AllData.MyOwnVehicleMode,0:1 NetexMode,minOccurs=0 type=NetexMode,aligned,Added in V2.2 PDF history and present in XSD
+AllData.TripState,0:1 TripStateEnumeration,minOccurs=0 type=TripStateEnumeration,aligned,Added in V2.2 PDF history and present in XSD
+CurrentConnectionInformationData.CurrentConnection,0:*,minOccurs=0 maxOccurs=unbounded,aligned,Carry-forward from V2.0 correction
+CurrentDisplayContentData.CurrentDisplayContent,1:*,maxOccurs=unbounded with default minOccurs=1,aligned,Carry-forward from V2.0 correction
+TripData.TripInformation,1:1,default minOccurs=1 maxOccurs=1,aligned,
+VehicleData.MyOwnVehicleMode,0:1 PtModesEnumeration,minOccurs=0 type=NetexMode,candidate_pdf_xsd_type_name_mismatch,AllData table says NetexMode but VehicleData table says PtModesEnumeration; XSD reuses VehicleInformationGroup with NetexMode
+VehicleData.TripState,0:1 TripStateEnumeration,minOccurs=0 type=TripStateEnumeration,aligned,
+PartialStopSequenceData.StopSequence,1:1,default minOccurs=1 maxOccurs=1,aligned,
+Operation group,PDF lists Get/Subscribe/Unsubscribe service operations,XSD lists concrete service-specific response/request elements,candidate_modelling_note,Cross-service subscription modelling check required
+GetCurrentConnectionInformation naming,PDF overview uses GetCurrentConnectionInformation; detail table uses GetCurrentConnectionResponse,XSD uses GetCurrentConnectionInformationResponse,candidate_documentation_note,XSD aligns with operation overview
+RetrievePartialStopSequence naming,PDF overview uses RetrievePartialStopSequenceRequestStructure; detail table uses RetrievePartialStopRequest,XSD uses RetrievePartialStopSequenceRequest,candidate_documentation_note,XSD aligns with operation overview
