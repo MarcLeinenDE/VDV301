@@ -51,6 +51,7 @@ docs/pdf_xsd_semantic_audit/01h_common_enums_v2_4_core_data_structures.md
 docs/pdf_xsd_semantic_audit/01i_common_enums_v2_4_remaining_data_structures_part1.md
 docs/pdf_xsd_semantic_audit/01j_common_enums_v2_4_remaining_data_structures_part2.md
 docs/pdf_xsd_semantic_audit/01k_common_enums_v2_4_structure_closure.md
+docs/pdf_xsd_semantic_audit/01l_common_enums_v2_4_deferred_scope_resolution.md
 ```
 
 Also read the broader branch context when needed:
@@ -118,38 +119,25 @@ docs/pdf_xsd_semantic_audit/VALIDATION_AUTHORITY.md
 
 ## Official PR candidate policy
 
-Some findings may turn out to be near-certain typos or schema/documentation defects. These are tracked separately in:
+Potential typo-like or correction candidates are tracked in:
 
 ```text
 docs/pdf_xsd_semantic_audit/OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
 ```
 
-Important rule:
+Rule:
 
 ```text
 Do not open official correction PRs during the audit.
-At the end of the full audit, recheck all candidates together, validate locally, compare against current upstream and open PRs, then decide whether a minimal official PR is justified.
+At the end of the full audit, recheck candidates against current upstream, open PRs, PDFs, history and local validation.
+Prepare or open a PR only after explicit user approval.
 ```
 
-Initial tracked candidates:
+Current examples:
 
 ```text
-PR-CAND-001 GlobalCardStausID, linked CE-016
-PR-CAND-002 TSPPoint Desciption, linked CE-017
-PR-CAND-003 AdditionalAnnouncement InformationAtSpecificPoint vs SpecificPoint, linked CE-013
-PR-CAND-004 cardinality discrepancy candidates, linked CE-011/CE-012/CE-014
-```
-
-Finding states:
-
-```text
-OK
-OK with note
-Mismatch
-Unclear
-Not checked yet
-Confirmed historical mismatch
-Confirmed PDF/XSD value discrepancy
+PR-CAND-001 GlobalCardStausID spelling, linked CE-016.
+PR-CAND-002 TSPPoint Desciption spelling, linked CE-017.
 ```
 
 ## Established findings so far
@@ -176,149 +164,44 @@ CE-017: TSPPoint Desciption spelling candidate. XSD observation confirmed; PDF v
 
 The authoritative text for these findings is `findings.md`.
 
-## Machine inventory files
-
-Exporter:
+## Current Common/Enums V2.4 result
 
 ```text
-tools/export_xsd_enumerations.py
+01g: wrapper datatypes, InternationalTextType and NetexMode documented.
+01h: core structures checked; CE-011 and CE-012 opened.
+01i: remaining structures part 1 checked; CE-013 to CE-016 opened.
+01j: remaining structures part 2 checked; CE-017 opened and SB-005 deferred names carried forward.
+01k: structure closure pass started.
+01l: SB-005 deferred names resolved for Common/Enums V2.4 first-pass closure.
 ```
 
-Generated XSD enumeration inventory:
+SB-005 resolution:
 
 ```text
-docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.csv
-docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.md
-```
+NetworkLocationPoint -> NetworkLocationService V1.0 audit.
+PassengerCounting / PassengerCountingData -> PassengerCountingService V2.1 audit.
+Route -> JourneyInformationService V1.0 audit.
+PathDestination -> already covered as TripInformation/PathDestinationNumber.
+OperationalInformation -> routing note only; revisit only with concrete PDF/XSD evidence.
 
-Generated PDF enumeration inventory and diff:
-
-```text
-docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_inventory.csv
-docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_vs_xsd_diff.csv
-docs/pdf_xsd_semantic_audit/01f_common_enums_v2_4_pdf_vs_xsd_enum_diff.md
-```
-
-Generated XSD datatype inventory:
-
-```text
-docs/pdf_xsd_semantic_audit/generated/common_v2_4_datatypes_xsd_inventory.csv
-docs/pdf_xsd_semantic_audit/generated/common_v2_4_datatypes_xsd_inventory.md
-```
-
-## Current result of 01g
-
-```text
-- All 16 observed IBIS-IP wrapper datatypes in IBIS-IP_common_V2.4.xsd follow the expected Value + optional ErrorCode pattern.
-- InternationalTextType is still OK against the PDF-described structure.
-- NetexMode structure is still OK partial; value-level differences are tracked in CE-008 to CE-010.
-```
-
-## Current result of 01h
-
-```text
-Core V2.4 common structures checked in first pass:
-Connection
-DeviceInformation / DeviceSpecification family
-DisplayContent
-LineInformation
-StopInformation / StopInformationRequest
-TripInformation
-
-New findings:
-CE-011 Connection TransportMode/ConnectionMode PDF 0:* vs XSD 0:1.
-CE-012 DeviceSpecificationWithStateList PDF 1:* vs XSD 0:*.
-
-No new mismatch found for DisplayContent, LineInformation V2.4 additions, StopInformation V2.4 additions or TripInformation V2.4 additions beyond CE-005.
-```
-
-## Current result of 01i
-
-```text
-Remaining V2.4 common structures part 1 checked:
-AdditionalAnnouncement
-Announcement
-BayArea
-BeaconPoint
-CardApplInformation
-CardTicketData
-DataAcceptedResponse
-DataAcceptedResponseData
-DataVersion
-DataVersionList
-Destination
-DoorCounting / DoorCountingList / DoorInformation
-DoorOpenState / DoorOperationState / DoorState
-FareZoneInformation
-GlobalCardStatus
-GNSSPoint
-
-New findings:
-CE-013 AdditionalAnnouncement PDF choice InformationAtSpecificPoint vs XSD SpecificPoint, and choice cardinality note.
-CE-014 DataVersionList PDF 1:* vs XSD 0:*.
-CE-015 FareZoneInformation casing difference needs visual confirmation.
-CE-016 GlobalCardStatusID vs XSD GlobalCardStausID.
-```
-
-## Current result of 01j
-
-```text
-Remaining V2.4 common structures part 2 checked:
-GNSSCoordinate
-JourneyStopInformation checked core fields
-Point / PointType checked core shape
-SpecificPoint
-StopSequence
-TimingPoint
-ViaPoint
-ZoneType with casing note
-
-New finding:
-CE-017 TSPPoint Desciption spelling candidate.
-
-Deferred scope resolution in validation_backlog.md:
-NetworkLocationPoint
-OperationalInformation
-PassengerCounting
-PassengerCountingData
-PathDestination
-Route
-```
-
-## Current result of 01k
-
-```text
-Common/Enums V2.4 structure closure pass started.
-Most checked V2.4 common structures are now classified as OK or OK with note.
-First-pass closure is still blocked by:
-- SB-005 deferred name routing,
-- SB-006 visual confirmation for CE-015 / CE-017 / ZoneType casing,
-- possible carry-forward of unresolved items into cross-version history checks.
+No CE finding opened by SB-005.
+No XSD change proposed.
 ```
 
 ## Next recommended task
 
-Continue with closure work:
+Perform visual PDF confirmation for Common/Enums V2.4 spelling/casing candidates:
 
 ```text
-Resolve SB-005 deferred names:
-NetworkLocationPoint
-OperationalInformation
-PassengerCounting
-PassengerCountingData
-PathDestination
-Route
+CE-015 FareZoneInformation Farezone* vs FareZone* casing.
+CE-017 TSPPoint Desciption vs expected Description spelling.
+ZoneType first-field casing/spelling if PDF differs from XSD FarezoneTypeID.
 ```
 
-Use the same evidence style:
+After that:
 
 ```text
-PDF table expectation
-XSD observation
-finding classification
-validation follows XSD
-PDF discrepancy becomes provider-facing note
-no schema changes during audit
+Close Common/Enums V2.4 first pass or carry explicitly labelled pending items into the cross-version history pass.
 ```
 
 ## Working style for continuity
@@ -327,7 +210,7 @@ After each meaningful block:
 
 ```text
 1. Commit audit file changes to dev/schema-integration.
-2. Update findings.md if a new CE finding is opened or a finding state changes.
+2. Update findings.md if a CE finding is opened or a finding state changes.
 3. Update validation_backlog.md when deferred checks or final-review gates change.
 4. Update AUDIT_HANDOFF.md only when the continuation point changes materially.
 5. Report the final branch commit SHA to the user.
