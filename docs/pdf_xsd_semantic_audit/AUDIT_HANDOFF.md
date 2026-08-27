@@ -53,6 +53,7 @@ docs/pdf_xsd_semantic_audit/01j_common_enums_v2_4_remaining_data_structures_part
 docs/pdf_xsd_semantic_audit/01k_common_enums_v2_4_structure_closure.md
 docs/pdf_xsd_semantic_audit/01l_common_enums_v2_4_deferred_scope_resolution.md
 docs/pdf_xsd_semantic_audit/02_dms_v2_4_pdf_xsd_audit.md
+docs/pdf_xsd_semantic_audit/02a_dms_v2_2_v2_3_v2_4_history_compare.md
 ```
 
 Also read the broader branch context when needed:
@@ -178,19 +179,28 @@ Do not block other audit work on these visual checks.
 Carry them in SB-006 until the user can perform manual visual confirmation.
 ```
 
-## Current DMS V2.4 result
+## Current DMS result
 
-File:
+Files:
 
 ```text
 docs/pdf_xsd_semantic_audit/02_dms_v2_4_pdf_xsd_audit.md
+docs/pdf_xsd_semantic_audit/02a_dms_v2_2_v2_3_v2_4_history_compare.md
 ```
 
-First-pass result:
+DMS V2.4 first-pass result:
 
 ```text
-No new DMS-specific PDF/XSD mismatch opened in this pass.
+No new DMS-specific PDF/XSD mismatch opened.
 DMS V2.4 candidate matches the documented V2.4 technical correction scope checked here.
+```
+
+DMS V2.2/V2.3/V2.4 history result:
+
+```text
+No new DMS-specific CE finding opened.
+DMS V2.4 candidate remains limited to the documented DMS V2.4 technical correction scope plus V2.4 dependency-family alignment.
+DMS V2.3 remains labelled as integration/fork/candidate comparison material, not as an official authority.
 ```
 
 Checked OK / guard passed:
@@ -206,7 +216,7 @@ UpdateStateData required fields not accidentally relaxed
 UpdateHistoryEntry required fields not accidentally relaxed
 ```
 
-Validation task created:
+Validation task:
 
 ```text
 VB-005 DMS V2.4 schema compile and targeted positive/negative XML samples.
@@ -217,7 +227,13 @@ VB-005 DMS V2.4 schema compile and targeted positive/negative XML samples.
 Next non-visual audit step:
 
 ```text
-Compare DMS V2.2 / V2.3 / V2.4 history to confirm that the DMS V2.4 candidate only applies the documented V2.4 correction scope and does not accidentally include unrelated changes.
+TicketValidationService V2.2 / V2.3 / V2.4 include and semantic history.
+```
+
+Reason:
+
+```text
+TVS V2.4 already has known version-family dependency issues in upstream/candidate material, so it is the next high-value service block after DMS.
 ```
 
 ## Working style for continuity
