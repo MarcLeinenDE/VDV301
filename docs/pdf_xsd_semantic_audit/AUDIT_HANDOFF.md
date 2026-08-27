@@ -1,258 +1,337 @@
-# PDF/XSD semantic audit handoff
+# PDF/XSD semantic audit - canonical handoff
 
-Status: living handoff for continuing the VDV301 PDF/XSD audit in a new chat.
+Status: consolidated continuation authority after completion of the historical semantic/provenance audit, executable XSD evidence and deterministic runtime/protocol evidence.
 
 Branch:
 
 ```text
-MarcLeinenDE/VDV301 dev/schema-integration
+MarcLeinenDE/VDV301:dev/schema-integration
 ```
 
-Important branch policy:
+Always fetch the current branch ref before making changes. A remembered commit SHA is context only, never the write base.
+
+## 1. Branch / official-facing policy
 
 ```text
-This is the superbranch / integration working branch.
-Do not open this branch as an upstream PR against VDVde/VDV301.
-Do not label its full content as an official VDV release.
-Official PR work remains separate; currently DMS V2.4 PR #31 is the clean official-facing draft PR path.
+dev/schema-integration is the superbranch / integration-audit branch.
+Do not open the full branch as an upstream VDVde/VDV301 PR.
+Do not describe the full branch as an official VDV release.
+Fork master remains untouched.
+No upstream PR/comment/review/merge/official-branch action without explicit user approval.
+Candidate/integration files remain candidate/integration until officially released/merged by the authoritative source.
 ```
 
-## How a new chat should resume
+## 2. Current continuation order
 
-At the start of a new chat, read these files first:
+For a new chat or continuation, read in this order:
 
 ```text
-docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF.md
-docs/pdf_xsd_semantic_audit/00_index.md
-docs/pdf_xsd_semantic_audit/AUDIT_SCOPE_MATRIX.md
-docs/pdf_xsd_semantic_audit/MIXED_VERSION_VALIDATION_PREMISE.md
-docs/pdf_xsd_semantic_audit/VALIDATION_AUTHORITY.md
-docs/pdf_xsd_semantic_audit/findings.md
-docs/pdf_xsd_semantic_audit/validation_backlog.md
-docs/pdf_xsd_semantic_audit/OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
+1. current dev/schema-integration branch HEAD
+2. docs/pdf_xsd_semantic_audit/AUDIT_SCOPE_MATRIX.md
+3. docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF.md
+4. docs/pdf_xsd_semantic_audit/findings.md
+5. docs/pdf_xsd_semantic_audit/validation_backlog.md
+6. docs/pdf_xsd_semantic_audit/00_index.md
 ```
 
-Then read the active detailed audit files:
+Then use detailed service/EV/RV files only for the specific area being worked on.
+
+Core policy documents:
 
 ```text
-docs/pdf_xsd_semantic_audit/04_common_enums_historical_v1_0_to_v2_4_plan.md
-docs/pdf_xsd_semantic_audit/04a_common_enums_v1_0_v2_0_history.md
-docs/pdf_xsd_semantic_audit/04b_common_enums_v2_0_v2_1_history.md
-docs/pdf_xsd_semantic_audit/04c_common_enums_v2_1_v2_2_history.md
-docs/pdf_xsd_semantic_audit/04d_common_enums_v2_2_v2_3_history.md
-docs/pdf_xsd_semantic_audit/04e_common_enums_v2_3_v2_4_history_and_closure.md
-docs/pdf_xsd_semantic_audit/01_common_enums_v2_1_to_v2_4.md
-docs/pdf_xsd_semantic_audit/01a_common_enums_v2_4_table_check.md
-docs/pdf_xsd_semantic_audit/01b_common_enums_v2_4_continuation.md
-docs/pdf_xsd_semantic_audit/01c_common_enums_additional_text_message_history.md
-docs/pdf_xsd_semantic_audit/01d_common_enums_v2_4_enumeration_first_pass.md
-docs/pdf_xsd_semantic_audit/01e_common_enums_v2_4_enumeration_second_pass.md
-docs/pdf_xsd_semantic_audit/01f_common_enums_v2_4_pdf_vs_xsd_enum_diff.md
-docs/pdf_xsd_semantic_audit/01g_common_enums_v2_4_datatypes_core_structures.md
-docs/pdf_xsd_semantic_audit/01h_common_enums_v2_4_core_data_structures.md
-docs/pdf_xsd_semantic_audit/01i_common_enums_v2_4_remaining_data_structures_part1.md
-docs/pdf_xsd_semantic_audit/01j_common_enums_v2_4_remaining_data_structures_part2.md
-docs/pdf_xsd_semantic_audit/01k_common_enums_v2_4_structure_closure.md
-docs/pdf_xsd_semantic_audit/01l_common_enums_v2_4_deferred_scope_resolution.md
-docs/pdf_xsd_semantic_audit/02_dms_v2_4_pdf_xsd_audit.md
-docs/pdf_xsd_semantic_audit/02a_dms_v2_2_v2_3_v2_4_history_compare.md
-docs/pdf_xsd_semantic_audit/03_tvs_v2_2_v2_3_v2_4_include_semantic_audit.md
+VALIDATION_AUTHORITY.md
+MIXED_VERSION_VALIDATION_PREMISE.md
+OFFICIAL_RELEASE_BACKFILL_POLICY.md
+OFFICIAL_RELEASE_BACKFILL_SAME_PATH_COLLISION_POLICY_ADDENDUM.md
+FINDING_CLASSIFICATION_POLICY.md
 ```
 
-Supporting generated inventories and matrices:
+Latest phase deltas:
 
 ```text
-docs/pdf_xsd_semantic_audit/generated/audit_scope_matrix.csv
-docs/pdf_xsd_semantic_audit/generated/enumerations_v1_0_v2_0_xsd_inventory.csv
-docs/pdf_xsd_semantic_audit/generated/enumerations_v1_0_vs_v2_0_xsd_diff.csv
-docs/pdf_xsd_semantic_audit/generated/enumerations_v1_0_vs_v2_0_xsd_diff.md
-docs/pdf_xsd_semantic_audit/generated/enumerations_v2_0_vs_v2_1_xsd_diff.csv
-docs/pdf_xsd_semantic_audit/generated/enumerations_v2_0_vs_v2_1_xsd_diff.md
-docs/pdf_xsd_semantic_audit/generated/enumerations_v2_1_vs_v2_2_xsd_diff.csv
-docs/pdf_xsd_semantic_audit/generated/enumerations_v2_1_vs_v2_2_xsd_diff.md
-docs/pdf_xsd_semantic_audit/generated/enumerations_v2_2_vs_v2_3_xsd_diff.csv
-docs/pdf_xsd_semantic_audit/generated/common_v2_2_vs_v2_3_structure_delta.csv
-docs/pdf_xsd_semantic_audit/generated/enumerations_v2_3_vs_v2_4_xsd_diff.csv
-docs/pdf_xsd_semantic_audit/generated/common_v2_3_vs_v2_4_structure_delta.csv
-docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.md
-docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.csv
-docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_inventory.csv
-docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_vs_xsd_diff.csv
-docs/pdf_xsd_semantic_audit/generated/common_v2_4_datatypes_xsd_inventory.md
-docs/pdf_xsd_semantic_audit/generated/common_v2_4_datatypes_xsd_inventory.csv
+AUDIT_HANDOFF_DELTA_EXECUTABLE_VALIDATION_24.md
+AUDIT_HANDOFF_DELTA_RUNTIME_25.md
 ```
 
-Before writing anything, fetch the current branch ref:
+## 3. Current project state
+
+Completed:
 
 ```text
-refs/heads/dev/schema-integration
+- semantic/provenance first pass across the public VDV301 service scope through V2.4 material available to this project
+- Base / General Conventions historical-family closure
+- Network Infrastructure 301-3 context audit
+- cross-service subscription modelling closure
+- deduplicated historical V1.0 superbranch layout
+- EV executable XSD evidence phase
+- RV deterministic runtime/protocol evidence phase
+- consolidated live/integration backlog
 ```
 
-Use the returned commit SHA as the current base. Do not rely on a remembered SHA if the branch has moved.
-
-## Current audit objective
-
-Long-term objective:
+Still open by environment:
 
 ```text
-Complete PDF-vs-XSD semantic comparison for all public VDV301 writings / schema-relevant versions V1.0 through V2.4.
+- live device/provider/network integration tests
+- packet-capture-backed DNS-SD/mDNS/HTTP/UDP/SNTP/RTSP/RTP validation
+- physical/network inventory evidence
 ```
 
-Current active direction:
+Canonical open live backlog:
 
 ```text
-Use AUDIT_SCOPE_MATRIX.md as the coverage checklist.
-Apply MIXED_VERSION_VALIDATION_PREMISE.md to every service/version pair.
-Continue non-visual audit work while user-specific visual PDF checks are deferred.
-Common/Enums historical first-pass chain V1.0/V1.x -> V2.4 is complete.
-Next recommended service-level block: CustomerInformationService history.
+26_live_integration_validation_backlog.md
 ```
 
-## Core method and authority
+These open live tasks do not block SDK design as long as they remain optional runtime capabilities and are never presented as executed conformance evidence.
+
+## 4. Validation authority
+
+Primary executable rule:
 
 ```text
-1. PDF tables/version histories are documentation evidence.
-2. XSD files are executable validation authority.
-3. In case of PDF/XSD inconsistency, validation follows XSD.
-4. No schema correction is made during audit without an explicit separate approval.
-5. Potential official PR candidates are collected only for end-of-audit review.
-6. Missing PDF/XSD version pairs are routing signals, not automatic defects.
-7. Do not apply latest-version XSD rules globally to older or mixed-version systems.
+Where an exact selected XSD profile exists, validation follows that XSD family.
+PDF/XSD differences are findings/provider notes, not silent XSD rewrites.
 ```
 
-## Mixed-version premise
-
-File:
+Additional guards:
 
 ```text
-docs/pdf_xsd_semantic_audit/MIXED_VERSION_VALIDATION_PREMISE.md
+No latest-XSD-wins.
+No global latest Common/Enums substitution.
+No latest-external-protocol-version substitution.
+Service identity/version and exact dependency pool matter independently.
+Operation/root/context selection may require an operation manifest beyond raw XSD group enumeration.
+Non-XSD services use explicit protocol/discovery profiles.
+Runtime findings retain authority source separately from severity.
 ```
 
-Key rule:
+VDV 301-2 V2.4 General Conventions explicitly support independently versioned services and state XSD precedence over documentation in inconsistencies; these findings support the architecture already adopted in this project.
+
+## 5. Superbranch historical storage model
+
+The superbranch is a deduplicated operational schema set, not a byte-for-byte mirror of every official tag.
+
+Rules:
 
 ```text
-Every service version that is or was published must be independently auditable and, where an XSD exists, independently validatable.
-A real IBIS-IP system may expose different services with different VDV301 versions.
-Validation must therefore be service-version scoped and dependency-pool scoped.
+byte-identical historical XSD -> store once
+same filename/version but packaging-only later official revision -> may use the more self-contained official revision after semantic diff review
+actual semantic constraint difference -> preserve separate routing context
+missing historical XSD -> backfill only from exact official VDVde/VDV301 release tags
+candidate/open-PR material -> separate candidate authority lane
 ```
 
-## Current Common/Enums status
-
-V2.4 first-pass result:
+Legacy V1.0 type-only root declarations are represented via:
 
 ```text
-01g: wrapper datatypes, InternationalTextType and NetexMode documented.
-01h: core structures checked; CE-011 and CE-012 opened.
-01i: remaining structures part 1 checked; CE-013 to CE-016 opened.
-01j: remaining structures part 2 checked; CE-017 opened and SB-005 deferred names carried forward.
-01k: structure closure pass started; visual checks explicitly deferred.
-01l: SB-005 deferred names resolved for Common/Enums V2.4 first-pass closure.
+schema_profiles/VDV-301-1.0-root-map.csv
+tools/validate_legacy_v1_roots.py
 ```
 
-Deferred manual visual checks:
+Do not reintroduce the old full `IBIS_IP_V1.0.xsd` aggregate into the operational root merely to recreate historical packaging.
+
+## 6. Completed EV evidence
+
+Identifier rule:
 
 ```text
-CE-015 FareZoneInformation Farezone* vs FareZone* casing.
-CE-017 TSPPoint Desciption vs expected Description spelling.
-ZoneType first-field casing/spelling if PDF differs from XSD FarezoneTypeID.
+EV-* = executable XML/XSD evidence
 ```
 
-Historical block result:
+Defined/completed IDs:
 
 ```text
-04a_common_enums_v1_0_v2_0_history.md completed first pass.
-04b_common_enums_v2_0_v2_1_history.md completed first pass.
-04c_common_enums_v2_1_v2_2_history.md completed first pass.
-04d_common_enums_v2_2_v2_3_history.md completed first pass.
-04e_common_enums_v2_3_v2_4_history_and_closure.md completed first-pass closure.
-CE-001 is closed as OK with note.
-No XSD correction was proposed by the historical closure.
+EV-001 + EV-002  run 33109011670
+  46 root XSDs compile
+  DMS V2.4 regression samples 6/6
+  legacy V1.0 root adapters compile
+
+EV-101  run 33109367265
+  PCS-001 OperationNotSupported exact-dependency mismatch confirmed
+
+EV-102  run 33109768872
+  CE-018 ServiceIdentificationWithStateList XSD 0:* behavior confirmed V1.0-V2.4
+
+EV-103  run 33111119723
+  VLS-002 / VRS-003 / VDS-002/003/004 compositor findings confirmed
+
+EV-104  run 33111644388
+  TSM-002 internal V2.2 operation-group/global-root mismatch confirmed
+  TSD-003 resolved as acknowledgement-vs-data-event contextual routing rule
+
+EV-105  run 33111831627
+  AnalogRadio ARA-003 candidate XSD permits Transmitter 0:1
 ```
 
-Important Common/Enums dependency pools:
+There were never EV-003 through EV-100; EV-101+ is the finding-specific namespace.
+
+## 7. Completed deterministic RV evidence
+
+Identifier rule:
 
 ```text
-V1.0: Common V1.0 + Enumerations V1.0.
-V2.0: Common V2.0 + Enumerations V2.0.
-V2.1: Common V2.1 + Enumerations V2.1.
-V2.2: Common V2.2 + Enumerations V2.2.
-V2.3: Common V2.3 + Enumerations V2.2.
-V2.4: Common V2.4 + Enumerations V2.4.
+RV-* = runtime/protocol evidence
 ```
 
-## Current DMS result
-
-Files:
+Completed:
 
 ```text
-docs/pdf_xsd_semantic_audit/02_dms_v2_4_pdf_xsd_audit.md
-docs/pdf_xsd_semantic_audit/02a_dms_v2_2_v2_3_v2_4_history_compare.md
+RV-001  run 33112730418
+  HTTP/XML + Content-Type classifier
+
+RV-002  run 33119080288
+  DNS-SD / VDV discovery + HTMLDisplay profiles
+
+RV-003  run 33119337775
+  TimeService V1.0 / RFC 4330 SNTP classifier
+
+RV-004  run 33119694991
+  Video rtspURI / RTSP-version boundary / RTP header classifier
 ```
 
-Result:
+These are deterministic classifier tests, not live-device claims.
+
+## 8. High-impact current findings
+
+Central index:
 
 ```text
-No new DMS-specific PDF/XSD mismatch opened.
-DMS V2.4 candidate remains limited to the documented DMS V2.4 technical correction scope plus V2.4 dependency-family alignment.
-DMS V2.3 remains labelled as integration/fork/candidate comparison material, not official authority.
+findings.md
 ```
 
-## Current TVS result
-
-File:
+Especially important for SDK architecture:
 
 ```text
-docs/pdf_xsd_semantic_audit/03_tvs_v2_2_v2_3_v2_4_include_semantic_audit.md
+PCS-001  exact dependency/value-set mismatch; no enum latest-wins
+CE-018   XSD permits empty state list despite PDF 1:*
+VLS-002  official V2.0 LiveStreamData xs:choice conflicts with PDF multi-field record
+VRS-003  official V2.0 recording-state xs:choice conflicts with grouped PDF semantics
+VDS-002/003/004 official V2.0 compositor conflicts
+TSM-002  official V2.2 operation group uses stale name while global corrected root exists
+TSD-003  not a defect: same response name has acknowledgement vs callback-data context
+ARA-003  candidate-only V2.4 Transmitter PDF 1:1 vs candidate XSD 0:1
 ```
 
-Result:
+## 9. Important non-XSD profiles
+
+### TimeService V1.0
 
 ```text
-TVS V2.2 -> V2.3: no schema delta observed; V2.3 treated as PDF/documentation correction.
-TVS V2.4: new GetCurrentShortHaulStops response/data structure is present and aligned with PDF table intent.
-TVS V2.4 integration branch uses common V2.4 and Enumerations V2.4.
-Official upstream master currently has TVS V2.4 with common V2.4 but Enumerations V2.2.
+validation kind: protocol_discovery_profile
+functional protocol: SNTP per VDV-selected RFC 4330
+no synthesized XML operations
 ```
 
-New service findings:
+### HTMLDisplayService V2.1/V2.2/V2.2a
 
 ```text
-TVS-001: GetCurrentShortHaulStopsResponse is defined top-level and has structures, but is missing from TicketValidationServiceOperations group.
-TVS-002: VehicleData.RouteDeviation PDF table type RouteDirectionEnumeration vs XSD RouteDeviationEnumeration.
+validation kind: discovery_http_profile
+no dedicated service XSD by design
+version-specific DNS-SD endpoint semantics
 ```
 
-## Established finding IDs
+## 10. Subscription / operation-manifest architecture
+
+Cross-service audit established:
 
 ```text
-Common/Enums findings: CE-001 through CE-017.
-TicketValidationService findings: TVS-001 and TVS-002.
-DMS first-pass: no DMS-specific finding opened.
+Do not derive supported operations solely from XSD service groups.
 ```
 
-## Next recommended task
-
-Start service-level historical audit:
+Minimum future operation-manifest dimensions:
 
 ```text
-CustomerInformationService historical block.
+service_id
+service_version
+operation_name
+operation_kind
+HTTP method / transport
+request payload schema ref
+immediate response schema ref
+callback payload schema ref
+response context
+callback endpoint fields
+heartbeat semantics
+selection parameters
+schema authority/pool id
+source provenance
 ```
 
-Suggested first sub-steps:
+This is required for TrainSet contextual responses and protects against stale operation-group members such as TSM-002.
+
+## 11. Runtime authority model
+
+Machine-readable source:
 
 ```text
-1. Map CIS public PDF versions against observed CIS XSD files in dev/schema-integration.
-2. Identify exact Common/Enums dependency pool per CIS version.
-3. Compare CIS V1.1/V2.0/V2.2/V2.3 and any V2.4 candidate provenance separately.
-4. Open service-specific findings only where PDF/XSD facts require it.
+generated/runtime_protocol_authority_matrix.csv
 ```
 
-## Working style for continuity
-
-After each meaningful block:
+Authority classes include:
 
 ```text
-1. Commit audit file changes to dev/schema-integration.
-2. Update findings/backlog/PR-candidate registers as needed.
-3. Update AUDIT_HANDOFF.md when the continuation point changes materially.
-4. Report the final branch commit SHA to the user.
+vdv_normative
+external_normative
+external_normative_referenced_by_vdv
+vdv_profile_exception_or_specialization
+combined_semantics
+diagnostic_heuristic
+```
+
+Example guards:
+
+```text
+missing Content-Type with a known body/media -> external HTTP warning, not invented explicit VDV error
+DNS-SD != mandatory mDNS
+RFC 5905 does not latest-wins replace TimeService's selected RFC 4330 profile
+RTSP 2.0 does not latest-wins replace RTSP 1.0 and is not a VDV-pinned requirement from current evidence
+valid VideoLive XML metadata does not prove playable media
+```
+
+## 12. Workflow state
+
+```text
+.github/workflows/schema-audit-validation.yml
+trigger: workflow_dispatch only
+```
+
+Do not leave a push trigger enabled after evidence collection; repeated Actions failures previously generated unwanted email notifications.
+
+## 13. Next phase
+
+Current active transition:
+
+```text
+central audit consolidation -> freeze audit baseline -> derive SDK manifest/resolver baseline
+```
+
+The semantic audit does not need to restart service-by-service.
+
+SDK baseline should convert the audited knowledge into machine-readable profiles for:
+
+```text
+schema routing
+service/version authority
+exact dependencies
+legacy root mappings
+operation/context routing
+non-XSD protocol profiles
+runtime check authority/severity
+known PDF/XSD discrepancy notes
+candidate guards
+```
+
+Live/integration tasks from block 26 then become SDK/tool integration tests rather than a prerequisite for defining the SDK architecture.
+
+## 14. Working style
+
+After a meaningful block:
+
+```text
+1. work only on dev/schema-integration unless user says otherwise
+2. keep candidate/official authority explicit
+3. run real tests before claiming pass/fail
+4. update central control docs only when the continuation point materially changes
+5. prefer concise phase deltas over duplicated historical state
+6. report current branch SHA to the user
 ```
