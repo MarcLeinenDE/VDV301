@@ -52,6 +52,7 @@ docs/pdf_xsd_semantic_audit/01i_common_enums_v2_4_remaining_data_structures_part
 docs/pdf_xsd_semantic_audit/01j_common_enums_v2_4_remaining_data_structures_part2.md
 docs/pdf_xsd_semantic_audit/01k_common_enums_v2_4_structure_closure.md
 docs/pdf_xsd_semantic_audit/01l_common_enums_v2_4_deferred_scope_resolution.md
+docs/pdf_xsd_semantic_audit/02_dms_v2_4_pdf_xsd_audit.md
 ```
 
 Also read the broader branch context when needed:
@@ -77,10 +78,10 @@ Long-term objective:
 Complete PDF-vs-XSD semantic comparison for all public VDV301 writings / schema-relevant versions V1.0 through V2.4.
 ```
 
-Current block:
+Current active direction:
 
 ```text
-Common Structures / Enumerations, especially VDV 301-2-1 V2.4.
+Continue non-visual audit work while user-specific visual PDF checks are deferred.
 ```
 
 Current method:
@@ -102,19 +103,6 @@ Tool and audit implication:
 ```text
 Validation follows XSD.
 PDF differences are shown as explanatory notes, not as executable validation authority.
-```
-
-Example:
-
-```text
-FAIL for `Valid` if XSD requires `valid`.
-Provider-facing note: PDF lists `Valid`, but XSD has precedence; therefore validation fails.
-```
-
-See:
-
-```text
-docs/pdf_xsd_semantic_audit/VALIDATION_AUTHORITY.md
 ```
 
 ## Official PR candidate policy
@@ -145,7 +133,7 @@ PR-CAND-002 TSPPoint Desciption spelling, linked CE-017.
 ```text
 CE-001: No separate IBIS-IP_Enumerations_V2.3.xsd in branch; common V2.3 includes Enumerations V2.2. State unclear.
 CE-002: V2.4 version history says StopPointNumber but table/XSD use PointNumber. OK with note; do not rename.
-CE-003: V2.4 common/enums mostly promising but not fully closed.
+CE-003: V2.4 common/enums mostly promising but not closed across all versions.
 CE-004: ServiceNameEnumeration V2.4: PDF table still shows SystemDocumentationService/SystemManagementService, but version history says removed and XSD omits them. Confirmed discrepancy; likely PDF table inconsistency.
 CE-005: TripInformation AdditionalTextMessage cardinality mismatch across V2.0-V2.4. PDF/history says 0:* / maxOccurs unbounded; XSD permits only 0:1 per named field. Confirmed historical mismatch; do not auto-correct.
 CE-006: DeviceStateEnumeration XSD contains warning, not listed in V2.4 PDF table. Confirmed discrepancy.
@@ -157,9 +145,9 @@ CE-011: Connection TransportMode/ConnectionMode cardinality PDF 0:* vs XSD 0:1. 
 CE-012: DeviceSpecificationWithStateList cardinality PDF 1:* vs XSD 0:*. Confirmed discrepancy candidate.
 CE-013: AdditionalAnnouncement third choice PDF InformationAtSpecificPoint vs XSD SpecificPoint, plus optional XSD choice. Confirmed discrepancy candidate.
 CE-014: DataVersionList cardinality PDF 1:* vs XSD 0:*. Confirmed discrepancy candidate.
-CE-015: FareZoneInformation PDF extraction casing Farezone* vs XSD FareZone*. Visual PDF confirmation required.
+CE-015: FareZoneInformation PDF extraction casing Farezone* vs XSD FareZone*. Visual PDF confirmation deferred.
 CE-016: GlobalCardStatusID vs XSD GlobalCardStausID spelling difference. Confirmed discrepancy candidate.
-CE-017: TSPPoint Desciption spelling candidate. XSD observation confirmed; PDF visual confirmation required.
+CE-017: TSPPoint Desciption spelling candidate. XSD observation confirmed; PDF visual confirmation deferred.
 ```
 
 The authoritative text for these findings is `findings.md`.
@@ -171,26 +159,11 @@ The authoritative text for these findings is `findings.md`.
 01h: core structures checked; CE-011 and CE-012 opened.
 01i: remaining structures part 1 checked; CE-013 to CE-016 opened.
 01j: remaining structures part 2 checked; CE-017 opened and SB-005 deferred names carried forward.
-01k: structure closure pass started.
+01k: structure closure pass started; visual checks explicitly deferred.
 01l: SB-005 deferred names resolved for Common/Enums V2.4 first-pass closure.
 ```
 
-SB-005 resolution:
-
-```text
-NetworkLocationPoint -> NetworkLocationService V1.0 audit.
-PassengerCounting / PassengerCountingData -> PassengerCountingService V2.1 audit.
-Route -> JourneyInformationService V1.0 audit.
-PathDestination -> already covered as TripInformation/PathDestinationNumber.
-OperationalInformation -> routing note only; revisit only with concrete PDF/XSD evidence.
-
-No CE finding opened by SB-005.
-No XSD change proposed.
-```
-
-## Next recommended task
-
-Perform visual PDF confirmation for Common/Enums V2.4 spelling/casing candidates:
+Deferred manual visual checks:
 
 ```text
 CE-015 FareZoneInformation Farezone* vs FareZone* casing.
@@ -198,10 +171,53 @@ CE-017 TSPPoint Desciption vs expected Description spelling.
 ZoneType first-field casing/spelling if PDF differs from XSD FarezoneTypeID.
 ```
 
-After that:
+Decision:
 
 ```text
-Close Common/Enums V2.4 first pass or carry explicitly labelled pending items into the cross-version history pass.
+Do not block other audit work on these visual checks.
+Carry them in SB-006 until the user can perform manual visual confirmation.
+```
+
+## Current DMS V2.4 result
+
+File:
+
+```text
+docs/pdf_xsd_semantic_audit/02_dms_v2_4_pdf_xsd_audit.md
+```
+
+First-pass result:
+
+```text
+No new DMS-specific PDF/XSD mismatch opened in this pass.
+DMS V2.4 candidate matches the documented V2.4 technical correction scope checked here.
+```
+
+Checked OK / guard passed:
+
+```text
+GetDeviceErrorMessagesResponseData.ErrorMessage 0:*
+SubdeviceErrorMessages.ErrorMessage 0:*
+DeviceStatusImpact optional
+DeviceStatusPriority optional
+InstallUpdateRequest UpdateID/UpdateTimestamp/UpdateURL optional
+InstallUpdateRequest UpdateFileChecksum/UpdateFileSize optional
+UpdateStateData required fields not accidentally relaxed
+UpdateHistoryEntry required fields not accidentally relaxed
+```
+
+Validation task created:
+
+```text
+VB-005 DMS V2.4 schema compile and targeted positive/negative XML samples.
+```
+
+## Next recommended task
+
+Next non-visual audit step:
+
+```text
+Compare DMS V2.2 / V2.3 / V2.4 history to confirm that the DMS V2.4 candidate only applies the documented V2.4 correction scope and does not accidentally include unrelated changes.
 ```
 
 ## Working style for continuity
@@ -212,7 +228,7 @@ After each meaningful block:
 1. Commit audit file changes to dev/schema-integration.
 2. Update findings.md if a CE finding is opened or a finding state changes.
 3. Update validation_backlog.md when deferred checks or final-review gates change.
-4. Update AUDIT_HANDOFF.md only when the continuation point changes materially.
+4. Update AUDIT_HANDOFF.md when the continuation point changes materially.
 5. Report the final branch commit SHA to the user.
 ```
 
