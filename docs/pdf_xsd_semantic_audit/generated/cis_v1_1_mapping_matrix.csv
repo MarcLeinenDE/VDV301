@@ -1,0 +1,7 @@
+item,status,evidence,classification,next_step
+CIS V1.1 PDF,observed,"Official VDV page links VDV 301-2-3 CustomerInformationService V1.1; PDF is dated 12/2016",public_pdf_version,"Keep as separate audit target"
+CIS V1.1 XSD,not_confirmed,"No IBIS-IP_CustomerInformationService_V1.1.xsd confirmed in checked official tags/current source set",unresolved_mapping,"Do not claim strict XSD validation"
+CIS V1.0 XSD,observed,"Official VDVde/VDV301 tag VDV-301-1.0 contains IBIS-IP_CustomerInformationService_V1.0.xsd",official_historical_release_schema,"Use for strict CIS V1.0 validation only"
+CIS V2.0 XSD,observed,"Official VDVde/VDV301 tag VDV-301-2.0 contains IBIS-IP_CustomerInformationService_V2.0.xsd",official_historical_release_schema,"Use for strict CIS V2.0 validation only"
+V1.1 PDF vs V1.0 XSD,not_equivalent_in_first_pass,"V1.1 PDF includes SpeakerActive/StopInformationActive; V1.0 XSD VehicleInformationGroup does not",mapping_not_supported,"Do not auto-map V1.1 to V1.0"
+V1.1 PDF vs V2.0 XSD,similarity_observed_not_authority,"V2.0 XSD contains several features visible in V1.1 PDF, but is a later official V2.0 schema family",comparison_target_not_mapping,"Do not auto-map V1.1 to V2.0"
