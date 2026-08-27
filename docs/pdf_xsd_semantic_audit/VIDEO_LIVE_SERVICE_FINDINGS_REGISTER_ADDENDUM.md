@@ -1,6 +1,6 @@
 # VideoLiveService findings register addendum
 
-Status: supplemental register; V1.0/V2.0 semantic/provenance first-pass closure completed.
+Status: supplemental register; V1.0/V2.0 semantic/provenance first-pass closure completed. VLS-002 is now executable-confirmed.
 
 Authority rule:
 
@@ -24,16 +24,33 @@ final_handling_bucket: official_schema_family_clarification_candidate
 ## VLS-002 - LiveStreamData xs:choice vs PDF multi-field structure
 
 ```text
-state: confirmed PDF/XSD semantic mismatch candidate
+state: executable-confirmed PDF/XSD semantic mismatch candidate
 classification: xsd_structure_modelling_error_candidate
 mismatch_kind: compositor_or_structure_modelling
 confidence: high
 version_scope: V2.0 XSD; semantic evidence in V1.0 and V2.0 PDFs
 validation_behavior: current XSD permits one choice member per LiveStreamData
-final_handling_bucket: local_validation_required + post_audit_official_schema_candidate_review
+final_handling_bucket: executable_evidence_complete + post_audit_official_schema_candidate_review
 ```
 
 Observed PDF record fields include StreamID, camera metadata, rtspURI, dimensions, codec, frame rate, bitrate, transforms and quality together. The XSD places all fields inside one `xs:choice`.
+
+Executable evidence:
+
+```text
+GitHub Actions run 33111119723
+head d4ffe09067cb38bf7f78ba295e029902078ed18d
+single StreamID sample: valid
+StreamID + CameraName + rtspURI: rejected; CameraName not expected
+complete PDF-shaped multi-field sample: rejected; CameraName not expected
+EV-103 status: PASS
+```
+
+Evidence document:
+
+```text
+docs/pdf_xsd_semantic_audit/24c_executable_validation_video_compositors.md
+```
 
 ## VLS-003 - V1.0 German foreword wrong part number
 
