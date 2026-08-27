@@ -52,6 +52,27 @@ Confirm whether common V2.3 intentionally uses Enumerations V2.2.
 Confirm V2.4 service candidates consistently use common V2.4 / Enumerations V2.4 when semantically required.
 ```
 
+### VB-004 - end-of-audit local validation for official PR candidates
+
+Source:
+
+```text
+docs/pdf_xsd_semantic_audit/OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
+```
+
+Goal:
+
+```text
+Before any official correction PR is prepared, run local XSD compilation and targeted positive/negative XML validation for the exact proposed change.
+```
+
+This applies especially to typo-like candidates such as:
+
+```text
+CE-016 / PR-CAND-001 GlobalCardStausID
+CE-017 / PR-CAND-002 TSPPoint Desciption
+```
+
 ## Semantic audit backlog
 
 ### SB-001 - Common/Enums V2.4 affected table check
@@ -108,6 +129,7 @@ Source:
 
 ```text
 docs/pdf_xsd_semantic_audit/01j_common_enums_v2_4_remaining_data_structures_part2.md
+docs/pdf_xsd_semantic_audit/01k_common_enums_v2_4_structure_closure.md
 ```
 
 Names from the continuation plan not yet confirmed as standalone `IBIS-IP_common_V2.4.xsd` complexType definitions:
@@ -148,10 +170,38 @@ Findings requiring visual PDF confirmation, not only text extraction:
 ```text
 CE-015 FareZoneInformation Farezone* vs FareZone* casing.
 CE-017 TSPPoint Desciption vs expected Description spelling.
+ZoneType first-field casing/spelling if PDF differs from XSD FarezoneTypeID.
 ```
 
 Goal:
 
 ```text
 Confirm the printed PDF table spelling before final classification or provider-facing wording.
+```
+
+### SB-007 - post-audit official PR candidate review
+
+Source:
+
+```text
+docs/pdf_xsd_semantic_audit/OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
+```
+
+Goal:
+
+```text
+At the end of the full PDF/XSD audit, review all CE findings and decide whether any minimal official-facing PRs should be prepared.
+No official PR is opened from this register during the audit.
+```
+
+Required review steps:
+
+```text
+1. Re-fetch current VDVde/VDV301 upstream state.
+2. Check open/merged PRs for duplicate fixes.
+3. Re-check PDF table spelling visually where relevant.
+4. Check historical XSD/PDF versions.
+5. Run local schema compilation and targeted sample validation.
+6. Split candidates into documentation-only notes, tool notes, validation backlog items and possible official PRs.
+7. Ask the user for explicit approval before preparing or opening any PR.
 ```
