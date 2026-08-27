@@ -1,6 +1,6 @@
 # Location Services findings register addendum
 
-Status: supplemental register; keep separate until the main findings register is consolidated.
+Status: supplemental register; first-pass closure completed for Location Services V1.0. Keep separate until the main findings register is consolidated.
 
 Authority rule:
 
@@ -14,6 +14,7 @@ Source audit files:
 ```text
 docs/pdf_xsd_semantic_audit/07_location_services_historical_start.md
 docs/pdf_xsd_semantic_audit/07a_location_services_v1_0_pdf_xsd_first_pass.md
+docs/pdf_xsd_semantic_audit/07b_location_services_findings_and_closure.md
 ```
 
 ## Location Services findings
@@ -84,3 +85,12 @@ A future validator must preserve service-specific top-level element modelling an
 ```
 
 Next action: include this in the executable service/version routing matrix.
+
+## Closure note
+
+```text
+Location Services V1.0 first pass is closed by 07b.
+No XSD file was changed.
+No official PR candidate was opened.
+LS-001 remains for local validation and later post-audit review.
+```
