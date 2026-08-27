@@ -1,0 +1,6 @@
+service,version,dependency_pool,pdf_xsd_result,finding_status,notes
+BeaconLocationService,V1.0,Common V1.0 + Enumerations V1.0,aligned first pass,no finding,"GetDataResponse and DataContent align; Subscribe/Unsubscribe use generic VDV 301-2-1 structures"
+DistanceLocationService,V1.0,Common V1.0 + Enumerations V1.0,aligned first pass,LS-002 closed OK with note,"Odometer-Pulses spelling with hyphen is present in PDF and XSD"
+GNSSLocationService,V1.0,Common V1.0 + Enumerations V1.0,PDF/XSD spelling mismatch candidate,LS-001,"PDF HorizontalDilutionOfPrecision vs XSD HoriziontalDilutionOfPrecision"
+NetworkLocationService,V1.0,Common V1.0 + Enumerations V1.0,aligned first pass,no finding,"Data structure and cardinalities align in the checked first pass"
+Location services cross-service modelling,V1.0,Common V1.0 + Enumerations V1.0,service-specific wrapper styles,LS-003 closed OK with note,"Beacon has GetDataResponse wrapper; Distance/GNSS/Network expose raw *.Data; do not normalize"
