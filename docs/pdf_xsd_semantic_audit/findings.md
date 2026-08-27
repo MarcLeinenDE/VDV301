@@ -338,3 +338,109 @@ Validation follows XSD.
 ```
 
 Next action: visually confirm the V2.4 PDF table and keep for post-audit PR-candidate review.
+
+## CustomerInformationService findings
+
+### CIS-001 - V1.1 public PDF without confirmed version-exact XSD mapping
+
+State: unresolved provenance / validation-routing gap.
+
+Observation:
+
+```text
+The public VDV page lists CustomerInformationService V1.1.
+No version-exact IBIS-IP_CustomerInformationService_V1.1.xsd has been confirmed in the checked source set.
+Official release-tag backfill found CIS V1.0, CIS V2.0 and CIS V2.2 service XSDs, but not a separate CIS V1.1 service XSD.
+```
+
+Impact:
+
+```text
+Do not silently validate CIS V1.1 traffic against CIS V1.0 or CIS V2.0.
+For a future tool/SDK, CIS V1.1 must remain public-PDF-known but exact-XSD-mapping-open until publication/release context is resolved.
+```
+
+Next action: resolve CIS V1.1 release/publication context before claiming strict XSD validation for V1.1.
+
+### CIS-002 - PDF Subscribe/Unsubscribe operations vs service-XSD operation group modelling
+
+State: OK with note / cross-service modelling check pending.
+
+Observation:
+
+```text
+The CIS V2.0/V2.2/V2.3 PDFs list service-specific Get, Subscribe and Unsubscribe operation concepts.
+The checked CIS V2.x service XSD operation group contains the concrete Get response elements and RetrievePartialStopSequence request/response elements, but not service-specific Subscribe/Unsubscribe elements.
+```
+
+Impact:
+
+```text
+This is not treated as a CIS schema defect at this stage.
+Subscribe/Unsubscribe may be modelled generically outside the local CIS operation group.
+Validation follows the selected XSD family.
+```
+
+Next action: perform a cross-service subscription modelling review before classifying this as anything stronger than a provider-facing note.
+
+### CIS-003 - GetCurrentConnectionInformation naming vs GetCurrentConnectionResponse table wording
+
+State: PDF label inconsistency candidate.
+
+Observation:
+
+```text
+The operation naming in the checked CIS V2.x material uses GetCurrentConnectionInformation in the operation overview and CustomerInformationService.GetCurrentConnectionInformationResponse in XSD.
+Some PDF table wording appears as GetCurrentConnectionResponse / CurrentConnectionData in the detailed structure area.
+```
+
+Impact:
+
+```text
+Do not rename the XSD based on shorter PDF table wording.
+The XSD-valid operation element is CustomerInformationService.GetCurrentConnectionInformationResponse.
+```
+
+Next action: keep as provider-facing naming note; no schema correction proposed.
+
+### CIS-004 - RetrievePartialStopSequence naming vs RetrievePartialStopRequest table wording
+
+State: PDF label inconsistency candidate.
+
+Observation:
+
+```text
+The operation overview and XSD use RetrievePartialStopSequence.
+Some PDF detail-table wording appears as RetrievePartialStopRequest.
+The XSD-valid request element is CustomerInformationService.RetrievePartialStopSequenceRequest.
+```
+
+Impact:
+
+```text
+Do not rename the XSD based on shorter PDF table wording.
+The XSD-valid element names remain RetrievePartialStopSequenceRequest and RetrievePartialStopSequenceResponse.
+```
+
+Next action: keep as provider-facing naming note; no schema correction proposed.
+
+### CIS-005 - MyOwnVehicleMode type differs between CIS PDF tables and XSD shared group
+
+State: confirmed PDF/XSD documentation discrepancy candidate; likely PDF table inconsistency, not an immediate XSD defect.
+
+Observation:
+
+```text
+In the checked CIS V2.2/V2.3 PDF tables, MyOwnVehicleMode is shown as NetexMode in the AllData context but as PtModesEnumeration in the VehicleData context.
+The CIS V2.2/V2.3 XSDs use a shared VehicleInformationGroup for AllData and VehicleData.
+In that XSD group, MyOwnVehicleMode has type NetexMode.
+```
+
+Impact:
+
+```text
+Validation follows the XSD: MyOwnVehicleMode is validated as NetexMode in the checked V2.2/V2.3 service schema family.
+A provider following the PtModesEnumeration table wording may fail strict XSD validation.
+```
+
+Next action: add local sample validation and include CIS-005 in post-audit review before considering any official-facing clarification or correction proposal.
