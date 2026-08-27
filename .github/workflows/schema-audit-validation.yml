@@ -1,11 +1,6 @@
 name: schema-audit-validation
 
 on:
-  push:
-    branches:
-      - dev/schema-integration
-    paths:
-      - .github/workflows/schema-audit-validation.yml
   workflow_dispatch:
 
 permissions:
@@ -80,5 +75,3 @@ jobs:
           else
             echo "All validation checks passed."
           fi
-
-# one-shot EV-102 evidence run
