@@ -101,3 +101,38 @@ Next action:
 Check V2.2/V2.3 PDFs and official repository history, then decide whether this should be
 reported as documentation inconsistency or tracked as a schema issue.
 ```
+
+### CE-005 - TripInformation AdditionalTextMessage cardinality mismatch
+
+State: schema/PDF discrepancy; needs confirmation before any schema change.
+
+Observation:
+
+```text
+VDV 301-2-1 V2.4 TripInformation table lists:
+AdditionalTextMessage     0:* +InternationalTextType
+AdditionalTextMessage(n)  0:* +InternationalTextType, n = 1 to 9
+
+IBIS-IP_common_V2.4.xsd contains:
+AdditionalTextMessage, AdditionalTextMessage1 ... AdditionalTextMessage9
+as optional elements without maxOccurs.
+
+In XML Schema, missing maxOccurs means default maxOccurs="1".
+```
+
+Impact:
+
+```text
+The XSD allows at most one occurrence of each named AdditionalTextMessage field.
+The PDF appears to allow multiple occurrences for the base field and each numbered field.
+This may matter for multilingual or repeated passenger text messages because InternationalTextType
+itself represents one language/value pair.
+```
+
+Next action:
+
+```text
+Compare V2.0, V2.1, V2.2 and V2.3 common XSD history for this field.
+Check examples and PR/fork history.
+Do not change the schema until intent is confirmed.
+```
