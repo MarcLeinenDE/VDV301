@@ -50,6 +50,16 @@ Required handling for historical release backfill:
 4. Treat it as official historical release material, not as a new correction.
 5. Do not include this import in an upstream correction PR unless a separate explicit PR decision is made.
 6. Keep candidate/integration files clearly labelled separately from official release-tag material.
+7. Detect same-path collisions where the same versioned filename has different blobs in different official releases.
+8. If a flat repository layout cannot preserve an exact release family, store the complete official family in `schema_pools/official/<tag>/` with original filenames and relative includes intact.
+```
+
+Release-family isolation rule:
+
+```text
+A per-release pool is required when exact historical compilation depends on a group of mutually matching files or when same-path official revisions would otherwise overwrite each other.
+The pool is immutable source material: no filename or XSD content is corrected while importing it.
+Strict validation selects the pool before resolving relative includes.
 ```
 
 Rationale:
@@ -68,6 +78,13 @@ IBIS-IP_CustomerInformationService_V1.0.xsd imported from VDVde/VDV301 tag VDV-3
 IBIS-IP_CustomerInformationService_V2.0.xsd imported from VDVde/VDV301 tag VDV-301-2.0.
 IBIS-IP_CustomerInformationService_V2.2.xsd imported from VDVde/VDV301 tag VDV-301-2.2.
 IBIS-IP_PassengerCountingService_V1.0.xsd imported unchanged from VDVde/VDV301 tag VDV-301-1.0, blob 600a3ee6290c630a4435fb06ca9803dabaceb788.
+Complete original VDV-301-1.0 aggregate family preserved unchanged under schema_pools/official/VDV-301-1.0/.
+```
+
+See also:
+
+```text
+OFFICIAL_RELEASE_BACKFILL_SAME_PATH_COLLISION_POLICY_ADDENDUM.md
 ```
 
 ## 2. Current candidate / pull-request integration lane
@@ -116,7 +133,7 @@ This must not blur the authority distinction between official release-tag materi
 ```text
 The later validator may use official release-tag backfills for historical version-specific validation.
 It may use candidate/integration files only when the user or tool profile explicitly selects a candidate/integration schema family.
-It must still select schemas by the requested service version and dependency pool.
+It must select schemas by requested service version, release context where necessary, and exact dependency pool.
 No latest-wins substitution is allowed.
 ```
 
@@ -130,6 +147,8 @@ Historical release backfill checklist:
 [ ] Was the original filename preserved?
 [ ] Was the file copied unchanged?
 [ ] Was the file classified as historical official release material rather than candidate material?
+[ ] Were same-path collisions checked against other official releases?
+[ ] If needed, was the complete family isolated under schema_pools/official/<tag>/ instead of flattening incompatible revisions?
 [ ] Was the version/dependency matrix updated?
 ```
 
