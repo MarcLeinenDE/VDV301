@@ -1,6 +1,6 @@
 # Common structures / enumerations V2.4 - structure closure pass
 
-Status: started, closure pass partial.
+Status: started, closure pass partial; SB-005 resolved.
 
 Scope:
 
@@ -26,6 +26,7 @@ Detailed audit files used as input:
 01h_common_enums_v2_4_core_data_structures.md
 01i_common_enums_v2_4_remaining_data_structures_part1.md
 01j_common_enums_v2_4_remaining_data_structures_part2.md
+01l_common_enums_v2_4_deferred_scope_resolution.md
 ```
 
 Supporting registers:
@@ -103,29 +104,36 @@ ZoneType first-field casing/spelling if the PDF differs from XSD FarezoneTypeID
 
 These must be confirmed visually, not only via text extraction, before final wording is locked.
 
-### Pending scope resolution
+## 3. SB-005 deferred names resolved
 
-From `validation_backlog.md` / SB-005:
-
-```text
-NetworkLocationPoint
-OperationalInformation
-PassengerCounting
-PassengerCountingData
-PathDestination
-Route
-```
-
-Current closure classification:
+SB-005 has been resolved in:
 
 ```text
-Not classified as schema gaps yet.
-Need routing check against PDF tables, service-specific schemas and older-version naming.
+docs/pdf_xsd_semantic_audit/01l_common_enums_v2_4_deferred_scope_resolution.md
 ```
 
-## 3. Official PR candidate handling
+Result:
 
-The audit now has a separate register:
+| Deferred name | Closure classification | Follow-up |
+|---|---|---|
+| NetworkLocationPoint | not a Common V2.4 standalone type; service-specific / older V1.0 NetworkLocation scope | NetworkLocationService V1.0 audit |
+| PassengerCounting | service-specific PCS scope | PassengerCountingService V2.1 audit |
+| PassengerCountingData | service-specific PCS scope | PassengerCountingService V2.1 audit |
+| PathDestination | field-level TripInformation usage as `PathDestinationNumber` | already covered in TripInformation audit |
+| Route | JourneyInformationService V1.0 element using `TripInformationStructure` | JourneyInformationService V1.0 audit |
+| OperationalInformation | not confirmed as Common V2.4 complexType; routing note only | revisit only with concrete PDF/XSD evidence |
+
+Closure decision:
+
+```text
+SB-005 no longer blocks Common/Enums V2.4 first-pass closure.
+No new CE finding opened.
+No XSD change proposed.
+```
+
+## 4. Official PR candidate handling
+
+The audit has a separate register:
 
 ```text
 docs/pdf_xsd_semantic_audit/OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
@@ -147,7 +155,7 @@ PR-CAND-003 AdditionalAnnouncement InformationAtSpecificPoint vs SpecificPoint, 
 PR-CAND-004 cardinality discrepancy candidates, linked CE-011/CE-012/CE-014
 ```
 
-## 4. Tool behaviour consequence
+## 5. Tool behaviour consequence
 
 For the eventual VDV301 Tool / SDK logic:
 
@@ -166,34 +174,34 @@ Allowed by current XSD: <GlobalCardStausID>.
 PDF note: The PDF table lists GlobalCardStatusID; this looks like a typo-like schema/documentation discrepancy. Because the VDV 301-2 V2.4 conventions give XSD precedence in case of inconsistency, validation follows the XSD.
 ```
 
-## 5. Current Common/Enums V2.4 closure state
+## 6. Current Common/Enums V2.4 closure state
 
 Current state:
 
 ```text
 Common/Enums V2.4 structure audit is close to a first-pass closure, but not fully closed.
+SB-005 is resolved and no longer blocks closure.
 ```
 
-Blocking items before declaring first-pass closure:
+Remaining blockers before declaring first-pass closure:
 
 ```text
-1. Resolve SB-005 deferred names.
-2. Visually confirm CE-015 and CE-017 PDF spellings/casing.
+1. Visually confirm CE-015 FareZoneInformation casing.
+2. Visually confirm CE-017 TSPPoint Desciption/Description spelling.
 3. Decide whether ZoneType needs its own finding or is covered by CE-015.
 4. Update findings.md and validation_backlog.md accordingly.
 ```
 
-## 6. Next step
+## 7. Next step
 
 Next audit action:
 
 ```text
-Resolve SB-005 deferred names by checking whether each is PDF-only, service-specific, older-version, differently named in XSD, or an extraction/planning artefact.
+Perform visual PDF confirmation for CE-015 and CE-017.
 ```
 
 After that:
 
 ```text
-Perform visual PDF confirmation for CE-015 and CE-017.
-Then either close Common/Enums V2.4 first pass or carry explicitly labelled pending items into the cross-version history pass.
+Close Common/Enums V2.4 first pass or carry explicitly labelled pending items into the cross-version history pass.
 ```
