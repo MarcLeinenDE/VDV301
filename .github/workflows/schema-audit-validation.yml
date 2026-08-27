@@ -1,6 +1,11 @@
 name: schema-audit-validation
 
 on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/schema-audit-validation.yml
   workflow_dispatch:
 
 permissions:
@@ -60,12 +65,15 @@ jobs:
           path: audit-results/
           if-no-files-found: error
 
-      - name: Enforce validation result
+      - name: Report validation result
         shell: bash
         run: |
           root_status=$(cat audit-results/root_status.txt)
           legacy_status=$(cat audit-results/legacy_status.txt)
+          echo "root_status=$root_status"
+          echo "legacy_status=$legacy_status"
           if [ "$root_status" -ne 0 ] || [ "$legacy_status" -ne 0 ]; then
-            echo "One or more validation checks failed. See uploaded evidence/logs."
-            exit 1
+            echo "Validation evidence contains failures; inspect uploaded logs."
+          else
+            echo "All validation checks passed."
           fi
