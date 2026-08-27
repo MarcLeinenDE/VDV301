@@ -36,13 +36,6 @@ TripInformation with BlockNumber
 DoorCountingObjectClassEnumeration with Wheelchair
 ```
 
-Goal:
-
-```text
-Positive samples validate.
-Negative samples fail where expected.
-```
-
 ### VB-003 - version-family include verification
 
 Goal:
@@ -66,13 +59,6 @@ Goal:
 Before any official correction PR is prepared, run local XSD compilation and targeted positive/negative XML validation for the exact proposed change.
 ```
 
-This applies especially to typo-like candidates such as:
-
-```text
-CE-016 / PR-CAND-001 GlobalCardStausID
-CE-017 / PR-CAND-002 TSPPoint Desciption
-```
-
 ### VB-005 - DMS V2.4 schema compile and targeted samples
 
 Source:
@@ -90,13 +76,6 @@ IBIS-IP_common_V2.4.xsd
 IBIS-IP_Enumerations_V2.4.xsd
 ```
 
-Goal:
-
-```text
-Confirm the DMS V2.4 candidate schema compiles with the V2.4 dependency pool.
-Run targeted positive/negative XML samples for the V2.4 technical correction scope.
-```
-
 Initial sample ideas:
 
 ```text
@@ -108,18 +87,43 @@ Negative: UpdateStateData missing required UpdateTimestamp.
 Negative: UpdateHistoryEntry missing required UpdateURL.
 ```
 
+### VB-006 - TVS V2.4 schema compile, samples and operation inventory
+
+Source:
+
+```text
+docs/pdf_xsd_semantic_audit/03_tvs_v2_2_v2_3_v2_4_include_semantic_audit.md
+```
+
+Scope:
+
+```text
+IBIS-IP_TicketValidationService_V2.4.xsd
+IBIS-IP_common_V2.4.xsd
+IBIS-IP_Enumerations_V2.4.xsd
+```
+
+Goal:
+
+```text
+Confirm TVS V2.4 compiles with the V2.4 dependency pool.
+Validate targeted positive/negative samples for the V2.4 GetCurrentShortHaulStops operation.
+Cross-check top-level TicketValidationService.* elements against TicketValidationServiceOperations group.
+Validate that VehicleData.RouteDeviation follows RouteDeviationEnumeration as required by XSD.
+```
+
+Initial sample ideas:
+
+```text
+Positive: GetCurrentShortHaulStopsResponse with no CurrentTariffStop entries.
+Positive: GetCurrentShortHaulStopsResponse with multiple CurrentTariffStop entries.
+Operation inventory check: top-level GetCurrentShortHaulStopsResponse is absent from TicketValidationServiceOperations group.
+VehicleData sample: RouteDeviationEnumeration value accepted where XSD expects RouteDeviationEnumeration.
+```
+
 ## Semantic audit backlog
 
 ### SB-001 - Common/Enums V2.4 affected table check
-
-Tables/sections:
-
-```text
-LineInformation
-StopInformation
-TripInformation
-DoorCountingObjectClassEnumeration
-```
 
 Status:
 
@@ -166,14 +170,6 @@ DisplayContent
 
 ### SB-005 - Common/Enums V2.4 deferred structure-name scope resolution
 
-Source:
-
-```text
-docs/pdf_xsd_semantic_audit/01j_common_enums_v2_4_remaining_data_structures_part2.md
-docs/pdf_xsd_semantic_audit/01k_common_enums_v2_4_structure_closure.md
-docs/pdf_xsd_semantic_audit/01l_common_enums_v2_4_deferred_scope_resolution.md
-```
-
 Status:
 
 ```text
@@ -194,7 +190,14 @@ Resolution:
 
 ### SB-006 - visual PDF confirmation for spelling/casing candidates
 
-Findings requiring visual PDF confirmation, not only text extraction:
+Status:
+
+```text
+Deferred by user request because visual checks require the user's personal/manual review.
+Do not block other non-visual audit work on SB-006.
+```
+
+Pending visual checks:
 
 ```text
 CE-015 FareZoneInformation Farezone* vs FareZone* casing.
@@ -202,54 +205,16 @@ CE-017 TSPPoint Desciption vs expected Description spelling.
 ZoneType first-field casing/spelling if PDF differs from XSD FarezoneTypeID.
 ```
 
-Goal:
-
-```text
-Confirm the printed PDF table spelling before final classification or provider-facing wording.
-```
-
-Status:
-
-```text
-Deferred by user request because visual checks require the user's personal/manual review.
-Do not block other non-visual audit work on SB-006.
-Carry these items as explicit pending checks until the user is available.
-```
-
 ### SB-007 - post-audit official PR candidate review
 
-Source:
-
-```text
-docs/pdf_xsd_semantic_audit/OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
-```
-
 Goal:
 
 ```text
-At the end of the full PDF/XSD audit, review all CE findings and decide whether any minimal official-facing PRs should be prepared.
+At the end of the full PDF/XSD audit, review all CE/TVS/service findings and decide whether any minimal official-facing PRs should be prepared.
 No official PR is opened from this register during the audit.
 ```
 
-Required review steps:
-
-```text
-1. Re-fetch current VDVde/VDV301 upstream state.
-2. Check open/merged PRs for duplicate fixes.
-3. Re-check PDF table spelling visually where relevant.
-4. Check historical XSD/PDF versions.
-5. Run local schema compilation and targeted sample validation.
-6. Split candidates into documentation-only notes, tool notes, validation backlog items and possible official PRs.
-7. Ask the user for explicit approval before preparing or opening any PR.
-```
-
 ### SB-008 - DMS V2.4 semantic audit
-
-Source:
-
-```text
-docs/pdf_xsd_semantic_audit/02_dms_v2_4_pdf_xsd_audit.md
-```
 
 Status:
 
@@ -260,12 +225,6 @@ No new DMS-specific CE finding opened in the first pass.
 
 ### SB-009 - DMS V2.2 / V2.3 / V2.4 history comparison
 
-Source:
-
-```text
-docs/pdf_xsd_semantic_audit/02a_dms_v2_2_v2_3_v2_4_history_compare.md
-```
-
 Status:
 
 ```text
@@ -275,9 +234,29 @@ DMS V2.4 candidate remains limited to the documented DMS V2.4 technical correcti
 DMS V2.3 remains labelled as integration/fork/candidate comparison material, not an official authority.
 ```
 
+### SB-010 - TVS V2.2 / V2.3 / V2.4 include and semantic history
+
+Source:
+
+```text
+docs/pdf_xsd_semantic_audit/03_tvs_v2_2_v2_3_v2_4_include_semantic_audit.md
+```
+
+Status:
+
+```text
+Completed first pass.
+TVS V2.2 -> V2.3: no schema delta observed; V2.3 treated as PDF/documentation correction.
+TVS V2.4: new GetCurrentShortHaulStops response/data structure present and aligned with PDF table intent.
+TVS-001 opened: new V2.4 operation absent from TicketValidationServiceOperations group.
+TVS-002 opened: VehicleData.RouteDeviation PDF type name RouteDirectionEnumeration vs XSD RouteDeviationEnumeration.
+No XSD changes made.
+```
+
 Follow-up:
 
 ```text
-Run VB-005 later for actual schema compilation and targeted XML samples.
-Continue with next non-visual service block, recommended: TicketValidationService V2.2 / V2.3 / V2.4 include and semantic history.
+Run VB-006 later.
+Consider TVS-001 as possible narrow official correction PR candidate only after full audit and validation.
+Continue with next non-visual service block, recommended: CustomerInformationService V2.3/V2.4.
 ```
