@@ -31,6 +31,8 @@ docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.md
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.csv
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_inventory.csv
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_vs_xsd_diff.csv
+docs/pdf_xsd_semantic_audit/generated/common_v2_4_datatypes_xsd_inventory.md
+docs/pdf_xsd_semantic_audit/generated/common_v2_4_datatypes_xsd_inventory.csv
 ```
 
 Then read the currently active detailed audit files:
@@ -146,19 +148,35 @@ Exporter:
 tools/export_xsd_enumerations.py
 ```
 
-Generated XSD inventory:
+Generated XSD enumeration inventory:
 
 ```text
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.csv
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.md
 ```
 
-Generated PDF inventory and diff:
+Generated PDF enumeration inventory and diff:
 
 ```text
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_inventory.csv
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_vs_xsd_diff.csv
 docs/pdf_xsd_semantic_audit/01f_common_enums_v2_4_pdf_vs_xsd_enum_diff.md
+```
+
+Generated XSD datatype inventory:
+
+```text
+docs/pdf_xsd_semantic_audit/generated/common_v2_4_datatypes_xsd_inventory.csv
+docs/pdf_xsd_semantic_audit/generated/common_v2_4_datatypes_xsd_inventory.md
+```
+
+## Current result of 01g
+
+```text
+- All 16 observed IBIS-IP wrapper datatypes in IBIS-IP_common_V2.4.xsd follow the expected Value + optional ErrorCode pattern.
+- InternationalTextType is still OK against the PDF-described structure.
+- NetexMode structure is still OK partial; value-level differences are tracked in CE-008 to CE-010.
+- Subscribe/DataAccepted core structures have first XSD observation notes and still need PDF table-level closure.
 ```
 
 ## Next recommended task
