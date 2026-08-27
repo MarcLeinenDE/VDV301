@@ -1,5 +1,7 @@
 # Block 25b - HTTP/XML and Content-Type runtime profile
 
+Runtime evidence ID: `RV-001`
+
 Status: deterministic classifier implemented and executable-tested. No live device/network claim is made.
 
 ## Evidence run
@@ -9,7 +11,15 @@ GitHub Actions run: 33112730418
 head tested: 9584a07e5abd70dd34d122fbbb230dd03bb6e83b
 job: 98659465458
 environment: Ubuntu 24.04 / Python 3.12.14 / lxml 6.1.2
-http_status: 0 / PASS
+RV-001 status: 0 / PASS
+```
+
+Historical note:
+
+```text
+The executable tool was originally named tools/validate_http_runtime_ev25b.py before the EV/RV namespace split.
+The filename is retained as provenance for the already executed run.
+Future runtime evidence uses RV-* identifiers; runtime evidence must not be named EV-25b/EV25b.
 ```
 
 The run also re-confirmed all prior XSD evidence checks with status 0.
@@ -18,7 +28,7 @@ The run also re-confirmed all prior XSD evidence checks with status 0.
 
 ```text
 tools/runtime_http_profile.py
-tools/validate_http_runtime_ev25b.py
+tools/validate_http_runtime_ev25b.py   # historical filename; evidence ID is RV-001
 ```
 
 `runtime_http_profile.py` is intentionally network-independent and separates:
@@ -189,7 +199,7 @@ Those are runtime integration tests built on top of this classifier.
 ## Next
 
 ```text
-25c DNS-SD/service discovery classifier
+RV-002 / block 25c DNS-SD/service discovery classifier
 - generic RFC 6763 record semantics
 - VDV ver/deviceclass/deviceID/multicast rules
 - version-sensitive service labels
