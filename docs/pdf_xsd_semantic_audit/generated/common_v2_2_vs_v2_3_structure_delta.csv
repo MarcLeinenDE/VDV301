@@ -1,0 +1,11 @@
+structure,field_or_group,v2_2,v2_3,result,notes
+DisplayContentStructure,AdditionalInformation,0..*,0..*,unchanged,"Already present before V2.3."
+DisplayContentStructure,AdditionalInformation1..9,not observed,0..*,added,"V2.3 adds project-specific AdditionalInformation1 through AdditionalInformation9."
+DisplayContentStructure,RunNumber,not observed,0..1 added,"V2.3 adds RunNumber to DisplayContent."
+StopInformationStructure,ArrivalExpected,not observed,0..1 added,"V2.3 adds ArrivalExpected."
+StopInformationStructure,DepartureExpected,not observed,0..1 added,"V2.3 adds DepartureExpected."
+StopInformationRequestStructure,ArrivalExpected/DepartureExpected support,not observed,documented in V2.3 PDF,needs exact request-side XSD sample,"PDF version history points to 2.51 and 2.52; first pass records this as V2.3 StopInformation/StopInformationRequest area."
+TripInformationStructure,RunNumber,not observed,0..1 added,"V2.3 adds RunNumber."
+TripInformationStructure,PatternNumber,not observed,0..1 added,"V2.3 adds PatternNumber."
+TripInformationStructure,PathDestinationNumber,not observed,0..1 added,"V2.3 adds PathDestinationNumber."
+TripInformationStructure,AdditionalTextMessage1..9,not observed,0..1 each added,"V2.3 adds AdditionalTextMessage1 through AdditionalTextMessage9; base AdditionalTextMessage still lacks maxOccurs unbounded in XSD."
