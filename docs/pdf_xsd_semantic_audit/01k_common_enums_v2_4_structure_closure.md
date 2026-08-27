@@ -1,6 +1,6 @@
 # Common structures / enumerations V2.4 - structure closure pass
 
-Status: started, closure pass partial; SB-005 resolved.
+Status: started, closure pass partial; SB-005 resolved; visual-only checks deferred.
 
 Scope:
 
@@ -94,7 +94,7 @@ CE-017 TSPPoint Desciption spelling candidate
 
 These items are not fixed during this audit. They become provider-facing notes and, where appropriate, possible later official PR candidates after full audit completion and revalidation.
 
-### Pending visual PDF confirmation
+### Deferred visual PDF confirmation
 
 ```text
 CE-015 FareZoneInformation Farezone* vs FareZone* casing
@@ -102,7 +102,7 @@ CE-017 TSPPoint Desciption vs Description spelling
 ZoneType first-field casing/spelling if the PDF differs from XSD FarezoneTypeID
 ```
 
-These must be confirmed visually, not only via text extraction, before final wording is locked.
+These checks require manual/visual PDF confirmation. They are deferred by user request and no longer block non-visual audit work.
 
 ## 3. SB-005 deferred names resolved
 
@@ -179,29 +179,35 @@ PDF note: The PDF table lists GlobalCardStatusID; this looks like a typo-like sc
 Current state:
 
 ```text
-Common/Enums V2.4 structure audit is close to a first-pass closure, but not fully closed.
+Common/Enums V2.4 first-pass structure audit can continue with visual-only checks deferred.
 SB-005 is resolved and no longer blocks closure.
 ```
 
-Remaining blockers before declaring first-pass closure:
+Deferred items:
 
 ```text
 1. Visually confirm CE-015 FareZoneInformation casing.
 2. Visually confirm CE-017 TSPPoint Desciption/Description spelling.
 3. Decide whether ZoneType needs its own finding or is covered by CE-015.
-4. Update findings.md and validation_backlog.md accordingly.
+```
+
+Decision:
+
+```text
+Do not wait for these visual checks before continuing the overall PDF/XSD audit.
+Carry them in SB-006 until the user can perform the manual visual confirmation.
 ```
 
 ## 7. Next step
 
-Next audit action:
+Next non-visual audit action:
 
 ```text
-Perform visual PDF confirmation for CE-015 and CE-017.
+Continue with DeviceManagementService V2.4 audit integration.
 ```
 
-After that:
+Implemented in:
 
 ```text
-Close Common/Enums V2.4 first pass or carry explicitly labelled pending items into the cross-version history pass.
+docs/pdf_xsd_semantic_audit/02_dms_v2_4_pdf_xsd_audit.md
 ```
