@@ -1,0 +1,12 @@
+scope,version,operation_family,service_group_encoding,request_model,immediate_response_model,callback_model,status
+Common,1.0,unsubscribe,generic structures,UnsubscribeRequestStructure,UnsubscribeResponseStructure,n/a,confirmed
+Common,2.0,unsubscribe,generic structures,UnsubscribeRequestStructure,UnsubscribeResponseStructure,n/a,confirmed
+Common,2.2,subscribe/unsubscribe,generic structures,SubscribeRequestStructure/UnsubscribeRequestStructure,SubscribeResponseStructure/UnsubscribeResponseStructure,service data structure,confirmed generic types
+Common,2.4,subscribe/unsubscribe,generic structures,SubscribeRequestStructure/UnsubscribeRequestStructure,SubscribeResponseStructure/UnsubscribeResponseStructure,service data structure plus heartbeat semantics,confirmed generic types
+General Conventions,2.3,unsubscribe,documentation table,TerminateSubscribeRequestStructure,TerminateSubscribeResponseStructure,n/a,SUB-001 documentation candidate
+General Conventions,2.4,unsubscribe,documentation table,TerminateSubscribeRequestStructure,TerminateSubscribeResponseStructure,n/a,SUB-001 documentation candidate
+CIS,2.x,get-data subscriptions,service group omits explicit subscription members,generic Common per conventions,generic Common per conventions,subscribed CIS data,CIS-002 resolved ok_with_note
+SMS,2.2,get-data subscriptions,service group omits explicit subscription members,generic Common per service document/conventions,generic Common per service document/conventions,subscribed status data,SMS-001 resolved ok_with_note
+DMS,2.2,get-data subscriptions,explicit service-prefixed local members,generic Common,generic Common,subscribed DMS data,SUB-002 comparison case
+TSD,2.1,parameterized Retrieve subscription,missing specialized XSD operations,documented parameterized operation,documented,TripRef/TripInformation,TSD-001 remains
+TSD,2.2,parameterized Retrieve subscription,explicit specialized request members,TrainSetSubscribeRequestStructure/TrainSetUnsubscribeRequestStructure,group uses generic subscribe/unsubscribe response,global Subscribe response roots use Retrieve data structures,TSD-003 open
