@@ -35,6 +35,12 @@ docs/pdf_xsd_semantic_audit/OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
 Then read the active detailed audit files:
 
 ```text
+docs/pdf_xsd_semantic_audit/04_common_enums_historical_v1_0_to_v2_4_plan.md
+docs/pdf_xsd_semantic_audit/04a_common_enums_v1_0_v2_0_history.md
+docs/pdf_xsd_semantic_audit/04b_common_enums_v2_0_v2_1_history.md
+docs/pdf_xsd_semantic_audit/04c_common_enums_v2_1_v2_2_history.md
+docs/pdf_xsd_semantic_audit/04d_common_enums_v2_2_v2_3_history.md
+docs/pdf_xsd_semantic_audit/04e_common_enums_v2_3_v2_4_history_and_closure.md
 docs/pdf_xsd_semantic_audit/01_common_enums_v2_1_to_v2_4.md
 docs/pdf_xsd_semantic_audit/01a_common_enums_v2_4_table_check.md
 docs/pdf_xsd_semantic_audit/01b_common_enums_v2_4_continuation.md
@@ -51,10 +57,6 @@ docs/pdf_xsd_semantic_audit/01l_common_enums_v2_4_deferred_scope_resolution.md
 docs/pdf_xsd_semantic_audit/02_dms_v2_4_pdf_xsd_audit.md
 docs/pdf_xsd_semantic_audit/02a_dms_v2_2_v2_3_v2_4_history_compare.md
 docs/pdf_xsd_semantic_audit/03_tvs_v2_2_v2_3_v2_4_include_semantic_audit.md
-docs/pdf_xsd_semantic_audit/04_common_enums_historical_v1_0_to_v2_4_plan.md
-docs/pdf_xsd_semantic_audit/04a_common_enums_v1_0_v2_0_history.md
-docs/pdf_xsd_semantic_audit/04b_common_enums_v2_0_v2_1_history.md
-docs/pdf_xsd_semantic_audit/04c_common_enums_v2_1_v2_2_history.md
 ```
 
 Supporting generated inventories and matrices:
@@ -68,6 +70,10 @@ docs/pdf_xsd_semantic_audit/generated/enumerations_v2_0_vs_v2_1_xsd_diff.csv
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_0_vs_v2_1_xsd_diff.md
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_1_vs_v2_2_xsd_diff.csv
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_1_vs_v2_2_xsd_diff.md
+docs/pdf_xsd_semantic_audit/generated/enumerations_v2_2_vs_v2_3_xsd_diff.csv
+docs/pdf_xsd_semantic_audit/generated/common_v2_2_vs_v2_3_structure_delta.csv
+docs/pdf_xsd_semantic_audit/generated/enumerations_v2_3_vs_v2_4_xsd_diff.csv
+docs/pdf_xsd_semantic_audit/generated/common_v2_3_vs_v2_4_structure_delta.csv
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.md
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.csv
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_inventory.csv
@@ -98,7 +104,8 @@ Current active direction:
 Use AUDIT_SCOPE_MATRIX.md as the coverage checklist.
 Apply MIXED_VERSION_VALIDATION_PREMISE.md to every service/version pair.
 Continue non-visual audit work while user-specific visual PDF checks are deferred.
-Current foundation block: Common/Enums historical audit V1.0 -> V2.4.
+Common/Enums historical first-pass chain V1.0/V1.x -> V2.4 is complete.
+Next recommended service-level block: CustomerInformationService history.
 ```
 
 ## Core method and authority
@@ -150,45 +157,27 @@ CE-017 TSPPoint Desciption vs expected Description spelling.
 ZoneType first-field casing/spelling if PDF differs from XSD FarezoneTypeID.
 ```
 
-Historical block:
+Historical block result:
 
 ```text
-04_common_enums_historical_v1_0_to_v2_4_plan.md created.
 04a_common_enums_v1_0_v2_0_history.md completed first pass.
 04b_common_enums_v2_0_v2_1_history.md completed first pass.
 04c_common_enums_v2_1_v2_2_history.md completed first pass.
-No new CE finding was opened by these first-pass history blocks.
+04d_common_enums_v2_2_v2_3_history.md completed first pass.
+04e_common_enums_v2_3_v2_4_history_and_closure.md completed first-pass closure.
+CE-001 is closed as OK with note.
+No XSD correction was proposed by the historical closure.
 ```
 
-Important historical results now recorded:
+Important Common/Enums dependency pools:
 
 ```text
-V1.0/V1.x -> V2.0:
-  DataIntervallEnumeration -> DataIntervalEnumeration naming.
-  IBIS-IP-VersionEnumeration no longer observed in V2.0.
-  DeviceStateEnumeration adds readyForShutdown.
-  RouteDirectionEnumeration appears.
-  ServiceNameEnumeration adds PassengerCountingService and video services.
-  ServiceStateEnumeration adds starting.
-
-V2.0 -> V2.1:
-  DeviceClassEnumeration adds MultiFunctionalDisplay.
-  ErrorCodeEnumeration adds OperationNotSupported.
-  ServiceNameEnumeration adds DoorState, TrainSet, TicketValidation and HTMLDisplay service names.
-
-V2.1 -> V2.2:
-  DeviceClassEnumeration adds CombiDevice.
-  TripStateEnumeration and NetexMode/mode/submode enumerations are introduced.
-  ServiceNameEnumeration removes SystemDocumentationService/SystemManagementService and adds SystemMonitoringService in XSD/history.
-  V2.2 PDF table still prints the removed service names.
-  DeviceStateEnumeration warning is already present in V2.2 XSD but absent from the V2.2 PDF table.
-```
-
-Next required Common/Enums step:
-
-```text
-Create 04d_common_enums_v2_2_v2_3_history.md.
-Check V2.2 -> V2.3 include family and PDF/XSD changes, especially CE-001 and V2.3 use of Enumerations V2.2.
+V1.0: Common V1.0 + Enumerations V1.0.
+V2.0: Common V2.0 + Enumerations V2.0.
+V2.1: Common V2.1 + Enumerations V2.1.
+V2.2: Common V2.2 + Enumerations V2.2.
+V2.3: Common V2.3 + Enumerations V2.2.
+V2.4: Common V2.4 + Enumerations V2.4.
 ```
 
 ## Current DMS result
@@ -242,20 +231,19 @@ DMS first-pass: no DMS-specific finding opened.
 
 ## Next recommended task
 
-Continue Common/Enums historical audit:
+Start service-level historical audit:
 
 ```text
-04d_common_enums_v2_2_v2_3_history.md
+CustomerInformationService historical block.
 ```
 
-Next sub-steps:
+Suggested first sub-steps:
 
 ```text
-1. Compare Common/Enums V2.2 and V2.3 XSD include families and deltas.
-2. Check VDV 301-2-1 V2.3 PDF version history and affected tables.
-3. Decide whether CE-001 can be closed as intentional dependency reuse or must remain unclear.
-4. Track DisplayContent / StopInformation / StopInformationRequest / TripInformation V2.3 additions.
-5. Then continue with V2.3 -> V2.4 historical closure.
+1. Map CIS public PDF versions against observed CIS XSD files in dev/schema-integration.
+2. Identify exact Common/Enums dependency pool per CIS version.
+3. Compare CIS V1.1/V2.0/V2.2/V2.3 and any V2.4 candidate provenance separately.
+4. Open service-specific findings only where PDF/XSD facts require it.
 ```
 
 ## Working style for continuity
