@@ -26,6 +26,7 @@ Important limits:
 - Local XSD compilation and sample XML validation remain a later technical validation step.
 - Possible official correction PRs are tracked only as post-audit candidates and are not opened during the audit.
 - Manual/visual PDF checks are explicitly allowed to remain deferred while non-visual audit work continues.
+- Mixed-version real-world systems are expected; validation must be service-version scoped.
 
 ## Validation authority
 
@@ -38,10 +39,11 @@ Executable validation authority: XSD
 PDF evidence: documented and shown as explanatory note when it differs from XSD
 ```
 
-Detailed policy:
+Detailed policies:
 
 ```text
 docs/pdf_xsd_semantic_audit/VALIDATION_AUTHORITY.md
+docs/pdf_xsd_semantic_audit/MIXED_VERSION_VALIDATION_PREMISE.md
 ```
 
 ## Start here / handoff
@@ -57,15 +59,12 @@ Then read:
 ```text
 docs/pdf_xsd_semantic_audit/00_index.md
 docs/pdf_xsd_semantic_audit/AUDIT_SCOPE_MATRIX.md
+docs/pdf_xsd_semantic_audit/MIXED_VERSION_VALIDATION_PREMISE.md
 docs/pdf_xsd_semantic_audit/VALIDATION_AUTHORITY.md
 docs/pdf_xsd_semantic_audit/findings.md
 docs/pdf_xsd_semantic_audit/validation_backlog.md
 docs/pdf_xsd_semantic_audit/OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
 docs/pdf_xsd_semantic_audit/generated/audit_scope_matrix.csv
-docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.md
-docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.csv
-docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_inventory.csv
-docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_vs_xsd_diff.csv
 ```
 
 Always fetch the current `dev/schema-integration` branch ref before continuing.
@@ -76,6 +75,7 @@ Always fetch the current `dev/schema-integration` branch ref before continuing.
 00_index.md
 AUDIT_HANDOFF.md
 AUDIT_SCOPE_MATRIX.md
+MIXED_VERSION_VALIDATION_PREMISE.md
 VALIDATION_AUTHORITY.md
 OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
 01_common_enums_v2_1_to_v2_4.md
@@ -94,6 +94,8 @@ OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
 02_dms_v2_4_pdf_xsd_audit.md
 02a_dms_v2_2_v2_3_v2_4_history_compare.md
 03_tvs_v2_2_v2_3_v2_4_include_semantic_audit.md
+04_common_enums_historical_v1_0_to_v2_4_plan.md
+04a_common_enums_v1_0_v2_0_history.md
 findings.md
 validation_backlog.md
 generated/audit_scope_matrix.csv
@@ -116,17 +118,13 @@ tools/export_xsd_enumerations.py
 | Area | Status | Notes |
 |---|---|---|
 | Audit scope matrix | available | Master checklist for public PDF versions vs observed XSD files. |
+| Mixed-version validation premise | available | Documents why all historical service versions must remain separately validatable. |
 | Validation authority policy | available | XSD precedence over documentation is documented for audit and tool behaviour. |
 | Official PR candidate register | available | Tracks possible post-audit correction PR candidates; no PRs during audit. |
-| Common/Enums V2.4 XSD enumeration inventory | available | XSD-side CSV/Markdown inventory exists for `IBIS-IP_Enumerations_V2.4.xsd`. |
-| Common/Enums V2.4 PDF enumeration inventory | available | PDF-side inventory exists for VDV 301-2-1 V2.4 tables 65-104. |
-| Common/Enums V2.4 PDF/XSD enumeration diff | completed first pass | Exact/case-sensitive diff exists; findings CE-004 and CE-006 through CE-010 remain open for historical classification. |
-| Common/Enums V2.4 datatypes/core structures | mostly completed first pass | Datatype inventory, InternationalTextType and NetexMode are documented in 01g. |
-| Common/Enums V2.4 common structures | visual checks deferred | 01h, 01i, 01j, 01k and 01l cover most structures; SB-005 resolved; CE-015/CE-017/ZoneType visual checks deferred. |
-| Common/Enums V1.0-V2.3 historical audit | next | Highest-priority foundation block because shared types affect all services. |
-| DeviceManagementService V2.4 | first pass completed | `02_dms_v2_4_pdf_xsd_audit.md`; no new DMS-specific mismatch opened; validation backlog VB-005 created. |
-| DMS V2.2/V2.3/V2.4 history | first pass completed | `02a_dms_v2_2_v2_3_v2_4_history_compare.md`; confirms DMS V2.4 candidate scope remains narrow. |
-| TicketValidationService | first pass completed for V2.2/V2.3/V2.4 | `03_tvs...`; TVS-001 and TVS-002 opened; V2.1 historical coverage still pending. |
+| Common/Enums V2.4 XSD/PDF inventory and diff | partial/completed first pass | V2.4 enum diff and core structure pass exist; visual checks deferred. |
+| Common/Enums V1.0-V2.3 historical audit | started | Plan file created; V1.0 -> V2.0 first XSD-side observation started. |
+| DeviceManagementService V2.4/history | first pass completed | No DMS-specific mismatch opened; validation backlog VB-005 created. |
+| TicketValidationService | first pass completed for V2.2/V2.3/V2.4 | TVS-001 and TVS-002 opened; V2.1 historical coverage still pending. |
 | CustomerInformationService | pending | Coverage and provenance unclear for older versions and V2.4 candidate. |
 | Remaining services | pending | To be split into small blocks after Common/Enums historical closure. |
 
