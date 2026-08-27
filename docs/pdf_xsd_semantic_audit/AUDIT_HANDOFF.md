@@ -27,6 +27,7 @@ docs/pdf_xsd_semantic_audit/00_index.md
 docs/pdf_xsd_semantic_audit/VALIDATION_AUTHORITY.md
 docs/pdf_xsd_semantic_audit/findings.md
 docs/pdf_xsd_semantic_audit/validation_backlog.md
+docs/pdf_xsd_semantic_audit/OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.md
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.csv
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_inventory.csv
@@ -49,6 +50,7 @@ docs/pdf_xsd_semantic_audit/01g_common_enums_v2_4_datatypes_core_structures.md
 docs/pdf_xsd_semantic_audit/01h_common_enums_v2_4_core_data_structures.md
 docs/pdf_xsd_semantic_audit/01i_common_enums_v2_4_remaining_data_structures_part1.md
 docs/pdf_xsd_semantic_audit/01j_common_enums_v2_4_remaining_data_structures_part2.md
+docs/pdf_xsd_semantic_audit/01k_common_enums_v2_4_structure_closure.md
 ```
 
 Also read the broader branch context when needed:
@@ -112,6 +114,30 @@ See:
 
 ```text
 docs/pdf_xsd_semantic_audit/VALIDATION_AUTHORITY.md
+```
+
+## Official PR candidate policy
+
+Some findings may turn out to be near-certain typos or schema/documentation defects. These are tracked separately in:
+
+```text
+docs/pdf_xsd_semantic_audit/OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
+```
+
+Important rule:
+
+```text
+Do not open official correction PRs during the audit.
+At the end of the full audit, recheck all candidates together, validate locally, compare against current upstream and open PRs, then decide whether a minimal official PR is justified.
+```
+
+Initial tracked candidates:
+
+```text
+PR-CAND-001 GlobalCardStausID, linked CE-016
+PR-CAND-002 TSPPoint Desciption, linked CE-017
+PR-CAND-003 AdditionalAnnouncement InformationAtSpecificPoint vs SpecificPoint, linked CE-013
+PR-CAND-004 cardinality discrepancy candidates, linked CE-011/CE-012/CE-014
 ```
 
 Finding states:
@@ -259,18 +285,29 @@ PathDestination
 Route
 ```
 
-## Next recommended task
-
-Create a Common/Enums V2.4 structure closure pass:
+## Current result of 01k
 
 ```text
-01k_common_enums_v2_4_structure_closure.md
+Common/Enums V2.4 structure closure pass started.
+Most checked V2.4 common structures are now classified as OK or OK with note.
+First-pass closure is still blocked by:
+- SB-005 deferred name routing,
+- SB-006 visual confirmation for CE-015 / CE-017 / ZoneType casing,
+- possible carry-forward of unresolved items into cross-version history checks.
+```
 
-Tasks:
-- resolve deferred structure names from SB-005,
-- visually confirm CE-015 and CE-017 from the PDF,
-- classify all Common/Enums V2.4 structure tables as closed / partial / pending,
-- then decide whether to move next to Common/Enums V2.3 history or DMS V2.4 audit integration.
+## Next recommended task
+
+Continue with closure work:
+
+```text
+Resolve SB-005 deferred names:
+NetworkLocationPoint
+OperationalInformation
+PassengerCounting
+PassengerCountingData
+PathDestination
+Route
 ```
 
 Use the same evidence style:
@@ -291,8 +328,9 @@ After each meaningful block:
 ```text
 1. Commit audit file changes to dev/schema-integration.
 2. Update findings.md if a new CE finding is opened or a finding state changes.
-3. Update AUDIT_HANDOFF.md only when the continuation point changes materially.
-4. Report the final branch commit SHA to the user.
+3. Update validation_backlog.md when deferred checks or final-review gates change.
+4. Update AUDIT_HANDOFF.md only when the continuation point changes materially.
+5. Report the final branch commit SHA to the user.
 ```
 
 This avoids depending on chat memory alone and lets a new chat continue without gaps.
