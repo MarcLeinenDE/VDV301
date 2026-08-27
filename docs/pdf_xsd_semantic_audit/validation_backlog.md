@@ -140,6 +140,36 @@ Each service payload is validated against the selected service version and depen
 Special/no-XSD services are marked explicitly instead of failing as missing files.
 ```
 
+### VB-008 - Common/Enums V1.0 and V2.0 schema compile
+
+Source:
+
+```text
+docs/pdf_xsd_semantic_audit/04a_common_enums_v1_0_v2_0_history.md
+docs/pdf_xsd_semantic_audit/generated/enumerations_v1_0_v2_0_xsd_inventory.csv
+docs/pdf_xsd_semantic_audit/generated/enumerations_v1_0_vs_v2_0_xsd_diff.csv
+```
+
+Scope:
+
+```text
+Common/Enums V1.0 pool:
+  IBIS-IP_common_V1.0.xsd
+  IBIS-IP_Enumerations_V1.0.xsd
+
+Common/Enums V2.0 pool:
+  IBIS-IP_common_V2.0.xsd
+  IBIS-IP_Enumerations_V2.0.xsd
+```
+
+Goal:
+
+```text
+Compile V1.0 and V2.0 pools separately.
+Do not mix V1.0 and V2.0 Common/Enums definitions.
+Later add targeted samples for deltas such as DeviceStateEnumeration readyForShutdown and DataIntervall/DataInterval type naming if referenced by service schemas.
+```
+
 ## Semantic audit backlog
 
 ### SB-001 - Common/Enums V2.4 affected table check
@@ -271,7 +301,8 @@ Status:
 ```text
 Started.
 Plan file created.
-V1.0 -> V2.0 XSD-side first observation started.
+V1.0 -> V2.0 XSD-side enumeration inventory and first diff completed.
+PDF-side V1.0/V2.0 check pending.
 ```
 
 Sources:
@@ -279,12 +310,17 @@ Sources:
 ```text
 docs/pdf_xsd_semantic_audit/04_common_enums_historical_v1_0_to_v2_4_plan.md
 docs/pdf_xsd_semantic_audit/04a_common_enums_v1_0_v2_0_history.md
+docs/pdf_xsd_semantic_audit/generated/enumerations_v1_0_v2_0_xsd_inventory.csv
+docs/pdf_xsd_semantic_audit/generated/enumerations_v1_0_vs_v2_0_xsd_diff.csv
+docs/pdf_xsd_semantic_audit/generated/enumerations_v1_0_vs_v2_0_xsd_diff.md
 ```
 
-Reason:
+Current result:
 
 ```text
-Common/Enums is shared by nearly every service. Historical closure here prevents duplicated or misclassified service-level findings.
+No new CE finding opened yet.
+Recorded XSD-side deltas include DataIntervall -> DataInterval naming, DeviceState readyForShutdown, RouteDirectionEnumeration, ServiceName video additions, PassengerCountingService and ServiceState starting.
+These deltas require V1.0/V2.0 PDF-side confirmation before findings or version-range updates.
 ```
 
 ### SB-013 - mixed-version validation premise
