@@ -1,217 +1,151 @@
-# CustomerInformationService V1.1 / V2.0 / V2.2 provenance and PDF-history audit
+# CustomerInformationService historical XSD provenance correction
 
-Status: provenance first pass completed; no schema correction proposed.
+Status: corrected after official VDV tag check; historical CIS XSDs imported into dev/schema-integration.
 
 Scope:
 
 ```text
 VDV 301-2-3 CustomerInformationService V1.1 PDF listing
-VDV 301-2-3 CustomerInformationService V2.0 PDF source
-VDV 301-2-3 CustomerInformationService V2.2 PDF source
-VDVde/VDV301 master repository contents
-MarcLeinenDE/VDV301 dev/schema-integration repository contents
-first-pass GitHub PR/commit/file searches for historical CIS XSDs
+VDV 301-2-3 CustomerInformationService V2.0 PDF source/listing
+VDV 301-2-3 CustomerInformationService V2.2 PDF source/listing
+VDV 301-2-3 CustomerInformationService V2.3 PDF source/listing
+Official VDVde/VDV301 tags VDV-301-1.0, VDV-301-2.0, VDV-301-2.1, VDV-301-2.2, VDV-301-2.3
+MarcLeinenDE/VDV301 dev/schema-integration
+```
+
+Correction note:
+
+```text
+The earlier 05a first pass looked only at current master/current integration branch state and therefore incorrectly classified CIS V1.1/V2.0/V2.2 as XSD-not-found.
+A follow-up check of official VDVde/VDV301 tags found historical CIS XSDs.
+This file supersedes the earlier first-pass classification.
 ```
 
 Authority rule:
 
 ```text
-Validation follows the selected version's XSD family where a version-exact XSD is available.
-PDF evidence is documentation evidence and can be used for audit/routing, but it is not a replacement for a missing historical XSD.
+Validation follows the selected version's XSD family where a version-exact XSD exists.
+PDF evidence is documentation evidence and is used for version mapping and provider-facing notes.
 No schema is reconstructed or corrected in this pass.
 ```
 
 Mixed-version rule:
 
 ```text
-Do not validate CIS V1.1, V2.0 or V2.2 traffic against CIS V2.3 only because CIS V2.3 is the earliest CIS service XSD currently observed in the current repository state.
-Older CIS versions remain separate audit targets.
+Do not validate older CIS payloads against CIS V2.3 by latest-wins substitution.
+Use the exact service schema and dependency pool for the selected CIS version.
 ```
 
-## 1. Public PDF publication map
+## 1. Corrected historical XSD map
 
-The public VDV IP-KOM-ÖV page lists these CustomerInformationService publications:
+| CIS / publication version | Official tag evidence | XSD file | Current integration status | Classification |
+|---|---|---|---|---|
+| V1.0 / V1.1 mapping question | `VDV-301-1.0` | `IBIS-IP_CustomerInformationService_V1.0.xsd` | imported | Historical XSD exists; V1.1 PDF-to-V1.0-XSD mapping still needs evidence. |
+| V2.0 | `VDV-301-2.0`; also still present in `VDV-301-2.1` | `IBIS-IP_CustomerInformationService_V2.0.xsd` | imported | Historical executable CIS V2.0 baseline exists. |
+| V2.2 | `VDV-301-2.2` | `IBIS-IP_CustomerInformationService_V2.2.xsd` | imported | Historical executable CIS V2.2 baseline exists. |
+| V2.3 | `VDV-301-2.3` / current master | `IBIS-IP_CustomerInformationService_V2.3.xsd` | already present | Current executable CIS baseline. |
+| V2.4 | no public CIS V2.4 PDF observed in this pass | `IBIS-IP_CustomerInformationService_V2.4.xsd` only in integration branch | already present as candidate/integration | Do not label official without source authority. |
+
+## 2. Imported files
+
+Imported into `dev/schema-integration` from official VDV tags, preserving blob contents and filenames:
 
 ```text
-VDV 301-2-3 CustomerInformationService V1.1
-VDV 301-2-3 CustomerInformationService V2.0
-VDV 301-2-3 CustomerInformationService V2.2
-VDV 301-2-3 CustomerInformationService V2.3
+IBIS-IP_CustomerInformationService_V1.0.xsd  <- VDVde/VDV301 tag VDV-301-1.0
+IBIS-IP_CustomerInformationService_V2.0.xsd  <- VDVde/VDV301 tag VDV-301-2.0
+IBIS-IP_CustomerInformationService_V2.2.xsd  <- VDVde/VDV301 tag VDV-301-2.2
 ```
 
-First-pass PDF-source observations from public search/opened snippets:
+## 3. Dependency pools now available for CIS
 
 ```text
-V2.0 PDF: VDV-Schrift 301-2-3, 02/2018, Dienst CustomerInformationService V 2.0.
-V2.2 PDF: VDV-Schrift 301-2-3, 08/2019, CustomerInformationService V 2.2.
-V2.3 PDF: VDV-Schrift 301-2-3, 12/2020, CustomerInformationService V 2.3.
-V1.1: public VDV page lists the publication, but this pass did not yet retrieve a direct standalone PDF text snippet beyond the listing.
-```
+CIS V1.0:
+  IBIS-IP_CustomerInformationService_V1.0.xsd
+  IBIS-IP_common_V1.0.xsd
+  IBIS-IP_Enumerations_V1.0.xsd
 
-Important source note:
-
-```text
-The VDV page also states that all VDV 301 documents from V2.0 onward are bilingual.
-Therefore CIS V1.1 must not be assumed to have the same bilingual/table layout style as the V2.x documents.
-```
-
-## 2. Repository XSD availability map
-
-### Official upstream master
-
-Observed in `VDVde/VDV301` current master contents:
-
-```text
-IBIS-IP_CustomerInformationService_V2.3.xsd is present.
-No IBIS-IP_CustomerInformationService_V1.1.xsd observed.
-No IBIS-IP_CustomerInformationService_V2.0.xsd observed.
-No IBIS-IP_CustomerInformationService_V2.2.xsd observed.
-```
-
-### Integration branch
-
-Observed in `MarcLeinenDE/VDV301` `dev/schema-integration` contents:
-
-```text
-IBIS-IP_CustomerInformationService_V2.3.xsd is present.
-IBIS-IP_CustomerInformationService_V2.4.xsd is present as integration/candidate material.
-No IBIS-IP_CustomerInformationService_V1.1.xsd observed.
-No IBIS-IP_CustomerInformationService_V2.0.xsd observed.
-No IBIS-IP_CustomerInformationService_V2.2.xsd observed.
-```
-
-## 3. First-pass GitHub/search provenance result
-
-First-pass searches performed:
-
-```text
-VDVde/VDV301 commit search for CustomerInformationService.
-VDVde/VDV301 pull-request search for CustomerInformationService.
-VDVde/VDV301 branch search for CIS.
-Web search for exact historical filenames:
-  IBIS-IP_CustomerInformationService_V1.1.xsd
+CIS V2.0:
   IBIS-IP_CustomerInformationService_V2.0.xsd
+  IBIS-IP_common_V2.0.xsd
+  IBIS-IP_Enumerations_V2.0.xsd
+
+CIS V2.2:
   IBIS-IP_CustomerInformationService_V2.2.xsd
+  IBIS-IP_common_V2.2.xsd
+  IBIS-IP_Enumerations_V2.2.xsd
+
+CIS V2.3:
+  IBIS-IP_CustomerInformationService_V2.3.xsd
+  IBIS-IP_common_V2.3.xsd
+  IBIS-IP_Enumerations_V2.2.xsd
+
+CIS V2.4 integration/candidate:
   IBIS-IP_CustomerInformationService_V2.4.xsd
+  IBIS-IP_common_V2.4.xsd
+  IBIS-IP_Enumerations_V2.4.xsd
 ```
 
-First-pass result:
+## 4. Remaining V1.1 mapping question
+
+The public VDV page lists `CustomerInformationService V1.1`, while the official tag check found a service schema named `IBIS-IP_CustomerInformationService_V1.0.xsd` in tag `VDV-301-1.0`.
+
+Current classification:
 
 ```text
-No historical CIS V1.1, V2.0 or V2.2 service XSD was found in these first-pass searches.
-No pull request explicitly about CustomerInformationService history was found in the checked repository search.
+Do not assume automatically that the V1.1 PDF is validated by the V1.0 XSD.
+Treat this as a mapping/provenance question for the next CIS block.
 ```
 
-Interpretation:
+Possible outcomes after checking the V1.1 PDF/release context:
 
 ```text
-This does not prove that no historical CIS XSD ever existed.
-It only means the exact historical CIS service XSDs were not found in the currently checked public/current repository state and first-pass searches.
-Possible remaining sources include old Git history not matched by search, archived downloads, ZIP bundles, CIS Excel tool material, local vendor/tool archives or VDV internal material.
+1. V1.1 PDF is a documentation update and still uses CIS V1.0 XSD.
+2. A separate CIS V1.1 XSD exists outside the checked tag path.
+3. V1.1 has no separate XSD and must be labelled as PDF-publication with V1.0-schema dependency if source evidence supports that.
 ```
 
-## 4. Version-specific classification
+## 5. Finding decision
 
-| CIS version | Public PDF listed | Service XSD observed in current official master | Service XSD observed in dev/schema-integration | First-pass classification |
-|---|---:|---:|---:|---|
-| V1.1 | yes | no | no | PDF-publication known; XSD recovery required before true XSD validation. |
-| V2.0 | yes | no | no | PDF-publication known; XSD recovery required before true XSD validation. |
-| V2.2 | yes | no | no | PDF-publication known; XSD recovery required before true XSD validation. |
-| V2.3 | yes | yes | yes | First currently observed official service-XSD baseline. |
-| V2.4 | no public CIS V2.4 PDF observed in this pass | no | yes | Integration/candidate only; do not label official. |
-
-## 5. CIS V2.3 baseline dependency pool
-
-Observed CIS V2.3 include family:
+Status after correction:
 
 ```text
-IBIS-IP_CustomerInformationService_V2.3.xsd
-  includes IBIS-IP_common_V2.3.xsd
-  includes IBIS-IP_Enumerations_V2.2.xsd
+No CIS-specific PDF/XSD finding opened.
+No XSD correction proposed.
+The previous "XSD not found" classification for V2.0 and V2.2 is superseded.
+The previous "older CIS XSD recovery required" classification is narrowed to the V1.1 mapping question only.
 ```
 
-This aligns with the Common/Enums historical closure:
+## 6. Tool/SDK implication
+
+For later SDK/tool validation:
 
 ```text
-Common V2.3 + Enumerations V2.2 is a legitimate V2.3 dependency pool in the observed branch state.
+CIS V2.0 and V2.2 can be executable validation targets after local schema compile.
+CIS V2.3 uses the known mixed Common V2.3 + Enumerations V2.2 dependency pool.
+CIS V1.1 must remain a selectable documentation version only after its exact schema mapping is resolved.
 ```
 
-## 6. CIS V2.4 integration/candidate dependency pool
-
-Observed CIS V2.4 include family:
-
-```text
-IBIS-IP_CustomerInformationService_V2.4.xsd
-  includes IBIS-IP_common_V2.4.xsd
-  includes IBIS-IP_Enumerations_V2.4.xsd
-```
-
-Classification:
-
-```text
-CIS V2.4 stays integration/candidate material until a public CIS V2.4 PDF/source authority or accepted upstream state is confirmed.
-It is useful for tool/internal experiments but not an official-facing correction baseline in this pass.
-```
-
-## 7. Finding decision
-
-Status after this pass:
-
-```text
-No CIS-specific finding opened.
-No XSD change proposed.
-No historical CIS XSD is reconstructed.
-```
-
-Reason:
-
-```text
-The absence of CIS V1.1/V2.0/V2.2 service XSDs in the currently checked sources is a provenance gap, not yet a confirmed PDF/XSD contradiction.
-The correct next action is source recovery and then version-specific comparison.
-```
-
-## 8. Tool/SDK implication
-
-For the later validator/SDK:
-
-```text
-CIS V2.3 can be mapped to an executable XSD pool:
-  CIS V2.3 + Common V2.3 + Enumerations V2.2.
-
-CIS V1.1/V2.0/V2.2 must not be silently validated with CIS V2.3.
-Until version-exact XSDs are recovered or a deliberate PDF-derived compatibility profile is approved, they should be marked as:
-  known public version, XSD not yet available in audited source set.
-```
-
-Potential user-facing validator wording later:
-
-```text
-CIS V2.0 selected: a public VDV PDF exists, but no version-exact CIS V2.0 XSD is available in the audited source set yet. XSD validation cannot be claimed for this version until the historical schema is recovered or an explicitly labelled compatibility profile is selected.
-```
-
-## 9. Next CIS audit step
+## 7. Next CIS audit step
 
 Next detailed file:
 
 ```text
-docs/pdf_xsd_semantic_audit/05b_cis_v2_3_pdf_xsd_first_pass.md
+docs/pdf_xsd_semantic_audit/05b_cis_v1_0_v2_0_v2_2_v2_3_xsd_history_compare.md
 ```
 
 Required next steps:
 
 ```text
-1. Use CIS V2.3 as the first executable CIS baseline because it has both public PDF and service XSD evidence.
-2. Compare top-level operations/group entries against the CIS V2.3 PDF operation set.
-3. Check key data structures: AllData, CurrentAnnouncementData, CurrentConnectionInformationData, CurrentDisplayContentData, CurrentStopPointData, CurrentStopIndexData, TripData, VehicleData, PartialStopSequenceData.
-4. Track inherited Common/Enums findings separately from CIS-specific findings.
-5. Keep older CIS V1.1/V2.0/V2.2 in the source-recovery backlog.
+1. Compare CIS V1.0 -> V2.0 -> V2.2 -> V2.3 XSD operation sets and structure changes.
+2. Check V1.1 PDF mapping against CIS V1.0 XSD.
+3. Then compare CIS V2.3 PDF/XSD in detail as the current official service baseline.
+4. Keep inherited Common/Enums findings separate from CIS-specific findings.
 ```
 
-## 10. Result
+## 8. Result
 
 ```text
-CIS V1.1/V2.0/V2.2 provenance first pass is complete.
-The older public CIS versions are confirmed as audit targets, but no version-exact historical service XSD was found in the checked sources.
-CIS V2.3 is the first executable baseline for detailed CIS PDF/XSD comparison.
-Next: CIS V2.3 PDF/XSD first pass.
+Historical CIS XSD provenance is corrected.
+CIS V1.0, V2.0 and V2.2 XSDs are now present in dev/schema-integration from official VDV tags.
+The remaining early-version uncertainty is the V1.1 PDF-to-XSD mapping, not the existence of all older CIS schemas.
 ```
