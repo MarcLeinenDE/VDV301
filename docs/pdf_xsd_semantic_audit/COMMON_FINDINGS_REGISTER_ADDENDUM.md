@@ -7,12 +7,12 @@ Authority rule:
 ```text
 Validation follows the selected Common XSD version.
 PDF table differences are explanatory evidence only.
-No schema change is implied by opening a finding.
+No schema change is implied by opening or confirming a finding.
 ```
 
 ## CE-018 - ServiceIdentificationWithStateList cardinality PDF 1:* vs XSD 0:*
 
-State: confirmed historical cardinality mismatch candidate.
+State: executable-confirmed historical cardinality mismatch.
 
 Classification:
 
@@ -20,10 +20,10 @@ Classification:
 mismatch_kind: cardinality
 likely_source_issue: cardinality_mismatch_candidate
 subclassification: xsd_more_permissive_than_pdf
-classification_confidence: high
-version_scope: confirmed V2.1, V2.2, V2.3, V2.4
+classification_confidence: very high
+version_scope: executable XSD behaviour confirmed V1.0, V2.0, V2.1, V2.2, V2.3, V2.4; checked PDF 1:* wording confirmed V2.1-V2.4
 validation_behavior: XSD permits empty list
-final_handling_bucket: local_validation_required
+final_handling_bucket: official_documentation_or_schema_alignment_review_candidate
 ```
 
 PDF evidence:
@@ -32,25 +32,47 @@ PDF evidence:
 Checked Common documents V2.1, V2.2, V2.3 and V2.4 each show ServiceIdentificationWithStateList / ServiceIdentificationWithState as 1:*.
 ```
 
-XSD evidence:
+Static XSD evidence:
 
 ```text
-Common XSDs V2.1, V2.2, V2.3 and V2.4 define:
+Checked Common XSD family defines:
 ServiceIdentificationWithState minOccurs="0" maxOccurs="unbounded".
+```
+
+Executable evidence:
+
+```text
+GitHub Actions run: 33109768872
+head tested: 2298f1297e9d2b00aacbf244f39f6c73587f713e
+tool: tools/validate_ce018_service_identification_with_state_list.py
+result: PASS
+```
+
+Executed versions:
+
+```text
+Common V1.0  empty list PASS; one-item list PASS
+Common V2.0  empty list PASS; one-item list PASS
+Common V2.1  empty list PASS; one-item list PASS
+Common V2.2  empty list PASS; one-item list PASS
+Common V2.3  empty list PASS; one-item list PASS
+Common V2.4  empty list PASS; one-item list PASS
 ```
 
 Impact:
 
 ```text
-An empty ServiceIdentificationWithStateList is accepted by the XSD but conflicts with the checked PDF cardinality.
+The executable Common XSD family consistently permits zero ServiceIdentificationWithState items.
+For the checked V2.1-V2.4 documents, this conflicts with the documented 1:* cardinality.
 SystemMonitoringService.GetServiceStatusResponseData is a direct consumer of this list structure.
 ```
 
-Next action:
+Handling:
 
 ```text
-Local positive sample with one item and XSD-positive empty-list sample for each relevant pool as needed.
-Do not alter the XSD until service impact and official-facing review are complete.
+Validation follows the selected XSD and must accept the empty list where the selected Common XSD does.
+The SDK may emit a documentation-discrepancy diagnostic, but must not reject the XSD-valid empty list solely because of the PDF 1:* wording.
+No XSD change is made in the audit branch.
 ```
 
 ## CE-019 - ServiceIdentificationWithStateList item type/reference PDF vs XSD
