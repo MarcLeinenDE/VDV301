@@ -61,12 +61,13 @@ The integration working branch therefore needs a complete version-scoped validat
 Official VDV release tags are acceptable authority for restoring historical XSDs into that integration branch.
 ```
 
-Example already applied:
+Examples already applied:
 
 ```text
 IBIS-IP_CustomerInformationService_V1.0.xsd imported from VDVde/VDV301 tag VDV-301-1.0.
 IBIS-IP_CustomerInformationService_V2.0.xsd imported from VDVde/VDV301 tag VDV-301-2.0.
 IBIS-IP_CustomerInformationService_V2.2.xsd imported from VDVde/VDV301 tag VDV-301-2.2.
+IBIS-IP_PassengerCountingService_V1.0.xsd imported unchanged from VDVde/VDV301 tag VDV-301-1.0, blob 600a3ee6290c630a4435fb06ca9803dabaceb788.
 ```
 
 ## 2. Current candidate / pull-request integration lane
