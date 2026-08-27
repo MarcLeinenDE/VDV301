@@ -36,10 +36,10 @@ Supported-operation discovery must not be derived solely from service-XSD operat
 | PassengerCountingService | 301-2-8 | 1.0, 2.1 | later official self-contained V1.0 revision + V2.1 official | first pass completed; PCS-001 executable-confirmed | run 33109367265 proves exact V2.1 route rejects OperationNotSupported while Enums V2.1 control accepts it. |
 | Ticketing / TicketInformation | 301-2-9 | 1.0 | later official self-contained V1.0 revision selected | first pass completed | TKT findings; no duplicate original packaging copy. |
 | TimeService | 301-2-10 | 1.0 | non-XSD SNTP/DNS-SD | first pass completed | TS findings. |
-| VideoLiveService | 301-2-11 | 1.0, 2.0 | V1.0 strict-XSD unresolved; V2.0 official | first pass completed; **EV-103 next** | VLS-002 compositor target. |
-| VideoRecordingService | 301-2-12 | 1.0, 2.0, 2.4 | V1.0 unresolved; V2.0 official; V2.4 candidate | first pass completed; **EV-103 next** | VRS-003 compositor target. |
-| VideoDisplayService | 301-2-13 | 1.0, 2.0 | V1.0 unresolved; V2.0 official | first pass completed; **EV-103 next** | VDS compositor targets. |
-| TrainSet services | 301-2-14 | 2.1, 2.2 | three separately routed service families | first pass completed | TSM-002/TSD-003 are EV-104 targets. |
+| VideoLiveService | 301-2-11 | 1.0, 2.0 | V1.0 strict-XSD unresolved; V2.0 official | first pass completed; VLS-002 executable-confirmed | run 33111119723 proves PDF-shaped multi-field LiveStreamData is rejected by V2.0 xs:choice. |
+| VideoRecordingService | 301-2-12 | 1.0, 2.0, 2.4 | V1.0 unresolved; V2.0 official; V2.4 candidate | first pass completed; VRS-003 executable-confirmed | run 33111119723 proves V2.0 combined state fields fail; V2.4 candidate grouped-state control passes. |
+| VideoDisplayService | 301-2-13 | 1.0, 2.0 | V1.0 unresolved; V2.0 official | first pass completed; VDS-002/003/004 executable-confirmed | run 33111119723 confirms all targeted choice conflicts. |
+| TrainSet services | 301-2-14 | 2.1, 2.2 | three separately routed service families | **EV-104 next** | TSM-002/TSD-003 root/modelling cases. |
 | DoorStateService | 301-2-15 | 2.1 | Common V1.0 + Enums V1.0 | first pass completed | DRS findings. |
 | TicketValidationService | 301-2-16 | 2.1, 2.2, 2.3, 2.4 | version-specific; V2.3 doc -> XSD V2.2; V2.4 candidate | first pass completed | TVS findings. |
 | HTMLDisplayService | 301-2-17 | 2.1, 2.2, 2.2a | non-XSD HTTP/discovery profile | first pass completed | HDS findings. |
@@ -48,7 +48,7 @@ Supported-operation discovery must not be derived solely from service-XSD operat
 | Legacy SystemManagement/SystemDocumentation | historical 301-2 base | V1.0 XSD lineage | SystemManagement self-contained V1.0 from tag 2.0; SystemDocumentation V1.0 type-XSD + root map | integrated; legacy root adapter compiled | no duplicate aggregate mirror. |
 | Network infrastructure | 301-3 | 02-2020 | non-XSD physical/network profile + discovery runtime context | first pass completed | NET/DISC findings; live validation later. |
 | Cross-service subscription modelling | 301-2 conventions + services | historical | generic Common structures + service-specific exceptions + operation-manifest layer | first pass completed | SUB-001/SUB-002; TSD-003 open for EV-104. |
-| Executable validation matrix | cross-version | historical/current/candidate | root compile + legacy root adapters + targeted samples | **in progress** | EV-001/EV-002, EV-101 and EV-102 passed; EV-103 next. |
+| Executable validation matrix | cross-version | historical/current/candidate | root compile + legacy root adapters + targeted samples | **in progress** | EV-001/EV-002, EV-101, EV-102 and EV-103 passed; EV-104 next. |
 
 ## Executed technical baseline
 
@@ -77,6 +77,14 @@ Common V1.0-V2.4 harnesses: PASS
 empty ServiceIdentificationWithStateList: accepted in every tested Common version
 one-item ServiceIdentificationWithStateList: accepted in every tested Common version
 CE-018: executable-confirmed xsd_more_permissive_than_pdf
+
+EV-103 / video compositors
+GitHub Actions run: 33111119723
+head tested: d4ffe09067cb38bf7f78ba295e029902078ed18d
+VideoLiveService V2.0: VLS-002 PASS / executable-confirmed
+VideoRecordingService V2.0: VRS-003 PASS / executable-confirmed
+VideoRecordingService V2.4 candidate grouped-state control: PASS / explanatory only
+VideoDisplayService V2.0: VDS-002/003/004 PASS / executable-confirmed
 ```
 
 The workflow is `workflow_dispatch` only and does not run on normal audit pushes.
@@ -84,30 +92,23 @@ The workflow is `workflow_dispatch` only and does not run on normal audit pushes
 ## Current priority
 
 ```text
-EV-103 - Video service xs:choice modelling candidates
-```
-
-Targets:
-
-```text
-VLS-002  VideoLiveService V2.0 LiveStreamData compositor
-VRS-003  VideoRecordingService V2.0 recording-state compositor
-VDS       VideoDisplayService V2.0 capability/request/response compositor findings
+EV-104 - TrainSet services
+TSM-002 / TSD-003 root and operation-modelling cases
 ```
 
 Test principle:
 
 ```text
-1. Compile exact official V2.0 service/dependency pools.
-2. Build minimal one-choice-field samples expected to validate.
-3. Build PDF-shaped multi-field records expected to fail if xs:choice is the operative restriction.
-4. Record each service/finding independently; do not change XSDs.
+1. Resolve each TrainSet service independently to its exact XSD/dependency family.
+2. Distinguish XML root availability from operation support/discovery semantics.
+3. Build only the minimal harnesses required to prove the open modelling findings.
+4. Do not infer supported operations solely from an XSD group.
+5. Do not change XSDs during evidence collection.
 ```
 
-Planned order after EV-103:
+Planned order after EV-104:
 
 ```text
-EV-104 TrainSet TSM-002/TSD-003 root/modelling cases
 EV-105 AnalogRadio ARA-003 candidate cardinality
 then runtime/discovery/HTTP/SNTP/RTSP layers
 ```
