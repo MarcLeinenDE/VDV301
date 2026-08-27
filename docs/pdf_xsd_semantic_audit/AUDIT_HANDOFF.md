@@ -24,6 +24,7 @@ At the start of a new chat, read these files first:
 ```text
 docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF.md
 docs/pdf_xsd_semantic_audit/00_index.md
+docs/pdf_xsd_semantic_audit/AUDIT_SCOPE_MATRIX.md
 docs/pdf_xsd_semantic_audit/VALIDATION_AUTHORITY.md
 docs/pdf_xsd_semantic_audit/findings.md
 docs/pdf_xsd_semantic_audit/validation_backlog.md
@@ -51,9 +52,10 @@ docs/pdf_xsd_semantic_audit/02a_dms_v2_2_v2_3_v2_4_history_compare.md
 docs/pdf_xsd_semantic_audit/03_tvs_v2_2_v2_3_v2_4_include_semantic_audit.md
 ```
 
-Supporting generated inventories:
+Supporting generated inventories and matrices:
 
 ```text
+docs/pdf_xsd_semantic_audit/generated/audit_scope_matrix.csv
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.md
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.csv
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_inventory.csv
@@ -81,7 +83,9 @@ Complete PDF-vs-XSD semantic comparison for all public VDV301 writings / schema-
 Current active direction:
 
 ```text
+Use AUDIT_SCOPE_MATRIX.md as the coverage checklist.
 Continue non-visual audit work while user-specific visual PDF checks are deferred.
+Next foundation block: Common/Enums historical audit V1.0 -> V2.4.
 ```
 
 ## Core method and authority
@@ -92,6 +96,32 @@ Continue non-visual audit work while user-specific visual PDF checks are deferre
 3. In case of PDF/XSD inconsistency, validation follows XSD.
 4. No schema correction is made during audit without an explicit separate approval.
 5. Potential official PR candidates are collected only for end-of-audit review.
+6. Missing PDF/XSD version pairs are routing signals, not automatic defects.
+```
+
+## Audit scope matrix
+
+Files:
+
+```text
+docs/pdf_xsd_semantic_audit/AUDIT_SCOPE_MATRIX.md
+docs/pdf_xsd_semantic_audit/generated/audit_scope_matrix.csv
+```
+
+Purpose:
+
+```text
+Track every public VDV301 service/scope and the published PDF versions listed by VDV against the XSD files observed in dev/schema-integration.
+Use this as the master checklist for complete audit coverage.
+```
+
+Important current matrix decisions:
+
+```text
+Common/Enums V1.0-V2.4 is the next foundation block.
+CIS has public PDFs through V2.3, while the branch also has a V2.4 candidate; provenance must be checked.
+Several V1.0 service PDFs have no corresponding V1.0 XSD observed in this branch; classify later as absent, special/no-XSD, renamed, or unresolved.
+Special/no-XSD candidates include TimeService and HTMLDisplayService; do not call them gaps until confirmed.
 ```
 
 ## Current Common/Enums V2.4 result
@@ -160,40 +190,33 @@ TVS-001: GetCurrentShortHaulStopsResponse is defined top-level and has structure
 TVS-002: VehicleData.RouteDeviation PDF table type RouteDirectionEnumeration vs XSD RouteDeviationEnumeration.
 ```
 
-Backlog / validation:
-
-```text
-VB-006 TVS V2.4 schema compile, targeted samples and operation inventory check.
-SB-010 TVS V2.2/V2.3/V2.4 include and semantic history completed first pass.
-```
-
-Official PR candidate register now tracks:
-
-```text
-PR-CAND-005: TVS V2.4 GetCurrentShortHaulStopsResponse operation-group omission, linked TVS-001.
-PR-CAND-006: TVS V2.4 VehicleData.RouteDeviation PDF type-name mismatch, linked TVS-002.
-```
-
-No PR is to be opened during the audit.
-
 ## Established finding IDs
 
-Common/Enums findings currently use `CE-001` through `CE-017`.
-Service-specific TVS findings currently use `TVS-001` and `TVS-002`.
-DMS first-pass did not open a DMS-specific finding.
+```text
+Common/Enums findings: CE-001 through CE-017.
+TicketValidationService findings: TVS-001 and TVS-002.
+DMS first-pass: no DMS-specific finding opened.
+```
 
 ## Next recommended task
 
 Next non-visual audit step:
 
 ```text
-CustomerInformationService V2.3 / V2.4 provenance, include and semantic history.
+Common/Enums historical audit V1.0 -> V2.4.
 ```
 
-Alternative:
+Reason:
 
 ```text
-Continue TVS backwards to V2.1/V2.2 PDF history if deeper TVS historical closure is desired before moving to CIS.
+Common/Enums is shared by nearly every service. Historical closure here prevents duplicate service-level misclassification and gives a reliable base for all remaining service audits.
+```
+
+Suggested next files:
+
+```text
+docs/pdf_xsd_semantic_audit/04_common_enums_historical_v1_0_to_v2_4_plan.md
+docs/pdf_xsd_semantic_audit/04a_common_enums_v1_0_v2_0_history.md
 ```
 
 ## Working style for continuity
