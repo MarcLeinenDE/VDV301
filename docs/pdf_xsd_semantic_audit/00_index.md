@@ -56,10 +56,12 @@ Then read:
 
 ```text
 docs/pdf_xsd_semantic_audit/00_index.md
+docs/pdf_xsd_semantic_audit/AUDIT_SCOPE_MATRIX.md
 docs/pdf_xsd_semantic_audit/VALIDATION_AUTHORITY.md
 docs/pdf_xsd_semantic_audit/findings.md
 docs/pdf_xsd_semantic_audit/validation_backlog.md
 docs/pdf_xsd_semantic_audit/OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
+docs/pdf_xsd_semantic_audit/generated/audit_scope_matrix.csv
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.md
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.csv
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_inventory.csv
@@ -73,6 +75,7 @@ Always fetch the current `dev/schema-integration` branch ref before continuing.
 ```text
 00_index.md
 AUDIT_HANDOFF.md
+AUDIT_SCOPE_MATRIX.md
 VALIDATION_AUTHORITY.md
 OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
 01_common_enums_v2_1_to_v2_4.md
@@ -90,8 +93,10 @@ OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
 01l_common_enums_v2_4_deferred_scope_resolution.md
 02_dms_v2_4_pdf_xsd_audit.md
 02a_dms_v2_2_v2_3_v2_4_history_compare.md
+03_tvs_v2_2_v2_3_v2_4_include_semantic_audit.md
 findings.md
 validation_backlog.md
+generated/audit_scope_matrix.csv
 generated/enumerations_v2_4_xsd_inventory.csv
 generated/enumerations_v2_4_xsd_inventory.md
 generated/enumerations_v2_4_pdf_inventory.csv
@@ -100,7 +105,7 @@ generated/common_v2_4_datatypes_xsd_inventory.csv
 generated/common_v2_4_datatypes_xsd_inventory.md
 ```
 
-Related tool:
+Related tools:
 
 ```text
 tools/export_xsd_enumerations.py
@@ -110,6 +115,7 @@ tools/export_xsd_enumerations.py
 
 | Area | Status | Notes |
 |---|---|---|
+| Audit scope matrix | available | Master checklist for public PDF versions vs observed XSD files. |
 | Validation authority policy | available | XSD precedence over documentation is documented for audit and tool behaviour. |
 | Official PR candidate register | available | Tracks possible post-audit correction PR candidates; no PRs during audit. |
 | Common/Enums V2.4 XSD enumeration inventory | available | XSD-side CSV/Markdown inventory exists for `IBIS-IP_Enumerations_V2.4.xsd`. |
@@ -117,12 +123,12 @@ tools/export_xsd_enumerations.py
 | Common/Enums V2.4 PDF/XSD enumeration diff | completed first pass | Exact/case-sensitive diff exists; findings CE-004 and CE-006 through CE-010 remain open for historical classification. |
 | Common/Enums V2.4 datatypes/core structures | mostly completed first pass | Datatype inventory, InternationalTextType and NetexMode are documented in 01g. |
 | Common/Enums V2.4 common structures | visual checks deferred | 01h, 01i, 01j, 01k and 01l cover most structures; SB-005 resolved; CE-015/CE-017/ZoneType visual checks deferred. |
+| Common/Enums V1.0-V2.3 historical audit | next | Highest-priority foundation block because shared types affect all services. |
 | DeviceManagementService V2.4 | first pass completed | `02_dms_v2_4_pdf_xsd_audit.md`; no new DMS-specific mismatch opened; validation backlog VB-005 created. |
-| DMS V2.2/V2.3/V2.4 history | first pass completed | `02a_dms_v2_2_v2_3_v2_4_history_compare.md`; confirms DMS V2.4 candidate scope remains narrow; no new DMS-specific CE finding. |
-| Common structures / enumerations V1.0-V2.3 | pending | Needs older PDF/table extraction and XSD comparison. |
-| TicketValidationService | next | TVS V2.2/V2.3/V2.4 include and semantic history is the recommended next non-visual block. |
-| CustomerInformationService | pending | Coverage and provenance unclear for older versions. |
-| Remaining services | pending | To be split into small blocks after Common/Enums/DMS/TVS. |
+| DMS V2.2/V2.3/V2.4 history | first pass completed | `02a_dms_v2_2_v2_3_v2_4_history_compare.md`; confirms DMS V2.4 candidate scope remains narrow. |
+| TicketValidationService | first pass completed for V2.2/V2.3/V2.4 | `03_tvs...`; TVS-001 and TVS-002 opened; V2.1 historical coverage still pending. |
+| CustomerInformationService | pending | Coverage and provenance unclear for older versions and V2.4 candidate. |
+| Remaining services | pending | To be split into small blocks after Common/Enums historical closure. |
 
 ## Evidence policy
 
@@ -153,7 +159,7 @@ After each meaningful block:
 
 ```text
 1. Commit audit file changes to dev/schema-integration.
-2. Update findings.md if a CE finding is opened or a finding state changes.
+2. Update findings.md if a CE/service finding is opened or a finding state changes.
 3. Update validation_backlog.md when deferred checks or final-review gates change.
 4. Update AUDIT_HANDOFF.md when the continuation point changes materially.
 5. Report the final branch commit SHA to the user.
