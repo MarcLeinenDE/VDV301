@@ -141,3 +141,62 @@ Next action:
 Check examples, upstream/fork history and consumer practice before changing any XSD.
 If fixed, scope it as a separate schema-correction candidate and do not mix it into the DMS V2.4 PR.
 ```
+
+### CE-006 - DeviceStateEnumeration XSD has value not listed in V2.4 PDF table
+
+State: open.
+
+Observation:
+
+```text
+VDV 301-2-1 V2.4 DeviceStateEnumeration table lists:
+defective, notavailable, running, readyForShutdown.
+
+IBIS-IP_Enumerations_V2.4.xsd additionally contains:
+warning.
+```
+
+Impact:
+
+```text
+Payloads using DeviceState=warning validate against XSD but are not supported by the V2.4 PDF table.
+```
+
+Next action:
+
+```text
+Check historical PDFs/XSDs and service usage before deciding whether this is PDF omission,
+historical carry-over, or an XSD defect.
+```
+
+### CE-007 - Enumeration value case/spelling mismatches between PDF and XSD
+
+State: open.
+
+Confirmed first-pass items:
+
+```text
+GNSSTypeEnumeration: PDF Other vs XSD other
+TicketValidationEnumeration: PDF Valid vs XSD valid
+VehicleModeEnumeration: PDF Air vs XSD air
+```
+
+Candidate Netex/Submode items requiring full extraction:
+
+```text
+FunicularSubmodeEnumeration: PDF Unknown vs XSD unknown
+TaxiSubmodeEnumeration: PDF Unknown/Undefined/minicab vs XSD unknown/undefined/miniCab
+```
+
+Impact:
+
+```text
+XML enumeration values are case-sensitive. These are not cosmetic differences for validation.
+```
+
+Next action:
+
+```text
+Complete full enumeration extraction for PDF tables 65-104 and XSD simpleTypes before deciding
+whether each case/spelling difference is a PDF typo, XSD defect, or compatibility choice.
+```
