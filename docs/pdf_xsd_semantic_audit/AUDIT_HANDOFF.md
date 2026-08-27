@@ -24,6 +24,7 @@ At the start of a new chat, read these files first, in this order:
 ```text
 docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF.md
 docs/pdf_xsd_semantic_audit/00_index.md
+docs/pdf_xsd_semantic_audit/VALIDATION_AUTHORITY.md
 docs/pdf_xsd_semantic_audit/findings.md
 docs/pdf_xsd_semantic_audit/validation_backlog.md
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.md
@@ -42,6 +43,7 @@ docs/pdf_xsd_semantic_audit/01c_common_enums_additional_text_message_history.md
 docs/pdf_xsd_semantic_audit/01d_common_enums_v2_4_enumeration_first_pass.md
 docs/pdf_xsd_semantic_audit/01e_common_enums_v2_4_enumeration_second_pass.md
 docs/pdf_xsd_semantic_audit/01f_common_enums_v2_4_pdf_vs_xsd_enum_diff.md
+docs/pdf_xsd_semantic_audit/01g_common_enums_v2_4_datatypes_core_structures.md
 ```
 
 Also read the broader branch context when needed:
@@ -81,6 +83,30 @@ Current method:
 3. Record exact evidence and classify each result.
 4. Do not correct XSDs during audit unless the user explicitly approves a separate correction branch/PR.
 5. Keep candidate/PR/fork provenance visible.
+```
+
+## Validation authority
+
+VDV 301-2 V2.4 General Conventions state that XML contents can be validated using XSD and that VDV provides the XSD files for the specified services. They also state that, in case of inconsistencies, the XSD definitions take precedence over the documentation.
+
+Tool and audit implication:
+
+```text
+Validation follows XSD.
+PDF differences are shown as explanatory notes, not as executable validation authority.
+```
+
+Example:
+
+```text
+FAIL for `Valid` if XSD requires `valid`.
+Provider-facing note: PDF lists `Valid`, but XSD has precedence; therefore validation fails.
+```
+
+See:
+
+```text
+docs/pdf_xsd_semantic_audit/VALIDATION_AUTHORITY.md
 ```
 
 Finding states:
@@ -137,13 +163,16 @@ docs/pdf_xsd_semantic_audit/01f_common_enums_v2_4_pdf_vs_xsd_enum_diff.md
 
 ## Next recommended task
 
-Continue with the full V2.4 common-structure table-level audit:
+Continue with Common/Enums V2.4 common data structures 2.1-2.64:
 
 ```text
-IBIS-IP datatypes 1.1-1.16
-InternationalTextType 1.17
-NetexMode 1.18
-Common data structures 2.1-2.64
+LineInformation
+StopInformation
+TripInformation
+DisplayContent
+Connection
+DeviceInformation / DeviceSpecification family
+then the remaining structures in table order
 ```
 
 Use the same evidence style:
@@ -152,6 +181,8 @@ Use the same evidence style:
 PDF table expectation
 XSD observation
 finding classification
+validation follows XSD
+PDF discrepancy becomes provider-facing note
 no schema changes during audit
 ```
 
@@ -167,7 +198,7 @@ After each meaningful block:
 
 ```text
 1. Commit audit file changes to dev/schema-integration.
-2. Update findings.md if a CE finding is opened or a finding state changes.
+2. Update findings.md if a new CE finding is opened or a finding state changes.
 3. Update AUDIT_HANDOFF.md only when the continuation point changes materially.
 4. Report the final branch commit SHA to the user.
 ```
