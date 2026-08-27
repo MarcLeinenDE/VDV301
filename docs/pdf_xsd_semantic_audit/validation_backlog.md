@@ -112,15 +112,6 @@ Cross-check top-level TicketValidationService.* elements against TicketValidatio
 Validate that VehicleData.RouteDeviation follows RouteDeviationEnumeration as required by XSD.
 ```
 
-Initial sample ideas:
-
-```text
-Positive: GetCurrentShortHaulStopsResponse with no CurrentTariffStop entries.
-Positive: GetCurrentShortHaulStopsResponse with multiple CurrentTariffStop entries.
-Operation inventory check: top-level GetCurrentShortHaulStopsResponse is absent from TicketValidationServiceOperations group.
-VehicleData sample: RouteDeviationEnumeration value accepted where XSD expects RouteDeviationEnumeration.
-```
-
 ## Semantic audit backlog
 
 ### SB-001 - Common/Enums V2.4 affected table check
@@ -177,17 +168,6 @@ Resolved for Common/Enums V2.4 first-pass closure.
 No new CE finding opened.
 ```
 
-Resolution:
-
-| Name | Classification | Follow-up |
-|---|---|---|
-| NetworkLocationPoint | service-specific / older V1.0 NetworkLocation scope | NetworkLocationService V1.0 audit |
-| PassengerCounting | service-specific PCS scope | PassengerCountingService V2.1 audit |
-| PassengerCountingData | service-specific PCS scope | PassengerCountingService V2.1 audit |
-| PathDestination | field-level TripInformation usage | already covered as PathDestinationNumber |
-| Route | service-specific JourneyInformation element using TripInformationStructure | JourneyInformationService V1.0 audit |
-| OperationalInformation | not confirmed / routing note only | revisit only with concrete PDF/XSD evidence |
-
 ### SB-006 - visual PDF confirmation for spelling/casing candidates
 
 Status:
@@ -236,12 +216,6 @@ DMS V2.3 remains labelled as integration/fork/candidate comparison material, not
 
 ### SB-010 - TVS V2.2 / V2.3 / V2.4 include and semantic history
 
-Source:
-
-```text
-docs/pdf_xsd_semantic_audit/03_tvs_v2_2_v2_3_v2_4_include_semantic_audit.md
-```
-
 Status:
 
 ```text
@@ -253,10 +227,46 @@ TVS-002 opened: VehicleData.RouteDeviation PDF type name RouteDirectionEnumerati
 No XSD changes made.
 ```
 
-Follow-up:
+### SB-011 - Audit scope matrix
+
+Source:
 
 ```text
-Run VB-006 later.
-Consider TVS-001 as possible narrow official correction PR candidate only after full audit and validation.
-Continue with next non-visual service block, recommended: CustomerInformationService V2.3/V2.4.
+docs/pdf_xsd_semantic_audit/AUDIT_SCOPE_MATRIX.md
+docs/pdf_xsd_semantic_audit/generated/audit_scope_matrix.csv
+```
+
+Status:
+
+```text
+Initial matrix created.
+Use as master checklist for full VDV301 PDF/XSD audit coverage.
+```
+
+Purpose:
+
+```text
+Track public VDV301 PDF versions from the VDV publication index against XSD files observed in dev/schema-integration.
+Classify missing version pairs as routing signals, not immediate defects.
+```
+
+### SB-012 - Common/Enums historical audit V1.0 -> V2.4
+
+Status:
+
+```text
+Next foundation block.
+```
+
+Reason:
+
+```text
+Common/Enums is shared by nearly every service. Historical closure here prevents duplicated or misclassified service-level findings.
+```
+
+Recommended next files:
+
+```text
+docs/pdf_xsd_semantic_audit/04_common_enums_historical_v1_0_to_v2_4_plan.md
+docs/pdf_xsd_semantic_audit/04a_common_enums_v1_0_v2_0_history.md
 ```
