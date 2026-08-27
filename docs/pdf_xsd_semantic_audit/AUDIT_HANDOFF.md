@@ -19,7 +19,7 @@ Official PR work remains separate; currently DMS V2.4 PR #31 is the clean offici
 
 ## How a new chat should resume
 
-At the start of a new chat, read these files first, in this order:
+At the start of a new chat, read these files first:
 
 ```text
 docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF.md
@@ -28,15 +28,9 @@ docs/pdf_xsd_semantic_audit/VALIDATION_AUTHORITY.md
 docs/pdf_xsd_semantic_audit/findings.md
 docs/pdf_xsd_semantic_audit/validation_backlog.md
 docs/pdf_xsd_semantic_audit/OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
-docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.md
-docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.csv
-docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_inventory.csv
-docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_vs_xsd_diff.csv
-docs/pdf_xsd_semantic_audit/generated/common_v2_4_datatypes_xsd_inventory.md
-docs/pdf_xsd_semantic_audit/generated/common_v2_4_datatypes_xsd_inventory.csv
 ```
 
-Then read the currently active detailed audit files:
+Then read the active detailed audit files:
 
 ```text
 docs/pdf_xsd_semantic_audit/01_common_enums_v2_1_to_v2_4.md
@@ -54,13 +48,18 @@ docs/pdf_xsd_semantic_audit/01k_common_enums_v2_4_structure_closure.md
 docs/pdf_xsd_semantic_audit/01l_common_enums_v2_4_deferred_scope_resolution.md
 docs/pdf_xsd_semantic_audit/02_dms_v2_4_pdf_xsd_audit.md
 docs/pdf_xsd_semantic_audit/02a_dms_v2_2_v2_3_v2_4_history_compare.md
+docs/pdf_xsd_semantic_audit/03_tvs_v2_2_v2_3_v2_4_include_semantic_audit.md
 ```
 
-Also read the broader branch context when needed:
+Supporting generated inventories:
 
 ```text
-docs/superbranch_status.md
-docs/schriften_coverage_audit_v0_1.md
+docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.md
+docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.csv
+docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_inventory.csv
+docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_vs_xsd_diff.csv
+docs/pdf_xsd_semantic_audit/generated/common_v2_4_datatypes_xsd_inventory.md
+docs/pdf_xsd_semantic_audit/generated/common_v2_4_datatypes_xsd_inventory.csv
 ```
 
 Before writing anything, fetch the current branch ref:
@@ -85,73 +84,15 @@ Current active direction:
 Continue non-visual audit work while user-specific visual PDF checks are deferred.
 ```
 
-Current method:
+## Core method and authority
 
 ```text
-1. Treat PDF tables/version histories as the documentation side.
-2. Treat XSD files in dev/schema-integration as the schema side.
-3. Record exact evidence and classify each result.
-4. Do not correct XSDs during audit unless the user explicitly approves a separate correction branch/PR.
-5. Keep candidate/PR/fork provenance visible.
+1. PDF tables/version histories are documentation evidence.
+2. XSD files are executable validation authority.
+3. In case of PDF/XSD inconsistency, validation follows XSD.
+4. No schema correction is made during audit without an explicit separate approval.
+5. Potential official PR candidates are collected only for end-of-audit review.
 ```
-
-## Validation authority
-
-VDV 301-2 V2.4 General Conventions state that XML contents can be validated using XSD and that VDV provides the XSD files for the specified services. They also state that, in case of inconsistencies, the XSD definitions take precedence over the documentation.
-
-Tool and audit implication:
-
-```text
-Validation follows XSD.
-PDF differences are shown as explanatory notes, not as executable validation authority.
-```
-
-## Official PR candidate policy
-
-Potential typo-like or correction candidates are tracked in:
-
-```text
-docs/pdf_xsd_semantic_audit/OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
-```
-
-Rule:
-
-```text
-Do not open official correction PRs during the audit.
-At the end of the full audit, recheck candidates against current upstream, open PRs, PDFs, history and local validation.
-Prepare or open a PR only after explicit user approval.
-```
-
-Current examples:
-
-```text
-PR-CAND-001 GlobalCardStausID spelling, linked CE-016.
-PR-CAND-002 TSPPoint Desciption spelling, linked CE-017.
-```
-
-## Established findings so far
-
-```text
-CE-001: No separate IBIS-IP_Enumerations_V2.3.xsd in branch; common V2.3 includes Enumerations V2.2. State unclear.
-CE-002: V2.4 version history says StopPointNumber but table/XSD use PointNumber. OK with note; do not rename.
-CE-003: V2.4 common/enums mostly promising but not closed across all versions.
-CE-004: ServiceNameEnumeration V2.4: PDF table still shows SystemDocumentationService/SystemManagementService, but version history says removed and XSD omits them. Confirmed discrepancy; likely PDF table inconsistency.
-CE-005: TripInformation AdditionalTextMessage cardinality mismatch across V2.0-V2.4. PDF/history says 0:* / maxOccurs unbounded; XSD permits only 0:1 per named field. Confirmed historical mismatch; do not auto-correct.
-CE-006: DeviceStateEnumeration XSD contains warning, not listed in V2.4 PDF table. Confirmed discrepancy.
-CE-007: Case-sensitive enum value mismatches: PDF Other/Valid/Air vs XSD other/valid/air. Confirmed discrepancy.
-CE-008: Submode case differences: Funicular/Taxi Unknown/Undefined/minicab vs XSD unknown/undefined/miniCab. Confirmed discrepancy.
-CE-009: RailSubmodeEnumeration PDF specialRail vs XSD specialTrain. Confirmed discrepancy.
-CE-010: AirSubmodeEnumeration XSD-only canalBarge. Confirmed discrepancy.
-CE-011: Connection TransportMode/ConnectionMode cardinality PDF 0:* vs XSD 0:1. Confirmed discrepancy candidate.
-CE-012: DeviceSpecificationWithStateList cardinality PDF 1:* vs XSD 0:*. Confirmed discrepancy candidate.
-CE-013: AdditionalAnnouncement third choice PDF InformationAtSpecificPoint vs XSD SpecificPoint, plus optional XSD choice. Confirmed discrepancy candidate.
-CE-014: DataVersionList cardinality PDF 1:* vs XSD 0:*. Confirmed discrepancy candidate.
-CE-015: FareZoneInformation PDF extraction casing Farezone* vs XSD FareZone*. Visual PDF confirmation deferred.
-CE-016: GlobalCardStatusID vs XSD GlobalCardStausID spelling difference. Confirmed discrepancy candidate.
-CE-017: TSPPoint Desciption spelling candidate. XSD observation confirmed; PDF visual confirmation deferred.
-```
-
-The authoritative text for these findings is `findings.md`.
 
 ## Current Common/Enums V2.4 result
 
@@ -172,13 +113,6 @@ CE-017 TSPPoint Desciption vs expected Description spelling.
 ZoneType first-field casing/spelling if PDF differs from XSD FarezoneTypeID.
 ```
 
-Decision:
-
-```text
-Do not block other audit work on these visual checks.
-Carry them in SB-006 until the user can perform manual visual confirmation.
-```
-
 ## Current DMS result
 
 Files:
@@ -188,32 +122,12 @@ docs/pdf_xsd_semantic_audit/02_dms_v2_4_pdf_xsd_audit.md
 docs/pdf_xsd_semantic_audit/02a_dms_v2_2_v2_3_v2_4_history_compare.md
 ```
 
-DMS V2.4 first-pass result:
+Result:
 
 ```text
 No new DMS-specific PDF/XSD mismatch opened.
-DMS V2.4 candidate matches the documented V2.4 technical correction scope checked here.
-```
-
-DMS V2.2/V2.3/V2.4 history result:
-
-```text
-No new DMS-specific CE finding opened.
 DMS V2.4 candidate remains limited to the documented DMS V2.4 technical correction scope plus V2.4 dependency-family alignment.
-DMS V2.3 remains labelled as integration/fork/candidate comparison material, not as an official authority.
-```
-
-Checked OK / guard passed:
-
-```text
-GetDeviceErrorMessagesResponseData.ErrorMessage 0:*
-SubdeviceErrorMessages.ErrorMessage 0:*
-DeviceStatusImpact optional
-DeviceStatusPriority optional
-InstallUpdateRequest UpdateID/UpdateTimestamp/UpdateURL optional
-InstallUpdateRequest UpdateFileChecksum/UpdateFileSize optional
-UpdateStateData required fields not accidentally relaxed
-UpdateHistoryEntry required fields not accidentally relaxed
+DMS V2.3 remains labelled as integration/fork/candidate comparison material, not official authority.
 ```
 
 Validation task:
@@ -222,18 +136,64 @@ Validation task:
 VB-005 DMS V2.4 schema compile and targeted positive/negative XML samples.
 ```
 
+## Current TVS result
+
+File:
+
+```text
+docs/pdf_xsd_semantic_audit/03_tvs_v2_2_v2_3_v2_4_include_semantic_audit.md
+```
+
+Result:
+
+```text
+TVS V2.2 -> V2.3: no schema delta observed; V2.3 treated as PDF/documentation correction.
+TVS V2.4: new GetCurrentShortHaulStops response/data structure is present and aligned with PDF table intent.
+TVS V2.4 integration branch uses common V2.4 and Enumerations V2.4.
+Official upstream master currently has TVS V2.4 with common V2.4 but Enumerations V2.2.
+```
+
+New service findings:
+
+```text
+TVS-001: GetCurrentShortHaulStopsResponse is defined top-level and has structures, but is missing from TicketValidationServiceOperations group.
+TVS-002: VehicleData.RouteDeviation PDF table type RouteDirectionEnumeration vs XSD RouteDeviationEnumeration.
+```
+
+Backlog / validation:
+
+```text
+VB-006 TVS V2.4 schema compile, targeted samples and operation inventory check.
+SB-010 TVS V2.2/V2.3/V2.4 include and semantic history completed first pass.
+```
+
+Official PR candidate register now tracks:
+
+```text
+PR-CAND-005: TVS V2.4 GetCurrentShortHaulStopsResponse operation-group omission, linked TVS-001.
+PR-CAND-006: TVS V2.4 VehicleData.RouteDeviation PDF type-name mismatch, linked TVS-002.
+```
+
+No PR is to be opened during the audit.
+
+## Established finding IDs
+
+Common/Enums findings currently use `CE-001` through `CE-017`.
+Service-specific TVS findings currently use `TVS-001` and `TVS-002`.
+DMS first-pass did not open a DMS-specific finding.
+
 ## Next recommended task
 
 Next non-visual audit step:
 
 ```text
-TicketValidationService V2.2 / V2.3 / V2.4 include and semantic history.
+CustomerInformationService V2.3 / V2.4 provenance, include and semantic history.
 ```
 
-Reason:
+Alternative:
 
 ```text
-TVS V2.4 already has known version-family dependency issues in upstream/candidate material, so it is the next high-value service block after DMS.
+Continue TVS backwards to V2.1/V2.2 PDF history if deeper TVS historical closure is desired before moving to CIS.
 ```
 
 ## Working style for continuity
@@ -242,10 +202,7 @@ After each meaningful block:
 
 ```text
 1. Commit audit file changes to dev/schema-integration.
-2. Update findings.md if a CE finding is opened or a finding state changes.
-3. Update validation_backlog.md when deferred checks or final-review gates change.
-4. Update AUDIT_HANDOFF.md when the continuation point changes materially.
-5. Report the final branch commit SHA to the user.
+2. Update findings/backlog/PR-candidate registers as needed.
+3. Update AUDIT_HANDOFF.md when the continuation point changes materially.
+4. Report the final branch commit SHA to the user.
 ```
-
-This avoids depending on chat memory alone and lets a new chat continue without gaps.
