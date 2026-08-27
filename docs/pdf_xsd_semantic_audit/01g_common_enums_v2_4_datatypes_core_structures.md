@@ -1,14 +1,14 @@
 # Common structures / enumerations V2.4 - datatype and core-structure audit
 
-Status: started, partial.
+Status: datatype/core structure block advanced; wrapper datatypes closed for first PDF/XSD pass.
 
 Scope of this block:
 
 ```text
 VDV 301-2-1 V2.4 chapter 1:
-- IBIS-IP wrapper datatypes
-- InternationalTextType
-- NetexMode
+- IBIS-IP wrapper datatypes 1.1-1.16
+- InternationalTextType 1.17
+- NetexMode 1.18
 
 This file continues after the completed first exact enumeration diff in 01f.
 ```
@@ -38,34 +38,58 @@ Value     1:1 underlying XML Schema primitive type
 ErrorCode 0:1 ErrorCodeEnumeration
 ```
 
-Examples in this datatype family include string-like, numeric, date/time and URI wrapper types.
+The wrapper datatype set in the V2.4 XSD contains 16 primitive wrappers.
 
 ### XSD observation
 
-Previously sampled and observed in `IBIS-IP_common_V2.4.xsd`:
+Observed in `IBIS-IP_common_V2.4.xsd`:
 
 ```text
-IBIS-IP.anyURI
-IBIS-IP.boolean
-IBIS-IP.int
-IBIS-IP.language
-IBIS-IP.NMTOKEN
+IBIS-IP.anyURI             -> xs:anyURI
+IBIS-IP.boolean            -> xs:boolean
+IBIS-IP.byte               -> xs:byte
+IBIS-IP.date               -> xs:date
+IBIS-IP.dateTime           -> xs:dateTime
+IBIS-IP.double             -> xs:double
+IBIS-IP.duration           -> xs:duration
+IBIS-IP.int                -> xs:int
+IBIS-IP.language           -> xs:language
+IBIS-IP.NMTOKEN            -> xs:NMTOKEN
+IBIS-IP.nonNegativeInteger -> xs:nonNegativeInteger
+IBIS-IP.normalizedString   -> xs:normalizedString
+IBIS-IP.string             -> xs:string
+IBIS-IP.time               -> xs:time
+IBIS-IP.unsignedInt        -> xs:unsignedInt
+IBIS-IP.unsignedLong       -> xs:unsignedLong
 ```
 
-These sampled types follow the expected wrapper structure:
+Each observed wrapper has this structure:
+
+```xml
+<xs:element name="Value" type="xs:*"/>
+<xs:element name="ErrorCode" type="ErrorCodeEnumeration" minOccurs="0"/>
+```
+
+Machine-readable inventory:
 
 ```text
-Value element with the respective xs:* primitive type
-optional ErrorCode element of type ErrorCodeEnumeration
+docs/pdf_xsd_semantic_audit/generated/common_v2_4_datatypes_xsd_inventory.csv
+```
+
+Human-readable inventory:
+
+```text
+docs/pdf_xsd_semantic_audit/generated/common_v2_4_datatypes_xsd_inventory.md
 ```
 
 ### Finding
 
 | Item | Status | Notes |
 |---|---|---|
-| Wrapper datatype structure | OK, sampled | Sampled XSD structures follow the PDF pattern. |
-| Full wrapper sweep | pending | Should be completed with automated extraction or local parser before closing the entire datatype section. |
-| Validation authority | XSD | If a payload passes/fails because of XSD wrapper type constraints, the XSD result is authoritative. |
+| Wrapper datatype structure | OK | All 16 observed V2.4 wrapper types follow the PDF-described pattern. |
+| `Value` cardinality | OK | Required by XSD default `1:1`. |
+| `ErrorCode` cardinality | OK | Optional `0:1` through `minOccurs="0"`. |
+| Validation authority | XSD | Primitive-type constraints are technically enforced by XSD. |
 
 No new CE finding opened in this subsection.
 
@@ -83,7 +107,7 @@ ErrorCode 0:1 ErrorCodeEnumeration
 
 ### XSD observation
 
-Observed earlier in `IBIS-IP_common_V2.4.xsd`:
+Observed in `IBIS-IP_common_V2.4.xsd`:
 
 ```xml
 <xs:complexType name="InternationalTextType">
@@ -106,6 +130,13 @@ Observed earlier in `IBIS-IP_common_V2.4.xsd`:
 
 No new CE finding opened in this subsection.
 
+Tool interpretation:
+
+```text
+InternationalTextType validates according to the XSD sequence.
+Provider-facing notes may additionally explain PDF inline-formatting expectations, but those are not fully XSD-enforced.
+```
+
 ## 3. NetexMode
 
 ### PDF expectation
@@ -119,7 +150,7 @@ PtSubmodeChoiceGroup or PrivateSubmodeChoiceGroup
 
 ### XSD observation
 
-Observed earlier in `IBIS-IP_common_V2.4.xsd`:
+Observed in `IBIS-IP_common_V2.4.xsd`:
 
 ```xml
 <xs:choice minOccurs="0">
@@ -145,7 +176,22 @@ The related submode enumeration values were handled in the V2.4 enumeration inve
 
 No new CE finding opened in this subsection; existing Netex/submode findings remain open for historical classification.
 
-## 4. Tool message examples for this section
+## 4. Subscribe / response core structures observed in the same XSD block
+
+The same XSD slice also confirms these core response/request structures:
+
+| Structure | XSD observation | Audit note |
+|---|---|---|
+| `SubscribeRequestStructure` | `Client-IP-Address` required, `ReplyPort` optional, `ReplyPath` optional | Needs PDF table confirmation before closure. |
+| `SubscribeResponseStructure` | `Active`, `Heartbeat`, `OperationErrorMessage` all optional | XSD documentation notes compatibility reasons and that meaningful data should include at least one member; this is not enforced by XSD. |
+| `UnsubscribeRequestStructure` | same addressing pattern as subscribe request | Needs PDF table confirmation before closure. |
+| `UnsubscribeResponseStructure` | `Active` required, `OperationErrorMessage` optional | Needs PDF table confirmation before closure. |
+| `DataAcceptedResponseStructure` | choice between response data and operation error message | Needs PDF table confirmation before closure. |
+| `DataAcceptedResponseDataStructure` | `TimeStamp`, `DataAccepted` required; `ErrorCode`, `ErrorInformation` optional | Needs PDF table confirmation before closure. |
+
+No CE finding is opened here yet because this subsection records XSD observations first. The PDF table-level closure for these structures belongs to the common data structures follow-up block.
+
+## 5. Tool message examples for this section
 
 Case-sensitive enum mismatch example:
 
@@ -162,13 +208,21 @@ FAIL: `SystemManagementService` is not allowed by the XSD ServiceNameEnumeration
 PDF note: The V2.4 PDF table still lists `SystemManagementService`, but the V2.4 version history says this older service name was removed and the XSD omits it. Validation follows XSD. Finding: CE-004.
 ```
 
-## 5. Result of this block
+Wrapper datatype example:
 
 ```text
-- Validation-authority rule is now explicitly applied to Common/Enums V2.4 datatype/core-structure checks.
-- Wrapper datatype sampling remains OK but needs a full automated/local sweep before final closure.
+FAIL: `abc` is not valid for `IBIS-IP.int/Value` because the XSD maps that wrapper to `xs:int`.
+PDF note: The PDF documents the wrapper concept, but actual type validation follows the XSD primitive type.
+```
+
+## 6. Result of this block
+
+```text
+- Validation-authority rule is explicitly applied to Common/Enums V2.4 datatype/core-structure checks.
+- All 16 observed IBIS-IP wrapper datatypes in V2.4 follow the expected Value + optional ErrorCode pattern.
 - InternationalTextType remains OK.
 - NetexMode structure remains OK partial; value-level differences are already captured in the enumeration diff.
+- Subscribe/DataAccepted core structures have first XSD observation notes and await PDF table-level closure.
 ```
 
 Next audit block:
