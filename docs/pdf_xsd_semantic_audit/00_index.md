@@ -96,12 +96,18 @@ OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
 03_tvs_v2_2_v2_3_v2_4_include_semantic_audit.md
 04_common_enums_historical_v1_0_to_v2_4_plan.md
 04a_common_enums_v1_0_v2_0_history.md
+04b_common_enums_v2_0_v2_1_history.md
+04c_common_enums_v2_1_v2_2_history.md
 findings.md
 validation_backlog.md
 generated/audit_scope_matrix.csv
 generated/enumerations_v1_0_v2_0_xsd_inventory.csv
 generated/enumerations_v1_0_vs_v2_0_xsd_diff.csv
 generated/enumerations_v1_0_vs_v2_0_xsd_diff.md
+generated/enumerations_v2_0_vs_v2_1_xsd_diff.csv
+generated/enumerations_v2_0_vs_v2_1_xsd_diff.md
+generated/enumerations_v2_1_vs_v2_2_xsd_diff.csv
+generated/enumerations_v2_1_vs_v2_2_xsd_diff.md
 generated/enumerations_v2_4_xsd_inventory.csv
 generated/enumerations_v2_4_xsd_inventory.md
 generated/enumerations_v2_4_pdf_inventory.csv
@@ -125,7 +131,7 @@ tools/export_xsd_enumerations.py
 | Validation authority policy | available | XSD precedence over documentation is documented for audit and tool behaviour. |
 | Official PR candidate register | available | Tracks possible post-audit correction PR candidates; no PRs during audit. |
 | Common/Enums V2.4 XSD/PDF inventory and diff | partial/completed first pass | V2.4 enum diff and core structure pass exist; visual checks deferred. |
-| Common/Enums V1.0-V2.3 historical audit | started | Plan file created; V1.0 -> V2.0 XSD-side enumeration inventory and first diff completed; PDF-side check pending. |
+| Common/Enums V1.0-V2.3 historical audit | in progress | V1.0/V1.x -> V2.0, V2.0 -> V2.1 and V2.1 -> V2.2 first passes completed; V2.2 -> V2.3 pending. |
 | DeviceManagementService V2.4/history | first pass completed | No DMS-specific mismatch opened; validation backlog VB-005 created. |
 | TicketValidationService | first pass completed for V2.2/V2.3/V2.4 | TVS-001 and TVS-002 opened; V2.1 historical coverage still pending. |
 | CustomerInformationService | pending | Coverage and provenance unclear for older versions and V2.4 candidate. |
