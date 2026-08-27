@@ -1,6 +1,9 @@
 name: schema-audit-validation
 
 on:
+  push:
+    branches:
+      - dev/schema-integration
   workflow_dispatch:
 
 permissions:
@@ -45,6 +48,8 @@ jobs:
           http_status=$?
           python tools/validate_discovery_runtime_rv002.py > audit-results/rv_002_discovery_runtime.log 2>&1
           discovery_status=$?
+          python tools/validate_time_runtime_rv003.py > audit-results/rv_003_time_sntp.log 2>&1
+          time_status=$?
 
           {
             echo 'check,authority,target,exit_code'
@@ -57,6 +62,7 @@ jobs:
             echo "ev_105_analog_radio,candidate_AnalogRadio_V2.4,ARA_003,$analog_status"
             echo "rv_001_http_runtime,VDV_HTTP_profile_plus_RFC9110_RFC7303,deterministic_classifier,$http_status"
             echo "rv_002_discovery_runtime,VDV_discovery_profiles_plus_RFC6763,deterministic_classifier,$discovery_status"
+            echo "rv_003_time_sntp,VDV_TimeService_V1.0_plus_RFC4330,deterministic_classifier,$time_status"
           } > audit-results/validation_status.csv
 
           for log in audit-results/*.log; do
@@ -73,6 +79,7 @@ jobs:
           echo "$analog_status" > audit-results/analog_status.txt
           echo "$http_status" > audit-results/http_status.txt
           echo "$discovery_status" > audit-results/discovery_status.txt
+          echo "$time_status" > audit-results/time_status.txt
 
       - name: Upload validation evidence
         if: always()
@@ -94,8 +101,9 @@ jobs:
           analog_status=$(cat audit-results/analog_status.txt)
           http_status=$(cat audit-results/http_status.txt)
           discovery_status=$(cat audit-results/discovery_status.txt)
-          echo "root_status=$root_status legacy_status=$legacy_status pcs_status=$pcs_status ce018_status=$ce018_status video_status=$video_status trainset_status=$trainset_status analog_status=$analog_status http_status=$http_status discovery_status=$discovery_status"
-          if [ "$root_status" -ne 0 ] || [ "$legacy_status" -ne 0 ] || [ "$pcs_status" -ne 0 ] || [ "$ce018_status" -ne 0 ] || [ "$video_status" -ne 0 ] || [ "$trainset_status" -ne 0 ] || [ "$analog_status" -ne 0 ] || [ "$http_status" -ne 0 ] || [ "$discovery_status" -ne 0 ]; then
+          time_status=$(cat audit-results/time_status.txt)
+          echo "root_status=$root_status legacy_status=$legacy_status pcs_status=$pcs_status ce018_status=$ce018_status video_status=$video_status trainset_status=$trainset_status analog_status=$analog_status http_status=$http_status discovery_status=$discovery_status time_status=$time_status"
+          if [ "$root_status" -ne 0 ] || [ "$legacy_status" -ne 0 ] || [ "$pcs_status" -ne 0 ] || [ "$ce018_status" -ne 0 ] || [ "$video_status" -ne 0 ] || [ "$trainset_status" -ne 0 ] || [ "$analog_status" -ne 0 ] || [ "$http_status" -ne 0 ] || [ "$discovery_status" -ne 0 ] || [ "$time_status" -ne 0 ]; then
             echo "Validation evidence contains failures; inspect uploaded logs."
           else
             echo "All validation checks passed."
