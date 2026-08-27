@@ -86,6 +86,12 @@ TripInformation
 DoorCountingObjectClassEnumeration
 ```
 
+Status:
+
+```text
+Covered in first-pass Common/Enums V2.4 audit files; keep open for later history/validation closure.
+```
+
 ### SB-002 - Common/Enums V2.3 affected table check
 
 Tables/sections:
@@ -130,38 +136,26 @@ Source:
 ```text
 docs/pdf_xsd_semantic_audit/01j_common_enums_v2_4_remaining_data_structures_part2.md
 docs/pdf_xsd_semantic_audit/01k_common_enums_v2_4_structure_closure.md
+docs/pdf_xsd_semantic_audit/01l_common_enums_v2_4_deferred_scope_resolution.md
 ```
 
-Names from the continuation plan not yet confirmed as standalone `IBIS-IP_common_V2.4.xsd` complexType definitions:
+Status:
 
 ```text
-NetworkLocationPoint
-OperationalInformation
-PassengerCounting
-PassengerCountingData
-PathDestination
-Route
+Resolved for Common/Enums V2.4 first-pass closure.
+No new CE finding opened.
 ```
 
-Observed related fields/concepts:
+Resolution:
 
-```text
-TripInformation contains RouteDirection.
-TripInformation contains PathDestinationNumber.
-```
-
-Goal:
-
-```text
-Resolve whether each name is:
-1. a PDF-only common structure,
-2. a service-specific structure in another XSD,
-3. an older-version leftover,
-4. a differently named XSD structure,
-5. or an extraction/planning artefact.
-
-Do not open a CE finding until the scope is confirmed.
-```
+| Name | Classification | Follow-up |
+|---|---|---|
+| NetworkLocationPoint | service-specific / older V1.0 NetworkLocation scope | NetworkLocationService V1.0 audit |
+| PassengerCounting | service-specific PCS scope | PassengerCountingService V2.1 audit |
+| PassengerCountingData | service-specific PCS scope | PassengerCountingService V2.1 audit |
+| PathDestination | field-level TripInformation usage | already covered as PathDestinationNumber |
+| Route | service-specific JourneyInformation element using TripInformationStructure | JourneyInformationService V1.0 audit |
+| OperationalInformation | not confirmed / routing note only | revisit only with concrete PDF/XSD evidence |
 
 ### SB-006 - visual PDF confirmation for spelling/casing candidates
 
@@ -177,6 +171,12 @@ Goal:
 
 ```text
 Confirm the printed PDF table spelling before final classification or provider-facing wording.
+```
+
+Status:
+
+```text
+Next Common/Enums V2.4 closure task.
 ```
 
 ### SB-007 - post-audit official PR candidate review
