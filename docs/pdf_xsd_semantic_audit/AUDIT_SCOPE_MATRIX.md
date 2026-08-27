@@ -1,6 +1,6 @@
 # PDF/XSD audit scope matrix
 
-Status: active control matrix; refreshed after PassengerCountingService V1.0/V2.1 first-pass closure.
+Status: active control matrix; refreshed after Ticketing / TicketInformation V1.0 first-pass closure.
 
 Purpose:
 
@@ -17,6 +17,7 @@ Historical XSD backfill: official VDVde/VDV301 release tags only.
 Open PR/candidate material remains candidate/integration.
 A public document without a dedicated XSD is not automatically a gap.
 Historical aggregate XSDs may be part of a version's official root-validation family.
+If the same versioned path has different official blobs in different releases, release_context/schema_revision must remain distinguishable.
 ```
 
 | Area | VDV part | Published PDF versions | Relevant XSD/routing state | Audit status | Notes |
@@ -31,8 +32,8 @@ Historical aggregate XSDs may be part of a version's official root-validation fa
 | JourneyInformationService | 301-2-6 | 1.0 | V1.0 | first pass completed | JIS findings retained. |
 | NetworkLocationService | 301-2-7 | 1.0 | V1.0 | first pass completed | |
 | PassengerCountingService | 301-2-8 | 1.0, 2.1 | V1.0 official historical backfill + Common V1.0 + Enums V1.0; V1.0 roots in official IBIS_IP_V1.0 aggregate; V2.1 official + Common V1.0 + Enums V1.0 | first pass completed | PCS-001 dependency/value-set conflict; PCS-002 aggregate routing OK with note; local validation pending. |
-| Ticketing / TicketInformation | 301-2-9 | 1.0 | TicketInformationService V1.0 | **next** | Resolve TicketingService/PDF vs TicketInformationService XSD naming and V1.0 aggregate routing. |
-| TimeService | 301-2-10 | 1.0 | no dedicated XSD observed | pending | Confirm non-XSD model. |
+| Ticketing / TicketInformation | 301-2-9 | 1.0 | original V1.0: service blob 017ca646 + Common/Enums V1.0 + IBIS_IP_V1.0 aggregate roots; later official V1.0 revision blob 3fda66d8 self-contained roots + Common/Enums V1.0 | first pass completed | TKT-001..TKT-009; executable identity TicketingService; release-context key required; local validation pending. |
+| TimeService | 301-2-10 | 1.0 | no dedicated XSD observed | **next** | Confirm intentional non-XSD model and exact protocol/discovery profile. |
 | VideoLiveService | 301-2-11 | 1.0, 2.0 | V2.0 observed | pending | V1.0 provenance/backfill needed. |
 | VideoRecordingService | 301-2-12 | 1.0, 2.0, 2.4 | V2.0 official; V2.4 candidate/integration | pending | V1.0 provenance needed. |
 | VideoDisplayService | 301-2-13 | 1.0, 2.0 | V2.0 observed | pending | V1.0 provenance needed. |
@@ -55,21 +56,24 @@ SystemMonitoringService V2.2 -> Common V2.2 + Enumerations V2.2.
 AnalogRadioService V2.4 candidate -> Common V2.3 -> Enumerations V2.2.
 PassengerCountingService V1.0 -> service structures in PCS V1.0 + Common V1.0 + Enums V1.0; roots/group in official IBIS_IP_V1.0 aggregate.
 PassengerCountingService V2.1 -> Common V1.0 + Enums V1.0; do not substitute V2.1 dependencies.
+TicketingService V1.0 original release -> TicketInformationService-named service blob 017ca646 + Common V1.0 + Enums V1.0 + IBIS_IP_V1.0 aggregate roots.
+TicketingService V1.0 later official revision -> same filename blob 3fda66d8 + Common V1.0 + Enums V1.0; roots/group in service XSD.
+TicketingService executable XML identity is TicketingService, not TicketInformationService.
 ```
 
 ## Current priority
 
 ```text
-docs/pdf_xsd_semantic_audit/14_ticketing_ticket_information_service_historical_start.md
+docs/pdf_xsd_semantic_audit/15_time_service_historical_start.md
 ```
 
 First actions:
 
 ```text
 1. Re-fetch branch head.
-2. Resolve public VDV 301-2-9 naming against IBIS-IP_TicketInformationService_V1.0.xsd.
-3. Inspect official VDV-301-1.0 aggregate operation names for TicketingService.
-4. Map PDF operations/types to the exact V1.0 service + Common/Enums + aggregate family.
-5. Open findings only where evidence requires; do not normalize names automatically.
-6. Do not claim compile/sample validation unless actually run.
+2. Read public VDV 301-2-10 TimeService V1.0.
+3. Check VDV-301-1.0 and later official release trees for any TimeService-specific XSD.
+4. Determine exact discovery/protocol model and dependencies.
+5. Classify absence of a dedicated XSD as intentional non-XSD modelling or a genuine provenance gap.
+6. Do not invent a TimeService schema and do not claim protocol validation without an executed test.
 ```
