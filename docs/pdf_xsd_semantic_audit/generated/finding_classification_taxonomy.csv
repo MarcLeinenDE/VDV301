@@ -1,0 +1,8 @@
+classification_key,meaning,example_findings,default_validation_behavior,default_final_handling_bucket
+xsd_typo_candidate,XSD spelling looks typo-like and PDF or semantic context points to expected spelling,"LS-001; CE-016; CE-017",validate against current XSD spelling,official_xsd_correction_candidate after validation
+pdf_table_or_documentation_error_candidate,PDF table/value/case likely inconsistent while XSD is semantically/history-consistent,"CE-007; CE-008; CE-009; CIS-005",validate against XSD,official_pdf_documentation_clarification_candidate or provider_facing_warning
+pdf_label_or_heading_error_candidate,PDF heading or table label appears shortened/stale while XSD naming remains coherent,"CIS-003; CIS-004; JIS-004; JIS-005",validate against XSD,provider_facing_warning
+cardinality_mismatch_candidate,PDF cardinality and XSD cardinality differ,"CE-005; CE-011; CE-012; CE-014; JIS-003",validate against XSD,local_validation_required then review
+service_modelling_or_generic_response_candidate,PDF operation concepts may be modelled through generic/common structures outside local service group,"CIS-002; JIS-001; JIS-002",validate against selected XSD,cross-service modelling review
+schema_family_or_provenance_gap,PDF version exists but version-exact XSD routing is unresolved,CIS-001,no silent neighbouring-version substitution,official_schema_family_clarification_candidate
+ok_with_note,Suspected issue resolved as aligned or intentionally service-specific,"CE-001; LS-002; LS-003",preserve exact XSD/service behaviour,no_action_note
