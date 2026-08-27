@@ -1,446 +1,281 @@
-# PDF/XSD semantic audit findings register
+# PDF/XSD semantic audit - consolidated findings index
 
-Status: started.
+Status: central current-state index after completion of the semantic/provenance first pass, executable XSD evidence and deterministic runtime evidence.
 
-Important validation authority rule:
+This file is deliberately concise. Detailed evidence remains in the service-specific finding registers, EV documents and RV documents.
 
-```text
-Validation follows XSD.
-PDF differences are recorded as explanatory/provider-facing notes, not as executable validation authority.
-```
-
-Historical consolidation note:
+## 1. Validation / authority rules
 
 ```text
-Common/Enums historical first-pass chain V1.0/V1.x -> V2.4 is complete in files 04a through 04e.
-CE-001 is closed as OK with note by 04e.
-Affected-version ranges for CE-004 through CE-017 are supported by the history files but should still be used conservatively until local XSD compile/sample validation is run.
+Selected XSD family = executable XML validation authority where an XSD profile exists.
+PDF/XSD differences = findings/provider notes, not silent schema rewrites.
+No latest-XSD-wins dependency substitution.
+No latest-external-protocol-version substitution.
+Candidate/integration XSDs remain candidate/integration.
+Operation-group membership alone is not a complete supported-operation authority.
+Runtime results must retain authority source separately from severity.
 ```
 
-## Open findings
+## 2. Executable-confirmed high-impact findings
 
-### CE-001 - Enumerations V2.3 file absent
-
-State: OK with note.
-
-Observation:
+### PCS-001 - PassengerCountingService V2.1 `OperationNotSupported`
 
 ```text
-IBIS-IP_common_V2.3.xsd includes IBIS-IP_Enumerations_V2.2.xsd.
-No IBIS-IP_Enumerations_V2.3.xsd is present in dev/schema-integration.
-The V2.3 PDF history records structure additions, not enumeration additions.
+state: executable-confirmed
+exact route: PCS V2.1 -> Common V1.0 -> Enums V1.0
+result: OperationNotSupported rejected by exact selected enum pool
+control: Enums V2.1 accepts it
+run: 33109367265
 ```
 
-Impact:
+Handling: preserve exact dependency routing; do not substitute Enums V2.1 merely to make the documented value validate.
+
+### CE-018 - ServiceIdentificationWithStateList cardinality
 
 ```text
-This is no longer treated as an unclear defect.
-The selected V2.3 dependency pool is Common V2.3 + Enumerations V2.2.
-Do not create an IBIS-IP_Enumerations_V2.3.xsd only for version-number symmetry.
-Do not substitute Enumerations V2.4 when validating V2.3 payloads unless the selected service schema explicitly requires it.
+state: executable-confirmed
+PDF: 1:*
+XSD history checked V1.0-V2.4: 0:*
+run: 33109768872
 ```
 
-Next action: carry this dependency fact into the executable version/dependency validation matrix.
+Both zero-item and one-item structures validate across all checked Common versions.
 
-### CE-002 - V2.4 StopPointNumber wording vs PointNumber table/XSD
-
-State: OK with note.
-
-Observation:
+### VLS-002 - VideoLiveService V2.0 LiveStreamData compositor
 
 ```text
-V2.4 version history says StopPointNumber inserted in StopInformation.
-The actual V2.4 StopInformation table uses PointNumber.
-IBIS-IP_common_V2.4.xsd uses PointNumber.
+state: executable-confirmed
+PDF semantics: multi-field stream record
+XSD: xs:choice among individual stream fields
+run: 33111119723
 ```
 
-Impact:
+One selected field validates; PDF-shaped multi-field records fail current official V2.0 XSD.
+
+### VRS-003 - VideoRecordingService V2.0 state compositor
 
 ```text
-Do not rename XSD element based only on version-history wording. Treat table name and XSD name as aligned unless additional VDV evidence says otherwise.
+state: executable-confirmed
+PDF semantics: grouped state data
+V2.0 XSD: xs:choice
+V2.4 candidate control: grouped model accepted
+run: 33111119723
 ```
 
-Next action: keep note and revisit if service schemas or examples refer to StopPointNumber.
+The later candidate correction is explanatory evidence only and does not rewrite historical V2.0 validation.
 
-### CE-003 - V2.4 common/enums mostly promising, not closed
-
-State: partial OK.
-
-Observation:
+### VDS-002 / VDS-003 / VDS-004 - VideoDisplayService V2.0 compositors
 
 ```text
-Main V2.4 additions observed so far are present in common/enums V2.4.
-Full table-level cardinality and type comparison is still pending.
+state: executable-confirmed
+run: 33111119723
 ```
 
-Next action: continue table-level checks beyond affected areas.
-
-### CE-004 - ServiceNameEnumeration V2.4 PDF table vs XSD/version-history discrepancy
-
-State: confirmed PDF/XSD table discrepancy; likely documentation/table inconsistency, not an immediate XSD defect.
-
-Observation:
+Confirmed current-XSD behavior includes:
 
 ```text
-V2.2 history says SystemDocumentationService and SystemManagementService were removed and SystemMonitoringService was added.
-The V2.2/V2.3/V2.4 PDF tables still list SystemDocumentationService and SystemManagementService.
-IBIS-IP_Enumerations_V2.2/V2.4 contain SystemMonitoringService but not SystemDocumentationService/SystemManagementService.
+ListViewCapabilitiesResponse multi-field view record rejected by xs:choice
+SetVideoViewRequest ViewID + Timeout rejected by xs:choice
+state + CurrentViewID response combinations rejected by xs:choice
+State + OperationErrorMessage combination rejected where PDF presents combined semantics
 ```
 
-Impact:
+### TSM-002 - TrainSetManagementService V2.2 operation-group/root mismatch
 
 ```text
-Payloads using the removed service names fail against XSD. Provider-facing note should explain the PDF table still lists them but XSD/version history do not.
+state: executable-confirmed internal XSD mismatch
+global root: GetTrainSetCompositionResponse
+operation group still expects: GetTrainSetComposition
+run: 33111644388
 ```
 
-Next action: local validation sample for removed values in V2.2+ pools.
+Handling: operation manifest/root mapping must override blind group enumeration.
 
-### CE-005 - TripInformation AdditionalTextMessage cardinality mismatch across V2.0 to V2.4
-
-State: confirmed historical mismatch; do not auto-correct yet.
-
-Observation:
+### ARA-003 - AnalogRadioService V2.4 Transmitter cardinality
 
 ```text
-V2.0+ PDF/history says TripInformation/AdditionalTextMessage allows 0:* / maxOccurs="unbounded".
-XSD history in dev/schema-integration:
-V1.0: AdditionalTextMessage type IBIS-IP.string, minOccurs="0", no maxOccurs.
-V2.0-V2.2: AdditionalTextMessage type InternationalTextType, minOccurs="0", no maxOccurs.
-V2.3-V2.4: AdditionalTextMessage plus AdditionalTextMessage1..9, all minOccurs="0", no maxOccurs.
+state: executable-confirmed for candidate/integration profile only
+PDF: 1:1
+candidate XSD: 0:1
+without Transmitter: valid
+with Transmitter: valid
+run: 33111831627
 ```
 
-Impact:
+Authority guard: AnalogRadio V2.4 XSD is candidate material from open upstream PR #27, not an official release XSD.
+
+## 3. Contextually resolved findings
+
+### TSD-003 - TrainSetData V2.2 dual Subscribe-response typing
 
 ```text
-Repeated AdditionalTextMessage payloads may be valid according to PDF table but invalid against current XSD pool. Validation follows XSD.
+state: resolved - OK with contextual resolver note
 ```
 
-Next action: check examples, upstream/fork history and consumer practice before any correction.
-
-### CE-006 - DeviceStateEnumeration contains XSD-only warning value
-
-State: confirmed PDF/XSD table discrepancy.
-
-Observation:
+Same lexical response names legitimately serve two contexts:
 
 ```text
-DeviceStateEnumeration warning is present in V2.2+ XSD pools.
-The checked V2.2/V2.3/V2.4 PDF tables list defective, notavailable, running, readyForShutdown, but do not list warning.
+immediate Subscribe acknowledgement -> SubscribeResponseStructure
+later subscription data event -> RetrieveTripRef/TripInformation response structure
 ```
 
-Impact: payloads using `warning` validate against XSD but are not visible in the checked PDF tables.
+Executable evidence run `33111644388` confirms both roles. This is a resolver-context requirement, not an automatic XSD defect.
 
-Next action: service-specific usage and local validation sample.
-
-### CE-007 - Common enumeration case-sensitive PDF/XSD differences
-
-State: confirmed PDF/XSD value discrepancies.
-
-Observation:
+### CIS-002 / SMS-001 - generic Subscribe/Unsubscribe modelling
 
 ```text
-GNSSTypeEnumeration: PDF Other vs XSD other.
-TicketValidationEnumeration: PDF Valid vs XSD valid.
-VehicleModeEnumeration: PDF Air vs XSD air.
-Historical first-pass support exists from V1.x/V2.0 through V2.4 for the checked values.
+state: resolved - OK with note
 ```
 
-Impact:
+General Conventions + Common provide generic subscription structures; omission of explicit service-prefixed Subscribe/Unsubscribe entries from local CIS/SMS groups is not sufficient evidence of a schema defect.
+
+### SUB-001 - `TerminateSubscribe*` names in General-Conventions table
 
 ```text
-XML enumeration values are case-sensitive. PDF values listed above do not validate if used exactly as printed. Validation follows XSD.
+state: documentation/XSD naming discrepancy
 ```
 
-Next action: local validation samples per version pool.
+Checked Common history uses `UnsubscribeRequestStructure` / `UnsubscribeResponseStructure`; no executable `TerminateSubscribe*` alias is created.
 
-### CE-008 - Submode enumeration case mismatches
+## 4. Historically corrected / version-evolution findings
 
-State: confirmed PDF/XSD value discrepancies.
-
-Observation:
+Important examples:
 
 ```text
-FunicularSubmodeEnumeration: PDF Unknown vs XSD unknown.
-TaxiSubmodeEnumeration: PDF Unknown / Undefined / minicab vs XSD unknown / undefined / miniCab.
-These are supported from the V2.2 NetexMode/submode introduction through V2.4 in the historical first-pass chain.
+TSI-001: TrainSetInformation V2.1 cannot model multiple coaches; V2.2 explicitly corrects with repeated SingleCoach.
+TSM-001: TrainSetManagement V2.1 old composition response name; V2.2 history records correction.
+TSD-001: V2.1 parameterized Retrieve subscriptions lack specialized schema structures; V2.2 introduces them.
+DMS historical cardinality/optionality changes must not be retroactively applied between V2.0/V2.1/V2.2/V2.4.
+VideoRecording V2.4 candidate clarifies/corrects the earlier state-response modelling but remains candidate authority.
 ```
 
-Impact: PDF spelling/case does not validate against XSD. Validation follows XSD.
+Later correction evidence explains history; it does not alter earlier selected XSD profiles.
 
-Next action: local validation samples per version pool.
+## 5. Candidate / provenance boundaries
 
-### CE-009 - RailSubmodeEnumeration specialRail vs specialTrain
-
-State: confirmed PDF/XSD value discrepancy.
-
-Observation:
+### AnalogRadioService V2.4
 
 ```text
-VDV 301-2-1 V2.2+ RailSubmodeEnumeration tables list specialRail.
-IBIS-IP_Enumerations_V2.2/V2.4 contain specialTrain.
+public V2.4 writing exists
+no official VDV-301-2.4 GitHub release observed during audit
+XSD in superbranch sourced from open upstream PR #27
 ```
 
-Impact:
+Candidate profile must be explicitly selected.
+
+### DMS / TVS / other V2.4 integration material
+
+Where V2.4 schema material is candidate/integration rather than an official release artifact, validation results retain that authority label. Candidate success must never be presented as official-release conformance.
+
+### Historical public writings without exact strict XSD profile
+
+Retained provenance gaps include service/version combinations where public documentation exists but no exact official-tag service XSD was confirmed, including relevant historical VideoLive/VideoRecording/VideoDisplay and CIS V1.1 cases recorded in their dedicated registers.
+
+Rule:
 
 ```text
-specialRail does not validate against XSD; specialTrain validates but is not listed in the checked PDF tables.
+do not silently map an unresolved public version to a nearby XSD version
 ```
 
-Next action: check external TPEG/NeTEx terminology only as background, not as replacement authority.
+## 6. Intentionally non-XSD services
 
-### CE-010 - AirSubmodeEnumeration canalBarge XSD-only value
-
-State: confirmed PDF/XSD value discrepancy.
-
-Observation:
+### TimeService V1.0
 
 ```text
-VDV 301-2-1 V2.4 AirSubmodeEnumeration table does not list canalBarge.
-IBIS-IP_Enumerations_V2.4.xsd contains canalBarge with an XSD annotation that it is not in TPEG.
-The value is introduced/observed in the V2.4 XSD side of this audit chain.
+classification: OK with note / non-XSD service by design
+validation lane: protocol_discovery_profile
 ```
 
-Impact: `canalBarge` validates against V2.4 XSD but is not visible in the V2.4 PDF table.
+Uses DNS-SD metadata + SNTP/RFC 4330. Do not synthesize TimeService XML operations.
 
-Next action: local V2.4 validation sample and final PR-candidate review only after full audit.
-
-### CE-011 - Connection TransportMode / ConnectionMode cardinality PDF 0:* vs XSD 0:1
-
-State: confirmed PDF/XSD cardinality discrepancy candidate.
-
-Observation:
+### HTMLDisplayService V2.1/V2.2/V2.2a
 
 ```text
-VDV 301-2-1 V2.4 table 8 lists TransportMode 0:* and ConnectionMode 0:*.
-IBIS-IP_common_V2.4.xsd contains both with minOccurs="0" but without maxOccurs, therefore maxOccurs="1" by XML Schema default.
-The same XSD modelling is already visible from the V2.2 introduction of ConnectionMode.
+classification: OK with note / non-XSD HTTP/discovery profile by design
+validation lane: discovery_http_profile
 ```
 
-Impact: repeated TransportMode/ConnectionMode entries fail against XSD although PDF table appears to allow them. Validation follows XSD.
+Version-specific DNS-SD endpoint semantics are retained; no HTML XSD is invented.
 
-Next action: local repeated-element negative sample for V2.2+ pools.
+## 7. Runtime/protocol findings and guards
 
-### CE-012 - DeviceSpecificationWithStateList cardinality PDF 1:* vs XSD 0:*
-
-State: confirmed PDF/XSD cardinality discrepancy candidate.
-
-Observation:
+Deterministic RV phase is complete:
 
 ```text
-VDV 301-2-1 V2.4 table 18 lists DeviceSpecificationWithState 1:*.
-IBIS-IP_common_V2.4.xsd contains DeviceSpecificationWithState minOccurs="0" maxOccurs="unbounded".
+RV-001 HTTP/XML + Content-Type       run 33112730418 PASS
+RV-002 DNS-SD/service discovery      run 33119080288 PASS
+RV-003 TimeService/SNTP              run 33119337775 PASS
+RV-004 Video RTSP/RTP boundary       run 33119694991 PASS
 ```
 
-Impact: an empty DeviceSpecificationWithStateList may validate against XSD although PDF table indicates at least one entry. Validation follows XSD.
-
-Next action: check service usage and local validation sample.
-
-### CE-013 - AdditionalAnnouncement third choice name and choice cardinality
-
-State: confirmed PDF/XSD structure discrepancy candidate.
-
-Observation:
+Key guards:
 
 ```text
-VDV 301-2-1 V2.4 table 1 lists the third AdditionalAnnouncement choice as InformationAtSpecificPoint with cardinality 1:1 +SpecificPoint.
-IBIS-IP_common_V2.4.xsd defines an optional xs:choice with elements ImmediateInformation, PeriodicalInformation and SpecificPoint.
-The XSD form is present throughout checked Common history.
+Missing Content-Type with a known body/media type is an external HTTP warning, not a fabricated explicit VDV hard failure.
+DNS-SD is not automatically synonymous with mandatory mDNS.
+HTMLDisplay V2.2/V2.2a uses TXT url as service-specific content endpoint semantics.
+RFC 5905 does not silently replace the RFC 4330 profile explicitly selected by historical TimeService V1.0.
+RTSP 2.0 is not treated as a VDV requirement or a latest-wins drop-in replacement for RTSP 1.0.
+Valid VideoLive XML metadata does not prove RTSP/RTP media availability.
 ```
 
-Impact:
+## 8. Documentation-only finding themes
+
+The detailed registers contain numerous high-confidence PDF issues, including:
 
 ```text
-A payload using <InformationAtSpecificPoint> will fail against XSD; <SpecificPoint> is the XSD-valid element name. The XSD also allows omitting the entire choice because the choice has minOccurs="0".
+wrong service/part/section labels
+copy/paste service names
+operation-name inconsistencies
+case-sensitive enumeration spelling differences
+cardinality table/XSD discrepancies
+URI example inconsistencies
+German/English General-Conventions IP-addressing divergence
+RFC reference-number error (RFC 2927 vs IPv4 Link-Local context)
 ```
 
-Next action: local positive/negative XML samples.
+These remain provider/documentation notes unless their executable effect has separately been demonstrated.
 
-### CE-014 - DataVersionList cardinality PDF 1:* vs XSD 0:*
+## 9. Common/Enumerations detailed register status
 
-State: confirmed PDF/XSD cardinality discrepancy candidate.
-
-Observation:
+The historic CE register contains more individual findings than this central index repeats. Important rule:
 
 ```text
-VDV 301-2-1 V2.4 table 12 lists DataVersion 1:*.
-IBIS-IP_common_V2.4.xsd defines DataVersion with minOccurs="0" maxOccurs="unbounded".
-The permissive XSD form is visible throughout checked Common history.
+Do not interpret omission from this concise central file as closure or deletion of a detailed CE/service finding.
 ```
 
-Impact:
+For exact wording/version scope, use the Common/Enums history files and finding addenda.
+
+## 10. Detailed evidence sources
+
+Primary current detailed sources include:
 
 ```text
-An empty DataVersionList validates against XSD but appears disallowed by the PDF table. Validation follows XSD.
+AUDIT_SCOPE_MATRIX.md
+AUDIT_HANDOFF_DELTA_EXECUTABLE_VALIDATION_24.md
+AUDIT_HANDOFF_DELTA_RUNTIME_25.md
+24a_executable_validation_pcs_001.md
+24b_executable_validation_ce_018.md
+24c_executable_validation_video_compositors.md
+24d_executable_validation_trainset.md
+24e_executable_validation_analog_radio.md
+25b_http_xml_content_type_profile.md
+25c_dns_sd_service_discovery_profile.md
+25d_time_service_sntp_profile.md
+25e_video_rtsp_rtp_boundary.md
+service-specific *_FINDINGS_REGISTER_ADDENDUM.md files
 ```
 
-Next action: local validation sample and service-impact review.
+## 11. Official-facing action guard
 
-### CE-015 - FareZoneInformation element-name casing PDF vs XSD
+No finding in this repository automatically authorizes an upstream change.
 
-State: potential PDF/XSD element-name discrepancy; visual PDF confirmation required before final classification.
-
-Observation:
+Before any official PR/comment/review:
 
 ```text
-PDF table extraction shows FarezoneID, FarezoneType, FarezoneLongName, FarezoneShortName.
-IBIS-IP_common_V2.4.xsd uses FareZoneID, FareZoneType, FareZoneLongName, FareZoneShortName.
-ZoneType uses FarezoneTypeID and FareZoneTypeName mixed casing in XSD.
+1. classify finding and authority
+2. verify exact affected version(s)
+3. run targeted executable regression where applicable
+4. decide documentation-vs-schema correction
+5. obtain explicit user approval for official-facing action
 ```
-
-Impact if confirmed:
-
-```text
-Element names are case-sensitive. FarezoneID/FarezoneType would fail against XSD; FareZoneID/FareZoneType validate.
-```
-
-Next action: visually confirm the PDF table, because extraction/table layout may affect casing.
-
-### CE-016 - GlobalCardStatusID vs GlobalCardStausID spelling difference
-
-State: confirmed PDF/XSD spelling discrepancy candidate.
-
-Observation:
-
-```text
-VDV 301-2-1 V2.4 table 27 lists GlobalCardStatusID.
-IBIS-IP_common_V2.4.xsd defines GlobalCardStausID.
-The typo-like XSD spelling is observed at least in the V2.3/V2.4 XSD path.
-```
-
-Impact:
-
-```text
-Payloads using GlobalCardStatusID as printed in the PDF fail against the XSD. The XSD-valid name is GlobalCardStausID, which appears typo-like but is technically authoritative for validation unless an official schema correction exists.
-```
-
-Next action: local validation sample and post-audit PR-candidate review.
-
-### CE-017 - TSPPoint Desciption spelling candidate
-
-State: confirmed XSD spelling observation; PDF visual confirmation required before final classification.
-
-Observation:
-
-```text
-IBIS-IP_common_V2.3.xsd and IBIS-IP_common_V2.4.xsd define the TSPPoint text field as:
-Desciption
-
-BeaconPoint was corrected to Description in V2.4, but TSPPoint remains Desciption.
-The expected semantic spelling is Description, but the PDF-side table spelling still needs visual confirmation.
-```
-
-Impact:
-
-```text
-Payloads using <Description> will fail against the current XSD if the XSD only permits <Desciption>.
-Payloads using <Desciption> validate against XSD but may look typo-like in provider discussions.
-Validation follows XSD.
-```
-
-Next action: visually confirm the V2.4 PDF table and keep for post-audit PR-candidate review.
-
-## CustomerInformationService findings
-
-### CIS-001 - V1.1 public PDF without confirmed version-exact XSD mapping
-
-State: unresolved provenance / validation-routing gap.
-
-Observation:
-
-```text
-The public VDV page lists CustomerInformationService V1.1.
-No version-exact IBIS-IP_CustomerInformationService_V1.1.xsd has been confirmed in the checked source set.
-Official release-tag backfill found CIS V1.0, CIS V2.0 and CIS V2.2 service XSDs, but not a separate CIS V1.1 service XSD.
-```
-
-Impact:
-
-```text
-Do not silently validate CIS V1.1 traffic against CIS V1.0 or CIS V2.0.
-For a future tool/SDK, CIS V1.1 must remain public-PDF-known but exact-XSD-mapping-open until publication/release context is resolved.
-```
-
-Next action: resolve CIS V1.1 release/publication context before claiming strict XSD validation for V1.1.
-
-### CIS-002 - PDF Subscribe/Unsubscribe operations vs service-XSD operation group modelling
-
-State: OK with note / cross-service modelling check pending.
-
-Observation:
-
-```text
-The CIS V2.0/V2.2/V2.3 PDFs list service-specific Get, Subscribe and Unsubscribe operation concepts.
-The checked CIS V2.x service XSD operation group contains the concrete Get response elements and RetrievePartialStopSequence request/response elements, but not service-specific Subscribe/Unsubscribe elements.
-```
-
-Impact:
-
-```text
-This is not treated as a CIS schema defect at this stage.
-Subscribe/Unsubscribe may be modelled generically outside the local CIS operation group.
-Validation follows the selected XSD family.
-```
-
-Next action: perform a cross-service subscription modelling review before classifying this as anything stronger than a provider-facing note.
-
-### CIS-003 - GetCurrentConnectionInformation naming vs GetCurrentConnectionResponse table wording
-
-State: PDF label inconsistency candidate.
-
-Observation:
-
-```text
-The operation naming in the checked CIS V2.x material uses GetCurrentConnectionInformation in the operation overview and CustomerInformationService.GetCurrentConnectionInformationResponse in XSD.
-Some PDF table wording appears as GetCurrentConnectionResponse / CurrentConnectionData in the detailed structure area.
-```
-
-Impact:
-
-```text
-Do not rename the XSD based on shorter PDF table wording.
-The XSD-valid operation element is CustomerInformationService.GetCurrentConnectionInformationResponse.
-```
-
-Next action: keep as provider-facing naming note; no schema correction proposed.
-
-### CIS-004 - RetrievePartialStopSequence naming vs RetrievePartialStopRequest table wording
-
-State: PDF label inconsistency candidate.
-
-Observation:
-
-```text
-The operation overview and XSD use RetrievePartialStopSequence.
-Some PDF detail-table wording appears as RetrievePartialStopRequest.
-The XSD-valid request element is CustomerInformationService.RetrievePartialStopSequenceRequest.
-```
-
-Impact:
-
-```text
-Do not rename the XSD based on shorter PDF table wording.
-The XSD-valid element names remain RetrievePartialStopSequenceRequest and RetrievePartialStopSequenceResponse.
-```
-
-Next action: keep as provider-facing naming note; no schema correction proposed.
-
-### CIS-005 - MyOwnVehicleMode type differs between CIS PDF tables and XSD shared group
-
-State: confirmed PDF/XSD documentation discrepancy candidate; likely PDF table inconsistency, not an immediate XSD defect.
-
-Observation:
-
-```text
-In the checked CIS V2.2/V2.3 PDF tables, MyOwnVehicleMode is shown as NetexMode in the AllData context but as PtModesEnumeration in the VehicleData context.
-The CIS V2.2/V2.3 XSDs use a shared VehicleInformationGroup for AllData and VehicleData.
-In that XSD group, MyOwnVehicleMode has type NetexMode.
-```
-
-Impact:
-
-```text
-Validation follows the XSD: MyOwnVehicleMode is validated as NetexMode in the checked V2.2/V2.3 service schema family.
-A provider following the PtModesEnumeration table wording may fail strict XSD validation.
-```
-
-Next action: add local sample validation and include CIS-005 in post-audit review before considering any official-facing clarification or correction proposal.
