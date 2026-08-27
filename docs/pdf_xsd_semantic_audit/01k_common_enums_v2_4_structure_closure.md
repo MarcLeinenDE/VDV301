@@ -1,0 +1,199 @@
+# Common structures / enumerations V2.4 - structure closure pass
+
+Status: started, closure pass partial.
+
+Scope:
+
+```text
+VDV 301-2-1 V2.4 common data structures after the table-level passes in 01h, 01i and 01j.
+```
+
+Authority rule:
+
+```text
+Validation follows XSD.
+PDF differences are retained as provider-facing explanation notes.
+No schema change is made during this audit pass.
+```
+
+## 1. Inputs reviewed
+
+Detailed audit files used as input:
+
+```text
+01f_common_enums_v2_4_pdf_vs_xsd_enum_diff.md
+01g_common_enums_v2_4_datatypes_core_structures.md
+01h_common_enums_v2_4_core_data_structures.md
+01i_common_enums_v2_4_remaining_data_structures_part1.md
+01j_common_enums_v2_4_remaining_data_structures_part2.md
+```
+
+Supporting registers:
+
+```text
+findings.md
+validation_backlog.md
+OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
+```
+
+## 2. Closure status summary
+
+### Closed / OK in current audit evidence
+
+```text
+Wrapper datatypes 1.1-1.16
+InternationalTextType structure
+Announcement
+BayArea
+BeaconPoint
+CardApplInformation
+CardTicketData
+DataAcceptedResponse
+DataAcceptedResponseData
+DataVersion
+Destination
+DoorCounting
+DoorCountingList
+DoorInformation
+DoorOpenState
+DoorOperationState
+DoorState
+DisplayContent
+GNSSCoordinate
+GNSSPoint
+JourneyStopInformation checked core fields
+LineInformation V2.4 additions
+Point / PointType checked core shape
+SpecificPoint
+StopInformation V2.4 additions
+StopInformationRequest checked core fields
+StopSequence
+TimingPoint
+TripInformation V2.4 additions except CE-005
+ViaPoint
+```
+
+### Closed with note / validation follows XSD
+
+```text
+CE-002 StopPointNumber wording vs PointNumber table/XSD
+CE-004 ServiceNameEnumeration older service names still visible in PDF table
+CE-006 DeviceState warning XSD-only value
+CE-007 case-sensitive enum differences Other/Valid/Air vs other/valid/air
+CE-008 submode case differences Unknown/Undefined/minicab vs unknown/undefined/miniCab
+CE-009 RailSubmode specialRail vs specialTrain
+CE-010 AirSubmode canalBarge XSD-only value
+CE-011 Connection TransportMode/ConnectionMode PDF 0:* vs XSD 0:1
+CE-012 DeviceSpecificationWithStateList PDF 1:* vs XSD 0:*
+CE-013 AdditionalAnnouncement InformationAtSpecificPoint vs SpecificPoint
+CE-014 DataVersionList PDF 1:* vs XSD 0:*
+CE-016 GlobalCardStatusID vs GlobalCardStausID
+CE-017 TSPPoint Desciption spelling candidate
+```
+
+These items are not fixed during this audit. They become provider-facing notes and, where appropriate, possible later official PR candidates after full audit completion and revalidation.
+
+### Pending visual PDF confirmation
+
+```text
+CE-015 FareZoneInformation Farezone* vs FareZone* casing
+CE-017 TSPPoint Desciption vs Description spelling
+ZoneType first-field casing/spelling if the PDF differs from XSD FarezoneTypeID
+```
+
+These must be confirmed visually, not only via text extraction, before final wording is locked.
+
+### Pending scope resolution
+
+From `validation_backlog.md` / SB-005:
+
+```text
+NetworkLocationPoint
+OperationalInformation
+PassengerCounting
+PassengerCountingData
+PathDestination
+Route
+```
+
+Current closure classification:
+
+```text
+Not classified as schema gaps yet.
+Need routing check against PDF tables, service-specific schemas and older-version naming.
+```
+
+## 3. Official PR candidate handling
+
+The audit now has a separate register:
+
+```text
+docs/pdf_xsd_semantic_audit/OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
+```
+
+Important rule:
+
+```text
+Do not open official correction PRs during the audit.
+At the end of the full audit, recheck all candidate findings together, validate locally, compare against current upstream and open PRs, then decide whether a minimal official PR is justified.
+```
+
+Initial candidates tracked there:
+
+```text
+PR-CAND-001 GlobalCardStausID spelling, linked CE-016
+PR-CAND-002 TSPPoint Desciption spelling, linked CE-017
+PR-CAND-003 AdditionalAnnouncement InformationAtSpecificPoint vs SpecificPoint, linked CE-013
+PR-CAND-004 cardinality discrepancy candidates, linked CE-011/CE-012/CE-014
+```
+
+## 4. Tool behaviour consequence
+
+For the eventual VDV301 Tool / SDK logic:
+
+```text
+1. XSD validation result is authoritative.
+2. PDF/XSD discrepancy is shown as contextual explanation.
+3. Typo-like XSD names are not silently corrected by the tool.
+4. Provider-facing text should explain why a PDF-oriented implementation may fail.
+```
+
+Example:
+
+```text
+FAIL: <GlobalCardStatusID> is not accepted by the XSD.
+Allowed by current XSD: <GlobalCardStausID>.
+PDF note: The PDF table lists GlobalCardStatusID; this looks like a typo-like schema/documentation discrepancy. Because the VDV 301-2 V2.4 conventions give XSD precedence in case of inconsistency, validation follows the XSD.
+```
+
+## 5. Current Common/Enums V2.4 closure state
+
+Current state:
+
+```text
+Common/Enums V2.4 structure audit is close to a first-pass closure, but not fully closed.
+```
+
+Blocking items before declaring first-pass closure:
+
+```text
+1. Resolve SB-005 deferred names.
+2. Visually confirm CE-015 and CE-017 PDF spellings/casing.
+3. Decide whether ZoneType needs its own finding or is covered by CE-015.
+4. Update findings.md and validation_backlog.md accordingly.
+```
+
+## 6. Next step
+
+Next audit action:
+
+```text
+Resolve SB-005 deferred names by checking whether each is PDF-only, service-specific, older-version, differently named in XSD, or an extraction/planning artefact.
+```
+
+After that:
+
+```text
+Perform visual PDF confirmation for CE-015 and CE-017.
+Then either close Common/Enums V2.4 first pass or carry explicitly labelled pending items into the cross-version history pass.
+```
