@@ -101,3 +101,57 @@ InternationalTextType
 DestinationStructure
 DisplayContent
 ```
+
+### SB-005 - Common/Enums V2.4 deferred structure-name scope resolution
+
+Source:
+
+```text
+docs/pdf_xsd_semantic_audit/01j_common_enums_v2_4_remaining_data_structures_part2.md
+```
+
+Names from the continuation plan not yet confirmed as standalone `IBIS-IP_common_V2.4.xsd` complexType definitions:
+
+```text
+NetworkLocationPoint
+OperationalInformation
+PassengerCounting
+PassengerCountingData
+PathDestination
+Route
+```
+
+Observed related fields/concepts:
+
+```text
+TripInformation contains RouteDirection.
+TripInformation contains PathDestinationNumber.
+```
+
+Goal:
+
+```text
+Resolve whether each name is:
+1. a PDF-only common structure,
+2. a service-specific structure in another XSD,
+3. an older-version leftover,
+4. a differently named XSD structure,
+5. or an extraction/planning artefact.
+
+Do not open a CE finding until the scope is confirmed.
+```
+
+### SB-006 - visual PDF confirmation for spelling/casing candidates
+
+Findings requiring visual PDF confirmation, not only text extraction:
+
+```text
+CE-015 FareZoneInformation Farezone* vs FareZone* casing.
+CE-017 TSPPoint Desciption vs expected Description spelling.
+```
+
+Goal:
+
+```text
+Confirm the printed PDF table spelling before final classification or provider-facing wording.
+```
