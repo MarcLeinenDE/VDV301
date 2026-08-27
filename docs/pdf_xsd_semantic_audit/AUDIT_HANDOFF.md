@@ -28,6 +28,8 @@ docs/pdf_xsd_semantic_audit/findings.md
 docs/pdf_xsd_semantic_audit/validation_backlog.md
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.md
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.csv
+docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_inventory.csv
+docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_vs_xsd_diff.csv
 ```
 
 Then read the currently active detailed audit files:
@@ -39,6 +41,7 @@ docs/pdf_xsd_semantic_audit/01b_common_enums_v2_4_continuation.md
 docs/pdf_xsd_semantic_audit/01c_common_enums_additional_text_message_history.md
 docs/pdf_xsd_semantic_audit/01d_common_enums_v2_4_enumeration_first_pass.md
 docs/pdf_xsd_semantic_audit/01e_common_enums_v2_4_enumeration_second_pass.md
+docs/pdf_xsd_semantic_audit/01f_common_enums_v2_4_pdf_vs_xsd_enum_diff.md
 ```
 
 Also read the broader branch context when needed:
@@ -89,6 +92,7 @@ Mismatch
 Unclear
 Not checked yet
 Confirmed historical mismatch
+Confirmed PDF/XSD value discrepancy
 ```
 
 ## Established findings so far
@@ -97,16 +101,18 @@ Confirmed historical mismatch
 CE-001: No separate IBIS-IP_Enumerations_V2.3.xsd in branch; common V2.3 includes Enumerations V2.2. State unclear.
 CE-002: V2.4 version history says StopPointNumber but table/XSD use PointNumber. OK with note; do not rename.
 CE-003: V2.4 common/enums mostly promising but not fully closed.
-CE-004: ServiceNameEnumeration V2.4: PDF table still shows SystemDocumentationService/SystemManagementService, but version history says removed and XSD omits them. Likely documentation/table inconsistency; still open.
+CE-004: ServiceNameEnumeration V2.4: PDF table still shows SystemDocumentationService/SystemManagementService, but version history says removed and XSD omits them. Confirmed discrepancy; likely PDF table inconsistency.
 CE-005: TripInformation AdditionalTextMessage cardinality mismatch across V2.0-V2.4. PDF/history says 0:* / maxOccurs unbounded; XSD permits only 0:1 per named field. Confirmed historical mismatch; do not auto-correct.
-CE-006: DeviceStateEnumeration XSD contains warning, not listed in V2.4 PDF table. Open.
-CE-007: Case-sensitive enum value mismatches, e.g. PDF Other/Valid/Air vs XSD other/valid/air. Open.
-CE-008: Submode spelling/case candidates, e.g. Funicular/Taxi values. Open.
+CE-006: DeviceStateEnumeration XSD contains warning, not listed in V2.4 PDF table. Confirmed discrepancy.
+CE-007: Case-sensitive enum value mismatches: PDF Other/Valid/Air vs XSD other/valid/air. Confirmed discrepancy.
+CE-008: Submode case differences: Funicular/Taxi Unknown/Undefined/minicab vs XSD unknown/undefined/miniCab. Confirmed discrepancy.
+CE-009: RailSubmodeEnumeration PDF specialRail vs XSD specialTrain. Confirmed discrepancy.
+CE-010: AirSubmodeEnumeration XSD-only canalBarge. Confirmed discrepancy.
 ```
 
 The authoritative text for these findings is `findings.md`.
 
-## Files added for machine inventory
+## Machine inventory files
 
 Exporter:
 
@@ -114,42 +120,46 @@ Exporter:
 tools/export_xsd_enumerations.py
 ```
 
-Generated inventory:
+Generated XSD inventory:
 
 ```text
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.csv
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.md
 ```
 
-The CSV is the XSD-side machine inventory for `IBIS-IP_Enumerations_V2.4.xsd`. Use it for exact PDF table comparison, especially tables 65-104 of VDV 301-2-1 V2.4.
-
-## Next recommended task
-
-Continue with:
-
-```text
-Create a PDF-side enumeration inventory for VDV 301-2-1 V2.4 tables 65-104,
-then compare it exactly/case-sensitively against generated/enumerations_v2_4_xsd_inventory.csv.
-```
-
-Expected output files:
+Generated PDF inventory and diff:
 
 ```text
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_inventory.csv
+docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_vs_xsd_diff.csv
 docs/pdf_xsd_semantic_audit/01f_common_enums_v2_4_pdf_vs_xsd_enum_diff.md
 ```
 
-The next diff should classify every value-level delta as:
+## Next recommended task
+
+Continue with the full V2.4 common-structure table-level audit:
 
 ```text
-only_in_pdf
-only_in_xsd
-case_or_spelling_difference
-same
-unclear_due_pdf_extraction
+IBIS-IP datatypes 1.1-1.16
+InternationalTextType 1.17
+NetexMode 1.18
+Common data structures 2.1-2.64
 ```
 
-Do not modify `IBIS-IP_Enumerations_V2.4.xsd` during this audit step.
+Use the same evidence style:
+
+```text
+PDF table expectation
+XSD observation
+finding classification
+no schema changes during audit
+```
+
+Alternative if we want to close known enum findings first:
+
+```text
+Check CE-006, CE-009 and CE-010 against older Common/Enums PDFs/XSDs and external TPEG/NeTEx terminology.
+```
 
 ## Working style for continuity
 
@@ -157,7 +167,7 @@ After each meaningful block:
 
 ```text
 1. Commit audit file changes to dev/schema-integration.
-2. Update findings.md if a new CE finding is opened or a finding state changes.
+2. Update findings.md if a CE finding is opened or a finding state changes.
 3. Update AUDIT_HANDOFF.md only when the continuation point changes materially.
 4. Report the final branch commit SHA to the user.
 ```
