@@ -1,6 +1,11 @@
 name: schema-audit-validation
 
 on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/schema-audit-validation.yml
   workflow_dispatch:
 
 permissions:
@@ -29,13 +34,10 @@ jobs:
 
           python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests > audit-results/root_pool_and_dms_v24.log 2>&1
           root_status=$?
-
           python tools/validate_legacy_v1_roots.py --repo-root . > audit-results/legacy_v1_root_adapters.log 2>&1
           legacy_status=$?
-
           python tools/validate_pcs_v21_operation_not_supported.py > audit-results/pcs_001_operation_not_supported.log 2>&1
           pcs_status=$?
-
           python tools/validate_ce018_service_identification_with_state_list.py > audit-results/ce_018_cardinality.log 2>&1
           ce018_status=$?
 
@@ -78,3 +80,5 @@ jobs:
           else
             echo "All validation checks passed."
           fi
+
+# one-shot EV-102 evidence run
