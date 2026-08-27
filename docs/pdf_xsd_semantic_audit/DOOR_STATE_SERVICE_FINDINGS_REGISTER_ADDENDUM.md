@@ -1,6 +1,6 @@
 # DoorStateService findings register addendum
 
-Status: supplemental register; keep separate until the main findings register is consolidated.
+Status: supplemental register; first-pass closure completed for DoorStateService V2.1. Keep separate until the main findings register is consolidated.
 
 Authority rule:
 
@@ -14,6 +14,7 @@ Source audit files:
 ```text
 docs/pdf_xsd_semantic_audit/08_door_state_service_historical_start.md
 docs/pdf_xsd_semantic_audit/08a_door_state_service_v2_1_pdf_xsd_first_pass.md
+docs/pdf_xsd_semantic_audit/08b_door_state_service_findings_and_closure.md
 ```
 
 ## DoorStateService findings
@@ -28,6 +29,7 @@ Classification:
 mismatch_kind: operation_or_element_name
 likely_source_issue: pdf_table_or_documentation_error_candidate
 classification_confidence: medium
+final_handling_bucket: provider_note_or_pdf_clarification_candidate
 ```
 
 Observation:
@@ -57,6 +59,7 @@ Classification:
 mismatch_kind: operation_or_element_name
 likely_source_issue: xsd_or_pdf_naming_inconsistency_candidate
 classification_confidence: medium
+final_handling_bucket: local_validation_then_official_facing_review
 ```
 
 Observation:
@@ -86,6 +89,7 @@ Classification:
 mismatch_kind: service_modelling
 likely_source_issue: schema_modelling_or_generic_empty_request_candidate
 classification_confidence: medium
+final_handling_bucket: local_compile_and_sample_validation
 ```
 
 Observation:
@@ -114,6 +118,7 @@ Classification:
 mismatch_kind: ok_note
 likely_source_issue: xsd_documentation_typo_non_executable
 classification_confidence: high
+final_handling_bucket: documentation_only_note
 ```
 
 Observation:
