@@ -53,6 +53,8 @@ docs/pdf_xsd_semantic_audit/02a_dms_v2_2_v2_3_v2_4_history_compare.md
 docs/pdf_xsd_semantic_audit/03_tvs_v2_2_v2_3_v2_4_include_semantic_audit.md
 docs/pdf_xsd_semantic_audit/04_common_enums_historical_v1_0_to_v2_4_plan.md
 docs/pdf_xsd_semantic_audit/04a_common_enums_v1_0_v2_0_history.md
+docs/pdf_xsd_semantic_audit/04b_common_enums_v2_0_v2_1_history.md
+docs/pdf_xsd_semantic_audit/04c_common_enums_v2_1_v2_2_history.md
 ```
 
 Supporting generated inventories and matrices:
@@ -62,6 +64,10 @@ docs/pdf_xsd_semantic_audit/generated/audit_scope_matrix.csv
 docs/pdf_xsd_semantic_audit/generated/enumerations_v1_0_v2_0_xsd_inventory.csv
 docs/pdf_xsd_semantic_audit/generated/enumerations_v1_0_vs_v2_0_xsd_diff.csv
 docs/pdf_xsd_semantic_audit/generated/enumerations_v1_0_vs_v2_0_xsd_diff.md
+docs/pdf_xsd_semantic_audit/generated/enumerations_v2_0_vs_v2_1_xsd_diff.csv
+docs/pdf_xsd_semantic_audit/generated/enumerations_v2_0_vs_v2_1_xsd_diff.md
+docs/pdf_xsd_semantic_audit/generated/enumerations_v2_1_vs_v2_2_xsd_diff.csv
+docs/pdf_xsd_semantic_audit/generated/enumerations_v2_1_vs_v2_2_xsd_diff.md
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.md
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.csv
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_inventory.csv
@@ -148,27 +154,41 @@ Historical block:
 
 ```text
 04_common_enums_historical_v1_0_to_v2_4_plan.md created.
-04a_common_enums_v1_0_v2_0_history.md updated.
-V1.0 and V2.0 XSD-side include-family observation is clean.
-V1.0 -> V2.0 XSD-side enumeration inventory and first diff are recorded.
-No new CE finding opened from the V1.0 -> V2.0 XSD-side diff alone.
+04a_common_enums_v1_0_v2_0_history.md completed first pass.
+04b_common_enums_v2_0_v2_1_history.md completed first pass.
+04c_common_enums_v2_1_v2_2_history.md completed first pass.
+No new CE finding was opened by these first-pass history blocks.
 ```
 
-Important V1.0 -> V2.0 XSD deltas now recorded:
+Important historical results now recorded:
 
 ```text
-DataIntervallEnumeration -> DataIntervalEnumeration naming.
-IBIS-IP-VersionEnumeration no longer observed in V2.0.
-DeviceStateEnumeration adds readyForShutdown.
-RouteDirectionEnumeration appears in V2.0.
-ServiceNameEnumeration adds PassengerCountingService, VideoLiveService, VideoRecordingService and VideoDisplayService.
-ServiceStateEnumeration adds starting.
+V1.0/V1.x -> V2.0:
+  DataIntervallEnumeration -> DataIntervalEnumeration naming.
+  IBIS-IP-VersionEnumeration no longer observed in V2.0.
+  DeviceStateEnumeration adds readyForShutdown.
+  RouteDirectionEnumeration appears.
+  ServiceNameEnumeration adds PassengerCountingService and video services.
+  ServiceStateEnumeration adds starting.
+
+V2.0 -> V2.1:
+  DeviceClassEnumeration adds MultiFunctionalDisplay.
+  ErrorCodeEnumeration adds OperationNotSupported.
+  ServiceNameEnumeration adds DoorState, TrainSet, TicketValidation and HTMLDisplay service names.
+
+V2.1 -> V2.2:
+  DeviceClassEnumeration adds CombiDevice.
+  TripStateEnumeration and NetexMode/mode/submode enumerations are introduced.
+  ServiceNameEnumeration removes SystemDocumentationService/SystemManagementService and adds SystemMonitoringService in XSD/history.
+  V2.2 PDF table still prints the removed service names.
+  DeviceStateEnumeration warning is already present in V2.2 XSD but absent from the V2.2 PDF table.
 ```
 
 Next required Common/Enums step:
 
 ```text
-Check VDV 301-2-1 V1.0 and V2.0 PDF version histories/tables against the recorded XSD deltas.
+Create 04d_common_enums_v2_2_v2_3_history.md.
+Check V2.2 -> V2.3 include family and PDF/XSD changes, especially CE-001 and V2.3 use of Enumerations V2.2.
 ```
 
 ## Current DMS result
@@ -225,17 +245,17 @@ DMS first-pass: no DMS-specific finding opened.
 Continue Common/Enums historical audit:
 
 ```text
-04a_common_enums_v1_0_v2_0_history.md
+04d_common_enums_v2_2_v2_3_history.md
 ```
 
 Next sub-steps:
 
 ```text
-1. Extract/check VDV 301-2-1 V1.0 PDF version history and enumeration tables.
-2. Extract/check VDV 301-2-1 V2.0 PDF version history and enumeration tables.
-3. Compare PDF-side facts to recorded XSD-side deltas.
-4. Decide whether existing CE findings need affected-version ranges updated.
-5. Then continue with V2.0 -> V2.1.
+1. Compare Common/Enums V2.2 and V2.3 XSD include families and deltas.
+2. Check VDV 301-2-1 V2.3 PDF version history and affected tables.
+3. Decide whether CE-001 can be closed as intentional dependency reuse or must remain unclear.
+4. Track DisplayContent / StopInformation / StopInformationRequest / TripInformation V2.3 additions.
+5. Then continue with V2.3 -> V2.4 historical closure.
 ```
 
 ## Working style for continuity
