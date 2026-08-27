@@ -1,6 +1,6 @@
 # PDF/XSD audit scope matrix
 
-Status: initial control matrix.
+Status: initial control matrix, mixed-version premise linked.
 
 Purpose:
 
@@ -28,6 +28,18 @@ PDF differences are retained as provider-facing explanation notes.
 No schema changes are made during audit work.
 ```
 
+Mixed-version validation premise:
+
+```text
+Real systems may expose several VDV301 service versions in parallel. Therefore each service version and its exact dependency pool must remain independently auditable and validatable. Do not apply a latest-version schema globally.
+```
+
+See:
+
+```text
+docs/pdf_xsd_semantic_audit/MIXED_VERSION_VALIDATION_PREMISE.md
+```
+
 Generated CSV:
 
 ```text
@@ -39,7 +51,7 @@ docs/pdf_xsd_semantic_audit/generated/audit_scope_matrix.csv
 | Area | VDV part | Published PDF versions | XSD files observed in dev/schema-integration | Audit status | Notes |
 |---|---|---|---|---|---|
 | Base / General Conventions | 301-2 | 1.0, 2.0, 2.1, 2.2, 2.3, 2.4 | no single service XSD | pending | General conventions V2.2-V2.4 provide cross-service rules; XSD precedence already documented. |
-| Common Data Structures and Enumerations | 301-2-1 | 1.0, 2.0, 2.1, 2.2, 2.3, 2.4 | common V1.0,V2.0,V2.1,V2.2,V2.3,V2.4; Enumerations V1.0,V2.0,V2.1,V2.2,V2.4 | partial | V2.4 first pass mostly done; V1.0-V2.3 historical audit is the next foundation block. |
+| Common Data Structures and Enumerations | 301-2-1 | 1.0, 2.0, 2.1, 2.2, 2.3, 2.4 | common V1.0,V2.0,V2.1,V2.2,V2.3,V2.4; Enumerations V1.0,V2.0,V2.1,V2.2,V2.4 | partial | V2.4 first pass mostly done; V1.0-V2.3 historical audit is the current foundation block. |
 | DeviceManagementService | 301-2-0 | 2.0, 2.1, 2.2, 2.4 | DMS V2.2; DMS V2.3 integration/fork comparison; DMS V2.4 candidate | partial | V2.4 semantic and V2.2/V2.3/V2.4 history first pass completed. |
 | BeaconLocationService | 301-2-2 | 1.0 | BeaconLocationService V1.0 | pending | Service audit not started. |
 | CustomerInformationService | 301-2-3 | 1.1, 2.0, 2.2, 2.3 | CIS V2.3; CIS V2.4 candidate/integration | pending | Official page lists PDFs through V2.3; V2.4 XSD candidate needs provenance review. |
@@ -63,12 +75,13 @@ docs/pdf_xsd_semantic_audit/generated/audit_scope_matrix.csv
 
 ## Immediate audit decision
 
-The next stable sequence is:
+The active sequence is:
 
 ```text
 1. Use this scope matrix as the master coverage checklist.
-2. Close Common/Enums historical audit V1.0 -> V2.4, because all services depend on these shared types.
-3. Then continue service waves: DMS/TVS/CIS first, then location/Journey/PCS/Ticketing, then video/train/door/system/analog/special services.
+2. Apply the mixed-version validation premise to every service/version pair.
+3. Close Common/Enums historical audit V1.0 -> V2.4, because all services depend on these shared types.
+4. Then continue service waves: DMS/TVS/CIS first, then location/Journey/PCS/Ticketing, then video/train/door/system/analog/special services.
 ```
 
 ## Gap handling rules
@@ -87,10 +100,17 @@ Do not treat it as official by default.
 Mark as candidate/integration/fork material until provenance is established.
 ```
 
-## Current priority after this matrix
+## Current priority
 
 ```text
 Common/Enums historical audit V1.0 -> V2.4.
+```
+
+Current files:
+
+```text
+docs/pdf_xsd_semantic_audit/04_common_enums_historical_v1_0_to_v2_4_plan.md
+docs/pdf_xsd_semantic_audit/04a_common_enums_v1_0_v2_0_history.md
 ```
 
 Reason:
