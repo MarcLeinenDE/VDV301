@@ -1,6 +1,6 @@
 # Common/Enums V1.0 -> V2.0 history audit
 
-Status: started, XSD-side first observation completed.
+Status: XSD-side enumeration inventory and first diff completed; PDF-side check pending.
 
 Scope:
 
@@ -52,7 +52,53 @@ V1.0 and V2.0 each have their own common/enumeration dependency family in the br
 No V1.0/V2.0 include-family mismatch is opened in this first observation.
 ```
 
-## 2. Initial enumeration-history observation
+## 2. XSD enumeration inventories
+
+Created grouped XSD-side inventory:
+
+```text
+docs/pdf_xsd_semantic_audit/generated/enumerations_v1_0_v2_0_xsd_inventory.csv
+```
+
+Scope of this inventory:
+
+```text
+IBIS-IP_Enumerations_V1.0.xsd
+IBIS-IP_Enumerations_V2.0.xsd
+```
+
+Important reproducibility note:
+
+```text
+This file is a grouped audit inventory recorded from the XSD files during the audit pass.
+It is not yet the row-by-row exporter output format used for the V2.4 inventory.
+The exporter/header mismatch noted earlier should still be cleaned up before claiming full automated reproducibility across all versions.
+```
+
+## 3. V1.0 -> V2.0 XSD enumeration diff
+
+Created diff files:
+
+```text
+docs/pdf_xsd_semantic_audit/generated/enumerations_v1_0_vs_v2_0_xsd_diff.csv
+docs/pdf_xsd_semantic_audit/generated/enumerations_v1_0_vs_v2_0_xsd_diff.md
+```
+
+Observed XSD-side deltas:
+
+| Change | V1.0 | V2.0 | Status | Notes |
+|---|---|---|---|---|
+| Type spelling change | `DataIntervallEnumeration` | `DataIntervalEnumeration` | confirmed XSD delta | Same value set; PDF/history check pending. |
+| Type no longer observed | `IBIS-IP-VersionEnumeration` | not observed | confirmed XSD delta | V1.0 had value `1.0`; PDF/history check pending. |
+| DeviceState value added | - | `readyForShutdown` | confirmed XSD delta | V2.0 XSD comment explicitly mentions this. |
+| Type added | - | `RouteDirectionEnumeration` | confirmed XSD delta | PDF/history check pending. |
+| ServiceName value added | - | `PassengerCountingService` | confirmed XSD delta | PDF/history check pending. |
+| ServiceName value added | - | `VideoLiveService` | confirmed XSD delta | V2.0 XSD comment mentions video services added. |
+| ServiceName value added | - | `VideoRecordingService` | confirmed XSD delta | V2.0 XSD comment mentions video services added. |
+| ServiceName value added | - | `VideoDisplayService` | confirmed XSD delta | V2.0 XSD comment mentions video services added. |
+| ServiceState value added | - | `starting` | confirmed XSD delta | PDF/history check pending. |
+
+## 4. XSD comment / history signal
 
 The V2.0 enumeration XSD contains an internal comment indicating relevant edits:
 
@@ -63,45 +109,47 @@ DeviceStateEnumeration extended by readyForShutdown.
 Date in comment: 2018-01-22.
 ```
 
-This is XSD-side evidence only. It is not yet a PDF/XSD finding.
-
-Pending PDF-side check:
+The first diff confirms these parts directly from the current branch XSDs:
 
 ```text
-Confirm whether VDV 301-2-1 V2.0 PDF version history and enumeration tables reflect these changes.
+VideoLiveService / VideoRecordingService / VideoDisplayService added to ServiceNameEnumeration.
+DeviceStateEnumeration adds readyForShutdown.
 ```
 
-## 3. First classification
+The comment part `Video enumerations removed` remains only an editor-history note in this pass:
+
+```text
+No separate video-specific enumeration type was observed in the fetched V1.0 enumeration XSD inventory used here.
+Do not open a finding from that note without repository/PDF history evidence.
+```
+
+## 5. First classification
 
 Status so far:
 
 ```text
 OK to continue.
-No new CE finding opened from V1.0 -> V2.0 first observation.
+No new CE finding opened from the V1.0 -> V2.0 XSD-side diff alone.
+```
+
+Reason:
+
+```text
+The observed changes are XSD-side historical deltas.
+They become findings only if the matching V1.0/V2.0 PDF version history or tables contradict, omit or misstate them after PDF-side checking.
 ```
 
 Potential historical closure targets:
 
 ```text
-ServiceNameEnumeration video-service additions.
-DeviceStateEnumeration readyForShutdown introduction.
-Removal/relocation of video-specific enumerations.
-Any type/cardinality changes in shared structures that later services depend on.
+CE-006 DeviceStateEnumeration: readyForShutdown exists already in V2.0, while warning is a later V2.4 XSD-only issue.
+CE-004 ServiceNameEnumeration: old SystemDocumentationService/SystemManagementService are still present in V1.0 and V2.0; later removal history must be checked in V2.2+.
+TVS-002 context: RouteDirectionEnumeration exists as a Common/Enums V2.0 type, but TVS V2.4 XSD uses RouteDeviationEnumeration for VehicleData.RouteDeviation.
 ```
 
-## 4. Next work inside this block
+No finding state is changed yet.
 
-Required next steps:
-
-```text
-1. Generate/record XSD enumeration inventories for V1.0 and V2.0 using the exporter.
-2. Compare V1.0 vs V2.0 XSD enumeration values.
-3. Extract/check V1.0 and V2.0 PDF enumeration tables.
-4. Record whether the XSD comment deltas are also visible in the PDF tables/version history.
-5. Only then decide whether historical CE finding ranges need updates.
-```
-
-## 5. Validation backlog impact
+## 6. Validation backlog impact
 
 Later technical validation should include version-specific pools:
 
@@ -117,11 +165,24 @@ Common/Enums V2.0 pool:
 
 The pools must be compiled separately.
 
-## 6. Result
+## 7. Next work inside this block
+
+Required next steps:
 
 ```text
-Common/Enums V1.0 -> V2.0 historical audit has started.
-XSD-side dependency-family observation is clean for V1.0 and V2.0.
-V2.0 XSD comment suggests concrete enumeration changes to verify against the PDF.
+1. Extract/check VDV 301-2-1 V1.0 PDF version history and enumeration tables.
+2. Extract/check VDV 301-2-1 V2.0 PDF version history and enumeration tables.
+3. Compare those PDF-side facts to the XSD deltas listed here.
+4. Decide whether any existing CE finding version ranges need updates.
+5. Then continue with V2.0 -> V2.1.
+```
+
+## 8. Result
+
+```text
+Common/Enums V1.0 -> V2.0 historical audit has moved from first observation to XSD-side diff completed.
+V1.0 and V2.0 include-family observation is clean.
+V1.0 vs V2.0 enumeration deltas are recorded.
 No new finding opened yet.
+PDF-side confirmation is the next required step.
 ```
