@@ -236,8 +236,6 @@ Impact:
 A payload using <InformationAtSpecificPoint> will fail against XSD; <SpecificPoint> is the XSD-valid element name. The XSD also allows omitting the entire choice because the choice has minOccurs="0".
 ```
 
-Tool note: validation follows XSD; provider-facing message can cite the PDF naming/cardinality difference.
-
 Next action: check older PDF/XSD history before proposing correction.
 
 ### CE-014 - DataVersionList cardinality PDF 1:* vs XSD 0:*
@@ -295,6 +293,27 @@ Impact:
 Payloads using GlobalCardStatusID as printed in the PDF fail against the XSD. The XSD-valid name is GlobalCardStausID, which appears typo-like but is technically authoritative for validation unless an official schema correction exists.
 ```
 
-Tool note: validation follows XSD; provider-facing message should explicitly explain the PDF/XSD spelling difference.
-
 Next action: check historical XSD/PDF/fork origin before proposing correction.
+
+### CE-017 - TSPPoint Desciption spelling candidate
+
+State: confirmed XSD spelling observation; PDF visual confirmation required before final classification.
+
+Observation:
+
+```text
+IBIS-IP_common_V2.4.xsd defines the TSPPoint text field as:
+Desciption
+
+The expected semantic spelling is Description, but the PDF-side table spelling still needs visual confirmation.
+```
+
+Impact:
+
+```text
+Payloads using <Description> will fail against the current XSD if the XSD only permits <Desciption>.
+Payloads using <Desciption> validate against XSD but may look typo-like in provider discussions.
+Validation follows XSD.
+```
+
+Next action: visually confirm the V2.4 PDF table and check historical XSD/PDF origin before proposing any correction.
