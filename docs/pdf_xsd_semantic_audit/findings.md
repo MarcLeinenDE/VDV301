@@ -142,61 +142,86 @@ Check examples, upstream/fork history and consumer practice before changing any 
 If fixed, scope it as a separate schema-correction candidate and do not mix it into the DMS V2.4 PR.
 ```
 
-### CE-006 - DeviceStateEnumeration XSD has value not listed in V2.4 PDF table
+### CE-006 - DeviceStateEnumeration contains XSD-only warning value
 
-State: open.
+State: discrepancy candidate.
 
 Observation:
 
 ```text
-VDV 301-2-1 V2.4 DeviceStateEnumeration table lists:
+VDV 301-2-1 V2.4 table 69 lists:
 defective, notavailable, running, readyForShutdown.
 
-IBIS-IP_Enumerations_V2.4.xsd additionally contains:
+IBIS-IP_Enumerations_V2.4.xsd contains the additional value:
 warning.
 ```
 
 Impact:
 
 ```text
-Payloads using DeviceState=warning validate against XSD but are not supported by the V2.4 PDF table.
+A payload using warning validates against the XSD but is not visible in the V2.4 PDF table.
 ```
 
 Next action:
 
 ```text
-Check historical PDFs/XSDs and service usage before deciding whether this is PDF omission,
-historical carry-over, or an XSD defect.
+Check earlier Common/Enums PDFs and service-specific usage before classifying as schema defect or PDF omission.
 ```
 
-### CE-007 - Enumeration value case/spelling mismatches between PDF and XSD
+### CE-007 - Common enumeration case-sensitive PDF/XSD differences
 
-State: open.
+State: discrepancy candidate.
 
-Confirmed first-pass items:
-
-```text
-GNSSTypeEnumeration: PDF Other vs XSD other
-TicketValidationEnumeration: PDF Valid vs XSD valid
-VehicleModeEnumeration: PDF Air vs XSD air
-```
-
-Candidate Netex/Submode items requiring full extraction:
+Observation:
 
 ```text
-FunicularSubmodeEnumeration: PDF Unknown vs XSD unknown
-TaxiSubmodeEnumeration: PDF Unknown/Undefined/minicab vs XSD unknown/undefined/miniCab
+GNSSTypeEnumeration:
+PDF Other vs XSD other.
+
+TicketValidationEnumeration:
+PDF Valid vs XSD valid.
+
+VehicleModeEnumeration:
+PDF Air vs XSD air.
 ```
 
 Impact:
 
 ```text
-XML enumeration values are case-sensitive. These are not cosmetic differences for validation.
+XML enumeration values are case-sensitive. The PDF values listed above do not validate against the XSD values if used exactly as printed.
 ```
 
 Next action:
 
 ```text
-Complete full enumeration extraction for PDF tables 65-104 and XSD simpleTypes before deciding
-whether each case/spelling difference is a PDF typo, XSD defect, or compatibility choice.
+Check historical XSD values and examples before deciding whether the PDF or XSD should be treated as authoritative for documentation.
+For actual XML validation, the tool must follow XSD values.
+```
+
+### CE-008 - Submode enumeration case mismatches
+
+State: discrepancy candidate.
+
+Observation:
+
+```text
+FunicularSubmodeEnumeration:
+PDF Unknown vs XSD unknown.
+
+TaxiSubmodeEnumeration:
+PDF Unknown / Undefined / minicab
+vs XSD unknown / undefined / miniCab.
+```
+
+Impact:
+
+```text
+All observed differences are case-sensitive. Payloads using the PDF spelling would not validate against the current XSD values.
+```
+
+Next action:
+
+```text
+Complete machine-generated extraction of all V2.4 enumeration values from IBIS-IP_Enumerations_V2.4.xsd,
+then compare against the PDF tables 65-104 before proposing any correction.
 ```
