@@ -86,6 +86,7 @@ OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
 01i_common_enums_v2_4_remaining_data_structures_part1.md
 01j_common_enums_v2_4_remaining_data_structures_part2.md
 01k_common_enums_v2_4_structure_closure.md
+01l_common_enums_v2_4_deferred_scope_resolution.md
 findings.md
 validation_backlog.md
 generated/enumerations_v2_4_xsd_inventory.csv
@@ -112,7 +113,7 @@ tools/export_xsd_enumerations.py
 | Common/Enums V2.4 PDF enumeration inventory | available | PDF-side inventory exists for VDV 301-2-1 V2.4 tables 65-104. |
 | Common/Enums V2.4 PDF/XSD enumeration diff | completed first pass | Exact/case-sensitive diff exists; findings CE-004 and CE-006 through CE-010 remain open for historical classification. |
 | Common/Enums V2.4 datatypes/core structures | mostly completed first pass | Datatype inventory, InternationalTextType and NetexMode are documented in 01g. |
-| Common/Enums V2.4 common structures | closure pass started | 01h, 01i, 01j and 01k cover most structures; deferred name routing and visual confirmation remain. |
+| Common/Enums V2.4 common structures | first-pass almost closed | 01h/01i/01j completed; 01k closure started; 01l resolved SB-005. Visual confirmation remains for CE-015/CE-017/ZoneType. |
 | Common structures / enumerations V1.0-V2.3 | pending | Needs older PDF/table extraction and XSD comparison. |
 | DeviceManagementService | pending | DMS V2.4 candidate already has a separate derivation document; needs integration into this audit format. |
 | TicketValidationService | pending | Must account for upstream V2.4 include state and open PR/candidate material. |
