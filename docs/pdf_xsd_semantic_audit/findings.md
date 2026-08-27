@@ -2,6 +2,13 @@
 
 Status: started.
 
+Important validation authority rule:
+
+```text
+Validation follows XSD.
+PDF differences are recorded as explanatory/provider-facing notes, not as executable validation authority.
+```
+
 ## Open findings
 
 ### CE-001 - Enumerations V2.3 file absent
@@ -18,16 +25,10 @@ No IBIS-IP_Enumerations_V2.3.xsd is present in dev/schema-integration.
 Impact:
 
 ```text
-Low to medium until confirmed.
-If V2.3 did not introduce enumeration changes, this may be intentional.
-If V2.3 should have its own enumeration file, include/version handling needs correction.
+Low to medium until confirmed. If V2.3 did not introduce enumeration changes, this may be intentional. If V2.3 should have its own enumeration file, include/version handling needs correction.
 ```
 
-Next action:
-
-```text
-Check V2.3 PDF common enumeration tables and repository history before changing any include.
-```
+Next action: check V2.3 PDF common enumeration tables and repository history before changing any include.
 
 ### CE-002 - V2.4 StopPointNumber wording vs PointNumber table/XSD
 
@@ -44,15 +45,10 @@ IBIS-IP_common_V2.4.xsd uses PointNumber.
 Impact:
 
 ```text
-Do not rename XSD element based only on version-history wording.
-Treat the table name and XSD name as aligned unless additional VDV evidence says otherwise.
+Do not rename XSD element based only on version-history wording. Treat table name and XSD name as aligned unless additional VDV evidence says otherwise.
 ```
 
-Next action:
-
-```text
-Keep note in Common/Enums audit and revisit if service schemas or examples refer to StopPointNumber.
-```
+Next action: keep note and revisit if service schemas or examples refer to StopPointNumber.
 
 ### CE-003 - V2.4 common/enums mostly promising, not closed
 
@@ -65,11 +61,7 @@ Main V2.4 additions observed so far are present in common/enums V2.4.
 Full table-level cardinality and type comparison is still pending.
 ```
 
-Next action:
-
-```text
-Continue table-level checks beyond the V2.4-changed areas: full datatype, structure and enumeration pass.
-```
+Next action: continue table-level checks beyond affected areas.
 
 ### CE-004 - ServiceNameEnumeration V2.4 PDF table vs XSD/version-history discrepancy
 
@@ -78,29 +70,18 @@ State: confirmed PDF/XSD table discrepancy; likely documentation/table inconsist
 Observation:
 
 ```text
-V2.4 version history says V2.2 removed SystemDocumentationService and SystemManagementService
-and added SystemMonitoringService.
-
-The V2.4 ServiceNameEnumeration PDF table still lists SystemDocumentationService,
-SystemManagementService and SystemMonitoringService.
-
-IBIS-IP_Enumerations_V2.4.xsd contains SystemMonitoringService but does not contain
-SystemDocumentationService or SystemManagementService.
+V2.4 version history says V2.2 removed SystemDocumentationService and SystemManagementService and added SystemMonitoringService.
+The V2.4 ServiceNameEnumeration PDF table still lists SystemDocumentationService, SystemManagementService and SystemMonitoringService.
+IBIS-IP_Enumerations_V2.4.xsd contains SystemMonitoringService but not SystemDocumentationService/SystemManagementService.
 ```
 
 Impact:
 
 ```text
-The XSD follows the version-history statement but not the still-visible enumeration table.
-For tool output, do not silently call either representation definitively official without noting the conflict.
+Payloads using the removed service names fail against XSD. Provider-facing note should explain the PDF table still lists them but XSD/version history do not.
 ```
 
-Next action:
-
-```text
-Check V2.2/V2.3 PDFs and official repository history, then decide whether this should be
-reported as documentation inconsistency or tracked as a schema issue.
-```
+Next action: check V2.2/V2.3 PDFs and repository history.
 
 ### CE-005 - TripInformation AdditionalTextMessage cardinality mismatch across V2.0 to V2.4
 
@@ -109,38 +90,20 @@ State: confirmed historical mismatch; do not auto-correct yet.
 Observation:
 
 ```text
-The V2.4 consolidated PDF history says that in V2.0 TripInformation/AdditionalTextMessage
-was updated to maxOccurs="unbounded".
-
-The current V2.4 TripInformation table states:
-
-AdditionalTextMessage     0:* +InternationalTextType
-AdditionalTextMessage(n)  0:* +InternationalTextType, n = 1 to 9
-
+V2.4 consolidated PDF/history says TripInformation/AdditionalTextMessage allows 0:* / maxOccurs="unbounded".
 XSD history in dev/schema-integration:
-
 V1.0: AdditionalTextMessage type IBIS-IP.string, minOccurs="0", no maxOccurs.
-V2.0: AdditionalTextMessage type InternationalTextType, minOccurs="0", no maxOccurs.
-V2.1: same as V2.0.
-V2.2: same as V2.0.
-V2.3: AdditionalTextMessage plus AdditionalTextMessage1..9, all minOccurs="0", no maxOccurs.
-V2.4: same as V2.3.
+V2.0-V2.2: AdditionalTextMessage type InternationalTextType, minOccurs="0", no maxOccurs.
+V2.3-V2.4: AdditionalTextMessage plus AdditionalTextMessage1..9, all minOccurs="0", no maxOccurs.
 ```
 
 Impact:
 
 ```text
-Current XSD validation allows at most one occurrence of each named AdditionalTextMessage field.
-The PDF appears to allow repeated elements. Therefore repeated AdditionalTextMessage payloads
-may be valid according to the PDF table but invalid against the current XSD pool.
+Repeated AdditionalTextMessage payloads may be valid according to PDF table but invalid against current XSD pool. Validation follows XSD.
 ```
 
-Next action:
-
-```text
-Check examples, upstream/fork history and consumer practice before changing any XSD.
-If fixed, scope it as a separate schema-correction candidate and do not mix it into the DMS V2.4 PR.
-```
+Next action: check examples, upstream/fork history and consumer practice before any correction.
 
 ### CE-006 - DeviceStateEnumeration contains XSD-only warning value
 
@@ -149,24 +112,13 @@ State: confirmed PDF/XSD table discrepancy.
 Observation:
 
 ```text
-VDV 301-2-1 V2.4 table 69 lists:
-defective, notavailable, running, readyForShutdown.
-
-IBIS-IP_Enumerations_V2.4.xsd contains the additional value:
-warning.
+VDV 301-2-1 V2.4 table 69 lists defective, notavailable, running, readyForShutdown.
+IBIS-IP_Enumerations_V2.4.xsd additionally contains warning.
 ```
 
-Impact:
+Impact: payloads using `warning` validate against XSD but are not visible in the V2.4 PDF table.
 
-```text
-A payload using warning validates against the XSD but is not visible in the V2.4 PDF table.
-```
-
-Next action:
-
-```text
-Check earlier Common/Enums PDFs and service-specific usage before classifying as schema defect or PDF omission.
-```
+Next action: check earlier PDFs/XSDs and service-specific usage.
 
 ### CE-007 - Common enumeration case-sensitive PDF/XSD differences
 
@@ -175,28 +127,18 @@ State: confirmed PDF/XSD value discrepancies.
 Observation:
 
 ```text
-GNSSTypeEnumeration:
-PDF Other vs XSD other.
-
-TicketValidationEnumeration:
-PDF Valid vs XSD valid.
-
-VehicleModeEnumeration:
-PDF Air vs XSD air.
+GNSSTypeEnumeration: PDF Other vs XSD other.
+TicketValidationEnumeration: PDF Valid vs XSD valid.
+VehicleModeEnumeration: PDF Air vs XSD air.
 ```
 
 Impact:
 
 ```text
-XML enumeration values are case-sensitive. The PDF values listed above do not validate against the XSD values if used exactly as printed.
+XML enumeration values are case-sensitive. PDF values listed above do not validate if used exactly as printed. Validation follows XSD.
 ```
 
-Next action:
-
-```text
-Check historical XSD values and examples before deciding whether the PDF or XSD should be treated as authoritative for documentation.
-For actual XML validation, the tool must follow XSD values.
-```
+Next action: check historical XSD values and examples.
 
 ### CE-008 - Submode enumeration case mismatches
 
@@ -205,26 +147,13 @@ State: confirmed PDF/XSD value discrepancies.
 Observation:
 
 ```text
-FunicularSubmodeEnumeration:
-PDF Unknown vs XSD unknown.
-
-TaxiSubmodeEnumeration:
-PDF Unknown / Undefined / minicab
-vs XSD unknown / undefined / miniCab.
+FunicularSubmodeEnumeration: PDF Unknown vs XSD unknown.
+TaxiSubmodeEnumeration: PDF Unknown / Undefined / minicab vs XSD unknown / undefined / miniCab.
 ```
 
-Impact:
+Impact: PDF spelling/case does not validate against XSD. Validation follows XSD.
 
-```text
-All observed differences are case-sensitive. Payloads using the PDF spelling would not validate against the current XSD values.
-```
-
-Next action:
-
-```text
-Check historical XSD values and examples before deciding whether the PDF or XSD should be treated as authoritative for documentation.
-For actual XML validation, the tool must follow XSD values.
-```
+Next action: check historical values and examples.
 
 ### CE-009 - RailSubmodeEnumeration specialRail vs specialTrain
 
@@ -233,26 +162,17 @@ State: confirmed PDF/XSD value discrepancy.
 Observation:
 
 ```text
-VDV 301-2-1 V2.4 RailSubmodeEnumeration table lists:
-specialRail.
-
-IBIS-IP_Enumerations_V2.4.xsd contains:
-specialTrain.
+VDV 301-2-1 V2.4 RailSubmodeEnumeration table lists specialRail.
+IBIS-IP_Enumerations_V2.4.xsd contains specialTrain.
 ```
 
 Impact:
 
 ```text
-This is not a case-only difference. Payloads using specialRail according to the PDF table
-will not validate against the current XSD; payloads using specialTrain validate but are not
-listed in the V2.4 PDF table.
+specialRail does not validate against XSD; specialTrain validates but is not listed in the V2.4 PDF table.
 ```
 
-Next action:
-
-```text
-Check earlier Common/Enums PDFs/XSDs and external TPEG/NeTEx terminology before proposing a correction.
-```
+Next action: check older Common/Enums PDFs/XSDs and external TPEG/NeTEx terminology.
 
 ### CE-010 - AirSubmodeEnumeration canalBarge XSD-only value
 
@@ -262,76 +182,119 @@ Observation:
 
 ```text
 VDV 301-2-1 V2.4 AirSubmodeEnumeration table does not list canalBarge.
-
-IBIS-IP_Enumerations_V2.4.xsd contains:
-canalBarge
-with an XSD annotation that it is not in TPEG.
+IBIS-IP_Enumerations_V2.4.xsd contains canalBarge with an XSD annotation that it is not in TPEG.
 ```
 
-Impact:
+Impact: `canalBarge` validates against current XSD but is not visible in the V2.4 PDF table.
 
-```text
-Payloads using canalBarge validate against the current XSD but are not visible in the V2.4 PDF table.
-```
-
-Next action:
-
-```text
-Check historical XSD/fork origin and whether the value is intentionally retained as an extension.
-```
+Next action: check historical origin and whether intentionally retained as extension.
 
 ### CE-011 - Connection TransportMode / ConnectionMode cardinality PDF 0:* vs XSD 0:1
 
-State: confirmed PDF/XSD cardinality discrepancy candidate; needs historical classification before any schema change.
+State: confirmed PDF/XSD cardinality discrepancy candidate.
 
 Observation:
 
 ```text
-VDV 301-2-1 V2.4 table 8 lists:
-TransportMode  0:* +Vehicle, deprecated
-ConnectionMode 0:* NetexMode
-
-IBIS-IP_common_V2.4.xsd contains both elements with minOccurs="0" but without maxOccurs.
-In XML Schema, missing maxOccurs means maxOccurs="1".
+VDV 301-2-1 V2.4 table 8 lists TransportMode 0:* and ConnectionMode 0:*.
+IBIS-IP_common_V2.4.xsd contains both with minOccurs="0" but without maxOccurs, therefore maxOccurs="1" by XML Schema default.
 ```
 
-Impact:
+Impact: repeated TransportMode/ConnectionMode entries fail against XSD although PDF table appears to allow them. Validation follows XSD.
 
-```text
-Repeated TransportMode or ConnectionMode entries may look permitted by the PDF table,
-but they fail against the XSD. Validation follows XSD.
-```
-
-Next action:
-
-```text
-Check V2.2/V2.3 common XSD/PDF history for the same fields and decide whether this is
-an inherited documentation issue, an XSD omission, or a deliberate XSD restriction.
-```
+Next action: check V2.2/V2.3 history.
 
 ### CE-012 - DeviceSpecificationWithStateList cardinality PDF 1:* vs XSD 0:*
 
-State: confirmed PDF/XSD cardinality discrepancy candidate; needs historical classification before any schema change.
+State: confirmed PDF/XSD cardinality discrepancy candidate.
 
 Observation:
 
 ```text
-VDV 301-2-1 V2.4 table 18 lists:
-DeviceSpecificationWithState 1:*.
+VDV 301-2-1 V2.4 table 18 lists DeviceSpecificationWithState 1:*.
+IBIS-IP_common_V2.4.xsd contains DeviceSpecificationWithState minOccurs="0" maxOccurs="unbounded".
+```
 
-IBIS-IP_common_V2.4.xsd contains:
-DeviceSpecificationWithState minOccurs="0" maxOccurs="unbounded".
+Impact: an empty DeviceSpecificationWithStateList may validate against XSD although PDF table indicates at least one entry. Validation follows XSD.
+
+Next action: check historical XSD/PDF and DMS/SystemMonitoring usage.
+
+### CE-013 - AdditionalAnnouncement third choice name and choice cardinality
+
+State: confirmed PDF/XSD structure discrepancy candidate.
+
+Observation:
+
+```text
+VDV 301-2-1 V2.4 table 1 lists the third AdditionalAnnouncement choice as InformationAtSpecificPoint with cardinality 1:1 +SpecificPoint.
+IBIS-IP_common_V2.4.xsd defines an optional xs:choice with elements ImmediateInformation, PeriodicalInformation and SpecificPoint.
 ```
 
 Impact:
 
 ```text
-An empty DeviceSpecificationWithStateList may validate against XSD although the PDF table
-indicates at least one entry. Validation follows XSD.
+A payload using <InformationAtSpecificPoint> will fail against XSD; <SpecificPoint> is the XSD-valid element name. The XSD also allows omitting the entire choice because the choice has minOccurs="0".
 ```
 
-Next action:
+Tool note: validation follows XSD; provider-facing message can cite the PDF naming/cardinality difference.
+
+Next action: check older PDF/XSD history before proposing correction.
+
+### CE-014 - DataVersionList cardinality PDF 1:* vs XSD 0:*
+
+State: confirmed PDF/XSD cardinality discrepancy candidate.
+
+Observation:
 
 ```text
-Check historical XSD/PDF and usage in DMS/SystemMonitoring contexts before proposing any change.
+VDV 301-2-1 V2.4 table 12 lists DataVersion 1:*.
+IBIS-IP_common_V2.4.xsd defines DataVersion with minOccurs="0" maxOccurs="unbounded".
 ```
+
+Impact:
+
+```text
+An empty DataVersionList validates against XSD but appears disallowed by the PDF table. Validation follows XSD.
+```
+
+Next action: check historical schema and whether empty list is intentional for compatibility.
+
+### CE-015 - FareZoneInformation element-name casing PDF vs XSD
+
+State: potential PDF/XSD element-name discrepancy; visual PDF confirmation required before final classification.
+
+Observation:
+
+```text
+PDF table extraction shows FarezoneID, FarezoneType, FarezoneLongName, FarezoneShortName.
+IBIS-IP_common_V2.4.xsd uses FareZoneID, FareZoneType, FareZoneLongName, FareZoneShortName.
+```
+
+Impact if confirmed:
+
+```text
+Element names are case-sensitive. FarezoneID/FarezoneType would fail against XSD; FareZoneID/FareZoneType validate.
+```
+
+Next action: visually confirm the PDF table, because extraction/table layout may affect casing.
+
+### CE-016 - GlobalCardStatusID vs GlobalCardStausID spelling difference
+
+State: confirmed PDF/XSD spelling discrepancy candidate.
+
+Observation:
+
+```text
+VDV 301-2-1 V2.4 table 27 lists GlobalCardStatusID.
+IBIS-IP_common_V2.4.xsd defines GlobalCardStausID.
+```
+
+Impact:
+
+```text
+Payloads using GlobalCardStatusID as printed in the PDF fail against the XSD. The XSD-valid name is GlobalCardStausID, which appears typo-like but is technically authoritative for validation unless an official schema correction exists.
+```
+
+Tool note: validation follows XSD; provider-facing message should explicitly explain the PDF/XSD spelling difference.
+
+Next action: check historical XSD/PDF/fork origin before proposing correction.
