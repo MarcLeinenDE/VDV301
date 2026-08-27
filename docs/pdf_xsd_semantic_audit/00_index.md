@@ -1,6 +1,6 @@
-# PDF/XSD semantic audit index
+# PDF/XSD semantic audit - current index
 
-Status: started.
+Status: consolidated current navigation index. Historical detailed audit files remain evidence; this file defines the present project phase and where to resume.
 
 Branch:
 
@@ -8,172 +8,317 @@ Branch:
 dev/schema-integration
 ```
 
-Purpose:
+## 1. Start here
 
-This audit tracks a source-based comparison between the public VDV 301 PDF writings and the XSD files present in the integration branch.
-
-Long-term target:
+Read in this order:
 
 ```text
-Complete PDF-vs-XSD semantic comparison for all public VDV301 writings and schema-relevant versions V1.0 through V2.4.
-```
-
-Important limits:
-
-- This is not an official VDV statement.
-- Files from open PRs, forks, or local candidates stay labelled as candidate/integration material until accepted upstream or published by VDV.
-- Semantic PDF/XSD checks are performed in small, traceable blocks.
-- Local XSD compilation and sample XML validation remain a later technical validation step.
-- Possible official correction PRs are tracked only as post-audit candidates and are not opened during the audit.
-- Manual/visual PDF checks are explicitly allowed to remain deferred while non-visual audit work continues.
-- Mixed-version real-world systems are expected; validation must be service-version scoped.
-
-## Validation authority
-
-VDV 301-2 V2.4 General Conventions state that, in case of inconsistencies, the XSD definitions take precedence over the documentation.
-
-Therefore this audit and the eventual tool behaviour follow this rule:
-
-```text
-Executable validation authority: XSD
-PDF evidence: documented and shown as explanatory note when it differs from XSD
-```
-
-Detailed policies:
-
-```text
-docs/pdf_xsd_semantic_audit/VALIDATION_AUTHORITY.md
-docs/pdf_xsd_semantic_audit/MIXED_VERSION_VALIDATION_PREMISE.md
-```
-
-## Start here / handoff
-
-For continuing this audit in a new chat, start with:
-
-```text
-docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF.md
-```
-
-Then read:
-
-```text
-docs/pdf_xsd_semantic_audit/00_index.md
-docs/pdf_xsd_semantic_audit/AUDIT_SCOPE_MATRIX.md
-docs/pdf_xsd_semantic_audit/MIXED_VERSION_VALIDATION_PREMISE.md
-docs/pdf_xsd_semantic_audit/VALIDATION_AUTHORITY.md
-docs/pdf_xsd_semantic_audit/findings.md
-docs/pdf_xsd_semantic_audit/validation_backlog.md
-docs/pdf_xsd_semantic_audit/OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
-docs/pdf_xsd_semantic_audit/generated/audit_scope_matrix.csv
-```
-
-Always fetch the current `dev/schema-integration` branch ref before continuing.
-
-## Audit files
-
-```text
-00_index.md
-AUDIT_HANDOFF.md
 AUDIT_SCOPE_MATRIX.md
-MIXED_VERSION_VALIDATION_PREMISE.md
+AUDIT_HANDOFF.md
+findings.md
+validation_backlog.md
+```
+
+Core policies:
+
+```text
 VALIDATION_AUTHORITY.md
-OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
-01_common_enums_v2_1_to_v2_4.md
-01a_common_enums_v2_4_table_check.md
-01b_common_enums_v2_4_continuation.md
-01c_common_enums_additional_text_message_history.md
-01d_common_enums_v2_4_enumeration_first_pass.md
-01e_common_enums_v2_4_enumeration_second_pass.md
-01f_common_enums_v2_4_pdf_vs_xsd_enum_diff.md
-01g_common_enums_v2_4_datatypes_core_structures.md
-01h_common_enums_v2_4_core_data_structures.md
-01i_common_enums_v2_4_remaining_data_structures_part1.md
-01j_common_enums_v2_4_remaining_data_structures_part2.md
-01k_common_enums_v2_4_structure_closure.md
-01l_common_enums_v2_4_deferred_scope_resolution.md
-02_dms_v2_4_pdf_xsd_audit.md
-02a_dms_v2_2_v2_3_v2_4_history_compare.md
-03_tvs_v2_2_v2_3_v2_4_include_semantic_audit.md
+MIXED_VERSION_VALIDATION_PREMISE.md
+FINDING_CLASSIFICATION_POLICY.md
+OFFICIAL_RELEASE_BACKFILL_POLICY.md
+OFFICIAL_RELEASE_BACKFILL_SAME_PATH_COLLISION_POLICY_ADDENDUM.md
+```
+
+Always fetch the current branch HEAD before editing.
+
+## 2. Current project phase
+
+Completed:
+
+```text
+semantic/provenance PDF-XSD first pass across service scope
+historical Common/Enums and service-family audit
+Base / General Conventions closure
+Network Infrastructure 301-3 context
+cross-service subscription modelling
+V1.0 superbranch dedup/storage refinement
+executable XSD evidence EV-001/002/101-105
+deterministic runtime evidence RV-001-RV-004
+live/integration backlog consolidation
+central findings/backlog/handoff/index consolidation
+```
+
+Current next phase:
+
+```text
+freeze semantic/audit baseline
+-> derive machine-readable SDK manifest and resolver model
+-> implement SDK regression baseline
+```
+
+Open real-world validation is tracked separately in:
+
+```text
+26_live_integration_validation_backlog.md
+```
+
+## 3. Validation authority
+
+```text
+Selected exact XSD family = executable XML authority where a schema profile exists.
+PDF/XSD discrepancies = explanatory/provider findings, not silent XSD rewrites.
+No latest-XSD-wins.
+No latest Common/Enums substitution.
+No latest external-protocol-version substitution.
+Candidate material remains candidate/integration.
+```
+
+Non-XSD services use explicit protocol/discovery profiles.
+
+Runtime findings retain source authority separately from severity.
+
+## 4. Evidence namespaces
+
+```text
+EV-* = executable XML/XSD evidence
+RV-* = deterministic runtime/protocol evidence
+LI-* = open live/integration task IDs in block 26
+```
+
+Defined EV set:
+
+```text
+EV-001
+EV-002
+EV-101
+EV-102
+EV-103
+EV-104
+EV-105
+```
+
+There were no EV-003 through EV-100.
+
+Defined deterministic RV set:
+
+```text
+RV-001 HTTP/XML + Content-Type
+RV-002 DNS-SD/service discovery
+RV-003 TimeService/SNTP
+RV-004 Video RTSP/RTP boundary
+```
+
+## 5. Executable evidence files
+
+```text
+24_executable_validation_matrix_start.md
+24a_executable_validation_pcs_001.md
+24b_executable_validation_ce_018.md
+24c_executable_validation_video_compositors.md
+24d_executable_validation_trainset.md
+24e_executable_validation_analog_radio.md
+AUDIT_HANDOFF_DELTA_EXECUTABLE_VALIDATION_24.md
+```
+
+Evidence runs:
+
+```text
+EV-001/002  33109011670
+EV-101      33109367265
+EV-102      33109768872
+EV-103      33111119723
+EV-104      33111644388
+EV-105      33111831627
+```
+
+## 6. Runtime/protocol evidence files
+
+```text
+25a_runtime_protocol_authority_matrix.md
+25b_http_xml_content_type_profile.md
+25c_dns_sd_service_discovery_profile.md
+25d_time_service_sntp_profile.md
+25e_video_rtsp_rtp_boundary.md
+AUDIT_HANDOFF_DELTA_RUNTIME_25.md
+generated/runtime_protocol_authority_matrix.csv
+```
+
+Evidence runs:
+
+```text
+RV-001  33112730418
+RV-002  33119080288
+RV-003  33119337775
+RV-004  33119694991
+```
+
+## 7. Current live/integration plan
+
+Canonical source:
+
+```text
+26_live_integration_validation_backlog.md
+```
+
+Contains live tasks for:
+
+```text
+subscriptions/heartbeat
+DNS-SD/mDNS/PTR
+HTTP endpoints/headers
+UDP multicast/network/IGMP
+SNTP exchange/clock diagnostics
+RTSP/RTP media path
+mixed-version end-to-end resolver
+physical/network inventory
+```
+
+These require devices/provider systems/network access/captures and are not failed findings merely because they remain unexecuted.
+
+## 8. Key architecture findings for the SDK
+
+Use `findings.md` for the central index. Especially important:
+
+```text
+PCS-001  exact dependency/value-set routing matters
+CE-018   XSD may be intentionally/mistakenly more permissive than PDF cardinality
+VLS-002  VideoLive V2.0 xs:choice vs multi-field PDF record
+VRS-003  VideoRecording V2.0 xs:choice vs grouped state
+VDS-002/003/004 VideoDisplay compositor conflicts
+TSM-002  operation group can disagree with valid global root
+TSD-003  same lexical response name can require different schema by response context
+ARA-003  candidate-only cardinality mismatch; authority guard mandatory
+```
+
+Cross-service consequence:
+
+```text
+Do not derive the SDK operation inventory solely from XSD groups.
+```
+
+## 9. Historical/Base architecture files
+
+Important consolidation blocks:
+
+```text
+21_base_general_conventions_historical_family_closure.md
+22_network_infrastructure_discovery_context.md
+23_cross_service_subscription_modelling_closure.md
+```
+
+These establish:
+
+```text
+deduplicated V1.0 schema storage
+legacy root-map model
+independent service versions
+XSD precedence
+network/discovery authority separation
+operation-manifest requirement
+```
+
+## 10. Common/Enumerations history
+
+Primary historical chain:
+
+```text
 04_common_enums_historical_v1_0_to_v2_4_plan.md
 04a_common_enums_v1_0_v2_0_history.md
 04b_common_enums_v2_0_v2_1_history.md
 04c_common_enums_v2_1_v2_2_history.md
 04d_common_enums_v2_2_v2_3_history.md
 04e_common_enums_v2_3_v2_4_history_and_closure.md
-findings.md
-validation_backlog.md
+```
+
+The older `01*` files remain detailed V2.4 evidence and should not be treated as the current continuation point.
+
+## 11. Service audit evidence
+
+Detailed service files and `*_FINDINGS_REGISTER_ADDENDUM.md` / `*_VALIDATION_BACKLOG_ADDENDUM.md` files remain the source for exact version-specific findings.
+
+The semantic first pass is **not pending** for CustomerInformationService or the later services; old references saying they are next/pending have been superseded by this consolidated index and `AUDIT_SCOPE_MATRIX.md`.
+
+## 12. Generated machine-readable artifacts
+
+Current high-value generated artifacts include:
+
+```text
 generated/audit_scope_matrix.csv
-generated/enumerations_v1_0_v2_0_xsd_inventory.csv
-generated/enumerations_v1_0_vs_v2_0_xsd_diff.csv
-generated/enumerations_v1_0_vs_v2_0_xsd_diff.md
-generated/enumerations_v2_0_vs_v2_1_xsd_diff.csv
-generated/enumerations_v2_0_vs_v2_1_xsd_diff.md
-generated/enumerations_v2_1_vs_v2_2_xsd_diff.csv
-generated/enumerations_v2_1_vs_v2_2_xsd_diff.md
-generated/enumerations_v2_2_vs_v2_3_xsd_diff.csv
-generated/common_v2_2_vs_v2_3_structure_delta.csv
-generated/enumerations_v2_3_vs_v2_4_xsd_diff.csv
-generated/common_v2_3_vs_v2_4_structure_delta.csv
-generated/enumerations_v2_4_xsd_inventory.csv
-generated/enumerations_v2_4_xsd_inventory.md
-generated/enumerations_v2_4_pdf_inventory.csv
-generated/enumerations_v2_4_pdf_vs_xsd_diff.csv
-generated/common_v2_4_datatypes_xsd_inventory.csv
-generated/common_v2_4_datatypes_xsd_inventory.md
+generated/runtime_protocol_authority_matrix.csv
+generated/cross_service_subscription_modelling_matrix.csv
+generated/device_management_service_historical_scope_matrix.csv
+service-specific generated scope/findings matrices
+Common/Enums historical diff/inventory CSVs
 ```
 
-Related tools:
+Exact generated artifacts should be regenerated/updated when their source model changes; do not infer current state from an old generated file over the current Markdown authority.
+
+## 13. Tools / regression harnesses
+
+Key tools added during audit:
 
 ```text
-tools/export_xsd_enumerations.py
+tools/validate_xsd_pool.py
+tools/validate_legacy_v1_roots.py
+tools/validate_pcs_v21_operation_not_supported.py
+tools/validate_ce018_service_identification_with_state_list.py
+tools/validate_video_v20_compositors.py
+tools/validate_trainset_ev104.py
+tools/validate_analog_radio_ev105.py
+tools/runtime_http_profile.py
+tools/validate_http_runtime_ev25b.py
+tools/runtime_discovery_profile.py
+tools/validate_discovery_runtime_rv002.py
+tools/runtime_time_profile.py
+tools/validate_time_runtime_rv003.py
+tools/runtime_video_profile.py
+tools/validate_video_runtime_rv004.py
 ```
 
-## Status overview
-
-| Area | Status | Notes |
-|---|---|---|
-| Audit scope matrix | available | Master checklist for public PDF versions vs observed XSD files. |
-| Mixed-version validation premise | available | Documents why all historical service versions must remain separately validatable. |
-| Validation authority policy | available | XSD precedence over documentation is documented for audit and tool behaviour. |
-| Official PR candidate register | available | Tracks possible post-audit correction PR candidates; no PRs during audit. |
-| Common/Enums V2.4 XSD/PDF inventory and diff | partial/completed first pass | V2.4 enum diff and core structure pass exist; visual checks deferred. |
-| Common/Enums V1.0-V2.4 historical audit | first pass completed | 04a through 04e complete; CE-001 closed as OK with note; local validation still pending. |
-| DeviceManagementService V2.4/history | first pass completed | No DMS-specific mismatch opened; validation backlog VB-005 created. |
-| TicketValidationService | first pass completed for V2.2/V2.3/V2.4 | TVS-001 and TVS-002 opened; V2.1 historical coverage still pending. |
-| CustomerInformationService | next | Next recommended service-level historical block. |
-| Remaining services | pending | To be split into small service-version blocks. |
-
-## Evidence policy
-
-Each finding should distinguish:
+Historical filename note:
 
 ```text
-PDF-derived fact
-XSD-derived fact
-inference / audit interpretation
-open validation task
+validate_http_runtime_ev25b.py retains its old filename for provenance, but its evidence ID is RV-001.
 ```
 
-Finding states:
+## 14. Workflow
 
 ```text
-OK
-OK with note
-Mismatch
-Unclear
-Not checked yet
-Confirmed historical mismatch
-Confirmed PDF/XSD value discrepancy
+.github/workflows/schema-audit-validation.yml
+trigger: workflow_dispatch only
 ```
 
-## Continuity policy
+Do not leave a temporary push trigger active after a controlled evidence run.
 
-After each meaningful block:
+## 15. Candidate / official-facing work
+
+Use:
 
 ```text
-1. Commit audit file changes to dev/schema-integration.
-2. Update findings.md if a CE/service finding is opened or a finding state changes.
-3. Update validation_backlog.md when deferred checks or final-review gates change.
-4. Update AUDIT_HANDOFF.md when the continuation point changes materially.
-5. Report the final branch commit SHA to the user.
+OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
+service-specific OFFICIAL_PR_CANDIDATES_ADDENDUM_*.md
+```
+
+These are candidate registers only.
+
+No official-facing action is authorized simply because an audit finding exists.
+
+## 16. Immediate next task
+
+```text
+Design/freeze the SDK machine-readable manifest and resolver baseline from the consolidated audit.
+```
+
+Minimum manifest domains:
+
+```text
+schema profiles and exact dependencies
+service/version/authority routing
+legacy root mappings
+operation and response-context mapping
+non-XSD protocol/discovery profiles
+runtime rule authority/severity
+known discrepancy/provider notes
+candidate selection guards
+regression evidence references
 ```
