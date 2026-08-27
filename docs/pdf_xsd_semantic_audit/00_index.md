@@ -89,6 +89,7 @@ OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
 01k_common_enums_v2_4_structure_closure.md
 01l_common_enums_v2_4_deferred_scope_resolution.md
 02_dms_v2_4_pdf_xsd_audit.md
+02a_dms_v2_2_v2_3_v2_4_history_compare.md
 findings.md
 validation_backlog.md
 generated/enumerations_v2_4_xsd_inventory.csv
@@ -117,11 +118,11 @@ tools/export_xsd_enumerations.py
 | Common/Enums V2.4 datatypes/core structures | mostly completed first pass | Datatype inventory, InternationalTextType and NetexMode are documented in 01g. |
 | Common/Enums V2.4 common structures | visual checks deferred | 01h, 01i, 01j, 01k and 01l cover most structures; SB-005 resolved; CE-015/CE-017/ZoneType visual checks deferred. |
 | DeviceManagementService V2.4 | first pass completed | `02_dms_v2_4_pdf_xsd_audit.md`; no new DMS-specific mismatch opened; validation backlog VB-005 created. |
-| DMS V2.2/V2.3/V2.4 history | next | Needs version-history comparison to confirm candidate scope. |
+| DMS V2.2/V2.3/V2.4 history | first pass completed | `02a_dms_v2_2_v2_3_v2_4_history_compare.md`; confirms DMS V2.4 candidate scope remains narrow; no new DMS-specific CE finding. |
 | Common structures / enumerations V1.0-V2.3 | pending | Needs older PDF/table extraction and XSD comparison. |
-| TicketValidationService | pending | Must account for upstream V2.4 include state and open PR/candidate material. |
+| TicketValidationService | next | TVS V2.2/V2.3/V2.4 include and semantic history is the recommended next non-visual block. |
 | CustomerInformationService | pending | Coverage and provenance unclear for older versions. |
-| Remaining services | pending | To be split into small blocks after Common/Enums/DMS. |
+| Remaining services | pending | To be split into small blocks after Common/Enums/DMS/TVS. |
 
 ## Evidence policy
 
