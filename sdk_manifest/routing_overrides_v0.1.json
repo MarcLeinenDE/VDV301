@@ -61,7 +61,29 @@
       "document_version": "1.0"
     }
   ],
+  "candidate_dependency_resources": [
+    {
+      "schema": "IBIS-IP_common_V2.4.xsd",
+      "authority": "candidate",
+      "source": "public schema candidate integration commit c9c086ac07f7e9bdb271c54f7a274e3cf0d03749",
+      "explicit_candidate_context_required": true
+    },
+    {
+      "schema": "IBIS-IP_Enumerations_V2.4.xsd",
+      "authority": "candidate",
+      "source": "public schema candidate integration commit c9c086ac07f7e9bdb271c54f7a274e3cf0d03749",
+      "explicit_candidate_context_required": true
+    }
+  ],
   "candidate_gates": [
+    {
+      "service_name": "CustomerInformationService",
+      "service_version": "2.4",
+      "schema": "IBIS-IP_CustomerInformationService_V2.4.xsd",
+      "authority": "candidate",
+      "source": "public schema candidate integration commit c9c086ac07f7e9bdb271c54f7a274e3cf0d03749",
+      "explicit_opt_in_required": true
+    },
     {
       "service_name": "AnalogRadioService",
       "service_version": "2.4",
@@ -90,7 +112,18 @@
       "service_version": "2.4",
       "schema": "IBIS-IP_TicketValidationService_V2.4.xsd",
       "authority": "candidate",
+      "source": "integration branch aligns this service with candidate Common/Enums V2.4 dependency family",
       "explicit_opt_in_required": true
+    }
+  ],
+  "integration_only_gates": [
+    {
+      "service_name": "DeviceManagementService",
+      "service_version": "2.3",
+      "schema": "IBIS-IP_DeviceManagementService_V2.3.xsd",
+      "authority": "integration",
+      "explicit_opt_in_required": true,
+      "note": "Retained as integration/comparison material, not official release authority."
     }
   ],
   "operation_context_overrides": [
