@@ -68,5 +68,36 @@ Full table-level cardinality and type comparison is still pending.
 Next action:
 
 ```text
-Complete table-level checks for LineInformation, StopInformation, TripInformation and DoorCountingObjectClassEnumeration.
+Continue table-level checks beyond the V2.4-changed areas: full datatype, structure and enumeration pass.
+```
+
+### CE-004 - ServiceNameEnumeration V2.4 PDF table vs XSD/version-history discrepancy
+
+State: discrepancy noted; likely documentation/table inconsistency, not an immediate XSD defect.
+
+Observation:
+
+```text
+V2.4 version history says V2.2 removed SystemDocumentationService and SystemManagementService
+and added SystemMonitoringService.
+
+The V2.4 ServiceNameEnumeration PDF table still lists SystemDocumentationService,
+SystemManagementService and SystemMonitoringService.
+
+IBIS-IP_Enumerations_V2.4.xsd contains SystemMonitoringService but does not contain
+SystemDocumentationService or SystemManagementService in the checked ServiceNameEnumeration snippet.
+```
+
+Impact:
+
+```text
+The XSD follows the version-history statement but not the still-visible enumeration table.
+For tool output, do not silently call either representation definitively official without noting the conflict.
+```
+
+Next action:
+
+```text
+Check V2.2/V2.3 PDFs and official repository history, then decide whether this should be
+reported as documentation inconsistency or tracked as a schema issue.
 ```
