@@ -70,12 +70,19 @@ def dms_harness_schema_text(dms_filename: str = "IBIS-IP_DeviceManagementService
 
 
 def dms_cases() -> list[XmlCase]:
+    """Targeted DMS V2.4 regression cases.
+
+    Common scalar wrapper types such as TimeStamp, SubdeviceName and
+    DeviceStatusFlag are structures with a required Value child. The positive
+    samples therefore model the wrapper shape explicitly instead of placing
+    scalar text directly on the wrapper element.
+    """
     return [
         XmlCase(
             "device-error-messages-empty-is-valid",
             """<DeviceManagementService.GetDeviceErrorMessagesResponse>
   <DeviceManagementService.GetDeviceErrorMessagesResponseData>
-    <TimeStamp>2026-01-01T00:00:00Z</TimeStamp>
+    <TimeStamp><Value>2026-01-01T00:00:00Z</Value></TimeStamp>
   </DeviceManagementService.GetDeviceErrorMessagesResponseData>
 </DeviceManagementService.GetDeviceErrorMessagesResponse>""",
             True,
@@ -83,7 +90,7 @@ def dms_cases() -> list[XmlCase]:
         XmlCase(
             "subdevice-error-messages-empty-is-valid",
             """<TestSubdeviceErrorMessages>
-  <SubdeviceName>subdevice-1</SubdeviceName>
+  <SubdeviceName><Value>subdevice-1</Value></SubdeviceName>
 </TestSubdeviceErrorMessages>""",
             True,
         ),
@@ -91,7 +98,7 @@ def dms_cases() -> list[XmlCase]:
             "device-status-impact-priority-omitted-is-valid",
             """<TestDeviceStatus>
   <DeviceStatusName>status-1</DeviceStatusName>
-  <DeviceStatusFlag>true</DeviceStatusFlag>
+  <DeviceStatusFlag><Value>true</Value></DeviceStatusFlag>
 </TestDeviceStatus>""",
             True,
         ),
