@@ -73,6 +73,40 @@ CE-016 / PR-CAND-001 GlobalCardStausID
 CE-017 / PR-CAND-002 TSPPoint Desciption
 ```
 
+### VB-005 - DMS V2.4 schema compile and targeted samples
+
+Source:
+
+```text
+docs/pdf_xsd_semantic_audit/02_dms_v2_4_pdf_xsd_audit.md
+```
+
+Scope:
+
+```text
+IBIS-IP_DeviceManagementService_V2.4.xsd
+IBIS-IP_common_V2.4.xsd
+IBIS-IP_Enumerations_V2.4.xsd
+```
+
+Goal:
+
+```text
+Confirm the DMS V2.4 candidate schema compiles with the V2.4 dependency pool.
+Run targeted positive/negative XML samples for the V2.4 technical correction scope.
+```
+
+Initial sample ideas:
+
+```text
+Positive: GetDeviceErrorMessagesResponseData with no ErrorMessage.
+Positive: SubdeviceErrorMessages with no ErrorMessage.
+Positive: InstallUpdateRequest without UpdateURL.
+Positive: DeviceStatus with only DeviceStatusName and DeviceStatusFlag.
+Negative: UpdateStateData missing required UpdateTimestamp.
+Negative: UpdateHistoryEntry missing required UpdateURL.
+```
+
 ## Semantic audit backlog
 
 ### SB-001 - Common/Enums V2.4 affected table check
@@ -176,7 +210,9 @@ Confirm the printed PDF table spelling before final classification or provider-f
 Status:
 
 ```text
-Next Common/Enums V2.4 closure task.
+Deferred by user request because visual checks require the user's personal/manual review.
+Do not block other non-visual audit work on SB-006.
+Carry these items as explicit pending checks until the user is available.
 ```
 
 ### SB-007 - post-audit official PR candidate review
@@ -204,4 +240,25 @@ Required review steps:
 5. Run local schema compilation and targeted sample validation.
 6. Split candidates into documentation-only notes, tool notes, validation backlog items and possible official PRs.
 7. Ask the user for explicit approval before preparing or opening any PR.
+```
+
+### SB-008 - DMS V2.4 semantic audit
+
+Source:
+
+```text
+docs/pdf_xsd_semantic_audit/02_dms_v2_4_pdf_xsd_audit.md
+```
+
+Status:
+
+```text
+Started; first pass completed for the V2.4 documented technical correction scope.
+No new DMS-specific CE finding opened in the first pass.
+```
+
+Next semantic follow-up:
+
+```text
+Compare DMS V2.2 / V2.3 / V2.4 history to confirm that the DMS V2.4 candidate only applies the documented V2.4 correction scope and does not accidentally include unrelated changes.
 ```
