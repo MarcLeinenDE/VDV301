@@ -46,6 +46,7 @@ docs/pdf_xsd_semantic_audit/01d_common_enums_v2_4_enumeration_first_pass.md
 docs/pdf_xsd_semantic_audit/01e_common_enums_v2_4_enumeration_second_pass.md
 docs/pdf_xsd_semantic_audit/01f_common_enums_v2_4_pdf_vs_xsd_enum_diff.md
 docs/pdf_xsd_semantic_audit/01g_common_enums_v2_4_datatypes_core_structures.md
+docs/pdf_xsd_semantic_audit/01h_common_enums_v2_4_core_data_structures.md
 ```
 
 Also read the broader branch context when needed:
@@ -136,6 +137,8 @@ CE-007: Case-sensitive enum value mismatches: PDF Other/Valid/Air vs XSD other/v
 CE-008: Submode case differences: Funicular/Taxi Unknown/Undefined/minicab vs XSD unknown/undefined/miniCab. Confirmed discrepancy.
 CE-009: RailSubmodeEnumeration PDF specialRail vs XSD specialTrain. Confirmed discrepancy.
 CE-010: AirSubmodeEnumeration XSD-only canalBarge. Confirmed discrepancy.
+CE-011: Connection TransportMode/ConnectionMode cardinality PDF 0:* vs XSD 0:1. Confirmed discrepancy candidate.
+CE-012: DeviceSpecificationWithStateList cardinality PDF 1:* vs XSD 0:*. Confirmed discrepancy candidate.
 ```
 
 The authoritative text for these findings is `findings.md`.
@@ -176,21 +179,46 @@ docs/pdf_xsd_semantic_audit/generated/common_v2_4_datatypes_xsd_inventory.md
 - All 16 observed IBIS-IP wrapper datatypes in IBIS-IP_common_V2.4.xsd follow the expected Value + optional ErrorCode pattern.
 - InternationalTextType is still OK against the PDF-described structure.
 - NetexMode structure is still OK partial; value-level differences are tracked in CE-008 to CE-010.
-- Subscribe/DataAccepted core structures have first XSD observation notes and still need PDF table-level closure.
+```
+
+## Current result of 01h
+
+```text
+Core V2.4 common structures checked in first pass:
+Connection
+DeviceInformation / DeviceSpecification family
+DisplayContent
+LineInformation
+StopInformation / StopInformationRequest
+TripInformation
+
+New findings:
+CE-011 Connection TransportMode/ConnectionMode PDF 0:* vs XSD 0:1.
+CE-012 DeviceSpecificationWithStateList PDF 1:* vs XSD 0:*.
+
+No new mismatch found for DisplayContent, LineInformation V2.4 additions, StopInformation V2.4 additions or TripInformation V2.4 additions beyond CE-005.
 ```
 
 ## Next recommended task
 
-Continue with Common/Enums V2.4 common data structures 2.1-2.64:
+Continue with remaining Common/Enums V2.4 structures in table order:
 
 ```text
-LineInformation
-StopInformation
-TripInformation
-DisplayContent
-Connection
-DeviceInformation / DeviceSpecification family
-then the remaining structures in table order
+01i_common_enums_v2_4_remaining_data_structures_part1.md
+
+AdditionalAnnouncement
+Announcement
+BayArea
+BeaconPoint
+CardApplInformation
+CardTicketData
+CardType
+DataAcceptedResponse
+DataAcceptedResponseData
+DataVersion
+DataVersionList
+Destination
+DoorCounting / DoorInformation / DoorState family
 ```
 
 Use the same evidence style:
