@@ -1,0 +1,13 @@
+item,pdf_v2_3_observation,xsd_v2_3_observation,classification,next_step
+source_identity,"VDV 301-2-3 CustomerInformationService V2.3, 12/2020","IBIS-IP_CustomerInformationService_V2.3.xsd",OK,"Use V2.3-specific pool"
+dependency_pool,"V2.3 publication; no V2.3 enum file implied by PDF history","common V2.3 + Enumerations V2.2",OK_with_dependency_note,"Do not infer Enumerations V2.3 or substitute V2.4"
+version_history,"V2.3 correction: reference to CIS tool in foreword","local CIS structures stable vs V2.2 in first pass",OK,"Treat V2.3 as dependency/documentation update unless further evidence found"
+operation_group,"PDF operation overview includes Get, Subscribe and Unsubscribe operations","XSD operation group contains ten concrete response/request elements",candidate_note_CIS_002,"Check generic subscription modelling cross-service"
+AllData_GlobalDisplayContent,"0:*","0:*",OK,"Add later positive validation sample"
+AllData_TripInformation,"0:2","minOccurs 0 maxOccurs 2",OK,"Add later positive validation sample without TripInformation"
+CurrentConnection,"0:*","minOccurs 0 maxOccurs unbounded",OK,"Add later positive validation sample with zero and multiple connections"
+CurrentDisplayContent,"1:*","maxOccurs unbounded with default min 1",OK,"Add later positive validation sample with repeated display content"
+TripData_TripInformation,"1:1","default 1:1",OK,"No action"
+VehicleData_MyOwnVehicleMode,"PDF VehicleData table says PtModesEnumeration; AllData table says NetexMode","shared VehicleInformationGroup uses NetexMode",candidate_CIS_005,"Open/confirm finding candidate in CIS closure"
+GetCurrentConnection_name,"PDF operation overview says GetCurrentConnectionInformation; detail table says GetCurrentConnectionResponse","XSD uses GetCurrentConnectionInformationResponse",candidate_note_CIS_003,"Carry to CIS closure"
+RetrievePartialStopSequence_name,"PDF operation says RetrievePartialStopSequence; detail table says RetrievePartialStopRequest","XSD uses RetrievePartialStopSequenceRequest",candidate_note_CIS_004,"Carry to CIS closure"
