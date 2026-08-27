@@ -12,6 +12,12 @@ Purpose:
 
 This audit tracks a source-based comparison between the public VDV 301 PDF writings and the XSD files present in the integration branch.
 
+Long-term target:
+
+```text
+Complete PDF-vs-XSD semantic comparison for all public VDV301 writings and schema-relevant versions V1.0 through V2.4.
+```
+
 Important limits:
 
 - This is not an official VDV statement.
@@ -34,6 +40,8 @@ docs/pdf_xsd_semantic_audit/findings.md
 docs/pdf_xsd_semantic_audit/validation_backlog.md
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.md
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.csv
+docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_inventory.csv
+docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_vs_xsd_diff.csv
 ```
 
 Always fetch the current `dev/schema-integration` branch ref before continuing.
@@ -49,10 +57,13 @@ AUDIT_HANDOFF.md
 01c_common_enums_additional_text_message_history.md
 01d_common_enums_v2_4_enumeration_first_pass.md
 01e_common_enums_v2_4_enumeration_second_pass.md
+01f_common_enums_v2_4_pdf_vs_xsd_enum_diff.md
 findings.md
 validation_backlog.md
 generated/enumerations_v2_4_xsd_inventory.csv
 generated/enumerations_v2_4_xsd_inventory.md
+generated/enumerations_v2_4_pdf_inventory.csv
+generated/enumerations_v2_4_pdf_vs_xsd_diff.csv
 ```
 
 Related tool:
@@ -66,8 +77,10 @@ tools/export_xsd_enumerations.py
 | Area | Status | Notes |
 |---|---|---|
 | Common structures / enumerations V2.1-V2.4 | started | Version-history deltas and V2.4 table-level checks are in progress. |
-| Common/Enums V2.4 XSD enumeration inventory | available | XSD-side CSV/Markdown inventory has been added for `IBIS-IP_Enumerations_V2.4.xsd`. |
-| Common/Enums V2.4 PDF enumeration inventory | pending | Next step: extract PDF tables 65-104 and compare exactly/case-sensitively to the XSD inventory. |
+| Common/Enums V2.4 XSD enumeration inventory | available | XSD-side CSV/Markdown inventory exists for `IBIS-IP_Enumerations_V2.4.xsd`. |
+| Common/Enums V2.4 PDF enumeration inventory | available | PDF-side inventory exists for VDV 301-2-1 V2.4 tables 65-104. |
+| Common/Enums V2.4 PDF/XSD enumeration diff | completed first pass | Exact/case-sensitive diff exists; findings CE-004 and CE-006 through CE-010 remain open for historical classification. |
+| Common/Enums V2.4 common structures | next | Full table-level audit of datatypes, InternationalTextType, NetexMode and common structures 2.1-2.64. |
 | Common structures / enumerations V1.0-V2.0 | pending | Needs older PDF/table extraction and XSD comparison. |
 | DeviceManagementService | pending | DMS V2.4 candidate already has a separate derivation document; needs integration into this audit format. |
 | TicketValidationService | pending | Must account for upstream V2.4 include state and open PR/candidate material. |
@@ -94,6 +107,7 @@ Mismatch
 Unclear
 Not checked yet
 Confirmed historical mismatch
+Confirmed PDF/XSD value discrepancy
 ```
 
 ## Continuity policy
