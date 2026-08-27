@@ -24,6 +24,7 @@ Important limits:
 - Files from open PRs, forks, or local candidates stay labelled as candidate/integration material until accepted upstream or published by VDV.
 - Semantic PDF/XSD checks are performed in small, traceable blocks.
 - Local XSD compilation and sample XML validation remain a later technical validation step.
+- Possible official correction PRs are tracked only as post-audit candidates and are not opened during the audit.
 
 ## Validation authority
 
@@ -53,9 +54,11 @@ docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF.md
 Then read:
 
 ```text
+docs/pdf_xsd_semantic_audit/00_index.md
 docs/pdf_xsd_semantic_audit/VALIDATION_AUTHORITY.md
 docs/pdf_xsd_semantic_audit/findings.md
 docs/pdf_xsd_semantic_audit/validation_backlog.md
+docs/pdf_xsd_semantic_audit/OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.md
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_xsd_inventory.csv
 docs/pdf_xsd_semantic_audit/generated/enumerations_v2_4_pdf_inventory.csv
@@ -70,6 +73,7 @@ Always fetch the current `dev/schema-integration` branch ref before continuing.
 00_index.md
 AUDIT_HANDOFF.md
 VALIDATION_AUTHORITY.md
+OFFICIAL_PR_CANDIDATES_AFTER_AUDIT.md
 01_common_enums_v2_1_to_v2_4.md
 01a_common_enums_v2_4_table_check.md
 01b_common_enums_v2_4_continuation.md
@@ -78,12 +82,18 @@ VALIDATION_AUTHORITY.md
 01e_common_enums_v2_4_enumeration_second_pass.md
 01f_common_enums_v2_4_pdf_vs_xsd_enum_diff.md
 01g_common_enums_v2_4_datatypes_core_structures.md
+01h_common_enums_v2_4_core_data_structures.md
+01i_common_enums_v2_4_remaining_data_structures_part1.md
+01j_common_enums_v2_4_remaining_data_structures_part2.md
+01k_common_enums_v2_4_structure_closure.md
 findings.md
 validation_backlog.md
 generated/enumerations_v2_4_xsd_inventory.csv
 generated/enumerations_v2_4_xsd_inventory.md
 generated/enumerations_v2_4_pdf_inventory.csv
 generated/enumerations_v2_4_pdf_vs_xsd_diff.csv
+generated/common_v2_4_datatypes_xsd_inventory.csv
+generated/common_v2_4_datatypes_xsd_inventory.md
 ```
 
 Related tool:
@@ -97,13 +107,13 @@ tools/export_xsd_enumerations.py
 | Area | Status | Notes |
 |---|---|---|
 | Validation authority policy | available | XSD precedence over documentation is documented for audit and tool behaviour. |
-| Common structures / enumerations V2.1-V2.4 | started | Version-history deltas and V2.4 table-level checks are in progress. |
+| Official PR candidate register | available | Tracks possible post-audit correction PR candidates; no PRs during audit. |
 | Common/Enums V2.4 XSD enumeration inventory | available | XSD-side CSV/Markdown inventory exists for `IBIS-IP_Enumerations_V2.4.xsd`. |
 | Common/Enums V2.4 PDF enumeration inventory | available | PDF-side inventory exists for VDV 301-2-1 V2.4 tables 65-104. |
 | Common/Enums V2.4 PDF/XSD enumeration diff | completed first pass | Exact/case-sensitive diff exists; findings CE-004 and CE-006 through CE-010 remain open for historical classification. |
-| Common/Enums V2.4 datatypes/core structures | started | Datatype authority, wrapper sampling, InternationalTextType and NetexMode are documented in 01g. |
-| Common/Enums V2.4 common structures 2.1-2.64 | next | Full table-level audit of common data structures. |
-| Common structures / enumerations V1.0-V2.0 | pending | Needs older PDF/table extraction and XSD comparison. |
+| Common/Enums V2.4 datatypes/core structures | mostly completed first pass | Datatype inventory, InternationalTextType and NetexMode are documented in 01g. |
+| Common/Enums V2.4 common structures | closure pass started | 01h, 01i, 01j and 01k cover most structures; deferred name routing and visual confirmation remain. |
+| Common structures / enumerations V1.0-V2.3 | pending | Needs older PDF/table extraction and XSD comparison. |
 | DeviceManagementService | pending | DMS V2.4 candidate already has a separate derivation document; needs integration into this audit format. |
 | TicketValidationService | pending | Must account for upstream V2.4 include state and open PR/candidate material. |
 | CustomerInformationService | pending | Coverage and provenance unclear for older versions. |
@@ -139,6 +149,7 @@ After each meaningful block:
 ```text
 1. Commit audit file changes to dev/schema-integration.
 2. Update findings.md if a CE finding is opened or a finding state changes.
-3. Update AUDIT_HANDOFF.md when the continuation point changes materially.
-4. Report the final branch commit SHA to the user.
+3. Update validation_backlog.md when deferred checks or final-review gates change.
+4. Update AUDIT_HANDOFF.md when the continuation point changes materially.
+5. Report the final branch commit SHA to the user.
 ```
