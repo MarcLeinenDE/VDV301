@@ -5,24 +5,30 @@
   "workflow_mode": "manual_only",
   "project_phase": "deep_read_pass_2",
   "superbranch": {
-    "root_xsd_count_last_executed": 49,
-    "direct_include_edges_last_executed": 82,
-    "xsd_service_profiles": 38,
+    "root_xsd_count_last_executed": 50,
+    "direct_include_edges_last_executed": 84,
+    "xsd_service_profiles": 39,
     "non_xsd_profiles": 4,
     "profile_generator": "tools/generate_schema_profile_inventory_v0_1.py",
-    "authority_model": ["official", "candidate", "integration", "unresolved"],
+    "authority_model": [
+      "official",
+      "candidate",
+      "integration",
+      "unresolved"
+    ],
     "latest_wins": false,
     "root_xsd_count_current": 50,
     "non_root_semantic_schema_variants_current": 1,
     "schema_variant_registry": "audit_registry/schema_variant_registry_v0.1.json",
-    "root_xsd_count_current_execution_status": "not_reexecuted_after_SystemDocumentation_V2.0_backfill_and_Common_V2.3_official_root_restore",
+    "root_xsd_count_current_execution_status": "executed_successfully_after_Common_V2.3_official_candidate_authority_split",
     "common_v2_3_authority_split": {
       "official_root_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
       "official_source_tag": "VDV-301-2.3",
       "candidate_variant_id": "common-v2.3-upstream-pr30",
       "candidate_blob": "456a7db179ce14bc3f04e2bc05e42e16545fb0c5",
       "candidate_source": "open upstream VDVde/VDV301 PR #30",
-      "selection_rule": "official by default; candidate only by explicit overlay selection"
+      "selection_rule": "official by default; candidate only by explicit overlay selection",
+      "executable_evidence": "EV-106"
     }
   },
   "audit": {
@@ -43,15 +49,39 @@
     "pdf_source_fetcher": "tools/fetch_vdv_pdf_sources.py",
     "pdf_source_registry_entries": 50,
     "pdf_source_semantic_units": 48,
-    "pdf_sources_byte_pinned": 0,
+    "pdf_sources_byte_pinned": 2,
     "pdf_source_catalog_verified_date": "2026-08-28",
     "local_pdf_cache_path": "local_sources/vdv_pdfs",
-    "local_pdf_cache_tracked_in_git": false
+    "local_pdf_cache_tracked_in_git": false,
+    "pinned_active_sources": [
+      "VDV301-2_GC_V2.3",
+      "COMMON_V2.3"
+    ],
+    "ce_020_original_pdf_table_visual_confirmation": "confirmed",
+    "pdf_source_pin_registry": "audit_registry/pdf_source_pins_v0.1.json",
+    "pdf_source_pin_verifier": "tools/verify_vdv_pdf_source_pins.py"
   },
   "evidence": {
-    "xsd_ev_completed": ["EV-001", "EV-002", "EV-101", "EV-102", "EV-103", "EV-104", "EV-105"],
-    "runtime_rv_completed": ["RV-001", "RV-002", "RV-003", "RV-004"],
-    "latest_profile_generator_run": "33140938945"
+    "xsd_ev_completed": [
+      "EV-001",
+      "EV-002",
+      "EV-101",
+      "EV-102",
+      "EV-103",
+      "EV-104",
+      "EV-105",
+      "EV-106"
+    ],
+    "runtime_rv_completed": [
+      "RV-001",
+      "RV-002",
+      "RV-003",
+      "RV-004"
+    ],
+    "latest_profile_generator_run": "33169314332",
+    "latest_root_xsd_validation_run": "33169314332",
+    "latest_common_v2_3_variant_run": "33169314332",
+    "latest_pdf_source_pin_run": "33169314332"
   },
   "sdk": {
     "status": "baseline_v0.1_prework_only_during_audit",
@@ -62,12 +92,10 @@
     "rule": "Findings/audit knowledge must later explain surprising validation results without silently changing normative XSD outcomes."
   },
   "next_actions": [
-    "From a local working copy, byte-pin VDV301-2_GC_V2.3 and COMMON_V2.3 with tools/fetch_vdv_pdf_sources.py --bootstrap-pins before using them for reproducible visual evidence.",
-    "Re-run executable root-XSD/profile validation before raising root_xsd_count_last_executed above 49; the root pool changed after the last execution and now stores exact official Common V2.3 bytes.",
-    "Add an executable candidate-overlay check for common-v2.3-upstream-pr30 before the SDK treats that candidate as runnable.",
-    "Continue fresh-read VDV 301-2 General Conventions V2.3 from pinned local PDF bytes and then compare with prior audit material.",
-    "During Common V2.3 Deep Read, fully verify CE-020 against the original VDV 301-2-1 V2.3 table and both exact XSD variants.",
+    "Continue fresh-read VDV 301-2 General Conventions V2.3 using the byte-pinned official source and render-first visual confirmation before promoting completion state.",
+    "Continue the dedicated Common V2.3 Deep Read; CE-020 Table 17 type rows are already visually confirmed and executable behaviour is covered by EV-106.",
     "During TimeService deep read, resolve DR3012-006 historical 301-2-11 cross-reference context.",
+    "Byte-pin additional official PDFs as each document enters render-first Deep Read; never bulk-repin an existing changed source.",
     "Retry visual page review for completed textual Deep Read documents from pinned local PDF sources; only then consider exhaustive_read.",
     "Proceed through all 48 semantic document units using DEEP_READ_METHOD.md.",
     "Do not decide PR/mail/remediation disposition of findings during deep read unless explicitly requested."
