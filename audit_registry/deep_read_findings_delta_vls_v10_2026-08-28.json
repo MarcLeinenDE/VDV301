@@ -1,0 +1,47 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-28",
+  "base_registry": "audit_registry/deep_read_findings_v0.1.json",
+  "document_id": "VLS_V1.0",
+  "policy": "Delta is additive audit knowledge. It does not authorize schema changes or official-facing action.",
+  "new_findings": [
+    {
+      "id": "VLS-005",
+      "document_id": "VLS_V1.0",
+      "classification": "pdf_table_cardinality_notation_error_candidate",
+      "state": "visually_confirmed",
+      "confidence": "very_high",
+      "summary": "Visible VLS V1.0 tables print ListAllLiveStreamsData as -1:* and CameraCurrentState/VideoCodec as -1:1. These are not valid ordinary cardinality notation; the intended replacement values are not guessed.",
+      "normative_validation_impact": "none for V1.0 strict XML because no exact official V1.0 VideoLiveService XSD is confirmed; do not synthesize cardinalities"
+    }
+  ],
+  "existing_finding_updates": [
+    {
+      "id": "VLS-001",
+      "effect": "Confirmed by recursive tree inspection of the official upstream VDV-301-1.0 tag and its monolithic IBIS_IP_V1.0.xsd: no VideoLiveService V1.0 service XSD, include or declaration is present. V1.0 must not be routed through V2.0."
+    },
+    {
+      "id": "VLS-002",
+      "effect": "Fresh byte-pinned VLS V1.0 visual evidence independently confirms LiveStreamData is documented as one multi-field stream record. This strengthens semantic history only; the executable mismatch remains scoped to the official V2.0 XSD and EV-103."
+    },
+    {
+      "id": "VLS-003",
+      "effect": "Visually confirmed from the exact pinned source on page 4 using fallback render run 33202961159: German foreword says VDV 301-2-1 while the English foreword says VDV 301-2-11."
+    },
+    {
+      "id": "VLS-004",
+      "effect": "Visually confirmed from the exact pinned source on page 38 using fallback render run 33203162588: VideoLive start/stop prose contains VideoDisplayService immediately before returning to VideoLiveService/RTSP semantics."
+    }
+  ],
+  "visual_evidence": {
+    "source_id": "VLS_V1.0",
+    "source_sha256": "f535673427ff8f495102e1fc7723ca157408949b981572c4342b862f6d9c2a3c",
+    "source_size_bytes": 1166329,
+    "render_runs": ["33202961159", "33203162588"],
+    "render_engine": "PyMuPDF 1.28.2",
+    "dpi": 180,
+    "interactive_screenshot_failure": "cache_miss",
+    "fallback_result": "success",
+    "policy": "docs/pdf_xsd_semantic_audit/PDF_VISUAL_RENDER_FALLBACK.md"
+  }
+}

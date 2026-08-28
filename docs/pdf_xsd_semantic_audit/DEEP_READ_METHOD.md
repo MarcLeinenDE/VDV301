@@ -36,6 +36,34 @@ A physical PDF source is byte-level audit evidence only after its registry entry
 
 If a previously pinned source no longer matches, record `SOURCE_CHANGED_SINCE_AUDIT`; do not silently replace the expected hash or carry the earlier visual review forward.
 
+## Reproducible visual-render fallback
+
+The interactive PDF screenshot backend is a convenience path, not a source authority. If it returns `cache miss` or another rendering-backend error while the byte-pinned PDF remains valid, do **not** classify that as a document/source failure.
+
+Use the independent fallback defined in:
+
+```text
+docs/pdf_xsd_semantic_audit/PDF_VISUAL_RENDER_FALLBACK.md
+tools/render_vdv_pdf_pages.py
+```
+
+The fallback must:
+
+```text
+1. resolve the same registered source_id;
+2. verify %PDF- signature;
+3. verify the pinned SHA-256 and byte size before rendering;
+4. abort with SOURCE_CHANGED_SINCE_AUDIT on mismatch;
+5. render only from those verified bytes;
+6. record page number, DPI, render engine/version and per-image hashes;
+7. keep PDF/page-image bytes outside the public repository;
+8. count as visual evidence only after the rendered page was actually inspected.
+```
+
+A successful pinned-byte render is a visible rendering of the same original source bytes and may be used to close layout-sensitive findings even when the interactive screenshot backend fails. The renderer itself does not promote a finding: actual page inspection is still required.
+
+Targeted rendered pages do not by themselves make a document `exhaustive_read`; all applicable chapters/tables/examples/figures must still be considered according to the completion rules below.
+
 ## Required checks per document
 
 Where applicable, inspect:
@@ -90,6 +118,8 @@ Each document deep-read record must include:
 - `ocr_quality`: good/mixed/poor/not_applicable
 - `preferred_reading_source`: original_visual / embedded_text_with_visual_confirmation / ocr_with_visual_confirmation
 - `source_conflicts`: list
+
+A successful independently rendered page from the exact byte-pinned source counts as `original_visual` evidence for that page when its source pin and render manifest are retained in the audit trail.
 
 ## Completion levels
 

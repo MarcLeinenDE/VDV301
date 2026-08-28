@@ -24,28 +24,42 @@
     "pairable_pdf_xsd_units": 38,
     "pairable_pdf_xsd_first_pass_completed": 38,
     "deep_read_exhaustive_completed": 0,
-    "deep_read_needs_visual_review": 11,
-    "deep_read_textual_fresh_read_completed": 11,
-    "deep_read_in_progress": 1,
-    "deep_read_current_document_id": "VLS_V1.0",
-    "deep_read_previous_document_id": "TIME_V1.0",
-    "latest_deep_read_finding": "DRTIME10-003",
+    "deep_read_needs_visual_review": 12,
+    "deep_read_textual_fresh_read_completed": 12,
+    "deep_read_in_progress": 0,
+    "deep_read_current_document_id": null,
+    "deep_read_previous_document_id": "VLS_V1.0",
+    "latest_deep_read_finding": "VLS-005",
     "latest_dms_finding": "DMS-007",
     "latest_common_finding": "CE-026",
     "resolved_historical_finding": "DR3012-006",
     "pdf_source_registry": "audit_registry/pdf_source_registry_v0.1.json",
     "pdf_source_pin_registry": "audit_registry/pdf_source_pins_v0.1.json",
+    "pdf_source_cache_policy": "docs/pdf_xsd_semantic_audit/PDF_SOURCE_CACHE_POLICY.md",
+    "pdf_source_fetcher": "tools/fetch_vdv_pdf_sources.py",
+    "pdf_visual_render_fallback": "docs/pdf_xsd_semantic_audit/PDF_VISUAL_RENDER_FALLBACK.md",
+    "pdf_visual_renderer": "tools/render_vdv_pdf_pages.py",
+    "pdf_visual_render_rule": "interactive screenshot cache miss is not a source failure; render exact byte-pinned source independently and inspect visible output before promoting visual status",
     "pdf_sources_byte_pinned": 7,
     "pinned_active_sources": ["VDV301-2_GC_V2.3", "COMMON_V2.3", "VDV301-2_GC_V2.4", "DMS_V2.2", "DMS_V2.4", "TIME_V1.0", "VLS_V1.0"],
     "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_vls_v10_2026-08-28.json",
-    "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_time_v10_2026-08-28.json",
+    "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_vls_v10_2026-08-28.json",
     "time_v1_0_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TIME_V1.0.md",
+    "vls_v1_0_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/VLS_V1.0.md",
+    "vls_findings_register": "docs/pdf_xsd_semantic_audit/VIDEO_LIVE_SERVICE_FINDINGS_REGISTER_ADDENDUM.md",
     "vls_v1_0_source_pin": {
       "sha256": "f535673427ff8f495102e1fc7723ca157408949b981572c4342b862f6d9c2a3c",
       "size_bytes": 1166329,
       "evidence_run": "33197955036",
       "pdf_authority": "official_public_VDV_writing",
-      "xsd_authority_status": "to_be_established_independently"
+      "xsd_authority_status": "no_official_release_tag_VideoLiveService_V1.0_service_xsd_confirmed"
+    },
+    "vls_v1_0_visual_review": {
+      "interactive_backend": "cache_miss",
+      "fallback": "success",
+      "render_runs": ["33202961159", "33203162588"],
+      "pages": [4, 38, 39, 40, 41, 44, 45],
+      "status": "targeted_material_findings_visually_confirmed"
     }
   },
   "evidence": {
@@ -54,7 +68,8 @@
     "latest_profile_generator_run": "33197358294",
     "latest_root_xsd_validation_run": "33197358294",
     "latest_rv_003_run": "33197358294",
-    "latest_pdf_source_pin_run": "33197955036"
+    "latest_pdf_source_pin_run": "33197955036",
+    "latest_pdf_visual_render_run": "33203162588"
   },
   "sdk": {
     "status": "baseline_v0.1_prework_only_during_audit",
@@ -65,11 +80,12 @@
     "rule": "Findings/audit knowledge must later explain surprising validation results without silently changing normative XSD outcomes."
   },
   "next_actions": [
-    "Fresh-read byte-pinned VLS_V1.0 independently before consulting later V2.0 video findings or RV-004 as a template.",
-    "Establish exact historical VLS V1.0 schema/provenance availability; never map V1.0 to V2.0 merely because a V2.0 XSD exists.",
-    "Inventory ListAllLiveStreams structures, service identity and RTSP/media references exactly as printed.",
-    "Retain RTSP/RTP external-protocol authority separately from VDV XML/schema authority.",
-    "Use visible PDF screenshots for material layout-sensitive findings; failed rendering keeps needs_visual_review.",
+    "Byte-pin official VLS_V2.0 and start its independent fresh read.",
+    "Use the pinned-byte visual renderer whenever the interactive PDF screenshot backend returns cache miss; never treat cache miss as source evidence.",
+    "For VLS V2.0, compare only after fresh PDF read against exact official IBIS-IP_VideoLiveService_V2.0.xsd -> Common V2.0 -> Enumerations V2.0.",
+    "Re-evaluate VLS-002 in the selected V2.0 authority context and visually check persistence/correction of VLS-004 and VLS-005.",
+    "Retain RTSP/RTP authority separately from VDV XML/XSD authority and compare RV-004 only after the independent V2.0 read.",
+    "Carry VLS V1.0 page-45 VRS/VDS version-label strings forward only as cross-document evidence for VRS_V1.0 and VDS_V1.0.",
     "Byte-pin additional official PDFs only as each document enters Deep Read.",
     "Do not decide PR/mail/remediation disposition during Deep Read unless explicitly requested."
   ]

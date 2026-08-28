@@ -4,13 +4,15 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "VLS_V1.0": {
-      "state": "in_progress",
+      "state": "needs_visual_review",
       "official_url": "https://www.vdv.de/301-2-11-sds.pdfx",
       "publication": "VDV-Schrift 301-2-11, VideoLiveService V1.0, 05/2017",
       "fresh_read_started": "2026-08-28",
-      "textual_fresh_read_complete": false,
-      "original_pdf_visual_review": "pending",
-      "preferred_reading_source": "byte-pinned official VLS V1.0 PDF; establish exact historical schema/provenance independently before consulting V2.0 video findings or RV-004",
+      "textual_fresh_read_complete": true,
+      "original_pdf_visual_review": "targeted_pinned_byte_render_success",
+      "embedded_text_quality": "good_with_table_linewrap_artifacts",
+      "existing_audit_comparison": "completed_after_fresh_read",
+      "preferred_reading_source": "byte-pinned official PDF + targeted pinned-byte visible page rendering; exact historical XSD provenance checked independently",
       "source_pin": {
         "sha256": "f535673427ff8f495102e1fc7723ca157408949b981572c4342b862f6d9c2a3c",
         "size_bytes": 1166329,
@@ -19,17 +21,37 @@
       },
       "authority_boundary": {
         "pdf_authority": "official_public_VDV_writing",
-        "xsd_authority": "to_be_established_from_exact_historical_release/provenance; do not substitute V2.0 by convenience",
-        "external_protocols": "RTSP/RTP/related standards remain a separate authority lane",
-        "rule": "Fresh-read the V1.0 writing first; compare VLS V2.0 compositor evidence and RV-004 only afterwards."
+        "xsd_authority": "no official release-tag VideoLiveService V1.0 service XSD confirmed; never substitute V2.0",
+        "external_protocols": "RTSP/RTP remain a separate external-protocol authority lane",
+        "rule": "V1.0 PDF semantics may explain history but cannot make V2.0 XSD normative for V1.0."
       },
-      "priority_cross_checks": [
-        "document/service identity and foreword numbering",
-        "V1.0 operation inventory and ListAllLiveStreams structures",
-        "exact historical XSD availability/provenance for VLS V1.0",
-        "RTSP URI and media/control boundary as stated by the V1.0 writing",
-        "version history and any later V2.0 correction relationship",
-        "only after independent fresh read: compare VLS-001/VLS-002 and RV-004"
+      "historical_xsd_provenance": {
+        "official_tag": "VDV-301-1.0",
+        "tag_commit": "f5b53785f703e898632603eec3bfa3555a79fdba",
+        "tree_sha": "729bbe3270e52fed3e0641466048a745d5a09b32",
+        "recursive_tree_checked": true,
+        "monolithic_root_checked": "IBIS_IP_V1.0.xsd",
+        "video_live_v1_xsd_found": false
+      },
+      "visual_render_fallback": {
+        "policy": "docs/pdf_xsd_semantic_audit/PDF_VISUAL_RENDER_FALLBACK.md",
+        "tool": "tools/render_vdv_pdf_pages.py",
+        "interactive_backend_result": "cache_miss",
+        "fallback_result": "success",
+        "render_runs": ["33202961159", "33203162588"],
+        "dpi": 180,
+        "render_engine": "PyMuPDF 1.28.2",
+        "visually_checked_pages": [4, 38, 39, 40, 41, 44, 45]
+      },
+      "existing_findings_strengthened": ["VLS-001", "VLS-002", "VLS-003", "VLS-004"],
+      "new_findings": ["VLS-005"],
+      "cross_document_follow_up": [
+        "Page 45 VRS/VDS version-label strings are retained for independent VRS_V1.0 and VDS_V1.0 Deep Reads; no defect classification is made here."
+      ],
+      "report": "docs/pdf_xsd_semantic_audit/deep_read/VLS_V1.0.md",
+      "source_conflicts": [
+        "Interactive screenshot backend returned cache miss for requested VLS pages, while the exact same byte-pinned source rendered successfully through the independent fallback.",
+        "No exact official release-tag VLS V1.0 service XSD exists in the checked VDV-301-1.0 tree, so the V2.0 XSD cannot be used as V1.0 authority."
       ]
     }
   }
