@@ -24,54 +24,18 @@
     "superbranch_is_official_release": false
   },
   "resolver": {
-    "required_dimensions": [
-      "service_name",
-      "service_version",
-      "validation_kind",
-      "authority"
-    ],
-    "conditional_dimensions": [
-      "schema_profile_id",
-      "release_context",
-      "operation_name",
-      "response_context",
-      "endpoint_identity",
-      "candidate_profile_id",
-      "schema_variant_id"
-    ],
-    "endpoint_identity_dimensions": [
-      "host_or_ip",
-      "port",
-      "path"
-    ],
+    "required_dimensions": ["service_name", "service_version", "validation_kind", "authority"],
+    "conditional_dimensions": ["schema_profile_id", "release_context", "operation_name", "response_context", "endpoint_identity", "candidate_profile_id", "schema_variant_id"],
+    "endpoint_identity_dimensions": ["host_or_ip", "port", "path"],
     "mixed_service_versions_supported": true,
     "parallel_versions_of_same_service_supported": true,
     "ordinary_schema_profile_source": "generated from stored XSD include graph",
     "override_source": "sdk_manifest/routing_overrides_v0.1.json",
     "semantic_variant_overlay_source": "sdk_manifest/schema_variant_overlays_v0.1.json"
   },
-  "authority_classes": [
-    "official",
-    "candidate",
-    "integration",
-    "unresolved"
-  ],
-  "runtime_authority_classes": [
-    "vdv_normative",
-    "external_normative",
-    "external_normative_referenced_by_vdv",
-    "vdv_profile_exception_or_specialization",
-    "combined_semantics",
-    "diagnostic_heuristic"
-  ],
-  "validation_kinds": [
-    "xsd_profile",
-    "protocol_discovery_profile",
-    "discovery_http_profile",
-    "runtime_protocol_profile",
-    "network_diagnostic",
-    "architecture_inventory"
-  ],
+  "authority_classes": ["official", "candidate", "integration", "unresolved"],
+  "runtime_authority_classes": ["vdv_normative", "external_normative", "external_normative_referenced_by_vdv", "vdv_profile_exception_or_specialization", "combined_semantics", "diagnostic_heuristic"],
+  "validation_kinds": ["xsd_profile", "protocol_discovery_profile", "discovery_http_profile", "runtime_protocol_profile", "network_diagnostic", "architecture_inventory"],
   "storage_model": {
     "byte_identical_historical_xsd_stored_once": true,
     "packaging_only_same_version_revision_may_be_deduplicated_after_semantic_diff": true,
@@ -85,35 +49,14 @@
   },
   "operation_model": {
     "separate_manifest_required": true,
-    "minimum_dimensions": [
-      "service_id",
-      "service_version",
-      "operation_name",
-      "operation_kind",
-      "transport",
-      "request_payload_schema_ref",
-      "immediate_response_schema_ref",
-      "callback_payload_schema_ref",
-      "response_context",
-      "callback_endpoint_fields",
-      "heartbeat_supported",
-      "selection_parameters",
-      "schema_authority",
-      "source_reference"
-    ]
+    "minimum_dimensions": ["service_id", "service_version", "operation_name", "operation_kind", "transport", "request_payload_schema_ref", "immediate_response_schema_ref", "callback_payload_schema_ref", "response_context", "callback_endpoint_fields", "heartbeat_supported", "selection_parameters", "schema_authority", "source_reference"]
   },
   "public_result_contract": {
     "schema": "sdk_manifest/public_result_contract_v0.1.schema.json",
     "stable_check_ids_required": true,
     "authority_and_severity_separate": true,
     "internal_field_inventory_public": false,
-    "forbidden_contract_fields": [
-      "field_validated",
-      "validated_fields",
-      "internal_field_inventory",
-      "internal_rule_path",
-      "schema_traversal_state"
-    ]
+    "forbidden_contract_fields": ["field_validated", "validated_fields", "internal_field_inventory", "internal_rule_path", "schema_traversal_state"]
   },
   "evidence_namespaces": {
     "EV": "executable XML/XSD evidence",
@@ -127,6 +70,9 @@
     "EV-103": "33111119723",
     "EV-104": "33111644388",
     "EV-105": "33111831627",
+    "EV-106": "33169314332",
+    "EV-107": "33181833930",
+    "EV-108": "33182963733",
     "RV-001": "33112730418",
     "RV-002": "33119080288",
     "RV-003": "33119337775",
@@ -145,6 +91,7 @@
     "RTSP version is observed external protocol state; current VDV evidence does not pin RTSP/1.0 or RTSP/2.0.",
     "Valid VideoLive XML metadata does not imply RTSP/RTP media availability.",
     "TrainSetData Subscribe response schema selection requires acknowledgement-vs-data-event context.",
-    "A semantic same-path candidate such as Common V2.3 PR #30 must be selected by schema_variant_id and never silently replace the official release root."
+    "A semantic same-path candidate such as Common V2.3 PR #30 must be selected by schema_variant_id and never silently replace the official release root.",
+    "Public DMS V2.4 documentation authority and candidate/integration DMS V2.4 XSD authority must remain separate."
   ]
 }

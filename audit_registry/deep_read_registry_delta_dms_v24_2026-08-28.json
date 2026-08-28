@@ -4,12 +4,13 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "DMS_V2.4": {
-      "state": "in_progress",
+      "state": "needs_visual_review",
       "official_url": "https://www.vdv.de/301-2-0-sde-v2.4-devicemanagementservice.pdfx",
       "publication": "VDV-Schrift 301-2-0, DeviceManagementService V2.4, 01/2023",
       "fresh_read_started": "2026-08-28",
-      "textual_fresh_read_complete": false,
-      "original_pdf_visual_review": "pending",
+      "textual_fresh_read_complete": true,
+      "original_pdf_visual_review": "attempted_failed_cache_miss",
+      "existing_audit_comparison": "completed_after_fresh_read",
       "preferred_reading_source": "byte-pinned official V2.4 PDF for documentation evidence; candidate/integration DMS V2.4 XSD kept as a separate explicitly labelled schema authority",
       "source_pin": {
         "sha256": "347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd",
@@ -22,15 +23,26 @@
         "xsd_authority": "candidate_or_integration_material_in_dev_schema_integration",
         "rule": "Do not describe the repository DMS V2.4 XSD as an official release XSD merely because the public V2.4 writing exists."
       },
-      "priority_cross_checks": [
-        "Fresh read all V2.4 correction statements before consulting previous DMS V2.4 audit",
-        "GetDeviceErrorMessages and SubdeviceErrorMessages 10:* -> 0:* correction",
-        "DeviceStatusImpact and DeviceStatusPriority optionality",
-        "InstallUpdate UpdateID/UpdateTimestamp/UpdateURL optionality and predefined storage wording",
-        "DMS-005..DMS-007 historical continuity or resolution",
-        "DRDMS22-001..DRDMS22-004 continuity or resolution",
-        "candidate/integration XSD exact dependency route and authority label"
-      ]
+      "fresh_findings": ["DRDMS24-001"],
+      "service_finding_updates": ["DMS-003", "DMS-004", "DMS-005", "DMS-006", "DMS-007"],
+      "resolved_predecessor_findings": ["DRDMS22-001", "DRDMS22-002"],
+      "persistent_predecessor_findings": ["DRDMS22-003", "DRDMS22-004", "DR3012V20-007", "DR3012V20-008"],
+      "documented_v2_4_corrections_confirmed": [
+        "Device/subdevice ErrorMessage 0:*",
+        "DeviceStatusImpact optional",
+        "DeviceStatusPriority optional",
+        "InstallUpdate UpdateID optional",
+        "InstallUpdate UpdateTimestamp optional",
+        "InstallUpdate UpdateURL optional"
+      ],
+      "source_conflicts": [
+        "DMS-005 response-data spelling remains inconsistent between official PDF and candidate/integration XSD.",
+        "DMS-007 GetUpdateStates wording remains in official PDF while operation inventory and candidate/integration XSD use GetUpdateHistory.",
+        "DMS V2.4 foreword incorrectly describes HtmlDisplayService in both language sections.",
+        "Requested original-PDF page renders returned cache-miss, so layout-sensitive visual closure remains pending."
+      ],
+      "report": "docs/pdf_xsd_semantic_audit/deep_read/DMS_V2.4.md",
+      "executable_evidence": "EV-108 / GitHub Actions run 33182963733"
     }
   }
 }

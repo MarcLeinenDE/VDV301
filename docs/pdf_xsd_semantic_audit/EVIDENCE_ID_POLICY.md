@@ -22,6 +22,7 @@ EV-104  TrainSet operation/root/context modelling
 EV-105  AnalogRadio candidate Transmitter cardinality
 EV-106  Common V2.3 official vs PR #30 schema-variant behaviour
 EV-107  DMS V2.2 Deep Read schema declarations
+EV-108  DMS V2.4 candidate/integration Deep Read schema declarations
 ```
 
 Important:
@@ -30,10 +31,18 @@ Important:
 EV-003 through EV-100 were never defined.
 The numbering intentionally separates baseline evidence (001/002) from finding-specific evidence (101+).
 Do not describe the completed set as a continuous range beginning at EV-001.
-Correct wording at the current state: "EV-001, EV-002 and EV-101 through EV-107".
+Correct wording at the current state: "EV-001, EV-002 and EV-101 through EV-108".
 ```
 
 Existing EV document names, historical workflow run IDs and historical tool names are not retroactively renamed because they are provenance evidence.
+
+Authority guard for EV-108:
+
+```text
+The public DMS V2.4 PDF is an official VDV writing.
+The DMS V2.4 XSD checked by EV-108 is candidate/integration material in dev/schema-integration.
+EV-108 success must never be described as official-release XSD conformance.
+```
 
 ## RV - runtime/protocol evidence
 

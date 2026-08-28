@@ -1,0 +1,74 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-28",
+  "base_registry": "audit_registry/deep_read_findings_v0.1.json",
+  "document_id": "DMS_V2.4",
+  "policy": "Delta is additive audit knowledge. It does not authorize schema changes or official-facing action.",
+  "new_findings": [
+    {
+      "id": "DRDMS24-001",
+      "document_id": "DMS_V2.4",
+      "classification": "pdf_copy_paste_service_identity_error_candidate",
+      "state": "confirmed_text_needs_visual_review",
+      "confidence": "very_high",
+      "summary": "The DeviceManagementService V2.4 foreword says in both language sections that the document describes HtmlDisplayService; the English text additionally describes its Web-server/HTML purpose.",
+      "normative_validation_impact": "none; do not infer HTMLDisplay semantics, routes or validation rules for DeviceManagementService"
+    }
+  ],
+  "service_finding_updates": [
+    {
+      "id": "DMS-003",
+      "effect": "V2.4 public PDF documents ErrorMessage as 0:* and the explicitly selected candidate/integration V2.4 XSD matches; this is a later correction and must not be back-applied to V2.2."
+    },
+    {
+      "id": "DMS-004",
+      "effect": "V2.4 public PDF makes InstallUpdate UpdateID/UpdateTimestamp/UpdateURL optional and the candidate/integration V2.4 XSD matches; V2.1/V2.2 requiredness remains historical authority for those profiles."
+    },
+    {
+      "id": "DMS-005",
+      "effect": "Persists in checked V2.4 public PDF: response choice still uses DeviceManagementService.DeviceStatusInformationResponseData while candidate/integration XSD uses DeviceManagementService.GetDeviceStatusInformationResponseData."
+    },
+    {
+      "id": "DMS-006",
+      "effect": "Resolved/aligned for checked V2.4 profile: public PDF and candidate/integration XSD both make DeviceStatusImpact and DeviceStatusPriority optional; historical V2.2 mismatch remains valid."
+    },
+    {
+      "id": "DMS-007",
+      "effect": "Persists in checked V2.4 public PDF: InstallUpdate UpdateTimestamp text still says GetUpdateStates while operation inventory and candidate/integration XSD say GetUpdateHistory."
+    }
+  ],
+  "existing_finding_updates": [
+    {
+      "id": "DRDMS22-001",
+      "effect": "Resolved in V2.4: SubdeviceStatusInformation reference points to table 19 rather than the wrong table 27."
+    },
+    {
+      "id": "DRDMS22-002",
+      "effect": "Resolved in V2.4: TOC numbering uses 2.33/2.34/2.35 consistently with the body."
+    },
+    {
+      "id": "DRDMS22-003",
+      "effect": "Persists in V2.4 prose/XSD annotation context; executable enum remains InstallationSuccessful and EV-108 confirms typo form is absent from enum values."
+    },
+    {
+      "id": "DRDMS22-004",
+      "effect": "Persists in V2.4 request prose as singular GetDeviceErrorMessage while operation/table/schema use plural GetDeviceErrorMessages."
+    },
+    {
+      "id": "DR3012V20-007",
+      "effect": "GetDeviceConfiguration setter wording persists through the checked DMS V2.4 publication."
+    },
+    {
+      "id": "DR3012V20-008",
+      "effect": "GetDeviceInformation response remains described as request structure/data through the checked DMS V2.4 publication."
+    }
+  ],
+  "executable_evidence": {
+    "evidence_id": "EV-108",
+    "run_id": "33182963733",
+    "head_tested": "1ea19f21c630b5f111fc8e41e6e39479e2b1c97f",
+    "authority": "candidate/integration DMS V2.4 XSD in dev/schema-integration",
+    "public_pdf_authority": "official VDV DMS V2.4 writing",
+    "result": "PASS"
+  }
+}
