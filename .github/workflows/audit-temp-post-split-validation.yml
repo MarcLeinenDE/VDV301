@@ -1,0 +1,95 @@
+name: audit-temp-post-split-validation
+
+on:
+  push:
+    branches:
+      - audit/tmp-validation-run
+
+permissions:
+  contents: read
+
+jobs:
+  post-split-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout validation branch
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install validation dependency
+        run: python -m pip install --disable-pip-version-check lxml
+
+      - name: Execute post-split evidence
+        shell: bash
+        run: |
+          set +e
+          mkdir -p audit-results
+
+          python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests > audit-results/root_pool_and_dms_v24.log 2>&1
+          root_status=$?
+
+          python tools/validate_sdk_manifest_v0_1.py > audit-results/sdk_manifest_v0_1.log 2>&1
+          sdk_manifest_status=$?
+
+          python tools/generate_schema_profile_inventory_v0_1.py --repo-root . --output audit-results/schema_profile_inventory_v0.1.json --check-only > audit-results/sdk_profile_generator_v0_1.log 2>&1
+          sdk_profile_status=$?
+
+          python tools/validate_common_v23_schema_variant.py > audit-results/ev_106_common_v23_variant.log 2>&1
+          variant_status=$?
+
+          python tools/fetch_vdv_pdf_sources.py \
+            --source-id VDV301-2_GC_V2.3 \
+            --source-id COMMON_V2.3 \
+            --bootstrap-pins > audit-results/pdf_source_pin.log 2>&1
+          pdf_status=$?
+
+          if [ "$pdf_status" -eq 0 ]; then
+            cp audit_registry/pdf_source_registry_v0.1.json audit-results/pdf_source_registry_v0.1.pinned.json
+            python - <<'PY'
+          import json
+          from pathlib import Path
+          registry = json.loads(Path('audit_registry/pdf_source_registry_v0.1.json').read_text(encoding='utf-8'))
+          wanted = {'VDV301-2_GC_V2.3', 'COMMON_V2.3'}
+          selected = [s for s in registry['sources'] if s['source_id'] in wanted]
+          Path('audit-results/pdf_source_pins_v0.1.json').write_text(
+              json.dumps({'sources': selected}, indent=2, ensure_ascii=False) + '\n',
+              encoding='utf-8',
+          )
+          PY
+          fi
+
+          {
+            echo 'check,authority,target,exit_code'
+            echo "root_compile_plus_dms_v24,current_repository_root,50_root_pool,$root_status"
+            echo "sdk_manifest_v0_1,audit_derived_manifest,sdk_manifest,$sdk_manifest_status"
+            echo "sdk_profile_inventory_v0_1,fail_closed_authority_plus_include_graph,sdk_manifest,$sdk_profile_status"
+            echo "ev_106_common_v23_variant,official_plus_explicit_candidate_overlay,CE-020,$variant_status"
+            echo "pdf_source_pin,official_VDV_downloads,VDV301-2_GC_V2.3+COMMON_V2.3,$pdf_status"
+          } > audit-results/validation_status.csv
+
+          echo "$root_status" > audit-results/root_status.txt
+          echo "$sdk_manifest_status" > audit-results/sdk_manifest_status.txt
+          echo "$sdk_profile_status" > audit-results/sdk_profile_status.txt
+          echo "$variant_status" > audit-results/variant_status.txt
+          echo "$pdf_status" > audit-results/pdf_status.txt
+
+          for log in audit-results/*.log; do
+            echo "===== $log ====="
+            cat "$log"
+          done
+
+          if [ "$root_status" -ne 0 ] || [ "$sdk_manifest_status" -ne 0 ] || [ "$sdk_profile_status" -ne 0 ] || [ "$variant_status" -ne 0 ] || [ "$pdf_status" -ne 0 ]; then
+            exit 1
+          fi
+
+      - name: Upload post-split evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: post-split-validation-results
+          path: audit-results/
+          if-no-files-found: error
