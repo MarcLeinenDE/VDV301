@@ -32,13 +32,16 @@ VDV 301-2 Base Services V2.0 fresh Deep Read:
   English translation of the same passage still cites RFC 2927.
   Bibliography lists RFC 3927.
 
-German V2.2/V2.4:
+VDV 301-2 Base Services V2.1 fresh Deep Read:
+  the same German RFC 3927 / English RFC 2927 split persists.
+
+German V2.2/V2.4 first-pass observation:
   no specific IP-address allocation rule; address ranges must be consistent; fixed IP/DHCP best practice.
 
-English V2.2/V2.4:
+English V2.2/V2.4 first-pass observation:
   retained ZeroConf wording, RFC 2927 reference and 169.254.x.x language.
 
-Historical V2.3 observation follows the later German/English conflict pattern.
+Historical V2.3 first-pass observation follows the later German/English conflict pattern.
 ```
 
 Handling:
@@ -67,6 +70,7 @@ Deep Read history:
 VDV 301-2 V1.0 cites RFC 2927.
 VDV 301-2 Base Services V2.0 corrects the German text to RFC 3927,
 but the English translation still cites RFC 2927; the bibliography uses RFC 3927.
+VDV 301-2 Base Services V2.1 retains the same bilingual split.
 ```
 
 Handling: reference-number correction candidate only; does not override DISC-001.
@@ -81,3 +85,9 @@ Handling:
 Keep discovery semantics/version provenance separate from language-table completeness.
 No schema correction.
 ```
+
+## Discovery Deep Read note - SRV Weight semantics
+
+Fresh V1.0, V2.0 and V2.1 Base-Service reads all retain wording equivalent to preferring the lower SRV weight at equal priority. RFC 2782 instead defines proportional weighted selection, where larger positive weights receive correspondingly higher probability.
+
+This evidence is tracked in `DR3012-002` and its later-document extensions rather than being duplicated as a separate DISC finding.

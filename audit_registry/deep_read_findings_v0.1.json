@@ -19,7 +19,8 @@
     {"id":"DR3012V20-005","document_id":"VDV301-2_BASE_V2.0","classification":"pdf_cross_reference_error_candidate","state":"confirmed_text_needs_visual_review","confidence":"high","summary":"SystemManagement main-task text contains an unresolved chapter-range reference ('Kapitel bis' / 'capitel bis').","normative_validation_impact":"none"},
     {"id":"DR3012V20-006","document_id":"VDV301-2_BASE_V2.0","classification":"pdf_label_or_heading_error_candidate","state":"confirmed_text_needs_visual_review","confidence":"medium_high","summary":"The DMS operation inventory includes SubscribeDeviceInformation, but the detailed subsection sequence jumps from GetDeviceInformation to UnsubscribeDeviceInformation without a corresponding SubscribeDeviceInformation subsection heading.","normative_validation_impact":"none; operation support must not be inferred from PDF heading presence alone"},
     {"id":"DR3012V20-007","document_id":"VDV301-2_BASE_V2.0","classification":"pdf_table_or_documentation_error_candidate","state":"confirmed_text_needs_visual_review","confidence":"high","summary":"The GetDeviceConfiguration description says the operation enables setting the device's variable parameter, although the following SetDeviceConfiguration operation is the setter and GetDeviceConfiguration is the retrieval operation.","normative_validation_impact":"none; do not invert operation semantics"},
-    {"id":"DR3012V20-008","document_id":"VDV301-2_BASE_V2.0","classification":"pdf_label_or_heading_error_candidate","state":"confirmed_text_needs_visual_review","confidence":"high","summary":"The GetDeviceInformation response table describes the response structure/data as a request structure.","normative_validation_impact":"none"}
+    {"id":"DR3012V20-008","document_id":"VDV301-2_BASE_V2.0","classification":"pdf_label_or_heading_error_candidate","state":"confirmed_text_needs_visual_review","confidence":"high","summary":"The GetDeviceInformation response table describes the response structure/data as a request structure.","normative_validation_impact":"none"},
+    {"id":"DR3012V21-001","document_id":"VDV301-2_BASE_V2.1","classification":"pdf_cross_reference_error_candidate","state":"confirmed_text_needs_visual_review","confidence":"high","summary":"V2.1 system-configuration/system-start principles point DeviceManagementService to VDV 301-2-2 and SystemDocumentationService to VDV 301-2-4, although those identifiers belong to other service documents in the VDV 301-2 family.","normative_validation_impact":"none; resolver must not route schemas from these stale prose references"}
   ],
   "existing_findings_strengthened": [
     {"id":"SUB-001","new_evidence_document":"VDV301-2_V1.0_DE","effect":"affected documentation history extends back to V1.0 table 4"},
@@ -30,6 +31,20 @@
     {"id":"SUB-002","new_evidence_document":"VDV301-2_BASE_V2.0","effect":"SystemDocumentation V2.0 and SystemManagement V1.0 provide additional evidence that documented generic subscription operations can be absent from local service groups."},
     {"id":"DMS-001","new_evidence_document":"VDV301-2_BASE_V2.0","effect":"fresh read confirms documented operation inventory exceeds DMS V2.0 service-group/global modelling; no duplicate finding opened."},
     {"id":"DMS-002","new_evidence_document":"VDV301-2_BASE_V2.0","effect":"fresh read confirms repeated unresolved Word cross-reference text."},
-    {"id":"DMS-003","new_evidence_document":"VDV301-2_BASE_V2.0","effect":"fresh read reconfirms PDF 10:* and official DMS V2.0 XSD minOccurs=10 are historically aligned; no new mismatch."}
+    {"id":"DMS-003","new_evidence_document":"VDV301-2_BASE_V2.0","effect":"fresh read reconfirms PDF 10:* and official DMS V2.0 XSD minOccurs=10 are historically aligned; no new mismatch."},
+    {"id":"DR3012-001","new_evidence_document":"VDV301-2_BASE_V2.1","effect":"German RFC 3927 / English RFC 2927 bilingual conflict persists in V2.1."},
+    {"id":"DR3012-002","new_evidence_document":"VDV301-2_BASE_V2.1","effect":"lower-weight-preferred SRV explanation persists in V2.1."},
+    {"id":"DR3012-005","new_evidence_document":"VDV301-2_BASE_V2.1","effect":"ServiceStatus operation names still coexist with SystemStatus detailed headings; exact selected SystemManagement V1.0 XSD uses ServiceStatus names."},
+    {"id":"DR3012V20-003","new_evidence_document":"VDV301-2_BASE_V2.1","effect":"V2.1 history/XSD still use HeartbeatInterval while actual tables retain HertbeatIntervall."},
+    {"id":"DR3012V20-004","new_evidence_document":"VDV301-2_BASE_V2.1","effect":"SystemDocumenationService narrative typo persists in V2.1."},
+    {"id":"DR3012V20-006","new_evidence_document":"VDV301-2_BASE_V2.1","effect":"resolved in V2.1: dedicated SubscribeDeviceInformation subsection is present."},
+    {"id":"DR3012V20-007","new_evidence_document":"VDV301-2_BASE_V2.1","effect":"GetDeviceConfiguration prose still describes a setter although SetDeviceConfiguration is the actual setter."},
+    {"id":"DR3012V20-008","new_evidence_document":"VDV301-2_BASE_V2.1","effect":"GetDeviceInformation response table still uses request wording."},
+    {"id":"SUB-001","new_evidence_document":"VDV301-2_BASE_V2.1","effect":"V2.1 notation table still maps UnsubscribeData to TerminateSubscribeRequest/ResponseStructure."},
+    {"id":"SUB-002","new_evidence_document":"VDV301-2_BASE_V2.1","effect":"DMS V2.1 explicitly expands generic subscription/control entries while SystemDocumentation V2.0 and SystemManagement V1.0 keep their sparse local group style, further proving operation-group style is service/version dependent."},
+    {"id":"DMS-001","new_evidence_document":"VDV301-2_BASE_V2.1","effect":"resolved for checked V2.1 modelling scope: DMS V2.1 operation group is materially expanded; V2.0 group/global mismatch is not carried forward."},
+    {"id":"DMS-002","new_evidence_document":"VDV301-2_BASE_V2.1","effect":"resolved in checked V2.1 publication: literal unresolved Word-reference strings are absent."},
+    {"id":"DMS-003","new_evidence_document":"VDV301-2_BASE_V2.1","effect":"V2.1 device/subdevice ErrorMessage 10:* remains PDF/XSD-aligned."},
+    {"id":"DMS-004","new_evidence_document":"VDV301-2_BASE_V2.1","effect":"InstallUpdate UpdateID/UpdateTimestamp/UpdateURL remain required 1:1 in both PDF and exact DMS V2.1 XSD."}
   ]
 }

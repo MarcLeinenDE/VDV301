@@ -15,10 +15,13 @@ VDV 301-2 V1.0 table 4 (fresh Deep Read Pass 2):
 VDV 301-2 Base Services V2.0 notation table (fresh Deep Read Pass 2):
   UnsubscribeData -> TerminateSubscribeRequestStructure / TerminateSubscribeResponseStructure
 
+VDV 301-2 Base Services V2.1 notation table (fresh Deep Read Pass 2):
+  UnsubscribeData -> TerminateSubscribeRequestStructure / TerminateSubscribeResponseStructure
+
 General Conventions V2.3/V2.4 table 4:
   UnsubscribeData -> TerminateSubscribeRequestStructure / TerminateSubscribeResponseStructure
 
-Checked Common V1.0/V2.0/V2.2/V2.4:
+Checked Common V1.0/V2.0/V2.1/V2.2/V2.4:
   UnsubscribeRequestStructure / UnsubscribeResponseStructure
   no TerminateSubscribe* structures found
 ```
@@ -27,8 +30,8 @@ Deep Read consequence:
 
 ```text
 The discrepancy is not merely a late V2.3/V2.4 documentation regression.
-It is present in the public VDV 301-2 V1.0 base publication and persists in Base Services V2.0.
-Affected-document history therefore extends across the early base-service publications.
+It is present in the public VDV 301-2 V1.0 base publication and persists through Base Services V2.0 and V2.1.
+Affected-document history therefore spans the early base-service publications as well as later checked General Conventions.
 ```
 
 Handling:
@@ -41,7 +44,7 @@ Retain SUB-001 as explanatory audit knowledge for historical profiles.
 
 ## SUB-002 - inconsistent service-XSD encoding of generic subscription operations
 
-State: cross-service modelling observation; technical intent not fully proven in the original first-pass document, with later EV/context work recorded elsewhere.
+State: cross-service modelling observation; technical intent is service/version dependent and must not be inferred from one group's style.
 
 Classification: `service_modelling_or_generic_response_candidate`.
 
@@ -55,8 +58,12 @@ CIS V2.x and SMS V2.2 document subscription operations but their local operation
 Fresh VDV 301-2 Base Services V2.0 Deep Read adds:
   - SystemDocumentationService V2.0 PDF documents Subscribe/UnsubscribeSystemConfiguration,
     while the exact service group contains only service-specific payload roots and omits equivalent generic subscription entries.
-  - SystemManagementService is still exact V1.0 in official tag VDV-301-2.0; the PDF documents subscription operations,
+  - SystemManagementService is exact V1.0 in official tag VDV-301-2.0; the PDF documents subscription operations,
     while the exact V1.0 group contains only GetDeviceStatusResponse and GetServiceStatusResponse.
+
+Fresh VDV 301-2 Base Services V2.1 Deep Read adds the contrasting model:
+  - DMS V2.1 explicitly expands its operation group with generic Subscribe/Unsubscribe and control entries.
+  - The same official VDV-301-2.1 tag still carries SystemDocumentation V2.0 and SystemManagement V1.0 with their sparser group style.
 ```
 
 Handling:

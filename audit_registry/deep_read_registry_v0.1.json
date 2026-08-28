@@ -68,16 +68,47 @@
       "report": "docs/pdf_xsd_semantic_audit/deep_read/VDV301-2_BASE_V2.0.md"
     },
     "VDV301-2_BASE_V2.1": {
+      "state": "needs_visual_review",
+      "official_url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx?forced=false",
+      "publication": "VDV-Schrift 301-2, V2.1, 07/2018, Basisdienste",
+      "fresh_read_started": "2026-08-28",
+      "textual_fresh_read_complete": true,
+      "original_pdf_visual_review": "attempted_failed_backend_error",
+      "embedded_text_quality": "good_with_bilingual_table_linewrap_artifacts",
+      "existing_ocr_found": false,
+      "ocr_quality": "not_applicable",
+      "preferred_reading_source": "embedded_text_with_exact_xsd_and_release-tag_crosscheck; visual confirmation pending",
+      "source_conflicts": [
+        "German ZeroConf paragraph cites RFC 3927 while English retains RFC 2927.",
+        "Version history/XSD use HeartbeatInterval while actual SystemDocumentation tables still print HertbeatIntervall.",
+        "ServiceStatus operation names coexist with SystemStatus detailed headings.",
+        "Requested screenshot returned backend/internal error, so layout-sensitive findings remain visually unclosed."
+      ],
+      "exact_release_family": {
+        "DeviceManagementService": "V2.1 -> Common V2.1 -> Enumerations V2.1",
+        "SystemDocumentationService": "V2.0 -> Common V2.0 -> Enumerations V2.0",
+        "SystemManagementService": "V1.0 -> Common V1.0 -> Enumerations V1.0"
+      },
+      "official_release_tag": "VDV-301-2.1",
+      "official_release_inventory_crosscheck": "complete_no_additional_backfill_needed",
+      "backfilled_exact_official_xsd": [],
+      "root_pool_execution_note": "Current stored root count remains 50; last executed full-root compile remains 49.",
+      "existing_audit_comparison": "completed_after_fresh_read",
+      "fresh_findings": ["DR3012V21-001"],
+      "existing_findings_strengthened": ["DR3012-001","DR3012-002","DR3012-005","DR3012V20-003","DR3012V20-004","DR3012V20-006","DR3012V20-007","DR3012V20-008","SUB-001","SUB-002","DMS-001","DMS-002","DMS-003","DMS-004"],
+      "report": "docs/pdf_xsd_semantic_audit/deep_read/VDV301-2_BASE_V2.1.md"
+    },
+    "VDV301-2_GC_V2.2": {
       "state": "in_progress",
       "fresh_read_started": "2026-08-28",
       "priority_cross_checks": [
-        "V2.0 -> V2.1 corrections and regressions",
-        "bilingual RFC 3927/2927 wording",
-        "SRV Weight semantics",
-        "HeartbeatInterval table/history consistency",
-        "SystemManagement ServiceStatus/SystemStatus headings",
-        "DMS unresolved Word references and operation headings",
-        "complete official VDV-301-2.1 release-tag XSD inventory vs superbranch"
+        "IP allocation wording and German/English divergence",
+        "DNS-SD SRV Priority/Weight semantics",
+        "UnsubscribeData / TerminateSubscribe notation",
+        "HTTP method/status/media-type rules",
+        "service/version publication and discovery rules",
+        "separation of service documents introduced with V2.2 family",
+        "complete official VDV-301-2.2 release-tag inventory before old-audit comparison"
       ]
     }
   }
