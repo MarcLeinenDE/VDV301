@@ -1,0 +1,98 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-28",
+  "base_registry": "audit_registry/deep_read_findings_v0.1.json",
+  "document_id": "VDV301-2_GC_V2.4",
+  "policy": "Delta is additive audit knowledge. It does not authorize schema changes or official-facing action.",
+  "new_findings": [
+    {
+      "id": "DR3012GC24-001",
+      "document_id": "VDV301-2_GC_V2.4",
+      "classification": "pdf_xsd_enum_spelling_mismatch_candidate",
+      "state": "confirmed_text_static_xsd_needs_visual_review",
+      "confidence": "very_high",
+      "version_scope": "checked General Conventions V2.2-V2.4",
+      "summary": "German device-class table and glossary print OnBordUnit even though the text says device-class terms are XML enumeration values; English tables and exact Enumerations V2.2/V2.4 XSDs use OnBoardUnit.",
+      "normative_validation_impact": "XSD accepts OnBoardUnit, not the German OnBordUnit spelling; do not create an alias"
+    },
+    {
+      "id": "DR3012GC24-002",
+      "document_id": "VDV301-2_GC_V2.4",
+      "classification": "pdf_label_or_heading_error_candidate",
+      "state": "confirmed_text_needs_visual_review",
+      "confidence": "high",
+      "version_scope": "checked German General Conventions V2.2-V2.4",
+      "summary": "German addressing chapter numbers both IP-Adressen and Subnetzmasken/Gateways as 2.1.1 while English correctly uses 2.1.1 and 2.1.2.",
+      "normative_validation_impact": "documentation navigation only"
+    },
+    {
+      "id": "DR3012GC24-003",
+      "document_id": "VDV301-2_GC_V2.4",
+      "classification": "minor_pdf_editorial_duplicate_candidate",
+      "state": "confirmed_text_needs_visual_review",
+      "confidence": "high",
+      "version_scope": "checked English General Conventions V2.2-V2.4",
+      "summary": "English IBIS-IP version-character list contains digit 2 twice; German list contains each digit once.",
+      "normative_validation_impact": "none; duplicate does not change the actual allowed character set"
+    },
+    {
+      "id": "DR3012GC24-004",
+      "document_id": "VDV301-2_GC_V2.4",
+      "classification": "pdf_example_terminology_mismatch_candidate",
+      "state": "confirmed_text_needs_visual_review",
+      "confidence": "high",
+      "version_scope": "checked General Conventions V2.2-V2.4",
+      "summary": "System-start/DNS-SD examples and glossary retain typo-like technical identifiers including DeviceManagmenService, CustomumerInformationService, DeviceManagmentServices and PassengerCountigService.",
+      "normative_validation_impact": "do not synthesize misspelled service names as DNS-SD identities, schema values or aliases"
+    },
+    {
+      "id": "DR3012GC24-005",
+      "document_id": "VDV301-2_GC_V2.4",
+      "classification": "pdf_internal_version_terminology_inconsistency_candidate",
+      "state": "confirmed_text_needs_visual_review",
+      "confidence": "high",
+      "version_scope": "checked General Conventions V2.2-V2.4",
+      "summary": "Section 1.5 says each service is versioned independently and there is no common IBIS-IP version, while section 2.5 still says further protocols are not considered by version 1.0 of IBIS-IP.",
+      "normative_validation_impact": "do not infer a global IBIS-IP schema/profile version; routing remains service-specific"
+    }
+  ],
+  "existing_finding_updates": [
+    {
+      "id": "DR3012GC22-001",
+      "effect": "Regression history established: unresolved Word cross-reference placeholders are present in V2.2, absent in the fresh V2.3 read, and reintroduced at multiple locations in V2.4."
+    },
+    {
+      "id": "DISC-001",
+      "effect": "V2.4 still contains the material German/English IP-allocation conflict."
+    },
+    {
+      "id": "DR3012-001",
+      "effect": "English V2.4 still cites RFC 2927 for automatic/link-local addressing while bibliography uses RFC 3927."
+    },
+    {
+      "id": "DR3012-002",
+      "effect": "V2.4 SRV Weight description still states lower weight is preferred."
+    },
+    {
+      "id": "DR3012GC22-002",
+      "effect": "German V2.4 still duplicates subsection number 3.3.1 for SRV and TXT; English uses 3.3.1/3.3.2."
+    },
+    {
+      "id": "SUB-001",
+      "effect": "V2.4 operation notation still maps UnsubscribeData to TerminateSubscribeRequest/ResponseStructure."
+    },
+    {
+      "id": "DR3012V21-001",
+      "effect": "V2.4 system-start text still points DeviceManagementService to VDV 301-2-2."
+    },
+    {
+      "id": "DR3012GC23-001",
+      "effect": "Resolved in V2.4 publication: Version 2.3 history subheadings are correctly numbered 7.2.1 and 7.2.2."
+    }
+  ],
+  "positive_authority_evidence": [
+    "V2.4 chapter 6 explicitly states that XSD definitions take precedence over documentation in case of inconsistencies.",
+    "V2.4 German DNS-SD TXT Table 3 adds the previously missing train/device entries.",
+    "V2.4 version history explicitly records both changes."
+  ]
+}

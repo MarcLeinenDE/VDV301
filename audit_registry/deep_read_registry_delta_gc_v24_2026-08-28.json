@@ -1,0 +1,56 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-28",
+  "base_registry": "audit_registry/deep_read_registry_v0.1.json",
+  "document_updates": {
+    "VDV301-2_GC_V2.4": {
+      "state": "needs_visual_review",
+      "official_url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+      "publication": "VDV-Schrift 301-2, 01/2023, Allgemeine Konventionen / General conventions V2.4",
+      "fresh_read_started": "2026-08-28",
+      "textual_fresh_read_complete": true,
+      "original_pdf_visual_review": "attempted_failed_cache_miss",
+      "embedded_text_quality": "good_with_bilingual_table_linewrap_and_reintroduced_word_reference_errors",
+      "existing_ocr_found": false,
+      "ocr_quality": "not_applicable",
+      "preferred_reading_source": "byte-pinned native PDF text + exact schema/enumeration crosschecks; visual confirmation pending",
+      "source_pin": {
+        "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+        "size_bytes": 1767094,
+        "pin_registry": "audit_registry/pdf_source_pins_v0.1.json",
+        "evidence_run": "33179106915"
+      },
+      "intentional_v2_4_changes": [
+        "German DNS-SD TXT Table 3 adds missing coachnumber/deviceclass/deviceID entries.",
+        "Chapter 6 explicitly establishes XSD precedence over documentation when inconsistent."
+      ],
+      "fresh_findings": [
+        "DR3012GC24-001",
+        "DR3012GC24-002",
+        "DR3012GC24-003",
+        "DR3012GC24-004",
+        "DR3012GC24-005"
+      ],
+      "existing_findings_strengthened": [
+        "DISC-001",
+        "DR3012-001",
+        "DR3012-002",
+        "DR3012GC22-001",
+        "DR3012GC22-002",
+        "SUB-001",
+        "DR3012V21-001"
+      ],
+      "resolved_predecessor_findings": ["DR3012GC23-001"],
+      "source_conflicts": [
+        "German IP-allocation text and English ZeroConf/RFC2927 text still conflict.",
+        "German device-class table prints OnBordUnit while English and XSD use OnBoardUnit.",
+        "Literal unresolved Word cross-reference placeholders reappear after being absent in V2.3.",
+        "System-start examples contain typo-like service identifiers.",
+        "Section 1.5 rejects a common IBIS-IP version while section 2.5 still refers to version 1.0 of IBIS-IP."
+      ],
+      "existing_audit_comparison": "completed_after_fresh_read",
+      "report": "docs/pdf_xsd_semantic_audit/deep_read/VDV301-2_GC_V2.4.md"
+    }
+  },
+  "finding_delta": "audit_registry/deep_read_findings_delta_gc_v24_2026-08-28.json"
+}
