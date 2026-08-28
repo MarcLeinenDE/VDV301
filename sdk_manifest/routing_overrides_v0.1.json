@@ -34,6 +34,32 @@
       "authority": "official"
     }
   ],
+  "official_historical_backfills": [
+    {
+      "service_name": "TrainSetDataService",
+      "service_version": "2.1",
+      "schema": "IBIS-IP_TrainSetDataService_V2.1.xsd",
+      "source_tag": "VDV-301-2.1",
+      "blob": "c2cdb73fcae265a2e4e0349ac6072e3548e36d8b",
+      "authority": "official"
+    },
+    {
+      "service_name": "TrainSetInformationService",
+      "service_version": "2.1",
+      "schema": "IBIS-IP_TrainSetInformationService_V2.1.xsd",
+      "source_tag": "VDV-301-2.1",
+      "blob": "897f373e31b76aa23d8bc206854b042524e4c102",
+      "authority": "official"
+    },
+    {
+      "service_name": "TrainSetManagementService",
+      "service_version": "2.1",
+      "schema": "IBIS-IP_TrainSetManagementService_V2.1.xsd",
+      "source_tag": "VDV-301-2.1",
+      "blob": "add9d1cb37e5759ff7a77855b239108d38373206",
+      "authority": "official"
+    }
+  ],
   "document_to_schema_routes": [
     {
       "service_name": "TicketValidationService",
@@ -124,6 +150,14 @@
       "authority": "integration",
       "explicit_opt_in_required": true,
       "note": "Retained as integration/comparison material, not official release authority."
+    },
+    {
+      "service_name": "TicketValidationService",
+      "service_version": "2.3",
+      "schema": "IBIS-IP_TicketValidationService_V2.3.xsd",
+      "authority": "integration",
+      "explicit_opt_in_required": true,
+      "note": "V2.3 document routes to official V2.2 schema semantics; the V2.3-named XSD is integration/comparison material."
     }
   ],
   "operation_context_overrides": [
