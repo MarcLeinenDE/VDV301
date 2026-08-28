@@ -1,0 +1,36 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-28",
+  "base_registry": "audit_registry/deep_read_registry_v0.1.json",
+  "document_updates": {
+    "VLS_V1.0": {
+      "state": "in_progress",
+      "official_url": "https://www.vdv.de/301-2-11-sds.pdfx",
+      "publication": "VDV-Schrift 301-2-11, VideoLiveService V1.0, 05/2017",
+      "fresh_read_started": "2026-08-28",
+      "textual_fresh_read_complete": false,
+      "original_pdf_visual_review": "pending",
+      "preferred_reading_source": "byte-pinned official VLS V1.0 PDF; establish exact historical schema/provenance independently before consulting V2.0 video findings or RV-004",
+      "source_pin": {
+        "sha256": "f535673427ff8f495102e1fc7723ca157408949b981572c4342b862f6d9c2a3c",
+        "size_bytes": 1166329,
+        "pin_registry": "audit_registry/pdf_source_pins_v0.1.json",
+        "evidence_run": "33197955036"
+      },
+      "authority_boundary": {
+        "pdf_authority": "official_public_VDV_writing",
+        "xsd_authority": "to_be_established_from_exact_historical_release/provenance; do not substitute V2.0 by convenience",
+        "external_protocols": "RTSP/RTP/related standards remain a separate authority lane",
+        "rule": "Fresh-read the V1.0 writing first; compare VLS V2.0 compositor evidence and RV-004 only afterwards."
+      },
+      "priority_cross_checks": [
+        "document/service identity and foreword numbering",
+        "V1.0 operation inventory and ListAllLiveStreams structures",
+        "exact historical XSD availability/provenance for VLS V1.0",
+        "RTSP URI and media/control boundary as stated by the V1.0 writing",
+        "version history and any later V2.0 correction relationship",
+        "only after independent fresh read: compare VLS-001/VLS-002 and RV-004"
+      ]
+    }
+  }
+}
