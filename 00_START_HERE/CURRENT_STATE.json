@@ -26,8 +26,8 @@
     "deep_read_exhaustive_completed": 0,
     "deep_read_needs_visual_review": 13,
     "deep_read_textual_fresh_read_completed": 13,
-    "deep_read_in_progress": 0,
-    "deep_read_current_document_id": null,
+    "deep_read_in_progress": 1,
+    "deep_read_current_document_id": "VRS_V1.0",
     "deep_read_previous_document_id": "VLS_V2.0",
     "latest_deep_read_finding": "VLS-005",
     "latest_dms_finding": "DMS-007",
@@ -40,40 +40,20 @@
     "pdf_visual_render_fallback": "docs/pdf_xsd_semantic_audit/PDF_VISUAL_RENDER_FALLBACK.md",
     "pdf_visual_renderer": "tools/render_vdv_pdf_pages.py",
     "pdf_visual_render_rule": "interactive screenshot cache miss is not a source failure; render exact byte-pinned source independently and inspect visible output before promoting visual status",
-    "pdf_sources_byte_pinned": 8,
-    "pinned_active_sources": ["VDV301-2_GC_V2.3", "COMMON_V2.3", "VDV301-2_GC_V2.4", "DMS_V2.2", "DMS_V2.4", "TIME_V1.0", "VLS_V1.0", "VLS_V2.0"],
-    "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_vls_v20_2026-08-28.json",
+    "pdf_sources_byte_pinned": 9,
+    "pinned_active_sources": ["VDV301-2_GC_V2.3", "COMMON_V2.3", "VDV301-2_GC_V2.4", "DMS_V2.2", "DMS_V2.4", "TIME_V1.0", "VLS_V1.0", "VLS_V2.0", "VRS_V1.0"],
+    "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_vrs_v10_2026-08-28.json",
     "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_vls_v20_2026-08-28.json",
     "time_v1_0_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TIME_V1.0.md",
     "vls_v1_0_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/VLS_V1.0.md",
     "vls_v2_0_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/VLS_V2.0.md",
     "vls_findings_register": "docs/pdf_xsd_semantic_audit/VIDEO_LIVE_SERVICE_FINDINGS_REGISTER_ADDENDUM.md",
-    "vls_v1_0_source_pin": {
-      "sha256": "f535673427ff8f495102e1fc7723ca157408949b981572c4342b862f6d9c2a3c",
-      "size_bytes": 1166329,
-      "evidence_run": "33197955036",
+    "vrs_v1_0_source_pin": {
+      "sha256": "29d0bcb270fdab2119c4653296d4bca01e0f8b127eb9aaf393f66b2b34dcd390",
+      "size_bytes": 1227302,
+      "evidence_run": "33204215397",
       "pdf_authority": "official_public_VDV_writing",
-      "xsd_authority_status": "no_official_release_tag_VideoLiveService_V1.0_service_xsd_confirmed"
-    },
-    "vls_v2_0_source_pin": {
-      "sha256": "d75a543c138f21c4ad370925ca7f306bcde7d692ce793ddc1d51bdcf6032787b",
-      "size_bytes": 1218788,
-      "evidence_run": "33203673347",
-      "pdf_authority": "official_public_VDV_writing",
-      "xsd_authority_status": "official_VDV-301-2.0_service_xsd_family"
-    },
-    "vls_visual_review": {
-      "interactive_backend": "cache_miss",
-      "fallback": "success",
-      "v1_0_render_runs": ["33202961159", "33203162588"],
-      "v2_0_render_run": "33203850390",
-      "status": "targeted_material_findings_visually_confirmed"
-    },
-    "vls_v2_0_history": {
-      "VLS-002": "fresh PDF/XSD reconfirmed; EV-103 executable-confirmed",
-      "VLS-003": "corrected in V2.0",
-      "VLS-004": "persists visibly through V2.0",
-      "VLS-005": "persists visibly through V2.0"
+      "xsd_authority_status": "to_be_established_independently"
     }
   },
   "evidence": {
@@ -82,7 +62,7 @@
     "latest_profile_generator_run": "33197358294",
     "latest_root_xsd_validation_run": "33197358294",
     "latest_rv_003_run": "33197358294",
-    "latest_pdf_source_pin_run": "33203673347",
+    "latest_pdf_source_pin_run": "33204215397",
     "latest_pdf_visual_render_run": "33203850390",
     "vls_v2_0_executable_evidence": "EV-103 / 33111119723",
     "vls_runtime_evidence": "RV-004 / 33119694991"
@@ -96,7 +76,7 @@
     "rule": "Findings/audit knowledge must later explain surprising validation results without silently changing normative XSD outcomes."
   },
   "next_actions": [
-    "Byte-pin official VRS_V1.0 and fresh-read it independently before consulting V2.0/V2.4 VideoRecording findings.",
+    "Fresh-read byte-pinned VRS_V1.0 independently before consulting V2.0/V2.4 VideoRecording findings.",
     "Carry the ambiguous VLS reference-section VideoRecordingService version-label string into the VRS_V1.0 read without pre-classifying it.",
     "Establish exact historical VRS V1.0 schema/provenance availability before mapping any schema.",
     "Use pinned-byte rendering whenever interactive screenshots return cache miss.",
