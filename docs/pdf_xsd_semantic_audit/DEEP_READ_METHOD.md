@@ -21,6 +21,21 @@ If sources disagree, return to the visible original. If the visible original its
 
 OCR is never automatically preferred over the original PDF. Native visual/text extraction is never automatically preferred when it contradicts the visible page.
 
+## Reproducible PDF byte source rule
+
+The visible original remains the highest semantic authority, but the exact bytes used for a reproducible deep read must come from the public source registry and local cache model defined in:
+
+```text
+audit_registry/pdf_source_registry_v0.1.json
+docs/pdf_xsd_semantic_audit/PDF_SOURCE_CACHE_POLICY.md
+```
+
+Downloaded VDV PDF bytes are local-only under `local_sources/vdv_pdfs/` and must not be committed.
+
+A physical PDF source is byte-level audit evidence only after its registry entry is pinned with SHA-256 and byte size and the local file verifies against both. An unpinned URL may be used to locate a publication, but it is not sufficient to promote a document to `exhaustive_read`.
+
+If a previously pinned source no longer matches, record `SOURCE_CHANGED_SINCE_AUDIT`; do not silently replace the expected hash or carry the earlier visual review forward.
+
 ## Required checks per document
 
 Where applicable, inspect:

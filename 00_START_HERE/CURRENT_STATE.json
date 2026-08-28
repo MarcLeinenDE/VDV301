@@ -37,7 +37,16 @@
     "deep_read_in_progress": 1,
     "deep_read_current_document_id": "VDV301-2_GC_V2.3",
     "deep_read_previous_document_id": "VDV301-2_GC_V2.2",
-    "new_schema_variant_finding": "CE-020"
+    "new_schema_variant_finding": "CE-020",
+    "pdf_source_registry": "audit_registry/pdf_source_registry_v0.1.json",
+    "pdf_source_cache_policy": "docs/pdf_xsd_semantic_audit/PDF_SOURCE_CACHE_POLICY.md",
+    "pdf_source_fetcher": "tools/fetch_vdv_pdf_sources.py",
+    "pdf_source_registry_entries": 50,
+    "pdf_source_semantic_units": 48,
+    "pdf_sources_byte_pinned": 0,
+    "pdf_source_catalog_verified_date": "2026-08-28",
+    "local_pdf_cache_path": "local_sources/vdv_pdfs",
+    "local_pdf_cache_tracked_in_git": false
   },
   "evidence": {
     "xsd_ev_completed": ["EV-001", "EV-002", "EV-101", "EV-102", "EV-103", "EV-104", "EV-105"],
@@ -53,12 +62,13 @@
     "rule": "Findings/audit knowledge must later explain surprising validation results without silently changing normative XSD outcomes."
   },
   "next_actions": [
-    "Continue fresh-read VDV 301-2 General Conventions V2.3 after the Common V2.3 official/candidate authority split.",
-    "During Common V2.3 Deep Read, fully verify CE-020 against the original VDV 301-2-1 V2.3 table and both exact XSD variants.",
+    "From a local working copy, byte-pin VDV301-2_GC_V2.3 and COMMON_V2.3 with tools/fetch_vdv_pdf_sources.py --bootstrap-pins before using them for reproducible visual evidence.",
     "Re-run executable root-XSD/profile validation before raising root_xsd_count_last_executed above 49; the root pool changed after the last execution and now stores exact official Common V2.3 bytes.",
     "Add an executable candidate-overlay check for common-v2.3-upstream-pr30 before the SDK treats that candidate as runnable.",
+    "Continue fresh-read VDV 301-2 General Conventions V2.3 from pinned local PDF bytes and then compare with prior audit material.",
+    "During Common V2.3 Deep Read, fully verify CE-020 against the original VDV 301-2-1 V2.3 table and both exact XSD variants.",
     "During TimeService deep read, resolve DR3012-006 historical 301-2-11 cross-reference context.",
-    "Retry visual page review for completed textual Deep Read documents when a reliable local PDF source is available; only then consider exhaustive_read.",
+    "Retry visual page review for completed textual Deep Read documents from pinned local PDF sources; only then consider exhaustive_read.",
     "Proceed through all 48 semantic document units using DEEP_READ_METHOD.md.",
     "Do not decide PR/mail/remediation disposition of findings during deep read unless explicitly requested."
   ]
