@@ -1,6 +1,7 @@
 {
   "registry_version": "0.1",
   "method": "docs/pdf_xsd_semantic_audit/DEEP_READ_METHOD.md",
+  "findings_registry": "audit_registry/deep_read_findings_v0.1.json",
   "documents": {
     "VDV301-1_V1.0_DE": {
       "state": "needs_visual_review",
@@ -13,32 +14,33 @@
       "existing_ocr_found": false,
       "ocr_quality": "not_applicable",
       "preferred_reading_source": "embedded_text_with_visual_confirmation_where_available",
-      "source_conflicts": [
-        "No source-text conflict found; visual confirmation of later figure/table pages remains incomplete because PDF screenshots returned cache-miss."
-      ],
+      "source_conflicts": ["No source-text conflict found; later figure/table screenshot confirmation remains incomplete because PDF screenshots returned cache-miss."],
       "existing_audit_comparison": "completed_after_fresh_read",
-      "fresh_findings": [
-        "DR3011-001",
-        "DR3011-002",
-        "DR3011-003"
-      ],
-      "report": "docs/pdf_xsd_semantic_audit/deep_read/VDV301-1_V1.0_DE.md",
-      "notes": [
-        "Existing ARCH-001..ARCH-008 first-pass conclusions were not contradicted.",
-        "DR3011-001: internal 5.1.2 reference conflicts with the document's own 5.1.3 System-Management heading.",
-        "DR3011-002: operation-name mismatch against historical SystemManagement V1.0 XSD remains pending VDV 301-2 V1.0 deep-read context.",
-        "DR3011-003: duplicate IBIS-IP abbreviation entry is editorial/minor.",
-        "File-library search did not locate a dedicated existing OCR text for VDV 301-1; existing analytical material is not treated as OCR."
-      ]
+      "fresh_findings": ["DR3011-001","DR3011-002","DR3011-003"],
+      "report": "docs/pdf_xsd_semantic_audit/deep_read/VDV301-1_V1.0_DE.md"
     },
     "VDV301-2_V1.0_DE": {
+      "state": "needs_visual_review",
+      "official_url": "https://www.vdv.de/301-2sds-v1-0.pdfx?forced=true",
+      "publication": "VDV-Schrift 301-2, V1.0, 07/2016",
+      "fresh_read_started": "2026-08-28",
+      "textual_fresh_read_complete": true,
+      "original_pdf_visual_review": "partial",
+      "embedded_text_quality": "good_with_table_linewrap_artifacts",
+      "existing_ocr_found": false,
+      "ocr_quality": "not_applicable",
+      "preferred_reading_source": "embedded_text_with_visual_confirmation_where_available",
+      "source_conflicts": ["Screenshot backend returned cache-miss/internal errors for requested later pages; material textual findings remain queued for visual confirmation where applicable."],
+      "existing_audit_comparison": "completed_after_fresh_read",
+      "fresh_findings": ["DR3012-001","DR3012-002","DR3012-003","DR3012-004","DR3012-005","DR3012-006","DR3012-007"],
+      "existing_findings_strengthened": ["SUB-001"],
+      "resolved_cross_document_findings": ["DR3011-002"],
+      "report": "docs/pdf_xsd_semantic_audit/deep_read/VDV301-2_V1.0_DE.md"
+    },
+    "VDV301-2_BASE_V2.0": {
       "state": "in_progress",
       "fresh_read_started": "2026-08-28",
-      "priority_cross_checks": [
-        "DR3011-002 SystemManagement operation naming",
-        "legacy aggregate vs service-local XSD root routing",
-        "V1.0 Common/Enumerations dependency usage"
-      ]
+      "priority_cross_checks": ["changes from V1.0 base document","HTTP/DNS-SD/version-routing deltas","basis-service structures and references","previous Deep Read findings that may have been corrected"]
     }
   }
 }
