@@ -2,9 +2,6 @@ name: schema-audit-validation
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - dev/schema-integration
 
 permissions:
   contents: read
@@ -71,7 +68,7 @@ jobs:
             echo "ev_104_trainset,official_TrainSet_V2.2_exact_contexts,TSM_002_TSD_003,$trainset_status"
             echo "ev_105_analog_radio,candidate_AnalogRadio_V2.4,ARA_003,$analog_status"
             echo "ev_106_common_v23_variant,official_Common_V2.3_plus_explicit_PR30_candidate_overlay,CE-020,$common_v23_variant_status"
-            echo "ev_107_dms_v22_deep_read,official_DMS_V2.2_exact_stored_XSD,DRDMS22_structural_findings,$dms_v22_status"
+            echo "ev_107_dms_v22_deep_read,official_DMS_V2.2_exact_stored_XSD,DMS_V2.2_deep_read_findings,$dms_v22_status"
             echo "rv_001_http_runtime,VDV_HTTP_profile_plus_RFC9110_RFC7303,deterministic_classifier,$http_status"
             echo "rv_002_discovery_runtime,VDV_discovery_profiles_plus_RFC6763,deterministic_classifier,$discovery_status"
             echo "rv_003_time_sntp,VDV_TimeService_V1.0_plus_RFC4330,deterministic_classifier,$time_status"
