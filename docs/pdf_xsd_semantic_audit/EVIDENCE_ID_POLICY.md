@@ -20,6 +20,8 @@ EV-102  CE-018 ServiceIdentificationWithStateList cardinality
 EV-103  video-service xs:choice findings
 EV-104  TrainSet operation/root/context modelling
 EV-105  AnalogRadio candidate Transmitter cardinality
+EV-106  Common V2.3 official vs PR #30 schema-variant behaviour
+EV-107  DMS V2.2 Deep Read schema declarations
 ```
 
 Important:
@@ -27,8 +29,8 @@ Important:
 ```text
 EV-003 through EV-100 were never defined.
 The numbering intentionally separates baseline evidence (001/002) from finding-specific evidence (101+).
-Do not describe the completed set as "EV-001 through EV-105".
-Correct wording: "EV-001, EV-002 and EV-101 through EV-105".
+Do not describe the completed set as a continuous range beginning at EV-001.
+Correct wording at the current state: "EV-001, EV-002 and EV-101 through EV-107".
 ```
 
 Existing EV document names, historical workflow run IDs and historical tool names are not retroactively renamed because they are provenance evidence.

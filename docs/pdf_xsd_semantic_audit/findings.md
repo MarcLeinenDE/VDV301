@@ -53,6 +53,35 @@ evidence: EV-106
 
 The two schema variants accept different XML instance shapes. Official VDV-301-2.3 bytes remain default authority; PR #30 is explicit candidate only.
 
+### DMS-005 / DMS-006 / DMS-007 - DeviceManagementService V2.2 Deep Read
+
+```text
+state: executable XSD declarations confirmed by EV-107
+run: 33181833930
+exact authority: official DMS V2.2 -> Common V2.2 -> Enumerations V2.2
+```
+
+Fresh byte-pinned DMS V2.2 evidence established:
+
+```text
+DMS-005:
+  PDF response branch: DeviceManagementService.DeviceStatusInformationResponseData
+  XSD response branch: DeviceManagementService.GetDeviceStatusInformationResponseData
+  PDF-only spelling is not an XSD alias
+
+DMS-006:
+  PDF DeviceStatus table lists only DeviceStatusName + DeviceStatusFlag
+  V2.2 XSD requires DeviceStatusName + DeviceStatusFlag + DeviceStatusImpact + DeviceStatusPriority
+  all four have effective minOccurs=1
+
+DMS-007:
+  PDF InstallUpdate.UpdateTimestamp refers to GetUpdateStates
+  exact XSD annotation refers to GetUpdateHistory + RetrieveUpdateState
+  operation inventory contains GetUpdateHistory, not GetUpdateStates
+```
+
+The later DMS V2.4 correction is explanatory history only; it must not be back-applied to official V2.2.
+
 ### VLS-002 - VideoLiveService V2.0 LiveStreamData compositor
 
 ```text
@@ -157,7 +186,9 @@ Important examples:
 TSI-001: TrainSetInformation V2.1 cannot model multiple coaches; V2.2 explicitly corrects with repeated SingleCoach.
 TSM-001: TrainSetManagement V2.1 old composition response name; V2.2 history records correction.
 TSD-001: V2.1 parameterized Retrieve subscriptions lack specialized schema structures; V2.2 introduces them.
-DMS historical cardinality/optionality changes must not be retroactively applied between V2.0/V2.1/V2.2/V2.4.
+DMS-003: ErrorMessage 10:* remains PDF/XSD-aligned through official V2.2; later V2.4 0:* must not be back-applied.
+DMS-004: InstallUpdate UpdateID/UpdateTimestamp/UpdateURL remain required through official V2.2; later V2.4 optionality must not be back-applied.
+DMS-006: V2.2 requires DeviceStatusImpact/Priority in XSD although its PDF table omits them; V2.4 later makes both optional in the corrected profile.
 CE-025: Reply-Path PDF naming persists through V2.3 and is corrected to ReplyPath in checked V2.4 documentation.
 CE-026: BeaconPoint Desciption is the V2.3 XSD spelling; V2.4 XSD corrects BeaconPoint to Description.
 VideoRecording V2.4 candidate clarifies/corrects the earlier state-response modelling but remains candidate authority.
@@ -259,7 +290,7 @@ German/English General-Conventions IP-addressing divergence
 RFC reference-number error (RFC 2927 vs IPv4 Link-Local context)
 ```
 
-These remain provider/documentation notes unless their executable effect has separately been demonstrated.
+The DMS V2.2 Deep Read additionally records `DRDMS22-001..004` for a wrong table reference, TOC numbering, the non-executable `InstallationSuccessfull` prose typo and singular `GetDeviceErrorMessage` wording. These remain documentation notes except where a separate executable finding exists.
 
 ## 9. Common/Enumerations detailed register status
 
@@ -305,12 +336,15 @@ AUDIT_HANDOFF_DELTA_EXECUTABLE_VALIDATION_24.md
 AUDIT_HANDOFF_DELTA_RUNTIME_25.md
 AUDIT_HANDOFF_DELTA_POST_SPLIT_EXECUTION_2026-08-28.md
 deep_read/COMMON_V2.3.md
+deep_read/DMS_V2.2.md
 COMMON_FINDINGS_REGISTER_ADDENDUM.md
+DEVICE_MANAGEMENT_SERVICE_FINDINGS_REGISTER_ADDENDUM.md
 24a_executable_validation_pcs_001.md
 24b_executable_validation_ce_018.md
 24c_executable_validation_video_compositors.md
 24d_executable_validation_trainset.md
 24e_executable_validation_analog_radio.md
+24f_executable_validation_dms_v22.md
 25b_http_xml_content_type_profile.md
 25c_dns_sd_service_discovery_profile.md
 25d_time_service_sntp_profile.md

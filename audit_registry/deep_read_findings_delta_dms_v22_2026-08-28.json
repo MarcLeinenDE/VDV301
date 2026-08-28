@@ -1,0 +1,71 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-28",
+  "base_registry": "audit_registry/deep_read_findings_v0.1.json",
+  "document_id": "DMS_V2.2",
+  "policy": "Delta is additive audit knowledge. It does not authorize schema changes or official-facing action.",
+  "new_findings": [
+    {
+      "id": "DRDMS22-001",
+      "document_id": "DMS_V2.2",
+      "classification": "pdf_cross_reference_error_candidate",
+      "state": "confirmed_text_needs_visual_review",
+      "confidence": "very_high",
+      "summary": "SubdeviceStatusInformation points DeviceStatusInformation to table 27, but table 19 is DeviceStatusInformationStructure and table 27 is InstallUpdateRequestStructure.",
+      "normative_validation_impact": "none; do not derive structure routing from the wrong table number"
+    },
+    {
+      "id": "DRDMS22-002",
+      "document_id": "DMS_V2.2",
+      "classification": "pdf_label_or_heading_error_candidate",
+      "state": "confirmed_text_needs_visual_review",
+      "confidence": "high",
+      "summary": "The table of contents numbers GetUpdateHistory, FinalizeUpdate and FinalizeAllPendingUpdates as 1.33/1.34/1.35 while the body correctly uses 2.33/2.34/2.35.",
+      "normative_validation_impact": "documentation navigation only"
+    },
+    {
+      "id": "DRDMS22-003",
+      "document_id": "DMS_V2.2",
+      "classification": "pdf_xsd_annotation_typo_candidate",
+      "state": "executable_enum_value_confirmed_needs_visual_review",
+      "confidence": "very_high",
+      "summary": "Update-history prose and the XSD documentation annotation say InstallationSuccessfull, while the PDF enumeration table and executable XSD enumeration value are InstallationSuccessful.",
+      "normative_validation_impact": "accept only InstallationSuccessful according to the selected XSD; do not create typo alias",
+      "evidence": "EV-107"
+    },
+    {
+      "id": "DRDMS22-004",
+      "document_id": "DMS_V2.2",
+      "classification": "pdf_example_terminology_mismatch_candidate",
+      "state": "confirmed_text_needs_visual_review",
+      "confidence": "high",
+      "summary": "Section 2.9 is GetDeviceErrorMessages but the request prose calls it GetDeviceErrorMessage singular; operation table and XSD use the plural name.",
+      "normative_validation_impact": "do not synthesize a singular operation alias"
+    }
+  ],
+  "service_findings_opened": ["DMS-005", "DMS-006", "DMS-007"],
+  "existing_finding_updates": [
+    {
+      "id": "DMS-003",
+      "effect": "Fresh byte-pinned V2.2 PDF reconfirms device and subdevice ErrorMessage 10:* cardinality matches exact official V2.2 XSD minOccurs=10; later 0:* correction must not be back-applied."
+    },
+    {
+      "id": "DMS-004",
+      "effect": "Historical required InstallUpdate UpdateID/UpdateTimestamp/UpdateURL scope now explicitly extends through official DMS V2.2; V2.4 optionality remains version-specific."
+    },
+    {
+      "id": "DR3012V20-007",
+      "effect": "The stale GetDeviceConfiguration setter wording persists in the separated DMS V2.2 publication even though V2.2 no longer exposes SetDeviceConfiguration."
+    },
+    {
+      "id": "DR3012V20-008",
+      "effect": "GetDeviceInformation response table still describes the response/data as a request structure in the separated DMS V2.2 publication."
+    }
+  ],
+  "executable_evidence": {
+    "evidence_id": "EV-107",
+    "run_id": "33181833930",
+    "head_tested": "00a31f808b9955a9c9af475621c4ce87b610c05a",
+    "result": "PASS"
+  }
+}

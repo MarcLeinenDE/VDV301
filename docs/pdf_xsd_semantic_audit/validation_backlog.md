@@ -1,6 +1,6 @@
 # PDF/XSD semantic audit - current validation backlog
 
-Status: deterministic repository validation is complete for the planned EV/RV phase, including the post-Common-V2.3 authority-split baseline. Remaining open validation requires targeted new finding regression, live/integration evidence or later provider-specific work.
+Status: deterministic repository validation is complete for the planned EV/RV phase, including the post-Common-V2.3 authority-split baseline and DMS V2.2 EV-107 evidence. Remaining open validation requires targeted new finding regression, visual closure, live/integration evidence or later provider-specific work.
 
 ## 1. Completed deterministic evidence
 
@@ -32,6 +32,14 @@ EV-106  run 33169314332  PASS
   official/candidate InternationalTextType instance-shape difference
   post-authority-split current root pool: 50/50 roots compile
   current inventory: 39 XSD service profiles, 84 direct include edges
+
+EV-107  run 33181833930  PASS
+  official DMS V2.2 exact stored XSD declaration evidence
+  GetDeviceStatusInformation exact response-data branch name
+  DeviceStatus four required fields / effective minOccurs=1
+  InstallUpdate.UpdateTimestamp GetUpdateHistory reference
+  executable InstallationSuccessful enum spelling
+  full deterministic suite re-run: 50/50 roots, 39 profiles, 84 include edges PASS
 ```
 
 ### Runtime/protocol deterministic evidence
@@ -78,7 +86,32 @@ CE-023 is a PDF copy/paste-table finding and does not require an executable XSD 
 
 CE-019 visual closure remains pending. CE-020 is already executable-confirmed by EV-106.
 
-## 3. Canonical remaining live backlog
+## 3. DMS V2.2 Deep Read evidence status
+
+Fresh byte-pinned DMS V2.2 Deep Read opened DMS-005..DMS-007 and DRDMS22-001..004.
+
+EV-107 already closes the deterministic XSD-declaration side for the material XML/name findings:
+
+```text
+DMS-005:
+  exact XSD response branch uses DeviceManagementService.GetDeviceStatusInformationResponseData
+  PDF-only DeviceManagementService.DeviceStatusInformationResponseData absent
+
+DMS-006:
+  DeviceStatusName, DeviceStatusFlag, DeviceStatusImpact and DeviceStatusPriority all required in V2.2 XSD
+
+DMS-007:
+  XSD UpdateTimestamp annotation says GetUpdateHistory + RetrieveUpdateState, not GetUpdateStates
+
+DRDMS22-003:
+  executable enum is InstallationSuccessful; InstallationSuccessfull is not an enum value
+```
+
+Optional later instance-level regression may add positive/negative XML samples for DMS-005/DMS-006, but the declaration facts are already executable-confirmed. This is not required to keep the findings open.
+
+DMS V2.2 visual closure remains deferred because original-PDF screenshot attempts returned cache-miss.
+
+## 4. Canonical remaining live backlog
 
 The full current live/device/network backlog is:
 
@@ -88,7 +121,7 @@ docs/pdf_xsd_semantic_audit/26_live_integration_validation_backlog.md
 
 Do not recreate duplicate per-service backlog lists in this central file.
 
-## 4. Remaining live/integration categories
+## 5. Remaining live/integration categories
 
 ### Subscription runtime
 
@@ -165,7 +198,7 @@ TrainSet response-context routing
 legacy V1.0 root-map end-to-end path
 ```
 
-## 5. Environment dependency
+## 6. Environment dependency
 
 Open live items require one or more of:
 
@@ -180,7 +213,7 @@ physical/inventory documentation
 
 Their open state is **not** a failed conformance result.
 
-## 6. Deferred visual/document review
+## 7. Deferred visual/document review
 
 The Deep Read uses byte-pinned official PDF sources, but the current PDF screenshot backend repeatedly returns cache-miss for several VDV publications.
 
@@ -191,11 +224,12 @@ CE-015 FareZone/Farezone and ZoneType casing
 CE-017 TSPPoint Desciption/Description
 CE-019 ServiceIdentificationWithStateList type/reference table
 CE-021..CE-026 where visible-page confirmation would strengthen native-text evidence
+DMS-005..DMS-007 and DRDMS22-001..004 where native text is clear but visible-page closure is still unavailable
 ```
 
 These do not block exact XSD validation. Do not promote affected documents to `exhaustive_read` until visible-page review is actually completed.
 
-## 7. Official correction candidate review
+## 8. Official correction candidate review
 
 No upstream action is automatic.
 
@@ -209,7 +243,7 @@ If an official-facing correction is later considered:
 - obtain explicit user approval before PR/comment/review/merge action
 ```
 
-## 8. SDK implementation readiness
+## 9. SDK implementation readiness
 
 SDK architecture may continue to be derived from the deterministic baseline, but implementation remains frozen during the current Deep Read pass according to CURRENT_STATE.
 
