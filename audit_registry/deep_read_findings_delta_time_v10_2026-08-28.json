@@ -1,0 +1,50 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-28",
+  "base_registry": "audit_registry/deep_read_findings_v0.1.json",
+  "document_id": "TIME_V1.0",
+  "policy": "Delta is additive audit knowledge. It does not authorize schema changes or official-facing action.",
+  "new_findings": [
+    {
+      "id": "DRTIME10-001",
+      "document_id": "TIME_V1.0",
+      "classification": "pdf_cross_reference_or_document_identity_error_candidate",
+      "state": "confirmed_text_needs_visual_review",
+      "confidence": "very_high",
+      "summary": "German foreword correctly identifies VDV 301-2-10 as the TimeService document, while the English foreword says VDV 301-2-1 describes TimeService.",
+      "normative_validation_impact": "documentation/resolver only; never route TimeService to VDV 301-2-1 from this sentence"
+    },
+    {
+      "id": "DRTIME10-002",
+      "document_id": "TIME_V1.0",
+      "classification": "bilingual_normative_text_omission_candidate",
+      "state": "visually_confirmed",
+      "confidence": "very_high",
+      "summary": "German service text explicitly says cyclic transmission of the current time is not intended, while the adjacent English service section omits this sentence.",
+      "normative_validation_impact": "runtime/profile interpretation; _ibisip_udp._udp must not be treated as evidence of a generic cyclic time-broadcast service"
+    },
+    {
+      "id": "DRTIME10-003",
+      "document_id": "TIME_V1.0",
+      "classification": "minor_pdf_editorial_cross_reference_typo_candidate",
+      "state": "confirmed_text_needs_visual_review",
+      "confidence": "high",
+      "summary": "English V1.0 version-history text prints 'cd. 1' after the _ibisip_udp._udp service-type correction, an editorial/cross-reference artifact with no technical meaning established by the source.",
+      "normative_validation_impact": "none"
+    }
+  ],
+  "existing_finding_updates": [
+    {
+      "id": "DR3012-006",
+      "effect": "Historical context resolved. The 07/2016 VDV 301-2 base writing points TimeService to VDV 301-2-11; VDV-Mitteilung 3002 from 10/2016 already lists TimeService as VDV-301-2-10, and VDV 301-2-11 is the 05/2017 VideoLiveService writing. Reclassify as a high-confidence wrong/stale document-number cross-reference rather than unresolved historical numbering. Do not route TimeService to 301-2-11."
+    }
+  ],
+  "runtime_evidence_update": {
+    "evidence_id": "RV-003",
+    "run_id": "33197358294",
+    "head_tested": "215fd3cbb00619b0cf0232856c7163a52402318b",
+    "result": "PASS",
+    "effect": "Fresh TimeService read retains existing discovery/SNTP/timezone rules and adds an explicit deterministic guard that cyclic transmission of current time is not expected.",
+    "authority": "official VDV TimeService V1.0 profile plus RFC 4330 where referenced"
+  }
+}

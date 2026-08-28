@@ -1,19 +1,43 @@
 # Block 25d / RV-003 - TimeService V1.0 and SNTP profile
 
-Status: deterministic classifier implemented and executable-tested. No live TimeService/SNTP exchange or system-clock synchronization claim is made.
+Status: deterministic classifier implemented and executable-tested; strengthened after byte-pinned TimeService V1.0 Deep Read. No live TimeService/SNTP exchange or system-clock synchronization claim is made.
 
-## Evidence run
+## Current evidence run
+
+Latest strengthened run:
 
 ```text
-GitHub Actions run: 33119337775
-run number: 13
-head tested: a22c3139cf0ae73c34aae253fdda275de9ce9981
-job: 98681993414
-environment: Ubuntu 24.04.4 / Python 3.12.14 / lxml 6.1.2
-time_status: 0 / PASS
+GitHub Actions run: 33197358294
+head tested: 215fd3cbb00619b0cf0232856c7163a52402318b
+result: PASS
 ```
 
-The run also re-confirmed all prior EV checks plus RV-001 and RV-002 with status 0.
+The run re-confirmed the complete deterministic repository suite:
+
+```text
+50 root XSDs compile
+EV-101 through EV-108 pass
+RV-001 through RV-004 pass
+SDK manifest/profile checks pass
+39 XSD service profiles
+84 direct include edges
+```
+
+Historical RV-003 implementation run `33119337775` remains provenance evidence for the initial deterministic classifier.
+
+## Fresh-read source
+
+Official TimeService source is now byte-pinned:
+
+```text
+VDV-Schrift 301-2-10 TimeService V1.0, 02/2018
+SHA-256: d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3
+size: 515920 bytes
+pin run: 33196758957
+report: deep_read/TIME_V1.0.md
+```
+
+The Fresh Read was completed independently before using this RV document as a comparison template.
 
 ## Reusable implementation
 
@@ -35,7 +59,7 @@ No socket is opened and the system clock is never modified by the deterministic 
 
 ## VDV TimeService V1.0 discovery evidence
 
-Executable cases confirm:
+Fresh-read and executable cases confirm:
 
 ```text
 TimeService + _ibisip_udp._udp + valid sntp-server IPv4 -> PASS
@@ -53,13 +77,40 @@ The selected profile source says:
 sntp-server=<IP-address>
 ```
 
-Therefore the classifier accepts IPv4/IPv6 address literals but does not silently broaden that VDV field to a hostname.
+The earlier VDV 301-2 V1.0 generic TXT table additionally labels `sntp-server` mandatory for the time-synchronization service.
 
-### timezone guard
+Therefore the classifier accepts IPv4/IPv6 address literals but does not silently broaden that field to a hostname.
 
-The historical audit established the `timezone` TXT metadata but did not establish a hard cardinality rule strong enough to justify inventing a mandatory failure.
+## TimeService is not a cyclic time-broadcast service
 
-Therefore RV-003 behavior is intentionally conservative:
+The German TimeService V1.0 service text explicitly states that cyclic transmission of the current time is not intended beyond SNTP synchronization.
+
+The adjacent English section omits that sentence; this is tracked as `DRTIME10-002`.
+
+The runtime profile now carries an explicit architecture guard:
+
+```text
+cyclic_time_broadcast_expected() == False
+```
+
+Strengthened run `33197358294` confirms:
+
+```text
+OK TimeService does not expect cyclic transmission of current time
+```
+
+SDK consequence:
+
+```text
+Do not interpret the DNS-SD type _ibisip_udp._udp as a generic cyclic UDP multicast-time stream.
+Time synchronization remains the SNTP path.
+```
+
+## timezone guard
+
+The separated TimeService writing describes the `timezone` TXT metadata, including an example such as `timezone=UTC+1`, but the Fresh Read did not establish a formal hard optional/mandatory cardinality comparable to the older explicit mandatory wording for `sntp-server`.
+
+Therefore RV-003 behavior remains deliberately conservative:
 
 ```text
 timezone present and non-empty -> preserve raw value / pass_with_note
@@ -112,7 +163,7 @@ non-zero reply Transmit Timestamp
 reply Originate Timestamp equals request Transmit Timestamp
 ```
 
-Negative cases all detect as expected:
+Negative cases detect as expected:
 
 ```text
 wrong Originate Timestamp
@@ -122,7 +173,7 @@ wrong reply mode
 reply VN different from request VN
 ```
 
-This provides a deterministic foundation for a later live SNTP diagnostic without implying that any real device has been contacted.
+This is deterministic protocol evidence only, not a claim of a live device exchange.
 
 ## No XML/XSD expectation
 
@@ -133,7 +184,7 @@ validation_kind() == protocol_discovery_profile
 expected_xml_operations() == ()
 ```
 
-This reinforces the historical TimeService conclusion:
+Consequences:
 
 ```text
 Do not synthesize TimeService.Get*
@@ -142,6 +193,20 @@ Do not search for a TimeService XML response XSD
 ```
 
 TimeService availability and SNTP operation belong to the protocol/discovery runtime lane.
+
+## Historical document-number correction - DR3012-006
+
+The VDV 301-2 V1.0 base writing dated 07/2016 points further TimeService/SNTP implementation information to `VDV 301-2-11`.
+
+Historical context is now resolved:
+
+```text
+VDV-Mitteilung 3002 | 10/2016 -> VDV-301-2-10 Dienst TimeService V1.0
+VDV-Schrift 301-2-11 | 05/2017 -> VideoLiveService
+VDV-Schrift 301-2-10 | 02/2018 -> TimeService V1.0
+```
+
+`DR3012-006` is therefore reclassified as a high-confidence wrong/stale document-number cross-reference. Resolver rule: never route TimeService to VDV 301-2-11 from that historical sentence.
 
 ## RFC 5905 handling
 
@@ -178,15 +243,7 @@ These remain integration/diagnostic tasks.
 
 ```text
 RV-003 deterministic TimeService V1.0 / RFC 4330 SNTP classifier: PASS
-```
-
-Next planned runtime evidence:
-
-```text
-RV-004 - Video RTSP/RTP boundary
-- rtspURI syntax/profile handling
-- RTSP version observation without latest-wins assumption
-- control-plane vs media-plane separation
-- RTP/RTCP evidence model
-- no claim of live stream availability until real endpoint tests are run
+latest strengthened run: 33197358294
+no-cyclic-time-broadcast guard: PASS
+no XML/XSD synthesis: PASS
 ```

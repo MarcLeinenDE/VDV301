@@ -192,6 +192,25 @@ state: documentation/XSD naming discrepancy
 
 Checked Common history uses `UnsubscribeRequestStructure` / `UnsubscribeResponseStructure`; no executable `TerminateSubscribe*` alias is created.
 
+### DR3012-006 - historical TimeService document number
+
+```text
+state: historical_context_resolved
+classification: pdf_cross_reference_error_candidate
+confidence: very_high
+```
+
+Evidence chain:
+
+```text
+VDV 301-2 V1.0, 07/2016: SNTP implementation points to VDV 301-2-11.
+VDV-Mitteilung 3002, 10/2016: TimeService is already listed as VDV-301-2-10.
+VDV 301-2-11, 05/2017: VideoLiveService.
+VDV 301-2-10, 02/2018: TimeService V1.0.
+```
+
+Handling: the old 301-2-11 reference is a wrong/stale document-number reference, not a resolver alias. TimeService routes to 301-2-10; 301-2-11 remains VideoLiveService.
+
 ## 4. Historically corrected / version-evolution findings
 
 Important examples:
@@ -244,10 +263,6 @@ EV-108: candidate/integration declaration evidence only
 
 Do not infer official-release XSD authority from the existence of the official public PDF.
 
-### TVS / other V2.4 integration material
-
-Where V2.4 schema material is candidate/integration rather than an official release artifact, validation results retain that authority label. Candidate success must never be presented as official-release conformance.
-
 ### Historical public writings without exact strict XSD profile
 
 Retained provenance gaps include service/version combinations where public documentation exists but no exact official-tag service XSD was confirmed, including relevant historical VideoLive/VideoRecording/VideoDisplay and CIS V1.1 cases recorded in their dedicated registers.
@@ -265,9 +280,27 @@ do not silently map an unresolved public version to a nearby XSD version
 ```text
 classification: OK with note / non-XSD service by design
 validation lane: protocol_discovery_profile
+byte-pinned Deep Read: complete textually, needs_visual_review
+latest RV-003 run: 33197358294 PASS
 ```
 
-Uses DNS-SD metadata + SNTP/RFC 4330. Do not synthesize TimeService XML operations.
+Fresh TimeService findings:
+
+```text
+DRTIME10-001: English foreword says VDV 301-2-1 describes TimeService; document/German text use 301-2-10.
+DRTIME10-002: German text explicitly excludes cyclic transmission of current time; English omits that sentence.
+DRTIME10-003: English version-history 'cd. 1' editorial cross-reference artifact.
+```
+
+Runtime guards:
+
+```text
+TimeService uses DNS-SD type _ibisip_udp._udp but must not be treated as a generic cyclic UDP time broadcaster.
+Synchronization uses SNTP under the VDV-selected RFC 4330 profile.
+sntp-server is required by the historical VDV profile and is an IP address.
+timezone remains conservatively handled because no formal hard cardinality was established in the checked source chain.
+No TimeService XML operations or XSD are synthesized.
+```
 
 ### HTMLDisplayService V2.1/V2.2/V2.2a
 
@@ -280,12 +313,12 @@ Version-specific DNS-SD endpoint semantics are retained; no HTML XSD is invented
 
 ## 7. Runtime/protocol findings and guards
 
-Deterministic RV phase is complete:
+Deterministic RV phase:
 
 ```text
 RV-001 HTTP/XML + Content-Type       run 33112730418 PASS
 RV-002 DNS-SD/service discovery      run 33119080288 PASS
-RV-003 TimeService/SNTP              run 33119337775 PASS
+RV-003 TimeService/SNTP              run 33197358294 PASS (strengthened after fresh read)
 RV-004 Video RTSP/RTP boundary       run 33119694991 PASS
 ```
 
@@ -296,6 +329,7 @@ Missing Content-Type with a known body/media type is an external HTTP warning, n
 DNS-SD is not automatically synonymous with mandatory mDNS.
 HTMLDisplay V2.2/V2.2a uses TXT url as service-specific content endpoint semantics.
 RFC 5905 does not silently replace the RFC 4330 profile explicitly selected by historical TimeService V1.0.
+TimeService _ibisip_udp._udp discovery does not imply cyclic current-time multicast/broadcast.
 RTSP 2.0 is not treated as a VDV requirement or a latest-wins drop-in replacement for RTSP 1.0.
 Valid VideoLive XML metadata does not prove RTSP/RTP media availability.
 ```
@@ -312,23 +346,14 @@ case-sensitive enumeration spelling differences
 cardinality table/XSD discrepancies
 element-name mismatches
 URI example inconsistencies
-German/English General-Conventions IP-addressing divergence
-RFC reference-number error (RFC 2927 vs IPv4 Link-Local context)
+German/English General-Conventions divergences
+historic document-number cross-reference errors
+bilingual omissions
 ```
 
-DMS-specific Deep Read history now includes:
+DMS-specific Deep Read history includes DRDMS22-001..004 and DRDMS24-001; TimeService Deep Read adds DRTIME10-001..003 and resolves DR3012-006.
 
-```text
-DRDMS22-001 wrong table reference -> resolved in V2.4
-DRDMS22-002 TOC numbering -> resolved in V2.4
-DRDMS22-003 InstallationSuccessfull prose/annotation typo -> persists through checked V2.4; executable enum is InstallationSuccessful
-DRDMS22-004 singular GetDeviceErrorMessage wording -> persists through checked V2.4
-DRDMS24-001 DMS V2.4 foreword incorrectly describes HtmlDisplayService in both language sections
-DR3012V20-007 GetDeviceConfiguration setter wording -> persists through checked DMS V2.4
-DR3012V20-008 GetDeviceInformation response described as request -> persists through checked DMS V2.4
-```
-
-These remain documentation notes except where a separate executable finding exists.
+These remain documentation notes except where a separate executable/runtime effect has been demonstrated.
 
 ## 9. Common/Enumerations detailed register status
 
@@ -362,8 +387,6 @@ Important rule:
 Do not interpret omission from this concise central file as closure or deletion of a detailed CE/service finding.
 ```
 
-For exact wording/version scope, use the Common/Enums history files, `COMMON_FINDINGS_REGISTER_ADDENDUM.md` and the Deep Read report.
-
 ## 10. Detailed evidence sources
 
 Primary current detailed sources include:
@@ -375,9 +398,11 @@ AUDIT_HANDOFF_DELTA_RUNTIME_25.md
 AUDIT_HANDOFF_DELTA_POST_SPLIT_EXECUTION_2026-08-28.md
 AUDIT_HANDOFF_DELTA_DMS_V22_DEEP_READ_2026-08-28.md
 AUDIT_HANDOFF_DELTA_DMS_V24_DEEP_READ_2026-08-28.md
+AUDIT_HANDOFF_DELTA_TIME_V10_DEEP_READ_2026-08-28.md
 deep_read/COMMON_V2.3.md
 deep_read/DMS_V2.2.md
 deep_read/DMS_V2.4.md
+deep_read/TIME_V1.0.md
 COMMON_FINDINGS_REGISTER_ADDENDUM.md
 DEVICE_MANAGEMENT_SERVICE_FINDINGS_REGISTER_ADDENDUM.md
 24a_executable_validation_pcs_001.md
@@ -403,7 +428,7 @@ Before any official PR/comment/review:
 ```text
 1. classify finding and authority
 2. verify exact affected version(s)
-3. run targeted executable regression where applicable
-4. decide documentation-vs-schema correction
+3. run targeted executable/runtime regression where applicable
+4. decide documentation-vs-schema/protocol correction
 5. obtain explicit user approval for official-facing action
 ```

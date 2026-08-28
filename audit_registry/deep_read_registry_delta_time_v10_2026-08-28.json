@@ -4,13 +4,14 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "TIME_V1.0": {
-      "state": "in_progress",
+      "state": "needs_visual_review",
       "official_url": "https://www.vdv.de/301-2-10sds-v-1-01.pdfx",
-      "publication": "VDV-Schrift 301-2-10, TimeService V1.0",
+      "publication": "VDV-Schrift 301-2-10, TimeService V1.0, 02/2018",
       "fresh_read_started": "2026-08-28",
-      "textual_fresh_read_complete": false,
-      "original_pdf_visual_review": "pending",
-      "preferred_reading_source": "byte-pinned official TimeService V1.0 PDF; non-XSD protocol/discovery authority lane; compare DR3012-006 and RV-003 only after independent fresh read",
+      "textual_fresh_read_complete": true,
+      "original_pdf_visual_review": "partial_page5_succeeded_other_critical_pages_cache_miss",
+      "existing_audit_comparison": "completed_after_fresh_read",
+      "preferred_reading_source": "byte-pinned official TimeService V1.0 PDF + historical VDV publication numbering + referenced RFC 4330; non-XSD protocol/discovery lane",
       "source_pin": {
         "sha256": "d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3",
         "size_bytes": 515920,
@@ -21,15 +22,31 @@
         "pdf_authority": "official_public_VDV_writing",
         "validation_lane": "protocol_discovery_profile",
         "xsd_authority": "not_applicable_by_design",
-        "rule": "Do not synthesize TimeService XML operations or an XSD. External SNTP/DNS-SD standards are consulted only after the VDV fresh read establishes the selected profile."
+        "external_standard_profile": "RFC 4330 as explicitly selected by the VDV writing",
+        "rule": "Do not synthesize TimeService XML operations/XSD and do not latest-wins substitute a newer NTP standard."
       },
-      "priority_cross_checks": [
-        "independent operation/service description and DNS-SD metadata",
-        "SNTP server and timezone semantics as printed in the VDV document",
-        "historical document numbering and any reference to VDV 301-2-11",
-        "publication/date/version context needed to resolve DR3012-006",
-        "only after fresh read: compare deterministic RV-003 assumptions with document text",
-        "do not replace historically referenced external protocol version with a newer standard automatically"
+      "fresh_findings": ["DRTIME10-001", "DRTIME10-002", "DRTIME10-003"],
+      "resolved_existing_findings": ["DR3012-006"],
+      "historical_numbering_evidence": [
+        "VDV 301-2 V1.0 07/2016 refers TimeService implementation to VDV 301-2-11.",
+        "VDV-Mitteilung 3002 10/2016 lists VDV-301-2-10 Dienst TimeService V1.0.",
+        "VDV 301-2-11 05/2017 is VideoLiveService.",
+        "VDV 301-2-10 02/2018 is TimeService V1.0."
+      ],
+      "runtime_profile_facts": [
+        "service discovery type _ibisip_udp._udp",
+        "TXT sntp-server contains the SNTP-server IP address",
+        "historical base table explicitly makes sntp-server mandatory for time synchronization",
+        "SNTP profile references RFC 4330",
+        "German TimeService text explicitly says no cyclic transmission of current time is intended",
+        "timezone is described but no hard optional/mandatory cardinality was established; retain conservative profile-note handling"
+      ],
+      "runtime_evidence": "RV-003 strengthened / GitHub Actions run 33197358294",
+      "report": "docs/pdf_xsd_semantic_audit/deep_read/TIME_V1.0.md",
+      "source_conflicts": [
+        "English foreword says VDV 301-2-1 describes TimeService while German/document identity say VDV 301-2-10.",
+        "English service section omits the German statement that cyclic transmission of current time is not intended.",
+        "Some critical original-PDF page renders returned cache-miss, so visual closure remains incomplete."
       ]
     }
   }

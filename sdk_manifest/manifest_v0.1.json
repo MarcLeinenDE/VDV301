@@ -75,7 +75,7 @@
     "EV-108": "33182963733",
     "RV-001": "33112730418",
     "RV-002": "33119080288",
-    "RV-003": "33119337775",
+    "RV-003": "33197358294",
     "RV-004": "33119694991"
   },
   "non_xsd_profiles": {
@@ -88,6 +88,9 @@
     "Content-Type checks must retain external HTTP/XML authority when VDV does not explicitly state the media-type rule.",
     "DNS-SD must not be equated with mandatory mDNS.",
     "TimeService V1.0 must not synthesize XML operations.",
+    "TimeService V1.0 uses _ibisip_udp._udp for discovery but explicitly does not expect cyclic transmission of current time; synchronization remains the SNTP path.",
+    "TimeService timezone must not be promoted to a hard mandatory field without stronger formal cardinality evidence; retain raw value when advertised.",
+    "Historical VDV 301-2 V1.0 reference to TimeService as VDV 301-2-11 is stale/wrong; resolver must use VDV 301-2-10 for TimeService and keep 301-2-11 for VideoLiveService.",
     "RTSP version is observed external protocol state; current VDV evidence does not pin RTSP/1.0 or RTSP/2.0.",
     "Valid VideoLive XML metadata does not imply RTSP/RTP media availability.",
     "TrainSetData Subscribe response schema selection requires acknowledgement-vs-data-event context.",
