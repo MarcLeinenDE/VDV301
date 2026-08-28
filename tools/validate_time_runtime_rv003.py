@@ -8,6 +8,7 @@ from runtime_time_profile import (
     check_sntp_client_request,
     check_sntp_unicast_reply,
     check_time_service_discovery,
+    cyclic_time_broadcast_expected,
     error_count,
     expected_xml_operations,
     parse_sntp_header,
@@ -105,6 +106,9 @@ def main() -> int:
         ad(service_name="OtherService", txt={"sntp-server": "192.0.2.10"})
     )
     expect("wrong service name is detected", not find(wrong_service, "TS-V00").ok)
+
+    # VDV TimeService delivery-model guard from the fresh V1.0 read.
+    expect("TimeService does not expect cyclic transmission of current time", not cyclic_time_broadcast_expected())
 
     # RFC 4330 request packet layer.
     request_tx = 0xE89ABCDE12345678
