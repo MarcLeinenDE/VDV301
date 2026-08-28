@@ -1,0 +1,45 @@
+{
+  "state_schema_version": "0.1",
+  "date": "2026-08-28",
+  "canonical_branch": "dev/schema-integration",
+  "baseline_parent_commit": "25762e6471555bd05422fd244abce8d95e33c79a",
+  "workflow_mode": "manual_only",
+  "project_phase": "deep_read_pass_2",
+  "superbranch": {
+    "root_xsd_count_last_executed": 49,
+    "direct_include_edges_last_executed": 82,
+    "xsd_service_profiles": 38,
+    "non_xsd_profiles": 4,
+    "profile_generator": "tools/generate_schema_profile_inventory_v0_1.py",
+    "authority_model": ["official", "candidate", "integration", "unresolved"],
+    "latest_wins": false
+  },
+  "audit": {
+    "public_physical_pdf_links": 50,
+    "semantic_document_units": 48,
+    "first_pass_completed": 48,
+    "pairable_pdf_xsd_units": 38,
+    "pairable_pdf_xsd_first_pass_completed": 38,
+    "deep_read_completed": 0,
+    "deep_read_in_progress": 1,
+    "deep_read_current_document_id": "VDV301-1_V1.0_DE"
+  },
+  "evidence": {
+    "xsd_ev_completed": ["EV-001", "EV-002", "EV-101", "EV-102", "EV-103", "EV-104", "EV-105"],
+    "runtime_rv_completed": ["RV-001", "RV-002", "RV-003", "RV-004"],
+    "latest_profile_generator_run": "33140938945"
+  },
+  "sdk": {
+    "status": "baseline_v0.1_prework_only_during_audit",
+    "implementation_frozen_during_deep_read": true,
+    "manifest": "sdk_manifest/manifest_v0.1.json",
+    "routing_overrides": "sdk_manifest/routing_overrides_v0.1.json",
+    "rule": "Findings/audit knowledge must later explain surprising validation results without silently changing normative XSD outcomes."
+  },
+  "next_actions": [
+    "Complete fresh deep read of VDV 301-1 V1.0 from the original PDF and record source-quality comparison.",
+    "Proceed through all 48 semantic document units using docs/pdf_xsd_semantic_audit/DEEP_READ_METHOD.md.",
+    "For each completed document, compare fresh reading with existing OCR/text extraction and existing first-pass audit findings.",
+    "Do not decide PR/mail/remediation disposition of findings during deep read unless explicitly requested."
+  ]
+}
