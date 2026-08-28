@@ -1,0 +1,50 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-28",
+  "base_registry": "audit_registry/deep_read_findings_v0.1.json",
+  "document_id": "VLS_V2.0",
+  "policy": "Delta is additive audit knowledge. It does not authorize schema changes or official-facing action.",
+  "new_findings": [],
+  "existing_finding_updates": [
+    {
+      "id": "VLS-002",
+      "effect": "Fresh byte-pinned V2.0 read and targeted visual rendering reconfirm that the PDF presents LiveStreamData as one multi-field record. Exact official tag VDV-301-2.0 XSD blob d8c52f5de9ef3f5915524fef12da11eabf0ca041 uses xs:choice. Existing EV-103 run 33111119723 remains the executable proof that PDF-shaped multi-field instances are rejected."
+    },
+    {
+      "id": "VLS-003",
+      "effect": "Resolved in V2.0 publication: visible V2.0 foreword consistently uses VDV 301-2-11 in German and English. The V1.0 wrong 301-2-1 text remains historical publication evidence."
+    },
+    {
+      "id": "VLS-004",
+      "effect": "Persists visibly in V2.0 page 35: VideoLiveService start/stop procedure contains VideoDisplayService immediately before the note returns to VideoLiveService/RTSP semantics."
+    },
+    {
+      "id": "VLS-005",
+      "effect": "Persists visibly in V2.0 pages 36-37: ListAllLiveStreamsData is printed -1:* and CameraCurrentState/VideoCodec are printed -1:1. Exact XSD declarations are consistent with 1:* / one occurrence inside the chosen branch if the leading hyphen is treated as editorial noise, but the audit does not silently rewrite the PDF."
+    }
+  ],
+  "visual_evidence": {
+    "source_id": "VLS_V2.0",
+    "source_sha256": "d75a543c138f21c4ad370925ca7f306bcde7d692ce793ddc1d51bdcf6032787b",
+    "source_size_bytes": 1218788,
+    "render_run": "33203850390",
+    "render_engine": "PyMuPDF 1.28.2",
+    "dpi": 180,
+    "pages": [4, 35, 36, 37, 41],
+    "interactive_screenshot_failure": "cache_miss",
+    "fallback_result": "success"
+  },
+  "xsd_evidence": {
+    "authority": "official VDV-301-2.0",
+    "service_xsd": "IBIS-IP_VideoLiveService_V2.0.xsd",
+    "service_xsd_blob": "d8c52f5de9ef3f5915524fef12da11eabf0ca041",
+    "dependency_family": ["IBIS-IP_common_V2.0.xsd", "IBIS-IP_Enumerations_V2.0.xsd"],
+    "executable_evidence": "EV-103",
+    "run_id": "33111119723"
+  },
+  "runtime_comparison": {
+    "evidence_id": "RV-004",
+    "run_id": "33119694991",
+    "effect": "No correction required. Fresh V2.0 reading independently agrees that rtspURI/RTSP control and RTP media remain separate from VDV XML metadata and that VideoLive START/STOP XML operations are not synthesized."
+  }
+}

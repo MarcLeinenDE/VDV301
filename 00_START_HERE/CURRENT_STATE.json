@@ -24,11 +24,11 @@
     "pairable_pdf_xsd_units": 38,
     "pairable_pdf_xsd_first_pass_completed": 38,
     "deep_read_exhaustive_completed": 0,
-    "deep_read_needs_visual_review": 12,
-    "deep_read_textual_fresh_read_completed": 12,
-    "deep_read_in_progress": 1,
-    "deep_read_current_document_id": "VLS_V2.0",
-    "deep_read_previous_document_id": "VLS_V1.0",
+    "deep_read_needs_visual_review": 13,
+    "deep_read_textual_fresh_read_completed": 13,
+    "deep_read_in_progress": 0,
+    "deep_read_current_document_id": null,
+    "deep_read_previous_document_id": "VLS_V2.0",
     "latest_deep_read_finding": "VLS-005",
     "latest_dms_finding": "DMS-007",
     "latest_common_finding": "CE-026",
@@ -43,9 +43,10 @@
     "pdf_sources_byte_pinned": 8,
     "pinned_active_sources": ["VDV301-2_GC_V2.3", "COMMON_V2.3", "VDV301-2_GC_V2.4", "DMS_V2.2", "DMS_V2.4", "TIME_V1.0", "VLS_V1.0", "VLS_V2.0"],
     "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_vls_v20_2026-08-28.json",
-    "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_vls_v10_2026-08-28.json",
+    "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_vls_v20_2026-08-28.json",
     "time_v1_0_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TIME_V1.0.md",
     "vls_v1_0_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/VLS_V1.0.md",
+    "vls_v2_0_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/VLS_V2.0.md",
     "vls_findings_register": "docs/pdf_xsd_semantic_audit/VIDEO_LIVE_SERVICE_FINDINGS_REGISTER_ADDENDUM.md",
     "vls_v1_0_source_pin": {
       "sha256": "f535673427ff8f495102e1fc7723ca157408949b981572c4342b862f6d9c2a3c",
@@ -54,19 +55,25 @@
       "pdf_authority": "official_public_VDV_writing",
       "xsd_authority_status": "no_official_release_tag_VideoLiveService_V1.0_service_xsd_confirmed"
     },
-    "vls_v1_0_visual_review": {
-      "interactive_backend": "cache_miss",
-      "fallback": "success",
-      "render_runs": ["33202961159", "33203162588"],
-      "pages": [4, 38, 39, 40, 41, 44, 45],
-      "status": "targeted_material_findings_visually_confirmed"
-    },
     "vls_v2_0_source_pin": {
       "sha256": "d75a543c138f21c4ad370925ca7f306bcde7d692ce793ddc1d51bdcf6032787b",
       "size_bytes": 1218788,
       "evidence_run": "33203673347",
       "pdf_authority": "official_public_VDV_writing",
       "xsd_authority_status": "official_VDV-301-2.0_service_xsd_family"
+    },
+    "vls_visual_review": {
+      "interactive_backend": "cache_miss",
+      "fallback": "success",
+      "v1_0_render_runs": ["33202961159", "33203162588"],
+      "v2_0_render_run": "33203850390",
+      "status": "targeted_material_findings_visually_confirmed"
+    },
+    "vls_v2_0_history": {
+      "VLS-002": "fresh PDF/XSD reconfirmed; EV-103 executable-confirmed",
+      "VLS-003": "corrected in V2.0",
+      "VLS-004": "persists visibly through V2.0",
+      "VLS-005": "persists visibly through V2.0"
     }
   },
   "evidence": {
@@ -76,7 +83,9 @@
     "latest_root_xsd_validation_run": "33197358294",
     "latest_rv_003_run": "33197358294",
     "latest_pdf_source_pin_run": "33203673347",
-    "latest_pdf_visual_render_run": "33203162588"
+    "latest_pdf_visual_render_run": "33203850390",
+    "vls_v2_0_executable_evidence": "EV-103 / 33111119723",
+    "vls_runtime_evidence": "RV-004 / 33119694991"
   },
   "sdk": {
     "status": "baseline_v0.1_prework_only_during_audit",
@@ -87,13 +96,11 @@
     "rule": "Findings/audit knowledge must later explain surprising validation results without silently changing normative XSD outcomes."
   },
   "next_actions": [
-    "Fresh-read byte-pinned VLS_V2.0 independently before consulting EV-103/RV-004 as templates.",
-    "Use pinned-byte rendering for material VLS V2.0 pages when interactive screenshots return cache miss.",
-    "Inventory ListAllLiveStreams response, LiveStreamData field set/cardinalities, start-stop prose, version history and RTSP/RTP references exactly as printed.",
-    "After independent PDF read, compare against exact official IBIS-IP_VideoLiveService_V2.0.xsd -> Common V2.0 -> Enumerations V2.0.",
-    "Re-evaluate VLS-002 and visually determine whether VLS-004/VLS-005 persist in V2.0.",
-    "Compare RV-004 only after the independent V2.0 PDF/XSD read; retain RTSP/RTP external authority separately.",
-    "Carry VLS V1.0 page-45 VRS/VDS version-label strings forward only as cross-document evidence for VRS_V1.0 and VDS_V1.0.",
+    "Byte-pin official VRS_V1.0 and fresh-read it independently before consulting V2.0/V2.4 VideoRecording findings.",
+    "Carry the ambiguous VLS reference-section VideoRecordingService version-label string into the VRS_V1.0 read without pre-classifying it.",
+    "Establish exact historical VRS V1.0 schema/provenance availability before mapping any schema.",
+    "Use pinned-byte rendering whenever interactive screenshots return cache miss.",
+    "After the independent VRS V1.0 read, compare later VRS V2.0 compositor evidence and V2.4 candidate correction only in their exact authority contexts.",
     "Byte-pin additional official PDFs only as each document enters Deep Read.",
     "Do not decide PR/mail/remediation disposition during Deep Read unless explicitly requested."
   ]

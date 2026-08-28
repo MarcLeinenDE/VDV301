@@ -4,33 +4,52 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "VLS_V2.0": {
-      "state": "in_progress",
+      "state": "needs_visual_review",
       "official_url": "https://www.vdv.de/301-2-11-sdes-v2-0-video-live-service.pdfx",
       "publication": "VDV-Schrift 301-2-11, VideoLiveService V2.0, 08/2019",
       "fresh_read_started": "2026-08-28",
-      "textual_fresh_read_complete": false,
-      "original_pdf_visual_review": "pending_pinned_byte_render_as_needed",
-      "preferred_reading_source": "byte-pinned official VLS V2.0 PDF first; exact official V2.0 XSD family only after independent PDF fresh read",
+      "textual_fresh_read_complete": true,
+      "original_pdf_visual_review": "targeted_pinned_byte_render_success",
+      "embedded_text_quality": "good_with_table_linewrap_and_minor_typo_artifacts",
+      "existing_audit_comparison": "completed_after_fresh_read",
+      "preferred_reading_source": "byte-pinned official PDF + exact official V2.0 XSD + targeted pinned-byte visible page rendering; EV-103/RV-004 consulted only after fresh read",
       "source_pin": {
         "sha256": "d75a543c138f21c4ad370925ca7f306bcde7d692ce793ddc1d51bdcf6032787b",
         "size_bytes": 1218788,
         "pin_registry": "audit_registry/pdf_source_pins_v0.1.json",
         "evidence_run": "33203673347"
       },
-      "authority_boundary": {
-        "pdf_authority": "official_public_VDV_writing",
-        "xsd_authority": "official VDV-301-2.0 IBIS-IP_VideoLiveService_V2.0.xsd -> Common V2.0 -> Enumerations V2.0",
-        "external_protocols": "RTSP/RTP remain separate external-protocol authority",
-        "rule": "Fresh-read V2.0 independently before using VLS-002/EV-103/RV-004 as comparison templates."
+      "official_xsd_route": {
+        "release_tag": "VDV-301-2.0",
+        "service_xsd": "IBIS-IP_VideoLiveService_V2.0.xsd",
+        "service_xsd_blob": "d8c52f5de9ef3f5915524fef12da11eabf0ca041",
+        "common": "IBIS-IP_common_V2.0.xsd",
+        "enumerations": "IBIS-IP_Enumerations_V2.0.xsd"
       },
-      "priority_cross_checks": [
-        "document identity, foreword and version history",
-        "ListAllLiveStreams operation/request/response tables",
-        "LiveStreamData field set and printed cardinalities",
-        "start/stop prose and any VideoDisplayService copy/paste persistence",
-        "RTSP/RTP control/media boundary",
-        "only after independent fresh read: exact V2.0 xs:choice behavior and EV-103",
-        "only after independent fresh read: RV-004 protocol boundary"
+      "visual_render_fallback": {
+        "interactive_backend_result": "cache_miss",
+        "fallback_result": "success",
+        "render_run": "33203850390",
+        "dpi": 180,
+        "render_engine": "PyMuPDF 1.28.2",
+        "visually_checked_pages": [4, 35, 36, 37, 41]
+      },
+      "finding_history": {
+        "VLS-002": "fresh PDF/XSD reconfirmed; EV-103 remains executable authority",
+        "VLS-003": "corrected in V2.0 publication",
+        "VLS-004": "persists visibly in V2.0",
+        "VLS-005": "persists visibly in V2.0"
+      },
+      "post_fresh_read_evidence": {
+        "EV-103": "33111119723",
+        "RV-004": "33119694991"
+      },
+      "new_findings": [],
+      "report": "docs/pdf_xsd_semantic_audit/deep_read/VLS_V2.0.md",
+      "source_conflicts": [
+        "PDF presents LiveStreamData as a combined multi-field record while exact official V2.0 XSD models the individual fields under xs:choice.",
+        "PDF visibly retains malformed leading-hyphen cardinality notation for selected rows.",
+        "Interactive screenshot backend returned cache miss; exact pinned bytes rendered successfully through the independent fallback."
       ]
     }
   }
