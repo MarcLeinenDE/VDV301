@@ -18,7 +18,10 @@ VDV 301-2 Base Services V2.0 notation table (fresh Deep Read Pass 2):
 VDV 301-2 Base Services V2.1 notation table (fresh Deep Read Pass 2):
   UnsubscribeData -> TerminateSubscribeRequestStructure / TerminateSubscribeResponseStructure
 
-General Conventions V2.3/V2.4 table 4:
+VDV 301-2 General Conventions V2.2 notation table (fresh Deep Read Pass 2):
+  UnsubscribeData -> TerminateSubscribeRequestStructure / TerminateSubscribeResponseStructure
+
+General Conventions V2.3/V2.4 first-pass table 4:
   UnsubscribeData -> TerminateSubscribeRequestStructure / TerminateSubscribeResponseStructure
 
 Checked Common V1.0/V2.0/V2.1/V2.2/V2.4:
@@ -30,8 +33,7 @@ Deep Read consequence:
 
 ```text
 The discrepancy is not merely a late V2.3/V2.4 documentation regression.
-It is present in the public VDV 301-2 V1.0 base publication and persists through Base Services V2.0 and V2.1.
-Affected-document history therefore spans the early base-service publications as well as later checked General Conventions.
+It is present from the V1.0 base publication through Base Services V2.0/V2.1 and General Conventions V2.2, and remains in the later checked conventions.
 ```
 
 Handling:
@@ -65,6 +67,8 @@ Fresh VDV 301-2 Base Services V2.1 Deep Read adds the contrasting model:
   - DMS V2.1 explicitly expands its operation group with generic Subscribe/Unsubscribe and control entries.
   - The same official VDV-301-2.1 tag still carries SystemDocumentation V2.0 and SystemManagement V1.0 with their sparser group style.
 ```
+
+General Conventions V2.2 further reinforces that operation semantics are a documentation/convention layer independent of any one service group's encoding style.
 
 Handling:
 
