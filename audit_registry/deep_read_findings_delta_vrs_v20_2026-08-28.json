@@ -1,0 +1,58 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-28",
+  "base_registry": "audit_registry/deep_read_findings_v0.1.json",
+  "document_id": "VRS_V2.0",
+  "policy": "Delta records version-specific Deep Read history. It does not authorize schema edits, latest-wins substitution or candidate promotion.",
+  "new_findings": [],
+  "existing_finding_updates": [
+    {
+      "id": "VRS-003",
+      "effect": "Fresh byte-pinned V2.0 PDF and exact official VDV-301-2.0 XSD reconfirm the mismatch directly: PDF presents one multi-field VideoRecordingStateResponse containing State, AlarmArchiveFillLevel, OperationErrorMessage and StartStopMode, while the official XSD models those four members as xs:choice. The integration-branch service XSD is byte-identical to the official release-tag blob 6ef0dae64ce6f4d3aa4f652d6d166896e71aaac7. EV-103 run 33111119723 remains exact executable confirmation."
+    },
+    {
+      "id": "VRS-004",
+      "effect": "Persists visibly in V2.0: operation inventory uses SubscribeVideoRecordingState/UnsubscribeVideoRecordingState, while page 21 detail headings say SubscribeDisplayState/UnsubscribeDisplayState. No alias is created."
+    },
+    {
+      "id": "VRS-005",
+      "effect": "Refine classification: V2.0 PDF operation table and exact official V2.0 XSD both use PauseRecordingRRMRequestStruture. It is a shared PDF/XSD typo-like identifier spelling, not a PDF/XSD mismatch. Exact spelling remains validation/codegen authority and must not be silently corrected. The checked V2.4 candidate XSD retains the same spelling."
+    },
+    {
+      "id": "VRS-006",
+      "effect": "Historically corrected by V2.0: the broken generated Word cross-reference placeholders visible in V1.0 subscription prose are absent on visible V2.0 page 21, which uses normal SubscribeRequest/SubscribeResponse and UnsubscribeRequest/UnsubscribeResponse prose."
+    },
+    {
+      "id": "VRS-007",
+      "effect": "Persists visibly in V2.0: page 18 prints State -1:1 and StartStopMode -1:1. Do not guess intended cardinalities; executable behavior remains XSD-defined."
+    },
+    {
+      "id": "VRS-008",
+      "effect": "Persists visibly in V2.0: section 2.5.4 is StopRecording but its request prose says StopRecordingERM. Operation inventory/XSD use StopRecording; no StopRecordingERM alias is created."
+    },
+    {
+      "id": "VRS-009",
+      "effect": "VideoLive reference portion persists visibly in V2.0: page 25 German VDV 301-2-11 line says VideoLiveService v1.0 while English says v1.1 alongside version 1.0/05-2017. Dedicated VLS V1.0 evidence keeps this classified as a reference/version-label error. Adjacent VideoDisplayService v1.1 remains deferred to VDS_V1.0."
+    }
+  ],
+  "authority_note": {
+    "v2_0_foreword": "The V2.0 writing says the service is compatible/compliant with VDV301 version 1.0 and 2.x.",
+    "resolver_rule": "Treat this as a service/document compatibility statement, not permission to substitute the V2.0 XSD for VRS V1.0. Exact schema provenance remains version-specific."
+  },
+  "visual_evidence": {
+    "source_sha256": "fbe9e68e72de4e5450f562aa6a6117283a94f87a28bded0e05458670527b6c5f",
+    "source_size_bytes": 941841,
+    "pin_run": "33206120045",
+    "render_run": "33206290291",
+    "pages": [4, 17, 18, 19, 20, 21, 25],
+    "method": "pinned-byte fallback renderer"
+  },
+  "xsd_evidence": {
+    "official_ref": "VDV-301-2.0",
+    "service_file": "IBIS-IP_VideoRecordingService_V2.0.xsd",
+    "official_git_blob": "6ef0dae64ce6f4d3aa4f652d6d166896e71aaac7",
+    "integration_git_blob": "6ef0dae64ce6f4d3aa4f652d6d166896e71aaac7",
+    "dependency_family": ["IBIS-IP_common_V2.0.xsd", "IBIS-IP_Enumerations_V2.0.xsd"],
+    "executable_evidence": "EV-103 / run 33111119723"
+  }
+}
