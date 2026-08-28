@@ -1,6 +1,7 @@
 # VDV301 public PDF coverage baseline
 
 Date: 2026-08-28
+Status: semantic first-pass coverage complete
 
 Canonical public list source:
 
@@ -29,22 +30,24 @@ physical PDF links: 50
 semantic publication/version units: 48
 ```
 
+The English VDV 301-1 file explicitly states that it is a convenience translation of the German V1.0/01-2014 document and that the German original applies in case of inconsistency. It is therefore not counted as a second normative semantic version.
+
 ## Metric A - semantic PDF first-pass coverage
 
-Current status:
+Current status after the dedicated VDV 301-1 architecture block:
 
 ```text
-47 / 48 semantic publication/version units covered by the audit first pass
-= 97.9 %
+48 / 48 semantic publication/version units covered by the audit first pass
+= 100 %
 ```
 
-The remaining dedicated publication block is:
+`First-pass covered` means the document/version has been read for audit-relevant semantics, version history, service/protocol model, relevant tables and PDF/XSD/protocol differences. It does NOT mean every page and every sentence has been independently marked as exhaustively reviewed.
+
+VDV 301-1 closure:
 
 ```text
-VDV 301-1 Systemarchitektur / System architecture
+docs/pdf_xsd_semantic_audit/28_vdv301_1_system_architecture_first_pass.md
 ```
-
-Important: `first-pass covered` means the document/version has been read for audit-relevant semantics, version history, service/protocol model, relevant tables and PDF/XSD/protocol differences. It does NOT mean every page and every sentence has been independently marked as exhaustively reviewed.
 
 ## Metric B - PDF <-> executable XSD comparison coverage
 
@@ -93,30 +96,41 @@ Candidate/integration XSDs count as executable comparison lanes only when they a
 
 Status: not previously measured with a defensible denominator.
 
-Do NOT infer 97.9 % here.
+Do NOT infer 100 % here.
 
-The historical audit used `first pass completed` as the service/document completion marker. Some high-value documents (especially Common/Enumerations, General Conventions and finding-heavy service structures) received deeper table-level review, while other service documents received a targeted semantic first pass.
+The historical audit used `first pass completed` as the service/document completion marker. Some high-value documents, especially Common/Enumerations, General Conventions and finding-heavy service structures, received deeper table-level review, while other service documents received a targeted semantic first pass.
 
-Next tracking step:
-
-```text
-Add a dedicated deep-read state per semantic publication unit:
-not_started | targeted_first_pass | table_level_deep_pass | exhaustive_read
-```
-
-Until that inventory is completed, the honest statement is:
+Tracking rule going forward:
 
 ```text
-Semantic first-pass PDF coverage: ~98 %
-Pairable PDF/XSD first-pass coverage: 100 %
-Exhaustive all-pages/all-tables reading: substantial, but no defensible percentage yet
+not_started
+  no meaningful document review yet
+
+targeted_first_pass
+  architecture/service/version/protocol semantics and audit-relevant tables checked
+
+table_level_deep_pass
+  systematic table/structure-level comparison performed
+
+exhaustive_read
+  complete page/table/figure review explicitly tracked and closed
 ```
+
+Current honest statement:
+
+```text
+Semantic first-pass PDF coverage:                100 %
+Pairable PDF/XSD first-pass coverage:             100 %
+Exhaustive all-pages/all-tables reading coverage: not yet defensibly quantified
+```
+
+The next optional document-work phase is therefore not `finish unread VDV301 PDFs`; it is a second-pass/deep-read phase targeted by risk and audit value.
 
 ## Scope group inventory
 
 | Public area | Physical PDFs | Semantic units | First-pass state | XSD lane |
 |---|---:|---:|---|---|
-| VDV 301-1 System architecture DE/EN | 2 | 1 | pending dedicated block | architecture / no direct service XSD |
+| VDV 301-1 System architecture DE/EN | 2 | 1 | covered | architecture / no direct service XSD |
 | VDV 301-2 V1.0 interface/base services DE/EN | 2 | 1 | covered | legacy aggregate/service XSD routing |
 | Base Services V2.0/V2.1 | 2 | 2 | covered | executable XSD families |
 | General Conventions V2.2/V2.3/V2.4 | 3 | 3 | covered | common/service/protocol authority mapping |
@@ -141,4 +155,4 @@ Exhaustive all-pages/all-tables reading: substantial, but no defensible percenta
 | SystemMonitoringService | 1 | 1 | covered | executable XSD |
 | AnalogRadioService | 1 | 1 | covered | candidate executable XSD |
 | VDV 301-3 Network infrastructure | 1 | 1 | covered | network/protocol profile |
-| **Total** | **50** | **48** | **47 covered / 1 pending** | **38 direct executable-XSD semantic units** |
+| **Total** | **50** | **48** | **48 covered / 0 pending** | **38 direct executable-XSD semantic units** |
