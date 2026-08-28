@@ -27,9 +27,18 @@ Classification: `pdf_table_or_documentation_error_candidate`.
 Observed:
 
 ```text
-German V2.2/V2.4: no specific IP-address allocation rule; address ranges must be consistent; fixed IP/DHCP best practice.
-English V2.2/V2.4: retained ZeroConf wording, RFC 2927 reference and 169.254.x.x language.
-Historical V2.3 observation follows the same pattern.
+VDV 301-2 Base Services V2.0 fresh Deep Read:
+  German ZeroConf/link-local paragraph cites RFC 3927.
+  English translation of the same passage still cites RFC 2927.
+  Bibliography lists RFC 3927.
+
+German V2.2/V2.4:
+  no specific IP-address allocation rule; address ranges must be consistent; fixed IP/DHCP best practice.
+
+English V2.2/V2.4:
+  retained ZeroConf wording, RFC 2927 reference and 169.254.x.x language.
+
+Historical V2.3 observation follows the later German/English conflict pattern.
 ```
 
 Handling:
@@ -38,6 +47,7 @@ Handling:
 Do not enforce ZeroConf/169.254 as a hard VDV rule from the English text alone.
 Do not silently choose one language version as corrected authority.
 Expose the documentation conflict if relevant to diagnostics.
+Preserve version/language provenance when explaining the rule.
 ```
 
 ## DISC-002 - RFC 2927 reference is unrelated to IPv4 Link-Local addressing
@@ -49,6 +59,14 @@ External corroboration:
 ```text
 RFC 2927: MIME Directory Profile for LDAP Schema.
 RFC 3927: Dynamic Configuration of IPv4 Link-Local Addresses, 169.254/16.
+```
+
+Deep Read history:
+
+```text
+VDV 301-2 V1.0 cites RFC 2927.
+VDV 301-2 Base Services V2.0 corrects the German text to RFC 3927,
+but the English translation still cites RFC 2927; the bibliography uses RFC 3927.
 ```
 
 Handling: reference-number correction candidate only; does not override DISC-001.

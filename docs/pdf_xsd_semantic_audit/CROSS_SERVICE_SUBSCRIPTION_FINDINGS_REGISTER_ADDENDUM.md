@@ -12,6 +12,9 @@ Evidence history:
 VDV 301-2 V1.0 table 4 (fresh Deep Read Pass 2):
   UnsubscribeData -> TerminateSubscribeRequestStructure / TerminateSubscribeResponseStructure
 
+VDV 301-2 Base Services V2.0 notation table (fresh Deep Read Pass 2):
+  UnsubscribeData -> TerminateSubscribeRequestStructure / TerminateSubscribeResponseStructure
+
 General Conventions V2.3/V2.4 table 4:
   UnsubscribeData -> TerminateSubscribeRequestStructure / TerminateSubscribeResponseStructure
 
@@ -24,8 +27,8 @@ Deep Read consequence:
 
 ```text
 The discrepancy is not merely a late V2.3/V2.4 documentation regression.
-It is already present in the public VDV 301-2 V1.0 base publication.
-Affected-document history is therefore extended back to V1.0.
+It is present in the public VDV 301-2 V1.0 base publication and persists in Base Services V2.0.
+Affected-document history therefore extends across the early base-service publications.
 ```
 
 Handling:
@@ -46,7 +49,14 @@ Evidence:
 
 ```text
 DMS V2.2 operation group explicitly lists service-prefixed Subscribe/Unsubscribe elements typed with generic Common structures.
+
 CIS V2.x and SMS V2.2 document subscription operations but their local operation groups omit equivalent service-prefixed subscription entries.
+
+Fresh VDV 301-2 Base Services V2.0 Deep Read adds:
+  - SystemDocumentationService V2.0 PDF documents Subscribe/UnsubscribeSystemConfiguration,
+    while the exact service group contains only service-specific payload roots and omits equivalent generic subscription entries.
+  - SystemManagementService is still exact V1.0 in official tag VDV-301-2.0; the PDF documents subscription operations,
+    while the exact V1.0 group contains only GetDeviceStatusResponse and GetServiceStatusResponse.
 ```
 
 Handling:
@@ -55,6 +65,7 @@ Handling:
 Do not derive supported operations solely from service-group membership.
 Do not rewrite schemas to force one style.
 Use a separate operation manifest in the SDK.
+Route every operation against its exact service/document version and dependency pool.
 ```
 
 ## Cross-reference resolutions
