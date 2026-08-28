@@ -2,7 +2,6 @@
   "state_schema_version": "0.1",
   "date": "2026-08-28",
   "canonical_branch": "dev/schema-integration",
-  "baseline_parent_commit": "25762e6471555bd05422fd244abce8d95e33c79a",
   "workflow_mode": "manual_only",
   "project_phase": "deep_read_pass_2",
   "superbranch": {
@@ -20,9 +19,11 @@
     "first_pass_completed": 48,
     "pairable_pdf_xsd_units": 38,
     "pairable_pdf_xsd_first_pass_completed": 38,
-    "deep_read_completed": 0,
+    "deep_read_exhaustive_completed": 0,
+    "deep_read_needs_visual_review": 1,
     "deep_read_in_progress": 1,
-    "deep_read_current_document_id": "VDV301-1_V1.0_DE"
+    "deep_read_current_document_id": "VDV301-2_V1.0_DE",
+    "deep_read_previous_document_id": "VDV301-1_V1.0_DE"
   },
   "evidence": {
     "xsd_ev_completed": ["EV-001", "EV-002", "EV-101", "EV-102", "EV-103", "EV-104", "EV-105"],
@@ -37,9 +38,10 @@
     "rule": "Findings/audit knowledge must later explain surprising validation results without silently changing normative XSD outcomes."
   },
   "next_actions": [
-    "Complete fresh deep read of VDV 301-1 V1.0 from the original PDF and record source-quality comparison.",
-    "Proceed through all 48 semantic document units using docs/pdf_xsd_semantic_audit/DEEP_READ_METHOD.md.",
-    "For each completed document, compare fresh reading with existing OCR/text extraction and existing first-pass audit findings.",
+    "Fresh-read VDV 301-2 V1.0 from the original PDF; compare with OCR/old audit only after fresh reading.",
+    "Use VDV 301-2 V1.0 to classify DR3011-002 SystemManagement operation-name mismatch.",
+    "Retry visual page review for VDV 301-1 when PDF screenshots are available; only then consider exhaustive_read.",
+    "Proceed through all 48 semantic document units using DEEP_READ_METHOD.md.",
     "Do not decide PR/mail/remediation disposition of findings during deep read unless explicitly requested."
   ]
 }
