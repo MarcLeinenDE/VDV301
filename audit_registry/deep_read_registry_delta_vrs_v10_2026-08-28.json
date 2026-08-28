@@ -4,35 +4,41 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "VRS_V1.0": {
-      "state": "in_progress",
+      "state": "needs_visual_review",
       "official_url": "https://www.vdv.de/301-2-12-sds.pdfx",
       "publication": "VDV-Schrift 301-2-12, VideoRecordingService V1.0, 05/2017",
       "fresh_read_started": "2026-08-28",
-      "textual_fresh_read_complete": false,
-      "original_pdf_visual_review": "pending_pinned_byte_render_as_needed",
-      "preferred_reading_source": "byte-pinned official VRS V1.0 PDF first; establish historical XSD/provenance independently before consulting VRS V2.0/V2.4 findings",
+      "textual_fresh_read_complete": true,
+      "original_pdf_visual_review": "targeted_material_pages_complete_via_pinned_byte_fallback",
+      "preferred_reading_source": "byte-pinned official VRS V1.0 PDF; later V2.0/V2.4 evidence consulted only after independent V1.0 read",
       "source_pin": {
         "sha256": "29d0bcb270fdab2119c4653296d4bca01e0f8b127eb9aaf393f66b2b34dcd390",
         "size_bytes": 1227302,
         "pin_registry": "audit_registry/pdf_source_pins_v0.1.json",
         "evidence_run": "33204215397"
       },
+      "visual_evidence": {
+        "render_run": "33204547867",
+        "pages": [4, 42, 43, 44, 45, 46, 50, 51],
+        "method": "tools/render_vdv_pdf_pages.py pinned-byte fallback"
+      },
       "authority_boundary": {
         "pdf_authority": "official_public_VDV_writing",
-        "xsd_authority": "to_be_established_from_exact_historical_release/provenance; do not substitute V2.0 or V2.4 by convenience",
-        "rule": "Fresh-read V1.0 writing and determine exact historical schema availability before comparing later compositor/correction evidence."
+        "xsd_authority": "unresolved_for_V1.0_no_exact_official_service_xsd_confirmed",
+        "historical_repository_checks": [
+          "complete VDV-301-1.0 tag tree",
+          "IBIS_IP_V1.0.xsd contents",
+          "commit history for IBIS-IP_VideoRecordingService_V1.0.xsd"
+        ],
+        "rule": "Do not substitute VRS V2.0 or candidate V2.4 for V1.0."
       },
-      "cross_document_input": [
-        "VLS V1.0/V2.0 reference sections contain an ambiguous VideoRecordingService version string resembling 'v1.1, 1.0, 05/2017'; carry it as an open question only."
+      "finding_updates": ["VRS-001", "VRS-003", "VRS-004"],
+      "new_findings": ["VRS-006", "VRS-007", "VRS-008", "VRS-009"],
+      "cross_document_output": [
+        "VDV 301-2-11 VideoLiveService English reference v1.1 is resolved as a documentation/version-label error against the dedicated VLS V1.0 evidence.",
+        "VideoDisplayService v1.1 reference remains deferred until VDS_V1.0 Deep Read."
       ],
-      "priority_cross_checks": [
-        "document identity, cover, foreword and version history",
-        "service operation inventory and response structures",
-        "VideoRecording state/status structures and field grouping",
-        "exact historical official-tag VRS V1.0 XSD availability/provenance",
-        "meaning of any document/service revision labels such as v1.1 / 1.0",
-        "only after independent fresh read: compare VRS V2.0 xs:choice finding and V2.4 candidate control"
-      ]
+      "completion_note": "Targeted material visual findings are confirmed, but an all-page/all-figure visual pass has not been completed; retain needs_visual_review."
     }
   }
 }

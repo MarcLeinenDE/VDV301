@@ -1,0 +1,67 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-28",
+  "base_registry": "audit_registry/deep_read_findings_v0.1.json",
+  "document_id": "VRS_V1.0",
+  "policy": "Delta is additive audit knowledge. It does not authorize schema changes, silent version substitution or official-facing action.",
+  "existing_finding_updates": [
+    {
+      "id": "VRS-001",
+      "effect": "Strongly confirmed for the checked official repository history: the complete VDV-301-1.0 tag has no VideoRecordingService V1.0 service XSD, the monolithic IBIS_IP_V1.0.xsd has no VideoRecording declarations/includes, and the expected historical path IBIS-IP_VideoRecordingService_V1.0.xsd has no commits. Keep V1.0 strict XSD authority unresolved and do not substitute V2.0/V2.4."
+    },
+    {
+      "id": "VRS-003",
+      "effect": "Fresh V1.0 PDF provides independent historical evidence that VideoRecordingStateResponse is described as a grouped multi-field state record containing State, AlarmArchiveFillLevel, OperationErrorMessage and StartStopMode. Executable finding scope remains official V2.0 only because no exact V1.0 service XSD is confirmed."
+    },
+    {
+      "id": "VRS-004",
+      "effect": "Visually confirmed from pinned V1.0 bytes: the operation table uses SubscribeVideoRecordingState/UnsubscribeVideoRecordingState while the detailed headings say SubscribeDisplayState/UnsubscribeDisplayState. No DisplayState alias is created."
+    }
+  ],
+  "new_findings": [
+    {
+      "id": "VRS-006",
+      "document_id": "VRS_V1.0",
+      "classification": "pdf_editorial_cross_reference_error_candidate",
+      "state": "visually_confirmed",
+      "confidence": "very_high",
+      "summary": "Both V1.0 subscription detail paragraphs visibly contain the generated Word placeholder 'Fehler! Verweisquelle konnte nicht gefunden werden..' while attempting to refer to Common subscription structure sections.",
+      "normative_validation_impact": "none; resolve generic subscription structures from selected Common authority, not the broken page reference"
+    },
+    {
+      "id": "VRS-007",
+      "document_id": "VRS_V1.0",
+      "classification": "pdf_cardinality_notation_error_candidate",
+      "state": "visually_confirmed",
+      "confidence": "very_high",
+      "summary": "The V1.0 VideoRecordingStateResponse table visibly prints '-1:1' for State and StartStopMode.",
+      "normative_validation_impact": "none for V1.0 because no exact strict XSD profile is confirmed; do not guess the intended cardinality"
+    },
+    {
+      "id": "VRS-008",
+      "document_id": "VRS_V1.0",
+      "classification": "pdf_operation_name_copy_paste_error_candidate",
+      "state": "visually_confirmed",
+      "confidence": "very_high",
+      "summary": "The V1.0 section headed 'Data structure of operation StopRecording' says in its request prose that no data is required for operation StopRecordingERM, while the operation inventory contains StopRecording and no StopRecordingERM.",
+      "normative_validation_impact": "documentation/resolver only; do not create StopRecordingERM alias"
+    },
+    {
+      "id": "VRS-009",
+      "document_id": "VRS_V1.0",
+      "classification": "pdf_reference_version_label_error_candidate",
+      "state": "visually_confirmed_cross_document",
+      "confidence": "very_high_for_VideoLive_reference",
+      "summary": "The V1.0 references page labels the English VDV 301-2-11 VideoLiveService reference as v1.1 while the German line says v1.0 and the dedicated pinned VLS V1.0 audit establishes VDV 301-2-11 as VideoLiveService V1.0, 05/2017.",
+      "normative_validation_impact": "none; do not reinterpret VDV 301-2-11 as a V1.1 validation profile",
+      "deferred_cross_document_note": "The adjacent VideoDisplayService v1.1 label remains open until the dedicated VDS V1.0 Deep Read."
+    }
+  ],
+  "visual_evidence": {
+    "render_run": "33204547867",
+    "pages": [4, 42, 43, 44, 45, 46, 50, 51],
+    "source_sha256": "29d0bcb270fdab2119c4653296d4bca01e0f8b127eb9aaf393f66b2b34dcd390",
+    "source_size_bytes": 1227302,
+    "method": "pinned-byte fallback renderer"
+  }
+}

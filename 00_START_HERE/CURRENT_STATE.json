@@ -24,12 +24,12 @@
     "pairable_pdf_xsd_units": 38,
     "pairable_pdf_xsd_first_pass_completed": 38,
     "deep_read_exhaustive_completed": 0,
-    "deep_read_needs_visual_review": 13,
-    "deep_read_textual_fresh_read_completed": 13,
-    "deep_read_in_progress": 1,
-    "deep_read_current_document_id": "VRS_V1.0",
-    "deep_read_previous_document_id": "VLS_V2.0",
-    "latest_deep_read_finding": "VLS-005",
+    "deep_read_needs_visual_review": 14,
+    "deep_read_textual_fresh_read_completed": 14,
+    "deep_read_in_progress": 0,
+    "deep_read_current_document_id": null,
+    "deep_read_previous_document_id": "VRS_V1.0",
+    "latest_deep_read_finding": "VRS-009",
     "latest_dms_finding": "DMS-007",
     "latest_common_finding": "CE-026",
     "resolved_historical_finding": "DR3012-006",
@@ -43,17 +43,34 @@
     "pdf_sources_byte_pinned": 9,
     "pinned_active_sources": ["VDV301-2_GC_V2.3", "COMMON_V2.3", "VDV301-2_GC_V2.4", "DMS_V2.2", "DMS_V2.4", "TIME_V1.0", "VLS_V1.0", "VLS_V2.0", "VRS_V1.0"],
     "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_vrs_v10_2026-08-28.json",
-    "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_vls_v20_2026-08-28.json",
+    "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_vrs_v10_2026-08-28.json",
     "time_v1_0_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TIME_V1.0.md",
     "vls_v1_0_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/VLS_V1.0.md",
     "vls_v2_0_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/VLS_V2.0.md",
+    "vrs_v1_0_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/VRS_V1.0.md",
     "vls_findings_register": "docs/pdf_xsd_semantic_audit/VIDEO_LIVE_SERVICE_FINDINGS_REGISTER_ADDENDUM.md",
+    "vrs_findings_register": "docs/pdf_xsd_semantic_audit/VIDEO_RECORDING_SERVICE_FINDINGS_REGISTER_ADDENDUM.md",
     "vrs_v1_0_source_pin": {
       "sha256": "29d0bcb270fdab2119c4653296d4bca01e0f8b127eb9aaf393f66b2b34dcd390",
       "size_bytes": 1227302,
       "evidence_run": "33204215397",
       "pdf_authority": "official_public_VDV_writing",
-      "xsd_authority_status": "to_be_established_independently"
+      "xsd_authority_status": "no_exact_official_V1.0_service_xsd_confirmed_in_checked_repository_history"
+    },
+    "vrs_v1_0_visual_review": {
+      "fallback": "success",
+      "render_run": "33204547867",
+      "pages": [4, 42, 43, 44, 45, 46, 50, 51],
+      "status": "targeted_material_findings_visually_confirmed"
+    },
+    "vrs_v1_0_history": {
+      "VRS-001": "strongly confirmed provenance gap",
+      "VRS-003": "V1.0 grouped-state PDF semantics added as historical evidence only; executable scope remains V2.0",
+      "VRS-004": "visually confirmed",
+      "VRS-006": "new broken generated cross-reference finding",
+      "VRS-007": "new invalid -1:1 printed cardinality finding",
+      "VRS-008": "new StopRecordingERM operation-name copy/paste finding",
+      "VRS-009": "new VideoLiveService v1.1 reference-version label finding"
     }
   },
   "evidence": {
@@ -63,8 +80,9 @@
     "latest_root_xsd_validation_run": "33197358294",
     "latest_rv_003_run": "33197358294",
     "latest_pdf_source_pin_run": "33204215397",
-    "latest_pdf_visual_render_run": "33203850390",
+    "latest_pdf_visual_render_run": "33204547867",
     "vls_v2_0_executable_evidence": "EV-103 / 33111119723",
+    "vrs_v2_0_executable_evidence": "EV-103 / 33111119723",
     "vls_runtime_evidence": "RV-004 / 33119694991"
   },
   "sdk": {
@@ -76,11 +94,11 @@
     "rule": "Findings/audit knowledge must later explain surprising validation results without silently changing normative XSD outcomes."
   },
   "next_actions": [
-    "Fresh-read byte-pinned VRS_V1.0 independently before consulting V2.0/V2.4 VideoRecording findings.",
-    "Carry the ambiguous VLS reference-section VideoRecordingService version-label string into the VRS_V1.0 read without pre-classifying it.",
-    "Establish exact historical VRS V1.0 schema/provenance availability before mapping any schema.",
+    "Byte-pin official VRS_V2.0 and fresh-read it independently before using EV-103 or V2.4 candidate history as interpretation shortcuts.",
+    "For VRS V2.0, establish its own operation inventory, shared state-response semantics, heading/cross-reference persistence and exact official schema-family relation.",
+    "Only after the independent VRS V2.0 read, compare VRS-003 executable evidence and the V2.4 candidate correction in their exact authority contexts.",
+    "Carry the VRS V1.0 VideoDisplayService v1.1 reference string forward as unresolved cross-document evidence for VDS_V1.0.",
     "Use pinned-byte rendering whenever interactive screenshots return cache miss.",
-    "After the independent VRS V1.0 read, compare later VRS V2.0 compositor evidence and V2.4 candidate correction only in their exact authority contexts.",
     "Byte-pin additional official PDFs only as each document enters Deep Read.",
     "Do not decide PR/mail/remediation disposition during Deep Read unless explicitly requested."
   ]
