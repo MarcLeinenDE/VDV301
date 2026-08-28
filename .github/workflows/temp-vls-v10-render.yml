@@ -22,13 +22,13 @@ jobs:
         run: |
           python tools/render_vdv_pdf_pages.py \
             --source-id VLS_V1.0 \
-            --pages 4,39-41,44 \
+            --pages 38,45 \
             --dpi 180 \
             --out-dir audit-results/vls-v10-renders
 
       - name: Upload visual review evidence
         uses: actions/upload-artifact@v4
         with:
-          name: vls-v10-visual-review
+          name: vls-v10-visual-review-2
           path: audit-results/vls-v10-renders/
           if-no-files-found: error
