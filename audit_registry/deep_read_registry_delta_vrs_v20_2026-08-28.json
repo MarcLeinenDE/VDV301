@@ -1,0 +1,43 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-28",
+  "base_registry": "audit_registry/deep_read_registry_v0.1.json",
+  "document_updates": {
+    "VRS_V2.0": {
+      "state": "in_progress",
+      "official_url": "https://www.vdv.de/301-2-12-sdes-v2-0-video-recording-service.pdfx",
+      "publication": "VDV-Schrift 301-2-12, VideoRecordingService V2.0, 08/2019",
+      "fresh_read_started": "2026-08-28",
+      "textual_fresh_read_complete": false,
+      "original_pdf_visual_review": "pending_pinned_byte_render",
+      "preferred_reading_source": "byte-pinned official VRS V2.0 PDF first; only after independent read compare EV-103 and V2.4 candidate history",
+      "source_pin": {
+        "sha256": "fbe9e68e72de4e5450f562aa6a6117283a94f87a28bded0e05458670527b6c5f",
+        "size_bytes": 941841,
+        "pin_registry": "audit_registry/pdf_source_pins_v0.1.json",
+        "evidence_run": "33206120045"
+      },
+      "authority_boundary": {
+        "pdf_authority": "official_public_VDV_writing",
+        "xsd_authority": "to_be_established_from_exact_official_V2.0_release_tag_before_comparison",
+        "candidate_v2_4": "excluded_until_independent_V2.0_read_complete",
+        "rule": "Do not use V2.4 candidate correction or EV-103 as a template while fresh-reading V2.0."
+      },
+      "fresh_text_observations_pending_visual_confirmation": [
+        "VRS-004 SubscribeDisplayState/UnsubscribeDisplayState headings appear to persist",
+        "VRS-007 printed -1:1 State/StartStopMode cardinalities appear to persist",
+        "VRS-008 StopRecording request prose still says StopRecordingERM",
+        "VRS-006 broken Word cross-reference placeholders appear corrected/absent",
+        "reference page continues VideoLiveService v1.1 and VideoDisplayService v1.1 labels",
+        "operation table spells PauseRecordingRRMRequestStruture"
+      ],
+      "priority_cross_checks": [
+        "operation inventory and exact shared response semantics",
+        "visual persistence/correction of VRS-004/VRS-006/VRS-007/VRS-008/VRS-009",
+        "exact official V2.0 XSD family and PauseRecordingRRMRequestStruture spelling",
+        "only after independent read: VRS-003 EV-103 executable behavior",
+        "only after independent read: V2.4 candidate correction history"
+      ]
+    }
+  }
+}
