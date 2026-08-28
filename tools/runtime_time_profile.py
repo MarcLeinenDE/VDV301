@@ -172,6 +172,11 @@ def check_time_service_discovery(ad: DiscoveryAdvertisement) -> list[CheckResult
     return results
 
 
+def cyclic_time_broadcast_expected() -> bool:
+    """TimeService V1.0 explicitly says no cyclic transmission of current time is intended."""
+    return False
+
+
 def _parse_result(packet: bytes) -> tuple[SntpHeader | None, list[CheckResult]]:
     try:
         header = parse_sntp_header(packet)
