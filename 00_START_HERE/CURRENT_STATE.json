@@ -35,10 +35,9 @@
     "deep_read_exhaustive_completed": 0,
     "deep_read_needs_visual_review": 10,
     "deep_read_textual_fresh_read_completed": 10,
-    "deep_read_in_progress": 0,
-    "deep_read_current_document_id": null,
+    "deep_read_in_progress": 1,
+    "deep_read_current_document_id": "TIME_V1.0",
     "deep_read_previous_document_id": "DMS_V2.4",
-    "next_deep_read_document_id": "TIME_V1.0",
     "latest_deep_read_finding": "DRDMS24-001",
     "latest_dms_finding": "DMS-007",
     "latest_common_finding": "CE-026",
@@ -48,16 +47,16 @@
     "pdf_source_fetcher": "tools/fetch_vdv_pdf_sources.py",
     "pdf_source_registry_entries": 50,
     "pdf_source_semantic_units": 48,
-    "pdf_sources_byte_pinned": 5,
+    "pdf_sources_byte_pinned": 6,
     "pdf_source_catalog_verified_date": "2026-08-28",
     "local_pdf_cache_path": "local_sources/vdv_pdfs",
     "local_pdf_cache_tracked_in_git": false,
-    "pinned_active_sources": ["VDV301-2_GC_V2.3", "COMMON_V2.3", "VDV301-2_GC_V2.4", "DMS_V2.2", "DMS_V2.4"],
+    "pinned_active_sources": ["VDV301-2_GC_V2.3", "COMMON_V2.3", "VDV301-2_GC_V2.4", "DMS_V2.2", "DMS_V2.4", "TIME_V1.0"],
     "ce_020_original_pdf_table_visual_confirmation": "confirmed",
     "pdf_source_pin_registry": "audit_registry/pdf_source_pins_v0.1.json",
     "pdf_source_pin_verifier": "tools/verify_vdv_pdf_source_pins.py",
     "deep_read_registry_base": "audit_registry/deep_read_registry_v0.1.json",
-    "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_dms_v24_2026-08-28.json",
+    "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_time_v10_2026-08-28.json",
     "deep_read_findings_base": "audit_registry/deep_read_findings_v0.1.json",
     "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_dms_v24_2026-08-28.json",
     "common_v2_3_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3.md",
@@ -66,17 +65,19 @@
     "dms_v2_4_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/DMS_V2.4.md",
     "common_findings_register": "docs/pdf_xsd_semantic_audit/COMMON_FINDINGS_REGISTER_ADDENDUM.md",
     "dms_findings_register": "docs/pdf_xsd_semantic_audit/DEVICE_MANAGEMENT_SERVICE_FINDINGS_REGISTER_ADDENDUM.md",
-    "dms_v2_2_source_pin": {
-      "sha256": "72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e",
-      "size_bytes": 1173719,
-      "evidence_run": "33180310954"
-    },
     "dms_v2_4_source_pin": {
       "sha256": "347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd",
       "size_bytes": 1298127,
       "evidence_run": "33182486754",
       "pdf_authority": "official_public_VDV_writing",
       "xsd_authority_note": "repository DMS V2.4 XSD remains candidate/integration material"
+    },
+    "time_v1_0_source_pin": {
+      "sha256": "d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3",
+      "size_bytes": 515920,
+      "evidence_run": "33196758957",
+      "pdf_authority": "official_public_VDV_writing",
+      "validation_lane": "protocol_discovery_profile_non_xsd"
     }
   },
   "evidence": {
@@ -87,7 +88,7 @@
     "latest_common_v2_3_variant_run": "33182963733",
     "latest_dms_v2_2_evidence_run": "33182963733",
     "latest_dms_v2_4_evidence_run": "33182963733",
-    "latest_pdf_source_pin_run": "33182486754"
+    "latest_pdf_source_pin_run": "33196758957"
   },
   "sdk": {
     "status": "baseline_v0.1_prework_only_during_audit",
@@ -98,10 +99,11 @@
     "rule": "Findings/audit knowledge must later explain surprising validation results without silently changing normative XSD outcomes."
   },
   "next_actions": [
-    "Byte-pin official TIME_V1.0 / VDV 301-2-10 TimeService V1.0 as next Deep Read source.",
-    "Fresh-read TIME_V1.0 independently before consulting DR3012-006 or RV-003 as a template.",
+    "Fresh-read byte-pinned TIME_V1.0 independently before consulting DR3012-006 or RV-003 as a template.",
     "Resolve the historical VDV 301-2-11 TimeService cross-reference context using document/publication history before classification.",
+    "Inventory TimeService DNS-SD TXT/SRV semantics and SNTP/timezone requirements exactly as printed before external-standard comparison.",
     "Retain TimeService as a non-XSD protocol/discovery profile; do not synthesize XML operations or a schema.",
+    "After the independent fresh read, compare the selected historical external-protocol references with RV-003 without latest-version substitution.",
     "Use visible PDF screenshots for layout-sensitive findings; if rendering fails, retain needs_visual_review rather than promoting exhaustive_read.",
     "Byte-pin additional official PDFs as each document enters render-first Deep Read; never bulk-repin an existing changed source.",
     "Proceed through all 48 semantic document units using DEEP_READ_METHOD.md.",

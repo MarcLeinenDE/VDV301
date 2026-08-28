@@ -1,0 +1,36 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-28",
+  "base_registry": "audit_registry/deep_read_registry_v0.1.json",
+  "document_updates": {
+    "TIME_V1.0": {
+      "state": "in_progress",
+      "official_url": "https://www.vdv.de/301-2-10sds-v-1-01.pdfx",
+      "publication": "VDV-Schrift 301-2-10, TimeService V1.0",
+      "fresh_read_started": "2026-08-28",
+      "textual_fresh_read_complete": false,
+      "original_pdf_visual_review": "pending",
+      "preferred_reading_source": "byte-pinned official TimeService V1.0 PDF; non-XSD protocol/discovery authority lane; compare DR3012-006 and RV-003 only after independent fresh read",
+      "source_pin": {
+        "sha256": "d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3",
+        "size_bytes": 515920,
+        "pin_registry": "audit_registry/pdf_source_pins_v0.1.json",
+        "evidence_run": "33196758957"
+      },
+      "authority_boundary": {
+        "pdf_authority": "official_public_VDV_writing",
+        "validation_lane": "protocol_discovery_profile",
+        "xsd_authority": "not_applicable_by_design",
+        "rule": "Do not synthesize TimeService XML operations or an XSD. External SNTP/DNS-SD standards are consulted only after the VDV fresh read establishes the selected profile."
+      },
+      "priority_cross_checks": [
+        "independent operation/service description and DNS-SD metadata",
+        "SNTP server and timezone semantics as printed in the VDV document",
+        "historical document numbering and any reference to VDV 301-2-11",
+        "publication/date/version context needed to resolve DR3012-006",
+        "only after fresh read: compare deterministic RV-003 assumptions with document text",
+        "do not replace historically referenced external protocol version with a newer standard automatically"
+      ]
+    }
+  }
+}
