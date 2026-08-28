@@ -78,23 +78,24 @@ No XSD change is made in the audit branch.
 
 ## CE-019 - ServiceIdentificationWithStateList item type/reference PDF vs XSD
 
-State: potential PDF table/documentation type discrepancy; visual confirmation pending.
+State: native-text cross-version discrepancy confirmed; visible-page confirmation still pending.
 
 Classification:
 
 ```text
-mismatch_kind: type
+mismatch_kind: type/reference
 likely_source_issue: pdf_table_or_documentation_error_candidate
-classification_confidence: medium-high pending visual PDF confirmation
-version_scope: text extraction indicates persistence across checked V2.1-V2.4 documents
+classification_confidence: high from native PDF text plus exact XSD cross-check; visual closure pending
+version_scope: checked documentation V2.1-V2.4; exact XSD type checked in Common family
 validation_behavior: exact XSD type ServiceIdentificationWithStateStructure
 final_handling_bucket: unresolved_keep_open
 ```
 
-Observed PDF extraction:
+PDF evidence:
 
 ```text
-The ServiceIdentificationWithStateList row names the item ServiceIdentificationWithState but the associated referenced structure/type is extracted as ServiceSpecificationWithState.
+The ServiceIdentificationWithStateList row names the item ServiceIdentificationWithState but the associated referenced structure/type is ServiceSpecificationWithState.
+The fresh byte-pinned Common V2.3 native-text read independently reconfirmed this wording.
 ```
 
 XSD evidence:
@@ -107,22 +108,22 @@ Semantic context:
 
 ```text
 ServiceIdentificationWithState includes the system-wide ServiceIdentification including the device on which the service runs.
-ServiceSpecificationWithState describes a service specification/state at a device without the same system-wide identification wrapper.
-The list is described as a list of all unique services and their state in the system, which is semantically consistent with the XSD type.
+ServiceSpecificationWithState describes a service specification/state without the same system-wide identification wrapper.
+The list is described as a list of unique services and their state in the system, which is semantically consistent with the XSD type.
 ```
 
 Visual-check note:
 
 ```text
-Direct screenshots of the relevant VDV PDF pages repeatedly failed or timed out during this pass.
-Do not raise confidence to final/confirmed PDF error until a visual table check is completed.
+Direct screenshots of the relevant VDV PDF pages repeatedly returned cache-miss for V2.3 and control attempts against V2.2/V2.4.
+Do not promote this finding to visually closed until a reliable renderer is available.
 ```
 
 Impact:
 
 ```text
 Validation follows ServiceIdentificationWithStateStructure.
-Do not accept ServiceSpecificationWithStateStructure as an automatic alias based on PDF extraction.
+Do not accept ServiceSpecificationWithStateStructure as an automatic alias based on PDF wording.
 ```
 
 ## CE-020 - Common V2.3 InternationalTextType official XSD vs PDF / PR #30 candidate
@@ -242,4 +243,266 @@ Handling remains conservative:
 The audit confirms the mismatch but does not modify either XSD.
 The official VDV-301-2.3 release bytes remain the default executable authority.
 The PR #30 variant remains an explicit candidate until an upstream authority change is separately established.
+```
+
+## CE-021 - LogMessage `MessageBody` PDF vs XSD `Message`
+
+State: native-text and exact-XSD cross-version mismatch confirmed; visible-page closure pending.
+
+Classification:
+
+```text
+mismatch_kind: element_name
+likely_source_issue: pdf_table_or_documentation_error_candidate
+classification_confidence: high
+version_scope: checked V2.2, V2.3, V2.4 PDF and XSD
+validation_behavior: XSD requires Message
+final_handling_bucket: official_documentation_or_schema_alignment_review_candidate
+```
+
+PDF evidence:
+
+```text
+LogMessage:
+  MessageProvider 1:1 +DeviceSpecification
+  MessageBody     1:1 +Message
+```
+
+The checked V2.2, byte-pinned V2.3 and V2.4 native PDF text all use `MessageBody`.
+
+XSD evidence:
+
+```text
+LogMessageStructure:
+  MessageProvider
+  Message type="MessageStructure"
+```
+
+Checked V2.2/V2.3/V2.4 Common XSDs use `Message`.
+
+Impact / handling:
+
+```text
+<MessageBody> is not an alias.
+Validation follows XSD and requires <Message>.
+Do not synthesize PDF-oriented aliases in the SDK.
+```
+
+## CE-022 - ServiceIdentification `ServiceName` PDF vs XSD `Service`
+
+State: native-text and exact-XSD cross-version mismatch confirmed; visible-page closure pending.
+
+Classification:
+
+```text
+mismatch_kind: element_name
+likely_source_issue: pdf_table_copy_or_naming_error_candidate
+classification_confidence: high
+version_scope: checked V2.2-V2.4
+validation_behavior: XSD requires Service
+final_handling_bucket: official_documentation_or_schema_alignment_review_candidate
+```
+
+PDF evidence:
+
+```text
+ServiceIdentification:
+  ServiceName 1:1 +ServiceSpecification
+  Device      1:1 +DeviceSpecification
+```
+
+XSD evidence:
+
+```text
+ServiceIdentificationStructure:
+  Service type="ServiceSpecificationStructure"
+  Device  type="DeviceSpecificationStructure"
+```
+
+Context:
+
+```text
+ServiceSpecificationStructure itself legitimately contains an inner ServiceName.
+That nested field does not make ServiceName the valid outer ServiceIdentification element name.
+```
+
+Impact / handling:
+
+```text
+<ServiceName> at ServiceIdentification level is rejected by the exact XSD.
+Use <Service>.
+```
+
+## CE-023 - Common V2.3 duplicate/corrupt second NetexMode table
+
+State: V2.3-specific PDF copy/paste table error confirmed in native text; visual closure pending.
+
+Classification:
+
+```text
+mismatch_kind: duplicate_or_copy_paste_table
+likely_source_issue: pdf_table_error_candidate
+classification_confidence: high
+version_scope: Common V2.3 in checked V2.2/V2.3/V2.4 chain
+validation_behavior: no XSD defect implied
+final_handling_bucket: documentation_correction_candidate
+```
+
+Evidence:
+
+```text
+V2.3 section 1.18 correctly describes NetexMode with main-mode/submode choices.
+
+Later V2.3 section 2.34 is again titled NetexMode but its table body is:
+  Message-ID
+  TimeStamp
+  MessageType
+  MessageText
+```
+
+Cross-version context:
+
+```text
+V2.2: after Message comes 2.34 Point.
+V2.4: after Message comes 2.34 Point.
+```
+
+XSD context:
+
+```text
+Official Common V2.3 NetexMode uses:
+  PtMainMode / PrivateMainMode
+  PtSubmodeChoiceGroup / PrivateSubmodeChoiceGroup
+```
+
+Impact / handling:
+
+```text
+Do not derive NetexMode XML shape from the corrupt second V2.3 table.
+Validation follows the selected XSD.
+```
+
+## CE-024 - UnsubscribeResponse `Active` PDF 0:1 vs XSD 1:1
+
+State: static cross-version cardinality mismatch confirmed; executable sample not yet separately assigned.
+
+Classification:
+
+```text
+mismatch_kind: cardinality
+subclassification: xsd_stricter_than_pdf
+classification_confidence: high
+version_scope: checked V2.2-V2.4
+validation_behavior: Active is required by XSD
+final_handling_bucket: official_documentation_or_schema_alignment_review_candidate
+```
+
+PDF evidence:
+
+```text
+UnsubscribeResponse:
+  Active                0:1
+  OperationErrorMessage 0:1
+```
+
+XSD evidence:
+
+```text
+UnsubscribeResponseStructure:
+  Active                minOccurs default 1
+  OperationErrorMessage minOccurs 0
+```
+
+Impact:
+
+```text
+A response without Active may appear valid from the PDF table but fails XSD validation.
+```
+
+## CE-025 - subscription request `Reply-Path` PDF vs XSD `ReplyPath`
+
+State: historical PDF/XSD element-name mismatch confirmed; corrected in checked V2.4 documentation.
+
+Classification:
+
+```text
+mismatch_kind: element_name
+classification_confidence: high
+version_scope: checked V2.2-V2.3; documentation corrected V2.4
+validation_behavior: XSD requires ReplyPath
+final_handling_bucket: historically_corrected_documentation_issue
+```
+
+PDF evidence:
+
+```text
+V2.2/V2.3 SubscribeRequest and UnsubscribeRequest tables:
+  Reply-Path
+```
+
+XSD evidence:
+
+```text
+SubscribeRequestStructure:
+  ReplyPath
+
+UnsubscribeRequestStructure:
+  ReplyPath
+```
+
+V2.4 PDF uses `ReplyPath`.
+
+Impact / handling:
+
+```text
+<Reply-Path> does not become an alias for historical validation.
+Use the selected XSD element <ReplyPath>.
+```
+
+## CE-026 - BeaconPoint `Description` PDF vs V2.3 XSD `Desciption`
+
+State: historical spelling mismatch confirmed; corrected in Common V2.4 XSD.
+
+Classification:
+
+```text
+mismatch_kind: element_name_spelling
+classification_confidence: high
+version_scope: Common V2.3 historical mismatch; corrected in Common V2.4 XSD
+validation_behavior_v2_3: XSD requires Desciption
+final_handling_bucket: historically_corrected_schema_issue
+```
+
+V2.3 PDF evidence:
+
+```text
+BeaconPoint:
+  Description 0:* +InternationalTextType
+```
+
+Official V2.3 XSD:
+
+```text
+BeaconPointStructure:
+  Desciption
+```
+
+Later correction evidence:
+
+```text
+Common V2.4 XSD:
+  BeaconPointStructure -> Description
+```
+
+Important separation:
+
+```text
+TSPPoint still uses Desciption in V2.4 XSD and remains tracked separately as CE-017.
+```
+
+Impact / handling:
+
+```text
+For official Common V2.3, validation still follows the historical XSD spelling <Desciption>.
+The later V2.4 correction does not retroactively change V2.3.
 ```

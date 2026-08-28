@@ -33,12 +33,13 @@
     "pairable_pdf_xsd_units": 38,
     "pairable_pdf_xsd_first_pass_completed": 38,
     "deep_read_exhaustive_completed": 0,
-    "deep_read_needs_visual_review": 6,
-    "deep_read_textual_fresh_read_completed": 6,
-    "deep_read_in_progress": 1,
-    "deep_read_current_document_id": "COMMON_V2.3",
-    "deep_read_previous_document_id": "VDV301-2_GC_V2.3",
+    "deep_read_needs_visual_review": 7,
+    "deep_read_textual_fresh_read_completed": 7,
+    "deep_read_in_progress": 0,
+    "deep_read_current_document_id": null,
+    "deep_read_previous_document_id": "COMMON_V2.3",
     "latest_deep_read_finding": "DR3012GC23-001",
+    "latest_common_finding": "CE-026",
     "new_schema_variant_finding": "CE-020",
     "pdf_source_registry": "audit_registry/pdf_source_registry_v0.1.json",
     "pdf_source_cache_policy": "docs/pdf_xsd_semantic_audit/PDF_SOURCE_CACHE_POLICY.md",
@@ -52,7 +53,9 @@
     "pinned_active_sources": ["VDV301-2_GC_V2.3", "COMMON_V2.3"],
     "ce_020_original_pdf_table_visual_confirmation": "confirmed",
     "pdf_source_pin_registry": "audit_registry/pdf_source_pins_v0.1.json",
-    "pdf_source_pin_verifier": "tools/verify_vdv_pdf_source_pins.py"
+    "pdf_source_pin_verifier": "tools/verify_vdv_pdf_source_pins.py",
+    "common_v2_3_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3.md",
+    "common_findings_register": "docs/pdf_xsd_semantic_audit/COMMON_FINDINGS_REGISTER_ADDENDUM.md"
   },
   "evidence": {
     "xsd_ev_completed": ["EV-001", "EV-002", "EV-101", "EV-102", "EV-103", "EV-104", "EV-105", "EV-106"],
@@ -71,12 +74,12 @@
     "rule": "Findings/audit knowledge must later explain surprising validation results without silently changing normative XSD outcomes."
   },
   "next_actions": [
-    "Continue fresh Deep Read of COMMON_V2.3 from the byte-pinned official source, independently of the previous Common audit.",
-    "During COMMON_V2.3, fully re-check CE-018 and CE-019, and retain CE-020 as already visually and executably confirmed by EV-106.",
-    "Keep VDV301-2_GC_V2.3 at needs_visual_review until the pinned PDF can be rendered locally or a reliable visual backend is available; do not promote it to exhaustive_read from text alone.",
+    "Byte-pin the official VDV301-2_GC_V2.4 PDF before starting its reproducible Deep Read.",
+    "Start fresh Deep Read of VDV301-2_GC_V2.4 only after its downloaded bytes match the newly recorded source pin.",
+    "Keep COMMON_V2.3 at needs_visual_review until its remaining layout-sensitive tables can be rendered from the pinned PDF; CE-020 is already visually and executably confirmed.",
+    "Correct historical CE-010 interpretation everywhere: canalBarge already exists in exact official Enumerations V2.2 and therefore in the Common V2.3 pool.",
     "During TimeService deep read, resolve DR3012-006 historical 301-2-11 cross-reference context.",
     "Byte-pin additional official PDFs as each document enters render-first Deep Read; never bulk-repin an existing changed source.",
-    "Retry visual page review for completed textual Deep Read documents from pinned local PDF sources; only then consider exhaustive_read.",
     "Proceed through all 48 semantic document units using DEEP_READ_METHOD.md.",
     "Do not decide PR/mail/remediation disposition of findings during deep read unless explicitly requested."
   ]

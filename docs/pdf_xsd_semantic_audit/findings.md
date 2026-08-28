@@ -1,8 +1,8 @@
 # PDF/XSD semantic audit - consolidated findings index
 
-Status: central current-state index after completion of the semantic/provenance first pass, executable XSD evidence and deterministic runtime evidence.
+Status: central current-state index after completion of the semantic/provenance first pass, executable XSD evidence, deterministic runtime evidence and ongoing Deep Read Pass 2.
 
-This file is deliberately concise. Detailed evidence remains in the service-specific finding registers, EV documents and RV documents.
+This file is deliberately concise. Detailed evidence remains in the service-specific finding registers, Common addendum, Deep Read reports, EV documents and RV documents.
 
 ## 1. Validation / authority rules
 
@@ -40,6 +40,18 @@ run: 33109768872
 ```
 
 Both zero-item and one-item structures validate across all checked Common versions.
+
+### CE-020 - Common V2.3 InternationalTextType authority split
+
+```text
+state: visually + executable-confirmed mismatch
+official XSD: Value xs:string / Language xs:language
+official PDF + PR #30 candidate: IBIS-IP.string / IBIS-IP.language
+run: 33169314332
+evidence: EV-106
+```
+
+The two schema variants accept different XML instance shapes. Official VDV-301-2.3 bytes remain default authority; PR #30 is explicit candidate only.
 
 ### VLS-002 - VideoLiveService V2.0 LiveStreamData compositor
 
@@ -146,6 +158,8 @@ TSI-001: TrainSetInformation V2.1 cannot model multiple coaches; V2.2 explicitly
 TSM-001: TrainSetManagement V2.1 old composition response name; V2.2 history records correction.
 TSD-001: V2.1 parameterized Retrieve subscriptions lack specialized schema structures; V2.2 introduces them.
 DMS historical cardinality/optionality changes must not be retroactively applied between V2.0/V2.1/V2.2/V2.4.
+CE-025: Reply-Path PDF naming persists through V2.3 and is corrected to ReplyPath in checked V2.4 documentation.
+CE-026: BeaconPoint Desciption is the V2.3 XSD spelling; V2.4 XSD corrects BeaconPoint to Description.
 VideoRecording V2.4 candidate clarifies/corrects the earlier state-response modelling but remains candidate authority.
 ```
 
@@ -162,6 +176,16 @@ XSD in superbranch sourced from open upstream PR #27
 ```
 
 Candidate profile must be explicitly selected.
+
+### Common V2.3 PR #30
+
+```text
+official Common V2.3 root blob: 0d8926c4063c12de9a5e68b6f0addaab35a55dc1
+candidate PR #30 blob:          456a7db179ce14bc3f04e2bc05e42e16545fb0c5
+variant id: common-v2.3-upstream-pr30
+```
+
+Candidate selection is explicit; never latest-wins.
 
 ### DMS / TVS / other V2.4 integration material
 
@@ -225,10 +249,11 @@ The detailed registers contain numerous high-confidence PDF issues, including:
 
 ```text
 wrong service/part/section labels
-copy/paste service names
+copy/paste service names and copied structure tables
 operation-name inconsistencies
 case-sensitive enumeration spelling differences
 cardinality table/XSD discrepancies
+element-name mismatches
 URI example inconsistencies
 German/English General-Conventions IP-addressing divergence
 RFC reference-number error (RFC 2927 vs IPv4 Link-Local context)
@@ -238,13 +263,37 @@ These remain provider/documentation notes unless their executable effect has sep
 
 ## 9. Common/Enumerations detailed register status
 
-The historic CE register contains more individual findings than this central index repeats. Important rule:
+The historic CE register contains more individual findings than this central index repeats.
+
+Fresh byte-pinned Common V2.3 Deep Read opened:
+
+```text
+CE-021 LogMessage MessageBody PDF vs XSD Message
+CE-022 ServiceIdentification ServiceName PDF vs XSD Service
+CE-023 V2.3 duplicate/corrupt second NetexMode table
+CE-024 UnsubscribeResponse Active PDF 0:1 vs XSD 1:1
+CE-025 Reply-Path PDF vs XSD ReplyPath; documentation corrected by V2.4
+CE-026 BeaconPoint Description PDF vs V2.3 XSD Desciption; XSD corrected by V2.4
+```
+
+It also strengthens CE-015, CE-017 and CE-019 from native PDF text, while visual page closure remains pending because the PDF screenshot backend returns cache-miss.
+
+Historical correction:
+
+```text
+CE-010 / canalBarge:
+The exact official VDV-301-2.2 Enumerations V2.2 XSD already contains canalBarge.
+Therefore canalBarge is already part of the Common V2.3 dependency pool and was not introduced by V2.4.
+CE-010 remains a PDF-vs-XSD omission, but its confirmed XSD history begins at least with V2.2.
+```
+
+Important rule:
 
 ```text
 Do not interpret omission from this concise central file as closure or deletion of a detailed CE/service finding.
 ```
 
-For exact wording/version scope, use the Common/Enums history files and finding addenda.
+For exact wording/version scope, use the Common/Enums history files, `COMMON_FINDINGS_REGISTER_ADDENDUM.md` and the Deep Read report.
 
 ## 10. Detailed evidence sources
 
@@ -254,6 +303,9 @@ Primary current detailed sources include:
 AUDIT_SCOPE_MATRIX.md
 AUDIT_HANDOFF_DELTA_EXECUTABLE_VALIDATION_24.md
 AUDIT_HANDOFF_DELTA_RUNTIME_25.md
+AUDIT_HANDOFF_DELTA_POST_SPLIT_EXECUTION_2026-08-28.md
+deep_read/COMMON_V2.3.md
+COMMON_FINDINGS_REGISTER_ADDENDUM.md
 24a_executable_validation_pcs_001.md
 24b_executable_validation_ce_018.md
 24c_executable_validation_video_compositors.md
