@@ -2,6 +2,9 @@ name: schema-audit-validation
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - dev/schema-integration
 
 permissions:
   contents: read
@@ -93,6 +96,35 @@ jobs:
           echo "$video_runtime_status" > audit-results/video_runtime_status.txt
           echo "$sdk_manifest_status" > audit-results/sdk_manifest_status.txt
           echo "$sdk_profile_status" > audit-results/sdk_profile_status.txt
+
+      - name: Pin VDV301-2 General Conventions V2.4 source bytes
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib, json, urllib.request
+          from datetime import datetime, timezone
+          url = 'https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx'
+          req = urllib.request.Request(url, headers={
+              'User-Agent': 'VDV301-Audit-SourceFetcher/0.1 (+https://github.com/MarcLeinenDE/VDV301)',
+              'Accept': 'application/pdf,application/octet-stream;q=0.9,*/*;q=0.1',
+          })
+          with urllib.request.urlopen(req, timeout=90) as response:
+              data = response.read()
+          if not data.startswith(b'%PDF-'):
+              raise SystemExit('downloaded content is not PDF')
+          record = {
+              'source_id': 'VDV301-2_GC_V2.4',
+              'official_url': url,
+              'expected_sha256': hashlib.sha256(data).hexdigest(),
+              'expected_size_bytes': len(data),
+              'pinned_at_utc': datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace('+00:00','Z'),
+              'deep_read_source_ready': True,
+          }
+          with open('audit-results/vdv301-2-gc-v24-source-pin.json','w',encoding='utf-8') as fh:
+              json.dump(record, fh, indent=2)
+              fh.write('\n')
+          print(json.dumps(record, sort_keys=True))
+          PY
 
       - name: Upload validation evidence
         if: always()
