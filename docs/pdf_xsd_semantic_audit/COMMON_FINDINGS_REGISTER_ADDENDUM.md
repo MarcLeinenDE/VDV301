@@ -127,15 +127,16 @@ Do not accept ServiceSpecificationWithStateStructure as an automatic alias based
 
 ## CE-020 - Common V2.3 InternationalTextType official XSD vs PDF / PR #30 candidate
 
-State: static provenance/type mismatch confirmed; executable candidate-overlay comparison pending.
+State: original-PDF table mismatch and executable official/candidate behavioural difference confirmed.
 
 Classification:
 
 ```text
 mismatch_kind: type + same-path authority collision
 likely_source_issue: xsd_typo_candidate / official_documentation_or_schema_alignment_review_candidate
-classification_confidence: high for the byte/type difference; final upstream disposition intentionally undecided
+classification_confidence: very high for PDF/XSD/candidate byte and instance-shape difference
 version_scope: Common V2.3
+final upstream disposition: intentionally undecided during audit
 ```
 
 Official release evidence:
@@ -160,8 +161,44 @@ InternationalTextType.Value    -> IBIS-IP.string
 InternationalTextType.Language -> IBIS-IP.language
 ```
 
-PR #30 states that the VDV 301-2-1 V2.3 PDF specifies `IBIS-IP.string` for Value and `IBIS-IP.language` for Language.
-The original Common V2.3 PDF table must still be rechecked during the dedicated Common V2.3 Deep Read, including visual confirmation when possible.
+Original PDF visual evidence:
+
+```text
+Official VDV 301-2-1 V2.3
+printed page 12 / PDF page index 11
+Table 17 InternationalTextType
+
+Value      1:1  IBIS-IP.string
+Language   1:1  IBIS-IP.language
+ErrorCode  0:1  ErrorCodeEnumeration
+```
+
+The original visible VDV table therefore agrees with the PR #30 candidate type names and differs from the exact official release XSD blob.
+
+Executable evidence:
+
+```text
+Evidence ID: EV-106
+GitHub Actions run: 33169314332
+tool: tools/validate_common_v23_schema_variant.py
+result: PASS
+```
+
+Both isolated dependency pools compile, including CustomerInformationService V2.3 against each Common variant.
+
+Observed instance-shape difference:
+
+```text
+official Common V2.3:
+  flat InternationalTextType instance    VALID
+  wrapped IBIS-IP.* instance             INVALID
+
+PR #30 candidate overlay:
+  flat InternationalTextType instance    INVALID
+  wrapped IBIS-IP.* instance             VALID
+```
+
+The PR #30 change is therefore not merely documentation cleanup: `IBIS-IP.string` and `IBIS-IP.language` are wrapper complex types and change the accepted XML instance shape.
 
 Superbranch handling:
 
@@ -194,6 +231,15 @@ Never delete either semantic variant while the collision exists.
 Execution status:
 
 ```text
-The official root restoration and candidate-overlay storage are provenance/routing changes.
-A new executable full-root/profile run and a dedicated candidate-overlay sample run are still required before claiming the post-split pools executed successfully.
+The post-split repository pool was revalidated in run 33169314332.
+All 50 current root XSDs compiled successfully.
+EV-106 separately confirms the explicit candidate overlay and its observable InternationalTextType behaviour.
+```
+
+Handling remains conservative:
+
+```text
+The audit confirms the mismatch but does not modify either XSD.
+The official VDV-301-2.3 release bytes remain the default executable authority.
+The PR #30 variant remains an explicit candidate until an upstream authority change is separately established.
 ```
