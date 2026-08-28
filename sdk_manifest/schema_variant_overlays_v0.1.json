@@ -1,0 +1,32 @@
+{
+  "manifest_version": "0.1",
+  "kind": "semantic-schema-variant-overlays",
+  "rule": "An overlay is never selected by filename/version alone. Official root schema remains the default when an official release exists. Candidate/integration overlays require explicit authority/profile selection and are assembled into an isolated temporary schema pool.",
+  "overlays": [
+    {
+      "variant_id": "common-v2.3-upstream-pr30",
+      "schema_identity": "Common@2.3",
+      "target_filename": "IBIS-IP_common_V2.3.xsd",
+      "official_default": {
+        "schema": "IBIS-IP_common_V2.3.xsd",
+        "blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+        "source_tag": "VDV-301-2.3",
+        "authority": "official"
+      },
+      "overlay": {
+        "schema": "schema_variants/upstream_pr_30/IBIS-IP_common_V2.3.xsd",
+        "blob": "456a7db179ce14bc3f04e2bc05e42e16545fb0c5",
+        "source": "open upstream VDVde/VDV301 PR #30",
+        "source_pr_head": "d1f1bf87b20d0cfb4b658555c9bd2779809c1f6d",
+        "authority": "candidate"
+      },
+      "explicit_opt_in_required": true,
+      "assembly_rule": "Copy the selected official dependency pool into an isolated validation workspace, then replace only IBIS-IP_common_V2.3.xsd with the overlay bytes. Do not mutate repository root files and do not apply latest-wins dependency substitution.",
+      "known_semantic_delta": {
+        "InternationalTextType.Value": "xs:string -> IBIS-IP.string",
+        "InternationalTextType.Language": "xs:language -> IBIS-IP.language"
+      },
+      "finding": "CE-020"
+    }
+  ]
+}

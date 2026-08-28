@@ -9,7 +9,8 @@
     "findings": "docs/pdf_xsd_semantic_audit/findings.md",
     "validation_backlog": "docs/pdf_xsd_semantic_audit/validation_backlog.md",
     "live_backlog": "docs/pdf_xsd_semantic_audit/26_live_integration_validation_backlog.md",
-    "runtime_authority_matrix": "docs/pdf_xsd_semantic_audit/generated/runtime_protocol_authority_matrix.csv"
+    "runtime_authority_matrix": "docs/pdf_xsd_semantic_audit/generated/runtime_protocol_authority_matrix.csv",
+    "schema_variant_registry": "audit_registry/schema_variant_registry_v0.1.json"
   },
   "invariants": {
     "xsd_is_executable_xml_authority_when_profile_exists": true,
@@ -35,7 +36,8 @@
       "operation_name",
       "response_context",
       "endpoint_identity",
-      "candidate_profile_id"
+      "candidate_profile_id",
+      "schema_variant_id"
     ],
     "endpoint_identity_dimensions": [
       "host_or_ip",
@@ -45,7 +47,8 @@
     "mixed_service_versions_supported": true,
     "parallel_versions_of_same_service_supported": true,
     "ordinary_schema_profile_source": "generated from stored XSD include graph",
-    "override_source": "sdk_manifest/routing_overrides_v0.1.json"
+    "override_source": "sdk_manifest/routing_overrides_v0.1.json",
+    "semantic_variant_overlay_source": "sdk_manifest/schema_variant_overlays_v0.1.json"
   },
   "authority_classes": [
     "official",
@@ -74,7 +77,11 @@
     "packaging_only_same_version_revision_may_be_deduplicated_after_semantic_diff": true,
     "semantic_constraint_difference_requires_separate_routing": true,
     "historical_backfill_source": "exact official VDVde/VDV301 release tags only",
-    "legacy_root_metadata": "schema_profiles/VDV-301-1.0-root-map.csv"
+    "legacy_root_metadata": "schema_profiles/VDV-301-1.0-root-map.csv",
+    "official_root_preferred_when_official_release_exists": true,
+    "semantic_variant_registry": "audit_registry/schema_variant_registry_v0.1.json",
+    "semantic_variant_overlay_manifest": "sdk_manifest/schema_variant_overlays_v0.1.json",
+    "candidate_variant_requires_explicit_overlay_selection": true
   },
   "operation_model": {
     "separate_manifest_required": true,
@@ -137,6 +144,7 @@
     "TimeService V1.0 must not synthesize XML operations.",
     "RTSP version is observed external protocol state; current VDV evidence does not pin RTSP/1.0 or RTSP/2.0.",
     "Valid VideoLive XML metadata does not imply RTSP/RTP media availability.",
-    "TrainSetData Subscribe response schema selection requires acknowledgement-vs-data-event context."
+    "TrainSetData Subscribe response schema selection requires acknowledgement-vs-data-event context.",
+    "A semantic same-path candidate such as Common V2.3 PR #30 must be selected by schema_variant_id and never silently replace the official release root."
   ]
 }

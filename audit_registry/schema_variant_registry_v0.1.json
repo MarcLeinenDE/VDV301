@@ -1,0 +1,35 @@
+{
+  "registry_version": "0.1",
+  "policy": "Semantic same-path variants must remain separately identifiable and routable. Official release bytes remain the default authority; candidate or integration overlays require explicit selection.",
+  "variants": [
+    {
+      "schema_identity": "Common@2.3",
+      "canonical_filename": "IBIS-IP_common_V2.3.xsd",
+      "official": {
+        "storage_path": "IBIS-IP_common_V2.3.xsd",
+        "authority": "official",
+        "source_repository": "VDVde/VDV301",
+        "source_tag": "VDV-301-2.3",
+        "source_commit": "39bf0c5bd7722eb1fae1069c8ad0bf37f487e9ef",
+        "blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1"
+      },
+      "alternate_variants": [
+        {
+          "variant_id": "common-v2.3-upstream-pr30",
+          "storage_path": "schema_variants/upstream_pr_30/IBIS-IP_common_V2.3.xsd",
+          "authority": "candidate",
+          "source_repository": "AMCON-GmbH/VDV301",
+          "source_pr": "VDVde/VDV301#30",
+          "source_pr_head": "d1f1bf87b20d0cfb4b658555c9bd2779809c1f6d",
+          "blob": "456a7db179ce14bc3f04e2bc05e42e16545fb0c5",
+          "explicit_opt_in_required": true,
+          "semantic_diff_from_official": [
+            "InternationalTextType.Value: xs:string -> IBIS-IP.string",
+            "InternationalTextType.Language: xs:language -> IBIS-IP.language"
+          ],
+          "reason_for_retention": "Open upstream PR #30 aligns the XSD with the VDV 301-2-1 V2.3 PDF types. The change is semantic, so same-path deduplication is forbidden by project policy."
+        }
+      ]
+    }
+  ]
+}

@@ -5,9 +5,10 @@ Status: supplemental Common register for findings discovered after the original 
 Authority rule:
 
 ```text
-Validation follows the selected Common XSD version.
+Validation follows the selected Common XSD version and selected authority/variant.
 PDF table differences are explanatory evidence only.
 No schema change is implied by opening or confirming a finding.
+Candidate same-path semantic variants require explicit opt-in and never silently replace official release bytes.
 ```
 
 ## CE-018 - ServiceIdentificationWithStateList cardinality PDF 1:* vs XSD 0:*
@@ -122,4 +123,77 @@ Impact:
 ```text
 Validation follows ServiceIdentificationWithStateStructure.
 Do not accept ServiceSpecificationWithStateStructure as an automatic alias based on PDF extraction.
+```
+
+## CE-020 - Common V2.3 InternationalTextType official XSD vs PDF / PR #30 candidate
+
+State: static provenance/type mismatch confirmed; executable candidate-overlay comparison pending.
+
+Classification:
+
+```text
+mismatch_kind: type + same-path authority collision
+likely_source_issue: xsd_typo_candidate / official_documentation_or_schema_alignment_review_candidate
+classification_confidence: high for the byte/type difference; final upstream disposition intentionally undecided
+version_scope: Common V2.3
+```
+
+Official release evidence:
+
+```text
+VDVde/VDV301 tag: VDV-301-2.3
+IBIS-IP_common_V2.3.xsd
+blob: 0d8926c4063c12de9a5e68b6f0addaab35a55dc1
+
+InternationalTextType.Value    -> xs:string
+InternationalTextType.Language -> xs:language
+```
+
+Candidate evidence:
+
+```text
+Open upstream PR: VDVde/VDV301 #30 "Fix the definition of InternationalTextType"
+PR head: d1f1bf87b20d0cfb4b658555c9bd2779809c1f6d
+candidate blob: 456a7db179ce14bc3f04e2bc05e42e16545fb0c5
+
+InternationalTextType.Value    -> IBIS-IP.string
+InternationalTextType.Language -> IBIS-IP.language
+```
+
+PR #30 states that the VDV 301-2-1 V2.3 PDF specifies `IBIS-IP.string` for Value and `IBIS-IP.language` for Language.
+The original Common V2.3 PDF table must still be rechecked during the dedicated Common V2.3 Deep Read, including visual confirmation when possible.
+
+Superbranch handling:
+
+```text
+Root IBIS-IP_common_V2.3.xsd stores the exact official VDV-301-2.3 blob.
+PR #30 bytes are retained separately at:
+  schema_variants/upstream_pr_30/IBIS-IP_common_V2.3.xsd
+
+Variant registry:
+  audit_registry/schema_variant_registry_v0.1.json
+
+SDK overlay manifest:
+  sdk_manifest/schema_variant_overlays_v0.1.json
+```
+
+Validation behaviour:
+
+```text
+authority=official, Common@2.3
+  -> use official blob 0d8926c...
+
+authority=candidate, schema_variant_id=common-v2.3-upstream-pr30
+  -> assemble isolated pool and overlay blob 456a7db...
+
+Never latest-wins.
+Never silently relabel PR #30 as official.
+Never delete either semantic variant while the collision exists.
+```
+
+Execution status:
+
+```text
+The official root restoration and candidate-overlay storage are provenance/routing changes.
+A new executable full-root/profile run and a dedicated candidate-overlay sample run are still required before claiming the post-split pools executed successfully.
 ```

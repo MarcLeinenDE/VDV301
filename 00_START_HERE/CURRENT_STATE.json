@@ -13,7 +13,17 @@
     "authority_model": ["official", "candidate", "integration", "unresolved"],
     "latest_wins": false,
     "root_xsd_count_current": 50,
-    "root_xsd_count_current_execution_status": "not_reexecuted_after_SystemDocumentation_V2.0_backfill"
+    "non_root_semantic_schema_variants_current": 1,
+    "schema_variant_registry": "audit_registry/schema_variant_registry_v0.1.json",
+    "root_xsd_count_current_execution_status": "not_reexecuted_after_SystemDocumentation_V2.0_backfill_and_Common_V2.3_official_root_restore",
+    "common_v2_3_authority_split": {
+      "official_root_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+      "official_source_tag": "VDV-301-2.3",
+      "candidate_variant_id": "common-v2.3-upstream-pr30",
+      "candidate_blob": "456a7db179ce14bc3f04e2bc05e42e16545fb0c5",
+      "candidate_source": "open upstream VDVde/VDV301 PR #30",
+      "selection_rule": "official by default; candidate only by explicit overlay selection"
+    }
   },
   "audit": {
     "public_physical_pdf_links": 50,
@@ -26,7 +36,8 @@
     "deep_read_textual_fresh_read_completed": 5,
     "deep_read_in_progress": 1,
     "deep_read_current_document_id": "VDV301-2_GC_V2.3",
-    "deep_read_previous_document_id": "VDV301-2_GC_V2.2"
+    "deep_read_previous_document_id": "VDV301-2_GC_V2.2",
+    "new_schema_variant_finding": "CE-020"
   },
   "evidence": {
     "xsd_ev_completed": ["EV-001", "EV-002", "EV-101", "EV-102", "EV-103", "EV-104", "EV-105"],
@@ -38,14 +49,16 @@
     "implementation_frozen_during_deep_read": true,
     "manifest": "sdk_manifest/manifest_v0.1.json",
     "routing_overrides": "sdk_manifest/routing_overrides_v0.1.json",
+    "schema_variant_overlays": "sdk_manifest/schema_variant_overlays_v0.1.json",
     "rule": "Findings/audit knowledge must later explain surprising validation results without silently changing normative XSD outcomes."
   },
   "next_actions": [
-    "Fresh-read VDV 301-2 General Conventions V2.3 from the original PDF before old-audit comparison.",
-    "Resolve the exact V2.3 XSD/release authority: official tag/release if one exists, otherwise preserve integration/candidate status and provenance.",
-    "Re-run executable root-XSD/profile validation before raising root_xsd_count_last_executed above 49; current stored root count is 50 after the official SystemDocumentation V2.0 backfill.",
+    "Continue fresh-read VDV 301-2 General Conventions V2.3 after the Common V2.3 official/candidate authority split.",
+    "During Common V2.3 Deep Read, fully verify CE-020 against the original VDV 301-2-1 V2.3 table and both exact XSD variants.",
+    "Re-run executable root-XSD/profile validation before raising root_xsd_count_last_executed above 49; the root pool changed after the last execution and now stores exact official Common V2.3 bytes.",
+    "Add an executable candidate-overlay check for common-v2.3-upstream-pr30 before the SDK treats that candidate as runnable.",
     "During TimeService deep read, resolve DR3012-006 historical 301-2-11 cross-reference context.",
-    "Retry visual page review for the five completed textual Deep Read documents when PDF screenshots are available; only then consider exhaustive_read.",
+    "Retry visual page review for completed textual Deep Read documents when a reliable local PDF source is available; only then consider exhaustive_read.",
     "Proceed through all 48 semantic document units using DEEP_READ_METHOD.md.",
     "Do not decide PR/mail/remediation disposition of findings during deep read unless explicitly requested."
   ]
