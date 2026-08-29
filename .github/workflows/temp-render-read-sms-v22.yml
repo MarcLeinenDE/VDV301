@@ -1,0 +1,75 @@
+name: temp-render-read-sms-v22
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp-render-read-sms-v22.yml
+permissions:
+  contents: write
+jobs:
+  read:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check pymupdf
+      - name: Extract text and render every page from exact pinned SMS V2.2 bytes
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, json, urllib.request
+          import fitz
+
+          url='https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx'
+          expected_sha='996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4'
+          expected_size=847416
+          req=urllib.request.Request(url,headers={'User-Agent':'VDV301-Audit-PDFRenderer/0.1'})
+          with urllib.request.urlopen(req,timeout=120) as r:
+              data=r.read()
+          sha=hashlib.sha256(data).hexdigest()
+          if sha != expected_sha or len(data) != expected_size:
+              raise SystemExit(f'SOURCE_CHANGED_SINCE_AUDIT sha={sha} size={len(data)}')
+          if not data.startswith(b'%PDF-'):
+              raise SystemExit('not a PDF')
+
+          out=Path('sms_v22_pinned_read'); pages=out/'pages'; pages.mkdir(parents=True,exist_ok=True)
+          doc=fitz.open(stream=data,filetype='pdf')
+          full=[]; index=[]; rendered=[]
+          matrix=fitz.Matrix(120/72,120/72)
+          for i in range(doc.page_count):
+              p=doc.load_page(i)
+              text=p.get_text('text')
+              full.append(f'===== PAGE {i+1} =====\n{text}\n')
+              lines=[x.strip() for x in text.splitlines() if x.strip()]
+              index.append({'page':i+1,'lines':lines[:40]})
+              pix=p.get_pixmap(matrix=matrix,alpha=False)
+              png=pix.tobytes('png')
+              name=f'SMS_V2.2_page_{i+1:04d}_120dpi.png'
+              (pages/name).write_bytes(png)
+              rendered.append({'page':i+1,'filename':name,'sha256':hashlib.sha256(png).hexdigest(),'size':len(png),'width':pix.width,'height':pix.height})
+          (out/'SMS_V2.2_fulltext.txt').write_text('\n'.join(full),encoding='utf-8')
+          (out/'page_text_index.json').write_text(json.dumps(index,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+          manifest={'source_id':'SMS_V2.2','source_sha256':sha,'source_size_bytes':len(data),'pdf_page_count':doc.page_count,'dpi':120,'pages':rendered}
+          (out/'render_manifest.json').write_text(json.dumps(manifest,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+          print('SMS_V22_READ',json.dumps({'page_count':doc.page_count,'sha256':sha,'size':len(data)}))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sms-v22-pinned-read
+          path: sms_v22_pinned_read
+          retention-days: 30
+      - name: Remove temporary workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rm .github/workflows/temp-render-read-sms-v22.yml
+          git config user.name MarcLeinenDE
+          git config user.email 34336531+MarcLeinenDE@users.noreply.github.com
+          git commit -m 'Remove temporary SMS V2.2 render workflow'
+          git push origin HEAD:dev/schema-integration
