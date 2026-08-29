@@ -4,7 +4,7 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "SMS_V2.2": {
-      "state": "source_pinned_authority_established_pending_fresh_read",
+      "state": "independent_fresh_read_frozen_pending_historical_reconciliation",
       "official_url": "https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx",
       "publication": "VDV-Schrift 301-2-18, SystemMonitoringService V2.2, 08/2019",
       "source_pin": {
@@ -22,9 +22,47 @@
         "integration_branch_matches_official_tag": true,
         "dependency_policy": "exact V2.2 service + Common V2.2 + Enumerations V2.2; no latest-version substitution"
       },
-      "historical_sms_findings_quarantined_until_fresh_read_freeze": true,
+      "historical_sms_findings_quarantined_until_fresh_read_freeze": false,
       "fresh_read_rule": "derive observations from pinned official SMS V2.2 source and exact authority family before historical SMS finding reconciliation",
-      "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md"
+      "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+      "render_read_evidence": {
+        "run": "33268591224",
+        "job": "99142914429",
+        "artifact": "9719396063",
+        "artifact_digest": "sha256:b7b73746ecdf6b904543c7d6a5312753a57a0b9effec6fe31d1dc83bdfdcec4a",
+        "pdf_page_count": 15,
+        "all_pages_rendered": true,
+        "visible_pages_reviewed": [
+          1,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        "fulltext_sha256": "d71cff8d60c96c526ad53267262b83781e35d26a6ea379815f3870f0c1148a12"
+      },
+      "independent_observations": [
+        "FR-SMS22-OBS-001 unrelated HTMLDisplayService paragraph in English foreword",
+        "FR-SMS22-OBS-002 broken list-of-figures bookmark/cross-reference printed in PDF",
+        "FR-SMS22-OBS-003 SystemStatus headings contradict ServiceStatus operation/body/XSD naming",
+        "FR-SMS22-OBS-004 ServiceStatus prose incorrectly describes device state",
+        "FR-SMS22-OBS-005 version history cites VDV 302-2 instead of evidenced 301-2-0 base-services source",
+        "FR-SMS22-OBS-006 SystemManagementService misspelled as SystemManagmentService",
+        "FR-SMS22-OBS-007 UnsubscribeServiceStatus operation-table Req./Resp. labels omitted"
+      ],
+      "rejected_suspicions": [
+        "cover-page isolated Fehler from extraction is not visible in rendered page 1",
+        "-1:1 with a/b labels is VDV XML-choice notation and matches xs:choice",
+        "generic subscription operations not appearing as service-local XSD elements is not by itself a schema defect"
+      ],
+      "historical_reconciliation_status": "now_allowed_after_freeze",
+      "fresh_read_report": "docs/pdf_xsd_semantic_audit/deep_read/SMS_V2.2.md"
     }
   }
 }
