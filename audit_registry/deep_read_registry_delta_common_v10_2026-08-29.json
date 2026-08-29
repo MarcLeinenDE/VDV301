@@ -1,0 +1,35 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-29",
+  "base_registry": "audit_registry/deep_read_registry_v0.1.json",
+  "document_updates": {
+    "COMMON_V1.0": {
+      "state": "source_pinned_render_complete_pending_independent_fresh_read",
+      "official_url": "https://www.vdv.de/301-2-1-sds.pdfx",
+      "publication": "VDV 301-2-1 V1.0, Gemeinsame Datenstrukturen und Aufzählungstypen",
+      "source_pin": {
+        "sha256": "a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf",
+        "size_bytes": 892769,
+        "pinned_at_utc": "2026-08-29T21:16:20Z",
+        "evidence_run": "33275626001"
+      },
+      "authority_status": {
+        "official_pdf": "official_public_VDV_writing",
+        "xsd_lane": "xsd",
+        "exact_xsd_authority": "pending_independent_release_history_resolution",
+        "latest_xsd_wins": false
+      },
+      "historical_common_findings_quarantined_until_fresh_read_freeze": true,
+      "fresh_read_rule": "derive observations from the exact pinned COMMON V1.0 PDF and independently establish exact official XSD/dependency authority before consulting historical Common findings",
+      "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+      "render_read_evidence": {
+        "run": "33275626001",
+        "artifact_name": "common-v10-pinned-read",
+        "pdf_page_count": 36,
+        "all_pages_rendered": true,
+        "render_dpi": 120,
+        "fulltext_sha256": "fdfdf62a88f78dd7a59b341157662d3e5708b2f9c56d2cf1df13a7d4eb0cfa0a"
+      }
+    }
+  }
+}

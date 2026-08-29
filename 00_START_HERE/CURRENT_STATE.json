@@ -29,14 +29,14 @@
     "pairable_pdf_xsd_units": 38,
     "pairable_pdf_xsd_first_pass_completed": 38,
     "deep_read_exhaustive_completed": 0,
-    "deep_read_needs_visual_review": 30,
-    "deep_read_textual_fresh_read_completed": 30,
+    "deep_read_needs_visual_review": 31,
+    "deep_read_textual_fresh_read_completed": 31,
     "deep_read_in_progress": 1,
-    "deep_read_current_document_id": "VDV301-3_02-2020",
-    "deep_read_previous_document_id": "ARA_V2.4",
-    "next_natural_deep_read_document_id": "VDV301-3_02-2020",
-    "latest_deep_read_finding": "DRARA24-002",
-    "latest_deep_read_revalidation": "ARA-003_executable_confirmed_EV-105_current_route_rerun_33228250613",
+    "deep_read_current_document_id": "COMMON_V1.0",
+    "deep_read_previous_document_id": "VDV301-3_02-2020",
+    "next_natural_deep_read_document_id": "COMMON_V1.0",
+    "latest_deep_read_finding": "DRNET20-003",
+    "latest_deep_read_revalidation": "NET-003_context_verified_exact_pinned_pdf",
     "latest_dms_finding": "DMS-007",
     "latest_common_finding": "CE-026",
     "resolved_historical_finding": "DR3012-006",
@@ -69,7 +69,7 @@
     "pdf_visual_render_fallback": "docs/pdf_xsd_semantic_audit/PDF_VISUAL_RENDER_FALLBACK.md",
     "pdf_visual_renderer": "tools/render_vdv_pdf_pages.py",
     "pdf_visual_render_rule": "interactive screenshot cache miss is not a source failure; render exact byte-pinned source independently and inspect visible output before promoting visual status",
-    "pdf_sources_byte_pinned": 26,
+    "pdf_sources_byte_pinned": 27,
     "pinned_active_sources": [
       "VDV301-2_GC_V2.3",
       "COMMON_V2.3",
@@ -96,10 +96,11 @@
       "HDS_V2.2a",
       "SMS_V2.2",
       "ARA_V2.4",
-      "VDV301-3_02-2020"
+      "VDV301-3_02-2020",
+      "COMMON_V1.0"
     ],
-    "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_vdv301_3_02_2020_2026-08-29.json",
-    "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_ara_v24_2026-08-29.json",
+    "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_common_v10_2026-08-29.json",
+    "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_vdv301_3_02_2020_2026-08-29.json",
     "trainset_v2_1_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.1.md",
     "trainset_v2_2_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.2.md",
     "trainset_findings_register": "docs/pdf_xsd_semantic_audit/TRAIN_SET_SERVICES_FINDINGS_REGISTER_ADDENDUM.md",
@@ -608,6 +609,38 @@
       "pdf_page_count": 37,
       "all_pages_rendered": true,
       "fulltext_sha256": "dd6ecfa0d78f0a00b86557aa2e3694883431fc6a7a1d5a92b4663981996a3276"
+    },
+    "network_vdv301_3_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/VDV301-3_02-2020.md",
+    "network_vdv301_3_handoff": "docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF_DELTA_VDV301_3_02_2020_DEEP_READ_2026-08-29.md",
+    "network_vdv301_3_fresh_read_status": "historical_reconciliation_complete",
+    "network_vdv301_3_findings": {
+      "NET-001": "context_verified_exact_pinned_pdf",
+      "NET-002": "context_verified_exact_pinned_pdf",
+      "NET-003": "context_verified_exact_pinned_pdf",
+      "DRNET20-001": "context_verified_internal_pdf_conflict_plus_external_IEEE_interpretation",
+      "DRNET20-002": "context_verified_bilingual_safety_security_semantic_conflict",
+      "DRNET20-003": "context_verified_grouped_editorial_residue_excluding_NET-003"
+    },
+    "network_vdv301_3_adjacent_runtime_evidence": {
+      "RV-002_corrected_rerun": "33267198470",
+      "job": "99139252921",
+      "status": "PASS",
+      "boundary": "deterministic DNS-SD classifier only"
+    },
+    "common_v1_0_source_pin": {
+      "sha256": "a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf",
+      "size_bytes": 892769,
+      "evidence_run": "33275626001",
+      "pinned_at_utc": "2026-08-29T21:16:20Z",
+      "pdf_authority": "official_public_VDV_writing",
+      "xsd_authority_status": "pending_independent_release_history_resolution"
+    },
+    "common_v1_0_render_read": {
+      "run": "33275626001",
+      "artifact_name": "common-v10-pinned-read",
+      "pdf_page_count": 36,
+      "all_pages_rendered": true,
+      "fulltext_sha256": "fdfdf62a88f78dd7a59b341157662d3e5708b2f9c56d2cf1df13a7d4eb0cfa0a"
     }
   },
   "evidence": {
@@ -641,8 +674,8 @@
     "latest_root_xsd_validation_run": "33228250613",
     "latest_full_suite_run": "33228250613",
     "latest_targeted_xsd_evidence_run": "33269006407",
-    "latest_pdf_source_pin_run": "33270251357",
-    "latest_pdf_visual_render_run": "33270251357",
+    "latest_pdf_source_pin_run": "33275626001",
+    "latest_pdf_visual_render_run": "33275626001",
     "trainset_v2_1_executable_evidence": "EV-109 / 33228250613",
     "trainset_v2_2_context_evidence": "EV-104 / 33111644388 revalidated against fresh V2.2 source/context",
     "trainset_v2_2_tsd002_executable_evidence": "EV-110 / 33241603270",
@@ -665,10 +698,10 @@
     "rule": "Findings/audit knowledge must later explain surprising validation results without silently changing normative XSD outcomes. No unrevalidated finding may drive SDK accept/reject/routing behaviour."
   },
   "next_actions": [
-    "Complete the independent Fresh Read of VDV301-3_02-2020 from the exact pinned render/text artifact.",
-    "Visually falsify material network/topology/connector/switching claims against the pinned page renders.",
-    "Freeze fresh observations before reopening historical network/discovery findings or RV-002 comparison.",
-    "Keep VDV network requirements, incorporated external standards and diagnostic heuristics as separate authority classes.",
+    "Independently establish exact official COMMON V1.0 XSD and dependency authority from VDV repository history; do not use latest-XSD-wins.",
+    "Complete the independent Fresh Read of COMMON V1.0 from the exact pinned full-text/render artifact before reopening historical Common findings.",
+    "Visually falsify material table/cardinality/type observations against the exact pinned page renders.",
+    "Freeze COMMON V1.0 fresh observations before historical Common reconciliation.",
     "After Deep Read Pass 2 freeze the complete finding inventory and run mandatory legacy finding revalidation before SDK/remediation baseline freeze."
   ]
 }
