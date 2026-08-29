@@ -1,0 +1,47 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-29",
+  "base_registry": "audit_registry/deep_read_registry_v0.1.json",
+  "document_updates": {
+    "TVS_V2.3": {
+      "state": "in_progress",
+      "official_url": "https://www.vdv.de/301-2-16-sdes-v2-3-ticketvalidation.pdfx",
+      "publication": "VDV-Schrift 301-2-16, TicketValidationService V2.3",
+      "fresh_read_started": "2026-08-29",
+      "textual_fresh_read_complete": false,
+      "historical_findings_opened_during_fresh_read": false,
+      "original_pdf_visual_review": "pending_pinned_byte_render_as_needed",
+      "source_pin": {
+        "sha256": "74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4",
+        "size_bytes": 404383,
+        "pin_registry": "audit_registry/pdf_source_pins_v0.1.json",
+        "evidence_run": "33258484479",
+        "pinned_at_utc": "2026-08-29T14:46:39Z"
+      },
+      "exact_xsd_authority": {
+        "upstream_repository": "VDVde/VDV301",
+        "tag": "VDV-301-2.3",
+        "official_service_filename": "IBIS-IP_TicketValidationService_V2.2.xsd",
+        "official_service_blob": "5a4be2b2ba66860f035777ec0458dba0790880e1",
+        "common_v2_2_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+        "enumerations_v2_2_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+        "official_v2_3_service_filename_exists": false,
+        "official_route_uses_v2_2_family": true
+      },
+      "candidate_separation": {
+        "branch_file": "IBIS-IP_TicketValidationService_V2.3.xsd",
+        "branch_blob": "b17591c5b067254dd3e2260f3ef2acd2e18394a9",
+        "introduced_by_commit": "c9c086ac07f7e9bdb271c54f7a274e3cf0d03749",
+        "introduced_by_commit_message": "Integrate public schema candidate files",
+        "authority": "candidate_integration_not_historical_official_V2.3"
+      },
+      "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+      "authority_boundary": {
+        "pdf_authority": "official_public_VDV_writing",
+        "official_xsd_authority": "official_VDV-301-2.3_tag_routing_to_exact_V2.2_service_family",
+        "candidate_xsd_authority": "separate_candidate_integration_material",
+        "rule": "Fresh-read TVS V2.3 before reopening prior TicketValidation V2.3 findings. Do not use the branch V2.3 candidate as historical official release authority."
+      }
+    }
+  }
+}
