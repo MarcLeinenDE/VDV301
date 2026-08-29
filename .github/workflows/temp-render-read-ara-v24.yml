@@ -1,0 +1,60 @@
+name: temp-render-read-ara-v24
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp-render-read-ara-v24.yml
+permissions:
+  contents: write
+jobs:
+  read:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check pymupdf
+      - name: Extract text and render every page from exact pinned ARA V2.4 bytes
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, json, urllib.request
+          import fitz
+          url='https://www.vdv.de/301-2-19-sde-v2.4-analogradioservice.pdfx'
+          expected_sha='d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c'
+          expected_size=1009640
+          req=urllib.request.Request(url,headers={'User-Agent':'VDV301-Audit-PDFRenderer/0.1'})
+          with urllib.request.urlopen(req,timeout=120) as r: data=r.read()
+          sha=hashlib.sha256(data).hexdigest()
+          if sha != expected_sha or len(data) != expected_size: raise SystemExit(f'SOURCE_CHANGED_SINCE_AUDIT sha={sha} size={len(data)}')
+          out=Path('ara_v24_pinned_read'); pages=out/'pages'; pages.mkdir(parents=True,exist_ok=True)
+          doc=fitz.open(stream=data,filetype='pdf'); full=[]; index=[]; rendered=[]; matrix=fitz.Matrix(120/72,120/72)
+          for i in range(doc.page_count):
+              p=doc.load_page(i); text=p.get_text('text'); full.append(f'===== PAGE {i+1} =====\n{text}\n')
+              lines=[x.strip() for x in text.splitlines() if x.strip()]; index.append({'page':i+1,'lines':lines[:60]})
+              pix=p.get_pixmap(matrix=matrix,alpha=False); png=pix.tobytes('png'); name=f'ARA_V2.4_page_{i+1:04d}_120dpi.png'; (pages/name).write_bytes(png)
+              rendered.append({'page':i+1,'filename':name,'sha256':hashlib.sha256(png).hexdigest(),'size':len(png),'width':pix.width,'height':pix.height})
+          fulltext='\n'.join(full); (out/'ARA_V2.4_fulltext.txt').write_text(fulltext,encoding='utf-8')
+          (out/'page_text_index.json').write_text(json.dumps(index,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+          (out/'render_manifest.json').write_text(json.dumps({'source_id':'ARA_V2.4','source_sha256':sha,'source_size_bytes':len(data),'pdf_page_count':doc.page_count,'dpi':120,'fulltext_sha256':hashlib.sha256(fulltext.encode()).hexdigest(),'pages':rendered},indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+          print('ARA_V24_READ',doc.page_count,hashlib.sha256(fulltext.encode()).hexdigest())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ara-v24-pinned-read
+          path: ara_v24_pinned_read
+          retention-days: 30
+      - name: Remove temporary workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rm .github/workflows/temp-render-read-ara-v24.yml
+          git config user.name MarcLeinenDE
+          git config user.email 34336531+MarcLeinenDE@users.noreply.github.com
+          git commit -m 'Remove temporary ARA V2.4 render workflow'
+          git push origin HEAD:dev/schema-integration
