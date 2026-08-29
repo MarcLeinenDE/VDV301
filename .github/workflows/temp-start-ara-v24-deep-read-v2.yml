@@ -1,0 +1,72 @@
+name: temp-start-ara-v24-deep-read-v2
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp-start-ara-v24-deep-read-v2.yml
+permissions:
+  contents: write
+jobs:
+  start:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Pin verified official ARA V2.4 PDF and establish candidate/integration XSD route
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, json, os, urllib.request
+          from datetime import datetime, timezone
+          source_id='ARA_V2.4'
+          url='https://www.vdv.de/301-2-19-sde-v2.4-analogradioservice.pdfx'
+          run_id=os.environ['GITHUB_RUN_ID']
+          req=urllib.request.Request(url,headers={'User-Agent':'VDV301-audit-source-pin/1.0'})
+          with urllib.request.urlopen(req,timeout=60) as r: data=r.read()
+          if not data.startswith(b'%PDF-'): raise SystemExit('Downloaded ARA V2.4 source is not a PDF')
+          sha=hashlib.sha256(data).hexdigest(); size=len(data)
+          ts=datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace('+00:00','Z')
+          print('ARA_V24_PIN',sha,size,ts,'RUN',run_id)
+
+          pp=Path('audit_registry/pdf_source_pins_v0.1.json')
+          pins=json.loads(pp.read_text(encoding='utf-8'))
+          if any(x['source_id']==source_id for x in pins['sources']): raise SystemExit('ARA_V2.4 already pinned')
+          pins['sources'].append({'source_id':source_id,'expected_sha256':sha,'expected_size_bytes':size,'pinned_at_utc':ts,'deep_read_source_ready':True,'evidence_run_id':run_id})
+          pp.write_text(json.dumps(pins,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+
+          delta={'delta_version':'0.1','date':'2026-08-29','base_registry':'audit_registry/deep_read_registry_v0.1.json','document_updates':{'ARA_V2.4':{
+            'state':'source_pinned_authority_established_pending_fresh_read','official_url':url,'publication':'VDV-Schrift 301-2-19, AnalogRadioService V2.4, 01/2023',
+            'source_pin':{'sha256':sha,'size_bytes':size,'pinned_at_utc':ts,'evidence_run':run_id},
+            'source_url_correction_note':'older registry/start guess used 301-2-19-sds-v2-4... which returned 404; verified official file is 301-2-19-sde-v2.4-analogradioservice.pdfx',
+            'authority_status':{'official_pdf':'official_public_VDV_writing','official_release_tag_VDV-301-2.4_exists':False,'upstream_master_service_xsd_present':False,'integration_service_xsd':'IBIS-IP_AnalogRadioService_V2.4.xsd','integration_service_blob':'48fb303b80936d2d762f0889ce0c359e04c16e5b','integration_provenance_commit':'c9c086ac07f7e9bdb271c54f7a274e3cf0d03749','integration_provenance_class':'public_schema_candidate','declared_common_dependency':'IBIS-IP_common_V2.3.xsd','common_V2.3_blob':'0d8926c4063c12de9a5e68b6f0addaab35a55dc1','xsd_authority_class':'candidate_integration_not_official_release','latest_wins':False},
+            'historical_analogradio_findings_quarantined_until_fresh_read_freeze':True,
+            'fresh_read_rule':'derive observations from pinned official ARA V2.4 PDF first; candidate/integration XSD may constrain executable behavior but must not be promoted to official-release authority',
+            'evidence_gate':'docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md'
+          }}}
+          dp=Path('audit_registry/deep_read_registry_delta_ara_v24_2026-08-29.json'); dp.write_text(json.dumps(delta,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+
+          sp=Path('00_START_HERE/CURRENT_STATE.json'); s=json.loads(sp.read_text(encoding='utf-8')); a=s['audit']
+          a['deep_read_in_progress']=1; a['deep_read_current_document_id']='ARA_V2.4'; a['deep_read_previous_document_id']='SMS_V2.2'; a['next_natural_deep_read_document_id']='ARA_V2.4'; a['pdf_sources_byte_pinned']=25
+          if source_id not in a['pinned_active_sources']: a['pinned_active_sources'].append(source_id)
+          a['latest_deep_read_registry_delta']='audit_registry/deep_read_registry_delta_ara_v24_2026-08-29.json'
+          a['ara_v2_4_source_pin']={'sha256':sha,'size_bytes':size,'evidence_run':run_id,'pinned_at_utc':ts,'pdf_authority':'official_public_VDV_writing','xsd_authority_status':'candidate_integration_not_official_release'}
+          a['ara_v2_4_authority']={'AnalogRadioService_blob':'48fb303b80936d2d762f0889ce0c359e04c16e5b','Common_V2.3_blob':'0d8926c4063c12de9a5e68b6f0addaab35a55dc1','official_release_tag_exists':False,'upstream_master_service_xsd_present':False,'integration_provenance':'public_schema_candidate'}
+          sp.write_text(json.dumps(s,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+          for p in [pp,dp,sp]: json.loads(p.read_text(encoding='utf-8'))
+          PY
+          git diff --check
+      - name: Commit ARA V2.4 start and remove temporary workflows
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add audit_registry/pdf_source_pins_v0.1.json audit_registry/deep_read_registry_delta_ara_v24_2026-08-29.json 00_START_HERE/CURRENT_STATE.json
+          git rm .github/workflows/temp-start-ara-v24-deep-read.yml
+          git rm .github/workflows/temp-start-ara-v24-deep-read-v2.yml
+          if git diff --cached --name-only | grep -E '\.xsd$'; then exit 1; fi
+          git config user.name MarcLeinenDE
+          git config user.email 34336531+MarcLeinenDE@users.noreply.github.com
+          git commit -m 'Pin and start AnalogRadioService V2.4 deep read'
+          git push origin HEAD:dev/schema-integration
