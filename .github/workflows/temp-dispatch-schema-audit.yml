@@ -1,0 +1,19 @@
+name: temp-dispatch-schema-audit
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch canonical manual audit workflow
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run schema-audit-validation.yml --ref dev/schema-integration
