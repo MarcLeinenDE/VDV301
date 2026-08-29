@@ -1,0 +1,269 @@
+name: temp-build-tvs-v23-close
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build TVS V2.3 closure artifacts
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+
+          ROOT = Path('.')
+          RUN = '33264437557'
+          JOB = '99131891930'
+
+          # 1) Finalize Deep Read registry delta.
+          p = ROOT / 'audit_registry/deep_read_registry_delta_tvs_v23_2026-08-29.json'
+          d = json.loads(p.read_text(encoding='utf-8'))
+          u = d['document_updates']['TVS_V2.3']
+          u['state'] = 'needs_visual_review'
+          u['historical_reconciliation_complete'] = True
+          u['historical_reconciliation'] = {
+              'TVS-002': 'executable_confirmed_EV-114_on_exact_official_V2.3_route',
+              'TVS-003': 'executable_confirmed_EV-114_with_V2.3_correction_claim_context',
+              'DRTVS21-001': 'V2.3_scope_reconfirmed_by_exact_official_route_identity_and_EV-114_xsd_side',
+              'DRTVS21-002': 'V2.3_scope_context_verified_with_EV-114_xsd_side_support',
+              'DRTVS21-003': 'V2.3_scope_context_verified',
+              'new_unique_finding_ids': []
+          }
+          u['executable_evidence'] = {
+              'evidence_id': 'EV-114',
+              'checker': 'tools/validate_tvs_v23_ev114.py',
+              'run': RUN,
+              'job': JOB,
+              'result': 'PASS',
+              'tested_temporary_head': 'ecaa7b51f5d78f950d329dd8166419ce6afad9a3',
+              'official_route_service_blob': '5a4be2b2ba66860f035777ec0458dba0790880e1',
+              'candidate_service_blob': 'b17591c5b067254dd3e2260f3ef2acd2e18394a9',
+              'rule': 'Semantic equality does not upgrade candidate/integration provenance to official release authority.'
+          }
+          u['completion'] = {
+              'textual_fresh_read': 'complete',
+              'targeted_visible_review': 'complete_for_pages_10_16_18_19',
+              'exhaustive_visual_review': False,
+              'deep_read_state': 'needs_visual_review'
+          }
+          p.write_text(json.dumps(d, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
+          # 2) Finding delta.
+          findings_delta = {
+            'delta_version': '0.1',
+            'date': '2026-08-29',
+            'document_id': 'TVS_V2.3',
+            'evidence_gate': 'docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md',
+            'new_unique_findings': [],
+            'revalidated_findings': {
+              'TVS-002': {
+                'state': 'executable_confirmed_EV-114',
+                'scope': 'V2.3 PDF / official V2.3 route to V2.2 XSD family',
+                'summary': 'PDF RouteDirectionEnumeration remains inconsistent with executable RouteDeviationEnumeration. EV-114 confirms onroute valid and Forward invalid for RouteDeviationEnumeration on the exact official V2.3 route.'
+              },
+              'TVS-003': {
+                'state': 'executable_confirmed_EV-114_with_context_refinement',
+                'scope': 'V2.3 PDF',
+                'summary': 'V2.3 explicitly claims chapter 3.1.2 was corrected to match XSD V2.2 and no XSD update is needed, yet stale CurrentStopPoint response/data labels and overview names remain. EV-114 confirms the CurrentTariffStop root is executable and stale GetCurrentStopPointResponse is invalid.'
+              }
+            },
+            'scope_extensions': {
+              'DRTVS21-001': 'V2.3 repeats IBIS-IP.NMToken; official route is the same exact V2.2 family whose CurrentTripRef type is IBIS-IP.NMTOKEN. EV-114 reconfirms the exact XSD-side type; EV-113 already proved the case-sensitive negative behavior for the identical blobs.',
+              'DRTVS21-002': 'V2.3 repeats TicketValidationServiceCurrentLineData missing the service-name separator dot; EV-114 reconfirms the exact XSD-side type TicketValidationService.CurrentLineDataStructure.',
+              'DRTVS21-003': 'V2.3 functional-sequence prose still says SubscribeCurrentStop while the detailed CurrentTariffStop-era operation name is SubscribeCurrentTariffStop.'
+            },
+            'routing_note': {
+              'state': 'ok_with_note_revalidated',
+              'official_tag': 'VDV-301-2.3',
+              'official_service_filename': 'IBIS-IP_TicketValidationService_V2.2.xsd',
+              'official_service_blob': '5a4be2b2ba66860f035777ec0458dba0790880e1',
+              'common_blob': '468fee6d177e7185dbcd5d3f90cfb114e29e01ae',
+              'enumerations_blob': '2a23b512379b18e8f122ac1272cef8229fb86283',
+              'candidate_branch_file': 'IBIS-IP_TicketValidationService_V2.3.xsd',
+              'candidate_branch_blob': 'b17591c5b067254dd3e2260f3ef2acd2e18394a9',
+              'candidate_is_not_historical_official': True
+            },
+            'deduplication': 'No V2.3-only finding IDs were opened. Repeated observations are scope extensions/refinements of existing TVS findings.'
+          }
+          (ROOT / 'audit_registry/deep_read_findings_delta_tvs_v23_2026-08-29.json').write_text(json.dumps(findings_delta, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
+          # 3) Finding-revalidation registry.
+          p = ROOT / 'audit_registry/finding_revalidation_registry_v0.1.json'
+          d = json.loads(p.read_text(encoding='utf-8'))
+          d['explicit_revalidations_during_deep_read_pass_2']['TVS_V2.3'] = {
+              'TVS-002': 'executable_confirmed_EV-114_on_exact_official_V2.3_route',
+              'TVS-003': 'executable_confirmed_EV-114_with_V2.3_correction_claim_context',
+              'DRTVS21-001': 'V2.3_scope_reconfirmed_exact_route_EV-114_plus_identical_blob_EV-113_case_behavior',
+              'DRTVS21-002': 'V2.3_scope_context_verified_with_EV-114_xsd_support',
+              'DRTVS21-003': 'V2.3_scope_context_verified'
+          }
+          p.write_text(json.dumps(d, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
+          # 4) CURRENT_STATE.
+          p = ROOT / '00_START_HERE/CURRENT_STATE.json'
+          d = json.loads(p.read_text(encoding='utf-8'))
+          a = d['audit']
+          a['deep_read_needs_visual_review'] = 24
+          a['deep_read_textual_fresh_read_completed'] = 24
+          a['deep_read_in_progress'] = 0
+          a['deep_read_current_document_id'] = None
+          a['deep_read_previous_document_id'] = 'TVS_V2.3'
+          a['next_natural_deep_read_document_id'] = 'TVS_V2.4'
+          a['latest_deep_read_revalidation'] = 'TVS-003_V2.3_executable_confirmed_EV-114'
+          a['pdf_sources_byte_pinned'] = 19
+          if 'TVS_V2.3' not in a['pinned_active_sources']:
+              a['pinned_active_sources'].append('TVS_V2.3')
+          a['latest_deep_read_registry_delta'] = 'audit_registry/deep_read_registry_delta_tvs_v23_2026-08-29.json'
+          a['latest_deep_read_findings_delta'] = 'audit_registry/deep_read_findings_delta_tvs_v23_2026-08-29.json'
+          a['tvs_v2_3_deep_read_report'] = 'docs/pdf_xsd_semantic_audit/deep_read/TVS_V2.3.md'
+          a['tvs_v2_3_source_pin'] = {
+              'sha256': '74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4',
+              'size_bytes': 404383,
+              'evidence_run': '33258484479',
+              'pinned_at_utc': '2026-08-29T14:46:39Z',
+              'pdf_authority': 'official_public_VDV_writing',
+              'xsd_authority_status': 'official_VDV-301-2.3_route_to_exact_V2.2_service_family'
+          }
+          a['tvs_v2_3_authority'] = {
+              'official_tag': 'VDV-301-2.3',
+              'official_service_filename': 'IBIS-IP_TicketValidationService_V2.2.xsd',
+              'official_service_blob': '5a4be2b2ba66860f035777ec0458dba0790880e1',
+              'Common_V2.2_blob': '468fee6d177e7185dbcd5d3f90cfb114e29e01ae',
+              'Enumerations_V2.2_blob': '2a23b512379b18e8f122ac1272cef8229fb86283',
+              'official_V2.3_named_service_file_exists': False,
+              'candidate_branch_file': 'IBIS-IP_TicketValidationService_V2.3.xsd',
+              'candidate_branch_blob': 'b17591c5b067254dd3e2260f3ef2acd2e18394a9',
+              'candidate_is_not_historical_official': True
+          }
+          a['tvs_v2_3_visual_evidence'] = {
+              'pinned_byte_render_run': '33258612417',
+              'render_job': '99116563806',
+              'artifact_id': '9716575205',
+              'pages_reviewed': [10,11,12,13,14,15,16,18,19],
+              'status': 'targeted_visible_review_complete_for_recorded_findings_not_exhaustive'
+          }
+          a['tvs_v2_3_findings'] = {
+              'TVS-002': 'executable_confirmed_EV-114_under_current_evidence_gate',
+              'TVS-003': 'executable_confirmed_EV-114_with_correction_claim_context_refinement',
+              'DRTVS21-001': 'V2.3_scope_reconfirmed_exact_route_EV-114_plus_identical_blob_EV-113_case_behavior',
+              'DRTVS21-002': 'V2.3_scope_context_verified_with_EV-114_xsd_support',
+              'DRTVS21-003': 'V2.3_scope_context_verified',
+              'new_unique_finding_ids': []
+          }
+          e = d['evidence']
+          if 'EV-114' not in e['xsd_ev_completed']:
+              e['xsd_ev_completed'].append('EV-114')
+          e['latest_targeted_xsd_evidence_run'] = RUN
+          e['latest_pdf_source_pin_run'] = '33258484479'
+          e['latest_pdf_visual_render_run'] = '33258612417'
+          e['tvs_v2_3_executable_evidence'] = 'EV-114 / ' + RUN
+          d['next_actions'] = [
+              'Start TVS_V2.4 with its own byte pin of the official PDF; do not reuse earlier TVS PDF pins.',
+              'Independently establish exact TVS V2.4 XSD/dependency authority before consulting historical V2.4 findings.',
+              'Fresh-read TVS_V2.4 under FINDING_EVIDENCE_GATE and use visible pinned-byte review for material table/layout context.',
+              'Only after the independent V2.4 Fresh Read, reopen and reconcile historical TicketValidation findings relevant to V2.4, including TVS-001.',
+              'Continue remaining Deep Reads.',
+              'After Deep Read Pass 2 freeze the complete finding inventory and run mandatory legacy finding revalidation before SDK/remediation baseline freeze.',
+              'Do not decide PR/mail/remediation disposition during Deep Read unless explicitly requested.'
+          ]
+          p.write_text(json.dumps(d, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
+          # 5) EVIDENCE_ID_POLICY text updates.
+          p = ROOT / 'docs/pdf_xsd_semantic_audit/EVIDENCE_ID_POLICY.md'
+          t = p.read_text(encoding='utf-8')
+          marker = 'EV-113  TicketValidationService V2.2 RouteDeviation enum separation and CurrentTariffStop rename/type evidence\n'
+          assert marker in t
+          t = t.replace(marker, marker + 'EV-114  TicketValidationService V2.3 official-route/candidate authority guard and inherited V2.2 executable boundary\n', 1)
+          t = t.replace('Correct wording at the current state: "EV-001, EV-002 and EV-101 through EV-113".', 'Correct wording at the current state: "EV-001, EV-002 and EV-101 through EV-114".', 1)
+          anchor = 'Its CurrentLineData check remains XSD-side evidence only; PDF display-convention classification is contextual.\n```'
+          assert anchor in t
+          ev114 = '''Its CurrentLineData check remains XSD-side evidence only; PDF display-convention classification is contextual.\n\nEV-114:\nThe official VDV-301-2.3 release does not contain an IBIS-IP_TicketValidationService_V2.3.xsd file. The official route is the unchanged V2.2-named family:\n  TicketValidationService V2.2 file 5a4be2b2ba66860f035777ec0458dba0790880e1\n  Common V2.2                        468fee6d177e7185dbcd5d3f90cfb114e29e01ae\n  Enums V2.2                         2a23b512379b18e8f122ac1272cef8229fb86283\nThe integration branch separately contains IBIS-IP_TicketValidationService_V2.3.xsd blob b17591c5b067254dd3e2260f3ef2acd2e18394a9, introduced as candidate/integration material.\nEV-114 proves both families compile and currently match for the critical TVS declarations, but keeps their provenance distinct. It also reconfirms the official-route RouteDeviation behavior and CurrentTariffStop rename boundary. Semantic equality must never promote the V2.3-named candidate file to historical official release authority.\n```'''
+          t = t.replace(anchor, ev114, 1)
+          p.write_text(t, encoding='utf-8')
+
+          # 6) Findings register updates + V2.3 closure section.
+          p = ROOT / 'docs/pdf_xsd_semantic_audit/TICKET_VALIDATION_SERVICE_FINDINGS_REGISTER_ADDENDUM.md'
+          t = p.read_text(encoding='utf-8')
+          t = t.replace('TVS V2.1 and V2.2 have now also been independently re-read and their in-scope findings processed under the current Evidence Gate.', 'TVS V2.1, V2.2 and V2.3 have now also been independently re-read and their in-scope findings processed under the current Evidence Gate.', 1)
+          t = t.replace('State: `executable_confirmed` for V2.1 by EV-112 and for V2.2 by EV-113 under the current Evidence Gate. V2.3/V2.4 historical scope remains subject to per-version revalidation.', 'State: `executable_confirmed` for V2.1 by EV-112, V2.2 by EV-113 and V2.3 by EV-114 under the current Evidence Gate. V2.4 historical scope remains subject to per-version revalidation.', 1)
+          t = t.replace('V2.2_revalidation_state: executable_confirmed_EV-113\nfinal_handling_bucket:', 'V2.2_revalidation_state: executable_confirmed_EV-113\nV2.3_revalidation_state: executable_confirmed_EV-114\nfinal_handling_bucket:', 1)
+          t = t.replace('Next action: no V2.1/V2.2 deterministic evidence is pending. Revalidate V2.3/V2.4 independently in their own exact authority/context before freezing the multi-version historical statement as SDK knowledge.', 'Next action: no V2.1/V2.2/V2.3 deterministic evidence is pending. Revalidate V2.4 independently before freezing the multi-version historical statement as SDK knowledge.', 1)
+          t = t.replace('State: `executable_confirmed_EV-113` for V2.2 under the current Evidence Gate. V2.3/V2.4 historical scope remains subject to per-version revalidation.', 'State: `executable_confirmed` for V2.2 by EV-113 and V2.3 by EV-114 under the current Evidence Gate. V2.4 historical scope remains subject to per-version revalidation.', 1)
+          t = t.replace('V2.2_revalidation_state: executable_confirmed_EV-113\nfinal_handling_bucket: official_pdf_documentation_clarification_candidate', 'V2.2_revalidation_state: executable_confirmed_EV-113\nV2.3_revalidation_state: executable_confirmed_EV-114_with_correction_claim_context_refinement\nfinal_handling_bucket: official_pdf_documentation_clarification_candidate', 1)
+          t = t.replace('Next action: no V2.2 deterministic evidence is pending. Revalidate the V2.3/V2.4 instances independently; no XSD modification is proposed.', 'Next action: no V2.2/V2.3 deterministic evidence is pending. Revalidate V2.4 independently; no XSD modification is proposed.', 1)
+          t = t.replace('State: `executable_confirmed` for V2.1 by EV-112 and independently for V2.2 by EV-113.', 'State: `executable_confirmed` for V2.1 by EV-112, independently for V2.2 by EV-113, and scope-reconfirmed for V2.3 through the exact identical official V2.2 route plus EV-114 authority guard.', 1)
+          t = t.replace('State: `context_verified` for V2.1 and independently for V2.2, with exact-XSD-side support from EV-112/EV-113.', 'State: `context_verified` for V2.1, V2.2 and V2.3, with exact-XSD-side support from EV-112/EV-113/EV-114 as applicable.', 1)
+          t = t.replace('State: `context_verified` for V2.1 and independently for V2.2.', 'State: `context_verified` for V2.1, V2.2 and V2.3.', 1)
+          t = t.replace('version_scope: V2.1-V2.2 PDFs', 'version_scope: V2.1-V2.3 PDFs')
+          t = t.replace('This routing note is historical knowledge only until the V2.3 Deep Read independently re-establishes the exact V2.3 authority route before using it as current Evidence-Gate proof.', 'The V2.3 Deep Read has now independently re-established this routing note: official tag VDV-301-2.3 contains the V2.2-named service file and no V2.3-named service file; the V2.3 PDF says no XSD update is necessary; EV-114 guards the official-route/candidate provenance boundary.', 1)
+          closing = 'The broader historical TicketValidation inventory is not frozen by the V2.1/V2.2 closures. Later version blocks must independently apply the current Evidence Gate.'
+          assert closing in t
+          v23 = '''## V2.3 Evidence-Gate closure boundary\n\n```text\nTVS-002       revalidated for V2.3 with EV-114 on the exact official V2.3 -> V2.2 schema route\nTVS-003       revalidated/refined for V2.3 with EV-114; correction-claim context retained\nDRTVS21-001  independently recurs; V2.3 scope uses identical official V2.2 blobs, EV-114 exact-type support and EV-113 case-sensitive behavior\nDRTVS21-002  independently recurs; V2.3 scope context-verified with EV-114 XSD support\nDRTVS21-003  independently recurs; V2.3 scope context-verified\nDRTVS21-004  not scope-extended\n\nTVS-001      not revalidated here; V2.4 scope\nnew V2.3-only IDs: none after deduplication\n```\n\nV2.3-specific context refinement for TVS-003:\n\n```text\nThe V2.3 foreword/version history explicitly says chapter 3.1.2 was corrected to correspond to XSD V2.2 and that no XSD update is necessary.\nNevertheless the visible response/table labels and list of tables still carry GetCurrentStopPointResponse / CurrentStopPointData, while the executable official route uses CurrentTariffStop names.\n```\n\nRouting conclusion:\n\n```text\nofficial V2.3 authority = official VDV-301-2.3 tag routing to IBIS-IP_TicketValidationService_V2.2.xsd + Common/Enums V2.2\nbranch IBIS-IP_TicketValidationService_V2.3.xsd = candidate/integration material; not historical official release authority\nsemantic equality does not collapse provenance classes\n```\n\nThe broader historical TicketValidation inventory is not frozen by the V2.1/V2.2/V2.3 closures. V2.4 must independently apply the current Evidence Gate.'''
+          t = t.replace(closing, v23, 1)
+          p.write_text(t, encoding='utf-8')
+
+          # 7) Validation backlog updates.
+          p = ROOT / 'docs/pdf_xsd_semantic_audit/validation_backlog.md'
+          t = p.read_text(encoding='utf-8')
+          t = t.replace('Status: deterministic repository validation includes EV-113 for TicketValidationService V2.2.', 'Status: deterministic repository validation includes EV-114 for TicketValidationService V2.3 authority/routing and inherited executable boundary.', 1)
+          line = 'EV-113           run 33257767942  PASS  official TVS V2.2 RouteDeviation enum separation + CurrentTariffStop rename/type evidence\n'
+          assert line in t
+          t = t.replace(line, line + 'EV-114           run 33264437557  PASS  TVS V2.3 official-route/candidate authority guard + inherited V2.2 executable boundary\n', 1)
+          t = t.replace('EV-110 through EV-113 are targeted additive tests', 'EV-110 through EV-114 are targeted additive tests', 1)
+          guard_anchor = 'It also proves CurrentTripRef uses case-sensitive IBIS-IP.NMTOKEN, confirms the exact CurrentLineData response type, and confirms the CurrentTariffStop rename boundary: new response root valid, stale CurrentStopPoint response root absent/invalid.\n```'
+          assert guard_anchor in t
+          guard = '''It also proves CurrentTripRef uses case-sensitive IBIS-IP.NMTOKEN, confirms the exact CurrentLineData response type, and confirms the CurrentTariffStop rename boundary: new response root valid, stale CurrentStopPoint response root absent/invalid.\n\nEV-114:\nOfficial VDV-301-2.3 routing uses the unchanged V2.2-named service file/blob plus Common/Enumerations V2.2. No V2.3-named service file exists in the official tag.\nThe branch V2.3-named file is a provenance-distinct candidate/integration blob. EV-114 confirms both compile and currently match for critical declarations, but that semantic equality does not make the candidate historical official authority.\nEV-114 reconfirms on the official route that RouteDeviationEnumeration rejects Forward and that GetCurrentTariffStopResponse is valid while stale GetCurrentStopPointResponse has no global declaration.\n```'''
+          t = t.replace(guard_anchor, guard, 1)
+          insert_before = '## 9. Mandatory legacy finding revalidation before baseline freeze'
+          assert insert_before in t
+          sec = '''## 8a. TicketValidationService V2.3 evidence status\n\nThe official TVS V2.3 PDF was independently byte-pinned and fresh-read before reopening historical V2.3 findings.\n\nSource/evidence:\n\n```text\nPDF sha256: 74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4\nPDF size: 404383\npin run: 33258484479\nvisual render run: 33258612417\npages visibly reviewed: 10-16, 18-19\n\nofficial V2.3 tag service file: IBIS-IP_TicketValidationService_V2.2.xsd\nservice blob: 5a4be2b2ba66860f035777ec0458dba0790880e1\nCommon V2.2: 468fee6d177e7185dbcd5d3f90cfb114e29e01ae\nEnumerations V2.2: 2a23b512379b18e8f122ac1272cef8229fb86283\nbranch candidate V2.3 file: b17591c5b067254dd3e2260f3ef2acd2e18394a9\n```\n\nRevalidated under the current Evidence Gate:\n\n```text\nTVS-002 -> executable-confirmed by EV-114 on the exact official V2.3 release route.\nTVS-003 -> executable-confirmed/refined by EV-114; V2.3 claims chapter 3.1.2 is corrected to XSD V2.2 but stale CurrentStopPoint labels remain visibly present.\nDRTVS21-001 -> V2.3 recurrence; exact official route is blob-identical to the V2.2 family whose case-sensitive behavior EV-113 already executed, while EV-114 reconfirms the exact type.\nDRTVS21-002 -> V2.3 recurrence; context-verified with EV-114 XSD-side support.\nDRTVS21-003 -> V2.3 recurrence; context-verified.\n```\n\nAuthority guard:\n\n```text\nOfficial V2.3 release routing must select the V2.2-named official service XSD family.\nDo not select the branch V2.3-named candidate merely because its filename appears newer.\nCurrent semantic equality between the two service files does not collapse provenance classes.\n```\n\nNo new V2.3-only finding ID was needed after deduplication. TVS V2.3 remains `needs_visual_review`, not `exhaustive_read`.\n\n'''
+          t = t.replace(insert_before, sec + insert_before, 1)
+          t = t.replace('fresh-read TVS_V2.3\n-> continue remaining Deep Reads', 'fresh-read TVS_V2.4\n-> continue remaining Deep Reads', 1)
+          t = t.replace('TVS V2.2 must preserve exact version-aligned Common V2.2/Enums V2.2 routing\n', 'TVS V2.2 must preserve exact version-aligned Common V2.2/Enums V2.2 routing\nTVS V2.3 official routing must use the official V2.2-named service XSD from tag VDV-301-2.3 and must not latest-wins select the branch V2.3 candidate\n', 1)
+          p.write_text(t, encoding='utf-8')
+
+          # 8) Deep Read report.
+          report = '''# Deep Read - TicketValidationService V2.3\n\nDocument ID: `TVS_V2.3`\n\nStatus: `needs_visual_review`\n\nDate: 2026-08-29\n\n## Source authority\n\nOfficial VDV writing:\n\n```text\nhttps://www.vdv.de/301-2-16-sdes-v2-3-ticketvalidation.pdfx\n```\n\nPinned source:\n\n```text\nsource_id: TVS_V2.3\nsha256: 74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4\nsize: 404383 bytes\npin run: 33258484479\npinned_at_utc: 2026-08-29T14:46:39Z\n```\n\nThe PDF is official documentation evidence. Executable XML validation follows the selected official XSD family.\n\n## Exact official XSD authority\n\nOfficial upstream tag: `VDV-301-2.3`.\n\nThe tag contains no `IBIS-IP_TicketValidationService_V2.3.xsd`. The official V2.3 route is:\n\n```text\nIBIS-IP_TicketValidationService_V2.2.xsd\n  blob 5a4be2b2ba66860f035777ec0458dba0790880e1\nIBIS-IP_common_V2.2.xsd\n  blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae\nIBIS-IP_Enumerations_V2.2.xsd\n  blob 2a23b512379b18e8f122ac1272cef8229fb86283\n```\n\nThe V2.3 PDF itself states that the corrected description corresponds to XSD V2.2 and that no XSD update is necessary.\n\n## Candidate/integration separation\n\n`dev/schema-integration` also contains:\n\n```text\nIBIS-IP_TicketValidationService_V2.3.xsd\nblob b17591c5b067254dd3e2260f3ef2acd2e18394a9\nintroduced by c9c086ac07f7e9bdb271c54f7a274e3cf0d03749\n```\n\nIt is candidate/integration material, not historical official V2.3 release authority. Filename recency must not override provenance.\n\n## Fresh-read method\n\nHistorical V2.3 TicketValidation findings were not reopened until the PDF was byte-pinned, the official tag route was independently established, the document was read afresh, material pages were rendered from the exact pinned bytes and visually inspected, and the fresh observations were committed separately.\n\nThe independent pre-history snapshot is commit `f01099f284f753a0bbbc5ce5c03fa046c9a1bb80`.\n\n## Visual evidence\n\n```text\nrender run: 33258612417\nrender job: 99116563806\nartifact id: 9716575205\nartifact digest: sha256:0cba4a211c323be415e26120eecda08c1453cce0df18e4ec373a108e22b56c74\nrendered pages: 10-19\nvisibly reviewed: 10-16, 18-19\ndpi: 180\nsource sha256 verified: 74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4\n```\n\nThe review is targeted, not exhaustive.\n\n## Independent fresh observations before historical reconciliation\n\n1. The V2.3 foreword says chapter 3.1.2 was corrected so the data tables correspond to the data definitions in XSD V2.2.\n2. The version history says the description is now in line with XSD and no XSD update is necessary.\n3. German and English operation overviews nevertheless still use `GetCurrentStopPoint`, `SubscribeCurrentStopPoint`, `UnsubscribeCurrentStopPoint`.\n4. German and English functional-sequence prose still says `SubscribeCurrentStop`.\n5. Chapter 3.1 is `GetCurrentTariffStop` and its structure body uses `CurrentTariffStopData` / `CurrentTariffStop`, but the response/table labels still say `GetCurrentStopPointResponse` / `CurrentStopPointData`.\n6. The list of tables independently repeats those stale names.\n7. `CurrentTripRef` is printed as `IBIS-IP.NMToken`; the official route uses `IBIS-IP.NMTOKEN`.\n8. The GetCurrentLine response display again prints `TicketValidationServiceCurrentLineData` without the service-name separator dot.\n9. `VehicleData.RouteDeviation` is printed with `RouteDirectionEnumeration`; the official route uses `RouteDeviationEnumeration`.\n\n## Historical reconciliation after the independent fresh read\n\n### TVS-002 - RouteDeviation PDF type vs XSD type\n\nV2.3 independently reproduces the PDF-side `RouteDirectionEnumeration` label. The official release route is the exact unchanged V2.2 family where `VehicleData.RouteDeviation` is `RouteDeviationEnumeration`.\n\nEV-114 confirms on that official route:\n\n```text\nonroute as RouteDeviationEnumeration -> valid\nForward as RouteDeviationEnumeration -> invalid\n```\n\nState: `executable_confirmed_EV-114`.\n\nNo compatibility alias is allowed.\n\n### TVS-003 - stale CurrentStopPoint names after CurrentTariffStop rename\n\nV2.3 sharpens the finding because the document explicitly claims the affected description was corrected to be in line with XSD V2.2, yet visible stale names remain in the response/table labels and list of tables.\n\nEV-114 confirms:\n\n```text\nTicketValidationService.GetCurrentTariffStopResponse sample -> valid\nTicketValidationService.GetCurrentStopPointResponse sample -> invalid; no matching global declaration\n```\n\nState: `executable_confirmed_EV-114_with_context_refinement`.\n\n### DRTVS21-001 - CurrentTripRef type identifier case\n\nV2.3 visibly repeats `IBIS-IP.NMToken`. The official route is blob-identical to the V2.2 family. EV-114 reconfirms the exact XSD declaration `IBIS-IP.NMTOKEN`; EV-113 already executed the case-sensitive unavailable-type negative probe against the identical blobs.\n\nV2.3 scope is therefore revalidated without inventing a new finding ID.\n\n### DRTVS21-002 - CurrentLineData missing separator dot\n\nV2.3 visibly repeats `TicketValidationServiceCurrentLineData`. EV-114 reconfirms exact XSD type `TicketValidationService.CurrentLineDataStructure`. The finding remains limited to the missing service-name separator dot; omission of `Structure` is not independently classified.\n\n### DRTVS21-003 - SubscribeCurrentStop\n\nV2.3 functional-sequence text repeats `SubscribeCurrentStop`, while the detailed CurrentTariffStop-era operation is `SubscribeCurrentTariffStop`. Context disproves a second formal operation with the truncated name.\n\n## Revalidated routing note\n\n```text\nVDV 301-2-16 V2.3 is a documentation-correction release.\nOfficial tag VDV-301-2.3 provides IBIS-IP_TicketValidationService_V2.2.xsd, not a V2.3-named service XSD.\nThe PDF explicitly says no XSD update is necessary.\nOfficial TVS V2.3 routing therefore uses the exact V2.2 service/Common/Enumerations family.\n```\n\nEV-114 additionally proves that the separate branch V2.3-named candidate currently matches the critical declarations but remains provenance-distinct. Semantic equality is not authority equivalence.\n\n## EV-114 provenance\n\n```text\nevidence: EV-114\nchecker: tools/validate_tvs_v23_ev114.py\nrun: 33264437557\njob: 99131891930\ntested temporary head: ecaa7b51f5d78f950d329dd8166419ce6afad9a3\nresult: PASS\n```\n\nThe temporary workflow was removed after execution. No XSD changed.\n\n## Deduplication result\n\nNo V2.3-only finding ID was opened. TVS-002/TVS-003 are revalidated and DRTVS21-001..003 receive V2.3 scope extensions. DRTVS21-004 is not scope-extended because generic spelling residue has no SDK/validation consequence requiring a version-wide duplicate.\n\n## Completion state\n\n```text\ntextual fresh read: complete\ntargeted visible review: complete for material pages\nexhaustive visual review: no\nDeep Read state: needs_visual_review\n```\n\nThis block authorizes no schema remediation or upstream action.\n\nNext natural Deep Read target: `TVS_V2.4`.\n'''
+          (ROOT / 'docs/pdf_xsd_semantic_audit/deep_read/TVS_V2.3.md').write_text(report, encoding='utf-8')
+
+          # 9) EV-114 evidence document.
+          evdoc = '''# EV-114 - TicketValidationService V2.3 official-route / candidate authority guard\n\nStatus: PASS\n\nDate: 2026-08-29\n\n## Purpose\n\nEV-114 protects the V2.3 resolver boundary. The official VDV-301-2.3 release routes TVS through the V2.2-named schema family, while `dev/schema-integration` separately contains a V2.3-named candidate/integration file. The test must not confuse semantic equality with provenance authority.\n\n## Exact inputs\n\n```text\nofficial-route service: IBIS-IP_TicketValidationService_V2.2.xsd\nblob: 5a4be2b2ba66860f035777ec0458dba0790880e1\nCommon V2.2: 468fee6d177e7185dbcd5d3f90cfb114e29e01ae\nEnumerations V2.2: 2a23b512379b18e8f122ac1272cef8229fb86283\n\ncandidate/integration service: IBIS-IP_TicketValidationService_V2.3.xsd\nblob: b17591c5b067254dd3e2260f3ef2acd2e18394a9\n```\n\n## Execution\n\n```text\nchecker: tools/validate_tvs_v23_ev114.py\ntemporary head: ecaa7b51f5d78f950d329dd8166419ce6afad9a3\nrun: 33264437557\njob: 99131891930\nresult: PASS\n```\n\n## Confirmed results\n\n- all four exact repository blobs matched the expected identities;\n- official-route and candidate service blobs are provenance-distinct;\n- both service files include Common V2.2 + Enumerations V2.2 and compile;\n- their critical TVS declarations currently match;\n- official-route `VehicleData.RouteDeviation` is `RouteDeviationEnumeration`;\n- official-route `CurrentTripRef` is `IBIS-IP.NMTOKEN`;\n- official-route `CurrentLineData` type is `TicketValidationService.CurrentLineDataStructure`;\n- official-route `GetCurrentTariffStopResponse` exists while stale `GetCurrentStopPointResponse` does not;\n- `RouteDeviationEnumeration`: `onroute` valid, `Forward` invalid;\n- `GetCurrentTariffStopResponse` sample valid, stale `GetCurrentStopPointResponse` sample invalid.\n\n## Authority boundary\n\nEV-114 does not by itself prove the official tag inventory; that provenance was independently established from tag `VDV-301-2.3` and the V2.3 PDF. EV-114 proves the repository-side identity/behavior consequences and guards against latest-filename-wins routing.\n\nThe branch V2.3-named file must remain candidate/integration authority unless separately promoted by an official release source.\n\nNo XSD was modified.\n'''
+          (ROOT / 'docs/pdf_xsd_semantic_audit/24m_executable_validation_tvs_v23.md').write_text(evdoc, encoding='utf-8')
+
+          # 10) Handoff delta.
+          handoff = '''# Audit handoff delta - TVS V2.3 Deep Read - 2026-08-29\n\n## Completed block\n\n`TVS_V2.3` is complete at Deep Read state `needs_visual_review`.\n\n## Source pin\n\n```text\nPDF: https://www.vdv.de/301-2-16-sdes-v2-3-ticketvalidation.pdfx\nsha256: 74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4\nsize: 404383\npin run: 33258484479\n```\n\n## Exact authority\n\nOfficial tag `VDV-301-2.3` contains no V2.3-named TVS service XSD. Official routing is:\n\n```text\nIBIS-IP_TicketValidationService_V2.2.xsd  5a4be2b2ba66860f035777ec0458dba0790880e1\nIBIS-IP_common_V2.2.xsd                   468fee6d177e7185dbcd5d3f90cfb114e29e01ae\nIBIS-IP_Enumerations_V2.2.xsd             2a23b512379b18e8f122ac1272cef8229fb86283\n```\n\nBranch candidate/integration only:\n\n```text\nIBIS-IP_TicketValidationService_V2.3.xsd  b17591c5b067254dd3e2260f3ef2acd2e18394a9\n```\n\nNever latest-wins select the branch candidate as official V2.3 authority.\n\n## Visual evidence\n\n```text\nrender run: 33258612417\njob: 99116563806\nartifact: 9716575205\npages rendered: 10-19\npages visibly reviewed: 10-16, 18-19\n```\n\n## Evidence\n\nEV-114 run `33264437557`, job `99131891930`: PASS.\n\nIt confirms the official-route/candidate identity boundary, critical declaration equality despite provenance distinction, RouteDeviation behavior, and CurrentTariffStop executable boundary.\n\n## Finding reconciliation\n\n```text\nTVS-002      V2.3 executable-confirmed EV-114\nTVS-003      V2.3 executable-confirmed/refined EV-114; explicit correction claim remains contradicted by stale labels\nDRTVS21-001 V2.3 scope extension; exact official route identity + EV-114/EV-113 support\nDRTVS21-002 V2.3 scope extension; context verified\nDRTVS21-003 V2.3 scope extension; context verified\nDRTVS21-004 not scope-extended\nnew V2.3-only IDs: none\nTVS-001      untouched; V2.4 scope\n```\n\n## Next block\n\nStart `TVS_V2.4` document-first:\n\n1. pin its own official PDF bytes;\n2. independently establish exact V2.4 XSD/dependency authority;\n3. fresh-read without consulting historical V2.4 findings;\n4. use pinned-byte visible review for material pages;\n5. only after fresh-read freeze, reopen TVS V2.4 history including TVS-001;\n6. executable-strengthen surviving XML-material findings as needed;\n7. close V2.4 with audit-only diff and no XSD/workflow residue.\n\nGlobal rules remain unchanged: no master changes, no upstream/PR action without explicit approval, no schema modification solely to match PDF, and no unrevalidated finding may drive SDK behavior.\n'''
+          (ROOT / 'docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF_DELTA_TVS_V23_DEEP_READ_2026-08-29.md').write_text(handoff, encoding='utf-8')
+
+          # JSON parse guard.
+          for q in [
+              '00_START_HERE/CURRENT_STATE.json',
+              'audit_registry/deep_read_registry_delta_tvs_v23_2026-08-29.json',
+              'audit_registry/deep_read_findings_delta_tvs_v23_2026-08-29.json',
+              'audit_registry/finding_revalidation_registry_v0.1.json',
+          ]:
+              json.loads((ROOT / q).read_text(encoding='utf-8'))
+              print('JSON_OK', q)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tvs-v23-close-files
+          path: |
+            00_START_HERE/CURRENT_STATE.json
+            audit_registry/deep_read_registry_delta_tvs_v23_2026-08-29.json
+            audit_registry/deep_read_findings_delta_tvs_v23_2026-08-29.json
+            audit_registry/finding_revalidation_registry_v0.1.json
+            docs/pdf_xsd_semantic_audit/EVIDENCE_ID_POLICY.md
+            docs/pdf_xsd_semantic_audit/TICKET_VALIDATION_SERVICE_FINDINGS_REGISTER_ADDENDUM.md
+            docs/pdf_xsd_semantic_audit/validation_backlog.md
+            docs/pdf_xsd_semantic_audit/deep_read/TVS_V2.3.md
+            docs/pdf_xsd_semantic_audit/24m_executable_validation_tvs_v23.md
+            docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF_DELTA_TVS_V23_DEEP_READ_2026-08-29.md
+          if-no-files-found: error
