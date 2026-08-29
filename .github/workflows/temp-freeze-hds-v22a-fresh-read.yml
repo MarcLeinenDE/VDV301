@@ -1,0 +1,127 @@
+name: temp-freeze-hds-v22a-fresh-read
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths: ['.github/workflows/temp-freeze-hds-v22a-fresh-read.yml']
+permissions:
+  contents: write
+jobs:
+  freeze:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Freeze independent HDS V2.2a fresh read
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+
+          sp=Path('00_START_HERE/CURRENT_STATE.json')
+          s=json.loads(sp.read_text(encoding='utf-8')); a=s['audit']
+          a['deep_read_needs_visual_review']=28
+          a['deep_read_textual_fresh_read_completed']=28
+          a['deep_read_in_progress']=1
+          a['deep_read_current_document_id']='HDS_V2.2a'
+          a['deep_read_previous_document_id']='HDS_V2.2'
+          a['next_natural_deep_read_document_id']='HDS_V2.2a'
+          a['hds_v2_2a_deep_read_report']='docs/pdf_xsd_semantic_audit/deep_read/HDS_V2.2a.md'
+          a['hds_v2_2a_source_pin']={
+            'sha256':'f3da1994e719572ba1689aea2448b9533faf9e8fbe42720b9e737b98edd8b0f8',
+            'size_bytes':431875,
+            'evidence_run':'33266884196',
+            'pinned_at_utc':'2026-08-29T17:55:31Z',
+            'pdf_authority':'official_public_VDV_writing',
+            'service_authority_status':'non_xsd_dns_sd_http_profile_without_dedicated_2.2a_release_tag'
+          }
+          a['hds_v2_2a_visual_evidence']={
+            'pinned_byte_render_run':'33266920928',
+            'render_job':'99138495593',
+            'artifact_id':'9718919955',
+            'pages_reviewed':[8,10,11],
+            'status':'targeted_visible_review_complete_independent_fresh_read'
+          }
+          a['hds_v2_2a_authority']={
+            'dedicated_service_xsd':False,
+            'dedicated_release_tag_VDV-301-2.2a_exists':False,
+            'service_model':'non_xsd_dns_sd_http_profile',
+            'dns_sd_service_name':'HtmlDisplayService',
+            'dns_sd_transport_labels_currently_recognised':[' _http._tcp'.strip(),'_ibisip_http._tcp'],
+            'dns_sd_txt_keys':['content','url'],
+            'content_endpoint_source':'TXT url',
+            'profile_interpretation':'V2.2a is an amended/corrected V2.2 publication carrying a future-transition note; it is not the future next service version after 2.2.',
+            'xsd_boundary':'No HDS XML contract is inferred or selected.'
+          }
+          sp.write_text(json.dumps(s,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+
+          dp=Path('audit_registry/deep_read_registry_delta_hds_v22a_2026-08-29.json')
+          d=json.loads(dp.read_text(encoding='utf-8')); h=d['document_updates']['HDS_V2.2a']
+          h['state']='fresh_read_visible_review_complete_pending_historical_reconciliation'
+          h['fresh_read_started']='2026-08-29'
+          h['textual_fresh_read_complete']=True
+          h['historical_v22a_profile_not_used_as_source_during_fresh_read']=True
+          h['visual_evidence']={
+            'interactive_screenshot_result':'cache_miss_fallback_used',
+            'pinned_byte_render_run':'33266920928',
+            'render_job':'99138495593',
+            'artifact_id':'9718919955',
+            'artifact_zip_sha256':'6c0a636017990fe40bc69d3e88f549c06c0d3d90510429f188754b60974db449',
+            'fulltext_sha256':'8f21a5a9445e7b27f7cb6e4ce7783fc52e0bf73e40b48c3119867c0cdfac9809',
+            'pages_rendered':[7,8,9,10,11,12,13,14],
+            'pages_visibly_reviewed':[8,10,11],
+            'page_png_sha256':{
+              '7':'9ba058cebc50e613e2947343aa6e15203e4720f3cf1749058cce7aa5ac2b9a78',
+              '8':'db5ed1dfd2c1e1d82361d9bd471a8908095031ddf4291cad4e84e73009f85b24',
+              '9':'41e38a9c640d93d8b3b7dc04b3215eb773711e0e28158bb8873975c138608024',
+              '10':'8e8c1ccfc18a96e71ef9383adae80ed8f7dc0f50915b24dbb899eef99bb849f1',
+              '11':'3d104262f4f2a083e8ae08bec6422fe2b645b98ebf8b75189d94c0887ae70a8a',
+              '12':'875a9657b6a1fe72829d488b2c6e920756cd24889f5048d9a3c405fc664e3613',
+              '13':'c715265b1eaf5cd4c15bc6efb633abd42e126b0f607a1a1ac35f345e853a50ab',
+              '14':'9f15c6f4f131689251fd315a8866e1b69cb3c0a0b47db1cc7ba8a80f3a303503'
+            },
+            'status':'visible_review_complete_for_independent_fresh_read'
+          }
+          h['fresh_observations']=[
+            'The V2.2a foreword explicitly describes the publication as carrying a note on future use of _ibisip_http._tcp instead of _http._tcp.',
+            'The service remains a non-XSD DNS-SD/HTTP/browser profile and again states that it defines no own protocol.',
+            'The current V2.2a discovery table lists both _http._tcp and _ibisip_http._tcp.',
+            'German marks _http._tcp as zukünftig nicht mehr empfohlen; English marks it deprecated.',
+            'TXT records remain content and url; the content endpoint follows TXT url.',
+            'The text explicitly says the SRV record will be adapted with the next service version after 2.2, which will use _ibisip_http._tcp and delete _http._tcp.',
+            'By mutual agreement, _ibisip_http._tcp may already be used project-specifically in version 2.2.',
+            'The version-history section is headed Version 2.2 and includes a usage-of-_ibisip_http._tcp correction/note.',
+            'No dedicated VDV-301-2.2a release tag or HDS service XSD exists; no XML contract is inferred.'
+          ]
+          h['active_falsification']=[
+            'Rejected: V2.2a is not treated as the future next service version after 2.2. The publication itself says that future next version will perform the deletion of _http._tcp, while the current V2.2a table still lists both labels.',
+            'Rejected: _ibisip_http._tcp is not promoted to an exclusive current V2.2a requirement. The publication frames it as future/transition use and explicitly permits project-specific use already in V2.2 by mutual agreement.',
+            'Rejected as defect: German future-not-recommended and English deprecated differ in wording strength but converge on the same transition direction and do not create conflicting executable routing.',
+            'Rejected: foreword wording about specific data structures does not prove a hidden HDS XML/XSD contract.'
+          ]
+          h['fresh_findings']=[]
+          h['runtime_diagnostic_wording_refinement_pending']={
+            'tool':'tools/runtime_discovery_profile.py + tools/validate_discovery_runtime_rv002.py',
+            'issue':'Existing RV-002 wording calls _ibisip_http._tcp preferred for V2.2a. Acceptance behavior matches the source, but preferred is stronger than the publication wording.',
+            'planned_change':'Retain both-label acceptance behavior; replace preferred with source-exact transition/future wording, then rerun RV-002.'
+          }
+          h['historical_reconciliation']='pending_after_V2.2a_fresh_read_freeze'
+          dp.write_text(json.dumps(d,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+
+          report='''# HTMLDisplayService V2.2a — Deep Read Pass 2\n\nStatus: independent V2.2a source read and targeted visible review complete; historical V2.2a reconciliation pending.\n\n## Source and authority\n\n- Official publication: VDV-Schrift 301-2-17, HTMLDisplayService V2.2a, 02/2021.\n- Official URL: https://www.vdv.de/301-2-17-sdes-v2-2a-htmldisplayservice.pdfx\n- Pinned SHA-256: `f3da1994e719572ba1689aea2448b9533faf9e8fbe42720b9e737b98edd8b0f8`\n- Size: `431875` bytes.\n- Pin run: `33266884196`.\n- No repository tag `VDV-301-2.2a` exists.\n- No dedicated HtmlDisplayService XSD exists in the integration root pool.\n- Authority class: official service publication for a **non-XSD DNS-SD/HTTP profile**; no HDS XML contract is invented.\n\n## Visual/read evidence\n\nThe interactive PDF screenshot path again returned cache miss. Exact pinned-byte fallback was used.\n\n- Render/read run: `33266920928`\n- Job: `99138495593`\n- Artifact: `9718919955`\n- Artifact digest: `6c0a636017990fe40bc69d3e88f549c06c0d3d90510429f188754b60974db449`\n- Extracted full-text SHA-256: `8f21a5a9445e7b27f7cb6e4ce7783fc52e0bf73e40b48c3119867c0cdfac9809`\n- Rendered pages: 7-14; visibly reviewed focus pages: 8, 10, 11.\n\n## Independence boundary\n\nThe historical HDS block was already known from prior-version reconciliation, but no historical V2.2a statement is used as source authority here. The facts below were re-derived from the pinned V2.2a publication before formal V2.2a reconciliation.\n\n## Independent V2.2a observations\n\n1. The foreword says V2.2a contains a note on future use of `_ibisip_http._tcp` instead of `_http._tcp`.\n2. HDS remains a DNS-SD/HTTP/browser profile without its own service protocol or service XSD.\n3. The current V2.2a discovery table lists **both** `_http._tcp` and `_ibisip_http._tcp`.\n4. German labels `_http._tcp` as `zukünftig nicht mehr empfohlen`; English labels it `deprecated`.\n5. TXT remains `content + url`; `url` is the content access URL.\n6. The publication states that **the next service version after 2.2** will adapt the SRV record, use `_ibisip_http._tcp`, and delete `_http._tcp`.\n7. By mutual agreement, project-specific use of `_ibisip_http._tcp` is already permitted in version 2.2.\n8. The version-history section is headed `Version 2.2` and records the usage-of-`_ibisip_http._tcp` note/correction.\n\n## Interpretation boundary\n\nV2.2a is treated as an amended/corrected V2.2 publication/profile variant, **not** as the future next service version mentioned in its own text. Therefore the current V2.2a authority recognises both labels. `_http._tcp` is deprecated/future-not-recommended, while `_ibisip_http._tcp` is the documented transition/future label and may be used by project agreement.\n\nIt would overstate the source to describe `_ibisip_http._tcp` as an exclusive current V2.2a requirement. The source reserves deletion of `_http._tcp` for the future next service version after 2.2.\n\n## Active falsification\n\n- Rejected the interpretation that V2.2a itself is the future next service version: its current table still contains both labels and its prose points to a future next version.\n- Rejected an exclusive-current `_ibisip_http._tcp` rule: mutual-agreement wording and the dual-label table contradict exclusivity.\n- German `zukünftig nicht mehr empfohlen` versus English `deprecated` is retained as a bilingual wording nuance, not promoted to a defect because the surrounding transition rule aligns.\n- No hidden XML/XSD contract is inferred from generic foreword wording.\n\n## Fresh finding result\n\nNo new unique VDV finding is promoted from the independent V2.2a fresh read. The protocol-label transition is version/profile routing knowledge.\n\n## Audit-tool wording refinement pending\n\nRV-002 currently labels `_ibisip_http._tcp` as `preferred` for V2.2a. Its acceptance behavior is compatible with the publication, but `preferred` is stronger than the source wording. After this source freeze, only the diagnostic/test wording will be refined to `transition/future` language; behavior will remain unchanged and RV-002 will be rerun.\n\n## Next gate\n\nCorrect the audit-tool wording, rerun RV-002, then reconcile the historical V2.2a profile and close HDS V2.2a.\n'''
+          Path('docs/pdf_xsd_semantic_audit/deep_read/HDS_V2.2a.md').write_text(report,encoding='utf-8')
+
+          for p in [sp,dp]: json.loads(p.read_text(encoding='utf-8'))
+          PY
+      - name: Commit V2.2a freeze and remove temporary workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add 00_START_HERE/CURRENT_STATE.json audit_registry/deep_read_registry_delta_hds_v22a_2026-08-29.json docs/pdf_xsd_semantic_audit/deep_read/HDS_V2.2a.md
+          git rm .github/workflows/temp-freeze-hds-v22a-fresh-read.yml
+          if git diff --cached --name-only | grep -E '\.xsd$'; then exit 1; fi
+          git config user.name 'MarcLeinenDE'
+          git config user.email '34336531+MarcLeinenDE@users.noreply.github.com'
+          git commit -m 'Freeze independent HTMLDisplayService V2.2a fresh read'
+          git push origin HEAD:dev/schema-integration
