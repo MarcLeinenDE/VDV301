@@ -18,11 +18,12 @@ EV-002  legacy V1.0 root-adapter compile
 EV-101  PCS-001 OperationNotSupported dependency/value-set mismatch
 EV-102  CE-018 ServiceIdentificationWithStateList cardinality
 EV-103  video-service xs:choice findings
-EV-104  TrainSet operation/root/context modelling
+EV-104  TrainSet V2.2 operation/root/context modelling
 EV-105  AnalogRadio candidate Transmitter cardinality
 EV-106  Common V2.3 official vs PR #30 schema-variant behaviour
 EV-107  DMS V2.2 Deep Read schema declarations
 EV-108  DMS V2.4 candidate/integration Deep Read schema declarations
+EV-109  TrainSet V2.1 Deep Read modelling/root/operation evidence
 ```
 
 Important:
@@ -31,17 +32,22 @@ Important:
 EV-003 through EV-100 were never defined.
 The numbering intentionally separates baseline evidence (001/002) from finding-specific evidence (101+).
 Do not describe the completed set as a continuous range beginning at EV-001.
-Correct wording at the current state: "EV-001, EV-002 and EV-101 through EV-108".
+Correct wording at the current state: "EV-001, EV-002 and EV-101 through EV-109".
 ```
 
 Existing EV document names, historical workflow run IDs and historical tool names are not retroactively renamed because they are provenance evidence.
 
-Authority guard for EV-108:
+Authority guards:
 
 ```text
+EV-108:
 The public DMS V2.4 PDF is an official VDV writing.
 The DMS V2.4 XSD checked by EV-108 is candidate/integration material in dev/schema-integration.
 EV-108 success must never be described as official-release XSD conformance.
+
+EV-109:
+The three checked TrainSet V2.1 service XSDs are byte-identical to the official upstream VDV-301-2.1 tag.
+EV-109 is V2.1 evidence only and must not be used to back-apply V2.2 corrections or EV-104 behaviour.
 ```
 
 ## RV - runtime/protocol evidence
@@ -98,6 +104,12 @@ result
 ```
 
 Candidate/integration evidence must remain explicitly candidate-labelled.
+
+## Finding Evidence Gate interaction
+
+An EV proves the executable claims it actually tests; it does not by itself prove every PDF interpretation or remediation conclusion attached to a finding.
+
+For findings re-evaluated under `FINDING_EVIDENCE_GATE.md`, executable evidence must be combined with the applicable original-source, notation/term, exact-authority, full-context and disproof checks before the complete finding is treated as revalidated.
 
 ## Naming guard
 
