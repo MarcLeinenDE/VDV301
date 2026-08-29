@@ -1,22 +1,32 @@
 {
-  "delta_version": "0.1",
+  "delta_version": "0.2",
   "date": "2026-08-29",
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "TVS_V2.3": {
-      "state": "in_progress",
+      "state": "fresh_read_complete_pending_historical_reconciliation",
       "official_url": "https://www.vdv.de/301-2-16-sdes-v2-3-ticketvalidation.pdfx",
-      "publication": "VDV-Schrift 301-2-16, TicketValidationService V2.3",
+      "publication": "VDV-Schrift 301-2-16, TicketValidationService V2.3, 02/2021",
       "fresh_read_started": "2026-08-29",
-      "textual_fresh_read_complete": false,
+      "textual_fresh_read_complete": true,
       "historical_findings_opened_during_fresh_read": false,
-      "original_pdf_visual_review": "pending_pinned_byte_render_as_needed",
+      "original_pdf_visual_review": "targeted_pinned_byte_pages_reviewed_not_exhaustive",
       "source_pin": {
         "sha256": "74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4",
         "size_bytes": 404383,
         "pin_registry": "audit_registry/pdf_source_pins_v0.1.json",
         "evidence_run": "33258484479",
         "pinned_at_utc": "2026-08-29T14:46:39Z"
+      },
+      "visual_evidence": {
+        "pinned_byte_render_run": "33258612417",
+        "render_job": "99116563806",
+        "artifact_id": "9716575205",
+        "artifact_digest": "sha256:0cba4a211c323be415e26120eecda08c1453cce0df18e4ec373a108e22b56c74",
+        "pages_reviewed": [10, 11, 12, 13, 14, 15, 16, 18, 19],
+        "pages_rendered": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+        "interactive_screenshot_status": "cache_miss_or_internal_error_on_material_pages",
+        "rule": "targeted visible review supports candidate observations but does not justify exhaustive_read"
       },
       "exact_xsd_authority": {
         "upstream_repository": "VDVde/VDV301",
@@ -35,12 +45,23 @@
         "introduced_by_commit_message": "Integrate public schema candidate files",
         "authority": "candidate_integration_not_historical_official_V2.3"
       },
+      "fresh_observations_before_historical_reconciliation": [
+        "The V2.3 foreword says data tables in chapter 3.1.2 were corrected to correspond to the data definitions in the corresponding XSD V2.2; version history page 18 says the description is now in line with XSD and no XSD update is necessary.",
+        "Despite that explicit correction claim, German page 10 and English page 12 operation overviews still use GetCurrentStopPoint, SubscribeCurrentStopPoint and UnsubscribeCurrentStopPoint instead of CurrentTariffStop-era names.",
+        "German page 11 and English page 13 functional-sequence text still say SubscribeCurrentStop.",
+        "Page 14 chapter 3.1 is GetCurrentTariffStop and its structure body uses CurrentTariffStopData / CurrentTariffStop, but the response header and Table 1 caption still say TicketValidationService.GetCurrentStopPointResponse and Table 2 caption still says TicketValidationService.CurrentStopPointData.",
+        "Page 19 list of tables independently repeats the stale Table 1 GetCurrentStopPointResponse and Table 2 CurrentStopPointData names after the document claims chapter 3.1.2 was corrected.",
+        "Page 14 CurrentTripRef is visibly printed as IBIS-IP.NMToken while exact official V2.3 routing uses the V2.2 service/Common family where the type is IBIS-IP.NMTOKEN.",
+        "Page 15 GetCurrentLine response display again concatenates TicketValidationServiceCurrentLineData without the service-name separator dot; exact official routing uses TicketValidationService.CurrentLineDataStructure.",
+        "Page 16 VehicleData.RouteDeviation is visibly printed with RouteDirectionEnumeration while exact official V2.3 routing uses the unchanged V2.2 service family where RouteDeviation is typed as RouteDeviationEnumeration.",
+        "Minor prose/caption spelling residue remains visible but is non-executable unless a specific identifier context proves otherwise."
+      ],
       "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
       "authority_boundary": {
         "pdf_authority": "official_public_VDV_writing",
         "official_xsd_authority": "official_VDV-301-2.3_tag_routing_to_exact_V2.2_service_family",
         "candidate_xsd_authority": "separate_candidate_integration_material",
-        "rule": "Fresh-read TVS V2.3 before reopening prior TicketValidation V2.3 findings. Do not use the branch V2.3 candidate as historical official release authority."
+        "rule": "Fresh-read TVS V2.3 completed before reopening prior TicketValidation V2.3 findings. Do not use the branch V2.3 candidate as historical official release authority."
       }
     }
   }
