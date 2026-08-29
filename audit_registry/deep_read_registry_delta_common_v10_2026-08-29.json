@@ -4,9 +4,9 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "COMMON_V1.0": {
-      "state": "source_pinned_render_complete_pending_independent_fresh_read",
+      "state": "independent_fresh_read_frozen_pending_historical_reconciliation",
       "official_url": "https://www.vdv.de/301-2-1-sds.pdfx",
-      "publication": "VDV 301-2-1 V1.0, Gemeinsame Datenstrukturen und Aufzählungstypen",
+      "publication": "VDV-Schrift 301-2-1, 05/2017, Common data structures and enumerations; audit unit COMMON_V1.0 with internal Version 1.1 history",
       "source_pin": {
         "sha256": "a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf",
         "size_bytes": 892769,
@@ -16,20 +16,52 @@
       "authority_status": {
         "official_pdf": "official_public_VDV_writing",
         "xsd_lane": "xsd",
-        "exact_xsd_authority": "pending_independent_release_history_resolution",
-        "latest_xsd_wins": false
+        "latest_xsd_wins": false,
+        "official_v1_import_commit": "604a5a5c7608977e483072f7e450d7381cc182e4",
+        "common_v1_0_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+        "enumerations_v1_0_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+        "dependency_route": "IBIS-IP_common_V1.0.xsd -> IBIS-IP_Enumerations_V1.0.xsd",
+        "integration_branch_byte_identity": true,
+        "common_v1_1_xsd_found": false,
+        "authority_note": "The exact V1.0 family comes from the official 2014 initial V1 XSD import. The 05/2017 PDF has an internal Version 1.1 revision history while IBIS-IP-VersionEnumeration remains 1.0."
       },
-      "historical_common_findings_quarantined_until_fresh_read_freeze": true,
+      "historical_common_findings_quarantined_until_fresh_read_freeze": false,
+      "fresh_read_freeze_ready": true,
       "fresh_read_rule": "derive observations from the exact pinned COMMON V1.0 PDF and independently establish exact official XSD/dependency authority before consulting historical Common findings",
       "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
       "render_read_evidence": {
         "run": "33275626001",
+        "job": "99161707311",
+        "artifact": "9721397514",
         "artifact_name": "common-v10-pinned-read",
+        "artifact_zip_digest": "sha256:89c464676008150dbcbb99a5def23c9276043eac39226025086a9e8ed36e1221",
         "pdf_page_count": 36,
         "all_pages_rendered": true,
         "render_dpi": 120,
+        "visible_pages_reviewed": [7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20, 21, 22, 25, 27, 28, 29, 30],
         "fulltext_sha256": "fdfdf62a88f78dd7a59b341157662d3e5708b2f9c56d2cf1df13a7d4eb0cfa0a"
-      }
+      },
+      "independent_observations": [
+        "FR-COM10-001 explicit PDF Version-1.1 change set is not present in unchanged official V1.0 XSD family",
+        "FR-COM10-002 AdditionalAnnouncement choice differs in cardinality and third element name",
+        "FR-COM10-003 DataAcceptedResponse PDF table omits XSD choice and displays both alternatives as 1:1",
+        "FR-COM10-004 multiple case-sensitive XML identifier spellings differ between PDF and exact XSD",
+        "FR-COM10-005 several list/repetition cardinalities differ and PDF DataVersionList has no named V1.0 XSD type",
+        "FR-COM10-006 ServiceIdentification family contains PDF element/type substitutions",
+        "FR-COM10-007 ShortTripStop list member name/type model differs between PDF and exact XSD",
+        "FR-COM10-008 enumeration values/case/inventory diverge between PDF and exact Enumerations V1.0",
+        "FR-COM10-009 grouped minor internal-document/editorial inconsistencies"
+      ],
+      "rejected_or_held_below_threshold": [
+        "do not reinterpret document-history Version 1.1 as IBIS-IP protocol Version 1.1; PDF still defines IBIS-IP-VersionEnumeration=1.0",
+        "do not interpret leading dash in –1:1 as negative cardinality; it marks an XML choice",
+        "do not treat line-wrap hyphens or leading plus signs as literal XML-name characters without independent support",
+        "do not treat enumeration ordering differences as value-set defects",
+        "do not automatically promote XSD-only helper structures/DataIntervallEnumeration/DeviceTaskEnumeration to PDF defects before downstream context reconciliation",
+        "do not modify XSD because of PDF drift"
+      ],
+      "historical_reconciliation_status": "now_allowed_after_freeze",
+      "fresh_read_report": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V1.0.md"
     }
   }
 }
