@@ -4,10 +4,10 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "TVS_V2.4": {
-      "state": "source_pinned_authority_established_pending_fresh_read",
+      "state": "fresh_read_complete_pending_historical_reconciliation",
       "official_url": "https://www.vdv.de/301-2-16-sde-v2.4-ticketvalidationservice.pdfx",
       "publication": "VDV-Schrift 301-2-16, TicketValidationService V2.4",
-      "fresh_read_started": null,
+      "fresh_read_started": "2026-08-29",
       "historical_findings_opened_during_fresh_read": false,
       "source_pin": {
         "sha256": "e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51",
@@ -56,7 +56,63 @@
         "rule": "Use this complete family for technical PDF/XSD comparison only as candidate/integration authority. Do not describe success as official V2.4 release XSD conformance."
       },
       "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
-      "fresh_read_rule": "Do not open historical TVS V2.4 findings, including TVS-001, until the independent V2.4 PDF fresh read and targeted visible review are frozen."
+      "fresh_read_rule": "Do not open historical TVS V2.4 findings, including TVS-001, until the independent V2.4 PDF fresh read and targeted visible review are frozen.",
+      "textual_fresh_read_complete": true,
+      "original_pdf_visual_review": "targeted_pinned_byte_pages_reviewed_not_exhaustive",
+      "visual_evidence": {
+        "interactive_screenshot_status": "cache_miss_on_material_pages",
+        "pinned_byte_render_run": "33265061000",
+        "render_job": "99133563822",
+        "artifact_id": "9718391355",
+        "artifact_digest": "sha256:03a308e9ac1f792ec074020a633e83ab58973c90573e982b58e4731466f72781",
+        "rendered_pages": [
+          4,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "visibly_reviewed_pages": [
+          4,
+          10,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "dpi": 180,
+        "source_sha256_verified": "e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51",
+        "rule": "Targeted visible review supports observations but does not justify exhaustive_read."
+      },
+      "fresh_observations_before_historical_reconciliation": [
+        "The V2.4 foreword explicitly says the new short-haul operation requires new XSD 2.4.",
+        "German operation overview still uses Get/Subscribe/UnsubscribeCurrentStopPoint while also adding GetCurrentShortHaulStops.",
+        "English operation overview repeats the stale CurrentStopPoint-era names and adds GetCurrentShortHaulStops.",
+        "German and English functional-sequence prose still says SubscribeCurrentStop.",
+        "Chapter 3 states that the corresponding XSD is master if description and XSD differ.",
+        "Chapter 3.1 is GetCurrentTariffStop, but response/table labels still say GetCurrentStopPointResponse and CurrentStopPointData while the body uses CurrentTariffStop names.",
+        "CurrentTripRef is visibly printed as IBIS-IP.NMToken in both CurrentTariffStopData and the new CurrentShortHaulStopsData.",
+        "GetCurrentLine response display again concatenates TicketValidationServiceCurrentLineData without the service-name separator dot.",
+        "VehicleData.RouteDeviation is visibly printed with RouteDirectionEnumeration.",
+        "The new GetCurrentShortHaulStops section visibly defines its response, CurrentShortHaulStopsData, CurrentTariffStop 0:* and CurrentTripRef 0:1.",
+        "V2.4 version history documents introduction of GetCurrentShortHaulStops and retains the prior V2.2 rename and V2.3 correction statements.",
+        "The list of tables still carries GetCurrentStopPointResponse and CurrentStopPointData names.",
+        "Visible -1:1 rows are VDV choice notation and are not cardinality findings."
+      ],
+      "fresh_read_disproof_notes": [
+        "The new GetCurrentShortHaulStops operation is not itself treated as a defect; the official PDF explicitly introduces it.",
+        "No conclusion about TVS-001 or any historical V2.4 finding was used during the fresh read.",
+        "Upstream-master and candidate/integration XSD provenance remain separate; no successful candidate-family validation may be labeled official V2.4 release conformance."
+      ],
+      "fresh_read_freeze_rule": "Historical V2.4 findings may be opened only after this independent snapshot commit is permanent."
     }
   }
 }
