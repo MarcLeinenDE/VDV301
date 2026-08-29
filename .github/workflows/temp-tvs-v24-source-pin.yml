@@ -1,0 +1,35 @@
+name: temp-tvs-v24-source-pin
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+
+permissions:
+  contents: read
+
+jobs:
+  pin:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch and hash official TVS V2.4 PDF
+        run: |
+          python - <<'PY'
+          import hashlib, json, urllib.request
+          from datetime import datetime, timezone
+
+          url = 'https://www.vdv.de/301-2-16-sde-v2.4-ticketvalidationservice.pdfx'
+          req = urllib.request.Request(url, headers={'User-Agent': 'VDV301-audit-source-pin/1.0'})
+          with urllib.request.urlopen(req, timeout=60) as r:
+              data = r.read()
+          if not data.startswith(b'%PDF-'):
+              raise SystemExit('Downloaded source is not a PDF')
+          result = {
+              'source_id': 'TVS_V2.4',
+              'expected_sha256': hashlib.sha256(data).hexdigest(),
+              'expected_size_bytes': len(data),
+              'pinned_at_utc': datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace('+00:00','Z'),
+              'deep_read_source_ready': True,
+          }
+          print('TVS_V24_PIN=' + json.dumps(result, separators=(',', ':')))
+          PY
