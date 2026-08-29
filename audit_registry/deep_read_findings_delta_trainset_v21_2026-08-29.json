@@ -1,0 +1,85 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-29",
+  "document_id": "TRAINSET_V2.1",
+  "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+  "source_pin": {
+    "source_id": "TRAINSET_V2.1",
+    "sha256": "8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e",
+    "size_bytes": 1708401,
+    "pin_run": "33226637254"
+  },
+  "existing_findings_revalidated": [
+    {
+      "id": "TSI-001",
+      "state": "executable_confirmed",
+      "evidence_id": "EV-109",
+      "run_id": "33228250613",
+      "counter_hypothesis": "A multi-coach response might be representable by repeating flat coach fields without a wrapper.",
+      "counter_result": "rejected; exact V2.1 declarations are non-repeating and the second coach record is rejected",
+      "sdk_eligibility": "diagnostic_only_selected_xsd_remains_authority"
+    },
+    {
+      "id": "TSM-001",
+      "state": "executable_confirmed",
+      "evidence_id": "EV-109",
+      "run_id": "33228250613",
+      "counter_hypothesis": "The old name may be only an operation label while a ...Response root exists elsewhere.",
+      "counter_result": "rejected; old name is the V2.1 global/group element and later ...Response root is absent",
+      "sdk_eligibility": "diagnostic_only_no_alias"
+    },
+    {
+      "id": "TSD-001",
+      "state": "executable_confirmed",
+      "evidence_id": "EV-109",
+      "run_id": "33228250613",
+      "counter_hypothesis": "Missing service-specific Subscribe/Unsubscribe roots might mean no subscription infrastructure exists at all.",
+      "counter_result": "rejected in that broad form; Common V2.0 generic subscription infrastructure exists, while the TrainSetDataService-specific operation/root inventory gap remains",
+      "sdk_eligibility": "operation_context_diagnostic_only_no_invented_roots"
+    }
+  ],
+  "new_findings": [
+    {
+      "id": "DRTRAINSET21-001",
+      "classification": "pdf_cross_reference_error_candidate",
+      "state": "context_verified",
+      "claim": "The V2.1 writing points to section 9.1 for material/examples located in section 10.",
+      "executable_evidence": "not_applicable_document_navigation",
+      "validation_behavior": "none",
+      "sdk_eligibility": "documentation_context_only"
+    },
+    {
+      "id": "DRTRAINSET21-002",
+      "classification": "pdf_service_name_copy_paste_error_candidate",
+      "state": "context_verified",
+      "claim": "Page 44 says TrainSetInformationService composition operations provide the same information as equally named TrainSetDataService operations, although TrainSetDataService has no such composition operations; TrainSetManagementService is the matching service context.",
+      "original_visual_status": "confirmed_pinned_byte_render",
+      "counter_hypothesis": "TrainSetDataService might define an alternate/hidden composition operation.",
+      "counter_result": "rejected after full V2.1 operation inventory and exact XSD check",
+      "executable_evidence": "not_applicable_pdf_service_reference",
+      "validation_behavior": "do_not_synthesize_trainsetdataservice_composition_operations",
+      "sdk_eligibility": "documentation_context_only"
+    },
+    {
+      "id": "DRTRAINSET21-003",
+      "classification": "pdf_operation_name_typo_candidate",
+      "state": "context_verified",
+      "claim": "Page 44 prints GetTrainSetCompositon instead of GetTrainSetComposition.",
+      "original_visual_status": "confirmed_pinned_byte_render",
+      "counter_hypothesis": "The typo might be an alternate operation spelling.",
+      "counter_result": "rejected; operation inventory and exact XSD use GetTrainSetComposition",
+      "executable_evidence": "not_applicable_pdf_typo",
+      "validation_behavior": "no_alias",
+      "sdk_eligibility": "documentation_context_only"
+    }
+  ],
+  "rejected_observations": [
+    {
+      "claim": "Possible coupledSide/CoupledSide casing mismatch",
+      "result": "rejected_after_deep_read",
+      "evidence": "visible original pages 24/25 and exact XSD both use CoupledSide",
+      "finding_id_created": false
+    }
+  ],
+  "deferred_to_trainset_v22": ["TSM-002", "TSD-002", "TSD-003"]
+}
