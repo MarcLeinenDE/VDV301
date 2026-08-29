@@ -1,0 +1,173 @@
+name: temp-finalize-hds-v22a-close
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp-finalize-hds-v22a-close.yml
+permissions:
+  contents: write
+jobs:
+  finalize:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build HDS V2.2a closure
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+
+          sp=Path('00_START_HERE/CURRENT_STATE.json')
+          s=json.loads(sp.read_text(encoding='utf-8')); a=s['audit']
+          a['deep_read_in_progress']=0
+          a['deep_read_current_document_id']=None
+          a['deep_read_previous_document_id']='HDS_V2.2a'
+          a['next_natural_deep_read_document_id']='SMS_V2.2'
+          a['latest_deep_read_revalidation']='HDS-001_V2.2a_context_verified_ok_with_note_RV-002_run_33267198470'
+          a['latest_deep_read_findings_delta']='audit_registry/deep_read_findings_delta_hds_v22a_2026-08-29.json'
+          a['latest_audit_correction']='docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_HDS_V22A_RV002_WORDING_2026-08-29.md'
+          a['hds_v2_2a_findings']={
+            'HDS-001':'context_verified_ok_with_note_runtime_profile_supported_RV-002_run_33267198470'
+          }
+          sp.write_text(json.dumps(s,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+
+          dp=Path('audit_registry/deep_read_registry_delta_hds_v22a_2026-08-29.json')
+          d=json.loads(dp.read_text(encoding='utf-8')); h=d['document_updates']['HDS_V2.2a']
+          h['state']='targeted_visual_review_complete_historical_reconciliation_complete'
+          h['historical_v22a_profile_reconciled_after_fresh_read_freeze']=True
+          h['existing_findings_revalidated']={
+            'HDS-001':'context_verified_ok_with_note_runtime_profile_supported_RV-002_run_33267198470'
+          }
+          h['new_unique_findings']=[]
+          h['runtime_diagnostic_wording_refinement']={
+            'correction_doc':'docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_HDS_V22A_RV002_WORDING_2026-08-29.md',
+            'permanent_commit':'6f0875e80c55f6c1ac6e209c484187a41dbf3d54',
+            'behavior_changed':False,
+            'summary':'RV-002 changed only diagnostic/test wording from preferred to documented transition/future language.'
+          }
+          h['runtime_evidence']={
+            'evidence_id':'RV-002',
+            'revalidation_run':'33267198470',
+            'job':'99139252921',
+            'status':'PASS',
+            'scope':'deterministic DNS-SD profile classifier; no live DNS/mDNS, endpoint-reachability or browser-interoperability claim',
+            'v2_2a_checks':[
+              '_ibisip_http._tcp transition label is accepted',
+              '_http._tcp is accepted with deprecated/future-not-recommended note',
+              'TXT content + url remains required',
+              'content endpoint follows TXT url',
+              'other protocol labels remain rejected by profile logic'
+            ]
+          }
+          h['historical_reconciliation']='complete_for_V2.2a'
+          h['next_document_id']='SMS_V2.2'
+          dp.write_text(json.dumps(d,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+
+          fd={
+            'delta_version':'0.1','date':'2026-08-29','document_id':'HDS_V2.2a',
+            'evidence_gate':'docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md',
+            'new_unique_findings':[],
+            'revalidated_findings':{
+              'HDS-001':{
+                'state':'context_verified_ok_with_note_runtime_profile_supported_RV-002_run_33267198470',
+                'classification':'ok_with_note',
+                'summary':'The byte-pinned official V2.2a publication confirms that HDS remains intentionally non-XSD. The current V2.2a table recognises both _http._tcp and _ibisip_http._tcp; _http._tcp is deprecated/future-not-recommended, while _ibisip_http._tcp is the documented transition/future label. Deletion of _http._tcp is reserved for the future next service version after 2.2.',
+                'validation_behavior':'discovery_http_profile_not_service_xsd'
+              }
+            },
+            'version_profile':{
+              'publication_variant':'V2.2a_amended_corrected_V2.2_profile',
+              'current_protocol_labels':[' _http._tcp'.strip(),'_ibisip_http._tcp'],
+              'legacy_label_status':'_http._tcp deprecated / zukünftig nicht mehr empfohlen',
+              'transition_label_status':'_ibisip_http._tcp documented for future use and already project-usable by mutual agreement in V2.2',
+              'future_next_version_rule':'next service version after 2.2 will use _ibisip_http._tcp and delete _http._tcp',
+              'txt_keys':['content','url'],
+              'endpoint_source':'TXT url'
+            },
+            'runtime_evidence':{
+              'RV-002_run':'33267198470',
+              'job':'99139252921',
+              'result':'PASS',
+              'wording_correction_commit':'6f0875e80c55f6c1ac6e209c484187a41dbf3d54',
+              'behavior_changed_by_correction':False
+            },
+            'authority_note':{
+              'official_pdf':'official_public_VDV_writing',
+              'dedicated_release_tag_VDV-301-2.2a_exists':False,
+              'dedicated_service_xsd':False,
+              'live_network_claim':False
+            },
+            'deduplication':'No new HDS V2.2a finding ID opened; the independently derived profile reconciles to HDS-001 plus version-specific transition routing knowledge.'
+          }
+          fdp=Path('audit_registry/deep_read_findings_delta_hds_v22a_2026-08-29.json')
+          fdp.write_text(json.dumps(fd,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+
+          rp=Path('audit_registry/finding_revalidation_registry_v0.1.json')
+          r=json.loads(rp.read_text(encoding='utf-8'))
+          r['explicit_revalidations_during_deep_read_pass_2']['HDS_V2.2a']={
+            'HDS-001':'context_verified_ok_with_note_runtime_profile_supported_RV-002_run_33267198470'
+          }
+          rp.write_text(json.dumps(r,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+
+          report_p=Path('docs/pdf_xsd_semantic_audit/deep_read/HDS_V2.2a.md')
+          report=report_p.read_text(encoding='utf-8')
+          appendix='''\n## Historical V2.2a reconciliation after fresh-read freeze\n\nThe independent V2.2a source state was frozen in commit `17f036c6257c5c71b94169c02905c2e80f36b847` before formal V2.2a historical reconciliation.\n\nThe historical HDS profile record is directionally consistent with the independently derived transition. The current-source wording is retained more precisely here: V2.2a itself still recognises both protocol labels; `_http._tcp` is deprecated/future-not-recommended, `_ibisip_http._tcp` is the documented transition/future label, and only the future next service version after 2.2 is stated to delete `_http._tcp`.\n\n### HDS-001 — V2.2a revalidation\n\nState: `context_verified_ok_with_note_runtime_profile_supported_RV-002_run_33267198470`.\n\nEvidence chain:\n\n- official byte-pinned V2.2a publication;\n- pinned-byte visible review of the discovery table and version history;\n- absence of a dedicated `VDV-301-2.2a` release tag and absence of a dedicated HDS service XSD;\n- active falsification of the mistaken interpretations `V2.2a = future next service version` and `_ibisip_http._tcp = exclusive current requirement`;\n- RV-002 wording correction commit `6f0875e80c55f6c1ac6e209c484187a41dbf3d54`;\n- corrected deterministic RV-002 rerun `33267198470` PASS.\n\nThe RV-002 correction changed only diagnostic/test wording, not acceptance or endpoint behavior. `_ibisip_http._tcp` is accepted as the transition/future label; `_http._tcp` remains accepted with a deprecation/future-not-recommended note; endpoint resolution continues to use TXT `url`.\n\nNo live DNS/mDNS, endpoint reachability, or browser/content interoperability is claimed. No new V2.2a finding ID is opened.\n\nWith this closure, HDS V2.1, V2.2 and V2.2a are all revalidated under the current Evidence Gate.\n'''
+          if '## Historical V2.2a reconciliation after fresh-read freeze' not in report:
+            report_p.write_text(report.rstrip()+appendix+'\n',encoding='utf-8')
+
+          hp=Path('docs/pdf_xsd_semantic_audit/HTML_DISPLAY_SERVICE_FINDINGS_REGISTER_ADDENDUM.md')
+          txt=hp.read_text(encoding='utf-8')
+          txt=txt.replace(
+            'Status: supplemental register; historical first-pass closure completed for HTMLDisplayService V2.1, V2.2 and V2.2a. V2.1 and V2.2 have now also been independently re-read and HDS-001 revalidated under the current Evidence Gate; V2.2a Deep Read revalidation remains pending.',
+            'Status: supplemental register; historical first-pass closure completed for HTMLDisplayService V2.1, V2.2 and V2.2a. V2.1, V2.2 and V2.2a have now all been independently re-read and HDS-001 revalidated under the current Evidence Gate.'
+          )
+          txt=txt.replace(
+            'State: closed OK with note historically; **V2.1 and V2.2 scopes revalidated under the current Evidence Gate**. V2.2a scope remains pending its own Deep Read.',
+            'State: closed OK with note; **V2.1, V2.2 and V2.2a scopes are revalidated under the current Evidence Gate**.'
+          )
+          old='V2.2a: TXT content + url, _http._tcp deprecated and _ibisip_http._tcp introduced/recommended for future alignment.'
+          new='V2.2a: TXT content + url; the current table recognises both _http._tcp (deprecated / future-not-recommended) and _ibisip_http._tcp as the transition/future label; only the future next service version after 2.2 is stated to delete _http._tcp.'
+          if old not in txt: raise SystemExit('expected HDS V2.2a profile note not found')
+          txt=txt.replace(old,new)
+          txt=txt.replace('Implement profile tests later; no schema correction/backfill action.','Keep deterministic version-specific profile tests; no schema correction/backfill action.')
+          extra='''\n## V2.2a Evidence-Gate revalidation\n\n```text\nsource pin: f3da1994e719572ba1689aea2448b9533faf9e8fbe42720b9e737b98edd8b0f8 / 431875 bytes / run 33266884196\nrender/read run: 33266920928\nfresh-read freeze: 17f036c6257c5c71b94169c02905c2e80f36b847\nRV-002 wording correction: 6f0875e80c55f6c1ac6e209c484187a41dbf3d54\ncorrected RV-002 rerun: 33267198470 PASS\n```\n\nResult for V2.2a:\n\n```text\nHDS-001 -> context_verified_ok_with_note_runtime_profile_supported_RV-002\ncurrent labels: _http._tcp + _ibisip_http._tcp\n_http._tcp: deprecated / zukünftig nicht mehr empfohlen\n_ibisip_http._tcp: documented transition/future label; project-specific use already permitted in V2.2 by mutual agreement\nfuture next service version after 2.2: delete _http._tcp and use _ibisip_http._tcp\nTXT: content + url\ncontent endpoint: TXT url\nNo dedicated HDS service XSD is expected.\n```\n\nThe former RV-002 word `preferred` was corrected because it overstated the V2.2a publication. Test behavior did not change.\n'''
+          if '## V2.2a Evidence-Gate revalidation' not in txt:
+            txt=txt.rstrip()+extra+'\n'
+          hp.write_text(txt,encoding='utf-8')
+
+          vp=Path('docs/pdf_xsd_semantic_audit/validation_backlog.md')
+          v=vp.read_text(encoding='utf-8')
+          add='''\n## HTMLDisplayService V2.2a Deep Read evidence status\n\nThe official HDS V2.2a publication is byte-pinned and independently re-derived before formal V2.2a historical reconciliation. HDS remains a non-XSD DNS-SD/HTTP profile.\n\n```text\nPDF sha256: f3da1994e719572ba1689aea2448b9533faf9e8fbe42720b9e737b98edd8b0f8\nPDF size: 431875\npin run: 33266884196\nrender/read run: 33266920928\nfresh-read freeze: 17f036c6257c5c71b94169c02905c2e80f36b847\nRV-002 diagnostic wording correction: 6f0875e80c55f6c1ac6e209c484187a41dbf3d54\ncorrected RV-002 rerun: 33267198470 PASS\n```\n\nV2.2a is an amended/corrected V2.2 publication/profile variant, not the future next service version referenced by its own text. Its current table recognises `_http._tcp` and `_ibisip_http._tcp`; `_http._tcp` is deprecated/future-not-recommended, while `_ibisip_http._tcp` is the documented transition/future label. Only the future next service version after 2.2 is stated to delete `_http._tcp`. HDS-001 is revalidated as `ok_with_note`; no new HDS finding ID is opened.\n\nThe HDS V2.1/V2.2/V2.2a block is now fully revalidated under the current Evidence Gate. Next Deep Read document: `SMS_V2.2`.\n'''
+          if '## HTMLDisplayService V2.2a Deep Read evidence status' not in v:
+            vp.write_text(v.rstrip()+add+'\n',encoding='utf-8')
+
+          handoff='''# Audit handoff delta — HTMLDisplayService V2.2a Deep Read\n\nDate: 2026-08-29\n\n## Permanent result\n\n- HDS V2.2a source independently pinned/read before formal V2.2a reconciliation.\n- PDF pin: `f3da1994e719572ba1689aea2448b9533faf9e8fbe42720b9e737b98edd8b0f8`, 431875 bytes, run `33266884196`.\n- Render/read: run `33266920928`; fresh-read freeze `17f036c6257c5c71b94169c02905c2e80f36b847`.\n- No `VDV-301-2.2a` release tag and no dedicated HDS service XSD; service remains non-XSD discovery/HTTP profile.\n- V2.2a is an amended/corrected V2.2 profile publication, not the future next service version. Current publication recognises both `_http._tcp` and `_ibisip_http._tcp`; only the future next version after 2.2 is stated to delete `_http._tcp`.\n- RV-002 wording `preferred` was refined to source-exact transition/future wording in commit `6f0875e80c55f6c1ac6e209c484187a41dbf3d54`; behavior unchanged.\n- Corrected RV-002 run `33267198470` PASS.\n- HDS-001 revalidated V2.2a as OK with note; no new finding IDs.\n- HDS V2.1, V2.2 and V2.2a are now all revalidated under the current Evidence Gate.\n- No XSD changed.\n\n## Next\n\nStart `SMS_V2.2`: own PDF pin, exact official XSD family, document-first fresh read, then historical reconciliation.\n'''
+          Path('docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF_DELTA_HDS_V22A_DEEP_READ_2026-08-29.md').write_text(handoff,encoding='utf-8')
+
+          for p in [sp,dp,fdp,rp]: json.loads(p.read_text(encoding='utf-8'))
+          assert s['audit']['next_natural_deep_read_document_id']=='SMS_V2.2'
+          assert s['audit']['deep_read_textual_fresh_read_completed']==28
+          PY
+          git diff --check
+      - name: Commit exact HDS V2.2a closure and remove finalizer
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add 00_START_HERE/CURRENT_STATE.json \
+            audit_registry/deep_read_registry_delta_hds_v22a_2026-08-29.json \
+            audit_registry/deep_read_findings_delta_hds_v22a_2026-08-29.json \
+            audit_registry/finding_revalidation_registry_v0.1.json \
+            docs/pdf_xsd_semantic_audit/deep_read/HDS_V2.2a.md \
+            docs/pdf_xsd_semantic_audit/HTML_DISPLAY_SERVICE_FINDINGS_REGISTER_ADDENDUM.md \
+            docs/pdf_xsd_semantic_audit/validation_backlog.md \
+            docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF_DELTA_HDS_V22A_DEEP_READ_2026-08-29.md
+          git rm .github/workflows/temp-finalize-hds-v22a-close.yml
+          if git diff --cached --name-only | grep -E '\.xsd$'; then exit 1; fi
+          git config user.name MarcLeinenDE
+          git config user.email 34336531+MarcLeinenDE@users.noreply.github.com
+          git commit -m 'Deep-read HTMLDisplayService V2.2a and close HDS block'
+          git push origin HEAD:dev/schema-integration
