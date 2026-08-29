@@ -4,7 +4,7 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "TVS_V2.3": {
-      "state": "fresh_read_complete_pending_historical_reconciliation",
+      "state": "needs_visual_review",
       "official_url": "https://www.vdv.de/301-2-16-sdes-v2-3-ticketvalidation.pdfx",
       "publication": "VDV-Schrift 301-2-16, TicketValidationService V2.3, 02/2021",
       "fresh_read_started": "2026-08-29",
@@ -23,8 +23,29 @@
         "render_job": "99116563806",
         "artifact_id": "9716575205",
         "artifact_digest": "sha256:0cba4a211c323be415e26120eecda08c1453cce0df18e4ec373a108e22b56c74",
-        "pages_reviewed": [10, 11, 12, 13, 14, 15, 16, 18, 19],
-        "pages_rendered": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+        "pages_reviewed": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          18,
+          19
+        ],
+        "pages_rendered": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
         "interactive_screenshot_status": "cache_miss_or_internal_error_on_material_pages",
         "rule": "targeted visible review supports candidate observations but does not justify exhaustive_read"
       },
@@ -62,6 +83,32 @@
         "official_xsd_authority": "official_VDV-301-2.3_tag_routing_to_exact_V2.2_service_family",
         "candidate_xsd_authority": "separate_candidate_integration_material",
         "rule": "Fresh-read TVS V2.3 completed before reopening prior TicketValidation V2.3 findings. Do not use the branch V2.3 candidate as historical official release authority."
+      },
+      "historical_reconciliation_complete": true,
+      "historical_reconciliation": {
+        "TVS-002": "executable_confirmed_EV-114_on_exact_official_V2.3_route",
+        "TVS-003": "executable_confirmed_EV-114_with_V2.3_correction_claim_context",
+        "DRTVS21-001": "V2.3_scope_reconfirmed_by_exact_official_route_identity_and_EV-114_xsd_side",
+        "DRTVS21-002": "V2.3_scope_context_verified_with_EV-114_xsd_side_support",
+        "DRTVS21-003": "V2.3_scope_context_verified",
+        "new_unique_finding_ids": []
+      },
+      "executable_evidence": {
+        "evidence_id": "EV-114",
+        "checker": "tools/validate_tvs_v23_ev114.py",
+        "run": "33264437557",
+        "job": "99131891930",
+        "result": "PASS",
+        "tested_temporary_head": "ecaa7b51f5d78f950d329dd8166419ce6afad9a3",
+        "official_route_service_blob": "5a4be2b2ba66860f035777ec0458dba0790880e1",
+        "candidate_service_blob": "b17591c5b067254dd3e2260f3ef2acd2e18394a9",
+        "rule": "Semantic equality does not upgrade candidate/integration provenance to official release authority."
+      },
+      "completion": {
+        "textual_fresh_read": "complete",
+        "targeted_visible_review": "complete_for_pages_10_16_18_19",
+        "exhaustive_visual_review": false,
+        "deep_read_state": "needs_visual_review"
       }
     }
   }

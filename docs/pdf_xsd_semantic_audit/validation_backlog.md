@@ -1,6 +1,6 @@
 # PDF/XSD semantic audit - current validation backlog
 
-Status: deterministic repository validation includes EV-113 for TicketValidationService V2.2. Remaining work includes continuing Deep Read Pass 2, mandatory post-Deep-Read legacy-finding revalidation, targeted finding regression, visual closure, live/integration evidence and later provider-specific work.
+Status: deterministic repository validation includes EV-114 for TicketValidationService V2.3 authority/routing and inherited executable boundary. Remaining work includes continuing Deep Read Pass 2, mandatory post-Deep-Read legacy-finding revalidation, targeted finding regression, visual closure, live/integration evidence and later provider-specific work.
 
 ## 1. Completed deterministic evidence
 
@@ -21,6 +21,7 @@ EV-110           run 33241603270  PASS  TrainSetDataService V2.2 TSD-002 unsubsc
 EV-111           run 33242337308  PASS  official DoorState V2.1 DRS-002/DRS-003 behaviour
 EV-112           run 33249561880  PASS  official TVS V2.1 RouteDeviation/CurrentTripRef/CurrentLineData type evidence
 EV-113           run 33257767942  PASS  official TVS V2.2 RouteDeviation enum separation + CurrentTariffStop rename/type evidence
+EV-114           run 33264437557  PASS  TVS V2.3 official-route/candidate authority guard + inherited V2.2 executable boundary
 ```
 
 Last full-suite baseline: run `33228250613` confirmed:
@@ -34,7 +35,7 @@ RV-001..RV-004 PASS
 SDK manifest/profile checks PASS
 ```
 
-EV-110 through EV-113 are targeted additive tests and did not change any XSD. A later full-suite run can absorb them into the canonical all-checks baseline.
+EV-110 through EV-114 are targeted additive tests and did not change any XSD. A later full-suite run can absorb them into the canonical all-checks baseline.
 
 Authority guards:
 
@@ -75,6 +76,11 @@ TicketValidationService V2.2, Common V2.2 and Enumerations V2.2 are exact offici
   Enums V2.2              2a23b512379b18e8f122ac1272cef8229fb86283
 It proves RouteDeviation uses RouteDeviationEnumeration even though RouteDirectionEnumeration also exists, and that the two enum value sets are incompatible.
 It also proves CurrentTripRef uses case-sensitive IBIS-IP.NMTOKEN, confirms the exact CurrentLineData response type, and confirms the CurrentTariffStop rename boundary: new response root valid, stale CurrentStopPoint response root absent/invalid.
+
+EV-114:
+Official VDV-301-2.3 routing uses the unchanged V2.2-named service file/blob plus Common/Enumerations V2.2. No V2.3-named service file exists in the official tag.
+The branch V2.3-named file is a provenance-distinct candidate/integration blob. EV-114 confirms both compile and currently match for critical declarations, but that semantic equality does not make the candidate historical official authority.
+EV-114 reconfirms on the official route that RouteDeviationEnumeration rejects Forward and that GetCurrentTariffStopResponse is valid while stale GetCurrentStopPointResponse has no global declaration.
 ```
 
 A provenance-only correction to the previously recorded DoorState dependency blob IDs is documented in `AUDIT_CORRECTION_DELTA_DOOR_V21_BLOB_PROVENANCE_2026-08-29.md`; executable results are unchanged.
@@ -312,6 +318,46 @@ The recurring NMToken / CurrentLine / SubscribeCurrentStop observations extend D
 
 TVS V2.2 remains `needs_visual_review`, not `exhaustive_read`, because visual review was targeted.
 
+## 8a. TicketValidationService V2.3 evidence status
+
+The official TVS V2.3 PDF was independently byte-pinned and fresh-read before reopening historical V2.3 findings.
+
+Source/evidence:
+
+```text
+PDF sha256: 74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4
+PDF size: 404383
+pin run: 33258484479
+visual render run: 33258612417
+pages visibly reviewed: 10-16, 18-19
+
+official V2.3 tag service file: IBIS-IP_TicketValidationService_V2.2.xsd
+service blob: 5a4be2b2ba66860f035777ec0458dba0790880e1
+Common V2.2: 468fee6d177e7185dbcd5d3f90cfb114e29e01ae
+Enumerations V2.2: 2a23b512379b18e8f122ac1272cef8229fb86283
+branch candidate V2.3 file: b17591c5b067254dd3e2260f3ef2acd2e18394a9
+```
+
+Revalidated under the current Evidence Gate:
+
+```text
+TVS-002 -> executable-confirmed by EV-114 on the exact official V2.3 release route.
+TVS-003 -> executable-confirmed/refined by EV-114; V2.3 claims chapter 3.1.2 is corrected to XSD V2.2 but stale CurrentStopPoint labels remain visibly present.
+DRTVS21-001 -> V2.3 recurrence; exact official route is blob-identical to the V2.2 family whose case-sensitive behavior EV-113 already executed, while EV-114 reconfirms the exact type.
+DRTVS21-002 -> V2.3 recurrence; context-verified with EV-114 XSD-side support.
+DRTVS21-003 -> V2.3 recurrence; context-verified.
+```
+
+Authority guard:
+
+```text
+Official V2.3 release routing must select the V2.2-named official service XSD family.
+Do not select the branch V2.3-named candidate merely because its filename appears newer.
+Current semantic equality between the two service files does not collapse provenance classes.
+```
+
+No new V2.3-only finding ID was needed after deduplication. TVS V2.3 remains `needs_visual_review`, not `exhaustive_read`.
+
 ## 9. Mandatory legacy finding revalidation before baseline freeze
 
 After Deep Read Pass 2, every surviving finding not already explicitly revalidated under the current Evidence Gate must be checked again.
@@ -411,6 +457,7 @@ DoorState RetrieveSpecific diagnostics must not silently normalize OperationErro
 DoorState untyped Get-request declarations must not be silently tightened to an invented empty type
 TVS V2.1 must preserve exact mixed-version Common V1.0/Enums V1.0 dependency routing
 TVS V2.2 must preserve exact version-aligned Common V2.2/Enums V2.2 routing
+TVS V2.3 official routing must use the official V2.2-named service XSD from tag VDV-301-2.3 and must not latest-wins select the branch V2.3 candidate
 TVS RouteDeviation diagnostics must not replace RouteDeviationEnumeration with the PDF-printed RouteDirectionEnumeration
 TVS V2.2 must not treat RouteDirectionEnumeration as an acceptable RouteDeviation alias merely because both enum names exist
 TVS CurrentTripRef diagnostics must not case-normalize IBIS-IP.NMTOKEN into the PDF-printed IBIS-IP.NMToken
@@ -420,7 +467,7 @@ TVS CurrentTariffStop diagnostics must not accept stale CurrentStopPoint respons
 Current sequencing:
 
 ```text
-fresh-read TVS_V2.3
+fresh-read TVS_V2.4
 -> continue remaining Deep Reads
 -> finish Deep Read Pass 2
 -> freeze complete finding inventory

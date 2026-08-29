@@ -1,6 +1,6 @@
 # TicketValidationService findings register addendum
 
-Status: supplemental register; historical first-pass closure completed for TicketValidationService V2.1 through V2.4. TVS V2.1 and V2.2 have now also been independently re-read and their in-scope findings processed under the current Evidence Gate. Keep separate until the main findings register is consolidated.
+Status: supplemental register; historical first-pass closure completed for TicketValidationService V2.1 through V2.4. TVS V2.1, V2.2 and V2.3 have now also been independently re-read and their in-scope findings processed under the current Evidence Gate. Keep separate until the main findings register is consolidated.
 
 Authority rule:
 
@@ -29,7 +29,7 @@ docs/pdf_xsd_semantic_audit/24l_executable_validation_tvs_v22.md
 
 ### TVS-001 - GetCurrentShortHaulStopsResponse omitted from TicketValidationServiceOperations
 
-State: open XSD internal-consistency candidate; **not revalidated by the TVS V2.1/V2.2 Deep Reads because its scope is V2.4**.
+State: open XSD internal-consistency candidate; **not revalidated by the TVS V2.1/V2.2/V2.3 Deep Reads because its scope is V2.4**.
 
 Classification:
 
@@ -60,7 +60,7 @@ Next action: revalidate under the current Evidence Gate in the correct V2.4 auth
 
 ### TVS-002 - VehicleData.RouteDeviation PDF type vs XSD type
 
-State: `executable_confirmed` for V2.1 by EV-112 and for V2.2 by EV-113 under the current Evidence Gate. V2.3/V2.4 historical scope remains subject to per-version revalidation.
+State: `executable_confirmed` for V2.1 by EV-112, V2.2 by EV-113 and V2.3 by EV-114 under the current Evidence Gate. V2.4 historical scope remains subject to per-version revalidation.
 
 Classification:
 
@@ -71,6 +71,7 @@ classification_confidence: high
 version_scope: V2.1, V2.2, V2.3, V2.4 PDFs
 V2.1_revalidation_state: executable_confirmed_EV-112
 V2.2_revalidation_state: executable_confirmed_EV-113
+V2.3_revalidation_state: executable_confirmed_EV-114
 final_handling_bucket: provider_note_or_pdf_clarification_candidate
 ```
 
@@ -137,11 +138,11 @@ Do not add RouteDirectionEnumeration as an automatic compatibility alias merely 
 V2.2 is especially important because both enum names exist but are semantically and executably non-interchangeable.
 ```
 
-Next action: no V2.1/V2.2 deterministic evidence is pending. Revalidate V2.3/V2.4 independently in their own exact authority/context before freezing the multi-version historical statement as SDK knowledge.
+Next action: no V2.1/V2.2/V2.3 deterministic evidence is pending. Revalidate V2.4 independently before freezing the multi-version historical statement as SDK knowledge.
 
 ### TVS-003 - stale CurrentStopPoint names after CurrentTariffStop rename
 
-State: `executable_confirmed_EV-113` for V2.2 under the current Evidence Gate. V2.3/V2.4 historical scope remains subject to per-version revalidation.
+State: `executable_confirmed` for V2.2 by EV-113 and V2.3 by EV-114 under the current Evidence Gate. V2.4 historical scope remains subject to per-version revalidation.
 
 Classification:
 
@@ -151,6 +152,7 @@ likely_source_issue: pdf_label_or_heading_error_candidate
 classification_confidence: high
 version_scope: V2.2, V2.3, V2.4 PDFs
 V2.2_revalidation_state: executable_confirmed_EV-113
+V2.3_revalidation_state: executable_confirmed_EV-114_with_correction_claim_context_refinement
 final_handling_bucket: official_pdf_documentation_clarification_candidate
 ```
 
@@ -208,20 +210,20 @@ The stale PDF labels and overview names must not be accepted as schema aliases b
 Provider-facing diagnostics may cite the PDF documentation inconsistency if a system implemented the stale names.
 ```
 
-Next action: no V2.2 deterministic evidence is pending. Revalidate the V2.3/V2.4 instances independently; no XSD modification is proposed.
+Next action: no V2.2/V2.3 deterministic evidence is pending. Revalidate V2.4 independently; no XSD modification is proposed.
 
 ## Deep Read findings first opened in TVS V2.1 and later scope extensions
 
 ### DRTVS21-001 - CurrentTripRef PDF type identifier case
 
-State: `executable_confirmed` for V2.1 by EV-112 and independently for V2.2 by EV-113.
+State: `executable_confirmed` for V2.1 by EV-112, independently for V2.2 by EV-113, and scope-reconfirmed for V2.3 through the exact identical official V2.2 route plus EV-114 authority guard.
 
 Classification:
 
 ```text
 mismatch_kind: type_identifier_case
 likely_source_issue: pdf_type_identifier_typo_candidate
-version_scope: V2.1-V2.2 PDFs
+version_scope: V2.1-V2.3 PDFs
 ```
 
 V2.1 evidence:
@@ -257,7 +259,7 @@ Exact selected XSD/Common type names remain authoritative.
 
 ### DRTVS21-002 - GetCurrentLine response display missing separator dot
 
-State: `context_verified` for V2.1 and independently for V2.2, with exact-XSD-side support from EV-112/EV-113.
+State: `context_verified` for V2.1, V2.2 and V2.3, with exact-XSD-side support from EV-112/EV-113/EV-114 as applicable.
 
 Classification:
 
@@ -265,7 +267,7 @@ Classification:
 mismatch_kind: pdf_type_display_identifier
 likely_source_issue: pdf_type_display_identifier_typo_candidate
 subtype: missing_service_name_separator_dot
-version_scope: V2.1-V2.2 PDFs
+version_scope: V2.1-V2.3 PDFs
 ```
 
 Evidence pattern in both versions:
@@ -294,14 +296,14 @@ Impact: documentation/context diagnostic only; no schema alias or normalization.
 
 ### DRTVS21-003 - truncated SubscribeCurrentStop flow name
 
-State: `context_verified` for V2.1 and independently for V2.2.
+State: `context_verified` for V2.1, V2.2 and V2.3.
 
 Classification:
 
 ```text
 mismatch_kind: operation_name
 likely_source_issue: pdf_operation_name_editorial_error_candidate
-version_scope: V2.1-V2.2 PDFs
+version_scope: V2.1-V2.3 PDFs
 ```
 
 V2.1 evidence:
@@ -327,7 +329,7 @@ Impact: documentation/operation-name diagnostic only; no alias.
 
 ### DRTVS21-004 - minor non-executable PDF editorial residue
 
-State: `context_verified` for V2.1 only. V2.2 contains minor prose/caption residue as well, but this generic editorial item is not automatically scope-extended because it has no validation or SDK consequence requiring a separate V2.2 finding.
+State: `context_verified` for V2.1 only. V2.2 and V2.3 contain minor prose/caption residue as well, but this generic editorial item is not automatically scope-extended because it has no validation or SDK consequence requiring a separate V2.2 finding.
 
 Classification:
 
@@ -371,7 +373,7 @@ IBIS-IP_TicketValidationService_V2.3.xsd in dev/schema-integration was added as 
 It is not historical official release material and must remain provenance-separated.
 ```
 
-This routing note is historical knowledge only until the V2.3 Deep Read independently re-establishes the exact V2.3 authority route before using it as current Evidence-Gate proof.
+The V2.3 Deep Read has now independently re-established this routing note: official tag VDV-301-2.3 contains the V2.2-named service file and no V2.3-named service file; the V2.3 PDF says no XSD update is necessary; EV-114 guards the official-route/candidate provenance boundary.
 
 ## V2.1 Evidence-Gate closure boundary
 
@@ -400,4 +402,33 @@ TVS-001      not revalidated here; V2.4 scope
 new V2.2-only IDs: none after deduplication
 ```
 
-The broader historical TicketValidation inventory is not frozen by the V2.1/V2.2 closures. Later version blocks must independently apply the current Evidence Gate.
+## V2.3 Evidence-Gate closure boundary
+
+```text
+TVS-002       revalidated for V2.3 with EV-114 on the exact official V2.3 -> V2.2 schema route
+TVS-003       revalidated/refined for V2.3 with EV-114; correction-claim context retained
+DRTVS21-001  independently recurs; V2.3 scope uses identical official V2.2 blobs, EV-114 exact-type support and EV-113 case-sensitive behavior
+DRTVS21-002  independently recurs; V2.3 scope context-verified with EV-114 XSD support
+DRTVS21-003  independently recurs; V2.3 scope context-verified
+DRTVS21-004  not scope-extended
+
+TVS-001      not revalidated here; V2.4 scope
+new V2.3-only IDs: none after deduplication
+```
+
+V2.3-specific context refinement for TVS-003:
+
+```text
+The V2.3 foreword/version history explicitly says chapter 3.1.2 was corrected to correspond to XSD V2.2 and that no XSD update is necessary.
+Nevertheless the visible response/table labels and list of tables still carry GetCurrentStopPointResponse / CurrentStopPointData, while the executable official route uses CurrentTariffStop names.
+```
+
+Routing conclusion:
+
+```text
+official V2.3 authority = official VDV-301-2.3 tag routing to IBIS-IP_TicketValidationService_V2.2.xsd + Common/Enums V2.2
+branch IBIS-IP_TicketValidationService_V2.3.xsd = candidate/integration material; not historical official release authority
+semantic equality does not collapse provenance classes
+```
+
+The broader historical TicketValidation inventory is not frozen by the V2.1/V2.2/V2.3 closures. V2.4 must independently apply the current Evidence Gate.

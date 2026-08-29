@@ -1,0 +1,36 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-29",
+  "document_id": "TVS_V2.3",
+  "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+  "new_unique_findings": [],
+  "revalidated_findings": {
+    "TVS-002": {
+      "state": "executable_confirmed_EV-114",
+      "scope": "V2.3 PDF / official V2.3 route to V2.2 XSD family",
+      "summary": "PDF RouteDirectionEnumeration remains inconsistent with executable RouteDeviationEnumeration. EV-114 confirms onroute valid and Forward invalid for RouteDeviationEnumeration on the exact official V2.3 route."
+    },
+    "TVS-003": {
+      "state": "executable_confirmed_EV-114_with_context_refinement",
+      "scope": "V2.3 PDF",
+      "summary": "V2.3 explicitly claims chapter 3.1.2 was corrected to match XSD V2.2 and no XSD update is needed, yet stale CurrentStopPoint response/data labels and overview names remain. EV-114 confirms the CurrentTariffStop root is executable and stale GetCurrentStopPointResponse is invalid."
+    }
+  },
+  "scope_extensions": {
+    "DRTVS21-001": "V2.3 repeats IBIS-IP.NMToken; official route is the same exact V2.2 family whose CurrentTripRef type is IBIS-IP.NMTOKEN. EV-114 reconfirms the exact XSD-side type; EV-113 already proved the case-sensitive negative behavior for the identical blobs.",
+    "DRTVS21-002": "V2.3 repeats TicketValidationServiceCurrentLineData missing the service-name separator dot; EV-114 reconfirms the exact XSD-side type TicketValidationService.CurrentLineDataStructure.",
+    "DRTVS21-003": "V2.3 functional-sequence prose still says SubscribeCurrentStop while the detailed CurrentTariffStop-era operation name is SubscribeCurrentTariffStop."
+  },
+  "routing_note": {
+    "state": "ok_with_note_revalidated",
+    "official_tag": "VDV-301-2.3",
+    "official_service_filename": "IBIS-IP_TicketValidationService_V2.2.xsd",
+    "official_service_blob": "5a4be2b2ba66860f035777ec0458dba0790880e1",
+    "common_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+    "enumerations_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+    "candidate_branch_file": "IBIS-IP_TicketValidationService_V2.3.xsd",
+    "candidate_branch_blob": "b17591c5b067254dd3e2260f3ef2acd2e18394a9",
+    "candidate_is_not_historical_official": true
+  },
+  "deduplication": "No V2.3-only finding IDs were opened. Repeated observations are scope extensions/refinements of existing TVS findings."
+}
