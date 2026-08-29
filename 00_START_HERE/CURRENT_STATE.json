@@ -31,8 +31,8 @@
     "deep_read_exhaustive_completed": 0,
     "deep_read_needs_visual_review": 30,
     "deep_read_textual_fresh_read_completed": 30,
-    "deep_read_in_progress": 0,
-    "deep_read_current_document_id": null,
+    "deep_read_in_progress": 1,
+    "deep_read_current_document_id": "VDV301-3_02-2020",
     "deep_read_previous_document_id": "ARA_V2.4",
     "next_natural_deep_read_document_id": "VDV301-3_02-2020",
     "latest_deep_read_finding": "DRARA24-002",
@@ -69,7 +69,7 @@
     "pdf_visual_render_fallback": "docs/pdf_xsd_semantic_audit/PDF_VISUAL_RENDER_FALLBACK.md",
     "pdf_visual_renderer": "tools/render_vdv_pdf_pages.py",
     "pdf_visual_render_rule": "interactive screenshot cache miss is not a source failure; render exact byte-pinned source independently and inspect visible output before promoting visual status",
-    "pdf_sources_byte_pinned": 25,
+    "pdf_sources_byte_pinned": 26,
     "pinned_active_sources": [
       "VDV301-2_GC_V2.3",
       "COMMON_V2.3",
@@ -95,9 +95,10 @@
       "HDS_V2.2",
       "HDS_V2.2a",
       "SMS_V2.2",
-      "ARA_V2.4"
+      "ARA_V2.4",
+      "VDV301-3_02-2020"
     ],
-    "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_ara_v24_2026-08-29.json",
+    "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_vdv301_3_02_2020_2026-08-29.json",
     "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_ara_v24_2026-08-29.json",
     "trainset_v2_1_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.1.md",
     "trainset_v2_2_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.2.md",
@@ -592,6 +593,21 @@
       "current_route_rerun": "33228250613",
       "status": "PASS",
       "authority": "candidate_service_plus_official_Common_V2.3_current_route_not_official_release_conformance"
+    },
+    "network_vdv301_3_source_pin": {
+      "sha256": "edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99",
+      "size_bytes": 558005,
+      "evidence_run": "33270251357",
+      "pinned_at_utc": "2026-08-29T19:12:21Z",
+      "pdf_authority": "official_public_VDV_writing",
+      "validation_lane": "physical_network_protocol_profile"
+    },
+    "network_vdv301_3_render_read": {
+      "run": "33270251357",
+      "artifact_name": "vdv301-3-02-2020-pinned-read",
+      "pdf_page_count": 37,
+      "all_pages_rendered": true,
+      "fulltext_sha256": "dd6ecfa0d78f0a00b86557aa2e3694883431fc6a7a1d5a92b4663981996a3276"
     }
   },
   "evidence": {
@@ -625,8 +641,8 @@
     "latest_root_xsd_validation_run": "33228250613",
     "latest_full_suite_run": "33228250613",
     "latest_targeted_xsd_evidence_run": "33269006407",
-    "latest_pdf_source_pin_run": "33269415752",
-    "latest_pdf_visual_render_run": "33269472968",
+    "latest_pdf_source_pin_run": "33270251357",
+    "latest_pdf_visual_render_run": "33270251357",
     "trainset_v2_1_executable_evidence": "EV-109 / 33228250613",
     "trainset_v2_2_context_evidence": "EV-104 / 33111644388 revalidated against fresh V2.2 source/context",
     "trainset_v2_2_tsd002_executable_evidence": "EV-110 / 33241603270",
@@ -649,11 +665,10 @@
     "rule": "Findings/audit knowledge must later explain surprising validation results without silently changing normative XSD outcomes. No unrevalidated finding may drive SDK accept/reject/routing behaviour."
   },
   "next_actions": [
-    "Start VDV301-3_02-2020 Network Infrastructure with its own verified source pin.",
-    "Fresh-read Network Infrastructure document-first and keep physical/network protocol evidence separate from XML/XSD authority.",
-    "Reconcile historical network/discovery findings only after the independent fresh-read freeze.",
-    "Continue remaining Deep Reads.",
-    "After Deep Read Pass 2 freeze the complete finding inventory and run mandatory legacy finding revalidation before SDK/remediation baseline freeze.",
-    "Do not decide PR/mail/remediation disposition during Deep Read unless explicitly requested."
+    "Complete the independent Fresh Read of VDV301-3_02-2020 from the exact pinned render/text artifact.",
+    "Visually falsify material network/topology/connector/switching claims against the pinned page renders.",
+    "Freeze fresh observations before reopening historical network/discovery findings or RV-002 comparison.",
+    "Keep VDV network requirements, incorporated external standards and diagnostic heuristics as separate authority classes.",
+    "After Deep Read Pass 2 freeze the complete finding inventory and run mandatory legacy finding revalidation before SDK/remediation baseline freeze."
   ]
 }

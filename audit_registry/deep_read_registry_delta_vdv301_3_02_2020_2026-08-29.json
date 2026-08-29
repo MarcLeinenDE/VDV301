@@ -1,0 +1,36 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-29",
+  "base_registry": "audit_registry/deep_read_registry_v0.1.json",
+  "document_updates": {
+    "VDV301-3_02-2020": {
+      "state": "source_pinned_render_complete_pending_independent_fresh_read",
+      "official_url": "https://www.vdv.de/301-3-sdes-network-infrastructure.pdfx",
+      "publication": "VDV-Schrift 301-3, Netzwerkinfrastruktur / Network infrastructure, 02/2020",
+      "source_pin": {
+        "sha256": "edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99",
+        "size_bytes": 558005,
+        "pinned_at_utc": "2026-08-29T19:12:21Z",
+        "evidence_run": "33270251357"
+      },
+      "authority_status": {
+        "official_pdf": "official_public_VDV_writing",
+        "xsd_lane": "network_protocol",
+        "xsd_required": false,
+        "validation_lane": "physical_network_protocol_profile",
+        "latest_external_protocol_version_wins": false
+      },
+      "historical_network_findings_quarantined_until_fresh_read_freeze": true,
+      "fresh_read_rule": "derive network/topology/physical-interface observations from the pinned official VDV301-3 source before consulting historical network/discovery findings or RV-002 results",
+      "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+      "render_read_evidence": {
+        "run": "33270251357",
+        "artifact_name": "vdv301-3-02-2020-pinned-read",
+        "pdf_page_count": 37,
+        "all_pages_rendered": true,
+        "render_dpi": 120,
+        "fulltext_sha256": "dd6ecfa0d78f0a00b86557aa2e3694883431fc6a7a1d5a92b4663981996a3276"
+      }
+    }
+  }
+}
