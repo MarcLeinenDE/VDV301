@@ -1,0 +1,87 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-28",
+  "base_registry": "audit_registry/deep_read_findings_v0.1.json",
+  "document_id": "VRS_V2.4",
+  "policy": "Delta records official-PDF history separately from candidate/integration XSD behavior. It does not promote candidate authority or authorize schema changes.",
+  "existing_finding_updates": [
+    {
+      "id": "VRS-002",
+      "effect": "Fresh provenance recheck confirms upstream PR #27 remains open and unmerged at head 0aa728aab47a7f13b6f36da415581d51592c4ca7. VRS V2.4 candidate XSD blob remains 07ff2c41731e63fd85b203e4b8e0186136caaaaf and includes Common V2.0 + Enumerations V2.0. Official V2.4 PDF existence does not promote this candidate to official release authority."
+    },
+    {
+      "id": "VRS-003",
+      "effect": "V2.4 official PDF explicitly restructures the response to alternatives VideoRecordingState / OperationErrorMessage and nests State 1:1, AlarmArchiveFillLevel 0:1, StartStopMode 0:1 inside VideoRecordingStateStructure. The PR27 candidate XSD models the same structure and EV-103 candidate control validates grouped state data. Treat as V2.4 correction/alignment evidence only; official V2.0 behavior remains unchanged."
+    },
+    {
+      "id": "VRS-004",
+      "effect": "Corrected in V2.4 exactly as the visible version history says: page 23 headings are SubscribeVideoRecordingState and UnsubscribeVideoRecordingState rather than the V1.0/V2.0 DisplayState copy/paste headings."
+    },
+    {
+      "id": "VRS-005",
+      "effect": "Persists in V2.4: page 19 uses PauseRecordingRRMRequestStruture and PR27 candidate XSD uses the same exact type spelling. Remains a shared typo-like identifier, not a PDF/XSD mismatch."
+    },
+    {
+      "id": "VRS-006",
+      "effect": "Remains corrected in V2.4: subscription prose uses ordinary SubscribeRequest/SubscribeResponse and UnsubscribeRequest/UnsubscribeResponse references; V1.0 generated Word error placeholders do not return."
+    },
+    {
+      "id": "VRS-007",
+      "effect": "Not fully corrected. V2.4 fixes nested State to 1:1 and StartStopMode to 0:1, but visible outer response table now prints VideoRecordingState -1:1. The malformed cardinality notation therefore persists at a different structural level."
+    },
+    {
+      "id": "VRS-008",
+      "effect": "Persists visibly in V2.4: StopRecording section request prose still says StopRecordingERM. Neither operation inventory nor candidate XSD defines StopRecordingERM; no alias is created."
+    },
+    {
+      "id": "VRS-009",
+      "effect": "VideoLive reference portion persists visibly in V2.4: page 28 German VDV 301-2-11 line says VideoLiveService v1.0 while English says v1.1, alongside 1.0/05-2017. Adjacent VideoDisplayService v1.1 remains deferred to VDS_V1.0."
+    }
+  ],
+  "new_findings": [
+    {
+      "id": "VRS-010",
+      "document_id": "VRS_V2.4",
+      "classification": "pdf_table_caption_structure_name_error_candidate",
+      "state": "visually_confirmed_cross_version",
+      "confidence": "very_high",
+      "version_scope": ["VRS_V1.0", "VRS_V2.0", "VRS_V2.4"],
+      "summary": "The PauseRecordingRRM request table caption says 'Description of response structure VideoRecordingService.PauseRecordingRequest' even though the table is a request for PauseRecordingRRM and its logical header is PauseRecordingRRMRequest. The same caption defect is visible in V1.0 page 45, V2.0 page 20 and V2.4 page 22.",
+      "normative_validation_impact": "documentation/resolver only; do not create PauseRecordingRequest alias; selected XSD exact type spelling remains PauseRecordingRRMRequestStruture for V2.0/candidate V2.4"
+    },
+    {
+      "id": "VRS-011",
+      "document_id": "VRS_V2.4",
+      "classification": "pdf_table_role_copy_paste_error_candidate",
+      "state": "visually_confirmed",
+      "confidence": "very_high",
+      "version_scope": ["VRS_V2.4"],
+      "summary": "The V2.4 VideoRecordingStateStructure table describes itself as 'Request data structure for operation PauseRecordingRRM' although it is the nested state structure used by VideoRecordingStateResponse. PR27 candidate XSD independently confirms the nested response role.",
+      "normative_validation_impact": "documentation only; do not infer a second PauseRecording request structure from this table description"
+    }
+  ],
+  "version_history_evidence": {
+    "visible_page": 27,
+    "functional_upgrade": "None",
+    "technical_corrections": [
+      "Fixed Copy/Paste-Error at Subscribe-methods",
+      "clarified issues at GetVideoRecordingState"
+    ]
+  },
+  "visual_evidence": {
+    "source_sha256": "d1a3cf36b4a9719ff8d233a84ade34ed7ff9c3dccb58f8a8688727d82a568a7b",
+    "source_size_bytes": 1036423,
+    "pin_run": "33206809886",
+    "render_run": "33207026201",
+    "pages": [6, 19, 20, 21, 22, 23, 27, 28],
+    "artifact_digest": "sha256:a81fa9b51ae3cc63fc00548e55308551754b6d17bb81c49d7272dcc24a277593"
+  },
+  "candidate_evidence": {
+    "upstream_pr": 27,
+    "pr_state": "open_unmerged",
+    "head_sha": "0aa728aab47a7f13b6f36da415581d51592c4ca7",
+    "service_xsd_blob": "07ff2c41731e63fd85b203e4b8e0186136caaaaf",
+    "dependency_family": ["IBIS-IP_common_V2.0.xsd", "IBIS-IP_Enumerations_V2.0.xsd"],
+    "authority": "candidate/integration only"
+  }
+}

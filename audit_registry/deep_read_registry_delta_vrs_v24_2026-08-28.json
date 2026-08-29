@@ -4,17 +4,22 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "VRS_V2.4": {
-      "state": "in_progress",
+      "state": "needs_visual_review",
       "official_url": "https://www.vdv.de/301-2-12-sdg-v2.4-videorecordingservice.pdfx",
       "publication": "VDV-Schrift 301-2-12, VideoRecordingService V2.4, 01/2023",
       "fresh_read_started": "2026-08-28",
-      "textual_fresh_read_complete": false,
-      "original_pdf_visual_review": "pending_pinned_byte_render",
+      "textual_fresh_read_complete": true,
+      "original_pdf_visual_review": "targeted_material_findings_visually_confirmed_from_pinned_bytes",
       "source_pin": {
         "sha256": "d1a3cf36b4a9719ff8d233a84ade34ed7ff9c3dccb58f8a8688727d82a568a7b",
         "size_bytes": 1036423,
         "pin_registry": "audit_registry/pdf_source_pins_v0.1.json",
         "evidence_run": "33206809886"
+      },
+      "visual_evidence": {
+        "render_run": "33207026201",
+        "pages": [6, 19, 20, 21, 22, 23, 27, 28],
+        "artifact_digest": "sha256:a81fa9b51ae3cc63fc00548e55308551754b6d17bb81c49d7272dcc24a277593"
       },
       "authority_boundary": {
         "pdf_authority": "official_public_VDV_writing",
@@ -23,21 +28,19 @@
         "candidate_dependency_family": ["IBIS-IP_common_V2.0.xsd", "IBIS-IP_Enumerations_V2.0.xsd"],
         "rule": "Official V2.4 PDF existence does not promote the candidate XSD to official release authority."
       },
-      "fresh_text_observations_pending_visual_confirmation": [
-        "Version history explicitly says Subscribe copy/paste error fixed and GetVideoRecordingState issues clarified",
-        "SubscribeVideoRecordingState/UnsubscribeVideoRecordingState headings appear corrected",
-        "response model now introduces VideoRecordingState wrapper with nested State/AlarmArchiveFillLevel/StartStopMode",
-        "printed -1:1 survives on outer VideoRecordingState row while nested State is 1:1 and optional fields are 0:1",
-        "StopRecordingERM prose appears to persist",
-        "PauseRecordingRRMRequestStruture spelling persists in operation table",
-        "VideoLiveService v1.1 and VideoDisplayService v1.1 reference labels appear to persist"
-      ],
-      "priority_cross_checks": [
-        "visible V2.4 correction tables and version history",
-        "candidate XSD alignment with corrected PDF response model",
-        "VRS-003 through VRS-009 version-history resolution",
-        "candidate dependency family must remain exact V2.0 Common/Enums unless evidence says otherwise"
-      ]
+      "finding_history": {
+        "VRS-002": "authority gap remains",
+        "VRS-003": "official V2.4 PDF corrected structurally; PR27 candidate aligns, candidate authority only",
+        "VRS-004": "corrected in V2.4",
+        "VRS-005": "persists as shared typo-like PDF/XSD identifier",
+        "VRS-006": "remains corrected",
+        "VRS-007": "persists on outer VideoRecordingState row as -1:1",
+        "VRS-008": "persists",
+        "VRS-009": "VideoLive reference portion persists; VideoDisplay portion deferred to VDS_V1.0",
+        "VRS-010": "new cross-version Pause request table-caption role/name error",
+        "VRS-011": "new V2.4 VideoRecordingStateStructure table-role copy/paste error"
+      },
+      "completion_note": "Targeted visual checks are complete for material findings; all-page/all-figure visual pass is not complete."
     }
   }
 }
