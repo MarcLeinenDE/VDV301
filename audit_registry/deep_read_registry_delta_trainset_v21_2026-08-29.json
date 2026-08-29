@@ -1,15 +1,17 @@
 {
-  "delta_version": "0.1",
+  "delta_version": "0.2",
   "date": "2026-08-29",
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "TRAINSET_V2.1": {
-      "state": "in_progress",
+      "state": "needs_visual_review",
       "official_url": "https://www.vdv.de/vdv-301-2-14-v2-1-sds-trainsetservices.pdfx",
       "publication": "VDV-Schrift 301-2-14, TrainSetInformationService / TrainSetManagementService / TrainSetDataService V2.1, 05/2018",
       "fresh_read_started": "2026-08-29",
-      "textual_fresh_read_complete": false,
-      "original_pdf_visual_review": "pending_pinned_byte_render_as_needed",
+      "fresh_read_completed": "2026-08-29",
+      "textual_fresh_read_complete": true,
+      "original_pdf_visual_review": "targeted_pinned_byte_render_completed",
+      "preferred_reading_source": "embedded_text_with_original_visual_confirmation",
       "source_pin": {
         "sha256": "8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e",
         "size_bytes": 1708401,
@@ -18,18 +20,39 @@
       },
       "authority_boundary": {
         "pdf_authority": "official_public_VDV_writing",
-        "xsd_authority": "to_be_established_independently for each of the three TrainSet service/schema lanes",
-        "rule": "Fresh-read the V2.1 document and establish exact operation/root/dependency behavior before consulting TSM-002/TSD-003 or EV-104."
+        "xsd_authority": "official_VDV-301-2.1_exact_service_families",
+        "schema_routes": {
+          "TrainSetInformationService": {
+            "schema": "IBIS-IP_TrainSetInformationService_V2.1.xsd",
+            "blob": "897f373e31b76aa23d8bc206854b042524e4c102",
+            "includes": ["IBIS-IP_common_V2.0.xsd"]
+          },
+          "TrainSetManagementService": {
+            "schema": "IBIS-IP_TrainSetManagementService_V2.1.xsd",
+            "blob": "add9d1cb37e5759ff7a77855b239108d38373206",
+            "includes": ["IBIS-IP_common_V2.0.xsd", "IBIS-IP_Enumerations_V2.0.xsd", "IBIS-IP_TrainSetInformationService_V2.1.xsd"]
+          },
+          "TrainSetDataService": {
+            "schema": "IBIS-IP_TrainSetDataService_V2.1.xsd",
+            "blob": "c2cdb73fcae265a2e4e0349ac6072e3548e36d8b",
+            "includes": ["IBIS-IP_common_V2.0.xsd", "IBIS-IP_Enumerations_V2.0.xsd", "IBIS-IP_CustomerInformationService_V2.0.xsd"]
+          }
+        },
+        "rule": "Exact V2.1 routes are authoritative; later V2.2 corrections are historical context only and are never back-applied."
       },
-      "priority_cross_checks": [
-        "document identity and trainset network/service concept",
-        "TrainSetInformationService operations and structures",
-        "TrainSetManagementService operations, roots/groups and composition structures",
-        "TrainSetDataService operations, request/response structures and trip-reference context",
-        "service-to-coach/proxy rules",
-        "exact V2.1 XSD files and dependency families",
-        "only after independent fresh read: TSM-002, TSD-003 and EV-104"
-      ]
+      "revalidated_findings": ["TSI-001", "TSM-001", "TSD-001"],
+      "executable_evidence": {
+        "id": "EV-109",
+        "run_id": "33228250613",
+        "result": "PASS",
+        "document": "docs/pdf_xsd_semantic_audit/24h_executable_validation_trainset_v21.md"
+      },
+      "fresh_findings": ["DRTRAINSET21-001", "DRTRAINSET21-002", "DRTRAINSET21-003"],
+      "rejected_observations": [
+        "coupledSide/CoupledSide casing suspicion rejected after visible original and exact XSD both showed CoupledSide"
+      ],
+      "deferred_to_next_document": ["TSM-002", "TSD-002", "TSD-003"],
+      "report": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.1.md"
     }
   }
 }
