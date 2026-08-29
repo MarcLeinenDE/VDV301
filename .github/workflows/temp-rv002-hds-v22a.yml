@@ -1,0 +1,26 @@
+name: temp-rv002-hds-v22a
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp-rv002-hds-v22a.yml
+permissions:
+  contents: write
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python tools/validate_discovery_runtime_rv002.py
+      - run: |
+          git rm .github/workflows/temp-rv002-hds-v22a.yml
+          git config user.name MarcLeinenDE
+          git config user.email 34336531+MarcLeinenDE@users.noreply.github.com
+          git commit -m 'Remove temporary HDS V2.2a RV-002 workflow'
+          git push origin HEAD:dev/schema-integration
