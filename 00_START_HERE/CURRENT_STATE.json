@@ -34,6 +34,22 @@
     "latest_common_finding": "CE-026",
     "resolved_historical_finding": "DR3012-006",
     "resolved_cross_document_question": "VDS-007 confirms neighboring VideoDisplayService v1.1 labels are documentation/reference-version errors; official VDV catalog identifies the 05/2017 301-2-13 publication as V1.0",
+    "latest_audit_correction": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CHOICE_NOTATION_2026-08-29.md",
+    "choice_notation_correction_registry": "audit_registry/deep_read_findings_correction_choice_notation_2026-08-29.json",
+    "choice_notation_rule": "VDV leading '-' in Min:Max denotes XML choice; -1:1 is not a negative/invalid cardinality; evaluate a/b/... labels and surrounding rows before comparing with XSD compositors",
+    "choice_notation_finding_updates": {
+      "VLS-005": "refined to pdf_choice_notation_application_anomaly_candidate",
+      "VRS-007": "withdrawn_after_deep_read_correction / rejected_after_deep_read",
+      "VDS-006": "refined to pdf_choice_notation_application_anomaly_candidate"
+    },
+    "ev103_after_choice_notation_correction": {
+      "status": "remains_valid",
+      "VLS-002": "executable-confirmed; decisive StreamID+CameraName+rtspURI test uses ordinary PDF 1:1 fields",
+      "VRS-003": "executable-confirmed; PDF interpretation refined to required AlarmArchiveFillLevel+OperationErrorMessage plus a/b State-vs-StartStopMode choice",
+      "VDS-002": "executable-confirmed; PDF ViewID/ViewName are ordinary 1:1 while only ViewType is a/-1:1",
+      "VDS-003": "executable-confirmed; unaffected",
+      "VDS-004": "executable-confirmed; State is a/-1:1 while other response fields are ordinary multiplicities"
+    },
     "pdf_source_registry": "audit_registry/pdf_source_registry_v0.1.json",
     "pdf_source_pin_registry": "audit_registry/pdf_source_pins_v0.1.json",
     "pdf_source_cache_policy": "docs/pdf_xsd_semantic_audit/PDF_SOURCE_CACHE_POLICY.md",
@@ -55,11 +71,11 @@
       "xsd_authority_status": "to_be_established_independently_per_service_lane"
     },
     "vds_v2_0_history": {
-      "VDS-002": "fresh PDF/XSD + EV-103 executable-confirmed",
+      "VDS-002": "fresh PDF/XSD + EV-103 executable-confirmed; PDF choice notation corrected",
       "VDS-003": "fresh PDF/XSD + EV-103 executable-confirmed",
-      "VDS-004": "fresh PDF/XSD + EV-103 executable-confirmed",
+      "VDS-004": "fresh PDF/XSD + EV-103 executable-confirmed; PDF choice notation corrected",
       "VDS-005": "corrected/absent in V2.0",
-      "VDS-006": "persists visibly",
+      "VDS-006": "refined: incomplete/degenerate choice-notation application, not invalid cardinality",
       "VDS-007": "cross-document VDS v1.1 issue remains resolved; no VDS V1.1 profile",
       "VDS-008": "cross-version RTP/SOA abbreviation-expansion error"
     }
@@ -87,6 +103,7 @@
     "Fresh-read byte-pinned TRAINSET_V2.1 independently before consulting existing TrainSet findings or EV-104.",
     "Establish operation inventories and response/root semantics separately for TrainSetInformationService, TrainSetManagementService and TrainSetDataService.",
     "Establish exact V2.1 service XSD files and dependency families only after the document-first read.",
+    "Apply the corrected VDV choice-notation rule whenever TrainSet or later PDFs use leading-minus Min:Max forms.",
     "Use pinned-byte rendering for material operation/structure pages and any interactive screenshot cache miss.",
     "Only after independent read, compare TSM-002/TSD-003 and EV-104.",
     "Then proceed to TRAINSET_V2.2.",

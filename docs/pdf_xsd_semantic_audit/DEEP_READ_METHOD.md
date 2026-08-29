@@ -1,6 +1,6 @@
 # VDV301 Deep Read Pass 2 – method
 
-Status: active from 2026-08-28.
+Status: active from 2026-08-28; choice-notation guard corrected 2026-08-29.
 
 ## Goal
 
@@ -64,6 +64,34 @@ A successful pinned-byte render is a visible rendering of the same original sour
 
 Targeted rendered pages do not by themselves make a document `exhaustive_read`; all applicable chapters/tables/examples/figures must still be considered according to the completion rules below.
 
+## VDV table-notation guard: multiplicity vs XML choice
+
+Do not interpret a leading minus sign as a negative minimum cardinality.
+
+VDV 301-2 V2.0 section 6.1.3.3 `Multiplizität & Choice (Min:Max)` defines:
+
+```text
+0:1  optional single element
+1:1  mandatory single element
+0:*  optional repeated element
+
+prefixed '-'  XML-choice marker
+-1:1         mandatory choice example
+-0:1         optional choice example
+```
+
+For documented choices, a lower-case letter (`a`, `b`, ...) before the element name identifies the listed alternatives.
+
+Audit rules:
+
+```text
+- `-1:1` is valid VDV notation by itself and must never be classified as an invalid/negative cardinality.
+- Evaluate the minus marker together with lower-case choice labels, surrounding rows and the selected XSD compositor.
+- If the minus marker is shown without the documented alternative labels, or appears on isolated enum-valued rows with no visible peer alternative, classify only the application/presentation as potentially anomalous; do not call the cardinality itself invalid.
+- A PDF/XSD compositor finding must be based on the complete visible grouping, not merely on the presence or absence of a minus sign.
+- Historical correction overlay: `AUDIT_CORRECTION_DELTA_CHOICE_NOTATION_2026-08-29.md`.
+```
+
 ## Required checks per document
 
 Where applicable, inspect:
@@ -74,7 +102,7 @@ Where applicable, inspect:
 - every operation table;
 - request/response assignment;
 - service/structure/element/type names;
-- cardinality (`0:1`, `1:1`, `0:*`, `1:*`);
+- cardinality (`0:1`, `1:1`, `0:*`, `1:*`) **and VDV choice notation (`-1:1`, `-0:1`, other leading-minus Min:Max forms plus a/b/... labels)**;
 - element ordering;
 - XSD compositor semantics (`sequence`, `choice`, groups);
 - enumeration values including exact case/spelling;
