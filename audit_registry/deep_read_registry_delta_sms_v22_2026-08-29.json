@@ -4,7 +4,7 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "SMS_V2.2": {
-      "state": "independent_fresh_read_frozen_pending_historical_reconciliation",
+      "state": "targeted_visual_review_complete_historical_reconciliation_complete",
       "official_url": "https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx",
       "publication": "VDV-Schrift 301-2-18, SystemMonitoringService V2.2, 08/2019",
       "source_pin": {
@@ -61,8 +61,36 @@
         "-1:1 with a/b labels is VDV XML-choice notation and matches xs:choice",
         "generic subscription operations not appearing as service-local XSD elements is not by itself a schema defect"
       ],
-      "historical_reconciliation_status": "now_allowed_after_freeze",
-      "fresh_read_report": "docs/pdf_xsd_semantic_audit/deep_read/SMS_V2.2.md"
+      "historical_reconciliation_status": "complete_for_V2.2",
+      "fresh_read_report": "docs/pdf_xsd_semantic_audit/deep_read/SMS_V2.2.md",
+      "fresh_read_freeze_commit": "625bb9a4d19f1f1c47a529686defa9b1368c80ff",
+      "existing_findings_revalidated": {
+        "SMS-001": "contextual_not_defect_executable_context_confirmed_EV-116",
+        "SMS-002": "executable_confirmed_EV-116",
+        "SMS-003": "context_verified",
+        "SMS-004": "context_verified_pdf_reference_number_error"
+      },
+      "new_unique_findings": [
+        "DRSMS22-001",
+        "DRSMS22-002",
+        "DRSMS22-003",
+        "DRSMS22-004"
+      ],
+      "executable_evidence": {
+        "evidence_id": "EV-116",
+        "checker": "tools/validate_sms_v22_ev116.py",
+        "run": "33269006407",
+        "job": "99144006184",
+        "status": "PASS",
+        "authority": "official_VDV-301-2.2_exact_family"
+      },
+      "common_lane_deferred_findings": [
+        "CE-012",
+        "CE-018",
+        "CE-019"
+      ],
+      "common_lane_note": "SMS V2.2 observes exact Common declarations for routing context only; CE-012/018/019 are not revalidated by this service closure.",
+      "next_document_id": "ARA_V2.4"
     }
   }
 }

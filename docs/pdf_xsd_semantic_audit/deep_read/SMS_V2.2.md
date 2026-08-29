@@ -75,3 +75,26 @@ Shared-list semantics remain Common V2.2 authority and must not be duplicated as
 ## Fresh-read freeze result
 
 Seven source-visible documentation observations are frozen without assigning historical SMS finding IDs. Three plausible false positives were actively rejected. No XSD was changed. The historical SMS register can now be reopened solely for deduplication/revalidation against this frozen evidence.
+
+## Historical SMS reconciliation after fresh-read freeze
+
+The independent SMS V2.2 source state was frozen in commit `625bb9a4d19f1f1c47a529686defa9b1368c80ff` before the historical SMS finding IDs were reopened for reconciliation.
+
+Mapping:
+
+```text
+FR-SMS22-OBS-003 -> SMS-002, confirmed PDF heading/name error; executable boundary EV-116
+FR-SMS22-OBS-001 -> SMS-003, confirmed wrong-service foreword copy/paste
+FR-SMS22-OBS-005 -> SMS-004, confirmed PDF reference-number error
+rejected generic-subscription defect hypothesis -> SMS-001, contextual_not_defect with EV-116 support
+FR-SMS22-OBS-002 -> DRSMS22-001
+FR-SMS22-OBS-004 -> DRSMS22-002
+FR-SMS22-OBS-006 -> DRSMS22-003
+FR-SMS22-OBS-007 -> DRSMS22-004
+```
+
+EV-116 (`tools/validate_sms_v22_ev116.py`, run `33269006407`, job `99144006184`) passed on the exact official VDV-301-2.2 family and proves the executable ServiceStatus/SystemStatus boundary plus the existence of generic Common subscription structures.
+
+CE-012, CE-018 and CE-019 are deliberately not revalidated here. They remain Common-lane findings subject to their own Evidence-Gate treatment.
+
+SMS V2.2 historical reconciliation is complete. No XSD was changed. Next Deep Read document: `ARA_V2.4`.

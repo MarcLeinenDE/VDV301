@@ -30,6 +30,7 @@ EV-112  TicketValidationService V2.1 RouteDeviation/CurrentTripRef/CurrentLineDa
 EV-113  TicketValidationService V2.2 RouteDeviation enum separation and CurrentTariffStop rename/type evidence
 EV-114  TicketValidationService V2.3 official-route/candidate authority guard and inherited V2.2 executable boundary
 EV-115  TicketValidationService V2.4 candidate/integration ShortHaul inventory + recurring type/rename behavior evidence
+EV-116  SystemMonitoringService V2.2 exact operation-name/generic-subscription modelling evidence
 ```
 
 Important:
@@ -38,7 +39,7 @@ Important:
 EV-003 through EV-100 were never defined.
 The numbering intentionally separates baseline evidence (001/002) from finding-specific evidence (101+).
 Do not describe the completed set as a continuous range beginning at EV-001.
-Correct wording at the current state: "EV-001, EV-002 and EV-101 through EV-115".
+Correct wording at the current state: "EV-001, EV-002 and EV-101 through EV-116".
 ```
 
 Existing EV document names, historical workflow run IDs and historical tool names are not retroactively renamed because they are provenance evidence.
@@ -99,6 +100,14 @@ No VDV-301-2.4 release tag exists. Current upstream master contains TVS V2.4 blo
   Enums V2.4                   2afed8cf23afa91db92b0f043cc5b4ad428b0f25
 It confirms TVS-001 (ShortHaul global response exists but is omitted from TicketValidationServiceOperations), validates the ShortHaul global response, and confirms the recurring RouteDeviation/NMTOKEN/CurrentLine/CurrentTariffStop behavior.
 EV-115 PASS is candidate/integration evidence and must never be described as official-release V2.4 XSD conformance.
+
+EV-116:
+The checked SystemMonitoringService V2.2 family is exact official VDV-301-2.2 authority:
+  SystemMonitoringService d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c
+  Common V2.2             468fee6d177e7185dbcd5d3f90cfb114e29e01ae
+  Enums V2.2              2a23b512379b18e8f122ac1272cef8229fb86283
+EV-116 proves the service-local Get response naming boundary, validates GetServiceStatusResponse, rejects invented GetSystemStatusResponse, and confirms the generic Common Subscribe/Unsubscribe structures used by the PDF.
+Its observation of Common list-item minOccurs=0 is routing context only and does not revalidate CE-012, CE-018, CE-019 or any Common PDF interpretation.
 ```
 
 The provenance metadata correction for the two DoorState dependency blob IDs is recorded in `AUDIT_CORRECTION_DELTA_DOOR_V21_BLOB_PROVENANCE_2026-08-29.md`; the executed validation result itself is unchanged.

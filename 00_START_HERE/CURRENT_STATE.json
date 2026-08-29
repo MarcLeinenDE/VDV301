@@ -31,12 +31,12 @@
     "deep_read_exhaustive_completed": 0,
     "deep_read_needs_visual_review": 29,
     "deep_read_textual_fresh_read_completed": 29,
-    "deep_read_in_progress": 1,
-    "deep_read_current_document_id": "SMS_V2.2",
-    "deep_read_previous_document_id": "HDS_V2.2a",
-    "next_natural_deep_read_document_id": "SMS_V2.2",
-    "latest_deep_read_finding": "DRTVS21-004",
-    "latest_deep_read_revalidation": "HDS-001_V2.2a_context_verified_ok_with_note_RV-002_run_33267198470",
+    "deep_read_in_progress": 0,
+    "deep_read_current_document_id": null,
+    "deep_read_previous_document_id": "SMS_V2.2",
+    "next_natural_deep_read_document_id": "ARA_V2.4",
+    "latest_deep_read_finding": "DRSMS22-004",
+    "latest_deep_read_revalidation": "SMS-002_executable_confirmed_EV-116_SMS-001_contextual_not_defect_EV-116",
     "latest_dms_finding": "DMS-007",
     "latest_common_finding": "CE-026",
     "resolved_historical_finding": "DR3012-006",
@@ -97,7 +97,7 @@
       "SMS_V2.2"
     ],
     "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_sms_v22_2026-08-29.json",
-    "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_hds_v22a_2026-08-29.json",
+    "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_sms_v22_2026-08-29.json",
     "trainset_v2_1_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.1.md",
     "trainset_v2_2_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.2.md",
     "trainset_findings_register": "docs/pdf_xsd_semantic_audit/TRAIN_SET_SERVICES_FINDINGS_REGISTER_ADDENDUM.md",
@@ -518,7 +518,30 @@
       ],
       "status": "targeted_visible_review_complete_for_fresh_observations_not_exhaustive"
     },
-    "sms_v2_2_fresh_read_status": "frozen_pending_historical_reconciliation"
+    "sms_v2_2_fresh_read_status": "historical_reconciliation_complete",
+    "sms_v2_2_findings": {
+      "SMS-001": "contextual_not_defect_executable_context_confirmed_EV-116",
+      "SMS-002": "executable_confirmed_EV-116",
+      "SMS-003": "context_verified",
+      "SMS-004": "context_verified_pdf_reference_number_error",
+      "DRSMS22-001": "context_verified",
+      "DRSMS22-002": "context_verified_with_exact_common_type_semantics",
+      "DRSMS22-003": "context_verified",
+      "DRSMS22-004": "context_verified"
+    },
+    "sms_v2_2_executable_evidence": {
+      "evidence_id": "EV-116",
+      "checker": "tools/validate_sms_v22_ev116.py",
+      "run": "33269006407",
+      "job": "99144006184",
+      "status": "PASS",
+      "authority": "official_VDV-301-2.2_exact_family"
+    },
+    "sms_v2_2_common_lane_not_revalidated": [
+      "CE-012",
+      "CE-018",
+      "CE-019"
+    ]
   },
   "evidence": {
     "xsd_ev_completed": [

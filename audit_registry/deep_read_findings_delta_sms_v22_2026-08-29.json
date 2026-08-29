@@ -1,0 +1,74 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-29",
+  "document_id": "SMS_V2.2",
+  "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+  "fresh_read_freeze": "625bb9a4d19f1f1c47a529686defa9b1368c80ff",
+  "executable_evidence": {
+    "evidence_id": "EV-116",
+    "checker": "tools/validate_sms_v22_ev116.py",
+    "run": "33269006407",
+    "job": "99144006184",
+    "result": "PASS",
+    "authority": "official_VDV-301-2.2_exact_family"
+  },
+  "revalidated_findings": {
+    "SMS-001": {
+      "state": "contextual_not_defect_executable_context_confirmed_EV-116",
+      "classification": "service_modelling / intentional generic Common subscription modelling",
+      "handling": "no_action_note"
+    },
+    "SMS-002": {
+      "state": "executable_confirmed_EV-116",
+      "classification": "pdf_operation_heading_error",
+      "handling": "official_pdf_documentation_clarification_candidate"
+    },
+    "SMS-003": {
+      "state": "context_verified",
+      "classification": "pdf_wrong_service_copy_paste",
+      "handling": "official_pdf_documentation_clarification_candidate"
+    },
+    "SMS-004": {
+      "state": "context_verified_pdf_reference_number_error",
+      "classification": "pdf_reference_number_error",
+      "handling": "official_pdf_documentation_clarification_candidate"
+    }
+  },
+  "new_unique_findings": {
+    "DRSMS22-001": {
+      "state": "context_verified",
+      "classification": "documentation_generation_error_printed_broken_cross_reference",
+      "summary": "PDF visibly prints Fehler! Textmarke nicht definiert. in the list-of-figures area",
+      "executable_effect": false
+    },
+    "DRSMS22-002": {
+      "state": "context_verified_with_exact_common_type_semantics",
+      "classification": "pdf_semantic_copy_paste_error",
+      "summary": "ServiceStatus prose describes device state although exact Common type semantics are ServiceIdentification + ServiceState",
+      "executable_effect": false
+    },
+    "DRSMS22-003": {
+      "state": "context_verified",
+      "classification": "pdf_editorial_spelling_error",
+      "summary": "SystemManagementService is misspelled SystemManagmentService in version history",
+      "executable_effect": false
+    },
+    "DRSMS22-004": {
+      "state": "context_verified",
+      "classification": "pdf_operation_table_label_omission",
+      "summary": "UnsubscribeServiceStatus request/response structures are present but Req./Resp. labels are omitted in the operation table",
+      "executable_effect": false
+    }
+  },
+  "rejected_suspicions": [
+    "cover-page isolated Fehler from extraction is not visible in rendered page 1",
+    "-1:1 with a/b labels is VDV XML-choice notation and matches xs:choice",
+    "generic subscription operations not appearing as service-local XSD elements is not a defect"
+  ],
+  "common_lane_not_revalidated": [
+    "CE-012",
+    "CE-018",
+    "CE-019"
+  ],
+  "deduplication": "FR-SMS22-OBS-001/003/005 reconcile to historical SMS-003/SMS-002/SMS-004 respectively; four remaining fresh observations receive DRSMS22-001..004."
+}

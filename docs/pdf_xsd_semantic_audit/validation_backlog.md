@@ -1,6 +1,6 @@
 # PDF/XSD semantic audit - current validation backlog
 
-Status: deterministic repository validation includes EV-115 for TicketValidationService V2.4 candidate/integration structure and behavior, with an explicit non-release authority guard. Remaining work includes continuing Deep Read Pass 2, mandatory post-Deep-Read legacy-finding revalidation, targeted finding regression, visual closure, live/integration evidence and later provider-specific work.
+Status: deterministic repository validation includes EV-116 for exact official SystemMonitoringService V2.2 operation-name/generic-subscription evidence, while EV-115 retains its explicit non-release authority guard. Remaining work includes continuing Deep Read Pass 2, mandatory post-Deep-Read legacy-finding revalidation, targeted finding regression, visual closure, live/integration evidence and later provider-specific work.
 
 ## 1. Completed deterministic evidence
 
@@ -23,6 +23,7 @@ EV-112           run 33249561880  PASS  official TVS V2.1 RouteDeviation/Current
 EV-113           run 33257767942  PASS  official TVS V2.2 RouteDeviation enum separation + CurrentTariffStop rename/type evidence
 EV-114           run 33264437557  PASS  TVS V2.3 official-route/candidate authority guard + inherited V2.2 executable boundary
 EV-115           run 33265239836  PASS  candidate/integration TVS V2.4 ShortHaul inventory + recurring type/rename behavior; NOT official-release conformance
+EV-116           run 33269006407  PASS  official SMS V2.2 ServiceStatus naming + generic Common subscription modelling evidence
 ```
 
 Last full-suite baseline: run `33228250613` confirmed:
@@ -36,7 +37,7 @@ RV-001..RV-004 PASS
 SDK manifest/profile checks PASS
 ```
 
-EV-110 through EV-115 are targeted additive tests and did not change any XSD. A later full-suite run can absorb them into the canonical all-checks baseline.
+EV-110 through EV-116 are targeted additive tests and did not change any XSD. A later full-suite run can absorb them into the canonical all-checks baseline.
 
 Authority guards:
 
@@ -560,3 +561,31 @@ V2.2a is an amended/corrected V2.2 publication/profile variant, not the future n
 
 The HDS V2.1/V2.2/V2.2a block is now fully revalidated under the current Evidence Gate. Next Deep Read document: `SMS_V2.2`.
 
+## SystemMonitoringService V2.2 Deep Read / EV-116 evidence status
+
+```text
+PDF sha256: 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4
+PDF size: 847416
+pin run: 33268541691
+render/read run: 33268591224
+fresh-read freeze: 625bb9a4d19f1f1c47a529686defa9b1368c80ff
+EV-116 run: 33269006407 PASS
+EV-116 job: 99144006184
+```
+
+Current SMS result:
+
+```text
+SMS-001 contextual_not_defect; generic Common subscription modelling; EV-116 support
+SMS-002 executable_confirmed_EV-116; PDF SystemStatus headings conflict with executable ServiceStatus naming
+SMS-003 context_verified; unrelated HTMLDisplayService foreword copy/paste
+SMS-004 context_verified; VDV 302-2 reference-number error
+DRSMS22-001 context_verified; printed broken cross-reference
+DRSMS22-002 context_verified; ServiceStatus/device-state prose copy/paste
+DRSMS22-003 context_verified; SystemManagmentService spelling
+DRSMS22-004 context_verified; missing Req./Resp. table labels
+```
+
+CE-012, CE-018 and CE-019 remain in the Common lane and are not revalidated by EV-116 or this service closure.
+
+SMS V2.2 Deep Read/reconciliation is complete. Next document: `ARA_V2.4`.
