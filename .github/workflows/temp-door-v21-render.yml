@@ -1,0 +1,31 @@
+name: temp-door-v21-render
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check pymupdf
+      - name: Render pinned DoorState V2.1 pages
+        run: |
+          python tools/render_vdv_pdf_pages.py \
+            --source-id DOOR_V2.1 \
+            --pages 9-12 \
+            --dpi 180 \
+            --out-dir door-v21-review
+      - uses: actions/upload-artifact@v4
+        with:
+          name: door-v21-review
+          path: door-v21-review/
+          if-no-files-found: error
