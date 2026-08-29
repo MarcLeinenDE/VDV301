@@ -4,7 +4,7 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "COMMON_V2.0": {
-      "state": "source_pinned_render_complete_pending_independent_fresh_read",
+      "state": "independent_fresh_read_frozen_pending_historical_reconciliation",
       "official_url": "https://www.vdv.de/301-2-1-sds-v-2-0.pdfx",
       "publication": "VDV 301-2-1 V2.0, Common Data Structures and Enumerations",
       "source_pin": {
@@ -23,17 +23,46 @@
         "branch_bytes_match_official_tag": true,
         "latest_xsd_wins": false
       },
-      "historical_common_findings_quarantined_until_fresh_read_freeze": true,
+      "historical_common_findings_quarantined_until_fresh_read_freeze": false,
+      "historical_reconciliation_status": "allowed_after_freeze_commit",
       "fresh_read_rule": "derive observations from exact pinned COMMON V2.0 PDF against exact official VDV-301-2.0 Common/Enumerations family before consulting historical Common findings",
       "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
       "render_read_evidence": {
         "run": "33279811315",
+        "job": "99172952524",
         "artifact_name": "common-v20-pinned-read",
+        "artifact_id": "9722644456",
+        "artifact_zip_sha256": "412a1714ce9c02b412262bb4d6103e686d85bf63709ad8a1bce2a3ac0d2361d9",
         "pdf_page_count": 45,
         "all_pages_rendered": true,
         "render_dpi": 120,
-        "fulltext_sha256": "05e8a7e1788318bf5ac83ffdd61125622e28ce30f4fc5f388467a41ed46f5a3f"
-      }
+        "fulltext_sha256": "05e8a7e1788318bf5ac83ffdd61125622e28ce30f4fc5f388467a41ed46f5a3f",
+        "interactive_screenshot_status": "cache_miss_non_source_failure_exact_pinned_render_fallback_used",
+        "material_pages_visibly_reviewed": [13, 16, 17, 18, 21, 22, 24, 25, 26, 28, 29, 30, 31, 33, 35, 36, 37, 38, 39]
+      },
+      "fresh_read_report": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.0.md",
+      "fresh_observations": {
+        "FR-COM20-001": "InternationalTextType PDF IBIS-IP.string/IBIS-IP.language vs exact XSD xs:string/xs:language; potentially instance-shape relevant",
+        "FR-COM20-002": "AdditionalAnnouncement PDF choice vs optional XSD choice plus InformationAtSpecificPoint/SpecificPoint name mismatch",
+        "FR-COM20-003": "DataAcceptedResponse PDF ordinary 1:1 rows vs exact XSD exclusive xs:choice",
+        "FR-COM20-004": "DataVersionList and WithState list minimums plus JourneyStop Announcement/FareZone repetition differ",
+        "FR-COM20-005": "TripInformation AdditionalTextMessage PDF 0:* and V2.0 history maxOccurs=unbounded vs exact XSD 0:1",
+        "FR-COM20-006": "case/spelling-sensitive element-name differences including Desciption, ReplyPath, FareZone, GlobalCardStausID, Message and ShortTripStop",
+        "FR-COM20-007": "ServiceIdentification outer ServiceName/type-reference wording differs from exact Service/ServiceIdentificationWithState model",
+        "FR-COM20-008": "DoorCounting/GNSS/TicketValidation/VehicleMode enum lexeme differences; major V2.0 additions otherwise align",
+        "FR-COM20-009": "grouped low-severity editorial residue including GNSSCoordinateSystem pluralization"
+      },
+      "active_falsification": [
+        "V1.x Connection DisplayContent optionality is corrected/aligned in V2.0",
+        "ExpectedDepartureTime and ScheduledDepartureTime align in V2.0",
+        "TripInformation RouteDirection and RouteDirectionEnumeration align in V2.0",
+        "readyForShutdown, PassengerCountingService, video service names and ServiceState starting align in V2.0",
+        "Message-ID is identical in PDF and XSD and is not a mismatch",
+        "VDV leading dash is choice notation, not negative cardinality",
+        "enumeration order is not treated as a discrepancy"
+      ],
+      "fresh_read_freeze_rule": "historical Common findings may be opened only after the commit containing this registry state and the independent COMMON_V2.0 report",
+      "next_step": "historical Common reconciliation and current-Evidence-Gate revalidation; no finding IDs assigned by the Fresh Read itself"
     }
   }
 }
