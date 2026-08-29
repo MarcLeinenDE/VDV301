@@ -1,0 +1,40 @@
+name: temp-patch-hds-v22a-finalizer
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp-patch-hds-v22a-finalizer.yml
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Fix finalizer EOF formatting
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('.github/workflows/temp-finalize-hds-v22a-close.yml')
+          t=p.read_text(encoding='utf-8')
+          old="report_p.write_text(report.rstrip()+appendix+'\\n',encoding='utf-8')"
+          new="report_p.write_text(report.rstrip()+'\\n'+appendix.strip()+'\\n',encoding='utf-8')"
+          if t.count(old)!=1:
+              raise SystemExit(f'expected one finalizer line, got {t.count(old)}')
+          p.write_text(t.replace(old,new),encoding='utf-8')
+          PY
+          git diff --check
+      - name: Commit finalizer fix and remove patcher
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add .github/workflows/temp-finalize-hds-v22a-close.yml
+          git rm .github/workflows/temp-patch-hds-v22a-finalizer.yml
+          git config user.name MarcLeinenDE
+          git config user.email 34336531+MarcLeinenDE@users.noreply.github.com
+          git commit -m 'Fix HDS V2.2a finalizer EOF formatting'
+          git push origin HEAD:dev/schema-integration
