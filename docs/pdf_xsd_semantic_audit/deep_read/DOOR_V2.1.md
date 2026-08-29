@@ -36,8 +36,8 @@ Exact official `VDV-301-2.1` blobs:
 
 ```text
 IBIS-IP_DoorStateService_V2.1.xsd  abff0f3960e2ec7a9caaa9ddeb6efff8f4183805
-IBIS-IP_common_V1.0.xsd            267be9bf692da6781a003cee7db92e2072b71182
-IBIS-IP_Enumerations_V1.0.xsd      399205aac6b912032812661176ebab0a9897d3c3
+IBIS-IP_common_V1.0.xsd            194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c
+IBIS-IP_Enumerations_V1.0.xsd      a9bea5bc73003ed91ded8519db06c32c4067831d
 ```
 
 The integration-branch copies checked during this Deep Read match the official tag. The V1.0 dependencies are not treated as an error and must not be silently substituted with V2.1 Common/Enumerations.

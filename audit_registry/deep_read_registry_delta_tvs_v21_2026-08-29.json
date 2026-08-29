@@ -1,0 +1,37 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-29",
+  "base_registry": "audit_registry/deep_read_registry_v0.1.json",
+  "document_updates": {
+    "TVS_V2.1": {
+      "state": "in_progress",
+      "official_url": "https://www.vdv.de/301-2-16-sds-v2-1-ticketvalidation.pdfx",
+      "publication": "VDV-Schrift 301-2-16, TicketValidationService V2.1",
+      "fresh_read_started": "2026-08-29",
+      "textual_fresh_read_complete": false,
+      "original_pdf_visual_review": "pending_pinned_byte_render_as_needed",
+      "source_pin": {
+        "sha256": "676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d",
+        "size_bytes": 752652,
+        "pin_registry": "audit_registry/pdf_source_pins_v0.1.json",
+        "evidence_run": "33248946083",
+        "pinned_at_utc": "2026-08-29T10:56:16Z"
+      },
+      "exact_xsd_authority": {
+        "upstream_repository": "VDVde/VDV301",
+        "tag": "VDV-301-2.1",
+        "TicketValidationService_blob": "f6497e6469b82ee19b185c4de749d13a7ca60bed",
+        "common_v1_0_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+        "enumerations_v1_0_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+        "integration_branch_files_match_official_tag": true,
+        "mixed_version_dependency_is_authoritative": true
+      },
+      "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+      "authority_boundary": {
+        "pdf_authority": "official_public_VDV_writing",
+        "xsd_authority": "official_VDV-301-2.1_exact_service_family",
+        "rule": "Fresh-read TVS V2.1 before reopening prior TicketValidation findings. Do not substitute later Common/Enumerations versions."
+      }
+    }
+  }
+}

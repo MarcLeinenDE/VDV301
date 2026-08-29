@@ -56,10 +56,15 @@ The checked TrainSetDataService V2.2 schema is byte-identical to official VDV-30
 EV-110 proves exact V2.2 Unsubscribe request validation behaviour for TSD-002; it does not turn the PDF into executable authority.
 
 EV-111:
-The checked DoorStateService V2.1 schema family is byte-identical to official VDV-301-2.1 authority and intentionally routes to Common V1.0 + Enumerations V1.0.
+The checked DoorStateService V2.1 schema family is byte-identical to official VDV-301-2.1 authority and intentionally routes to Common V1.0 + Enumerations V1.0:
+  DoorStateService abff0f3960e2ec7a9caaa9ddeb6efff8f4183805
+  Common V1.0     194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c
+  Enums V1.0      a9bea5bc73003ed91ded8519db06c32c4067831d
 For DRS-002, probe roots are typed directly to exact normative RetrieveSpecific response complex types and prove ErrorMessage valid / OperationErrorMessage invalid.
 For DRS-003, the exact normative local group declarations are first verified as untyped; the executable probe reproduces that declaration form at global scope only to demonstrate default xs:anyType semantics. EV-111 does not claim that real global DoorState Get request roots exist.
 ```
+
+The provenance metadata correction for the two DoorState dependency blob IDs is recorded in `AUDIT_CORRECTION_DELTA_DOOR_V21_BLOB_PROVENANCE_2026-08-29.md`; the executed validation result itself is unchanged.
 
 ## RV - runtime/protocol evidence
 

@@ -13,10 +13,10 @@ DoorStateService V2.1
 
 Dependencies selected by that exact service file:
   IBIS-IP_common_V1.0.xsd
-  blob 267be9bf692da6781a003cee7db92e2072b71182
+  official VDV-301-2.1 blob 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c
 
   IBIS-IP_Enumerations_V1.0.xsd
-  blob 399205aac6b912032812661176ebab0a9897d3c3
+  official VDV-301-2.1 blob a9bea5bc73003ed91ded8519db06c32c4067831d
 ```
 
 The checked integration-branch copies match the official tag. No XSD was modified for this evidence.
@@ -53,11 +53,11 @@ Results:
 
 ```text
 ProbeRetrieveOpenResponse
-  <ErrorMessage><Value>diagnostic</Value></ErrorMessage>          -> valid
+  <ErrorMessage><Value>diagnostic</Value></ErrorMessage>                  -> valid
   <OperationErrorMessage><Value>diagnostic</Value></OperationErrorMessage> -> invalid
 
 ProbeRetrieveOperationResponse
-  <ErrorMessage><Value>diagnostic</Value></ErrorMessage>          -> valid
+  <ErrorMessage><Value>diagnostic</Value></ErrorMessage>                  -> valid
   <OperationErrorMessage><Value>diagnostic</Value></OperationErrorMessage> -> invalid
 ```
 

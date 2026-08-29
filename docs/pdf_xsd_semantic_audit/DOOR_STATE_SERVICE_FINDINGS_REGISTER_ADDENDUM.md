@@ -22,8 +22,8 @@ Exact official `VDV-301-2.1` blobs:
 
 ```text
 DoorStateService  abff0f3960e2ec7a9caaa9ddeb6efff8f4183805
-Common V1.0      267be9bf692da6781a003cee7db92e2072b71182
-Enums V1.0       399205aac6b912032812661176ebab0a9897d3c3
+Common V1.0      194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c
+Enums V1.0       a9bea5bc73003ed91ded8519db06c32c4067831d
 ```
 
 The checked integration-branch files are byte-identical to this official authority. The V1.0 dependency pool is intentional and must not be replaced by later Common/Enumerations versions.
@@ -119,7 +119,7 @@ The PDF says the two Get operations have no request structure. Exact XSD declare
 This declaration form defaults to `xs:anyType` semantics. EV-111 first verifies the exact local declarations, then uses a non-normative probe that reproduces the exact declaration form solely to exercise XML Schema default-type behavior:
 
 ```text
-empty request                       -> valid
+empty request                        -> valid
 arbitrary unexpected nested content -> valid
 ```
 

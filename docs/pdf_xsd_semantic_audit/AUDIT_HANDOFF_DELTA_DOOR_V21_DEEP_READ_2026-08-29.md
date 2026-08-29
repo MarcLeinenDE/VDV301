@@ -34,8 +34,8 @@ Official tag: `VDV-301-2.1`.
 
 ```text
 IBIS-IP_DoorStateService_V2.1.xsd  abff0f3960e2ec7a9caaa9ddeb6efff8f4183805
-IBIS-IP_common_V1.0.xsd            267be9bf692da6781a003cee7db92e2072b71182
-IBIS-IP_Enumerations_V1.0.xsd      399205aac6b912032812661176ebab0a9897d3c3
+IBIS-IP_common_V1.0.xsd            194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c
+IBIS-IP_Enumerations_V1.0.xsd      a9bea5bc73003ed91ded8519db06c32c4067831d
 ```
 
 The integration-branch copies checked during this Deep Read match the official tag exactly.
@@ -46,6 +46,14 @@ Important routing rule:
 DoorState V2.1 intentionally depends on Common V1.0 + Enumerations V1.0.
 Do not substitute later Common/Enums versions.
 ```
+
+A provenance-only correction is recorded in:
+
+```text
+docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_DOOR_V21_BLOB_PROVENANCE_2026-08-29.md
+```
+
+The earlier closure commit had incorrect Git blob IDs for Common/Enumerations metadata; validation itself used the actual branch files and remains unchanged.
 
 ## Existing findings revalidated
 

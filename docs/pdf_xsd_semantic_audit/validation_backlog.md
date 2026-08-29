@@ -1,6 +1,6 @@
 # PDF/XSD semantic audit - current validation backlog
 
-Status: deterministic repository validation now includes EV-111 for DoorStateService V2.1. Remaining work includes continuing Deep Read Pass 2, mandatory post-Deep-Read legacy-finding revalidation, targeted finding regression, visual closure, live/integration evidence and later provider-specific work.
+Status: deterministic repository validation includes EV-111 for DoorStateService V2.1. Remaining work includes continuing Deep Read Pass 2, mandatory post-Deep-Read legacy-finding revalidation, targeted finding regression, visual closure, live/integration evidence and later provider-specific work.
 
 ## 1. Completed deterministic evidence
 
@@ -51,10 +51,15 @@ TrainSetDataService V2.2 is exact official VDV-301-2.2 authority.
 It proves the executable request-shape consequence of TSD-002; the PDF does not become executable authority.
 
 EV-111:
-DoorStateService V2.1 and its Common V1.0 + Enumerations V1.0 dependencies are exact official VDV-301-2.1 authority.
+DoorStateService V2.1 and its Common V1.0 + Enumerations V1.0 dependencies are exact official VDV-301-2.1 authority:
+  DoorStateService abff0f3960e2ec7a9caaa9ddeb6efff8f4183805
+  Common V1.0     194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c
+  Enums V1.0      a9bea5bc73003ed91ded8519db06c32c4067831d
 It proves RetrieveSpecific ErrorMessage vs OperationErrorMessage behavior and the default xs:anyType semantics of the exact untyped Get-request declaration form.
 The DRS-003 probe does not claim a real global DoorState request root.
 ```
+
+A provenance-only correction to the previously recorded DoorState dependency blob IDs is documented in `AUDIT_CORRECTION_DELTA_DOOR_V21_BLOB_PROVENANCE_2026-08-29.md`; executable results are unchanged.
 
 ### Runtime/protocol deterministic evidence
 
@@ -156,8 +161,8 @@ Exact official blobs:
 
 ```text
 DoorStateService  abff0f3960e2ec7a9caaa9ddeb6efff8f4183805
-Common V1.0      267be9bf692da6781a003cee7db92e2072b71182
-Enums V1.0       399205aac6b912032812661176ebab0a9897d3c3
+Common V1.0      194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c
+Enums V1.0       a9bea5bc73003ed91ded8519db06c32c4067831d
 ```
 
 Existing findings revalidated under the current Evidence Gate:
@@ -185,7 +190,23 @@ No DoorState cardinality finding is opened from those rows.
 
 DoorState V2.1 remains `needs_visual_review`, not `exhaustive_read`, because visual review was targeted.
 
-## 7. Mandatory legacy finding revalidation before baseline freeze
+## 7. TicketValidationService V2.1 start state
+
+The official TVS V2.1 PDF has been byte-pinned and exact XSD authority independently established before reopening legacy TVS findings:
+
+```text
+PDF sha256: 676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d
+PDF size: 752652
+pin run: 33248946083
+
+TVS V2.1 service XSD: f6497e6469b82ee19b185c4de749d13a7ca60bed
+Common V1.0:          194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c
+Enumerations V1.0:    a9bea5bc73003ed91ded8519db06c32c4067831d
+```
+
+The service file explicitly includes Common V1.0 + Enumerations V1.0; branch copies match official upstream `VDV-301-2.1` authority. Fresh document reading must occur before historical TVS findings are consulted.
+
+## 8. Mandatory legacy finding revalidation before baseline freeze
 
 After Deep Read Pass 2, every surviving finding not already explicitly revalidated under the current Evidence Gate must be checked again.
 
@@ -214,7 +235,7 @@ SDK finding knowledge ready = false
 remediation ready = false
 ```
 
-## 8. Canonical remaining live backlog
+## 9. Canonical remaining live backlog
 
 The full current live/device/network backlog is:
 
@@ -224,7 +245,7 @@ docs/pdf_xsd_semantic_audit/26_live_integration_validation_backlog.md
 
 Do not recreate duplicate per-service live backlog lists in this central file.
 
-## 9. Remaining live/integration categories
+## 10. Remaining live/integration categories
 
 ```text
 Subscription runtime:
@@ -251,17 +272,17 @@ Mixed-version resolver:
 
 Open live items require real devices/provider systems/simulators/network access or packet capture. Their open state is not a failed conformance result.
 
-## 10. Deferred visual/document review
+## 11. Deferred visual/document review
 
 Layout-sensitive items not yet closed by visible-page evidence remain `needs_visual_review` / candidate as applicable. The pinned-byte visual fallback is preferred when the interactive renderer returns cache-miss.
 
 Do not promote a document to `exhaustive_read` merely because selected critical pages were rendered.
 
-## 11. Official correction candidate review
+## 12. Official correction candidate review
 
 No upstream action is automatic. Any later official-facing correction requires Evidence-Gate-revalidated findings and explicit user approval before PR/comment/review/merge action.
 
-## 12. SDK implementation readiness
+## 13. SDK implementation readiness
 
 Finding-driven SDK implementation remains frozen during the current Deep Read and legacy revalidation phases.
 
@@ -287,7 +308,8 @@ DoorState untyped Get-request declarations must not be silently tightened to an 
 Current sequencing:
 
 ```text
-continue with TVS_V2.1 Deep Read
+fresh-read TVS_V2.1
+-> continue remaining Deep Reads
 -> finish Deep Read Pass 2
 -> freeze complete finding inventory
 -> revalidate all untouched/non-current findings under FINDING_EVIDENCE_GATE
