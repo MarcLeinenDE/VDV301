@@ -1,6 +1,6 @@
 # PDF/XSD semantic audit - current validation backlog
 
-Status: deterministic repository validation includes EV-112 for TicketValidationService V2.1. Remaining work includes continuing Deep Read Pass 2, mandatory post-Deep-Read legacy-finding revalidation, targeted finding regression, visual closure, live/integration evidence and later provider-specific work.
+Status: deterministic repository validation includes EV-113 for TicketValidationService V2.2. Remaining work includes continuing Deep Read Pass 2, mandatory post-Deep-Read legacy-finding revalidation, targeted finding regression, visual closure, live/integration evidence and later provider-specific work.
 
 ## 1. Completed deterministic evidence
 
@@ -20,6 +20,7 @@ EV-109           run 33228250613  PASS  official TrainSet V2.1 Deep Read evidenc
 EV-110           run 33241603270  PASS  TrainSetDataService V2.2 TSD-002 unsubscribe request shape
 EV-111           run 33242337308  PASS  official DoorState V2.1 DRS-002/DRS-003 behaviour
 EV-112           run 33249561880  PASS  official TVS V2.1 RouteDeviation/CurrentTripRef/CurrentLineData type evidence
+EV-113           run 33257767942  PASS  official TVS V2.2 RouteDeviation enum separation + CurrentTariffStop rename/type evidence
 ```
 
 Last full-suite baseline: run `33228250613` confirmed:
@@ -33,7 +34,7 @@ RV-001..RV-004 PASS
 SDK manifest/profile checks PASS
 ```
 
-EV-110 through EV-112 are targeted additive tests and did not change any XSD. A later full-suite run can absorb them into the canonical all-checks baseline.
+EV-110 through EV-113 are targeted additive tests and did not change any XSD. A later full-suite run can absorb them into the canonical all-checks baseline.
 
 Authority guards:
 
@@ -66,6 +67,14 @@ TicketValidationService V2.1 and its Common V1.0 + Enumerations V1.0 dependencie
   Enums V1.0              a9bea5bc73003ed91ded8519db06c32c4067831d
 It proves RouteDeviation uses RouteDeviationEnumeration with onroute/offroute/unknown, CurrentTripRef uses the case-sensitive IBIS-IP.NMTOKEN type, and GetCurrentLine uses TicketValidationService.CurrentLineDataStructure.
 The CurrentLineData check proves XSD-side identifiers only; it does not classify every shortened PDF type-display convention.
+
+EV-113:
+TicketValidationService V2.2, Common V2.2 and Enumerations V2.2 are exact official VDV-301-2.2 authority:
+  TicketValidationService 5a4be2b2ba66860f035777ec0458dba0790880e1
+  Common V2.2             468fee6d177e7185dbcd5d3f90cfb114e29e01ae
+  Enums V2.2              2a23b512379b18e8f122ac1272cef8229fb86283
+It proves RouteDeviation uses RouteDeviationEnumeration even though RouteDirectionEnumeration also exists, and that the two enum value sets are incompatible.
+It also proves CurrentTripRef uses case-sensitive IBIS-IP.NMTOKEN, confirms the exact CurrentLineData response type, and confirms the CurrentTariffStop rename boundary: new response root valid, stale CurrentStopPoint response root absent/invalid.
 ```
 
 A provenance-only correction to the previously recorded DoorState dependency blob IDs is documented in `AUDIT_CORRECTION_DELTA_DOOR_V21_BLOB_PROVENANCE_2026-08-29.md`; executable results are unchanged.
@@ -231,12 +240,12 @@ TVS-002 -> executable-confirmed by EV-112:
            onroute/offroute/unknown validate; out-of-set value fails.
 ```
 
-New V2.1 findings:
+Deep-Read findings:
 
 ```text
 DRTVS21-001 CurrentTripRef PDF IBIS-IP.NMToken vs exact case-sensitive IBIS-IP.NMTOKEN; EV-112 executable-confirmed.
 DRTVS21-002 GetCurrentLine response display misses service-name separator dot; Structure-suffix omission is explicitly not classified.
-DRTVS21-003 flow text SubscribeCurrentStop vs formal/executable SubscribeCurrentStopPoint.
+DRTVS21-003 flow text SubscribeCurrentStop vs formal SubscribeCurrentStopPoint.
 DRTVS21-004 minor non-executable PDF spelling/caption residue.
 ```
 
@@ -249,7 +258,61 @@ TVS-003 begins at V2.2 and was not revalidated by this block.
 
 TVS V2.1 remains `needs_visual_review`, not `exhaustive_read`, because visual review was targeted.
 
-## 8. Mandatory legacy finding revalidation before baseline freeze
+## 8. TicketValidationService V2.2 evidence status
+
+The official TVS V2.2 PDF was independently byte-pinned and fresh-read before historical V2.2 findings or V2.1 correction history were reopened.
+
+Exact authority is version-aligned:
+
+```text
+TicketValidationService V2.2 -> Common V2.2 -> Enumerations V2.2
+```
+
+Source/evidence:
+
+```text
+PDF sha256: 1915a1b12c24386e9a8ab5638fd88af6a442b5e42586b7b2d48f03e9a4205083
+PDF size: 785931
+pin run: 33255245725
+visual render run: 33255450850
+pages visibly reviewed: 10-18
+
+TVS V2.2 service XSD: 5a4be2b2ba66860f035777ec0458dba0790880e1
+Common V2.2:           468fee6d177e7185dbcd5d3f90cfb114e29e01ae
+Enumerations V2.2:     2a23b512379b18e8f122ac1272cef8229fb86283
+```
+
+Existing findings revalidated under the current Evidence Gate:
+
+```text
+TVS-002 -> executable-confirmed by EV-113.
+           Exact RouteDeviationEnumeration and RouteDirectionEnumeration both exist but have incompatible value sets.
+           VehicleData.RouteDeviation uses RouteDeviationEnumeration.
+
+TVS-003 -> executable-confirmed/refined by EV-113.
+           V2.2 explicitly documents CurrentStopPoint -> CurrentTariffStop, while stale CurrentStopPoint names remain in both operation overviews and page-14 response/data labels.
+           Exact new response root validates; stale response root has no matching global declaration.
+```
+
+Existing Deep-Read finding scopes independently extended into V2.2:
+
+```text
+DRTVS21-001 -> V2.2 repeats IBIS-IP.NMToken; EV-113 confirms exact IBIS-IP.NMTOKEN and case-sensitive failure of the PDF spelling.
+DRTVS21-002 -> V2.2 repeats missing-dot TicketValidationServiceCurrentLineData; context-verified with EV-113 exact-XSD support.
+DRTVS21-003 -> V2.2 flow text repeats SubscribeCurrentStop; detailed formal section is SubscribeCurrentTariffStop after the documented rename.
+```
+
+Deduplication result:
+
+```text
+No new V2.2-only finding ID was needed.
+The operation-overview stale-name observation refines TVS-003.
+The recurring NMToken / CurrentLine / SubscribeCurrentStop observations extend DRTVS21-001..003 instead of duplicating them.
+```
+
+TVS V2.2 remains `needs_visual_review`, not `exhaustive_read`, because visual review was targeted.
+
+## 9. Mandatory legacy finding revalidation before baseline freeze
 
 After Deep Read Pass 2, every surviving finding not already explicitly revalidated under the current Evidence Gate must be checked again.
 
@@ -278,7 +341,7 @@ SDK finding knowledge ready = false
 remediation ready = false
 ```
 
-## 9. Canonical remaining live backlog
+## 10. Canonical remaining live backlog
 
 The full current live/device/network backlog is:
 
@@ -288,7 +351,7 @@ docs/pdf_xsd_semantic_audit/26_live_integration_validation_backlog.md
 
 Do not recreate duplicate per-service live backlog lists in this central file.
 
-## 10. Remaining live/integration categories
+## 11. Remaining live/integration categories
 
 ```text
 Subscription runtime:
@@ -315,17 +378,17 @@ Mixed-version resolver:
 
 Open live items require real devices/provider systems/simulators/network access or packet capture. Their open state is not a failed conformance result.
 
-## 11. Deferred visual/document review
+## 12. Deferred visual/document review
 
 Layout-sensitive items not yet closed by visible-page evidence remain `needs_visual_review` / candidate as applicable. The pinned-byte visual fallback is preferred when the interactive renderer returns cache-miss.
 
 Do not promote a document to `exhaustive_read` merely because selected critical pages were rendered.
 
-## 12. Official correction candidate review
+## 13. Official correction candidate review
 
 No upstream action is automatic. Any later official-facing correction requires Evidence-Gate-revalidated findings and explicit user approval before PR/comment/review/merge action.
 
-## 13. SDK implementation readiness
+## 14. SDK implementation readiness
 
 Finding-driven SDK implementation remains frozen during the current Deep Read and legacy revalidation phases.
 
@@ -347,14 +410,17 @@ DoorState V2.1 must preserve exact mixed-version Common V1.0/Enums V1.0 dependen
 DoorState RetrieveSpecific diagnostics must not silently normalize OperationErrorMessage/ErrorMessage
 DoorState untyped Get-request declarations must not be silently tightened to an invented empty type
 TVS V2.1 must preserve exact mixed-version Common V1.0/Enums V1.0 dependency routing
+TVS V2.2 must preserve exact version-aligned Common V2.2/Enums V2.2 routing
 TVS RouteDeviation diagnostics must not replace RouteDeviationEnumeration with the PDF-printed RouteDirectionEnumeration
+TVS V2.2 must not treat RouteDirectionEnumeration as an acceptable RouteDeviation alias merely because both enum names exist
 TVS CurrentTripRef diagnostics must not case-normalize IBIS-IP.NMTOKEN into the PDF-printed IBIS-IP.NMToken
+TVS CurrentTariffStop diagnostics must not accept stale CurrentStopPoint response/type labels as executable aliases
 ```
 
 Current sequencing:
 
 ```text
-fresh-read TVS_V2.2
+fresh-read TVS_V2.3
 -> continue remaining Deep Reads
 -> finish Deep Read Pass 2
 -> freeze complete finding inventory

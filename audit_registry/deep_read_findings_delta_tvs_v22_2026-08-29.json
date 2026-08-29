@@ -1,0 +1,67 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-29",
+  "document_id": "TVS_V2.2",
+  "source_id": "TVS_V2.2",
+  "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+  "revalidated_existing_findings": [
+    {
+      "id": "TVS-002",
+      "state": "executable_confirmed",
+      "classification": "pdf_xsd_type_mismatch",
+      "evidence": [
+        "visible pinned-byte page 16",
+        "exact official TVS/Common/Enumerations V2.2 family",
+        "EV-113 run 33257767942"
+      ],
+      "validation_behavior": "VehicleData.RouteDeviation uses RouteDeviationEnumeration; RouteDirectionEnumeration also exists but has a different and incompatible value set",
+      "sdk_eligibility": "explanatory_diagnostic_no_enum_substitution"
+    },
+    {
+      "id": "TVS-003",
+      "state": "executable_confirmed",
+      "classification": "pdf_stale_operation_and_type_labels_after_rename",
+      "scope_refinement": "V2.2 stale CurrentStopPoint residue includes German/English operation overviews plus GetCurrentStopPointResponse and CurrentStopPointData labels",
+      "evidence": [
+        "visible pinned-byte pages 10, 12, 14 and 18",
+        "exact official TVS V2.2 XSD",
+        "EV-113 run 33257767942"
+      ],
+      "validation_behavior": "GetCurrentTariffStopResponse validates; stale GetCurrentStopPointResponse has no matching global declaration",
+      "sdk_eligibility": "explanatory_diagnostic_no_legacy_alias"
+    }
+  ],
+  "scope_extended_existing_deep_read_findings": [
+    {
+      "id": "DRTVS21-001",
+      "state": "executable_confirmed",
+      "new_version_scope": "V2.1-V2.2 PDFs",
+      "evidence": ["visible pinned-byte page 14", "EV-113 run 33257767942"],
+      "summary": "V2.2 independently repeats PDF IBIS-IP.NMToken while exact Common V2.2 uses case-sensitive IBIS-IP.NMTOKEN."
+    },
+    {
+      "id": "DRTVS21-002",
+      "state": "context_verified",
+      "new_version_scope": "V2.1-V2.2 PDFs",
+      "evidence": ["visible pinned-byte page 15", "exact XSD-side type confirmed by EV-113"],
+      "summary": "V2.2 independently repeats TicketValidationServiceCurrentLineData without the service-name separator dot; Structure-suffix omission remains outside the finding boundary."
+    },
+    {
+      "id": "DRTVS21-003",
+      "state": "context_verified",
+      "new_version_scope": "V2.1-V2.2 PDFs",
+      "evidence": ["visible pinned-byte pages 11, 13, 14 and 18"],
+      "summary": "V2.2 flow text independently repeats SubscribeCurrentStop; the formal detailed V2.2 section is SubscribeCurrentTariffStop after the documented rename."
+    }
+  ],
+  "new_findings": [],
+  "deduplication": [
+    "No new V2.2-only ID was created for stale operation-overview CurrentStopPoint names because they refine TVS-003.",
+    "No duplicate V2.2 IDs were created for NMToken, missing-dot CurrentLineData or SubscribeCurrentStop because the independently observed instances extend DRTVS21-001/002/003 scope."
+  ],
+  "rejected_or_resolved_observations": [
+    "The version-aligned TVS V2.2 -> Common V2.2 -> Enumerations V2.2 dependency route is exact official authority, not a latest-version routing defect.",
+    "RouteDirectionEnumeration is not a valid substitute for RouteDeviationEnumeration merely because both exist in Enumerations V2.2; EV-113 proves incompatible value sets.",
+    "Stale CurrentStopPoint PDF names are not executable aliases for CurrentTariffStop names; EV-113 rejects the stale response root."
+  ]
+}

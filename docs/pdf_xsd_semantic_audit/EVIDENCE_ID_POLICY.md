@@ -27,6 +27,7 @@ EV-109  TrainSet V2.1 Deep Read modelling/root/operation evidence
 EV-110  TrainSetDataService V2.2 Unsubscribe request-shape mismatch (TSD-002)
 EV-111  DoorStateService V2.1 RetrieveSpecific error-branch naming and untyped Get-request declaration semantics
 EV-112  TicketValidationService V2.1 RouteDeviation/CurrentTripRef/CurrentLineData exact-type evidence
+EV-113  TicketValidationService V2.2 RouteDeviation enum separation and CurrentTariffStop rename/type evidence
 ```
 
 Important:
@@ -35,7 +36,7 @@ Important:
 EV-003 through EV-100 were never defined.
 The numbering intentionally separates baseline evidence (001/002) from finding-specific evidence (101+).
 Do not describe the completed set as a continuous range beginning at EV-001.
-Correct wording at the current state: "EV-001, EV-002 and EV-101 through EV-112".
+Correct wording at the current state: "EV-001, EV-002 and EV-101 through EV-113".
 ```
 
 Existing EV document names, historical workflow run IDs and historical tool names are not retroactively renamed because they are provenance evidence.
@@ -71,6 +72,15 @@ The checked TicketValidationService V2.1 schema family is byte-identical to offi
   Enums V1.0              a9bea5bc73003ed91ded8519db06c32c4067831d
 EV-112 proves the exact RouteDeviation type/value-set behavior, the case-sensitive CurrentTripRef type identifier, and the exact CurrentLineData response type.
 Its CurrentLineData check is XSD-side evidence only; it does not declare every shortened PDF display convention defective.
+
+EV-113:
+The checked TicketValidationService V2.2 schema family is byte-identical to official VDV-301-2.2 authority and uses the version-aligned route:
+  TicketValidationService 5a4be2b2ba66860f035777ec0458dba0790880e1
+  Common V2.2             468fee6d177e7185dbcd5d3f90cfb114e29e01ae
+  Enums V2.2              2a23b512379b18e8f122ac1272cef8229fb86283
+EV-113 proves that VehicleData.RouteDeviation uses RouteDeviationEnumeration even though RouteDirectionEnumeration also exists in V2.2, and proves the two enum value sets are incompatible.
+EV-113 also proves the case-sensitive CurrentTripRef type, the exact CurrentLineData response type, and the executable CurrentTariffStop rename boundary: GetCurrentTariffStopResponse is valid while stale GetCurrentStopPointResponse has no matching global declaration.
+Its CurrentLineData check remains XSD-side evidence only; PDF display-convention classification is contextual.
 ```
 
 The provenance metadata correction for the two DoorState dependency blob IDs is recorded in `AUDIT_CORRECTION_DELTA_DOOR_V21_BLOB_PROVENANCE_2026-08-29.md`; the executed validation result itself is unchanged.
