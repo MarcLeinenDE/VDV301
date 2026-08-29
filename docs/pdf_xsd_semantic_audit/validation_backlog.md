@@ -1,6 +1,6 @@
 # PDF/XSD semantic audit - current validation backlog
 
-Status: deterministic repository validation is complete for the planned EV/RV phase, including the post-Common-V2.3 authority-split baseline, DMS V2.2/V2.4 EV-107/EV-108 evidence, and the strengthened TimeService RV-003 profile. Remaining open validation requires targeted new finding regression, visual closure, live/integration evidence or later provider-specific work.
+Status: deterministic repository validation includes EV-109 TrainSet V2.1 evidence and the current full-suite baseline. Remaining work includes the continuing Deep Read, mandatory post-Deep-Read legacy-finding revalidation, targeted finding regression, visual closure, live/integration evidence and later provider-specific work.
 
 ## 1. Completed deterministic evidence
 
@@ -11,28 +11,36 @@ EV-001 + EV-002  run 33109011670  PASS
 EV-101           run 33109367265  PASS  PCS-001
 EV-102           run 33109768872  PASS  CE-018
 EV-103           run 33111119723  PASS  video compositors
-EV-104           run 33111644388  PASS  TrainSet context/root evidence
+EV-104           run 33111644388  PASS  TrainSet V2.2 context/root evidence
 EV-105           run 33111831627  PASS  AnalogRadio candidate cardinality
 EV-106           run 33169314332  PASS  Common V2.3 official/candidate authority split
 EV-107           run 33181833930  PASS  official DMS V2.2 Deep Read declarations
 EV-108           run 33182963733  PASS  candidate/integration DMS V2.4 Deep Read declarations
+EV-109           run 33228250613  PASS  official TrainSet V2.1 Deep Read evidence
 ```
 
-Current full-suite baseline re-run `33197358294` also re-confirmed all of the above with:
+Current full-suite run `33228250613` confirmed:
 
 ```text
 50/50 root XSDs compile
 39 XSD service profiles
 84 direct include edges
+EV-103..EV-109 PASS in the current suite
+RV-001..RV-004 PASS
 SDK manifest/profile checks PASS
 ```
 
-EV-108 authority guard remains:
+Authority guards:
 
 ```text
+EV-108:
 The public DMS V2.4 PDF is official VDV documentation.
 The repository DMS V2.4 XSD checked by EV-108 is candidate/integration material.
 EV-108 is not official-release XSD conformance evidence.
+
+EV-109:
+The three checked TrainSet V2.1 XSDs are byte-identical to the official VDV-301-2.1 tag.
+EV-109 is V2.1 evidence only; V2.2 corrections/EV-104 are not back-applied.
 ```
 
 ### Runtime/protocol deterministic evidence
@@ -44,7 +52,7 @@ RV-003  run 33197358294  PASS  TimeService/SNTP, strengthened after byte-pinned 
 RV-004  run 33119694991  PASS  Video RTSP/RTP boundary
 ```
 
-The repository workflow is `workflow_dispatch` only.
+The canonical repository workflow is `workflow_dispatch` only.
 
 ## 2. Targeted Common regression backlog from Deep Read
 
@@ -62,6 +70,8 @@ CE-026 BeaconPoint V2.3: negative <Description>, positive <Desciption>; V2.4 con
 
 CE-023 is a PDF copy/paste-table finding and does not require an executable XSD defect test. CE-019 visual closure remains pending. CE-020 is already executable-confirmed by EV-106.
 
+All surviving Common findings are also subject to the final legacy-finding Evidence-Gate revalidation; earlier confidence labels are not grandfathered.
+
 ## 3. DMS V2.2 / V2.4 evidence status
 
 EV-107 closes the deterministic official-V2.2 declaration side for DMS-005..DMS-007 and the executable enum spelling behind DRDMS22-003.
@@ -76,7 +86,7 @@ ErrorMessage is 0:* in V2.4 candidate.
 InstallUpdate ID/Timestamp/URL/checksum/size are optional in V2.4 candidate.
 ```
 
-DMS V2.2 and V2.4 visual closure remains deferred where original-PDF screenshot attempts returned cache-miss.
+DMS V2.2 and V2.4 visual closure remains deferred where original-PDF screenshot attempts returned cache-miss and no later pinned-byte page review has yet closed the specific item.
 
 ## 4. TimeService V1.0 evidence status
 
@@ -112,9 +122,66 @@ no cyclic transmission of current time expected
 conservative timezone handling retained
 ```
 
-No further deterministic TimeService regression is required for the established facts. Remaining TimeService work is live integration plus visual closure of cache-missed PDF pages.
+No further deterministic TimeService regression is currently required for these established facts. Remaining TimeService work is live integration plus any unresolved visual closure.
 
-## 5. Canonical remaining live backlog
+## 5. TrainSet V2.1 evidence status
+
+The byte-pinned V2.1 Fresh Read is completed textually with targeted original visual review and exact official V2.1 XSD authority established.
+
+EV-109 run `33228250613` confirms:
+
+```text
+TSI-001  V2.1 flat composition structure accepts one coach record and rejects a second PDF-described record.
+TSM-001  V2.1 executable root is GetTrainSetComposition; later ...Response root is absent.
+TSD-001  V2.1 service XSD lacks service-prefixed Subscribe/Unsubscribe members/roots while Common generic subscription infrastructure exists.
+```
+
+New documentation findings:
+
+```text
+DRTRAINSET21-001  stale/wrong section cross-reference
+DRTRAINSET21-002  page 44 wrongly names TrainSetDataService as having equally named composition operations
+DRTRAINSET21-003  page 44 GetTrainSetCompositon typo
+```
+
+Disproof success retained:
+
+```text
+suspected coupledSide/CoupledSide mismatch -> rejected; visible original + exact XSD both use CoupledSide
+```
+
+V2.2-specific `TSM-002`, `TSD-002`, `TSD-003` remain deferred until an independent `TRAINSET_V2.2` Fresh Read under the current Evidence Gate. Historical EV-104 evidence is not sufficient to skip that revalidation.
+
+## 6. Mandatory legacy finding revalidation before baseline freeze
+
+After Deep Read Pass 2, every surviving finding not already explicitly revalidated under the current Evidence Gate must be checked again.
+
+Canonical plan/registry:
+
+```text
+docs/pdf_xsd_semantic_audit/LEGACY_FINDING_REVALIDATION_PLAN.md
+audit_registry/finding_revalidation_registry_v0.1.json
+```
+
+Rules:
+
+```text
+no grandfathering of old confidence/state labels
+freeze the complete finding inventory only after Deep Read completion
+run original-source + definition + exact-authority + context + disproof checks
+executable-confirm XML-validity claims when technically practical
+reconcile duplicate/superseded/withdrawn findings
+require zero pending SDK-relevant findings before finding-baseline freeze
+```
+
+Until this phase is complete:
+
+```text
+SDK finding knowledge ready = false
+remediation ready = false
+```
+
+## 7. Canonical remaining live backlog
 
 The full current live/device/network backlog is:
 
@@ -124,7 +191,7 @@ docs/pdf_xsd_semantic_audit/26_live_integration_validation_backlog.md
 
 Do not recreate duplicate per-service live backlog lists in this central file.
 
-## 6. Remaining live/integration categories
+## 8. Remaining live/integration categories
 
 ### Subscription runtime
 
@@ -204,7 +271,7 @@ TrainSet response-context routing
 legacy V1.0 root-map end-to-end path
 ```
 
-## 7. Environment dependency
+## 9. Environment dependency
 
 Open live items require one or more of:
 
@@ -219,36 +286,29 @@ physical/inventory documentation
 
 Their open state is **not** a failed conformance result.
 
-## 8. Deferred visual/document review
+## 10. Deferred visual/document review
 
-Current layout-sensitive examples include:
+Layout-sensitive items that are not yet closed by visible-page evidence remain `needs_visual_review` / candidate as applicable. The pinned-byte visual fallback is preferred when the interactive renderer returns cache-miss.
 
-```text
-CE-015 / CE-017 / CE-019 and remaining Common V2.3 table findings
-DMS V2.2 findings where page renders cache-missed
-DMS V2.4 continuity findings and DRDMS24-001 where page renders cache-missed
-TIME V1.0: page 5 visually confirmed, foreword page 3 and version-history page 6 still cache-miss
-```
+Do not promote a document to `exhaustive_read` merely because selected critical pages were rendered; all applicable chapters/tables/examples/figures must have been considered.
 
-These do not block exact schema/protocol classification. Do not promote affected documents to `exhaustive_read` until visible-page review is actually completed.
-
-## 9. Official correction candidate review
+## 11. Official correction candidate review
 
 No upstream action is automatic.
 
 If an official-facing correction is later considered:
 
 ```text
-- use the detailed finding register/report
+- use only Evidence-Gate-revalidated findings
 - identify exact affected versions
 - distinguish PDF correction from XSD/protocol correction
 - add targeted regression evidence where materially useful
 - obtain explicit user approval before PR/comment/review/merge action
 ```
 
-## 10. SDK implementation readiness
+## 12. SDK implementation readiness
 
-SDK architecture may continue to be derived from the deterministic baseline, but implementation remains frozen during the current Deep Read pass.
+SDK architecture may continue to be derived from the deterministic authority baseline, but finding-driven implementation remains frozen during the current Deep Read and legacy revalidation phases.
 
 Required guardrails:
 
@@ -262,10 +322,16 @@ non-XSD protocol profiles
 runtime authority + severity separation
 TimeService no-cyclic-time-broadcast specialization
 no unexecuted live check represented as conformance evidence
+no unrevalidated finding represented as SDK accept/reject knowledge
 ```
 
 Current sequencing:
 
 ```text
-finish Deep Read -> consolidate findings/provenance -> freeze audit baseline -> implement SDK regression suite
+finish Deep Read Pass 2
+-> freeze complete finding inventory
+-> revalidate all untouched/non-current findings under FINDING_EVIDENCE_GATE
+-> reconcile findings/provenance and require zero pending SDK-relevant findings
+-> freeze audit/finding baseline
+-> only then implement finding-driven SDK regression/diagnostic knowledge
 ```
