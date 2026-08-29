@@ -197,7 +197,7 @@ def main() -> int:
         ),
         version="2.2a",
     )
-    expect("HDS V2.2a preferred _ibisip_http._tcp profile passes", error_count(h22a) == 0)
+    expect("HDS V2.2a _ibisip_http._tcp transition label passes", error_count(h22a) == 0)
     expect("HDS V2.2a endpoint follows TXT url", endpoint22a == "http://content.example/route")
 
     h22a_legacy, _ = check_html_display(

@@ -238,9 +238,9 @@ def check_html_display(ad: DiscoveryAdvertisement, *, version: str) -> tuple[lis
                 proto_ok,
                 "pass_with_note" if deprecated else ("pass" if proto_ok else "error"),
                 "vdv_normative",
-                "V2.2a accepts the legacy _http._tcp label but marks it deprecated." if deprecated else ("V2.2a uses the IBIS-IP HTTP protocol label." if proto_ok else "V2.2a protocol label is not documented for HDS."),
+                "V2.2a accepts _http._tcp but marks it deprecated/future-not-recommended." if deprecated else ("V2.2a recognises _ibisip_http._tcp as the documented transition/future protocol label." if proto_ok else "V2.2a protocol label is not documented for HDS."),
                 observed=ad.protocol_label,
-                expected="_ibisip_http._tcp (preferred) or deprecated _http._tcp",
+                expected="_ibisip_http._tcp transition/future label or _http._tcp (deprecated/future-not-recommended)",
             )
         )
         results.append(_required_txt(ad, "content", "HDS-V03-CONTENT"))
