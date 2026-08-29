@@ -108,3 +108,22 @@ DR3012GC22-002
 ```
 
 These are documentation findings, not runtime/XSD rules.
+
+## VDV 301-3 Deep Read Pass 2 reconciliation
+
+The independent VDV 301-3 Fresh Read was frozen in commit `f359aa0160d2f8a0834db9274a4ecf0a18321dea` before this register was reopened.
+
+Current Evidence-Gate states:
+
+```text
+NET-001      context_verified_exact_pinned_pdf
+NET-002      context_verified_exact_pinned_pdf
+NET-003      context_verified_exact_pinned_pdf
+DRNET20-001  context_verified  1000Base-X terminology in copper section vs own 1 GBase-T table + IEEE interpretation
+DRNET20-002  context_verified  security-relevant caption vs safety-relevant body/figure/German context
+DRNET20-003  context_verified  grouped additional editorial spelling residue excluding NET-003
+```
+
+`DISC-001..003` are deliberately not marked revalidated by the 301-3 block because they belong to General-Conventions/discovery evidence.
+
+Corrected RV-002 run `33267198470` / job `99139252921` is PASS and confirms deterministic DNS-SD classifier behavior with the corrected HDS V2.2a transition wording. It is adjacent runtime evidence only; it does not test physical wiring/media/topology/safety claims in VDV 301-3.

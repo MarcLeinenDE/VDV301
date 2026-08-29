@@ -1,6 +1,6 @@
 # Network / discovery validation backlog addendum
 
-Status: open runtime and protocol tasks.
+Status: open live/integration runtime and protocol tasks; deterministic classifier evidence is tracked separately.
 
 ```text
 ND-VB-001 Capture DNS-SD publication from a real/test IBIS-IP service and verify SRV service/protocol/target/port.
@@ -17,4 +17,19 @@ ND-VB-011 Define manual/inventory evidence fields for safety-network coupling, d
 ND-VB-012 Add regression test proving DISC-001 does not cause an automatic hard requirement for 169.254/16.
 ```
 
-No item is marked passed until actually executed.
+## Deterministic evidence boundary
+
+RV-002 corrected rerun:
+
+```text
+run  33267198470
+job  99139252921
+head 928e42baeb3f019d11e48024b680e63e7865e4c3
+PASS
+```
+
+The run confirms the deterministic DNS-SD / VDV discovery classifier, including the corrected HDS V2.2a `_ibisip_http._tcp` transition wording. It operates on already-observed records and performs no live DNS/mDNS I/O.
+
+Therefore RV-002 does not by itself close ND-VB-001 through ND-VB-012. In particular it is not evidence for M12/copper cabling, network topology, data-diode/safety separation, live multicast/IGMP behavior or 1000BASE media selection.
+
+No live/integration backlog item is marked passed until actually executed.

@@ -1,0 +1,67 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-29",
+  "document_id": "VDV301-3_02-2020",
+  "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+  "fresh_read_freeze": "f359aa0160d2f8a0834db9274a4ecf0a18321dea",
+  "source_evidence": {
+    "pdf_sha256": "edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99",
+    "pdf_size_bytes": 558005,
+    "pin_render_read_run": "33270251357",
+    "job": "99147343832",
+    "artifact": "9719880284",
+    "page_count": 37,
+    "fulltext_sha256": "dd6ecfa0d78f0a00b86557aa2e3694883431fc6a7a1d5a92b4663981996a3276"
+  },
+  "revalidated_findings": {
+    "NET-001": {
+      "state": "context_verified",
+      "classification": "pdf_label_or_heading_error_candidate",
+      "fresh_observation": "FR-NET20-OBS-001"
+    },
+    "NET-002": {
+      "state": "context_verified",
+      "classification": "pdf_label_or_heading_error_candidate",
+      "fresh_observation": "FR-NET20-OBS-002"
+    },
+    "NET-003": {
+      "state": "context_verified",
+      "classification": "pdf_table_or_documentation_error_candidate",
+      "fresh_observation": "FR-NET20-OBS-005_partial_IEE_802_3"
+    }
+  },
+  "new_unique_findings": {
+    "DRNET20-001": {
+      "state": "context_verified",
+      "classification": "pdf_network_media_terminology_error_candidate",
+      "summary": "The explicit copper-cabling section recommends 1000Base-X while its own table specifies 1 GBase-T; IEEE material distinguishes 1000BASE-X from 1000BASE-T.",
+      "authority_note": "The internal VDV contradiction is primary evidence; IEEE material is interpretation/falsification context, not substituted VDV authority.",
+      "executable_effect": false
+    },
+    "DRNET20-002": {
+      "state": "context_verified",
+      "classification": "pdf_translation_semantic_safety_security_error_candidate",
+      "summary": "English Figure 1 caption says security-relevant where the same page body/figure and German counterpart establish the functional-safety boundary as safety-relevant.",
+      "executable_effect": false
+    },
+    "DRNET20-003": {
+      "state": "context_verified",
+      "classification": "pdf_editorial_spelling_errors_grouped",
+      "summary": "Grouped additional non-executable editorial residue such as in de IEEE 802.3af/at/bt, Connection methodes and Not describede; historical NET-003 remains the separate IEE 802.3 item.",
+      "executable_effect": false
+    }
+  },
+  "not_revalidated_here": {
+    "DISC-001": "General-Conventions discovery scope, not VDV301-3 finding",
+    "DISC-002": "General-Conventions/RFC scope, not VDV301-3 finding",
+    "DISC-003": "General-Conventions V2.4 history scope, not VDV301-3 finding"
+  },
+  "runtime_evidence_boundary": {
+    "RV-002_corrected_rerun": "33267198470",
+    "job": "99139252921",
+    "result": "PASS",
+    "use": "adjacent deterministic DNS-SD classifier evidence only",
+    "not_evidence_for": ["M12", "cabling category", "1000BASE-X/T media", "safety separation", "physical topology", "live IGMP behavior"]
+  },
+  "deduplication": "FR-NET20-OBS-001 -> NET-001; FR-NET20-OBS-002 -> NET-002; FR-NET20-OBS-005 IEE item -> NET-003; FR-NET20-OBS-003 -> DRNET20-001; FR-NET20-OBS-004 -> DRNET20-002; remaining FR-NET20-OBS-005 editorial residue -> DRNET20-003."
+}

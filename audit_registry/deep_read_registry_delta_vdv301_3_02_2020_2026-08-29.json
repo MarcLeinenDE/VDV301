@@ -4,7 +4,7 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "VDV301-3_02-2020": {
-      "state": "independent_fresh_read_frozen_pending_historical_reconciliation",
+      "state": "historical_reconciliation_complete",
       "official_url": "https://www.vdv.de/301-3-sdes-network-infrastructure.pdfx",
       "publication": "VDV-Schrift 301-3, Netzwerkinfrastruktur / Network infrastructure, 02/2020",
       "source_pin": {
@@ -20,7 +20,7 @@
         "validation_lane": "physical_network_protocol_profile",
         "latest_external_protocol_version_wins": false
       },
-      "historical_network_findings_quarantined_until_fresh_read_freeze": false,
+      "fresh_read_freeze_commit": "f359aa0160d2f8a0834db9274a4ecf0a18321dea",
       "fresh_read_rule": "derive network/topology/physical-interface observations from the pinned official VDV301-3 source before consulting historical network/discovery findings or RV-002 results",
       "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
       "render_read_evidence": {
@@ -54,7 +54,26 @@
         "absence of XSD is intentional for network_protocol lane",
         "interactive screenshot cache miss is not a source failure because exact pinned-byte render completed"
       ],
-      "historical_reconciliation_status": "now_allowed_after_freeze",
+      "historical_reconciliation_status": "complete_after_independent_fresh_read_freeze",
+      "historical_reconciliation": {
+        "NET-001": "context_verified_exact_pinned_pdf",
+        "NET-002": "context_verified_exact_pinned_pdf",
+        "NET-003": "context_verified_exact_pinned_pdf",
+        "DISC-001": "not_revalidated_by_this_document_different_general_conventions_scope",
+        "DISC-002": "not_revalidated_by_this_document_different_general_conventions_scope",
+        "DISC-003": "not_revalidated_by_this_document_different_general_conventions_scope",
+        "DRNET20-001": "context_verified_internal_pdf_conflict_plus_external_IEEE_interpretation",
+        "DRNET20-002": "context_verified_bilingual_safety_security_semantic_conflict",
+        "DRNET20-003": "context_verified_grouped_editorial_residue_excluding_NET-003"
+      },
+      "adjacent_runtime_evidence": {
+        "evidence_id": "RV-002",
+        "corrected_rerun": "33267198470",
+        "job": "99139252921",
+        "head": "928e42baeb3f019d11e48024b680e63e7865e4c3",
+        "result": "PASS",
+        "boundary": "deterministic DNS-SD classifier only; no live discovery and no physical/network-media conformance evidence"
+      },
       "fresh_read_report": "docs/pdf_xsd_semantic_audit/deep_read/VDV301-3_02-2020.md"
     }
   }
