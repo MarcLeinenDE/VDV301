@@ -31,8 +31,8 @@
     "deep_read_exhaustive_completed": 0,
     "deep_read_needs_visual_review": 28,
     "deep_read_textual_fresh_read_completed": 28,
-    "deep_read_in_progress": 0,
-    "deep_read_current_document_id": null,
+    "deep_read_in_progress": 1,
+    "deep_read_current_document_id": "SMS_V2.2",
     "deep_read_previous_document_id": "HDS_V2.2a",
     "next_natural_deep_read_document_id": "SMS_V2.2",
     "latest_deep_read_finding": "DRTVS21-004",
@@ -69,7 +69,7 @@
     "pdf_visual_render_fallback": "docs/pdf_xsd_semantic_audit/PDF_VISUAL_RENDER_FALLBACK.md",
     "pdf_visual_renderer": "tools/render_vdv_pdf_pages.py",
     "pdf_visual_render_rule": "interactive screenshot cache miss is not a source failure; render exact byte-pinned source independently and inspect visible output before promoting visual status",
-    "pdf_sources_byte_pinned": 23,
+    "pdf_sources_byte_pinned": 24,
     "pinned_active_sources": [
       "VDV301-2_GC_V2.3",
       "COMMON_V2.3",
@@ -93,9 +93,10 @@
       "TVS_V2.4",
       "HDS_V2.1",
       "HDS_V2.2",
-      "HDS_V2.2a"
+      "HDS_V2.2a",
+      "SMS_V2.2"
     ],
-    "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_hds_v22a_2026-08-29.json",
+    "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_sms_v22_2026-08-29.json",
     "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_hds_v22a_2026-08-29.json",
     "trainset_v2_1_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.1.md",
     "trainset_v2_2_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.2.md",
@@ -482,6 +483,20 @@
     },
     "hds_v2_2a_findings": {
       "HDS-001": "context_verified_ok_with_note_runtime_profile_supported_RV-002_run_33267198470"
+    },
+    "sms_v2_2_source_pin": {
+      "sha256": "996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4",
+      "size_bytes": 847416,
+      "evidence_run": "33268541691",
+      "pinned_at_utc": "2026-08-29T18:32:34Z",
+      "pdf_authority": "official_public_VDV_writing",
+      "xsd_authority_status": "official_VDV-301-2.2_exact_version_aligned_family"
+    },
+    "sms_v2_2_authority": {
+      "SystemMonitoringService_blob": "d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c",
+      "Common_V2.2_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+      "Enumerations_V2.2_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+      "integration_branch_matches_official_tag": true
     }
   },
   "evidence": {
