@@ -1,0 +1,77 @@
+# SystemMonitoringService V2.2 — Deep Read Pass 2
+
+Status: independent source read and targeted visible review complete; historical SMS finding reconciliation is intentionally still pending.
+
+## Source and exact authority
+
+- Official publication: VDV-Schrift 301-2-18, SystemMonitoringService V2.2, 08/2019.
+- Official URL: https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx
+- PDF SHA-256: `996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4`
+- PDF size: `847416` bytes.
+- Pin run: `33268541691`.
+- Official XSD tag: `VDV-301-2.2`.
+- `IBIS-IP_SystemMonitoringService_V2.2.xsd`: `d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c`.
+- `IBIS-IP_common_V2.2.xsd`: `468fee6d177e7185dbcd5d3f90cfb114e29e01ae`.
+- `IBIS-IP_Enumerations_V2.2.xsd`: `2a23b512379b18e8f122ac1272cef8229fb86283`.
+- Integration branch is blob-identical to the official tag for all three files.
+- No latest-version dependency substitution is permitted.
+
+## Render/read evidence
+
+- Full pinned-byte render/text run: `33268591224`.
+- Job: `99142914429`.
+- Artifact: `9719396063` (`sms-v22-pinned-read`).
+- Artifact digest: `b7b73746ecdf6b904543c7d6a5312753a57a0b9effec6fe31d1dc83bdfdcec4a`.
+- PDF pages: `15`; all pages rendered at 120 dpi.
+- Extracted full-text SHA-256: `d71cff8d60c96c526ad53267262b83781e35d26a6ea379815f3870f0c1148a12`.
+- Targeted visible review: pages 1, 4, 5, 6, 7, 8, 9, 10, 11, 12 and 13.
+
+## Independence boundary
+
+Historical SMS findings were not used as source authority for the observations below. Although an older historical audit file had already been opened before this boundary was explicitly restated, its candidate findings were quarantined and were not used to build the fresh-read observation list. Formal historical reconciliation starts only after this freeze commit.
+
+## Independent observations
+
+### FR-SMS22-OBS-001 — unrelated HTMLDisplayService paragraph in English foreword
+
+Page 4 first states that this document describes SystemMonitoringService, then visibly inserts a paragraph explaining the HTMLDisplayService URL/web-server/HTML mechanism. The German foreword has no corresponding HDS paragraph. This is a documentation-only wrong-service/copy-paste anomaly; it has no executable XSD effect.
+
+### FR-SMS22-OBS-002 — broken list-of-figures cross-reference is printed
+
+Page 5 visibly prints `Fehler! Textmarke nicht definiert.` after `Abbildungsverzeichnis / List of figures`. This is not a text-extraction artifact; it is present in the rendered official PDF. Documentation-generation defect only.
+
+### FR-SMS22-OBS-003 — SystemStatus section headings contradict ServiceStatus operation naming
+
+The table of contents and headings 2.5, 2.6 and 2.7 use `GetSystemStatus`, `SubscribeSystemStatus` and `UnsubscribeSystemStatus`. Page 9's operation overview instead defines `GetServiceStatus`, `SubscribeServiceStatus` and `UnsubscribeServiceStatus`; section 2.5.1 itself says `GetServiceStatus`; and the exact service XSD defines `SystemMonitoringService.GetServiceStatusResponse`. The evidence therefore supports a PDF heading/name error, not an alternative executable operation.
+
+### FR-SMS22-OBS-004 — ServiceStatus descriptions say device state
+
+On pages 10-11, the executable names and shared type refer to service status (`GetServiceStatus`, `ServiceIdentificationWithStateList`), but several prose cells describe the `device state of all services` or the `service state of all devices`. Exact Common V2.2 defines `ServiceIdentificationWithStateStructure` as `ServiceIdentification` plus `ServiceState`, and its list contains `ServiceIdentificationWithState`. The inconsistent device wording is therefore a documentation semantic/copy-paste error, not XSD behavior.
+
+### FR-SMS22-OBS-005 — version history cites VDV 302-2
+
+Page 12 visibly says the service was extracted from `VDV-Schrift 302-2` / `VDV-requirements 302-2`. Page 13 of the same official document identifies the old Base Services source as `VDV 301-2-0`, DeviceManagementService/SystemManagementService/SystemDocumentationService V2.0. The official VDV IBIS-IP publication catalog likewise lists that Base Services family under VDV 301-2 / 301-2-0. The `302-2` reference is therefore retained as a documentation reference-number error.
+
+### FR-SMS22-OBS-006 — SystemManagementService misspelled in version history
+
+Page 12 visibly spells `SystemManagementService` as `SystemManagmentService` in both language lines, while page 13 names `SystemManagementService` correctly. This is an editorial spelling error with no executable impact.
+
+### FR-SMS22-OBS-007 — missing Req./Resp. labels for UnsubscribeServiceStatus in operation table
+
+Page 9 visibly contains the `UnsubscribeServiceStatus` request and response structures, but unlike the neighboring operation rows the middle Request/Response column omits the visible `Req.` and `Resp.` labels for this operation. The structures themselves remain identifiable, so this is a documentation-table omission, not an operation/XSD defect.
+
+## Active falsification and rejected suspicions
+
+1. **Rejected cover-page `Fehler` finding.** Full-text extraction exposed an isolated `Fehler`, but the exact pinned-byte rendering of page 1 contains no visible `Fehler`. It is not promoted.
+2. **Rejected `-1:1` cardinality finding.** The response tables visibly use branch labels `a`/`b` with `-1:1`; under established VDV notation this is XML-choice notation, not a negative cardinality. The exact XSD uses `xs:choice`, which is consistent.
+3. **Rejected missing-service-XSD-subscription-operation defect.** Page 9 assigns generic Subscribe/Unsubscribe request/response structures and sections 2.3/2.4/2.6/2.7 explicitly refer to common VDV 301-2-1 subscription structures. The service-local XSD's focus on concrete Get response elements is therefore not by itself evidence of a schema defect.
+
+## Executable authority facts retained
+
+The service XSD defines `SystemMonitoringService.GetDeviceStatusResponse` and `SystemMonitoringService.GetServiceStatusResponse`. Each response is an `xs:choice` between service-specific response data and `OperationErrorMessage`. `GetDeviceStatusResponseData` contains `TimeStamp` and `DeviceSpecificationWithStateList`; `GetServiceStatusResponseData` contains `TimeStamp` and `ServiceIdentificationWithStateList`.
+
+Shared-list semantics remain Common V2.2 authority and must not be duplicated as SMS-local defects. Exact Common V2.2 currently permits zero or more list items for both DeviceSpecificationWithStateList and ServiceIdentificationWithStateList; any PDF/Common cardinality issue belongs to the Common finding lane and is not independently promoted here from the SMS document.
+
+## Fresh-read freeze result
+
+Seven source-visible documentation observations are frozen without assigning historical SMS finding IDs. Three plausible false positives were actively rejected. No XSD was changed. The historical SMS register can now be reopened solely for deduplication/revalidation against this frozen evidence.
