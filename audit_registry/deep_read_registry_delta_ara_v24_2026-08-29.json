@@ -4,7 +4,7 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "ARA_V2.4": {
-      "state": "source_pinned_authority_established_pending_fresh_read",
+      "state": "independent_fresh_read_frozen_pending_historical_reconciliation",
       "official_url": "https://www.vdv.de/301-2-19-sde-v2.4-analogradioservice.pdfx",
       "publication": "VDV-Schrift 301-2-19, AnalogRadioService V2.4, 01/2023",
       "source_pin": {
@@ -27,9 +27,34 @@
         "xsd_authority_class": "candidate_integration_not_official_release",
         "latest_wins": false
       },
-      "historical_analogradio_findings_quarantined_until_fresh_read_freeze": true,
+      "historical_analogradio_findings_quarantined_until_fresh_read_freeze": false,
       "fresh_read_rule": "derive observations from pinned official ARA V2.4 PDF first; candidate/integration XSD may constrain executable behavior but must not be promoted to official-release authority",
-      "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md"
+      "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+      "render_read_evidence": {
+        "run": "33269472968",
+        "job": "99145237184",
+        "artifact": "9719652068",
+        "artifact_digest": "sha256:06c2ce302b1b98d5bbe22265806ea605bbc2abe62327b8d809a0e27da19592a3",
+        "pdf_page_count": 16,
+        "all_pages_rendered": true,
+        "visible_pages_reviewed": [1, 9, 10, 11, 12, 13, 14],
+        "fulltext_sha256": "de4be3a9282310cfccbca7244bfd5e85b04b493c34e74f99494cccc2c35e7fe5"
+      },
+      "independent_observations": [
+        "FR-ARA24-OBS-001 page-11 TransmitterType 1:1 row contradicts same-PDF Transmitter minOccurs=0 schema screenshot, page-12 diagram and page-13 XML example",
+        "FR-ARA24-OBS-002 SendTelegram URI section uses SendFFSKTelegram in concrete URI example",
+        "FR-ARA24-OBS-003 concrete URI example omits http:// although the immediately preceding URI form includes it",
+        "FR-ARA24-OBS-004 AnlogRadioService spelling error in operation introduction",
+        "FR-ARA24-OBS-005 grouped minor English editorial residue"
+      ],
+      "rejected_suspicions": [
+        "cover-page isolated Fehler from text extraction is not visible in exact pinned-byte page-1 render",
+        "missing SendTelegram response is not independently a defect because the PDF explicitly states response not provided",
+        "official PDF reference to GitHub releases does not establish an official VDV-301-2.4 XSD release",
+        "page-11 plain 1:1 is ordinary cardinality notation and not leading-minus VDV XML-choice notation"
+      ],
+      "historical_reconciliation_status": "now_allowed_after_freeze",
+      "fresh_read_report": "docs/pdf_xsd_semantic_audit/deep_read/ARA_V2.4.md"
     }
   }
 }
