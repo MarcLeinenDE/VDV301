@@ -53,3 +53,25 @@ No new unique V2.2 finding is promoted from the independent fresh read. The V2.2
 ## Next gate
 
 Reconcile the already-existing HDS historical register against this frozen V2.2 source. Do not back-apply V2.1 `content + path` endpoint reconstruction to V2.2.
+## Historical V2.2 reconciliation after fresh-read freeze
+
+The independent V2.2 source state was frozen in commit `da2c000e82640e321d0f5379a120be75dc7a3eb2` before formal V2.2 historical reconciliation.
+
+The historical HDS profile record matches the independently derived V2.2 facts: canonical `_http._tcp`, TXT `content + url`, endpoint taken directly from TXT `url`, SRV port not used for content addressing, and SRV host identifying the publisher. This is a version-specific routing change, not a defect.
+
+### HDS-001 — V2.2 revalidation
+
+State: `context_verified_ok_with_note_runtime_profile_supported_RV-002_run_33266770833`.
+
+Evidence chain:
+
+- official byte-pinned V2.2 publication;
+- exact official `VDV-301-2.2` release inventory with no dedicated HDS service schema;
+- visible pinned-byte pages 7-11;
+- independent active-falsification checks for SRV host/port semantics and hidden-XSD inference;
+- deterministic RV-002 rerun `33266770833`.
+
+RV-002 confirms canonical V2.2 `_http._tcp`, TXT-url endpoint resolution, missing-url failure and HDS service-name checking. Its `_ibisip_http._tcp` transition acceptance is retained only as an explicit compatibility note derived from later V2.2a documentation; it does not rewrite the native V2.2 profile.
+
+No live DNS/mDNS, HTTP reachability or browser/content-interoperability conclusion is claimed. No new V2.2 finding ID is opened.
+

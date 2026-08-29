@@ -1,6 +1,6 @@
 # HTMLDisplayService findings register addendum
 
-Status: supplemental register; historical first-pass closure completed for HTMLDisplayService V2.1, V2.2 and V2.2a. V2.1 has now also been independently re-read and HDS-001 revalidated under the current Evidence Gate; V2.2/V2.2a Deep Read revalidation remains pending.
+Status: supplemental register; historical first-pass closure completed for HTMLDisplayService V2.1, V2.2 and V2.2a. V2.1 and V2.2 have now also been independently re-read and HDS-001 revalidated under the current Evidence Gate; V2.2a Deep Read revalidation remains pending.
 
 Authority rule:
 
@@ -19,7 +19,7 @@ docs/pdf_xsd_semantic_audit/10a_html_display_service_protocol_profile_and_closur
 
 ## HDS-001 - no dedicated HTMLDisplayService XSD
 
-State: closed OK with note historically; **V2.1 scope revalidated under the current Evidence Gate**. V2.2/V2.2a scopes remain pending their own Deep Reads.
+State: closed OK with note historically; **V2.1 and V2.2 scopes revalidated under the current Evidence Gate**. V2.2a scope remains pending its own Deep Read.
 
 Classification:
 
@@ -79,5 +79,26 @@ No dedicated service XSD is expected.
 Route to discovery_http_profile.
 Do not apply V2.2/V2.2a url/protocol changes to V2.1.
 No live DNS/mDNS or endpoint-reachability conclusion is claimed by RV-002.
+```
+## V2.2 Evidence-Gate revalidation
+
+```text
+source pin: bf62b7a8b6cfdf654181b48da2d85a805118687c7463a46fadfd32679c9b7577 / 802399 bytes / run 33266549282
+visible review: pages 7-11 / render-read run 33266588436
+fresh-read freeze: da2c000e82640e321d0f5379a120be75dc7a3eb2
+RV-002 rerun after freeze: 33266770833 PASS
+```
+
+Result for V2.2:
+
+```text
+HDS-001 -> context_verified_ok_with_note_runtime_profile_supported_RV-002
+canonical protocol: _http._tcp
+TXT: content + url
+content endpoint: TXT url
+SRV port: no content-address meaning
+SRV host: publishing device
+No dedicated HDS service XSD is expected.
+Later V2.2a _ibisip_http._tcp transition is compatibility context, not native V2.2 source wording.
 ```
 

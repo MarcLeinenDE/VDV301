@@ -526,4 +526,20 @@ RV-002 Evidence-Gate rerun: 33266402138 PASS
 `HDS-001` is revalidated for V2.1 as `ok_with_note`: no dedicated service XSD is expected and the validator must route the service to its version-specific discovery/HTTP profile. RV-002 confirms V2.1 `_http._tcp`, `content + path`, endpoint reconstruction and the historical-version guard. Live DNS/mDNS, endpoint reachability and browser/content interoperability remain outside this deterministic evidence.
 
 Next Deep Read document: `HDS_V2.2`.
+## HTMLDisplayService V2.2 Deep Read evidence status
+
+The official HDS V2.2 PDF is byte-pinned and independently re-derived from the exact source before V2.2 historical reconciliation. HDS remains a non-XSD DNS-SD/HTTP profile.
+
+```text
+PDF sha256: bf62b7a8b6cfdf654181b48da2d85a805118687c7463a46fadfd32679c9b7577
+PDF size: 802399
+pin run: 33266549282
+render/read run: 33266588436
+pages visibly reviewed: 7-11
+RV-002 post-freeze rerun: 33266770833 PASS
+```
+
+V2.2 canonical profile is `_http._tcp` with TXT `content + url`; the content endpoint is the TXT `url`, while SRV port has no content-address meaning and host identifies the publisher. `HDS-001` is revalidated for V2.2 as `ok_with_note`. `_ibisip_http._tcp` remains a later V2.2a compatibility context, not a rewritten native V2.2 rule. Live network and HTTP/browser interoperability remain outside deterministic RV-002 evidence.
+
+Next Deep Read document: `HDS_V2.2a`.
 

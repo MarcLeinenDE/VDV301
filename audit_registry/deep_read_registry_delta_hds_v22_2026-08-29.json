@@ -4,7 +4,7 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "HDS_V2.2": {
-      "state": "fresh_read_visible_review_complete_pending_historical_reconciliation",
+      "state": "targeted_visual_review_complete_historical_reconciliation_complete",
       "official_url": "https://www.vdv.de/301-2-17-sdes-v2-2-htmldisplayservice.pdfx",
       "publication": "VDV-Schrift 301-2-17, HTMLDisplayService V2.2, 08/2019",
       "historical_findings_opened_during_fresh_read": false,
@@ -69,7 +69,28 @@
         "Potential hidden-XSD inference rejected: foreword wording about specific data structures is insufficient to establish an XML contract, and no dedicated HDS schema exists in the exact official tag."
       ],
       "fresh_findings": [],
-      "historical_reconciliation": "pending_after_V2.2_fresh_read_freeze"
+      "historical_reconciliation": "complete_for_V2.2_only",
+      "historical_v22_profile_reconciled_after_fresh_read_freeze": true,
+      "existing_findings_revalidated": {
+        "HDS-001": "context_verified_ok_with_note_runtime_profile_supported_RV-002_run_33266770833"
+      },
+      "new_unique_findings": [],
+      "runtime_evidence": {
+        "evidence_id": "RV-002",
+        "revalidation_run": "33266770833",
+        "job": "99138094017",
+        "status": "PASS",
+        "scope": "deterministic DNS-SD profile classifier; no live DNS/mDNS or endpoint-reachability claim",
+        "v2_2_checks": [
+          "canonical _http._tcp profile passes",
+          "content endpoint comes from TXT url rather than SRV host/port reconstruction",
+          "service-specific HDS specialization is recorded",
+          "missing url is detected and yields no resolved content endpoint",
+          "wrong service name is detected",
+          "_ibisip_http._tcp transition is accepted only with note and is not reclassified as the native V2.2 canonical label"
+        ]
+      },
+      "next_document_id": "HDS_V2.2a"
     }
   }
 }
