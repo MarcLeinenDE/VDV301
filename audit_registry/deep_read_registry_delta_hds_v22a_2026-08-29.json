@@ -1,0 +1,28 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-29",
+  "base_registry": "audit_registry/deep_read_registry_v0.1.json",
+  "document_updates": {
+    "HDS_V2.2a": {
+      "state": "source_pinned_authority_established_pending_fresh_read",
+      "official_url": "https://www.vdv.de/301-2-17-sdes-v2-2a-htmldisplayservice.pdfx",
+      "publication": "VDV-Schrift 301-2-17, HTMLDisplayService V2.2a, 02/2021",
+      "source_pin": {
+        "sha256": "f3da1994e719572ba1689aea2448b9533faf9e8fbe42720b9e737b98edd8b0f8",
+        "size_bytes": 431875,
+        "pinned_at_utc": "2026-08-29T17:55:31Z",
+        "evidence_run": "SELF_RUN_ID_PENDING_LOG_CAPTURE"
+      },
+      "authority_status": {
+        "official_pdf": "official_public_VDV_writing",
+        "dedicated_release_tag_VDV-301-2.2a_exists": false,
+        "service_model": "non_xsd_dns_sd_http_profile",
+        "dedicated_HtmlDisplayService_xsd_in_integration_branch": false,
+        "xsd_boundary": "No dedicated HDS service XSD is selected or inferred; V2.2a authority is the official service publication plus separately sourced general-conventions rules where explicitly referenced."
+      },
+      "historical_context_note": "The historical HDS block is known from earlier reconciliation, but V2.2a facts must be independently re-derived from this pinned V2.2a source before V2.2a reconciliation.",
+      "historical_v22a_profile_not_used_as_source_during_fresh_read": true,
+      "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md"
+    }
+  }
+}
