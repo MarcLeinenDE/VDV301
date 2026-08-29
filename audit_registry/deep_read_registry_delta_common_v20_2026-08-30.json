@@ -1,0 +1,39 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-30",
+  "base_registry": "audit_registry/deep_read_registry_v0.1.json",
+  "document_updates": {
+    "COMMON_V2.0": {
+      "state": "source_pinned_render_complete_pending_independent_fresh_read",
+      "official_url": "https://www.vdv.de/301-2-1-sds-v-2-0.pdfx",
+      "publication": "VDV 301-2-1 V2.0, Common Data Structures and Enumerations",
+      "source_pin": {
+        "sha256": "23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088",
+        "size_bytes": 946088,
+        "pinned_at_utc": "2026-08-29T22:57:33Z",
+        "evidence_run": "33279811315"
+      },
+      "authority_status": {
+        "official_pdf": "official_public_VDV_writing",
+        "xsd_lane": "xsd",
+        "exact_xsd_authority": "official_VDV-301-2.0_exact_family",
+        "official_tag": "VDV-301-2.0",
+        "common_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+        "enumerations_blob": "27e3c183b00381d959622d13c10543123af8eef6",
+        "branch_bytes_match_official_tag": true,
+        "latest_xsd_wins": false
+      },
+      "historical_common_findings_quarantined_until_fresh_read_freeze": true,
+      "fresh_read_rule": "derive observations from exact pinned COMMON V2.0 PDF against exact official VDV-301-2.0 Common/Enumerations family before consulting historical Common findings",
+      "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+      "render_read_evidence": {
+        "run": "33279811315",
+        "artifact_name": "common-v20-pinned-read",
+        "pdf_page_count": 45,
+        "all_pages_rendered": true,
+        "render_dpi": 120,
+        "fulltext_sha256": "05e8a7e1788318bf5ac83ffdd61125622e28ce30f4fc5f388467a41ed46f5a3f"
+      }
+    }
+  }
+}
