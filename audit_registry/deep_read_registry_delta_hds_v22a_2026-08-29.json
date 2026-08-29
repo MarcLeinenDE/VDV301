@@ -4,7 +4,7 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "HDS_V2.2a": {
-      "state": "source_pinned_authority_established_pending_fresh_read",
+      "state": "fresh_read_visible_review_complete_pending_historical_reconciliation",
       "official_url": "https://www.vdv.de/301-2-17-sdes-v2-2a-htmldisplayservice.pdfx",
       "publication": "VDV-Schrift 301-2-17, HTMLDisplayService V2.2a, 02/2021",
       "source_pin": {
@@ -22,7 +22,67 @@
       },
       "historical_context_note": "The historical HDS block is known from earlier reconciliation, but V2.2a facts must be independently re-derived from this pinned V2.2a source before V2.2a reconciliation.",
       "historical_v22a_profile_not_used_as_source_during_fresh_read": true,
-      "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md"
+      "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+      "fresh_read_started": "2026-08-29",
+      "textual_fresh_read_complete": true,
+      "visual_evidence": {
+        "interactive_screenshot_result": "cache_miss_fallback_used",
+        "pinned_byte_render_run": "33266920928",
+        "render_job": "99138495593",
+        "artifact_id": "9718919955",
+        "artifact_zip_sha256": "6c0a636017990fe40bc69d3e88f549c06c0d3d90510429f188754b60974db449",
+        "fulltext_sha256": "8f21a5a9445e7b27f7cb6e4ce7783fc52e0bf73e40b48c3119867c0cdfac9809",
+        "pages_rendered": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        "pages_visibly_reviewed": [
+          8,
+          10,
+          11
+        ],
+        "page_png_sha256": {
+          "7": "9ba058cebc50e613e2947343aa6e15203e4720f3cf1749058cce7aa5ac2b9a78",
+          "8": "db5ed1dfd2c1e1d82361d9bd471a8908095031ddf4291cad4e84e73009f85b24",
+          "9": "41e38a9c640d93d8b3b7dc04b3215eb773711e0e28158bb8873975c138608024",
+          "10": "8e8c1ccfc18a96e71ef9383adae80ed8f7dc0f50915b24dbb899eef99bb849f1",
+          "11": "3d104262f4f2a083e8ae08bec6422fe2b645b98ebf8b75189d94c0887ae70a8a",
+          "12": "875a9657b6a1fe72829d488b2c6e920756cd24889f5048d9a3c405fc664e3613",
+          "13": "c715265b1eaf5cd4c15bc6efb633abd42e126b0f607a1a1ac35f345e853a50ab",
+          "14": "9f15c6f4f131689251fd315a8866e1b69cb3c0a0b47db1cc7ba8a80f3a303503"
+        },
+        "status": "visible_review_complete_for_independent_fresh_read"
+      },
+      "fresh_observations": [
+        "The V2.2a foreword explicitly describes the publication as carrying a note on future use of _ibisip_http._tcp instead of _http._tcp.",
+        "The service remains a non-XSD DNS-SD/HTTP/browser profile and again states that it defines no own protocol.",
+        "The current V2.2a discovery table lists both _http._tcp and _ibisip_http._tcp.",
+        "German marks _http._tcp as zukünftig nicht mehr empfohlen; English marks it deprecated.",
+        "TXT records remain content and url; the content endpoint follows TXT url.",
+        "The text explicitly says the SRV record will be adapted with the next service version after 2.2, which will use _ibisip_http._tcp and delete _http._tcp.",
+        "By mutual agreement, _ibisip_http._tcp may already be used project-specifically in version 2.2.",
+        "The version-history section is headed Version 2.2 and includes a usage-of-_ibisip_http._tcp correction/note.",
+        "No dedicated VDV-301-2.2a release tag or HDS service XSD exists; no XML contract is inferred."
+      ],
+      "active_falsification": [
+        "Rejected: V2.2a is not treated as the future next service version after 2.2. The publication itself says that future next version will perform the deletion of _http._tcp, while the current V2.2a table still lists both labels.",
+        "Rejected: _ibisip_http._tcp is not promoted to an exclusive current V2.2a requirement. The publication frames it as future/transition use and explicitly permits project-specific use already in V2.2 by mutual agreement.",
+        "Rejected as defect: German future-not-recommended and English deprecated differ in wording strength but converge on the same transition direction and do not create conflicting executable routing.",
+        "Rejected: foreword wording about specific data structures does not prove a hidden HDS XML/XSD contract."
+      ],
+      "fresh_findings": [],
+      "runtime_diagnostic_wording_refinement_pending": {
+        "tool": "tools/runtime_discovery_profile.py + tools/validate_discovery_runtime_rv002.py",
+        "issue": "Existing RV-002 wording calls _ibisip_http._tcp preferred for V2.2a. Acceptance behavior matches the source, but preferred is stronger than the publication wording.",
+        "planned_change": "Retain both-label acceptance behavior; replace preferred with source-exact transition/future wording, then rerun RV-002."
+      },
+      "historical_reconciliation": "pending_after_V2.2a_fresh_read_freeze"
     }
   }
 }
