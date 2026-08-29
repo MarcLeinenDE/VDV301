@@ -1,0 +1,26 @@
+name: temp-tvs-v21-visual-render
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check pymupdf
+      - name: Render exact pinned TVS V2.1 pages
+        run: python tools/render_vdv_pdf_pages.py --source-id TVS_V2.1 --pages 10-17 --out-dir rendered_tvs_v21 --dpi 180
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tvs-v21-rendered-pages
+          path: rendered_tvs_v21/
+          if-no-files-found: error
