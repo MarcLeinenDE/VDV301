@@ -1,0 +1,23 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-29",
+  "document_id": "HDS_V2.1",
+  "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+  "new_unique_findings": [],
+  "revalidated_findings": {
+    "HDS-001": {
+      "state": "context_verified_ok_with_note_runtime_profile_supported_RV-002_run_33266402138",
+      "summary": "The byte-pinned official V2.1 publication, visible pages 7-10 and official VDV-301-2.1 repository inventory independently confirm that HTMLDisplayService intentionally has no dedicated service XSD and is a DNS-SD/HTTP profile. The current RV-002 rerun confirms the V2.1 discovery profile and endpoint construction without applying V2.2+ discovery rules retroactively.",
+      "classification": "ok_with_note",
+      "validation_behavior": "discovery_http_profile_not_service_xsd"
+    }
+  },
+  "authority_note": {
+    "official_pdf": "official_public_VDV_writing",
+    "dedicated_service_xsd": false,
+    "service_model": "non_xsd_dns_sd_http_profile",
+    "runtime_evidence": "RV-002 run 33266402138",
+    "live_network_claim": false
+  },
+  "deduplication": "No new HDS V2.1 finding ID opened; the independent fresh-read result reconciles to HDS-001."
+}

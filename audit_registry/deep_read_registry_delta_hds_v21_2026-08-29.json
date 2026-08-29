@@ -4,7 +4,7 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "HDS_V2.1": {
-      "state": "fresh_read_visible_review_complete_pending_historical_reconciliation",
+      "state": "targeted_visual_review_complete_historical_reconciliation_complete",
       "official_url": "https://www.vdv.de/301-2-17-sds-v2-1-htmldisplayservice.pdfx",
       "publication": "VDV-Schrift 301-2-17, HtmlDisplayService V2.1, 07/2018",
       "historical_findings_opened_during_fresh_read": false,
@@ -66,7 +66,25 @@
         "No dedicated HtmlDisplayService XSD exists in the checked official VDV-301-2.1 tag or integration branch."
       ],
       "fresh_findings": [],
-      "historical_reconciliation": "pending_after_fresh_read_freeze"
+      "historical_reconciliation": "complete_for_V2.1_only",
+      "historical_findings_opened_after_fresh_read_freeze": true,
+      "existing_findings_revalidated": {
+        "HDS-001": "context_verified_ok_with_note_runtime_profile_supported_RV-002_run_33266402138"
+      },
+      "new_unique_findings": [],
+      "runtime_evidence": {
+        "evidence_id": "RV-002",
+        "revalidation_run": "33266402138",
+        "job": "99137119627",
+        "status": "PASS",
+        "scope": "deterministic already-observed DNS-SD advertisements; no live DNS/mDNS claim",
+        "v2_1_checks": [
+          "HDS V2.1 profile passes",
+          "endpoint built from SRV target/port plus TXT path",
+          "V2.2+ TXT rules not retroactively applied to GC V2.1"
+        ]
+      },
+      "next_document_id": "HDS_V2.2"
     }
   }
 }

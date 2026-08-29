@@ -510,3 +510,20 @@ fresh-read HDS_V2.1
 -> freeze audit/finding baseline
 -> only then implement finding-driven SDK regression/diagnostic knowledge
 ```
+## HTMLDisplayService V2.1 Deep Read evidence status
+
+The official HDS V2.1 PDF is byte-pinned and independently fresh-read with targeted visible review before historical HDS findings were opened. HDS is intentionally a non-XSD DNS-SD/HTTP profile.
+
+```text
+PDF sha256: c8aa91626bf60c8e74200200d63d44d497aeb3ab240c47039333b2c922a0e495
+PDF size: 734901
+pin run: 33265498869
+visual render run: 33265541783
+pages visibly reviewed: 7-10
+RV-002 Evidence-Gate rerun: 33266402138 PASS
+```
+
+`HDS-001` is revalidated for V2.1 as `ok_with_note`: no dedicated service XSD is expected and the validator must route the service to its version-specific discovery/HTTP profile. RV-002 confirms V2.1 `_http._tcp`, `content + path`, endpoint reconstruction and the historical-version guard. Live DNS/mDNS, endpoint reachability and browser/content interoperability remain outside this deterministic evidence.
+
+Next Deep Read document: `HDS_V2.2`.
+

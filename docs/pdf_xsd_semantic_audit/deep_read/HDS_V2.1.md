@@ -42,3 +42,27 @@ No new finding ID is promoted from the independent fresh read. This is not a cla
 ## Next gate
 
 Only after this freeze may the historical HDS audit files and finding register be opened. Each historical item must then be revalidated against this pinned source and the protocol authority boundary under `FINDING_EVIDENCE_GATE.md`.
+## Historical reconciliation after fresh-read freeze
+
+Historical HDS material was opened only after the independent fresh read had been committed at `cf27ca153255ce724f7db6730eb4311623b76ac0`.
+
+The historical register contains one service-modelling item relevant to V2.1: `HDS-001`, absence of a dedicated HTMLDisplayService XSD. The fresh read independently reached the same conclusion before that finding was opened.
+
+### HDS-001 — V2.1 revalidation
+
+State: `context_verified_ok_with_note_runtime_profile_supported_RV-002_run_33266402138`.
+
+Evidence chain:
+
+- official byte-pinned V2.1 publication;
+- visible review of pages 7-10 from exact pinned bytes;
+- official `VDV-301-2.1` release inventory contains no dedicated HDS service schema;
+- publication explicitly states that HDS defines no own protocol;
+- deterministic RV-002 rerun `33266402138` confirms the V2.1 `_http._tcp` + `content`/`path` profile, endpoint construction from SRV target/port plus TXT path, and the non-retroactive V2.1 boundary.
+
+Active falsification did not reveal a hidden HDS XML contract or a release-tag service XSD. Therefore missing-XSD handling would be incorrect; HDS V2.1 must route to the discovery/HTTP profile validator.
+
+RV-002 does not perform live DNS/mDNS or endpoint reachability and is not represented as such.
+
+No new unique V2.1 finding was opened. V2.2 and V2.2a remain separately pending Deep Read revalidation; their later `url` and protocol-label changes are not back-applied to V2.1.
+

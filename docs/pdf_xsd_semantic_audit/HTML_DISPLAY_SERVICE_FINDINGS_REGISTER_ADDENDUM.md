@@ -1,6 +1,6 @@
 # HTMLDisplayService findings register addendum
 
-Status: supplemental register; historical first-pass closure completed for HTMLDisplayService V2.1, V2.2 and V2.2a.
+Status: supplemental register; historical first-pass closure completed for HTMLDisplayService V2.1, V2.2 and V2.2a. V2.1 has now also been independently re-read and HDS-001 revalidated under the current Evidence Gate; V2.2/V2.2a Deep Read revalidation remains pending.
 
 Authority rule:
 
@@ -19,7 +19,7 @@ docs/pdf_xsd_semantic_audit/10a_html_display_service_protocol_profile_and_closur
 
 ## HDS-001 - no dedicated HTMLDisplayService XSD
 
-State: closed OK with note; intentional service modelling, not a schema/provenance gap.
+State: closed OK with note historically; **V2.1 scope revalidated under the current Evidence Gate**. V2.2/V2.2a scopes remain pending their own Deep Reads.
 
 Classification:
 
@@ -62,3 +62,22 @@ Next action:
 ```text
 Implement profile tests later; no schema correction/backfill action.
 ```
+## V2.1 Evidence-Gate revalidation
+
+```text
+source pin: c8aa91626bf60c8e74200200d63d44d497aeb3ab240c47039333b2c922a0e495 / 734901 bytes / run 33265498869
+visible review: pages 7-10 / render run 33265541783
+fresh-read freeze: cf27ca153255ce724f7db6730eb4311623b76ac0
+RV-002 current rerun: 33266402138 PASS
+```
+
+Result for V2.1:
+
+```text
+HDS-001 -> context_verified_ok_with_note_runtime_profile_supported_RV-002
+No dedicated service XSD is expected.
+Route to discovery_http_profile.
+Do not apply V2.2/V2.2a url/protocol changes to V2.1.
+No live DNS/mDNS or endpoint-reachability conclusion is claimed by RV-002.
+```
+
