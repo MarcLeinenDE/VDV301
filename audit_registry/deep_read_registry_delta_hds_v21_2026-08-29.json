@@ -1,0 +1,38 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-29",
+  "base_registry": "audit_registry/deep_read_registry_v0.1.json",
+  "document_updates": {
+    "HDS_V2.1": {
+      "state": "source_pinned_authority_established_pending_fresh_read",
+      "official_url": "https://www.vdv.de/301-2-17-sds-v2-1-htmldisplayservice.pdfx",
+      "publication": "VDV-Schrift 301-2-17, HtmlDisplayService V2.1, 07/2018",
+      "historical_findings_opened_during_fresh_read": false,
+      "source_pin": {
+        "sha256": "c8aa91626bf60c8e74200200d63d44d497aeb3ab240c47039333b2c922a0e495",
+        "size_bytes": 734901,
+        "pinned_at_utc": "2026-08-29T17:23:26Z",
+        "evidence_run": "SELF_RUN_ID_PENDING_LOG_CAPTURE"
+      },
+      "authority_status": {
+        "official_pdf": "official_public_VDV_writing",
+        "official_release_tag_checked": "VDV-301-2.1",
+        "dedicated_HtmlDisplayService_xsd_in_official_tag": false,
+        "dedicated_HtmlDisplayService_xsd_in_integration_branch": false,
+        "service_model": "non_xsd_dns_sd_http_profile",
+        "pdf_statement": "HTMLDisplayService is comparable to TimeService and defines no own protocol.",
+        "dns_sd_service_name": "HtmlDisplayService",
+        "dns_sd_transport": "_http._tcp",
+        "dns_sd_txt_keys": [
+          "content",
+          "path"
+        ],
+        "url_model": "http://host:port/path",
+        "device_integration": "DeviceManagementService + DeviceClass MultiFunctionalDisplay; devices distinguished by DeviceID",
+        "xsd_boundary": "No dedicated HDS service XSD is selected. Relevant common enumerations/DMS structures are supporting dependencies only, not an invented HDS XML contract."
+      },
+      "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+      "fresh_read_rule": "Do not open historical HDS findings until independent pinned-source fresh read and targeted visible review are frozen."
+    }
+  }
+}
