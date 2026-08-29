@@ -4,7 +4,7 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "COMMON_V1.0": {
-      "state": "independent_fresh_read_frozen_pending_historical_reconciliation",
+      "state": "deep_read_closed_after_historical_reconciliation_EV-117",
       "official_url": "https://www.vdv.de/301-2-1-sds.pdfx",
       "publication": "VDV-Schrift 301-2-1, 05/2017, Common data structures and enumerations; audit unit COMMON_V1.0 with internal Version 1.1 history",
       "source_pin": {
@@ -38,7 +38,26 @@
         "pdf_page_count": 36,
         "all_pages_rendered": true,
         "render_dpi": 120,
-        "visible_pages_reviewed": [7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20, 21, 22, 25, 27, 28, 29, 30],
+        "visible_pages_reviewed": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          14,
+          15,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          25,
+          27,
+          28,
+          29,
+          30
+        ],
         "fulltext_sha256": "fdfdf62a88f78dd7a59b341157662d3e5708b2f9c56d2cf1df13a7d4eb0cfa0a"
       },
       "independent_observations": [
@@ -60,8 +79,45 @@
         "do not automatically promote XSD-only helper structures/DataIntervallEnumeration/DeviceTaskEnumeration to PDF defects before downstream context reconciliation",
         "do not modify XSD because of PDF drift"
       ],
-      "historical_reconciliation_status": "now_allowed_after_freeze",
-      "fresh_read_report": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V1.0.md"
+      "historical_reconciliation_status": "complete",
+      "fresh_read_report": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V1.0.md",
+      "executable_evidence": {
+        "evidence_id": "EV-117",
+        "checker": "tools/validate_common_v10_ev117.py",
+        "run": "33279461529",
+        "job": "99172025835",
+        "head_tested": "104ff8d49af248258fcf174d62610c43179fdcf5",
+        "result": "PASS",
+        "common_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+        "enumerations_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d"
+      },
+      "revalidated_or_scope_extended_findings": {
+        "CE-005": "V1x_scope_context_verified_with_EV-117_exact_V1.0_type_and_cardinality_support",
+        "CE-007": "V1x_scope_executable_enum_lexeme_boundaries_confirmed_EV-117",
+        "CE-012": "V1x_scope_executable_empty_list_confirmed_EV-117",
+        "CE-013": "V1x_scope_executable_choice_and_name_boundary_confirmed_EV-117",
+        "CE-014": "V1x_scope_exact_V1.0_anonymous_DataVersion_0star_declaration_confirmed_EV-117",
+        "CE-015": "V1x_scope_visible_pdf_and_exact_XSD_case_boundary_confirmed_EV-117",
+        "CE-016": "V1x_scope_visible_pdf_and_exact_XSD_spelling_boundary_confirmed_EV-117",
+        "CE-017": "V1x_scope_executable_Description_vs_Desciption_boundary_confirmed_EV-117",
+        "CE-018": "V1x_scope_executable_empty_list_confirmed_EV-117",
+        "CE-019": "V1x_scope_visible_pdf_type_reference_and_exact_XSD_type_confirmed_EV-117",
+        "CE-021": "V1x_scope_visible_pdf_and_exact_XSD_Message_declaration_confirmed_EV-117",
+        "CE-022": "V1x_scope_executable_outer_Service_vs_ServiceName_boundary_confirmed_EV-117",
+        "CE-025": "V1x_scope_visible_pdf_and_exact_XSD_ReplyPath_declaration_confirmed_EV-117",
+        "CE-026": "V1x_scope_executable_Description_vs_Desciption_boundary_confirmed_EV-117"
+      },
+      "new_unique_findings": [
+        "DRCOM10-001",
+        "DRCOM10-002",
+        "DRCOM10-003",
+        "DRCOM10-004",
+        "DRCOM10-005",
+        "DRCOM10-006",
+        "DRCOM10-007"
+      ],
+      "findings_delta": "audit_registry/deep_read_findings_delta_common_v10_2026-08-30.json",
+      "next_natural_document_id": "COMMON_V2.0"
     }
   }
 }

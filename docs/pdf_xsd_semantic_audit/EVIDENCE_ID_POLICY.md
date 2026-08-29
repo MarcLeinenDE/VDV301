@@ -31,6 +31,7 @@ EV-113  TicketValidationService V2.2 RouteDeviation enum separation and CurrentT
 EV-114  TicketValidationService V2.3 official-route/candidate authority guard and inherited V2.2 executable boundary
 EV-115  TicketValidationService V2.4 candidate/integration ShortHaul inventory + recurring type/rename behavior evidence
 EV-116  SystemMonitoringService V2.2 exact operation-name/generic-subscription modelling evidence
+EV-117  Common V1.0 exact historical authority + Deep Read choice/cardinality/naming/enum boundary evidence
 ```
 
 Important:
@@ -39,7 +40,7 @@ Important:
 EV-003 through EV-100 were never defined.
 The numbering intentionally separates baseline evidence (001/002) from finding-specific evidence (101+).
 Do not describe the completed set as a continuous range beginning at EV-001.
-Correct wording at the current state: "EV-001, EV-002 and EV-101 through EV-116".
+Correct wording at the current state: "EV-001, EV-002 and EV-101 through EV-117".
 ```
 
 Existing EV document names, historical workflow run IDs and historical tool names are not retroactively renamed because they are provenance evidence.
@@ -189,3 +190,13 @@ runtime-EV-...
 ```
 
 Use `RV-*` for runtime/protocol validation.
+
+EV-117:
+The checked Common V1.0 family is exact historical official authority from the
+2014 VDV initial V1 import:
+  Common V1.0       194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c
+  Enumerations V1.0 a9bea5bc73003ed91ded8519db06c32c4067831d
+The byte-pinned 05/2017 publication has internal document/data-definition revision
+Version 1.1, but no Common V1.1 XSD exists. EV-117 therefore tests the exact V1.0
+executable family and must not be described as invented V1.1 schema conformance.
+Run 33279461529 PASS.

@@ -506,3 +506,39 @@ Impact / handling:
 For official Common V2.3, validation still follows the historical XSD spelling <Desciption>.
 The later V2.4 correction does not retroactively change V2.3.
 ```
+
+## COMMON V1.0 / public V1.x Deep Read scope extension — 2026-08-30
+
+Source: byte-pinned official 05/2017 VDV 301-2-1 publication, SHA-256 `a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf`.
+Exact executable authority remains official Common V1.0 `194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c` plus
+Enumerations V1.0 `a9bea5bc73003ed91ded8519db06c32c4067831d`.
+
+EV-117 run `33279461529` PASS.
+
+Existing IDs revalidated/refined for V1.x where applicable:
+
+```text
+CE-005: V1x_scope_context_verified_with_EV-117_exact_V1.0_type_and_cardinality_support
+CE-007: V1x_scope_executable_enum_lexeme_boundaries_confirmed_EV-117
+CE-012: V1x_scope_executable_empty_list_confirmed_EV-117
+CE-013: V1x_scope_executable_choice_and_name_boundary_confirmed_EV-117
+CE-014: V1x_scope_exact_V1.0_anonymous_DataVersion_0star_declaration_confirmed_EV-117
+CE-015: V1x_scope_visible_pdf_and_exact_XSD_case_boundary_confirmed_EV-117
+CE-016: V1x_scope_visible_pdf_and_exact_XSD_spelling_boundary_confirmed_EV-117
+CE-017: V1x_scope_executable_Description_vs_Desciption_boundary_confirmed_EV-117
+CE-018: V1x_scope_executable_empty_list_confirmed_EV-117
+CE-019: V1x_scope_visible_pdf_type_reference_and_exact_XSD_type_confirmed_EV-117
+CE-021: V1x_scope_visible_pdf_and_exact_XSD_Message_declaration_confirmed_EV-117
+CE-022: V1x_scope_executable_outer_Service_vs_ServiceName_boundary_confirmed_EV-117
+CE-025: V1x_scope_visible_pdf_and_exact_XSD_ReplyPath_declaration_confirmed_EV-117
+CE-026: V1x_scope_executable_Description_vs_Desciption_boundary_confirmed_EV-117
+```
+
+This does **not** visually close unresolved V2.x portions of CE-019/021/022/etc.;
+it only establishes the V1.x scope from the independently pinned source.
+
+New unique V1.x Deep Read findings are `DRCOM10-001..DRCOM10-007`; detailed machine-
+readable evidence is in `audit_registry/deep_read_findings_delta_common_v10_2026-08-30.json`.
+
+Validation continues to follow the exact selected XSD family. No alias is synthesized
+from PDF spelling, casing, cardinality or type-reference wording.

@@ -432,3 +432,21 @@ Before any official PR/comment/review:
 4. decide documentation-vs-schema/protocol correction
 5. obtain explicit user approval for official-facing action
 ```
+
+## COMMON V1.0 / public V1.x Deep Read closure
+
+```text
+source: byte-pinned official 05/2017 VDV 301-2-1 publication
+exact XSD authority: Common V1.0 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c
+                     Enumerations V1.0 a9bea5bc73003ed91ded8519db06c32c4067831d
+EV-117: run 33279461529 PASS
+```
+
+The source has internal document/data-definition revision `Version 1.1` while the
+official executable XSD family remains the unchanged V1.0 import. Existing Common
+finding IDs are reused where the Fresh Read rediscovered the same discrepancy.
+Unique additions are `DRCOM10-001..DRCOM10-007`, covering revision-vs-XSD drift,
+DataAcceptedResponse choice modelling, additional list/cardinality/model differences,
+DoorCountingObjectClass lexemes and grouped editorial residue.
+
+No V1.1 XSD authority is invented and no XSD is changed.

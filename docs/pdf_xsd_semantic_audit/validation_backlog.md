@@ -24,6 +24,7 @@ EV-113           run 33257767942  PASS  official TVS V2.2 RouteDeviation enum se
 EV-114           run 33264437557  PASS  TVS V2.3 official-route/candidate authority guard + inherited V2.2 executable boundary
 EV-115           run 33265239836  PASS  candidate/integration TVS V2.4 ShortHaul inventory + recurring type/rename behavior; NOT official-release conformance
 EV-116           run 33269006407  PASS  official SMS V2.2 ServiceStatus naming + generic Common subscription modelling evidence
+EV-117           run 33279461529  PASS  exact historical Common V1.0 Deep Read authority/behaviour evidence
 ```
 
 Last full-suite baseline: run `33228250613` confirmed:
@@ -37,7 +38,7 @@ RV-001..RV-004 PASS
 SDK manifest/profile checks PASS
 ```
 
-EV-110 through EV-116 are targeted additive tests and did not change any XSD. A later full-suite run can absorb them into the canonical all-checks baseline.
+EV-110 through EV-117 are targeted additive tests and did not change any XSD. A later full-suite run can absorb them into the canonical all-checks baseline.
 
 Authority guards:
 
@@ -606,3 +607,16 @@ DRARA24-002 context_verified grouped editorial spelling residue
 ```
 
 No new EV ID is required: canonical full-suite run `33228250613` already reran EV-105 with the current official Common V2.3 root and passed.
+
+## COMMON V1.0 EV-117 closure
+
+EV-117 run `33279461529` / job `99172025835` PASS on exact official historical Common V1.0
+`194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c` + Enumerations V1.0 `a9bea5bc73003ed91ded8519db06c32c4067831d`.
+
+The prior Common targeted backlog is narrowed for V1.x: EV-117 now supplies exact
+V1.0 declaration/instance evidence for CE-005/007/012-019/021/022/025/026 to the
+extent explicitly listed in the Common V1.0 findings delta. It does not automatically
+close unresolved visual scope in later Common versions.
+
+New V1.x-specific findings DRCOM10-001..007 are recorded in the Common V1.0 delta.
+No further deterministic V1.0 XSD run is currently required before moving to `COMMON_V2.0`.

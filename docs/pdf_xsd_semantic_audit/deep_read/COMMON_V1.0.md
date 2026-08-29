@@ -199,3 +199,61 @@ These do not independently change executable validation behavior.
 ## Fresh-read freeze result
 
 Nine independent observation groups are frozen. They distinguish the explicit 1.1 document-revision drift from additional identifier, choice, cardinality, service-model, ShortTrip and enumeration differences. Historical Common findings may now be opened only for deduplication and current-Evidence-Gate revalidation.
+
+## Historical reconciliation and closure — 2026-08-30
+
+The historical Common registers were opened only after the independent Fresh Read
+freeze `f21aa84b0aae5222cbfdcc4757b599f8133e2d36`.
+
+### Deduplication
+
+Existing finding identities are reused and their V1.x scope is revalidated/refined
+where the pinned 05/2017 source and exact V1.0 XSD support it:
+
+```text
+CE-005: V1x_scope_context_verified_with_EV-117_exact_V1.0_type_and_cardinality_support
+CE-007: V1x_scope_executable_enum_lexeme_boundaries_confirmed_EV-117
+CE-012: V1x_scope_executable_empty_list_confirmed_EV-117
+CE-013: V1x_scope_executable_choice_and_name_boundary_confirmed_EV-117
+CE-014: V1x_scope_exact_V1.0_anonymous_DataVersion_0star_declaration_confirmed_EV-117
+CE-015: V1x_scope_visible_pdf_and_exact_XSD_case_boundary_confirmed_EV-117
+CE-016: V1x_scope_visible_pdf_and_exact_XSD_spelling_boundary_confirmed_EV-117
+CE-017: V1x_scope_executable_Description_vs_Desciption_boundary_confirmed_EV-117
+CE-018: V1x_scope_executable_empty_list_confirmed_EV-117
+CE-019: V1x_scope_visible_pdf_type_reference_and_exact_XSD_type_confirmed_EV-117
+CE-021: V1x_scope_visible_pdf_and_exact_XSD_Message_declaration_confirmed_EV-117
+CE-022: V1x_scope_executable_outer_Service_vs_ServiceName_boundary_confirmed_EV-117
+CE-025: V1x_scope_visible_pdf_and_exact_XSD_ReplyPath_declaration_confirmed_EV-117
+CE-026: V1x_scope_executable_Description_vs_Desciption_boundary_confirmed_EV-117
+```
+
+New unique findings are limited to:
+
+```text
+DRCOM10-001: pdf_revision_vs_exact_historical_xsd_drift
+DRCOM10-002: pdf_compositor_omission_or_table_modelling_error
+DRCOM10-003: cardinality_xsd_more_permissive_than_pdf
+DRCOM10-004: cardinality_xsd_stricter_than_pdf
+DRCOM10-005: pdf_element_name_and_type_reference_model_error
+DRCOM10-006: enumeration_lexeme_mismatch
+DRCOM10-007: pdf_editorial_errors_grouped
+```
+
+`DRCOM10-001` deliberately does not duplicate the AdditionalTextMessage issue already
+tracked by `CE-005`.
+
+### Executable evidence
+
+EV-117 run `33279461529` / job `99172025835` PASS on exact historical V1.0 blobs
+`194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c` + `a9bea5bc73003ed91ded8519db06c32c4067831d`. See `24o_executable_validation_common_v10.md`.
+
+The first controlled EV-117 run failed only due to an incomplete positive test fixture
+for InternationalTextType and is retained as provenance, not as contradictory schema evidence.
+
+### Closure
+
+COMMON V1.0 remains `needs_visual_review`, not `exhaustive_read`: all 36 pinned pages
+were rendered and the material pages for findings were visibly reviewed, but the
+visual pass was targeted rather than a pixel-by-pixel exhaustive closure.
+
+No XSD was changed. Next natural Deep Read unit: `COMMON_V2.0`.
