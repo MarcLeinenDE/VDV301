@@ -29,6 +29,7 @@ EV-111  DoorStateService V2.1 RetrieveSpecific error-branch naming and untyped G
 EV-112  TicketValidationService V2.1 RouteDeviation/CurrentTripRef/CurrentLineData exact-type evidence
 EV-113  TicketValidationService V2.2 RouteDeviation enum separation and CurrentTariffStop rename/type evidence
 EV-114  TicketValidationService V2.3 official-route/candidate authority guard and inherited V2.2 executable boundary
+EV-115  TicketValidationService V2.4 candidate/integration ShortHaul inventory + recurring type/rename behavior evidence
 ```
 
 Important:
@@ -37,7 +38,7 @@ Important:
 EV-003 through EV-100 were never defined.
 The numbering intentionally separates baseline evidence (001/002) from finding-specific evidence (101+).
 Do not describe the completed set as a continuous range beginning at EV-001.
-Correct wording at the current state: "EV-001, EV-002 and EV-101 through EV-114".
+Correct wording at the current state: "EV-001, EV-002 and EV-101 through EV-115".
 ```
 
 Existing EV document names, historical workflow run IDs and historical tool names are not retroactively renamed because they are provenance evidence.
@@ -90,6 +91,14 @@ The official VDV-301-2.3 release does not contain an IBIS-IP_TicketValidationSer
   Enums V2.2                         2a23b512379b18e8f122ac1272cef8229fb86283
 The integration branch separately contains IBIS-IP_TicketValidationService_V2.3.xsd blob b17591c5b067254dd3e2260f3ef2acd2e18394a9, introduced as candidate/integration material.
 EV-114 proves both families compile and currently match for the critical TVS declarations, but keeps their provenance distinct. It also reconfirms the official-route RouteDeviation behavior and CurrentTariffStop rename boundary. Semantic equality must never promote the V2.3-named candidate file to historical official release authority.
+
+EV-115:
+No VDV-301-2.4 release tag exists. Current upstream master contains TVS V2.4 blob 291f41518fd48cd9dcc9f285cf9b5fec7dd72159 but not its referenced Common V2.4 dependency. EV-115 therefore executes only the complete candidate/integration family:
+  TicketValidationService V2.4 34b18b8c874e325dd923b366a72bb0ebee32e59e
+  Common V2.4                  1946fd37e29ced605654f49ea3d98cd2fbbdc8e4
+  Enums V2.4                   2afed8cf23afa91db92b0f043cc5b4ad428b0f25
+It confirms TVS-001 (ShortHaul global response exists but is omitted from TicketValidationServiceOperations), validates the ShortHaul global response, and confirms the recurring RouteDeviation/NMTOKEN/CurrentLine/CurrentTariffStop behavior.
+EV-115 PASS is candidate/integration evidence and must never be described as official-release V2.4 XSD conformance.
 ```
 
 The provenance metadata correction for the two DoorState dependency blob IDs is recorded in `AUDIT_CORRECTION_DELTA_DOOR_V21_BLOB_PROVENANCE_2026-08-29.md`; the executed validation result itself is unchanged.

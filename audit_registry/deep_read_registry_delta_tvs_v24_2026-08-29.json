@@ -4,7 +4,7 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "TVS_V2.4": {
-      "state": "fresh_read_complete_pending_historical_reconciliation",
+      "state": "needs_visual_review",
       "official_url": "https://www.vdv.de/301-2-16-sde-v2.4-ticketvalidationservice.pdfx",
       "publication": "VDV-Schrift 301-2-16, TicketValidationService V2.4",
       "fresh_read_started": "2026-08-29",
@@ -112,7 +112,43 @@
         "No conclusion about TVS-001 or any historical V2.4 finding was used during the fresh read.",
         "Upstream-master and candidate/integration XSD provenance remain separate; no successful candidate-family validation may be labeled official V2.4 release conformance."
       ],
-      "fresh_read_freeze_rule": "Historical V2.4 findings may be opened only after this independent snapshot commit is permanent."
+      "fresh_read_freeze_rule": "Historical V2.4 findings may be opened only after this independent snapshot commit is permanent.",
+      "historical_reconciliation_complete": true,
+      "historical_reconciliation": {
+        "TVS-001": "upstream_master_structurally_confirmed_and_candidate_integration_executable_confirmed_EV-115",
+        "TVS-002": "candidate_integration_executable_confirmed_EV-115_with_upstream_master_declaration_correspondence",
+        "TVS-003": "candidate_integration_executable_confirmed_EV-115_with_official_pdf_context",
+        "DRTVS21-001": "V2.4_scope_candidate_integration_executable_confirmed_EV-115",
+        "DRTVS21-002": "V2.4_scope_context_verified_with_EV-115_xsd_support",
+        "DRTVS21-003": "V2.4_scope_context_verified",
+        "new_unique_finding_ids": []
+      },
+      "executable_evidence": {
+        "evidence_id": "EV-115",
+        "checker": "tools/validate_tvs_v24_ev115.py",
+        "run": "33265239836",
+        "job": "99134041204",
+        "tested_temporary_head": "3abb516526328690f2ab4d8d93d7d2efc2a61468",
+        "result": "PASS",
+        "authority_class": "candidate_integration",
+        "authority_guard": "PASS is not official-release V2.4 XSD conformance."
+      },
+      "upstream_master_structural_crosscheck": {
+        "service_blob": "291f41518fd48cd9dcc9f285cf9b5fec7dd72159",
+        "shorthaul_global_root_present": true,
+        "shorthaul_operation_group_member_present": false,
+        "route_deviation_type": "RouteDeviationEnumeration",
+        "current_trip_ref_type": "IBIS-IP.NMTOKEN",
+        "current_tariff_stop_root_present": true,
+        "current_stop_point_root_present": false,
+        "compile_status": "not_claimed_dependency_incomplete_current_upstream_master"
+      },
+      "completion": {
+        "textual_fresh_read": "complete",
+        "targeted_visible_review": "complete_for_material_pages",
+        "exhaustive_visual_review": false,
+        "deep_read_state": "needs_visual_review"
+      }
     }
   }
 }

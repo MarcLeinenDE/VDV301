@@ -1,6 +1,6 @@
 # PDF/XSD semantic audit - current validation backlog
 
-Status: deterministic repository validation includes EV-114 for TicketValidationService V2.3 authority/routing and inherited executable boundary. Remaining work includes continuing Deep Read Pass 2, mandatory post-Deep-Read legacy-finding revalidation, targeted finding regression, visual closure, live/integration evidence and later provider-specific work.
+Status: deterministic repository validation includes EV-115 for TicketValidationService V2.4 candidate/integration structure and behavior, with an explicit non-release authority guard. Remaining work includes continuing Deep Read Pass 2, mandatory post-Deep-Read legacy-finding revalidation, targeted finding regression, visual closure, live/integration evidence and later provider-specific work.
 
 ## 1. Completed deterministic evidence
 
@@ -22,6 +22,7 @@ EV-111           run 33242337308  PASS  official DoorState V2.1 DRS-002/DRS-003 
 EV-112           run 33249561880  PASS  official TVS V2.1 RouteDeviation/CurrentTripRef/CurrentLineData type evidence
 EV-113           run 33257767942  PASS  official TVS V2.2 RouteDeviation enum separation + CurrentTariffStop rename/type evidence
 EV-114           run 33264437557  PASS  TVS V2.3 official-route/candidate authority guard + inherited V2.2 executable boundary
+EV-115           run 33265239836  PASS  candidate/integration TVS V2.4 ShortHaul inventory + recurring type/rename behavior; NOT official-release conformance
 ```
 
 Last full-suite baseline: run `33228250613` confirmed:
@@ -35,7 +36,7 @@ RV-001..RV-004 PASS
 SDK manifest/profile checks PASS
 ```
 
-EV-110 through EV-114 are targeted additive tests and did not change any XSD. A later full-suite run can absorb them into the canonical all-checks baseline.
+EV-110 through EV-115 are targeted additive tests and did not change any XSD. A later full-suite run can absorb them into the canonical all-checks baseline.
 
 Authority guards:
 
@@ -354,9 +355,41 @@ Authority guard:
 Official V2.3 release routing must select the V2.2-named official service XSD family.
 Do not select the branch V2.3-named candidate merely because its filename appears newer.
 Current semantic equality between the two service files does not collapse provenance classes.
+
+EV-115 / TVS V2.4:
+No V2.4 release tag exists. Upstream master TVS V2.4 is dependency-incomplete at current head; EV-115 executes the complete candidate/integration V2.4 family only.
+It confirms TVS-001 and the recurring TVS type/name boundaries but MUST NOT be reported as official-release V2.4 XSD conformance.
 ```
 
 No new V2.3-only finding ID was needed after deduplication. TVS V2.3 remains `needs_visual_review`, not `exhaustive_read`.
+
+## 8b. TicketValidationService V2.4 evidence status
+
+The official V2.4 PDF was byte-pinned and independently fresh-read before reopening historical V2.4 findings.
+
+```text
+PDF sha256: e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51
+PDF size: 864860
+pin run: 33264912909
+visual render run: 33265061000
+pages visibly reviewed: 4, 10, 14-19 material subset
+```
+
+Authority split:
+
+```text
+VDV-301-2.4 release tag: absent
+upstream master TVS V2.4 blob: 291f41518fd48cd9dcc9f285cf9b5fec7dd72159
+upstream master Common V2.4 dependency: absent at current head
+complete candidate/integration family:
+  TVS    34b18b8c874e325dd923b366a72bb0ebee32e59e
+  Common 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4
+  Enums  2afed8cf23afa91db92b0f043cc5b4ad428b0f25
+```
+
+EV-115 run `33265239836` PASS confirms TVS-001 on the complete candidate family, validates the ShortHaul global root, and confirms RouteDeviation/NMTOKEN/CurrentLine/CurrentTariffStop behavior. Upstream master separately structurally confirms the ShortHaul global-root / operation-group omission.
+
+No new V2.4-only finding ID was needed. TVS V2.4 remains `needs_visual_review`, not `exhaustive_read`.
 
 ## 9. Mandatory legacy finding revalidation before baseline freeze
 
@@ -458,6 +491,7 @@ DoorState untyped Get-request declarations must not be silently tightened to an 
 TVS V2.1 must preserve exact mixed-version Common V1.0/Enums V1.0 dependency routing
 TVS V2.2 must preserve exact version-aligned Common V2.2/Enums V2.2 routing
 TVS V2.3 official routing must use the official V2.2-named service XSD from tag VDV-301-2.3 and must not latest-wins select the branch V2.3 candidate
+TVS V2.4 must preserve the release-authority split: no V2.4 tag; upstream master family incomplete; candidate/integration EV-115 results must stay candidate-labelled
 TVS RouteDeviation diagnostics must not replace RouteDeviationEnumeration with the PDF-printed RouteDirectionEnumeration
 TVS V2.2 must not treat RouteDirectionEnumeration as an acceptable RouteDeviation alias merely because both enum names exist
 TVS CurrentTripRef diagnostics must not case-normalize IBIS-IP.NMTOKEN into the PDF-printed IBIS-IP.NMToken
@@ -467,7 +501,7 @@ TVS CurrentTariffStop diagnostics must not accept stale CurrentStopPoint respons
 Current sequencing:
 
 ```text
-fresh-read TVS_V2.4
+fresh-read HDS_V2.1
 -> continue remaining Deep Reads
 -> finish Deep Read Pass 2
 -> freeze complete finding inventory

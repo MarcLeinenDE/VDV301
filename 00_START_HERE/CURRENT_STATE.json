@@ -29,14 +29,14 @@
     "pairable_pdf_xsd_units": 38,
     "pairable_pdf_xsd_first_pass_completed": 38,
     "deep_read_exhaustive_completed": 0,
-    "deep_read_needs_visual_review": 24,
-    "deep_read_textual_fresh_read_completed": 24,
+    "deep_read_needs_visual_review": 25,
+    "deep_read_textual_fresh_read_completed": 25,
     "deep_read_in_progress": 0,
     "deep_read_current_document_id": null,
-    "deep_read_previous_document_id": "TVS_V2.3",
-    "next_natural_deep_read_document_id": "TVS_V2.4",
+    "deep_read_previous_document_id": "TVS_V2.4",
+    "next_natural_deep_read_document_id": "HDS_V2.1",
     "latest_deep_read_finding": "DRTVS21-004",
-    "latest_deep_read_revalidation": "TVS-003_V2.3_executable_confirmed_EV-114",
+    "latest_deep_read_revalidation": "TVS-001_V2.4_upstream_structural_candidate_EV-115",
     "latest_dms_finding": "DMS-007",
     "latest_common_finding": "CE-026",
     "resolved_historical_finding": "DR3012-006",
@@ -69,7 +69,7 @@
     "pdf_visual_render_fallback": "docs/pdf_xsd_semantic_audit/PDF_VISUAL_RENDER_FALLBACK.md",
     "pdf_visual_renderer": "tools/render_vdv_pdf_pages.py",
     "pdf_visual_render_rule": "interactive screenshot cache miss is not a source failure; render exact byte-pinned source independently and inspect visible output before promoting visual status",
-    "pdf_sources_byte_pinned": 19,
+    "pdf_sources_byte_pinned": 20,
     "pinned_active_sources": [
       "VDV301-2_GC_V2.3",
       "COMMON_V2.3",
@@ -89,10 +89,11 @@
       "DOOR_V2.1",
       "TVS_V2.1",
       "TVS_V2.2",
-      "TVS_V2.3"
+      "TVS_V2.3",
+      "TVS_V2.4"
     ],
-    "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_tvs_v23_2026-08-29.json",
-    "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_tvs_v23_2026-08-29.json",
+    "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_tvs_v24_2026-08-29.json",
+    "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_tvs_v24_2026-08-29.json",
     "trainset_v2_1_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.1.md",
     "trainset_v2_2_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.2.md",
     "trainset_findings_register": "docs/pdf_xsd_semantic_audit/TRAIN_SET_SERVICES_FINDINGS_REGISTER_ADDENDUM.md",
@@ -317,6 +318,51 @@
       "DRTVS21-002": "V2.3_scope_context_verified_with_EV-114_xsd_support",
       "DRTVS21-003": "V2.3_scope_context_verified",
       "new_unique_finding_ids": []
+    },
+    "tvs_v2_4_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TVS_V2.4.md",
+    "tvs_v2_4_source_pin": {
+      "sha256": "e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51",
+      "size_bytes": 864860,
+      "evidence_run": "33264912909",
+      "pinned_at_utc": "2026-08-29T17:10:21Z",
+      "pdf_authority": "official_public_VDV_writing",
+      "xsd_authority_status": "split_upstream_master_dependency_incomplete_plus_candidate_integration_complete_family"
+    },
+    "tvs_v2_4_authority": {
+      "release_tag_exists": false,
+      "upstream_master_head": "14880bb33beec5c5dffe96315b730bd6c094a585",
+      "upstream_master_service_blob": "291f41518fd48cd9dcc9f285cf9b5fec7dd72159",
+      "upstream_master_common_v2_4_present": false,
+      "candidate_service_blob": "34b18b8c874e325dd923b366a72bb0ebee32e59e",
+      "candidate_common_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+      "candidate_enumerations_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+      "candidate_integration_commit": "c9c086ac07f7e9bdb271c54f7a274e3cf0d03749",
+      "rule": "Candidate executable evidence must not be described as official-release V2.4 conformance."
+    },
+    "tvs_v2_4_visual_evidence": {
+      "pinned_byte_render_run": "33265061000",
+      "render_job": "99133563822",
+      "artifact_id": "9718391355",
+      "pages_reviewed": [
+        4,
+        10,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "status": "targeted_visible_review_complete_for_recorded_findings_not_exhaustive"
+    },
+    "tvs_v2_4_findings": {
+      "TVS-001": "upstream_master_structurally_confirmed_and_candidate_integration_executable_confirmed_EV-115",
+      "TVS-002": "candidate_integration_executable_confirmed_EV-115",
+      "TVS-003": "candidate_integration_executable_confirmed_EV-115_with_official_pdf_context",
+      "DRTVS21-001": "V2.4_scope_candidate_integration_executable_confirmed_EV-115",
+      "DRTVS21-002": "V2.4_scope_context_verified_with_EV-115_xsd_support",
+      "DRTVS21-003": "V2.4_scope_context_verified",
+      "new_unique_finding_ids": []
     }
   },
   "evidence": {
@@ -336,7 +382,8 @@
       "EV-111",
       "EV-112",
       "EV-113",
-      "EV-114"
+      "EV-114",
+      "EV-115"
     ],
     "runtime_rv_completed": [
       "RV-001",
@@ -347,16 +394,17 @@
     "latest_profile_generator_run": "33228250613",
     "latest_root_xsd_validation_run": "33228250613",
     "latest_full_suite_run": "33228250613",
-    "latest_targeted_xsd_evidence_run": "33264437557",
-    "latest_pdf_source_pin_run": "33258484479",
-    "latest_pdf_visual_render_run": "33258612417",
+    "latest_targeted_xsd_evidence_run": "33265239836",
+    "latest_pdf_source_pin_run": "33264912909",
+    "latest_pdf_visual_render_run": "33265061000",
     "trainset_v2_1_executable_evidence": "EV-109 / 33228250613",
     "trainset_v2_2_context_evidence": "EV-104 / 33111644388 revalidated against fresh V2.2 source/context",
     "trainset_v2_2_tsd002_executable_evidence": "EV-110 / 33241603270",
     "door_v2_1_executable_evidence": "EV-111 / 33242337308",
     "tvs_v2_1_executable_evidence": "EV-112 / 33249561880",
     "tvs_v2_2_executable_evidence": "EV-113 / 33257767942",
-    "tvs_v2_3_executable_evidence": "EV-114 / 33264437557"
+    "tvs_v2_3_executable_evidence": "EV-114 / 33264437557",
+    "tvs_v2_4_candidate_executable_evidence": "EV-115 / 33265239836"
   },
   "sdk": {
     "status": "baseline_v0.1_prework_only_during_audit",
@@ -369,10 +417,9 @@
     "rule": "Findings/audit knowledge must later explain surprising validation results without silently changing normative XSD outcomes. No unrevalidated finding may drive SDK accept/reject/routing behaviour."
   },
   "next_actions": [
-    "Start TVS_V2.4 with its own byte pin of the official PDF; do not reuse earlier TVS PDF pins.",
-    "Independently establish exact TVS V2.4 XSD/dependency authority before consulting historical V2.4 findings.",
-    "Fresh-read TVS_V2.4 under FINDING_EVIDENCE_GATE and use visible pinned-byte review for material table/layout context.",
-    "Only after the independent V2.4 Fresh Read, reopen and reconcile historical TicketValidation findings relevant to V2.4, including TVS-001.",
+    "Start HDS_V2.1 with its own byte pin of the official PDF.",
+    "Independently establish exact HDS V2.1 XSD/dependency authority before consulting historical HDS findings.",
+    "Fresh-read HDS_V2.1 under FINDING_EVIDENCE_GATE and use pinned-byte visual review for material context.",
     "Continue remaining Deep Reads.",
     "After Deep Read Pass 2 freeze the complete finding inventory and run mandatory legacy finding revalidation before SDK/remediation baseline freeze.",
     "Do not decide PR/mail/remediation disposition during Deep Read unless explicitly requested."

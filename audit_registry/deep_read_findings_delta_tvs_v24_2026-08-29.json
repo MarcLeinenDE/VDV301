@@ -1,0 +1,39 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-29",
+  "document_id": "TVS_V2.4",
+  "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+  "new_unique_findings": [],
+  "revalidated_findings": {
+    "TVS-001": {
+      "state": "upstream_master_structurally_confirmed_and_candidate_integration_executable_confirmed_EV-115",
+      "summary": "The official V2.4 PDF introduces GetCurrentShortHaulStops and explicitly says new XSD 2.4 is required. Upstream master service blob declares the ShortHaul global root and structures but omits the root from TicketValidationServiceOperations. EV-115 confirms the same structural inconsistency and a valid global response on the complete candidate/integration family.",
+      "authority_boundary": "No VDV-301-2.4 release tag exists; upstream master dependency family is incomplete. EV-115 is candidate/integration executable evidence, not official-release conformance."
+    },
+    "TVS-002": {
+      "state": "candidate_integration_executable_confirmed_EV-115",
+      "summary": "Official V2.4 PDF still prints RouteDirectionEnumeration for RouteDeviation. Candidate/integration V2.4 uses RouteDeviationEnumeration; onroute validates and Forward fails. Upstream master service declaration also names RouteDeviationEnumeration."
+    },
+    "TVS-003": {
+      "state": "candidate_integration_executable_confirmed_EV-115_with_official_pdf_context",
+      "summary": "Official V2.4 PDF retains stale CurrentStopPoint names in overviews/labels/list of tables while detailed section and candidate/upstream service declaration use CurrentTariffStop. EV-115 validates new root and rejects stale root."
+    }
+  },
+  "scope_extensions": {
+    "DRTVS21-001": "V2.4 repeats IBIS-IP.NMToken in both CurrentTariffStopData and new CurrentShortHaulStopsData; EV-115 confirms candidate Common V2.4 exact IBIS-IP.NMTOKEN and negative compile for NMToken.",
+    "DRTVS21-002": "V2.4 repeats TicketValidationServiceCurrentLineData missing the service-name separator dot; EV-115 confirms exact candidate type TicketValidationService.CurrentLineDataStructure.",
+    "DRTVS21-003": "V2.4 German and English flow prose still says SubscribeCurrentStop while detailed operation is SubscribeCurrentTariffStop."
+  },
+  "authority_note": {
+    "official_pdf": "official_public_VDV_writing",
+    "release_tag_V2.4_exists": false,
+    "upstream_master_service_blob": "291f41518fd48cd9dcc9f285cf9b5fec7dd72159",
+    "upstream_master_family": "merged_but_dependency_incomplete_not_release_tagged",
+    "candidate_integration_family": {
+      "service": "34b18b8c874e325dd923b366a72bb0ebee32e59e",
+      "common": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+      "enumerations": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25"
+    }
+  },
+  "deduplication": "No V2.4-only finding ID opened; all surviving observations reconcile to TVS-001..003 or DRTVS21-001..003."
+}
