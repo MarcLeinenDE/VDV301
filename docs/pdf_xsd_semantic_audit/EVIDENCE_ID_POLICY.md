@@ -24,6 +24,7 @@ EV-106  Common V2.3 official vs PR #30 schema-variant behaviour
 EV-107  DMS V2.2 Deep Read schema declarations
 EV-108  DMS V2.4 candidate/integration Deep Read schema declarations
 EV-109  TrainSet V2.1 Deep Read modelling/root/operation evidence
+EV-110  TrainSetDataService V2.2 Unsubscribe request-shape mismatch (TSD-002)
 ```
 
 Important:
@@ -32,7 +33,7 @@ Important:
 EV-003 through EV-100 were never defined.
 The numbering intentionally separates baseline evidence (001/002) from finding-specific evidence (101+).
 Do not describe the completed set as a continuous range beginning at EV-001.
-Correct wording at the current state: "EV-001, EV-002 and EV-101 through EV-109".
+Correct wording at the current state: "EV-001, EV-002 and EV-101 through EV-110".
 ```
 
 Existing EV document names, historical workflow run IDs and historical tool names are not retroactively renamed because they are provenance evidence.
@@ -48,6 +49,10 @@ EV-108 success must never be described as official-release XSD conformance.
 EV-109:
 The three checked TrainSet V2.1 service XSDs are byte-identical to the official upstream VDV-301-2.1 tag.
 EV-109 is V2.1 evidence only and must not be used to back-apply V2.2 corrections or EV-104 behaviour.
+
+EV-110:
+The checked TrainSetDataService V2.2 schema is byte-identical to official VDV-301-2.2 blob 7a132894c281d613e16514a6fa1bcbffe713d066.
+EV-110 proves exact V2.2 Unsubscribe request validation behaviour for TSD-002; it does not turn the PDF into executable authority.
 ```
 
 ## RV - runtime/protocol evidence

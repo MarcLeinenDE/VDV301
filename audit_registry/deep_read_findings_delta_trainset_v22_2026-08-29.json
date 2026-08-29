@@ -1,0 +1,71 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-29",
+  "document_id": "TRAINSET_V2.2",
+  "source_id": "TRAINSET_V2.2",
+  "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+  "revalidated_existing_findings": [
+    {
+      "id": "TSM-002",
+      "state": "executable_confirmed",
+      "classification": "xsd_structure_modelling_error_candidate",
+      "subtype": "operation_group_name_mismatch",
+      "evidence": ["original V2.2 PDF section 5.5.3.2 + version history", "official VDV-301-2.2 XSD", "EV-104 run 33111644388"],
+      "sdk_eligibility": "explanatory_and_operation_manifest_guard"
+    },
+    {
+      "id": "TSD-002",
+      "state": "executable_confirmed",
+      "classification": "pdf_table_or_documentation_error_candidate",
+      "evidence": ["visible pinned-byte pages 34-35", "official VDV-301-2.2 XSD", "EV-110 run 33241603270"],
+      "validation_behavior": "UnsubscribeTripRefRequest and UnsubscribeTripInformationRequest require TrainSetUnsubscribeRequestStructure; Retrieve-like CoachNumber-only overview shape is invalid",
+      "sdk_eligibility": "explanatory_diagnostic"
+    },
+    {
+      "id": "TSD-003",
+      "state": "contextual_not_defect_executable_context_confirmed",
+      "classification": "service_modelling_or_generic_response_context",
+      "evidence": ["TrainSet V2.2 subscription text", "General Conventions V2.2 section 4.1.3", "official VDV-301-2.2 XSD", "EV-104 run 33111644388"],
+      "sdk_eligibility": "response_context_resolver_requirement"
+    }
+  ],
+  "new_findings": [
+    {
+      "id": "TSM-003",
+      "state": "context_verified",
+      "classification": "pdf_embedded_xsd_diagram_stale_candidate",
+      "summary": "Pinned-byte page 31 uses the corrected TSM response root but its embedded expanded TSI composition diagram still shows the old flat V2.1 coach fields instead of the V2.2 repeated SingleCoach wrapper.",
+      "validation_behavior": "none; exact V2.2 XSD remains authority",
+      "sdk_eligibility": "explanatory_only"
+    },
+    {
+      "id": "TSD-004",
+      "state": "context_verified",
+      "classification": "pdf_response_structure_copy_paste_error_candidate",
+      "summary": "SubscribeTripInformation section 6.5.7.2 says later events use RetrieveTripRefResponseStructure; the operation context and exact XSD require RetrieveTripInformationResponseStructure.",
+      "validation_behavior": "event-context routing follows exact XSD TripInformation response type",
+      "sdk_eligibility": "explanatory_and_context_routing_guard"
+    },
+    {
+      "id": "DRTRAINSET22-001",
+      "state": "context_verified",
+      "classification": "pdf_cross_reference_error_candidate",
+      "summary": "German and English introductions point examples to section 9.1 although the examples are in section 10.",
+      "validation_behavior": "none",
+      "sdk_eligibility": "documentation_context_only"
+    },
+    {
+      "id": "DRTRAINSET22-002",
+      "state": "context_verified",
+      "classification": "pdf_cross_reference_error_candidate",
+      "summary": "Multiple TrainSetDataService detail passages retain stale section 6.5.1 references after insertion of the new 6.5.1/6.5.2 subscribe/unsubscribe structures.",
+      "validation_behavior": "none",
+      "sdk_eligibility": "documentation_context_only"
+    }
+  ],
+  "rejected_or_resolved_observations": [
+    "TSD-003 rejected as XSD defect; contextual dual-role model confirmed.",
+    "No V2.2 authority/provenance finding: all three service XSDs match official VDV-301-2.2 blobs.",
+    "TSI V2.2 multi-coach correction is aligned in checked PDF section and exact XSD."
+  ]
+}

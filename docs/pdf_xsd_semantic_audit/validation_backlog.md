@@ -1,6 +1,6 @@
 # PDF/XSD semantic audit - current validation backlog
 
-Status: deterministic repository validation includes EV-109 TrainSet V2.1 evidence and the current full-suite baseline. Remaining work includes the continuing Deep Read, mandatory post-Deep-Read legacy-finding revalidation, targeted finding regression, visual closure, live/integration evidence and later provider-specific work.
+Status: deterministic repository validation now includes EV-110 for TrainSet V2.2 `TSD-002`. Remaining work includes the continuing Deep Read, mandatory post-Deep-Read legacy-finding revalidation, targeted finding regression, visual closure, live/integration evidence and later provider-specific work.
 
 ## 1. Completed deterministic evidence
 
@@ -17,18 +17,21 @@ EV-106           run 33169314332  PASS  Common V2.3 official/candidate authority
 EV-107           run 33181833930  PASS  official DMS V2.2 Deep Read declarations
 EV-108           run 33182963733  PASS  candidate/integration DMS V2.4 Deep Read declarations
 EV-109           run 33228250613  PASS  official TrainSet V2.1 Deep Read evidence
+EV-110           run 33241603270  PASS  TrainSet V2.2 TSD-002 unsubscribe request shape
 ```
 
-Current full-suite run `33228250613` confirmed:
+Last full-suite baseline before EV-110: run `33228250613` confirmed:
 
 ```text
 50/50 root XSDs compile
 39 XSD service profiles
 84 direct include edges
-EV-103..EV-109 PASS in the current suite
+EV-103..EV-109 PASS
 RV-001..RV-004 PASS
 SDK manifest/profile checks PASS
 ```
+
+EV-110 was a targeted additive test and did not change any XSD. A later full-suite run can absorb it into the canonical all-checks baseline.
 
 Authority guards:
 
@@ -41,18 +44,22 @@ EV-108 is not official-release XSD conformance evidence.
 EV-109:
 The three checked TrainSet V2.1 XSDs are byte-identical to the official VDV-301-2.1 tag.
 EV-109 is V2.1 evidence only; V2.2 corrections/EV-104 are not back-applied.
+
+EV-110:
+TrainSetDataService V2.2 is exact official VDV-301-2.2 authority.
+It proves the executable request-shape consequence of TSD-002; the PDF does not become executable authority.
 ```
 
 ### Runtime/protocol deterministic evidence
 
 ```text
-RV-001  run 33112730418  PASS  HTTP/XML + Content-Type
-RV-002  run 33119080288  PASS  DNS-SD/service discovery
-RV-003  run 33197358294  PASS  TimeService/SNTP, strengthened after byte-pinned Fresh Read
-RV-004  run 33119694991  PASS  Video RTSP/RTP boundary
+RV-001  run 33112730418 PASS  HTTP/XML + Content-Type
+RV-002  run 33119080288 PASS  DNS-SD/service discovery
+RV-003  run 33228250613 PASS  TimeService/SNTP
+RV-004  run 33119694991 PASS  Video RTSP/RTP boundary
 ```
 
-The canonical repository workflow is `workflow_dispatch` only.
+The canonical repository workflow is `workflow_dispatch` only. Temporary push-trigger evidence workflows are removed after use.
 
 ## 2. Targeted Common regression backlog from Deep Read
 
@@ -86,71 +93,50 @@ ErrorMessage is 0:* in V2.4 candidate.
 InstallUpdate ID/Timestamp/URL/checksum/size are optional in V2.4 candidate.
 ```
 
-DMS V2.2 and V2.4 visual closure remains deferred where original-PDF screenshot attempts returned cache-miss and no later pinned-byte page review has yet closed the specific item.
+DMS V2.2 and V2.4 visual closure remains deferred where no later pinned-byte page review has yet closed the specific item.
 
 ## 4. TimeService V1.0 evidence status
 
-The official TimeService V1.0 PDF is byte-pinned and textually fresh-read.
+The official TimeService V1.0 PDF is byte-pinned and textually fresh-read. RV-003 confirms the non-XSD SNTP/discovery profile, including no cyclic current-time broadcast expectation.
 
-Fresh findings:
+Remaining TimeService work is live integration plus unresolved visual closure; no new deterministic check is currently required for the established facts.
 
-```text
-DRTIME10-001 English foreword wrongly points TimeService to VDV 301-2-1.
-DRTIME10-002 German text excludes cyclic transmission of current time; English omits that sentence.
-DRTIME10-003 minor English version-history cross-reference artifact 'cd. 1'.
-```
+## 5. TrainSet V2.1 / V2.2 evidence status
 
-Historical finding resolved:
-
-```text
-DR3012-006:
-07/2016 base writing points TimeService to VDV 301-2-11.
-VDV-Mitteilung 3002 10/2016 already maps TimeService to VDV-301-2-10.
-VDV 301-2-11 05/2017 is VideoLiveService.
-Result: wrong/stale historical document-number reference; no TimeService 301-2-11 resolver alias.
-```
-
-Strengthened RV-003 run `33197358294` confirms:
-
-```text
-_ibisip_udp._udp discovery profile
-mandatory sntp-server profile field
-IP-address-only sntp-server syntax
-RFC 4330 request/reply checks
-no XML/XSD operations
-no cyclic transmission of current time expected
-conservative timezone handling retained
-```
-
-No further deterministic TimeService regression is currently required for these established facts. Remaining TimeService work is live integration plus any unresolved visual closure.
-
-## 5. TrainSet V2.1 evidence status
-
-The byte-pinned V2.1 Fresh Read is completed textually with targeted original visual review and exact official V2.1 XSD authority established.
+### V2.1
 
 EV-109 run `33228250613` confirms:
 
 ```text
-TSI-001  V2.1 flat composition structure accepts one coach record and rejects a second PDF-described record.
+TSI-001  V2.1 flat composition structure cannot carry a second PDF-described coach record.
 TSM-001  V2.1 executable root is GetTrainSetComposition; later ...Response root is absent.
-TSD-001  V2.1 service XSD lacks service-prefixed Subscribe/Unsubscribe members/roots while Common generic subscription infrastructure exists.
+TSD-001  V2.1 service XSD lacks service-prefixed Subscribe/Unsubscribe roots while Common generic subscription infrastructure exists.
 ```
 
-New documentation findings:
+Documentation findings: `DRTRAINSET21-001..003`. Rejected observation retained: suspected `coupledSide/CoupledSide` mismatch was disproved.
+
+### V2.2
+
+The byte-pinned V2.2 Fresh Read is textually complete with targeted pinned-byte visual review. Exact official VDV-301-2.2 service blobs are established.
+
+Existing findings revalidated under the current Evidence Gate:
 
 ```text
-DRTRAINSET21-001  stale/wrong section cross-reference
-DRTRAINSET21-002  page 44 wrongly names TrainSetDataService as having equally named composition operations
-DRTRAINSET21-003  page 44 GetTrainSetCompositon typo
+TSM-002 -> executable-confirmed operation-group/global-root mismatch; EV-104 remains valid.
+TSD-002 -> executable-confirmed PDF overview request-structure mismatch; EV-110 run 33241603270.
+TSD-003 -> contextual-not-defect / response-context resolver requirement; General Conventions + EV-104 confirm immediate acknowledgement vs later data-event roles.
 ```
 
-Disproof success retained:
+New V2.2 findings:
 
 ```text
-suspected coupledSide/CoupledSide mismatch -> rejected; visible original + exact XSD both use CoupledSide
+TSM-003          stale V2.1-style flat composition diagram embedded on V2.2 page 31
+TSD-004          SubscribeTripInformation text names RetrieveTripRefResponseStructure for later events instead of RetrieveTripInformationResponseStructure
+DRTRAINSET22-001 examples cross-reference points to 9.1 instead of section 10
+DRTRAINSET22-002 multiple stale 6.5.1 cross-references after new subscription structures were inserted
 ```
 
-V2.2-specific `TSM-002`, `TSD-002`, `TSD-003` remain deferred until an independent `TRAINSET_V2.2` Fresh Read under the current Evidence Gate. Historical EV-104 evidence is not sufficient to skip that revalidation.
+TrainSet V2.2 remains `needs_visual_review`, not `exhaustive_read`, because only targeted critical pages were visually closed.
 
 ## 6. Mandatory legacy finding revalidation before baseline freeze
 
@@ -193,124 +179,46 @@ Do not recreate duplicate per-service live backlog lists in this central file.
 
 ## 8. Remaining live/integration categories
 
-### Subscription runtime
-
 ```text
-real Subscribe acknowledgement
-callback delivery
-heartbeat timing
-Unsubscribe behavior
-TrainSet parameterized subscription context
+Subscription runtime:
+  real Subscribe acknowledgement, callback delivery, heartbeat timing, Unsubscribe behavior, TrainSet parameterized subscription context
+
+Discovery / DNS-SD:
+  real PTR browse, raw SRV/TXT capture, mDNS vs unicast DNS transport, reachability, parallel versions, TTL/cache
+
+HTTP:
+  real GET/POST, HTTP version/status/headers, Content-Type/charset/encoding, redirects/auth/timeouts, feed response XML to exact resolver
+
+UDP/network:
+  multicast reception where applicable, IGMP symptoms, routing/duplicate-IP diagnostics, train/vehicle integration
+
+TimeService:
+  real DNS-SD, SNTP request/reply, reachability, clock offset/round trip, actual local synchronization state
+
+Video:
+  real RTSP session/SDP/auth, RTP/RTCP, loss/jitter/continuity and media-property comparison
+
+Mixed-version resolver:
+  discovery -> profile -> exact schema route, parallel versions, candidate guard, TrainSet response context, legacy V1.0 root-map path
 ```
 
-### Discovery / DNS-SD
+Open live items require real devices/provider systems/simulators/network access or packet capture. Their open state is not a failed conformance result.
 
-```text
-real PTR browse
-raw SRV/TXT capture
-actual mDNS vs unicast DNS transport
-host resolution/reachability
-multiple simultaneous versions using separate endpoint identity
-TTL/cache behavior
-```
+## 9. Deferred visual/document review
 
-### HTTP
+Layout-sensitive items not yet closed by visible-page evidence remain `needs_visual_review` / candidate as applicable. The pinned-byte visual fallback is preferred when the interactive renderer returns cache-miss.
 
-```text
-real GET/POST operations
-HTTP version/status/headers
-actual Content-Type/charset/encoding
-redirect/auth/timeout behavior
-feed real response XML to exact XSD resolver
-HTMLDisplay real fetch path
-```
+Do not promote a document to `exhaustive_read` merely because selected critical pages were rendered.
 
-### UDP / network
+## 10. Official correction candidate review
 
-```text
-multicast join/reception
-cycle observation where the selected service profile actually defines cyclic UDP data
-IGMP-related failure symptoms
-routing/duplicate-IP diagnostics
-train/vehicle network integration
-physical/network architecture evidence
-```
+No upstream action is automatic. Any later official-facing correction requires Evidence-Gate-revalidated findings and explicit user approval before PR/comment/review/merge action.
 
-TimeService guard: do not put TimeService into a generic cyclic current-time-broadcast test merely because its DNS-SD type is `_ibisip_udp._udp`.
+## 11. SDK implementation readiness
 
-### TimeService
+Finding-driven SDK implementation remains frozen during the current Deep Read and legacy revalidation phases.
 
-```text
-real DNS-SD discovery
-real SNTP request/reply
-advertised endpoint reachability
-clock offset/round-trip observation
-actual local clock synchronization state
-certificate/TLS clock-skew diagnostic integration
-```
-
-### Video
-
-```text
-real ListAllLiveStreams
-rtspURI reachability
-RTSP session/control sequence
-SDP/auth
-RTP/RTCP reception
-loss/jitter/continuity
-codec/resolution/frame-rate/bitrate comparison
-```
-
-### Mixed-version resolver
-
-```text
-end-to-end discovery -> profile -> exact schema route
-parallel versions of one service
-candidate-selection guard
-TrainSet response-context routing
-legacy V1.0 root-map end-to-end path
-```
-
-## 9. Environment dependency
-
-Open live items require one or more of:
-
-```text
-real VDV301 device
-provider test system
-controlled simulator
-network access
-packet capture
-physical/inventory documentation
-```
-
-Their open state is **not** a failed conformance result.
-
-## 10. Deferred visual/document review
-
-Layout-sensitive items that are not yet closed by visible-page evidence remain `needs_visual_review` / candidate as applicable. The pinned-byte visual fallback is preferred when the interactive renderer returns cache-miss.
-
-Do not promote a document to `exhaustive_read` merely because selected critical pages were rendered; all applicable chapters/tables/examples/figures must have been considered.
-
-## 11. Official correction candidate review
-
-No upstream action is automatic.
-
-If an official-facing correction is later considered:
-
-```text
-- use only Evidence-Gate-revalidated findings
-- identify exact affected versions
-- distinguish PDF correction from XSD/protocol correction
-- add targeted regression evidence where materially useful
-- obtain explicit user approval before PR/comment/review/merge action
-```
-
-## 12. SDK implementation readiness
-
-SDK architecture may continue to be derived from the deterministic authority baseline, but finding-driven implementation remains frozen during the current Deep Read and legacy revalidation phases.
-
-Required guardrails:
+Required guardrails include:
 
 ```text
 exact service/version routing
@@ -320,9 +228,10 @@ operation/context manifest
 legacy root-map support
 non-XSD protocol profiles
 runtime authority + severity separation
-TimeService no-cyclic-time-broadcast specialization
 no unexecuted live check represented as conformance evidence
 no unrevalidated finding represented as SDK accept/reject knowledge
+TrainSet V2.2 response-context resolver for TSD-003
+TrainSet TSM root inventory must not rely blindly on stale operation-group member
 ```
 
 Current sequencing:
