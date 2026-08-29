@@ -1,12 +1,37 @@
 # VDV301 Deep Read Pass 2 – method
 
-Status: active from 2026-08-28; choice-notation guard corrected 2026-08-29.
+Status: active from 2026-08-28; choice-notation guard corrected 2026-08-29; mandatory finding evidence gate adopted 2026-08-29.
 
 ## Goal
 
 Re-read every one of the 48 semantic public VDV301 document/version units independently from the original VDV PDF, then compare that fresh reading against existing extracted/OCR material and the existing first-pass audit.
 
 The deep read is not a search for already-known findings. It is a fresh audit intended to confirm, refine, reject or add findings.
+
+## Mandatory finding evidence gate
+
+Every finding is subject to:
+
+```text
+docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md
+```
+
+A visible PDF/XSD difference is only an observation until the meaning of all material notation, labels, grouping and terminology has been established from an authoritative definition.
+
+Before a finding is promoted to `confirmed`, the auditor must, where applicable:
+
+```text
+1. inspect the visible original PDF page and surrounding context;
+2. trace notation/terminology to its original VDV or referenced-standard definition;
+3. establish the exact selected XSD family and dependency route;
+4. compare the full semantic context rather than an isolated token;
+5. actively attempt to disprove the proposed finding;
+6. executable-test claimed XML-validity behaviour whenever technically practical.
+```
+
+If any material step cannot be completed, use `candidate`, `unresolved`, `visual_review_required` / `needs_visual_review` or equivalent. Do not fill an evidence gap by assumption.
+
+This gate is mandatory because findings feed later remediation decisions and SDK diagnostics. An unverified finding must never become an SDK accept/reject rule.
 
 ## Source reliability order
 
@@ -136,6 +161,8 @@ For each existing or new issue use one of:
 - `visual_review_required`
 - `ok_with_note`
 
+A comparison outcome does not bypass the evidence gate. In particular, `confirmed` means the original source/context and notation semantics were actually checked; `confirmed_executable` additionally means the relevant executable behaviour was tested.
+
 ## Source-quality fields
 
 Each document deep-read record must include:
@@ -165,3 +192,12 @@ A document may be marked `exhaustive_read` only after all applicable chapters/ta
 Findings must later be available to the SDK as explanatory audit knowledge, but they do not automatically override normative validation.
 
 Example: if an official service XSD includes Enumerations V1.0 and a PDF uses a value only present in a later enumeration, validation remains against the exact official dependency family. The SDK may attach the relevant finding to explain the failure; it must not silently switch enumeration versions.
+
+Additionally:
+
+```text
+candidate/unresolved finding -> never drives SDK accept/reject behaviour
+source/context-verified finding -> explanatory diagnostic only unless executable behaviour is independently established
+executable-confirmed finding -> may inform diagnostics about actual validation behaviour, but selected XSD authority remains normative
+remediation decision -> separate explicit post-audit phase
+```
