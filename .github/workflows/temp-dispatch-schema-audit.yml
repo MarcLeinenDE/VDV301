@@ -16,4 +16,4 @@ jobs:
       - name: Dispatch canonical manual audit workflow
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh workflow run schema-audit-validation.yml --ref dev/schema-integration
+        run: gh workflow run schema-audit-validation.yml --repo MarcLeinenDE/VDV301 --ref dev/schema-integration
