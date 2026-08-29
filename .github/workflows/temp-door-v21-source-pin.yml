@@ -1,0 +1,31 @@
+name: temp-door-v21-source-pin
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+
+permissions:
+  contents: read
+
+jobs:
+  pin:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download and hash official DoorState V2.1 PDF
+        shell: bash
+        run: |
+          set -euo pipefail
+          url='https://www.vdv.de/301-2-15-sd-v2-1-doorstateservice.pdfx'
+          curl -fL --retry 3 --retry-delay 2 --connect-timeout 30 -A 'Mozilla/5.0' "$url" -o DOOR_V2.1.pdf
+          test "$(head -c 5 DOOR_V2.1.pdf)" = '%PDF-'
+          sha=$(sha256sum DOOR_V2.1.pdf | awk '{print $1}')
+          size=$(stat -c '%s' DOOR_V2.1.pdf)
+          now=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          printf 'source_id=DOOR_V2.1\nsha256=%s\nsize_bytes=%s\npinned_at_utc=%s\nurl=%s\n' "$sha" "$size" "$now" "$url" | tee pin.txt
+      - name: Upload pin evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: door-v21-source-pin
+          path: pin.txt
+          if-no-files-found: error
