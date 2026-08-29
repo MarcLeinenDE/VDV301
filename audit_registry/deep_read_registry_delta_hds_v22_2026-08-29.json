@@ -1,0 +1,30 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-29",
+  "base_registry": "audit_registry/deep_read_registry_v0.1.json",
+  "document_updates": {
+    "HDS_V2.2": {
+      "state": "source_pinned_authority_established_pending_fresh_read",
+      "official_url": "https://www.vdv.de/301-2-17-sdes-v2-2-htmldisplayservice.pdfx",
+      "publication": "VDV-Schrift 301-2-17, HTMLDisplayService V2.2, 08/2019",
+      "historical_findings_opened_during_fresh_read": false,
+      "source_pin": {
+        "sha256": "bf62b7a8b6cfdf654181b48da2d85a805118687c7463a46fadfd32679c9b7577",
+        "size_bytes": 802399,
+        "pinned_at_utc": "2026-08-29T17:47:37Z",
+        "evidence_run": "SELF_RUN_ID_PENDING_LOG_CAPTURE"
+      },
+      "authority_status": {
+        "official_pdf": "official_public_VDV_writing",
+        "official_release_tag_checked": "VDV-301-2.2",
+        "official_release_tag_commit": "f283697124750d12189b960b302b399769bad530",
+        "dedicated_HtmlDisplayService_xsd_in_official_tag": false,
+        "dedicated_HtmlDisplayService_xsd_in_integration_branch": false,
+        "service_model": "non_xsd_dns_sd_http_profile",
+        "xsd_boundary": "No dedicated HDS service XSD is selected or inferred."
+      },
+      "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+      "fresh_read_rule": "Independently derive V2.2 behavior from the pinned V2.2 source before reconciling historical V2.2 profile notes."
+    }
+  }
+}
