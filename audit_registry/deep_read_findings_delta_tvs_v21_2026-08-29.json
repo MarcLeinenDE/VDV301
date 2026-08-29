@@ -1,0 +1,68 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-29",
+  "document_id": "TVS_V2.1",
+  "source_id": "TVS_V2.1",
+  "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+  "revalidated_existing_findings": [
+    {
+      "id": "TVS-002",
+      "state": "executable_confirmed",
+      "classification": "pdf_xsd_type_mismatch",
+      "subtype": "RouteDeviation_pdf_RouteDirectionEnumeration_vs_xsd_RouteDeviationEnumeration",
+      "evidence": [
+        "visible pinned-byte page 16",
+        "exact official TicketValidationService V2.1 XSD family",
+        "EV-112 run 33249561880"
+      ],
+      "validation_behavior": "RouteDeviation uses RouteDeviationEnumeration; onroute/offroute/unknown validate and an out-of-set value fails",
+      "sdk_eligibility": "explanatory_diagnostic_no_alias_or_normalization"
+    }
+  ],
+  "new_findings": [
+    {
+      "id": "DRTVS21-001",
+      "state": "executable_confirmed",
+      "classification": "pdf_xsd_type_identifier_case_mismatch",
+      "summary": "CurrentTripRef is printed as IBIS-IP.NMToken in the PDF while the exact XSD uses the case-sensitive type IBIS-IP.NMTOKEN.",
+      "evidence": [
+        "visible pinned-byte page 14",
+        "exact Common V1.0 type inventory",
+        "EV-112 run 33249561880"
+      ],
+      "validation_behavior": "NMTOKEN exists; NMToken does not; a probe schema using NMToken fails to compile",
+      "sdk_eligibility": "explanatory_diagnostic_no_normalization"
+    },
+    {
+      "id": "DRTVS21-002",
+      "state": "context_verified",
+      "classification": "pdf_type_display_identifier_typo_candidate",
+      "subtype": "missing_service_name_separator_dot",
+      "summary": "GetCurrentLine response display prints TicketValidationServiceCurrentLineData while the surrounding table and exact XSD preserve the TicketValidationService separator dot.",
+      "evidence_boundary": "The PDF commonly omits the Structure suffix in display labels; that suffix omission is not classified as a defect here.",
+      "validation_behavior": "none beyond exact XSD type TicketValidationService.CurrentLineDataStructure",
+      "sdk_eligibility": "documentation_context_only"
+    },
+    {
+      "id": "DRTVS21-003",
+      "state": "context_verified",
+      "classification": "pdf_operation_name_editorial_error_candidate",
+      "summary": "German and English flow text use SubscribeCurrentStop, while formal operation overviews, the detailed section and exact XSD use SubscribeCurrentStopPoint.",
+      "validation_behavior": "none; no alias",
+      "sdk_eligibility": "explanatory_operation_name_diagnostic"
+    },
+    {
+      "id": "DRTVS21-004",
+      "state": "context_verified",
+      "classification": "pdf_documentation_typo_non_executable",
+      "summary": "Targeted pages contain prose/caption spelling residue including Unscubscribe, GetrazziaResponsetData and Error Respone.",
+      "validation_behavior": "none",
+      "sdk_eligibility": "documentation_context_only"
+    }
+  ],
+  "rejected_or_resolved_observations": [
+    "TVS V2.1 dependency on Common V1.0 + Enumerations V1.0 is exact official schema routing, not a latest-version defect.",
+    "The PDF's deliberate omission of Structure in shortened type displays is not by itself treated as a defect; DRTVS21-002 is limited to the missing service-name separator dot.",
+    "TVS-001 and TVS-003 are outside the V2.1 evidence scope and are not grandfathered or revalidated by this block."
+  ]
+}

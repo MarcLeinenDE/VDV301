@@ -26,6 +26,7 @@ EV-108  DMS V2.4 candidate/integration Deep Read schema declarations
 EV-109  TrainSet V2.1 Deep Read modelling/root/operation evidence
 EV-110  TrainSetDataService V2.2 Unsubscribe request-shape mismatch (TSD-002)
 EV-111  DoorStateService V2.1 RetrieveSpecific error-branch naming and untyped Get-request declaration semantics
+EV-112  TicketValidationService V2.1 RouteDeviation/CurrentTripRef/CurrentLineData exact-type evidence
 ```
 
 Important:
@@ -34,7 +35,7 @@ Important:
 EV-003 through EV-100 were never defined.
 The numbering intentionally separates baseline evidence (001/002) from finding-specific evidence (101+).
 Do not describe the completed set as a continuous range beginning at EV-001.
-Correct wording at the current state: "EV-001, EV-002 and EV-101 through EV-111".
+Correct wording at the current state: "EV-001, EV-002 and EV-101 through EV-112".
 ```
 
 Existing EV document names, historical workflow run IDs and historical tool names are not retroactively renamed because they are provenance evidence.
@@ -62,6 +63,14 @@ The checked DoorStateService V2.1 schema family is byte-identical to official VD
   Enums V1.0      a9bea5bc73003ed91ded8519db06c32c4067831d
 For DRS-002, probe roots are typed directly to exact normative RetrieveSpecific response complex types and prove ErrorMessage valid / OperationErrorMessage invalid.
 For DRS-003, the exact normative local group declarations are first verified as untyped; the executable probe reproduces that declaration form at global scope only to demonstrate default xs:anyType semantics. EV-111 does not claim that real global DoorState Get request roots exist.
+
+EV-112:
+The checked TicketValidationService V2.1 schema family is byte-identical to official VDV-301-2.1 authority and intentionally routes to Common V1.0 + Enumerations V1.0:
+  TicketValidationService f6497e6469b82ee19b185c4de749d13a7ca60bed
+  Common V1.0             194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c
+  Enums V1.0              a9bea5bc73003ed91ded8519db06c32c4067831d
+EV-112 proves the exact RouteDeviation type/value-set behavior, the case-sensitive CurrentTripRef type identifier, and the exact CurrentLineData response type.
+Its CurrentLineData check is XSD-side evidence only; it does not declare every shortened PDF display convention defective.
 ```
 
 The provenance metadata correction for the two DoorState dependency blob IDs is recorded in `AUDIT_CORRECTION_DELTA_DOOR_V21_BLOB_PROVENANCE_2026-08-29.md`; the executed validation result itself is unchanged.
