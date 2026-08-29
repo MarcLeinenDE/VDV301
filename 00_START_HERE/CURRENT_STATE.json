@@ -29,10 +29,10 @@
     "pairable_pdf_xsd_units": 38,
     "pairable_pdf_xsd_first_pass_completed": 38,
     "deep_read_exhaustive_completed": 0,
-    "deep_read_needs_visual_review": 25,
-    "deep_read_textual_fresh_read_completed": 25,
-    "deep_read_in_progress": 0,
-    "deep_read_current_document_id": null,
+    "deep_read_needs_visual_review": 26,
+    "deep_read_textual_fresh_read_completed": 26,
+    "deep_read_in_progress": 1,
+    "deep_read_current_document_id": "HDS_V2.1",
     "deep_read_previous_document_id": "TVS_V2.4",
     "next_natural_deep_read_document_id": "HDS_V2.1",
     "latest_deep_read_finding": "DRTVS21-004",
@@ -69,7 +69,7 @@
     "pdf_visual_render_fallback": "docs/pdf_xsd_semantic_audit/PDF_VISUAL_RENDER_FALLBACK.md",
     "pdf_visual_renderer": "tools/render_vdv_pdf_pages.py",
     "pdf_visual_render_rule": "interactive screenshot cache miss is not a source failure; render exact byte-pinned source independently and inspect visible output before promoting visual status",
-    "pdf_sources_byte_pinned": 20,
+    "pdf_sources_byte_pinned": 21,
     "pinned_active_sources": [
       "VDV301-2_GC_V2.3",
       "COMMON_V2.3",
@@ -90,9 +90,10 @@
       "TVS_V2.1",
       "TVS_V2.2",
       "TVS_V2.3",
-      "TVS_V2.4"
+      "TVS_V2.4",
+      "HDS_V2.1"
     ],
-    "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_tvs_v24_2026-08-29.json",
+    "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_hds_v21_2026-08-29.json",
     "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_tvs_v24_2026-08-29.json",
     "trainset_v2_1_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.1.md",
     "trainset_v2_2_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.2.md",
@@ -363,6 +364,40 @@
       "DRTVS21-002": "V2.4_scope_context_verified_with_EV-115_xsd_support",
       "DRTVS21-003": "V2.4_scope_context_verified",
       "new_unique_finding_ids": []
+    },
+    "hds_v2_1_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/HDS_V2.1.md",
+    "hds_v2_1_source_pin": {
+      "sha256": "c8aa91626bf60c8e74200200d63d44d497aeb3ab240c47039333b2c922a0e495",
+      "size_bytes": 734901,
+      "evidence_run": "33265498869",
+      "pinned_at_utc": "2026-08-29T17:23:26Z",
+      "pdf_authority": "official_public_VDV_writing",
+      "service_authority_status": "non_xsd_dns_sd_http_profile"
+    },
+    "hds_v2_1_visual_evidence": {
+      "pinned_byte_render_run": "33265541783",
+      "render_job": "99134831905",
+      "artifact_id": "9718526667",
+      "pages_reviewed": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "status": "targeted_visible_review_complete_independent_fresh_read"
+    },
+    "hds_v2_1_authority": {
+      "dedicated_service_xsd": false,
+      "official_release_tag_checked": "VDV-301-2.1",
+      "service_model": "non_xsd_dns_sd_http_profile",
+      "dns_sd_service_name": "HtmlDisplayService",
+      "dns_sd_transport": "_http._tcp",
+      "dns_sd_txt_keys": [
+        "content",
+        "path"
+      ],
+      "url_model": "http://host:port/path",
+      "xsd_boundary": "No HDS XML contract is inferred or selected."
     }
   },
   "evidence": {

@@ -4,7 +4,7 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "HDS_V2.1": {
-      "state": "source_pinned_authority_established_pending_fresh_read",
+      "state": "fresh_read_visible_review_complete_pending_historical_reconciliation",
       "official_url": "https://www.vdv.de/301-2-17-sds-v2-1-htmldisplayservice.pdfx",
       "publication": "VDV-Schrift 301-2-17, HtmlDisplayService V2.1, 07/2018",
       "historical_findings_opened_during_fresh_read": false,
@@ -32,7 +32,41 @@
         "xsd_boundary": "No dedicated HDS service XSD is selected. Relevant common enumerations/DMS structures are supporting dependencies only, not an invented HDS XML contract."
       },
       "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
-      "fresh_read_rule": "Do not open historical HDS findings until independent pinned-source fresh read and targeted visible review are frozen."
+      "fresh_read_rule": "Do not open historical HDS findings until independent pinned-source fresh read and targeted visible review are frozen.",
+      "fresh_read_started": "2026-08-29",
+      "textual_fresh_read_complete": true,
+      "visual_evidence": {
+        "interactive_screenshot_result": "cache_miss_fallback_used",
+        "pinned_byte_render_run": "33265541783",
+        "render_job": "99134831905",
+        "artifact_id": "9718526667",
+        "artifact_zip_sha256": "7c614eb57da7c2f43ae62ee930c4bbbc326dd99effcfe13cded0a85363ec907a",
+        "pages_reviewed": [
+          7,
+          8,
+          9,
+          10
+        ],
+        "page_png_sha256": {
+          "7": "2a27330b04c1c75c9d2a8959d3c5a1973251752bcab758480cddb851cc757263",
+          "8": "6e362a61d66d6a7018327e4aaadc71ed5174ab2d8268adf66764f6423da6adae",
+          "9": "fd03a121c9efb2e884a736bd1bc624f9482ece46d004b4b3185a2b683b2af8f2",
+          "10": "250c5aa85bf3a0cd37bfc3e50d470fda6b8a7bd7a274cf417493aa15164a0a08"
+        },
+        "status": "visible_review_complete_for_independent_fresh_read"
+      },
+      "fresh_observations": [
+        "The document explicitly says HtmlDisplayService defines no own protocol and is comparable to TimeService in that respect.",
+        "Discovery is DNS-SD based with service name HtmlDisplayService over _http._tcp.",
+        "TXT keys are content and path; path may include query or fragment.",
+        "The browser URL is formed as http://host:port/path using SRV host/port plus TXT path.",
+        "The content value is project-specific and not standardized by the document.",
+        "The document intentionally does not prescribe stable requirements for the served HTTP content/browser behavior.",
+        "Device integration uses DeviceManagementService with DeviceClass MultiFunctionalDisplay and DeviceID differentiation.",
+        "No dedicated HtmlDisplayService XSD exists in the checked official VDV-301-2.1 tag or integration branch."
+      ],
+      "fresh_findings": [],
+      "historical_reconciliation": "pending_after_fresh_read_freeze"
     }
   }
 }
