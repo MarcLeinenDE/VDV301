@@ -1,0 +1,64 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-29",
+  "document_id": "DOOR_V2.1",
+  "source_id": "DOOR_V2.1",
+  "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+  "revalidated_existing_findings": [
+    {
+      "id": "DRS-001",
+      "state": "context_verified",
+      "classification": "pdf_table_or_documentation_error_candidate",
+      "subtype": "copy_paste_operation_name",
+      "evidence": ["visible pinned-byte page 9", "exact official DoorState V2.1 XSD operation group"],
+      "sdk_eligibility": "explanatory_operation_name_diagnostic"
+    },
+    {
+      "id": "DRS-002",
+      "state": "executable_confirmed",
+      "classification": "pdf_xsd_element_name_mismatch",
+      "evidence": ["visible pinned-byte page 12", "exact official DoorState V2.1 XSD", "EV-111 run 33242337308"],
+      "validation_behavior": "RetrieveSpecific response error branch accepts ErrorMessage and rejects OperationErrorMessage",
+      "sdk_eligibility": "explanatory_diagnostic_no_normalization"
+    },
+    {
+      "id": "DRS-003",
+      "state": "executable_declaration_semantics_confirmed",
+      "classification": "xsd_more_permissive_request_modelling_candidate",
+      "evidence": ["PDF no-request-structure statement", "exact untyped local XSD declarations", "EV-111 run 33242337308"],
+      "validation_behavior": "no explicit/inline type means xs:anyType default semantics; declaration form accepts empty and arbitrary nested content",
+      "evidence_boundary": "probe reproduces exact declaration form at global scope only to exercise type semantics; no real global DoorState request root is claimed",
+      "sdk_eligibility": "explanatory_model_guard"
+    },
+    {
+      "id": "DRS-004",
+      "state": "context_verified_ok_note",
+      "classification": "xsd_documentation_typo_non_executable",
+      "evidence": ["exact official DoorState V2.1 XSD annotations"],
+      "validation_behavior": "none",
+      "sdk_eligibility": "documentation_context_only"
+    }
+  ],
+  "new_findings": [
+    {
+      "id": "DRDOOR21-001",
+      "state": "context_verified",
+      "classification": "pdf_operation_name_editorial_error_candidate",
+      "summary": "RetrieveSpecific request-table descriptions use RetrieveDoorOpenState and RetrieveDoorOpereationState instead of the surrounding/executable RetrieveSpecificDoorOpenState and RetrieveSpecificDoorOperationState names.",
+      "validation_behavior": "none; no aliases",
+      "sdk_eligibility": "documentation_context_only"
+    },
+    {
+      "id": "DRDOOR21-002",
+      "state": "context_verified",
+      "classification": "pdf_description_copy_paste_error_candidate",
+      "summary": "RetrieveSpecificDoorOpenState response table describes DoorOpenState as a current door operation state although the section and exact type model open state.",
+      "validation_behavior": "none",
+      "sdk_eligibility": "documentation_context_only"
+    }
+  ],
+  "rejected_or_resolved_observations": [
+    "Visible -1:1 rows with a/b labels are valid VDV XML-choice notation, not negative cardinality.",
+    "DoorState V2.1 dependency on Common V1.0 + Enumerations V1.0 is exact official schema routing, not a latest-version substitution defect."
+  ]
+}

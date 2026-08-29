@@ -1,138 +1,224 @@
 # DoorStateService findings register addendum
 
-Status: supplemental register; first-pass closure completed for DoorStateService V2.1. Keep separate until the main findings register is consolidated.
+Status: DoorStateService V2.1 Deep Read completed under the current Finding Evidence Gate. The document remains `needs_visual_review` because the visual review was targeted rather than exhaustive.
 
 Authority rule:
 
 ```text
-Validation follows XSD.
-PDF differences are recorded as explanatory/provider-facing notes, not as executable validation authority.
+Validation follows the exact selected XSD family.
+PDF differences are explanatory findings; they never silently rewrite or normalize XSD behavior.
 ```
 
-Source audit files:
+Selected executable route:
 
 ```text
-docs/pdf_xsd_semantic_audit/08_door_state_service_historical_start.md
-docs/pdf_xsd_semantic_audit/08a_door_state_service_v2_1_pdf_xsd_first_pass.md
-docs/pdf_xsd_semantic_audit/08b_door_state_service_findings_and_closure.md
+DoorStateService V2.1
+-> IBIS-IP_DoorStateService_V2.1.xsd
+-> IBIS-IP_common_V1.0.xsd
+-> IBIS-IP_Enumerations_V1.0.xsd
 ```
 
-## DoorStateService findings
+Exact official `VDV-301-2.1` blobs:
 
-### DRS-001 - DoorOperationStates subscription names in PDF operation overview
+```text
+DoorStateService  abff0f3960e2ec7a9caaa9ddeb6efff8f4183805
+Common V1.0      267be9bf692da6781a003cee7db92e2072b71182
+Enums V1.0       399205aac6b912032812661176ebab0a9897d3c3
+```
 
-State: confirmed PDF table/wording candidate; likely PDF copy/paste issue, not an immediate XSD defect.
+The checked integration-branch files are byte-identical to this official authority. The V1.0 dependency pool is intentional and must not be replaced by later Common/Enumerations versions.
+
+Visual evidence:
+
+```text
+source pin sha256: 7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8
+pin run: 33241913638
+pinned-byte render run: 33242075873
+visible pages reviewed: 9-12
+```
+
+Executable evidence:
+
+```text
+EV-111
+run: 33242337308
+job: 99073684198
+head tested: 356d1b792730b66a4f5ec3b99b82e6d66185315c
+result: PASS
+```
+
+## Revalidated existing findings
+
+### DRS-001 - DoorOperationStates subscription names copied incorrectly in PDF operation overview
+
+State: `context_verified`.
+
+Visible page 9 repeats `SubscribeDoorOpenStates` and `UnsubscribeDoorOpenStates` after `GetDoorOperationStates`. The detailed operation-state sections and exact XSD instead use `SubscribeDoorOperationStates` and `UnsubscribeDoorOperationStates`.
 
 Classification:
 
 ```text
-mismatch_kind: operation_or_element_name
-likely_source_issue: pdf_table_or_documentation_error_candidate
-classification_confidence: medium
-final_handling_bucket: provider_note_or_pdf_clarification_candidate
+pdf_table_or_documentation_error_candidate
+subtype: copy_paste_operation_name
 ```
 
-Observation:
+Counter-hypothesis rejected: these are not intentionally shared generic operation names; the PDF and XSD both distinguish the two operation families elsewhere.
+
+Impact:
 
 ```text
-The DoorStateService V2.1 PDF operation overview appears to repeat SubscribeDoorOpenStates and UnsubscribeDoorOpenStates in the DoorOperationStates block.
-The surrounding PDF section headings name SubscribeDoorOperationStates and UnsubscribeDoorOperationStates.
-The XSD operation group uses SubscribeDoorOperationStates and UnsubscribeDoorOperationStates.
+No XSD change.
+Diagnostics must preserve exact XSD operation names and may explain the PDF table error.
+Do not synthesize aliases.
+```
+
+### DRS-002 - RetrieveSpecific error branch `OperationErrorMessage` PDF vs `ErrorMessage` XSD
+
+State: `executable_confirmed` by EV-111.
+
+Visible page 12, Tables 9 and 11, names the RetrieveSpecific error alternative `OperationErrorMessage`. Exact XSD uses `ErrorMessage` in both RetrieveSpecific response types; its Get response types separately use `OperationErrorMessage`.
+
+EV-111:
+
+```text
+RetrieveSpecificDoorOpenStateResponse:
+  ErrorMessage          -> valid
+  OperationErrorMessage -> invalid
+
+RetrieveSpecificDoorOperationStateResponse:
+  ErrorMessage          -> valid
+  OperationErrorMessage -> invalid
+```
+
+Classification:
+
+```text
+pdf_xsd_element_name_mismatch
 ```
 
 Impact:
 
 ```text
-Validation follows the XSD operation names.
-Provider-facing explanations should mention that the PDF overview table appears inconsistent with the section headings and executable XSD.
+Selected XSD remains authority.
+Do not normalize OperationErrorMessage to ErrorMessage silently.
+A later SDK may explain the discrepancy after final finding-baseline freeze.
+No remediation disposition is made during Deep Read.
 ```
 
-Next action: local operation-element samples and later register consolidation.
+### DRS-003 - Get requests are untyped and therefore permissive
 
-### DRS-002 - RetrieveSpecific error branch OperationErrorMessage PDF vs ErrorMessage XSD
+State: `executable_declaration_semantics_confirmed` by EV-111.
 
-State: confirmed PDF/XSD executable element-name discrepancy candidate.
+The PDF says the two Get operations have no request structure. Exact XSD declares the corresponding local operation-group elements without explicit or inline type:
+
+```xml
+<xs:element name="DoorStateService.GetDoorOpenStatesRequest"/>
+<xs:element name="DoorStateService.GetDoorOperationStatesRequest"/>
+```
+
+This declaration form defaults to `xs:anyType` semantics. EV-111 first verifies the exact local declarations, then uses a non-normative probe that reproduces the exact declaration form solely to exercise XML Schema default-type behavior:
+
+```text
+empty request                       -> valid
+arbitrary unexpected nested content -> valid
+```
+
+Evidence boundary:
+
+```text
+The real declarations remain local group members.
+EV-111 does not claim or invent real global DoorState request roots.
+```
 
 Classification:
 
 ```text
-mismatch_kind: operation_or_element_name
-likely_source_issue: xsd_or_pdf_naming_inconsistency_candidate
-classification_confidence: medium
-final_handling_bucket: local_validation_then_official_facing_review
-```
-
-Observation:
-
-```text
-The DoorStateService V2.1 PDF RetrieveSpecificDoorOpenStateResponse and RetrieveSpecificDoorOperationStateResponse tables list OperationErrorMessage for the error branch.
-The XSD uses ErrorMessage in both RetrieveSpecific response structures.
-The Get response structures in the same XSD use OperationErrorMessage.
+xsd_more_permissive_request_modelling_candidate
 ```
 
 Impact:
 
 ```text
-Payloads using <OperationErrorMessage> in the RetrieveSpecific response branches will fail against the checked XSD.
-Payloads using <ErrorMessage> validate against the checked XSD but differ from the PDF table wording and from the Get-response naming pattern.
+Do not silently tighten the XSD to an invented empty type.
+Retain exact XSD authority and explain the modelling consequence where relevant.
 ```
 
-Next action: local positive/negative XML samples before deciding whether this is official-facing XSD correction, PDF clarification, or compatibility note.
+### DRS-004 - XSD documentation-only spelling residue
 
-### DRS-003 - Get request elements without explicit type despite PDF saying no request structure
+State: `context_verified_ok_note`.
 
-State: service modelling candidate; local schema behavior must be tested.
+Examples such as `GetDoorOpeationStates`, `RetrieveSpecificDoorOperationnState` and `operationn state` occur only inside `xs:documentation`; executable identifiers are unaffected.
 
 Classification:
 
 ```text
-mismatch_kind: service_modelling
-likely_source_issue: schema_modelling_or_generic_empty_request_candidate
-classification_confidence: medium
-final_handling_bucket: local_compile_and_sample_validation
+xsd_documentation_typo_non_executable
 ```
 
-Observation:
+Impact: none on XML validation.
+
+## New DoorState V2.1 Deep Read findings
+
+### DRDOOR21-001 - RetrieveSpecific operation names shortened/typoed in PDF table descriptions
+
+State: `context_verified`.
+
+Visible page 12 contains:
 
 ```text
-The DoorStateService V2.1 PDF says no request structure exists for GetDoorOpenStates and GetDoorOperationStates.
-The XSD operation group declares DoorStateService.GetDoorOpenStatesRequest and DoorStateService.GetDoorOperationStatesRequest as elements without explicit type.
+RetrieveDoorOpenState
+RetrieveDoorOpereationState
 ```
 
-Impact:
+where the surrounding headings, operation overview and exact XSD use:
 
 ```text
-Do not infer final behavior without local schema compilation and sample validation.
-The future tool should preserve the exact XSD and test whether these untyped request elements accept more content than intended.
+RetrieveSpecificDoorOpenState
+RetrieveSpecificDoorOperationState
 ```
 
-Next action: local compile/sample validation for empty and non-empty Get request elements.
-
-### DRS-004 - XSD documentation-only spelling typos
-
-State: OK with note; no executable validation impact.
+The second PDF form additionally misspells `Operation`.
 
 Classification:
 
 ```text
-mismatch_kind: ok_note
-likely_source_issue: xsd_documentation_typo_non_executable
-classification_confidence: high
-final_handling_bucket: documentation_only_note
+pdf_operation_name_editorial_error_candidate
+validation impact: none
 ```
 
-Observation:
+Do not synthesize the erroneous forms as aliases.
+
+### DRDOOR21-002 - DoorOpenState description copied from operation-state semantics
+
+State: `context_verified`.
+
+In the RetrieveSpecificDoorOpenState response table, the `DoorOpenState` success row describes a current door operation state. Exact type/section context is open-state semantics; a separate operation-state response exists directly beside it.
+
+Classification:
 
 ```text
-The XSD contains typo-like text inside xs:documentation only, such as GetDoorOpeationStates and RetrieveSpecificDoorOperationnState.
-The executable operation/type/element names are not affected by those annotation spelling issues.
+pdf_description_copy_paste_error_candidate
+validation impact: none
 ```
 
-Impact:
+## Explicitly rejected observation
+
+Visible `-1:1` rows on page 12 are accompanied by `a` / `b` choice labels. Under the established VDV notation this denotes XML choice membership, not a negative cardinality.
 
 ```text
-No validation behavior changes.
-Do not open an XSD correction for annotation text unless the VDV specifically wants documentation cleanup.
+No DoorState cardinality finding is opened from -1:1.
+Exact XSD xs:choice agrees with the visible a/b grouping.
 ```
 
-Next action: carry as documentation-only note.
+## Completion
+
+```text
+textual fresh read: complete
+targeted visible review: complete for recorded critical pages
+exhaustive visual review: no
+Deep Read state: needs_visual_review
+existing findings revalidated now: DRS-001..DRS-004
+new findings: DRDOOR21-001, DRDOOR21-002
+```
+
+No XSD was changed. No PR, comment, merge, or official remediation action was initiated.

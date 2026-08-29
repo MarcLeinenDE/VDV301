@@ -1,6 +1,6 @@
 # PDF/XSD semantic audit - current validation backlog
 
-Status: deterministic repository validation now includes EV-110 for TrainSet V2.2 `TSD-002`. Remaining work includes the continuing Deep Read, mandatory post-Deep-Read legacy-finding revalidation, targeted finding regression, visual closure, live/integration evidence and later provider-specific work.
+Status: deterministic repository validation now includes EV-111 for DoorStateService V2.1. Remaining work includes continuing Deep Read Pass 2, mandatory post-Deep-Read legacy-finding revalidation, targeted finding regression, visual closure, live/integration evidence and later provider-specific work.
 
 ## 1. Completed deterministic evidence
 
@@ -18,9 +18,10 @@ EV-107           run 33181833930  PASS  official DMS V2.2 Deep Read declarations
 EV-108           run 33182963733  PASS  candidate/integration DMS V2.4 Deep Read declarations
 EV-109           run 33228250613  PASS  official TrainSet V2.1 Deep Read evidence
 EV-110           run 33241603270  PASS  TrainSet V2.2 TSD-002 unsubscribe request shape
+EV-111           run 33242337308  PASS  official DoorState V2.1 DRS-002/DRS-003 behaviour
 ```
 
-Last full-suite baseline before EV-110: run `33228250613` confirmed:
+Last full-suite baseline: run `33228250613` confirmed:
 
 ```text
 50/50 root XSDs compile
@@ -31,7 +32,7 @@ RV-001..RV-004 PASS
 SDK manifest/profile checks PASS
 ```
 
-EV-110 was a targeted additive test and did not change any XSD. A later full-suite run can absorb it into the canonical all-checks baseline.
+EV-110 and EV-111 are targeted additive tests and did not change any XSD. A later full-suite run can absorb them into the canonical all-checks baseline.
 
 Authority guards:
 
@@ -48,6 +49,11 @@ EV-109 is V2.1 evidence only; V2.2 corrections/EV-104 are not back-applied.
 EV-110:
 TrainSetDataService V2.2 is exact official VDV-301-2.2 authority.
 It proves the executable request-shape consequence of TSD-002; the PDF does not become executable authority.
+
+EV-111:
+DoorStateService V2.1 and its Common V1.0 + Enumerations V1.0 dependencies are exact official VDV-301-2.1 authority.
+It proves RetrieveSpecific ErrorMessage vs OperationErrorMessage behavior and the default xs:anyType semantics of the exact untyped Get-request declaration form.
+The DRS-003 probe does not claim a real global DoorState request root.
 ```
 
 ### Runtime/protocol deterministic evidence
@@ -77,7 +83,7 @@ CE-026 BeaconPoint V2.3: negative <Description>, positive <Desciption>; V2.4 con
 
 CE-023 is a PDF copy/paste-table finding and does not require an executable XSD defect test. CE-019 visual closure remains pending. CE-020 is already executable-confirmed by EV-106.
 
-All surviving Common findings are also subject to the final legacy-finding Evidence-Gate revalidation; earlier confidence labels are not grandfathered.
+All surviving Common findings are also subject to final legacy-finding Evidence-Gate revalidation unless already explicitly revalidated under the current gate.
 
 ## 3. DMS V2.2 / V2.4 evidence status
 
@@ -93,7 +99,7 @@ ErrorMessage is 0:* in V2.4 candidate.
 InstallUpdate ID/Timestamp/URL/checksum/size are optional in V2.4 candidate.
 ```
 
-DMS V2.2 and V2.4 visual closure remains deferred where no later pinned-byte page review has yet closed the specific item.
+DMS V2.2 and V2.4 visual closure remains deferred where no pinned-byte page review has yet closed the specific item.
 
 ## 4. TimeService V1.0 evidence status
 
@@ -138,7 +144,48 @@ DRTRAINSET22-002 multiple stale 6.5.1 cross-references after new subscription st
 
 TrainSet V2.2 remains `needs_visual_review`, not `exhaustive_read`, because only targeted critical pages were visually closed.
 
-## 6. Mandatory legacy finding revalidation before baseline freeze
+## 6. DoorStateService V2.1 evidence status
+
+The official DoorState V2.1 PDF is byte-pinned and fresh-read. Critical pages 9-12 were rendered from the exact pinned bytes and visibly inspected. Exact authority is intentionally mixed-version:
+
+```text
+DoorStateService V2.1 -> Common V1.0 -> Enumerations V1.0
+```
+
+Exact official blobs:
+
+```text
+DoorStateService  abff0f3960e2ec7a9caaa9ddeb6efff8f4183805
+Common V1.0      267be9bf692da6781a003cee7db92e2072b71182
+Enums V1.0       399205aac6b912032812661176ebab0a9897d3c3
+```
+
+Existing findings revalidated under the current Evidence Gate:
+
+```text
+DRS-001 -> context-verified PDF operation-overview copy/paste error.
+DRS-002 -> executable-confirmed by EV-111: RetrieveSpecific accepts ErrorMessage, rejects OperationErrorMessage.
+DRS-003 -> declaration semantics executable-confirmed by EV-111: exact untyped local request declarations default to xs:anyType and are more permissive than an explicitly empty request type.
+DRS-004 -> context-verified XSD documentation-only typo note; no validation impact.
+```
+
+New findings:
+
+```text
+DRDOOR21-001  PDF request-table descriptions use shortened/typoed Retrieve operation names.
+DRDOOR21-002  DoorOpenState success description is copied from operation-state semantics.
+```
+
+Rejected observation:
+
+```text
+Visible -1:1 rows with a/b labels are valid VDV choice notation, not negative cardinality.
+No DoorState cardinality finding is opened from those rows.
+```
+
+DoorState V2.1 remains `needs_visual_review`, not `exhaustive_read`, because visual review was targeted.
+
+## 7. Mandatory legacy finding revalidation before baseline freeze
 
 After Deep Read Pass 2, every surviving finding not already explicitly revalidated under the current Evidence Gate must be checked again.
 
@@ -167,7 +214,7 @@ SDK finding knowledge ready = false
 remediation ready = false
 ```
 
-## 7. Canonical remaining live backlog
+## 8. Canonical remaining live backlog
 
 The full current live/device/network backlog is:
 
@@ -177,7 +224,7 @@ docs/pdf_xsd_semantic_audit/26_live_integration_validation_backlog.md
 
 Do not recreate duplicate per-service live backlog lists in this central file.
 
-## 8. Remaining live/integration categories
+## 9. Remaining live/integration categories
 
 ```text
 Subscription runtime:
@@ -204,17 +251,17 @@ Mixed-version resolver:
 
 Open live items require real devices/provider systems/simulators/network access or packet capture. Their open state is not a failed conformance result.
 
-## 9. Deferred visual/document review
+## 10. Deferred visual/document review
 
 Layout-sensitive items not yet closed by visible-page evidence remain `needs_visual_review` / candidate as applicable. The pinned-byte visual fallback is preferred when the interactive renderer returns cache-miss.
 
 Do not promote a document to `exhaustive_read` merely because selected critical pages were rendered.
 
-## 10. Official correction candidate review
+## 11. Official correction candidate review
 
 No upstream action is automatic. Any later official-facing correction requires Evidence-Gate-revalidated findings and explicit user approval before PR/comment/review/merge action.
 
-## 11. SDK implementation readiness
+## 12. SDK implementation readiness
 
 Finding-driven SDK implementation remains frozen during the current Deep Read and legacy revalidation phases.
 
@@ -232,12 +279,16 @@ no unexecuted live check represented as conformance evidence
 no unrevalidated finding represented as SDK accept/reject knowledge
 TrainSet V2.2 response-context resolver for TSD-003
 TrainSet TSM root inventory must not rely blindly on stale operation-group member
+DoorState V2.1 must preserve exact mixed-version Common V1.0/Enums V1.0 dependency routing
+DoorState RetrieveSpecific diagnostics must not silently normalize OperationErrorMessage/ErrorMessage
+DoorState untyped Get-request declarations must not be silently tightened to an invented empty type
 ```
 
 Current sequencing:
 
 ```text
-finish Deep Read Pass 2
+continue with TVS_V2.1 Deep Read
+-> finish Deep Read Pass 2
 -> freeze complete finding inventory
 -> revalidate all untouched/non-current findings under FINDING_EVIDENCE_GATE
 -> reconcile findings/provenance and require zero pending SDK-relevant findings

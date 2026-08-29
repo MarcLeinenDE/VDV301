@@ -1,27 +1,47 @@
 {
-  "delta_version": "0.1",
+  "delta_version": "0.2",
   "date": "2026-08-29",
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "DOOR_V2.1": {
-      "state": "in_progress",
+      "state": "needs_visual_review",
       "official_url": "https://www.vdv.de/301-2-15-sd-v2-1-doorstateservice.pdfx",
-      "publication": "VDV-Schrift 301-2-15, DoorStateService V2.1",
+      "publication": "VDV-Schrift 301-2-15, DoorStateService V2.1, 07/2018",
       "fresh_read_started": "2026-08-29",
-      "textual_fresh_read_complete": false,
-      "original_pdf_visual_review": "pending_pinned_byte_render_as_needed",
+      "textual_fresh_read_complete": true,
+      "original_pdf_visual_review": "targeted_pinned_byte_pages_reviewed_not_exhaustive",
       "source_pin": {
         "sha256": "7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8",
         "size_bytes": 851513,
         "pin_registry": "audit_registry/pdf_source_pins_v0.1.json",
         "evidence_run": "33241913638"
       },
+      "visual_evidence": {
+        "pinned_byte_render_run": "33242075873",
+        "pages_reviewed": [9, 10, 11, 12],
+        "interactive_screenshot_status": "cache_miss_on_material_pages",
+        "rule": "targeted visible review supports recorded findings but does not justify exhaustive_read"
+      },
+      "exact_xsd_authority": {
+        "tag": "VDV-301-2.1",
+        "DoorStateService_blob": "abff0f3960e2ec7a9caaa9ddeb6efff8f4183805",
+        "common_v1_0_blob": "267be9bf692da6781a003cee7db92e2072b71182",
+        "enumerations_v1_0_blob": "399205aac6b912032812661176ebab0a9897d3c3",
+        "integration_branch_files_match_official_tag": true,
+        "mixed_version_dependency_is_authoritative": true
+      },
       "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
-      "authority_boundary": {
-        "pdf_authority": "official_public_VDV_writing",
-        "xsd_authority": "to_be_established_independently from official upstream release/tag before consulting historical DoorState findings",
-        "rule": "Fresh-read DoorState V2.1 and establish exact schema/dependency behavior before reopening prior DoorState findings."
-      }
+      "existing_findings_revalidated": {
+        "DRS-001": "context_verified",
+        "DRS-002": "executable_confirmed_EV-111",
+        "DRS-003": "executable_declaration_semantics_confirmed_EV-111",
+        "DRS-004": "context_verified_ok_note"
+      },
+      "new_findings": ["DRDOOR21-001", "DRDOOR21-002"],
+      "rejected_observations": ["-1:1 with a/b labels is valid VDV XML-choice notation; no cardinality finding"],
+      "report": "docs/pdf_xsd_semantic_audit/deep_read/DOOR_V2.1.md",
+      "findings_delta": "audit_registry/deep_read_findings_delta_door_v21_2026-08-29.json",
+      "executable_evidence": "EV-111 / run 33242337308"
     }
   }
 }
