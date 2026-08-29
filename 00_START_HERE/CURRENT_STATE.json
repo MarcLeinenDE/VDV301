@@ -26,10 +26,9 @@
     "deep_read_exhaustive_completed": 0,
     "deep_read_needs_visual_review": 19,
     "deep_read_textual_fresh_read_completed": 19,
-    "deep_read_in_progress": 0,
-    "deep_read_current_document_id": null,
+    "deep_read_in_progress": 1,
+    "deep_read_current_document_id": "TRAINSET_V2.2",
     "deep_read_previous_document_id": "TRAINSET_V2.1",
-    "deep_read_next_document_id": "TRAINSET_V2.2",
     "latest_deep_read_finding": "DRTRAINSET21-003",
     "latest_dms_finding": "DMS-007",
     "latest_common_finding": "CE-026",
@@ -64,9 +63,9 @@
     "pdf_visual_render_fallback": "docs/pdf_xsd_semantic_audit/PDF_VISUAL_RENDER_FALLBACK.md",
     "pdf_visual_renderer": "tools/render_vdv_pdf_pages.py",
     "pdf_visual_render_rule": "interactive screenshot cache miss is not a source failure; render exact byte-pinned source independently and inspect visible output before promoting visual status",
-    "pdf_sources_byte_pinned": 14,
-    "pinned_active_sources": ["VDV301-2_GC_V2.3", "COMMON_V2.3", "VDV301-2_GC_V2.4", "DMS_V2.2", "DMS_V2.4", "TIME_V1.0", "VLS_V1.0", "VLS_V2.0", "VRS_V1.0", "VRS_V2.0", "VRS_V2.4", "VDS_V1.0", "VDS_V2.0", "TRAINSET_V2.1"],
-    "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_trainset_v21_2026-08-29.json",
+    "pdf_sources_byte_pinned": 15,
+    "pinned_active_sources": ["VDV301-2_GC_V2.3", "COMMON_V2.3", "VDV301-2_GC_V2.4", "DMS_V2.2", "DMS_V2.4", "TIME_V1.0", "VLS_V1.0", "VLS_V2.0", "VRS_V1.0", "VRS_V2.0", "VRS_V2.4", "VDS_V1.0", "VDS_V2.0", "TRAINSET_V2.1", "TRAINSET_V2.2"],
+    "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_trainset_v22_2026-08-29.json",
     "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_trainset_v21_2026-08-29.json",
     "trainset_v2_1_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.1.md",
     "trainset_findings_register": "docs/pdf_xsd_semantic_audit/TRAIN_SET_SERVICES_FINDINGS_REGISTER_ADDENDUM.md",
@@ -76,6 +75,14 @@
       "evidence_run": "33226637254",
       "pdf_authority": "official_public_VDV_writing",
       "xsd_authority_status": "official_VDV-301-2.1_exact_service_families"
+    },
+    "trainset_v2_2_source_pin": {
+      "sha256": "c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e",
+      "size_bytes": 1744296,
+      "evidence_run": "33239594518",
+      "pinned_at_utc": "2026-08-29T06:54:37Z",
+      "pdf_authority": "official_public_VDV_writing",
+      "xsd_authority_status": "pending_independent_VDV-301-2.2_verification"
     },
     "trainset_v2_1_authority": {
       "TSI_blob": "897f373e31b76aa23d8bc206854b042524e4c102",
@@ -99,11 +106,11 @@
     "latest_root_xsd_validation_run": "33228250613",
     "latest_full_suite_run": "33228250613",
     "latest_rv_003_run": "33228250613",
-    "latest_pdf_source_pin_run": "33226637254",
+    "latest_pdf_source_pin_run": "33239594518",
     "latest_pdf_visual_render_run": "trainset_v21_pinned_byte_render",
     "vds_v2_0_executable_evidence": "EV-103 / 33111119723",
     "trainset_v2_1_executable_evidence": "EV-109 / 33228250613",
-    "trainset_v2_2_historical_evidence": "EV-104 / 33111644388; must be re-evaluated only after independent TRAINSET_V2.2 fresh read"
+    "trainset_v2_2_historical_evidence": "EV-104 / 33111644388; do not inherit conclusions until independent TRAINSET_V2.2 fresh read"
   },
   "sdk": {
     "status": "baseline_v0.1_prework_only_during_audit",
@@ -116,8 +123,7 @@
     "rule": "Findings/audit knowledge must later explain surprising validation results without silently changing normative XSD outcomes. No unrevalidated finding may drive SDK accept/reject/routing behaviour."
   },
   "next_actions": [
-    "Byte-pin official TRAINSET_V2.2 before authoritative Fresh Read.",
-    "Fresh-read TRAINSET_V2.2 independently before consulting TSM-002/TSD-002/TSD-003 or EV-104 conclusions.",
+    "Fresh-read byte-pinned TRAINSET_V2.2 independently before consulting TSM-002/TSD-002/TSD-003 or EV-104 conclusions.",
     "Establish exact V2.2 TrainSet service XSD blobs/dependency families from official VDV-301-2.2 authority.",
     "Apply FINDING_EVIDENCE_GATE including original visual context, definition provenance, exact authority, full context and active disproof attempt.",
     "Only after the independent V2.2 read, compare TSM-002/TSD-002/TSD-003 and EV-104.",
