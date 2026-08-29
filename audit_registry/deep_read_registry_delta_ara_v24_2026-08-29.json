@@ -1,0 +1,35 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-29",
+  "base_registry": "audit_registry/deep_read_registry_v0.1.json",
+  "document_updates": {
+    "ARA_V2.4": {
+      "state": "source_pinned_authority_established_pending_fresh_read",
+      "official_url": "https://www.vdv.de/301-2-19-sde-v2.4-analogradioservice.pdfx",
+      "publication": "VDV-Schrift 301-2-19, AnalogRadioService V2.4, 01/2023",
+      "source_pin": {
+        "sha256": "d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c",
+        "size_bytes": 1009640,
+        "pinned_at_utc": "2026-08-29T18:52:30Z",
+        "evidence_run": "33269415752"
+      },
+      "source_url_correction_note": "older registry/start guess used 301-2-19-sds-v2-4... which returned 404; verified official file is 301-2-19-sde-v2.4-analogradioservice.pdfx",
+      "authority_status": {
+        "official_pdf": "official_public_VDV_writing",
+        "official_release_tag_VDV-301-2.4_exists": false,
+        "upstream_master_service_xsd_present": false,
+        "integration_service_xsd": "IBIS-IP_AnalogRadioService_V2.4.xsd",
+        "integration_service_blob": "48fb303b80936d2d762f0889ce0c359e04c16e5b",
+        "integration_provenance_commit": "c9c086ac07f7e9bdb271c54f7a274e3cf0d03749",
+        "integration_provenance_class": "public_schema_candidate",
+        "declared_common_dependency": "IBIS-IP_common_V2.3.xsd",
+        "common_V2.3_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+        "xsd_authority_class": "candidate_integration_not_official_release",
+        "latest_wins": false
+      },
+      "historical_analogradio_findings_quarantined_until_fresh_read_freeze": true,
+      "fresh_read_rule": "derive observations from pinned official ARA V2.4 PDF first; candidate/integration XSD may constrain executable behavior but must not be promoted to official-release authority",
+      "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md"
+    }
+  }
+}
