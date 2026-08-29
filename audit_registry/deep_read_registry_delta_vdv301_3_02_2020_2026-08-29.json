@@ -4,7 +4,7 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "VDV301-3_02-2020": {
-      "state": "source_pinned_render_complete_pending_independent_fresh_read",
+      "state": "independent_fresh_read_frozen_pending_historical_reconciliation",
       "official_url": "https://www.vdv.de/301-3-sdes-network-infrastructure.pdfx",
       "publication": "VDV-Schrift 301-3, Netzwerkinfrastruktur / Network infrastructure, 02/2020",
       "source_pin": {
@@ -20,17 +20,42 @@
         "validation_lane": "physical_network_protocol_profile",
         "latest_external_protocol_version_wins": false
       },
-      "historical_network_findings_quarantined_until_fresh_read_freeze": true,
+      "historical_network_findings_quarantined_until_fresh_read_freeze": false,
       "fresh_read_rule": "derive network/topology/physical-interface observations from the pinned official VDV301-3 source before consulting historical network/discovery findings or RV-002 results",
       "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
       "render_read_evidence": {
         "run": "33270251357",
+        "job": "99147343832",
+        "artifact": "9719880284",
         "artifact_name": "vdv301-3-02-2020-pinned-read",
+        "artifact_zip_digest": "sha256:2cc403407a354af07c2dfc1cc78666e0f16fc753af6eebfaf090b0300214d930",
         "pdf_page_count": 37,
         "all_pages_rendered": true,
         "render_dpi": 120,
+        "visible_pages_reviewed": [6, 7, 8, 10, 11, 14, 17, 18, 19, 20, 22, 23, 24, 26, 27, 29, 31, 32, 33],
         "fulltext_sha256": "dd6ecfa0d78f0a00b86557aa2e3694883431fc6a7a1d5a92b4663981996a3276"
-      }
+      },
+      "independent_observations": [
+        "FR-NET20-OBS-001 English Scope says VDV 303-3 while the document is VDV 301-3",
+        "FR-NET20-OBS-002 English cabling subsection is numbered 2.3.5 while German counterpart is 2.3.4 and English sequence skips 2.3.4",
+        "FR-NET20-OBS-003 copper-cabling prose recommends 1000Base-X while its own table specifies 1 GBase-T; IEEE material distinguishes 1000BASE-X from 1000BASE-T",
+        "FR-NET20-OBS-004 English Figure 1 caption says security-relevant although body and figure use safety-relevant",
+        "FR-NET20-OBS-005 grouped non-executable editorial residue"
+      ],
+      "external_falsification_context": {
+        "ieee_1000base_t_clause40_source": "https://www.ieee802.org/3/publication/index.html",
+        "ieee_1000base_x_vs_t_revision_source": "https://ieee802.org/3/axay/comments/D1.0/802.3ay_D1p0_unresolved.pdf",
+        "cat6_55m_context": "not promoted; immediate 10GBASE-T context plus external implementation evidence supports 55m Cat6 / 100m Cat6A reading"
+      },
+      "rejected_suspicions": [
+        "CAT6 55m sentence not promoted as independent technical defect because immediate context is 10GBASE-T and external evidence supports that reach distinction",
+        "Figure/Table 2 and 3 mixed labels not promoted because connector figures are embedded within pin-assignment tables and directories distinguish tables from figures",
+        "empty version-history section not promoted without evidence that an entry is required",
+        "absence of XSD is intentional for network_protocol lane",
+        "interactive screenshot cache miss is not a source failure because exact pinned-byte render completed"
+      ],
+      "historical_reconciliation_status": "now_allowed_after_freeze",
+      "fresh_read_report": "docs/pdf_xsd_semantic_audit/deep_read/VDV301-3_02-2020.md"
     }
   }
 }
