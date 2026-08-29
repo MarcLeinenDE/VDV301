@@ -1,0 +1,151 @@
+name: temp-finalize-hds-v21-close
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths: ['.github/workflows/temp-finalize-hds-v21-close.yml']
+permissions:
+  contents: write
+jobs:
+  finalize:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build HDS V2.1 closure
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+
+          # CURRENT_STATE
+          sp = Path('00_START_HERE/CURRENT_STATE.json')
+          s = json.loads(sp.read_text(encoding='utf-8'))
+          a = s['audit']
+          a['deep_read_in_progress'] = 0
+          a['deep_read_current_document_id'] = None
+          a['deep_read_previous_document_id'] = 'HDS_V2.1'
+          a['next_natural_deep_read_document_id'] = 'HDS_V2.2'
+          a['latest_deep_read_revalidation'] = 'HDS-001_V2.1_context_verified_ok_with_note_RV-002_run_33266402138'
+          a['latest_deep_read_findings_delta'] = 'audit_registry/deep_read_findings_delta_hds_v21_2026-08-29.json'
+          a['hds_v2_1_findings'] = {
+              'HDS-001':'context_verified_ok_with_note_runtime_profile_supported_RV-002_run_33266402138'
+          }
+          sp.write_text(json.dumps(s, indent=2, ensure_ascii=False)+'\n', encoding='utf-8')
+
+          # Deep-read registry delta
+          dp = Path('audit_registry/deep_read_registry_delta_hds_v21_2026-08-29.json')
+          d = json.loads(dp.read_text(encoding='utf-8'))
+          h = d['document_updates']['HDS_V2.1']
+          h['state'] = 'targeted_visual_review_complete_historical_reconciliation_complete'
+          h['historical_findings_opened_after_fresh_read_freeze'] = True
+          h['existing_findings_revalidated'] = {
+              'HDS-001':'context_verified_ok_with_note_runtime_profile_supported_RV-002_run_33266402138'
+          }
+          h['new_unique_findings'] = []
+          h['runtime_evidence'] = {
+              'evidence_id':'RV-002',
+              'revalidation_run':'33266402138',
+              'job':'99137119627',
+              'status':'PASS',
+              'scope':'deterministic already-observed DNS-SD advertisements; no live DNS/mDNS claim',
+              'v2_1_checks':['HDS V2.1 profile passes','endpoint built from SRV target/port plus TXT path','V2.2+ TXT rules not retroactively applied to GC V2.1']
+          }
+          h['historical_reconciliation'] = 'complete_for_V2.1_only'
+          h['next_document_id'] = 'HDS_V2.2'
+          dp.write_text(json.dumps(d, indent=2, ensure_ascii=False)+'\n', encoding='utf-8')
+
+          # Findings delta
+          fd = {
+              'delta_version':'0.1',
+              'date':'2026-08-29',
+              'document_id':'HDS_V2.1',
+              'evidence_gate':'docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md',
+              'new_unique_findings':[],
+              'revalidated_findings':{
+                  'HDS-001':{
+                      'state':'context_verified_ok_with_note_runtime_profile_supported_RV-002_run_33266402138',
+                      'summary':'The byte-pinned official V2.1 publication, visible pages 7-10 and official VDV-301-2.1 repository inventory independently confirm that HTMLDisplayService intentionally has no dedicated service XSD and is a DNS-SD/HTTP profile. The current RV-002 rerun confirms the V2.1 discovery profile and endpoint construction without applying V2.2+ discovery rules retroactively.',
+                      'classification':'ok_with_note',
+                      'validation_behavior':'discovery_http_profile_not_service_xsd'
+                  }
+              },
+              'authority_note':{
+                  'official_pdf':'official_public_VDV_writing',
+                  'dedicated_service_xsd':False,
+                  'service_model':'non_xsd_dns_sd_http_profile',
+                  'runtime_evidence':'RV-002 run 33266402138',
+                  'live_network_claim':False
+              },
+              'deduplication':'No new HDS V2.1 finding ID opened; the independent fresh-read result reconciles to HDS-001.'
+          }
+          fdp = Path('audit_registry/deep_read_findings_delta_hds_v21_2026-08-29.json')
+          fdp.write_text(json.dumps(fd, indent=2, ensure_ascii=False)+'\n', encoding='utf-8')
+
+          # Revalidation registry
+          rp = Path('audit_registry/finding_revalidation_registry_v0.1.json')
+          r = json.loads(rp.read_text(encoding='utf-8'))
+          r['explicit_revalidations_during_deep_read_pass_2']['HDS_V2.1'] = {
+              'HDS-001':'context_verified_ok_with_note_runtime_profile_supported_RV-002_run_33266402138'
+          }
+          rp.write_text(json.dumps(r, indent=2, ensure_ascii=False)+'\n', encoding='utf-8')
+
+          # Deep-read report reconciliation appendix
+          report_p = Path('docs/pdf_xsd_semantic_audit/deep_read/HDS_V2.1.md')
+          report = report_p.read_text(encoding='utf-8')
+          appendix = '''\n## Historical reconciliation after fresh-read freeze\n\nHistorical HDS material was opened only after the independent fresh read had been committed at `cf27ca153255ce724f7db6730eb4311623b76ac0`.\n\nThe historical register contains one service-modelling item relevant to V2.1: `HDS-001`, absence of a dedicated HTMLDisplayService XSD. The fresh read independently reached the same conclusion before that finding was opened.\n\n### HDS-001 — V2.1 revalidation\n\nState: `context_verified_ok_with_note_runtime_profile_supported_RV-002_run_33266402138`.\n\nEvidence chain:\n\n- official byte-pinned V2.1 publication;\n- visible review of pages 7-10 from exact pinned bytes;\n- official `VDV-301-2.1` release inventory contains no dedicated HDS service schema;\n- publication explicitly states that HDS defines no own protocol;\n- deterministic RV-002 rerun `33266402138` confirms the V2.1 `_http._tcp` + `content`/`path` profile, endpoint construction from SRV target/port plus TXT path, and the non-retroactive V2.1 boundary.\n\nActive falsification did not reveal a hidden HDS XML contract or a release-tag service XSD. Therefore missing-XSD handling would be incorrect; HDS V2.1 must route to the discovery/HTTP profile validator.\n\nRV-002 does not perform live DNS/mDNS or endpoint reachability and is not represented as such.\n\nNo new unique V2.1 finding was opened. V2.2 and V2.2a remain separately pending Deep Read revalidation; their later `url` and protocol-label changes are not back-applied to V2.1.\n'''
+          if '## Historical reconciliation after fresh-read freeze' not in report:
+              report_p.write_text(report.rstrip()+appendix+'\n', encoding='utf-8')
+
+          # HDS findings register scope-specific update
+          hp = Path('docs/pdf_xsd_semantic_audit/HTML_DISPLAY_SERVICE_FINDINGS_REGISTER_ADDENDUM.md')
+          txt = hp.read_text(encoding='utf-8')
+          txt = txt.replace(
+              'Status: supplemental register; historical first-pass closure completed for HTMLDisplayService V2.1, V2.2 and V2.2a.',
+              'Status: supplemental register; historical first-pass closure completed for HTMLDisplayService V2.1, V2.2 and V2.2a. V2.1 has now also been independently re-read and HDS-001 revalidated under the current Evidence Gate; V2.2/V2.2a Deep Read revalidation remains pending.'
+          )
+          txt = txt.replace(
+              'State: closed OK with note; intentional service modelling, not a schema/provenance gap.',
+              'State: closed OK with note historically; **V2.1 scope revalidated under the current Evidence Gate**. V2.2/V2.2a scopes remain pending their own Deep Reads.'
+          )
+          extra = '''\n## V2.1 Evidence-Gate revalidation\n\n```text\nsource pin: c8aa91626bf60c8e74200200d63d44d497aeb3ab240c47039333b2c922a0e495 / 734901 bytes / run 33265498869\nvisible review: pages 7-10 / render run 33265541783\nfresh-read freeze: cf27ca153255ce724f7db6730eb4311623b76ac0\nRV-002 current rerun: 33266402138 PASS\n```\n\nResult for V2.1:\n\n```text\nHDS-001 -> context_verified_ok_with_note_runtime_profile_supported_RV-002\nNo dedicated service XSD is expected.\nRoute to discovery_http_profile.\nDo not apply V2.2/V2.2a url/protocol changes to V2.1.\nNo live DNS/mDNS or endpoint-reachability conclusion is claimed by RV-002.\n```\n'''
+          if '## V2.1 Evidence-Gate revalidation' not in txt:
+              txt = txt.rstrip()+extra+'\n'
+          hp.write_text(txt, encoding='utf-8')
+
+          # Validation backlog append
+          vp = Path('docs/pdf_xsd_semantic_audit/validation_backlog.md')
+          v = vp.read_text(encoding='utf-8')
+          add = '''\n## HTMLDisplayService V2.1 Deep Read evidence status\n\nThe official HDS V2.1 PDF is byte-pinned and independently fresh-read with targeted visible review before historical HDS findings were opened. HDS is intentionally a non-XSD DNS-SD/HTTP profile.\n\n```text\nPDF sha256: c8aa91626bf60c8e74200200d63d44d497aeb3ab240c47039333b2c922a0e495\nPDF size: 734901\npin run: 33265498869\nvisual render run: 33265541783\npages visibly reviewed: 7-10\nRV-002 Evidence-Gate rerun: 33266402138 PASS\n```\n\n`HDS-001` is revalidated for V2.1 as `ok_with_note`: no dedicated service XSD is expected and the validator must route the service to its version-specific discovery/HTTP profile. RV-002 confirms V2.1 `_http._tcp`, `content + path`, endpoint reconstruction and the historical-version guard. Live DNS/mDNS, endpoint reachability and browser/content interoperability remain outside this deterministic evidence.\n\nNext Deep Read document: `HDS_V2.2`.\n'''
+          if '## HTMLDisplayService V2.1 Deep Read evidence status' not in v:
+              vp.write_text(v.rstrip()+add+'\n', encoding='utf-8')
+
+          # Handoff delta
+          handoff = '''# Audit handoff delta — HTMLDisplayService V2.1 Deep Read\n\nDate: 2026-08-29\n\n## Permanent result\n\n- HDS V2.1 independent fresh read completed before historical findings were opened.\n- Official PDF pin: `c8aa91626bf60c8e74200200d63d44d497aeb3ab240c47039333b2c922a0e495`, 734901 bytes, run `33265498869`.\n- Visible fallback render: run `33265541783`, pages 7-10.\n- Authority: intentionally non-XSD `discovery_http_profile`; no dedicated HDS service XSD in official VDV-301-2.1 tag or integration branch.\n- Historical HDS-001 independently reproduced and revalidated for V2.1 as OK with note.\n- RV-002 rerun `33266402138` PASS supports V2.1 `_http._tcp`, `content + path`, SRV/port/path endpoint construction, and non-retroactive version handling.\n- No new HDS V2.1 finding IDs.\n- No XSD changed.\n- No live DNS/mDNS or reachability claim.\n\n## Next\n\n`HDS_V2.2` must receive its own byte pin, document-first fresh read and visible review before the historical V2.2 profile delta is reopened. Do not back-apply V2.2 `url` semantics to V2.1.\n'''
+          Path('docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF_DELTA_HDS_V21_DEEP_READ_2026-08-29.md').write_text(handoff, encoding='utf-8')
+
+          # Validate JSONs and invariants
+          for p in [sp, dp, fdp, rp]:
+              json.loads(p.read_text(encoding='utf-8'))
+          assert s['audit']['next_natural_deep_read_document_id'] == 'HDS_V2.2'
+          assert s['audit']['pdf_sources_byte_pinned'] == 21
+          PY
+      - name: Commit exact HDS V2.1 closure and remove finalizer
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add 00_START_HERE/CURRENT_STATE.json \
+            audit_registry/deep_read_registry_delta_hds_v21_2026-08-29.json \
+            audit_registry/deep_read_findings_delta_hds_v21_2026-08-29.json \
+            audit_registry/finding_revalidation_registry_v0.1.json \
+            docs/pdf_xsd_semantic_audit/deep_read/HDS_V2.1.md \
+            docs/pdf_xsd_semantic_audit/HTML_DISPLAY_SERVICE_FINDINGS_REGISTER_ADDENDUM.md \
+            docs/pdf_xsd_semantic_audit/validation_backlog.md \
+            docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF_DELTA_HDS_V21_DEEP_READ_2026-08-29.md
+          git rm .github/workflows/temp-finalize-hds-v21-close.yml
+          if git diff --cached --name-only | grep -E '\.xsd$'; then exit 1; fi
+          git config user.name 'MarcLeinenDE'
+          git config user.email '34336531+MarcLeinenDE@users.noreply.github.com'
+          git commit -m 'Deep-read HTMLDisplayService V2.1 and revalidate HDS-001'
+          git push origin HEAD:dev/schema-integration
