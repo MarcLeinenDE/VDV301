@@ -1,10 +1,33 @@
 # Finding classification policy
 
-Status: adopted as audit policy.
+Status: adopted as audit policy; mandatory evidence gate added 2026-08-29.
 
 This document defines how PDF/XSD audit findings are grouped before final handling decisions are made.
 
 The goal is to avoid treating every mismatch as the same kind of defect. Some findings are likely XSD spelling defects, some are likely PDF/table documentation defects, some are modelling differences, and some are only routing/provenance gaps.
+
+## Mandatory evidence gate before classification
+
+Every finding is subject to:
+
+```text
+docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md
+```
+
+Classification is downstream of evidence. A difference must not be called a defect merely because two extracted strings, rows or schema declarations look different.
+
+Before a finding may be called `confirmed`, the auditor must establish, where applicable:
+
+```text
+- the visible original PDF context;
+- the authoritative definition of any material notation or specialized term;
+- the exact selected XSD family and dependency route;
+- the complete surrounding semantic/grouping context;
+- the strongest plausible counter-explanation and the result of trying to disprove the finding;
+- executable behaviour when the claim concerns accepted/rejected XML and testing is technically practical.
+```
+
+If a material evidence step is missing, confidence must remain candidate/unresolved/review-required. Do not compensate with inference.
 
 ## Core authority rule
 
@@ -30,6 +53,38 @@ validation_behavior
 final_handling_bucket
 notes
 ```
+
+For findings created or materially re-evaluated after adoption of the evidence gate, also retain or make reconstructable:
+
+```text
+pdf_source_id_or_publication
+page_or_section
+original_visual_status
+notation_or_term_definition_source
+selected_xsd_family
+schema_identity_or_authority
+full_context_checked
+counter_hypothesis_checked
+executable_evidence_id_or_reason_not_applicable
+confidence_state
+sdk_eligibility
+```
+
+## Confidence/promotion discipline
+
+Use this progression conceptually:
+
+```text
+candidate_observation
+source_verified
+context_verified
+executable_confirmed      # when executable behaviour is material
+remediation_ready         # only after a later explicit remediation decision
+```
+
+A finding does not need to reach the final state. It is preferable to retain an unresolved candidate than to create a false confirmed finding.
+
+`classification_confidence: high` is not permitted solely because PDF and XSD text differ. High confidence requires the relevant original-source, definition and context checks to have passed.
 
 ## mismatch_kind values
 
@@ -130,7 +185,9 @@ Validate against XSD and keep provider-facing notes.
 
 ### cardinality_mismatch_candidate
 
-Use this where PDF cardinality and XSD cardinality differ.
+Use this where PDF cardinality and XSD cardinality differ **after the PDF notation has been resolved from its authoritative definition**.
+
+A leading choice marker or other table convention must not be interpreted as cardinality without first checking the VDV notation definition and the complete visible grouping.
 
 Subclassification:
 
@@ -225,6 +282,8 @@ official_schema_family_clarification_candidate
 unresolved_keep_open
 ```
 
+No finding may enter an official correction candidate bucket solely from a candidate observation. The evidence gate and later explicit remediation review must both be satisfied.
+
 ## Inference discipline
 
 A finding may say `likely XSD typo` or `likely PDF table error`, but only when the evidence is stated. Do not hide the inference.
@@ -245,6 +304,8 @@ The PDF is wrong.
 
 until final local validation and official-facing review are complete.
 
+For every non-trivial inference, record the strongest plausible alternative explanation considered. A finding that has not survived a deliberate disproof attempt is not fully confirmed.
+
 ## Tool/SDK behaviour
 
 For the future validation tool/SDK:
@@ -254,4 +315,13 @@ Always validate against the selected XSD version family.
 Emit explanatory diagnostics when a known PDF/XSD discrepancy may explain a provider payload.
 Do not auto-normalize case, spelling or element names.
 Do not substitute a corrected-looking spelling unless a corrected official schema exists.
+```
+
+Additionally:
+
+```text
+candidate/unresolved findings must never cause accept/reject decisions;
+source/context-verified findings may provide explanatory diagnostics only;
+claims about executable XML behaviour should be executable-confirmed before being encoded as SDK behaviour knowledge;
+no finding automatically authorizes a schema override or remediation.
 ```
