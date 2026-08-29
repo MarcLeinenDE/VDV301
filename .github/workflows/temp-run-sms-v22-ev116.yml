@@ -1,0 +1,31 @@
+name: temp-run-sms-v22-ev116
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp-run-sms-v22-ev116.yml
+permissions:
+  contents: write
+jobs:
+  ev116:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check lxml
+      - name: Run EV-116 official SMS V2.2 evidence
+        run: python tools/validate_sms_v22_ev116.py
+      - name: Remove temporary EV-116 workflow after PASS
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rm .github/workflows/temp-run-sms-v22-ev116.yml
+          git config user.name MarcLeinenDE
+          git config user.email 34336531+MarcLeinenDE@users.noreply.github.com
+          git commit -m 'Remove temporary SMS V2.2 EV-116 workflow'
+          git push origin HEAD:dev/schema-integration
