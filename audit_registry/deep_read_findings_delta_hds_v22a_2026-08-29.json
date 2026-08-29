@@ -1,0 +1,44 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-29",
+  "document_id": "HDS_V2.2a",
+  "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+  "new_unique_findings": [],
+  "revalidated_findings": {
+    "HDS-001": {
+      "state": "context_verified_ok_with_note_runtime_profile_supported_RV-002_run_33267198470",
+      "classification": "ok_with_note",
+      "summary": "The byte-pinned official V2.2a publication confirms that HDS remains intentionally non-XSD. The current V2.2a table recognises both _http._tcp and _ibisip_http._tcp; _http._tcp is deprecated/future-not-recommended, while _ibisip_http._tcp is the documented transition/future label. Deletion of _http._tcp is reserved for the future next service version after 2.2.",
+      "validation_behavior": "discovery_http_profile_not_service_xsd"
+    }
+  },
+  "version_profile": {
+    "publication_variant": "V2.2a_amended_corrected_V2.2_profile",
+    "current_protocol_labels": [
+      "_http._tcp",
+      "_ibisip_http._tcp"
+    ],
+    "legacy_label_status": "_http._tcp deprecated / zukünftig nicht mehr empfohlen",
+    "transition_label_status": "_ibisip_http._tcp documented for future use and already project-usable by mutual agreement in V2.2",
+    "future_next_version_rule": "next service version after 2.2 will use _ibisip_http._tcp and delete _http._tcp",
+    "txt_keys": [
+      "content",
+      "url"
+    ],
+    "endpoint_source": "TXT url"
+  },
+  "runtime_evidence": {
+    "RV-002_run": "33267198470",
+    "job": "99139252921",
+    "result": "PASS",
+    "wording_correction_commit": "6f0875e80c55f6c1ac6e209c484187a41dbf3d54",
+    "behavior_changed_by_correction": false
+  },
+  "authority_note": {
+    "official_pdf": "official_public_VDV_writing",
+    "dedicated_release_tag_VDV-301-2.2a_exists": false,
+    "dedicated_service_xsd": false,
+    "live_network_claim": false
+  },
+  "deduplication": "No new HDS V2.2a finding ID opened; the independently derived profile reconciles to HDS-001 plus version-specific transition routing knowledge."
+}

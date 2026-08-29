@@ -1,6 +1,6 @@
 # HTMLDisplayService findings register addendum
 
-Status: supplemental register; historical first-pass closure completed for HTMLDisplayService V2.1, V2.2 and V2.2a. V2.1 and V2.2 have now also been independently re-read and HDS-001 revalidated under the current Evidence Gate; V2.2a Deep Read revalidation remains pending.
+Status: supplemental register; historical first-pass closure completed for HTMLDisplayService V2.1, V2.2 and V2.2a. V2.1, V2.2 and V2.2a have now all been independently re-read and HDS-001 revalidated under the current Evidence Gate.
 
 Authority rule:
 
@@ -19,7 +19,7 @@ docs/pdf_xsd_semantic_audit/10a_html_display_service_protocol_profile_and_closur
 
 ## HDS-001 - no dedicated HTMLDisplayService XSD
 
-State: closed OK with note historically; **V2.1 and V2.2 scopes revalidated under the current Evidence Gate**. V2.2a scope remains pending its own Deep Read.
+State: closed OK with note; **V2.1, V2.2 and V2.2a scopes are revalidated under the current Evidence Gate**.
 
 Classification:
 
@@ -54,13 +54,13 @@ Version profile note:
 ```text
 V2.1: TXT content + path, protocol _http._tcp, access URL derived from host/port/path.
 V2.2: TXT content + url, protocol _http._tcp, access URL comes from url.
-V2.2a: TXT content + url, _http._tcp deprecated and _ibisip_http._tcp introduced/recommended for future alignment.
+V2.2a: TXT content + url; the current table recognises both _http._tcp (deprecated / future-not-recommended) and _ibisip_http._tcp as the transition/future label; only the future next service version after 2.2 is stated to delete _http._tcp.
 ```
 
 Next action:
 
 ```text
-Implement profile tests later; no schema correction/backfill action.
+Keep deterministic version-specific profile tests; no schema correction/backfill action.
 ```
 ## V2.1 Evidence-Gate revalidation
 
@@ -101,4 +101,28 @@ SRV host: publishing device
 No dedicated HDS service XSD is expected.
 Later V2.2a _ibisip_http._tcp transition is compatibility context, not native V2.2 source wording.
 ```
+## V2.2a Evidence-Gate revalidation
+
+```text
+source pin: f3da1994e719572ba1689aea2448b9533faf9e8fbe42720b9e737b98edd8b0f8 / 431875 bytes / run 33266884196
+render/read run: 33266920928
+fresh-read freeze: 17f036c6257c5c71b94169c02905c2e80f36b847
+RV-002 wording correction: 6f0875e80c55f6c1ac6e209c484187a41dbf3d54
+corrected RV-002 rerun: 33267198470 PASS
+```
+
+Result for V2.2a:
+
+```text
+HDS-001 -> context_verified_ok_with_note_runtime_profile_supported_RV-002
+current labels: _http._tcp + _ibisip_http._tcp
+_http._tcp: deprecated / zukünftig nicht mehr empfohlen
+_ibisip_http._tcp: documented transition/future label; project-specific use already permitted in V2.2 by mutual agreement
+future next service version after 2.2: delete _http._tcp and use _ibisip_http._tcp
+TXT: content + url
+content endpoint: TXT url
+No dedicated HDS service XSD is expected.
+```
+
+The former RV-002 word `preferred` was corrected because it overstated the V2.2a publication. Test behavior did not change.
 

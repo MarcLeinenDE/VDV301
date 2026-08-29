@@ -542,4 +542,21 @@ RV-002 post-freeze rerun: 33266770833 PASS
 V2.2 canonical profile is `_http._tcp` with TXT `content + url`; the content endpoint is the TXT `url`, while SRV port has no content-address meaning and host identifies the publisher. `HDS-001` is revalidated for V2.2 as `ok_with_note`. `_ibisip_http._tcp` remains a later V2.2a compatibility context, not a rewritten native V2.2 rule. Live network and HTTP/browser interoperability remain outside deterministic RV-002 evidence.
 
 Next Deep Read document: `HDS_V2.2a`.
+## HTMLDisplayService V2.2a Deep Read evidence status
+
+The official HDS V2.2a publication is byte-pinned and independently re-derived before formal V2.2a historical reconciliation. HDS remains a non-XSD DNS-SD/HTTP profile.
+
+```text
+PDF sha256: f3da1994e719572ba1689aea2448b9533faf9e8fbe42720b9e737b98edd8b0f8
+PDF size: 431875
+pin run: 33266884196
+render/read run: 33266920928
+fresh-read freeze: 17f036c6257c5c71b94169c02905c2e80f36b847
+RV-002 diagnostic wording correction: 6f0875e80c55f6c1ac6e209c484187a41dbf3d54
+corrected RV-002 rerun: 33267198470 PASS
+```
+
+V2.2a is an amended/corrected V2.2 publication/profile variant, not the future next service version referenced by its own text. Its current table recognises `_http._tcp` and `_ibisip_http._tcp`; `_http._tcp` is deprecated/future-not-recommended, while `_ibisip_http._tcp` is the documented transition/future label. Only the future next service version after 2.2 is stated to delete `_http._tcp`. HDS-001 is revalidated as `ok_with_note`; no new HDS finding ID is opened.
+
+The HDS V2.1/V2.2/V2.2a block is now fully revalidated under the current Evidence Gate. Next Deep Read document: `SMS_V2.2`.
 

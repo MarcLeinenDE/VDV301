@@ -4,7 +4,7 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "HDS_V2.2a": {
-      "state": "fresh_read_visible_review_complete_pending_historical_reconciliation",
+      "state": "targeted_visual_review_complete_historical_reconciliation_complete",
       "official_url": "https://www.vdv.de/301-2-17-sdes-v2-2a-htmldisplayservice.pdfx",
       "publication": "VDV-Schrift 301-2-17, HTMLDisplayService V2.2a, 02/2021",
       "source_pin": {
@@ -82,7 +82,33 @@
         "issue": "Existing RV-002 wording calls _ibisip_http._tcp preferred for V2.2a. Acceptance behavior matches the source, but preferred is stronger than the publication wording.",
         "planned_change": "Retain both-label acceptance behavior; replace preferred with source-exact transition/future wording, then rerun RV-002."
       },
-      "historical_reconciliation": "pending_after_V2.2a_fresh_read_freeze"
+      "historical_reconciliation": "complete_for_V2.2a",
+      "historical_v22a_profile_reconciled_after_fresh_read_freeze": true,
+      "existing_findings_revalidated": {
+        "HDS-001": "context_verified_ok_with_note_runtime_profile_supported_RV-002_run_33267198470"
+      },
+      "new_unique_findings": [],
+      "runtime_diagnostic_wording_refinement": {
+        "correction_doc": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_HDS_V22A_RV002_WORDING_2026-08-29.md",
+        "permanent_commit": "6f0875e80c55f6c1ac6e209c484187a41dbf3d54",
+        "behavior_changed": false,
+        "summary": "RV-002 changed only diagnostic/test wording from preferred to documented transition/future language."
+      },
+      "runtime_evidence": {
+        "evidence_id": "RV-002",
+        "revalidation_run": "33267198470",
+        "job": "99139252921",
+        "status": "PASS",
+        "scope": "deterministic DNS-SD profile classifier; no live DNS/mDNS, endpoint-reachability or browser-interoperability claim",
+        "v2_2a_checks": [
+          "_ibisip_http._tcp transition label is accepted",
+          "_http._tcp is accepted with deprecated/future-not-recommended note",
+          "TXT content + url remains required",
+          "content endpoint follows TXT url",
+          "other protocol labels remain rejected by profile logic"
+        ]
+      },
+      "next_document_id": "SMS_V2.2"
     }
   }
 }

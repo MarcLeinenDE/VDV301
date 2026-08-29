@@ -63,3 +63,27 @@ RV-002 currently labels `_ibisip_http._tcp` as `preferred` for V2.2a. Its accept
 ## Next gate
 
 Correct the audit-tool wording, rerun RV-002, then reconcile the historical V2.2a profile and close HDS V2.2a.
+## Historical V2.2a reconciliation after fresh-read freeze
+
+The independent V2.2a source state was frozen in commit `17f036c6257c5c71b94169c02905c2e80f36b847` before formal V2.2a historical reconciliation.
+
+The historical HDS profile record is directionally consistent with the independently derived transition. The current-source wording is retained more precisely here: V2.2a itself still recognises both protocol labels; `_http._tcp` is deprecated/future-not-recommended, `_ibisip_http._tcp` is the documented transition/future label, and only the future next service version after 2.2 is stated to delete `_http._tcp`.
+
+### HDS-001 — V2.2a revalidation
+
+State: `context_verified_ok_with_note_runtime_profile_supported_RV-002_run_33267198470`.
+
+Evidence chain:
+
+- official byte-pinned V2.2a publication;
+- pinned-byte visible review of the discovery table and version history;
+- absence of a dedicated `VDV-301-2.2a` release tag and absence of a dedicated HDS service XSD;
+- active falsification of the mistaken interpretations `V2.2a = future next service version` and `_ibisip_http._tcp = exclusive current requirement`;
+- RV-002 wording correction commit `6f0875e80c55f6c1ac6e209c484187a41dbf3d54`;
+- corrected deterministic RV-002 rerun `33267198470` PASS.
+
+The RV-002 correction changed only diagnostic/test wording, not acceptance or endpoint behavior. `_ibisip_http._tcp` is accepted as the transition/future label; `_http._tcp` remains accepted with a deprecation/future-not-recommended note; endpoint resolution continues to use TXT `url`.
+
+No live DNS/mDNS, endpoint reachability, or browser/content interoperability is claimed. No new V2.2a finding ID is opened.
+
+With this closure, HDS V2.1, V2.2 and V2.2a are all revalidated under the current Evidence Gate.
