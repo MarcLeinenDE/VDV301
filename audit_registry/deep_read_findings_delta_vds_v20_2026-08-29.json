@@ -1,0 +1,62 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-29",
+  "base_registry": "audit_registry/deep_read_findings_v0.1.json",
+  "document_id": "VDS_V2.0",
+  "policy": "VDS V2.0 PDF was fresh-read before the existing compositor findings and EV-103 were mapped to the exact official V2.0 schema family.",
+  "existing_finding_updates": [
+    {
+      "id": "VDS-002",
+      "effect": "Fresh V2.0 PDF page 13 presents ViewID/ViewName/ViewType together; exact official V2.0 XSD blob fcfdadd3b62a584370cae326004050b4dc832e23 uses xs:choice; EV-103 run 33111119723 confirms multi-field record rejection. Executable-confirmed."
+    },
+    {
+      "id": "VDS-003",
+      "effect": "Fresh V2.0 PDF page 14 requires ViewID + Timeout; exact official V2.0 XSD uses xs:choice; EV-103 confirms ViewID-only valid and ViewID+Timeout rejected. Executable-confirmed."
+    },
+    {
+      "id": "VDS-004",
+      "effect": "Fresh V2.0 PDF pages 14-15 present grouped SetVideoView/GetDisplayState/SetNextViewIndex responses; exact official V2.0 XSD uses xs:choice; EV-103 confirms representative multi-field responses are rejected. Executable-confirmed."
+    },
+    {
+      "id": "VDS-005",
+      "effect": "The literal Word-generated cross-reference failures visually confirmed in V1.0 are absent from the corresponding V2.0 common-service/startup/subscription prose. Mark corrected/absent in V2.0."
+    },
+    {
+      "id": "VDS-006",
+      "effect": "Persists visibly through V2.0: ViewType and State rows continue to print malformed -1:1 cardinality notation. Validation remains controlled by exact selected XSD."
+    },
+    {
+      "id": "VDS-007",
+      "effect": "Cross-document VideoDisplayService v1.1 reference-label finding remains resolved from the dedicated V1.0 source/catalog. VDS V2.0 itself does not establish a VDS V1.1 profile. Its reference page still repeats already-known VLS/VRS v1.1 errors."
+    }
+  ],
+  "new_findings": [
+    {
+      "id": "VDS-008",
+      "document_id": "VDS_V2.0",
+      "classification": "pdf_protocol_or_architecture_abbreviation_error_candidate",
+      "state": "visually_confirmed_v2_0_cross_version_persistent",
+      "confidence": "very_high",
+      "version_scope": ["VDS_V1.0", "VDS_V2.0"],
+      "summary": "The VDS abbreviation table expands RTP as 'Real Time Protocol' and SOA as 'Server Oriented Architecture'. RFC 3550 identifies RTP as the real-time transport protocol / A Transport Protocol for Real-Time Applications, while the OASIS SOA Reference Model uses Service Oriented Architecture.",
+      "normative_validation_impact": "none on XML/XSD; protocol and architecture terminology must follow the external standards rather than these erroneous expansions"
+    }
+  ],
+  "visual_evidence": {
+    "source_sha256": "c287df20d8225af2afcd37dfdb487eb4922b89ce78c287da91745d12b410c8a2",
+    "source_size_bytes": 903444,
+    "pin_run": "33226181059",
+    "render_run": "33226294383",
+    "pages": [4, 6, 11, 12, 13, 14, 15, 16],
+    "render_engine": "PyMuPDF 1.28.2",
+    "dpi": 180,
+    "artifact_digest": "sha256:a8f9a098f7bbf534d41c1586230a45518ada62c67482494d8ba9b0debb617fb1"
+  },
+  "xsd_evidence": {
+    "authority": "official_VDV-301-2.0",
+    "service_xsd_blob": "fcfdadd3b62a584370cae326004050b4dc832e23",
+    "integration_blob_same": true,
+    "dependency_family": ["IBIS-IP_common_V2.0.xsd", "IBIS-IP_Enumerations_V2.0.xsd"],
+    "executable_evidence": "EV-103 / run 33111119723"
+  }
+}

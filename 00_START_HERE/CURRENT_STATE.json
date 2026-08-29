@@ -24,16 +24,16 @@
     "pairable_pdf_xsd_units": 38,
     "pairable_pdf_xsd_first_pass_completed": 38,
     "deep_read_exhaustive_completed": 0,
-    "deep_read_needs_visual_review": 17,
-    "deep_read_textual_fresh_read_completed": 17,
-    "deep_read_in_progress": 1,
-    "deep_read_current_document_id": "VDS_V2.0",
-    "deep_read_previous_document_id": "VDS_V1.0",
-    "latest_deep_read_finding": "VDS-007",
+    "deep_read_needs_visual_review": 18,
+    "deep_read_textual_fresh_read_completed": 18,
+    "deep_read_in_progress": 0,
+    "deep_read_current_document_id": null,
+    "deep_read_previous_document_id": "VDS_V2.0",
+    "latest_deep_read_finding": "VDS-008",
     "latest_dms_finding": "DMS-007",
     "latest_common_finding": "CE-026",
     "resolved_historical_finding": "DR3012-006",
-    "resolved_cross_document_question": "VDS-007 confirms the neighboring VideoDisplayService v1.1 labels are documentation/reference-version errors; official VDV catalog identifies the 05/2017 301-2-13 publication as V1.0",
+    "resolved_cross_document_question": "VDS-007 confirms neighboring VideoDisplayService v1.1 labels are documentation/reference-version errors; official VDV catalog identifies the 05/2017 301-2-13 publication as V1.0",
     "pdf_source_registry": "audit_registry/pdf_source_registry_v0.1.json",
     "pdf_source_pin_registry": "audit_registry/pdf_source_pins_v0.1.json",
     "pdf_source_cache_policy": "docs/pdf_xsd_semantic_audit/PDF_SOURCE_CACHE_POLICY.md",
@@ -44,16 +44,38 @@
     "pdf_sources_byte_pinned": 13,
     "pinned_active_sources": ["VDV301-2_GC_V2.3", "COMMON_V2.3", "VDV301-2_GC_V2.4", "DMS_V2.2", "DMS_V2.4", "TIME_V1.0", "VLS_V1.0", "VLS_V2.0", "VRS_V1.0", "VRS_V2.0", "VRS_V2.4", "VDS_V1.0", "VDS_V2.0"],
     "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_vds_v20_2026-08-29.json",
-    "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_vds_v10_2026-08-29.json",
+    "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_vds_v20_2026-08-29.json",
     "vds_v1_0_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/VDS_V1.0.md",
+    "vds_v2_0_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/VDS_V2.0.md",
     "vds_findings_register": "docs/pdf_xsd_semantic_audit/VIDEO_DISPLAY_SERVICE_FINDINGS_REGISTER_ADDENDUM.md",
     "vds_v2_0_source_pin": {
       "sha256": "c287df20d8225af2afcd37dfdb487eb4922b89ce78c287da91745d12b410c8a2",
       "size_bytes": 903444,
       "evidence_run": "33226181059",
       "pdf_authority": "official_public_VDV_writing",
-      "xsd_authority_status": "exact_official_VDV-301-2.0_family_to_be_rechecked_after_fresh_PDF_read"
-    }
+      "xsd_authority_status": "official_VDV-301-2.0_exact_family",
+      "official_service_xsd_blob": "fcfdadd3b62a584370cae326004050b4dc832e23",
+      "integration_service_xsd_blob": "fcfdadd3b62a584370cae326004050b4dc832e23",
+      "dependency_family": ["IBIS-IP_common_V2.0.xsd", "IBIS-IP_Enumerations_V2.0.xsd"]
+    },
+    "vds_v2_0_visual_review": {
+      "fallback": "success",
+      "render_run": "33226294383",
+      "pages": [4, 6, 11, 12, 13, 14, 15, 16],
+      "render_engine": "PyMuPDF 1.28.2",
+      "artifact_digest": "sha256:a8f9a098f7bbf534d41c1586230a45518ada62c67482494d8ba9b0debb617fb1",
+      "status": "targeted_material_findings_visually_confirmed"
+    },
+    "vds_v2_0_history": {
+      "VDS-002": "fresh PDF/XSD + EV-103 executable-confirmed",
+      "VDS-003": "fresh PDF/XSD + EV-103 executable-confirmed",
+      "VDS-004": "fresh PDF/XSD + EV-103 executable-confirmed",
+      "VDS-005": "corrected/absent in V2.0",
+      "VDS-006": "persists visibly",
+      "VDS-007": "cross-document VDS v1.1 issue remains resolved; no VDS V1.1 profile",
+      "VDS-008": "new cross-version RTP/SOA abbreviation-expansion error"
+    },
+    "vds_compatibility_authority_note": "VDS V2.0 compatibility/compliance prose covering VDV301 1.0 and 2.x does not authorize using the V2.0 XSD as missing V1.0 schema authority."
   },
   "evidence": {
     "xsd_ev_completed": ["EV-001", "EV-002", "EV-101", "EV-102", "EV-103", "EV-104", "EV-105", "EV-106", "EV-107", "EV-108"],
@@ -62,7 +84,7 @@
     "latest_root_xsd_validation_run": "33197358294",
     "latest_rv_003_run": "33197358294",
     "latest_pdf_source_pin_run": "33226181059",
-    "latest_pdf_visual_render_run": "33225843645",
+    "latest_pdf_visual_render_run": "33226294383",
     "vds_v2_0_executable_evidence": "EV-103 / 33111119723"
   },
   "sdk": {
@@ -74,10 +96,11 @@
     "rule": "Findings/audit knowledge must later explain surprising validation results without silently changing normative XSD outcomes."
   },
   "next_actions": [
-    "Fresh-read byte-pinned VDS_V2.0 independently before consulting VDS-002/VDS-003/VDS-004 executable evidence.",
-    "Render material V2.0 pages from pinned bytes and check persistence/correction of VDS-005/VDS-006/VDS-007-related references.",
-    "After the independent V2.0 PDF read, select exact official VDV-301-2.0 service XSD + Common V2.0 + Enums V2.0 and map EV-103.",
-    "Keep VDS V1.0 provenance unresolved and do not backfill it with the V2.0 schema.",
+    "Byte-pin official TRAINSET_V2.1 and fresh-read it independently before consulting existing TrainSet findings/EV-104.",
+    "Establish TrainSet V2.1 document identity, operation inventories, data structures and exact XSD dependency families from its own source.",
+    "Only after the independent TrainSet V2.1 read, map TSM-002/TSD-003 and EV-104 in their exact authority contexts.",
+    "Then proceed to TRAINSET_V2.2 as the next version in the same service family.",
+    "Use pinned-byte rendering whenever interactive screenshots return cache miss.",
     "Do not decide PR/mail/remediation disposition during Deep Read unless explicitly requested."
   ]
 }
