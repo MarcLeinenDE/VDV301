@@ -120,3 +120,35 @@ Observation:
 Operation table, detailed operation description, candidate XSD and XML example use SendTelegram.
 URI example uses /AnalogRadioService/SendFFSKTelegram.
 ```
+
+## Deep Read Pass 2 current-gate reconciliation
+
+Pinned official PDF evidence and the independent fresh-read freeze `fe77b60b96e8d8aef138b71c00f44d4e409ba1f1` revalidate `ARA-001` through `ARA-004`.
+
+Current states:
+
+```text
+ARA-001  context_verified_provenance_gap_under_current_evidence_gate
+ARA-002  context_verified_pinned_pdf_internal_name_contradiction
+ARA-003  executable_confirmed_EV-105_current_route_rerun_33228250613
+ARA-004  context_verified_pinned_pdf_operation_name_inconsistency_with_candidate_xsd_support
+DRARA24-001 context_verified_pdf_uri_scheme_omission
+DRARA24-002 context_verified_grouped_editorial_typos
+```
+
+EV-105 authority refinement:
+
+```text
+original run 33111831627:
+  service blob 48fb303b...
+  Common V2.3 at that historical head was PR-30 candidate 456a7db...
+
+canonical full-suite rerun 33228250613:
+  service blob 48fb303b...
+  official Common V2.3 root 0d8926c...
+  Enumerations V2.2 2a23b5...
+  EV-105 PASS
+  50/50 root XSD compile PASS
+```
+
+The current-route rerun closes the executable dependency-route concern without creating a new evidence ID. Candidate/integration status remains unchanged; there is still no official VDV-301-2.4 release XSD authority for AnalogRadioService.

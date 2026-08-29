@@ -70,3 +70,16 @@ Visible/document-text residue includes `pre-emtion` on page 8 and `contians`, `p
 ## Fresh-read freeze result
 
 Five independent documentation observations are frozen. The strongest observation is the page-11 Transmitter name/cardinality contradiction, which is already established internally by the official PDF's own table, embedded schema image, structure diagram and XML example. Three plausible false-positive/authority inferences were actively rejected. No XSD was changed. Historical AnalogRadio findings may now be reopened solely for deduplication and Evidence-Gate revalidation.
+
+## Historical reconciliation — completed after freeze
+
+The post-freeze historical register maps cleanly to the independent observations:
+
+- `ARA-001` is revalidated as the V2.4 public-document / official-release-schema provenance gap.
+- `ARA-002` is revalidated from the pinned PDF's own contradiction: table `TransmitterType` vs embedded schema/diagram/example `Transmitter`.
+- `ARA-003` is revalidated as the 1:1 vs 0:1 cardinality mismatch. EV-105 was rerun in canonical full-suite run `33228250613` on service blob `48fb303b...` with official Common V2.3 blob `0d8926c...` and Enumerations V2.2 blob `2a23b5...`; omission and presence of `Transmitter` both validate. This remains candidate/integration evidence, not official V2.4 release conformance.
+- `ARA-004` is revalidated from the pinned PDF: operation inventory/XML example use `SendTelegram`, while the URI example uses `SendFFSKTelegram`.
+- `DRARA24-001` records the concrete URI example's omitted `http://` scheme.
+- `DRARA24-002` groups the remaining non-executable editorial spelling residue.
+
+No XSD was changed. Historical IDs were not used to generate the fresh observation list; they were opened only after freeze for deduplication and revalidation.

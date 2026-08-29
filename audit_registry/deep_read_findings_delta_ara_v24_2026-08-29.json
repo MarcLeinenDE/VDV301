@@ -1,0 +1,59 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-29",
+  "document_id": "ARA_V2.4",
+  "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+  "fresh_read_freeze": "fe77b60b96e8d8aef138b71c00f44d4e409ba1f1",
+  "executable_evidence": {
+    "evidence_id": "EV-105",
+    "checker": "tools/validate_analog_radio_ev105.py",
+    "original_run": "33111831627",
+    "current_route_rerun": "33228250613",
+    "current_route_head": "97a117a2b03fa2bc78f7fedb7eb2d31bd81ec419",
+    "result": "PASS",
+    "authority": "candidate_AnalogRadio_V2.4_service_blob_48fb303b_plus_official_Common_V2.3_0d8926c_plus_Enums_V2.2_2a23b5"
+  },
+  "revalidated_findings": {
+    "ARA-001": {
+      "state": "context_verified",
+      "classification": "schema_family_or_provenance_gap",
+      "handling": "official_schema_family_clarification_candidate"
+    },
+    "ARA-002": {
+      "state": "context_verified",
+      "classification": "pdf_table_element_name_error",
+      "handling": "official_pdf_documentation_clarification_candidate"
+    },
+    "ARA-003": {
+      "state": "executable_confirmed_EV-105_current_route_rerun_33228250613",
+      "classification": "cardinality_mismatch_candidate_xsd_more_permissive_than_pdf",
+      "handling": "candidate_schema_review_plus_documentation_clarification"
+    },
+    "ARA-004": {
+      "state": "context_verified_with_candidate_xsd_support",
+      "classification": "pdf_operation_name_error_in_uri_example",
+      "handling": "official_pdf_documentation_clarification_candidate"
+    }
+  },
+  "new_unique_findings": {
+    "DRARA24-001": {
+      "state": "context_verified",
+      "classification": "pdf_uri_example_scheme_omission",
+      "summary": "Concrete SendTelegram URI example omits http:// although the immediately preceding URI form includes it.",
+      "executable_effect": false
+    },
+    "DRARA24-002": {
+      "state": "context_verified",
+      "classification": "pdf_editorial_spelling_errors_grouped",
+      "summary": "Grouped visible/editorial residue includes AnlogRadioService, pre-emtion, contians, pre-amption and BitrateEnumerationis.",
+      "executable_effect": false
+    }
+  },
+  "rejected_suspicions": [
+    "cover-page isolated Fehler from extraction is not visible in rendered page 1",
+    "missing SendTelegram response is not independently a defect because the PDF explicitly states response not provided",
+    "official PDF reference to GitHub releases does not establish an official VDV-301-2.4 XSD release",
+    "page-11 plain 1:1 is ordinary cardinality notation and not leading-minus XML-choice notation"
+  ],
+  "deduplication": "FR-ARA24-OBS-001 reconciles to historical ARA-002 + ARA-003; FR-ARA24-OBS-002 reconciles to ARA-004; the authority analysis revalidates ARA-001; FR-ARA24-OBS-003 becomes DRARA24-001; editorial observations FR-ARA24-OBS-004/005 are grouped as DRARA24-002."
+}

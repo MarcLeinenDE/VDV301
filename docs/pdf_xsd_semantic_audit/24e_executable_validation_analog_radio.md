@@ -75,3 +75,23 @@ runtime/protocol validation profiles
 - TimeService/SNTP
 - Video RTSP/RTP boundary
 ```
+
+## Current-route revalidation under the Deep Read Evidence Gate
+
+The original EV-105 run remains provenance evidence, but its historical head still had the PR-30 candidate blob at the root path `IBIS-IP_common_V2.3.xsd`.
+
+A later canonical full-suite run reran the same checker after the Common V2.3 authority split:
+
+```text
+run: 33228250613
+job: 99036090357
+head: 97a117a2b03fa2bc78f7fedb7eb2d31bd81ec419
+AnalogRadioService V2.4: 48fb303b80936d2d762f0889ce0c359e04c16e5b
+Common V2.3 official:     0d8926c4063c12de9a5e68b6f0addaab35a55dc1
+Enumerations V2.2:       2a23b512379b18e8f122ac1272cef8229fb86283
+result: PASS
+```
+
+The run explicitly compiled `IBIS-IP_AnalogRadioService_V2.4.xsd`, confirmed `Transmitter` 0:1, accepted SendTelegram both without and with Transmitter, and the same full suite compiled 50/50 repository root XSDs.
+
+Therefore ARA-003 is executable-confirmed under the current Evidence Gate without allocating a new EV ID. The result is still candidate/integration behavior only and must not be described as official V2.4 release conformance.

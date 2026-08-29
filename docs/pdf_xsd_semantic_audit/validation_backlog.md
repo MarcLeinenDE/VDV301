@@ -12,7 +12,7 @@ EV-101           run 33109367265  PASS  PCS-001
 EV-102           run 33109768872  PASS  CE-018
 EV-103           run 33111119723  PASS  video compositors
 EV-104           run 33111644388  PASS  TrainSet V2.2 context/root evidence
-EV-105           run 33111831627  PASS  AnalogRadio candidate cardinality
+EV-105           run 33111831627  PASS  AnalogRadio candidate cardinality; current-route rerun 33228250613 PASS
 EV-106           run 33169314332  PASS  Common V2.3 official/candidate authority split
 EV-107           run 33181833930  PASS  official DMS V2.2 Deep Read declarations
 EV-108           run 33182963733  PASS  candidate/integration DMS V2.4 Deep Read declarations
@@ -589,3 +589,20 @@ DRSMS22-004 context_verified; missing Req./Resp. table labels
 CE-012, CE-018 and CE-019 remain in the Common lane and are not revalidated by EV-116 or this service closure.
 
 SMS V2.2 Deep Read/reconciliation is complete. Next document: `ARA_V2.4`.
+
+## AnalogRadioService V2.4 Deep Read closure
+
+The official V2.4 PDF is byte-pinned and independently fresh-read. The executable XSD comparison remains candidate/integration-only because no official VDV-301-2.4 release tag/service XSD exists.
+
+Current-gate reconciliation:
+
+```text
+ARA-001 context_verified provenance gap
+ARA-002 context_verified TransmitterType-vs-Transmitter PDF inconsistency
+ARA-003 executable_confirmed EV-105 current-route rerun 33228250613
+ARA-004 context_verified SendFFSKTelegram-vs-SendTelegram URI inconsistency
+DRARA24-001 context_verified missing http:// in concrete URI example
+DRARA24-002 context_verified grouped editorial spelling residue
+```
+
+No new EV ID is required: canonical full-suite run `33228250613` already reran EV-105 with the current official Common V2.3 root and passed.

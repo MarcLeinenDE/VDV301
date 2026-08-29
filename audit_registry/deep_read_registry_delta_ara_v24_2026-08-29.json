@@ -4,7 +4,7 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "ARA_V2.4": {
-      "state": "independent_fresh_read_frozen_pending_historical_reconciliation",
+      "state": "historical_reconciliation_complete",
       "official_url": "https://www.vdv.de/301-2-19-sde-v2.4-analogradioservice.pdfx",
       "publication": "VDV-Schrift 301-2-19, AnalogRadioService V2.4, 01/2023",
       "source_pin": {
@@ -37,7 +37,15 @@
         "artifact_digest": "sha256:06c2ce302b1b98d5bbe22265806ea605bbc2abe62327b8d809a0e27da19592a3",
         "pdf_page_count": 16,
         "all_pages_rendered": true,
-        "visible_pages_reviewed": [1, 9, 10, 11, 12, 13, 14],
+        "visible_pages_reviewed": [
+          1,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
         "fulltext_sha256": "de4be3a9282310cfccbca7244bfd5e85b04b493c34e74f99494cccc2c35e7fe5"
       },
       "independent_observations": [
@@ -53,8 +61,29 @@
         "official PDF reference to GitHub releases does not establish an official VDV-301-2.4 XSD release",
         "page-11 plain 1:1 is ordinary cardinality notation and not leading-minus VDV XML-choice notation"
       ],
-      "historical_reconciliation_status": "now_allowed_after_freeze",
-      "fresh_read_report": "docs/pdf_xsd_semantic_audit/deep_read/ARA_V2.4.md"
+      "historical_reconciliation_status": "complete_after_independent_fresh_read_freeze",
+      "fresh_read_report": "docs/pdf_xsd_semantic_audit/deep_read/ARA_V2.4.md",
+      "historical_findings_opened_after_freeze": true,
+      "historical_reconciliation": {
+        "ARA-001": "context_verified_provenance_gap_under_current_evidence_gate",
+        "ARA-002": "context_verified_pinned_pdf_internal_name_contradiction",
+        "ARA-003": "executable_confirmed_EV-105_current_route_rerun_33228250613",
+        "ARA-004": "context_verified_pinned_pdf_operation_name_inconsistency_with_candidate_xsd_support",
+        "DRARA24-001": "context_verified_pdf_uri_scheme_omission",
+        "DRARA24-002": "context_verified_grouped_editorial_typos"
+      },
+      "ev105_current_route_revalidation": {
+        "original_run": "33111831627",
+        "original_head": "86e3592968f24cfa59e05ace625f64886ca3ae89",
+        "current_route_rerun": "33228250613",
+        "current_route_head": "97a117a2b03fa2bc78f7fedb7eb2d31bd81ec419",
+        "service_blob": "48fb303b80936d2d762f0889ce0c359e04c16e5b",
+        "common_v2_3_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+        "enumerations_v2_2_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+        "result": "PASS",
+        "authority": "candidate_integration_service_plus_official_common_v2.3_dependency",
+        "official_release_conformance": false
+      }
     }
   }
 }

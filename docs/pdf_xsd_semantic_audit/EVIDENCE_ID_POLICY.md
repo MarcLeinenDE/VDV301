@@ -47,6 +47,11 @@ Existing EV document names, historical workflow run IDs and historical tool name
 Authority guards:
 
 ```text
+EV-105 current-route revalidation:
+The original EV-105 run 33111831627 tested AnalogRadioService blob 48fb303b80936d2d762f0889ce0c359e04c16e5b while the root Common V2.3 path still held PR-30 candidate blob 456a7db179ce14bc3f04e2bc05e42e16545fb0c5.
+Canonical full-suite run 33228250613 reran the same EV-105 checker with the same service blob but official Common V2.3 blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 plus Enumerations V2.2 blob 2a23b512379b18e8f122ac1272cef8229fb86283; EV-105 and the 50-root compile both PASS.
+This closes the current-route executable dependency concern without a new EV ID. AnalogRadioService V2.4 remains candidate/integration material and EV-105 is not official-release V2.4 conformance evidence.
+
 EV-108:
 The public DMS V2.4 PDF is an official VDV writing.
 The DMS V2.4 XSD checked by EV-108 is candidate/integration material in dev/schema-integration.
