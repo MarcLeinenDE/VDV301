@@ -4,7 +4,7 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "HDS_V2.2": {
-      "state": "source_pinned_authority_established_pending_fresh_read",
+      "state": "fresh_read_visible_review_complete_pending_historical_reconciliation",
       "official_url": "https://www.vdv.de/301-2-17-sdes-v2-2-htmldisplayservice.pdfx",
       "publication": "VDV-Schrift 301-2-17, HTMLDisplayService V2.2, 08/2019",
       "historical_findings_opened_during_fresh_read": false,
@@ -24,7 +24,52 @@
         "xsd_boundary": "No dedicated HDS service XSD is selected or inferred."
       },
       "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
-      "fresh_read_rule": "Independently derive V2.2 behavior from the pinned V2.2 source before reconciling historical V2.2 profile notes."
+      "fresh_read_rule": "Independently derive V2.2 behavior from the pinned V2.2 source before reconciling historical V2.2 profile notes.",
+      "fresh_read_started": "2026-08-29",
+      "textual_fresh_read_complete": true,
+      "historical_context_note": "The broader historical HDS block had already been seen during the prior V2.1 reconciliation. For this V2.2 pass, no historical V2.2 statement was used as factual authority: all V2.2 observations below were independently re-derived from the pinned V2.2 bytes before V2.2 reconciliation.",
+      "historical_v22_profile_not_used_as_source_during_fresh_read": true,
+      "visual_evidence": {
+        "interactive_screenshot_result": "cache_miss_fallback_used",
+        "pinned_byte_render_run": "33266588436",
+        "render_job": "99137608617",
+        "artifact_id": "9718826204",
+        "artifact_zip_sha256": "54ae8617da6f26f31a855925f54af0059d7dec1001c0932ed75f4bee4d6e1267",
+        "fulltext_sha256": "c0db2e41ddaf56ac90b8f2e51957ed2190923e859ad5754ea4db989d79ea745d",
+        "pages_reviewed": [
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "page_png_sha256": {
+          "7": "1d7064db8f4ebf5d7e37d9dd177bd9af8a37e49f6deaf688debefbef2851e39f",
+          "8": "5f3899e84db643ec680e1048ae9dc630f5d474cf189cf93c4dcd3f276e145956",
+          "9": "42d98d492e9cae5784f05c4d53630d8c45766589e5e6962eaa7c0b17e52e7d06",
+          "10": "fd4ddefa0ac65aaa24ad1af763feac6dd44d12a73d20dada8f3968ed9826a251",
+          "11": "4f6e8bc0707ae42598dbdb6cce92d1847978e66e55ed5a9a4aaae0099e332d98"
+        },
+        "status": "visible_review_complete_for_independent_fresh_read"
+      },
+      "fresh_observations": [
+        "The publication again states that HtmlDisplayService defines no own protocol and uses DNS-SD plus HTTP/browser delivery.",
+        "V2.2 publishes service name HtmlDisplayService over _http._tcp.",
+        "The V2.2 TXT record contains content and url.",
+        "TXT url contains the access URL and may also contain query or fragment components.",
+        "TXT content remains project-specific and not standardized by the publication.",
+        "Multiple URLs require separate DNS-SD entries with corresponding content names.",
+        "SRV port is still published but explicitly has no meaning for the content access address; SRV host identifies the publishing device.",
+        "The publication imposes no HTTP-content requirements beyond browser/provider interoperability being agreed between suppliers.",
+        "The V2.2 version history explicitly records new TXT url replacing host, port and path for access-address construction.",
+        "The official VDV-301-2.2 tag contains no dedicated HtmlDisplayService service XSD."
+      ],
+      "active_falsification": [
+        "Potential contradiction rejected: version-history wording that url replaces host/port/path does not mean SRV host/port records disappear; the main profile still lists them and assigns publisher/discovery-only roles.",
+        "Potential hidden-XSD inference rejected: foreword wording about specific data structures is insufficient to establish an XML contract, and no dedicated HDS schema exists in the exact official tag."
+      ],
+      "fresh_findings": [],
+      "historical_reconciliation": "pending_after_V2.2_fresh_read_freeze"
     }
   }
 }
