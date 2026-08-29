@@ -26,8 +26,8 @@
     "deep_read_exhaustive_completed": 0,
     "deep_read_needs_visual_review": 17,
     "deep_read_textual_fresh_read_completed": 17,
-    "deep_read_in_progress": 0,
-    "deep_read_current_document_id": null,
+    "deep_read_in_progress": 1,
+    "deep_read_current_document_id": "VDS_V2.0",
     "deep_read_previous_document_id": "VDS_V1.0",
     "latest_deep_read_finding": "VDS-007",
     "latest_dms_finding": "DMS-007",
@@ -41,36 +41,18 @@
     "pdf_visual_render_fallback": "docs/pdf_xsd_semantic_audit/PDF_VISUAL_RENDER_FALLBACK.md",
     "pdf_visual_renderer": "tools/render_vdv_pdf_pages.py",
     "pdf_visual_render_rule": "interactive screenshot cache miss is not a source failure; render exact byte-pinned source independently and inspect visible output before promoting visual status",
-    "pdf_sources_byte_pinned": 12,
-    "pinned_active_sources": ["VDV301-2_GC_V2.3", "COMMON_V2.3", "VDV301-2_GC_V2.4", "DMS_V2.2", "DMS_V2.4", "TIME_V1.0", "VLS_V1.0", "VLS_V2.0", "VRS_V1.0", "VRS_V2.0", "VRS_V2.4", "VDS_V1.0"],
-    "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_vds_v10_2026-08-29.json",
+    "pdf_sources_byte_pinned": 13,
+    "pinned_active_sources": ["VDV301-2_GC_V2.3", "COMMON_V2.3", "VDV301-2_GC_V2.4", "DMS_V2.2", "DMS_V2.4", "TIME_V1.0", "VLS_V1.0", "VLS_V2.0", "VRS_V1.0", "VRS_V2.0", "VRS_V2.4", "VDS_V1.0", "VDS_V2.0"],
+    "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_vds_v20_2026-08-29.json",
     "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_vds_v10_2026-08-29.json",
     "vds_v1_0_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/VDS_V1.0.md",
     "vds_findings_register": "docs/pdf_xsd_semantic_audit/VIDEO_DISPLAY_SERVICE_FINDINGS_REGISTER_ADDENDUM.md",
-    "vrs_v2_4_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/VRS_V2.4.md",
-    "vds_v1_0_source_pin": {
-      "sha256": "9280cc239cf71bb158ab5941b522a2c4c822420e07ed44f4d4111d9689418480",
-      "size_bytes": 1202943,
-      "evidence_run": "33225713193",
+    "vds_v2_0_source_pin": {
+      "sha256": "c287df20d8225af2afcd37dfdb487eb4922b89ce78c287da91745d12b410c8a2",
+      "size_bytes": 903444,
+      "evidence_run": "33226181059",
       "pdf_authority": "official_public_VDV_writing",
-      "xsd_authority_status": "no_exact_official_V1.0_service_xsd_confirmed_in_checked_repository_history"
-    },
-    "vds_v1_0_visual_review": {
-      "fallback": "success",
-      "render_run": "33225843645",
-      "pages": [4, 37, 38, 39, 40, 41, 42, 43, 44, 45],
-      "render_engine": "PyMuPDF 1.28.2",
-      "artifact_digest": "sha256:ff288301329a8fc3ea7e5e1fa568f06b0b6b5c4e76270f9c720a3a60eb29c9cd",
-      "status": "targeted_material_findings_visually_confirmed"
-    },
-    "vds_v1_0_history": {
-      "VDS-001": "strongly confirmed provenance gap",
-      "VDS-002": "V1.0 grouped ViewCapabilities semantics added as historical evidence only; executable scope remains V2.0",
-      "VDS-003": "V1.0 ViewID+Timeout semantics added as historical evidence only; executable scope remains V2.0",
-      "VDS-004": "V1.0 grouped response semantics added as historical evidence only; executable scope remains V2.0",
-      "VDS-005": "visually confirmed broken Word cross references",
-      "VDS-006": "new invalid -1:1 printed cardinality finding",
-      "VDS-007": "new cross-document VideoDisplayService v1.1 reference-version label finding"
+      "xsd_authority_status": "exact_official_VDV-301-2.0_family_to_be_rechecked_after_fresh_PDF_read"
     }
   },
   "evidence": {
@@ -79,7 +61,7 @@
     "latest_profile_generator_run": "33197358294",
     "latest_root_xsd_validation_run": "33197358294",
     "latest_rv_003_run": "33197358294",
-    "latest_pdf_source_pin_run": "33225713193",
+    "latest_pdf_source_pin_run": "33226181059",
     "latest_pdf_visual_render_run": "33225843645",
     "vds_v2_0_executable_evidence": "EV-103 / 33111119723"
   },
@@ -92,11 +74,10 @@
     "rule": "Findings/audit knowledge must later explain surprising validation results without silently changing normative XSD outcomes."
   },
   "next_actions": [
-    "Byte-pin official VDS_V2.0 and fresh-read it independently against its exact official V2.0 XSD family.",
-    "Re-evaluate VDS-002/VDS-003/VDS-004 only after the V2.0 PDF read, then map EV-103 to that exact authority family.",
-    "Check whether VDS-005/VDS-006 and the reference-label defects persist or are corrected in V2.0.",
-    "Keep service compatibility prose separate from schema-version substitution authority.",
-    "Use pinned-byte rendering whenever interactive screenshots return cache miss.",
+    "Fresh-read byte-pinned VDS_V2.0 independently before consulting VDS-002/VDS-003/VDS-004 executable evidence.",
+    "Render material V2.0 pages from pinned bytes and check persistence/correction of VDS-005/VDS-006/VDS-007-related references.",
+    "After the independent V2.0 PDF read, select exact official VDV-301-2.0 service XSD + Common V2.0 + Enums V2.0 and map EV-103.",
+    "Keep VDS V1.0 provenance unresolved and do not backfill it with the V2.0 schema.",
     "Do not decide PR/mail/remediation disposition during Deep Read unless explicitly requested."
   ]
 }
