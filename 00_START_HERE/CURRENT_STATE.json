@@ -15,7 +15,7 @@
     "root_xsd_count_current": 50,
     "non_root_semantic_schema_variants_current": 1,
     "schema_variant_registry": "audit_registry/schema_variant_registry_v0.1.json",
-    "root_xsd_count_current_execution_status": "executed_successfully_in_strengthened_RV003_run_33197358294"
+    "root_xsd_count_current_execution_status": "executed_successfully_in_full_suite_run_33228250613"
   },
   "audit": {
     "public_physical_pdf_links": 50,
@@ -24,12 +24,13 @@
     "pairable_pdf_xsd_units": 38,
     "pairable_pdf_xsd_first_pass_completed": 38,
     "deep_read_exhaustive_completed": 0,
-    "deep_read_needs_visual_review": 18,
-    "deep_read_textual_fresh_read_completed": 18,
-    "deep_read_in_progress": 1,
-    "deep_read_current_document_id": "TRAINSET_V2.1",
-    "deep_read_previous_document_id": "VDS_V2.0",
-    "latest_deep_read_finding": "VDS-008",
+    "deep_read_needs_visual_review": 19,
+    "deep_read_textual_fresh_read_completed": 19,
+    "deep_read_in_progress": 0,
+    "deep_read_current_document_id": null,
+    "deep_read_previous_document_id": "TRAINSET_V2.1",
+    "deep_read_next_document_id": "TRAINSET_V2.2",
+    "latest_deep_read_finding": "DRTRAINSET21-003",
     "latest_dms_finding": "DMS-007",
     "latest_common_finding": "CE-026",
     "resolved_historical_finding": "DR3012-006",
@@ -50,6 +51,12 @@
       "VDS-003": "executable-confirmed; unaffected",
       "VDS-004": "executable-confirmed; State is a/-1:1 while other response fields are ordinary multiplicities"
     },
+    "finding_evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+    "legacy_finding_revalidation_required": true,
+    "legacy_finding_revalidation_state": "planned_after_deep_read_pass_2",
+    "legacy_finding_revalidation_plan": "docs/pdf_xsd_semantic_audit/LEGACY_FINDING_REVALIDATION_PLAN.md",
+    "finding_revalidation_registry": "audit_registry/finding_revalidation_registry_v0.1.json",
+    "finding_revalidation_rule": "No grandfathering. After Deep Read Pass 2 freeze the full finding inventory and revalidate every finding not already explicitly revalidated under the current Evidence Gate; require zero pending SDK-relevant findings before baseline freeze.",
     "pdf_source_registry": "audit_registry/pdf_source_registry_v0.1.json",
     "pdf_source_pin_registry": "audit_registry/pdf_source_pins_v0.1.json",
     "pdf_source_cache_policy": "docs/pdf_xsd_semantic_audit/PDF_SOURCE_CACHE_POLICY.md",
@@ -60,36 +67,43 @@
     "pdf_sources_byte_pinned": 14,
     "pinned_active_sources": ["VDV301-2_GC_V2.3", "COMMON_V2.3", "VDV301-2_GC_V2.4", "DMS_V2.2", "DMS_V2.4", "TIME_V1.0", "VLS_V1.0", "VLS_V2.0", "VRS_V1.0", "VRS_V2.0", "VRS_V2.4", "VDS_V1.0", "VDS_V2.0", "TRAINSET_V2.1"],
     "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_trainset_v21_2026-08-29.json",
-    "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_vds_v20_2026-08-29.json",
-    "vds_v2_0_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/VDS_V2.0.md",
-    "vds_findings_register": "docs/pdf_xsd_semantic_audit/VIDEO_DISPLAY_SERVICE_FINDINGS_REGISTER_ADDENDUM.md",
+    "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_trainset_v21_2026-08-29.json",
+    "trainset_v2_1_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.1.md",
+    "trainset_findings_register": "docs/pdf_xsd_semantic_audit/TRAIN_SET_SERVICES_FINDINGS_REGISTER_ADDENDUM.md",
     "trainset_v2_1_source_pin": {
       "sha256": "8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e",
       "size_bytes": 1708401,
       "evidence_run": "33226637254",
       "pdf_authority": "official_public_VDV_writing",
-      "xsd_authority_status": "to_be_established_independently_per_service_lane"
+      "xsd_authority_status": "official_VDV-301-2.1_exact_service_families"
     },
-    "vds_v2_0_history": {
-      "VDS-002": "fresh PDF/XSD + EV-103 executable-confirmed; PDF choice notation corrected",
-      "VDS-003": "fresh PDF/XSD + EV-103 executable-confirmed",
-      "VDS-004": "fresh PDF/XSD + EV-103 executable-confirmed; PDF choice notation corrected",
-      "VDS-005": "corrected/absent in V2.0",
-      "VDS-006": "refined: incomplete/degenerate choice-notation application, not invalid cardinality",
-      "VDS-007": "cross-document VDS v1.1 issue remains resolved; no VDS V1.1 profile",
-      "VDS-008": "cross-version RTP/SOA abbreviation-expansion error"
-    }
+    "trainset_v2_1_authority": {
+      "TSI_blob": "897f373e31b76aa23d8bc206854b042524e4c102",
+      "TSM_blob": "add9d1cb37e5759ff7a77855b239108d38373206",
+      "TSD_blob": "c2cdb73fcae265a2e4e0349ac6072e3548e36d8b"
+    },
+    "trainset_v2_1_findings": {
+      "TSI-001": "executable_confirmed_EV-109",
+      "TSM-001": "executable_confirmed_EV-109",
+      "TSD-001": "executable_confirmed_EV-109_with_generic_subscription_context",
+      "DRTRAINSET21-001": "context_verified_pdf_cross_reference",
+      "DRTRAINSET21-002": "context_verified_wrong_service_reference",
+      "DRTRAINSET21-003": "context_verified_operation_name_typo"
+    },
+    "trainset_v2_1_rejected_observation": "coupledSide/CoupledSide casing suspicion rejected; visible original and exact XSD both use CoupledSide"
   },
   "evidence": {
-    "xsd_ev_completed": ["EV-001", "EV-002", "EV-101", "EV-102", "EV-103", "EV-104", "EV-105", "EV-106", "EV-107", "EV-108"],
+    "xsd_ev_completed": ["EV-001", "EV-002", "EV-101", "EV-102", "EV-103", "EV-104", "EV-105", "EV-106", "EV-107", "EV-108", "EV-109"],
     "runtime_rv_completed": ["RV-001", "RV-002", "RV-003", "RV-004"],
-    "latest_profile_generator_run": "33197358294",
-    "latest_root_xsd_validation_run": "33197358294",
-    "latest_rv_003_run": "33197358294",
+    "latest_profile_generator_run": "33228250613",
+    "latest_root_xsd_validation_run": "33228250613",
+    "latest_full_suite_run": "33228250613",
+    "latest_rv_003_run": "33228250613",
     "latest_pdf_source_pin_run": "33226637254",
-    "latest_pdf_visual_render_run": "33226294383",
+    "latest_pdf_visual_render_run": "trainset_v21_pinned_byte_render",
     "vds_v2_0_executable_evidence": "EV-103 / 33111119723",
-    "trainset_executable_evidence_deferred": "EV-104 must not be mapped until independent TRAINSET_V2.1 fresh read is complete"
+    "trainset_v2_1_executable_evidence": "EV-109 / 33228250613",
+    "trainset_v2_2_historical_evidence": "EV-104 / 33111644388; must be re-evaluated only after independent TRAINSET_V2.2 fresh read"
   },
   "sdk": {
     "status": "baseline_v0.1_prework_only_during_audit",
@@ -97,16 +111,18 @@
     "manifest": "sdk_manifest/manifest_v0.1.json",
     "routing_overrides": "sdk_manifest/routing_overrides_v0.1.json",
     "schema_variant_overlays": "sdk_manifest/schema_variant_overlays_v0.1.json",
-    "rule": "Findings/audit knowledge must later explain surprising validation results without silently changing normative XSD outcomes."
+    "finding_knowledge_ready": false,
+    "finding_knowledge_ready_requires_legacy_revalidation": true,
+    "rule": "Findings/audit knowledge must later explain surprising validation results without silently changing normative XSD outcomes. No unrevalidated finding may drive SDK accept/reject/routing behaviour."
   },
   "next_actions": [
-    "Fresh-read byte-pinned TRAINSET_V2.1 independently before consulting existing TrainSet findings or EV-104.",
-    "Establish operation inventories and response/root semantics separately for TrainSetInformationService, TrainSetManagementService and TrainSetDataService.",
-    "Establish exact V2.1 service XSD files and dependency families only after the document-first read.",
-    "Apply the corrected VDV choice-notation rule whenever TrainSet or later PDFs use leading-minus Min:Max forms.",
-    "Use pinned-byte rendering for material operation/structure pages and any interactive screenshot cache miss.",
-    "Only after independent read, compare TSM-002/TSD-003 and EV-104.",
-    "Then proceed to TRAINSET_V2.2.",
+    "Byte-pin official TRAINSET_V2.2 before authoritative Fresh Read.",
+    "Fresh-read TRAINSET_V2.2 independently before consulting TSM-002/TSD-002/TSD-003 or EV-104 conclusions.",
+    "Establish exact V2.2 TrainSet service XSD blobs/dependency families from official VDV-301-2.2 authority.",
+    "Apply FINDING_EVIDENCE_GATE including original visual context, definition provenance, exact authority, full context and active disproof attempt.",
+    "Only after the independent V2.2 read, compare TSM-002/TSD-002/TSD-003 and EV-104.",
+    "Continue all remaining Deep Reads.",
+    "After Deep Read Pass 2 freeze the complete finding inventory and run mandatory legacy finding revalidation before SDK/remediation baseline freeze.",
     "Do not decide PR/mail/remediation disposition during Deep Read unless explicitly requested."
   ]
 }
