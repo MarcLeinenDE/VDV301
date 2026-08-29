@@ -47,6 +47,8 @@ jobs:
           dms_v22_status=$?
           python tools/validate_dms_v24_deep_read_ev108.py > audit-results/ev_108_dms_v24_deep_read.log 2>&1
           dms_v24_status=$?
+          python tools/validate_trainset_v21_ev109.py > audit-results/ev_109_trainset_v21_deep_read.log 2>&1
+          trainset_v21_status=$?
           python tools/validate_http_runtime_ev25b.py > audit-results/rv_001_http_runtime.log 2>&1
           http_status=$?
           python tools/validate_discovery_runtime_rv002.py > audit-results/rv_002_discovery_runtime.log 2>&1
@@ -72,6 +74,7 @@ jobs:
             echo "ev_106_common_v23_variant,official_Common_V2.3_plus_explicit_PR30_candidate_overlay,CE-020,$common_v23_variant_status"
             echo "ev_107_dms_v22_deep_read,official_DMS_V2.2_exact_stored_XSD,DMS_V2.2_deep_read_findings,$dms_v22_status"
             echo "ev_108_dms_v24_deep_read,candidate_integration_DMS_V2.4_XSD,DMS_V2.4_deep_read_findings,$dms_v24_status"
+            echo "ev_109_trainset_v21_deep_read,official_TrainSet_V2.1_exact_service_families,TSI_001_TSM_001_TSD_001,$trainset_v21_status"
             echo "rv_001_http_runtime,VDV_HTTP_profile_plus_RFC9110_RFC7303,deterministic_classifier,$http_status"
             echo "rv_002_discovery_runtime,VDV_discovery_profiles_plus_RFC6763,deterministic_classifier,$discovery_status"
             echo "rv_003_time_sntp,VDV_TimeService_V1.0_plus_RFC4330,deterministic_classifier,$time_status"
@@ -95,6 +98,7 @@ jobs:
           echo "$common_v23_variant_status" > audit-results/common_v23_variant_status.txt
           echo "$dms_v22_status" > audit-results/dms_v22_status.txt
           echo "$dms_v24_status" > audit-results/dms_v24_status.txt
+          echo "$trainset_v21_status" > audit-results/trainset_v21_status.txt
           echo "$http_status" > audit-results/http_status.txt
           echo "$discovery_status" > audit-results/discovery_status.txt
           echo "$time_status" > audit-results/time_status.txt
@@ -123,14 +127,15 @@ jobs:
           common_v23_variant_status=$(cat audit-results/common_v23_variant_status.txt)
           dms_v22_status=$(cat audit-results/dms_v22_status.txt)
           dms_v24_status=$(cat audit-results/dms_v24_status.txt)
+          trainset_v21_status=$(cat audit-results/trainset_v21_status.txt)
           http_status=$(cat audit-results/http_status.txt)
           discovery_status=$(cat audit-results/discovery_status.txt)
           time_status=$(cat audit-results/time_status.txt)
           video_runtime_status=$(cat audit-results/video_runtime_status.txt)
           sdk_manifest_status=$(cat audit-results/sdk_manifest_status.txt)
           sdk_profile_status=$(cat audit-results/sdk_profile_status.txt)
-          echo "root_status=$root_status legacy_status=$legacy_status pcs_status=$pcs_status ce018_status=$ce018_status video_status=$video_status trainset_status=$trainset_status analog_status=$analog_status common_v23_variant_status=$common_v23_variant_status dms_v22_status=$dms_v22_status dms_v24_status=$dms_v24_status http_status=$http_status discovery_status=$discovery_status time_status=$time_status video_runtime_status=$video_runtime_status sdk_manifest_status=$sdk_manifest_status sdk_profile_status=$sdk_profile_status"
-          if [ "$root_status" -ne 0 ] || [ "$legacy_status" -ne 0 ] || [ "$pcs_status" -ne 0 ] || [ "$ce018_status" -ne 0 ] || [ "$video_status" -ne 0 ] || [ "$trainset_status" -ne 0 ] || [ "$analog_status" -ne 0 ] || [ "$common_v23_variant_status" -ne 0 ] || [ "$dms_v22_status" -ne 0 ] || [ "$dms_v24_status" -ne 0 ] || [ "$http_status" -ne 0 ] || [ "$discovery_status" -ne 0 ] || [ "$time_status" -ne 0 ] || [ "$video_runtime_status" -ne 0 ] || [ "$sdk_manifest_status" -ne 0 ] || [ "$sdk_profile_status" -ne 0 ]; then
+          echo "root_status=$root_status legacy_status=$legacy_status pcs_status=$pcs_status ce018_status=$ce018_status video_status=$video_status trainset_status=$trainset_status analog_status=$analog_status common_v23_variant_status=$common_v23_variant_status dms_v22_status=$dms_v22_status dms_v24_status=$dms_v24_status trainset_v21_status=$trainset_v21_status http_status=$http_status discovery_status=$discovery_status time_status=$time_status video_runtime_status=$video_runtime_status sdk_manifest_status=$sdk_manifest_status sdk_profile_status=$sdk_profile_status"
+          if [ "$root_status" -ne 0 ] || [ "$legacy_status" -ne 0 ] || [ "$pcs_status" -ne 0 ] || [ "$ce018_status" -ne 0 ] || [ "$video_status" -ne 0 ] || [ "$trainset_status" -ne 0 ] || [ "$analog_status" -ne 0 ] || [ "$common_v23_variant_status" -ne 0 ] || [ "$dms_v22_status" -ne 0 ] || [ "$dms_v24_status" -ne 0 ] || [ "$trainset_v21_status" -ne 0 ] || [ "$http_status" -ne 0 ] || [ "$discovery_status" -ne 0 ] || [ "$time_status" -ne 0 ] || [ "$video_runtime_status" -ne 0 ] || [ "$sdk_manifest_status" -ne 0 ] || [ "$sdk_profile_status" -ne 0 ]; then
             echo "Validation evidence contains failures; inspect uploaded logs."
             exit 1
           else
