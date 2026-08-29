@@ -1,0 +1,21 @@
+name: temp-door-v21-ev111
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+
+permissions:
+  contents: read
+
+jobs:
+  ev111:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check lxml
+      - name: Run EV-111
+        run: python tools/validate_door_v21_ev111.py
