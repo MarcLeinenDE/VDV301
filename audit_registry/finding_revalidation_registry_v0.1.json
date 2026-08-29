@@ -1,0 +1,59 @@
+{
+  "registry_version": "0.1",
+  "date": "2026-08-29",
+  "state": "planned_after_deep_read_pass_2",
+  "policy": "no_grandfathering",
+  "trigger": "after_deep_read_pass_2_before_finding_baseline_freeze_sdk_or_remediation",
+  "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+  "plan": "docs/pdf_xsd_semantic_audit/LEGACY_FINDING_REVALIDATION_PLAN.md",
+  "scope": {
+    "include_all_existing_findings": true,
+    "inventory_freezes_after_deep_read": true,
+    "skip_only_if_explicitly_revalidated_under_current_evidence_gate": true,
+    "sources": [
+      "docs/pdf_xsd_semantic_audit/findings.md",
+      "docs/pdf_xsd_semantic_audit/*_FINDINGS_REGISTER_ADDENDUM.md",
+      "audit_registry/deep_read_findings_v0.1.json",
+      "audit_registry/deep_read_findings_delta_*.json",
+      "audit correction and supersession overlays",
+      "EV/RV evidence records",
+      "surviving first-pass findings"
+    ]
+  },
+  "allowed_states": [
+    "pending",
+    "source_verified",
+    "context_verified",
+    "executable_confirmed",
+    "contextual_not_defect",
+    "withdrawn",
+    "unresolved",
+    "superseded"
+  ],
+  "required_checks": [
+    "original_source",
+    "definition_provenance",
+    "exact_authority_route",
+    "full_semantic_context",
+    "active_disproof_attempt",
+    "executable_evidence_when_validation_behavior_is_material"
+  ],
+  "inventory": {
+    "state": "deferred_until_deep_read_completion",
+    "reason": "The finding set is still changing during Deep Read Pass 2; final inventory must include additions, refinements, withdrawals and supersessions produced by the remaining document reads.",
+    "entries": []
+  },
+  "sdk_readiness": {
+    "finding_knowledge_ready": false,
+    "requires_zero_pending": true,
+    "requires_zero_unreconciled_duplicates_or_supersessions": true,
+    "requires_zero_unresolved_sdk_affecting_findings": true,
+    "requires_executable_confirmation_for_testable_xml_behavior_claims": true,
+    "selected_xsd_remains_normative_authority": true
+  },
+  "remediation_readiness": {
+    "ready": false,
+    "requires_revalidation_completion": true,
+    "official_facing_action_requires_separate_explicit_decision": true
+  }
+}
