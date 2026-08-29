@@ -1,0 +1,58 @@
+name: temp-correct-hds-v22a-rv002-wording
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths: ['.github/workflows/temp-correct-hds-v22a-rv002-wording.yml']
+permissions:
+  contents: write
+jobs:
+  correct:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Refine RV-002 wording without behavior change
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          runtime_p=Path('tools/runtime_discovery_profile.py')
+          text=runtime_p.read_text(encoding='utf-8')
+          replacements={
+            '"V2.2a accepts the legacy _http._tcp label but marks it deprecated."': '"V2.2a accepts _http._tcp but marks it deprecated/future-not-recommended."',
+            '"V2.2a uses the IBIS-IP HTTP protocol label."': '"V2.2a recognises _ibisip_http._tcp as the documented transition/future protocol label."',
+            'expected="_ibisip_http._tcp (preferred) or deprecated _http._tcp",': 'expected="_ibisip_http._tcp transition/future label or _http._tcp (deprecated/future-not-recommended)",'
+          }
+          for old,new in replacements.items():
+            if text.count(old)!=1:
+              raise SystemExit(f'expected exactly one runtime wording occurrence: {old!r}; got {text.count(old)}')
+            text=text.replace(old,new)
+          runtime_p.write_text(text,encoding='utf-8')
+
+          test_p=Path('tools/validate_discovery_runtime_rv002.py')
+          t=test_p.read_text(encoding='utf-8')
+          old='expect("HDS V2.2a preferred _ibisip_http._tcp profile passes", error_count(h22a) == 0)'
+          new='expect("HDS V2.2a _ibisip_http._tcp transition label passes", error_count(h22a) == 0)'
+          if t.count(old)!=1:
+            raise SystemExit(f'expected exactly one RV-002 test label occurrence; got {t.count(old)}')
+          t=t.replace(old,new)
+          test_p.write_text(t,encoding='utf-8')
+
+          correction='''# Audit correction delta — HDS V2.2a RV-002 wording\n\nDate: 2026-08-29\n\n## Scope\n\nThis is an audit-tool diagnostic wording correction only. It does **not** change the accepted protocol labels, severity mapping, endpoint resolution, or any VDV source material.\n\n## Trigger\n\nThe independently frozen HDS V2.2a source read (`17f036c6257c5c71b94169c02905c2e80f36b847`) showed that the publication:\n\n- lists both `_http._tcp` and `_ibisip_http._tcp` in the current V2.2a discovery table;\n- marks `_http._tcp` as `zukünftig nicht mehr empfohlen` / `deprecated`;\n- says the **next service version after 2.2** will use `_ibisip_http._tcp` and delete `_http._tcp`;\n- permits project-specific `_ibisip_http._tcp` use already in version 2.2 by mutual agreement;\n- describes V2.2a in the foreword as carrying a note on the **future use** of `_ibisip_http._tcp`.\n\nThe prior RV-002 diagnostic text used the word `preferred` for `_ibisip_http._tcp`. That wording is directionally compatible with the transition but is stronger than the publication itself.\n\n## Correction\n\n`tools/runtime_discovery_profile.py` keeps its existing V2.2a behavior:\n\n```text\n_ibisip_http._tcp -> accepted\n_http._tcp        -> accepted with deprecation/future-not-recommended note\nother labels      -> rejected\nendpoint          -> TXT url\n```\n\nOnly diagnostic wording changes:\n\n```text\npreferred -> documented transition/future label\ndeprecated legacy wording -> deprecated/future-not-recommended wording\n```\n\n`tools/validate_discovery_runtime_rv002.py` likewise changes only the human-readable test label from `preferred` to `transition label`.\n\n## Evidence boundary\n\nThis correction does not turn V2.2a into the future next service version. It preserves the dual-label current profile and reserves deletion of `_http._tcp` for the future service version described by the publication.\n\nA fresh RV-002 rerun is required after this correction.\n'''
+          Path('docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_HDS_V22A_RV002_WORDING_2026-08-29.md').write_text(correction,encoding='utf-8')
+          PY
+          python -m py_compile tools/runtime_discovery_profile.py tools/validate_discovery_runtime_rv002.py
+          git diff --check
+      - name: Commit permanent wording correction and remove temporary workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add tools/runtime_discovery_profile.py tools/validate_discovery_runtime_rv002.py docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_HDS_V22A_RV002_WORDING_2026-08-29.md
+          git rm .github/workflows/temp-correct-hds-v22a-rv002-wording.yml
+          if git diff --cached --name-only | grep -E '\.xsd$'; then exit 1; fi
+          git config user.name 'MarcLeinenDE'
+          git config user.email '34336531+MarcLeinenDE@users.noreply.github.com'
+          git commit -m 'Refine HDS V2.2a RV-002 transition wording'
+          git push origin HEAD:dev/schema-integration
