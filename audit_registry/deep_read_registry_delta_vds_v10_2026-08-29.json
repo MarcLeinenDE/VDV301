@@ -4,35 +4,38 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "VDS_V1.0": {
-      "state": "in_progress",
+      "state": "needs_visual_review",
       "official_url": "https://www.vdv.de/301-2-13-sds.pdfx",
       "publication": "VDV-Schrift 301-2-13, VideoDisplayService V1.0, 05/2017",
       "fresh_read_started": "2026-08-29",
-      "textual_fresh_read_complete": false,
-      "original_pdf_visual_review": "pending_pinned_byte_render_as_needed",
+      "textual_fresh_read_complete": true,
+      "original_pdf_visual_review": "targeted_material_findings_visually_confirmed_from_pinned_bytes",
       "source_pin": {
         "sha256": "9280cc239cf71bb158ab5941b522a2c4c822420e07ed44f4d4111d9689418480",
         "size_bytes": 1202943,
         "pin_registry": "audit_registry/pdf_source_pins_v0.1.json",
         "evidence_run": "33225713193"
       },
+      "visual_evidence": {
+        "render_run": "33225843645",
+        "pages": [4, 37, 38, 39, 40, 41, 42, 43, 44, 45],
+        "artifact_digest": "sha256:ff288301329a8fc3ea7e5e1fa568f06b0b6b5c4e76270f9c720a3a60eb29c9cd"
+      },
       "authority_boundary": {
         "pdf_authority": "official_public_VDV_writing",
-        "xsd_authority": "to_be_established_from_exact_historical_release/provenance; do not substitute V2.0 by convenience",
-        "rule": "Read VDS V1.0 independently and establish exact historical service-XSD availability before comparing later V2.0 compositor findings."
+        "xsd_authority": "unresolved; no exact official VDS V1.0 service XSD confirmed in checked repository history",
+        "rule": "Do not substitute V2.0 merely because the V1.0 document describes semantics later represented by V2.0 schemas."
       },
-      "cross_document_input": [
-        "VLS and VRS reference sections repeatedly label VDV 301-2-13 / 05-2017 as VideoDisplayService v1.1 while also carrying document/service version 1.0 context; resolve this only against the dedicated VDS source history."
-      ],
-      "priority_cross_checks": [
-        "document identity, foreword, references and version history",
-        "operation inventory",
-        "ViewCapabilities and display-state structures",
-        "SetVideoView request/response field grouping",
-        "exact historical VDS V1.0 XSD availability/provenance",
-        "meaning of the v1.1 reference label",
-        "only after independent V1.0 read: compare VDS-002/VDS-003/VDS-004 and EV-103"
-      ]
+      "finding_history": {
+        "VDS-001": "strongly confirmed provenance gap",
+        "VDS-002": "V1.0 multi-field ViewCapabilities semantics added as historical evidence only",
+        "VDS-003": "V1.0 ViewID+Timeout semantics added as historical evidence only",
+        "VDS-004": "V1.0 grouped response semantics added as historical evidence only",
+        "VDS-005": "visually confirmed and localized across common-service/startup/subscription prose",
+        "VDS-006": "new invalid -1:1 printed cardinality finding",
+        "VDS-007": "new cross-document VideoDisplayService v1.1 reference-version label error"
+      },
+      "completion_note": "Targeted material findings visually confirmed; all-page/all-figure pass not complete."
     }
   }
 }

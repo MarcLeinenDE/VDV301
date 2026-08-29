@@ -1,0 +1,69 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-29",
+  "base_registry": "audit_registry/deep_read_findings_v0.1.json",
+  "document_id": "VDS_V1.0",
+  "policy": "V1.0 PDF semantics and provenance are recorded independently. Later V2.0 executable evidence is not back-projected into the unresolved V1.0 schema authority.",
+  "existing_finding_updates": [
+    {
+      "id": "VDS-001",
+      "effect": "Strongly confirmed for checked official repository history: complete VDV-301-1.0 tag tree contains no VideoDisplayService V1.0 service XSD; IBIS_IP_V1.0.xsd has no VDS include/declaration; direct commit history for IBIS-IP_VideoDisplayService_V1.0.xsd is empty. No V2.0 substitution."
+    },
+    {
+      "id": "VDS-002",
+      "effect": "V1.0 visible page 40 already presents ListViewCapabilitiesResponse as one multi-field record with ViewID, ViewName and ViewType. This is historical semantic evidence only; VDS-002 executable scope remains official V2.0 XSD."
+    },
+    {
+      "id": "VDS-003",
+      "effect": "V1.0 visible page 41 presents SetVideoViewRequest with both ViewID 1:1 and Timeout 1:1. This strengthens semantic history only; VDS-003 executable scope remains official V2.0 XSD."
+    },
+    {
+      "id": "VDS-004",
+      "effect": "V1.0 visible pages 41-42 present SetVideoViewResponse, SetNextViewIndexResponse and GetDisplayStateResponse as grouped multi-field responses. Historical evidence only; EV-103 remains V2.0-only executable evidence."
+    },
+    {
+      "id": "VDS-005",
+      "effect": "Visually confirmed and localized. Literal Word cross-reference failures are visible in Identification of VideoDisplayService, DeviceManagementService/Error Handling, System start/stop, SubscribeDisplayState and UnsubscribeDisplayState prose. No validation rule is inferred from missing targets."
+    }
+  ],
+  "new_findings": [
+    {
+      "id": "VDS-006",
+      "document_id": "VDS_V1.0",
+      "classification": "pdf_cardinality_notation_error_candidate",
+      "state": "visually_confirmed",
+      "confidence": "very_high",
+      "version_scope": ["VDS_V1.0"],
+      "summary": "Visible pages 40-42 print malformed -1:1 cardinality values on ViewType and State rows across ListViewCapabilitiesResponse, SetVideoViewResponse, SetNextViewIndexResponse and GetDisplayStateResponse.",
+      "normative_validation_impact": "none for V1.0 because no exact strict VDS V1.0 XSD profile is confirmed; do not guess the intended cardinality"
+    },
+    {
+      "id": "VDS-007",
+      "document_id": "VDS_V1.0",
+      "classification": "pdf_reference_version_label_error_candidate",
+      "state": "cross_document_confirmed",
+      "confidence": "very_high",
+      "version_scope": ["VLS_V1.0", "VRS_V1.0", "VRS_V2.0", "VRS_V2.4", "VDS_V1.0"],
+      "summary": "Neighboring official video-service writings label VDV 301-2-13 / 05-2017 as VideoDisplayService v1.1. The dedicated VideoDisplay writing is the 05/2017 301-2-13 publication and the official current VDV catalog explicitly labels it VideoDisplayService V1.0.",
+      "normative_validation_impact": "none; do not create a VDS V1.1 schema/profile or resolver alias from the erroneous reference label"
+    }
+  ],
+  "visual_evidence": {
+    "source_sha256": "9280cc239cf71bb158ab5941b522a2c4c822420e07ed44f4d4111d9689418480",
+    "source_size_bytes": 1202943,
+    "pin_run": "33225713193",
+    "render_run": "33225843645",
+    "pages": [4, 37, 38, 39, 40, 41, 42, 43, 44, 45],
+    "render_engine": "PyMuPDF 1.28.2",
+    "dpi": 180,
+    "artifact_digest": "sha256:ff288301329a8fc3ea7e5e1fa568f06b0b6b5c4e76270f9c720a3a60eb29c9cd"
+  },
+  "provenance_evidence": {
+    "official_tag": "VDV-301-1.0",
+    "tag_tree_commit": "f5b53785f703e898632603eec3bfa3555a79fdba",
+    "monolithic_v1_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+    "dedicated_v1_service_xsd_confirmed": false,
+    "dedicated_path_commit_history_count": 0,
+    "authority": "PDF official; strict V1.0 VDS XSD unresolved"
+  }
+}
