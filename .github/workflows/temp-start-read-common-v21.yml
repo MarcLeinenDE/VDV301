@@ -65,7 +65,7 @@ jobs:
           set -euo pipefail
           git config user.name 'Marc Leinen'
           git config user.email '34336531+MarcLeinenDE@users.noreply.github.com'
-          git rm -f --ignore-unmatch tools/temp_start_read_common_v21.py .github/workflows/temp-start-read-common-v21.yml
+          git rm -f .github/workflows/temp-start-read-common-v21.yml
           git add -A
           if git diff --cached --name-only | grep -E '\.xsd$'; then
             echo 'ERROR: staged XSD modification detected'
