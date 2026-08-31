@@ -200,3 +200,59 @@ Additional falsification rules retained:
 ## Fresh-read freeze result
 
 Nine independent observation groups are frozen against the byte-pinned official V2.0 publication and exact official `VDV-301-2.0` XSD family. Historical Common findings may now be opened only for deduplication and current-Evidence-Gate revalidation.
+
+## Historical reconciliation and closure — 2026-08-30
+
+Historical Common material was reopened only after independent freeze `60d8e6a444473615771bcab52e22293d96a8aa04`.
+
+### Deduplification / scope extension
+
+```text
+CE-005: V2.0_scope_visible_table_and_version_history_plus_exact_0to1_XSD_declaration_EV-118
+CE-007: V2.0_scope_executable_enum_lexeme_boundaries_confirmed_EV-118
+CE-012: V2.0_scope_executable_empty_DeviceSpecificationWithStateList_confirmed_EV-118
+CE-013: V2.0_scope_executable_optional_choice_and_SpecificPoint_name_boundary_EV-118
+CE-014: V2.0_scope_executable_empty_DataVersionList_confirmed_EV-118
+CE-015: V2.0_scope_visible_pdf_and_exact_XSD_FareZone_case_boundary_confirmed_EV-118
+CE-016: V2.0_scope_visible_pdf_and_exact_XSD_GlobalCardStausID_boundary_confirmed_EV-118
+CE-017: V2.0_scope_executable_TSPPoint_Description_vs_Desciption_boundary_EV-118
+CE-018: V2.0_scope_visible_pdf_1star_plus_executable_empty_ServiceIdentificationWithStateList_EV-118
+CE-019: V2.0_scope_visible_pdf_type_reference_plus_exact_ServiceIdentificationWithStateStructure_EV-118
+CE-021: V2.0_scope_visible_MessageBody_vs_exact_XSD_Message_declaration_EV-118
+CE-022: V2.0_scope_executable_outer_Service_vs_ServiceName_boundary_EV-118
+CE-025: V2.0_scope_visible_Reply-Path_vs_exact_ReplyPath_declarations_EV-118
+CE-026: V2.0_scope_executable_BeaconPoint_Description_vs_Desciption_boundary_EV-118
+DRCOM10-002: V2.0_scope_executable_DataAcceptedResponse_choice_boundary_EV-118
+DRCOM10-003: V2.0_scope_executable_empty_ServiceSpecificationWithStateList_EV-118
+DRCOM10-004: V2.0_scope_exact_JourneyStop_Announcement_FareZone_0to1_declarations_EV-118
+DRCOM10-005: V2.0_scope_refined_child_name_facet_persists_type_facet_aligned_exact_XSD_EV-118
+DRCOM10-006: V2.0_scope_executable_DoorCountingObjectClass_lexemes_EV-118
+DRCOM10-007: V2.0_scope_context_verified_grouped_editorial_residue
+```
+
+Only one new V2.0-specific ID is required:
+
+```text
+DRCOM20-001: pdf_type_reference_vs_xsd_primitive_instance_shape_mismatch
+```
+
+`CE-020` is deliberately not broadened because its finding identity includes the V2.3
+PR #30 authority collision. `DRCOM20-001` isolates the V2.0 PDF-vs-official-XSD
+primitive/wrapper type difference without importing later candidate history.
+
+`DRCOM10-005` is refined for V2.0: the child-label mismatch persists, but the V1.x
+StopPointTariffInformation type/model facet is not carried forward because the V2.0 PDF
+type is aligned with the ShortTripStop model.
+
+### Executable evidence
+
+EV-118 run `33280224191` / job `99174026383` PASS against exact official V2.0 blobs
+`8608e3dcd665c197c34da7f6ec6af5a3758da164` + `27e3c183b00381d959622d13c10543123af8eef6`.
+
+### Closure
+
+COMMON V2.0 remains `needs_visual_review`, not `exhaustive_read`: all 45 pinned pages
+were rendered and material finding pages were visibly reviewed, but the visual pass was
+targeted rather than pixel-by-pixel exhaustive.
+
+No XSD was changed. Next natural Deep Read unit: `COMMON_V2.1`.

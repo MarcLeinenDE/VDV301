@@ -1,0 +1,72 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-08-30",
+  "document_id": "COMMON_V2.0",
+  "fresh_read_freeze": "60d8e6a444473615771bcab52e22293d96a8aa04",
+  "source_evidence": {
+    "pdf_sha256": "23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088",
+    "size_bytes": 946088,
+    "pin_render_read_run": "33279811315",
+    "job": "99172952524",
+    "artifact_id": "9722644456",
+    "artifact_zip_sha256": "412a1714ce9c02b412262bb4d6103e686d85bf63709ad8a1bce2a3ac0d2361d9",
+    "page_count": 45,
+    "fulltext_sha256": "05e8a7e1788318bf5ac83ffdd61125622e28ce30f4fc5f388467a41ed46f5a3f"
+  },
+  "exact_xsd_authority": {
+    "official_tag": "VDV-301-2.0",
+    "common_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+    "enumerations_blob": "27e3c183b00381d959622d13c10543123af8eef6",
+    "branch_bytes_match_official_tag": true
+  },
+  "executable_evidence": {
+    "evidence_id": "EV-118",
+    "checker": "tools/validate_common_v20_ev118.py",
+    "run": "33280224191",
+    "job": "99174026383",
+    "head_tested": "f048cc6ac896c0eb9885999ee5c9e1d3c91d7e77",
+    "result": "PASS",
+    "authority": "exact_official_VDV-301-2.0_Common_Enumerations_family"
+  },
+  "revalidated_or_scope_extended_findings": {
+    "CE-005": "V2.0_scope_visible_table_and_version_history_plus_exact_0to1_XSD_declaration_EV-118",
+    "CE-007": "V2.0_scope_executable_enum_lexeme_boundaries_confirmed_EV-118",
+    "CE-012": "V2.0_scope_executable_empty_DeviceSpecificationWithStateList_confirmed_EV-118",
+    "CE-013": "V2.0_scope_executable_optional_choice_and_SpecificPoint_name_boundary_EV-118",
+    "CE-014": "V2.0_scope_executable_empty_DataVersionList_confirmed_EV-118",
+    "CE-015": "V2.0_scope_visible_pdf_and_exact_XSD_FareZone_case_boundary_confirmed_EV-118",
+    "CE-016": "V2.0_scope_visible_pdf_and_exact_XSD_GlobalCardStausID_boundary_confirmed_EV-118",
+    "CE-017": "V2.0_scope_executable_TSPPoint_Description_vs_Desciption_boundary_EV-118",
+    "CE-018": "V2.0_scope_visible_pdf_1star_plus_executable_empty_ServiceIdentificationWithStateList_EV-118",
+    "CE-019": "V2.0_scope_visible_pdf_type_reference_plus_exact_ServiceIdentificationWithStateStructure_EV-118",
+    "CE-021": "V2.0_scope_visible_MessageBody_vs_exact_XSD_Message_declaration_EV-118",
+    "CE-022": "V2.0_scope_executable_outer_Service_vs_ServiceName_boundary_EV-118",
+    "CE-025": "V2.0_scope_visible_Reply-Path_vs_exact_ReplyPath_declarations_EV-118",
+    "CE-026": "V2.0_scope_executable_BeaconPoint_Description_vs_Desciption_boundary_EV-118",
+    "DRCOM10-002": "V2.0_scope_executable_DataAcceptedResponse_choice_boundary_EV-118",
+    "DRCOM10-003": "V2.0_scope_executable_empty_ServiceSpecificationWithStateList_EV-118",
+    "DRCOM10-004": "V2.0_scope_exact_JourneyStop_Announcement_FareZone_0to1_declarations_EV-118",
+    "DRCOM10-005": "V2.0_scope_refined_child_name_facet_persists_type_facet_aligned_exact_XSD_EV-118",
+    "DRCOM10-006": "V2.0_scope_executable_DoorCountingObjectClass_lexemes_EV-118",
+    "DRCOM10-007": "V2.0_scope_context_verified_grouped_editorial_residue"
+  },
+  "new_unique_findings": {
+    "DRCOM20-001": {
+      "state": "executable_confirmed_EV-118",
+      "classification": "pdf_type_reference_vs_xsd_primitive_instance_shape_mismatch",
+      "summary": "Common V2.0 PDF InternationalTextType prints Value as IBIS-IP.string and Language as IBIS-IP.language, while exact official V2.0 XSD uses xs:string and xs:language. EV-118 confirms the exact flat primitive-shaped instance validates and an IBIS-IP wrapper-shaped Value/Language instance fails. This is kept separate from CE-020 because CE-020 additionally tracks the V2.3 PR #30 same-path authority collision.",
+      "executable_effect": true
+    }
+  },
+  "explicit_non_extension": {
+    "CE-020": "not scope-extended: CE-020 remains V2.3-specific because its identity includes the PR #30 same-path authority collision; DRCOM20-001 tracks the V2.0 primitive-vs-wrapper PDF/XSD mismatch"
+  },
+  "active_falsification": [
+    "Connection DisplayContent optionality and ExpectedDepartureTime/ScheduledDepartureTime are corrected and aligned in V2.0",
+    "TripInformation RouteDirection and RouteDirectionEnumeration are aligned in V2.0",
+    "readyForShutdown, PassengerCountingService, video service names and ServiceState starting align in V2.0",
+    "ShortTripStop V1.x type facet is not carried forward: V2.0 PDF type aligns semantically with ShortTripStopStructure; only the child-label facet persists",
+    "Message-ID is identical in PDF and XSD and is not a finding"
+  ],
+  "next_natural_document_id": "COMMON_V2.1"
+}

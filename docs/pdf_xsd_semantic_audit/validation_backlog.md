@@ -25,6 +25,7 @@ EV-114           run 33264437557  PASS  TVS V2.3 official-route/candidate author
 EV-115           run 33265239836  PASS  candidate/integration TVS V2.4 ShortHaul inventory + recurring type/rename behavior; NOT official-release conformance
 EV-116           run 33269006407  PASS  official SMS V2.2 ServiceStatus naming + generic Common subscription modelling evidence
 EV-117           run 33279461529  PASS  exact historical Common V1.0 Deep Read authority/behaviour evidence
+EV-118           run 33280224191  PASS  exact official Common V2.0 Deep Read authority/behaviour evidence
 ```
 
 Last full-suite baseline: run `33228250613` confirmed:
@@ -38,7 +39,7 @@ RV-001..RV-004 PASS
 SDK manifest/profile checks PASS
 ```
 
-EV-110 through EV-117 are targeted additive tests and did not change any XSD. A later full-suite run can absorb them into the canonical all-checks baseline.
+EV-110 through EV-118 are targeted additive tests and did not change any XSD. A later full-suite run can absorb them into the canonical all-checks baseline.
 
 Authority guards:
 
@@ -620,3 +621,13 @@ close unresolved visual scope in later Common versions.
 
 New V1.x-specific findings DRCOM10-001..007 are recorded in the Common V1.0 delta.
 No further deterministic V1.0 XSD run is currently required before moving to `COMMON_V2.0`.
+
+## COMMON V2.0 EV-118 closure
+
+EV-118 run `33280224191` / job `99174026383` PASS on exact official Common V2.0 `8608e3dcd665c197c34da7f6ec6af5a3758da164` +
+Enumerations V2.0 `27e3c183b00381d959622d13c10543123af8eef6`.
+
+The V2.0 deterministic XSD lane is closed for the frozen observations. Existing CE/DRCOM10
+IDs are scope-extended only where the exact pinned source rediscovered the same issue.
+`DRCOM20-001` is the sole new V2.0-specific finding. No further deterministic V2.0 XSD
+run is currently required before moving to `COMMON_V2.1`.

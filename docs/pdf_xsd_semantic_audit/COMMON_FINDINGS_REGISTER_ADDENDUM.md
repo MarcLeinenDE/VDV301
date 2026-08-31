@@ -542,3 +542,46 @@ readable evidence is in `audit_registry/deep_read_findings_delta_common_v10_2026
 
 Validation continues to follow the exact selected XSD family. No alias is synthesized
 from PDF spelling, casing, cardinality or type-reference wording.
+
+## COMMON V2.0 Deep Read scope extension — 2026-08-30
+
+Source: byte-pinned official V2.0 VDV 301-2-1 publication, SHA-256 `23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088`.
+Exact executable authority: official tag `VDV-301-2.0`, Common `8608e3dcd665c197c34da7f6ec6af5a3758da164` plus
+Enumerations `27e3c183b00381d959622d13c10543123af8eef6`. EV-118 run `33280224191` PASS.
+
+Existing IDs revalidated/refined:
+
+```text
+CE-005: V2.0_scope_visible_table_and_version_history_plus_exact_0to1_XSD_declaration_EV-118
+CE-007: V2.0_scope_executable_enum_lexeme_boundaries_confirmed_EV-118
+CE-012: V2.0_scope_executable_empty_DeviceSpecificationWithStateList_confirmed_EV-118
+CE-013: V2.0_scope_executable_optional_choice_and_SpecificPoint_name_boundary_EV-118
+CE-014: V2.0_scope_executable_empty_DataVersionList_confirmed_EV-118
+CE-015: V2.0_scope_visible_pdf_and_exact_XSD_FareZone_case_boundary_confirmed_EV-118
+CE-016: V2.0_scope_visible_pdf_and_exact_XSD_GlobalCardStausID_boundary_confirmed_EV-118
+CE-017: V2.0_scope_executable_TSPPoint_Description_vs_Desciption_boundary_EV-118
+CE-018: V2.0_scope_visible_pdf_1star_plus_executable_empty_ServiceIdentificationWithStateList_EV-118
+CE-019: V2.0_scope_visible_pdf_type_reference_plus_exact_ServiceIdentificationWithStateStructure_EV-118
+CE-021: V2.0_scope_visible_MessageBody_vs_exact_XSD_Message_declaration_EV-118
+CE-022: V2.0_scope_executable_outer_Service_vs_ServiceName_boundary_EV-118
+CE-025: V2.0_scope_visible_Reply-Path_vs_exact_ReplyPath_declarations_EV-118
+CE-026: V2.0_scope_executable_BeaconPoint_Description_vs_Desciption_boundary_EV-118
+DRCOM10-002: V2.0_scope_executable_DataAcceptedResponse_choice_boundary_EV-118
+DRCOM10-003: V2.0_scope_executable_empty_ServiceSpecificationWithStateList_EV-118
+DRCOM10-004: V2.0_scope_exact_JourneyStop_Announcement_FareZone_0to1_declarations_EV-118
+DRCOM10-005: V2.0_scope_refined_child_name_facet_persists_type_facet_aligned_exact_XSD_EV-118
+DRCOM10-006: V2.0_scope_executable_DoorCountingObjectClass_lexemes_EV-118
+DRCOM10-007: V2.0_scope_context_verified_grouped_editorial_residue
+```
+
+New unique finding:
+
+```text
+DRCOM20-001 InternationalTextType PDF IBIS-IP.string/IBIS-IP.language vs exact
+             V2.0 XSD xs:string/xs:language; executable instance-shape difference EV-118
+```
+
+`CE-020` remains V2.3-specific because it additionally tracks PR #30 and the explicit
+same-path authority collision. No V2.0 candidate overlay is inferred.
+
+Validation follows the exact selected V2.0 XSD family; no PDF alias or multiplicity is synthesized.

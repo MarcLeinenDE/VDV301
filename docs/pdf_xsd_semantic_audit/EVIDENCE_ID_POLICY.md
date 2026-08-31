@@ -32,6 +32,7 @@ EV-114  TicketValidationService V2.3 official-route/candidate authority guard an
 EV-115  TicketValidationService V2.4 candidate/integration ShortHaul inventory + recurring type/rename behavior evidence
 EV-116  SystemMonitoringService V2.2 exact operation-name/generic-subscription modelling evidence
 EV-117  Common V1.0 exact historical authority + Deep Read choice/cardinality/naming/enum boundary evidence
+EV-118  Common V2.0 exact official authority + Deep Read type/choice/cardinality/naming/enum boundary evidence
 ```
 
 Important:
@@ -40,7 +41,7 @@ Important:
 EV-003 through EV-100 were never defined.
 The numbering intentionally separates baseline evidence (001/002) from finding-specific evidence (101+).
 Do not describe the completed set as a continuous range beginning at EV-001.
-Correct wording at the current state: "EV-001, EV-002 and EV-101 through EV-117".
+Correct wording at the current state: "EV-001, EV-002 and EV-101 through EV-118".
 ```
 
 Existing EV document names, historical workflow run IDs and historical tool names are not retroactively renamed because they are provenance evidence.
@@ -200,3 +201,11 @@ The byte-pinned 05/2017 publication has internal document/data-definition revisi
 Version 1.1, but no Common V1.1 XSD exists. EV-117 therefore tests the exact V1.0
 executable family and must not be described as invented V1.1 schema conformance.
 Run 33279461529 PASS.
+
+EV-118:
+The checked Common V2.0 family is exact official `VDV-301-2.0` authority:
+  Common V2.0       8608e3dcd665c197c34da7f6ec6af5a3758da164
+  Enumerations V2.0 27e3c183b00381d959622d13c10543123af8eef6
+EV-118 run 33280224191 confirms the primitive InternationalTextType instance shape and the
+targeted V2.0 compositor/cardinality/name/enum boundaries. It is official-release V2.0
+XSD evidence and does not inherit the later V2.3 PR #30 candidate authority collision.

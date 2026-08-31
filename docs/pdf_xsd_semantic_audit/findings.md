@@ -450,3 +450,21 @@ DataAcceptedResponse choice modelling, additional list/cardinality/model differe
 DoorCountingObjectClass lexemes and grouped editorial residue.
 
 No V1.1 XSD authority is invented and no XSD is changed.
+
+## COMMON V2.0 Deep Read closure
+
+```text
+source: exact byte-pinned official VDV 301-2-1 V2.0
+XSD authority: official VDV-301-2.0
+Common blob: 8608e3dcd665c197c34da7f6ec6af5a3758da164
+Enumerations blob: 27e3c183b00381d959622d13c10543123af8eef6
+EV-118: run 33280224191 PASS
+```
+
+The V2.0 Fresh Read mainly revalidates/extends existing Common finding identities.
+The sole new ID is `DRCOM20-001`: InternationalTextType is documented with
+`IBIS-IP.string` / `IBIS-IP.language`, while exact official V2.0 XSD uses `xs:string` /
+`xs:language`; EV-118 confirms the observable instance-shape boundary.
+
+`CE-020` remains V2.3-specific because its identity also includes the PR #30 candidate
+same-path authority collision. No XSD was modified.
