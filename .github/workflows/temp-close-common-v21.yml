@@ -29,6 +29,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          # Normalize the report to exactly one final newline before diff hygiene checks.
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.1.md')
+          p.write_text(p.read_text(encoding='utf-8').rstrip() + '\n', encoding='utf-8')
+          PY
           git diff --check
           if git status --porcelain | awk '{print $2}' | grep -E '\.xsd$'; then
             echo 'ERROR: XSD modification detected'
