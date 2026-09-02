@@ -35,15 +35,11 @@ jobs:
         run: |
           set -euo pipefail
           git diff --check
-          changed="$(git diff --name-only)"
-          printf '%s\n' "$changed"
-          if printf '%s\n' "$changed" | grep -E '\.xsd$'; then
-            echo "XSD change detected"
-            exit 1
-          fi
           python - <<'PY'
           import subprocess
-          got=set(subprocess.check_output(["git","diff","--name-only"], text=True).splitlines())
+          tracked=set(subprocess.check_output(["git","diff","--name-only"], text=True).splitlines())
+          untracked=set(subprocess.check_output(["git","ls-files","--others","--exclude-standard"], text=True).splitlines())
+          got=tracked | untracked
           expected={
             ".github/workflows/temp-common-v22-ev120.yml",
             ".github/workflows/temp-close-common-v22.yml",
@@ -62,7 +58,10 @@ jobs:
             "docs/pdf_xsd_semantic_audit/COMMON_FINDINGS_REGISTER_ADDENDUM.md",
             "docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF_DELTA_COMMON_V22_DEEP_READ_2026-09-02.md",
           }
+          print("\n".join(sorted(got)))
           assert got == expected, (sorted(got), sorted(expected))
+          xsd=[p for p in got if p.endswith(".xsd")]
+          assert not xsd, f"XSD change detected: {xsd}"
           print("COMMON_V22_CLOSURE_DIFF_OK")
           PY
 
