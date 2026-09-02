@@ -1,0 +1,91 @@
+name: temp-close-common-v23
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp-close-common-v23.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  close-common-v23:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout audit branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Apply closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/temp_close_common_v23.py
+          rm -f .github/workflows/temp-close-common-v23.yml
+          python - <<'PY'
+          from pathlib import Path
+          for name in [
+              'docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3.md',
+              'docs/pdf_xsd_semantic_audit/COMMON_FINDINGS_REGISTER_ADDENDUM.md',
+          ]:
+              p=Path(name)
+              p.write_text(p.read_text(encoding='utf-8').rstrip()+'\n',encoding='utf-8')
+          PY
+
+      - name: Validate closure diff
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          python - <<'PY'
+          import subprocess
+          tracked=set(subprocess.check_output(['git','diff','--name-only'],text=True).splitlines())
+          untracked=set(subprocess.check_output(['git','ls-files','--others','--exclude-standard'],text=True).splitlines())
+          got=tracked|untracked
+          expected={
+            '.github/workflows/temp-common-v23-pin-read.yml',
+            '.github/workflows/temp-common-v23-ev121.yml',
+            '.github/workflows/temp-close-common-v23.yml',
+            'tools/temp_close_common_v23.py',
+            '00_START_HERE/CURRENT_STATE.json',
+            'audit_registry/deep_read_registry_delta_common_v23_2026-09-02.json',
+            'audit_registry/deep_read_findings_delta_common_v23_2026-09-02.json',
+            'audit_registry/deep_read_findings_delta_common_v22_2026-09-02.json',
+            'docs/pdf_xsd_semantic_audit/COMMON_FINDINGS_REGISTER_ADDENDUM.md',
+            'docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3.md',
+            'docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF_DELTA_COMMON_V23_DEEP_READ_2026-09-02.md',
+            'docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_COMMON_V23_CE023_SCOPE_2026-09-02.md',
+          }
+          print('\n'.join(sorted(got)))
+          assert got==expected,(sorted(got),sorted(expected))
+          xsd=[p for p in got if p.endswith('.xsd')]
+          assert not xsd,f'XSD change detected: {xsd}'
+          print('COMMON_V23_CLOSURE_DIFF_OK')
+          PY
+
+      - name: Commit closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- \
+            .github/workflows/temp-common-v23-pin-read.yml \
+            .github/workflows/temp-common-v23-ev121.yml \
+            .github/workflows/temp-close-common-v23.yml \
+            tools/temp_close_common_v23.py \
+            00_START_HERE/CURRENT_STATE.json \
+            audit_registry/deep_read_registry_delta_common_v23_2026-09-02.json \
+            audit_registry/deep_read_findings_delta_common_v23_2026-09-02.json \
+            audit_registry/deep_read_findings_delta_common_v22_2026-09-02.json \
+            docs/pdf_xsd_semantic_audit/COMMON_FINDINGS_REGISTER_ADDENDUM.md \
+            docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3.md \
+            docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF_DELTA_COMMON_V23_DEEP_READ_2026-09-02.md \
+            docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_COMMON_V23_CE023_SCOPE_2026-09-02.md
+          git diff --cached --check
+          git commit -m 'audit: close COMMON V2.3 deep read'
+          git push origin HEAD:dev/schema-integration
