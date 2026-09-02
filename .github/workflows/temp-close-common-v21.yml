@@ -1,0 +1,80 @@
+name: TEMP Close COMMON V2.1 deep read
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - tools/temp_close_common_v21.py
+      - .github/workflows/temp-close-common-v21.yml
+
+permissions:
+  contents: write
+
+jobs:
+  close:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout audit branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build COMMON V2.1 closure state
+        run: python tools/temp_close_common_v21.py
+      - name: Fail closed and commit closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          if git status --porcelain | awk '{print $2}' | grep -E '\.xsd$'; then
+            echo 'ERROR: XSD modification detected'
+            exit 1
+          fi
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path('00_START_HERE/CURRENT_STATE.json').read_text(encoding='utf-8'))
+          a=s['audit']
+          assert a['deep_read_textual_fresh_read_completed'] == 34
+          assert a['deep_read_needs_visual_review'] == 34
+          assert a['deep_read_in_progress'] == 0
+          assert a['deep_read_current_document_id'] == 'COMMON_V2.1'
+          assert a['next_natural_deep_read_document_id'] == 'COMMON_V2.2'
+          assert a['latest_common_finding'] == 'DRCOM21-001'
+          f=json.loads(Path('audit_registry/deep_read_findings_delta_common_v21_2026-09-02.json').read_text(encoding='utf-8'))
+          assert f['fresh_read_freeze'] == '11c16e618e1d86504ba4517f9d9891429d40d2ce'
+          assert f['executable_evidence']['evidence_id'] == 'EV-119'
+          assert f['executable_evidence']['result'] == 'PASS'
+          assert list(f['new_unique_findings']) == ['DRCOM21-001']
+          d=json.loads(Path('audit_registry/deep_read_registry_delta_common_v21_2026-09-02.json').read_text(encoding='utf-8'))
+          assert d['document_updates']['COMMON_V2.1']['fresh_read_freeze']['historical_reconciliation_completed'] is True
+          assert Path('docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.1.md').is_file()
+          assert Path('docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF_DELTA_COMMON_V21_DEEP_READ_2026-09-02.md').is_file()
+          print('COMMON_V21_FAIL_CLOSED_OK')
+          PY
+          git config user.name 'Marc Leinen'
+          git config user.email '34336531+MarcLeinenDE@users.noreply.github.com'
+          git rm -f .github/workflows/temp-ev119-common-v21.yml .github/workflows/temp-close-common-v21.yml tools/temp_close_common_v21.py
+          git add \
+            00_START_HERE/CURRENT_STATE.json \
+            audit_registry/deep_read_registry_delta_common_v21_2026-09-02.json \
+            audit_registry/deep_read_findings_delta_common_v21_2026-09-02.json \
+            docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.1.md \
+            docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF_DELTA_COMMON_V21_DEEP_READ_2026-09-02.md
+          git diff --cached --check
+          if git diff --cached --name-only | grep -E '\.xsd$'; then
+            echo 'ERROR: staged XSD modification detected'
+            exit 1
+          fi
+          UNEXPECTED="$(git diff --cached --name-only | grep -Ev '^(00_START_HERE/CURRENT_STATE\.json|audit_registry/deep_read_registry_delta_common_v21_2026-09-02\.json|audit_registry/deep_read_findings_delta_common_v21_2026-09-02\.json|docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2\.1\.md|docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF_DELTA_COMMON_V21_DEEP_READ_2026-09-02\.md|\.github/workflows/temp-ev119-common-v21\.yml|\.github/workflows/temp-close-common-v21\.yml|tools/temp_close_common_v21\.py)$' || true)"
+          if [ -n "$UNEXPECTED" ]; then
+            echo 'ERROR: unexpected staged paths:'
+            echo "$UNEXPECTED"
+            exit 1
+          fi
+          git commit -m 'audit: close COMMON V2.1 deep read'
+          git push origin HEAD:dev/schema-integration
