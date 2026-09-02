@@ -2,6 +2,12 @@ name: temp-common-v22-ev120
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - tools/validate_common_v22_ev120.py
+      - .github/workflows/temp-common-v22-ev120.yml
 
 permissions:
   contents: read
