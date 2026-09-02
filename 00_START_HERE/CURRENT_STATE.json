@@ -1,6 +1,6 @@
 {
   "state_schema_version": "0.1",
-  "date": "2026-08-30",
+  "date": "2026-09-02",
   "canonical_branch": "dev/schema-integration",
   "workflow_mode": "manual_only",
   "project_phase": "deep_read_pass_2",
@@ -31,8 +31,8 @@
     "deep_read_exhaustive_completed": 0,
     "deep_read_needs_visual_review": 33,
     "deep_read_textual_fresh_read_completed": 33,
-    "deep_read_in_progress": 0,
-    "deep_read_current_document_id": "COMMON_V2.0",
+    "deep_read_in_progress": 1,
+    "deep_read_current_document_id": "COMMON_V2.1",
     "deep_read_previous_document_id": "COMMON_V2.0",
     "next_natural_deep_read_document_id": "COMMON_V2.1",
     "latest_deep_read_finding": "DRCOM20-001",
@@ -69,7 +69,7 @@
     "pdf_visual_render_fallback": "docs/pdf_xsd_semantic_audit/PDF_VISUAL_RENDER_FALLBACK.md",
     "pdf_visual_renderer": "tools/render_vdv_pdf_pages.py",
     "pdf_visual_render_rule": "interactive screenshot cache miss is not a source failure; render exact byte-pinned source independently and inspect visible output before promoting visual status",
-    "pdf_sources_byte_pinned": 28,
+    "pdf_sources_byte_pinned": 29,
     "pinned_active_sources": [
       "VDV301-2_GC_V2.3",
       "COMMON_V2.3",
@@ -98,9 +98,10 @@
       "ARA_V2.4",
       "VDV301-3_02-2020",
       "COMMON_V1.0",
-      "COMMON_V2.0"
+      "COMMON_V2.0",
+      "COMMON_V2.1"
     ],
-    "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_common_v20_2026-08-30.json",
+    "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_common_v21_2026-09-02.json",
     "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_common_v20_2026-08-30.json",
     "trainset_v2_1_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.1.md",
     "trainset_v2_2_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.2.md",
@@ -729,6 +730,32 @@
       "DRCOM10-006": "V2.0_scope_executable_DoorCountingObjectClass_lexemes_EV-118",
       "DRCOM10-007": "V2.0_scope_context_verified_grouped_editorial_residue",
       "DRCOM20-001": "executable_confirmed_EV-118"
+    },
+    "common_v2_1_source_pin": {
+      "sha256": "a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32",
+      "size_bytes": 1274051,
+      "evidence_run": "33608210402",
+      "pinned_at_utc": "2026-09-02T08:20:57Z",
+      "recovered_from_evidence_run": "33393002497",
+      "original_2026_08_31_pin_timestamp_status": "not_recoverable_from_retained_artifact",
+      "fresh_retrieval_matches_prior_pdf_bytes": true,
+      "pdf_authority": "official_public_VDV_writing",
+      "xsd_authority_status": "official_VDV-301-2.1_exact_family"
+    },
+    "common_v2_1_authority": {
+      "official_tag": "VDV-301-2.1",
+      "Common_V2.1_blob": "05977c9f86c7c9dd0b48f36a4a4e9be32e94659e",
+      "Enumerations_V2.1_blob": "311464690ad60749ed8d326217787e4b8ed0b718",
+      "integration_branch_matches_official_tag": true
+    },
+    "common_v2_1_render_read": {
+      "run": "33608210402",
+      "artifact_name": "common-v21-recovery-read",
+      "prior_evidence_run": "33393002497",
+      "pdf_page_count": 48,
+      "all_pages_rendered": true,
+      "fulltext_sha256": "5dce4c8ecc770574bdce8d5961fefbc01f88b1547e3957855013d9b077fc24b0",
+      "fresh_read_freeze": "not_started"
     }
   },
   "evidence": {
@@ -762,8 +789,8 @@
     "latest_root_xsd_validation_run": "33228250613",
     "latest_full_suite_run": "33228250613",
     "latest_targeted_xsd_evidence_run": "33269006407",
-    "latest_pdf_source_pin_run": "33279811315",
-    "latest_pdf_visual_render_run": "33279811315",
+    "latest_pdf_source_pin_run": "33608210402",
+    "latest_pdf_visual_render_run": "33608210402",
     "trainset_v2_1_executable_evidence": "EV-109 / 33228250613",
     "trainset_v2_2_context_evidence": "EV-104 / 33111644388 revalidated against fresh V2.2 source/context",
     "trainset_v2_2_tsd002_executable_evidence": "EV-110 / 33241603270",
@@ -787,8 +814,9 @@
     "rule": "Findings/audit knowledge must later explain surprising validation results without silently changing normative XSD outcomes. No unrevalidated finding may drive SDK accept/reject/routing behaviour."
   },
   "next_actions": [
-    "Start COMMON V2.1 Deep Read from the official byte-pinned source; establish exact VDV-301-2.1 Common/Enumerations authority before historical reconciliation.",
-    "Complete independent COMMON V2.1 Fresh Read and targeted visible review before reopening historical Common findings for that document.",
+    "Complete the independent Fresh Read of COMMON V2.1 from the exact pinned full-text/render artifact before reopening historical Common findings.",
+    "Visually falsify material table/cardinality/type observations against the exact pinned page renders.",
+    "Freeze COMMON V2.1 fresh observations before historical Common reconciliation.",
     "After Deep Read Pass 2 freeze the complete finding inventory and run mandatory legacy finding revalidation before SDK/remediation baseline freeze."
   ]
 }
