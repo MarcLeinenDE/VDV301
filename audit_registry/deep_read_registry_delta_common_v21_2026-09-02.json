@@ -4,7 +4,7 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "COMMON_V2.1": {
-      "state": "source_pinned_render_complete_pending_independent_fresh_read",
+      "state": "fresh_read_frozen_pending_historical_reconciliation_and_executable_evidence",
       "official_url": "https://www.vdv.de/301-2-1-sds-v2-1-commonstructure-enums.pdfx",
       "publication": "VDV 301-2-1 V2.1, Common Data Structures and Enumerations",
       "source_pin": {
@@ -27,19 +27,38 @@
         "latest_xsd_wins": false
       },
       "historical_common_findings_quarantined_until_fresh_read_freeze": true,
-      "fresh_read_rule": "derive observations from exact pinned COMMON V2.1 PDF against exact official VDV-301-2.1 Common/Enumerations family before consulting historical Common findings",
+      "historical_metadata_exposure_note": "CURRENT_STATE.json exposed historical COMMON V2.0 finding metadata after the independent V2.1 observation list had been completed but before the formal freeze commit. The frozen V2.1 list was not changed from historical metadata; this procedural exposure is explicitly recorded.",
+      "fresh_read_rule": "derive observations from exact pinned COMMON V2.1 PDF against exact official VDV-301-2.1 Common/Enumerations family before historical reconciliation",
       "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
       "render_read_evidence": {
         "run": "33608210402",
         "artifact_name": "common-v21-recovery-read",
+        "artifact_id": "9837875704",
+        "artifact_digest": "sha256:f76b9cbc078edbe4646bf8d8754d486e6046bda460f885a7d52889c78a29ee34",
         "prior_evidence_run": "33393002497",
         "prior_artifact_id": "9758203545",
         "pdf_page_count": 48,
         "all_pages_rendered": true,
         "render_dpi": 120,
-        "fulltext_sha256": "5dce4c8ecc770574bdce8d5961fefbc01f88b1547e3957855013d9b077fc24b0"
+        "fulltext_sha256": "5dce4c8ecc770574bdce8d5961fefbc01f88b1547e3957855013d9b077fc24b0",
+        "all_page_png_hashes_rechecked": true,
+        "complete_extracted_text_read": true,
+        "targeted_visible_review_pages": [12,15,16,17,18,20,23,24,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42]
       },
-      "fresh_read_freeze": "not_started"
+      "fresh_read_freeze": {
+        "status": "frozen",
+        "report": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.1.md",
+        "observation_ids": [
+          "FR-COM21-OBS-001","FR-COM21-OBS-002","FR-COM21-OBS-003","FR-COM21-OBS-004","FR-COM21-OBS-005",
+          "FR-COM21-OBS-006","FR-COM21-OBS-007","FR-COM21-OBS-008","FR-COM21-OBS-009","FR-COM21-OBS-010",
+          "FR-COM21-OBS-011","FR-COM21-OBS-012","FR-COM21-OBS-013","FR-COM21-OBS-014","FR-COM21-OBS-015",
+          "FR-COM21-OBS-016","FR-COM21-OBS-017","FR-COM21-OBS-018","FR-COM21-OBS-019","FR-COM21-OBS-020"
+        ],
+        "observation_count": 20,
+        "historical_reconciliation_started": false,
+        "executable_evidence_status": "pending_where_sensible",
+        "xsd_modified": false
+      }
     }
   }
 }
