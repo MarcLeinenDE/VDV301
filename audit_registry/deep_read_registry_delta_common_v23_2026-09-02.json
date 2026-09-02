@@ -1,0 +1,91 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-09-02",
+  "base_registry": "audit_registry/deep_read_registry_v0.1.json",
+  "document_updates": {
+    "COMMON_V2.3": {
+      "state": "source_revalidated_fresh_read_frozen_pending_historical_reconciliation",
+      "official_url": "https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx",
+      "publication": "VDV 301-2-1 V2.3, Common Data Structures and Enumerations",
+      "source_pin": {
+        "sha256": "d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b",
+        "size_bytes": 793521,
+        "original_pinned_at_utc": "2026-08-28T12:00:30Z",
+        "fresh_revalidation_run": "33656579631",
+        "fresh_revalidation_job": "100336514663",
+        "fresh_retrieval_matches_existing_pin": true
+      },
+      "authority_status": {
+        "official_pdf": "official_public_VDV_writing",
+        "xsd_lane": "xsd",
+        "exact_xsd_authority": "official_VDV-301-2.3_exact_family",
+        "official_tag": "VDV-301-2.3",
+        "common_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+        "enumerations_file": "IBIS-IP_Enumerations_V2.2.xsd",
+        "enumerations_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+        "branch_bytes_match_official_tag": true,
+        "latest_xsd_wins": false
+      },
+      "historical_common_findings_quarantined_until_fresh_read_freeze": true,
+      "historical_independence_status": "source_only_freeze",
+      "fresh_read_rule": "derive and freeze observations from freshly revalidated COMMON V2.3 PDF against exact official VDV-301-2.3 Common plus its declared Enumerations V2.2 dependency before opening historical COMMON V2.3 finding material",
+      "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+      "render_read_evidence": {
+        "run": "33656579631",
+        "job": "100336514663",
+        "artifact_name": "common-v23-pinned-read",
+        "artifact_id": "9856965744",
+        "artifact_digest": "sha256:a3c0a59cf1a5e6ca8a98c7419c5f02e1445efa503b6986c62daa2f53171eb746",
+        "pdf_page_count": 58,
+        "all_pages_rendered": true,
+        "render_dpi": 120,
+        "fulltext_sha256": "c0ac2f22f0d4cf155d601d26c9c550214d7db221c0ce185eaeba26df27149c16",
+        "all_page_png_hashes_rechecked": true,
+        "exact_xsd_files_bundled_and_git_blob_rechecked": true
+      },
+      "fresh_read_freeze": {
+        "status": "frozen_by_source_only_commit",
+        "report": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3_FRESH_2026-09-02.md",
+        "observation_ids": [
+          "FR-COM23-001",
+          "FR-COM23-002",
+          "FR-COM23-003",
+          "FR-COM23-004",
+          "FR-COM23-005",
+          "FR-COM23-006",
+          "FR-COM23-007",
+          "FR-COM23-008",
+          "FR-COM23-009",
+          "FR-COM23-010",
+          "FR-COM23-011",
+          "FR-COM23-012",
+          "FR-COM23-013",
+          "FR-COM23-014",
+          "FR-COM23-015",
+          "FR-COM23-016"
+        ],
+        "observation_count": 16,
+        "historical_reconciliation_started": false,
+        "executable_evidence_status": "not_started",
+        "xsd_modified": false
+      },
+      "fresh_read_high_priority_candidate": {
+        "observation_id": "FR-COM23-011",
+        "summary": "StopInformationRequest PDF documents ArrivalExpected and DepartureExpected as optional fields and V2.3 history references section 2.52, but exact official StopInformationRequestStructure contains neither field; StopInformationStructure itself contains both and aligns.",
+        "executable_effect_expected": true
+      },
+      "active_falsification": [
+        "VDV -1:1 notation is XML choice notation, not negative cardinality",
+        "PointType required choice aligns",
+        "AdditionalInformation(n) is shorthand for explicit AdditionalInformation1..9 and aligns",
+        "V2.3 DisplayContent and TripInformation numeric additions align in checked facets",
+        "StopInformation ArrivalExpected and DepartureExpected align; mismatch is specifically StopInformationRequest",
+        "exact pinned V2.3 section 2.34 does not show a duplicate Message table under NetexMode",
+        "enumeration ordering differences are ignored",
+        "no XSD change is proposed or performed"
+      ],
+      "next_after_freeze": "historical_reconciliation_then_targeted_executable_evidence",
+      "next_natural_document_id_after_closure": "COMMON_V2.4"
+    }
+  }
+}
