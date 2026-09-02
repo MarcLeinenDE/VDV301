@@ -23,6 +23,11 @@ jobs:
         run: |
           set -euo pipefail
           python tools/temp_close_common_v22.py
+          python - <<'PY'
+          from pathlib import Path
+          p = Path("docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.2.md")
+          p.write_text(p.read_text(encoding="utf-8").rstrip() + "\n", encoding="utf-8")
+          PY
           rm -f .github/tmp/common_v22_closure_*.b64
 
       - name: Validate closure diff
