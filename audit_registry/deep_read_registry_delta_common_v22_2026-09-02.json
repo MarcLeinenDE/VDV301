@@ -4,7 +4,7 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "COMMON_V2.2": {
-      "state": "source_pinned_render_complete_pending_independent_fresh_read",
+      "state": "source_rederived_fresh_read_frozen_pending_historical_reconciliation",
       "official_url": "https://www.vdv.de/301-2-1-sdes-v2-2-commonstructure-enums.pdfx",
       "publication": "VDV 301-2-1 V2.2, Common Data Structures and Enumerations",
       "source_pin": {
@@ -26,17 +26,25 @@
         "branch_bytes_match_historical_upstream": true,
         "latest_xsd_wins": false
       },
-      "historical_common_findings_quarantined_until_fresh_read_freeze": true,
-      "fresh_read_rule": "derive observations from exact pinned COMMON V2.2 PDF against exact historical upstream V2.2 Common/Enumerations family before consulting historical Common findings",
+      "historical_common_findings_quarantined_until_fresh_read_freeze": false,
+      "historical_independence_status": "qualified_not_pristine",
+      "pre_freeze_historical_exposure": true,
+      "pre_freeze_historical_exposure_note": "A file-library search unintentionally surfaced historical Common finding material after source-only comparison had begun but before the formal freeze commit. The complete V2.2 observation set was re-derived from the pinned PDF and exact V2.2 XSD family; no pristine clean-room claim is made.",
+      "observation_derivation": "complete_source_xsd_matrix_rederived_after_exposure",
+      "fresh_read_rule": "the frozen 14-group observation list is immutable input for historical mapping/revalidation; historical reconciliation must not retrospectively add observations while describing them as part of this freeze",
       "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
       "render_read_evidence": {
         "run": "33614504943",
         "artifact_name": "common-v22-pinned-read",
+        "artifact_id": "9840345496",
+        "artifact_digest": "sha256:72bcf873ea86daf543acef1bf3050773f74ee31c57aed314be684a6e52f9a253",
         "pdf_page_count": 55,
         "all_pages_rendered": true,
         "render_dpi": 120,
         "fulltext_sha256": "4153a25b69cd9262fd6e2900f8275d13ffbdc76d0ca50b05196a7e5a7b2fb99e",
-        "fresh_read_freeze": "not_started"
+        "fresh_read_freeze": "13409ec0d79f74ed493abc196abb8a69186adeaa",
+        "frozen_observation_count": 14,
+        "historical_reconciliation_completed": false
       }
     }
   }
