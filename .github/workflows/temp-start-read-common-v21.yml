@@ -1,4 +1,4 @@
-name: Temporary pin and render Common V2.1
+name: TEMP Recover and start COMMON V2.1 deep read
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
   contents: write
 
 jobs:
-  read:
+  recover-start:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout audit branch
@@ -27,7 +27,7 @@ jobs:
       - name: Install renderer
         run: python -m pip install --disable-pip-version-check pymupdf
 
-      - name: Pin extract render and verify authority
+      - name: Re-pin exact source and build start state
         run: python tools/temp_start_read_common_v21.py
 
       - name: Fail closed before evidence upload
@@ -39,38 +39,67 @@ jobs:
             echo 'ERROR: XSD modification detected'
             exit 1
           fi
+          test -f .tmp_common_v21_recovery_evidence/manifest.json
           python - <<'PY'
           import json
           from pathlib import Path
-          for p in [
-              'audit_registry/pdf_source_pins_v0.1.json',
-              'audit_registry/deep_read_registry_delta_common_v21_2026-08-31.json',
-              '00_START_HERE/CURRENT_STATE.json',
-              'audit-results/common-v21-pinned-read/manifest.json',
-          ]:
-              json.loads(Path(p).read_text(encoding='utf-8'))
-              print('OK JSON', p)
+          pins = json.loads(Path('audit_registry/pdf_source_pins_v0.1.json').read_text(encoding='utf-8'))
+          matches = [x for x in pins['sources'] if x.get('source_id') == 'COMMON_V2.1']
+          assert len(matches) == 1, matches
+          assert matches[0]['expected_sha256'] == 'a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32'
+          assert matches[0]['expected_size_bytes'] == 1274051
+          state = json.loads(Path('00_START_HERE/CURRENT_STATE.json').read_text(encoding='utf-8'))
+          a = state['audit']
+          assert a['deep_read_in_progress'] == 1
+          assert a['deep_read_current_document_id'] == 'COMMON_V2.1'
+          # Critical recovery invariant: start state must not claim a completed fresh read.
+          assert a['deep_read_textual_fresh_read_completed'] == 33
+          assert a['deep_read_needs_visual_review'] == 33
+          delta = Path(a['latest_deep_read_registry_delta'])
+          d = json.loads(delta.read_text(encoding='utf-8'))
+          assert d['document_updates']['COMMON_V2.1']['fresh_read_freeze'] == 'not_started'
+          manifest = json.loads(Path('.tmp_common_v21_recovery_evidence/manifest.json').read_text(encoding='utf-8'))
+          assert manifest['pdf_sha256'] == matches[0]['expected_sha256']
+          assert manifest['pdf_size_bytes'] == matches[0]['expected_size_bytes']
+          assert manifest['page_count'] == 48
+          print('RECOVERY_FAIL_CLOSED_OK', delta)
           PY
 
-      - name: Upload exact pinned read artifact
+      - name: Upload recovery read evidence
         uses: actions/upload-artifact@v4
         with:
-          name: common-v21-pinned-read
-          path: audit-results/common-v21-pinned-read/
+          name: common-v21-recovery-read
+          path: .tmp_common_v21_recovery_evidence/
+          retention-days: 30
           if-no-files-found: error
 
-      - name: Commit source pin and start state
+      - name: Commit recovered pin and clean temporary machinery
         shell: bash
         run: |
           set -euo pipefail
+          DELTA="$(python - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path('00_START_HERE/CURRENT_STATE.json').read_text(encoding='utf-8'))
+          print(s['audit']['latest_deep_read_registry_delta'])
+          PY
+          )"
+          rm -rf .tmp_common_v21_recovery_evidence
           git config user.name 'Marc Leinen'
           git config user.email '34336531+MarcLeinenDE@users.noreply.github.com'
-          git rm -f .github/workflows/temp-start-read-common-v21.yml
-          git add -A
+          git rm -f .github/workflows/temp-start-read-common-v21.yml tools/temp_start_read_common_v21.py
+          git add audit_registry/pdf_source_pins_v0.1.json "$DELTA" 00_START_HERE/CURRENT_STATE.json
+          git diff --cached --check
           if git diff --cached --name-only | grep -E '\.xsd$'; then
             echo 'ERROR: staged XSD modification detected'
             exit 1
           fi
-          git diff --cached --check
-          git commit -m 'Pin and start Common V2.1 deep read'
+          UNEXPECTED="$(git diff --cached --name-only | grep -Ev '^(00_START_HERE/CURRENT_STATE\.json|audit_registry/pdf_source_pins_v0\.1\.json|audit_registry/deep_read_registry_delta_common_v21_[0-9]{4}-[0-9]{2}-[0-9]{2}\.json|\.github/workflows/temp-start-read-common-v21\.yml|tools/temp_start_read_common_v21\.py)$' || true)"
+          if [ -n "$UNEXPECTED" ]; then
+            echo 'ERROR: unexpected staged paths:'
+            echo "$UNEXPECTED"
+            exit 1
+          fi
+          test ! -d .tmp_common_v21_recovery_evidence
+          git commit -m 'audit: recover and start COMMON V2.1 deep read'
           git push origin HEAD:dev/schema-integration
