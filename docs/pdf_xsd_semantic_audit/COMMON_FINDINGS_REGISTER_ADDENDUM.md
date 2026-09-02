@@ -333,53 +333,61 @@ Impact / handling:
 Use <Service>.
 ```
 
-## CE-023 - Common V2.3 duplicate/corrupt second NetexMode table
+## CE-023 - Common V2.2/V2.3 duplicate/corrupt NetexMode documentation table
 
-State: V2.3-specific PDF copy/paste table error confirmed in native text; visual closure pending.
+State: byte-pinned V2.2 Fresh Read and V2.3 historical evidence confirm a PDF copy/paste table error; checked V2.4 is corrected.
 
 Classification:
 
 ```text
 mismatch_kind: duplicate_or_copy_paste_table
 likely_source_issue: pdf_table_error_candidate
-classification_confidence: high
-version_scope: Common V2.3 in checked V2.2/V2.3/V2.4 chain
+classification_confidence: very high for V2.2 visible evidence; high for retained V2.3 evidence
+version_scope: Common V2.2 and V2.3 affected; checked V2.4 corrected
 validation_behavior: no XSD defect implied
-final_handling_bucket: documentation_correction_candidate
+final_handling_bucket: historically_corrected_documentation_issue
 ```
 
 Evidence:
 
 ```text
-V2.3 section 1.18 correctly describes NetexMode with main-mode/submode choices.
-
-Later V2.3 section 2.34 is again titled NetexMode but its table body is:
+V2.2 page 15 correctly presents NetexMode as main-mode/submode choices.
+V2.2 section 2.34 is again titled NetexMode, but the visible table body is:
   Message-ID
   TimeStamp
   MessageType
   MessageText
+
+V2.3 likewise contains a later duplicate/corrupt NetexMode table with the Message structure.
 ```
 
-Cross-version context:
+V2.2 correction provenance:
 
 ```text
-V2.2: after Message comes 2.34 Point.
-V2.4: after Message comes 2.34 Point.
+Fresh Read freeze: 13409ec0d79f74ed493abc196abb8a69186adeaa
+Official PDF SHA-256: 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203
+Pin/render/read run: 33614504943
+EV-120 run: 33620003188
 ```
+
+The earlier historical note that treated this duplicate-table problem as V2.3-specific is superseded by the byte-pinned V2.2 Fresh Read. This is a scope correction, not a new XML/XSD defect.
 
 XSD context:
 
 ```text
-Official Common V2.3 NetexMode uses:
-  PtMainMode / PrivateMainMode
-  PtSubmodeChoiceGroup / PrivateSubmodeChoiceGroup
+Exact Common V2.2 NetexMode:
+  PtMainMode / PrivateMainMode choice
+  PtSubmodeChoiceGroup / PrivateSubmodeChoiceGroup choice
 ```
+
+The separate executable V2.2 choice-optionality mismatch is tracked as `DRCOM22-001`; do not merge that compositor issue into this documentation-copy/paste identity.
 
 Impact / handling:
 
 ```text
-Do not derive NetexMode XML shape from the corrupt second V2.3 table.
-Validation follows the selected XSD.
+Do not derive NetexMode XML shape from the corrupt documentation table.
+Validation follows the exact selected XSD.
+No XSD change is made from CE-023.
 ```
 
 ## CE-024 - UnsubscribeResponse `Active` PDF 0:1 vs XSD 1:1

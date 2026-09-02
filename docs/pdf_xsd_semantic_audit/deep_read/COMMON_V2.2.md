@@ -318,3 +318,69 @@ Fourteen source-rederived observation groups are frozen against the exact pinned
 The historical-independence boundary is explicitly qualified because of the accidental pre-freeze file-library exposure. Any later historical reconciliation must use this frozen list as immutable input and may only map/deduplicate/revalidate it; it must not retrospectively add observations while calling them part of this freeze.
 
 No XSD was changed.
+
+## Historical reconciliation and EV-120 closure
+
+Historical reconciliation was performed only against the immutable fourteen-group freeze above. Because the pre-freeze file-library exposure is disclosed, this closure does **not** upgrade the process to a pristine clean-room claim.
+
+Mapping:
+
+```text
+FR-COM22-001 -> DRCOM20-001
+FR-COM22-002 -> DRCOM22-001 (new)
+FR-COM22-003 -> CE-013
+FR-COM22-004 -> CE-011
+FR-COM22-005 -> DRCOM10-002
+FR-COM22-006 -> CE-014, CE-012, CE-018, DRCOM10-003
+FR-COM22-007 -> DRCOM10-004, DRCOM21-001, CE-005, CE-024
+FR-COM22-008 -> CE-026, CE-017, CE-015, CE-016, CE-021, CE-025
+FR-COM22-009 -> CE-022, CE-019
+FR-COM22-010 -> DRCOM10-005
+FR-COM22-011 -> CE-023
+FR-COM22-012 -> CE-004, CE-006
+FR-COM22-013 -> DRCOM10-006, CE-007, CE-008, CE-009, CE-010
+FR-COM22-014 -> DRCOM10-007 (grouped documentation/editorial residue)
+```
+
+`FR-COM22-002` is a new executable identity, `DRCOM22-001`. It is intentionally separate from `CE-023`: `DRCOM22-001` concerns the two optional XSD choice compositors, while `CE-023` concerns the corrupt duplicate NetexMode documentation table.
+
+The byte-pinned V2.2 Fresh Read also corrects the historical scope statement for `CE-023`: the duplicate/corrupt NetexMode table is present in **V2.2 and V2.3**; the checked V2.4 document is corrected. The earlier V2.3-specific statement is superseded.
+
+`FR-COM22-014` remains documentation-only. In particular the `LineCode` and `Heartbeat` cross-reference defects do not create XML aliases or a new executable finding.
+
+### EV-120
+
+Executable evidence:
+
+```text
+Evidence ID: EV-120
+Checker: tools/validate_common_v22_ev120.py
+Run: 33620003188
+Job: 100214595629
+Head tested: da75231b62c21a5f64097a5539e85e3b6d70aac2
+Result: PASS
+```
+
+EV-120 fail-closes on the exact historical-upstream Common V2.2 and Enumerations V2.2 Git blobs before compiling the harness.
+
+The decisive new boundary is executable:
+
+```text
+<TestNetexMode/> -> VALID
+```
+
+because both exact XSD top-level NetexMode choices have `minOccurs="0"`, despite the PDF presenting mandatory one-of choices.
+
+The run also confirms the V2.2 boundaries for InternationalTextType, AdditionalAnnouncement, Connection, DataAcceptedResponse, the four empty-list cases, JourneyStopInformation, StopInformationRequest, TripInformation, UnsubscribeResponse.Active, identifier spelling/case, ServiceIdentification and the V2.2 enumeration inventories/lexemes.
+
+## Closure result
+
+`COMMON_V2.2` is closed for Deep Read Pass 2 as `needs_visual_review` with historical reconciliation complete and EV-120 PASS.
+
+- Frozen observation groups: 14.
+- Existing findings revalidated/scope-extended: 30.
+- New unique finding: `DRCOM22-001`.
+- Corrected historical finding scope: `CE-023` = V2.2 and V2.3 affected; V2.4 corrected.
+- No XSD changed.
+- Exact selected V2.2 XSD family remains executable authority.
+- Next natural unit: `COMMON_V2.3`.

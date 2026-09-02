@@ -4,7 +4,7 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "COMMON_V2.2": {
-      "state": "source_rederived_fresh_read_frozen_pending_historical_reconciliation",
+      "state": "historical_reconciliation_complete_executable_evidence_pass",
       "official_url": "https://www.vdv.de/301-2-1-sdes-v2-2-commonstructure-enums.pdfx",
       "publication": "VDV 301-2-1 V2.2, Common Data Structures and Enumerations",
       "source_pin": {
@@ -44,7 +44,54 @@
         "fulltext_sha256": "4153a25b69cd9262fd6e2900f8275d13ffbdc76d0ca50b05196a7e5a7b2fb99e",
         "fresh_read_freeze": "13409ec0d79f74ed493abc196abb8a69186adeaa",
         "frozen_observation_count": 14,
-        "historical_reconciliation_completed": false
+        "historical_reconciliation_completed": true
+      },
+      "fresh_read_freeze": {
+        "status": "frozen",
+        "commit": "13409ec0d79f74ed493abc196abb8a69186adeaa",
+        "report": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.2.md",
+        "observation_ids": [
+          "FR-COM22-001",
+          "FR-COM22-002",
+          "FR-COM22-003",
+          "FR-COM22-004",
+          "FR-COM22-005",
+          "FR-COM22-006",
+          "FR-COM22-007",
+          "FR-COM22-008",
+          "FR-COM22-009",
+          "FR-COM22-010",
+          "FR-COM22-011",
+          "FR-COM22-012",
+          "FR-COM22-013",
+          "FR-COM22-014"
+        ],
+        "observation_count": 14,
+        "historical_reconciliation_started": true,
+        "executable_evidence_status": "EV-120_PASS",
+        "xsd_modified": false,
+        "historical_reconciliation_completed": true
+      },
+      "executable_evidence": {
+        "evidence_id": "EV-120",
+        "checker": "tools/validate_common_v22_ev120.py",
+        "run": "33620003188",
+        "job": "100214595629",
+        "head_tested": "da75231b62c21a5f64097a5539e85e3b6d70aac2",
+        "result": "PASS",
+        "authority": "exact_historical_upstream_Common_V2.2_Enumerations_V2.2_family"
+      },
+      "historical_reconciliation": {
+        "status": "complete",
+        "findings_delta": "audit_registry/deep_read_findings_delta_common_v22_2026-09-02.json",
+        "revalidated_or_scope_extended_count": 30,
+        "new_unique_findings": [
+          "DRCOM22-001"
+        ],
+        "corrected_historical_scope": {
+          "CE-023": "V2.2_and_V2.3_affected_V2.4_corrected"
+        },
+        "next_natural_document_id": "COMMON_V2.3"
       }
     }
   }
