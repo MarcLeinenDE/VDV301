@@ -27,7 +27,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p common-v23-pinned-read/pages
+          mkdir -p common-v23-pinned-read/pages common-v23-pinned-read/xsd
           url='https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx'
           pdf='common-v23-pinned-read/COMMON_V2.3.pdf'
           curl --fail --location --retry 3 --retry-delay 2 --output "$pdf" "$url"
@@ -36,12 +36,18 @@ jobs:
           size="$(stat -c %s "$pdf")"
           test "$sha" = 'd59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b'
           test "$size" = '793521'
+
+          test "$(git hash-object IBIS-IP_common_V2.3.xsd)" = '0d8926c4063c12de9a5e68b6f0addaab35a55dc1'
+          test "$(git hash-object IBIS-IP_Enumerations_V2.2.xsd)" = '2a23b512379b18e8f122ac1272cef8229fb86283'
+          cp IBIS-IP_common_V2.3.xsd common-v23-pinned-read/xsd/
+          cp IBIS-IP_Enumerations_V2.2.xsd common-v23-pinned-read/xsd/
+
           pdfinfo "$pdf" > common-v23-pinned-read/pdfinfo.txt
           pages="$(pdfinfo "$pdf" | awk '/^Pages:/ {print $2}')"
           pdftotext -layout "$pdf" common-v23-pinned-read/fulltext.txt
           pdftoppm -png -r 120 "$pdf" common-v23-pinned-read/pages/page >/dev/null 2>&1
           fulltext_sha="$(sha256sum common-v23-pinned-read/fulltext.txt | awk '{print $1}')"
-          printf 'source_id=COMMON_V2.3\nurl=%s\nsha256=%s\nsize_bytes=%s\npages=%s\nfulltext_sha256=%s\n' "$url" "$sha" "$size" "$pages" "$fulltext_sha" > common-v23-pinned-read/manifest.txt
+          printf 'source_id=COMMON_V2.3\nurl=%s\nsha256=%s\nsize_bytes=%s\npages=%s\nfulltext_sha256=%s\ncommon_blob=0d8926c4063c12de9a5e68b6f0addaab35a55dc1\nenumerations_blob=2a23b512379b18e8f122ac1272cef8229fb86283\n' "$url" "$sha" "$size" "$pages" "$fulltext_sha" > common-v23-pinned-read/manifest.txt
           (cd common-v23-pinned-read && sha256sum pages/*.png > page_hashes.sha256)
           cat common-v23-pinned-read/manifest.txt
 
