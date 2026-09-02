@@ -185,3 +185,50 @@ Twenty independent observations are frozen:
 These are fresh observations, not yet historical finding mappings. Executable positive/negative evidence is still required where it is sensible before any observation is promoted or revalidated as a confirmed finding under the Evidence Gate.
 
 No XSD was changed. The exact `VDV-301-2.1` XSD family remains the executable validation authority. Historical COMMON findings may now be reopened only for deduplication, mapping, falsification, and Evidence-Gate revalidation.
+
+## Historical reconciliation and closure — 2026-09-02
+
+Historical COMMON material was deliberately mapped only after the formal fresh-read freeze commit `11c16e618e1d86504ba4517f9d9891429d40d2ce`.
+
+The earlier procedural note remains part of the audit record: `CURRENT_STATE.json` exposed historical COMMON V2.0 metadata after the independent V2.1 observation list had already been completed but before the formal freeze commit. The frozen twenty-observation list was not altered from that metadata.
+
+### Deduplication / scope extension
+
+Nineteen of the twenty fresh observation groups map to existing Common finding identities. `FR-COM21-OBS-018` intentionally maps to two existing identities because the historic registry separates `DoorCountingObjectClassEnumeration` (`DRCOM10-006`) from the other case-sensitive enumeration lexeme boundaries (`CE-007`). `FR-COM21-OBS-005` intentionally maps to the four existing list-minimum identities it groups.
+
+The V2.1 mapping is recorded machine-readably in `audit_registry/deep_read_findings_delta_common_v21_2026-09-02.json`.
+
+The only new V2.1-specific identity required is:
+
+```text
+DRCOM21-001: StopInformationRequest.StopName PDF 0:1 vs exact V2.1 XSD 0:*
+```
+
+`CE-020` is not broadened: that identity includes the V2.3 PR #30 same-path authority collision. The V2.1 `InternationalTextType` primitive-vs-wrapper boundary therefore scope-extends `DRCOM20-001`, which was created specifically to isolate that PDF/XSD shape mismatch from the later candidate-authority collision.
+
+### Executable evidence — EV-119
+
+EV-119 run `33609779315` / job `100181942929` PASS on head `0e5d0213cdbbac73ed8991153893faaf85db15e9` against exact official V2.1 blobs:
+
+```text
+IBIS-IP_common_V2.1.xsd        05977c9f86c7c9dd0b48f36a4a4e9be32e94659e
+IBIS-IP_Enumerations_V2.1.xsd  311464690ad60749ed8d326217787e4b8ed0b718
+```
+
+The checker `tools/validate_common_v21_ev119.py` verifies the exact blob identities, static declarations, and positive/negative XML behavior. Among the executable boundaries it confirms:
+
+- flat `InternationalTextType` validates while PDF wrapper-shaped `Value`/`Language` does not;
+- optional `AdditionalAnnouncement` choice and XSD `SpecificPoint` behavior;
+- exclusive `DataAcceptedResponse` choice;
+- empty containers validate for the four PDF `1:*` list structures;
+- PDF/XSD element-name and case boundaries for FareZone, GlobalCardStatus, Message, Service, ReplyPath, BeaconPoint, TSPPoint and ZoneType;
+- a second `Announcement` or `FareZone` in `JourneyStopInformation` is rejected;
+- a second `AdditionalTextMessage` in `TripInformation` is rejected even though the PDF table and its own V2.0 correction history say repeatable;
+- two `StopName` entries in `StopInformationRequest` are accepted by the exact XSD, proving new `DRCOM21-001`;
+- the exact XSD enumeration lexemes validate while the mismatching PDF-side lexemes fail.
+
+### Closure
+
+COMMON V2.1 is complete for Deep Read Pass 2 as `needs_visual_review`, not `exhaustive_read`: the complete extracted text was read across all 48 pinned pages and all material finding pages received targeted visible review, but this was not a pixel-by-pixel exhaustive visual pass.
+
+No XSD was changed. Exact `VDV-301-2.1` Common/Enumerations remains executable authority. Next natural Deep Read unit: `COMMON_V2.2`.
