@@ -4,7 +4,7 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "COMMON_V2.3": {
-      "state": "source_revalidated_fresh_read_frozen_pending_historical_reconciliation",
+      "state": "historical_reconciliation_complete_executable_evidence_pass",
       "official_url": "https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx",
       "publication": "VDV 301-2-1 V2.3, Common Data Structures and Enumerations",
       "source_pin": {
@@ -44,7 +44,7 @@
         "exact_xsd_files_bundled_and_git_blob_rechecked": true
       },
       "fresh_read_freeze": {
-        "status": "frozen_by_source_only_commit",
+        "status": "frozen",
         "report": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3_FRESH_2026-09-02.md",
         "observation_ids": [
           "FR-COM23-001",
@@ -65,9 +65,11 @@
           "FR-COM23-016"
         ],
         "observation_count": 16,
-        "historical_reconciliation_started": false,
-        "executable_evidence_status": "not_started",
-        "xsd_modified": false
+        "historical_reconciliation_started": true,
+        "executable_evidence_status": "EV-121_PASS",
+        "xsd_modified": false,
+        "freeze_commit": "885905349b9812b64a92b9f6d27d211fe9f2aa14",
+        "historical_reconciliation_completed": true
       },
       "fresh_read_high_priority_candidate": {
         "observation_id": "FR-COM23-011",
@@ -84,8 +86,30 @@
         "enumeration ordering differences are ignored",
         "no XSD change is proposed or performed"
       ],
-      "next_after_freeze": "historical_reconciliation_then_targeted_executable_evidence",
-      "next_natural_document_id_after_closure": "COMMON_V2.4"
+      "next_after_freeze": "complete",
+      "next_natural_document_id_after_closure": "COMMON_V2.4",
+      "executable_evidence": {
+        "evidence_id": "EV-121",
+        "checker": "tools/validate_common_v23_ev121.py",
+        "run": "33657653888",
+        "job": "100340112497",
+        "head_tested": "3ca203156e2a6791c7757470e2cf4549f604ad0d",
+        "result": "PASS",
+        "authority": "exact_official_VDV-301-2.3_Common_plus_declared_Enumerations_V2.2"
+      },
+      "historical_reconciliation": {
+        "status": "complete",
+        "findings_delta": "audit_registry/deep_read_findings_delta_common_v23_2026-09-02.json",
+        "revalidated_or_scope_extended_count": 30,
+        "new_unique_findings": [
+          "DRCOM23-001"
+        ],
+        "corrections": [
+          "CE-023 V2.3 scope removed after visible-source falsification",
+          "V2.2 CE-004/CE-006 revalidation labels corrected"
+        ],
+        "next_natural_document_id": "COMMON_V2.4"
+      }
     }
   }
 }

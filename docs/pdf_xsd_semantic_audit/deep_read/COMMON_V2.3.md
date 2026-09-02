@@ -1,3 +1,5 @@
+> **Superseded for COMMON V2.3 scope decisions on 2026-09-02.** The independent source-only freeze `COMMON_V2.3_FRESH_2026-09-02.md` plus EV-121 supersedes this earlier reconnaissance. In particular, its old duplicate-NetexMode-table interpretation is rejected by the exact pinned visible V2.3 page 26.
+
 # VDV 301-2-1 Common Data Structures and Enumerations V2.3 - Deep Read Pass 2
 
 Status: textual fresh read complete; exact official XSD/dependency/variant cross-check complete; previous-audit comparison complete; visual closure pending because the PDF screenshot backend repeatedly returned cache-miss.
