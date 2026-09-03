@@ -1,0 +1,92 @@
+name: TEMP validate VDV301-2 V1.0 EV-129
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths:
+      - .github/workflows/temp_validate_vdv3012_v10_ev129.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install evidence dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          python -m pip install --disable-pip-version-check lxml
+
+      - name: Fetch exact byte-pinned VDV301-2 V1.0 PDF
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/fetch_vdv_pdf_sources.py --source-id VDV301-2_V1.0_DE
+
+      - name: Render targeted visible evidence pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/ev129/pages artifacts/ev129/text
+          for p in 20 22 26 59 63 65 67 69 75 80; do
+            pdftoppm -f "$p" -l "$p" -singlefile -png -r 150 \
+              local_sources/vdv_pdfs/VDV301-2_V1.0_DE.pdf \
+              "artifacts/ev129/pages/page-$p"
+            pdftotext -f "$p" -l "$p" -layout \
+              local_sources/vdv_pdfs/VDV301-2_V1.0_DE.pdf \
+              "artifacts/ev129/text/page-$p.txt"
+          done
+
+      - name: Run EV-129
+        shell: bash
+        env:
+          EV129_OUTPUT_DIR: artifacts/ev129
+        run: |
+          set -euo pipefail
+          python tools/validate_vdv3012_v10_ev129.py
+
+      - name: Build evidence manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum local_sources/vdv_pdfs/VDV301-2_V1.0_DE.pdf > artifacts/ev129/pdf.sha256
+          find artifacts/ev129 -type f ! -name manifest.sha256 -print0 | sort -z | xargs -0 sha256sum > artifacts/ev129/manifest.sha256
+          cat artifacts/ev129/ev129_result.json
+          cat artifacts/ev129/manifest.sha256
+
+      - name: Root XSD pool regression gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+
+      - name: Verify no tracked mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          git diff --exit-code -- '*.xsd'
+          if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
+            echo 'Unexpected tracked changes:'
+            git status --short
+            git diff --exit-code
+            exit 1
+          fi
+
+      - name: Upload EV-129 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: vdv3012-v10-ev129
+          path: artifacts/ev129
+          if-no-files-found: error
+          retention-days: 90
