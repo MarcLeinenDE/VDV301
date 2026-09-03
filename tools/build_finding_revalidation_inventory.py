@@ -139,15 +139,8 @@ def build_inventory(date: str, source_head: str | None) -> dict[str, Any]:
     revalidation_registry = load_json(REVALIDATION_REGISTRY_PATH)
     candidates, declarations = discover_candidate_ids()
     priors = prior_revalidations(revalidation_registry)
-    entries = []
-    for fid in sorted(candidates):
-        entries.append({
-            'finding_id': fid,
-            'declaration_sources': sorted(declarations.get(fid, set())),
-            'prior_current_gate_records': priors.get(fid, []),
-            'revalidation_state': 'pending',
-            'terminal_state_source': None
-        })
+    finding_ids = sorted(candidates)
+    prior_ids = sorted(fid for fid in finding_ids if priors.get(fid))
     return {
         'inventory_version': '0.1',
         'date': date,
@@ -156,6 +149,7 @@ def build_inventory(date: str, source_head: str | None) -> dict[str, Any]:
         'source_head': source_head,
         'evidence_gate': 'docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md',
         'revalidation_plan': 'docs/pdf_xsd_semantic_audit/LEGACY_FINDING_REVALIDATION_PLAN.md',
+        'generator': 'tools/build_finding_revalidation_inventory.py',
         'discovery_policy': {
             'canonical_sources': [
                 'docs/pdf_xsd_semantic_audit/findings.md',
@@ -167,14 +161,15 @@ def build_inventory(date: str, source_head: str | None) -> dict[str, Any]:
                 'audit_registry/deep_read_findings_correction_*.json'
             ],
             'historical_first_pass_safety_net': 'structured finding IDs declared in headings/table rows/bullets across docs/pdf_xsd_semantic_audit/**/*.md',
-            'context_reconstructability': 'full audit docs, generated matrices and audit_registry remain source-of-record; snapshot embeds declaring sources plus prior current-gate records only',
+            'context_reconstructability': 'declaration sources and prior current-gate records are deterministically reconstructable from the generator and canonical audit source files at source_head',
             'excluded_non_finding_prefixes': sorted(EXCLUDED_PREFIXES),
             'latest_wins': False,
             'xsd_mutation_allowed': False
         },
-        'entry_count': len(entries),
-        'finding_ids': [e['finding_id'] for e in entries],
-        'entries': entries
+        'entry_count': len(finding_ids),
+        'finding_ids': finding_ids,
+        'prior_current_gate_finding_ids': prior_ids,
+        'initial_revalidation_state': 'pending'
     }
 
 
@@ -189,7 +184,7 @@ def update_revalidation_registry(inventory: dict[str, Any], snapshot_rel: str, s
         'source_head': source_head,
         'snapshot': snapshot_rel,
         'entry_count': inventory['entry_count'],
-        'entries': [{'finding_id': e['finding_id'], 'revalidation_state': 'pending', 'terminal_state_source': None} for e in inventory['entries']]
+        'entries': [{'finding_id': fid, 'revalidation_state': 'pending', 'terminal_state_source': None} for fid in inventory['finding_ids']]
     }
     registry['next_revalidation_block'] = 'ARA_V2.4'
     registry['sdk_readiness']['finding_knowledge_ready'] = False
