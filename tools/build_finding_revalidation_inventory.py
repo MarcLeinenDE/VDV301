@@ -149,7 +149,7 @@ def build_inventory(date: str, source_head: str | None) -> dict[str, Any]:
         entries.append({
             'finding_id': fid,
             'declaration_sources': sorted(declarations.get(fid, set())),
-            'reference_sources': sorted(set(references.get(fid, []))),
+            'reference_source_count': len(set(references.get(fid, []))),
             'prior_current_gate_records': priors.get(fid, []),
             'status_hints_non_authoritative': infer_status_hints(fid, context_texts),
             'revalidation_state': 'pending',
