@@ -6,6 +6,7 @@ on:
     paths:
       - .github/workflows/temp_validate_vdv3012_gc22_ev132.yml
       - tools/validate_vdv3012_gc22_ev132.py
+      - tools/run_vdv3012_gc22_ev132.py
   workflow_dispatch:
 
 permissions:
@@ -78,7 +79,7 @@ jobs:
           EV132_OUTPUT_DIR: artifacts/ev132
         run: |
           set -euo pipefail
-          python tools/validate_vdv3012_gc22_ev132.py
+          python tools/run_vdv3012_gc22_ev132.py
 
       - name: Build evidence manifest
         shell: bash
