@@ -26,10 +26,14 @@ ENUM = {
 }
 
 
+def fail(message: str) -> None:
+    print(f"FAIL {message}")
+    raise SystemExit(1)
+
+
 def require(condition: bool, message: str) -> None:
     if not condition:
-        print(f"FAIL {message}")
-        raise SystemExit(1)
+        fail(message)
 
 
 def first_enum(path: Path, type_name: str) -> str:
@@ -48,8 +52,6 @@ def wrapper_schema(include_path: Path, element_name: str, type_name: str) -> etr
   <xs:include schemaLocation="{include_path.name}"/>
   <xs:element name="{element_name}" type="{type_name}"/>
 </xs:schema>'''
-    # Place the wrapper beside the selected XSD so all relative includes resolve
-    # exactly through the repository's selected dependency route.
     with tempfile.NamedTemporaryFile(
         mode="w", suffix=".xsd", prefix="ev127-wrapper-", dir=".", delete=False, encoding="utf-8"
     ) as handle:
@@ -63,6 +65,21 @@ def wrapper_schema(include_path: Path, element_name: str, type_name: str) -> etr
 
 def valid(schema: etree.XMLSchema, xml: str) -> bool:
     return schema.validate(etree.fromstring(xml.encode("utf-8")))
+
+
+def require_valid(schema: etree.XMLSchema, xml: str, label: str) -> None:
+    if valid(schema, xml):
+        return
+    print(f"VALIDATION_DIAGNOSTIC {label}")
+    for entry in schema.error_log:
+        print(f"  line={entry.line} domain={entry.domain_name} type={entry.type_name}: {entry.message}")
+    fail(f"{label}: expected valid instance was rejected")
+
+
+def require_invalid(schema: etree.XMLSchema, xml: str, label: str) -> None:
+    if not valid(schema, xml):
+        return
+    fail(f"{label}: expected invalid instance was accepted")
 
 
 def message_xml(message_type: str) -> str:
@@ -93,9 +110,9 @@ def test_dms003() -> None:
             "DeviceManagementService.GetDeviceErrorMessagesResponseDataStructure",
         )
         msg_type = first_enum(ENUM[version], "MessageTypeEnumeration")
-        require(not valid(schema, error_data_xml(9, msg_type)), f"DMS-003 {version}: 9 ErrorMessage unexpectedly valid")
-        require(valid(schema, error_data_xml(10, msg_type)), f"DMS-003 {version}: 10 ErrorMessage unexpectedly invalid")
-        require(valid(schema, error_data_xml(11, msg_type)), f"DMS-003 {version}: 11 ErrorMessage unexpectedly invalid")
+        require_invalid(schema, error_data_xml(9, msg_type), f"DMS-003 {version} 9 ErrorMessage")
+        require_valid(schema, error_data_xml(10, msg_type), f"DMS-003 {version} 10 ErrorMessage")
+        require_valid(schema, error_data_xml(11, msg_type), f"DMS-003 {version} 11 ErrorMessage")
         print(f"INSTANCE_OK DMS-003 {version}: 9=reject 10=accept 11=accept")
 
     schema24 = wrapper_schema(
@@ -104,8 +121,8 @@ def test_dms003() -> None:
         "DeviceManagementService.GetDeviceErrorMessagesResponseDataStructure",
     )
     msg_type24 = first_enum(ENUM["v24"], "MessageTypeEnumeration")
-    require(valid(schema24, error_data_xml(0, msg_type24)), "DMS-003 v24: 0 ErrorMessage unexpectedly invalid")
-    require(valid(schema24, error_data_xml(1, msg_type24)), "DMS-003 v24: 1 ErrorMessage unexpectedly invalid")
+    require_valid(schema24, error_data_xml(0, msg_type24), "DMS-003 v24 0 ErrorMessage")
+    require_valid(schema24, error_data_xml(1, msg_type24), "DMS-003 v24 1 ErrorMessage")
     print("INSTANCE_OK DMS-003 v24: 0=accept 1=accept")
 
 
@@ -127,10 +144,10 @@ def test_dms004() -> None:
             "EV127Install",
             "DeviceManagementService.InstallUpdateRequestStructure",
         )
-        require(valid(schema, install_xml(required)), f"DMS-004 {version}: complete required trio invalid")
+        require_valid(schema, install_xml(required), f"DMS-004 {version} complete required trio")
         for missing in required:
             fields = tuple(name for name in required if name != missing)
-            require(not valid(schema, install_xml(fields)), f"DMS-004 {version}: missing {missing} unexpectedly valid")
+            require_invalid(schema, install_xml(fields), f"DMS-004 {version} missing {missing}")
         print(f"INSTANCE_OK DMS-004 {version}: required trio accepted; each single omission rejected")
 
     schema24 = wrapper_schema(
@@ -138,8 +155,8 @@ def test_dms004() -> None:
         "EV127Install",
         "DeviceManagementService.InstallUpdateRequestStructure",
     )
-    require(valid(schema24, install_xml(tuple())), "DMS-004 v24: empty optional request unexpectedly invalid")
-    require(valid(schema24, install_xml(required)), "DMS-004 v24: populated optional request unexpectedly invalid")
+    require_valid(schema24, install_xml(tuple()), "DMS-004 v24 empty optional request")
+    require_valid(schema24, install_xml(required), "DMS-004 v24 populated optional request")
     print("INSTANCE_OK DMS-004 v24: empty=accept populated=accept")
 
 
@@ -153,13 +170,13 @@ def status_xml(version: str, include_impact_priority: bool) -> str:
 
 def test_dms006() -> None:
     schema22 = wrapper_schema(DMS["v22"], "EV127Status", "DeviceStatusStructure")
-    require(not valid(schema22, status_xml("v22", False)), "DMS-006 v22: PDF-visible Name+Flag-only instance unexpectedly valid")
-    require(valid(schema22, status_xml("v22", True)), "DMS-006 v22: full four-field status unexpectedly invalid")
+    require_invalid(schema22, status_xml("v22", False), "DMS-006 v22 PDF-visible Name+Flag-only")
+    require_valid(schema22, status_xml("v22", True), "DMS-006 v22 full four-field status")
     print("INSTANCE_OK DMS-006 v22: PDF-visible two-field shape=reject; XSD-required four-field shape=accept")
 
     schema24 = wrapper_schema(DMS["v24"], "EV127Status", "DeviceStatusStructure")
-    require(valid(schema24, status_xml("v24", False)), "DMS-006 v24: Name+Flag-only instance unexpectedly invalid")
-    require(valid(schema24, status_xml("v24", True)), "DMS-006 v24: populated optional fields unexpectedly invalid")
+    require_valid(schema24, status_xml("v24", False), "DMS-006 v24 Name+Flag-only")
+    require_valid(schema24, status_xml("v24", True), "DMS-006 v24 populated optional fields")
     print("INSTANCE_OK DMS-006 v24: two-field=accept four-field=accept")
 
 
