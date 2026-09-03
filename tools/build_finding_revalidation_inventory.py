@@ -15,11 +15,11 @@ AUDIT_REGISTRY = ROOT / 'audit_registry'
 STATE_PATH = ROOT / '00_START_HERE' / 'CURRENT_STATE.json'
 REVALIDATION_REGISTRY_PATH = AUDIT_REGISTRY / 'finding_revalidation_registry_v0.1.json'
 
-ID_RE = re.compile(r'\b([A-Z][A-Z0-9]{1,30}-\d{3})\b')
+ID_RE = re.compile(r'(?<![A-Z0-9-])([A-Z][A-Z0-9]{1,30}-\d{3})(?![A-Z0-9-])')
 HEADING_RE = re.compile(r'(?m)^#{1,6}\s+([A-Z][A-Z0-9]{1,30}-\d{3})\b')
 TABLE_RE = re.compile(r'(?m)^\|\s*([A-Z][A-Z0-9]{1,30}-\d{3})\s*\|')
 BULLET_RE = re.compile(r'(?m)^\s*[-*]\s+(?:`|\*\*)?([A-Z][A-Z0-9]{1,30}-\d{3})\b')
-EXCLUDED_PREFIXES = {'EV','RV','VDV','RFC','ISO','IEC','PR','HTTP','XML','XSD'}
+EXCLUDED_PREFIXES = {'EV','RV','VDV','RFC','ISO','IEC','PR','HTTP','XML','XSD','SHA'}
 
 
 def read_text(path: Path) -> str:
