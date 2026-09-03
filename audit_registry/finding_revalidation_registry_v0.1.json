@@ -210,13 +210,13 @@
       },
       {
         "finding_id": "BG-001",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_BG_2026-09-03.md"
       },
       {
         "finding_id": "BG-002",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "contextual_not_defect",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_BG_2026-09-03.md"
       },
       {
         "finding_id": "CE-001",
@@ -1123,7 +1123,7 @@
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true
   },
-  "next_revalidation_block": "BG",
+  "next_revalidation_block": "CE",
   "revalidation_blocks": {
     "ARA_V2.4": {
       "date": "2026-09-03",
@@ -1181,6 +1181,46 @@
       },
       "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARCH_V10_2026-09-03.md",
       "executable_evidence_reason_not_applicable": "Architecture context/authority constraints; no direct XSD validation behavior claim.",
+      "xsd_mutation": false
+    },
+    "BG": {
+      "date": "2026-09-03",
+      "state": "completed",
+      "authority_lane": "official_git_tag_provenance_plus_operational_legacy_root_adapter",
+      "upstream_repository": "VDVde/VDV301",
+      "compared_tags": [
+        "VDV-301-1.0",
+        "VDV-301-2.0"
+      ],
+      "upstream_compare_base_commit": "f5b53785f703e898632603eec3bfa3555a79fdba",
+      "same_path_v10_blob_transitions": {
+        "IBIS-IP_JourneyInformationService_V1.0.xsd": [
+          "1ee4d7aeb15f3269c5335313be9e214bdb519d2e",
+          "8c303db5a9c0548d66b90174d9c329d33092ad24"
+        ],
+        "IBIS-IP_PassengerCountingService_V1.0.xsd": [
+          "600a3ee6290c630a4435fb06ca9803dabaceb788",
+          "4161872be76740abfdd1cddf96f8a736333fc8be"
+        ],
+        "IBIS-IP_SystemManagementService_V1.0.xsd": [
+          "85390f99d6c19c88923ed9a5fc8a5706137708af",
+          "2d32630a0f1981e980e6a466e3f6a69136410f24"
+        ],
+        "IBIS-IP_TicketInformationService_V1.0.xsd": [
+          "017ca64666e25d757fc0cde1f1be817f06a743fc",
+          "3fda66d872ab0d1c511247f13e715cf3ad56afe7"
+        ]
+      },
+      "aggregate_v1_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+      "aggregate_removed_by_VDV_301_2_0": true,
+      "executable_evidence_id": "EV-123",
+      "executable_run_id": "33726364976",
+      "executable_checker": "tools/validate_legacy_v1_roots.py",
+      "findings": {
+        "BG-001": "context_verified",
+        "BG-002": "contextual_not_defect"
+      },
+      "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_BG_2026-09-03.md",
       "xsd_mutation": false
     }
   }
