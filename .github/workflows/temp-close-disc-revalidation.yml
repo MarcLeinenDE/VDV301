@@ -1,5 +1,5 @@
 name: temp-close-disc-revalidation
-# retry after deterministic PDF text-layer hardening
+# retry from the already successful pinned source artifact
 
 on:
   push:
@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: write
+  actions: read
 
 jobs:
   close-disc:
@@ -20,6 +21,17 @@ jobs:
           fetch-depth: 1
       - name: Install PDF tools
         run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - name: Download pinned DISC source artifact
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/disc-source-evidence
+          mkdir -p /tmp/disc-source-evidence
+          gh run download 33752224704 -n disc-source-pin -D /tmp/disc-source-evidence
+          test -f /tmp/disc-source-evidence/pdfs/VDV301-2_V1.0_DE.pdf
+          test -f /tmp/disc-source-evidence/pdfs/VDV301-2_GC_V2.4.pdf
       - name: Snapshot immutable inputs
         shell: bash
         run: |
@@ -39,7 +51,7 @@ jobs:
           print(h.hexdigest())
           PY
       - name: Run EV-126
-        run: python tools/validate_disc_ev126.py
+        run: python tools/validate_disc_ev126.py --source-dir /tmp/disc-source-evidence/pdfs
       - name: Apply DISC closure
         run: python tools/temp_close_disc_revalidation.py --ev-run-id "$GITHUB_RUN_ID"
       - name: Validate closure state
