@@ -1,0 +1,64 @@
+name: temp-close-ce-revalidation
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp-close-ce-revalidation.yml
+
+permissions:
+  contents: write
+
+jobs:
+  close:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install validation dependency
+        run: python -m pip install --disable-pip-version-check lxml
+      - name: Rerun Common evidence and prepare CE closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          snapshot_before="$(sha256sum audit_registry/finding_inventory_frozen_2026-09-03.json | awk '{print $1}')"
+          python tools/validate_common_v10_ev117.py
+          python tools/validate_common_v20_ev118.py
+          python tools/validate_common_v21_ev119.py
+          python tools/validate_common_v22_ev120.py
+          python tools/validate_common_v23_ev121.py
+          python tools/validate_common_v24_ev122.py
+          python tools/validate_common_v23_schema_variant.py
+          python tools/temp_close_ce_revalidation.py
+          snapshot_after="$(sha256sum audit_registry/finding_inventory_frozen_2026-09-03.json | awk '{print $1}')"
+          test "$snapshot_before" = "$snapshot_after"
+          python -c "import json; r=json.load(open('audit_registry/finding_revalidation_registry_v0.1.json')); e={x['finding_id']:x for x in r['inventory']['entries']}; ce=[f'CE-{i:03d}' for i in range(1,27)]; assert all(e[x]['revalidation_state']!='pending' for x in ce); assert e['CE-001']['revalidation_state']=='contextual_not_defect'; assert e['CE-003']['revalidation_state']=='superseded'; assert e['CE-023']['revalidation_state']=='context_verified'; assert sum(x['revalidation_state']!='pending' for x in r['inventory']['entries'])==42; assert sum(x['revalidation_state']=='pending' for x in r['inventory']['entries'])==150; assert r['next_revalidation_block']=='CIS'; s=json.load(open('00_START_HERE/CURRENT_STATE.json'))['audit']; assert s['finding_revalidation_completed_findings']==42 and s['finding_revalidation_pending_findings']==150 and s['finding_revalidation_next_block']=='CIS'"
+          git diff --check
+          if git diff --name-only | grep -E '\.xsd$'; then
+            echo 'XSD mutation detected' >&2
+            exit 1
+          fi
+      - name: Commit CE closure and self-remove
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm .github/workflows/temp-close-ce-revalidation.yml tools/temp_close_ce_revalidation.py
+          expected="$(printf '%s\n' '.github/workflows/temp-close-ce-revalidation.yml' '00_START_HERE/CURRENT_STATE.json' 'audit_registry/finding_revalidation_registry_v0.1.json' 'audit_registry/revalidation_evidence_ev124_ce_block_2026-09-03.json' 'docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_COMMON_V22_CE008_CE009_IDENTITY_2026-09-03.md' 'docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md' 'tools/temp_close_ce_revalidation.py')"
+          got="$( (git diff --name-only; git ls-files --others --exclude-standard) | sort -u )"
+          test "$got" = "$expected"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- .github/workflows/temp-close-ce-revalidation.yml tools/temp_close_ce_revalidation.py 00_START_HERE/CURRENT_STATE.json audit_registry/finding_revalidation_registry_v0.1.json audit_registry/revalidation_evidence_ev124_ce_block_2026-09-03.json docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_COMMON_V22_CE008_CE009_IDENTITY_2026-09-03.md docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md
+          git diff --cached --check
+          if git diff --cached --name-only | grep -E '\.xsd$'; then
+            echo 'Staged XSD mutation detected' >&2
+            exit 1
+          fi
+          git commit -m 'audit: revalidate CE finding block'
+          git push origin HEAD:dev/schema-integration
