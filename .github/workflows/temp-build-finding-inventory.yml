@@ -2,10 +2,8 @@ name: temp-build-finding-inventory
 
 on:
   push:
-    branches:
-      - dev/schema-integration
-    paths:
-      - .github/workflows/temp-build-finding-inventory.yml
+    branches: [dev/schema-integration]
+    paths: ['.github/workflows/temp-build-finding-inventory.yml']
 
 permissions:
   contents: write
@@ -24,61 +22,21 @@ jobs:
           set -euo pipefail
           FREEZE_HEAD='7fad145f528205ef5c40e58a3a23374379b08189'
           python tools/build_finding_revalidation_inventory.py --date 2026-09-03 --source-head "$FREEZE_HEAD"
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          inv=json.loads(Path('audit_registry/finding_inventory_frozen_2026-09-03.json').read_text())
-          assert inv['state']=='frozen'
-          assert inv['source_head']=='7fad145f528205ef5c40e58a3a23374379b08189'
-          assert inv['entry_count']==192
-          ids=inv['finding_ids']
-          assert len(ids)==len(set(ids))==192
-          assert not [x for x in ids if x.startswith(('EV-','RV-','FR-','SHA-'))]
-          reg=json.loads(Path('audit_registry/finding_revalidation_registry_v0.1.json').read_text())
-          assert reg['state']=='inventory_frozen_revalidation_in_progress'
-          assert reg['inventory']['entry_count']==192
-          assert reg['inventory']['source_head']==inv['source_head']
-          assert reg['next_revalidation_block']=='ARA_V2.4'
-          state=json.loads(Path('00_START_HERE/CURRENT_STATE.json').read_text())
-          a=state['audit']
-          assert state['project_phase']=='legacy_finding_revalidation'
-          assert a['finding_inventory_count']==192
-          assert a['finding_inventory_source_head']==inv['source_head']
-          assert a['finding_revalidation_next_block']=='ARA_V2.4'
-          print('FINDING_INVENTORY_FREEZE_OK')
-          PY
+          python -c "import json,pathlib; p=pathlib.Path; inv=json.loads(p('audit_registry/finding_inventory_frozen_2026-09-03.json').read_text()); assert inv['state']=='frozen' and inv['source_head']=='7fad145f528205ef5c40e58a3a23374379b08189' and inv['entry_count']==192; ids=inv['finding_ids']; assert len(ids)==len(set(ids))==192 and not [x for x in ids if x.startswith(('EV-','RV-','FR-','SHA-'))]; reg=json.loads(p('audit_registry/finding_revalidation_registry_v0.1.json').read_text()); assert reg['state']=='inventory_frozen_revalidation_in_progress' and reg['inventory']['entry_count']==192 and reg['inventory']['source_head']==inv['source_head'] and reg['next_revalidation_block']=='ARA_V2.4'; s=json.loads(p('00_START_HERE/CURRENT_STATE.json').read_text()); a=s['audit']; assert s['project_phase']=='legacy_finding_revalidation' and a['finding_inventory_count']==192 and a['finding_inventory_source_head']==inv['source_head'] and a['finding_revalidation_next_block']=='ARA_V2.4'; print('FINDING_INVENTORY_FREEZE_OK')"
           git diff --check
-          if git diff --name-only | grep -E '\.xsd$'; then
-            echo 'XSD mutation detected' >&2
-            exit 1
-          fi
+          ! git diff --name-only | grep -E '\.xsd$'
       - name: Commit frozen inventory and self-remove
         shell: bash
         run: |
           set -euo pipefail
           rm .github/workflows/temp-build-finding-inventory.yml
-          expected=$(cat <<'EOF'
-.github/workflows/temp-build-finding-inventory.yml
-00_START_HERE/CURRENT_STATE.json
-audit_registry/finding_inventory_frozen_2026-09-03.json
-audit_registry/finding_revalidation_registry_v0.1.json
-docs/pdf_xsd_semantic_audit/FINDING_INVENTORY_FREEZE_2026-09-03.md
-EOF
-          )
+          expected="$(printf '%s\n' '.github/workflows/temp-build-finding-inventory.yml' '00_START_HERE/CURRENT_STATE.json' 'audit_registry/finding_inventory_frozen_2026-09-03.json' 'audit_registry/finding_revalidation_registry_v0.1.json' 'docs/pdf_xsd_semantic_audit/FINDING_INVENTORY_FREEZE_2026-09-03.md')"
           got="$( (git diff --name-only; git ls-files --others --exclude-standard) | sort -u )"
           test "$got" = "$expected"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A -- \
-            .github/workflows/temp-build-finding-inventory.yml \
-            00_START_HERE/CURRENT_STATE.json \
-            audit_registry/finding_inventory_frozen_2026-09-03.json \
-            audit_registry/finding_revalidation_registry_v0.1.json \
-            docs/pdf_xsd_semantic_audit/FINDING_INVENTORY_FREEZE_2026-09-03.md
+          git add -A -- .github/workflows/temp-build-finding-inventory.yml 00_START_HERE/CURRENT_STATE.json audit_registry/finding_inventory_frozen_2026-09-03.json audit_registry/finding_revalidation_registry_v0.1.json docs/pdf_xsd_semantic_audit/FINDING_INVENTORY_FREEZE_2026-09-03.md
           git diff --cached --check
-          if git diff --cached --name-only | grep -E '\.xsd$'; then
-            echo 'Staged XSD mutation detected' >&2
-            exit 1
-          fi
+          ! git diff --cached --name-only | grep -E '\.xsd$'
           git commit -m 'audit: freeze full legacy finding inventory'
           git push origin HEAD:dev/schema-integration
