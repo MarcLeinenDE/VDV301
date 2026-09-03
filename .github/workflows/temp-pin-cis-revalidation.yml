@@ -1,0 +1,75 @@
+name: temp-pin-cis-revalidation
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp-pin-cis-revalidation.yml
+
+permissions:
+  contents: write
+
+jobs:
+  pin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 1
+      - name: Fetch render and hash official CIS sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils
+          mkdir -p cis-pinned-read
+          fetch_one() {
+            id="$1"
+            url="$2"
+            out="cis-pinned-read/$id"
+            mkdir -p "$out/pages"
+            pdf="$out/$id.pdf"
+            curl --fail --location --retry 3 --retry-delay 2 --output "$pdf" "$url"
+            test "$(head -c 5 "$pdf")" = '%PDF-'
+            sha256sum "$pdf" > "$out/pdf.sha256"
+            stat -c '%s' "$pdf" > "$out/pdf.size"
+            pdfinfo "$pdf" > "$out/pdfinfo.txt"
+            pdftotext -layout "$pdf" "$out/fulltext.txt"
+            pdftoppm -png -r 120 "$pdf" "$out/pages/page" >/dev/null 2>&1
+            sha256sum "$out/fulltext.txt" > "$out/fulltext.sha256"
+            sha256sum "$out"/pages/*.png > "$out/page_hashes.sha256"
+            printf '%s\n%s\n' "$id" "$url" > "$out/source.txt"
+            echo "=== $id ==="
+            cat "$out/pdf.sha256"
+            cat "$out/pdf.size"
+            grep '^Pages:' "$out/pdfinfo.txt"
+          }
+          fetch_one CIS_V1.1 'https://www.vdv.de/301-2-3-sds-v1-1.pdfx'
+          fetch_one CIS_V2.0 'https://www.vdv.de/301-2-3sds-v-2-0.pdfx'
+          fetch_one CIS_V2.2 'https://www.vdv.de/301-2-3-sdes-v2-2-customerinformationservice.pdfx'
+          fetch_one CIS_V2.3 'https://www.vdv.de/301-2-3-sdes-v2-3-customerinformationservice.pdfx'
+          find cis-pinned-read -type f | sort > cis-pinned-read/filelist.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cis-pinned-read
+          path: cis-pinned-read/
+          if-no-files-found: error
+      - name: Self-remove temporary workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm .github/workflows/temp-pin-cis-revalidation.yml
+          test "$(git diff --name-only)" = '.github/workflows/temp-pin-cis-revalidation.yml'
+          git diff --check
+          if git diff --name-only | grep -E '\.xsd$'; then
+            echo 'XSD mutation detected' >&2
+            exit 1
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- .github/workflows/temp-pin-cis-revalidation.yml
+          git diff --cached --check
+          git commit -m 'audit: remove temporary CIS pin workflow'
+          git push origin HEAD:dev/schema-integration
