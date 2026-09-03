@@ -21,6 +21,18 @@ jobs:
         run: |
           set -euo pipefail
           python tools/temp_close_common_v24.py
+          python - <<'PY'
+          from pathlib import Path
+          for name in [
+            'docs/pdf_xsd_semantic_audit/COMMON_FINDINGS_REGISTER_ADDENDUM.md',
+            'docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4.md',
+            'docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF_DELTA_COMMON_V24_DEEP_READ_2026-09-03.md',
+            'docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_COMMON_V24_INTERNATIONALTEXT_AUTHORITY_2026-09-03.md',
+            'docs/pdf_xsd_semantic_audit/01g_common_enums_v2_4_datatypes_core_structures.md',
+          ]:
+            q=Path(name)
+            q.write_text(q.read_text(encoding='utf-8').rstrip()+'\n',encoding='utf-8')
+          PY
       - name: Validate closure diff
         run: |
           set -euo pipefail
