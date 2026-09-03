@@ -2,8 +2,10 @@ name: temp-close-cis-revalidation
 
 on:
   push:
-    branches: [dev/schema-integration]
-    paths: ['.github/workflows/temp-close-cis-revalidation.yml']
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp-close-cis-revalidation.yml
 
 permissions:
   contents: write
@@ -14,15 +16,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
-      - name: Guard baseline and snapshot XSDs
+          fetch-depth: 10
+
+      - name: Guard branch and XSD baseline
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD^)" = "cdf6acb0ea35a6e024bb1297e1214b20a715978e"
+          git merge-base --is-ancestor cdf6acb0ea35a6e024bb1297e1214b20a715978e HEAD
+          test -z "$(git diff --name-only cdf6acb0ea35a6e024bb1297e1214b20a715978e..HEAD -- '*.xsd')"
           find . -type f -name '*.xsd' -print0 | sort -z | xargs -0 sha256sum > /tmp/xsd.before
           python -m pip install --disable-pip-version-check lxml
-      - name: Pin historical CIS V1.1 working family
+
+      - name: Materialize historical CIS V1.1 working family
         shell: bash
         run: |
           set -euo pipefail
@@ -32,233 +37,25 @@ jobs:
           for f in IBIS-IP_CustomerInformationService_V1.1.xsd IBIS-IP_common_V1.1.xsd IBIS-IP_Enumerations_V1.1.xsd; do
             git show FETCH_HEAD:$f > /tmp/cis_v11/$f
           done
-      - name: Create and run EV-125
+
+      - name: EV-125 executable revalidation
         shell: bash
         env:
           CIS_V11_DIR: /tmp/cis_v11
         run: |
           set -euo pipefail
-          cat > tools/validate_cis_ev125.py <<'PY'
-          #!/usr/bin/env python3
-          """EV-125: CIS legacy finding revalidation executable evidence."""
-          from __future__ import annotations
-          import hashlib, os, tempfile
-          from pathlib import Path
-          from lxml import etree
-
-          XS='http://www.w3.org/2001/XMLSchema'; NS={'xs':XS}
-          ROOT=Path(__file__).resolve().parents[1]
-          HIST=Path(os.environ['CIS_V11_DIR'])
-          class EvidenceError(RuntimeError): pass
-          def need(v,m):
-              if not v: raise EvidenceError(m)
-              print('OK ',m)
-          def blob(path:Path):
-              b=path.read_bytes(); return hashlib.sha1(f'blob {len(b)}\0'.encode()+b).hexdigest()
-          def expect_blob(path,sha,label): need(blob(path)==sha,f'{label} blob={sha}')
-          def parse(path): return etree.parse(str(path)).getroot()
-          def group(root,name):
-              x=root.find(f"xs:group[@name='{name}']",NS)
-              if x is None: raise EvidenceError('missing group '+name)
-              return x
-          def ctype(root,name):
-              x=root.find(f"xs:complexType[@name='{name}']",NS)
-              if x is None: raise EvidenceError('missing complexType '+name)
-              return x
-          def elem_in(node,name): return node.find(f".//xs:element[@name='{name}']",NS)
-          def occurs(x,key): return x.get(key,'1')
-          def globals_(root): return {x.get('name') for x in root.findall('xs:element',NS)}
-          def validate(schema,label,xml,want):
-              doc=etree.fromstring(xml.encode()); got=bool(schema.validate(doc))
-              if got != want: raise EvidenceError(f'{label}: got {got}, expected {want}; {schema.error_log.last_error}')
-              print('OK ',label,'VALID' if got else 'INVALID')
-          def compile_(path):
-              s=etree.XMLSchema(etree.parse(str(path))); print('OK ',path.name,'compiled'); return s
-          def includes(root): return [x.get('schemaLocation') for x in root.findall('xs:include',NS)]
-
-          def historical_v11():
-              svc=HIST/'IBIS-IP_CustomerInformationService_V1.1.xsd'; com=HIST/'IBIS-IP_common_V1.1.xsd'; en=HIST/'IBIS-IP_Enumerations_V1.1.xsd'
-              expect_blob(svc,'5957e27f128a191c794b0c8081b531a07126784a','historical working CIS V1.1')
-              expect_blob(com,'bdf839813b4b19dd000a32a684ce985878adaca9','historical working Common V1.1')
-              expect_blob(en,'5a9957a6931be2e4460665f8a52c76765fbfbcde','historical working Enumerations V1.1')
-              r=parse(svc); need(includes(r)==['IBIS-IP_common_V1.1.xsd','IBIS-IP_Enumerations_V1.1.xsd'],'V1.1 working service includes exact V1.1 dependencies')
-              g=group(r,'VehicleInformationGroup'); need(elem_in(g,'SpeakerActive') is None,'V1.1 working VehicleInformationGroup lacks SpeakerActive'); need(elem_in(g,'StopInformationActive') is None,'V1.1 working VehicleInformationGroup lacks StopInformationActive')
-              compile_(svc)
-              h=HIST/'_ev125_v11_harness.xsd'
-              h.write_text(f'<xs:schema xmlns:xs="{XS}" elementFormDefault="qualified"><xs:include schemaLocation="{svc.name}"/><xs:element name="V" type="CustomerInformationService.VehicleData"/></xs:schema>',encoding='utf-8')
-              s=compile_(h)
-              base='<TimeStamp><Value>2026-01-01T00:00:00Z</Value></TimeStamp><VehicleRef><Value>V1</Value></VehicleRef><RouteDeviation>onroute</RouteDeviation>'
-              validate(s,'V1.1 working base VehicleData',f'<V>{base}</V>',True)
-              validate(s,'V1.1 working SpeakerActive rejected',f'<V>{base}<SpeakerActive><Value>true</Value></SpeakerActive></V>',False)
-              validate(s,'V1.1 working StopInformationActive rejected',f'<V>{base}<StopInformationActive><Value>true</Value></StopInformationActive></V>',False)
-              h.unlink()
-
-          FAMILIES={
-            '2.0':('IBIS-IP_CustomerInformationService_V2.0.xsd','fa8f0a51ad5f612660c9532c8557ad1ca473a908','IBIS-IP_common_V2.0.xsd','8608e3dcd665c197c34da7f6ec6af5a3758da164','IBIS-IP_Enumerations_V2.0.xsd','27e3c183b00381d959622d13c10543123af8eef6'),
-            '2.2':('IBIS-IP_CustomerInformationService_V2.2.xsd','ddc70ed9d6238f1377be1d7728ff46b36a22ee1e','IBIS-IP_common_V2.2.xsd','468fee6d177e7185dbcd5d3f90cfb114e29e01ae','IBIS-IP_Enumerations_V2.2.xsd','2a23b512379b18e8f122ac1272cef8229fb86283'),
-            '2.3':('IBIS-IP_CustomerInformationService_V2.3.xsd','bf921c857a3abfcbe9c6c24fe525d6cc7d2d399e','IBIS-IP_common_V2.3.xsd','0d8926c4063c12de9a5e68b6f0addaab35a55dc1','IBIS-IP_Enumerations_V2.2.xsd','2a23b512379b18e8f122ac1272cef8229fb86283')}
-          def current_family(ver):
-              sf,ss,cf,cs,ef,es=FAMILIES[ver]; svc=ROOT/sf; com=ROOT/cf; en=ROOT/ef
-              expect_blob(svc,ss,f'CIS V{ver}'); expect_blob(com,cs,f'Common V{ver} dependency'); expect_blob(en,es,f'Enumerations dependency for CIS V{ver}')
-              r=parse(svc); need(includes(r)==[cf,ef],f'CIS V{ver} exact dependency route')
-              s=compile_(svc); g=group(r,'CustomerInformationServiceOperations'); opnames=[x.get('name') for x in g.findall('.//xs:element',NS)]
-              need(not any('Subscribe' in n or 'Unsubscribe' in n for n in opnames),f'CIS V{ver} operation group has no service-specific Subscribe/Unsubscribe roots')
-              cr=parse(com)
-              for n in ['SubscribeRequestStructure','SubscribeResponseStructure','UnsubscribeRequestStructure','UnsubscribeResponseStructure']: need(ctype(cr,n) is not None,f'Common route exposes generic {n}')
-              names=globals_(r); good='CustomerInformationService.GetCurrentConnectionInformationResponse'; bad='CustomerInformationService.GetCurrentConnectionResponse'
-              need(good in names and bad not in names,f'CIS V{ver} exact current-connection root naming')
-              data='<CurrentConnectionData><TimeStamp><Value>2026-01-01T00:00:00Z</Value></TimeStamp></CurrentConnectionData>'
-              validate(s,f'CIS V{ver} correct current-connection root',f'<{good}>{data}</{good}>',True); validate(s,f'CIS V{ver} PDF short current-connection root',f'<{bad}>{data}</{bad}>',False)
-              goodr='CustomerInformationService.RetrievePartialStopSequenceRequest'; badr='CustomerInformationService.RetrievePartialStopRequest'
-              need(goodr in names and badr not in names,f'CIS V{ver} exact retrieve root naming')
-              body='<StartingStopIndex><Value>1</Value></StartingStopIndex><NumberOfStopPoints><Value>1</Value></NumberOfStopPoints>'
-              validate(s,f'CIS V{ver} correct retrieve root',f'<{goodr}>{body}</{goodr}>',True); validate(s,f'CIS V{ver} PDF short retrieve root',f'<{badr}>{body}</{badr}>',False)
-              allct=ctype(r,'CustomerInformationService.AllData'); ti=elem_in(allct,'TripInformation'); need(ti is not None and occurs(ti,'maxOccurs')=='2',f'CIS V{ver} AllData.TripInformation maxOccurs=2')
-              vg=group(r,'VehicleInformationGroup')
-              if ver=='2.0':
-                  need(occurs(ti,'minOccurs')=='1','CIS V2.0 AllData.TripInformation required'); need(elem_in(allct,'GlobalDisplayContent') is None,'CIS V2.0 GlobalDisplayContent absent'); need(elem_in(vg,'MyOwnVehicleMode') is None,'CIS V2.0 MyOwnVehicleMode absent'); need(elem_in(vg,'TripState') is None,'CIS V2.0 TripState absent')
-              else:
-                  need(occurs(ti,'minOccurs')=='0',f'CIS V{ver} AllData.TripInformation optional'); gd=elem_in(allct,'GlobalDisplayContent'); need(gd is not None and occurs(gd,'minOccurs')=='0' and occurs(gd,'maxOccurs')=='unbounded',f'CIS V{ver} GlobalDisplayContent 0:*'); m=elem_in(vg,'MyOwnVehicleMode'); need(m is not None and m.get('type')=='NetexMode',f'CIS V{ver} MyOwnVehicleMode type=NetexMode'); need(elem_in(vg,'TripState') is not None,f'CIS V{ver} TripState present')
-                  with tempfile.NamedTemporaryFile('w',suffix='.xsd',dir=ROOT,delete=False,encoding='utf-8') as f:
-                      hp=Path(f.name); f.write(f'<xs:schema xmlns:xs="{XS}" elementFormDefault="qualified"><xs:include schemaLocation="{cf}"/><xs:element name="Mode" type="NetexMode"/></xs:schema>')
-                  try:
-                      ms=compile_(hp); validate(ms,f'CIS V{ver} NetexMode structured value','<Mode><PtMainMode>RailSubmode</PtMainMode><RailSubmode>local</RailSubmode></Mode>',True); validate(ms,f'CIS V{ver} scalar PtModes-like value rejected','<Mode>bus</Mode>',False)
-                  finally: hp.unlink(missing_ok=True)
-              cc=ctype(r,'CustomerInformationService.CurrentConnectionInformationData'); x=elem_in(cc,'CurrentConnection'); need(occurs(x,'minOccurs')=='0' and occurs(x,'maxOccurs')=='unbounded',f'CIS V{ver} CurrentConnection 0:*')
-              dc=ctype(r,'CustomerInformationService.CurrentDisplayContentData'); x=elem_in(dc,'CurrentDisplayContent'); need(occurs(x,'minOccurs')=='1' and occurs(x,'maxOccurs')=='unbounded',f'CIS V{ver} CurrentDisplayContent 1:*')
-
-          def main():
-              try:
-                  historical_v11()
-                  for v in ('2.0','2.2','2.3'): current_family(v)
-              except (OSError,etree.XMLSyntaxError,etree.XMLSchemaParseError,EvidenceError) as ex:
-                  print('FAILED: EV-125 CIS revalidation:',ex); return 1
-              print('PASSED: EV-125 CIS V1.1 historical-working provenance and V2.0/V2.2/V2.3 executable boundaries confirmed'); return 0
-          if __name__=='__main__': raise SystemExit(main())
-          PY
-          chmod +x tools/validate_cis_ev125.py
           python tools/validate_cis_ev125.py | tee /tmp/ev125.log
-      - name: Write CIS closure records
+
+      - name: Write closure records after PASS
         shell: bash
         env:
           EV_RUN_ID: ${{ github.run_id }}
           EV_HEAD: ${{ github.sha }}
         run: |
           set -euo pipefail
-          python - <<'PY'
-          import json, os
-          from pathlib import Path
-          run=os.environ['EV_RUN_ID']; head=os.environ['EV_HEAD']; now='2026-09-03T10:07:00Z'
-          reval='docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CIS_2026-09-03.md'
-          correction='docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CIS_V11_PROVENANCE_2026-09-03.md'
-          evidence='audit_registry/revalidation_evidence_ev125_cis_block_2026-09-03.json'
-          Path(evidence).write_text(json.dumps({
-            'evidence_id':'EV-125','date':'2026-09-03','purpose':'CIS-001..CIS-005 legacy revalidation closure','run_id':run,'head_tested':head,'result':'PASS',
-            'historical_v11':{'upstream_commit':'0a5228a768c7d710c40f5f99fbdce2e544d19883','release_tag':None,'authority':'historical_working_snapshot_not_release_authority','cis_blob':'5957e27f128a191c794b0c8081b531a07126784a','common_blob':'bdf839813b4b19dd000a32a684ce985878adaca9','enumerations_blob':'5a9957a6931be2e4460665f8a52c76765fbfbcde'},
-            'official_routes':{
-              'V2.0':{'cis_blob':'fa8f0a51ad5f612660c9532c8557ad1ca473a908','common_blob':'8608e3dcd665c197c34da7f6ec6af5a3758da164','enumerations_blob':'27e3c183b00381d959622d13c10543123af8eef6'},
-              'V2.2':{'cis_blob':'ddc70ed9d6238f1377be1d7728ff46b36a22ee1e','common_blob':'468fee6d177e7185dbcd5d3f90cfb114e29e01ae','enumerations_blob':'2a23b512379b18e8f122ac1272cef8229fb86283'},
-              'V2.3':{'cis_blob':'bf921c857a3abfcbe9c6c24fe525d6cc7d2d399e','common_blob':'0d8926c4063c12de9a5e68b6f0addaab35a55dc1','enumerations_blob':'2a23b512379b18e8f122ac1272cef8229fb86283'}},
-            'finding_states':{'CIS-001':'unresolved','CIS-002':'contextual_not_defect','CIS-003':'executable_confirmed','CIS-004':'executable_confirmed','CIS-005':'executable_confirmed'},
-            'pdf_pin_run_id':'33736316368','pdf_pin_job_id':'100587592810','pdf_pin_artifact_id':'9885887536','pdf_pin_artifact_digest':'sha256:8a514d33d5c9f23408a14dd1302366845b319027e280773407a2188c27b23cfe','rendered_pages':105,'xsd_mutation':False
-          },indent=2)+'\n')
+          python tools/close_cis_revalidation_ev125.py
 
-          Path(reval).write_text(f'''# CIS legacy finding revalidation — 2026-09-03
-
-Status: **closed under the current Finding Evidence Gate** for `CIS-001..CIS-005`.
-
-Evidence: `EV-125` (Actions run `{run}`) plus official byte-pinned CIS PDFs from run `33736316368`, job `100587592810`, artifact `9885887536`. The four PDFs total **105 rendered pages**; source and page hashes were verified and the finding-bearing pages were visually inspected.
-
-| Finding | Terminal state | Revalidated conclusion |
-|---|---|---|
-| CIS-001 | `unresolved` | The old claim “no CIS V1.1 XSD found” is corrected. Official Git history contains an untagged V1.1 working family at `0a5228a…`, but there is no `VDV-301-1.1` release tag and the working CIS V1.1 schema lacks published-PDF fields `SpeakerActive` and `StopInformationActive`. It therefore cannot be promoted to a strict published V1.1 release authority. |
-| CIS-002 | `contextual_not_defect` | Subscribe/Unsubscribe are generic Common structures; their absence from the CIS-specific operation group is intentional shared modelling, not a CIS schema defect. |
-| CIS-003 | `executable_confirmed` | PDF detail label `GetCurrentConnectionResponse` differs from executable XSD root `CustomerInformationService.GetCurrentConnectionInformationResponse`; EV-125 proves correct root valid / PDF short root invalid on V2.0, V2.2 and V2.3. |
-| CIS-004 | `executable_confirmed` | PDF detail label `RetrievePartialStopRequest` differs from executable XSD root `CustomerInformationService.RetrievePartialStopSequenceRequest`; EV-125 proves the root boundary on all three official routes. |
-| CIS-005 | `executable_confirmed` | PDF internally types `MyOwnVehicleMode` inconsistently (`NetexMode` vs `PtModesEnumeration`). V2.2/V2.3 XSD use `NetexMode`; EV-125 proves structured NetexMode valid and scalar value invalid. |
-
-## Disproof / context checks
-
-- V1.1 was searched in official Git history rather than inferred from release tags.
-- The strongest alternative for CIS-001 — treating the untagged working files as publication authority — fails because no V1.1 release tag exists and the working XSD is materially behind the published PDF.
-- CIS-002 was tested against Common generic subscribe/unsubscribe definitions and CIS operation-group scope.
-- CIS-003/004 were checked as global-root naming questions, not merely table wording.
-- CIS-005 was checked against the shared `VehicleInformationGroup`, not an isolated PDF row.
-
-No XSD correction or mutation is authorized by this revalidation.
-''',encoding='utf-8')
-
-          Path(correction).write_text('''# Audit correction delta — CIS V1.1 provenance — 2026-09-03
-
-This overlay corrects earlier first-pass statements that no CIS V1.1 XSD had been confirmed.
-
-Fresh provenance establishes an official-upstream **working** V1.1 family at commit `0a5228a768c7d710c40f5f99fbdce2e544d19883` immediately before the V2.0 release lineage:
-
-- CIS: `5957e27f128a191c794b0c8081b531a07126784a`
-- Common: `bdf839813b4b19dd000a32a684ce985878adaca9`
-- Enumerations: `5a9957a6931be2e4460665f8a52c76765fbfbcde`
-
-The official tag set contains no `VDV-301-1.1` release tag. The working CIS V1.1 schema also lacks `SpeakerActive` and `StopInformationActive`, both visible in the published V1.1 PDF and executable in V2.0. Therefore the historical files prove development provenance but **do not establish a strict published V1.1 release validation authority**.
-
-Historical reports are preserved; this correction overlay supersedes only their “V1.1 XSD not found” provenance conclusion. No XSD is imported or modified by this correction.
-''',encoding='utf-8')
-
-          Path('docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF_DELTA_CIS_REVALIDATION_2026-09-03.md').write_text(f'''# Audit handoff delta — CIS revalidation — 2026-09-03
-
-CIS revalidation is complete under the current Evidence Gate.
-
-- terminal findings: `CIS-001..CIS-005`
-- EV: `EV-125`, run `{run}`
-- states: 1 unresolved provenance/routing finding, 1 contextual-not-defect, 3 executable-confirmed documentation/XSD boundaries
-- four official CIS PDF sources byte-pinned by run `33736316368`; 105 rendered pages total
-- V1.1 historical working files are provenance evidence only, not release authority
-- no XSD changes
-- next legacy revalidation block: `DISC`
-''',encoding='utf-8')
-
-          # Revalidation registry
-          rp=Path('audit_registry/finding_revalidation_registry_v0.1.json'); reg=json.loads(rp.read_text())
-          states={'CIS-001':'unresolved','CIS-002':'contextual_not_defect','CIS-003':'executable_confirmed','CIS-004':'executable_confirmed','CIS-005':'executable_confirmed'}
-          entries={e['finding_id']:e for e in reg['inventory']['entries']}
-          for fid,st in states.items():
-              assert entries[fid]['revalidation_state']=='pending', (fid,entries[fid])
-              entries[fid]['revalidation_state']=st; entries[fid]['terminal_state_source']=reval
-          rp.write_text(json.dumps(reg,indent=2)+'\n')
-
-          # PDF pins
-          pp=Path('audit_registry/pdf_source_pins_v0.1.json'); pins=json.loads(pp.read_text()); existing={x['source_id']:x for x in pins['sources']}
-          fresh=[
-            ('CIS_V1.1','89080a41da387270ecac5b228df6aa4903ccb123a0d37e9e73cd98396786931b',985025,'1d2098ad9eecc462ed03e2a9646e2280199918e03eafd56f56aef84ea39cd1bb',27),
-            ('CIS_V2.0','0e3041d6354c040d532767391947476238a8afcab7a8df4276da1e7cad0cfa2b',878454,'7fc6654639ea136951df666239d3f30650461588de5aef67ebba453bd4acf6fe',26),
-            ('CIS_V2.2','3fcd258cf21c60527c48bd438c4d09a2a139c7093c0ff6984185e7c81efb8802',831079,'4dbc9ed36d19c3dd446b3d8cc42ac2baf01edbaa239cd7fa173cf61732617997',26),
-            ('CIS_V2.3','3f427901177e372daf0fee974648240e38da267c30030a909ccb712686f71ab1',1035224,'219936ed35725ddd45a4c2225780eb95095edb85e06648d13cdf264965fe5e23',26)]
-          for sid,sha,size,txt,pages in fresh:
-              if sid in existing:
-                  assert existing[sid]['expected_sha256']==sha and existing[sid]['expected_size_bytes']==size
-              else:
-                  pins['sources'].append({'source_id':sid,'expected_sha256':sha,'expected_size_bytes':size,'pinned_at_utc':'2026-09-03T08:59:53Z','deep_read_source_ready':True,'evidence_run_id':'33736316368','evidence_job_id':'100587592810','evidence_artifact_id':'9885887536','fulltext_sha256':txt,'rendered_pages':pages,'pin_note':'CIS legacy revalidation pin; full render and per-page hash manifest verified'})
-          assert len({x['source_id'] for x in pins['sources']})==len(pins['sources'])
-          pp.write_text(json.dumps(pins,indent=2)+'\n')
-
-          # Current state
-          sp=Path('00_START_HERE/CURRENT_STATE.json'); s=json.loads(sp.read_text()); a=s['audit']
-          a['pdf_sources_byte_pinned']=len(pins['sources'])
-          for sid, *_ in fresh:
-              if sid not in a['pinned_active_sources']: a['pinned_active_sources'].append(sid)
-          a['finding_revalidation_next_block']='DISC'; a['finding_revalidation_completed_findings']=47; a['finding_revalidation_pending_findings']=145; a['finding_revalidation_current_block']='CIS'; a['finding_revalidation_latest_completed_block']='CIS'; a['finding_revalidation_latest_terminal_state_source']=reval
-          a['latest_executable_evidence_id']='EV-125'; a['latest_executable_evidence_run_id']=run; a['latest_executable_evidence_run']=run; a['latest_audit_correction']=correction
-          a['cis_revalidation']={'status':'complete','evidence_id':'EV-125','run_id':run,'terminal_states':states,'pdf_pin_run_id':'33736316368','pdf_pin_artifact_id':'9885887536','rendered_pages':105,'next_block':'DISC','xsd_mutation':False}
-          ev=s.get('evidence',{}).get('xsd_ev_completed')
-          if isinstance(ev,list) and 'EV-125' not in ev: ev.append('EV-125')
-          sp.write_text(json.dumps(s,indent=2)+'\n')
-
-          # Preserve historical text; append explicit overlay pointers only.
-          marker='\n## Post-audit correction — 2026-09-03\n\nThe earlier V1.1 provenance statement is superseded by `AUDIT_CORRECTION_DELTA_CIS_V11_PROVENANCE_2026-09-03.md`. A historical untagged V1.1 working XSD family exists, but it is not a V1.1 release-tag authority and does not match all published V1.1 PDF fields. See also `FINDING_REVALIDATION_CIS_2026-09-03.md` / `EV-125`.\n'
-          for f in ['docs/pdf_xsd_semantic_audit/05c_cis_v1_1_mapping.md','docs/pdf_xsd_semantic_audit/05g_cis_findings_and_v2_0_v2_2_v2_3_closure.md','docs/pdf_xsd_semantic_audit/CIS_HISTORICAL_XSD_INTEGRATION_DECISION.md']:
-              p=Path(f); t=p.read_text();
-              if '## Post-audit correction — 2026-09-03' not in t: p.write_text(t.rstrip()+marker+'\n')
-          PY
-      - name: Gate, stage, commit and remove temporary workflow
+      - name: Final gates and commit
         shell: bash
         run: |
           set -euo pipefail
@@ -266,13 +63,18 @@ CIS revalidation is complete under the current Evidence Gate.
           find . -type f -name '*.xsd' -print0 | sort -z | xargs -0 sha256sum > /tmp/xsd.after
           cmp /tmp/xsd.before /tmp/xsd.after
           rm .github/workflows/temp-close-cis-revalidation.yml
-          allow='^(tools/validate_cis_ev125.py|audit_registry/revalidation_evidence_ev125_cis_block_2026-09-03.json|audit_registry/finding_revalidation_registry_v0.1.json|audit_registry/pdf_source_pins_v0.1.json|00_START_HERE/CURRENT_STATE.json|docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CIS_2026-09-03.md|docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CIS_V11_PROVENANCE_2026-09-03.md|docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF_DELTA_CIS_REVALIDATION_2026-09-03.md|docs/pdf_xsd_semantic_audit/05c_cis_v1_1_mapping.md|docs/pdf_xsd_semantic_audit/05g_cis_findings_and_v2_0_v2_2_v2_3_closure.md|docs/pdf_xsd_semantic_audit/CIS_HISTORICAL_XSD_INTEGRATION_DECISION.md|.github/workflows/temp-close-cis-revalidation.yml)$'
+          rm tools/close_cis_revalidation_ev125.py
+
+          allow='^(00_START_HERE/CURRENT_STATE.json|audit_registry/finding_revalidation_registry_v0.1.json|audit_registry/pdf_source_pins_v0.1.json|audit_registry/revalidation_evidence_ev125_cis_block_2026-09-03.json|docs/pdf_xsd_semantic_audit/05c_cis_v1_1_mapping.md|docs/pdf_xsd_semantic_audit/05g_cis_findings_and_v2_0_v2_2_v2_3_closure.md|docs/pdf_xsd_semantic_audit/CIS_HISTORICAL_XSD_INTEGRATION_DECISION.md|docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CIS_2026-09-03.md|docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CIS_V11_PROVENANCE_2026-09-03.md|docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF_DELTA_CIS_REVALIDATION_2026-09-03.md|tools/close_cis_revalidation_ev125.py|.github/workflows/temp-close-cis-revalidation.yml)$'
           bad=$(git status --porcelain | sed 's/^...//' | grep -Ev "$allow" || true)
-          test -z "$bad" || { echo "Unexpected paths:"; echo "$bad"; exit 1; }
-          git add tools/validate_cis_ev125.py audit_registry/revalidation_evidence_ev125_cis_block_2026-09-03.json audit_registry/finding_revalidation_registry_v0.1.json audit_registry/pdf_source_pins_v0.1.json 00_START_HERE/CURRENT_STATE.json docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CIS_2026-09-03.md docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CIS_V11_PROVENANCE_2026-09-03.md docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF_DELTA_CIS_REVALIDATION_2026-09-03.md docs/pdf_xsd_semantic_audit/05c_cis_v1_1_mapping.md docs/pdf_xsd_semantic_audit/05g_cis_findings_and_v2_0_v2_2_v2_3_closure.md docs/pdf_xsd_semantic_audit/CIS_HISTORICAL_XSD_INTEGRATION_DECISION.md .github/workflows/temp-close-cis-revalidation.yml
+          test -z "$bad" || { echo 'Unexpected changed paths:'; echo "$bad"; exit 1; }
+
+          git add -A -- 00_START_HERE/CURRENT_STATE.json audit_registry/finding_revalidation_registry_v0.1.json audit_registry/pdf_source_pins_v0.1.json audit_registry/revalidation_evidence_ev125_cis_block_2026-09-03.json docs/pdf_xsd_semantic_audit/05c_cis_v1_1_mapping.md docs/pdf_xsd_semantic_audit/05g_cis_findings_and_v2_0_v2_2_v2_3_closure.md docs/pdf_xsd_semantic_audit/CIS_HISTORICAL_XSD_INTEGRATION_DECISION.md docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CIS_2026-09-03.md docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CIS_V11_PROVENANCE_2026-09-03.md docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF_DELTA_CIS_REVALIDATION_2026-09-03.md tools/close_cis_revalidation_ev125.py .github/workflows/temp-close-cis-revalidation.yml
+
           staged=$(git diff --cached --name-only)
-          echo "$staged" | grep -E '\.xsd$' && { echo 'XSD staged unexpectedly'; exit 1; } || true
-          echo "$staged" | grep -Ev "$allow" && { echo 'Unexpected staged path'; exit 1; } || true
+          test -z "$(printf '%s\n' "$staged" | grep -E '\.xsd$' || true)"
+          test -z "$(printf '%s\n' "$staged" | grep -Ev "$allow" || true)"
+
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git commit -m 'audit: revalidate CIS finding block'
