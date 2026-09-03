@@ -27,11 +27,41 @@ jobs:
           sudo apt-get install -y poppler-utils
           python -m pip install --disable-pip-version-check lxml
 
-      - name: Fetch exact byte-pinned VDV301-2 V1.0 PDF
+      - name: Fetch exact byte-pinned VDV301-2 V1.0 PDF from split source/pin registries
         shell: bash
         run: |
           set -euo pipefail
-          python tools/fetch_vdv_pdf_sources.py --source-id VDV301-2_V1.0_DE
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          import urllib.request
+
+          source_id = 'VDV301-2_V1.0_DE'
+          source_registry = json.loads(Path('audit_registry/pdf_source_registry_v0.1.json').read_text(encoding='utf-8'))
+          pin_registry = json.loads(Path('audit_registry/pdf_source_pins_v0.1.json').read_text(encoding='utf-8'))
+          source = next(x for x in source_registry['sources'] if x['source_id'] == source_id)
+          pin = next(x for x in pin_registry['sources'] if x['source_id'] == source_id)
+          expected_hash = pin['expected_sha256']
+          expected_size = int(pin['expected_size_bytes'])
+          request = urllib.request.Request(
+              source['official_url'],
+              headers={
+                  'User-Agent': 'VDV301-Audit-EV129/0.1 (+https://github.com/MarcLeinenDE/VDV301)',
+                  'Accept': 'application/pdf,application/octet-stream;q=0.9,*/*;q=0.1',
+              },
+          )
+          with urllib.request.urlopen(request, timeout=90) as response:
+              data = response.read()
+          actual_hash = hashlib.sha256(data).hexdigest()
+          assert data.startswith(b'%PDF-'), 'download is not PDF'
+          assert actual_hash == expected_hash, (actual_hash, expected_hash)
+          assert len(data) == expected_size, (len(data), expected_size)
+          target = Path('local_sources/vdv_pdfs') / source['local_filename']
+          target.parent.mkdir(parents=True, exist_ok=True)
+          target.write_bytes(data)
+          print(f'PIN_OK {source_id} sha256={actual_hash} size={len(data)}')
+          PY
 
       - name: Render targeted visible evidence pages
         shell: bash
