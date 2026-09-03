@@ -1,0 +1,155 @@
+name: TEMP close VDV301-2 General Conventions V2.2 revalidation subblock
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths:
+      - .github/workflows/temp_close_vdv3012_gc22_revalidation.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  close-vdv3012-gc22:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact branch state
+        uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install evidence dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          python -m pip install --disable-pip-version-check lxml
+
+      - name: Fetch exact byte-pinned VDV301-2 GC V2.2 PDF
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, urllib.request
+          from pathlib import Path
+          source_id = 'VDV301-2_GC_V2.2'
+          sources = json.loads(Path('audit_registry/pdf_source_registry_v0.1.json').read_text(encoding='utf-8'))
+          pins = json.loads(Path('audit_registry/pdf_source_pins_v0.1.json').read_text(encoding='utf-8'))
+          source = next(x for x in sources['sources'] if x['source_id'] == source_id)
+          pin = next(x for x in pins['sources'] if x['source_id'] == source_id)
+          req = urllib.request.Request(source['official_url'], headers={'User-Agent':'VDV301-EV132-Closure/0.1','Accept':'application/pdf,*/*;q=0.1'})
+          with urllib.request.urlopen(req, timeout=90) as response: data = response.read()
+          actual = hashlib.sha256(data).hexdigest()
+          assert data.startswith(b'%PDF-')
+          assert actual == pin['expected_sha256'], (actual, pin['expected_sha256'])
+          assert len(data) == int(pin['expected_size_bytes'])
+          target = Path('local_sources/vdv_pdfs') / source['local_filename']
+          target.parent.mkdir(parents=True, exist_ok=True)
+          target.write_bytes(data)
+          print('PIN_OK', source_id, actual, len(data))
+          PY
+
+      - name: EV-132 exact revalidation gate
+        shell: bash
+        env:
+          EV132_OUTPUT_DIR: /tmp/ev132
+        run: |
+          set -euo pipefail
+          python tools/run_vdv3012_gc22_ev132.py
+
+      - name: Root XSD pool regression gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+
+      - name: Pre-closure immutable and mutation guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/vdv3012_gc22_revalidation_evidence_2026-09-03.json)" = "54931eb6c161f7cba3861d59f533a32e931f4b26"
+          test "$(git hash-object IBIS-IP_common_V2.2.xsd)" = "468fee6d177e7185dbcd5d3f90cfb114e29e01ae"
+          test "$(git hash-object IBIS-IP_Enumerations_V2.2.xsd)" = "2a23b512379b18e8f122ac1272cef8229fb86283"
+          git diff --exit-code -- '*.xsd'
+
+      - name: Write VDV301-2 GC V2.2 closure state
+        shell: bash
+        env:
+          EVIDENCE_RUN_ID: ${{ github.run_id }}
+          EVIDENCE_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          python tools/close_vdv3012_gc22_revalidation_block.py
+
+      - name: Remove temporary workflow plumbing and generated caches
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/temp_validate_vdv3012_gc22_ev132.yml
+          rm -f .github/workflows/temp_close_vdv3012_gc22_revalidation.yml
+          rm -f local_sources/vdv_pdfs/VDV301-2_GC_V2.2.pdf
+          rm -rf /tmp/ev132
+          find . -type d -name __pycache__ -prune -exec rm -rf {} +
+
+      - name: Verify closure delta allowlist and immutable authorities
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/vdv3012_gc22_revalidation_evidence_2026-09-03.json)" = "54931eb6c161f7cba3861d59f533a32e931f4b26"
+          git diff --exit-code -- '*.xsd'
+          git add -A
+          python - <<'PY'
+          import subprocess
+          expected = {
+            '.github/workflows/temp_close_vdv3012_gc22_revalidation.yml',
+            '.github/workflows/temp_validate_vdv3012_gc22_ev132.yml',
+            '00_START_HERE/CURRENT_STATE.json',
+            'audit_registry/finding_revalidation_registry_v0.1.json',
+            'docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_GC22_2026-09-03.md',
+          }
+          actual = set(subprocess.check_output(['git','diff','--cached','--name-only'], text=True).splitlines())
+          assert actual == expected, (sorted(actual), sorted(expected))
+          print('ALLOWLIST_OK', sorted(actual))
+          PY
+
+      - name: Verify post-closure state
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          registry = json.loads(Path('audit_registry/finding_revalidation_registry_v0.1.json').read_text(encoding='utf-8'))
+          state = json.loads(Path('00_START_HERE/CURRENT_STATE.json').read_text(encoding='utf-8'))
+          entries = {x['finding_id']:x for x in registry['inventory']['entries']}
+          for fid in ('DR3012GC22-001','DR3012GC22-002'):
+              assert entries[fid]['revalidation_state'] == 'context_verified'
+              assert entries[fid]['terminal_state_source'] == 'docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_GC22_2026-09-03.md'
+          terminal = sum(1 for x in entries.values() if x['revalidation_state'] != 'pending')
+          pending = sum(1 for x in entries.values() if x['revalidation_state'] == 'pending')
+          assert (terminal,pending) == (78,114), (terminal,pending)
+          assert registry['revalidation_blocks']['VDV301-2_GC_V2.2']['next_subblock'] == 'VDV301-2_GC_V2.3'
+          audit = state['audit']
+          assert audit['finding_revalidation_completed_findings'] == 78
+          assert audit['finding_revalidation_pending_findings'] == 114
+          assert audit['finding_revalidation_latest_completed_block'] == 'VDV301-2_GC_V2.2'
+          print('POST_STATE_OK terminal=78 pending=114 next=VDV301-2_GC_V2.3')
+          PY
+
+      - name: Commit closure atomically
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Marc Leinen"
+          git config user.email "34336531+MarcLeinenDE@users.noreply.github.com"
+          git commit -m "audit: revalidate VDV301-2 GC V2.2 finding subblock [skip ci]"
+          git push origin HEAD:dev/schema-integration
