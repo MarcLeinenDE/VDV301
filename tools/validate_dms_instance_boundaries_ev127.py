@@ -2,7 +2,8 @@
 """EV-127 supplemental positive/negative XML instance tests for DMS-003/-004/-006.
 
 This checker exists so the terminal state ``executable_confirmed`` is backed by
-actual XML validity boundaries, not only declaration inspection.
+actual XML validity boundaries, not only declaration inspection.  IBIS-IP.*
+base types are represented using their real ``<Value>`` wrapper shape.
 """
 from __future__ import annotations
 
@@ -82,21 +83,26 @@ def require_invalid(schema: etree.XMLSchema, xml: str, label: str) -> None:
     fail(f"{label}: expected invalid instance was accepted")
 
 
+def ibis(name: str, value: str) -> str:
+    """Render the repository's IBIS-IP.* wrapper type shape."""
+    return f"<{name}><Value>{value}</Value></{name}>"
+
+
 def message_xml(message_type: str) -> str:
     return (
         "<ErrorMessage>"
-        "<Message-ID>1</Message-ID>"
-        "<TimeStamp>2026-09-03T12:00:00Z</TimeStamp>"
-        f"<MessageType>{message_type}</MessageType>"
-        "<MessageText>e</MessageText>"
-        "</ErrorMessage>"
+        + ibis("Message-ID", "1")
+        + ibis("TimeStamp", "2026-09-03T12:00:00Z")
+        + f"<MessageType>{message_type}</MessageType>"
+        + ibis("MessageText", "e")
+        + "</ErrorMessage>"
     )
 
 
 def error_data_xml(count: int, message_type: str) -> str:
     return (
         "<EV127ErrorData>"
-        "<TimeStamp>2026-09-03T12:00:00Z</TimeStamp>"
+        + ibis("TimeStamp", "2026-09-03T12:00:00Z")
         + message_xml(message_type) * count
         + "</EV127ErrorData>"
     )
@@ -132,7 +138,7 @@ def install_xml(fields: tuple[str, ...]) -> str:
         "UpdateTimestamp": "2026-09-03T12:00:00Z",
         "UpdateURL": "https://example.invalid/update.bin",
     }
-    body = "".join(f"<{name}>{values[name]}</{name}>" for name in fields)
+    body = "".join(ibis(name, values[name]) for name in fields)
     return f"<EV127Install>{body}</EV127Install>"
 
 
@@ -161,10 +167,10 @@ def test_dms004() -> None:
 
 
 def status_xml(version: str, include_impact_priority: bool) -> str:
-    body = "<DeviceStatusName>status</DeviceStatusName><DeviceStatusFlag>true</DeviceStatusFlag>"
+    body = ibis("DeviceStatusName", "status") + ibis("DeviceStatusFlag", "true")
     if include_impact_priority:
         state = first_enum(ENUM[version], "DeviceStateEnumeration")
-        body += f"<DeviceStatusImpact>{state}</DeviceStatusImpact><DeviceStatusPriority>1</DeviceStatusPriority>"
+        body += f"<DeviceStatusImpact>{state}</DeviceStatusImpact>" + ibis("DeviceStatusPriority", "1")
     return f"<EV127Status>{body}</EV127Status>"
 
 
