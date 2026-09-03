@@ -11,7 +11,6 @@ on:
 permissions:
   contents: read
 
-# retrigger after explicit DMS V2.4 visual-evidence wording fix
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -37,6 +36,12 @@ jobs:
           set -euo pipefail
           mkdir -p dms-ev127-final-results
           python tools/validate_dms_revalidation_ev127_final.py 2>&1 | tee dms-ev127-final-results/ev127-final.log
+
+      - name: Run EV-127 positive-negative XML boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_dms_instance_boundaries_ev127.py 2>&1 | tee dms-ev127-final-results/ev127-instance-boundaries.log
 
       - name: Re-run root XSD pool gate
         shell: bash
