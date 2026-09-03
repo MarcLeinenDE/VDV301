@@ -1,0 +1,77 @@
+{
+  "evidence_record_version": "0.1",
+  "date": "2026-09-03",
+  "scope": "VDV301-2 Base V2.0 legacy finding revalidation for DR3012V20-001..008",
+  "branch": "dev/schema-integration",
+  "evidence_id": "EV-130",
+  "evidence_run_id": "33780668141",
+  "evidence_run_head": "3d9c9b7a233171b5feb77f2f63fa20d57172ddfa",
+  "artifact": {
+    "id": "9903434312",
+    "name": "vdv3012-v20-ev130",
+    "digest": "sha256:d5e003a68cce78cff35882a98cd418876482e80a87ff3f8975fc30d5e1970b1c",
+    "retention_days": 90
+  },
+  "pdf": {
+    "source_id": "VDV301-2_BASE_V2.0",
+    "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+    "size_bytes": 2374295,
+    "page_count": 115,
+    "targeted_visible_pages": [21, 33, 34, 90, 92, 93, 98, 100, 101, 102, 105, 110],
+    "visual_artifact_review": "confirmed from EV-130 rendered PNGs"
+  },
+  "external_authorities": [
+    {
+      "id": "RFC 2927",
+      "role": "shows the English ZeroConf citation points to the LDAP-schema MIME profile rather than IPv4 link-local addressing"
+    },
+    {
+      "id": "RFC 3927",
+      "role": "defines dynamic IPv4 link-local addressing in 169.254/16 and matches the German V2.0 wording/bibliography"
+    },
+    {
+      "id": "RFC 2782",
+      "role": "defines SRV Weight proportional selection; larger weights receive proportionately higher probability"
+    }
+  ],
+  "selected_xsd_authority": {
+    "family": "official VDVde/VDV301 tag VDV-301-2.0 with historical SystemManagement V1.0",
+    "system_documentation_file": "IBIS-IP_SystemDocumentationService_V2.0.xsd",
+    "system_documentation_blob": "ab959dddbfa2b8ca420af1b079501f94cff38051",
+    "device_management_file": "IBIS-IP_DeviceManagementService_V2.0.xsd",
+    "device_management_blob": "74189e0da65563eeb084ec2f3c400e9668d1ee1a",
+    "system_management_file": "IBIS-IP_SystemManagementService_V1.0.xsd",
+    "system_management_blob": "2d32630a0f1981e980e6a466e3f6a69136410f24",
+    "common_file": "IBIS-IP_common_V2.0.xsd",
+    "common_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+    "enumerations_file": "IBIS-IP_Enumerations_V2.0.xsd",
+    "enumerations_blob": "27e3c183b00381d959622d13c10543123af8eef6",
+    "integration_branch_matches_official_tag_for_v20_files": true
+  },
+  "findings": {
+    "DR3012V20-001": "context_verified",
+    "DR3012V20-002": "context_verified",
+    "DR3012V20-003": "executable_confirmed",
+    "DR3012V20-004": "context_verified",
+    "DR3012V20-005": "context_verified",
+    "DR3012V20-006": "context_verified",
+    "DR3012V20-007": "context_verified",
+    "DR3012V20-008": "context_verified"
+  },
+  "heartbeat_executable_boundary": {
+    "declared_identifier": "HeartbeatInterval",
+    "declared_type": "IBIS-IP.duration",
+    "accepted_sample": "PT5S",
+    "rejected_numeric_sample": "5.5",
+    "rejected_aliases": ["HertbeatIntervall", "HeartbeatIntervall"],
+    "scope": "both SystemDocumentationService.SystemConfigurationData and StoreSystemConfigurationRequestStructure use HeartbeatInterval as IBIS-IP.duration"
+  },
+  "active_disproof": {
+    "DR3012V20-006": "full native PDF text was searched for a dedicated 'Data Structure of Operation SubscribeDeviceInformation' heading; none exists while the operation inventory and generic subscription context are present"
+  },
+  "root_xsd_pool_gate": "PASS in run 33780668141",
+  "tracked_mutation_guard": "PASS in run 33780668141",
+  "xsd_mutated": false,
+  "frozen_inventory_mutated": false,
+  "result": "PASS"
+}
