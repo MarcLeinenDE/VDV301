@@ -1,0 +1,76 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-09-03",
+  "base_registry": "audit_registry/deep_read_registry_v0.1.json",
+  "document_updates": {
+    "COMMON_V2.4": {
+      "state": "source_only_fresh_read_frozen_pending_historical_reconciliation",
+      "official_url": "https://www.vdv.de/301-2-1-sde-v2-4-commonstructure-enums.pdfx",
+      "publication": "VDV 301-2-1 V2.4, Common Data Structures and Enumerations",
+      "source_pin": {
+        "sha256": "01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a",
+        "size_bytes": 1689647,
+        "pages": 63,
+        "fresh_revalidation_run": "33658306978",
+        "fresh_revalidation_job": "100342316111",
+        "artifact_name": "common-v24-pinned-read",
+        "artifact_id": "9857652638",
+        "artifact_digest": "sha256:be0ce46c03893d79b216c92e7af8cd2906b27524f9d24a954be5d7e1d57d934c",
+        "fulltext_sha256": "02bfe01587937052f0d9b1c4a581a7a0546b6a3ca024de94310c6894646929b1",
+        "all_page_png_hashes_rechecked": true
+      },
+      "authority_status": {
+        "pdf_authority": "official_public_VDV_writing",
+        "xsd_authority": "candidate_integration_explicit_selection",
+        "release_tag": null,
+        "official_tag_VDV_301_2_4_resolves": false,
+        "common_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+        "enumerations_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+        "common_includes": "IBIS-IP_Enumerations_V2.4.xsd",
+        "candidate_branch": "candidate/dms-v2.4-xsd",
+        "candidate_pr": "VDVde/VDV301#31",
+        "candidate_pr_state": "open_draft_not_merged",
+        "integration_branch_matches_candidate_blobs": true,
+        "upstream_reference_commit": "14880bb33beec5c5dffe96315b730bd6c094a585",
+        "upstream_reference_note": "TicketValidationService V2.4 references IBIS-IP_common_V2.4.xsd, but the upstream tree at this commit contains neither Common V2.4 nor Enumerations V2.4.",
+        "latest_xsd_wins": false
+      },
+      "historical_common_findings_quarantined_until_fresh_read_freeze": true,
+      "historical_independence_status": "source_only_freeze",
+      "fresh_read_freeze": {
+        "status": "frozen_by_source_only_commit",
+        "freeze_commit": "789f02f697809b1eef4d3b1a366a3599649a6d7d",
+        "report": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4_FRESH_2026-09-03.md",
+        "observation_ids": [
+          "FR-COM24-001",
+          "FR-COM24-002",
+          "FR-COM24-003",
+          "FR-COM24-004",
+          "FR-COM24-005",
+          "FR-COM24-006",
+          "FR-COM24-007",
+          "FR-COM24-008",
+          "FR-COM24-009",
+          "FR-COM24-010",
+          "FR-COM24-011",
+          "FR-COM24-012",
+          "FR-COM24-013",
+          "FR-COM24-014",
+          "FR-COM24-015"
+        ],
+        "observation_count": 15,
+        "historical_reconciliation_started": false,
+        "historical_reconciliation_completed": false,
+        "executable_evidence_status": "not_started",
+        "xsd_modified": false
+      },
+      "fresh_read_high_priority_candidate": {
+        "observation_id": "FR-COM24-008",
+        "summary": "LineInformation LineName and LineShortName are PDF IBIS-IP.string 0:1 but candidate XSD InternationalTextType 0:*; both XML shape and repeatability differ.",
+        "executable_effect_expected": true
+      },
+      "next_after_freeze": "historical_reconciliation_then_targeted_executable_evidence",
+      "next_natural_document_id_after_closure": null
+    }
+  }
+}
