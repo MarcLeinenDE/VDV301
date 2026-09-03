@@ -1,0 +1,52 @@
+{
+  "evidence_record_version": "0.1",
+  "date": "2026-09-03",
+  "scope": "VDV301-2 Base V2.1 legacy finding revalidation for DR3012V21-001",
+  "branch": "dev/schema-integration",
+  "evidence_id": "EV-131",
+  "evidence_run_id": "33781385699",
+  "evidence_run_head": "102551319484660df0d9949a0821dcb2fa1407c8",
+  "artifact": {
+    "id": "9903719333",
+    "name": "vdv3012-v21-ev131",
+    "digest": "sha256:b0fdcb3705e5e95158545d099845184a1effe9b57647011881bb35fdf94df2d8",
+    "retention_days": 90
+  },
+  "pdf": {
+    "source_id": "VDV301-2_BASE_V2.1",
+    "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+    "size_bytes": 2671005,
+    "page_count": 130,
+    "targeted_visible_pages": [59, 60, 69, 70, 75, 76],
+    "visual_artifact_review": "confirmed from EV-131 rendered PNGs"
+  },
+  "selected_xsd_authority": {
+    "family": "official VDVde/VDV301 tag VDV-301-2.1 mixed-version Base Services route",
+    "device_management_file": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+    "device_management_blob": "191b43e01cdaba14b247725689a913c244a67eed",
+    "device_management_dependencies": ["IBIS-IP_common_V2.1.xsd", "IBIS-IP_Enumerations_V2.1.xsd"],
+    "system_documentation_file": "IBIS-IP_SystemDocumentationService_V2.0.xsd",
+    "system_documentation_blob": "ab959dddbfa2b8ca420af1b079501f94cff38051",
+    "system_management_file": "IBIS-IP_SystemManagementService_V1.0.xsd",
+    "system_management_blob": "2d32630a0f1981e980e6a466e3f6a69136410f24",
+    "common_v21_blob": "05977c9f86c7c9dd0b48f36a4a4e9be32e94659e",
+    "enumerations_v21_blob": "311464690ad60749ed8d326217787e4b8ed0b718",
+    "integration_branch_matches_official_tag_for_v21_files": true
+  },
+  "finding": {
+    "DR3012V21-001": "context_verified"
+  },
+  "active_disproof": {
+    "stale_reference_claim": "The prose references DeviceManagementService to VDV 301-2-2 and SystemDocumentationService to VDV 301-2-4.",
+    "vdv_301_2_2_catalog_identity": "BLS_V1.0 / BeaconLocationService",
+    "vdv_301_2_4_catalog_identity": "DLS_V1.0 / DistanceLocationService",
+    "release_route": "DMS 2.1 / SystemDocumentation 2.0 / SystemManagement 1.0 from exact VDV-301-2.1 tag",
+    "conclusion": "The prose numbers are stale cross references and must not drive schema routing."
+  },
+  "executable_evidence_reason_not_applicable": "DR3012V21-001 concerns stale prose document-number routing and does not define XML instance validity. Exact service XSDs were compiled to establish the authoritative release route.",
+  "root_xsd_pool_gate": "PASS in run 33781385699",
+  "tracked_mutation_guard": "PASS in run 33781385699",
+  "xsd_mutated": false,
+  "frozen_inventory_mutated": false,
+  "result": "PASS"
+}
