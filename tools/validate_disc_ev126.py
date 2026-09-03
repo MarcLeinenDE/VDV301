@@ -145,9 +145,12 @@ def main() -> None:
 
         # DISC-003 strongest disproof: the V2.4 history note corresponds to a real
         # German Table-3 expansion compared with V2.3, not merely a history typo.
+        # Poppler preserves narrow table columns as split tokens (for example
+        # "sntp- server", "coachnumb er" and "devicecla ss"), so assertions use
+        # stable visible fragments while the rendered-page review checks the labels.
         v23_table = page_text(pdfs["VDV301-2_GC_V2.3"], 27)
-        require(v23_table, "Tabelle 3", "sntp-server")
-        forbid(v23_table, "coachnumber", "deviceclass", "deviceID")
+        require(v23_table, "Tabelle 3", "sntp-", "server")
+        forbid(v23_table, "coachnumb", "devicecla", "deviceID")
 
         v24_table = " ".join(
             [
@@ -155,7 +158,7 @@ def main() -> None:
                 page_text(pdfs["VDV301-2_GC_V2.4"], 31),
             ]
         )
-        require(v24_table, "Tabelle 3", "coachnumber", "deviceclass", "deviceID")
+        require(v24_table, "Tabelle 3", "coachnumb", "devicecla", "deviceID")
         v24_history = page_text(pdfs["VDV301-2_GC_V2.4"], 75).lower()
         require(v24_history, "fehlende einträge", "tabelle 3", "missing entries", "table 3 added")
 
