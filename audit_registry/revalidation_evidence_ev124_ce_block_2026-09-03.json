@@ -1,0 +1,47 @@
+{
+  "evidence_id": "EV-124",
+  "date": "2026-09-03",
+  "purpose": "current-head aggregate executable rerun for CE-001..CE-026 legacy revalidation closure",
+  "run_id": "33735601969",
+  "head_tested": "3f94712f6d97ec6063763b5e5ef8038c1f65ee80",
+  "result": "PASS",
+  "checkers": [
+    {
+      "tool": "tools/validate_common_v10_ev117.py",
+      "authority": "exact selected Common V1.0 route",
+      "result": "PASS"
+    },
+    {
+      "tool": "tools/validate_common_v20_ev118.py",
+      "authority": "exact selected Common V2.0 route",
+      "result": "PASS"
+    },
+    {
+      "tool": "tools/validate_common_v21_ev119.py",
+      "authority": "exact selected Common V2.1 route",
+      "result": "PASS"
+    },
+    {
+      "tool": "tools/validate_common_v22_ev120.py",
+      "authority": "exact historical-upstream Common V2.2 + Enumerations V2.2 family",
+      "result": "PASS"
+    },
+    {
+      "tool": "tools/validate_common_v23_ev121.py",
+      "authority": "official VDV-301-2.3 Common + declared Enumerations V2.2",
+      "result": "PASS"
+    },
+    {
+      "tool": "tools/validate_common_v24_ev122.py",
+      "authority": "explicit selected candidate/integration Common V2.4 + Enumerations V2.4",
+      "result": "PASS"
+    },
+    {
+      "tool": "tools/validate_common_v23_schema_variant.py",
+      "authority": "official V2.3 vs explicit upstream-PR30 candidate overlay",
+      "result": "PASS"
+    }
+  ],
+  "authority_note": "EV-124 aggregates current-head reruns only. It does not upgrade candidate/integration V2.4 or PR30 bytes to official authority and does not replace the per-version evidence identities.",
+  "xsd_mutation": false
+}
