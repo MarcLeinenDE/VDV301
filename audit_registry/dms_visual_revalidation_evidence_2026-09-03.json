@@ -1,0 +1,120 @@
+{
+  "evidence_record_version": "0.1",
+  "date": "2026-09-03",
+  "scope": "DMS legacy finding revalidation visual evidence",
+  "branch": "dev/schema-integration",
+  "render_run_id": "33758274931",
+  "render_artifact_id": "9894357560",
+  "render_artifact_name": "dms-revalidation-visual-pages",
+  "render_artifact_digest": "sha256:6cd210a39445cbeecff14b918d2f2e9a424a82f3f43d8a0e41cb7dfd8b7df892",
+  "render_method": "tools/render_vdv_pdf_pages.py with local PDF bytes downloaded from official VDV URLs; renderer re-verifies PDF SHA-256 and size against audit_registry/pdf_source_pins_v0.1.json before rendering",
+  "visual_review_status": "completed",
+  "reviewed_pages": [
+    {
+      "source_id": "VDV301-2_BASE_V2.0",
+      "page": 76,
+      "png_sha256": "29e162540456fd549fc5f7e9856909c2f97bc8271211f66182609af4477c4d0e",
+      "observations": [
+        "The printed page visibly contains the unresolved cross-reference text 'Fehler! Verweisquelle konnte nicht gefunden werden.' in the Start further Services context."
+      ],
+      "supports": ["DMS-002"]
+    },
+    {
+      "source_id": "VDV301-2_BASE_V2.0",
+      "page": 90,
+      "png_sha256": "2079b7cfabc86aa71dd167fc6032c6b269f41838aacb7e12a17c0b7a5cb2c75b",
+      "observations": [
+        "The operation inventory visibly assigns Common SubscribeRequestStructure/SubscribeResponseStructure and UnsubscribeRequestStructure/UnsubscribeResponseStructure to subscription operations.",
+        "SetDeviceConfiguration visibly uses DataAcceptedResponseStructure as response."
+      ],
+      "supports": ["DMS-001"]
+    },
+    {
+      "source_id": "VDV301-2_BASE_V2.0",
+      "page": 95,
+      "png_sha256": "7ace7eccdaf052b6974c0ae408e2fe0b5a7b7fdb8a7e7e2e6ef013747448966c",
+      "observations": [
+        "GetDeviceErrorMessages response data visibly documents ErrorMessage as 10:*.",
+        "RestartDevice and DeactivateDevice response prose visibly points to DataAcceptedResponseStructure."
+      ],
+      "supports": ["DMS-001", "DMS-003"]
+    },
+    {
+      "source_id": "DMS_V2.2",
+      "page": 20,
+      "png_sha256": "46373d4fde64db25ef64b9f1602681ae9253180c965881646335dd8feac76840",
+      "observations": [
+        "GetDeviceErrorMessages response data visibly documents ErrorMessage as 10:*."
+      ],
+      "supports": ["DMS-003"]
+    },
+    {
+      "source_id": "DMS_V2.2",
+      "page": 23,
+      "png_sha256": "caa6a73b3117d766f48630114cc6c13ddcb30f65d42b861c1f6c677ef1c3c5b1",
+      "observations": [
+        "Table 17 visibly names choice branch a as DeviceManagementService.DeviceStatusInformationResponseData, without the Get prefix.",
+        "The adjacent type/reference cell visibly uses the Get-prefixed DeviceManagementService.GetDeviceStatusInformationResponseData form.",
+        "Table 20 visibly lists only DeviceStatusName 1:1 and DeviceStatusFlag 1:1; DeviceStatusImpact and DeviceStatusPriority are absent from the printed table."
+      ],
+      "supports": ["DMS-005", "DMS-006"]
+    },
+    {
+      "source_id": "DMS_V2.2",
+      "page": 26,
+      "png_sha256": "63238b9faa1eea6542aed00b5a7a2e3f0f0354108e1107961e2d7286aed85483",
+      "observations": [
+        "InstallUpdate visibly documents UpdateID, UpdateTimestamp and UpdateURL as 1:1, with UpdateFileChecksum and UpdateFileSize as 0:1.",
+        "UpdateTimestamp description visibly says GetUpdateStates."
+      ],
+      "supports": ["DMS-004", "DMS-007"]
+    },
+    {
+      "source_id": "DMS_V2.4",
+      "page": 22,
+      "png_sha256": "97a4a83efd7dda8dc81b4d966ff0cbe217878f9622adb2cf67f4a0b26db4696a",
+      "observations": [
+        "Table 17 visibly retains the non-Get choice-branch spelling DeviceManagementService.DeviceStatusInformationResponseData while the adjacent type/reference uses the Get-prefixed form."
+      ],
+      "supports": ["DMS-005"]
+    },
+    {
+      "source_id": "DMS_V2.4",
+      "page": 23,
+      "png_sha256": "e7e1d76a41e0ba5ed5120f60c437bed28682d9d3edf442be839252500a883a74",
+      "observations": [
+        "Table 20 visibly documents DeviceStatusImpact as 0:1.",
+        "The priority row is visibly printed as eDeviceStatusPriority 0:1, including a leading lowercase e before DeviceStatusPriority."
+      ],
+      "supports": ["DMS-006", "DRDMS24-002"]
+    },
+    {
+      "source_id": "DMS_V2.4",
+      "page": 25,
+      "png_sha256": "f621d9ea8f59ab5c8033137956924a54cdf35fbc9b164d13d70cca65cabbd3cf",
+      "observations": [
+        "InstallUpdate visibly documents UpdateID, UpdateTimestamp, UpdateURL, UpdateFileChecksum and UpdateFileSize as 0:1.",
+        "UpdateTimestamp description visibly still says GetUpdateStates."
+      ],
+      "supports": ["DMS-004", "DMS-007"]
+    }
+  ],
+  "post_freeze_visual_delta": {
+    "id": "DRDMS24-002",
+    "document_id": "DMS_V2.4",
+    "classification": "pdf_field_name_typo",
+    "state": "context_verified",
+    "confidence": "very_high",
+    "summary": "DMS V2.4 table 20 visibly prints eDeviceStatusPriority, while the selected candidate/integration V2.4 XSD declares DeviceStatusPriority.",
+    "pdf_source_id": "DMS_V2.4",
+    "pdf_page": 23,
+    "selected_xsd_family": "IBIS-IP_DeviceManagementService_V2.4.xsd plus declared V2.4 includes",
+    "xsd_declaration": "DeviceStatusStructure/DeviceStatusPriority",
+    "counter_hypothesis_checked": "Not a line-wrap artifact: the leading lowercase e is visibly part of the field label on the byte-pinned render; the exact candidate/integration XSD contains DeviceStatusPriority without that prefix.",
+    "validation_behavior": "none; do not create an eDeviceStatusPriority alias and do not reject/accept XML based on the PDF typo",
+    "sdk_eligibility": "documentation knowledge only; not an SDK validation rule",
+    "frozen_inventory_relation": "discovered during independent visual revalidation after the 192-entry inventory freeze; recorded additively and must not rewrite audit_registry/finding_inventory_frozen_2026-09-03.json"
+  },
+  "frozen_inventory_mutated": false,
+  "xsd_mutated": false
+}
