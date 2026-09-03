@@ -1,5 +1,5 @@
 name: temp-close-disc-revalidation
-# retry from the already successful pinned source artifact
+# final retry with staged + unstaged + untracked allowlist accounting
 
 on:
   push:
@@ -119,9 +119,10 @@ jobs:
               '.github/workflows/temp-disc-source-pin.yml',
               'tools/temp_close_disc_revalidation.py',
           }
-          tracked = set(filter(None, subprocess.check_output(['git','diff','--name-only'], text=True).splitlines()))
+          unstaged = set(filter(None, subprocess.check_output(['git','diff','--name-only'], text=True).splitlines()))
+          staged = set(filter(None, subprocess.check_output(['git','diff','--cached','--name-only'], text=True).splitlines()))
           untracked = set(filter(None, subprocess.check_output(['git','ls-files','--others','--exclude-standard'], text=True).splitlines()))
-          got = tracked | untracked
+          got = unstaged | staged | untracked
           assert got == expected, f'allowlist mismatch\nexpected={sorted(expected)}\ngot={sorted(got)}'
           assert not any(p.lower().endswith('.xsd') for p in got), got
           print('DISC_CLOSURE_DIFF_OK')
