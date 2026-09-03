@@ -139,22 +139,14 @@ def build_inventory(date: str, source_head: str | None) -> dict[str, Any]:
     revalidation_registry = load_json(REVALIDATION_REGISTRY_PATH)
     candidates, declarations = discover_candidate_ids()
     priors = prior_revalidations(revalidation_registry)
-    context_texts = {p.relative_to(ROOT).as_posix(): read_text(p) for p in all_context_paths()}
-    references: dict[str, list[str]] = defaultdict(list)
-    for rel, text in context_texts.items():
-        for fid in candidates.intersection(ids_in_text(text)):
-            references[fid].append(rel)
     entries = []
     for fid in sorted(candidates):
         entries.append({
             'finding_id': fid,
             'declaration_sources': sorted(declarations.get(fid, set())),
-            'reference_source_count': len(set(references.get(fid, []))),
             'prior_current_gate_records': priors.get(fid, []),
-            'status_hints_non_authoritative': infer_status_hints(fid, context_texts),
             'revalidation_state': 'pending',
-            'terminal_state_source': None,
-            'notes': 'Frozen inventory entry. Prior current-gate records are evidence inputs only; terminal state is assigned during explicit legacy revalidation reconciliation.'
+            'terminal_state_source': None
         })
     return {
         'inventory_version': '0.1',
@@ -175,7 +167,7 @@ def build_inventory(date: str, source_head: str | None) -> dict[str, Any]:
                 'audit_registry/deep_read_findings_correction_*.json'
             ],
             'historical_first_pass_safety_net': 'structured finding IDs declared in headings/table rows/bullets across docs/pdf_xsd_semantic_audit/**/*.md',
-            'context_reference_sources': ['docs/pdf_xsd_semantic_audit/**/*.md','docs/pdf_xsd_semantic_audit/**/*.csv','audit_registry/*.json'],
+            'context_reconstructability': 'full audit docs, generated matrices and audit_registry remain source-of-record; snapshot embeds declaring sources plus prior current-gate records only',
             'excluded_non_finding_prefixes': sorted(EXCLUDED_PREFIXES),
             'latest_wins': False,
             'xsd_mutation_allowed': False
