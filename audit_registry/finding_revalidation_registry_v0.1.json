@@ -390,38 +390,38 @@
       },
       {
         "finding_id": "DMS-001",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md"
       },
       {
         "finding_id": "DMS-002",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md"
       },
       {
         "finding_id": "DMS-003",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "executable_confirmed",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md"
       },
       {
         "finding_id": "DMS-004",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "executable_confirmed",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md"
       },
       {
         "finding_id": "DMS-005",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md"
       },
       {
         "finding_id": "DMS-006",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "executable_confirmed",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md"
       },
       {
         "finding_id": "DMS-007",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md"
       },
       {
         "finding_id": "DR3011-001",
@@ -1123,7 +1123,7 @@
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true
   },
-  "next_revalidation_block": "DMS",
+  "next_revalidation_block": "VDV301-1",
   "revalidation_blocks": {
     "ARA_V2.4": {
       "date": "2026-09-03",
@@ -1340,6 +1340,51 @@
       "sdk_handling": "Do not hard-enforce ZeroConf/169.254 as a universal VDV rule from the stale English language track; keep language/version provenance and external-RFC diagnostics separate from VDV rule attribution.",
       "xsd_mutation": false,
       "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DISC_2026-09-03.md"
+    },
+    "DMS": {
+      "date": "2026-09-03",
+      "state": "completed",
+      "authority_lane": "official byte-pinned VDV PDFs plus exact selected historical XSD families; DMS V2.4 XSD remains candidate/integration authority",
+      "official_pdf_source_ids": [
+        "VDV301-2_BASE_V2.0",
+        "VDV301-2_BASE_V2.1",
+        "DMS_V2.2",
+        "DMS_V2.4"
+      ],
+      "selected_service_blobs": {
+        "IBIS-IP_DeviceManagementService_V2.0.xsd": "74189e0da65563eeb084ec2f3c400e9668d1ee1a",
+        "IBIS-IP_DeviceManagementService_V2.1.xsd": "191b43e01cdaba14b247725689a913c244a67eed",
+        "IBIS-IP_DeviceManagementService_V2.2.xsd": "c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d",
+        "IBIS-IP_DeviceManagementService_V2.4.xsd": "d222dfd98b2be3777576388da7ace8f333d24c3f"
+      },
+      "executable_evidence_id": "EV-127",
+      "executable_run_id": "33762375705",
+      "executable_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/33762375705",
+      "executable_checkers": [
+        "tools/validate_dms_revalidation_ev127_final.py",
+        "tools/validate_dms_instance_boundaries_ev127.py"
+      ],
+      "visual_render_run": "33758274931",
+      "visual_artifact_id": "9894357560",
+      "visual_evidence_record": "audit_registry/dms_visual_revalidation_evidence_2026-09-03.json",
+      "post_freeze_visual_delta": {
+        "id": "DRDMS24-002",
+        "state": "context_verified",
+        "validation_behavior": "none",
+        "frozen_inventory_mutated": false
+      },
+      "findings": {
+        "DMS-001": "context_verified",
+        "DMS-002": "context_verified",
+        "DMS-003": "executable_confirmed",
+        "DMS-004": "executable_confirmed",
+        "DMS-005": "context_verified",
+        "DMS-006": "executable_confirmed",
+        "DMS-007": "context_verified"
+      },
+      "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md",
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false
     }
   }
 }
