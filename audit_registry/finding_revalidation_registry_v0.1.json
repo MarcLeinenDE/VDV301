@@ -425,18 +425,18 @@
       },
       {
         "finding_id": "DR3011-001",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3011_2026-09-03.md"
       },
       {
         "finding_id": "DR3011-002",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3011_2026-09-03.md"
       },
       {
         "finding_id": "DR3011-003",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3011_2026-09-03.md"
       },
       {
         "finding_id": "DR3012-001",
@@ -1123,7 +1123,7 @@
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true
   },
-  "next_revalidation_block": "VDV301-1",
+  "next_revalidation_block": "VDV301-2",
   "revalidation_blocks": {
     "ARA_V2.4": {
       "date": "2026-09-03",
@@ -1383,6 +1383,33 @@
         "DMS-007": "context_verified"
       },
       "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md",
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false
+    },
+    "VDV301-1": {
+      "date": "2026-09-03",
+      "state": "completed",
+      "authority_lane": "official byte-pinned VDV301-1 V1.0 architecture PDF; DR3011-002 additionally cross-checked against official byte-pinned VDV301-2 V1.0 PDF and selected historical SystemManagement V1.0 XSD",
+      "official_pdf_source_ids": [
+        "VDV301-1_V1.0_DE",
+        "VDV301-2_V1.0_DE"
+      ],
+      "part1_pdf_sha256": "5418f24190468a1823699688cf86f98d812591ad2c7c2eada07b1d34889c20c2",
+      "part2_pdf_sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+      "system_management_xsd_blob": "2d32630a0f1981e980e6a466e3f6a69136410f24",
+      "evidence_id": "EV-128",
+      "evidence_run_id": "33763071038",
+      "evidence_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/33763071038",
+      "visual_render_run": "33725750019",
+      "visual_artifact_id": "9881897572",
+      "visual_evidence_record": "audit_registry/vdv3011_visual_revalidation_evidence_2026-09-03.json",
+      "findings": {
+        "DR3011-001": "context_verified",
+        "DR3011-002": "context_verified",
+        "DR3011-003": "context_verified"
+      },
+      "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3011_2026-09-03.md",
+      "executable_evidence_reason_not_applicable": "All three findings are documentation/context issues and do not define XML validity behavior. DR3011-002 explicitly forbids inventing stale Part-1 operation aliases.",
       "xsd_mutation": false,
       "frozen_inventory_mutation": false
     }
