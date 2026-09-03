@@ -31,7 +31,8 @@ jobs:
             'docs/pdf_xsd_semantic_audit/01g_common_enums_v2_4_datatypes_core_structures.md',
           ]:
             q=Path(name)
-            q.write_text(q.read_text(encoding='utf-8').rstrip()+'\n',encoding='utf-8')
+            text=q.read_text(encoding='utf-8')
+            q.write_text('\n'.join(line.rstrip() for line in text.splitlines()).rstrip()+'\n',encoding='utf-8')
           PY
       - name: Validate closure diff
         run: |
