@@ -1,0 +1,40 @@
+name: temp-build-finding-inventory
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp-build-finding-inventory.yml
+      - tools/build_finding_revalidation_inventory.py
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+      - name: Build frozen inventory preview
+        run: |
+          python tools/build_finding_revalidation_inventory.py --date 2026-09-03 --source-head "${GITHUB_SHA}"
+          python -m json.tool audit_registry/finding_inventory_frozen_2026-09-03.json >/dev/null
+          python -m json.tool audit_registry/finding_revalidation_registry_v0.1.json >/dev/null
+          python -m json.tool 00_START_HERE/CURRENT_STATE.json >/dev/null
+          git diff --check
+          if git diff --name-only | grep -E '\.xsd$'; then
+            echo 'XSD mutation detected' >&2
+            exit 1
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: finding-inventory-preview
+          path: |
+            audit_registry/finding_inventory_frozen_2026-09-03.json
+            audit_registry/finding_revalidation_registry_v0.1.json
+            00_START_HERE/CURRENT_STATE.json
+            docs/pdf_xsd_semantic_audit/FINDING_INVENTORY_FREEZE_2026-09-03.md
+          if-no-files-found: error
