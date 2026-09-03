@@ -1,0 +1,41 @@
+name: temp-close-arch-revalidation
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths: ['.github/workflows/temp-close-arch-revalidation.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  close:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 1
+      - name: Apply and verify ARCH closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/temp_revalidate_arch.py
+          python -c "import json,pathlib; p=pathlib.Path; reg=json.loads(p('audit_registry/finding_revalidation_registry_v0.1.json').read_text()); e={x['finding_id']:x for x in reg['inventory']['entries']}; arch=[f'ARCH-{i:03d}' for i in range(1,9)]; assert all(e[k]['revalidation_state']=='contextual_not_defect' for k in arch); assert sum(x['revalidation_state']!='pending' for x in reg['inventory']['entries'])==14; assert sum(x['revalidation_state']=='pending' for x in reg['inventory']['entries'])==178; assert reg['next_revalidation_block']=='BG'; snap=json.loads(p('audit_registry/finding_inventory_frozen_2026-09-03.json').read_text()); assert snap['entry_count']==192 and snap['source_head']=='7fad145f528205ef5c40e58a3a23374379b08189'; pins=json.loads(p('audit_registry/pdf_source_pins_v0.1.json').read_text()); q=[x for x in pins['sources'] if x['source_id']=='VDV301-1_V1.0_DE']; assert len(q)==1 and q[0]['expected_sha256']=='5418f24190468a1823699688cf86f98d812591ad2c7c2eada07b1d34889c20c2' and q[0]['page_count']==36; s=json.loads(p('00_START_HERE/CURRENT_STATE.json').read_text()); a=s['audit']; assert a['finding_revalidation_completed_findings']==14 and a['finding_revalidation_pending_findings']==178 and a['finding_revalidation_next_block']=='BG' and a['pdf_sources_byte_pinned']==len(pins['sources']); print('ARCH_REVALIDATION_GATE_OK')"
+          git diff --check
+          ! git diff --name-only | grep -E '\.xsd$'
+      - name: Commit closure and remove temporary files
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm .github/workflows/temp-pin-arch-v10.yml .github/workflows/temp-close-arch-revalidation.yml tools/temp_revalidate_arch.py
+          expected="$(printf '%s\n' '.github/workflows/temp-close-arch-revalidation.yml' '.github/workflows/temp-pin-arch-v10.yml' '00_START_HERE/CURRENT_STATE.json' 'audit_registry/finding_revalidation_registry_v0.1.json' 'audit_registry/pdf_source_pins_v0.1.json' 'docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARCH_V10_2026-09-03.md' 'docs/pdf_xsd_semantic_audit/deep_read/VDV301-1_V1.0_DE.md' 'tools/temp_revalidate_arch.py')"
+          got="$( (git diff --name-only; git ls-files --others --exclude-standard) | sort -u )"
+          test "$got" = "$expected"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- .github/workflows/temp-close-arch-revalidation.yml .github/workflows/temp-pin-arch-v10.yml tools/temp_revalidate_arch.py 00_START_HERE/CURRENT_STATE.json audit_registry/finding_revalidation_registry_v0.1.json audit_registry/pdf_source_pins_v0.1.json docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARCH_V10_2026-09-03.md docs/pdf_xsd_semantic_audit/deep_read/VDV301-1_V1.0_DE.md
+          git diff --cached --check
+          ! git diff --cached --name-only | grep -E '\.xsd$'
+          git commit -m 'audit: revalidate ARCH finding block'
+          git push origin HEAD:dev/schema-integration
