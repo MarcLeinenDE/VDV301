@@ -1,0 +1,45 @@
+name: TEMP DMS revalidation visual render
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_render_dms_revalidation.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact branch state
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install render dependency
+        run: python -m pip install --disable-pip-version-check pymupdf
+
+      - name: Render byte-pinned DMS evidence pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dms-render
+          python tools/render_vdv_pdf_pages.py --source-id VDV301-2_BASE_V2.0 --pages 76-77,90-91,95-97 --out-dir dms-render/base-v20 --dpi 180
+          python tools/render_vdv_pdf_pages.py --source-id VDV301-2_BASE_V2.1 --pages 92-94,100,106-108 --out-dir dms-render/base-v21 --dpi 180
+          python tools/render_vdv_pdf_pages.py --source-id DMS_V2.2 --pages 20,23,25-26 --out-dir dms-render/dms-v22 --dpi 180
+          python tools/render_vdv_pdf_pages.py --source-id DMS_V2.4 --pages 19,22-25 --out-dir dms-render/dms-v24 --dpi 180
+
+      - name: Upload visual evidence artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dms-revalidation-visual-pages
+          path: dms-render
+          if-no-files-found: error
+          retention-days: 7
