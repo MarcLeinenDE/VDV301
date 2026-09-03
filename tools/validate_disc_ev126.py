@@ -7,10 +7,13 @@ context only and must not mutate or infer any XML schema contract.
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import shutil
 import subprocess
 import tempfile
+import time
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -59,10 +62,19 @@ RFC_URLS = {
 }
 
 
-def fetch(url: str) -> bytes:
-    req = urllib.request.Request(url, headers={"User-Agent": "VDV301-audit-EV126/1.0"})
-    with urllib.request.urlopen(req, timeout=60) as response:
-        return response.read()
+def fetch(url: str, attempts: int = 4, timeout: int = 45) -> bytes:
+    last: Exception | None = None
+    for attempt in range(1, attempts + 1):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "VDV301-audit-EV126/1.0"})
+            with urllib.request.urlopen(req, timeout=timeout) as response:
+                return response.read()
+        except (OSError, urllib.error.URLError) as exc:
+            last = exc
+            if attempt == attempts:
+                break
+            time.sleep(attempt * 2)
+    raise RuntimeError(f"Unable to fetch {url} after {attempts} attempts: {last}")
 
 
 def page_text(pdf: Path, page: int) -> str:
@@ -88,7 +100,37 @@ def forbid(text: str, *needles: str) -> None:
         raise AssertionError(f"Unexpected text present: {present!r}")
 
 
+def verify_pdf(pdf: Path, sid: str, meta: dict[str, object]) -> None:
+    if not pdf.is_file():
+        raise AssertionError(f"{sid}: missing source PDF {pdf}")
+    data = pdf.read_bytes()
+    digest = hashlib.sha256(data).hexdigest()
+    if digest != meta["sha256"]:
+        raise AssertionError(f"{sid}: SHA-256 changed: {digest}")
+    if len(data) != meta["size"]:
+        raise AssertionError(f"{sid}: size changed: {len(data)}")
+    info = subprocess.run(
+        ["pdfinfo", str(pdf)], check=True, stdout=subprocess.PIPE, text=True
+    ).stdout
+    pages = None
+    for line in info.splitlines():
+        if line.startswith("Pages:"):
+            pages = int(line.split(":", 1)[1].strip())
+            break
+    if pages != meta["pages"]:
+        raise AssertionError(f"{sid}: page count changed: {pages}")
+    print(f"PIN_OK {sid} sha256={digest} size={len(data)} pages={pages}")
+
+
 def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument(
+        "--source-dir",
+        type=Path,
+        help="Directory containing the six already pinned <source_id>.pdf files. When omitted, fetch official URLs with retry.",
+    )
+    args = ap.parse_args()
+
     if shutil.which("pdftotext") is None or shutil.which("pdfinfo") is None:
         raise SystemExit("EV-126 requires poppler-utils (pdftotext + pdfinfo)")
 
@@ -97,26 +139,13 @@ def main() -> None:
         pdfs: dict[str, Path] = {}
 
         for sid, meta in SOURCES.items():
-            data = fetch(meta["url"])
-            digest = hashlib.sha256(data).hexdigest()
-            if digest != meta["sha256"]:
-                raise AssertionError(f"{sid}: SHA-256 changed: {digest}")
-            if len(data) != meta["size"]:
-                raise AssertionError(f"{sid}: size changed: {len(data)}")
-            pdf = root / f"{sid}.pdf"
-            pdf.write_bytes(data)
-            info = subprocess.run(
-                ["pdfinfo", str(pdf)], check=True, stdout=subprocess.PIPE, text=True
-            ).stdout
-            pages = None
-            for line in info.splitlines():
-                if line.startswith("Pages:"):
-                    pages = int(line.split(":", 1)[1].strip())
-                    break
-            if pages != meta["pages"]:
-                raise AssertionError(f"{sid}: page count changed: {pages}")
+            if args.source_dir is not None:
+                pdf = args.source_dir / f"{sid}.pdf"
+            else:
+                pdf = root / f"{sid}.pdf"
+                pdf.write_bytes(fetch(str(meta["url"])))
+            verify_pdf(pdf, sid, meta)
             pdfs[sid] = pdf
-            print(f"PIN_OK {sid} sha256={digest} size={len(data)} pages={pages}")
 
         # DISC-002 historical root: V1.0 itself cites RFC 2927 for link-local addressing,
         # while its bibliography identifies RFC 2927 as the LDAP-schema MIME profile.
