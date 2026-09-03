@@ -1,0 +1,61 @@
+{
+  "evidence_record_version": "0.1",
+  "date": "2026-09-03",
+  "scope": "VDV301-2 V1.0 legacy finding revalidation for DR3012-001..007",
+  "branch": "dev/schema-integration",
+  "evidence_id": "EV-129",
+  "evidence_run_id": "33765167655",
+  "evidence_run_head": "09a21377ef501309ba470a420573a0d05d724299",
+  "artifact": {
+    "id": "9897171006",
+    "name": "vdv3012-v10-ev129",
+    "digest": "sha256:a410cdc7103b2ed01f61570b6435a5b2319d2b80f4fec2802929359058a51cc7",
+    "retention_days": 90
+  },
+  "pdf": {
+    "source_id": "VDV301-2_V1.0_DE",
+    "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+    "size_bytes": 1790447,
+    "targeted_visible_pages": [20, 22, 26, 59, 63, 65, 67, 69, 75, 80],
+    "visual_artifact_review": "confirmed from EV-129 rendered PNGs"
+  },
+  "external_authorities": [
+    {
+      "id": "RFC 2927",
+      "role": "shows cited document is MIME Directory Profile for LDAP Schema"
+    },
+    {
+      "id": "RFC 3927",
+      "role": "defines dynamic IPv4 link-local addressing in 169.254/16"
+    },
+    {
+      "id": "RFC 2782",
+      "role": "defines SRV Weight proportional selection; larger weights receive higher probability"
+    }
+  ],
+  "selected_xsd_authority": {
+    "family": "official historical VDV-301-1.0 family",
+    "system_documentation_file": "IBIS-IP_SystemDocumentationService_v1.0.xsd",
+    "system_documentation_blob": "8995c4a230bf81d5e47b9313ee7725ff3cd4b7b5",
+    "official_upstream_tag": "VDVde/VDV301@VDV-301-1.0",
+    "official_upstream_blob_identical": true,
+    "system_management_file": "IBIS-IP_SystemManagementService_V1.0.xsd",
+    "system_management_blob": "2d32630a0f1981e980e6a466e3f6a69136410f24"
+  },
+  "correction_trail": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_DR3012_003_V10_IDENTIFIER_TYPE_2026-09-03.md",
+  "findings": {
+    "DR3012-001": "context_verified",
+    "DR3012-002": "context_verified",
+    "DR3012-003": "executable_confirmed",
+    "DR3012-004": "context_verified",
+    "DR3012-005": "context_verified",
+    "DR3012-006": "context_verified",
+    "DR3012-007": "context_verified"
+  },
+  "dr3012_003_corrected_claim": "PDF uses HertbeatIntervall with IBIS-IP.duration in both visible rows; exact official V1.0 XSD uses HeartbeatIntervall, with IBIS-IP.double in SystemConfigurationData and IBIS-IP.duration in StoreSystemConfigurationRequestStructure.",
+  "root_xsd_pool_gate": "PASS in run 33765167655",
+  "tracked_mutation_guard": "PASS in run 33765167655",
+  "xsd_mutated": false,
+  "frozen_inventory_mutated": false,
+  "result": "PASS"
+}
