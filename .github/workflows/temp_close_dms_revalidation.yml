@@ -78,6 +78,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          rm -rf tools/__pycache__
           rm -f \
             .github/workflows/temp_render_dms_revalidation.yml \
             .github/workflows/temp_validate_dms_revalidation.yml \
