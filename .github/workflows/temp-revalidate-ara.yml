@@ -1,0 +1,41 @@
+name: temp-revalidate-ara
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths: ['.github/workflows/temp-revalidate-ara.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  revalidate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 1
+      - name: Apply ARA terminal states
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/temp_revalidate_ara.py
+          python -c "import json,pathlib; p=pathlib.Path; reg=json.loads(p('audit_registry/finding_revalidation_registry_v0.1.json').read_text()); e={x['finding_id']:x for x in reg['inventory']['entries']}; expected={'ARA-001':'context_verified','ARA-002':'context_verified','ARA-003':'executable_confirmed','ARA-004':'context_verified','DRARA24-001':'context_verified','DRARA24-002':'context_verified'}; assert all(e[k]['revalidation_state']==v for k,v in expected.items()); assert sum(x['revalidation_state']!='pending' for x in reg['inventory']['entries'])==6; assert sum(x['revalidation_state']=='pending' for x in reg['inventory']['entries'])==186; assert reg['next_revalidation_block']=='ARCH'; snap=json.loads(p('audit_registry/finding_inventory_frozen_2026-09-03.json').read_text()); assert snap['entry_count']==192 and all(x['revalidation_state']=='pending' for x in snap['entries']); s=json.loads(p('00_START_HERE/CURRENT_STATE.json').read_text()); a=s['audit']; assert a['finding_revalidation_completed_findings']==6 and a['finding_revalidation_pending_findings']==186 and a['finding_revalidation_next_block']=='ARCH'; print('ARA_REVALIDATION_GATE_OK')"
+          git diff --check
+          ! git diff --name-only | grep -E '\.xsd$'
+      - name: Commit closure and self-remove
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm .github/workflows/temp-revalidate-ara.yml tools/temp_revalidate_ara.py
+          expected="$(printf '%s\n' '.github/workflows/temp-revalidate-ara.yml' '00_START_HERE/CURRENT_STATE.json' 'audit_registry/finding_revalidation_registry_v0.1.json' 'docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARA_V24_2026-09-03.md' 'tools/temp_revalidate_ara.py')"
+          got="$( (git diff --name-only; git ls-files --others --exclude-standard) | sort -u )"
+          test "$got" = "$expected"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- .github/workflows/temp-revalidate-ara.yml tools/temp_revalidate_ara.py 00_START_HERE/CURRENT_STATE.json audit_registry/finding_revalidation_registry_v0.1.json docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARA_V24_2026-09-03.md
+          git diff --cached --check
+          ! git diff --cached --name-only | grep -E '\.xsd$'
+          git commit -m 'audit: revalidate ARA finding block'
+          git push origin HEAD:dev/schema-integration
