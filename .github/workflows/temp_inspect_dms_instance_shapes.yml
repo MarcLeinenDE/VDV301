@@ -23,13 +23,13 @@ jobs:
           python - <<'PY'
           from lxml import etree
           NS={'xs':'http://www.w3.org/2001/XMLSchema'}
-          for path in ['IBIS-IP_common_V2.2.xsd','IBIS-IP_common_V2.4.xsd']:
+          for path in ['IBIS-IP_common_V2.0.xsd','IBIS-IP_common_V2.1.xsd','IBIS-IP_common_V2.2.xsd','IBIS-IP_common_V2.4.xsd']:
               root=etree.parse(path).getroot()
               ct=root.xpath("./xs:complexType[@name='MessageStructure']",namespaces=NS)[0]
               print('\n',path,'MessageStructure')
               for e in ct.xpath('./xs:sequence/xs:element',namespaces=NS):
                   print(e.get('name'),e.get('type'),e.get('minOccurs','1'),e.get('maxOccurs','1'))
-          for path in ['IBIS-IP_Enumerations_V2.2.xsd','IBIS-IP_Enumerations_V2.4.xsd']:
+          for path in ['IBIS-IP_Enumerations_V2.0.xsd','IBIS-IP_Enumerations_V2.1.xsd','IBIS-IP_Enumerations_V2.2.xsd','IBIS-IP_Enumerations_V2.4.xsd']:
               root=etree.parse(path).getroot()
               st=root.xpath("./xs:simpleType[@name='MessageTypeEnumeration']",namespaces=NS)[0]
               vals=st.xpath('.//xs:enumeration/@value',namespaces=NS)
