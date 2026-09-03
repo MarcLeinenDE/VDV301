@@ -5,6 +5,8 @@ on:
     branches: [dev/schema-integration]
     paths:
       - .github/workflows/temp_validate_vdv3012_v10_ev129.yml
+      - tools/run_vdv3012_v10_ev129.py
+      - tools/validate_vdv3012_v10_ev129.py
   workflow_dispatch:
 
 permissions:
@@ -83,7 +85,7 @@ jobs:
           EV129_OUTPUT_DIR: artifacts/ev129
         run: |
           set -euo pipefail
-          python tools/validate_vdv3012_v10_ev129.py
+          python tools/run_vdv3012_v10_ev129.py
 
       - name: Build evidence manifest
         shell: bash
