@@ -59,6 +59,16 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          for name in (
+              'docs/pdf_xsd_semantic_audit/05c_cis_v1_1_mapping.md',
+              'docs/pdf_xsd_semantic_audit/05g_cis_findings_and_v2_0_v2_2_v2_3_closure.md',
+              'docs/pdf_xsd_semantic_audit/CIS_HISTORICAL_XSD_INTEGRATION_DECISION.md',
+          ):
+              p = Path(name)
+              p.write_text(p.read_text(encoding='utf-8').rstrip() + '\n', encoding='utf-8')
+          PY
           git diff --check
           find . -type f -name '*.xsd' -print0 | sort -z | xargs -0 sha256sum > /tmp/xsd.after
           cmp /tmp/xsd.before /tmp/xsd.after
