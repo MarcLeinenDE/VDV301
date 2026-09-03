@@ -1,0 +1,65 @@
+name: TEMP validate DMS revalidation EV-127 final
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_validate_dms_revalidation_final.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact branch state
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install validation dependencies
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          python -m pip install --disable-pip-version-check lxml
+
+      - name: Run EV-127 final
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dms-ev127-final-results
+          python tools/validate_dms_revalidation_ev127_final.py 2>&1 | tee dms-ev127-final-results/ev127-final.log
+
+      - name: Re-run root XSD pool gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests 2>&1 | tee dms-ev127-final-results/root-pool.log
+
+      - name: Verify evidence tools did not mutate tracked files
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
+            echo 'Tracked repository mutation detected:'
+            git status --short
+            git diff --exit-code
+            exit 1
+          fi
+          echo 'NO_TRACKED_MUTATION'
+
+      - name: Upload final EV-127 logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dms-ev127-final-results
+          path: dms-ev127-final-results
+          if-no-files-found: error
+          retention-days: 7
