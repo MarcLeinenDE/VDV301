@@ -1,0 +1,47 @@
+name: temp-close-bg-revalidation
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths: ['.github/workflows/temp-close-bg-revalidation.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  close:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Execute legacy-root evidence and close BG
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check lxml >/dev/null
+          python tools/validate_legacy_v1_roots.py --repo-root . | tee /tmp/ev123.log
+          grep -q '^PASSED$' /tmp/ev123.log
+          python tools/temp_revalidate_bg.py
+          python -c "import json,pathlib,os; p=pathlib.Path; reg=json.loads(p('audit_registry/finding_revalidation_registry_v0.1.json').read_text()); e={x['finding_id']:x for x in reg['inventory']['entries']}; assert e['BG-001']['revalidation_state']=='context_verified' and e['BG-002']['revalidation_state']=='contextual_not_defect'; assert sum(x['revalidation_state']!='pending' for x in reg['inventory']['entries'])==16; assert sum(x['revalidation_state']=='pending' for x in reg['inventory']['entries'])==176; assert reg['next_revalidation_block']=='CE'; assert reg['revalidation_blocks']['BG']['executable_evidence_id']=='EV-123' and reg['revalidation_blocks']['BG']['executable_run_id']==os.environ['GITHUB_RUN_ID']; snap=json.loads(p('audit_registry/finding_inventory_frozen_2026-09-03.json').read_text()); assert snap['entry_count']==192 and snap['source_head']=='7fad145f528205ef5c40e58a3a23374379b08189'; s=json.loads(p('00_START_HERE/CURRENT_STATE.json').read_text()); a=s['audit']; assert a['finding_revalidation_completed_findings']==16 and a['finding_revalidation_pending_findings']==176 and a['finding_revalidation_next_block']=='CE'; print('BG_REVALIDATION_GATE_OK')"
+          git diff --check
+          ! git diff --name-only | grep -E '\.xsd$'
+      - name: Commit closure and self-remove
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm .github/workflows/temp-close-bg-revalidation.yml tools/temp_revalidate_bg.py
+          expected="$(printf '%s\n' '.github/workflows/temp-close-bg-revalidation.yml' '00_START_HERE/CURRENT_STATE.json' 'audit_registry/finding_revalidation_registry_v0.1.json' 'docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_BG_2026-09-03.md' 'tools/temp_revalidate_bg.py')"
+          got="$( (git diff --name-only; git ls-files --others --exclude-standard) | sort -u )"
+          test "$got" = "$expected"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- .github/workflows/temp-close-bg-revalidation.yml tools/temp_revalidate_bg.py 00_START_HERE/CURRENT_STATE.json audit_registry/finding_revalidation_registry_v0.1.json docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_BG_2026-09-03.md
+          git diff --cached --check
+          ! git diff --cached --name-only | grep -E '\.xsd$'
+          git commit -m 'audit: revalidate BG finding block'
+          git push origin HEAD:dev/schema-integration
