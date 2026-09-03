@@ -4,7 +4,7 @@
   "base_registry": "audit_registry/deep_read_registry_v0.1.json",
   "document_updates": {
     "COMMON_V2.4": {
-      "state": "source_only_fresh_read_frozen_pending_historical_reconciliation",
+      "state": "closed_needs_visual_review_candidate_integration_authority",
       "official_url": "https://www.vdv.de/301-2-1-sde-v2-4-commonstructure-enums.pdfx",
       "publication": "VDV 301-2-1 V2.4, Common Data Structures and Enumerations",
       "source_pin": {
@@ -59,9 +59,9 @@
           "FR-COM24-015"
         ],
         "observation_count": 15,
-        "historical_reconciliation_started": false,
-        "historical_reconciliation_completed": false,
-        "executable_evidence_status": "not_started",
+        "historical_reconciliation_started": true,
+        "historical_reconciliation_completed": true,
+        "executable_evidence_status": "EV-122_PASS_run_33716645876_job_100527119224",
         "xsd_modified": false
       },
       "fresh_read_high_priority_candidate": {
@@ -69,8 +69,32 @@
         "summary": "LineInformation LineName and LineShortName are PDF IBIS-IP.string 0:1 but candidate XSD InternationalTextType 0:*; both XML shape and repeatability differ.",
         "executable_effect_expected": true
       },
-      "next_after_freeze": "historical_reconciliation_then_targeted_executable_evidence",
-      "next_natural_document_id_after_closure": null
+      "next_after_freeze": "closed_then_legacy_finding_revalidation",
+      "next_natural_document_id_after_closure": null,
+      "historical_quarantine_released_after_freeze": true,
+      "historical_reconciliation": {
+        "findings_delta": "audit_registry/deep_read_findings_delta_common_v24_2026-09-03.json",
+        "new_unique_findings": [
+          "DRCOM24-001"
+        ],
+        "scope_corrections": [
+          "DRCOM23-001",
+          "CE-025",
+          "CE-026",
+          "DRCOM10-006",
+          "CE-020",
+          "CE-023"
+        ],
+        "stale_note_correction": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_COMMON_V24_INTERNATIONALTEXT_AUTHORITY_2026-09-03.md"
+      },
+      "executable_evidence": {
+        "evidence_id": "EV-122",
+        "checker": "tools/validate_common_v24_ev122.py",
+        "run": "33716645876",
+        "job": "100527119224",
+        "result": "PASS",
+        "authority": "exact_selected_candidate_integration_family"
+      }
     }
   }
 }

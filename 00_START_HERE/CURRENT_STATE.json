@@ -1,9 +1,9 @@
 {
   "state_schema_version": "0.1",
-  "date": "2026-09-02",
+  "date": "2026-09-03",
   "canonical_branch": "dev/schema-integration",
   "workflow_mode": "manual_only",
-  "project_phase": "deep_read_pass_2",
+  "project_phase": "legacy_finding_revalidation",
   "superbranch": {
     "root_xsd_count_last_executed": 50,
     "direct_include_edges_last_executed": 84,
@@ -29,18 +29,18 @@
     "pairable_pdf_xsd_units": 38,
     "pairable_pdf_xsd_first_pass_completed": 38,
     "deep_read_exhaustive_completed": 0,
-    "deep_read_needs_visual_review": 36,
-    "deep_read_textual_fresh_read_completed": 36,
+    "deep_read_needs_visual_review": 37,
+    "deep_read_textual_fresh_read_completed": 37,
     "deep_read_in_progress": 0,
-    "deep_read_current_document_id": "COMMON_V2.3",
-    "deep_read_previous_document_id": "COMMON_V2.3",
-    "next_natural_deep_read_document_id": "COMMON_V2.4",
-    "latest_deep_read_finding": "DRCOM23-001",
-    "latest_deep_read_revalidation": "DRCOM23-001_V2.3_scope_executable_StopInformationRequest_expected_fields_absent_EV-121",
+    "deep_read_current_document_id": "COMMON_V2.4",
+    "deep_read_previous_document_id": "COMMON_V2.4",
+    "next_natural_deep_read_document_id": null,
+    "latest_deep_read_finding": "DRCOM24-001",
+    "latest_deep_read_revalidation": "DRCOM24-001_V2.4_candidate_scope_LineName_LineShortName_type_shape_repeatability_EV-122",
     "latest_dms_finding": "DMS-007",
-    "latest_common_finding": "DRCOM23-001",
+    "latest_common_finding": "DRCOM24-001",
     "resolved_historical_finding": "DR3012-006",
-    "latest_audit_correction": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_COMMON_V23_CE023_SCOPE_2026-09-02.md",
+    "latest_audit_correction": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_COMMON_V24_INTERNATIONALTEXT_AUTHORITY_2026-09-03.md",
     "choice_notation_correction_registry": "audit_registry/deep_read_findings_correction_choice_notation_2026-08-29.json",
     "choice_notation_rule": "VDV leading '-' in Min:Max denotes XML choice; -1:1 is not a negative/invalid cardinality; evaluate a/b/... labels and surrounding rows before comparing with XSD compositors",
     "choice_notation_finding_updates": {
@@ -58,7 +58,7 @@
     },
     "finding_evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
     "legacy_finding_revalidation_required": true,
-    "legacy_finding_revalidation_state": "planned_after_deep_read_pass_2",
+    "legacy_finding_revalidation_state": "ready_after_deep_read_pass_2_freeze",
     "legacy_finding_revalidation_plan": "docs/pdf_xsd_semantic_audit/LEGACY_FINDING_REVALIDATION_PLAN.md",
     "finding_revalidation_registry": "audit_registry/finding_revalidation_registry_v0.1.json",
     "finding_revalidation_rule": "No grandfathering. After Deep Read Pass 2 freeze the full finding inventory and revalidate every finding not already explicitly revalidated under the current Evidence Gate; require zero pending SDK-relevant findings before baseline freeze.",
@@ -69,7 +69,7 @@
     "pdf_visual_render_fallback": "docs/pdf_xsd_semantic_audit/PDF_VISUAL_RENDER_FALLBACK.md",
     "pdf_visual_renderer": "tools/render_vdv_pdf_pages.py",
     "pdf_visual_render_rule": "interactive screenshot cache miss is not a source failure; render exact byte-pinned source independently and inspect visible output before promoting visual status",
-    "pdf_sources_byte_pinned": 30,
+    "pdf_sources_byte_pinned": 31,
     "pinned_active_sources": [
       "VDV301-2_GC_V2.3",
       "COMMON_V2.3",
@@ -100,10 +100,11 @@
       "COMMON_V1.0",
       "COMMON_V2.0",
       "COMMON_V2.1",
-      "COMMON_V2.2"
+      "COMMON_V2.2",
+      "COMMON_V2.4"
     ],
-    "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_common_v23_2026-09-02.json",
-    "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_common_v23_2026-09-02.json",
+    "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_common_v24_2026-09-03.json",
+    "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_common_v24_2026-09-03.json",
     "trainset_v2_1_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.1.md",
     "trainset_v2_2_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.2.md",
     "trainset_findings_register": "docs/pdf_xsd_semantic_audit/TRAIN_SET_SERVICES_FINDINGS_REGISTER_ADDENDUM.md",
@@ -843,6 +844,17 @@
     "common_v2_3_findings": {
       "DRCOM23-001": "executable_confirmed_EV-121",
       "CE-023": "V2.3_scope_withdrawn_after_exact_visible_source_falsification"
+    },
+    "deep_read_pass_2_status": "frozen_complete",
+    "next_project_phase": "legacy_finding_revalidation",
+    "common_v2_4_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4.md",
+    "common_v2_4_source_freeze": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4_FRESH_2026-09-03.md",
+    "common_v2_4_authority": {
+      "status": "candidate_integration_explicit_selection",
+      "common_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+      "enumerations_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+      "upstream_draft_pr": "VDVde/VDV301#31",
+      "official_release_tag": null
     }
   },
   "evidence": {

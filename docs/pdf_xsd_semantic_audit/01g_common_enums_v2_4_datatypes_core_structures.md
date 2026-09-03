@@ -1,3 +1,5 @@
+> **Superseded audit note (2026-09-03):** The historical `InternationalTextType` conclusion below is not current authority. The exact selected V2.4 candidate/integration Common blob `1946fd37e29ced605654f49ea3d98cd2fbbdc8e4` uses native `xs:string` / `xs:language`, while the official PDF prints `IBIS-IP.string` / `IBIS-IP.language`. See `AUDIT_CORRECTION_DELTA_COMMON_V24_INTERNATIONALTEXT_AUTHORITY_2026-09-03.md` and EV-122. Historical text is retained for provenance only.
+
 # Common structures / enumerations V2.4 - datatype and core-structure audit
 
 Status: datatype/core structure block advanced; wrapper datatypes closed for first PDF/XSD pass.

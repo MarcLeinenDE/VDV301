@@ -577,3 +577,24 @@ DRCOM20-001 InternationalTextType PDF IBIS-IP.string/IBIS-IP.language vs exact
 same-path authority collision. No V2.0 candidate overlay is inferred.
 
 Validation follows the exact selected V2.0 XSD family; no PDF alias or multiplicity is synthesized.
+
+## COMMON V2.4 Deep Read closure — 2026-09-03
+
+Authority note: the selected Common/Enums V2.4 bytes are **candidate/integration** (matching open draft `VDVde/VDV301#31`), not an official release-tag family.
+
+### DRCOM24-001 — LineInformation LineName/LineShortName type + repeatability mismatch
+
+State: **executable-confirmed EV-122**.
+
+PDF V2.4 documents both fields as `IBIS-IP.string 0:1`; selected candidate XSD models both as `InternationalTextType 0:*`. EV-122 confirms both the shape/type and repetition effects. Validation follows the exact selected candidate XSD in candidate mode; the diagnostic layer may explain the PDF difference.
+
+### V2.4 scope corrections
+
+- `DRCOM23-001` ends at V2.3: V2.4 StopInformationRequest contains `ArrivalExpected` and `DepartureExpected` in both PDF and selected candidate XSD.
+- `CE-025` is not extended to V2.4: `ReplyPath` aligns.
+- `CE-026` is not extended to V2.4: `BeaconPoint.Description` aligns.
+- DoorCounting lexeme portion of `DRCOM10-006` is not extended to V2.4: `Wheelchair` / `Other` align.
+- `CE-020` remains V2.3 official-vs-PR30 collision specific.
+- `CE-023` remains V2.2-only.
+
+The exact 15-group reconciliation is machine-readable in `audit_registry/deep_read_findings_delta_common_v24_2026-09-03.json`.

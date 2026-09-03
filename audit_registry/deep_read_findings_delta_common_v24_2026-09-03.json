@@ -1,0 +1,179 @@
+{
+  "delta_version": "0.1",
+  "date": "2026-09-03",
+  "document_id": "COMMON_V2.4",
+  "fresh_read_freeze": "789f02f697809b1eef4d3b1a366a3599649a6d7d",
+  "source_evidence": {
+    "pdf_sha256": "01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a",
+    "size_bytes": 1689647,
+    "pin_render_read_run": "33658306978",
+    "job": "100342316111",
+    "artifact_id": "9857652638",
+    "artifact_digest": "sha256:be0ce46c03893d79b216c92e7af8cd2906b27524f9d24a954be5d7e1d57d934c",
+    "page_count": 63,
+    "fulltext_sha256": "02bfe01587937052f0d9b1c4a581a7a0546b6a3ca024de94310c6894646929b1"
+  },
+  "selected_xsd_authority": {
+    "status": "candidate_integration_explicit_selection",
+    "release_tag": null,
+    "common_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+    "enumerations_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+    "common_includes": "IBIS-IP_Enumerations_V2.4.xsd",
+    "candidate_branch": "candidate/dms-v2.4-xsd",
+    "upstream_draft_pr": "VDVde/VDV301#31",
+    "official_release_authority": false,
+    "latest_xsd_wins": false
+  },
+  "executable_evidence": {
+    "evidence_id": "EV-122",
+    "checker": "tools/validate_common_v24_ev122.py",
+    "run": "33716645876",
+    "job": "100527119224",
+    "head_tested": "50811251d855e02aa7decc7a1c82fa2444d2ac39",
+    "result": "PASS",
+    "authority": "exact_selected_candidate_integration_Common_V2.4_plus_Enumerations_V2.4"
+  },
+  "observation_to_finding_mapping": {
+    "FR-COM24-001": [
+      "DRCOM20-001"
+    ],
+    "FR-COM24-002": [
+      "DRCOM22-001"
+    ],
+    "FR-COM24-003": [
+      "CE-013"
+    ],
+    "FR-COM24-004": [
+      "CE-011"
+    ],
+    "FR-COM24-005": [
+      "DRCOM10-002"
+    ],
+    "FR-COM24-006": [
+      "CE-014",
+      "CE-012",
+      "CE-018",
+      "DRCOM10-003"
+    ],
+    "FR-COM24-007": [
+      "DRCOM10-004",
+      "DRCOM21-001",
+      "CE-005",
+      "CE-024"
+    ],
+    "FR-COM24-008": [
+      "DRCOM24-001"
+    ],
+    "FR-COM24-009": [
+      "CE-015",
+      "CE-016",
+      "CE-021",
+      "CE-017"
+    ],
+    "FR-COM24-010": [
+      "CE-022",
+      "CE-019"
+    ],
+    "FR-COM24-011": [
+      "DRCOM10-005"
+    ],
+    "FR-COM24-012": [
+      "CE-006",
+      "CE-004"
+    ],
+    "FR-COM24-013": [
+      "CE-007",
+      "CE-008",
+      "CE-009",
+      "CE-010"
+    ],
+    "FR-COM24-014": [
+      "CE-002",
+      "DRCOM10-007"
+    ],
+    "FR-COM24-015": [
+      "DRCOM10-007"
+    ]
+  },
+  "revalidated_or_scope_extended_findings": {
+    "DRCOM20-001": "V2.4_candidate_scope_executable_InternationalText_native_xs_string_language_vs_PDF_wrapper_references_EV-122",
+    "DRCOM22-001": "V2.4_candidate_scope_executable_NetexMode_optional_choices_empty_valid_EV-122",
+    "CE-013": "V2.4_candidate_scope_executable_AdditionalAnnouncement_optional_choice_and_SpecificPoint_name_EV-122",
+    "CE-011": "V2.4_candidate_scope_executable_Connection_TransportMode_ConnectionMode_0to1_vs_pdf_0star_EV-122",
+    "DRCOM10-002": "V2.4_candidate_scope_executable_DataAcceptedResponse_choice_boundary_EV-122",
+    "CE-014": "V2.4_candidate_scope_executable_empty_DataVersionList_EV-122",
+    "CE-012": "V2.4_candidate_scope_executable_empty_DeviceSpecificationWithStateList_EV-122",
+    "CE-018": "V2.4_candidate_scope_visible_1star_plus_executable_empty_ServiceIdentificationWithStateList_EV-122",
+    "DRCOM10-003": "V2.4_candidate_scope_executable_empty_ServiceSpecificationWithStateList_EV-122",
+    "DRCOM10-004": "V2.4_candidate_scope_executable_JourneyStop_Announcement_FareZone_0to1_EV-122",
+    "DRCOM21-001": "V2.4_candidate_scope_executable_StopInformationRequest_StopName_0star_EV-122",
+    "CE-005": "V2.4_candidate_scope_executable_base_AdditionalTextMessage_0to1_EV-122",
+    "CE-024": "V2.4_candidate_scope_executable_UnsubscribeResponse_Active_required_EV-122",
+    "CE-015": "V2.4_candidate_scope_executable_FareZone_case_boundaries_EV-122",
+    "CE-016": "V2.4_candidate_scope_executable_GlobalCardStausID_boundary_EV-122",
+    "CE-021": "V2.4_candidate_scope_executable_MessageBody_vs_Message_boundary_EV-122",
+    "CE-017": "V2.4_candidate_scope_executable_TSPPoint_Description_vs_Desciption_EV-122",
+    "CE-022": "V2.4_candidate_scope_executable_outer_ServiceName_vs_Service_boundary_EV-122",
+    "CE-019": "V2.4_candidate_scope_exact_ServiceIdentificationWithStateStructure_EV-122",
+    "DRCOM10-005": "V2.4_candidate_scope_executable_ShortTripStop_child_name_boundary_EV-122",
+    "CE-006": "V2.4_candidate_scope_exact_Enums_contains_DeviceState_warning_while_PDF_omits_it_EV-122",
+    "CE-004": "V2.4_candidate_scope_exact_Enums_excludes_stale_SystemDocumentationService_SystemManagementService_EV-122",
+    "CE-007": "V2.4_candidate_scope_executable_GNSS_TicketValidation_VehicleMode_case_boundaries_EV-122",
+    "CE-008": "V2.4_candidate_scope_executable_checked_NeTEx_submode_case_boundaries_EV-122",
+    "CE-009": "V2.4_candidate_scope_executable_RailSubmode_specialRail_vs_specialTrain_EV-122",
+    "CE-010": "V2.4_candidate_scope_executable_AirSubmode_canalBarge_present_EV-122",
+    "CE-002": "V2.4_source_context_revalidated_StopPointNumber_history_wording_vs_PointNumber_table_and_candidate_XSD",
+    "DRCOM10-007": "V2.4_source_context_revalidated_grouped_cross_reference_and_editorial_residue"
+  },
+  "new_unique_findings": {
+    "DRCOM24-001": {
+      "state": "executable_confirmed_EV-122",
+      "classification": "pdf_xsd_type_shape_and_cardinality_mismatch",
+      "summary": "COMMON V2.4 PDF LineInformation documents LineName and LineShortName as IBIS-IP.string 0:1, while the exact selected candidate XSD models both as repeatable InternationalTextType. EV-122 confirms candidate InternationalText instances and repetition are valid while the PDF-shaped value-only form is invalid.",
+      "executable_effect": true,
+      "authority_scope": "selected_candidate_integration_V2.4_only_until_official_release_exists"
+    }
+  },
+  "historical_scope_corrections": {
+    "DRCOM23-001": {
+      "decision": "do_not_extend_to_V2.4",
+      "reason": "V2.4 PDF and selected candidate XSD both contain optional StopInformationRequest.ArrivalExpected and DepartureExpected; EV-122 positive."
+    },
+    "CE-025": {
+      "decision": "do_not_extend_to_V2.4",
+      "reason": "V2.4 PDF and candidate XSD use ReplyPath; EV-122 accepts ReplyPath and rejects old Reply-Path."
+    },
+    "CE-026": {
+      "decision": "do_not_extend_to_V2.4",
+      "reason": "V2.4 BeaconPoint uses Description in PDF and candidate XSD; EV-122 confirms correction."
+    },
+    "DRCOM10-006": {
+      "decision": "do_not_extend_DoorCounting_lexeme_mismatch_to_V2.4",
+      "reason": "V2.4 PDF and candidate Enumerations use Wheelchair and Other; EV-122 confirms correction."
+    },
+    "CE-020": {
+      "decision": "not_mapped_to_V2.4",
+      "reason": "CE-020 is the V2.3 official-vs-PR30 same-path authority collision identity; V2.4 is a separately selected candidate/integration family."
+    },
+    "CE-023": {
+      "decision": "not_mapped_to_V2.4",
+      "reason": "confirmed V2.2-only duplicate NetexMode/Message documentation issue."
+    },
+    "historical_01g_InternationalTextType": {
+      "decision": "superseded",
+      "reason": "old V2.4 first-pass note incorrectly stated XSD uses IBIS-IP.string/language; exact selected blobs use xs:string/xs:language. Fresh freeze plus EV-122 supersede it.",
+      "correction_doc": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_COMMON_V24_INTERNATIONALTEXT_AUTHORITY_2026-09-03.md"
+    }
+  },
+  "active_falsification": [
+    "-1:1 is XML choice notation, not negative cardinality",
+    "PointType required choice aligns",
+    "V2.4 StopInformationRequest expected fields align",
+    "V2.4 BeaconPoint Description aligns",
+    "V2.4 ReplyPath aligns",
+    "V2.4 DoorCounting Wheelchair aligns",
+    "enumeration ordering ignored",
+    "no XSD change proposed or performed"
+  ],
+  "next_project_phase": "legacy_finding_revalidation"
+}
