@@ -1,0 +1,37 @@
+name: TEMP validate VDV301-1 EV-128
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths: [.github/workflows/temp_validate_vdv3011_ev128.yml]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          python -m pip install --disable-pip-version-check lxml
+      - name: Run EV-128
+        run: python tools/validate_vdv3011_revalidation_ev128.py
+      - name: Root XSD pool regression gate
+        run: python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+      - name: Verify no tracked mutation
+        shell: bash
+        run: |
+          if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
+            git status --short
+            git diff --exit-code
+            exit 1
+          fi
+          git diff --exit-code -- '*.xsd'
