@@ -40,7 +40,7 @@
     "latest_dms_finding": "DMS-007",
     "latest_common_finding": "DRCOM24-001",
     "resolved_historical_finding": "DR3012-006",
-    "latest_audit_correction": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_COMMON_V22_CE008_CE009_IDENTITY_2026-09-03.md",
+    "latest_audit_correction": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CIS_V11_PROVENANCE_2026-09-03.md",
     "choice_notation_correction_registry": "audit_registry/deep_read_findings_correction_choice_notation_2026-08-29.json",
     "choice_notation_rule": "VDV leading '-' in Min:Max denotes XML choice; -1:1 is not a negative/invalid cardinality; evaluate a/b/... labels and surrounding rows before comparing with XSD compositors",
     "choice_notation_finding_updates": {
@@ -69,7 +69,7 @@
     "pdf_visual_render_fallback": "docs/pdf_xsd_semantic_audit/PDF_VISUAL_RENDER_FALLBACK.md",
     "pdf_visual_renderer": "tools/render_vdv_pdf_pages.py",
     "pdf_visual_render_rule": "interactive screenshot cache miss is not a source failure; render exact byte-pinned source independently and inspect visible output before promoting visual status",
-    "pdf_sources_byte_pinned": 32,
+    "pdf_sources_byte_pinned": 36,
     "pinned_active_sources": [
       "VDV301-2_GC_V2.3",
       "COMMON_V2.3",
@@ -101,7 +101,11 @@
       "COMMON_V2.0",
       "COMMON_V2.1",
       "COMMON_V2.2",
-      "COMMON_V2.4"
+      "COMMON_V2.4",
+      "CIS_V1.1",
+      "CIS_V2.0",
+      "CIS_V2.2",
+      "CIS_V2.3"
     ],
     "latest_deep_read_registry_delta": "audit_registry/deep_read_registry_delta_common_v24_2026-09-03.json",
     "latest_deep_read_findings_delta": "audit_registry/deep_read_findings_delta_common_v24_2026-09-03.json",
@@ -859,15 +863,33 @@
     "finding_inventory_snapshot": "audit_registry/finding_inventory_frozen_2026-09-03.json",
     "finding_inventory_count": 192,
     "finding_inventory_source_head": "7fad145f528205ef5c40e58a3a23374379b08189",
-    "finding_revalidation_next_block": "CIS",
-    "finding_revalidation_completed_findings": 42,
-    "finding_revalidation_pending_findings": 150,
-    "finding_revalidation_current_block": "CE",
-    "finding_revalidation_latest_completed_block": "CE",
-    "finding_revalidation_latest_terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md",
-    "latest_executable_evidence_id": "EV-124",
-    "latest_executable_evidence_run_id": "33726364976",
-    "latest_executable_evidence_run": "33735601969"
+    "finding_revalidation_next_block": "DISC",
+    "finding_revalidation_completed_findings": 47,
+    "finding_revalidation_pending_findings": 145,
+    "finding_revalidation_current_block": "CIS",
+    "finding_revalidation_latest_completed_block": "CIS",
+    "finding_revalidation_latest_terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CIS_2026-09-03.md",
+    "latest_executable_evidence_id": "EV-125",
+    "latest_executable_evidence_run_id": "33744039627",
+    "latest_executable_evidence_run": "33744039627",
+    "cis_revalidation": {
+      "status": "complete",
+      "completed_at": "2026-09-03T10:23:42Z",
+      "evidence_id": "EV-125",
+      "run_id": "33744039627",
+      "terminal_states": {
+        "CIS-001": "unresolved",
+        "CIS-002": "contextual_not_defect",
+        "CIS-003": "executable_confirmed",
+        "CIS-004": "executable_confirmed",
+        "CIS-005": "executable_confirmed"
+      },
+      "pdf_pin_run_id": "33736316368",
+      "pdf_pin_artifact_id": "9885887536",
+      "rendered_pages": 105,
+      "next_block": "DISC",
+      "xsd_mutation": false
+    }
   },
   "evidence": {
     "xsd_ev_completed": [
@@ -888,7 +910,8 @@
       "EV-113",
       "EV-114",
       "EV-115",
-      "EV-116"
+      "EV-116",
+      "EV-125"
     ],
     "runtime_rv_completed": [
       "RV-001",

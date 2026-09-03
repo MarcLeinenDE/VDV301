@@ -187,3 +187,6 @@ Recommended next work:
 3. Then continue CIS V2.2 and V2.3.
 4. Keep CIS V1.1 unresolved unless a source-exact mapping is found.
 ```
+## Post-audit correction — 2026-09-03
+
+The earlier V1.1 provenance statement is superseded by `AUDIT_CORRECTION_DELTA_CIS_V11_PROVENANCE_2026-09-03.md`. A historical untagged V1.1 working XSD family exists, but it is not a V1.1 release-tag authority and does not match all published V1.1 PDF fields. See also `FINDING_REVALIDATION_CIS_2026-09-03.md` / `EV-125`.

@@ -156,3 +156,6 @@ Continue with the next service-level audit after CIS closure:
 ```
 
 Before starting, first map public JIS PDF versions against observed official release-tag/current-master XSDs, applying OFFICIAL_RELEASE_BACKFILL_POLICY.md and MIXED_VERSION_VALIDATION_PREMISE.md.
+## Post-audit correction — 2026-09-03
+
+The earlier V1.1 provenance statement is superseded by `AUDIT_CORRECTION_DELTA_CIS_V11_PROVENANCE_2026-09-03.md`. A historical untagged V1.1 working XSD family exists, but it is not a V1.1 release-tag authority and does not match all published V1.1 PDF fields. See also `FINDING_REVALIDATION_CIS_2026-09-03.md` / `EV-125`.
