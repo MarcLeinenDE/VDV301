@@ -375,18 +375,18 @@
       },
       {
         "finding_id": "DISC-001",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DISC_2026-09-03.md"
       },
       {
         "finding_id": "DISC-002",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DISC_2026-09-03.md"
       },
       {
         "finding_id": "DISC-003",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DISC_2026-09-03.md"
       },
       {
         "finding_id": "DMS-001",
@@ -1123,7 +1123,7 @@
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true
   },
-  "next_revalidation_block": "CIS",
+  "next_revalidation_block": "DMS",
   "revalidation_blocks": {
     "ARA_V2.4": {
       "date": "2026-09-03",
@@ -1277,6 +1277,69 @@
       },
       "xsd_mutation": false,
       "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+    },
+    "DISC": {
+      "date": "2026-09-03",
+      "state": "completed",
+      "authority_lane": "official_byte_pinned_VDV_General_Conventions_Base_Services_plus_RFC_Editor_definition_provenance",
+      "evidence_id": "EV-126",
+      "evidence_run_id": "33754189273",
+      "source_pin_run_id": "33752224704",
+      "source_pin_job_id": "100638164877",
+      "source_pin_artifact_id": "9892036202",
+      "source_pin_artifact_digest_sha256": "263b468f0d5752fa160e7d03e5097482c49e3e56650c8b33d014cc0cf5297030",
+      "source_hashes": {
+        "VDV301-2_V1.0_DE": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+        "VDV301-2_BASE_V2.0": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+        "VDV301-2_BASE_V2.1": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+        "VDV301-2_GC_V2.2": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+        "VDV301-2_GC_V2.3": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+        "VDV301-2_GC_V2.4": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d"
+      },
+      "visual_pages_checked": {
+        "VDV301-2_V1.0_DE": [
+          20,
+          80
+        ],
+        "VDV301-2_BASE_V2.0": [
+          21
+        ],
+        "VDV301-2_BASE_V2.1": [
+          22
+        ],
+        "VDV301-2_GC_V2.2": [
+          17,
+          20
+        ],
+        "VDV301-2_GC_V2.3": [
+          27
+        ],
+        "VDV301-2_GC_V2.4": [
+          20,
+          23,
+          30,
+          31,
+          75
+        ]
+      },
+      "rfc_definition_sources": {
+        "RFC2927": "https://www.rfc-editor.org/rfc/rfc2927.txt",
+        "RFC3927": "https://www.rfc-editor.org/rfc/rfc3927.txt"
+      },
+      "findings": {
+        "DISC-001": "context_verified",
+        "DISC-002": "context_verified",
+        "DISC-003": "context_verified"
+      },
+      "active_disproof_attempts": {
+        "DISC-001": "Rejected the hypothesis that the discrepancy is only an RFC-number translation typo: exact V2.2+ German pages remove prescribed IP allocation while exact English pages retain ZeroConf/169.254 requirements.",
+        "DISC-002": "Rejected the hypothesis that RFC 2927 could define IPv4 Link-Local addressing: RFC Editor identifies 2927 as LDAP-schema MIME profile and 3927 as IPv4 Link-Local 169.254/16.",
+        "DISC-003": "Rejected the hypothesis that the V2.4 history line is only editorial: V2.3 German Table 3 lacks coachnumber/deviceclass/deviceID and V2.4 German Table 3 contains them."
+      },
+      "executable_evidence_reason_not_applicable": "DISC-001..003 are cross-language/reference/version-history documentation findings in the non-XSD discovery/profile lane. They make no XML-validity or schema-shape claim.",
+      "sdk_handling": "Do not hard-enforce ZeroConf/169.254 as a universal VDV rule from the stale English language track; keep language/version provenance and external-RFC diagnostics separate from VDV rule attribution.",
+      "xsd_mutation": false,
+      "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DISC_2026-09-03.md"
     }
   }
 }

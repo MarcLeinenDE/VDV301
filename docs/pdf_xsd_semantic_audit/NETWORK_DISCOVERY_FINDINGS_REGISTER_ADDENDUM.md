@@ -127,3 +127,15 @@ DRNET20-003  context_verified  grouped additional editorial spelling residue exc
 `DISC-001..003` are deliberately not marked revalidated by the 301-3 block because they belong to General-Conventions/discovery evidence.
 
 Corrected RV-002 run `33267198470` / job `99139252921` is PASS and confirms deterministic DNS-SD classifier behavior with the corrected HDS V2.2a transition wording. It is adjacent runtime evidence only; it does not test physical wiring/media/topology/safety claims in VDV 301-3.
+
+## Legacy finding revalidation - 2026-09-03
+
+Current Evidence-Gate terminal states:
+
+```text
+DISC-001  context_verified  EV-126 run 33754189273
+DISC-002  context_verified  EV-126 run 33754189273
+DISC-003  context_verified  EV-126 run 33754189273
+```
+
+The V1.0, Base V2.0, Base V2.1 and General-Conventions V2.2 PDFs were freshly byte-pinned in source run `33752224704`; V2.3/V2.4 were re-fetched byte-identically. Targeted rendered pages closed the material visual-source gap for these three findings. RFC 2927/3927 definition provenance was checked against RFC Editor. No XSD contract applies to these findings and no XSD was changed.
