@@ -41,7 +41,6 @@ jobs:
           import json
           from pathlib import Path
           import urllib.request
-
           source_id = 'VDV301-2_GC_V2.3'
           sources = json.loads(Path('audit_registry/pdf_source_registry_v0.1.json').read_text(encoding='utf-8'))
           pins = json.loads(Path('audit_registry/pdf_source_pins_v0.1.json').read_text(encoding='utf-8'))
@@ -55,8 +54,8 @@ jobs:
               data = response.read()
           actual_hash = hashlib.sha256(data).hexdigest()
           assert data.startswith(b'%PDF-')
-          assert actual_hash == pin['expected_sha256'], (actual_hash, pin['expected_sha256'])
-          assert len(data) == int(pin['expected_size_bytes']), (len(data), pin['expected_size_bytes'])
+          assert actual_hash == pin['expected_sha256']
+          assert len(data) == int(pin['expected_size_bytes'])
           target = Path('local_sources/vdv_pdfs') / source['local_filename']
           target.parent.mkdir(parents=True, exist_ok=True)
           target.write_bytes(data)
@@ -103,6 +102,7 @@ jobs:
           set -euo pipefail
           rm -f .github/workflows/temp_validate_vdv3012_gc23_ev133.yml
           rm -f .github/workflows/temp_close_vdv3012_gc23_revalidation.yml
+          rm -rf artifacts/ev133-closure
           find . -type d -name '__pycache__' -prune -exec rm -rf {} +
 
       - name: Verify closure delta allowlist and immutable authorities
@@ -123,10 +123,10 @@ jobs:
               '.github/workflows/temp_validate_vdv3012_gc23_ev133.yml',
               '.github/workflows/temp_close_vdv3012_gc23_revalidation.yml',
           }
-          paths = set(subprocess.check_output(['git','status','--porcelain','--untracked-files=all'], text=True).splitlines())
-          changed = {line[3:] for line in paths if len(line) >= 4}
+          lines = subprocess.check_output(['git','status','--porcelain','--untracked-files=all'], text=True).splitlines()
+          changed = {line[3:] for line in lines if len(line) >= 4}
           unexpected = changed - allowed
-          assert not unexpected, f'unexpected tracked closure delta: {sorted(unexpected)}'
+          assert not unexpected, f'unexpected closure delta: {sorted(unexpected)}'
           required = {
               'audit_registry/finding_revalidation_registry_v0.1.json',
               '00_START_HERE/CURRENT_STATE.json',
