@@ -1,0 +1,71 @@
+{
+  "evidence_record_version": "0.1",
+  "date": "2026-09-04",
+  "scope": "COMMON V2.1 legacy finding revalidation for DRCOM21-001",
+  "branch": "dev/schema-integration",
+  "evidence_id": "EV-137",
+  "evidence_run_id": "33856800289",
+  "evidence_run_head": "06a611ed20af90308300f5b57a933aba21bff7e8",
+  "artifact": {
+    "id": "9930503494",
+    "name": "common-v21-ev137",
+    "digest": "sha256:3e28953401560f104c075128928a17931666e0d0ec8ef5deb6f23f79f8e775d6",
+    "retention_days": 90
+  },
+  "pdf": {
+    "source_id": "COMMON_V2.1",
+    "sha256": "a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32",
+    "size_bytes": 1274051,
+    "page_count": 48,
+    "visual_review_status": "completed_from_EV-137_rendered_page_29",
+    "finding_pages": {
+      "DRCOM21-001": [29]
+    },
+    "visual_note": "Page 29 visibly documents StopInformationRequest.StopName with multiplicity 0:1. The same page independently shows StopInformation.StopName as 1:* and several other repeatable rows as 0:*, so the StopInformationRequest 0:1 cell is a specific visible cardinality claim rather than a generic table-format interpretation."
+  },
+  "authority": {
+    "status": "exact_official_release_family",
+    "source_repository": "VDVde/VDV301",
+    "official_release_tag": "VDV-301-2.1",
+    "common_file": "IBIS-IP_common_V2.1.xsd",
+    "common_blob": "05977c9f86c7c9dd0b48f36a4a4e9be32e94659e",
+    "enumerations_file": "IBIS-IP_Enumerations_V2.1.xsd",
+    "enumerations_blob": "311464690ad60749ed8d326217787e4b8ed0b718",
+    "authority_note": "Integration-branch bytes match the exact official VDV-301-2.1 tag; no candidate or latest-wins substitution is involved."
+  },
+  "frozen_mapping": {
+    "delta_record": "audit_registry/deep_read_findings_delta_common_v21_2026-09-02.json",
+    "delta_blob": "44e06e66b65d7a7909d0e37ac3e6657f94e6a092",
+    "fresh_observation": "FR-COM21-OBS-013",
+    "finding_id": "DRCOM21-001",
+    "classification": "cardinality_xsd_more_permissive_than_pdf"
+  },
+  "base_evidence": {
+    "evidence_id": "EV-119",
+    "checker": "tools/validate_common_v21_ev119.py",
+    "checker_blob": "fb892931b74d32a69177fbe32356a08fc758534a",
+    "historical_successful_run": "33609779315",
+    "status_in_ev137": "rerun_unchanged_PASS"
+  },
+  "ev137_checker": {
+    "path": "tools/validate_common_v21_revalidation_ev137.py",
+    "blob_at_successful_run": "e88731f35970b2f0147a8d60ca546d6165a43ccd"
+  },
+  "finding": {
+    "id": "DRCOM21-001",
+    "claim": "COMMON V2.1 PDF documents StopInformationRequest.StopName as 0:1 while the exact official V2.1 XSD declares minOccurs=0 maxOccurs=unbounded.",
+    "terminal_state": "executable_confirmed",
+    "visual_result": "Rendered page 29 visibly confirms StopInformationRequest.StopName 0:1.",
+    "xsd_result": "Exact Common V2.1 declares StopInformationRequestStructure.StopName minOccurs=0 maxOccurs=unbounded.",
+    "active_disproof": {
+      "two_StopName_instance": "VALID in preserved EV-119 rerun",
+      "boundary_effect": "The exact XSD accepts an instance shape that exceeds the PDF's visible 0:1 maximum."
+    },
+    "validation_behavior": "material; validation and generated models must follow the selected V2.1 XSD repeatability and must not impose the PDF-only 0:1 maximum"
+  },
+  "root_xsd_pool_gate": "PASS in run 33856800289",
+  "tracked_mutation_guard": "PASS in run 33856800289",
+  "xsd_mutated": false,
+  "frozen_inventory_mutated": false,
+  "result": "PASS"
+}
