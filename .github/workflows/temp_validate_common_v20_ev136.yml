@@ -1,5 +1,5 @@
 name: TEMP validate COMMON V2.0 EV-136
-# rerun with canonicalized page-13 visual-text anchors
+# rerun with explicit page-13 visual fallback for pdftotext-fragmented IBIS-IP.language
 
 on:
   push:
@@ -100,7 +100,7 @@ jobs:
           test "$(git hash-object IBIS-IP_common_V2.0.xsd)" = "8608e3dcd665c197c34da7f6ec6af5a3758da164"
           test "$(git hash-object IBIS-IP_Enumerations_V2.0.xsd)" = "27e3c183b00381d959622d13c10543123af8eef6"
           test "$(git hash-object tools/validate_common_v20_ev118.py)" = "6db122b1726376b11ac24cfec68dbfbd758b079e"
-          test "$(git hash-object tools/validate_common_v20_revalidation_ev136.py)" = "322186ab1e32e16f4c26485558b7fa5b41dcfd07"
+          test "$(git hash-object tools/validate_common_v20_revalidation_ev136.py)" = "001d5c85aa25db4b0c834bc087d7bd551eb794e3"
           git diff --exit-code -- '*.xsd'
           test -z "$(git status --porcelain --untracked-files=no)"
 
