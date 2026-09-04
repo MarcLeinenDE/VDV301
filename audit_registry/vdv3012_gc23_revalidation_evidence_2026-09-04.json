@@ -1,0 +1,47 @@
+{
+  "evidence_record_version": "0.1",
+  "date": "2026-09-04",
+  "scope": "VDV301-2 General Conventions V2.3 legacy finding revalidation for DR3012GC23-001",
+  "branch": "dev/schema-integration",
+  "evidence_id": "EV-133",
+  "evidence_run_id": "33842952649",
+  "evidence_run_head": "86fe5b614ac150e7adcede2cae2fccbf5e0e900a",
+  "artifact": {
+    "id": "9925516670",
+    "name": "vdv3012-gc23-ev133",
+    "digest": "sha256:7fb77ca6ca5c1950b45d49fe983118831e4cae187997d2568b203e97a89f4b33",
+    "retention_days": 90
+  },
+  "pdf": {
+    "source_id": "VDV301-2_GC_V2.3",
+    "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+    "size_bytes": 1057483,
+    "targeted_visible_pages": [70, 71],
+    "visual_review_status": "confirmed_from_EV-133_rendered_PNGs",
+    "visual_result": "Page 70 visibly establishes the V2.2 German 7.1.1/7.1.2 baseline. Page 71 visibly places German 7.1.3 and 7.1.4 under 7.2 Version 2.3 while the adjacent English headings correctly use 7.2.1 and 7.2.2."
+  },
+  "selected_xsd_authority": {
+    "family": "official VDV-301-2.3 General Conventions release context",
+    "common_file": "IBIS-IP_common_V2.3.xsd",
+    "common_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+    "enumerations_file": "IBIS-IP_Enumerations_V2.2.xsd",
+    "enumerations_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+    "official_upstream_tag": "VDVde/VDV301@VDV-301-2.3",
+    "official_upstream_blobs_identical": true,
+    "dependency_route": "IBIS-IP_common_V2.3.xsd includes IBIS-IP_Enumerations_V2.2.xsd"
+  },
+  "active_disproof": {
+    "predecessor_numbering_baseline": "V2.2 page 70 correctly uses German 7.1.1 and 7.1.2 under 7.1 Version 2.2.",
+    "same_page_language_control": "V2.3 page 71 English headings correctly use 7.2.1 and 7.2.2 under 7.2 Version 2.3.",
+    "resolved_predecessor_defect": "Literal unresolved Word-reference placeholders present in V2.2 are absent in the V2.3 full-text gate."
+  },
+  "findings": {
+    "DR3012GC23-001": "context_verified"
+  },
+  "executable_evidence_reason_not_applicable": "DR3012GC23-001 concerns printed version-history subsection numbering and does not define XML instance validity. The exact official Common V2.3 root was nevertheless compiled to preserve release authority context.",
+  "root_xsd_pool_gate": "PASS in run 33842952649",
+  "tracked_mutation_guard": "PASS in run 33842952649",
+  "xsd_mutated": false,
+  "frozen_inventory_mutated": false,
+  "result": "PASS"
+}
