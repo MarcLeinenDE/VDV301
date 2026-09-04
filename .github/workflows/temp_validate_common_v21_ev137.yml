@@ -1,0 +1,113 @@
+name: TEMP validate COMMON V2.1 EV-137
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths:
+      - .github/workflows/temp_validate_common_v21_ev137.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install evidence dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          python -m pip install --disable-pip-version-check lxml
+
+      - name: Fetch exact byte-pinned COMMON V2.1 PDF
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          import urllib.request
+          source_id = 'COMMON_V2.1'
+          sources = json.loads(Path('audit_registry/pdf_source_registry_v0.1.json').read_text(encoding='utf-8'))
+          pins = json.loads(Path('audit_registry/pdf_source_pins_v0.1.json').read_text(encoding='utf-8'))
+          source = next(x for x in sources['sources'] if x['source_id'] == source_id)
+          pin = next(x for x in pins['sources'] if x['source_id'] == source_id)
+          request = urllib.request.Request(source['official_url'], headers={
+              'User-Agent': 'VDV301-Audit-EV137/0.1 (+https://github.com/MarcLeinenDE/VDV301)',
+              'Accept': 'application/pdf,application/octet-stream;q=0.9,*/*;q=0.1',
+          })
+          with urllib.request.urlopen(request, timeout=90) as response:
+              data = response.read()
+          actual_hash = hashlib.sha256(data).hexdigest()
+          assert data.startswith(b'%PDF-')
+          assert actual_hash == pin['expected_sha256'], (actual_hash, pin['expected_sha256'])
+          assert len(data) == int(pin['expected_size_bytes']), (len(data), pin['expected_size_bytes'])
+          target = Path('local_sources/vdv_pdfs') / source['local_filename']
+          target.parent.mkdir(parents=True, exist_ok=True)
+          target.write_bytes(data)
+          print(f'PIN_OK {source_id} sha256={actual_hash} size={len(data)}')
+          PY
+
+      - name: Run EV-137 Common V2.1 revalidation gate
+        shell: bash
+        env:
+          EV137_OUTPUT_DIR: artifacts/ev137
+        run: |
+          set -euo pipefail
+          python tools/validate_common_v21_revalidation_ev137.py
+
+      - name: Render EV-137 page 29
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/ev137/pages artifacts/ev137/text
+          pdftoppm -f 29 -l 29 -singlefile -png -r 180 \
+            local_sources/vdv_pdfs/COMMON_V2.1.pdf artifacts/ev137/pages/page-29
+          pdftotext -f 29 -l 29 -layout \
+            local_sources/vdv_pdfs/COMMON_V2.1.pdf artifacts/ev137/text/page-29.txt
+
+      - name: Build evidence manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum local_sources/vdv_pdfs/COMMON_V2.1.pdf > artifacts/ev137/pdf.sha256
+          find artifacts/ev137 -type f ! -name manifest.sha256 -print0 | sort -z | xargs -0 sha256sum > artifacts/ev137/manifest.sha256
+          cat artifacts/ev137/ev137_result.json
+          cat artifacts/ev137/manifest.sha256
+
+      - name: Root XSD pool regression gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+
+      - name: Verify no tracked mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.1.md)" = "91cf693217d3b0df5309a0f8a242cfd4895a59fa"
+          test "$(git hash-object audit_registry/deep_read_findings_delta_common_v21_2026-09-02.json)" = "44e06e66b65d7a7909d0e37ac3e6657f94e6a092"
+          test "$(git hash-object IBIS-IP_common_V2.1.xsd)" = "05977c9f86c7c9dd0b48f36a4a4e9be32e94659e"
+          test "$(git hash-object IBIS-IP_Enumerations_V2.1.xsd)" = "311464690ad60749ed8d326217787e4b8ed0b718"
+          test "$(git hash-object tools/validate_common_v21_ev119.py)" = "fb892931b74d32a69177fbe32356a08fc758534a"
+          test "$(git hash-object tools/validate_common_v21_revalidation_ev137.py)" = "e88731f35970b2f0147a8d60ca546d6165a43ccd"
+          git diff --exit-code -- '*.xsd'
+          test -z "$(git status --porcelain --untracked-files=no)"
+
+      - name: Upload EV-137 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: common-v21-ev137
+          path: artifacts/ev137
+          if-no-files-found: error
+          retention-days: 90
