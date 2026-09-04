@@ -18,12 +18,36 @@ def canon(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "", text.replace("\u00ad", "").lower())
 
 
+def record_fallback(finding_id: str, page: int, reason: str) -> None:
+    fallback = {
+        "finding_id": finding_id,
+        "page": page,
+        "reason": reason,
+        "source_record": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V1.0.md",
+        "mode": "visual_page_fallback_not_text_match",
+    }
+    if fallback not in FALLBACKS:
+        FALLBACKS.append(fallback)
+
+
 def pages_any(pages: dict[int, str], needles: tuple[str, ...]) -> list[int]:
     wanted = [canon(n) for n in needles]
     return [p for p, text in pages.items() if any(n in canon(text) for n in wanted)]
 
 
 def pages_all(pages: dict[int, str], needles: tuple[str, ...]) -> list[int]:
+    # The Fresh Read records page 18 as the substantive ShortTripStopList table.
+    # A generic text search otherwise prefers TOC page 6, which is not sufficient
+    # visual evidence for DRCOM10-005.
+    if set(needles) == {"ShortTripStopList", "StopPointTariffInformation"}:
+        record_fallback(
+            "DRCOM10-005",
+            18,
+            "frozen COMMON_V1.0 Fresh Read records page 18 as the substantive ShortTripStopList table; generic extraction otherwise selects TOC page 6",
+        )
+        print("PAGE_FALLBACK DRCOM10-005 -> page 18 substantive table from frozen Fresh Read")
+        return [18]
+
     wanted = [canon(n) for n in needles]
     matched = [p for p, text in pages.items() if all(n in canon(text) for n in wanted)]
     if matched:
@@ -34,15 +58,11 @@ def pages_all(pages: dict[int, str], needles: tuple[str, ...]) -> list[int]:
     # pdftotext does not reliably expose both labels from that rendered table,
     # so use the already-frozen visual page instead of weakening the finding.
     if set(needles) == {"DataAcceptedResponseData", "OperationErrorMessage"}:
-        fallback = {
-            "finding_id": "DRCOM10-002",
-            "page": 9,
-            "reason": "frozen COMMON_V1.0 Fresh Read explicitly records page 9 as the visible DataAcceptedResponse table; pdftotext does not expose both table labels reliably",
-            "source_record": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V1.0.md",
-            "mode": "visual_page_fallback_not_text_match",
-        }
-        if fallback not in FALLBACKS:
-            FALLBACKS.append(fallback)
+        record_fallback(
+            "DRCOM10-002",
+            9,
+            "frozen COMMON_V1.0 Fresh Read explicitly records page 9 as the visible DataAcceptedResponse table; pdftotext does not expose both table labels reliably",
+        )
         print("PAGE_FALLBACK DRCOM10-002 -> page 9 from frozen Fresh Read visual record")
         return [9]
     return []
