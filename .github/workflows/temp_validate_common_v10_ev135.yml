@@ -1,4 +1,5 @@
 name: TEMP validate COMMON V1.0 EV-135
+# rerun with frozen visual-page fallback provenance for DRCOM10-002
 
 on:
   push:
@@ -87,6 +88,7 @@ jobs:
           sha256sum local_sources/vdv_pdfs/COMMON_V1.0.pdf > artifacts/ev135/pdf.sha256
           find artifacts/ev135 -type f ! -name manifest.sha256 -print0 | sort -z | xargs -0 sha256sum > artifacts/ev135/manifest.sha256
           cat artifacts/ev135/ev135_result.json
+          test -f artifacts/ev135/page_fallbacks.json && cat artifacts/ev135/page_fallbacks.json || true
           cat artifacts/ev135/render_pages.txt
           cat artifacts/ev135/manifest.sha256
 
