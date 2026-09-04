@@ -123,7 +123,7 @@ jobs:
               '.github/workflows/temp_validate_vdv3012_gc23_ev133.yml',
               '.github/workflows/temp_close_vdv3012_gc23_revalidation.yml',
           }
-          paths = set(subprocess.check_output(['git','status','--porcelain','--untracked-files=no'], text=True).splitlines())
+          paths = set(subprocess.check_output(['git','status','--porcelain','--untracked-files=all'], text=True).splitlines())
           changed = {line[3:] for line in paths if len(line) >= 4}
           unexpected = changed - allowed
           assert not unexpected, f'unexpected tracked closure delta: {sorted(unexpected)}'
