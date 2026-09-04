@@ -1,0 +1,121 @@
+{
+  "evidence_record_version": "0.1",
+  "date": "2026-09-04",
+  "scope": "COMMON V1.0 legacy finding revalidation for DRCOM10-001..007",
+  "branch": "dev/schema-integration",
+  "evidence_id": "EV-135",
+  "evidence_run_id": "33850418941",
+  "evidence_run_head": "2b31c0015acf7b7ab12b18d7141f65938ba72b54",
+  "artifact": {
+    "id": "9928121371",
+    "name": "common-v10-ev135",
+    "digest": "sha256:8c2e42238577f29bb9f79e8de31692db739d8cf89fe13d4532d7c92cac500acf",
+    "retention_days": 90
+  },
+  "pdf": {
+    "source_id": "COMMON_V1.0",
+    "sha256": "a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf",
+    "size_bytes": 892769,
+    "page_count": 36,
+    "visual_review_status": "completed_from_EV-135_rendered_PNGs",
+    "finding_pages": {
+      "DRCOM10-001": [30],
+      "DRCOM10-002": [9],
+      "DRCOM10-003": [18],
+      "DRCOM10-004": [15],
+      "DRCOM10-005": [18],
+      "DRCOM10-006": [25],
+      "DRCOM10-007": [24, 26, 27, 34]
+    }
+  },
+  "authority": {
+    "status": "exact_official_historical_release_family",
+    "source_repository": "VDVde/VDV301",
+    "official_import_commit": "604a5a5c7608977e483072f7e450d7381cc182e4",
+    "common_file": "IBIS-IP_common_V1.0.xsd",
+    "common_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+    "enumerations_file": "IBIS-IP_Enumerations_V1.0.xsd",
+    "enumerations_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+    "common_v1_1_xsd_found": false,
+    "authority_note": "The publication contains an internal document revision 1.1 history, but the exact official historical XSD authority remains Common V1.0 plus Enumerations V1.0. No synthetic Common V1.1 XSD authority is inferred."
+  },
+  "base_evidence": {
+    "evidence_id": "EV-117",
+    "checker": "tools/validate_common_v10_ev117.py",
+    "checker_blob": "5d2b69aabd8de7b69575d6f98e6b6517c4d66fb4",
+    "status_in_ev135": "rerun_unchanged_PASS"
+  },
+  "ev135_checkers": {
+    "main": "tools/validate_common_v10_revalidation_ev135.py",
+    "main_blob_at_run": "8f265f127330cf384b3bac2749ac0c5124626080",
+    "layout_runner": "tools/run_common_v10_revalidation_ev135.py",
+    "layout_runner_blob_at_final_run": "c0f2fb021a16e98f41c889ab2372960cdc0431a1"
+  },
+  "visual_page_fallbacks": [
+    {
+      "finding_id": "DRCOM10-002",
+      "page": 9,
+      "reason": "The frozen COMMON_V1.0 Fresh Read explicitly records page 9 as the visible DataAcceptedResponse table; pdftotext does not expose both table labels reliably. The rendered page was inspected directly."
+    },
+    {
+      "finding_id": "DRCOM10-005",
+      "page": 18,
+      "reason": "The frozen COMMON_V1.0 Fresh Read records page 18 as the substantive ShortTripStopList table; generic extraction otherwise selects TOC page 6. The rendered page 18 was inspected directly."
+    }
+  ],
+  "visual_findings": {
+    "DRCOM10-001": "Page 30 visibly records document Version 1.1 changes including ScheduledDepartureTime, corrected Connection Min:Max information, TripInformation AdditionalTextMessage type/RouteDirection changes, and RouteDirectionEnumeration. The exact official historical Common V1.0 XSD does not contain those V1.1 additions and retains its V1.0 Connection declarations.",
+    "DRCOM10-002": "Page 9 visibly presents DataAcceptedResponseData and OperationErrorMessage as two ordinary 1:1 table rows without expressing the XSD choice compositor. Exact XSD and EV-117 establish that either branch alone is valid and both together are invalid.",
+    "DRCOM10-003": "Page 18 visibly prints ServiceSpecificationWithStateList/ServiceSpecificationWithState with multiplicity 1:*. Exact XSD declares minOccurs=0 maxOccurs=unbounded, and EV-117 confirms an empty list is valid.",
+    "DRCOM10-004": "Page 15 visibly prints JourneyStopInformation Announcement and FareZone as 0:*. Exact XSD declares each as 0:1; EV-135 confirms one instance is valid and two repeated instances are invalid for each field.",
+    "DRCOM10-005": "Page 18 visibly models ShortTripStopList with an inner ShortTripStopList child at 1:* and type StopPointTariffInformation. Exact XSD instead declares child ShortTripStop with type ShortTripStopStructure. EV-135 confirms ShortTripStop is valid and the PDF child-name alias ShortTripStopList is invalid. The two referenced V1.0 structures are instance-shape equivalent, so the type-reference mismatch is declaration-semantic rather than separately distinguishable by instance validation.",
+    "DRCOM10-006": "Page 25 visibly lists DoorCountingObjectClassEnumeration values including Wheelchair and Others. Exact Enumerations V1.0 uses WheelChair and Other; preserved EV-117 executable samples accept the XSD lexemes and reject the PDF-side variants.",
+    "DRCOM10-007": "Rendered enumeration/table-list pages visibly preserve grouped editorial residue such as 'Common enummerations' and inconsistent GNSS enumeration naming/spelling. These are documentation-only residues and no XML alias or validation rule is derived from them."
+  },
+  "active_disproof_and_executable_evidence": {
+    "DRCOM10-001": [
+      "Exact V1.0 Connection including required DisplayContent and ExpectedDepatureTime validates.",
+      "Omitting DisplayContent is rejected.",
+      "PDF-side ExpectedDepartureTime is rejected as an alias.",
+      "PDF Version-1.1 ScheduledDepartureTime is rejected by the exact V1.0 authority."
+    ],
+    "DRCOM10-002": [
+      "EV-117 confirms DataAcceptedResponseData-only valid.",
+      "EV-117 confirms OperationErrorMessage-only valid.",
+      "EV-117 confirms both branches together invalid."
+    ],
+    "DRCOM10-003": [
+      "EV-117 confirms empty ServiceSpecificationWithStateList valid under exact XSD 0:* despite PDF 1:*."
+    ],
+    "DRCOM10-004": [
+      "One Announcement valid; two Announcements invalid.",
+      "One FareZone valid; two FareZones invalid."
+    ],
+    "DRCOM10-005": [
+      "ShortTripStop child valid.",
+      "PDF child-name alias ShortTripStopList invalid.",
+      "StopPointTariffInformationStructure and ShortTripStopStructure are confirmed instance-shape equivalent in exact V1.0, preventing an overstated instance-level distinction for the type-reference part."
+    ],
+    "DRCOM10-006": [
+      "WheelChair valid / Wheelchair invalid.",
+      "Other valid / Others invalid."
+    ],
+    "DRCOM10-007": [
+      "Executable evidence not applicable because the finding groups editorial documentation residue and does not define XML validity behavior."
+    ]
+  },
+  "findings": {
+    "DRCOM10-001": "executable_confirmed",
+    "DRCOM10-002": "executable_confirmed",
+    "DRCOM10-003": "executable_confirmed",
+    "DRCOM10-004": "executable_confirmed",
+    "DRCOM10-005": "executable_confirmed",
+    "DRCOM10-006": "executable_confirmed",
+    "DRCOM10-007": "context_verified"
+  },
+  "root_xsd_pool_gate": "PASS in run 33850418941",
+  "tracked_mutation_guard": "PASS in run 33850418941",
+  "xsd_mutated": false,
+  "frozen_inventory_mutated": false,
+  "result": "PASS"
+}
