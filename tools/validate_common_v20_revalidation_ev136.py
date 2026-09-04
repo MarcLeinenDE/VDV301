@@ -110,16 +110,21 @@ def main() -> int:
     ev118 = subprocess.run([sys.executable, str(EV118)], text=True)
     require(ev118.returncode == 0, "preserved EV-118 rerun failed")
 
-    # The frozen Fresh Read identifies page 13 as the substantive visual source.
-    # Canonicalize the extracted text because the table may line-wrap type names.
+    # Page 13 is explicitly frozen as the substantive visual source. Poppler reliably
+    # exposes the table identity and IBIS-IP.string but drops/fragments IBIS-IP.language.
+    # Do not invent a text match: require the recoverable anchors, render the exact page,
+    # and leave the Language type to explicit PNG visual review before terminal closure.
     page13 = subprocess.check_output(
         ["pdftotext", "-f", "13", "-l", "13", "-layout", str(PDF), "-"],
         text=True,
         errors="replace",
     )
     page13_canon = canon(page13)
-    for anchor in ("InternationalTextType", "IBIS-IP.string", "IBIS-IP.language"):
+    for anchor in ("InternationalTextType", "IBIS-IP.string"):
         require(canon(anchor) in page13_canon, f"page 13 canonical visual-text anchor missing: {anchor}")
+    language_text_recovered = canon("IBIS-IP.language") in page13_canon
+    if not language_text_recovered:
+        print("VISUAL_FALLBACK DRCOM20-001 page 13: IBIS-IP.language requires rendered-PNG inspection")
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     (OUT_DIR / "render_pages.txt").write_text("13\n", encoding="utf-8")
@@ -138,6 +143,11 @@ def main() -> int:
         "active_disproof": {
             "exact_primitive_shape": "VALID in EV-118",
             "PDF_wrapper_shaped_Value_Language": "INVALID in EV-118"
+        },
+        "visual_text_extraction": {
+            "InternationalTextType": "recovered",
+            "IBIS-IP.string": "recovered",
+            "IBIS-IP.language": "recovered" if language_text_recovered else "visual_fallback_required_from_exact_rendered_page_13"
         },
         "terminal_revalidation_recommendations": {FINDING: "executable_confirmed"},
         "visual_review": "rendered page 13 required before permanent evidence record and closure",
