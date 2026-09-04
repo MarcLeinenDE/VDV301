@@ -1,0 +1,69 @@
+{
+  "evidence_record_version": "0.1",
+  "date": "2026-09-04",
+  "scope": "COMMON V2.0 legacy finding revalidation for DRCOM20-001",
+  "branch": "dev/schema-integration",
+  "evidence_id": "EV-136",
+  "evidence_run_id": "33851287947",
+  "evidence_run_head": "40909d2f8aabc6196bbc3574d3d164c077d8d8c3",
+  "artifact": {
+    "id": "9928439083",
+    "name": "common-v20-ev136",
+    "digest": "sha256:763c065d99a5757202b64256fd883f91568f751316cc997bd56b37c7ba01c568",
+    "retention_days": 90
+  },
+  "pdf": {
+    "source_id": "COMMON_V2.0",
+    "sha256": "23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088",
+    "size_bytes": 946088,
+    "visual_review_status": "completed_from_EV-136_rendered_page_13",
+    "finding_pages": {
+      "DRCOM20-001": [13]
+    },
+    "visual_note": "Page 13 visibly documents InternationalTextType.Value as IBIS-IP.string and InternationalTextType.Language as IBIS-IP.language. The Language type is line-wrapped inside the PDF table cell, which explains the pdftotext tokenization failure seen in the first two EV-136 attempts."
+  },
+  "authority": {
+    "status": "exact_official_release_family",
+    "source_repository": "VDVde/VDV301",
+    "official_release_tag": "VDV-301-2.0",
+    "common_file": "IBIS-IP_common_V2.0.xsd",
+    "common_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+    "enumerations_file": "IBIS-IP_Enumerations_V2.0.xsd",
+    "enumerations_blob": "27e3c183b00381d959622d13c10543123af8eef6",
+    "authority_note": "Integration-branch bytes match the exact official VDV-301-2.0 tag; no candidate or latest-wins substitution is involved."
+  },
+  "base_evidence": {
+    "evidence_id": "EV-118",
+    "checker": "tools/validate_common_v20_ev118.py",
+    "checker_blob": "6db122b1726376b11ac24cfec68dbfbd758b079e",
+    "historical_successful_run": "33280224191",
+    "status_in_ev136": "rerun_unchanged_PASS"
+  },
+  "ev136_checker": {
+    "path": "tools/validate_common_v20_revalidation_ev136.py",
+    "blob_at_successful_run": "001d5c85aa25db4b0c834bc087d7bd551eb794e3"
+  },
+  "visual_fallback": {
+    "finding_id": "DRCOM20-001",
+    "page": 13,
+    "reason": "pdftotext splits IBIS-IP.language across lines as 'IBIS-' and 'IP.language'; the exact rendered PNG was therefore inspected directly instead of synthesizing a text match.",
+    "source_record": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.0.md"
+  },
+  "finding": {
+    "id": "DRCOM20-001",
+    "claim": "PDF InternationalTextType uses IBIS-IP.string / IBIS-IP.language wrapper type notation while the exact official V2.0 XSD declares xs:string / xs:language primitives, producing a material instance-shape boundary.",
+    "terminal_state": "executable_confirmed",
+    "visual_result": "Page 13 confirms the PDF wrapper-type notation.",
+    "xsd_result": "Exact Common V2.0 declares InternationalTextType.Value as xs:string and Language as xs:language.",
+    "active_disproof": {
+      "exact_primitive_instance_shape": "VALID in preserved EV-118 rerun",
+      "PDF_wrapper_shaped_Value_Language": "INVALID in preserved EV-118 rerun"
+    },
+    "validation_behavior": "material; consumers must validate against the selected XSD primitive instance shape and must not infer nested IBIS-IP wrapper children from the PDF type labels"
+  },
+  "root_xsd_pool_gate": "PASS in run 33851287947",
+  "tracked_mutation_guard": "PASS in run 33851287947",
+  "xsd_mutated": false,
+  "frozen_inventory_mutated": false,
+  "result": "PASS"
+}
