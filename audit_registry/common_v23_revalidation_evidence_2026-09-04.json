@@ -1,0 +1,72 @@
+{
+  "evidence_record_version": "0.1",
+  "date": "2026-09-04",
+  "scope": "COMMON V2.3 legacy finding revalidation for DRCOM23-001",
+  "branch": "dev/schema-integration",
+  "evidence_id": "EV-139",
+  "evidence_run_id": "33857687723",
+  "evidence_run_head": "e9302d3ee53fb8d41b20338342d472ab720c7dba",
+  "artifact": {
+    "id": "9930843755",
+    "name": "common-v23-ev139",
+    "digest": "sha256:8fd840cf40abfcfb2ac1e7c75e25eb52ccfd961ad6d977d54a86e992239d74a7",
+    "retention_days": 90
+  },
+  "pdf": {
+    "source_id": "COMMON_V2.3",
+    "sha256": "d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b",
+    "size_bytes": 793521,
+    "page_count": 58,
+    "visual_review_status": "completed_from_EV-139_rendered_page_32",
+    "finding_pages": {
+      "DRCOM23-001": [32]
+    },
+    "visual_note": "Page 32 visibly presents section 2.52 StopInformationRequest. The table contains ArrivalExpected 0:1 and DepartureExpected 0:1, each typed IBIS-IP.dateTime. The same table also visibly retains StopName 0:1, separating the new absent-element facet from the already-established StopName cardinality finding."
+  },
+  "authority": {
+    "status": "exact_official_release_family",
+    "source_repository": "VDVde/VDV301",
+    "official_release_tag": "VDV-301-2.3",
+    "common_file": "IBIS-IP_common_V2.3.xsd",
+    "common_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+    "enumerations_file": "IBIS-IP_Enumerations_V2.2.xsd",
+    "enumerations_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+    "authority_note": "The official VDV-301-2.3 Common schema explicitly includes Enumerations V2.2. Integration-branch bytes match this exact official family; no later enumeration substitution or latest-wins rule is permitted."
+  },
+  "frozen_mapping": {
+    "delta_record": "audit_registry/deep_read_findings_delta_common_v23_2026-09-02.json",
+    "delta_blob": "2bf1f8555ecad4c050d78750dd7326dd28c9484a",
+    "fresh_observation": "FR-COM23-011",
+    "finding_id": "DRCOM23-001",
+    "classification": "pdf_documents_elements_absent_from_xsd"
+  },
+  "base_evidence": {
+    "evidence_id": "EV-121",
+    "checker": "tools/validate_common_v23_ev121.py",
+    "checker_blob": "79a55a6eed8eacdc2f853b4380a987beea14b40c",
+    "historical_successful_run": "33657653888",
+    "status_in_ev139": "rerun_unchanged_PASS"
+  },
+  "ev139_checker": {
+    "path": "tools/validate_common_v23_revalidation_ev139.py",
+    "blob_at_successful_run": "0b920d09df1d873ba8e2fa623fd3ee402b139fcd"
+  },
+  "finding": {
+    "id": "DRCOM23-001",
+    "claim": "COMMON V2.3 PDF documents ArrivalExpected and DepartureExpected as optional members of StopInformationRequest while the exact official V2.3 StopInformationRequestStructure contains neither element.",
+    "terminal_state": "executable_confirmed",
+    "visual_result": "Rendered page 32 visibly confirms ArrivalExpected 0:1 and DepartureExpected 0:1 in StopInformationRequest.",
+    "xsd_result": "Exact Common V2.3 contains neither element in StopInformationRequestStructure, while both are present as optional IBIS-IP.dateTime fields in StopInformationStructure.",
+    "active_disproof": {
+      "StopInformationRequest_ArrivalExpected": "INVALID in preserved EV-121 rerun",
+      "StopInformationRequest_DepartureExpected": "INVALID in preserved EV-121 rerun",
+      "StopInformation_with_both_fields": "VALID in preserved EV-121 rerun"
+    },
+    "validation_behavior": "material; validators and generated request models must not accept or expose ArrivalExpected/DepartureExpected in StopInformationRequest solely from the PDF table, while the fields remain valid in StopInformation according to the exact V2.3 schema"
+  },
+  "root_xsd_pool_gate": "PASS in run 33857687723",
+  "tracked_mutation_guard": "PASS in run 33857687723",
+  "xsd_mutated": false,
+  "frozen_inventory_mutated": false,
+  "result": "PASS"
+}
