@@ -1,0 +1,115 @@
+name: TEMP validate VDV301-2 GC V2.4 EV-134
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths:
+      - .github/workflows/temp_validate_vdv3012_gc24_ev134.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install evidence dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          python -m pip install --disable-pip-version-check lxml
+
+      - name: Fetch exact byte-pinned GC V2.4 PDF
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          import urllib.request
+          source_id = 'VDV301-2_GC_V2.4'
+          sources = json.loads(Path('audit_registry/pdf_source_registry_v0.1.json').read_text(encoding='utf-8'))
+          pins = json.loads(Path('audit_registry/pdf_source_pins_v0.1.json').read_text(encoding='utf-8'))
+          source = next(x for x in sources['sources'] if x['source_id'] == source_id)
+          pin = next(x for x in pins['sources'] if x['source_id'] == source_id)
+          request = urllib.request.Request(source['official_url'], headers={
+              'User-Agent': 'VDV301-Audit-EV134/0.1 (+https://github.com/MarcLeinenDE/VDV301)',
+              'Accept': 'application/pdf,application/octet-stream;q=0.9,*/*;q=0.1',
+          })
+          with urllib.request.urlopen(request, timeout=90) as response:
+              data = response.read()
+          actual_hash = hashlib.sha256(data).hexdigest()
+          assert data.startswith(b'%PDF-')
+          assert actual_hash == pin['expected_sha256'], (actual_hash, pin['expected_sha256'])
+          assert len(data) == int(pin['expected_size_bytes']), (len(data), pin['expected_size_bytes'])
+          target = Path('local_sources/vdv_pdfs') / source['local_filename']
+          target.parent.mkdir(parents=True, exist_ok=True)
+          target.write_bytes(data)
+          print(f'PIN_OK {source_id} sha256={actual_hash} size={len(data)}')
+          PY
+
+      - name: Run EV-134 text and XSD gate
+        shell: bash
+        env:
+          EV134_OUTPUT_DIR: artifacts/ev134
+        run: |
+          set -euo pipefail
+          python tools/validate_vdv3012_gc24_ev134.py
+
+      - name: Render all EV-134 evidence pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/ev134/pages artifacts/ev134/text
+          while IFS= read -r p; do
+            [ -n "$p" ] || continue
+            pdftoppm -f "$p" -l "$p" -singlefile -png -r 180 \
+              local_sources/vdv_pdfs/VDV301-2_GC_V2.4.pdf \
+              "artifacts/ev134/pages/page-$p"
+            pdftotext -f "$p" -l "$p" -layout \
+              local_sources/vdv_pdfs/VDV301-2_GC_V2.4.pdf \
+              "artifacts/ev134/text/page-$p.txt"
+          done < artifacts/ev134/render_pages.txt
+
+      - name: Build evidence manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum local_sources/vdv_pdfs/VDV301-2_GC_V2.4.pdf > artifacts/ev134/pdf.sha256
+          find artifacts/ev134 -type f ! -name manifest.sha256 -print0 | sort -z | xargs -0 sha256sum > artifacts/ev134/manifest.sha256
+          cat artifacts/ev134/ev134_result.json
+          cat artifacts/ev134/render_pages.txt
+          cat artifacts/ev134/manifest.sha256
+
+      - name: Root XSD pool regression gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+
+      - name: Verify no tracked mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object IBIS-IP_common_V2.4.xsd)" = "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4"
+          test "$(git hash-object IBIS-IP_Enumerations_V2.4.xsd)" = "2afed8cf23afa91db92b0f043cc5b4ad428b0f25"
+          git diff --exit-code -- '*.xsd'
+          test -z "$(git status --porcelain --untracked-files=no)"
+
+      - name: Upload EV-134 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: vdv3012-gc24-ev134
+          path: artifacts/ev134
+          if-no-files-found: error
+          retention-days: 90
