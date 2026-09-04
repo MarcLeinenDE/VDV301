@@ -1,0 +1,80 @@
+{
+  "evidence_record_version": "0.1",
+  "date": "2026-09-04",
+  "scope": "COMMON V2.4 legacy finding revalidation for DRCOM24-001",
+  "branch": "dev/schema-integration",
+  "evidence_id": "EV-140",
+  "evidence_run_id": "33858121693",
+  "evidence_run_head": "f22b6127fdea456d892af1ea454e6050c4c30ac2",
+  "artifact": {
+    "id": "9931012948",
+    "name": "common-v24-ev140",
+    "digest": "sha256:1f78c0767d8d610fd41d4edb2211a1e007953daaa2e45abaa5e84caf866a63e4",
+    "retention_days": 90
+  },
+  "pdf": {
+    "source_id": "COMMON_V2.4",
+    "sha256": "01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a",
+    "size_bytes": 1689647,
+    "page_count": 63,
+    "visual_review_status": "completed_from_EV-140_rendered_page_28",
+    "finding_pages": {
+      "DRCOM24-001": [28]
+    },
+    "visual_note": "Page 28 visibly presents section 2.31 LineInformation. LineName is 0:1 IBIS-IP.string and LineShortName is 0:1 IBIS-IP.string."
+  },
+  "authority": {
+    "status": "candidate_integration_explicit_selection",
+    "official_release_tag": null,
+    "official_release_authority": false,
+    "candidate_repository": "MarcLeinenDE/VDV301",
+    "candidate_branch": "candidate/dms-v2.4-xsd",
+    "upstream_draft_pr": "VDVde/VDV301#31",
+    "common_file": "IBIS-IP_common_V2.4.xsd",
+    "common_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+    "enumerations_file": "IBIS-IP_Enumerations_V2.4.xsd",
+    "enumerations_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+    "latest_xsd_wins": false,
+    "authority_note": "This evidence is candidate/integration scoped. No VDV-301-2.4 release tag exists and the selected bytes must not be relabelled official-release authority."
+  },
+  "frozen_mapping": {
+    "delta_record": "audit_registry/deep_read_findings_delta_common_v24_2026-09-03.json",
+    "delta_blob": "9744612c607e63659d574c13500cfc611f239f39",
+    "fresh_observation": "FR-COM24-008",
+    "finding_id": "DRCOM24-001",
+    "classification": "pdf_xsd_type_shape_and_cardinality_mismatch",
+    "authority_scope": "selected_candidate_integration_V2.4_only_until_official_release_exists"
+  },
+  "base_evidence": {
+    "evidence_id": "EV-122",
+    "checker": "tools/validate_common_v24_ev122.py",
+    "checker_blob": "acbca8a808e623030c2ff48bc2e3f3e336cb5f11",
+    "historical_successful_run": "33716645876",
+    "status_in_ev140": "rerun_unchanged_PASS"
+  },
+  "ev140_checker": {
+    "path": "tools/validate_common_v24_revalidation_ev140.py",
+    "blob_at_successful_run": "75633e50c7de5a469acab226084603dbc0906ae2"
+  },
+  "finding": {
+    "id": "DRCOM24-001",
+    "claim": "COMMON V2.4 PDF documents LineInformation.LineName and LineShortName as IBIS-IP.string 0:1 while the explicitly selected candidate/integration V2.4 XSD models both as InternationalTextType 0:*.",
+    "terminal_state": "executable_confirmed",
+    "authority_scope": "selected_candidate_integration_V2.4_only_until_official_release_exists",
+    "visual_result": "Rendered page 28 visibly confirms both PDF rows as 0:1 IBIS-IP.string.",
+    "xsd_result": "Selected candidate Common V2.4 declares both fields InternationalTextType with minOccurs=0 maxOccurs=unbounded.",
+    "active_disproof": {
+      "candidate_InternationalText_LineName": "VALID in preserved EV-122 rerun",
+      "candidate_InternationalText_LineShortName": "VALID in preserved EV-122 rerun",
+      "repeated_LineName": "VALID in preserved EV-122 rerun",
+      "repeated_LineShortName": "VALID in preserved EV-122 rerun",
+      "PDF_value_only_LineName_shape": "INVALID in preserved EV-122 rerun"
+    },
+    "validation_behavior": "material within the selected candidate lane; candidate-mode validators/generated models must follow InternationalTextType repeatability and must not infer the PDF-only IBIS-IP.string 0:1 shape"
+  },
+  "root_xsd_pool_gate": "PASS in run 33858121693",
+  "tracked_mutation_guard": "PASS in run 33858121693",
+  "xsd_mutated": false,
+  "frozen_inventory_mutated": false,
+  "result": "PASS"
+}
