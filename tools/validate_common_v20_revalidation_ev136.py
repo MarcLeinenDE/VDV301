@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import subprocess
 import sys
 
@@ -53,6 +54,10 @@ def sha256_file(path: Path) -> tuple[str, int]:
             h.update(chunk)
             size += len(chunk)
     return h.hexdigest(), size
+
+
+def canon(text: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "", text.replace("\u00ad", "").lower())
 
 
 def main() -> int:
@@ -106,14 +111,15 @@ def main() -> int:
     require(ev118.returncode == 0, "preserved EV-118 rerun failed")
 
     # The frozen Fresh Read identifies page 13 as the substantive visual source.
+    # Canonicalize the extracted text because the table may line-wrap type names.
     page13 = subprocess.check_output(
         ["pdftotext", "-f", "13", "-l", "13", "-layout", str(PDF), "-"],
         text=True,
         errors="replace",
     )
-    require("InternationalTextType" in page13, "page 13 InternationalTextType table missing")
-    require("IBIS-IP.string" in page13, "page 13 IBIS-IP.string notation missing")
-    require("IBIS-IP.language" in page13, "page 13 IBIS-IP.language notation missing")
+    page13_canon = canon(page13)
+    for anchor in ("InternationalTextType", "IBIS-IP.string", "IBIS-IP.language"):
+        require(canon(anchor) in page13_canon, f"page 13 canonical visual-text anchor missing: {anchor}")
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     (OUT_DIR / "render_pages.txt").write_text("13\n", encoding="utf-8")
