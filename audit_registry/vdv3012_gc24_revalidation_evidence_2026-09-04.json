@@ -1,0 +1,78 @@
+{
+  "evidence_record_version": "0.1",
+  "date": "2026-09-04",
+  "scope": "VDV301-2 General Conventions V2.4 legacy finding revalidation for DR3012GC24-001..005",
+  "branch": "dev/schema-integration",
+  "evidence_id": "EV-134",
+  "evidence_run_id": "33843888080",
+  "evidence_run_head": "9a31f9d1f0242bffaf876f07d52cdbd4851ea9c2",
+  "artifact": {
+    "id": "9925822375",
+    "name": "vdv3012-gc24-ev134",
+    "digest": "sha256:f69b3f678b5f9153aac90c03a1995d1ece7941e5c3db45ec96a55537f16731a2",
+    "retention_days": 90
+  },
+  "pdf": {
+    "source_id": "VDV301-2_GC_V2.4",
+    "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+    "size_bytes": 1767094,
+    "visual_review_status": "completed_from_EV-134_rendered_PNGs",
+    "finding_pages": {
+      "DR3012GC24-001": [13, 17, 57, 62, 76, 78],
+      "DR3012GC24-002": [5, 6, 20, 23],
+      "DR3012GC24-003": [18],
+      "DR3012GC24-004": [59, 64, 77, 79],
+      "DR3012GC24-005": [18, 22]
+    },
+    "context_pages": {
+      "V2.3_history_numbering_repaired": [10, 75],
+      "V2.4_word_reference_regression": [16, 56, 66, 68, 70]
+    }
+  },
+  "authority": {
+    "status": "candidate_integration_explicit_selection",
+    "official_release_tag": null,
+    "upstream_draft_pr": "VDVde/VDV301#31",
+    "upstream_pr_state_at_revalidation": "open_draft_unmerged",
+    "common_file": "IBIS-IP_common_V2.4.xsd",
+    "common_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+    "enumerations_file": "IBIS-IP_Enumerations_V2.4.xsd",
+    "enumerations_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+    "common_dependency": "IBIS-IP_common_V2.4.xsd includes IBIS-IP_Enumerations_V2.4.xsd",
+    "authority_note": "No official V2.4 release tag is claimed. The audit preserves the project-frozen candidate/integration authority selection backed by upstream draft PR #31."
+  },
+  "visual_findings": {
+    "DR3012GC24-001": "German device-class table visibly prints OnBordUnit while the adjacent English device-class table and selected Enumerations V2.4 authority use OnBoardUnit. Additional German/English examples and glossary pages preserve the same cross-language discrepancy.",
+    "DR3012GC24-002": "German contents and section text visibly use 2.1.1 for both IP-Adressen and Subnetzmasken/Gateways; English uses 2.1.1 IP Addresses and 2.1.2 Subnet Masks/Gateways.",
+    "DR3012GC24-003": "English IBIS-IP version character list on page 18 visibly contains the duplicated digit sequence 0,1,2,2,3,... while describing the allowed version characters.",
+    "DR3012GC24-004": "German and English example/glossary contexts visibly contain typo-like technical service identifiers including DeviceManagmenService, CustomumerInformationService, DeviceManagmentServices and PassengerCountigService.",
+    "DR3012GC24-005": "Page 18 visibly states that each service is versioned independently and there is no common IBIS-IP version; page 22 nevertheless uses stale umbrella wording referring to Version 1.0 of IBIS-IP."
+  },
+  "active_disproof_and_context": {
+    "DR3012GC24-001": "Selected DeviceClassEnumeration contains OnBoardUnit and not OnBordUnit; executable samples confirm OnBoardUnit valid and OnBordUnit invalid.",
+    "DR3012GC24-002": "Adjacent English numbering provides a same-document control and uses 2.1.2 for subnet masks/gateways.",
+    "DR3012GC24-003": "The duplicated digit is visible in the English normative explanation and is treated as documentation residue, not as an executable version grammar extension.",
+    "DR3012GC24-004": "Selected ServiceNameEnumeration contains the correctly spelled DeviceManagementService, CustomerInformationService and PassengerCountingService and none of the typo variants; executable samples reject the typo variants.",
+    "DR3012GC24-005": "The document's explicit no-common-version rule is retained as the operative interpretation; no umbrella schema version is inferred from the stale wording.",
+    "V2.3_history_numbering": "Pages 10 and 75 visibly use corrected 7.2.1 and 7.2.2 numbering under Version 2.3, disproving persistence of DR3012GC23-001 into V2.4.",
+    "Word_reference_regression": "Literal 'Fehler! Verweisquelle konnte nicht gefunden werden.' text is visibly present again on multiple V2.4 pages, supporting the historical DR3012GC22-001 regression context without opening or terminalizing a duplicate finding."
+  },
+  "findings": {
+    "DR3012GC24-001": "executable_confirmed",
+    "DR3012GC24-002": "context_verified",
+    "DR3012GC24-003": "context_verified",
+    "DR3012GC24-004": "executable_confirmed",
+    "DR3012GC24-005": "context_verified"
+  },
+  "executable_tests": {
+    "DeviceClass_OnBoardUnit": "valid",
+    "DeviceClass_OnBordUnit": "invalid",
+    "correct_ServiceNameEnumeration_values": "valid",
+    "typo_service_identifiers": "invalid"
+  },
+  "root_xsd_pool_gate": "PASS in run 33843888080",
+  "tracked_mutation_guard": "PASS in run 33843888080",
+  "xsd_mutated": false,
+  "frozen_inventory_mutated": false,
+  "result": "PASS"
+}
