@@ -1,0 +1,154 @@
+name: TEMP close COMMON V2.3 revalidation subblock
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths:
+      - .github/workflows/temp_close_common_v23_revalidation.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  close-common-v23:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact branch state
+        uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install evidence dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          python -m pip install --disable-pip-version-check lxml
+
+      - name: Fetch exact byte-pinned COMMON V2.3 PDF
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, urllib.request
+          from pathlib import Path
+          source_id='COMMON_V2.3'
+          sources=json.loads(Path('audit_registry/pdf_source_registry_v0.1.json').read_text())
+          pins=json.loads(Path('audit_registry/pdf_source_pins_v0.1.json').read_text())
+          source=next(x for x in sources['sources'] if x['source_id']==source_id)
+          pin=next(x for x in pins['sources'] if x['source_id']==source_id)
+          req=urllib.request.Request(source['official_url'],headers={'User-Agent':'VDV301-Audit-EV139-Closure/0.1 (+https://github.com/MarcLeinenDE/VDV301)','Accept':'application/pdf,application/octet-stream;q=0.9,*/*;q=0.1'})
+          with urllib.request.urlopen(req,timeout=90) as response: data=response.read()
+          actual=hashlib.sha256(data).hexdigest()
+          assert data.startswith(b'%PDF-')
+          assert actual==pin['expected_sha256'],(actual,pin['expected_sha256'])
+          assert len(data)==int(pin['expected_size_bytes']),(len(data),pin['expected_size_bytes'])
+          target=Path('local_sources/vdv_pdfs')/source['local_filename']; target.parent.mkdir(parents=True,exist_ok=True); target.write_bytes(data)
+          print(f'PIN_OK {source_id} sha256={actual} size={len(data)}')
+          PY
+
+      - name: Re-run EV-139 exact evidence gate
+        shell: bash
+        env:
+          EV139_OUTPUT_DIR: artifacts/ev139-closure
+        run: |
+          set -euo pipefail
+          python tools/validate_common_v23_revalidation_ev139.py
+
+      - name: Root XSD pool regression gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+
+      - name: Pre-closure immutable and mutation guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/common_v23_revalidation_evidence_2026-09-04.json)" = "ce4bcc52ad6497cae9ed9d88ab695f77c5650c5e"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3_FRESH_2026-09-02.md)" = "cf6060cc9639de64edacdfa84a4cb336fc28c0e6"
+          test "$(git hash-object audit_registry/deep_read_findings_delta_common_v23_2026-09-02.json)" = "2bf1f8555ecad4c050d78750dd7326dd28c9484a"
+          test "$(git hash-object IBIS-IP_common_V2.3.xsd)" = "0d8926c4063c12de9a5e68b6f0addaab35a55dc1"
+          test "$(git hash-object IBIS-IP_Enumerations_V2.2.xsd)" = "2a23b512379b18e8f122ac1272cef8229fb86283"
+          test "$(git hash-object tools/validate_common_v23_ev121.py)" = "79a55a6eed8eacdc2f853b4380a987beea14b40c"
+          test "$(git hash-object tools/validate_common_v23_revalidation_ev139.py)" = "0b920d09df1d873ba8e2fa623fd3ee402b139fcd"
+          test "$(git hash-object tools/close_common_v23_revalidation_block.py)" = "cbcc8a6823f194dd5585f07dd007c66384db4072"
+          git diff --exit-code -- '*.xsd'
+          test -z "$(git status --porcelain --untracked-files=no)"
+
+      - name: Write COMMON V2.3 closure state
+        shell: bash
+        env:
+          EVIDENCE_RUN_ID: ${{ github.run_id }}
+          EVIDENCE_RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          python tools/close_common_v23_revalidation_block.py
+
+      - name: Remove temporary workflow plumbing and generated caches
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/temp_validate_common_v23_ev139.yml
+          rm -f .github/workflows/temp_close_common_v23_revalidation.yml
+          rm -rf artifacts/ev139-closure
+          find . -type d -name '__pycache__' -prune -exec rm -rf {} +
+
+      - name: Verify closure delta allowlist and immutable authorities
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/common_v23_revalidation_evidence_2026-09-04.json)" = "ce4bcc52ad6497cae9ed9d88ab695f77c5650c5e"
+          test "$(git hash-object IBIS-IP_common_V2.3.xsd)" = "0d8926c4063c12de9a5e68b6f0addaab35a55dc1"
+          test "$(git hash-object IBIS-IP_Enumerations_V2.2.xsd)" = "2a23b512379b18e8f122ac1272cef8229fb86283"
+          git diff --exit-code -- '*.xsd'
+          python - <<'PY'
+          import subprocess
+          allowed={'audit_registry/finding_revalidation_registry_v0.1.json','00_START_HERE/CURRENT_STATE.json','docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V23_2026-09-04.md','.github/workflows/temp_validate_common_v23_ev139.yml','.github/workflows/temp_close_common_v23_revalidation.yml'}
+          lines=subprocess.check_output(['git','status','--porcelain','--untracked-files=all'],text=True).splitlines()
+          changed={line[3:] for line in lines if len(line)>=4}
+          assert not changed-allowed,f'unexpected closure delta: {sorted(changed-allowed)}'
+          required={'audit_registry/finding_revalidation_registry_v0.1.json','00_START_HERE/CURRENT_STATE.json','docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V23_2026-09-04.md'}
+          assert required<=changed,f'missing required closure delta: {sorted(required-changed)}'
+          print('ALLOWLIST_OK',sorted(changed))
+          PY
+
+      - name: Verify post-closure state
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          reg=json.loads(Path('audit_registry/finding_revalidation_registry_v0.1.json').read_text()); state=json.loads(Path('00_START_HERE/CURRENT_STATE.json').read_text())
+          entries=reg['inventory']['entries']; by_id={x['finding_id']:x for x in entries}
+          terminal=sum(x.get('revalidation_state')!='pending' for x in entries); pending=sum(x.get('revalidation_state')=='pending' for x in entries)
+          assert (terminal,pending)==(95,97),(terminal,pending)
+          assert by_id['DRCOM23-001']['revalidation_state']=='executable_confirmed'
+          assert by_id['DRCOM24-001']['revalidation_state']=='pending'
+          block=reg['revalidation_blocks']['COMMON_V2.3']; assert block['next_block']=='COMMON' and block['next_subblock']=='COMMON_V2.4'
+          assert reg['next_revalidation_block']=='COMMON'
+          audit=state['audit']; assert audit['finding_revalidation_completed_findings']==95 and audit['finding_revalidation_pending_findings']==97
+          assert audit['finding_revalidation_latest_completed_block']=='COMMON_V2.3'; assert audit['common_v23_revalidation']['next_subblock']=='COMMON_V2.4'
+          assert json.loads(Path('audit_registry/finding_inventory_frozen_2026-09-03.json').read_text())['entry_count']==192
+          print('POST_STATE_OK terminal=95 pending=97 next=COMMON_V2.4')
+          PY
+
+      - name: Commit closure atomically
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Marc Leinen"
+          git config user.email "34336531+MarcLeinenDE@users.noreply.github.com"
+          git add -A
+          git commit -m "audit: revalidate COMMON V2.3 finding subblock [skip ci]"
+          git push origin HEAD:dev/schema-integration
