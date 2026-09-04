@@ -1,0 +1,75 @@
+{
+  "evidence_record_version": "0.1",
+  "date": "2026-09-04",
+  "scope": "COMMON V2.2 legacy finding revalidation for DRCOM22-001",
+  "branch": "dev/schema-integration",
+  "evidence_id": "EV-138",
+  "evidence_run_id": "33857241506",
+  "evidence_run_head": "31e0153263304ec80301b72d9ce75296910eb3ff",
+  "artifact": {
+    "id": "9930671790",
+    "name": "common-v22-ev138",
+    "digest": "sha256:43e1dce9285a6295c8a7ef3b92f3a5eb627e6973e2170bd1207242bffe5c0b92",
+    "retention_days": 90
+  },
+  "pdf": {
+    "source_id": "COMMON_V2.2",
+    "sha256": "85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203",
+    "size_bytes": 1411558,
+    "page_count": 55,
+    "visual_review_status": "completed_from_EV-138_rendered_page_15",
+    "finding_pages": {
+      "DRCOM22-001": [15]
+    },
+    "visual_note": "Page 15 visibly presents two NetexMode choice sections. The PtMainMode/PrivateMainMode choice is marked -1:1 and the public/private submode choice is also marked -1:1 using the documented VDV choice notation."
+  },
+  "authority": {
+    "status": "historical_upstream_V2.2_file_lineage_exact_family",
+    "source_repository": "VDVde/VDV301",
+    "official_release_tag": null,
+    "release_tag_status": "no_VDV-301-2.2_tag_resolved_in_upstream_repository",
+    "common_file": "IBIS-IP_common_V2.2.xsd",
+    "common_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+    "common_last_modification_commit": "775def7b24901bfd515c80fa5fe57f12562873fd",
+    "enumerations_file": "IBIS-IP_Enumerations_V2.2.xsd",
+    "enumerations_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+    "enumerations_last_modification_commit": "591ca66d8b94bb5c2a7f9440b3e31e28f8261a88",
+    "latest_xsd_wins": false,
+    "authority_note": "No VDV-301-2.2 release tag is invented. Authority is the exact historical upstream V2.2 file lineage; integration-branch bytes match those exact blobs."
+  },
+  "frozen_mapping": {
+    "delta_record": "audit_registry/deep_read_findings_delta_common_v22_2026-09-02.json",
+    "delta_blob": "6b0208d153761bef6e0cbf0041888251b99cdca4",
+    "fresh_observation": "FR-COM22-002",
+    "finding_id": "DRCOM22-001",
+    "classification": "compositor_xsd_more_permissive_than_pdf"
+  },
+  "base_evidence": {
+    "evidence_id": "EV-120",
+    "checker": "tools/validate_common_v22_ev120.py",
+    "checker_blob": "ca6aa03c50f7f63057e46623df639da77a1b67d7",
+    "historical_successful_run": "33620003188",
+    "status_in_ev138": "rerun_unchanged_PASS"
+  },
+  "ev138_checker": {
+    "path": "tools/validate_common_v22_revalidation_ev138.py",
+    "blob_at_successful_run": "d488d829a14b16fa8a49ff6749b2e189089a560b"
+  },
+  "finding": {
+    "id": "DRCOM22-001",
+    "claim": "COMMON V2.2 PDF presents both NetexMode one-of groups as mandatory while the exact historical V2.2 XSD declares both top-level xs:choice compositors minOccurs=0.",
+    "terminal_state": "executable_confirmed",
+    "visual_result": "Rendered page 15 visibly confirms -1:1 VDV choice notation for both NetexMode choice groups.",
+    "xsd_result": "Exact historical Common V2.2 contains two top-level NetexMode xs:choice compositors and each has minOccurs=0.",
+    "active_disproof": {
+      "empty_NetexMode_instance": "VALID in preserved EV-120 rerun",
+      "boundary_effect": "The exact XSD accepts a NetexMode with neither a main-mode branch nor a submode branch, exceeding the PDF's visible mandatory one-of presentation."
+    },
+    "validation_behavior": "material; validation and generated models must follow the selected V2.2 XSD optional compositors and must not impose PDF-only mandatory choice presence"
+  },
+  "root_xsd_pool_gate": "PASS in run 33857241506",
+  "tracked_mutation_guard": "PASS in run 33857241506",
+  "xsd_mutated": false,
+  "frozen_inventory_mutated": false,
+  "result": "PASS"
+}
