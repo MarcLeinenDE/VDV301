@@ -625,8 +625,8 @@
       },
       {
         "finding_id": "DRCOM24-001",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "executable_confirmed",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V24_2026-09-04.md"
       },
       {
         "finding_id": "DRDMS22-001",
@@ -1123,7 +1123,7 @@
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true
   },
-  "next_revalidation_block": "COMMON",
+  "next_revalidation_block": "DMS",
   "revalidation_blocks": {
     "ARA_V2.4": {
       "date": "2026-09-03",
@@ -1771,6 +1771,40 @@
       "frozen_inventory_mutation": false,
       "next_block": "COMMON",
       "next_subblock": "COMMON_V2.4"
+    },
+    "COMMON_V2.4": {
+      "date": "2026-09-04",
+      "state": "completed",
+      "parent_block": "COMMON",
+      "authority_lane": "byte-pinned official Common V2.4 PDF plus project-frozen candidate/integration Common V2.4 and Enumerations V2.4 authority from upstream draft PR VDVde/VDV301#31; no official V2.4 release tag claimed",
+      "official_pdf_source_id": "COMMON_V2.4",
+      "pdf_sha256": "01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a",
+      "pdf_size_bytes": 1689647,
+      "official_release_tag": null,
+      "official_release_authority": false,
+      "candidate_branch": "candidate/dms-v2.4-xsd",
+      "upstream_draft_pr": "VDVde/VDV301#31",
+      "common_xsd_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+      "enumerations_xsd_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+      "latest_xsd_wins": false,
+      "base_evidence_id": "EV-122",
+      "evidence_id": "EV-140",
+      "evidence_run_id": "33973935324",
+      "evidence_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/33973935324",
+      "pinned_successful_evidence_run": "33858121693",
+      "artifact_id": "9931012948",
+      "artifact_digest": "sha256:1f78c0767d8d610fd41d4edb2211a1e007953daaa2e45abaa5e84caf866a63e4",
+      "evidence_record": "audit_registry/common_v24_revalidation_evidence_2026-09-04.json",
+      "visual_page": 28,
+      "findings": {
+        "DRCOM24-001": "executable_confirmed"
+      },
+      "finding_authority_scope": "selected_candidate_integration_V2.4_only_until_official_release_exists",
+      "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V24_2026-09-04.md",
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false,
+      "next_block": "DMS",
+      "next_subblock": "DMS_V2.2"
     }
   }
 }
