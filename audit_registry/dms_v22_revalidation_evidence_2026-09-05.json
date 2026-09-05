@@ -1,0 +1,176 @@
+{
+  "evidence_record_version": "0.1",
+  "date": "2026-09-05",
+  "evidence_id": "EV-141",
+  "scope": "Frozen DMS V2.2 deep-read findings DRDMS22-001..004 under the current finding evidence gate",
+  "branch": "dev/schema-integration",
+  "result": "PASS",
+  "successful_run_id": "33974267275",
+  "successful_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/33974267275",
+  "artifact_id": "9971840037",
+  "artifact_name": "dms-v22-ev141",
+  "artifact_digest": "sha256:ea779d9299761142a250bdbf5a42730794f13881999deb5f69240690a9701b8a",
+  "failed_attempt_correction": {
+    "run_id": "33974145598",
+    "status": "failed_closed_before_evidence_freeze_or_registry_mutation",
+    "reason": "The initial EV-141 checker incorrectly tried to validate DeviceManagementService.GetDeviceErrorMessagesRequest as a global XML root. The DMS V2.2 service XSD models operations as members of DeviceManagementServiceGroup. The corrected gate therefore checks the actual group declaration boundary and retains executable instance validation only for the enum value boundary.",
+    "finding_effect": "none",
+    "audit_state_mutated": false,
+    "frozen_inventory_mutated": false,
+    "xsd_mutated": false
+  },
+  "authority": {
+    "status": "official_historical_DMS_V2.2_exact_XSD_family",
+    "pdf_source_id": "DMS_V2.2",
+    "publication": "VDV-Schrift 301-2-0, DeviceManagementService V2.2, 08/2019",
+    "pdf_sha256": "72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e",
+    "pdf_size_bytes": 1173719,
+    "pdf_page_count": 36,
+    "device_management_xsd_blob": "c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d",
+    "common_xsd_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+    "enumerations_xsd_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+    "latest_xsd_wins": false,
+    "later_v24_candidate_corrections_back_applied": false
+  },
+  "immutable_sources": {
+    "frozen_inventory_blob": "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf",
+    "deep_read_blob": "009243f56e8a81e9fdac82ff96d0fb714c7ba45b",
+    "findings_delta_blob": "e350612884c8c22ca7fc0e4839a03ac924abc076",
+    "deep_read_registry_delta_blob": "d44cc214ebd85172579065b8091d2e91d9dbb4a4",
+    "ev107_checker_blob": "6acd2dc75131455e220ae18ce5131eeb5ad44789",
+    "ev141_initial_checker_blob": "9c3bfe506709f2ee11003ce2ddaa4ccbeaf8cb2f",
+    "ev141_final_checker_blob": "cd89c37f6bcc3f3279ac19fa557c89eb824cf964"
+  },
+  "base_evidence": {
+    "evidence_id": "EV-107",
+    "historical_run_id": "33181833930",
+    "current_ev141_rerun": "PASS",
+    "confirmed_boundaries": [
+      "UpdateStatusEnumeration contains InstallationSuccessful",
+      "UpdateStatusEnumeration does not contain InstallationSuccessfull",
+      "DeviceManagementServiceGroup contains DeviceManagementService.GetDeviceErrorMessagesRequest",
+      "DeviceManagementServiceGroup does not contain DeviceManagementService.GetDeviceErrorMessageRequest"
+    ]
+  },
+  "visual_review_status": "completed_all_EV-141_discovered_pages",
+  "visual_reviewed_pages": [
+    {
+      "page": 7,
+      "png_sha256": "16f8bd5a8b44e9bc16ce392ab2dded997c75a685b0e0adeb9992990ea49f73f0",
+      "observations": [
+        "The table of contents visibly uses 1.33 for GetUpdateHistory, 1.34 for FinalizeUpdate and 1.35 for FinalizeAllPendingUpdates, including 1.33.1/1.33.2, 1.34.1/1.34.2 and 1.35.1/1.35.2 subsections.",
+        "The immediately preceding operations are numbered 2.31 and 2.32, making the 1.xx numbering discontinuity visible."
+      ],
+      "supports": ["DRDMS22-001", "DRDMS22-002"]
+    },
+    {
+      "page": 19,
+      "png_sha256": "ce7693b8e4075ece935b4ef346d254b083c52ee0cb14e734bf5b57b8d5d7bfb5",
+      "observations": [
+        "Section 2.9 is visibly headed Data Structure of Operation GetDeviceErrorMessages.",
+        "Section 2.9.1 request prose visibly says 'GetDeviceErrorMessage operation' in singular while the section and response structure use the plural operation family."
+      ],
+      "supports": ["DRDMS22-004"]
+    },
+    {
+      "page": 23,
+      "png_sha256": "c49903abb421fcfd8ac676e1918690149811bdd28f47a8c8d422161f6df26ff3",
+      "observations": [
+        "Table 19 is visibly titled Description of DeviceManagementService.DeviceStatusInformationStructure.",
+        "This establishes the actual table number for DeviceStatusInformation independently of the later wrong cross-reference."
+      ],
+      "supports": ["DRDMS22-001"]
+    },
+    {
+      "page": 24,
+      "png_sha256": "48a050ff44c32f67b082274aff0bdd85cc0d67134eac8accff0203824b204d94",
+      "observations": [
+        "Table 23 DeviceManagementService.SubdeviceStatusInformation visibly describes DeviceStatusInformation as 'Detailed device status (cf. table 27)'.",
+        "The printed cross-reference to table 27 is therefore directly visible in the original byte-pinned page."
+      ],
+      "supports": ["DRDMS22-001"]
+    },
+    {
+      "page": 26,
+      "png_sha256": "0eacad031632460ffca2e38ed902e33e6a134113f7ac99ed0f0d792967950b2a",
+      "observations": [
+        "Table 27 is visibly titled Description of DeviceManagementService.InstallUpdateRequestStructure.",
+        "This directly disproves table 27 as the intended DeviceStatusInformation structure target."
+      ],
+      "supports": ["DRDMS22-001"]
+    },
+    {
+      "page": 28,
+      "png_sha256": "bf60247a5d79fc9cc250af07eda1ee274603191157fedc55cd440097017b9208",
+      "observations": [
+        "Table 33 UpdateStatusEnumeration visibly contains the defined value InstallationSuccessful with the description 'Update successfully completed'.",
+        "The correct executable spelling is therefore visibly present in the PDF enumeration table."
+      ],
+      "supports": ["DRDMS22-003"]
+    },
+    {
+      "page": 29,
+      "png_sha256": "3510a2e66700bb07680c744a27c53c8234300087879a19228fdc9f9ec2eee1c6",
+      "observations": [
+        "The body visibly uses section 2.33 Data Structures of Operation GetUpdateHistory, contradicting the TOC's 1.33.",
+        "UpdateHistoryEntry.UpdateStatus prose visibly says 'Typically final status (InstallationSuccessfull or InstallationFailed)', preserving the double-l typo in prose while referring back to table 33."
+      ],
+      "supports": ["DRDMS22-002", "DRDMS22-003"]
+    },
+    {
+      "page": 30,
+      "png_sha256": "7717fc82fae695325784cb750c73584f9e1f3617b1b7f536db49a0e580f50ba7",
+      "observations": [
+        "The body visibly uses 2.34 Data Structures of Operation FinalizeUpdate and 2.35 Data Structures of Operation FinalizeAllPendingUpdates, contradicting the TOC's 1.34 and 1.35."
+      ],
+      "supports": ["DRDMS22-002"]
+    },
+    {
+      "page": 32,
+      "png_sha256": "68d3811ee825d29ce3b0a24b4e31104db41ecbf3b91586f271f3c11903bc2844",
+      "observations": [
+        "The table index visibly maps Table 19 to DeviceManagementService.DeviceStatusInformationStructure on page 23."
+      ],
+      "supports": ["DRDMS22-001"]
+    },
+    {
+      "page": 33,
+      "png_sha256": "cd78658d33118bf120f08968005c64d17796db0f62df2add324161adf53fd41d",
+      "observations": [
+        "The table index visibly maps Table 27 to DeviceManagementService.InstallUpdateRequestStructure on page 26.",
+        "The same index maps Table 33 to UpdateStatusEnumeration on page 29."
+      ],
+      "supports": ["DRDMS22-001", "DRDMS22-003"]
+    }
+  ],
+  "active_disproof_attempts": {
+    "DRDMS22-001": "Rejected the hypothesis that table 27 could be another DeviceStatusInformation definition: the original table page and table index independently identify table 19 as DeviceStatusInformationStructure and table 27 as InstallUpdateRequestStructure.",
+    "DRDMS22-002": "Rejected the hypothesis that the 1.33/1.34/1.35 values are the actual body numbering: the body visibly uses 2.33/2.34/2.35.",
+    "DRDMS22-003": "Rejected the hypothesis that InstallationSuccessfull is an accepted legacy enum alias: a temporary root adapter over the exact selected V2.2 XSD validates InstallationSuccessful and rejects InstallationSuccessfull; EV-107 also confirms the typo is absent from enum values.",
+    "DRDMS22-004": "Rejected the hypothesis that the singular wording names an alternate operation: DeviceManagementServiceGroup declares the plural GetDeviceErrorMessages request/response family and contains no singular GetDeviceErrorMessage request alias."
+  },
+  "findings": {
+    "DRDMS22-001": {
+      "terminal_state": "context_verified",
+      "validation_behavior": "none; documentation cross-reference only",
+      "sdk_handling": "Do not derive DMS structure routing from the printed table-27 cross-reference."
+    },
+    "DRDMS22-002": {
+      "terminal_state": "context_verified",
+      "validation_behavior": "none; documentation navigation only",
+      "sdk_handling": "No validation rule; retain as documentation provenance only."
+    },
+    "DRDMS22-003": {
+      "terminal_state": "executable_confirmed",
+      "validation_behavior": "accept InstallationSuccessful according to the exact selected V2.2 XSD; reject InstallationSuccessfull as an enum value",
+      "sdk_handling": "Do not create an InstallationSuccessfull compatibility alias."
+    },
+    "DRDMS22-004": {
+      "terminal_state": "context_verified",
+      "validation_behavior": "selected DMS V2.2 operation declaration is plural GetDeviceErrorMessages; singular prose spelling is not an operation alias",
+      "sdk_handling": "Do not synthesize a singular GetDeviceErrorMessage operation alias."
+    }
+  },
+  "xsd_mutated": false,
+  "frozen_inventory_mutated": false
+}
