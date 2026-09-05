@@ -39,7 +39,7 @@ jobs:
           pins=json.loads(Path('audit_registry/pdf_source_pins_v0.1.json').read_text())
           source=next(x for x in sources['sources'] if x['source_id']==source_id)
           pin=next(x for x in pins['sources'] if x['source_id']==source_id)
-          req=urllib.request.Request(source['official_url'],headers={'User-Agent':'VDV301-Audit-EV141/0.1 (+https://github.com/MarcLeinenDE/VDV301)','Accept':'application/pdf,application/octet-stream;q=0.9,*/*;q=0.1'})
+          req=urllib.request.Request(source['official_url'],headers={'User-Agent':'VDV301-Audit-EV141/0.2 (+https://github.com/MarcLeinenDE/VDV301)','Accept':'application/pdf,application/octet-stream;q=0.9,*/*;q=0.1'})
           with urllib.request.urlopen(req,timeout=90) as response: data=response.read()
           actual=hashlib.sha256(data).hexdigest()
           assert data.startswith(b'%PDF-')
@@ -49,13 +49,13 @@ jobs:
           print(f'PIN_OK {source_id} sha256={actual} size={len(data)}')
           PY
 
-      - name: Run EV-141 DMS V2.2 revalidation gate
+      - name: Run corrected EV-141 DMS V2.2 revalidation gate
         shell: bash
         env:
           EV141_OUTPUT_DIR: artifacts/ev141
         run: |
           set -euo pipefail
-          python tools/validate_dms_v22_revalidation_ev141.py
+          python tools/validate_dms_v22_revalidation_ev141_final.py
 
       - name: Render all EV-141 evidence pages
         shell: bash
@@ -99,6 +99,7 @@ jobs:
           test "$(git hash-object IBIS-IP_Enumerations_V2.2.xsd)" = "2a23b512379b18e8f122ac1272cef8229fb86283"
           test "$(git hash-object tools/validate_dms_v22_deep_read_ev107.py)" = "6acd2dc75131455e220ae18ce5131eeb5ad44789"
           test "$(git hash-object tools/validate_dms_v22_revalidation_ev141.py)" = "9c3bfe506709f2ee11003ce2ddaa4ccbeaf8cb2f"
+          test "$(git hash-object tools/validate_dms_v22_revalidation_ev141_final.py)" = "cd89c37f6bcc3f3279ac19fa557c89eb824cf964"
           git diff --exit-code -- '*.xsd'
           test -z "$(git status --porcelain --untracked-files=no)"
 
