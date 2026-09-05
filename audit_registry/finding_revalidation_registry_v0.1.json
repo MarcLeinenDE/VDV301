@@ -650,8 +650,8 @@
       },
       {
         "finding_id": "DRDMS24-001",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_V24_2026-09-05.md"
       },
       {
         "finding_id": "DRDOOR21-001",
@@ -1123,7 +1123,7 @@
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true
   },
-  "next_revalidation_block": "DMS",
+  "next_revalidation_block": "DOOR",
   "revalidation_blocks": {
     "ARA_V2.4": {
       "date": "2026-09-03",
@@ -1853,6 +1853,49 @@
       "existing_legacy_DMS_block_mutated": false,
       "next_block": "DMS",
       "next_subblock": "DMS_V2.4"
+    },
+    "DMS_V2.4": {
+      "date": "2026-09-05",
+      "state": "completed",
+      "parent_block": "DMS",
+      "scope_kind": "post_freeze_deep_read_findings_subblock",
+      "authority_lane": "byte-pinned official public DMS V2.4 PDF for documentation evidence plus explicitly candidate/integration DMS V2.4/Common V2.4/Enumerations V2.4 XSD context; no official V2.4 release XSD is claimed",
+      "official_pdf_source_id": "DMS_V2.4",
+      "pdf_sha256": "347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd",
+      "pdf_size_bytes": 1298127,
+      "pdf_page_count": 35,
+      "pdf_authority": "official_public_VDV_writing",
+      "xsd_authority": "candidate_or_integration_material_in_dev_schema_integration",
+      "official_release_xsd_claimed": false,
+      "device_management_xsd_blob": "d222dfd98b2be3777576388da7ace8f333d24c3f",
+      "common_xsd_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+      "enumerations_xsd_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+      "latest_xsd_wins": false,
+      "base_evidence_id": "EV-108",
+      "evidence_id": "EV-142",
+      "evidence_run_id": "33976613628",
+      "evidence_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/33976613628",
+      "pinned_successful_evidence_run": "33976298388",
+      "artifact_id": "9972412891",
+      "artifact_digest": "sha256:55caffc0755707a4b8b0f5f18d2b344e3bc89eb6721ca3870c8aebdb59aece63",
+      "evidence_record": "audit_registry/dms_v24_revalidation_evidence_2026-09-05.json",
+      "visual_pages": [
+        1,
+        3,
+        4
+      ],
+      "findings": {
+        "DRDMS24-001": "context_verified"
+      },
+      "active_disproof_result": "rejected_by_visible_foreword_identity_language_plus_HTML_Web_server_purpose_context",
+      "executable_evidence_reason_not_applicable": "The defect is document identity/copy-paste prose. XML validity is not defined by the erroneous foreword; candidate XSD execution is corroborating context only.",
+      "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_V24_2026-09-05.md",
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false,
+      "existing_legacy_DMS_block_mutated": false,
+      "existing_DMS_V2.2_block_mutated": false,
+      "next_block": "DOOR",
+      "next_subblock": "DOOR_V2.1"
     }
   }
 }
