@@ -1,0 +1,81 @@
+{
+  "evidence_record_version": "0.1",
+  "date": "2026-09-05",
+  "evidence_id": "EV-142",
+  "scope": "Frozen DMS V2.4 deep-read finding DRDMS24-001 under the current finding evidence gate",
+  "branch": "dev/schema-integration",
+  "result": "PASS",
+  "successful_run_id": "33976298388",
+  "successful_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/33976298388",
+  "artifact_id": "9972412891",
+  "artifact_name": "dms-v24-ev142",
+  "artifact_digest": "sha256:55caffc0755707a4b8b0f5f18d2b344e3bc89eb6721ca3870c8aebdb59aece63",
+  "pdf": {
+    "source_id": "DMS_V2.4",
+    "sha256": "347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd",
+    "size_bytes": 1298127,
+    "page_count": 35,
+    "authority": "official_public_VDV_writing",
+    "visual_review_status": "completed_from_EV-142_rendered_pages_1_3_4"
+  },
+  "authority": {
+    "pdf_authority": "official_public_VDV_writing",
+    "xsd_authority": "candidate_or_integration_material_in_dev_schema_integration",
+    "official_release_xsd_claimed": false,
+    "latest_xsd_wins": false,
+    "candidate_xsd_role": "corroborating service-identity and dependency context only"
+  },
+  "reviewed_pages": [
+    {
+      "page": 1,
+      "png_sha256": "b742db69fc76c75c9fc3421d1ed6cc9e467af001abe17df1b36fc997d342a8af",
+      "observations": [
+        "The visible cover identifies VDV-Schrift 301-2-0, 01/2023, as DIENST-/SERVICE-DeviceManagementService V2.4."
+      ],
+      "supports": ["DRDMS24-001_document_identity"]
+    },
+    {
+      "page": 3,
+      "png_sha256": "bc21986d91a5b1b8e2a45ceaafaab16ac735a53bdc413f27b9c70bc20d9f17a8",
+      "observations": [
+        "The visible publication/title page again identifies the document as DeviceManagementService V2.4."
+      ],
+      "supports": ["DRDMS24-001_document_identity"]
+    },
+    {
+      "page": 4,
+      "png_sha256": "e12f3bc4cc75af35620cfddd81d0cb33f3a402e95f84ee0ef441d0e13e88ab18",
+      "observations": [
+        "The German Vorwort visibly says that this VDV writing describes HtmlDisplayService and its specific data structures.",
+        "The English Foreword visibly says that this VDV document describes HtmlDisplayService and its specific data structures.",
+        "The following English sentence visibly assigns HTMLDisplayService a URL/web-server/HTML display purpose, confirming copied service-purpose prose rather than a mere related-service reference."
+      ],
+      "supports": ["DRDMS24-001"]
+    }
+  ],
+  "text_gate": {
+    "html_display_foreword_pages": [4],
+    "html_display_occurrences": 3,
+    "document_identity_pages": [1, 3],
+    "active_disproof_hypothesis": "HtmlDisplayService is only a related-service reference, not copied document identity/purpose prose",
+    "active_disproof_result": "rejected_by_visible_foreword_identity_language_plus_HTML_Web_server_purpose_context"
+  },
+  "candidate_structure_context": {
+    "schema": "IBIS-IP_DeviceManagementService_V2.4.xsd",
+    "service_group": "DeviceManagementServiceGroup",
+    "all_group_operations_are_DeviceManagementService_prefixed": true,
+    "HtmlDisplayService_operation_present": false,
+    "base_evidence": "EV-108 rerun unchanged PASS",
+    "authority_scope": "candidate_or_integration_only_not_official_release"
+  },
+  "finding": {
+    "id": "DRDMS24-001",
+    "classification": "pdf_copy_paste_service_identity_error_candidate",
+    "terminal_state": "context_verified",
+    "validation_behavior": "none; do not infer HTMLDisplay semantics, routes or validation rules for DeviceManagementService",
+    "sdk_eligibility": "documentation knowledge only; not an SDK XML accept/reject rule",
+    "executable_evidence_reason_not_applicable": "The defect is document identity/copy-paste prose. XML validity is not defined by the erroneous foreword; candidate XSD execution is corroborating context only."
+  },
+  "xsd_mutated": false,
+  "frozen_inventory_mutated": false
+}
