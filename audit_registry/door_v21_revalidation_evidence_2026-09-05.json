@@ -1,0 +1,87 @@
+{
+  "evidence_record_version": "0.1",
+  "date": "2026-09-05",
+  "evidence_id": "EV-143",
+  "scope": "Frozen DOOR V2.1 deep-read findings DRDOOR21-001..002 under the current finding evidence gate",
+  "branch": "dev/schema-integration",
+  "result": "PASS",
+  "successful_run_id": "33976777554",
+  "successful_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/33976777554",
+  "artifact_id": "9972544125",
+  "artifact_name": "door-v21-ev143",
+  "artifact_digest": "sha256:5f7260a06a0f4362ca5668f24879830d61fde37e9fb4bfb969d88cfcaca49823",
+  "pdf": {
+    "source_id": "DOOR_V2.1",
+    "sha256": "7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8",
+    "size_bytes": 851513,
+    "page_count": 16,
+    "authority": "official_public_VDV_writing",
+    "visual_review_status": "completed_all_EV-143_discovered_pages_11_12"
+  },
+  "authority": {
+    "status": "official_VDV-301-2.1_exact_mixed_version_family",
+    "official_tag": "VDV-301-2.1",
+    "door_xsd_blob": "abff0f3960e2ec7a9caaa9ddeb6efff8f4183805",
+    "common_v1_0_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+    "enumerations_v1_0_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+    "integration_branch_files_match_official_tag": true,
+    "mixed_version_dependency_is_authoritative": true,
+    "latest_xsd_wins": false,
+    "provenance_correction": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_DOOR_V21_BLOB_PROVENANCE_2026-08-29.md"
+  },
+  "reviewed_pages": [
+    {
+      "page": 11,
+      "png_sha256": "96ef34798f2041af47ff943a36e37523e0acae45b866775b91f8523e2a73c570",
+      "observations": [
+        "Section 2.7 visibly names the operation RetrieveSpecificDoorOpenState and its prose repeats that exact operation name.",
+        "Table 8 visibly identifies DoorStateService.RetrieveSpecificDoorOpenStateRequest but its description cell says Request structure for operation RetrieveDoorOpenState, omitting Specific."
+      ],
+      "supports": ["DRDOOR21-001"]
+    },
+    {
+      "page": 12,
+      "png_sha256": "e90660e9ec8ec21bb955f761aff0b73de01576f80f1c81555f6f446d927fcb5f",
+      "observations": [
+        "Table 9 visibly belongs to RetrieveSpecificDoorOpenStateResponse while its operation-description cell uses the shortened RetrieveDoorOpenState form.",
+        "The DoorOpenState success row in Table 9 visibly describes a Current door operation state, despite the surrounding section being RetrieveSpecificDoorOpenState.",
+        "Section 2.8 visibly names RetrieveSpecificDoorOperationState, while Table 10 describes its exact request structure as operation RetrieveDoorOpereationState, both omitting Specific and misspelling Operation."
+      ],
+      "supports": ["DRDOOR21-001", "DRDOOR21-002"]
+    }
+  ],
+  "base_evidence": {
+    "evidence_id": "EV-111",
+    "rerun_status": "PASS_unchanged",
+    "role": "corroborating exact-XSD operation/type boundary"
+  },
+  "active_disproof": {
+    "DRDOOR21-001": {
+      "hypothesis": "RetrieveDoorOpenState and RetrieveDoorOpereationState are legitimate alternate operation names",
+      "result": "rejected",
+      "basis": "The exact official DoorStateServiceGroup contains RetrieveSpecificDoorOpenStateRequest and RetrieveSpecificDoorOperationStateRequest and contains no shortened/typo aliases."
+    },
+    "DRDOOR21-002": {
+      "hypothesis": "The operation-state wording in the DoorOpenState row is a deliberate shared semantic description",
+      "result": "rejected",
+      "basis": "The exact RetrieveSpecificDoorOpenState response routes DoorOpenState to SpecificDoorOpenStateStructure containing OpenState, while a separate SpecificDoorOperationStateStructure contains OperationState."
+    }
+  },
+  "findings": {
+    "DRDOOR21-001": {
+      "classification": "pdf_operation_name_editorial_error_candidate",
+      "terminal_state": "context_verified",
+      "validation_behavior": "none; no aliases",
+      "sdk_eligibility": "documentation_context_only"
+    },
+    "DRDOOR21-002": {
+      "classification": "pdf_description_copy_paste_error_candidate",
+      "terminal_state": "context_verified",
+      "validation_behavior": "none",
+      "sdk_eligibility": "documentation_context_only"
+    }
+  },
+  "executable_evidence_reason_not_applicable": "Both frozen findings are documentation-only wording/name errors; EV-111 and exact-XSD structure inspection are corroborating context, not XML accept/reject rules for the typo text.",
+  "xsd_mutated": false,
+  "frozen_inventory_mutated": false
+}
