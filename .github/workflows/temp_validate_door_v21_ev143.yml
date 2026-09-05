@@ -1,0 +1,113 @@
+name: TEMP validate DOOR V2.1 EV-143
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths:
+      - .github/workflows/temp_validate_door_v21_ev143.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install evidence dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          python -m pip install --disable-pip-version-check lxml
+
+      - name: Fetch exact byte-pinned DOOR V2.1 PDF
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, urllib.request
+          from pathlib import Path
+          source_id='DOOR_V2.1'
+          sources=json.loads(Path('audit_registry/pdf_source_registry_v0.1.json').read_text())
+          pins=json.loads(Path('audit_registry/pdf_source_pins_v0.1.json').read_text())
+          source=next(x for x in sources['sources'] if x['source_id']==source_id)
+          pin=next(x for x in pins['sources'] if x['source_id']==source_id)
+          req=urllib.request.Request(source['official_url'],headers={'User-Agent':'VDV301-Audit-EV143/0.1 (+https://github.com/MarcLeinenDE/VDV301)','Accept':'application/pdf,application/octet-stream;q=0.9,*/*;q=0.1'})
+          with urllib.request.urlopen(req,timeout=90) as response: data=response.read()
+          actual=hashlib.sha256(data).hexdigest()
+          assert data.startswith(b'%PDF-')
+          assert actual==pin['expected_sha256'],(actual,pin['expected_sha256'])
+          assert len(data)==int(pin['expected_size_bytes']),(len(data),pin['expected_size_bytes'])
+          target=Path('local_sources/vdv_pdfs')/source['local_filename']; target.parent.mkdir(parents=True,exist_ok=True); target.write_bytes(data)
+          print(f'PIN_OK {source_id} sha256={actual} size={len(data)} file={target}')
+          PY
+
+      - name: Run EV-143 DOOR V2.1 revalidation gate
+        shell: bash
+        env:
+          EV143_OUTPUT_DIR: artifacts/ev143
+        run: |
+          set -euo pipefail
+          python tools/validate_door_v21_revalidation_ev143.py
+
+      - name: Render all EV-143 evidence pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/ev143/pages artifacts/ev143/text
+          while IFS= read -r p; do
+            [ -n "$p" ] || continue
+            pdftoppm -f "$p" -l "$p" -singlefile -png -r 180 \
+              local_sources/vdv_pdfs/DOOR_V2.1.pdf "artifacts/ev143/pages/page-$p"
+            pdftotext -f "$p" -l "$p" -layout \
+              local_sources/vdv_pdfs/DOOR_V2.1.pdf "artifacts/ev143/text/page-$p.txt"
+          done < artifacts/ev143/render_pages.txt
+
+      - name: Build evidence manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum local_sources/vdv_pdfs/DOOR_V2.1.pdf > artifacts/ev143/pdf.sha256
+          find artifacts/ev143 -type f ! -name manifest.sha256 -print0 | sort -z | xargs -0 sha256sum > artifacts/ev143/manifest.sha256
+          cat artifacts/ev143/ev143_result.json
+          cat artifacts/ev143/page_map.json
+          cat artifacts/ev143/render_pages.txt
+          cat artifacts/ev143/manifest.sha256
+
+      - name: Root XSD pool regression gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+
+      - name: Verify no tracked mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/deep_read/DOOR_V2.1.md)" = "ef81d838be8d42ae9250cddb7e506f978ba75655"
+          test "$(git hash-object audit_registry/deep_read_findings_delta_door_v21_2026-08-29.json)" = "5daf0521652097d141947ccba6811b22e66e2468"
+          test "$(git hash-object audit_registry/deep_read_registry_delta_door_v21_2026-08-29.json)" = "47a0f7ab3c9004bbfd2e01819194718b356c107f"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_DOOR_V21_BLOB_PROVENANCE_2026-08-29.md)" = "0eb7f9cb46644a8c526523d42dccac5b3d962994"
+          test "$(git hash-object IBIS-IP_DoorStateService_V2.1.xsd)" = "abff0f3960e2ec7a9caaa9ddeb6efff8f4183805"
+          test "$(git hash-object IBIS-IP_common_V1.0.xsd)" = "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c"
+          test "$(git hash-object IBIS-IP_Enumerations_V1.0.xsd)" = "a9bea5bc73003ed91ded8519db06c32c4067831d"
+          test "$(git hash-object tools/validate_door_v21_ev111.py)" = "75c7528c2f18dfe35d74a6b27e104ec006661ce1"
+          test "$(git hash-object tools/validate_door_v21_revalidation_ev143.py)" = "94f3ffa0c1771fcbadf2b5c5a7283b6d7d2761de"
+          git diff --exit-code -- '*.xsd'
+          test -z "$(git status --porcelain --untracked-files=no)"
+
+      - name: Upload EV-143 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: door-v21-ev143
+          path: artifacts/ev143
+          if-no-files-found: error
+          retention-days: 90
