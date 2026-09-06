@@ -51,8 +51,9 @@ jobs:
           pin=next(x for x in pins['sources'] if x['source_id']==sid)
           assert source['official_url']=='https://www.vdv.de/301-2-10sds-v-1-01.pdfx'
           assert source['local_filename']=='TIME_V1.0.pdf'
-          assert pin['expected_sha256']=='464be766ef8ccf6a9e80cb8c374110d44d65afca9d938ef3b11210134a23210e'
-          assert int(pin['expected_size_bytes'])==369139
+          assert pin['expected_sha256']=='d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3'
+          assert int(pin['expected_size_bytes'])==515920
+          assert str(pin['evidence_run_id'])=='33196758957'
           for attempt in range(4):
               try:
                   req=urllib.request.Request(source['official_url'],headers={
@@ -64,9 +65,12 @@ jobs:
                   if attempt==3: raise
                   time.sleep(2*(attempt+1))
           sha=hashlib.sha256(data).hexdigest()
+          if sha != pin['expected_sha256'] or len(data) != int(pin['expected_size_bytes']):
+              raise AssertionError(
+                  f'OFFICIAL_SOURCE_BYTES_CHANGED current_sha={sha} current_size={len(data)} '
+                  f'pinned_sha={pin["expected_sha256"]} pinned_size={pin["expected_size_bytes"]} '
+                  f'original_pin_run={pin["evidence_run_id"]}')
           assert data.startswith(b'%PDF-')
-          assert sha==pin['expected_sha256']
-          assert len(data)==int(pin['expected_size_bytes'])
           target=Path('local_sources/vdv_pdfs')/source['local_filename']
           target.parent.mkdir(parents=True,exist_ok=True)
           target.write_bytes(data)
@@ -102,6 +106,8 @@ jobs:
           assert r['semantic_authority_lane']=='PDF/API/prose'
           assert r['time_service_xsd_authority'] is False
           assert r['xsd_pool_role']=='repository-regression-only'
+          assert r['authority']['pdf_sha256']=='d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3'
+          assert r['authority']['pdf_size_bytes']==515920
           assert r['rederived_invariants']['cyclic_time_broadcast_expected'] is False
           assert r['visual_gap_closure_targets']==[3,6]
           assert r['xsd_mutated'] is False and r['frozen_inventory_mutated'] is False

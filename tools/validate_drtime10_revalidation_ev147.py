@@ -15,8 +15,9 @@ import subprocess
 from pathlib import Path
 
 SOURCE_ID = "TIME_V1.0"
-PDF_SHA256 = "464be766ef8ccf6a9e80cb8c374110d44d65afca9d938ef3b11210134a23210e"
-PDF_SIZE = 369139
+PDF_SHA256 = "d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3"
+PDF_SIZE = 515920
+ORIGINAL_PIN_EVIDENCE_RUN = "33196758957"
 OFFICIAL_URL = "https://www.vdv.de/301-2-10sds-v-1-01.pdfx"
 LOCAL_FILENAME = "TIME_V1.0.pdf"
 FROZEN_INVENTORY_BLOB = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
@@ -129,14 +130,14 @@ def main() -> int:
     pin = next(x for x in pins["sources"] if x["source_id"] == SOURCE_ID)
     assert source["official_url"] == OFFICIAL_URL
     assert source["local_filename"] == LOCAL_FILENAME
-    assert source["expected_sha256"] == PDF_SHA256
-    assert int(source["expected_size_bytes"]) == PDF_SIZE
     assert pin["expected_sha256"] == PDF_SHA256
     assert int(pin["expected_size_bytes"]) == PDF_SIZE
+    assert str(pin["evidence_run_id"]) == ORIGINAL_PIN_EVIDENCE_RUN
+    assert pin["deep_read_source_ready"] is True
 
     pdf = root / "local_sources/vdv_pdfs" / LOCAL_FILENAME
     if not pdf.exists():
-        fail(f"missing fetched PDF {pdf}")
+        fail(f"missing fetched/recovered PDF {pdf}")
     if pdf.stat().st_size != PDF_SIZE or sha256(pdf) != PDF_SHA256:
         fail("TIME V1.0 PDF byte pin mismatch")
 
@@ -167,7 +168,6 @@ def main() -> int:
         "Eine Nachricht wird ausschließlich als passive Antwort auf die GetTime-Request-Nachricht versendet",
     )
     require(p5, 5, "A message is sent exclusively as passive response to the GetTime request message")
-    # The English counterpart must not independently state a cyclic/non-cyclic broadcast rule.
     forbid(p5, 5, "cyclic", "cyclical", "cyclically", "periodic time")
 
     # DRTIME10-003: preserve the exact printed version-history artifact without
@@ -176,7 +176,7 @@ def main() -> int:
     require(p6, 6, "19.04.2016", "cd. 1", "Completion", "Druckschrift")
 
     # Re-derive the historically documented TimeService invariant from the
-    # current byte-pinned source; do not pretend a current RV-003 checker exists.
+    # current frozen byte source; no current RV-003 checker is claimed.
     cyclic_time_broadcast_expected = False
     assert "nicht vorgesehen" in p4
     assert cyclic_time_broadcast_expected is False
@@ -205,11 +205,12 @@ def main() -> int:
             "official_url": OFFICIAL_URL,
             "pdf_sha256": PDF_SHA256,
             "pdf_size_bytes": PDF_SIZE,
+            "original_pin_evidence_run": ORIGINAL_PIN_EVIDENCE_RUN,
             "deep_read_blob": DEEP_READ_BLOB,
             "latest_xsd_wins_applicable": False,
         },
         "historical_review_reference": {
-            "RV-003": "Referenced by the frozen/current deep-read narrative only; no current RV-003 checker or cyclic_time_broadcast_expected implementation is present on the audited branch HEAD. EV-147 re-derives the relevant invariant directly from the pinned source."
+            "RV-003": "Referenced by the current deep-read narrative only; no current RV-003 checker or cyclic_time_broadcast_expected implementation is present on the audited branch HEAD. EV-147 re-derives the relevant invariant directly from the pinned source."
         },
         "rederived_invariants": {
             "cyclic_time_broadcast_expected": cyclic_time_broadcast_expected,
@@ -228,10 +229,7 @@ def main() -> int:
             "DRTIME10-002": "Implicit-English-equivalence hypothesis rejected because the English counterpart preserves the following passive-response sentence while omitting the preceding explicit non-cyclic rule.",
             "DRTIME10-003": "Extraction-only hypothesis rejected by retaining fresh page render plus independent layout/raw extraction; intended corrected wording remains deliberately unspecified.",
         },
-        "non_promoted_findings": [
-            "FR-TIM10-SEM-001",
-            "FR-TIM10-SEM-004",
-        ],
+        "non_promoted_findings": ["FR-TIM10-SEM-001", "FR-TIM10-SEM-004"],
         "executable_xml_evidence_reason_not_applicable": "The three DRTIME10 findings are documentation/prose/version-history findings. TimeService has no XSD semantic authority in this audit lane.",
         "xsd_mutated": False,
         "frozen_inventory_mutated": False,
