@@ -21,7 +21,7 @@ ORIGINAL_PIN_EVIDENCE_RUN = "33196758957"
 OFFICIAL_URL = "https://www.vdv.de/301-2-10sds-v-1-01.pdfx"
 LOCAL_FILENAME = "TIME_V1.0.pdf"
 FROZEN_INVENTORY_BLOB = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
-DEEP_READ_BLOB = "82a88b8e15f8cc7089e08fa6a58fb20866da6ed8"
+DEEP_READ_BLOB = "82a88fbd6dae5d22f472bf144770d915fcc902ea"
 TARGET_PAGES = [2, 3, 4, 5, 6]
 
 
@@ -151,14 +151,11 @@ def main() -> int:
 
     texts = {p: extract_page(pdf, p, text_dir) for p in TARGET_PAGES}
 
-    # DRTIME10-001: adjacent German/English normative-reference context.
     p2 = combined(texts[2])
     p3 = combined(texts[3])
     require(p2, 2, "VDV-Schrift 301-1", "VDV-Schrift 301-2-0")
     require(p3, 3, "VDV 301-2-1")
 
-    # DRTIME10-002: German explicitly excludes cyclic time broadcasting;
-    # the corresponding English GetTime prose retains only passive response.
     p4 = combined(texts[4])
     p5 = combined(texts[5])
     require(
@@ -170,13 +167,9 @@ def main() -> int:
     require(p5, 5, "A message is sent exclusively as passive response to the GetTime request message")
     forbid(p5, 5, "cyclic", "cyclical", "cyclically", "periodic time")
 
-    # DRTIME10-003: preserve the exact printed version-history artifact without
-    # guessing what its intended replacement should have been.
     p6 = combined(texts[6])
     require(p6, 6, "19.04.2016", "cd. 1", "Completion", "Druckschrift")
 
-    # Re-derive the historically documented TimeService invariant from the
-    # current frozen byte source; no current RV-003 checker is claimed.
     cyclic_time_broadcast_expected = False
     assert "nicht vorgesehen" in p4
     assert cyclic_time_broadcast_expected is False
