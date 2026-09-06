@@ -53,7 +53,10 @@ def load_json(path: Path):
 
 
 def norm(text: str) -> str:
-    return re.sub(r"\s+", " ", text).strip().lower()
+    # pdftotext -layout may split identifiers across table line breaks (for
+    # example OperationErrorMe + ssage). For source-token presence checks,
+    # whitespace is therefore non-semantic and intentionally removed.
+    return re.sub(r"\s+", "", text).lower()
 
 
 def page_text(pdf: Path, page: int, out_dir: Path) -> str:
