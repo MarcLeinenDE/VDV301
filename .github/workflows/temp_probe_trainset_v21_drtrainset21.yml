@@ -1,0 +1,105 @@
+name: Temp probe TRAINSET V2.1 DRTRAINSET21
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_probe_trainset_v21_drtrainset21.yml
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 0
+
+      - name: Install PDF tooling
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+
+      - name: Fetch exact byte-pinned TRAINSET V2.1 PDF
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib,json,time,urllib.request
+          from pathlib import Path
+          sid='TRAINSET_V2.1'
+          sources=json.loads(Path('audit_registry/pdf_source_registry_v0.1.json').read_text())
+          pins=json.loads(Path('audit_registry/pdf_source_pins_v0.1.json').read_text())
+          source=next(x for x in sources['sources'] if x['source_id']==sid)
+          pin=next(x for x in pins['sources'] if x['source_id']==sid)
+          assert source['official_url']=='https://www.vdv.de/vdv-301-2-14-v2-1-sds-trainsetservices.pdfx'
+          assert source['local_filename']=='TRAINSET_V2.1.pdf'
+          assert pin['expected_sha256']=='8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e'
+          assert int(pin['expected_size_bytes'])==1708401
+          assert str(pin['evidence_run_id'])=='33226637254'
+          for attempt in range(4):
+              try:
+                  req=urllib.request.Request(source['official_url'],headers={
+                    'User-Agent':'VDV301-Audit-TRAINSET21-Probe/0.1 (+https://github.com/MarcLeinenDE/VDV301)',
+                    'Accept':'application/pdf,application/octet-stream;q=0.9,*/*;q=0.1'})
+                  with urllib.request.urlopen(req,timeout=90) as r: data=r.read()
+                  break
+              except Exception:
+                  if attempt==3: raise
+                  time.sleep(2*(attempt+1))
+          sha=hashlib.sha256(data).hexdigest()
+          assert data.startswith(b'%PDF-')
+          assert sha==pin['expected_sha256']
+          assert len(data)==int(pin['expected_size_bytes'])
+          target=Path('local_sources/vdv_pdfs')/source['local_filename']
+          target.parent.mkdir(parents=True,exist_ok=True)
+          target.write_bytes(data)
+          print('TRAINSET_V21_PIN_OK',sha,len(data))
+          PY
+
+      - name: Extract candidate contexts and renders
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/trainset21-probe/text artifacts/trainset21-probe/renders
+          python - <<'PY'
+          import re,subprocess
+          from pathlib import Path
+          pdf=Path('local_sources/vdv_pdfs/TRAINSET_V2.1.pdf')
+          info=subprocess.check_output(['pdfinfo',str(pdf)],text=True,errors='replace')
+          count=int(re.search(r'^Pages:\s+(\d+)\s*$',info,re.M).group(1))
+          out=Path('artifacts/trainset21-probe')
+          hits=set()
+          for p in range(1,count+1):
+              txt=out/'text'/f'page-{p:02d}.txt'
+              subprocess.run(['pdftotext','-layout','-f',str(p),'-l',str(p),str(pdf),str(txt)],check=True)
+              text=txt.read_text(encoding='utf-8',errors='replace')
+              lines=text.splitlines()
+              interesting=[]
+              for i,line in enumerate(lines):
+                  if '9.1' in line or 'GetTrainSetCompositon' in line or ('TrainSetDataService' in line and 'Composition' in text):
+                      lo=max(0,i-4); hi=min(len(lines),i+5)
+                      interesting.append('\n'.join(lines[lo:hi]))
+              if interesting:
+                  hits.add(p)
+                  print(f'===== PHYSICAL PAGE {p} =====')
+                  print('\n---\n'.join(interesting))
+          print('CANDIDATE_PAGES',sorted(hits))
+          for p in sorted(hits):
+              prefix=out/'renders'/f'page-{p:02d}'
+              subprocess.run(['pdftoppm','-f',str(p),'-l',str(p),'-singlefile','-png','-r','160',str(pdf),str(prefix)],check=True)
+          (out/'candidate_pages.txt').write_text('\n'.join(map(str,sorted(hits)))+'\n',encoding='utf-8')
+          PY
+
+      - name: Upload probe evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: trainset-v21-drtrainset21-probe
+          path: artifacts/trainset21-probe
+          if-no-files-found: error
+          retention-days: 30
