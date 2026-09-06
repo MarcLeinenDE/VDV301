@@ -1,0 +1,164 @@
+name: DOOR V2.1 registry closure
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/door-v21-registry-closure.yml
+
+permissions:
+  contents: write
+
+jobs:
+  close-door-v21:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install validation dependencies
+        run: python -m pip install --upgrade pip lxml
+
+      - name: Re-run EV-143
+        run: python tools/validate_door_v21_revalidation_ev143.py --repo-root .
+
+      - name: Validate complete XSD pool
+        run: python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+
+      - name: Verify immutable inventory and current state
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path('00_START_HERE/CURRENT_STATE.json').read_text(encoding='utf-8'))
+          assert s['finding_revalidation_inventory_total'] == 192
+          assert s['finding_revalidation_completed_findings'] == 189
+          assert s['finding_revalidation_pending_findings'] == 3
+          assert s['finding_revalidation_current_block'] == 'Network'
+          assert s['next_revalidation_block'] == 'Network'
+          assert s['finding_revalidation_latest_completed_block'] == 'DoorManagementServices'
+          print('CURRENT_STATE is already consistent: DoorManagementServices closed; Network active; 189/192 terminal.')
+          PY
+
+      - name: Reconcile central registry and create closure report
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          registry_path = Path('audit_registry/finding_revalidation_registry_v0.1.json')
+          report_path = Path('docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DOOR_V21_2026-09-05.md')
+          evidence_path = Path('audit_registry/door_v21_revalidation_evidence_2026-09-05.json')
+
+          data = json.loads(registry_path.read_text(encoding='utf-8'))
+          ev = json.loads(evidence_path.read_text(encoding='utf-8'))
+          assert ev['evidence_id'] == 'EV-143' and ev['result'] == 'PASS'
+          assert ev['successful_run_id'] == '33976777554'
+          assert ev['pdf']['sha256'] == '7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8'
+          assert ev['authority']['door_xsd_blob'] == 'abff0f3960e2ec7a9caaa9ddeb6efff8f4183805'
+          assert ev['xsd_mutated'] is False and ev['frozen_inventory_mutated'] is False
+
+          entries = data['inventory']['entries']
+          by_id = {e['finding_id']: e for e in entries}
+          terminal_source = str(report_path)
+          for fid in ('DRDOOR21-001', 'DRDOOR21-002'):
+              e = by_id[fid]
+              assert e['revalidation_state'] == 'pending', (fid, e)
+              assert e['terminal_state_source'] is None, (fid, e)
+              e['revalidation_state'] = 'context_verified'
+              e['terminal_state_source'] = terminal_source
+
+          blocks = data['revalidation_blocks']
+          assert 'DOOR_V2.1' not in blocks
+          assert blocks['DMS_V2.4']['state'] == 'completed'
+          blocks['DOOR_V2.1'] = {
+              'date': '2026-09-05',
+              'state': 'completed',
+              'parent_block': 'DoorManagementServices',
+              'scope_kind': 'frozen_deep_read_findings_subblock',
+              'authority_lane': 'byte-pinned official DOOR V2.1 PDF plus exact official VDV-301-2.1 mixed-version DoorStateServiceGroup/Common V1.0/Enumerations V1.0 XSD family; no latest-XSD substitution',
+              'official_pdf_source_id': 'DOOR_V2.1',
+              'pdf_sha256': '7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8',
+              'pdf_size_bytes': 851513,
+              'pdf_page_count': 16,
+              'official_release_tag': 'VDV-301-2.1',
+              'door_xsd_blob': 'abff0f3960e2ec7a9caaa9ddeb6efff8f4183805',
+              'common_v1_0_blob': '194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c',
+              'enumerations_v1_0_blob': 'a9bea5bc73003ed91ded8519db06c32c4067831d',
+              'mixed_version_dependency_is_authoritative': True,
+              'latest_xsd_wins': False,
+              'base_evidence_id': 'EV-111',
+              'evidence_id': 'EV-143',
+              'evidence_run_id': '33976777554',
+              'evidence_run_url': 'https://github.com/MarcLeinenDE/VDV301/actions/runs/33976777554',
+              'artifact_id': '9972544125',
+              'artifact_digest': 'sha256:5f7260a06a0f4362ca5668f24879830d61fde37e9fb4bfb969d88cfcaca49823',
+              'evidence_record': str(evidence_path),
+              'visual_pages': [11, 12],
+              'findings': {
+                  'DRDOOR21-001': 'context_verified',
+                  'DRDOOR21-002': 'context_verified'
+              },
+              'active_disproof_result': 'shortened_or_typo_operation_alias_hypotheses_rejected_by_exact_official_XSD_and_copy_paste_semantic_hypothesis_rejected_by_distinct_response_structures',
+              'executable_evidence_reason_not_applicable': 'Both frozen findings concern documentation-only wording/name defects. EV-111 and exact-XSD structure inspection are corroborating context, not XML accept/reject rules for the erroneous prose.',
+              'terminal_state_source': terminal_source,
+              'xsd_mutation': False,
+              'frozen_inventory_mutation': False,
+              'next_block': 'Network',
+              'next_subblock': 'Network_V2.0'
+          }
+
+          registry_path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
+          report = '''# Finding Revalidation — DOOR V2.1\n\nDate: 2026-09-05  \nScope: frozen findings `DRDOOR21-001` and `DRDOOR21-002`  \nEvidence: `EV-143` (successful run `33976777554`)\n\n## Authority route\n\n- Official public DOOR V2.1 PDF, byte pin `7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8`.\n- Official release tag `VDV-301-2.1`.\n- Exact DoorStateServiceGroup XSD blob `abff0f3960e2ec7a9caaa9ddeb6efff8f4183805`.\n- Authoritative mixed-version dependencies: Common V1.0 blob `194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c` and Enumerations V1.0 blob `a9bea5bc73003ed91ded8519db06c32c4067831d`.\n- No latest-XSD substitution. No XSD mutation.\n\n## DRDOOR21-001 — context_verified\n\nThe official PDF visibly uses shortened/incorrect operation names in table-description prose around `RetrieveSpecificDoorOpenState` and `RetrieveSpecificDoorOperationState`. Pages 11 and 12 are visually bound in EV-143. The exact official XSD contains the `RetrieveSpecific...` request structures and no shortened or typo aliases. The alternate-name hypothesis is therefore rejected.\n\nThis is a documentation-context defect only. It does not create a validation alias and does not justify an XSD change.\n\n## DRDOOR21-002 — context_verified\n\nThe `RetrieveSpecificDoorOpenStateResponse` table describes the `DoorOpenState` success row as a current door operation state. The exact XSD separates `SpecificDoorOpenStateStructure`/`OpenState` from `SpecificDoorOperationStateStructure`/`OperationState`, rejecting the hypothesis that the wording is a deliberate shared semantic description.\n\nThis is a documentation copy/paste defect only and does not change XML validation behavior.\n\n## Closure\n\n- EV-143: PASS.\n- Full XSD pool: PASS at closure.\n- Frozen 192-finding inventory: unchanged.\n- XSD mutation: none.\n- Both frozen DOOR findings are terminal `context_verified`.\n- Next block: Network (`DRNET20-001..003`).\n'''
+          report_path.write_text(report, encoding='utf-8')
+          print('Registry reconciled and DOOR closure report created.')
+          PY
+
+      - name: Verify only allowed closure paths changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm .github/workflows/door-v21-registry-closure.yml
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('audit_registry/finding_revalidation_registry_v0.1.json').read_text(encoding='utf-8'))
+          by={e['finding_id']:e for e in d['inventory']['entries']}
+          for fid in ('DRDOOR21-001','DRDOOR21-002'):
+              assert by[fid]['revalidation_state']=='context_verified'
+          assert d['revalidation_blocks']['DOOR_V2.1']['state']=='completed'
+          s=json.loads(Path('00_START_HERE/CURRENT_STATE.json').read_text(encoding='utf-8'))
+          assert s['finding_revalidation_completed_findings']==189
+          assert s['finding_revalidation_pending_findings']==3
+          assert s['finding_revalidation_current_block']=='Network'
+          print('Post-write registry/state consistency PASS.')
+          PY
+          changed="$(git status --short | awk '{print $2}' | sort)"
+          expected="$(printf '%s\n' '.github/workflows/door-v21-registry-closure.yml' 'audit_registry/finding_revalidation_registry_v0.1.json' 'docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DOOR_V21_2026-09-05.md' | sort)"
+          test "$changed" = "$expected"
+          if git status --short | grep -E '\.xsd$'; then echo 'Unexpected XSD mutation'; exit 1; fi
+
+      - name: Commit atomic DOOR closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A .github/workflows/door-v21-registry-closure.yml audit_registry/finding_revalidation_registry_v0.1.json docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DOOR_V21_2026-09-05.md
+          git commit -m 'audit: close DOOR V2.1 revalidation block [skip ci]'
+          git push origin HEAD:dev/schema-integration
