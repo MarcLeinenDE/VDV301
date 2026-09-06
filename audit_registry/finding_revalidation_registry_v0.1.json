@@ -700,23 +700,23 @@
       },
       {
         "finding_id": "DRSMS22-001",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRSMS22_2026-09-06.md"
       },
       {
         "finding_id": "DRSMS22-002",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRSMS22_2026-09-06.md"
       },
       {
         "finding_id": "DRSMS22-003",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRSMS22_2026-09-06.md"
       },
       {
         "finding_id": "DRSMS22-004",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRSMS22_2026-09-06.md"
       },
       {
         "finding_id": "DRTIME10-001",
@@ -1123,7 +1123,7 @@
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true
   },
-  "next_revalidation_block": "DRSMS22",
+  "next_revalidation_block": "DRTIME10",
   "revalidation_blocks": {
     "ARA_V2.4": {
       "date": "2026-09-03",
@@ -2038,6 +2038,58 @@
       "existing_Network_V2.0_block_mutated": false,
       "next_block": "DRSMS22",
       "next_subblock": "SMS_V2.2_DRSMS22"
+    },
+    "SMS_V2.2_DRSMS22": {
+      "date": "2026-09-06",
+      "state": "completed",
+      "parent_block": "DRSMS22",
+      "scope_kind": "frozen_deep_read_findings_subblock",
+      "source_id": "SMS_V2.2",
+      "publication": "VDV-Schrift 301-2-18, SystemMonitoringService V2.2, 08/2019",
+      "authority_lane": "byte-pinned official SMS V2.2 PDF plus exact official VDV-301-2.2 SystemMonitoringService/Common/Enumerations family; latest-wins forbidden",
+      "pdf_sha256": "996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4",
+      "pdf_size_bytes": 847416,
+      "sms_xsd_blob": "d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c",
+      "common_v2_2_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+      "enumerations_v2_2_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+      "latest_xsd_wins": false,
+      "evidence_id": "EV-146",
+      "evidence_run_id": "34026822637",
+      "evidence_job_id": "101469161311",
+      "evidence_head_sha": "21369ec625823fe0425193a19d3ff42b3833270a",
+      "artifact_id": "9987318510",
+      "artifact_digest": "sha256:181ff01b16dae43ec2826299e6f14717aef1668d66491b6051ae07661ee607f6",
+      "evidence_record": "audit_registry/drsms22_revalidation_evidence_2026-09-06.json",
+      "closure_run_id": "34026992744",
+      "closure_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/34026992744",
+      "fresh_visual_pages": [
+        5,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "prior_executable_evidence_id": "EV-116",
+      "prior_executable_evidence_run_id": "33269006407",
+      "prior_executable_evidence_job_id": "99144006184",
+      "ev116_rerun_under_ev146": "PASS",
+      "findings": {
+        "DRSMS22-001": "context_verified",
+        "DRSMS22-002": "context_verified",
+        "DRSMS22-003": "context_verified",
+        "DRSMS22-004": "context_verified"
+      },
+      "choice_notation_guard": "SMS a/b -1:1 is XML choice notation, not negative cardinality; no cardinality finding promoted",
+      "active_disproof_result": "extraction-artifact, device-semantics, alternate-service-name and missing-structure counter-hypotheses rejected by exact source/XSD context",
+      "executable_evidence_applicability": "documentation-only findings; EV-116 rerun retained as authority support",
+      "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRSMS22_2026-09-06.md",
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false,
+      "existing_DOOR_V2.1_DRS_block_mutated": false,
+      "existing_Network_V2.0_block_mutated": false,
+      "next_block": "DRTIME10",
+      "next_subblock": "TIME_V1.0_DRTIME10"
     }
   }
 }
