@@ -22,7 +22,6 @@ OFFICIAL_URL = "https://www.vdv.de/301-2-10sds-v-1-01.pdfx"
 LOCAL_FILENAME = "TIME_V1.0.pdf"
 FROZEN_INVENTORY_BLOB = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
 DEEP_READ_BLOB = "82a88fbd6dae5d22f472bf144770d915fcc902ea"
-TARGET_PAGES = [2, 3, 4, 5, 6]
 
 
 def fail(msg: str) -> None:
@@ -50,6 +49,17 @@ def load_json(path: Path):
 def norm(text: str) -> str:
     text = text.replace("\u00ad", "")
     return re.sub(r"\s+", "", text).lower()
+
+
+def page_count(pdf: Path) -> int:
+    info = subprocess.check_output(["pdfinfo", str(pdf)], text=True, errors="replace")
+    m = re.search(r"^Pages:\s+(\d+)\s*$", info, flags=re.MULTILINE)
+    if not m:
+        fail("pdfinfo did not expose a page count")
+    count = int(m.group(1))
+    if count < 1 or count > 100:
+        fail(f"implausible PDF page count: {count}")
+    return count
 
 
 def extract_page(pdf: Path, page: int, out_dir: Path) -> tuple[str, str]:
@@ -88,18 +98,19 @@ def combined(pair: tuple[str, str]) -> str:
     return pair[0] + "\n" + pair[1]
 
 
-def require(text: str, page: int, *tokens: str) -> None:
+def require(text: str, label: str, *tokens: str) -> None:
     n = norm(text)
     missing = [token for token in tokens if norm(token) not in n]
     if missing:
-        fail(f"physical PDF page {page}: missing tokens {missing}")
+        fail(f"{label}: missing tokens {missing}")
 
 
-def forbid(text: str, page: int, *tokens: str) -> None:
-    n = norm(text)
-    present = [token for token in tokens if norm(token) in n]
-    if present:
-        fail(f"physical PDF page {page}: unexpected tokens {present}")
+def locate(texts: dict[int, tuple[str, str]], token: str) -> int:
+    needle = norm(token)
+    hits = [p for p, pair in texts.items() if needle in norm(combined(pair))]
+    if len(hits) != 1:
+        fail(f"token {token!r}: expected exactly one physical-page hit, got {hits}")
+    return hits[0]
 
 
 def main() -> int:
@@ -149,33 +160,58 @@ def main() -> int:
         assert by_id[fid]["revalidation_state"] == "pending"
         assert by_id[fid]["terminal_state_source"] is None
 
-    texts = {p: extract_page(pdf, p, text_dir) for p in TARGET_PAGES}
+    count = page_count(pdf)
+    texts = {p: extract_page(pdf, p, text_dir) for p in range(1, count + 1)}
 
-    p2 = combined(texts[2])
-    p3 = combined(texts[3])
-    require(p2, 2, "VDV-Schrift 301-1", "VDV-Schrift 301-2-0")
-    require(p3, 3, "VDV 301-2-1")
-
-    p4 = combined(texts[4])
-    p5 = combined(texts[5])
+    # DRTIME10-001: locate the bilingual foreword by content, not by a
+    # zero-/one-based screenshot page convention.
+    p_foreword = locate(texts, "The VDV 301-2-1 describes the TimeService")
+    foreword = combined(texts[p_foreword])
     require(
-        p4,
-        4,
-        "Ein zyklisches Versenden der Uhrzeit ist nicht vorgesehen",
-        "Eine Nachricht wird ausschließlich als passive Antwort auf die GetTime-Request-Nachricht versendet",
+        foreword,
+        f"physical PDF page {p_foreword} bilingual foreword",
+        "Die VDV-Schrift 301-2-10 beschreibt den TimeService",
+        "The VDV 301-2-1 describes the TimeService",
     )
-    require(p5, 5, "A message is sent exclusively as passive response to the GetTime request message")
-    forbid(p5, 5, "cyclic", "cyclical", "cyclically", "periodic time")
 
-    p6 = combined(texts[6])
-    require(p6, 6, "19.04.2016", "cd. 1", "Completion", "Druckschrift")
+    # DRTIME10-002: German and English service sections are adjacent on the
+    # same physical page. The German section has an explicit no-cyclic rule;
+    # the English section omits it.
+    p_service = locate(texts, "Ein zyklisches Versenden der aktuellen Uhrzeit ist darüber hinaus nicht vorgesehen")
+    service_layout = texts[p_service][0]
+    require(
+        combined(texts[p_service]),
+        f"physical PDF page {p_service} bilingual TimeService section",
+        "Ein zyklisches Versenden der aktuellen Uhrzeit ist darüber hinaus nicht vorgesehen",
+        "Service TimeService",
+        "The actual form of time synchronization is then processed using the SNTP protocol",
+    )
+    english_marker = service_layout.find("Service TimeService")
+    if english_marker < 0:
+        fail(f"physical PDF page {p_service}: cannot isolate English Service TimeService block")
+    english_block = service_layout[english_marker:]
+    forbidden = [token for token in ("cyclic", "cyclical", "cyclically", "periodic time") if norm(token) in norm(english_block)]
+    if forbidden:
+        fail(f"physical PDF page {p_service}: English block unexpectedly contains {forbidden}")
+
+    # DRTIME10-003: exact English technical-correction artifact. Do not infer
+    # the intended replacement for 'cd. 1'.
+    p_history = locate(texts, "Definition of the service type: _ibisip_udp._udp, cd. 1")
+    history = combined(texts[p_history])
+    require(
+        history,
+        f"physical PDF page {p_history} version history",
+        "Definition of the service type: _ibisip_udp._udp, cd. 1",
+        "Technische Ergänzungen/Korrekturen",
+        "Technical Upgrade/Corrections",
+    )
 
     cyclic_time_broadcast_expected = False
-    assert "nicht vorgesehen" in p4
     assert cyclic_time_broadcast_expected is False
 
+    evidence_pages = sorted({p_foreword, p_service, p_history})
     render_hashes = {}
-    for p in TARGET_PAGES:
+    for p in evidence_pages:
         png = render_page(pdf, p, render_dir)
         render_hashes[str(p)] = {
             "sha256": sha256(png),
@@ -194,10 +230,11 @@ def main() -> int:
         "xsd_pool_role": "repository-regression-only",
         "authority": {
             "source_id": SOURCE_ID,
-            "publication": "VDV 301-2-10 TimeService V1.0",
+            "publication": "VDV 301-2-10 TimeService V1.0, 02/2018",
             "official_url": OFFICIAL_URL,
             "pdf_sha256": PDF_SHA256,
             "pdf_size_bytes": PDF_SIZE,
+            "pdf_page_count": count,
             "original_pin_evidence_run": ORIGINAL_PIN_EVIDENCE_RUN,
             "deep_read_blob": DEEP_READ_BLOB,
             "latest_xsd_wins_applicable": False,
@@ -208,19 +245,25 @@ def main() -> int:
         "rederived_invariants": {
             "cyclic_time_broadcast_expected": cyclic_time_broadcast_expected,
         },
-        "fresh_visual_pages": TARGET_PAGES,
         "visual_gap_closure_targets": [3, 6],
+        "visual_gap_target_semantics": "legacy deep-read screenshot indices; not physical one-based PDF page numbers",
+        "fresh_visual_physical_pages": evidence_pages,
+        "visual_gap_resolution": {
+            "deep_read_page_3_foreword": p_foreword,
+            "deep_read_page_6_version_history": p_history,
+            "deep_read_page_5_service_content": p_service,
+        },
         "fresh_render_hashes": render_hashes,
         "text_extraction_modes": ["pdftotext-layout", "pdftotext-raw"],
         "finding_checks": {
-            "DRTIME10-001": "German normative-reference context contains VDV-Schrift 301-1 and VDV-Schrift 301-2-0; adjacent English context prints VDV 301-2-1.",
-            "DRTIME10-002": "German GetTime prose explicitly says cyclic time sending is not intended and then limits messages to passive GetTime responses; the English counterpart retains the passive-response sentence but no cyclic/non-cyclic rule.",
-            "DRTIME10-003": "English version-history row visibly/extractably contains '19.04.2016 cd. 1 Completion Druckschrift'; EV-147 preserves this as an editorial artifact without inventing the intended replacement text.",
+            "DRTIME10-001": f"Physical PDF page {p_foreword} directly juxtaposes German 'VDV-Schrift 301-2-10 describes TimeService' with English 'VDV 301-2-1 describes TimeService'.",
+            "DRTIME10-002": f"Physical PDF page {p_service} contains adjacent German and English TimeService sections; only German explicitly says cyclic transmission of current time is not intended.",
+            "DRTIME10-003": f"Physical PDF page {p_history} contains the English technical-correction text 'Definition of the service type: _ibisip_udp._udp, cd. 1'.",
         },
         "active_disproof": {
-            "DRTIME10-001": "Equivalent-reference hypothesis rejected by the directly adjacent bilingual normative-reference sections in the same pinned publication.",
-            "DRTIME10-002": "Implicit-English-equivalence hypothesis rejected because the English counterpart preserves the following passive-response sentence while omitting the preceding explicit non-cyclic rule.",
-            "DRTIME10-003": "Extraction-only hypothesis rejected by retaining fresh page render plus independent layout/raw extraction; intended corrected wording remains deliberately unspecified.",
+            "DRTIME10-001": "Equivalent-document-identity hypothesis rejected by the directly adjacent bilingual foreword within the same pinned publication, whose identity is VDV 301-2-10.",
+            "DRTIME10-002": "Implicit-English-equivalence hypothesis rejected by isolating the adjacent English Service TimeService block and confirming the explicit non-cyclic rule is absent there.",
+            "DRTIME10-003": "Extraction-only hypothesis rejected by retaining a fresh render plus independent layout/raw extraction; intended corrected wording remains deliberately unspecified.",
         },
         "non_promoted_findings": ["FR-TIM10-SEM-001", "FR-TIM10-SEM-004"],
         "executable_xml_evidence_reason_not_applicable": "The three DRTIME10 findings are documentation/prose/version-history findings. TimeService has no XSD semantic authority in this audit lane.",
