@@ -180,36 +180,41 @@ def main() -> int:
         "10 Examples",
     )
 
-    # DRTRAINSET22-002: locate the three stale 6.5.1 references and the actual
-    # definitions/operation numbers they should navigate to in the same V2.2 document.
+    # DRTRAINSET22-002: pin each stale reference to its detailed prose heading,
+    # not to operation names that also occur in the table of contents.
     p_unsub_ref = locate(
         texts,
         "DRTRAINSET22-002 UnsubscribeTripRef stale reference",
-        "UnsubscribeTripRef",
-        "TrainSetUnsubscribeRequestStructure",
-        "6.5.1",
+        "6.5.5.1 Request",
+        "The UnsubscribeTripRef request makes use of the",
+        "TrainSetUnsubscribeRequestStructure as described in section 6.5.1",
     )
     p_retrieve_info = locate(
         texts,
         "DRTRAINSET22-002 RetrieveTripInformation stale reference",
-        "RetrieveTripInformation",
-        "RetrieveTripRef",
-        "6.5.1",
+        "6.5.6 Operation RetrieveTripInformation",
+        "In contrast to the operation RetrieveTripRef (cf. 6.5.1)",
     )
     p_unsub_info = locate(
         texts,
         "DRTRAINSET22-002 UnsubscribeTripInformation stale reference",
-        "UnsubscribeTripInformation",
-        "TrainSetUnsubscribeRequestStructure",
-        "6.5.1",
+        "6.5.8.1 Request",
+        "The UnsubscribeTripInformation request makes use of the",
+        "TrainSetUnsubscribeRequestStructure as described in section 6.5.1",
     )
-    p_correct_numbering = locate(
+
+    # Same-document positive controls for the actual target numbering.
+    p_correct_unsubscribe = locate(
         texts,
-        "DRTRAINSET22-002 correct 6.5.2/6.5.3 numbering",
-        "6.5.2",
-        "TrainSetUnsubscribeRequestStructure",
-        "6.5.3",
-        "RetrieveTripRef",
+        "DRTRAINSET22-002 correct 6.5.2 unsubscribe-structure definition",
+        "6.5.2 Specific TrainSetUnsubscribeRequestStructure",
+        "This TrainSetUnsubscribeRequestStructure is defined only in the context of the TrainSetDataService",
+    )
+    p_correct_retrieve = locate(
+        texts,
+        "DRTRAINSET22-002 correct 6.5.3 RetrieveTripRef definition",
+        "6.5.3 Operation RetrieveTripRef",
+        "The operation RetrieveTripRef is provided by the master OBU in a trainset",
     )
 
     # Stronger context checks on the stale-reference pages.
@@ -224,7 +229,8 @@ def main() -> int:
 
     evidence_pages = sorted({
         p_intro_de, p_intro_en, p_toc,
-        p_unsub_ref, p_retrieve_info, p_unsub_info, p_correct_numbering,
+        p_unsub_ref, p_retrieve_info, p_unsub_info,
+        p_correct_unsubscribe, p_correct_retrieve,
     })
     render_hashes = {}
     for p in evidence_pages:
@@ -264,16 +270,17 @@ def main() -> int:
                 "UnsubscribeTripRef_stale_6_5_1": p_unsub_ref,
                 "RetrieveTripInformation_stale_6_5_1": p_retrieve_info,
                 "UnsubscribeTripInformation_stale_6_5_1": p_unsub_info,
-                "correct_6_5_2_and_6_5_3_numbering": p_correct_numbering,
+                "correct_6_5_2_unsubscribe_structure": p_correct_unsubscribe,
+                "correct_6_5_3_RetrieveTripRef": p_correct_retrieve,
             },
         },
         "finding_checks": {
             "DRTRAINSET22-001": "German and English overview lists point service-interaction examples to 9.1; the same publication identifies 9.1 as the re-initialisation scenario and section 10 as Examples.",
-            "DRTRAINSET22-002": "Three detail-section references still point to 6.5.1 after insertion of new structures; the same V2.2 document numbers TrainSetUnsubscribeRequestStructure as 6.5.2 and RetrieveTripRef as 6.5.3.",
+            "DRTRAINSET22-002": "Three detail-section references still point to 6.5.1 after insertion of new structures; the same V2.2 document defines TrainSetUnsubscribeRequestStructure at 6.5.2 and RetrieveTripRef at 6.5.3.",
         },
         "active_disproof": {
             "DRTRAINSET22-001": "The possibility that 9.1 was intentionally cited because it contains an example-style re-initialisation scenario was considered. As in V2.1, overview item 4 already assigns re-initialisation to sections 7 and 9, while item 5 separately introduces service-interaction examples and the document has a dedicated section 10 Examples. The 9.1 pointer remains a cross-reference error.",
-            "DRTRAINSET22-002": "The possibility that 6.5.1 is a stable external or historical identifier was rejected by same-document numbering: the referenced unsubscribe structure is defined at 6.5.2 and RetrieveTripRef at 6.5.3. The stale references are navigation errors, not schema rules.",
+            "DRTRAINSET22-002": "The possibility that 6.5.1 is a stable external or historical identifier was rejected by same-document detail headings: the referenced unsubscribe structure is defined at 6.5.2 and RetrieveTripRef at 6.5.3. The stale references are navigation errors, not schema rules.",
         },
         "executable_evidence": {
             "required_for_terminal_state": False,
