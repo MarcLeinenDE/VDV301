@@ -1,0 +1,284 @@
+name: DRS V2.1 registry closure
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/drs-v21-registry-closure.yml
+      - audit_registry/drs_v21_revalidation_evidence_2026-09-06.json
+
+permissions:
+  contents: write
+
+jobs:
+  close:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          python -m pip install --disable-pip-version-check lxml
+
+      - name: Snapshot immutable XSD pool
+        shell: bash
+        run: |
+          set -euo pipefail
+          find . -maxdepth 1 -type f -name '*.xsd' -print0 | sort -z | xargs -0 sha256sum > /tmp/xsd-before.sha256
+          test "$(git rev-parse HEAD:audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git rev-parse HEAD:audit_registry/drs_v21_revalidation_evidence_2026-09-06.json)" = "31f80e57b2d064731038f7e691ee46e781efb484"
+
+      - name: Fetch exact byte-pinned DOOR V2.1 PDF
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib,json,time,urllib.request
+          from pathlib import Path
+          sid='DOOR_V2.1'
+          sources=json.loads(Path('audit_registry/pdf_source_registry_v0.1.json').read_text())
+          pins=json.loads(Path('audit_registry/pdf_source_pins_v0.1.json').read_text())
+          source=next(x for x in sources['sources'] if x['source_id']==sid)
+          pin=next(x for x in pins['sources'] if x['source_id']==sid)
+          for attempt in range(4):
+              try:
+                  req=urllib.request.Request(source['official_url'],headers={'User-Agent':'VDV301-Audit-EV145-Closure/0.1 (+https://github.com/MarcLeinenDE/VDV301)','Accept':'application/pdf,application/octet-stream;q=0.9,*/*;q=0.1'})
+                  with urllib.request.urlopen(req,timeout=90) as r: data=r.read()
+                  break
+              except Exception:
+                  if attempt==3: raise
+                  time.sleep(2*(attempt+1))
+          sha=hashlib.sha256(data).hexdigest()
+          assert data.startswith(b'%PDF-')
+          assert sha==pin['expected_sha256']=='7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8'
+          assert len(data)==int(pin['expected_size_bytes'])==851513
+          target=Path('local_sources/vdv_pdfs')/source['local_filename']
+          target.parent.mkdir(parents=True,exist_ok=True)
+          target.write_bytes(data)
+          print('DOOR_V21_PDF_PIN_OK',sha,len(data))
+          PY
+
+      - name: Re-run EV-145 and full XSD pool
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_drs_v21_revalidation_ev145.py --repo-root . --output-dir artifacts/ev145-closure
+          python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+          find . -maxdepth 1 -type f -name '*.xsd' -print0 | sort -z | xargs -0 sha256sum > /tmp/xsd-after.sha256
+          diff -u /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+
+      - name: Close DRS block atomically
+        shell: bash
+        env:
+          CLOSURE_RUN_ID: ${{ github.run_id }}
+          CLOSURE_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import copy,json,os
+          from pathlib import Path
+
+          rp=Path('audit_registry/finding_revalidation_registry_v0.1.json')
+          sp=Path('00_START_HERE/CURRENT_STATE.json')
+          ep=Path('audit_registry/drs_v21_revalidation_evidence_2026-09-06.json')
+          report=Path('docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRS_V21_2026-09-06.md')
+          d=json.loads(rp.read_text(encoding='utf-8'))
+          s=json.loads(sp.read_text(encoding='utf-8'))
+          e=json.loads(ep.read_text(encoding='utf-8'))
+          run_id=os.environ['CLOSURE_RUN_ID']; run_url=os.environ['CLOSURE_RUN_URL']
+
+          scope=['DRS-001','DRS-002','DRS-003','DRS-004']
+          states={
+            'DRS-001':'context_verified',
+            'DRS-002':'executable_confirmed',
+            'DRS-003':'executable_confirmed',
+            'DRS-004':'context_verified'
+          }
+
+          assert e['evidence_id']=='EV-145' and e['result']=='PASS'
+          assert e['scope']==scope
+          assert e['successful_run_id']=='34026409256' and e['successful_job_id']=='101468048441'
+          assert e['head_sha']=='9405a83c235d47cebcde6d0cb8f59e69485f5f93'
+          assert e['artifact_id']=='9987189102'
+          assert e['artifact_digest']=='sha256:77d90917105e6a26cfd05660612ebd0ab2f37db6a1b5fc49b86bce95a8e179f9'
+          assert e['authority']['source_id']=='DOOR_V2.1'
+          assert e['authority']['pdf_sha256']=='7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8'
+          assert e['prior_executable_evidence']['evidence_id']=='EV-111'
+          assert e['prior_executable_evidence']['rerun_result']=='PASS'
+          assert e['full_xsd_pool']=={'count':50,'result':'PASS'}
+          assert e['immutable_guards']['xsd_mutated'] is False
+          assert e['immutable_guards']['frozen_inventory_mutated'] is False
+          assert {k:v['recommended_terminal_state'] for k,v in e['finding_results'].items()}==states
+
+          inv=d['inventory']; entries=inv['entries']
+          assert inv['state']=='frozen' and inv['entry_count']==192 and len(entries)==192
+          assert d['next_revalidation_block']=='DRS'
+          pre_terminal=sum(x['revalidation_state']!='pending' for x in entries)
+          pre_pending=sum(x['revalidation_state']=='pending' for x in entries)
+          assert (pre_terminal,pre_pending)==(106,86),(pre_terminal,pre_pending)
+          by={x['finding_id']:x for x in entries}
+          for fid in scope:
+              assert by[fid]['revalidation_state']=='pending'
+              assert by[fid]['terminal_state_source'] is None
+              by[fid]['revalidation_state']=states[fid]
+              by[fid]['terminal_state_source']=str(report)
+
+          post_terminal=sum(x['revalidation_state']!='pending' for x in entries)
+          post_pending=sum(x['revalidation_state']=='pending' for x in entries)
+          assert (post_terminal,post_pending)==(110,82),(post_terminal,post_pending)
+
+          first_pending=next(x['finding_id'] for x in entries if x['revalidation_state']=='pending')
+          assert first_pending=='DRSMS22-001', first_pending
+          assert all(by[f]['revalidation_state']=='pending' for f in ['DRSMS22-001','DRSMS22-002','DRSMS22-003','DRSMS22-004'])
+          next_block='DRSMS22'
+          next_subblock='SMS_V2.2_DRSMS22'
+          d['next_revalidation_block']=next_block
+
+          blocks=d['revalidation_blocks']
+          assert 'DOOR_V2.1_DRS' not in blocks
+          assert blocks['DOOR_V2.1']['state']=='completed'
+          assert blocks['Network_V2.0']['state']=='completed'
+          door_before=copy.deepcopy(blocks['DOOR_V2.1'])
+          network_before=copy.deepcopy(blocks['Network_V2.0'])
+          blocks['DOOR_V2.1_DRS']={
+            'date':'2026-09-06',
+            'state':'completed',
+            'parent_block':'DRS',
+            'scope_kind':'frozen_legacy_findings_subblock',
+            'source_id':'DOOR_V2.1',
+            'publication':'VDV 301-2.1 DoorStateService',
+            'authority_lane':'byte-pinned official VDV 301-2.1 PDF plus exact official VDV-301-2.1 DoorStateService/Common V1.0/Enumerations V1.0 mixed-version XSD family; latest-wins forbidden',
+            'pdf_sha256':'7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8',
+            'pdf_size_bytes':851513,
+            'door_xsd_blob':'abff0f3960e2ec7a9caaa9ddeb6efff8f4183805',
+            'common_v1_0_blob':'194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c',
+            'enumerations_v1_0_blob':'a9bea5bc73003ed91ded8519db06c32c4067831d',
+            'mixed_version_dependency_is_authoritative':True,
+            'latest_xsd_wins':False,
+            'evidence_id':'EV-145',
+            'evidence_run_id':'34026409256',
+            'evidence_job_id':'101468048441',
+            'evidence_head_sha':'9405a83c235d47cebcde6d0cb8f59e69485f5f93',
+            'artifact_id':'9987189102',
+            'artifact_digest':'sha256:77d90917105e6a26cfd05660612ebd0ab2f37db6a1b5fc49b86bce95a8e179f9',
+            'evidence_record':str(ep),
+            'closure_run_id':run_id,
+            'closure_run_url':run_url,
+            'fresh_visual_pages':[9,10,11,12],
+            'prior_executable_evidence_id':'EV-111',
+            'prior_executable_evidence_run_id':'33242337308',
+            'prior_executable_evidence_job_id':'99073684198',
+            'ev111_rerun_under_ev145':'PASS',
+            'findings':states,
+            'choice_notation_guard':'page-12 a/b -1:1 is XML choice notation, not negative cardinality; no cardinality finding promoted',
+            'active_disproof_result':'subscription-name reuse, generic prose label, empty-request and executable-annotation-impact counter-hypotheses rejected by exact source/XSD evidence',
+            'terminal_state_source':str(report),
+            'xsd_mutation':False,
+            'frozen_inventory_mutation':False,
+            'existing_DOOR_V2.1_block_mutated':False,
+            'existing_Network_V2.0_block_mutated':False,
+            'next_block':next_block,
+            'next_subblock':next_subblock
+          }
+          assert blocks['DOOR_V2.1']==door_before
+          assert blocks['Network_V2.0']==network_before
+
+          a=s['audit']
+          assert a['finding_inventory_count']==192
+          assert (a['finding_revalidation_completed_findings'],a['finding_revalidation_pending_findings'])==(106,86)
+          assert a['finding_revalidation_next_block']=='DRS'
+          assert a['finding_revalidation_current_block']=='Network_V2.0'
+          assert a['finding_revalidation_latest_completed_block']=='Network_V2.0'
+          assert a['latest_revalidation_evidence_id']=='EV-144'
+          assert 'drs_v21_revalidation' not in a
+          a['finding_revalidation_completed_findings']=110
+          a['finding_revalidation_pending_findings']=82
+          a['finding_revalidation_current_block']='DOOR_V2.1_DRS'
+          a['finding_revalidation_latest_completed_block']='DOOR_V2.1_DRS'
+          a['finding_revalidation_next_block']=next_block
+          a['finding_revalidation_latest_terminal_state_source']=str(report)
+          a['latest_revalidation_evidence_id']='EV-145'
+          a['drs_v21_revalidation']={
+            'status':'complete',
+            'completed_at_run':run_id,
+            'evidence_id':'EV-145',
+            'evidence_run_id':'34026409256',
+            'evidence_job_id':'101468048441',
+            'evidence_head_sha':'9405a83c235d47cebcde6d0cb8f59e69485f5f93',
+            'artifact_id':'9987189102',
+            'artifact_digest':'sha256:77d90917105e6a26cfd05660612ebd0ab2f37db6a1b5fc49b86bce95a8e179f9',
+            'terminal_states':states,
+            'prior_executable_evidence':'EV-111',
+            'ev111_rerun_under_ev145':'PASS',
+            'report':str(report),
+            'next_block':next_block,
+            'next_subblock':next_subblock,
+            'xsd_mutation':False,
+            'frozen_inventory_mutation':False
+          }
+
+          rp.write_text(json.dumps(d,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+          sp.write_text(json.dumps(s,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+          report.write_text(f'''# Finding Revalidation — DRS / DoorStateService V2.1\n\nDate: 2026-09-06  \nScope: `DRS-001`, `DRS-002`, `DRS-003`, `DRS-004`  \nEvidence: `EV-145`, successful evidence run `34026409256`, job `101468048441`  \nEvidence commit: `9405a83c235d47cebcde6d0cb8f59e69485f5f93`  \nClosure run: `{run_id}`\n\n## Authority route\n\nOfficial byte-pinned VDV 301-2.1 DoorStateService PDF (`7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8`, 851513 bytes) plus the exact official VDV-301-2.1 mixed-version schema family: `IBIS-IP_DoorStateService_V2.1.xsd` blob `abff0f3960e2ec7a9caaa9ddeb6efff8f4183805`, `IBIS-IP_common_V1.0.xsd` blob `194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c`, and `IBIS-IP_Enumerations_V1.0.xsd` blob `a9bea5bc73003ed91ded8519db06c32c4067831d`. The mixed-version dependency is authoritative; latest-XSD-wins is forbidden.\n\nEV-145 freshly rendered PDF pages 9–12 at 180 DPI, retained both layout and raw text extraction for source-token checks, reran EV-111 for the executable DRS-002/DRS-003 boundary, and reran the complete 50-XSD pool.\n\n## DRS-001 — context_verified\n\nThe page-9 operation overview repeats `SubscribeDoorOpenStates` / `UnsubscribeDoorOpenStates` after `GetDoorOperationStates`. The exact DoorStateService V2.1 XSD declares distinct OperationStates subscription operations. The shared/generic-name counter-hypothesis is therefore rejected. This is documentation-only and does not require executable XML evidence.\n\n## DRS-002 — executable_confirmed\n\nPage 12 names `OperationErrorMessage` in the RetrieveSpecific response context. The exact RetrieveSpecific response choices use `ErrorMessage`; `OperationErrorMessage` is rejected. EV-111 was rerun under EV-145 and passed the positive/negative boundary again.\n\n## DRS-003 — executable_confirmed\n\n`GetDoorOpenStatesRequest` and `GetDoorOperationStatesRequest` remain exact untyped local XSD declarations. EV-111 rerun reconfirms the resulting XML Schema `xs:anyType` default behaviour, including acceptance of arbitrary nested content. The counter-hypothesis that an omitted request structure implies an empty request is rejected.\n\n## DRS-004 — context_verified\n\nThe known `GetDoorOpeationStates` / `RetrieveSpecificDoorOperationnState` misspellings are confined to `xs:documentation`. Executable `@name` / `@type` identifiers remain correctly spelled, so executable impact is disproved.\n\n## Choice-notation guard\n\nThe page-12 `a/b -1:1` notation is treated as VDV XML-choice notation, not as a negative cardinality. No new cardinality finding is promoted.\n\n## Closure\n\nEV-145 PASS; closure rerun PASS; EV-111 rerun PASS; all 50 XSDs PASS; frozen 192-finding inventory unchanged; no XSD mutation. Revalidation count is now **110/192 terminal, 82 pending**. The first remaining pending frozen finding is `DRSMS22-001`; next block is `DRSMS22` (`SMS_V2.2_DRSMS22`).\n''',encoding='utf-8')
+          print('DRS_CLOSE_WRITE_OK terminal=110 pending=82 next=DRSMS22')
+          PY
+
+      - name: Cleanup, verify allowlist, commit and push
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf artifacts/ev145-closure local_sources/vdv_pdfs/DOOR_V2.1.pdf tools/__pycache__
+          rm .github/workflows/temp_validate_drs_v21_ev145.yml
+          rm .github/workflows/drs-v21-registry-closure.yml
+
+          test "$(git rev-parse HEAD:audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test -z "$(git diff --name-only | grep -E '\.xsd$' || true)"
+
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          d=json.loads(Path('audit_registry/finding_revalidation_registry_v0.1.json').read_text())
+          s=json.loads(Path('00_START_HERE/CURRENT_STATE.json').read_text())
+          by={x['finding_id']:x for x in d['inventory']['entries']}
+          expected={'DRS-001':'context_verified','DRS-002':'executable_confirmed','DRS-003':'executable_confirmed','DRS-004':'context_verified'}
+          assert all(by[f]['revalidation_state']==st for f,st in expected.items())
+          assert d['revalidation_blocks']['DOOR_V2.1_DRS']['state']=='completed'
+          assert d['next_revalidation_block']=='DRSMS22'
+          first=next(x['finding_id'] for x in d['inventory']['entries'] if x['revalidation_state']=='pending')
+          assert first=='DRSMS22-001'
+          a=s['audit']
+          assert (a['finding_revalidation_completed_findings'],a['finding_revalidation_pending_findings'])==(110,82)
+          assert a['finding_revalidation_next_block']=='DRSMS22'
+          assert a['finding_revalidation_latest_completed_block']=='DOOR_V2.1_DRS'
+          assert a['latest_revalidation_evidence_id']=='EV-145'
+
+          allowed={
+            '.github/workflows/temp_validate_drs_v21_ev145.yml',
+            '.github/workflows/drs-v21-registry-closure.yml',
+            'audit_registry/finding_revalidation_registry_v0.1.json',
+            '00_START_HERE/CURRENT_STATE.json',
+            'docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRS_V21_2026-09-06.md'
+          }
+          changed=set(subprocess.check_output(['git','status','--porcelain'],text=True).splitlines())
+          paths={line[3:] for line in changed if len(line)>=4}
+          assert paths==allowed,(paths,allowed)
+          print('DRS_POST_CLOSURE_CONSISTENCY_PASS')
+          PY
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'audit: close DRS V2.1 revalidation block [skip ci]'
+          git push origin HEAD:dev/schema-integration

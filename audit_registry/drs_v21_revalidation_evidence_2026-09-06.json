@@ -1,0 +1,101 @@
+{
+  "evidence_id": "EV-145",
+  "date": "2026-09-06",
+  "result": "PASS",
+  "scope": [
+    "DRS-001",
+    "DRS-002",
+    "DRS-003",
+    "DRS-004"
+  ],
+  "successful_run_id": "34026409256",
+  "successful_job_id": "101468048441",
+  "head_sha": "9405a83c235d47cebcde6d0cb8f59e69485f5f93",
+  "artifact_id": "9987189102",
+  "artifact_name": "drs-v21-ev145",
+  "artifact_size_bytes": 1026893,
+  "artifact_digest": "sha256:77d90917105e6a26cfd05660612ebd0ab2f37db6a1b5fc49b86bce95a8e179f9",
+  "authority": {
+    "source_id": "DOOR_V2.1",
+    "publication": "VDV 301-2.1 DoorStateService",
+    "official_url": "https://www.vdv.de/301-2-15-sd-v2-1-doorstateservice.pdfx",
+    "pdf_sha256": "7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8",
+    "pdf_size_bytes": 851513,
+    "official_release_tag": "VDV-301-2.1",
+    "door_xsd_blob": "abff0f3960e2ec7a9caaa9ddeb6efff8f4183805",
+    "common_v1_0_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+    "enumerations_v1_0_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+    "mixed_version_dependency_is_authoritative": true,
+    "latest_xsd_wins": false
+  },
+  "prior_executable_evidence": {
+    "evidence_id": "EV-111",
+    "run_id": "33242337308",
+    "job_id": "99073684198",
+    "rerun_result": "PASS"
+  },
+  "fresh_visual_evidence": {
+    "render_dpi": 180,
+    "pages": {
+      "9": {
+        "sha256": "699fc2f28e1e901d8f0078004418e6e065d232756ab1cb3bf37ea16a3895d983",
+        "bytes": 262819
+      },
+      "10": {
+        "sha256": "9973a258e9eac95c241aa0632c3239dd4d3b3f185559504376a7f1bb397421a0",
+        "bytes": 289179
+      },
+      "11": {
+        "sha256": "96ef34798f2041af47ff943a36e37523e0acae45b866775b91f8523e2a73c570",
+        "bytes": 295159
+      },
+      "12": {
+        "sha256": "e90660e9ec8ec21bb955f761aff0b73de01576f80f1c81555f6f446d927fcb5f",
+        "bytes": 254235
+      }
+    },
+    "text_extraction_modes": [
+      "pdftotext-layout",
+      "pdftotext-raw"
+    ],
+    "extraction_guard_reason": "Table reading order can interleave split identifiers in layout mode; source-token checks therefore retain both layout and raw extraction evidence while visible renders remain authoritative for layout-sensitive interpretation."
+  },
+  "finding_results": {
+    "DRS-001": {
+      "recommended_terminal_state": "context_verified",
+      "evidence": "Pinned PDF page 9 repeats OpenStates subscription operation names after GetDoorOperationStates, while the exact DoorStateService V2.1 XSD declares distinct SubscribeDoorOperationStatesRequest and UnsubscribeDoorOperationStatesRequest operations.",
+      "executable_effect": false
+    },
+    "DRS-002": {
+      "recommended_terminal_state": "executable_confirmed",
+      "evidence": "Pinned PDF page 12 names OperationErrorMessage for the RetrieveSpecific response context. The exact response choices accept ErrorMessage and reject OperationErrorMessage; EV-111 was rerun successfully under EV-145.",
+      "executable_effect": true
+    },
+    "DRS-003": {
+      "recommended_terminal_state": "executable_confirmed",
+      "evidence": "The exact local GetDoorOpenStatesRequest and GetDoorOperationStatesRequest declarations remain untyped. EV-111 rerun reconfirms XML Schema anyType default semantics, including arbitrary nested child content.",
+      "executable_effect": true
+    },
+    "DRS-004": {
+      "recommended_terminal_state": "context_verified",
+      "evidence": "The known GetDoorOpeationStates / RetrieveSpecificDoorOperationnState spelling errors are confined to xs:documentation. Executable @name and @type identifiers retain the correct spellings.",
+      "executable_effect": false
+    }
+  },
+  "active_disproof": {
+    "DRS-001": "Shared or generic subscription-name hypothesis rejected by the distinct exact XSD OperationStates subscription operations.",
+    "DRS-002": "Generic prose-label hypothesis rejected by the table element-name role and the exact XSD Get-vs-RetrieveSpecific response distinction.",
+    "DRS-003": "No-request-structure-means-empty hypothesis rejected by the exact untyped declarations and XML Schema anyType semantics.",
+    "DRS-004": "Executable-identifier-impact hypothesis rejected by annotation-only location and correctly spelled executable identifiers."
+  },
+  "choice_notation_guard": "Page-12 a/b -1:1 notation is treated as XML choice notation, not negative cardinality; no new cardinality finding is promoted.",
+  "full_xsd_pool": {
+    "count": 50,
+    "result": "PASS"
+  },
+  "immutable_guards": {
+    "frozen_inventory_blob": "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf",
+    "frozen_inventory_mutated": false,
+    "xsd_mutated": false
+  }
+}
