@@ -33,7 +33,7 @@ jobs:
           pins=json.loads(Path('audit_registry/pdf_source_pins_v0.1.json').read_text())
           source=next(x for x in sources['sources'] if x['source_id']==sid)
           pin=next(x for x in pins['sources'] if x['source_id']==sid)
-          req=urllib.request.Request(source['official_url'],headers={'User-Agent':'VDV301-Audit-Closure/0.1 (+https://github.com/MarcLeinenDE/VDV301)','Accept':'application/pdf,application/octet-stream;q=0.9,*/*;q=0.1'})
+          req=urllib.request.Request(source['official_url'],headers={'User-Agent':'VDV301-Audit-Closure/0.2 (+https://github.com/MarcLeinenDE/VDV301)','Accept':'application/pdf,application/octet-stream;q=0.9,*/*;q=0.1'})
           with urllib.request.urlopen(req,timeout=90) as r: data=r.read()
           sha=hashlib.sha256(data).hexdigest()
           assert data.startswith(b'%PDF-')
@@ -48,49 +48,109 @@ jobs:
         run: python tools/validate_door_v21_revalidation_ev143.py --repo-root .
       - name: Validate XSD pool
         run: python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
-      - name: Reconcile and close
+      - name: Reconcile registry and CURRENT_STATE
         shell: bash
+        env:
+          CLOSURE_RUN_ID: ${{ github.run_id }}
+          CLOSURE_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD:audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
           python - <<'PY'
-          import json
+          import copy,json,os
           from pathlib import Path
           rp=Path('audit_registry/finding_revalidation_registry_v0.1.json')
           ep=Path('audit_registry/door_v21_revalidation_evidence_2026-09-05.json')
           sp=Path('00_START_HERE/CURRENT_STATE.json')
           report=Path('docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DOOR_V21_2026-09-05.md')
           d=json.loads(rp.read_text()); e=json.loads(ep.read_text()); s=json.loads(sp.read_text())
+          run_id=os.environ['CLOSURE_RUN_ID']; run_url=os.environ['CLOSURE_RUN_URL']
+          assert run_id.isdigit() and run_url.startswith('https://github.com/')
           assert e['evidence_id']=='EV-143' and e['result']=='PASS' and e['successful_run_id']=='33976777554'
+          assert e['artifact_id']=='9972544125'
+          assert e['artifact_digest']=='sha256:5f7260a06a0f4362ca5668f24879830d61fde37e9fb4bfb969d88cfcaca49823'
+          assert e['pdf']['sha256']=='7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8'
+          assert e['authority']['door_xsd_blob']=='abff0f3960e2ec7a9caaa9ddeb6efff8f4183805'
+          assert e['authority']['mixed_version_dependency_is_authoritative'] is True
+          assert e['authority']['latest_xsd_wins'] is False
           assert e['xsd_mutated'] is False and e['frozen_inventory_mutated'] is False
-          assert (s['finding_revalidation_completed_findings'],s['finding_revalidation_pending_findings'])==(189,3)
-          assert s['finding_revalidation_current_block']==s['next_revalidation_block']=='Network'
-          assert s['finding_revalidation_latest_completed_block']=='DoorManagementServices'
-          by={x['finding_id']:x for x in d['inventory']['entries']}
+
+          inv=d['inventory']; entries=inv['entries']
+          assert inv['state']=='frozen' and inv['entry_count']==192 and len(entries)==192
+          pre_terminal=sum(x['revalidation_state']!='pending' for x in entries)
+          pre_pending=sum(x['revalidation_state']=='pending' for x in entries)
+          assert (pre_terminal,pre_pending)==(101,91),(pre_terminal,pre_pending)
+          assert d['next_revalidation_block']=='DOOR'
+          blocks=d['revalidation_blocks']
+          assert blocks['DMS_V2.4']['state']=='completed'
+          assert blocks['DMS_V2.4']['next_block']=='DOOR' and blocks['DMS_V2.4']['next_subblock']=='DOOR_V2.1'
+          assert 'DOOR_V2.1' not in blocks
+          dms24_before=copy.deepcopy(blocks['DMS_V2.4'])
+          by={x['finding_id']:x for x in entries}
           for fid in ('DRDOOR21-001','DRDOOR21-002'):
               assert by[fid]['revalidation_state']=='pending' and by[fid]['terminal_state_source'] is None
               by[fid]['revalidation_state']='context_verified'; by[fid]['terminal_state_source']=str(report)
-          b=d['revalidation_blocks']; assert 'DOOR_V2.1' not in b and b['DMS_V2.4']['state']=='completed'
-          b['DOOR_V2.1']={
-            'date':'2026-09-05','state':'completed','parent_block':'DoorManagementServices','scope_kind':'frozen_deep_read_findings_subblock',
+          assert by['DRNET20-001']['revalidation_state']=='pending'
+          assert by['DRNET20-002']['revalidation_state']=='pending'
+          assert by['DRNET20-003']['revalidation_state']=='pending'
+          post_terminal=sum(x['revalidation_state']!='pending' for x in entries)
+          post_pending=sum(x['revalidation_state']=='pending' for x in entries)
+          assert (post_terminal,post_pending)==(103,89),(post_terminal,post_pending)
+          d['next_revalidation_block']='Network'
+          blocks['DOOR_V2.1']={
+            'date':'2026-09-05','state':'completed','parent_block':'DOOR','scope_kind':'post_freeze_deep_read_findings_subblock',
             'authority_lane':'byte-pinned official DOOR V2.1 PDF plus exact official VDV-301-2.1 mixed-version DoorStateServiceGroup/Common V1.0/Enumerations V1.0 XSD family; no latest-XSD substitution',
             'official_pdf_source_id':'DOOR_V2.1','pdf_sha256':'7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8','pdf_size_bytes':851513,'pdf_page_count':16,
             'official_release_tag':'VDV-301-2.1','door_xsd_blob':'abff0f3960e2ec7a9caaa9ddeb6efff8f4183805','common_v1_0_blob':'194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c','enumerations_v1_0_blob':'a9bea5bc73003ed91ded8519db06c32c4067831d',
-            'mixed_version_dependency_is_authoritative':True,'latest_xsd_wins':False,'base_evidence_id':'EV-111','evidence_id':'EV-143','evidence_run_id':'33976777554','evidence_run_url':'https://github.com/MarcLeinenDE/VDV301/actions/runs/33976777554',
-            'artifact_id':'9972544125','artifact_digest':'sha256:5f7260a06a0f4362ca5668f24879830d61fde37e9fb4bfb969d88cfcaca49823','evidence_record':str(ep),'visual_pages':[11,12],
+            'mixed_version_dependency_is_authoritative':True,'latest_xsd_wins':False,'base_evidence_id':'EV-111','evidence_id':'EV-143','closure_run_id':run_id,'closure_run_url':run_url,
+            'pinned_successful_evidence_run':'33976777554','evidence_run_url':'https://github.com/MarcLeinenDE/VDV301/actions/runs/33976777554','artifact_id':'9972544125','artifact_digest':'sha256:5f7260a06a0f4362ca5668f24879830d61fde37e9fb4bfb969d88cfcaca49823','evidence_record':str(ep),'visual_pages':[11,12],
             'findings':{'DRDOOR21-001':'context_verified','DRDOOR21-002':'context_verified'},
             'active_disproof_result':'shortened/typo operation aliases rejected by exact official XSD; copy/paste semantic hypothesis rejected by distinct response structures',
             'executable_evidence_reason_not_applicable':'Documentation-only wording/name defects; EV-111 and exact-XSD inspection are corroborating context, not XML accept/reject rules for erroneous prose.',
-            'terminal_state_source':str(report),'xsd_mutation':False,'frozen_inventory_mutation':False,'next_block':'Network','next_subblock':'Network_V2.0'}
+            'terminal_state_source':str(report),'xsd_mutation':False,'frozen_inventory_mutation':False,'existing_DMS_V2.4_block_mutated':False,'next_block':'Network','next_subblock':'Network_V2.0'}
+          assert blocks['DMS_V2.4']==dms24_before
+
+          audit=s.get('audit'); assert isinstance(audit,dict)
+          assert audit['finding_inventory_count']==192
+          assert (audit['finding_revalidation_completed_findings'],audit['finding_revalidation_pending_findings'])==(101,91)
+          assert audit['finding_revalidation_next_block']=='DOOR'
+          assert audit['finding_revalidation_current_block']=='DMS_V2.4'
+          assert audit['finding_revalidation_latest_completed_block']=='DMS_V2.4'
+          assert 'door_v21_revalidation' not in audit
+          audit['finding_revalidation_next_block']='Network'
+          audit['finding_revalidation_completed_findings']=103
+          audit['finding_revalidation_pending_findings']=89
+          audit['finding_revalidation_current_block']='DOOR_V2.1'
+          audit['finding_revalidation_latest_completed_block']='DOOR_V2.1'
+          audit['finding_revalidation_latest_terminal_state_source']=str(report)
+          audit['latest_revalidation_evidence_id']='EV-143'
+          audit['door_v21_revalidation']={
+            'status':'complete','completed_at_run':run_id,'evidence_id':'EV-143','closure_run_id':run_id,'closure_run_url':run_url,
+            'pinned_successful_evidence_run':'33976777554','artifact_id':'9972544125','artifact_digest':'sha256:5f7260a06a0f4362ca5668f24879830d61fde37e9fb4bfb969d88cfcaca49823',
+            'terminal_states':{'DRDOOR21-001':'context_verified','DRDOOR21-002':'context_verified'},'report':str(report),'next_block':'Network','next_subblock':'Network_V2.0','xsd_mutation':False,'frozen_inventory_mutation':False}
+
           rp.write_text(json.dumps(d,indent=2,ensure_ascii=False)+'\n')
-          report.write_text('''# Finding Revalidation — DOOR V2.1\n\nDate: 2026-09-05  \nScope: `DRDOOR21-001`, `DRDOOR21-002`  \nEvidence: `EV-143`, successful run `33976777554`\n\n## Authority\nOfficial public DOOR V2.1 PDF: `7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8`. Exact release route: `VDV-301-2.1`, DoorStateServiceGroup blob `abff0f3960e2ec7a9caaa9ddeb6efff8f4183805`, Common V1.0 `194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c`, Enumerations V1.0 `a9bea5bc73003ed91ded8519db06c32c4067831d`. No latest-XSD substitution.\n\n## DRDOOR21-001 — context_verified\nPages 11–12 visibly contain shortened/incorrect operation names around `RetrieveSpecificDoorOpenState` and `RetrieveSpecificDoorOperationState`. The exact official XSD contains the `RetrieveSpecific...` structures and no shortened/typo aliases. The alternate-name hypothesis is rejected. Documentation-only defect; no validation alias or XSD change.\n\n## DRDOOR21-002 — context_verified\nThe `DoorOpenState` row is described as an operation state. Exact XSD structures separate `OpenState` from `OperationState`, rejecting deliberate-shared-semantics as an explanation. Documentation copy/paste defect only.\n\n## Closure\nEV-143 PASS; closure rerun PASS; full XSD pool PASS; frozen inventory unchanged; no XSD mutation. Both findings terminal `context_verified`. Next: Network (`DRNET20-001..003`).\n''')
+          sp.write_text(json.dumps(s,indent=2,ensure_ascii=False)+'\n')
+          report.write_text(f'''# Finding Revalidation — DOOR V2.1\n\nDate: 2026-09-05  \nScope: `DRDOOR21-001`, `DRDOOR21-002`  \nEvidence: `EV-143`, successful evidence run `33976777554`  \nClosure run: `{run_id}`\n\n## Authority\nOfficial public DOOR V2.1 PDF: `7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8`. Exact release route: `VDV-301-2.1`, DoorStateServiceGroup blob `abff0f3960e2ec7a9caaa9ddeb6efff8f4183805`, Common V1.0 `194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c`, Enumerations V1.0 `a9bea5bc73003ed91ded8519db06c32c4067831d`. No latest-XSD substitution.\n\n## DRDOOR21-001 — context_verified\nPages 11–12 visibly contain shortened/incorrect operation names around `RetrieveSpecificDoorOpenState` and `RetrieveSpecificDoorOperationState`. The exact official XSD contains the `RetrieveSpecific...` structures and no shortened/typo aliases. The alternate-name hypothesis is rejected. Documentation-only defect; no validation alias or XSD change.\n\n## DRDOOR21-002 — context_verified\nThe `DoorOpenState` row is described as an operation state. Exact XSD structures separate `OpenState` from `OperationState`, rejecting deliberate-shared-semantics as an explanation. Documentation copy/paste defect only.\n\n## Closure\nEV-143 PASS; closure rerun PASS; full XSD pool PASS; frozen inventory unchanged; no XSD mutation. Revalidation count is now 103/192 terminal, 89 pending. Next block: Network (`DRNET20-001..003`).\n''')
           PY
           rm -rf artifacts/ev143-closure local_sources/vdv_pdfs/DOOR_V2.1.pdf
           rm .github/workflows/door-v21-registry-closure.yml
           test -z "$(git status --short | awk '{print $2}' | grep -E '\.xsd$' || true)"
           changed="$(git status --short | awk '{print $2}' | sort)"
-          expected="$(printf '%s\n' '.github/workflows/door-v21-registry-closure.yml' 'audit_registry/finding_revalidation_registry_v0.1.json' 'docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DOOR_V21_2026-09-05.md' | sort)"
+          expected="$(printf '%s\n' '.github/workflows/door-v21-registry-closure.yml' '00_START_HERE/CURRENT_STATE.json' 'audit_registry/finding_revalidation_registry_v0.1.json' 'docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DOOR_V21_2026-09-05.md' | sort)"
           test "$changed" = "$expected"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('audit_registry/finding_revalidation_registry_v0.1.json').read_text())
+          s=json.loads(Path('00_START_HERE/CURRENT_STATE.json').read_text())
+          by={x['finding_id']:x for x in d['inventory']['entries']}
+          assert all(by[f]['revalidation_state']=='context_verified' for f in ('DRDOOR21-001','DRDOOR21-002'))
+          assert d['revalidation_blocks']['DOOR_V2.1']['state']=='completed' and d['next_revalidation_block']=='Network'
+          a=s['audit']; assert (a['finding_revalidation_completed_findings'],a['finding_revalidation_pending_findings'])==(103,89)
+          assert a['finding_revalidation_next_block']=='Network' and a['finding_revalidation_latest_completed_block']=='DOOR_V2.1'
+          print('POST-CLOSURE CONSISTENCY PASS: DOOR closed, 103/192 terminal, Network next.')
+          PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
