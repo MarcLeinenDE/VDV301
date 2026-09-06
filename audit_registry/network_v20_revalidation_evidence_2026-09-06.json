@@ -1,0 +1,120 @@
+{
+  "evidence_id": "EV-144",
+  "date": "2026-09-06",
+  "result": "PASS",
+  "scope": [
+    "DRNET20-001",
+    "DRNET20-002",
+    "DRNET20-003"
+  ],
+  "successful_run_id": "34025645375",
+  "successful_job_id": "101466007321",
+  "head_sha": "0379cefa8cfd0e229e0aad53234e9bc2719bb172",
+  "artifact_id": "9986959255",
+  "artifact_name": "network-v20-ev144",
+  "artifact_size_bytes": 1793437,
+  "artifact_digest": "sha256:7d135ae12aab3a9ff8f307390545c177afea9f4dde25eafb63e44ea2310b5af4",
+  "authority": {
+    "source_id": "VDV301-3_02-2020",
+    "publication": "VDV-Schrift 301-3, Netzwerkinfrastruktur / Network infrastructure, 02/2020",
+    "official_url": "https://www.vdv.de/301-3-sdes-network-infrastructure.pdfx",
+    "pdf_sha256": "edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99",
+    "pdf_size_bytes": 558005,
+    "pdf_page_count": 37,
+    "validation_lane": "physical_network_protocol_profile",
+    "xsd_required": false,
+    "latest_external_protocol_version_wins": false,
+    "fresh_read_freeze_commit": "f359aa0160d2f8a0834db9274a4ecf0a18321dea",
+    "canonical_deep_read_blob": "ddb4f49da1e3afa55920e50f9e74e554748f1378",
+    "canonical_findings_delta_blob": "f1d879dafba78533158448c55ff475d234308d36",
+    "canonical_registry_delta_blob": "c46bf8ee10c1c83d4c3cea0a5f305b4fbc23638b"
+  },
+  "prior_visual_evidence": {
+    "run_id": "33270251357",
+    "job_id": "99147343832",
+    "artifact_id": "9719880284",
+    "artifact_name": "vdv301-3-02-2020-pinned-read",
+    "artifact_digest": "sha256:2cc403407a354af07c2dfc1cc78666e0f16fc753af6eebfaf090b0300214d930",
+    "all_37_pages_rendered": true,
+    "render_dpi": 120
+  },
+  "fresh_visual_evidence": {
+    "render_dpi": 180,
+    "pages": {
+      "7": {
+        "sha256": "be9c6c96cab9989dd79c6e5a58b62f170fcbe62450444c87707b186a68706e1e",
+        "bytes": 323271
+      },
+      "8": {
+        "sha256": "1a50ca1b7db00fe9f7e2f8eb97e197c627ce99fd9acff602da4fe921bd9dc429",
+        "bytes": 262659
+      },
+      "10": {
+        "sha256": "639e098d0dcebb255dbdecb6cc09fe9f7e0a93620e2b567933bb0296bea206c5",
+        "bytes": 290055
+      },
+      "17": {
+        "sha256": "966851329fc222cb173ce443b44efecc61cad176fb81807c4d429685b36a9a7e",
+        "bytes": 287060
+      },
+      "18": {
+        "sha256": "4f88120a8720f5f41de4d3a1d80b155f80784b0e0df46fc3fd871bf7ee284743",
+        "bytes": 311413
+      },
+      "19": {
+        "sha256": "fb27d1c65056d7fb7dbbbc038e2eeae8f48bb287430dd6825387e4a6fa7e27b1",
+        "bytes": 300216
+      },
+      "29": {
+        "sha256": "2d29469bf5e5a5ba63e92f9cc8461200d703d46a9f11e710ca356cd09283ecd2",
+        "bytes": 150267
+      }
+    }
+  },
+  "external_falsification_context": {
+    "authority_role": "interpretation/falsification only; external material does not replace or rewrite historical VDV authority",
+    "ieee_publication_url": "https://www.ieee802.org/3/publication/index.html",
+    "ieee_publication_sha256_at_run": "6dde32ed3e3bc84aebe7dffa825edc85b3c0c3b85a7bbedd3856fc5e4fd72aa2",
+    "ieee_publication_marker": "IEEE Std 802.3 Clause 40 1000BASE-T",
+    "ieee_interpretations_url": "https://www.ieee802.org/3/interp/index.html",
+    "ieee_interpretations_sha256_at_run": "1b44e44e268cf57fe0f9e71612d43a2b382e9599136710c05ccfc766a2506967",
+    "ieee_interpretations_marker": "distinct 1000BASE-X and 1000BASE-T references"
+  },
+  "finding_results": {
+    "DRNET20-001": {
+      "recommended_terminal_state": "context_verified",
+      "classification": "pdf_network_media_terminology_error_candidate",
+      "evidence": "Exact pinned PDF pages 10 and 17 place 1000Base-X in the copper-cabling section while the adjacent table specifies 1 GBase-T. The internal VDV contradiction is primary; IEEE material only supports terminology interpretation.",
+      "executable_effect": false
+    },
+    "DRNET20-002": {
+      "recommended_terminal_state": "context_verified",
+      "classification": "pdf_translation_semantic_safety_security_error_candidate",
+      "evidence": "Exact pinned pages 7 and 8 preserve the German/English functional-safety context while the English Figure 1 caption switches to security-relevant.",
+      "executable_effect": false
+    },
+    "DRNET20-003": {
+      "recommended_terminal_state": "context_verified",
+      "classification": "pdf_editorial_spelling_errors_grouped",
+      "evidence": "Exact pinned pages 18, 19 and 29 retain the grouped additional editorial residue. The page-11 IEE 802.3 typo remains historical NET-003 and is explicitly excluded from DRNET20-003.",
+      "executable_effect": false
+    }
+  },
+  "active_disproof": {
+    "cat6_55m": "not promoted as an independent defect; immediate 10GBASE-T context supports the scoped reading",
+    "figure_table_2_3": "not promoted; connector figures are embedded inside numbered tables",
+    "empty_version_history": "not promoted; first-edition publication gives no evidence that an entry is required",
+    "xsd_gap": "rejected; VDV 301-3 intentionally uses the non-XSD physical/network/protocol authority lane",
+    "rv002_as_network_conformance": "rejected; RV-002 is deterministic DNS-SD classifier evidence only and does not validate physical wiring/media/topology/safety behavior"
+  },
+  "executable_xml_evidence": "not_applicable_documentation_only_non_xsd_network_profile",
+  "full_xsd_pool": {
+    "count": 50,
+    "result": "PASS"
+  },
+  "immutable_guards": {
+    "frozen_inventory_blob": "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf",
+    "frozen_inventory_mutated": false,
+    "xsd_mutated": false
+  }
+}
