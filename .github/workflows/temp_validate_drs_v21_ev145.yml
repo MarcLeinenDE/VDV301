@@ -1,0 +1,108 @@
+name: Temp validate DRS V2.1 EV-145
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_validate_drs_v21_ev145.yml
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          python -m pip install --disable-pip-version-check lxml
+
+      - name: Snapshot root XSD hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          find . -maxdepth 1 -type f -name '*.xsd' -print0 | sort -z | xargs -0 sha256sum > /tmp/xsd-before.sha256
+
+      - name: Fetch exact byte-pinned DOOR V2.1 PDF
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib,json,time,urllib.request
+          from pathlib import Path
+          sid='DOOR_V2.1'
+          sources=json.loads(Path('audit_registry/pdf_source_registry_v0.1.json').read_text())
+          pins=json.loads(Path('audit_registry/pdf_source_pins_v0.1.json').read_text())
+          source=next(x for x in sources['sources'] if x['source_id']==sid)
+          pin=next(x for x in pins['sources'] if x['source_id']==sid)
+          for attempt in range(4):
+              try:
+                  req=urllib.request.Request(source['official_url'],headers={'User-Agent':'VDV301-Audit-EV145/0.1 (+https://github.com/MarcLeinenDE/VDV301)','Accept':'application/pdf,application/octet-stream;q=0.9,*/*;q=0.1'})
+                  with urllib.request.urlopen(req,timeout=90) as r: data=r.read()
+                  break
+              except Exception:
+                  if attempt==3: raise
+                  time.sleep(2*(attempt+1))
+          sha=hashlib.sha256(data).hexdigest()
+          assert data.startswith(b'%PDF-')
+          assert sha==pin['expected_sha256']=='7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8'
+          assert len(data)==int(pin['expected_size_bytes'])==851513
+          target=Path('local_sources/vdv_pdfs')/source['local_filename']
+          target.parent.mkdir(parents=True,exist_ok=True)
+          target.write_bytes(data)
+          print(f'PIN_OK {sid} sha256={sha} size={len(data)}')
+          PY
+
+      - name: Run EV-145
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_drs_v21_revalidation_ev145.py --repo-root . --output-dir artifacts/ev145
+
+      - name: Validate complete XSD pool
+        run: python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+
+      - name: Verify immutable boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          find . -maxdepth 1 -type f -name '*.xsd' -print0 | sort -z | xargs -0 sha256sum > /tmp/xsd-after.sha256
+          diff -u /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          test -z "$(git diff --name-only | grep -E '\.xsd$' || true)"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('artifacts/ev145/ev145_results.json').read_text())
+          assert r['evidence_id']=='EV-145' and r['result']=='PASS'
+          assert r['scope']==['DRS-001','DRS-002','DRS-003','DRS-004']
+          assert r['recommended_terminal_states']=={
+            'DRS-001':'context_verified',
+            'DRS-002':'executable_confirmed',
+            'DRS-003':'executable_confirmed',
+            'DRS-004':'context_verified'}
+          assert r['xsd_mutated'] is False and r['frozen_inventory_mutated'] is False
+          print('EV-145 immutable-boundary verification PASS')
+          PY
+
+      - name: Upload EV-145 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: drs-v21-ev145
+          path: artifacts/ev145
+          if-no-files-found: error
+          retention-days: 90
