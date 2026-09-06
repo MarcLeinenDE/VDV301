@@ -680,23 +680,23 @@
       },
       {
         "finding_id": "DRS-001",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRS_V21_2026-09-06.md"
       },
       {
         "finding_id": "DRS-002",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "executable_confirmed",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRS_V21_2026-09-06.md"
       },
       {
         "finding_id": "DRS-003",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "executable_confirmed",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRS_V21_2026-09-06.md"
       },
       {
         "finding_id": "DRS-004",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRS_V21_2026-09-06.md"
       },
       {
         "finding_id": "DRSMS22-001",
@@ -1123,7 +1123,7 @@
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true
   },
-  "next_revalidation_block": "DRS",
+  "next_revalidation_block": "DRSMS22",
   "revalidation_blocks": {
     "ARA_V2.4": {
       "date": "2026-09-03",
@@ -1988,6 +1988,56 @@
       "existing_DOOR_V2.1_block_mutated": false,
       "next_block": "DRS",
       "next_subblock": "DOOR_V2.1_DRS"
+    },
+    "DOOR_V2.1_DRS": {
+      "date": "2026-09-06",
+      "state": "completed",
+      "parent_block": "DRS",
+      "scope_kind": "frozen_legacy_findings_subblock",
+      "source_id": "DOOR_V2.1",
+      "publication": "VDV 301-2.1 DoorStateService",
+      "authority_lane": "byte-pinned official VDV 301-2.1 PDF plus exact official VDV-301-2.1 DoorStateService/Common V1.0/Enumerations V1.0 mixed-version XSD family; latest-wins forbidden",
+      "pdf_sha256": "7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8",
+      "pdf_size_bytes": 851513,
+      "door_xsd_blob": "abff0f3960e2ec7a9caaa9ddeb6efff8f4183805",
+      "common_v1_0_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+      "enumerations_v1_0_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+      "mixed_version_dependency_is_authoritative": true,
+      "latest_xsd_wins": false,
+      "evidence_id": "EV-145",
+      "evidence_run_id": "34026409256",
+      "evidence_job_id": "101468048441",
+      "evidence_head_sha": "9405a83c235d47cebcde6d0cb8f59e69485f5f93",
+      "artifact_id": "9987189102",
+      "artifact_digest": "sha256:77d90917105e6a26cfd05660612ebd0ab2f37db6a1b5fc49b86bce95a8e179f9",
+      "evidence_record": "audit_registry/drs_v21_revalidation_evidence_2026-09-06.json",
+      "closure_run_id": "34026674927",
+      "closure_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/34026674927",
+      "fresh_visual_pages": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "prior_executable_evidence_id": "EV-111",
+      "prior_executable_evidence_run_id": "33242337308",
+      "prior_executable_evidence_job_id": "99073684198",
+      "ev111_rerun_under_ev145": "PASS",
+      "findings": {
+        "DRS-001": "context_verified",
+        "DRS-002": "executable_confirmed",
+        "DRS-003": "executable_confirmed",
+        "DRS-004": "context_verified"
+      },
+      "choice_notation_guard": "page-12 a/b -1:1 is XML choice notation, not negative cardinality; no cardinality finding promoted",
+      "active_disproof_result": "subscription-name reuse, generic prose label, empty-request and executable-annotation-impact counter-hypotheses rejected by exact source/XSD evidence",
+      "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRS_V21_2026-09-06.md",
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false,
+      "existing_DOOR_V2.1_block_mutated": false,
+      "existing_Network_V2.0_block_mutated": false,
+      "next_block": "DRSMS22",
+      "next_subblock": "SMS_V2.2_DRSMS22"
     }
   }
 }
