@@ -1,0 +1,108 @@
+{
+  "evidence_id": "EV-146",
+  "date": "2026-09-06",
+  "result": "PASS",
+  "scope": [
+    "DRSMS22-001",
+    "DRSMS22-002",
+    "DRSMS22-003",
+    "DRSMS22-004"
+  ],
+  "successful_run_id": "34026822637",
+  "successful_job_id": "101469161311",
+  "head_sha": "21369ec625823fe0425193a19d3ff42b3833270a",
+  "artifact_id": "9987318510",
+  "artifact_name": "drsms22-ev146",
+  "artifact_size_bytes": 994106,
+  "artifact_digest": "sha256:181ff01b16dae43ec2826299e6f14717aef1668d66491b6051ae07661ee607f6",
+  "authority": {
+    "source_id": "SMS_V2.2",
+    "publication": "VDV-Schrift 301-2-18, SystemMonitoringService V2.2, 08/2019",
+    "official_url": "https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx",
+    "pdf_sha256": "996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4",
+    "pdf_size_bytes": 847416,
+    "official_release_tag": "VDV-301-2.2",
+    "sms_xsd_blob": "d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c",
+    "common_v2_2_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+    "enumerations_v2_2_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+    "latest_xsd_wins": false
+  },
+  "prior_executable_evidence": {
+    "evidence_id": "EV-116",
+    "run_id": "33269006407",
+    "job_id": "99144006184",
+    "rerun_result": "PASS"
+  },
+  "fresh_visual_evidence": {
+    "render_dpi": 180,
+    "pages": {
+      "5": {
+        "sha256": "39091e889381a592ce7c294161af36c1bbd3c804b9becd786630aefd3b1b781a",
+        "bytes": 206206
+      },
+      "9": {
+        "sha256": "6f813ae55fd3acc28e99f055978c504b9759e03b1cfb52a133adaf696a2f3b79",
+        "bytes": 166033
+      },
+      "10": {
+        "sha256": "97bf0974fa9a1ef98fed84d6c7c844afa804a7091d29061affbe5359205cc563",
+        "bytes": 289934
+      },
+      "11": {
+        "sha256": "02b26dddd0fa57785ee5e35757a03dc6f1b1a595ae006cdb5ffe66481b4a2b7f",
+        "bytes": 120616
+      },
+      "12": {
+        "sha256": "41515d4afc0455e0628128f47eecba3d88364858882c5551b2616af72528addf",
+        "bytes": 114166
+      },
+      "13": {
+        "sha256": "d323b92c7b84c67bb4eeb5fcb2559b8d5fb94dd19635e210c4ed9106791b2ba2",
+        "bytes": 195647
+      }
+    },
+    "text_extraction_modes": [
+      "pdftotext-layout",
+      "pdftotext-raw"
+    ]
+  },
+  "finding_results": {
+    "DRSMS22-001": {
+      "recommended_terminal_state": "context_verified",
+      "evidence": "Exact pinned PDF page 5 visibly and extractably contains the broken list-of-figures bookmark text 'Fehler! Textmarke nicht definiert.'.",
+      "executable_effect": false
+    },
+    "DRSMS22-002": {
+      "recommended_terminal_state": "context_verified",
+      "evidence": "Pages 10-11 use device wording in ServiceStatus prose, while exact Common V2.2 ServiceIdentificationWithStateStructure contains ServiceIdentification plus ServiceState and no DeviceState.",
+      "executable_effect": false
+    },
+    "DRSMS22-003": {
+      "recommended_terminal_state": "context_verified",
+      "evidence": "Page 12 spells SystemManagementService as SystemManagmentService while page 13 prints the correct service name.",
+      "executable_effect": false
+    },
+    "DRSMS22-004": {
+      "recommended_terminal_state": "context_verified",
+      "evidence": "Page 9 operation-table segment contains UnsubscribeServiceStatus request and response structures but omits the visible Req./Resp. labels present for neighboring operations.",
+      "executable_effect": false
+    }
+  },
+  "active_disproof": {
+    "DRSMS22-001": "Text-extraction-artifact hypothesis rejected by the exact pinned source, fresh render and extracted printed string.",
+    "DRSMS22-002": "Device-oriented service-semantics hypothesis rejected by ServiceStatus operation naming and exact Common ServiceState structure.",
+    "DRSMS22-003": "Intentional alternate service-name hypothesis rejected by the correctly spelled SystemManagementService reference on page 13.",
+    "DRSMS22-004": "Missing-structure hypothesis rejected because both structures are present, narrowing the finding to omitted table labels only."
+  },
+  "choice_notation_guard": "SMS response-table a/b -1:1 notation is XML choice notation and is not promoted as a cardinality defect.",
+  "executable_xml_evidence_reason_not_applicable": "All four DRSMS22 findings are documentation/layout/terminology findings. EV-116 is rerun only as exact-authority support, not because these findings alter XML acceptance behaviour.",
+  "full_xsd_pool": {
+    "count": 50,
+    "result": "PASS"
+  },
+  "immutable_guards": {
+    "frozen_inventory_blob": "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf",
+    "frozen_inventory_mutated": false,
+    "xsd_mutated": false
+  }
+}
