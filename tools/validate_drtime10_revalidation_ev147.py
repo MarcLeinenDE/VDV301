@@ -194,14 +194,15 @@ def main() -> int:
     if forbidden:
         fail(f"physical PDF page {p_service}: English block unexpectedly contains {forbidden}")
 
-    # DRTIME10-003: exact English technical-correction artifact. Do not infer
-    # the intended replacement for 'cd. 1'.
-    p_history = locate(texts, "Definition of the service type: _ibisip_udp._udp, cd. 1")
+    # DRTIME10-003: exact printed English technical-correction artifact. Do
+    # not infer an intended replacement for 'cd. 1'.
+    p_history = locate(texts, "define Type for Service-Discovery: _ibisip_udp._udp (cd. 1)")
     history = combined(texts[p_history])
     require(
         history,
         f"physical PDF page {p_history} version history",
-        "Definition of the service type: _ibisip_udp._udp, cd. 1",
+        "define Type for Service-Discovery: _ibisip_udp._udp (cd. 1)",
+        "Typ für Service-Discovery definiert:_ibisip_udp._udp (vgl. 1)",
         "Technische Ergänzungen/Korrekturen",
         "Technical Upgrade/Corrections",
     )
@@ -256,9 +257,9 @@ def main() -> int:
         "fresh_render_hashes": render_hashes,
         "text_extraction_modes": ["pdftotext-layout", "pdftotext-raw"],
         "finding_checks": {
-            "DRTIME10-001": f"Physical PDF page {p_foreword} directly juxtaposes German 'VDV-Schrift 301-2-10 describes TimeService' with English 'VDV 301-2-1 describes TimeService'.",
+            "DRTIME10-001": f"Physical PDF page {p_foreword} directly juxtaposes German VDV 301-2-10 TimeService identity with English VDV 301-2-1 TimeService identity.",
             "DRTIME10-002": f"Physical PDF page {p_service} contains adjacent German and English TimeService sections; only German explicitly says cyclic transmission of current time is not intended.",
-            "DRTIME10-003": f"Physical PDF page {p_history} contains the English technical-correction text 'Definition of the service type: _ibisip_udp._udp, cd. 1'.",
+            "DRTIME10-003": f"Physical PDF page {p_history} prints the English technical-correction artifact 'define Type for Service-Discovery: _ibisip_udp._udp (cd. 1)'.",
         },
         "active_disproof": {
             "DRTIME10-001": "Equivalent-document-identity hypothesis rejected by the directly adjacent bilingual foreword within the same pinned publication, whose identity is VDV 301-2-10.",
