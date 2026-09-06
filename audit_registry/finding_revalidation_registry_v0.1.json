@@ -720,18 +720,18 @@
       },
       {
         "finding_id": "DRTIME10-001",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTIME10_2026-09-06.md"
       },
       {
         "finding_id": "DRTIME10-002",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTIME10_2026-09-06.md"
       },
       {
         "finding_id": "DRTIME10-003",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTIME10_2026-09-06.md"
       },
       {
         "finding_id": "DRTRAINSET21-001",
@@ -1123,7 +1123,7 @@
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true
   },
-  "next_revalidation_block": "DRTIME10",
+  "next_revalidation_block": "DRTRAINSET21",
   "revalidation_blocks": {
     "ARA_V2.4": {
       "date": "2026-09-03",
@@ -2090,6 +2090,52 @@
       "existing_Network_V2.0_block_mutated": false,
       "next_block": "DRTIME10",
       "next_subblock": "TIME_V1.0_DRTIME10"
+    },
+    "TIME_V1.0_DRTIME10": {
+      "date": "2026-09-06",
+      "state": "completed",
+      "parent_block": "DRTIME10",
+      "scope_kind": "frozen_deep_read_findings_subblock",
+      "source_id": "TIME_V1.0",
+      "publication": "VDV 301-2-10 TimeService V1.0, 02/2018",
+      "authority_lane": "byte-pinned official TimeService PDF plus API/prose protocol profile; TimeService XSD semantic authority is not applicable",
+      "pdf_sha256": "d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3",
+      "pdf_size_bytes": 515920,
+      "original_pin_evidence_run_id": "33196758957",
+      "deep_read_blob": "82a88fbd6dae5d22f472bf144770d915fcc902ea",
+      "time_service_xsd_authority": false,
+      "xsd_pool_role": "repository-regression-only",
+      "evidence_id": "EV-147",
+      "evidence_run_id": "34028395412",
+      "evidence_job_id": "101473376840",
+      "evidence_head_sha": "686ce92ede0f1391e04a4260bc7adf98b6ae3103",
+      "artifact_id": "9987794844",
+      "artifact_digest": "sha256:2fbb9272c55ebbe704ae4736f488af5758bc0cbbbc8902e77d1a46e19b1ffc92",
+      "evidence_record": "audit_registry/drtime10_revalidation_evidence_2026-09-06.json",
+      "closure_run_id": "34028583953",
+      "closure_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/34028583953",
+      "fresh_visual_physical_pages": [
+        4,
+        6,
+        7
+      ],
+      "visual_gap_status": "closed_by_fresh_byte_pinned_render_and_manual_inspection",
+      "historical_RV_003_status": "deep_read_reference_only_no_current_checker_claimed",
+      "cyclic_time_broadcast_expected": false,
+      "findings": {
+        "DRTIME10-001": "context_verified",
+        "DRTIME10-002": "context_verified",
+        "DRTIME10-003": "context_verified"
+      },
+      "non_promoted_findings": [
+        "FR-TIM10-SEM-001",
+        "FR-TIM10-SEM-004"
+      ],
+      "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTIME10_2026-09-06.md",
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false,
+      "next_block": "DRTRAINSET21",
+      "next_subblock": "TRAINSET_V2.1_DRTRAINSET21"
     }
   }
 }
