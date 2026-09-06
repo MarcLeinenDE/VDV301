@@ -53,16 +53,22 @@ def load_json(path: Path):
 
 
 def norm(text: str) -> str:
-    # pdftotext -layout may split identifiers across table line breaks (for
-    # example OperationErrorMe + ssage). For source-token presence checks,
-    # whitespace is therefore non-semantic and intentionally removed.
+    # PDF table extraction may split identifiers across line breaks. For
+    # source-token presence checks whitespace is non-semantic.
     return re.sub(r"\s+", "", text).lower()
 
 
 def page_text(pdf: Path, page: int, out_dir: Path) -> str:
-    target = out_dir / f"page-{page:02d}.txt"
-    subprocess.run(["pdftotext", "-layout", "-f", str(page), "-l", str(page), str(pdf), str(target)], check=True)
-    return target.read_text(encoding="utf-8", errors="replace")
+    # Keep both extraction modes as evidence. Poppler's -layout reading order
+    # can interleave neighbouring table columns inside a visually continuous
+    # identifier; -raw provides an independent content-stream ordering.
+    layout_target = out_dir / f"page-{page:02d}-layout.txt"
+    raw_target = out_dir / f"page-{page:02d}-raw.txt"
+    subprocess.run(["pdftotext", "-layout", "-f", str(page), "-l", str(page), str(pdf), str(layout_target)], check=True)
+    subprocess.run(["pdftotext", "-raw", "-f", str(page), "-l", str(page), str(pdf), str(raw_target)], check=True)
+    layout = layout_target.read_text(encoding="utf-8", errors="replace")
+    raw = raw_target.read_text(encoding="utf-8", errors="replace")
+    return layout + "\n" + raw
 
 
 def render_page(pdf: Path, page: int, out_dir: Path) -> Path:
