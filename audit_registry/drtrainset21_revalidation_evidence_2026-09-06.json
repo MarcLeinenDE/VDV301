@@ -1,0 +1,124 @@
+{
+  "evidence_id": "EV-148",
+  "date": "2026-09-06",
+  "result": "PASS",
+  "scope": [
+    "DRTRAINSET21-001",
+    "DRTRAINSET21-002",
+    "DRTRAINSET21-003"
+  ],
+  "successful_run_id": "34029363792",
+  "successful_job_id": "101475946965",
+  "head_sha": "1f5fcc0245bc5f53c29118f90252f644feef276d",
+  "artifact_id": "9988086415",
+  "artifact_name": "drtrainset21-ev148",
+  "artifact_size_bytes": 997849,
+  "artifact_digest": "sha256:c4e963de40e4684a9625644f9df2fc8f63ebedc8b2bba38736e83723d1c8dfea",
+  "authority": {
+    "source_id": "TRAINSET_V2.1",
+    "publication": "VDV 301-2-14 TrainSet Services V2.1, 05/2018",
+    "official_url": "https://www.vdv.de/vdv-301-2-14-v2-1-sds-trainsetservices.pdfx",
+    "pdf_sha256": "8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e",
+    "pdf_size_bytes": 1708401,
+    "original_pin_evidence_run": "33226637254",
+    "deep_read_blob": "6d5680f438e7e592aaf1d056e39224e7c2a3f2d9",
+    "exact_v21_xsd_blobs": {
+      "IBIS-IP_TrainSetInformationService_V2.1.xsd": "897f373e31b76aa23d8bc206854b042524e4c102",
+      "IBIS-IP_TrainSetManagementService_V2.1.xsd": "add9d1cb37e5759ff7a77855b239108d38373206",
+      "IBIS-IP_TrainSetDataService_V2.1.xsd": "c2cdb73fcae265a2e4e0349ac6072e3548e36d8b"
+    },
+    "ev109_blob": "f88208bff7e39bb38a86a310dc121f486984f807",
+    "latest_xsd_wins_applicable": false
+  },
+  "fresh_visual_evidence": {
+    "status": "PASS",
+    "inspection": "Fresh 180-DPI PNG renders from the exact byte-pinned TRAINSET V2.1 PDF were visually inspected after successful EV-148 run 34029363792.",
+    "physical_pages": {
+      "6": {
+        "sha256": "51e510f33fd878d6968709dda465dfea0eaec90a8af4e0f8bb5f3f2403c0f300",
+        "bytes": 311798,
+        "finding": "DRTRAINSET21-001",
+        "visual_result": "The table of contents visibly identifies 9.1 as the driving-direction re-initialisation subsection and section 10 as Examples, with 10.1 starting the dedicated example use cases."
+      },
+      "9": {
+        "sha256": "1887dff1f50a690cf5e1c0f7d7fcce3a6cd842fe628b1dcec471d2bc51f430fd",
+        "bytes": 231955,
+        "finding": "DRTRAINSET21-001",
+        "visual_result": "German overview item 5 visibly says that examples explaining interaction of the different services are in Abschnitt 9.1."
+      },
+      "10": {
+        "sha256": "359e20a7722059c8c1b626ac0777be1ec298df1e50ed3fd851373c58f7ace616",
+        "bytes": 197520,
+        "finding": "DRTRAINSET21-001",
+        "visual_result": "English overview item 5 visibly repeats the same pointer: examples explaining interaction of the different services are in section 9.1."
+      },
+      "44": {
+        "sha256": "ac44110da51217c7e2c9dbee4a30c8ad8eb49964722495a7a4f3c144570ed7fc",
+        "bytes": 330171,
+        "finding": "DRTRAINSET21-002, DRTRAINSET21-003",
+        "visual_result": "The page visibly prints GetTrainSetCompositon and then says the TrainSetInformationService composition operations provide the same information as equally named operations of the TrainSetDataService."
+      }
+    }
+  },
+  "finding_results": {
+    "DRTRAINSET21-001": {
+      "recommended_terminal_state": "context_verified",
+      "classification": "pdf_cross_reference_error_candidate",
+      "executable_effect": false,
+      "summary": "Overview item 5 points service-interaction examples to 9.1 although the document has a dedicated section 10 Examples."
+    },
+    "DRTRAINSET21-002": {
+      "recommended_terminal_state": "context_verified",
+      "classification": "pdf_service_name_copy_paste_error_candidate",
+      "executable_effect": false,
+      "summary": "Page 44 attributes equally named composition operations to TrainSetDataService, whose exact V2.1 operation/global inventories contain no TrainSetComposition operation.",
+      "likely_intended_reference": "TrainSetManagementService",
+      "likely_intended_reference_is_not_used_as_schema_rewrite": true
+    },
+    "DRTRAINSET21-003": {
+      "recommended_terminal_state": "context_verified",
+      "classification": "pdf_operation_name_typo_candidate",
+      "executable_effect": false,
+      "summary": "Page 44 prints GetTrainSetCompositon; exact V2.1 authority and the rest of the publication use Composition, and no Compositon alias exists."
+    }
+  },
+  "active_disproof": {
+    "DRTRAINSET21-001": "The counter-hypothesis that 9.1 is intentionally cited because it itself contains an example-based re-initialisation use case was tested. Section 9.1 does contain such a use case. However, overview item 4 already assigns the re-initialisation problem to sections 7 and 9, while item 5 separately introduces examples of service interaction; section 10 is explicitly titled Examples and contains multiple cross-service use cases. The 9.1 pointer is therefore retained as a stale/wrong cross-reference.",
+    "DRTRAINSET21-002": "An alternate service-alias interpretation was rejected. Exact V2.1 TrainSetDataService exposes TripRef/TripInformation operations only and no TrainSetComposition name. TrainSetManagementService has composition context in the same V2.1 family. No TrainSetDataService composition alias is synthesized.",
+    "DRTRAINSET21-003": "An alternate spelling hypothesis was rejected. Exact TrainSetInformationService V2.1 contains GetTrainSetCompositionResponse and no Compositon declaration; the publication operation inventory also uses Composition. No typo alias is created."
+  },
+  "exact_xsd_counter_context": {
+    "TrainSetInformationService_group": [
+      "TrainSetInformationService.GetTrainSetCompositionResponse"
+    ],
+    "TrainSetManagementService_group": [
+      "TrainSetManagementService.GetTrainSetComposition",
+      "TrainSetManagementService.SetNeutralModeRequest",
+      "TrainSetManagementService.SetNeutralModeResponse",
+      "TrainSetManagementService.SetSlaveModeRequest",
+      "TrainSetManagementService.SetSlaveModeResponse"
+    ],
+    "TrainSetDataService_group": [
+      "TrainSetDataService.RetrieveTripInformationRequest",
+      "TrainSetDataService.RetrieveTripInformationResponse",
+      "TrainSetDataService.RetrieveTripRefRequest",
+      "TrainSetDataService.RetrieveTripRefResponse"
+    ]
+  },
+  "executable_context": {
+    "terminal_state_requires_xml_execution": false,
+    "reason": "The three DRTRAINSET21 findings are documentation/navigation/name-context findings; their terminal state does not alter XML validation behaviour.",
+    "EV-109_rerun_in_EV-148_job": "PASS",
+    "EV-109_role": "exact V2.1 executable counter-context and immutability control"
+  },
+  "full_xsd_pool": {
+    "count": 50,
+    "result": "PASS",
+    "role": "repository-regression-only"
+  },
+  "immutable_guards": {
+    "frozen_inventory_blob": "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf",
+    "frozen_inventory_mutated": false,
+    "xsd_mutated": false
+  }
+}
