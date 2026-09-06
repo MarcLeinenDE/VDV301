@@ -26,10 +26,11 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install PDF tooling
+      - name: Install PDF and XSD tooling
         run: |
           sudo apt-get update
           sudo apt-get install -y poppler-utils
+          python -m pip install --disable-pip-version-check lxml
 
       - name: Snapshot root XSD hashes
         shell: bash
@@ -108,6 +109,7 @@ jobs:
           assert r['authority']['deep_read_blob']=='82a88fbd6dae5d22f472bf144770d915fcc902ea'
           assert r['rederived_invariants']['cyclic_time_broadcast_expected'] is False
           assert r['visual_gap_closure_targets']==[3,6]
+          assert r['fresh_visual_physical_pages']==[4,6,7]
           assert r['xsd_mutated'] is False and r['frozen_inventory_mutated'] is False
           print('EV-147 immutable-boundary and authority-separation verification PASS')
           PY
