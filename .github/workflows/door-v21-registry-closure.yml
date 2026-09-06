@@ -16,8 +16,35 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip install --upgrade pip lxml
+      - name: Install validation dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          python -m pip install --disable-pip-version-check lxml
+      - name: Fetch exact byte-pinned DOOR V2.1 PDF
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib,json,urllib.request
+          from pathlib import Path
+          sid='DOOR_V2.1'
+          sources=json.loads(Path('audit_registry/pdf_source_registry_v0.1.json').read_text())
+          pins=json.loads(Path('audit_registry/pdf_source_pins_v0.1.json').read_text())
+          source=next(x for x in sources['sources'] if x['source_id']==sid)
+          pin=next(x for x in pins['sources'] if x['source_id']==sid)
+          req=urllib.request.Request(source['official_url'],headers={'User-Agent':'VDV301-Audit-Closure/0.1 (+https://github.com/MarcLeinenDE/VDV301)','Accept':'application/pdf,application/octet-stream;q=0.9,*/*;q=0.1'})
+          with urllib.request.urlopen(req,timeout=90) as r: data=r.read()
+          sha=hashlib.sha256(data).hexdigest()
+          assert data.startswith(b'%PDF-')
+          assert sha==pin['expected_sha256'],(sha,pin['expected_sha256'])
+          assert len(data)==int(pin['expected_size_bytes']),(len(data),pin['expected_size_bytes'])
+          target=Path('local_sources/vdv_pdfs')/source['local_filename']; target.parent.mkdir(parents=True,exist_ok=True); target.write_bytes(data)
+          print(f'PIN_OK {sid} sha256={sha} size={len(data)} file={target}')
+          PY
       - name: Re-run EV-143
+        env:
+          EV143_OUTPUT_DIR: artifacts/ev143-closure
         run: python tools/validate_door_v21_revalidation_ev143.py --repo-root .
       - name: Validate XSD pool
         run: python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
@@ -52,12 +79,13 @@ jobs:
             'mixed_version_dependency_is_authoritative':True,'latest_xsd_wins':False,'base_evidence_id':'EV-111','evidence_id':'EV-143','evidence_run_id':'33976777554','evidence_run_url':'https://github.com/MarcLeinenDE/VDV301/actions/runs/33976777554',
             'artifact_id':'9972544125','artifact_digest':'sha256:5f7260a06a0f4362ca5668f24879830d61fde37e9fb4bfb969d88cfcaca49823','evidence_record':str(ep),'visual_pages':[11,12],
             'findings':{'DRDOOR21-001':'context_verified','DRDOOR21-002':'context_verified'},
-            'active_disproof_result':'shortened_or_typo_operation_alias hypotheses rejected by exact official XSD; copy/paste semantic hypothesis rejected by distinct response structures',
+            'active_disproof_result':'shortened/typo operation aliases rejected by exact official XSD; copy/paste semantic hypothesis rejected by distinct response structures',
             'executable_evidence_reason_not_applicable':'Documentation-only wording/name defects; EV-111 and exact-XSD inspection are corroborating context, not XML accept/reject rules for erroneous prose.',
             'terminal_state_source':str(report),'xsd_mutation':False,'frozen_inventory_mutation':False,'next_block':'Network','next_subblock':'Network_V2.0'}
           rp.write_text(json.dumps(d,indent=2,ensure_ascii=False)+'\n')
-          report.write_text('''# Finding Revalidation — DOOR V2.1\n\nDate: 2026-09-05  \nScope: `DRDOOR21-001`, `DRDOOR21-002`  \nEvidence: `EV-143`, successful run `33976777554`\n\n## Authority\nOfficial public DOOR V2.1 PDF: `7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8`. Exact release route: `VDV-301-2.1`, DoorStateServiceGroup blob `abff0f3960e2ec7a9caaa9ddeb6efff8f4183805`, Common V1.0 `194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c`, Enumerations V1.0 `a9bea5bc73003ed91ded8519db06c32c4067831d`. No latest-XSD substitution.\n\n## DRDOOR21-001 — context_verified\nPages 11–12 visibly contain shortened/incorrect operation names around `RetrieveSpecificDoorOpenState` and `RetrieveSpecificDoorOperationState`. The exact official XSD contains the `RetrieveSpecific...` structures and no shortened/typo aliases. The alternate-name hypothesis is rejected. Documentation-only defect; no validation alias or XSD change.\n\n## DRDOOR21-002 — context_verified\nThe `DoorOpenState` row is described as an operation state. Exact XSD structures separate `OpenState` from `OperationState`, rejecting deliberate-shared-semantics as an explanation. Documentation copy/paste defect only.\n\n## Closure\nEV-143 PASS; full XSD pool PASS; frozen inventory unchanged; no XSD mutation. Both findings terminal `context_verified`. Next: Network (`DRNET20-001..003`).\n''')
+          report.write_text('''# Finding Revalidation — DOOR V2.1\n\nDate: 2026-09-05  \nScope: `DRDOOR21-001`, `DRDOOR21-002`  \nEvidence: `EV-143`, successful run `33976777554`\n\n## Authority\nOfficial public DOOR V2.1 PDF: `7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8`. Exact release route: `VDV-301-2.1`, DoorStateServiceGroup blob `abff0f3960e2ec7a9caaa9ddeb6efff8f4183805`, Common V1.0 `194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c`, Enumerations V1.0 `a9bea5bc73003ed91ded8519db06c32c4067831d`. No latest-XSD substitution.\n\n## DRDOOR21-001 — context_verified\nPages 11–12 visibly contain shortened/incorrect operation names around `RetrieveSpecificDoorOpenState` and `RetrieveSpecificDoorOperationState`. The exact official XSD contains the `RetrieveSpecific...` structures and no shortened/typo aliases. The alternate-name hypothesis is rejected. Documentation-only defect; no validation alias or XSD change.\n\n## DRDOOR21-002 — context_verified\nThe `DoorOpenState` row is described as an operation state. Exact XSD structures separate `OpenState` from `OperationState`, rejecting deliberate-shared-semantics as an explanation. Documentation copy/paste defect only.\n\n## Closure\nEV-143 PASS; closure rerun PASS; full XSD pool PASS; frozen inventory unchanged; no XSD mutation. Both findings terminal `context_verified`. Next: Network (`DRNET20-001..003`).\n''')
           PY
+          rm -rf artifacts/ev143-closure local_sources/vdv_pdfs/DOOR_V2.1.pdf
           rm .github/workflows/door-v21-registry-closure.yml
           test -z "$(git status --short | awk '{print $2}' | grep -E '\.xsd$' || true)"
           changed="$(git status --short | awk '{print $2}' | sort)"
