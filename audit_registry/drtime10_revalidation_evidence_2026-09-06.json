@@ -1,0 +1,101 @@
+{
+  "evidence_id": "EV-147",
+  "date": "2026-09-06",
+  "result": "PASS",
+  "scope": [
+    "DRTIME10-001",
+    "DRTIME10-002",
+    "DRTIME10-003"
+  ],
+  "successful_run_id": "34028395412",
+  "successful_job_id": "101473376840",
+  "head_sha": "686ce92ede0f1391e04a4260bc7adf98b6ae3103",
+  "artifact_id": "9987794844",
+  "artifact_name": "drtime10-ev147",
+  "artifact_size_bytes": 579380,
+  "artifact_digest": "sha256:2fbb9272c55ebbe704ae4736f488af5758bc0cbbbc8902e77d1a46e19b1ffc92",
+  "authority": {
+    "source_id": "TIME_V1.0",
+    "publication": "VDV 301-2-10 TimeService V1.0, 02/2018",
+    "official_url": "https://www.vdv.de/301-2-10sds-v-1-01.pdfx",
+    "pdf_sha256": "d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3",
+    "pdf_size_bytes": 515920,
+    "pdf_page_count": 10,
+    "original_pin_evidence_run": "33196758957",
+    "deep_read_blob": "82a88fbd6dae5d22f472bf144770d915fcc902ea",
+    "semantic_authority_lane": "PDF/API/prose",
+    "time_service_xsd_authority": false,
+    "xsd_pool_role": "repository-regression-only"
+  },
+  "historical_review_reference": {
+    "RV-003": "The current deep-read narrative records the historical RV-003 result, but no current RV-003 checker or cyclic_time_broadcast_expected implementation exists on the audited branch. EV-147 re-derived the relevant invariant directly from the pinned source."
+  },
+  "rederived_invariants": {
+    "cyclic_time_broadcast_expected": false
+  },
+  "fresh_visual_evidence": {
+    "status": "PASS",
+    "inspection": "Fresh 180-DPI PNG renders from the exact byte-pinned PDF artifact were visually inspected after the successful EV-147 run.",
+    "legacy_visual_gap_targets": [3, 6],
+    "legacy_target_semantics": "Deep-read screenshot indices, not physical one-based PDF page numbers.",
+    "physical_pages": {
+      "4": {
+        "sha256": "1614a270b77c37cd2abb51bbfb84f3626554ff7b60b385c45b3b02ee29d2ac06",
+        "bytes": 131551,
+        "finding": "DRTIME10-001",
+        "visual_result": "German foreword visibly names VDV-Schrift 301-2-10 for TimeService while the adjacent English foreword visibly names VDV 301-2-1."
+      },
+      "6": {
+        "sha256": "099a2198df048ef805ea37ac559fc1adec24e9b622fd2e7b421ac31d8bbb0cfd",
+        "bytes": 402182,
+        "finding": "DRTIME10-002",
+        "visual_result": "German TimeService section visibly contains the sentence excluding cyclic current-time transmission; the directly following English TimeService section visibly omits that sentence."
+      },
+      "7": {
+        "sha256": "daf92ecdb9370957c772a73e46a016835a1d8e7e171915deea88288f53d395fd",
+        "bytes": 88405,
+        "finding": "DRTIME10-003",
+        "visual_result": "Version history visibly prints 'define Type for Service-Discovery: _ibisip_udp._udp (cd. 1)'."
+      }
+    }
+  },
+  "finding_results": {
+    "DRTIME10-001": {
+      "recommended_terminal_state": "context_verified",
+      "classification": "pdf_cross_reference_or_document_identity_error_candidate",
+      "executable_effect": false
+    },
+    "DRTIME10-002": {
+      "recommended_terminal_state": "context_verified",
+      "classification": "bilingual_normative_text_omission_candidate",
+      "executable_effect": false,
+      "runtime_profile_consequence": "Do not infer a generic cyclic UDP time-broadcast service; TimeService synchronization remains the SNTP path."
+    },
+    "DRTIME10-003": {
+      "recommended_terminal_state": "context_verified",
+      "classification": "minor_pdf_editorial_cross_reference_typo_candidate",
+      "executable_effect": false,
+      "intended_replacement_text": null
+    }
+  },
+  "active_disproof": {
+    "DRTIME10-001": "Equivalent-document-identity hypothesis rejected by the adjacent bilingual foreword in the same pinned VDV 301-2-10 publication.",
+    "DRTIME10-002": "Implicit-English-equivalence hypothesis rejected by direct visual and extracted comparison of the adjacent German and English TimeService sections.",
+    "DRTIME10-003": "Extraction-only hypothesis rejected by the fresh visible page-7 render; no intended correction for 'cd. 1' is invented."
+  },
+  "non_promoted_findings": [
+    "FR-TIM10-SEM-001",
+    "FR-TIM10-SEM-004"
+  ],
+  "full_xsd_pool": {
+    "count": 50,
+    "result": "PASS",
+    "role": "repository-regression-only",
+    "time_service_semantic_authority": false
+  },
+  "immutable_guards": {
+    "frozen_inventory_blob": "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf",
+    "frozen_inventory_mutated": false,
+    "xsd_mutated": false
+  }
+}
