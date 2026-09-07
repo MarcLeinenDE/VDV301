@@ -241,7 +241,7 @@ def main() -> int:
     assert not ok2, "JIS-003 negative unexpectedly validated"
 
     # JIS-004 exact operation declaration stays RetrieveAllRoutesPerLineRequest.
-    routes_req = one(service_doc.xpath("//xs:element[@name='JourneyInformationService.RetrieveAllRoutesPerLineRequest']", namespaces=NS), "RetrieveAllRoutesPerLineRequest")
+    routes_req = one(service_doc.xpath("/xs:schema/xs:element[@name='JourneyInformationService.RetrieveAllRoutesPerLineRequest']", namespaces=NS), "RetrieveAllRoutesPerLineRequest")
     assert routes_req.get("type") == "JourneyInformationService.RetrieveAllRoutesPerLineRequestStructure"
     routes_type = one(service_doc.xpath("//xs:complexType[@name='JourneyInformationService.RetrieveAllRoutesPerLineRequestStructure']", namespaces=NS), "RetrieveAllRoutesPerLineRequestStructure")
     line_ref = one(routes_type.xpath("./xs:sequence/xs:element[@name='LineRef']", namespaces=NS), "RetrieveAllRoutesPerLine.LineRef")
