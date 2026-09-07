@@ -1,0 +1,103 @@
+name: TEMP pin JIS V1.0 PDF
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths:
+      - .github/workflows/temp_pin_jis_v10.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pin-evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install PDF evidence tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+
+      - name: Fetch current official JIS V1.0 bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/jis-v10-pin/pages artifacts/jis-v10-pin/text local_sources/vdv_pdfs
+          python - <<'PY'
+          import hashlib, json, urllib.request
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          source_id = 'JIS_V1.0'
+          registry = json.loads(Path('audit_registry/pdf_source_registry_v0.1.json').read_text(encoding='utf-8'))
+          source = next(x for x in registry['sources'] if x['source_id'] == source_id)
+          assert source['official_url'] == 'https://www.vdv.de/301-2-6sds-v1-0.pdfx'
+          assert source['local_filename'] == 'JIS_V1.0.pdf'
+          req = urllib.request.Request(
+              source['official_url'],
+              headers={
+                  'User-Agent': 'VDV301-Audit-JIS-Pin/0.1 (+https://github.com/MarcLeinenDE/VDV301)',
+                  'Accept': 'application/pdf,application/octet-stream;q=0.9,*/*;q=0.1',
+              },
+          )
+          with urllib.request.urlopen(req, timeout=90) as response:
+              data = response.read()
+          assert data.startswith(b'%PDF-'), 'downloaded content is not PDF'
+          sha = hashlib.sha256(data).hexdigest()
+          target = Path('local_sources/vdv_pdfs') / source['local_filename']
+          target.write_bytes(data)
+          result = {
+              'source_id': source_id,
+              'official_url': source['official_url'],
+              'local_filename': source['local_filename'],
+              'sha256': sha,
+              'size_bytes': len(data),
+              'retrieved_at_utc': datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace('+00:00','Z'),
+              'pdf_signature_ok': True,
+              'registry_mutated': False,
+          }
+          Path('artifacts/jis-v10-pin/pin-result.json').write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
+          print(f"JIS_PIN_CANDIDATE sha256={sha} size={len(data)}")
+          PY
+
+      - name: Extract and render finding evidence pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          for p in 9 11 12 13 17 19 22; do
+            pdftoppm -f "$p" -l "$p" -singlefile -png -r 180 \
+              local_sources/vdv_pdfs/JIS_V1.0.pdf "artifacts/jis-v10-pin/pages/page-$p"
+            pdftotext -f "$p" -l "$p" -layout \
+              local_sources/vdv_pdfs/JIS_V1.0.pdf "artifacts/jis-v10-pin/text/page-$p-layout.txt"
+            pdftotext -f "$p" -l "$p" -raw \
+              local_sources/vdv_pdfs/JIS_V1.0.pdf "artifacts/jis-v10-pin/text/page-$p-raw.txt"
+          done
+          pdfinfo local_sources/vdv_pdfs/JIS_V1.0.pdf > artifacts/jis-v10-pin/pdfinfo.txt
+          sha256sum local_sources/vdv_pdfs/JIS_V1.0.pdf > artifacts/jis-v10-pin/pdf.sha256
+          find artifacts/jis-v10-pin -type f ! -name manifest.sha256 -print0 | sort -z | xargs -0 sha256sum > artifacts/jis-v10-pin/manifest.sha256
+          cat artifacts/jis-v10-pin/pin-result.json
+          cat artifacts/jis-v10-pin/pdfinfo.txt
+
+      - name: Verify immutable audit inputs untouched
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/06a_jis_v1_0_pdf_xsd_first_pass.md)" = "6add2ad2fe836767de9606232d0e70823c9c2212"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/06b_jis_findings_and_closure.md)" = "922f541f58b394803a69c4c58ec2e213dcb34d1f"
+          test "$(git hash-object IBIS-IP_JourneyInformationService_V1.0.xsd)" = "6021f2170298bb52ffb02dba462779db00d6bf59"
+          git diff --exit-code -- '*.xsd'
+          test -z "$(git status --porcelain --untracked-files=no)"
+
+      - name: Upload JIS V1.0 pin evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: jis-v10-pdf-pin
+          path: artifacts/jis-v10-pin
+          if-no-files-found: error
+          retention-days: 90
