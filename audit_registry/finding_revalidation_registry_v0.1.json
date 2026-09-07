@@ -780,8 +780,8 @@
       },
       {
         "finding_id": "HDS-001",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_HDS_2026-09-07.md"
       },
       {
         "finding_id": "JIS-001",
@@ -1123,7 +1123,7 @@
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true
   },
-  "next_revalidation_block": "HDS",
+  "next_revalidation_block": "JIS",
   "revalidation_blocks": {
     "ARA_V2.4": {
       "date": "2026-09-03",
@@ -2271,6 +2271,38 @@
       "next_block": "HDS",
       "next_subblock": "HDS_V21_V22_V22A_HDS001",
       "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTVS21_2026-09-07.md"
+    },
+    "HDS_V21_V22_V22A_HDS001": {
+      "date": "2026-09-07",
+      "state": "completed",
+      "parent_block": "HDS",
+      "scope_kind": "frozen_cross_version_non_xsd_profile_finding",
+      "source_ids": [
+        "HDS_V2.1",
+        "HDS_V2.2",
+        "HDS_V2.2a"
+      ],
+      "authority_lane": "three byte-pinned official HDS publications plus exact upstream V2.1/V2.2 release inventories and deterministic RV-002 profile evidence",
+      "service_model": "intentional_non_xsd_dns_sd_http_profile",
+      "evidence_id": "EV-151",
+      "evidence_run_id": "34091867070",
+      "evidence_job_id": "101646862752",
+      "evidence_head_sha": "9f84047937e66236c1741dfe8a35ac124f1ca758",
+      "artifact_id": "10007106356",
+      "artifact_digest": "sha256:90bc7a5e12af1fb65abd7d4c5d97748e3f2153fd3ab6297d7616c300c4a786ca",
+      "evidence_record": "audit_registry/hds_revalidation_evidence_2026-09-07.json",
+      "closure_run_id": "34092485260",
+      "closure_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/34092485260",
+      "findings": {
+        "HDS-001": "context_verified"
+      },
+      "runtime_evidence": "RV-002 rerun PASS; deterministic only, no live-network claim",
+      "dedicated_hds_xsd": false,
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false,
+      "next_block": "JIS",
+      "next_subblock": "JIS",
+      "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_HDS_2026-09-07.md"
     }
   }
 }
