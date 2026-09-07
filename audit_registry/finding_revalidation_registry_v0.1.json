@@ -760,23 +760,23 @@
       },
       {
         "finding_id": "DRTVS21-001",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "executable_confirmed",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTVS21_2026-09-07.md"
       },
       {
         "finding_id": "DRTVS21-002",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTVS21_2026-09-07.md"
       },
       {
         "finding_id": "DRTVS21-003",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTVS21_2026-09-07.md"
       },
       {
         "finding_id": "DRTVS21-004",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTVS21_2026-09-07.md"
       },
       {
         "finding_id": "HDS-001",
@@ -1123,7 +1123,7 @@
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true
   },
-  "next_revalidation_block": "DRTVS21",
+  "next_revalidation_block": "HDS",
   "revalidation_blocks": {
     "ARA_V2.4": {
       "date": "2026-09-03",
@@ -2226,6 +2226,51 @@
       "frozen_inventory_mutation": false,
       "next_block": "DRTVS21",
       "next_subblock": "TVS_V2.1_DRTVS21"
+    },
+    "TVS_V2.1_DRTVS21": {
+      "date": "2026-09-07",
+      "state": "completed",
+      "parent_block": "DRTVS21",
+      "scope_kind": "frozen_deep_read_findings_subblock",
+      "source_id": "TVS_V2.1",
+      "publication": "VDV 301-2-16 TicketValidationService V2.1, 07/2018",
+      "authority_lane": "byte-pinned official PDF plus exact official mixed-version XSD route TVS V2.1 -> Common V1.0 -> Enumerations V1.0",
+      "pdf_sha256": "676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d",
+      "pdf_size_bytes": 752652,
+      "original_pin_evidence_run_id": "33248946083",
+      "deep_read_blob": "d658d818833bfe7a436f92708ff4ec89402b51b3",
+      "evidence_id": "EV-150",
+      "evidence_run_id": "34087850644",
+      "evidence_job_id": "101635233786",
+      "evidence_head_sha": "9e99931b27645f4a45850b6c7a45486f04369825",
+      "artifact_id": "10005814043",
+      "artifact_digest": "sha256:8540e52a7866f8e034f2b5ed1496f2048173d183df58f7d9db42953c5ada579a",
+      "evidence_record": "audit_registry/drtvs21_revalidation_evidence_2026-09-07.json",
+      "closure_run_id": "34088402374",
+      "closure_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/34088402374",
+      "fresh_visual_physical_pages": [
+        5,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "visual_gap_status": "closed_by_fresh_byte_pinned_render_and_manual_inspection",
+      "findings": {
+        "DRTVS21-001": "executable_confirmed",
+        "DRTVS21-002": "context_verified",
+        "DRTVS21-003": "context_verified",
+        "DRTVS21-004": "context_verified"
+      },
+      "audit_correction": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_DRTVS21_003_V21_XSD_SUPPORT_2026-09-07.md",
+      "drtvs21_003_xsd_support_correction": "exact V2.1 service XSD contains neither local SubscribeCurrentStopPoint nor SubscribeCurrentStop operation/global element; finding survives on same-document PDF evidence",
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false,
+      "next_block": "HDS",
+      "next_subblock": "HDS_V21_V22_V22A_HDS001",
+      "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTVS21_2026-09-07.md"
     }
   }
 }

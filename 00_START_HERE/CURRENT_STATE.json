@@ -40,7 +40,7 @@
     "latest_dms_finding": "DRDMS24-002",
     "latest_common_finding": "DRCOM24-001",
     "resolved_historical_finding": "DR3012-006",
-    "latest_audit_correction": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_DR3012_003_V10_IDENTIFIER_TYPE_2026-09-03.md",
+    "latest_audit_correction": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_DRTVS21_003_V21_XSD_SUPPORT_2026-09-07.md",
     "choice_notation_correction_registry": "audit_registry/deep_read_findings_correction_choice_notation_2026-08-29.json",
     "choice_notation_rule": "VDV leading '-' in Min:Max denotes XML choice; -1:1 is not a negative/invalid cardinality; evaluate a/b/... labels and surrounding rows before comparing with XSD compositors",
     "choice_notation_finding_updates": {
@@ -867,12 +867,12 @@
     "finding_inventory_snapshot": "audit_registry/finding_inventory_frozen_2026-09-03.json",
     "finding_inventory_count": 192,
     "finding_inventory_source_head": "7fad145f528205ef5c40e58a3a23374379b08189",
-    "finding_revalidation_next_block": "DRTVS21",
-    "finding_revalidation_completed_findings": 122,
-    "finding_revalidation_pending_findings": 70,
-    "finding_revalidation_current_block": "TRAINSET_V2.2_DRTRAINSET22",
-    "finding_revalidation_latest_completed_block": "TRAINSET_V2.2_DRTRAINSET22",
-    "finding_revalidation_latest_terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTRAINSET22_2026-09-06.md",
+    "finding_revalidation_next_block": "HDS",
+    "finding_revalidation_completed_findings": 126,
+    "finding_revalidation_pending_findings": 66,
+    "finding_revalidation_current_block": "TVS_V2.1_DRTVS21",
+    "finding_revalidation_latest_completed_block": "TVS_V2.1_DRTVS21",
+    "finding_revalidation_latest_terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTVS21_2026-09-07.md",
     "latest_executable_evidence_id": "EV-142",
     "latest_executable_evidence_run_id": "33976613628",
     "latest_executable_evidence_run": "33976613628",
@@ -894,7 +894,7 @@
       "next_block": "DISC",
       "xsd_mutation": false
     },
-    "latest_revalidation_evidence_id": "EV-149",
+    "latest_revalidation_evidence_id": "EV-150",
     "disc_revalidation": {
       "status": "completed",
       "evidence_id": "EV-126",
@@ -1393,6 +1393,40 @@
       "report": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTRAINSET22_2026-09-06.md",
       "next_block": "DRTVS21",
       "next_subblock": "TVS_V2.1_DRTVS21",
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false
+    },
+    "drtvs21_revalidation": {
+      "status": "complete",
+      "completed_at_run": "34088402374",
+      "evidence_id": "EV-150",
+      "evidence_run_id": "34087850644",
+      "evidence_job_id": "101635233786",
+      "evidence_head_sha": "9e99931b27645f4a45850b6c7a45486f04369825",
+      "artifact_id": "10005814043",
+      "artifact_digest": "sha256:8540e52a7866f8e034f2b5ed1496f2048173d183df58f7d9db42953c5ada579a",
+      "terminal_states": {
+        "DRTVS21-001": "executable_confirmed",
+        "DRTVS21-002": "context_verified",
+        "DRTVS21-003": "context_verified",
+        "DRTVS21-004": "context_verified"
+      },
+      "exact_xsd_route": "TVS V2.1 -> Common V1.0 -> Enumerations V1.0",
+      "fresh_visual_physical_pages": [
+        5,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "visual_gap_status": "closed",
+      "audit_correction": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_DRTVS21_003_V21_XSD_SUPPORT_2026-09-07.md",
+      "drtvs21_003_finding_survives_after_xsd_support_correction": true,
+      "report": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTVS21_2026-09-07.md",
+      "next_block": "HDS",
+      "next_subblock": "HDS_V21_V22_V22A_HDS001",
       "xsd_mutation": false,
       "frozen_inventory_mutation": false
     }
