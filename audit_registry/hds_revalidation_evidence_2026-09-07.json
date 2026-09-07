@@ -1,0 +1,139 @@
+{
+  "evidence_id": "EV-151",
+  "date": "2026-09-07",
+  "result": "PASS",
+  "scope": [
+    "HDS-001"
+  ],
+  "successful_run_id": "34091867070",
+  "successful_job_id": "101646862752",
+  "head_sha": "9f84047937e66236c1741dfe8a35ac124f1ca758",
+  "artifact_id": "10007106356",
+  "artifact_name": "hds-ev151",
+  "artifact_size_bytes": 5478,
+  "artifact_digest": "sha256:90bc7a5e12af1fb65abd7d4c5d97748e3f2153fd3ab6297d7616c300c4a786ca",
+  "validator_blob": "6b4f77c21c85b11d109a0a3e9fa71528e08ef66a",
+  "authority": {
+    "service_model": "intentional_non_xsd_dns_sd_http_profile",
+    "HDS_V2.1": {
+      "official_url": "https://www.vdv.de/301-2-17-sds-v2-1-htmldisplayservice.pdfx",
+      "pdf_sha256": "c8aa91626bf60c8e74200200d63d44d497aeb3ab240c47039333b2c922a0e495",
+      "pdf_size_bytes": 734901,
+      "pin_run": "33265498869",
+      "deep_read_blob": "a71603fd2f1c1ad177da23722d07ee36af5eea87",
+      "finding_delta_blob": "3e0c7c13353d3fc868ec57d928afe6e48a0ca19e",
+      "official_upstream_tag": "VDV-301-2.1",
+      "official_upstream_tag_commit": "585e0bea34b64887db4276f1c94d5f3e78f06c66",
+      "dedicated_hds_xsd": false
+    },
+    "HDS_V2.2": {
+      "official_url": "https://www.vdv.de/301-2-17-sdes-v2-2-htmldisplayservice.pdfx",
+      "pdf_sha256": "bf62b7a8b6cfdf654181b48da2d85a805118687c7463a46fadfd32679c9b7577",
+      "pdf_size_bytes": 802399,
+      "pin_run": "33266549282",
+      "deep_read_blob": "bcee902b1bde7fdd7a705dac4dcabc35f6c1700f",
+      "finding_delta_blob": "0706cc787637a9b7e9d9534429c0854fc02de09a",
+      "official_upstream_tag": "VDV-301-2.2",
+      "official_upstream_tag_commit": "f283697124750d12189b960b302b399769bad530",
+      "dedicated_hds_xsd": false
+    },
+    "HDS_V2.2a": {
+      "official_url": "https://www.vdv.de/301-2-17-sdes-v2-2a-htmldisplayservice.pdfx",
+      "pdf_sha256": "f3da1994e719572ba1689aea2448b9533faf9e8fbe42720b9e737b98edd8b0f8",
+      "pdf_size_bytes": 431875,
+      "pin_run": "33266884196",
+      "deep_read_blob": "938e44a85256dcffba7e7201c00b6a1254e6d5b0",
+      "finding_delta_blob": "a25aaa64e81a07b41b190047067fbe4030ad3ff9",
+      "dedicated_upstream_tag_exists": false,
+      "dedicated_hds_xsd": false
+    }
+  },
+  "runtime_evidence": {
+    "checker": "tools/validate_discovery_runtime_rv002.py",
+    "checker_blob": "946488b2b7d08d681089ec5bbbfd6558dab57e35",
+    "profile": "tools/runtime_discovery_profile.py",
+    "profile_blob": "4473b913ad4576982789b2791b44e2cf1cba0c8d",
+    "rerun_result": "PASS",
+    "live_network_claim": false,
+    "version_boundaries": {
+      "2.1": "_http._tcp; TXT content+path; endpoint from SRV target/port plus TXT path",
+      "2.2": "canonical _http._tcp; TXT content+url; endpoint from TXT url",
+      "2.2a": "_ibisip_http._tcp transition/future label; _http._tcp accepted deprecated/future-not-recommended; endpoint from TXT url"
+    }
+  },
+  "finding_results": {
+    "HDS-001": {
+      "recommended_terminal_state": "context_verified",
+      "classification": "ok_with_note",
+      "validation_behavior": "discovery_http_profile_not_service_xsd",
+      "current_claim": "No dedicated HTMLDisplayService service XSD is required or missing; HDS is intentionally routed as a version-specific DNS-SD/HTTP profile.",
+      "executable_support": "RV-002 rerun PASS verifies deterministic V2.1/V2.2/V2.2a discovery and endpoint behavior."
+    }
+  },
+  "active_disproof": {
+    "official_VDV_301_2_1_tag_inventory": "checked; no dedicated HDS XSD",
+    "official_VDV_301_2_2_tag_inventory": "checked; no dedicated HDS XSD",
+    "integration_root_xsd_pool": "50 roots checked; no dedicated HDS XSD",
+    "hidden_xml_contract_hypothesis": "rejected by exact source authority plus release inventories",
+    "latest_wins": "forbidden; version-specific discovery rules retained"
+  },
+  "prior_visual_evidence": {
+    "HDS_V2.1": {
+      "render_run": "33265541783",
+      "pages": [
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    "HDS_V2.2": {
+      "render_run": "33266588436",
+      "pages": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    "HDS_V2.2a": {
+      "render_run": "33266920928",
+      "rendered_pages": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "focus_pages": [
+        8,
+        10,
+        11
+      ]
+    },
+    "status": "targeted pinned-byte visual review already complete in canonical Deep Reads; no HDS-001 visual gap remained"
+  },
+  "full_xsd_pool": {
+    "count": 50,
+    "result": "PASS",
+    "role": "repository-regression-only"
+  },
+  "immutable_guards": {
+    "frozen_inventory_blob": "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf",
+    "frozen_inventory_mutated": false,
+    "xsd_mutated": false
+  },
+  "infrastructure_note": {
+    "first_attempt_run_id": "34091700946",
+    "first_attempt_job_id": "101646352038",
+    "result": "FAIL",
+    "cause": "Fork checkout did not contain upstream release-tag refs locally.",
+    "substantive_finding_contradiction": false,
+    "repair": "Fetch and pin exact official VDVde/VDV301 tag commits before tag-inventory checks.",
+    "behavior_changed": false
+  }
+}
