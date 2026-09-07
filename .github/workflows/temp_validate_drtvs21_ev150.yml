@@ -1,0 +1,123 @@
+name: Temp validate DRTVS21 EV-150
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_validate_drtvs21_ev150.yml
+      - tools/validate_drtvs21_revalidation_ev150.py
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install PDF and XSD tooling
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          python -m pip install --disable-pip-version-check lxml
+
+      - name: Snapshot root XSD hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          find . -maxdepth 1 -type f -name '*.xsd' -print0 | sort -z | xargs -0 sha256sum > /tmp/xsd-before.sha256
+          test "$(git rev-parse HEAD:audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git rev-parse HEAD:docs/pdf_xsd_semantic_audit/deep_read/TVS_V2.1.md)" = "d658d818833bfe7a436f92708ff4ec89402b51b3"
+          test "$(git rev-parse HEAD:tools/validate_tvs_v21_ev112.py)" = "ac95c53ac1ca1900f51df0b06fe3f0ed623700f5"
+
+      - name: Fetch exact byte-pinned TVS V2.1 PDF
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib,json,time,urllib.request
+          from pathlib import Path
+          sid='TVS_V2.1'
+          sources=json.loads(Path('audit_registry/pdf_source_registry_v0.1.json').read_text())
+          pins=json.loads(Path('audit_registry/pdf_source_pins_v0.1.json').read_text())
+          source=next(x for x in sources['sources'] if x['source_id']==sid)
+          pin=next(x for x in pins['sources'] if x['source_id']==sid)
+          assert source['official_url']=='https://www.vdv.de/301-2-16-sds-v2-1-ticketvalidation.pdfx'
+          assert source['local_filename']=='TVS_V2.1.pdf'
+          assert pin['expected_sha256']=='676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d'
+          assert int(pin['expected_size_bytes'])==752652
+          assert str(pin['evidence_run_id'])=='33248946083'
+          for attempt in range(4):
+              try:
+                  req=urllib.request.Request(source['official_url'],headers={
+                    'User-Agent':'VDV301-Audit-EV150/0.1 (+https://github.com/MarcLeinenDE/VDV301)',
+                    'Accept':'application/pdf,application/octet-stream;q=0.9,*/*;q=0.1'})
+                  with urllib.request.urlopen(req,timeout=90) as r: data=r.read()
+                  break
+              except Exception:
+                  if attempt==3: raise
+                  time.sleep(2*(attempt+1))
+          sha=hashlib.sha256(data).hexdigest()
+          if sha != pin['expected_sha256'] or len(data) != int(pin['expected_size_bytes']):
+              raise AssertionError(f'OFFICIAL_SOURCE_BYTES_CHANGED current_sha={sha} current_size={len(data)}')
+          assert data.startswith(b'%PDF-')
+          target=Path('local_sources/vdv_pdfs')/source['local_filename']
+          target.parent.mkdir(parents=True,exist_ok=True)
+          target.write_bytes(data)
+          print('TVS_V21_PIN_OK',sha,len(data))
+          PY
+
+      - name: Run EV-150 on exact TVS V2.1 authority
+        run: |
+          python tools/validate_drtvs21_revalidation_ev150.py --repo-root . --output-dir artifacts/ev150
+
+      - name: Re-run EV-112 executable type-reference evidence
+        run: |
+          python tools/validate_tvs_v21_ev112.py
+
+      - name: Run complete XSD pool as repository regression guard
+        run: |
+          python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+
+      - name: Verify immutable boundaries and evidence separation
+        shell: bash
+        run: |
+          set -euo pipefail
+          find . -maxdepth 1 -type f -name '*.xsd' -print0 | sort -z | xargs -0 sha256sum > /tmp/xsd-after.sha256
+          diff -u /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          test "$(git rev-parse HEAD:audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('artifacts/ev150/ev150_results.json').read_text())
+          assert r['result']=='PASS'
+          assert r['recommended_terminal_states']=={
+            'DRTVS21-001':'executable_confirmed',
+            'DRTVS21-002':'context_verified',
+            'DRTVS21-003':'context_verified',
+            'DRTVS21-004':'context_verified'}
+          assert r['audit_correction']['required'] is True
+          assert r['audit_correction']['finding_survives'] is True
+          assert r['xsd_operation_inventory']['SubscribeCurrentStopPoint_present'] is False
+          assert r['xsd_operation_inventory']['SubscribeCurrentStop_present'] is False
+          print('EV150_IMMUTABLE_AND_CORRECTION_GUARDS_PASS')
+          PY
+
+      - name: Upload EV-150 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: drtvs21-ev150
+          path: artifacts/ev150
+          if-no-files-found: error
+          retention-days: 90
