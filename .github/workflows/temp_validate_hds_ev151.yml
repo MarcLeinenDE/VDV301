@@ -21,6 +21,16 @@ jobs:
           ref: dev/schema-integration
           fetch-depth: 0
 
+      - name: Fetch exact official upstream release tags
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags https://github.com/VDVde/VDV301.git \
+            refs/tags/VDV-301-2.1:refs/tags/VDV-301-2.1 \
+            refs/tags/VDV-301-2.2:refs/tags/VDV-301-2.2
+          test "$(git rev-parse refs/tags/VDV-301-2.1)" = "585e0bea34b64887db4276f1c94d5f3e78f06c66"
+          test "$(git rev-parse refs/tags/VDV-301-2.2)" = "f283697124750d12189b960b302b399769bad530"
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
