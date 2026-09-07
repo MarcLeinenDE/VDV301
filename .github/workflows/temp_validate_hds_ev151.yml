@@ -1,0 +1,108 @@
+name: HDS EV-151 revalidation
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - tools/validate_hds_revalidation_ev151.py
+      - .github/workflows/temp_validate_hds_ev151.yml
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install XSD tooling
+        run: |
+          python -m pip install --disable-pip-version-check lxml
+
+      - name: Snapshot immutable XSD pool
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          find . -maxdepth 1 -type f -name '*.xsd' -print0 | sort -z | xargs -0 sha256sum > /tmp/xsd-before.sha256
+          test "$(wc -l < /tmp/xsd-before.sha256)" -eq 50
+
+      - name: Fetch exact byte-pinned HDS PDFs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, time, urllib.request
+          from pathlib import Path
+
+          ids = ["HDS_V2.1", "HDS_V2.2", "HDS_V2.2a"]
+          sources = json.loads(Path("audit_registry/pdf_source_registry_v0.1.json").read_text())
+          pins = json.loads(Path("audit_registry/pdf_source_pins_v0.1.json").read_text())
+          sb = {x["source_id"]: x for x in sources["sources"]}
+          pb = {x["source_id"]: x for x in pins["sources"]}
+          target_dir = Path("local_sources/vdv_pdfs")
+          target_dir.mkdir(parents=True, exist_ok=True)
+
+          for sid in ids:
+              source = sb[sid]
+              pin = pb[sid]
+              data = None
+              for attempt in range(4):
+                  try:
+                      req = urllib.request.Request(
+                          source["official_url"],
+                          headers={
+                              "User-Agent": "VDV301-Audit-EV151/0.1 (+https://github.com/MarcLeinenDE/VDV301)",
+                              "Accept": "application/pdf,application/octet-stream;q=0.9,*/*;q=0.1",
+                          },
+                      )
+                      with urllib.request.urlopen(req, timeout=90) as response:
+                          data = response.read()
+                      break
+                  except Exception:
+                      if attempt == 3:
+                          raise
+                      time.sleep(2 * (attempt + 1))
+              assert data is not None and data.startswith(b"%PDF-")
+              sha = hashlib.sha256(data).hexdigest()
+              assert sha == pin["expected_sha256"], (sid, sha, pin["expected_sha256"])
+              assert len(data) == int(pin["expected_size_bytes"]), (sid, len(data))
+              (target_dir / source["local_filename"]).write_bytes(data)
+              print("PIN_OK", sid, sha, len(data))
+          PY
+
+      - name: Run EV-151 and deterministic RV-002
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/ev151
+          python -m py_compile tools/runtime_discovery_profile.py tools/validate_discovery_runtime_rv002.py tools/validate_hds_revalidation_ev151.py
+          python tools/validate_hds_revalidation_ev151.py --repo-root . --output-dir artifacts/ev151 | tee artifacts/ev151/ev151-validator.log
+          python tools/validate_discovery_runtime_rv002.py | tee artifacts/ev151/rv002.log
+
+      - name: Run full XSD regression pool
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests | tee artifacts/ev151/xsd-pool.log
+          find . -maxdepth 1 -type f -name '*.xsd' -print0 | sort -z | xargs -0 sha256sum > /tmp/xsd-after.sha256
+          diff -u /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          cp /tmp/xsd-before.sha256 artifacts/ev151/xsd-root-sha256.txt
+
+      - name: Upload EV-151 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: hds-ev151
+          path: artifacts/ev151
+          if-no-files-found: error
