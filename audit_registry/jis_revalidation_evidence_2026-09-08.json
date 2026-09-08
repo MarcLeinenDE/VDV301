@@ -1,0 +1,127 @@
+{
+  "evidence_id": "EV-152",
+  "date": "2026-09-08",
+  "result": "PASS",
+  "scope": [
+    "JIS-001",
+    "JIS-002",
+    "JIS-003",
+    "JIS-004",
+    "JIS-005"
+  ],
+  "successful_run_id": "34113437268",
+  "successful_job_id": "101714662141",
+  "head_sha": "4da900b4acf993b14bdfbe5f48e0fb386fbad3fe",
+  "artifact_id": "10015273758",
+  "artifact_name": "jis-ev152",
+  "artifact_size_bytes": 1742665,
+  "artifact_digest": "sha256:338e3fb679a8375c98fba359a3478d4cf7ba0968f3e97c08209ce52c0d23dc65",
+  "validator_blob": "d7c11eeb315f640648466b69cb1196cc095deb89",
+  "authority": {
+    "pdf": {
+      "source_id": "JIS_V1.0",
+      "official_url": "https://www.vdv.de/301-2-6sds-v1-0.pdfx",
+      "sha256": "424181b4932e18b6ac059843fa3978fdcc07a9c6acb553f9fbe8b71ef583da73",
+      "size_bytes": 772125,
+      "pin_run_id": "34103529949",
+      "pin_artifact_id": "10011459459"
+    },
+    "xsd_route": "JIS V1.0 -> Common V1.0 -> Enumerations V1.0",
+    "service_blob": "8c303db5a9c0548d66b90174d9c329d33092ad24",
+    "common_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+    "enumerations_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d"
+  },
+  "finding_results": {
+    "JIS-001": {
+      "recommended_terminal_state": "contextual_not_defect",
+      "classification_after_disproof": "contextual_not_defect",
+      "reason": "PDF explicitly delegates subscription structures to VDV 301-2-1 and Common V1.0 contains the four generic Subscribe/Unsubscribe structures; absence from local JIS group is intentional shared modelling.",
+      "visual_pages": [9, 12, 13],
+      "validation_behavior": "no JIS-local subscribe/unsubscribe element alias inferred"
+    },
+    "JIS-002": {
+      "recommended_terminal_state": "contextual_not_defect",
+      "classification_after_disproof": "contextual_not_defect",
+      "reason": "PDF operation overview uses generic DataAcceptedResponseStructure for Set* responses; Common V1.0 defines it while the JIS group contains the seven Set* request elements only.",
+      "visual_pages": [11, 22],
+      "validation_behavior": "no JIS-local Set*Response element inferred"
+    },
+    "JIS-003": {
+      "recommended_terminal_state": "executable_confirmed",
+      "classification_after_disproof": "executable_confirmed",
+      "reason": "PDF table 29 visibly marks LineInformation 1:*; exact XSD omits maxOccurs so XML Schema default maxOccurs=1 applies.",
+      "visual_pages": [19],
+      "xsd_declaration": {"minOccurs": "default=1", "maxOccurs": "default=1"},
+      "positive_one_line": true,
+      "negative_two_lines": false,
+      "negative_error": "<string>:5:0:ERROR:SCHEMASV:SCHEMAV_ELEMENT_CONTENT: Element 'LineInformation': This element is not expected."
+    },
+    "JIS-004": {
+      "recommended_terminal_state": "context_verified",
+      "classification_after_disproof": "context_verified",
+      "reason": "PDF section 1.22 RetrieveAllRoutesPerLine visibly carries SetBlockNumberRequest in table 38; exact XSD retains RetrieveAllRoutesPerLineRequest with LineRef.",
+      "visual_pages": [22],
+      "validation_behavior": "documentation label only; XSD operation is unchanged"
+    },
+    "JIS-005": {
+      "recommended_terminal_state": "executable_confirmed",
+      "classification_after_disproof": "executable_confirmed",
+      "reason": "PDF response choice row visibly names SpecificGNSSPointInformationData, while exact XSD choice element is SpecificGNSSPointInformation typed as JourneyInformationService.SpecificGNSSPointInformationData.",
+      "visual_pages": [17],
+      "positive_xsd_element_name": true,
+      "negative_pdf_row_name": false,
+      "negative_error": "<string>:2:0:ERROR:SCHEMASV:SCHEMAV_ELEMENT_CONTENT: Element 'SpecificGNSSPointInformationData': This element is not expected. Expected is one of ( SpecificGNSSPointInformation, OperationErrorMessage )."
+    }
+  },
+  "fresh_visual_evidence": {
+    "physical_pages": [9, 11, 12, 13, 17, 19, 22],
+    "render_dpi": 180,
+    "render_hashes": {
+      "9": {"sha256": "eb4274fd531510109c62ebb9d1c293ab8e440981edad130f517d3efec5cc655c", "size_bytes": 248222},
+      "11": {"sha256": "698a4c1099476acb970382172af6e8c7f3f0dcc42036babdd1b5d498ec31e741", "size_bytes": 207400},
+      "12": {"sha256": "a030e788fd63f9089778abda6ed4e9d3c466bdd2c389973d698e34698e0dd1e9", "size_bytes": 239750},
+      "13": {"sha256": "a5bfe1f0fabb40acfdb4f4475f2cb8f4f273c94e80bdf7010a6085490d5c823a", "size_bytes": 281265},
+      "17": {"sha256": "05e250698030a3d2af1b569d918c82e47c2b14092a8510030b261d206368b6ef", "size_bytes": 346188},
+      "19": {"sha256": "e011920ad88ddb14bef706c77f24993838a4748ef8c45c1e63653504f5c237cf", "size_bytes": 280952},
+      "22": {"sha256": "edbf46ad4beca13d4f6099c1f5e3556707b041ea1bc5c0cae0ab2258f183857b", "size_bytes": 270426}
+    },
+    "manual_visual_review_required_before_closure": true,
+    "manual_visual_review_completed": true,
+    "manual_visual_review_date": "2026-09-08",
+    "manual_visual_review_result": "PASS",
+    "manual_visual_review_notes": {
+      "9": "Generic Subscribe/Unsubscribe request/response structures are visibly used in the JIS operation overview.",
+      "11": "All seven Set* operations visibly use DataAcceptedResponseStructure for the response.",
+      "12": "SubscribeAllData and UnsubscribeAllData explicitly delegate their structures to VDV 301-2-1.",
+      "13": "SubscribeCurrentBlockRef and UnsubscribeCurrentBlockRef explicitly delegate their structures to VDV 301-2-1.",
+      "17": "The response choice visibly prints SpecificGNSSPointInformationData while the following table defines the Data-suffixed structure.",
+      "19": "AllLineInformationData visibly prints LineInformation with cardinality 1:*.",
+      "22": "RetrieveAllRoutesPerLine section/table visibly labels its LineRef request as SetBlockNumberRequest; the following SetBlockNumber section separately uses BlockRef."
+    }
+  },
+  "full_xsd_pool": {"count": 50, "result": "PASS"},
+  "prestate": {
+    "terminal": 127,
+    "pending": 65,
+    "first_pending": "JIS-001",
+    "expected_poststate_if_closed": {"terminal": 132, "pending": 60, "first_pending": "LS-001"}
+  },
+  "immutable_guards": {
+    "frozen_inventory_blob": "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf",
+    "frozen_inventory_mutated": false,
+    "xsd_mutated": false
+  },
+  "failed_closed_attempt": {
+    "run_id": "34113029896",
+    "job_id": "101713376822",
+    "head_sha": "bddfd5fb7a961be595eabf4d765dab958c7f23aa",
+    "result": "FAIL",
+    "repair_commit": "4da900b4acf993b14bdfbe5f48e0fb386fbad3fe",
+    "repair_commit_message": "audit: harden EV-152 global operation locator",
+    "substantive_finding_contradiction": false,
+    "behavior_changed": false
+  },
+  "closure_ready": true,
+  "xsd_mutation": false,
+  "frozen_inventory_mutation": false
+}
