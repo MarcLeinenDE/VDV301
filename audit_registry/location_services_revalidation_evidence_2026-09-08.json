@@ -1,0 +1,152 @@
+{
+  "evidence_id": "EV-153",
+  "date": "2026-09-08",
+  "result": "PASS",
+  "scope": [
+    "LS-001",
+    "LS-002",
+    "LS-003"
+  ],
+  "successful_run_id": "34229647400",
+  "successful_job_id": "102072276013",
+  "head_sha": "45eeed958b3f7f1081f19d6858e54a27824c682f",
+  "artifact_id": "10057222866",
+  "artifact_name": "ls-ev153",
+  "artifact_size_bytes": 1077575,
+  "artifact_digest": "sha256:914a1b126e8c06145fe0ccc896f4e2a85db5204a7562ad7dada21ad660fecff7",
+  "validator_blob": "5c75d6d0d363f969507f526db1c678c331d47387",
+  "runner_blob": "cc5f0c058152653e8defed5bc0d1959ac534cea6",
+  "authority": {
+    "pdfs": {
+      "BLS_V1.0": {
+        "official_url": "https://www.vdv.de/301-2-2sds-v1-0.pdfx",
+        "sha256": "1756dd8f373defd15988c222bea566a3841af376d987c0b0369f8701f2bc711d",
+        "size_bytes": 616519,
+        "pin_run_id": "34228583786",
+        "pin_job_id": "102068710920",
+        "pin_artifact_id": "10056787340"
+      },
+      "DLS_V1.0": {
+        "official_url": "https://www.vdv.de/301-2-4sds-v1-0.pdfx",
+        "sha256": "bdcbb3b2188f109944d687e6511209c5f049f25e1770bb3f4df596542d5009c4",
+        "size_bytes": 441422,
+        "pin_run_id": "34228583786",
+        "pin_job_id": "102068710920",
+        "pin_artifact_id": "10056787340"
+      },
+      "GNSS_V1.0": {
+        "official_url": "https://www.vdv.de/301-2-5sds-v1-0.pdfx",
+        "sha256": "e6a19a333a6c149a2d4b726a189acf16a9891d85dd28a7c5b008cdf254b631f5",
+        "size_bytes": 449287,
+        "pin_run_id": "34228583786",
+        "pin_job_id": "102068710920",
+        "pin_artifact_id": "10056787340"
+      },
+      "NLS_V1.0": {
+        "official_url": "https://www.vdv.de/301-2-7sds-v1-0.pdfx",
+        "sha256": "fa45c9ef69635ab8615e4cf7dbd5c0417f8ea154a817ea1c54a73a141c7f4697",
+        "size_bytes": 447715,
+        "pin_run_id": "34228583786",
+        "pin_job_id": "102068710920",
+        "pin_artifact_id": "10056787340"
+      }
+    },
+    "xsd_route": "four separate Location Services V1.0 service schemas -> Common V1.0 -> Enumerations V1.0",
+    "service_blobs": {
+      "BLS": "791e2889f2baa4779ab66ae9e77038ff1b4be915",
+      "DLS": "e6fdc418b6ddaba75d3fbe8f048d1c6d70e023b6",
+      "GNSS": "a74a22079af25cdd028a3e519019d9b3326d9971",
+      "NLS": "bd1f83df2dfa83f36666a3ab3df4457242b387e9"
+    },
+    "common_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+    "enumerations_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+    "frozen_source_head": "7fad145f528205ef5c40e58a3a23374379b08189"
+  },
+  "finding_results": {
+    "LS-001": {
+      "recommended_terminal_state": "executable_confirmed",
+      "classification_after_disproof": "confirmed PDF/XSD spelling discrepancy",
+      "reason": "GNSS V1.0 PDF prints HorizontalDilutionOfPrecision while the exact V1.0 XSD defines HoriziontalDilutionOfPrecision. The XSD-spelled sample validates and the PDF-spelled sample is rejected.",
+      "visual_pages": ["GNSS_V1.0:7"],
+      "pdf_spelling": "HorizontalDilutionOfPrecision",
+      "xsd_spelling": "HoriziontalDilutionOfPrecision",
+      "positive_xsd_sample_valid": true,
+      "negative_pdf_spelling_rejected": true
+    },
+    "LS-002": {
+      "recommended_terminal_state": "contextual_not_defect",
+      "classification_after_disproof": "OK with note; exact XML name aligned",
+      "reason": "Distance V1.0 PDF and XSD both use the exact XML element name Odometer-Pulses. A normalized OdometerPulses alias is rejected by the selected XSD.",
+      "visual_pages": ["DLS_V1.0:7"],
+      "exact_name": "Odometer-Pulses",
+      "positive_exact_name_valid": true,
+      "normalized_alias_rejected": true
+    },
+    "LS-003": {
+      "recommended_terminal_state": "contextual_not_defect",
+      "classification_after_disproof": "OK with note; intentional service-specific root modelling",
+      "reason": "Beacon V1.0 uses BeaconLocationService.GetDataResponse while Distance, GNSS and Network V1.0 expose raw *.Data roots. Each positive sample validates only against its intended service schema; no generic/latest Location root is inferred.",
+      "visual_pages": ["BLS_V1.0:8", "DLS_V1.0:7", "GNSS_V1.0:7", "NLS_V1.0:7"],
+      "roots": {
+        "BLS": ["BeaconLocationService.GetDataResponse"],
+        "DLS": ["DistanceLocationService.Data"],
+        "GNSS": ["GNSSLocationService.Data"],
+        "NLS": ["NetworkLocationService.Data"]
+      },
+      "routing_confirmed": true
+    }
+  },
+  "fresh_visual_evidence": {
+    "physical_pages": [
+      "BLS_V1.0:7",
+      "BLS_V1.0:8",
+      "DLS_V1.0:7",
+      "GNSS_V1.0:7",
+      "NLS_V1.0:7"
+    ],
+    "render_dpi": 180,
+    "render_hashes": {
+      "BLS_V1.0:7": {"sha256": "40df64802d52da1e3984ba25a3664fc2caef6b8a4eb839029905c8e7c7b7fc07", "size_bytes": 208600},
+      "BLS_V1.0:8": {"sha256": "698b315983a5c8ee7fa5205c885c9b37b983007650a6f65077063cae8518f709", "size_bytes": 207741},
+      "DLS_V1.0:7": {"sha256": "5ba0c63b9343c55e108b8741e5ee7eadeb1ae036b97045e335992ca4f195af7d", "size_bytes": 130087},
+      "GNSS_V1.0:7": {"sha256": "400ca6d9488609131a9fcab6ff024b7e8d310d972f48174d96cd7b429e5bce8e", "size_bytes": 341322},
+      "NLS_V1.0:7": {"sha256": "0d2ef56f421381ca4f18b9ff7978bcef9b8c8bc4fafa342d0d702d4061fc53de", "size_bytes": 268778}
+    },
+    "manual_visual_review_required_before_closure": true,
+    "manual_visual_review_completed": true,
+    "manual_visual_review_date": "2026-09-08",
+    "manual_visual_review_result": "PASS",
+    "manual_visual_review_notes": {
+      "GNSS_V1.0:7": "The table visibly prints HorizontalDilutionOfPrecision.",
+      "DLS_V1.0:7": "The table visibly prints Odometer-Pulses with the hyphen.",
+      "BLS_V1.0:8": "The response table visibly uses BeaconLocationService.GetDataResponse with Data / OperationErrorMessage choice.",
+      "NLS_V1.0:7": "The data table visibly uses NetworkLocationService.Data, consistent with raw Data modelling."
+    }
+  },
+  "full_xsd_pool": {"count": 50, "result": "PASS"},
+  "prestate": {
+    "terminal": 132,
+    "pending": 60,
+    "first_pending": "LS-001",
+    "expected_poststate_if_closed": {"terminal": 135, "pending": 57, "first_pending": "NET-001"}
+  },
+  "immutable_guards": {
+    "frozen_inventory_blob": "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf",
+    "frozen_inventory_mutated": false,
+    "xsd_mutated": false
+  },
+  "failed_closed_attempt": {
+    "run_id": "34229230088",
+    "job_id": "102070886371",
+    "head_sha": "75e13e88f9edf7b105e134f6f98ce184b1015033",
+    "result": "FAIL",
+    "failure_reason": "pdftotext -layout split the long GNSS identifier, causing a textual evidence assertion to fail after all authority guards and PDF pins had passed",
+    "repair_commit": "45eeed958b3f7f1081f19d6858e54a27824c682f",
+    "repair_commit_message": "audit: rerun EV-153 with robust PDF extraction",
+    "substantive_finding_contradiction": false,
+    "behavior_changed": false
+  },
+  "closure_ready": true,
+  "xsd_mutation": false,
+  "frozen_inventory_mutation": false
+}
