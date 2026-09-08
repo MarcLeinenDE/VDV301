@@ -1,0 +1,142 @@
+{
+  "evidence_id": "EV-154",
+  "date": "2026-09-08",
+  "result": "PASS",
+  "scope": [
+    "NET-001",
+    "NET-002",
+    "NET-003"
+  ],
+  "successful_run_id": "34232483234",
+  "successful_job_id": "102081822927",
+  "head_sha": "3645ddfeb32effd0b17432672ab91476e1accdf8",
+  "artifact_id": "10058380451",
+  "artifact_name": "network-ev154",
+  "artifact_size_bytes": 1797394,
+  "artifact_digest": "sha256:dcb266cad68054375d65818fda20d7ec53c59843a48525d60b3ade62f5c38396",
+  "validator_blob": "590a970a998dad780a1554220e2e2271b783bfe8",
+  "validation_workflow_blob": "b388fc0617ec5a5b1b60ebb827b5bea77ecef095",
+  "authority": {
+    "source_id": "VDV301-3_02-2020",
+    "publication": "VDV-Schrift 301-3 Network Infrastructure, 02/2020",
+    "official_url": "https://www.vdv.de/301-3-sdes-network-infrastructure.pdfx",
+    "pdf_sha256": "edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99",
+    "pdf_size_bytes": 558005,
+    "fresh_pin_run_id": "34232022618",
+    "fresh_pin_job_id": "102080274471",
+    "fresh_pin_head_sha": "ce24df3f6e637734dadf3643b3d6f8f689be001c",
+    "fresh_pin_artifact_id": "10058187809",
+    "fresh_pin_artifact_digest": "sha256:5f978eccdddf1d20cd6b62b4798bceae12b11438a4cbf59d9d5a98611a17421a",
+    "historical_pin_run_id": "33270251357",
+    "historical_pin_job_id": "99147343832",
+    "historical_pin_artifact_id": "9719880284",
+    "historical_pin_artifact_digest": "sha256:2cc403407a354af07c2dfc1cc78666e0f16fc753af6eebfaf090b0300214d930",
+    "fresh_bytes_match_historical_pin": true,
+    "frozen_source_head": "7fad145f528205ef5c40e58a3a23374379b08189",
+    "independent_deep_read_blob": "ddb4f49da1e3afa55920e50f9e74e554748f1378",
+    "historical_handoff_blob": "69bb404f71eb4173c8757b6c7751f2b3922588b9",
+    "validation_lane": "physical/network/protocol documentation; intentionally no XSD lane"
+  },
+  "definition_provenance": {
+    "independent_source_observations_created_before_historical_reconciliation": true,
+    "NET-001": "FR-NET20-OBS-001 independently rediscovered and reconciled to historical NET-001",
+    "NET-002": "FR-NET20-OBS-002 independently rediscovered and reconciled to historical NET-002",
+    "NET-003": "IEE 802.3 part of FR-NET20-OBS-005 independently rediscovered and reconciled to historical NET-003",
+    "rv002_used_as_decisive_evidence": false,
+    "rv002_note": "RV-002 is deterministic DNS-SD classifier evidence only and does not validate these documentation findings."
+  },
+  "finding_results": {
+    "NET-001": {
+      "recommended_terminal_state": "context_verified",
+      "classification_after_disproof": "English documentation-number typo",
+      "reason": "English Scope page 8 visibly says VDV 303-3, while German Scope page 7, the footer and the publication identity establish VDV 301-3. Alternate document identity is actively disproved.",
+      "physical_pages": [7, 8],
+      "observed_wrong": "VDV 303-3",
+      "document_identity_confirmed": "VDV 301-3",
+      "alternate_document_identity_rejected": true
+    },
+    "NET-002": {
+      "recommended_terminal_state": "context_verified",
+      "classification_after_disproof": "bilingual subsection-numbering editorial error",
+      "reason": "German page 14 numbers the cabling section 2.3.4; English page 20 and the English table of contents on page 6 call the corresponding section 2.3.5, while the preceding English sequence ends at 2.3.3.",
+      "physical_pages": [6, 14, 20],
+      "german_number": "2.3.4",
+      "english_number": "2.3.5",
+      "english_toc_skip_confirmed": true
+    },
+    "NET-003": {
+      "recommended_terminal_state": "context_verified",
+      "classification_after_disproof": "local IEEE spelling typo",
+      "reason": "German page 11 visibly says IEE 802.3, while pages 7/8 and the PoE reference on page 29 use the correct IEEE spelling in the same exact publication. Intentional alternate terminology is actively disproved.",
+      "physical_pages": [7, 8, 11, 29],
+      "observed_wrong": "IEE 802.3",
+      "correct_spelling_elsewhere_same_writing": true
+    }
+  },
+  "active_falsification": {
+    "alternate_VDV_303_3_document_identity_rejected": true,
+    "intentional_bilingual_2_3_4_to_2_3_5_renumbering_rejected": true,
+    "intentional_IEE_abbreviation_rejected": true,
+    "broader_deep_read_rejections_retained": [
+      "CAT6/55m sentence not promoted as independent defect",
+      "embedded Figure/Table labels not promoted",
+      "empty first-edition version history not promoted",
+      "absence of XSD not promoted",
+      "interactive screenshot cache misses not promoted"
+    ]
+  },
+  "fresh_visual_evidence": {
+    "physical_pages": [6, 7, 8, 11, 14, 20, 29],
+    "render_dpi": 180,
+    "render_hashes": {
+      "6": {"sha256": "f48e04a4663ce0e3d6175176074e971948630d223564f2b8c7e2636c4cb0a98e", "size_bytes": 230957},
+      "7": {"sha256": "be9c6c96cab9989dd79c6e5a58b62f170fcbe62450444c87707b186a68706e1e", "size_bytes": 323271},
+      "8": {"sha256": "1a50ca1b7db00fe9f7e2f8eb97e197c627ce99fd9acff602da4fe921bd9dc429", "size_bytes": 262659},
+      "11": {"sha256": "91bfa3416a4193d1ec2aadce859aec85708fb8d113f0e2167728c7886c3ccb2f", "size_bytes": 356200},
+      "14": {"sha256": "709480cd89494e6da2c9ea590c7826d8c17ec6ce5be1360ce89a54ce70c90a77", "size_bytes": 311919},
+      "20": {"sha256": "30b8f5d5139833ada803a58c9cff112c1f0273f1ff892363380963897edf1b16", "size_bytes": 285445},
+      "29": {"sha256": "2d29469bf5e5a5ba63e92f9cc8461200d703d46a9f11e710ca356cd09283ecd2", "size_bytes": 150267}
+    },
+    "pin_and_validator_render_hashes_identical": true,
+    "manual_visual_review_required_before_closure": true,
+    "manual_visual_review_completed": true,
+    "manual_visual_review_date": "2026-09-08",
+    "manual_visual_review_result": "PASS",
+    "manual_visual_review_notes": {
+      "6": "English contents visibly skips from 2.3.3 to 2.3.5 for the cabling section.",
+      "7": "German Scope visibly identifies VDV 301-3 and uses correct IEEE 802.3 spelling.",
+      "8": "English Scope visibly prints VDV 303-3 while the same page footer identifies VDV-Schrift 301-3.",
+      "11": "German fibre paragraph visibly prints IEE 802.3.",
+      "14": "German cabling section visibly numbered 2.3.4.",
+      "20": "English corresponding cabling section visibly numbered 2.3.5.",
+      "29": "Same publication visibly uses correct IEEE 802.3af/at/bt spelling in German and English PoE text."
+    }
+  },
+  "executable_evidence": {
+    "applicable": false,
+    "reason": "VDV 301-3 intentionally has no XSD lane; NET-001..003 are non-executable documentation/editorial context findings."
+  },
+  "full_xsd_pool": {
+    "count": 50,
+    "result": "PASS",
+    "role": "regression/no-mutation guard only"
+  },
+  "prestate": {
+    "terminal": 135,
+    "pending": 57,
+    "first_pending": "NET-001",
+    "expected_poststate_if_closed": {
+      "terminal": 138,
+      "pending": 54,
+      "first_pending": "PCS-001"
+    }
+  },
+  "immutable_guards": {
+    "frozen_inventory_blob": "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf",
+    "frozen_inventory_mutated": false,
+    "xsd_mutated": false
+  },
+  "closure_ready": true,
+  "xsd_mutation": false,
+  "frozen_inventory_mutation": false
+}
