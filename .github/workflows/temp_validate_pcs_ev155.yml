@@ -92,10 +92,14 @@ jobs:
           git -C artifacts/upstream-git init
           git -C artifacts/upstream-git remote add origin https://github.com/VDVde/VDV301.git
           git -C artifacts/upstream-git fetch --depth=1 origin refs/tags/VDV-301-1.0:refs/tags/VDV-301-1.0 refs/tags/VDV-301-2.0:refs/tags/VDV-301-2.0 refs/tags/VDV-301-2.1:refs/tags/VDV-301-2.1
+          echo "V1_TAG=$(git -C artifacts/upstream-git rev-parse VDV-301-1.0)"
+          echo "V1_COMMIT=$(git -C artifacts/upstream-git rev-parse VDV-301-1.0^{})"
+          echo "V20_COMMIT=$(git -C artifacts/upstream-git rev-parse VDV-301-2.0^{})"
+          echo "V21_COMMIT=$(git -C artifacts/upstream-git rev-parse VDV-301-2.1^{})"
           test "$(git -C artifacts/upstream-git rev-parse VDV-301-1.0)" = "ef38d3babebfbb72e6bcdc42c7026e13bab77f69"
-          test "$(git -C artifacts/upstream-git rev-parse VDV-301-1.0^{})" = "f282d22bcec0925325293baaaec8c90d5b399ca8"
-          test "$(git -C artifacts/upstream-git rev-parse VDV-301-2.0^{})" = "351085b7a320335daa91434b3bb2df3148c07d58"
-          test "$(git -C artifacts/upstream-git rev-parse VDV-301-2.1^{})" = "ba6cf6395c35b4983532382be06060d35f279c1d"
+          test "$(git -C artifacts/upstream-git rev-parse VDV-301-1.0^{})" = "f5b53785f703e898632603eec3bfa3555a79fdba"
+          test "$(git -C artifacts/upstream-git rev-parse VDV-301-2.0^{})" = "f2569a91f0a7c737a0ca7c0280b28ad223d7ee08"
+          test "$(git -C artifacts/upstream-git rev-parse VDV-301-2.1^{})" = "585e0bea34b64887db4276f1c94d5f3e78f06c66"
           test "$(git -C artifacts/upstream-git rev-parse VDV-301-1.0^{}:IBIS-IP_PassengerCountingService_V1.0.xsd)" = "600a3ee6290c630a4435fb06ca9803dabaceb788"
           test "$(git -C artifacts/upstream-git rev-parse VDV-301-1.0^{}:IBIS_IP_V1.0.xsd)" = "41289eaed2674a169fdf77a10a2eff293c76d5c4"
           test "$(git -C artifacts/upstream-git rev-parse VDV-301-2.0^{}:IBIS-IP_PassengerCountingService_V1.0.xsd)" = "4161872be76740abfdd1cddf96f8a736333fc8be"
