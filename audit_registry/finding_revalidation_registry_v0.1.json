@@ -825,18 +825,18 @@
       },
       {
         "finding_id": "NET-001",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_NETWORK_2026-09-08.md"
       },
       {
         "finding_id": "NET-002",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_NETWORK_2026-09-08.md"
       },
       {
         "finding_id": "NET-003",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_NETWORK_2026-09-08.md"
       },
       {
         "finding_id": "PCS-001",
@@ -1123,7 +1123,7 @@
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true
   },
-  "next_revalidation_block": "NET",
+  "next_revalidation_block": "PCS",
   "revalidation_blocks": {
     "ARA_V2.4": {
       "date": "2026-09-03",
@@ -2434,6 +2434,69 @@
       "next_block": "NET",
       "next_subblock": "NET",
       "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_LOCATION_SERVICES_2026-09-08.md"
+    },
+    "VDV301-3_02-2020": {
+      "date": "2026-09-08",
+      "state": "completed",
+      "parent_block": "NET",
+      "scope_kind": "frozen_VDV301_3_network_documentation_findings",
+      "source_ids": [
+        "VDV301-3_02-2020"
+      ],
+      "publication": "VDV-Schrift 301-3 Network Infrastructure, 02/2020",
+      "authority_lane": "byte-pinned official VDV 301-3 PDF plus independent frozen-head Deep Read; intentionally no XSD lane",
+      "pdf": {
+        "source_id": "VDV301-3_02-2020",
+        "publication": "VDV-Schrift 301-3 Network Infrastructure, 02/2020",
+        "official_url": "https://www.vdv.de/301-3-sdes-network-infrastructure.pdfx",
+        "pdf_sha256": "edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99",
+        "pdf_size_bytes": 558005,
+        "fresh_pin_run_id": "34232022618",
+        "fresh_pin_job_id": "102080274471",
+        "fresh_pin_head_sha": "ce24df3f6e637734dadf3643b3d6f8f689be001c",
+        "fresh_pin_artifact_id": "10058187809",
+        "fresh_pin_artifact_digest": "sha256:5f978eccdddf1d20cd6b62b4798bceae12b11438a4cbf59d9d5a98611a17421a",
+        "historical_pin_run_id": "33270251357",
+        "historical_pin_job_id": "99147343832",
+        "historical_pin_artifact_id": "9719880284",
+        "historical_pin_artifact_digest": "sha256:2cc403407a354af07c2dfc1cc78666e0f16fc753af6eebfaf090b0300214d930",
+        "fresh_bytes_match_historical_pin": true,
+        "frozen_source_head": "7fad145f528205ef5c40e58a3a23374379b08189",
+        "independent_deep_read_blob": "ddb4f49da1e3afa55920e50f9e74e554748f1378",
+        "historical_handoff_blob": "69bb404f71eb4173c8757b6c7751f2b3922588b9",
+        "validation_lane": "physical/network/protocol documentation; intentionally no XSD lane"
+      },
+      "evidence_id": "EV-154",
+      "evidence_run_id": "34232483234",
+      "evidence_job_id": "102081822927",
+      "evidence_head_sha": "3645ddfeb32effd0b17432672ab91476e1accdf8",
+      "artifact_id": "10058380451",
+      "artifact_digest": "sha256:dcb266cad68054375d65818fda20d7ec53c59843a48525d60b3ade62f5c38396",
+      "evidence_record": "audit_registry/network_vdv301_3_revalidation_evidence_2026-09-08.json",
+      "closure_run_id": "34266935807",
+      "closure_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/34266935807",
+      "fresh_visual_physical_pages": [
+        6,
+        7,
+        8,
+        11,
+        14,
+        20,
+        29
+      ],
+      "visual_status": "closed_by_fresh_byte_pinned_render_and_manual_inspection",
+      "findings": {
+        "NET-001": "context_verified",
+        "NET-002": "context_verified",
+        "NET-003": "context_verified"
+      },
+      "full_xsd_pool": "50 roots PASS as regression/no-mutation guard only",
+      "xsd_lane_applicable": false,
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false,
+      "next_block": "PCS",
+      "next_subblock": "PCS",
+      "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_NETWORK_2026-09-08.md"
     }
   }
 }
