@@ -810,18 +810,18 @@
       },
       {
         "finding_id": "LS-001",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "executable_confirmed",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_LOCATION_SERVICES_2026-09-08.md"
       },
       {
         "finding_id": "LS-002",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "contextual_not_defect",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_LOCATION_SERVICES_2026-09-08.md"
       },
       {
         "finding_id": "LS-003",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "contextual_not_defect",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_LOCATION_SERVICES_2026-09-08.md"
       },
       {
         "finding_id": "NET-001",
@@ -1123,7 +1123,7 @@
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true
   },
-  "next_revalidation_block": "LS",
+  "next_revalidation_block": "NET",
   "revalidation_blocks": {
     "ARA_V2.4": {
       "date": "2026-09-03",
@@ -2350,6 +2350,90 @@
       "next_block": "LS",
       "next_subblock": "LS",
       "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_JIS_2026-09-08.md"
+    },
+    "LS_V1.0": {
+      "date": "2026-09-08",
+      "state": "completed",
+      "parent_block": "LS",
+      "scope_kind": "frozen_Location_Services_V1.0_pdf_xsd_findings",
+      "source_ids": [
+        "BLS_V1.0",
+        "DLS_V1.0",
+        "GNSS_V1.0",
+        "NLS_V1.0"
+      ],
+      "publication": "VDV 301-2-2/-4/-5/-7 Location Services V1.0, 07/2016",
+      "authority_lane": "four byte-pinned official Location Services V1.0 PDFs plus four exact historical service schemas and Common V1.0 + Enumerations V1.0",
+      "pdfs": {
+        "BLS_V1.0": {
+          "official_url": "https://www.vdv.de/301-2-2sds-v1-0.pdfx",
+          "sha256": "1756dd8f373defd15988c222bea566a3841af376d987c0b0369f8701f2bc711d",
+          "size_bytes": 616519,
+          "pin_run_id": "34228583786",
+          "pin_job_id": "102068710920",
+          "pin_artifact_id": "10056787340"
+        },
+        "DLS_V1.0": {
+          "official_url": "https://www.vdv.de/301-2-4sds-v1-0.pdfx",
+          "sha256": "bdcbb3b2188f109944d687e6511209c5f049f25e1770bb3f4df596542d5009c4",
+          "size_bytes": 441422,
+          "pin_run_id": "34228583786",
+          "pin_job_id": "102068710920",
+          "pin_artifact_id": "10056787340"
+        },
+        "GNSS_V1.0": {
+          "official_url": "https://www.vdv.de/301-2-5sds-v1-0.pdfx",
+          "sha256": "e6a19a333a6c149a2d4b726a189acf16a9891d85dd28a7c5b008cdf254b631f5",
+          "size_bytes": 449287,
+          "pin_run_id": "34228583786",
+          "pin_job_id": "102068710920",
+          "pin_artifact_id": "10056787340"
+        },
+        "NLS_V1.0": {
+          "official_url": "https://www.vdv.de/301-2-7sds-v1-0.pdfx",
+          "sha256": "fa45c9ef69635ab8615e4cf7dbd5c0417f8ea154a817ea1c54a73a141c7f4697",
+          "size_bytes": 447715,
+          "pin_run_id": "34228583786",
+          "pin_job_id": "102068710920",
+          "pin_artifact_id": "10056787340"
+        }
+      },
+      "service_xsd_blobs": {
+        "BLS": "791e2889f2baa4779ab66ae9e77038ff1b4be915",
+        "DLS": "e6fdc418b6ddaba75d3fbe8f048d1c6d70e023b6",
+        "GNSS": "a74a22079af25cdd028a3e519019d9b3326d9971",
+        "NLS": "bd1f83df2dfa83f36666a3ab3df4457242b387e9"
+      },
+      "common_xsd_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+      "enumerations_xsd_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+      "evidence_id": "EV-153",
+      "evidence_run_id": "34229647400",
+      "evidence_job_id": "102072276013",
+      "evidence_head_sha": "45eeed958b3f7f1081f19d6858e54a27824c682f",
+      "artifact_id": "10057222866",
+      "artifact_digest": "sha256:914a1b126e8c06145fe0ccc896f4e2a85db5204a7562ad7dada21ad660fecff7",
+      "evidence_record": "audit_registry/location_services_revalidation_evidence_2026-09-08.json",
+      "closure_run_id": "34230809592",
+      "closure_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/34230809592",
+      "fresh_visual_physical_pages": [
+        "BLS_V1.0:7",
+        "BLS_V1.0:8",
+        "DLS_V1.0:7",
+        "GNSS_V1.0:7",
+        "NLS_V1.0:7"
+      ],
+      "visual_status": "closed_by_fresh_byte_pinned_render_and_manual_inspection",
+      "findings": {
+        "LS-001": "executable_confirmed",
+        "LS-002": "contextual_not_defect",
+        "LS-003": "contextual_not_defect"
+      },
+      "full_xsd_pool": "50 roots PASS",
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false,
+      "next_block": "NET",
+      "next_subblock": "NET",
+      "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_LOCATION_SERVICES_2026-09-08.md"
     }
   }
 }
