@@ -1,0 +1,111 @@
+name: TEMP validate Location Services EV-153 v2
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths:
+      - .github/workflows/temp_validate_location_services_ev153_v2.yml
+      - tools/run_location_services_revalidation_ev153.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ev153:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install validation and PDF tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          python -m pip install --disable-pip-version-check lxml
+
+      - name: Snapshot immutable authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git rev-parse HEAD:audit_registry/finding_revalidation_registry_v0.1.json)" = "f3ade5d00f59cb409767b8928ea92e5e11b8b203"
+          test "$(git rev-parse HEAD:00_START_HERE/CURRENT_STATE.json)" = "c47e024f267751f1d9f8d4e2aea66bca0c200c6b"
+          test "$(git rev-parse HEAD:tools/validate_location_services_revalidation_ev153.py)" = "5c75d6d0d363f969507f526db1c678c331d47387"
+          test "$(git rev-parse HEAD:tools/run_location_services_revalidation_ev153.py)" = "cc5f0c058152653e8defed5bc0d1959ac534cea6"
+          test "$(git rev-parse HEAD:.github/workflows/temp_pin_location_services_v10.yml)" = "45ae18965997e87c599689190e02ef62175992b1"
+          test "$(git rev-parse HEAD:IBIS-IP_BeaconLocationService_V1.0.xsd)" = "791e2889f2baa4779ab66ae9e77038ff1b4be915"
+          test "$(git rev-parse HEAD:IBIS-IP_DistanceLocationService_V1.0.xsd)" = "e6fdc418b6ddaba75d3fbe8f048d1c6d70e023b6"
+          test "$(git rev-parse HEAD:IBIS-IP_GNSSLocationService_V1.0.xsd)" = "a74a22079af25cdd028a3e519019d9b3326d9971"
+          test "$(git rev-parse HEAD:IBIS-IP_NetworkLocationService_V1.0.xsd)" = "bd1f83df2dfa83f36666a3ab3df4457242b387e9"
+          test "$(git rev-parse HEAD:IBIS-IP_common_V1.0.xsd)" = "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c"
+          test "$(git rev-parse HEAD:IBIS-IP_Enumerations_V1.0.xsd)" = "a9bea5bc73003ed91ded8519db06c32c4067831d"
+          find . -maxdepth 1 -type f -name '*.xsd' -print0 | sort -z | xargs -0 sha256sum > /tmp/xsd-before.sha256
+          test "$(wc -l < /tmp/xsd-before.sha256)" -eq 50
+
+      - name: Fetch exact byte-pinned Location Services V1.0 PDFs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p local_sources/vdv_pdfs
+          python - <<'PY'
+          import hashlib, time, urllib.request
+          from pathlib import Path
+
+          sources = [
+              ("BLS_V1.0.pdf", "https://www.vdv.de/301-2-2sds-v1-0.pdfx", "1756dd8f373defd15988c222bea566a3841af376d987c0b0369f8701f2bc711d", 616519),
+              ("DLS_V1.0.pdf", "https://www.vdv.de/301-2-4sds-v1-0.pdfx", "bdcbb3b2188f109944d687e6511209c5f049f25e1770bb3f4df596542d5009c4", 441422),
+              ("GNSS_V1.0.pdf", "https://www.vdv.de/301-2-5sds-v1-0.pdfx", "e6a19a333a6c149a2d4b726a189acf16a9891d85dd28a7c5b008cdf254b631f5", 449287),
+              ("NLS_V1.0.pdf", "https://www.vdv.de/301-2-7sds-v1-0.pdfx", "fa45c9ef69635ab8615e4cf7dbd5c0417f8ea154a817ea1c54a73a141c7f4697", 447715),
+          ]
+          for filename, url, expected_sha, expected_size in sources:
+              data = None
+              for attempt in range(4):
+                  try:
+                      req = urllib.request.Request(url, headers={
+                          "User-Agent": "VDV301-Audit-EV153/0.2 (+https://github.com/MarcLeinenDE/VDV301)",
+                          "Accept": "application/pdf,application/octet-stream;q=0.9,*/*;q=0.1",
+                      })
+                      with urllib.request.urlopen(req, timeout=90) as response:
+                          data = response.read()
+                      break
+                  except Exception:
+                      if attempt == 3:
+                          raise
+                      time.sleep(2 * (attempt + 1))
+              assert data is not None and data.startswith(b"%PDF-")
+              assert hashlib.sha256(data).hexdigest() == expected_sha
+              assert len(data) == expected_size
+              Path("local_sources/vdv_pdfs", filename).write_bytes(data)
+              print("EV153_PDF_PIN_OK", filename, expected_sha, expected_size)
+          PY
+
+      - name: Run EV-153 and full XSD pool
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf artifacts/ev153
+          python -m py_compile tools/validate_location_services_revalidation_ev153.py tools/run_location_services_revalidation_ev153.py
+          python tools/run_location_services_revalidation_ev153.py --repo-root . --output-dir artifacts/ev153
+          python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+          find . -maxdepth 1 -type f -name '*.xsd' -print0 | sort -z | xargs -0 sha256sum > /tmp/xsd-after.sha256
+          diff -u /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          git diff --exit-code -- '*.xsd'
+          test "$(git rev-parse HEAD:audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          cat artifacts/ev153/ev153-result.json
+
+      - name: Upload EV-153 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: ls-ev153
+          path: artifacts/ev153
+          if-no-files-found: error
+          retention-days: 90
