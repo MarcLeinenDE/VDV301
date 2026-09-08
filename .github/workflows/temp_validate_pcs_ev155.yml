@@ -1,0 +1,139 @@
+name: TEMP validate PCS EV-155
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths:
+      - .github/workflows/temp_validate_pcs_ev155.yml
+      - tools/validate_pcs_revalidation_ev155.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ev155:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install validation and PDF tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          python -m pip install --disable-pip-version-check lxml
+
+      - name: Snapshot immutable authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git rev-parse HEAD:audit_registry/finding_revalidation_registry_v0.1.json)" = "865a21115cec1beb556af000c71717ae774459cb"
+          test "$(git rev-parse HEAD:00_START_HERE/CURRENT_STATE.json)" = "ee9120db8b01e26e888ad6b512c0a49d8751d700"
+          test "$(git rev-parse HEAD:audit_registry/pdf_source_registry_v0.1.json)" = "d3471e1cef9b099dc8764a3ee8bf234b9a658ce8"
+          test "$(git rev-parse HEAD:IBIS-IP_PassengerCountingService_V1.0.xsd)" = "4161872be76740abfdd1cddf96f8a736333fc8be"
+          test "$(git rev-parse HEAD:IBIS-IP_PassengerCountingService_V2.1.xsd)" = "59ef2ddb09b92db0d492974e38bad5b6be03865e"
+          test "$(git rev-parse HEAD:tools/validate_pcs_v21_operation_not_supported.py)" = "ffb932f19b669cd0584943063fc14cb4fd5daba8"
+          test "$(git rev-parse HEAD:tools/validate_pcs_revalidation_ev155.py)" = "6f4ceb1936731786265ed17fb2e35517e69135d1"
+          test "$(git rev-parse HEAD:.github/workflows/temp_pin_pcs_ev155.yml)" = "7cca0391f3eab39ae00e9613cc30e91c99a85d96"
+          test "$(git rev-parse 7fad145f528205ef5c40e58a3a23374379b08189:docs/pdf_xsd_semantic_audit/findings.md)" = "9e34d4eb9f798b83390b27c166bf1368adbd9ad8"
+          test "$(git rev-parse 7fad145f528205ef5c40e58a3a23374379b08189:docs/pdf_xsd_semantic_audit/PASSENGER_COUNTING_SERVICE_FINDINGS_REGISTER_ADDENDUM.md)" = "d95f19a3e8ba207c0964a16f24260358536acf7d"
+          find . -maxdepth 1 -type f -name '*.xsd' -print0 | sort -z | xargs -0 sha256sum > /tmp/xsd-before.sha256
+          test "$(wc -l < /tmp/xsd-before.sha256)" -eq 50
+
+      - name: Fetch exact official PCS PDFs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/ev155/pdfs artifacts/ev155/renders
+          python - <<'PY'
+          import hashlib, time, urllib.request
+          from pathlib import Path
+          sources = {
+            'PCS_V1.0': ('https://www.vdv.de/301-2-8-sd-2017-03.pdfx', '372be7a5d39c72e4bf405e3058f5af3d809eb611ac3548b70c526788d364c402', 918762),
+            'PCS_V2.1': ('https://www.vdv.de/301-2-8-sds-v2-1-passengercounting.pdfx', '572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043', 1084925),
+          }
+          for sid, (url, expected_sha, expected_size) in sources.items():
+              data = None
+              for attempt in range(4):
+                  try:
+                      req = urllib.request.Request(url, headers={'User-Agent':'VDV301-Audit-EV155/0.1 (+https://github.com/MarcLeinenDE/VDV301)','Accept':'application/pdf,application/octet-stream;q=0.9,*/*;q=0.1'})
+                      with urllib.request.urlopen(req, timeout=90) as response:
+                          data = response.read()
+                      break
+                  except Exception:
+                      if attempt == 3: raise
+                      time.sleep(2 * (attempt + 1))
+              assert data is not None and data.startswith(b'%PDF-')
+              assert hashlib.sha256(data).hexdigest() == expected_sha
+              assert len(data) == expected_size
+              Path(f'artifacts/ev155/pdfs/{sid}.pdf').write_bytes(data)
+              print('PIN_OK', sid, expected_sha, expected_size)
+          PY
+          for p in 12 16 17; do
+            pdftoppm -f "$p" -singlefile -r 180 -png artifacts/ev155/pdfs/PCS_V2.1.pdf "artifacts/ev155/renders/PCS_V2.1-page-$p" >/dev/null 2>&1
+          done
+
+      - name: Materialize exact official upstream tag trees
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf artifacts/upstream-git artifacts/upstream-v1 artifacts/upstream-v20
+          mkdir -p artifacts/upstream-git artifacts/upstream-v1 artifacts/upstream-v20
+          git -C artifacts/upstream-git init
+          git -C artifacts/upstream-git remote add origin https://github.com/VDVde/VDV301.git
+          git -C artifacts/upstream-git fetch --depth=1 origin refs/tags/VDV-301-1.0:refs/tags/VDV-301-1.0 refs/tags/VDV-301-2.0:refs/tags/VDV-301-2.0 refs/tags/VDV-301-2.1:refs/tags/VDV-301-2.1
+          test "$(git -C artifacts/upstream-git rev-parse VDV-301-1.0)" = "ef38d3babebfbb72e6bcdc42c7026e13bab77f69"
+          test "$(git -C artifacts/upstream-git rev-parse VDV-301-1.0^{})" = "f282d22bcec0925325293baaaec8c90d5b399ca8"
+          test "$(git -C artifacts/upstream-git rev-parse VDV-301-2.0^{})" = "351085b7a320335daa91434b3bb2df3148c07d58"
+          test "$(git -C artifacts/upstream-git rev-parse VDV-301-2.1^{})" = "ba6cf6395c35b4983532382be06060d35f279c1d"
+          test "$(git -C artifacts/upstream-git rev-parse VDV-301-1.0^{}:IBIS-IP_PassengerCountingService_V1.0.xsd)" = "600a3ee6290c630a4435fb06ca9803dabaceb788"
+          test "$(git -C artifacts/upstream-git rev-parse VDV-301-1.0^{}:IBIS_IP_V1.0.xsd)" = "41289eaed2674a169fdf77a10a2eff293c76d5c4"
+          test "$(git -C artifacts/upstream-git rev-parse VDV-301-2.0^{}:IBIS-IP_PassengerCountingService_V1.0.xsd)" = "4161872be76740abfdd1cddf96f8a736333fc8be"
+          test "$(git -C artifacts/upstream-git rev-parse VDV-301-2.1^{}:IBIS-IP_PassengerCountingService_V2.1.xsd)" = "59ef2ddb09b92db0d492974e38bad5b6be03865e"
+          git -C artifacts/upstream-git archive VDV-301-1.0^{} | tar -x -C artifacts/upstream-v1
+          git -C artifacts/upstream-git archive VDV-301-2.0^{} | tar -x -C artifacts/upstream-v20
+
+      - name: Run EV-155 and full XSD pool
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile tools/validate_pcs_revalidation_ev155.py tools/validate_pcs_v21_operation_not_supported.py
+          python tools/validate_pcs_revalidation_ev155.py \
+            --repo-root . \
+            --pdf-v1 artifacts/ev155/pdfs/PCS_V1.0.pdf \
+            --pdf-v21 artifacts/ev155/pdfs/PCS_V2.1.pdf \
+            --upstream-v1-dir artifacts/upstream-v1 \
+            --upstream-v20-dir artifacts/upstream-v20 \
+            --output-dir artifacts/ev155/result
+          python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+          find . -maxdepth 1 -type f -name '*.xsd' -print0 | sort -z | xargs -0 sha256sum > /tmp/xsd-after.sha256
+          diff -u /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          git diff --exit-code -- '*.xsd'
+
+      - name: Verify repository remained immutable
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git rev-parse HEAD:audit_registry/finding_revalidation_registry_v0.1.json)" = "865a21115cec1beb556af000c71717ae774459cb"
+          test "$(git rev-parse HEAD:00_START_HERE/CURRENT_STATE.json)" = "ee9120db8b01e26e888ad6b512c0a49d8751d700"
+          git diff --exit-code -- audit_registry/finding_inventory_frozen_2026-09-03.json audit_registry/finding_revalidation_registry_v0.1.json 00_START_HERE/CURRENT_STATE.json
+
+      - name: Upload EV-155 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: pcs-ev155
+          path: |
+            artifacts/ev155
+            artifacts/upstream-git/.git/refs/tags
+          if-no-files-found: error
