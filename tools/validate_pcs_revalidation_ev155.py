@@ -19,7 +19,6 @@ import json
 import subprocess
 import sys
 from pathlib import Path
-from typing import Iterable
 
 from lxml import etree
 
@@ -234,7 +233,7 @@ def main() -> int:
     old_service_schema = schema(old_service)
     old_aggregate_schema = schema(old_root_path)
     new_service_schema = schema(new_service)
-    root_sample = """<PassengerCountingService.GetAllDataResponse><OperationErrorMessage>probe</OperationErrorMessage></PassengerCountingService.GetAllDataResponse>"""
+    root_sample = """<PassengerCountingService.GetAllDataResponse><OperationErrorMessage><Value>probe</Value></OperationErrorMessage></PassengerCountingService.GetAllDataResponse>"""
     old_service_ok, old_service_msg = validate_xml(old_service_schema, root_sample)
     old_aggregate_ok, old_aggregate_msg = validate_xml(old_aggregate_schema, root_sample)
     new_service_ok, new_service_msg = validate_xml(new_service_schema, root_sample)
