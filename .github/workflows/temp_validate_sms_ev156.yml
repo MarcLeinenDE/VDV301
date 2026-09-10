@@ -1,0 +1,173 @@
+name: TEMP validate SMS EV-156
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths:
+      - .github/workflows/temp_validate_sms_ev156.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-sms:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install evidence tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          python -m pip install --disable-pip-version-check lxml
+
+      - name: Verify immutable SMS prestate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git rev-parse HEAD:audit_registry/finding_revalidation_registry_v0.1.json)" = "96fa80faade79c5866f6c9d21e550abb56ea282f"
+          test "$(git rev-parse HEAD:00_START_HERE/CURRENT_STATE.json)" = "b2e89510ffebd76448f9ff8a99b98bbc8c0d20fd"
+          test "$(git rev-parse HEAD:audit_registry/pdf_source_pins_v0.1.json)" = "88349638b423689799af700e8a1c8ec99bbfb67b"
+          test "$(git rev-parse HEAD:docs/pdf_xsd_semantic_audit/deep_read/SMS_V2.2.md)" = "4eb220e43a728a0f719cdcf81fac78df058ecd08"
+          test "$(git rev-parse HEAD:tools/validate_sms_v22_ev116.py)" = "bac849f6c33e6084e899794564f99f0c6cbd338a"
+          test "$(git rev-parse HEAD:tools/validate_sms_revalidation_ev156.py)" = "335aff0aaed1badc60bf5a59aac101897f211161"
+          test "$(git rev-parse HEAD:IBIS-IP_SystemMonitoringService_V2.2.xsd)" = "d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c"
+          test "$(git rev-parse HEAD:IBIS-IP_common_V2.2.xsd)" = "468fee6d177e7185dbcd5d3f90cfb114e29e01ae"
+          test "$(git rev-parse HEAD:IBIS-IP_Enumerations_V2.2.xsd)" = "2a23b512379b18e8f122ac1272cef8229fb86283"
+          find . -maxdepth 1 -type f -name '*.xsd' -print0 | sort -z | xargs -0 sha256sum > /tmp/xsd-before.sha256
+          test "$(wc -l < /tmp/xsd-before.sha256)" -eq 50
+
+      - name: Re-pin official SMS V2.2 PDF and render evidence pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf artifacts/sms-ev156
+          mkdir -p artifacts/sms-ev156/renders artifacts/sms-ev156/text artifacts/sms-ev156/result
+          python - <<'PY'
+          import hashlib, time, urllib.request
+          from pathlib import Path
+          url='https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx'
+          expected_sha='996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4'
+          expected_size=847416
+          data=None
+          for attempt in range(4):
+              try:
+                  req=urllib.request.Request(url, headers={
+                      'User-Agent':'VDV301-Audit-EV156/0.1 (+https://github.com/MarcLeinenDE/VDV301)',
+                      'Accept':'application/pdf,application/octet-stream;q=0.9,*/*;q=0.1',
+                  })
+                  with urllib.request.urlopen(req, timeout=90) as response:
+                      data=response.read()
+                  break
+              except Exception:
+                  if attempt == 3:
+                      raise
+                  time.sleep(2*(attempt+1))
+          assert data is not None and data.startswith(b'%PDF-')
+          assert hashlib.sha256(data).hexdigest() == expected_sha
+          assert len(data) == expected_size
+          Path('artifacts/sms-ev156/SMS_V2.2.pdf').write_bytes(data)
+          print('PIN_OK', expected_sha, expected_size)
+          PY
+          for p in 4 9 10 11 12 13; do
+            pdftoppm -f "$p" -singlefile -r 180 -png artifacts/sms-ev156/SMS_V2.2.pdf "artifacts/sms-ev156/renders/SMS_V2.2-page-$p" >/dev/null 2>&1
+            pdftotext -f "$p" -l "$p" -layout artifacts/sms-ev156/SMS_V2.2.pdf "artifacts/sms-ev156/text/SMS_V2.2-page-$p.txt"
+          done
+          test "$(pdfinfo artifacts/sms-ev156/SMS_V2.2.pdf | awk '/^Pages:/ {print $2}')" = "15"
+
+      - name: Verify exact official upstream VDV-301-2.2 tag
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf artifacts/sms-upstream-git
+          git init -q artifacts/sms-upstream-git
+          git -C artifacts/sms-upstream-git remote add origin https://github.com/VDVde/VDV301.git
+          git -C artifacts/sms-upstream-git fetch --depth=1 origin refs/tags/VDV-301-2.2:refs/tags/VDV-301-2.2
+          test "$(git -C artifacts/sms-upstream-git rev-parse VDV-301-2.2^{})" = "f283697124750d12189b960b302b399769bad530"
+          test "$(git -C artifacts/sms-upstream-git rev-parse VDV-301-2.2^{}:IBIS-IP_SystemMonitoringService_V2.2.xsd)" = "d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c"
+          test "$(git -C artifacts/sms-upstream-git rev-parse VDV-301-2.2^{}:IBIS-IP_common_V2.2.xsd)" = "468fee6d177e7185dbcd5d3f90cfb114e29e01ae"
+          test "$(git -C artifacts/sms-upstream-git rev-parse VDV-301-2.2^{}:IBIS-IP_Enumerations_V2.2.xsd)" = "2a23b512379b18e8f122ac1272cef8229fb86283"
+
+      - name: Run EV-156 and executable support evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile tools/validate_sms_revalidation_ev156.py tools/validate_sms_v22_ev116.py
+          python tools/validate_sms_revalidation_ev156.py \
+            --repo-root . \
+            --pdf artifacts/sms-ev156/SMS_V2.2.pdf \
+            --output-dir artifacts/sms-ev156/result
+          python - <<'PY'
+          import json
+          p='artifacts/sms-ev156/result/ev156_result.json'
+          d=json.load(open(p,encoding='utf-8'))
+          assert d['evidence_id']=='EV-156' and d['result']=='PASS'
+          assert d['finding_results']['SMS-001']['recommended_terminal_state']=='contextual_not_defect'
+          assert d['finding_results']['SMS-001']['executable_context']=='PASS'
+          assert d['finding_results']['SMS-002']['recommended_terminal_state']=='executable_confirmed'
+          assert d['finding_results']['SMS-002']['executable_result']=='PASS'
+          assert d['finding_results']['SMS-003']['recommended_terminal_state']=='context_verified'
+          assert d['finding_results']['SMS-003']['visual_result']=='PASS'
+          assert d['finding_results']['SMS-004']['recommended_terminal_state']=='context_verified'
+          assert d['finding_results']['SMS-004']['visual_result']=='PASS'
+          assert d['expected_poststate_if_closed']=={'terminal':144,'pending':48,'first_pending':'SUB-001','next_block':'SUB'}
+          assert d['xsd_mutation_required'] is False
+          assert d['frozen_inventory_mutation_required'] is False
+          print('EV156_RESULT_OK')
+          PY
+          python tools/validate_sms_v22_ev116.py
+          python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+          find . -maxdepth 1 -type f -name '*.xsd' -print0 | sort -z | xargs -0 sha256sum > /tmp/xsd-after.sha256
+          diff -u /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          git diff --exit-code -- '*.xsd' audit_registry/finding_inventory_frozen_2026-09-03.json
+
+      - name: Build EV-156 manifest
+        shell: bash
+        env:
+          EVIDENCE_RUN_ID: ${{ github.run_id }}
+          EVIDENCE_RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          root=Path('artifacts/sms-ev156')
+          files={}
+          for p in sorted([*root.glob('renders/*.png'), *root.glob('text/*.txt'), root/'result/ev156_result.json']):
+              b=p.read_bytes()
+              files[str(p.relative_to(root))]={'sha256':hashlib.sha256(b).hexdigest(),'size_bytes':len(b)}
+          manifest={
+              'evidence_id':'EV-156',
+              'run_id':os.environ['EVIDENCE_RUN_ID'],
+              'run_url':os.environ['EVIDENCE_RUN_URL'],
+              'head_sha':os.environ.get('GITHUB_SHA'),
+              'pdf_sha256':'996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4',
+              'pdf_size_bytes':847416,
+              'official_tag':'VDV-301-2.2',
+              'official_tag_commit':'f283697124750d12189b960b302b399769bad530',
+              'visual_pages':[4,9,10,11,12,13],
+              'files':files,
+          }
+          (root/'EV156_MANIFEST.json').write_text(json.dumps(manifest,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+          PY
+          rm -f artifacts/sms-ev156/SMS_V2.2.pdf
+          rm -rf artifacts/sms-upstream-git
+
+      - name: Upload EV-156 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: sms-ev156-evidence
+          path: artifacts/sms-ev156/
+          if-no-files-found: error
+          retention-days: 30
