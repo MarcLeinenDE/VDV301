@@ -870,13 +870,13 @@
       },
       {
         "finding_id": "SUB-001",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_SUB_2026-09-10.md"
       },
       {
         "finding_id": "SUB-002",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "contextual_not_defect",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_SUB_2026-09-10.md"
       },
       {
         "finding_id": "TKT-001",
@@ -1123,7 +1123,7 @@
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true
   },
-  "next_revalidation_block": "SUB",
+  "next_revalidation_block": "TKT",
   "revalidation_blocks": {
     "ARA_V2.4": {
       "date": "2026-09-03",
@@ -2593,6 +2593,71 @@
       "frozen_inventory_mutation": false,
       "next_block": "SUB",
       "next_finding": "SUB-001"
+    },
+    "SUB": {
+      "date": "2026-09-10",
+      "state": "completed",
+      "authority_lane": "official byte-pinned Base Services V2.0/V2.1 documentation plus exact Common/SystemDocumentation/SystemManagement/DeviceManagement XSD history",
+      "evidence_id": "EV-157",
+      "evidence_run_id": "34488450123",
+      "evidence_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/34488450123",
+      "pinned_successful_evidence_run": "34487918692",
+      "pinned_successful_evidence_job": "102906852658",
+      "artifact_id": "10156457016",
+      "artifact_digest": "sha256:25bf3344ba21c7a98eea97e48d5f637191a91a96bd9132993808691089eabe12",
+      "evidence_head_sha": "2f58012b2d6c8b7165d6c283821407fa534d193b",
+      "source_acquisition": {
+        "run_id": "34486504933",
+        "job_id": "102902042657",
+        "artifact_id": "10155848626",
+        "artifact_digest": "sha256:8318472f56fe7c33d85bc5cda3bc02df5cfed7f987dacb832eaa4798a1ff2d4a"
+      },
+      "pdf_authority": {
+        "VDV301-2_BASE_V2.0": {
+          "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+          "size_bytes": 2374295,
+          "pages": 115
+        },
+        "VDV301-2_BASE_V2.1": {
+          "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+          "size_bytes": 2671005,
+          "pages": 130
+        }
+      },
+      "visual_pages": {
+        "VDV301-2_BASE_V2.0": [
+          82,
+          83,
+          99,
+          103
+        ],
+        "VDV301-2_BASE_V2.1": [
+          83,
+          84,
+          112,
+          116
+        ]
+      },
+      "xsd_blobs": {
+        "IBIS-IP_common_V1.0.xsd": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+        "IBIS-IP_Enumerations_V1.0.xsd": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+        "IBIS-IP_SystemManagementService_V1.0.xsd": "2d32630a0f1981e980e6a466e3f6a69136410f24",
+        "IBIS-IP_common_V2.0.xsd": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+        "IBIS-IP_Enumerations_V2.0.xsd": "27e3c183b00381d959622d13c10543123af8eef6",
+        "IBIS-IP_SystemDocumentationService_V2.0.xsd": "ab959dddbfa2b8ca420af1b079501f94cff38051",
+        "IBIS-IP_common_V2.1.xsd": "05977c9f86c7c9dd0b48f36a4a4e9be32e94659e",
+        "IBIS-IP_Enumerations_V2.1.xsd": "311464690ad60749ed8d326217787e4b8ed0b718",
+        "IBIS-IP_DeviceManagementService_V2.1.xsd": "191b43e01cdaba14b247725689a913c244a67eed"
+      },
+      "findings": {
+        "SUB-001": "context_verified",
+        "SUB-002": "contextual_not_defect"
+      },
+      "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_SUB_2026-09-10.md",
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false,
+      "next_block": "TKT",
+      "next_finding": "TKT-001"
     }
   }
 }
