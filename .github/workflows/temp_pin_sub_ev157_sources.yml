@@ -1,0 +1,105 @@
+name: TEMP pin SUB EV-157 sources
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths:
+      - .github/workflows/temp_pin_sub_ev157_sources.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pin-sub-sources:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 0
+
+      - name: Install PDF tools
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+
+      - name: Verify current SUB prestate and source registry
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git rev-parse HEAD:audit_registry/finding_revalidation_registry_v0.1.json)" = "7c1f8988697b901c3e1b0693c5611f858535602f"
+          test "$(git rev-parse HEAD:00_START_HERE/CURRENT_STATE.json)" = "c53c4f0b880775502acf86282ff8720118d7c6ff"
+          test "$(git rev-parse HEAD:audit_registry/pdf_source_registry_v0.1.json)" = "d3471e1cef9b099dc8764a3ee8bf234b9a658ce8"
+          test "$(git rev-parse HEAD:audit_registry/pdf_source_pins_v0.1.json)" = "88349638b423689799af700e8a1c8ec99bbfb67b"
+
+      - name: Acquire official Base Services V2.0 and V2.1 bytes
+        run: |
+          set -euo pipefail
+          rm -rf artifacts/sub-ev157-source-pin
+          mkdir -p artifacts/sub-ev157-source-pin/pdfs artifacts/sub-ev157-source-pin/text
+          python - <<'PY'
+          import hashlib, json, time, urllib.request
+          from pathlib import Path
+          sources = {
+              'VDV301-2_BASE_V2.0': 'https://www.vdv.de/301-2-sds-v-2-0.pdfx',
+              'VDV301-2_BASE_V2.1': 'https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx',
+          }
+          result={}
+          for sid,url in sources.items():
+              data=None
+              for attempt in range(5):
+                  try:
+                      req=urllib.request.Request(url, headers={
+                          'User-Agent':'VDV301-Audit-SUB-EV157-Pin/0.1 (+https://github.com/MarcLeinenDE/VDV301)',
+                          'Accept':'application/pdf,application/octet-stream;q=0.9,*/*;q=0.1',
+                      })
+                      with urllib.request.urlopen(req, timeout=90) as r:
+                          data=r.read()
+                      break
+                  except Exception:
+                      if attempt == 4: raise
+                      time.sleep(2*(attempt+1))
+              assert data is not None and data.startswith(b'%PDF-'), sid
+              p=Path('artifacts/sub-ev157-source-pin/pdfs')/(sid+'.pdf')
+              p.write_bytes(data)
+              result[sid]={'url':url,'sha256':hashlib.sha256(data).hexdigest(),'size_bytes':len(data)}
+              print('PIN_DISCOVERY',sid,result[sid]['sha256'],len(data))
+          Path('artifacts/sub-ev157-source-pin/source_hashes.json').write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
+          PY
+
+      - name: Extract page map for subscription evidence
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, re, subprocess
+          from pathlib import Path
+          hashes=json.load(open('artifacts/sub-ev157-source-pin/source_hashes.json',encoding='utf-8'))
+          page_map={}
+          needles=['TerminateSubscribe','UnsubscribeData','SubscribeDeviceInformation','UnsubscribeDeviceInformation','SystemDocumentationService','SystemManagementService']
+          for sid in hashes:
+              pdf=Path('artifacts/sub-ev157-source-pin/pdfs')/(sid+'.pdf')
+              info=subprocess.check_output(['pdfinfo',str(pdf)],text=True)
+              pages=int(re.search(r'^Pages:\s+(\d+)',info,re.M).group(1))
+              hits={k:[] for k in needles}
+              for page in range(1,pages+1):
+                  text=subprocess.check_output(['pdftotext','-f',str(page),'-l',str(page),'-layout',str(pdf),'-'],stderr=subprocess.DEVNULL).decode('utf-8','replace')
+                  for needle in needles:
+                      if needle.lower() in text.lower():
+                          hits[needle].append(page)
+                  if any(page in v for v in hits.values()):
+                      Path(f'artifacts/sub-ev157-source-pin/text/{sid}-page-{page}.txt').write_text(text,encoding='utf-8')
+              page_map[sid]={'page_count':pages,'hits':hits}
+              print('PAGE_MAP',sid,json.dumps(page_map[sid],sort_keys=True))
+          Path('artifacts/sub-ev157-source-pin/page_map.json').write_text(json.dumps(page_map,indent=2)+'\n',encoding='utf-8')
+          PY
+          rm -rf artifacts/sub-ev157-source-pin/pdfs
+
+      - name: Upload source pin evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: sub-ev157-source-pin
+          path: artifacts/sub-ev157-source-pin/
+          if-no-files-found: error
+          retention-days: 30
