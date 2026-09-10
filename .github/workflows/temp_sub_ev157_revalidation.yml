@@ -1,0 +1,156 @@
+name: TEMP SUB EV-157 Revalidation
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths:
+      - .github/workflows/temp_sub_ev157_revalidation.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-sub:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install evidence tools
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check lxml
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+
+      - name: Verify immutable SUB prestate
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git rev-parse HEAD:audit_registry/finding_revalidation_registry_v0.1.json)" = "650dc6a45f47e01cef2e5e05f48614e0c5afe819"
+          test "$(git rev-parse HEAD:00_START_HERE/CURRENT_STATE.json)" = "612b9217244e7bbb49a09c8f4d94b9036e388dc4"
+          test "$(git rev-parse HEAD:audit_registry/pdf_source_registry_v0.1.json)" = "d3471e1cef9b099dc8764a3ee8bf234b9a658ce8"
+          test "$(git rev-parse HEAD:audit_registry/pdf_source_pins_v0.1.json)" = "88349638b423689799af700e8a1c8ec99bbfb67b"
+          test "$(git rev-parse HEAD:audit_registry/deep_read_findings_v0.1.json)" = "f016defa3148400834378ac99ca33b30937f2571"
+          test "$(git rev-parse HEAD:audit_registry/deep_read_findings_delta_gc_v24_2026-08-28.json)" = "2fd4eb48195c27312c73f665d4365bb28ca3a791"
+          test "$(git rev-parse HEAD:tools/validate_sub_revalidation_ev157.py)" = "b68091fdc2713c56718d9313187f56d9eef3c9cd"
+
+      - name: Re-pin official Base Services PDFs and render evidence pages
+        run: |
+          set -euo pipefail
+          rm -rf artifacts/ev157
+          mkdir -p artifacts/ev157/pdfs artifacts/ev157/rendered
+          python - <<'PY'
+          import hashlib, json, time, urllib.request
+          from pathlib import Path
+          sources = {
+            'VDV301-2_BASE_V2.0': ('https://www.vdv.de/301-2-sds-v-2-0.pdfx', 'fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37', 2374295),
+            'VDV301-2_BASE_V2.1': ('https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx', '685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a', 2671005),
+          }
+          observed={}
+          for sid,(url,sha,size) in sources.items():
+            data=None
+            for attempt in range(5):
+              try:
+                req=urllib.request.Request(url,headers={'User-Agent':'VDV301-Audit-EV157/0.1 (+https://github.com/MarcLeinenDE/VDV301)','Accept':'application/pdf,application/octet-stream;q=0.9,*/*;q=0.1'})
+                with urllib.request.urlopen(req,timeout=90) as r: data=r.read()
+                break
+              except Exception:
+                if attempt == 4: raise
+                time.sleep(2*(attempt+1))
+            assert data is not None and data.startswith(b'%PDF-'), sid
+            actual=hashlib.sha256(data).hexdigest()
+            assert actual == sha, (sid,actual,sha)
+            assert len(data) == size, (sid,len(data),size)
+            path=Path('artifacts/ev157/pdfs')/(sid+'.pdf')
+            path.write_bytes(data)
+            observed[sid]={'url':url,'sha256':actual,'size_bytes':len(data)}
+            print('REPinned',sid,actual,len(data))
+          Path('artifacts/ev157/pdf_pins.json').write_text(json.dumps(observed,indent=2)+'\n',encoding='utf-8')
+          PY
+          for spec in \
+            'VDV301-2_BASE_V2.0 82 83 99 103' \
+            'VDV301-2_BASE_V2.1 83 84 112 116'; do
+            set -- $spec
+            sid=$1; shift
+            for page in "$@"; do
+              pdftoppm -f "$page" -singlefile -png -r 120 "artifacts/ev157/pdfs/${sid}.pdf" "artifacts/ev157/rendered/${sid}-page-${page}" >/dev/null 2>&1
+              pdftotext -f "$page" -l "$page" -layout "artifacts/ev157/pdfs/${sid}.pdf" "artifacts/ev157/rendered/${sid}-page-${page}.txt"
+            done
+          done
+
+      - name: Verify exact XSD authority blobs
+        run: |
+          set -euo pipefail
+          declare -A expected=(
+            [IBIS-IP_common_V1.0.xsd]=194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c
+            [IBIS-IP_Enumerations_V1.0.xsd]=a9bea5bc73003ed91ded8519db06c32c4067831d
+            [IBIS-IP_SystemManagementService_V1.0.xsd]=2d32630a0f1981e980e6a466e3f6a69136410f24
+            [IBIS-IP_common_V2.0.xsd]=8608e3dcd665c197c34da7f6ec6af5a3758da164
+            [IBIS-IP_Enumerations_V2.0.xsd]=27e3c183b00381d959622d13c10543123af8eef6
+            [IBIS-IP_SystemDocumentationService_V2.0.xsd]=ab959dddbfa2b8ca420af1b079501f94cff38051
+            [IBIS-IP_common_V2.1.xsd]=05977c9f86c7c9dd0b48f36a4a4e9be32e94659e
+            [IBIS-IP_Enumerations_V2.1.xsd]=311464690ad60749ed8d326217787e4b8ed0b718
+            [IBIS-IP_DeviceManagementService_V2.1.xsd]=191b43e01cdaba14b247725689a913c244a67eed
+          )
+          for file in "${!expected[@]}"; do
+            actual=$(git hash-object "$file")
+            test "$actual" = "${expected[$file]}" || { echo "blob mismatch $file $actual"; exit 1; }
+            echo "XSD_BLOB $file $actual"
+          done
+          sha256sum ./*.xsd | sort > artifacts/ev157/xsd_sha256_before.txt
+
+      - name: Run EV-157 and full XSD compile pool
+        run: |
+          set -euo pipefail
+          python tools/validate_sub_revalidation_ev157.py \
+            --repo-root . \
+            --base-v20 artifacts/ev157/pdfs/VDV301-2_BASE_V2.0.pdf \
+            --base-v21 artifacts/ev157/pdfs/VDV301-2_BASE_V2.1.pdf \
+            --output-dir artifacts/ev157
+          python tools/validate_xsd_pool.py --repo-root .
+          sha256sum ./*.xsd | sort > artifacts/ev157/xsd_sha256_after.txt
+          cmp artifacts/ev157/xsd_sha256_before.txt artifacts/ev157/xsd_sha256_after.txt
+
+      - name: Build EV-157 manifest
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          root=Path('artifacts/ev157')
+          files=[]
+          for p in sorted(root.rglob('*')):
+            if p.is_file() and '/pdfs/' not in p.as_posix():
+              files.append({'path':p.relative_to(root).as_posix(),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'size_bytes':p.stat().st_size})
+          manifest={
+            'evidence_id':'EV-157',
+            'result':'PASS',
+            'run_id':os.environ['GITHUB_RUN_ID'],
+            'head_sha':os.environ['GITHUB_SHA'],
+            'source_acquisition':{
+              'run_id':'34486504933','job_id':'102902042657','artifact_id':'10155848626',
+              'artifact_digest':'sha256:8318472f56fe7c33d85bc5cda3bc02df5cfed7f987dacb832eaa4798a1ff2d4a'
+            },
+            'files':files,
+            'xsd_mutation':False,
+            'frozen_inventory_mutation':False,
+          }
+          (root/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
+          PY
+          rm -rf artifacts/ev157/pdfs
+
+      - name: Upload EV-157 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: sub-ev157-evidence
+          path: artifacts/ev157/
+          if-no-files-found: error
+          retention-days: 30
