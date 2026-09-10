@@ -840,13 +840,13 @@
       },
       {
         "finding_id": "PCS-001",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "executable_confirmed",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_PCS_2026-09-10.md"
       },
       {
         "finding_id": "PCS-002",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "contextual_not_defect",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_PCS_2026-09-10.md"
       },
       {
         "finding_id": "SMS-001",
@@ -1123,7 +1123,7 @@
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true
   },
-  "next_revalidation_block": "PCS",
+  "next_revalidation_block": "SMS",
   "revalidation_blocks": {
     "ARA_V2.4": {
       "date": "2026-09-03",
@@ -2497,6 +2497,53 @@
       "next_block": "PCS",
       "next_subblock": "PCS",
       "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_NETWORK_2026-09-08.md"
+    },
+    "PCS": {
+      "date": "2026-09-10",
+      "state": "completed",
+      "authority_lane": "official byte-pinned PCS V1.0/V2.1 PDFs plus exact official upstream VDV-301-1.0/2.0/2.1 tag provenance and selected integration XSD blobs",
+      "evidence_id": "EV-155",
+      "evidence_run_id": "34448427086",
+      "evidence_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/34448427086",
+      "pinned_successful_evidence_run": "34447583426",
+      "artifact_id": "10140238171",
+      "artifact_digest": "sha256:48e3f7ad728660a342124d42976f8a1c88670c06b5ba3a63f7475b462653f633",
+      "pdf_authority": {
+        "PCS_V1.0": {
+          "sha256": "372be7a5d39c72e4bf405e3058f5af3d809eb611ac3548b70c526788d364c402",
+          "size_bytes": 918762,
+          "pages": 18
+        },
+        "PCS_V2.1": {
+          "sha256": "572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043",
+          "size_bytes": 1084925,
+          "pages": 22
+        }
+      },
+      "visual_pages": [
+        12,
+        16,
+        17
+      ],
+      "upstream_authority": {
+        "VDV-301-1.0_tag_object": "ef38d3babebfbb72e6bcdc42c7026e13bab77f69",
+        "VDV-301-1.0_commit": "f5b53785f703e898632603eec3bfa3555a79fdba",
+        "VDV-301-2.0_commit": "f2569a91f0a7c737a0ca7c0280b28ad223d7ee08",
+        "VDV-301-2.1_commit": "585e0bea34b64887db4276f1c94d5f3e78f06c66",
+        "original_PCS_V1.0_blob": "600a3ee6290c630a4435fb06ca9803dabaceb788",
+        "original_V1.0_aggregate_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+        "later_self_contained_PCS_V1.0_blob": "4161872be76740abfdd1cddf96f8a736333fc8be",
+        "PCS_V2.1_blob": "59ef2ddb09b92db0d492974e38bad5b6be03865e"
+      },
+      "findings": {
+        "PCS-001": "executable_confirmed",
+        "PCS-002": "contextual_not_defect"
+      },
+      "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_PCS_2026-09-10.md",
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false,
+      "next_block": "SMS",
+      "next_finding": "SMS-001"
     }
   }
 }
