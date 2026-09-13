@@ -77,14 +77,24 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          f=evidence/tkt_ev158/document.txt
-          grep -F 'UnsubscribeValidationResult' "$f"
-          grep -F 'SubscribeResponseStructure' "$f"
-          grep -F 'TicketInformationService.Validation.GetDataRequest' "$f"
-          grep -F 'ValidationResultStructure' "$f"
-          grep -F 'DefaultLanguage' "$f"
-          grep -F 'CardApplicationInformation' "$f"
-          grep -F 'TicketingSevice' "$f"
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          text=Path('evidence/tkt_ev158/document.txt').read_text(encoding='utf-8',errors='replace')
+          flat=''.join(text.split())
+          anchors={
+            'UnsubscribeValidationResult':'UnsubscribeValidationResult',
+            'SubscribeResponseStructure':'SubscribeResponseStructure',
+            'TicketInformationService.Validation.GetDataRequest':'TicketInformationService.Validation.GetDataRequest',
+            'ValidationResultStructure':'ValidationResultStructure',
+            'DefaultLanguage':'DefaultLanguage',
+            'CardApplicationInformation':'CardApplicationInformation',
+            'TicketingSevice':'TicketingSevice',
+          }
+          for label,token in anchors.items():
+              assert token in flat, f'missing PDF text anchor after whitespace normalization: {label}'
+              print(f'OK  PDF text anchor: {label}')
+          PY
 
       - name: Render physical PDF pages 8 through 12
         shell: bash
@@ -101,7 +111,6 @@ jobs:
           set -euo pipefail
           python - <<'PY'
           import hashlib,json,re
-
           from pathlib import Path
           p=Path('evidence/tkt_ev158/VDV301-2-9_TicketingService_V1.0.pdf')
           data=p.read_bytes()
