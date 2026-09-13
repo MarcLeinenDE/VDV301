@@ -258,8 +258,8 @@ def main() -> int:
             "PDF page 9 visibly carries TicketingSevice typo")
     require("TicketInformationService.Validation.GetDataRequest" in p10,
             "PDF page 10 carries TicketInformationService.Validation.GetDataRequest heading")
-    require("CardApplicationInformation" in p11,
-            "PDF page 11 visibly carries CardApplicationInformation spelling")
+    require("CardApplicationIn-" in p11 and "formation" in p11,
+            "PDF page 11 extraction preserves the split visible CardApplicationInformation label for visual review")
     require("TicketingService.GetValidationResultResponseStructure" in p12 and "TimeStamp" in p12 and "ValidationResult" in p12,
             "PDF page 12 detailed table labels outer response structure while listing inner result fields")
 
