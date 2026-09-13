@@ -1,0 +1,75 @@
+name: TEMP patch TKT EV-158 source id
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_patch_tkt_ev158_source_id.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout canonical branch
+        uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 0
+
+      - name: Patch only the TKT PDF registry identity and validator blob guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object tools/validate_tkt_revalidation_ev158.py)" = "3540706aa24ed3f6b8632fd0f62a8776d2e1862f"
+          test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "287e3bbcf4130567b288b1d039e8f576b668012b"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "a911f050fa5e7affc3d03ec9f2b21c68c848d364"
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('tools/validate_tkt_revalidation_ev158.py')
+          text=p.read_text(encoding='utf-8')
+          old='VDV301-2-9_TICKETING_V1.0'
+          new='TICKETING_V1.0'
+          count=text.count(old)
+          assert count == 2, count
+          p.write_text(text.replace(old,new),encoding='utf-8')
+          PY
+
+          new_blob="$(git hash-object tools/validate_tkt_revalidation_ev158.py)"
+          python - "$new_blob" <<'PY'
+          from pathlib import Path
+          import sys
+          p=Path('.github/workflows/temp_validate_tkt_ev158.yml')
+          text=p.read_text(encoding='utf-8')
+          old='3540706aa24ed3f6b8632fd0f62a8776d2e1862f'
+          new=sys.argv[1]
+          assert text.count(old) == 1
+          p.write_text(text.replace(old,new),encoding='utf-8')
+          print('new validator blob:',new)
+          PY
+
+          rm .github/workflows/temp_patch_tkt_ev158_source_id.yml
+          python -m py_compile tools/validate_tkt_revalidation_ev158.py
+          rm -rf tools/__pycache__
+
+          changed="$(git status --porcelain | sed 's/^...//' | sort)"
+          expected="$(printf '%s\n' '.github/workflows/temp_patch_tkt_ev158_source_id.yml' '.github/workflows/temp_validate_tkt_ev158.yml' 'tools/validate_tkt_revalidation_ev158.py' | sort)"
+          test "$changed" = "$expected"
+          git diff --check
+
+      - name: Commit and push narrowly scoped harness fix
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add tools/validate_tkt_revalidation_ev158.py .github/workflows/temp_validate_tkt_ev158.yml
+          git rm .github/workflows/temp_patch_tkt_ev158_source_id.yml
+          git diff --cached --check
+          git commit -m 'audit: fix TKT EV-158 PDF source registry identity'
+          git push origin HEAD:dev/schema-integration
