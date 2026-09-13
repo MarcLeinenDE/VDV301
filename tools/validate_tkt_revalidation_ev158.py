@@ -238,7 +238,7 @@ def main() -> int:
 
     source_registry = load(root / "audit_registry/pdf_source_registry_v0.1.json")
     sources = {s["source_id"]: s for s in source_registry.get("sources", [])}
-    src = sources["VDV301-2-9_TICKETING_V1.0"]
+    src = sources["TICKETING_V1.0"]
     require(src.get("official_url") == PDF_URL, "official Ticketing V1.0 PDF URL unchanged")
 
     p7 = flat_text(page_text(pdf, 7))
@@ -514,7 +514,7 @@ def main() -> int:
             "next_block": next_block,
         },
         "pdf": {
-            "source_id": "VDV301-2-9_TICKETING_V1.0",
+            "source_id": "TICKETING_V1.0",
             "official_url": PDF_URL,
             "sha256": PDF_SHA256,
             "size_bytes": PDF_SIZE,
