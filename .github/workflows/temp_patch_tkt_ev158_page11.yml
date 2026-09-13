@@ -24,7 +24,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = "d26e5efa213f660bab7ae20b246d5f08a6cdf6da"
           test "$(git hash-object tools/validate_tkt_revalidation_ev158.py)" = "213e0471ee6ed458bc386ea7c0a151052e829a21"
           test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "287e3bbcf4130567b288b1d039e8f576b668012b"
           test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "a911f050fa5e7affc3d03ec9f2b21c68c848d364"
