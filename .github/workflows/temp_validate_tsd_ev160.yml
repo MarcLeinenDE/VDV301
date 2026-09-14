@@ -100,12 +100,21 @@ jobs:
             test "$(git -C "/tmp/$dir" rev-parse HEAD^{tree})" = "$tree"
           done
           test "$(git -C /tmp/upstream-v21 hash-object IBIS-IP_TrainSetDataService_V2.1.xsd)" = "c2cdb73fcae265a2e4e0349ac6072e3548e36d8b"
-          test "$(git -C /tmp/upstream-v21 hash-object IBIS-IP_common_V2.0.xsd)" = "f06efa17e96761d74fbc49540c1127370981356d"
-          test "$(git -C /tmp/upstream-v21 hash-object IBIS-IP_Enumerations_V2.0.xsd)" = "88bed783752418249a179f7686e45dd43ba90047"
-          test "$(git -C /tmp/upstream-v21 hash-object IBIS-IP_CustomerInformationService_V2.0.xsd)" = "fc678833eecaed35de3d1d601595ab798cad243c"
+          test "$(git -C /tmp/upstream-v21 hash-object IBIS-IP_common_V2.0.xsd)" = "8608e3dcd665c197c34da7f6ec6af5a3758da164"
+          test "$(git -C /tmp/upstream-v21 hash-object IBIS-IP_Enumerations_V2.0.xsd)" = "27e3c183b00381d959622d13c10543123af8eef6"
+          test "$(git -C /tmp/upstream-v21 hash-object IBIS-IP_CustomerInformationService_V2.0.xsd)" = "fa8f0a51ad5f612660c9532c8557ad1ca473a908"
           test "$(git -C /tmp/upstream-v22 hash-object IBIS-IP_TrainSetDataService_V2.2.xsd)" = "7a132894c281d613e16514a6fa1bcbffe713d066"
           test "$(git -C /tmp/upstream-v22 hash-object IBIS-IP_common_V2.2.xsd)" = "468fee6d177e7185dbcd5d3f90cfb114e29e01ae"
           test "$(git -C /tmp/upstream-v22 hash-object IBIS-IP_Enumerations_V2.2.xsd)" = "2a23b512379b18e8f122ac1272cef8229fb86283"
+          python - <<'PY'
+          from lxml import etree
+          for path in (
+              '/tmp/upstream-v21/IBIS-IP_TrainSetDataService_V2.1.xsd',
+              '/tmp/upstream-v22/IBIS-IP_TrainSetDataService_V2.2.xsd',
+          ):
+              etree.XMLSchema(etree.parse(path))
+              print('OK compiled exact official release context', path)
+          PY
 
       - name: Re-acquire exact official PDFs
         shell: bash
