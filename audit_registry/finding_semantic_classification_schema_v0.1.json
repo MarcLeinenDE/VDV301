@@ -38,6 +38,18 @@
       },
       "additionalProperties": true
     },
+    "progress": {
+      "type": "object",
+      "required": ["classified_count", "remaining_count", "reviewed_blocks", "latest_block", "latest_block_file"],
+      "properties": {
+        "classified_count": {"type": "integer", "minimum": 0, "maximum": 192},
+        "remaining_count": {"type": "integer", "minimum": 0, "maximum": 192},
+        "reviewed_blocks": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "latest_block": {"type": ["string", "null"]},
+        "latest_block_file": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
     "entries": {"type": "array", "items": {"$ref": "#/$defs/entry"}}
   },
   "$defs": {
