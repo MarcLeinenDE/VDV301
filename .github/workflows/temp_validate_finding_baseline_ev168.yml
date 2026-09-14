@@ -1,4 +1,5 @@
 name: temp-validate-finding-baseline-ev168
+# validator-revision: dddc6d0ef605b7725a85b8b54bd7b1d8995325a8
 
 on:
   push:
@@ -33,7 +34,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git hash-object tools/validate_finding_baseline_ev168.py)" = "4a79cb0b2dff5fa8cd10cb52cc57d7f32bd7e969"
+          test "$(git hash-object tools/validate_finding_baseline_ev168.py)" = "dddc6d0ef605b7725a85b8b54bd7b1d8995325a8"
           test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "d5a645bb9c1498cbca55796d16d2ee71c80ebb37"
           test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "ccc7efa9d1a12578295dcab7b19a18e3ef3e8e94"
           test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
