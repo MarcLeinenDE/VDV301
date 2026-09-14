@@ -1,0 +1,149 @@
+name: temp-merge-semantic-classification-bg
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_merge_semantic_classification_bg.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  merge-bg:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout canonical branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+
+      - name: Verify exact inputs and snapshot immutable state
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "c5e6b80c29eef9df75fd3c8d94259d0663f548dc"
+          test "$(git hash-object audit_registry/finding_semantic_classification_schema_v0.1.json)" = "7cb69f527fe9d69e5b0fc59f6a23c36e0e426571"
+          test "$(git hash-object tools/validate_finding_semantic_classification.py)" = "3304b31b2233e48d8d85e2ef9e248397d9a86b4e"
+          test "$(git hash-object tools/merge_semantic_classification_block.py)" = "bddb17d5f264663611585cde33202c355ce9e5ca"
+          test "$(git hash-object audit_registry/semantic_classification_blocks/BG_v0.1.json)" = "496e9de89ea66b5d73ebd83a5663c7e33b21b551"
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "ab6d5f09081435e1d744b50af0a3a5f572eb5cef"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "6e401f0bd374379e74ce2a065fab88f2016f9f67"
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+          sha256sum ./*.xsd | sort -k2 > /tmp/bg-classification-xsd-before.sha256
+          git diff --exit-code
+
+      - name: Merge manually reviewed BG block
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence_out
+          python tools/merge_semantic_classification_block.py --block audit_registry/semantic_classification_blocks/BG_v0.1.json | tee evidence_out/merge.log
+          grep -Fq "PASSED: merged block BG; classified=20 remaining=172" evidence_out/merge.log
+
+      - name: Validate Known-Issues registry
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_finding_semantic_classification.py | tee evidence_out/classification.log
+          grep -Fq "PASSED: semantic classification registry valid; 20 reviewed entries anchored to frozen baseline" evidence_out/classification.log
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text(encoding='utf-8'))
+          assert d['state']=='in_progress'
+          assert d['progress']['classified_count']==20
+          assert d['progress']['remaining_count']==172
+          assert d['progress']['reviewed_blocks']==['ARA','ARCH','BG']
+          assert d['progress']['latest_block']=='BG'
+          ids=[e['finding_id'] for e in d['entries']]
+          assert ids[:14]==[
+            'ARA-001','ARA-002','ARA-003','ARA-004',
+            'ARCH-001','ARCH-002','ARCH-003','ARCH-004','ARCH-005','ARCH-006','ARCH-007','ARCH-008',
+            'BG-001','BG-002'
+          ]
+          print('BG_REGISTRY_POSTSTATE_OK')
+          PY
+
+      - name: Run complete 50-root-XSD regression pool
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_xsd_pool.py | tee evidence_out/xsd_pool.log
+          grep -Fq "PASSED" evidence_out/xsd_pool.log
+
+      - name: Enforce exact one-path mutation and immutability
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum ./*.xsd | sort -k2 > /tmp/bg-classification-xsd-after.sha256
+          cmp /tmp/bg-classification-xsd-before.sha256 /tmp/bg-classification-xsd-after.sha256
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "ab6d5f09081435e1d744b50af0a3a5f572eb5cef"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "6e401f0bd374379e74ce2a065fab88f2016f9f67"
+          rm -rf evidence_out
+          mapfile -t changed < <(git status --porcelain | sed 's/^...//' | sort)
+          printf '%s\n' "${changed[@]}"
+          test "${#changed[@]}" -eq 1
+          test "${changed[0]}" = "audit_registry/finding_semantic_classification_v0.1.json"
+          git diff --check
+          if git status --porcelain | grep -E '\.xsd$'; then
+            echo 'XSD mutation detected' >&2
+            exit 1
+          fi
+
+      - name: Recreate evidence and upload
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence_out
+          python tools/validate_finding_semantic_classification.py > evidence_out/classification.log
+          python tools/validate_xsd_pool.py > evidence_out/xsd_pool.log
+          cp audit_registry/semantic_classification_blocks/BG_v0.1.json evidence_out/BG_v0.1.json
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          registry=Path('audit_registry/finding_semantic_classification_v0.1.json')
+          manifest={
+            'block':'BG',
+            'classified_count':20,
+            'remaining_count':172,
+            'registry_sha256':hashlib.sha256(registry.read_bytes()).hexdigest(),
+            'frozen_baseline_payload_sha256':'d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576',
+            'xsd_pool':'PASS',
+            'xsd_mutation':False
+          }
+          Path('evidence_out/manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
+          PY
+
+      - name: Upload BG classification evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: semantic-classification-bg-evidence
+          path: evidence_out/
+
+      - name: Commit and push BG classification registry
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf evidence_out
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add audit_registry/finding_semantic_classification_v0.1.json
+          git diff --cached --check
+          test "$(git diff --cached --name-only)" = "audit_registry/finding_semantic_classification_v0.1.json"
+          git commit -m 'audit: merge BG semantic classification'
+          git push origin HEAD:dev/schema-integration
