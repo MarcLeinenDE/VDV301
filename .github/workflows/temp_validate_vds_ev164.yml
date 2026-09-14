@@ -1,0 +1,161 @@
+name: temp-validate-vds-ev164
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_validate_vds_ev164.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  vds-ev164:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout canonical branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install validation dependency
+        run: python -m pip install --disable-pip-version-check lxml==6.1.2
+
+      - name: Snapshot immutable XSD pool
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+          sha256sum ./*.xsd | sort -k2 > /tmp/vds-xsd-before.sha256
+          git diff --exit-code
+
+      - name: Verify exact upstream V2.0 and historical V1.0 authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          git remote remove audit-upstream 2>/dev/null || true
+          git remote add audit-upstream https://github.com/VDVde/VDV301.git
+
+          git fetch --no-tags audit-upstream refs/tags/VDV-301-2.0
+          test "$(git rev-parse FETCH_HEAD^{commit})" = "f2569a91f0a7c737a0ca7c0280b28ad223d7ee08"
+          test "$(git rev-parse FETCH_HEAD:IBIS-IP_VideoDisplayService_V2.0.xsd)" = "fcfdadd3b62a584370cae326004050b4dc832e23"
+          test "$(git rev-parse FETCH_HEAD:IBIS-IP_common_V2.0.xsd)" = "8608e3dcd665c197c34da7f6ec6af5a3758da164"
+          test "$(git rev-parse FETCH_HEAD:IBIS-IP_Enumerations_V2.0.xsd)" = "27e3c183b00381d959622d13c10543123af8eef6"
+
+          git fetch --no-tags audit-upstream refs/tags/VDV-301-1.0
+          test "$(git rev-parse FETCH_HEAD^{commit})" = "f5b53785f703e898632603eec3bfa3555a79fdba"
+          if git ls-tree -r --name-only FETCH_HEAD | grep -Eq '(^|/)IBIS-IP_VideoDisplayService_V1\.0\.xsd$'; then
+            echo "Unexpected official VDS V1.0 service XSD appeared in VDV-301-1.0"
+            exit 1
+          fi
+          if git show FETCH_HEAD:IBIS_IP_V1.0.xsd | grep -q 'VideoDisplayService'; then
+            echo "Unexpected VideoDisplayService declaration/include appeared in monolithic V1.0 schema"
+            exit 1
+          fi
+
+      - name: Reacquire exact official VDS PDFs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence_sources evidence_out
+          curl -fL --retry 4 --retry-all-errors --connect-timeout 20 \
+            "https://www.vdv.de/301-2-13-sds.pdfx" \
+            -o evidence_sources/VDS_V1.0.pdf
+          curl -fL --retry 4 --retry-all-errors --connect-timeout 20 \
+            "https://www.vdv.de/301-2-13-sdes-v2-0-video-display-service.pdfx" \
+            -o evidence_sources/VDS_V2.0.pdf
+          test "$(stat -c '%s' evidence_sources/VDS_V1.0.pdf)" = "1202943"
+          test "$(sha256sum evidence_sources/VDS_V1.0.pdf | awk '{print $1}')" = "9280cc239cf71bb158ab5941b522a2c4c822420e07ed44f4d4111d9689418480"
+          test "$(stat -c '%s' evidence_sources/VDS_V2.0.pdf)" = "903444"
+          test "$(sha256sum evidence_sources/VDS_V2.0.pdf | awk '{print $1}')" = "c287df20d8225af2afcd37dfdb487eb4922b89ce78c287da91745d12b410c8a2"
+
+      - name: Verify pinned historical visual evidence and EV-103 metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/33225843645" --jq .conclusion)" = "success"
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/9706815054" --jq .digest)" = "sha256:ff288301329a8fc3ea7e5e1fa568f06b0b6b5c4e76270f9c720a3a60eb29c9cd"
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/33226294383" --jq .conclusion)" = "success"
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/9706970109" --jq .digest)" = "sha256:a8f9a098f7bbf534d41c1586230a45518ada62c67482494d8ba9b0debb617fb1"
+
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/33111119723" --jq .conclusion)" = "success"
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/9662552176" --jq .digest)" = "sha256:b97d2e4506ffd63b8ff7985765131826d409e32769fb3a08193084134ca00ec0"
+
+      - name: Revalidate external terminology for VDS-008
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL --retry 3 "https://www.rfc-editor.org/rfc/rfc3550.txt" -o evidence_out/rfc3550.txt
+          grep -Fiq "real-time transport protocol" evidence_out/rfc3550.txt
+          curl -fsSL --retry 3 "https://docs.oasis-open.org/soa-rm/v1.0/soa-rm.html" -o evidence_out/oasis-soa-rm.html
+          grep -Fiq "Service Oriented Architecture" evidence_out/oasis-soa-rm.html
+          {
+            echo "VDS-008 external terminology revalidation: PASS"
+            echo "RFC 3550: real-time transport protocol"
+            echo "OASIS SOA-RM: Service Oriented Architecture"
+          } > evidence_out/vds008_external_terminology.txt
+
+      - name: Rerun EV-103 compositor evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_video_v20_compositors.py | tee evidence_out/ev103-rerun.log
+          grep -Fq "PASSED: EV-103 video compositor behaviour confirmed" evidence_out/ev103-rerun.log
+
+      - name: Run EV-164 aggregate VDS gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_vds_revalidation_ev164.py \
+            --vds-v10-pdf evidence_sources/VDS_V1.0.pdf \
+            --vds-v20-pdf evidence_sources/VDS_V2.0.pdf \
+            --output evidence_out/vds_ev164_evidence.json \
+            | tee evidence_out/ev164.log
+          grep -Fq "PASSED: EV-164 VDS aggregate evidence gate" evidence_out/ev164.log
+
+      - name: Run complete 50-root-XSD regression pool
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_xsd_pool.py | tee evidence_out/xsd-pool.log
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+
+      - name: Enforce immutability
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum ./*.xsd | sort -k2 > /tmp/vds-xsd-after.sha256
+          cmp /tmp/vds-xsd-before.sha256 /tmp/vds-xsd-after.sha256
+          git diff --exit-code -- \
+            audit_registry/finding_inventory_frozen_2026-09-03.json \
+            audit_registry/finding_revalidation_registry_v0.1.json \
+            00_START_HERE/CURRENT_STATE.json \
+            audit_registry/pdf_source_registry_v0.1.json \
+            audit_registry/pdf_source_pins_v0.1.json \
+            '*.xsd'
+          {
+            echo "canonical_head=${GITHUB_SHA}"
+            echo "root_xsd_count=50"
+            echo "xsd_mutation=false"
+            echo "frozen_inventory_mutation=false"
+            echo "registry_mutation=false"
+            echo "current_state_mutation=false"
+          } > evidence_out/immutability.txt
+
+      - name: Upload EV-164 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: vds-ev164-evidence
+          path: evidence_out/
+          if-no-files-found: error
+          retention-days: 90
