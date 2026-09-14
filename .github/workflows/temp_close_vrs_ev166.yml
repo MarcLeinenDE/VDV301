@@ -1,0 +1,200 @@
+name: temp-close-vrs-ev166
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_close_vrs_ev166.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  close-vrs:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout canonical branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: dev/schema-integration
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install validation dependency
+        run: python -m pip install --disable-pip-version-check lxml==6.1.2
+
+      - name: Verify exact closure inputs and snapshot immutable XSDs
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object tools/close_vrs_revalidation_block.py)" = "3955c91c3b1710e160b4fdd9128e0f981253973e"
+          test "$(git hash-object tools/validate_vrs_revalidation_ev166.py)" = "22ef7a87e5ae6395b7a15a96750a9eb116472bbb"
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "9fa016a223052e84610d9a47e08a81a5015bcb4d"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "5f7e232d7f8b75ea2ff85e88c108dd4646aa0ba4"
+          test "$(git hash-object audit_registry/pdf_source_registry_v0.1.json)" = "d3471e1cef9b099dc8764a3ee8bf234b9a658ce8"
+          test "$(git hash-object audit_registry/pdf_source_pins_v0.1.json)" = "88349638b423689799af700e8a1c8ec99bbfb67b"
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+          sha256sum ./*.xsd | sort -k2 > /tmp/vrs-close-xsd-before.sha256
+          git diff --exit-code
+
+      - name: Verify successful EV-166 evidence online
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/34840970136" --jq .conclusion)" = "success"
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/34840970136" --jq .head_sha)" = "8bcfbbc3e93fcc1bfc41e422cd5a83790ed99e9f"
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/10346331279" --jq .digest)" = "sha256:da205bc769db11a5406a11de1c2febeb6c38745924d51835fe7a22b6fd978309"
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/10346331279" --jq .expired)" = "false"
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/33111119723" --jq .conclusion)" = "success"
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/9662552176" --jq .digest)" = "sha256:b97d2e4506ffd63b8ff7985765131826d409e32769fb3a08193084134ca00ec0"
+
+      - name: Verify authority routes and PR 27
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git remote remove audit-upstream 2>/dev/null || true
+          git remote add audit-upstream https://github.com/VDVde/VDV301.git
+          git fetch --no-tags audit-upstream refs/tags/VDV-301-2.0
+          test "$(git rev-parse FETCH_HEAD^{commit})" = "f2569a91f0a7c737a0ca7c0280b28ad223d7ee08"
+          test "$(git rev-parse FETCH_HEAD:IBIS-IP_VideoRecordingService_V2.0.xsd)" = "6ef0dae64ce6f4d3aa4f652d6d166896e71aaac7"
+          git fetch --no-tags audit-upstream refs/tags/VDV-301-1.0
+          test "$(git rev-parse FETCH_HEAD^{commit})" = "f5b53785f703e898632603eec3bfa3555a79fdba"
+          ! git ls-tree -r --name-only FETCH_HEAD | grep -Eq '(^|/)IBIS-IP_VideoRecordingService_V1\.0\.xsd$'
+          ! git show FETCH_HEAD:IBIS_IP_V1.0.xsd | grep -q 'VideoRecordingService'
+          git fetch --no-tags audit-upstream refs/pull/27/head
+          test "$(git rev-parse FETCH_HEAD^{commit})" = "0aa728aab47a7f13b6f36da415581d51592c4ca7"
+          test "$(git rev-parse FETCH_HEAD:IBIS-IP_VideoRecordingService_V2.4.xsd)" = "07ff2c41731e63fd85b203e4b8e0186136caaaaf"
+          test "$(gh api repos/VDVde/VDV301/pulls/27 --jq .state)" = "open"
+          test "$(gh api repos/VDVde/VDV301/pulls/27 --jq .merged)" = "false"
+          test "$(gh api repos/VDVde/VDV301/pulls/27 --jq .head.sha)" = "0aa728aab47a7f13b6f36da415581d51592c4ca7"
+
+      - name: Reacquire exact official VRS PDFs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence_sources evidence_out
+          curl -fL --retry 4 --retry-all-errors --connect-timeout 20 "https://www.vdv.de/301-2-12-sds.pdfx" -o evidence_sources/VRS_V1.0.pdf
+          curl -fL --retry 4 --retry-all-errors --connect-timeout 20 "https://www.vdv.de/301-2-12-sdes-v2-0-video-recording-service.pdfx" -o evidence_sources/VRS_V2.0.pdf
+          curl -fL --retry 4 --retry-all-errors --connect-timeout 20 "https://www.vdv.de/301-2-12-sdg-v2.4-videorecordingservice.pdfx" -o evidence_sources/VRS_V2.4.pdf
+          test "$(stat -c '%s' evidence_sources/VRS_V1.0.pdf)" = "1227302"
+          test "$(sha256sum evidence_sources/VRS_V1.0.pdf | awk '{print $1}')" = "29d0bcb270fdab2119c4653296d4bca01e0f8b127eb9aaf393f66b2b34dcd390"
+          test "$(stat -c '%s' evidence_sources/VRS_V2.0.pdf)" = "941841"
+          test "$(sha256sum evidence_sources/VRS_V2.0.pdf | awk '{print $1}')" = "fbe9e68e72de4e5450f562aa6a6117283a94f87a28bded0e05458670527b6c5f"
+          test "$(stat -c '%s' evidence_sources/VRS_V2.4.pdf)" = "1036423"
+          test "$(sha256sum evidence_sources/VRS_V2.4.pdf | awk '{print $1}')" = "d1a3cf36b4a9719ff8d233a84ade34ed7ff9c3dccb58f8a8688727d82a568a7b"
+
+      - name: Verify visual evidence metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/9699101854" --jq .digest)" = "sha256:09c32d7cc15f03deeb27a747268da8120e40e79da5cc5e343d2d682c6c6d1670"
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/9699785995" --jq .digest)" = "sha256:c37754790fe9e62c64a245593b258465d167ee6b76353010399af49e9462cbae"
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/9700060119" --jq .digest)" = "sha256:a81fa9b51ae3cc63fc00548e55308551754b6d17bb81c49d7272dcc24a277593"
+
+      - name: Rerun EV-103 and EV-166
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_video_v20_compositors.py | tee evidence_out/ev103-rerun.log
+          grep -Fq "PASSED: EV-103 video compositor behaviour confirmed" evidence_out/ev103-rerun.log
+          python tools/validate_vrs_revalidation_ev166.py \
+            --vrs-v10-pdf evidence_sources/VRS_V1.0.pdf \
+            --vrs-v20-pdf evidence_sources/VRS_V2.0.pdf \
+            --vrs-v24-pdf evidence_sources/VRS_V2.4.pdf \
+            --output evidence_out/vrs_ev166_evidence.json \
+            | tee evidence_out/ev166-rerun.log
+          grep -Fq "PASSED: EV-166 VRS final-block aggregate gate" evidence_out/ev166-rerun.log
+
+      - name: Run complete 50-root-XSD regression pool
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_xsd_pool.py | tee evidence_out/xsd-pool.log
+          grep -Fq "PASSED" evidence_out/xsd-pool.log
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+
+      - name: Prepare atomic VRS closure
+        env:
+          EVIDENCE_RUN_ID: ${{ github.run_id }}
+          EVIDENCE_RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/close_vrs_revalidation_block.py | tee evidence_out/closure-writer.log
+          grep -Fq "PASSED: VRS final-block closure files prepared; expected poststate 192/0; readiness reconciliation pending CIS-001" evidence_out/closure-writer.log
+
+      - name: Enforce exact three-path mutation allowlist
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf evidence_out evidence_sources
+          git status --porcelain=v1 --untracked-files=all
+          git status --porcelain=v1 --untracked-files=all | cut -c4- | sort > /tmp/actual-paths.txt
+          cat > /tmp/expected-paths.txt <<'EOF'
+          00_START_HERE/CURRENT_STATE.json
+          audit_registry/finding_revalidation_registry_v0.1.json
+          docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md
+          EOF
+          diff -u /tmp/expected-paths.txt /tmp/actual-paths.txt
+
+      - name: Verify exact poststate and immutability
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          terminal={"context_verified","executable_confirmed","contextual_not_defect","withdrawn","unresolved","superseded"}
+          reg=json.loads(Path("audit_registry/finding_revalidation_registry_v0.1.json").read_text())
+          e=reg["inventory"]["entries"]; by={x["finding_id"]:x for x in e}
+          assert len(e)==len(by)==192
+          assert sum(x["revalidation_state"] in terminal for x in e)==192
+          assert sum(x["revalidation_state"]=="pending" for x in e)==0
+          assert reg["next_revalidation_block"] is None
+          assert reg["state"]=="inventory_frozen_revalidation_terminalized_readiness_pending"
+          assert reg["sdk_readiness"]["finding_knowledge_ready"] is False
+          assert reg["sdk_readiness"]["readiness_reconciliation_pending"]==["CIS-001"]
+          assert by["VRS-003"]["revalidation_state"]=="executable_confirmed"
+          assert by["VRS-007"]["revalidation_state"]=="withdrawn"
+          assert [x["finding_id"] for x in e if x["revalidation_state"]=="unresolved"]==["CIS-001"]
+          a=json.loads(Path("00_START_HERE/CURRENT_STATE.json").read_text())["audit"]
+          assert a["finding_revalidation_completed_findings"]==192
+          assert a["finding_revalidation_pending_findings"]==0
+          assert a["finding_revalidation_next_block"] is None
+          assert a["finding_revalidation_latest_completed_block"]=="VRS"
+          assert a["latest_revalidation_evidence_id"]=="EV-166"
+          assert a["finding_readiness_reconciliation_pending"]==["CIS-001"]
+          print("POSTSTATE PASS: 192/0; CIS-001 readiness reconciliation pending")
+          PY
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/pdf_source_registry_v0.1.json)" = "d3471e1cef9b099dc8764a3ee8bf234b9a658ce8"
+          test "$(git hash-object audit_registry/pdf_source_pins_v0.1.json)" = "88349638b423689799af700e8a1c8ec99bbfb67b"
+          sha256sum ./*.xsd | sort -k2 > /tmp/vrs-close-xsd-after.sha256
+          cmp /tmp/vrs-close-xsd-before.sha256 /tmp/vrs-close-xsd-after.sha256
+
+      - name: Commit and push atomic VRS closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 00_START_HERE/CURRENT_STATE.json \
+                  audit_registry/finding_revalidation_registry_v0.1.json \
+                  docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md
+          test "$(git diff --cached --name-only | wc -l)" -eq 3
+          git commit -m "audit: close final VRS revalidation without schema mutation"
+          git push origin HEAD:dev/schema-integration
