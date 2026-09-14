@@ -1,0 +1,132 @@
+name: temp validate TVS EV-163
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_validate_tvs_ev163.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-tvs-ev163:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact triggering commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Assert workflow-only trigger commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE_SHA="083ffb47a029f3d161ff4718bc4443adafb2660e"
+          git cat-file -e "${BASE_SHA}^{commit}"
+          mapfile -t changed < <(git diff --name-only "$BASE_SHA" "$GITHUB_SHA")
+          printf 'Changed paths since EV-163 gate commit:\n%s\n' "${changed[*]}"
+          test "${#changed[@]}" -eq 1
+          test "${changed[0]}" = ".github/workflows/temp_validate_tvs_ev163.yml"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install validator dependency
+        run: python -m pip install --disable-pip-version-check lxml
+
+      - name: Snapshot immutable XSD pool
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence/tvs_ev163
+          count=$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)
+          echo "XSD count: $count"
+          test "$count" -eq 50
+          sha256sum ./*.xsd | sort > evidence/tvs_ev163/xsd_before.sha256
+          sha256sum audit_registry/finding_inventory_frozen_2026-09-03.json > evidence/tvs_ev163/frozen_inventory_before.sha256
+
+      - name: Run EV-112 official V2.1 lane
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_tvs_v21_ev112.py | tee evidence/tvs_ev163/ev112_direct.log
+
+      - name: Run EV-113 official V2.2 lane
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_tvs_v22_ev113.py | tee evidence/tvs_ev163/ev113_direct.log
+
+      - name: Run EV-114 official V2.3 lane
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_tvs_v23_ev114.py | tee evidence/tvs_ev163/ev114_direct.log
+
+      - name: Run EV-115 V2.4 candidate/integration lane
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_tvs_v24_ev115.py | tee evidence/tvs_ev163/ev115_direct.log
+          grep -F "AUTHORITY: candidate/integration V2.4 family; NOT official-release V2.4 conformance" evidence/tvs_ev163/ev115_direct.log
+
+      - name: Run aggregate EV-163 gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_tvs_revalidation_ev163.py \
+            --repo-root . \
+            --output-dir evidence/tvs_ev163 \
+            | tee evidence/tvs_ev163/ev163.log
+          grep -F "PASSED: EV-163 TVS aggregate revalidation gate; projected poststate 168/24, next VDS-001" evidence/tvs_ev163/ev163.log
+
+      - name: Validate complete 50-XSD pool
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_xsd_pool.py --repo-root . | tee evidence/tvs_ev163/xsd_pool.log
+          grep -Fx "PASSED" evidence/tvs_ev163/xsd_pool.log
+
+      - name: Prove immutable audit/schema inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum ./*.xsd | sort > evidence/tvs_ev163/xsd_after.sha256
+          cmp evidence/tvs_ev163/xsd_before.sha256 evidence/tvs_ev163/xsd_after.sha256
+          sha256sum audit_registry/finding_inventory_frozen_2026-09-03.json > evidence/tvs_ev163/frozen_inventory_after.sha256
+          cmp evidence/tvs_ev163/frozen_inventory_before.sha256 evidence/tvs_ev163/frozen_inventory_after.sha256
+          git diff --exit-code -- ./*.xsd audit_registry/finding_inventory_frozen_2026-09-03.json
+
+      - name: Record CI provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, pathlib
+          p = pathlib.Path('evidence/tvs_ev163/ci_provenance.json')
+          data = {
+              'evidence_id': 'EV-163',
+              'repository': os.environ['GITHUB_REPOSITORY'],
+              'head_sha': os.environ['GITHUB_SHA'],
+              'run_id': os.environ['GITHUB_RUN_ID'],
+              'run_attempt': os.environ['GITHUB_RUN_ATTEMPT'],
+              'workflow': os.environ['GITHUB_WORKFLOW'],
+              'ref': os.environ['GITHUB_REF'],
+              'authority_boundary': 'EV-115 is candidate/integration V2.4 evidence, not official-release V2.4 XSD conformance',
+              'projected_poststate': {'terminal': 168, 'pending': 24, 'first_pending': 'VDS-001', 'next_block': 'VDS'},
+          }
+          p.write_text(json.dumps(data, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+          PY
+
+      - name: Upload EV-163 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: tvs-ev163-evidence
+          path: evidence/tvs_ev163/
+          if-no-files-found: error
+          retention-days: 30
