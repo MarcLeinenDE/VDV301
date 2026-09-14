@@ -960,18 +960,18 @@
       },
       {
         "finding_id": "TSM-001",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "executable_confirmed",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSM_2026-09-14.md"
       },
       {
         "finding_id": "TSM-002",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "executable_confirmed",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSM_2026-09-14.md"
       },
       {
         "finding_id": "TSM-003",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSM_2026-09-14.md"
       },
       {
         "finding_id": "TVS-001",
@@ -1123,7 +1123,7 @@
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true
   },
-  "next_revalidation_block": "TSM",
+  "next_revalidation_block": "TVS",
   "revalidation_blocks": {
     "ARA_V2.4": {
       "date": "2026-09-03",
@@ -2936,6 +2936,67 @@
       "frozen_inventory_mutation": false,
       "next_block": "TSM",
       "next_finding": "TSM-001"
+    },
+    "TSM": {
+      "date": "2026-09-14",
+      "state": "completed",
+      "authority_lane": "official byte-pinned TrainSetServices V2.1/V2.2 PDFs plus exact official V2.1/V2.2 TrainSetManagementService XSDs, V2.2 correction history, EV-109/EV-104 and EV-162",
+      "evidence_id": "EV-162",
+      "evidence_run_id": "34823587675",
+      "evidence_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/34823587675",
+      "pinned_successful_evidence_run": "34823353897",
+      "pinned_successful_evidence_job": "103909732702",
+      "artifact_id": "10339282538",
+      "artifact_digest": "sha256:8083d5badea1af9922302b202f06c33f4961d53878dfbc5d84324a4e4d65a4a0",
+      "evidence_head_sha": "41a491ad41b1f03a786610f64fc54979a38faf4f",
+      "source_pin": {
+        "reused_from": "EV-160 source acquisition",
+        "run_id": "34816735900",
+        "job_id": "103888867262",
+        "artifact_id": "10336466475",
+        "artifact_digest": "sha256:30089b9d4f2c86dd57f8bb184844a428ee08e91b0d327517c84f6689ea231bfb",
+        "head_sha": "20785d8ee41e812a5902d49b6d4b800ef238e311"
+      },
+      "pdf_authority": {
+        "TRAINSET_V2.1": {
+          "sha256": "8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e",
+          "visual_pages": [
+            30
+          ]
+        },
+        "TRAINSET_V2.2": {
+          "sha256": "c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e",
+          "visual_pages": [
+            31,
+            51
+          ],
+          "page_31_embedded_diagram_evidence_mode": "visual_not_Poppler_text"
+        }
+      },
+      "xsd_authority": {
+        "TSM_V2.1_blob": "add9d1cb37e5759ff7a77855b239108d38373206",
+        "TSM_V2.2_blob": "da9465d6683e3f7d54a546ab4a13739fb3c3e902",
+        "TSI_V2.2_blob": "7ab1f8f892bfcea2a8b8a055f07de92c143356f9",
+        "latest_wins": false
+      },
+      "underlying_executable_evidence": [
+        "EV-109",
+        "EV-104"
+      ],
+      "full_xsd_regression_pool": {
+        "root_xsd_count": 50,
+        "result": "PASS"
+      },
+      "findings": {
+        "TSM-001": "executable_confirmed",
+        "TSM-002": "executable_confirmed",
+        "TSM-003": "context_verified"
+      },
+      "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSM_2026-09-14.md",
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false,
+      "next_block": "TVS",
+      "next_finding": "TVS-001"
     }
   }
 }
