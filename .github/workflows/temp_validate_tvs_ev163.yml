@@ -24,7 +24,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          BASE_SHA="47fd722b7d4a575994ae829d899218a220ff7e7f"
+          BASE_SHA="466340965faa7cff9c6a78565396b4ea09e27bce"
           git cat-file -e "${BASE_SHA}^{commit}"
           mapfile -t changed < <(git diff --name-only "$BASE_SHA" "$GITHUB_SHA")
           printf 'Changed paths since corrected EV-163 gate commit:\n%s\n' "${changed[*]}"
