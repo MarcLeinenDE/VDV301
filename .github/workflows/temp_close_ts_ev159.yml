@@ -158,6 +158,8 @@ jobs:
           test "$(git hash-object audit_registry/pdf_source_registry_v0.1.json)" = "d3471e1cef9b099dc8764a3ee8bf234b9a658ce8"
           test "$(git hash-object audit_registry/pdf_source_pins_v0.1.json)" = "88349638b423689799af700e8a1c8ec99bbfb67b"
           test "$(git hash-object IBIS-IP_Enumerations_V1.0.xsd)" = "a9bea5bc73003ed91ded8519db06c32c4067831d"
+          find . -type d -name '__pycache__' -prune -exec rm -rf {} +
+          test -z "$(find . -type d -name '__pycache__' -print -quit)"
           python - <<'PY'
           import json, subprocess
           expected={
@@ -183,8 +185,6 @@ jobs:
           assert state['finding_revalidation_latest_completed_block']=='TS'
           print('OK exact TS poststate and path allowlist')
           PY
-          find . -type d -name '__pycache__' -prune -exec rm -rf {} +
-          test -z "$(find . -type d -name '__pycache__' -print -quit)"
 
       - name: Commit and push atomic TS closure
         shell: bash
