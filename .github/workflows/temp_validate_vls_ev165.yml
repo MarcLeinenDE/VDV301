@@ -1,0 +1,137 @@
+name: temp-validate-vls-ev165
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_validate_vls_ev165.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  vls-ev165:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout canonical branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install validation dependency
+        run: python -m pip install --disable-pip-version-check lxml==6.1.2
+
+      - name: Snapshot immutable XSD pool
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+          sha256sum ./*.xsd | sort -k2 > /tmp/vls-xsd-before.sha256
+          git diff --exit-code
+
+      - name: Verify exact upstream V2.0 and historical V1.0 authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          git remote remove audit-upstream 2>/dev/null || true
+          git remote add audit-upstream https://github.com/VDVde/VDV301.git
+          git fetch --no-tags audit-upstream refs/tags/VDV-301-2.0
+          test "$(git rev-parse FETCH_HEAD^{commit})" = "f2569a91f0a7c737a0ca7c0280b28ad223d7ee08"
+          test "$(git rev-parse FETCH_HEAD:IBIS-IP_VideoLiveService_V2.0.xsd)" = "d8c52f5de9ef3f5915524fef12da11eabf0ca041"
+          test "$(git rev-parse FETCH_HEAD:IBIS-IP_common_V2.0.xsd)" = "8608e3dcd665c197c34da7f6ec6af5a3758da164"
+          test "$(git rev-parse FETCH_HEAD:IBIS-IP_Enumerations_V2.0.xsd)" = "27e3c183b00381d959622d13c10543123af8eef6"
+          git fetch --no-tags audit-upstream refs/tags/VDV-301-1.0
+          test "$(git rev-parse FETCH_HEAD^{commit})" = "f5b53785f703e898632603eec3bfa3555a79fdba"
+          ! git ls-tree -r --name-only FETCH_HEAD | grep -Eq '(^|/)IBIS-IP_VideoLiveService_V1\.0\.xsd$'
+          ! git show FETCH_HEAD:IBIS_IP_V1.0.xsd | grep -q 'VideoLiveService'
+
+      - name: Reacquire exact official VLS PDFs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence_sources evidence_out
+          curl -fL --retry 4 --retry-all-errors --connect-timeout 20 "https://www.vdv.de/301-2-11-sds.pdfx" -o evidence_sources/VLS_V1.0.pdf
+          curl -fL --retry 4 --retry-all-errors --connect-timeout 20 "https://www.vdv.de/301-2-11-sdes-v2-0-video-live-service.pdfx" -o evidence_sources/VLS_V2.0.pdf
+          test "$(stat -c '%s' evidence_sources/VLS_V1.0.pdf)" = "1166329"
+          test "$(sha256sum evidence_sources/VLS_V1.0.pdf | awk '{print $1}')" = "f535673427ff8f495102e1fc7723ca157408949b981572c4342b862f6d9c2a3c"
+          test "$(stat -c '%s' evidence_sources/VLS_V2.0.pdf)" = "1218788"
+          test "$(sha256sum evidence_sources/VLS_V2.0.pdf | awk '{print $1}')" = "d75a543c138f21c4ad370925ca7f306bcde7d692ce793ddc1d51bdcf6032787b"
+
+      - name: Verify pinned visual evidence and EV-103 metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/33202961159" --jq .conclusion)" = "success"
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/9698490677" --jq .digest)" = "sha256:1e251087156601d70d6e33fd5b0d37c2085fba859f251104346530c10a732ddf"
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/33203162588" --jq .conclusion)" = "success"
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/9698569098" --jq .digest)" = "sha256:f15725fdd204162e0e122628a2ccdfc0fa3b9ceb74f6d70ecaba7e141b3b49b6"
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/33203850390" --jq .conclusion)" = "success"
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/9698836620" --jq .digest)" = "sha256:1a3ecf292eb99968a56aaf7e1c12d0395907250ebdf7eef913b87e74f42dbbbf"
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/33111119723" --jq .conclusion)" = "success"
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/9662552176" --jq .digest)" = "sha256:b97d2e4506ffd63b8ff7985765131826d409e32769fb3a08193084134ca00ec0"
+
+      - name: Rerun EV-103 compositor evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_video_v20_compositors.py | tee evidence_out/ev103-rerun.log
+          grep -Fq "PASSED: EV-103 video compositor behaviour confirmed" evidence_out/ev103-rerun.log
+
+      - name: Run EV-165 aggregate VLS gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_vls_revalidation_ev165.py \
+            --vls-v10-pdf evidence_sources/VLS_V1.0.pdf \
+            --vls-v20-pdf evidence_sources/VLS_V2.0.pdf \
+            --output evidence_out/vls_ev165_evidence.json \
+            | tee evidence_out/ev165.log
+          grep -Fq "PASSED: EV-165 VLS aggregate evidence gate" evidence_out/ev165.log
+
+      - name: Run complete 50-root-XSD regression pool
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_xsd_pool.py | tee evidence_out/xsd-pool.log
+          grep -Fq "PASSED" evidence_out/xsd-pool.log
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+
+      - name: Enforce immutability
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum ./*.xsd | sort -k2 > /tmp/vls-xsd-after.sha256
+          cmp /tmp/vls-xsd-before.sha256 /tmp/vls-xsd-after.sha256
+          git diff --exit-code -- \
+            audit_registry/finding_inventory_frozen_2026-09-03.json \
+            audit_registry/finding_revalidation_registry_v0.1.json \
+            00_START_HERE/CURRENT_STATE.json \
+            audit_registry/pdf_source_registry_v0.1.json \
+            audit_registry/pdf_source_pins_v0.1.json \
+            '*.xsd'
+          {
+            echo "canonical_head=${GITHUB_SHA}"
+            echo "root_xsd_count=50"
+            echo "xsd_mutation=false"
+            echo "frozen_inventory_mutation=false"
+            echo "registry_mutation=false"
+            echo "current_state_mutation=false"
+          } > evidence_out/immutability.txt
+
+      - name: Upload EV-165 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: vls-ev165-evidence
+          path: evidence_out/
+          if-no-files-found: error
+          retention-days: 90
