@@ -27,6 +27,7 @@ SOURCE_PINS = ROOT / "audit_registry/pdf_source_pins_v0.1.json"
 EVIDENCE_GATE = ROOT / "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md"
 PLAN = ROOT / "docs/pdf_xsd_semantic_audit/LEGACY_FINDING_REVALIDATION_PLAN.md"
 CIS_REPORT = ROOT / "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CIS_2026-09-03.md"
+PIN_CORRECTION = ROOT / "docs/pdf_xsd_semantic_audit/PDF_SOURCE_PIN_CORRECTION_CIS_2026-09-14.md"
 XSD_POOL = ROOT / "tools/validate_xsd_pool.py"
 
 EXPECTED = {
@@ -34,7 +35,7 @@ EXPECTED = {
     REGISTRY: "8635e6d6a5e3f6f9a358760d35e716a0b065b277",
     STATE: "c5b5d7f29203a23d42fe9feee54ab2c130850191",
     SOURCE_REGISTRY: "d3471e1cef9b099dc8764a3ee8bf234b9a658ce8",
-    SOURCE_PINS: "88349638b423689799af700e8a1c8ec99bbfb67b",
+    SOURCE_PINS: "bc60527ddc158d967470a63d38ffd035e5ec1400",
     EVIDENCE_GATE: "969cce8b14b50ded2ca5eb745674b894428ecf1a",
     PLAN: "b8a38bd09ca6239b96981548b7cfcbd49aa4c9d5",
     CIS_REPORT: "4e871dae28db1d36c99ff0ebcb553e7178681c4f",
@@ -48,8 +49,8 @@ TERMINAL = {
     "unresolved",
     "superseded",
 }
-CIS_PDF_SHA = "89080a41da387270ecac5b228df6aa4903ccb123a0d37e9e73cd98396786931b"
-CIS_PDF_SIZE = 985025
+CIS_PDF_SHA = "f9d63dd1f2e417691913e57a9c7121c90b4e781cbcd1328be681695975f59739"
+CIS_PDF_SIZE = 809729
 CIS_PDF_URL = "https://www.vdv.de/301-2-3-sds-v1-1.pdfx"
 WORKING_COMMIT = "0a5228a768c7d710c40f5f99fbdce2e544d19883"
 WORKING_CIS_BLOB = "5957e27f128a191c794b0c8081b531a07126784a"
@@ -94,6 +95,17 @@ def main() -> int:
 
     for path, expected in EXPECTED.items():
         req(path.is_file() and blob(path) == expected, f"exact blob {path.relative_to(ROOT)} = {expected}")
+    req(PIN_CORRECTION.is_file(), "CIS pin-correction report exists")
+    tokens(
+        PIN_CORRECTION,
+        [
+            "evidence-backed registry correction",
+            "33736316368",
+            "9885887536",
+            "f9d63dd1f2e417691913e57a9c7121c90b4e781cbcd1328be681695975f59739",
+        ],
+        "CIS source-pin correction",
+    )
 
     frozen = load(FROZEN)
     req(frozen.get("state") == "frozen" and frozen.get("entry_count") == 192, "frozen inventory remains 192")
@@ -169,14 +181,15 @@ def main() -> int:
     req(source.get("official_url") == CIS_PDF_URL, "CIS V1.1 official PDF URL pinned")
     req(
         pin.get("expected_sha256") == CIS_PDF_SHA and pin.get("expected_size_bytes") == CIS_PDF_SIZE,
-        "CIS V1.1 PDF hash/size pinned",
+        "CIS V1.1 corrected PDF hash/size pinned",
     )
     req(str(pin.get("evidence_run_id")) == "33736316368", "CIS V1.1 source evidence run pinned")
+    req(str(pin.get("correction_artifact_id")) == "9885887536", "CIS V1.1 pin correction retains exact evidence artifact")
     req(
         args.cis_v11_pdf.is_file()
         and args.cis_v11_pdf.stat().st_size == CIS_PDF_SIZE
         and sha256(args.cis_v11_pdf) == CIS_PDF_SHA,
-        "fresh CIS V1.1 PDF bytes match permanent pin",
+        "fresh CIS V1.1 PDF bytes match corrected permanent pin",
     )
 
     req(args.cis_v11_text.is_file(), "fresh CIS V1.1 PDF text extraction supplied")
@@ -190,10 +203,6 @@ def main() -> int:
     for field in MISSING_PUBLISHED_FIELDS:
         req(field not in working_text, f"untagged CIS V1.1 working XSD omits published field {field}")
 
-    # The old terminal label 'unresolved' described the missing release-XSD identity.
-    # The current finding claim is narrower and provable: a publication-to-release-XSD
-    # provenance gap exists and must route fail-closed. Final reconciliation therefore
-    # refines the finding state without inventing an authority that does not exist.
     projected_state = "context_verified"
     req(projected_state in TERMINAL, "CIS-001 projected state is terminal")
 
