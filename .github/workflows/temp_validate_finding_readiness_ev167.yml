@@ -1,4 +1,5 @@
 name: temp-validate-finding-readiness-ev167
+# validator-revision: a4c13eab177a64b0f18140673c07e8ef5fdcbf63
 
 on:
   push:
@@ -33,7 +34,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git hash-object tools/validate_finding_readiness_ev167.py)" = "69b0a5e94394e9cc1c4ba92c99dea766b7b19fb5"
+          test "$(git hash-object tools/validate_finding_readiness_ev167.py)" = "a4c13eab177a64b0f18140673c07e8ef5fdcbf63"
+          test "$(git hash-object audit_registry/pdf_source_pins_v0.1.json)" = "bc60527ddc158d967470a63d38ffd035e5ec1400"
           test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
           sha256sum ./*.xsd | sort -k2 > /tmp/ev167-xsd-before.sha256
           git diff --exit-code
@@ -46,8 +48,8 @@ jobs:
           curl -fL --retry 4 --retry-all-errors --connect-timeout 20 \
             "https://www.vdv.de/301-2-3-sds-v1-1.pdfx" \
             -o evidence_sources/CIS_V1.1.pdf
-          test "$(stat -c '%s' evidence_sources/CIS_V1.1.pdf)" = "985025"
-          test "$(sha256sum evidence_sources/CIS_V1.1.pdf | awk '{print $1}')" = "89080a41da387270ecac5b228df6aa4903ccb123a0d37e9e73cd98396786931b"
+          test "$(stat -c '%s' evidence_sources/CIS_V1.1.pdf)" = "809729"
+          test "$(sha256sum evidence_sources/CIS_V1.1.pdf | awk '{print $1}')" = "f9d63dd1f2e417691913e57a9c7121c90b4e781cbcd1328be681695975f59739"
 
       - name: Extract and verify published CIS V1.1 fields
         shell: bash
