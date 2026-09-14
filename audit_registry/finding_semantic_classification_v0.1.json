@@ -862,6 +862,160 @@
       "notes": "Prevents false service synthesis from architecture vocabulary."
     },
     {
+      "finding_id": "BG-001",
+      "service": "BaseGeneral",
+      "version_scope": [
+        {
+          "version": "VDV-301-1.0 / VDV-301-2.0 historical V1.0 service families",
+          "authority": "official_release",
+          "xsd_profile": "exact release-tag-selected service XSD pool",
+          "note": "Four same-path V1.0 service XSD files have different official blobs across the two release contexts; the semantic differences are primarily packaging/self-containment changes."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "provenance",
+      "primary_issue_kind": "version_routing_issue",
+      "secondary_issue_kinds": [
+        "semantic_contradiction"
+      ],
+      "defect_assessment": "non_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "other"
+      ],
+      "sdk_behavior": "warning",
+      "semantic_basis": [
+        {
+          "type": "official_release_provenance",
+          "note": "Official tag comparison proves that several V1.0 service files kept the same path/version token but changed blob identity between VDV-301-1.0 and VDV-301-2.0."
+        },
+        {
+          "type": "technical_inference",
+          "note": "Byte identity and semantic validation identity are separate questions: a changed blob alone is not sufficient evidence that payload-validity rules changed."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-123 confirms that the exact legacy root mappings can still be compiled through adapters without modifying or replacing the official schemas."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Versionsname allein reicht für die Auswahl einer historischen XSD nicht immer aus",
+          "short": "Bei einigen V1.0-Services existieren unter demselben Dateinamen unterschiedliche offizielle XSD-Bytes in verschiedenen Release-Kontexten.",
+          "long": "Bei mehreren historischen V1.0-Service-XSDs bleibt Dateiname beziehungsweise Versionsbezeichnung gleich, obwohl sich die offiziellen Dateien zwischen den Release-Ständen VDV-301-1.0 und VDV-301-2.0 unterscheiden. Daraus folgt nicht automatisch, dass sich auch die fachliche XML-Gültigkeit geändert hat; ein Teil der Änderungen betrifft lediglich Verpackung und Selbstständigkeit der Dateien. Für eine reproduzierbare Prüfung muss das SDK trotzdem wissen, aus welchem offiziellen Release-Kontext der ausgewählte Schema-Pool stammt und darf nicht einfach die neueste gleichnamige Datei verwenden.",
+          "recommendation": "Für historische Prüfprofile den konkreten offiziellen Release-/Schema-Pool auswählen. Eine reine Blob-Abweichung nicht automatisch als semantischen Fehler melden, aber einen unklaren oder vermischten Release-Kontext als Routingproblem kennzeichnen."
+        },
+        "en": {
+          "title": "A version name alone is not always sufficient to select a historical XSD",
+          "short": "Some V1.0 services have different official XSD bytes under the same file name in different release contexts.",
+          "long": "For several historical V1.0 service XSDs, the file name or version label remains the same even though the official files differ between the VDV-301-1.0 and VDV-301-2.0 release contexts. This does not automatically mean that the semantic XML-validity model changed; some transitions are primarily packaging and self-containment changes. For reproducible validation, however, the SDK still needs to know which official release/schema pool was selected and must not simply use the newest file with the same name.",
+          "recommendation": "Select the concrete official release/schema pool for historical profiles. Do not report a byte difference alone as a semantic defect, but flag an ambiguous or mixed release context as a routing problem."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "historical V1.0 validation profile selected without an exact release context",
+          "schema dependencies from VDV-301-1.0 and VDV-301-2.0 are mixed",
+          "latest same-named XSD is substituted for the selected historical pool"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_BG_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-123 run 33726364976"
+        },
+        {
+          "kind": "other",
+          "reference": "official VDVde/VDV301 tags VDV-301-1.0 and VDV-301-2.0"
+        }
+      ],
+      "notes": "Routing/provenance safeguard, not a statement that every differing blob changes XML validity."
+    },
+    {
+      "finding_id": "BG-002",
+      "service": "BaseGeneral",
+      "version_scope": [
+        {
+          "version": "VDV-301-1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS_IP_V1.0.xsd historical aggregate packaging",
+          "note": "The aggregate root belongs to the original VDV-301-1.0 packaging."
+        },
+        {
+          "version": "VDV-301-2.0 and later",
+          "authority": "official_release",
+          "xsd_profile": null,
+          "note": "The historical aggregate file is removed; later V1.0 service files are self-contained and must not be mixed with the old aggregate."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "provenance",
+      "primary_issue_kind": "intentional_design_misread",
+      "secondary_issue_kinds": [
+        "version_routing_issue"
+      ],
+      "defect_assessment": "non_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_release_provenance",
+          "note": "Official tag comparison shows IBIS_IP_V1.0.xsd in the original VDV-301-1.0 packaging and its removal in VDV-301-2.0."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The removed aggregate is historical packaging/root-declaration evidence, not a missing active dependency that should be reconstructed for later releases."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-123 uses generated adapters to compile legacy roots while explicitly preserving the official XSDs unchanged."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Das alte Sammelschema gehört nur zur historischen V1.0-Verpackung",
+          "short": "IBIS_IP_V1.0.xsd wurde mit der späteren Verpackung bewusst entfernt und ist dort keine fehlende Abhängigkeit.",
+          "long": "Das Sammelschema IBIS_IP_V1.0.xsd gehört zum ursprünglichen VDV-301-1.0-Paket. Im offiziellen VDV-301-2.0-Stand wurde diese Datei entfernt, während die betroffenen V1.0-Service-XSDs selbstständiger verpackt wurden. Das Fehlen des Sammelschemas in späteren Release-Ständen ist deshalb kein Defekt. Es wäre falsch, die historische Aggregate-Datei mit späteren Service-XSDs zu vermischen oder ein neues künstliches Sammelschema als vermeintliche offizielle Abhängigkeit zu erzeugen.",
+          "recommendation": "Historische Aggregate-Roots nur im zugehörigen VDV-301-1.0-Kontext verwenden. Für spätere Release-Pools die dort tatsächlich veröffentlichten Service-XSDs und Abhängigkeiten verwenden."
+        },
+        "en": {
+          "title": "The old aggregate schema belongs only to the historical V1.0 packaging",
+          "short": "IBIS_IP_V1.0.xsd was deliberately removed with the later packaging and is not a missing dependency there.",
+          "long": "The aggregate schema IBIS_IP_V1.0.xsd belongs to the original VDV-301-1.0 package. In the official VDV-301-2.0 state it was removed while the affected V1.0 service XSDs became more self-contained. The absence of the aggregate schema from later release states is therefore not a defect. Mixing the historical aggregate with later service XSDs, or inventing a new synthetic aggregate as an allegedly official dependency, would be incorrect.",
+          "recommendation": "Use historical aggregate roots only in their VDV-301-1.0 context. For later release pools, use the service XSDs and dependencies actually published in those releases."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_BG_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-123 run 33726364976"
+        },
+        {
+          "kind": "other",
+          "reference": "official VDVde/VDV301 tags VDV-301-1.0 and VDV-301-2.0"
+        }
+      ],
+      "notes": "Historical packaging rule; no synthetic later aggregate is allowed."
+    },
+    {
       "finding_id": "TSD-004",
       "service": "TrainSetDataService",
       "version_scope": [
@@ -1387,13 +1541,14 @@
     }
   ],
   "progress": {
-    "classified_count": 18,
-    "remaining_count": 174,
+    "classified_count": 20,
+    "remaining_count": 172,
     "reviewed_blocks": [
       "ARA",
-      "ARCH"
+      "ARCH",
+      "BG"
     ],
-    "latest_block": "ARCH",
-    "latest_block_file": "audit_registry/semantic_classification_blocks/ARCH_v0.1.json"
+    "latest_block": "BG",
+    "latest_block_file": "audit_registry/semantic_classification_blocks/BG_v0.1.json"
   }
 }
