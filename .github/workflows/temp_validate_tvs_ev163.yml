@@ -27,7 +27,6 @@ jobs:
           BASE_SHA="466340965faa7cff9c6a78565396b4ea09e27bce"
           git cat-file -e "${BASE_SHA}^{commit}"
           mapfile -t changed < <(git diff --name-only "$BASE_SHA" "$GITHUB_SHA")
-          printf 'Changed paths since corrected EV-163 gate commit:\n%s\n' "${changed[*]}"
           test "${#changed[@]}" -eq 1
           test "${changed[0]}" = ".github/workflows/temp_validate_tvs_ev163.yml"
 
@@ -44,9 +43,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p evidence/tvs_ev163
-          count=$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)
-          echo "XSD count: $count"
-          test "$count" -eq 50
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
           sha256sum ./*.xsd | sort > evidence/tvs_ev163/xsd_before.sha256
           sha256sum audit_registry/finding_inventory_frozen_2026-09-03.json > evidence/tvs_ev163/frozen_inventory_before.sha256
 
@@ -66,39 +63,95 @@ jobs:
           python tools/validate_tvs_v24_ev115.py | tee evidence/tvs_ev163/ev115_direct.log
           grep -F "AUTHORITY: candidate/integration V2.4 family; NOT official-release V2.4 conformance" evidence/tvs_ev163/ev115_direct.log
 
-      - name: Run aggregate EV-163 gate with diagnostic capture
-        id: aggregate
+      - name: Precheck EV-163 immutable pins
+        run: |
+          python - <<'PY'
+          import hashlib, importlib.util, pathlib
+          spec=importlib.util.spec_from_file_location('ev163','tools/validate_tvs_revalidation_ev163.py')
+          m=importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+          for rel, exp in m.EXPECTED_BLOBS.items():
+              p=pathlib.Path(rel); d=p.read_bytes(); act=hashlib.sha1(f"blob {len(d)}\0".encode()+d).hexdigest()
+              assert act==exp, (rel, exp, act)
+          print('PASSED pins')
+          PY
+
+      - name: Precheck EV-163 state and registry counts
+        run: |
+          python - <<'PY'
+          import importlib.util, json
+          spec=importlib.util.spec_from_file_location('ev163','tools/validate_tvs_revalidation_ev163.py')
+          m=importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+          state=json.load(open('00_START_HERE/CURRENT_STATE.json',encoding='utf-8')); audit=state['audit']
+          reg=json.load(open('audit_registry/finding_revalidation_registry_v0.1.json',encoding='utf-8')); entries=reg['inventory']['entries']
+          assert state['canonical_branch']=='dev/schema-integration'
+          assert audit['finding_inventory_count']==192
+          assert audit['finding_revalidation_completed_findings']==165
+          assert audit['finding_revalidation_pending_findings']==27
+          assert audit['finding_revalidation_next_block']=='TVS'
+          assert audit['finding_revalidation_latest_completed_block']=='TSM'
+          assert audit['latest_executable_evidence_id']=='EV-162'
+          assert reg.get('next_revalidation_block')=='TVS'
+          assert len(entries)==192 and len({x['finding_id'] for x in entries})==192
+          assert m.counts(entries)==(165,27), m.counts(entries)
+          assert m.first_pending(entries)=='TVS-001', m.first_pending(entries)
+          pending=[x['finding_id'] for x in entries if x.get('revalidation_state')=='pending']
+          assert pending[:3]==['TVS-001','TVS-002','TVS-003'], pending[:3]
+          print('PASSED state-registry')
+          PY
+
+      - name: Precheck EV-163 projected poststate
+        run: |
+          python - <<'PY'
+          import importlib.util, json
+          spec=importlib.util.spec_from_file_location('ev163','tools/validate_tvs_revalidation_ev163.py')
+          m=importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+          reg=json.load(open('audit_registry/finding_revalidation_registry_v0.1.json',encoding='utf-8')); entries=reg['inventory']['entries']
+          by={x['finding_id']:x for x in entries}
+          for fid in m.TARGET_STATES:
+              assert by[fid].get('revalidation_state')=='pending'
+              assert by[fid].get('terminal_state_source') is None
+          projected=[dict(x) for x in entries]; pby={x['finding_id']:x for x in projected}
+          for fid,s in m.TARGET_STATES.items(): pby[fid]['revalidation_state']=s
+          assert m.counts(projected)==(168,24), m.counts(projected)
+          assert m.first_pending(projected)=='VDS-001', m.first_pending(projected)
+          print('PASSED projected-poststate')
+          PY
+
+      - name: Precheck EV-163 authority tokens
+        run: |
+          python - <<'PY'
+          a=open('docs/pdf_xsd_semantic_audit/TICKET_VALIDATION_SERVICE_FINDINGS_REGISTER_ADDENDUM.md',encoding='utf-8').read()
+          for t in [
+            'TVS-001 - GetCurrentShortHaulStopsResponse omitted from TicketValidationServiceOperations',
+            'upstream_master_structurally_confirmed_and_candidate_integration_executable_confirmed_EV-115',
+            'No V2.4 release tag exists; executable evidence is candidate/integration authority.',
+            'TVS-002 - VehicleData.RouteDeviation PDF type vs XSD type',
+            'TVS-003 - stale CurrentStopPoint names after CurrentTariffStop rename',
+            'EV-115: candidate/integration evidence only; not official-release conformance']:
+              assert t in a, t
+          s=open('tools/validate_tvs_v24_ev115.py',encoding='utf-8').read()
+          for t in ['candidate/integration','not official-release','VDV-301-2.4','GetCurrentShortHaulStopsResponse','TicketValidationServiceOperations']:
+              assert t in s, t
+          print('PASSED authority-tokens')
+          PY
+
+      - name: Precheck EV-163 nested lane markers
+        run: |
+          python - <<'PY'
+          import subprocess, sys
+          for ev,p in [('EV-112','tools/validate_tvs_v21_ev112.py'),('EV-113','tools/validate_tvs_v22_ev113.py'),('EV-114','tools/validate_tvs_v23_ev114.py'),('EV-115','tools/validate_tvs_v24_ev115.py')]:
+              r=subprocess.run([sys.executable,p],text=True,capture_output=True)
+              assert r.returncode==0, (ev,r.stderr)
+              assert 'PASSED:' in r.stdout, (ev,r.stdout[-500:])
+          print('PASSED nested-lane-markers')
+          PY
+
+      - name: Run aggregate EV-163 gate
         shell: bash
         run: |
-          set +e
-          set -o pipefail
-          python tools/validate_tvs_revalidation_ev163.py \
-            --repo-root . \
-            --output-dir evidence/tvs_ev163 \
-            2>&1 | tee evidence/tvs_ev163/ev163.log
-          rc=${PIPESTATUS[0]}
-          diag=$(tail -n 1 evidence/tvs_ev163/ev163.log | tr -cs 'A-Za-z0-9._-' '_' | cut -c1-110)
-          test -n "$diag" || diag="no-diagnostic"
-          echo "rc=$rc" >> "$GITHUB_OUTPUT"
-          echo "diag=$diag" >> "$GITHUB_OUTPUT"
-          exit 0
-
-      - name: Upload EV-163 failure diagnostic
-        if: steps.aggregate.outputs.rc != '0'
-        uses: actions/upload-artifact@v4
-        with:
-          name: ev163-diagnostic-${{ steps.aggregate.outputs.diag }}
-          path: evidence/tvs_ev163/ev163.log
-          if-no-files-found: error
-          retention-days: 7
-
-      - name: Fail closed on aggregate error
-        if: steps.aggregate.outputs.rc != '0'
-        run: exit 1
-
-      - name: Assert aggregate EV-163 PASSED marker
-        if: steps.aggregate.outputs.rc == '0'
-        run: grep -F "PASSED: EV-163 TVS aggregate revalidation gate; projected poststate 168/24, next VDS-001" evidence/tvs_ev163/ev163.log
+          set -euo pipefail
+          python tools/validate_tvs_revalidation_ev163.py --repo-root . --output-dir evidence/tvs_ev163 | tee evidence/tvs_ev163/ev163.log
+          grep -F "PASSED: EV-163 TVS aggregate revalidation gate; projected poststate 168/24, next VDS-001" evidence/tvs_ev163/ev163.log
 
       - name: Validate complete 50-XSD pool
         shell: bash
@@ -120,22 +173,10 @@ jobs:
       - name: Record CI provenance
         shell: bash
         run: |
-          set -euo pipefail
           python - <<'PY'
           import json, os, pathlib
-          p = pathlib.Path('evidence/tvs_ev163/ci_provenance.json')
-          data = {
-              'evidence_id': 'EV-163',
-              'repository': os.environ['GITHUB_REPOSITORY'],
-              'head_sha': os.environ['GITHUB_SHA'],
-              'run_id': os.environ['GITHUB_RUN_ID'],
-              'run_attempt': os.environ['GITHUB_RUN_ATTEMPT'],
-              'workflow': os.environ['GITHUB_WORKFLOW'],
-              'ref': os.environ['GITHUB_REF'],
-              'authority_boundary': 'EV-115 is candidate/integration V2.4 evidence, not official-release V2.4 XSD conformance',
-              'projected_poststate': {'terminal': 168, 'pending': 24, 'first_pending': 'VDS-001', 'next_block': 'VDS'},
-          }
-          p.write_text(json.dumps(data, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+          p=pathlib.Path('evidence/tvs_ev163/ci_provenance.json')
+          p.write_text(json.dumps({'evidence_id':'EV-163','repository':os.environ['GITHUB_REPOSITORY'],'head_sha':os.environ['GITHUB_SHA'],'run_id':os.environ['GITHUB_RUN_ID'],'run_attempt':os.environ['GITHUB_RUN_ATTEMPT'],'workflow':os.environ['GITHUB_WORKFLOW'],'ref':os.environ['GITHUB_REF'],'authority_boundary':'EV-115 is candidate/integration V2.4 evidence, not official-release V2.4 XSD conformance','projected_poststate':{'terminal':168,'pending':24,'first_pending':'VDS-001','next_block':'VDS'}},indent=2,sort_keys=True)+'\n',encoding='utf-8')
           PY
 
       - name: Upload EV-163 evidence
