@@ -1,0 +1,124 @@
+name: TEMP pin TS EV-159 source
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_pin_ts_ev159.yml
+
+permissions:
+  contents: read
+
+jobs:
+  pin-ts-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout canonical audit branch
+        uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 0
+
+      - name: Install PDF tooling
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+
+      - name: Assert post-TKT pre-TS authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "0a4bfcb5d895f25381afd56c32fe5c7d349e4de0"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "f3c248261066c3760ac093e73c6bfaca484c67c1"
+          test "$(git hash-object audit_registry/pdf_source_registry_v0.1.json)" = "d3471e1cef9b099dc8764a3ee8bf234b9a658ce8"
+          test "$(git hash-object audit_registry/pdf_source_pins_v0.1.json)" = "88349638b423689799af700e8a1c8ec99bbfb67b"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/TIME_SERVICE_FINDINGS_REGISTER_ADDENDUM.md)" = "23723fbb6bb99ffa3aa1eb8c13feae6aa95a0170"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/deep_read/TIME_V1.0.md)" = "82a88fbd6dae5d22f472bf144770d915fcc902ea"
+
+      - name: Re-acquire, inspect and render official TimeService V1.0 PDF
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence/ts_ev159/pages
+          pdf=evidence/ts_ev159/TIME_V1.0.pdf
+          curl --fail --location --retry 3 --retry-delay 2 \
+            --user-agent 'Mozilla/5.0 VDV301-audit-EV159' \
+            'https://www.vdv.de/301-2-10sds-v-1-01.pdfx' -o "$pdf"
+          test "$(sha256sum "$pdf" | awk '{print $1}')" = "d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3"
+          test "$(stat --printf='%s' "$pdf")" = "515920"
+          pages="$(pdfinfo "$pdf" | awk '/^Pages:/ {print $2}')"
+          test "$pages" -ge 6
+          pdftotext -layout "$pdf" evidence/ts_ev159/document.txt
+          pdftotext -f 3 -l 3 -layout "$pdf" evidence/ts_ev159/page-03.txt
+          pdftotext -f 5 -l 5 -layout "$pdf" evidence/ts_ev159/page-05.txt
+          pdftotext -f 6 -l 6 -layout "$pdf" evidence/ts_ev159/page-06.txt
+          grep -F 'TimeService' evidence/ts_ev159/page-03.txt
+          grep -F 'VDV 301-2-1' evidence/ts_ev159/page-03.txt
+          grep -F 'RFC 4330' evidence/ts_ev159/page-05.txt
+          grep -F '_ibisip_udp._udp' evidence/ts_ev159/page-05.txt
+          grep -F 'sntp-server' evidence/ts_ev159/page-05.txt
+          pdftoppm -png -r 170 -f 3 -l 3 "$pdf" evidence/ts_ev159/pages/time-03
+          pdftoppm -png -r 170 -f 5 -l 6 "$pdf" evidence/ts_ev159/pages/time
+          test -s evidence/ts_ev159/pages/time-03-03.png
+          test -s evidence/ts_ev159/pages/time-05.png
+          test -s evidence/ts_ev159/pages/time-06.png
+          python - "$pages" <<'PY'
+          import hashlib, json, sys
+          from pathlib import Path
+          root=Path('evidence/ts_ev159')
+          def h(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          result={
+            'source_id':'TIME_V1.0',
+            'official_url':'https://www.vdv.de/301-2-10sds-v-1-01.pdfx',
+            'sha256':'d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3',
+            'size_bytes':515920,
+            'pages':int(sys.argv[1]),
+            'fulltext_sha256':h(root/'document.txt'),
+            'page03_text_sha256':h(root/'page-03.txt'),
+            'page05_text_sha256':h(root/'page-05.txt'),
+            'page06_text_sha256':h(root/'page-06.txt'),
+            'rendered_physical_pages':[3,5,6],
+          }
+          (root/'source_pin.json').write_text(json.dumps(result,indent=2)+'\n')
+          print(json.dumps(result,indent=2))
+          PY
+
+      - name: Verify source acquisition is read-only
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf evidence/ts_ev159
+          test -z "$(git status --porcelain)"
+
+      - name: Rebuild evidence for artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence/ts_ev159/pages
+          pdf=evidence/ts_ev159/TIME_V1.0.pdf
+          curl --fail --location --retry 3 --retry-delay 2 --user-agent 'Mozilla/5.0 VDV301-audit-EV159' 'https://www.vdv.de/301-2-10sds-v-1-01.pdfx' -o "$pdf"
+          test "$(sha256sum "$pdf" | awk '{print $1}')" = "d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3"
+          pages="$(pdfinfo "$pdf" | awk '/^Pages:/ {print $2}')"
+          pdftotext -layout "$pdf" evidence/ts_ev159/document.txt
+          for p in 3 5 6; do pdftotext -f "$p" -l "$p" -layout "$pdf" "evidence/ts_ev159/page-$(printf '%02d' "$p").txt"; done
+          pdftoppm -png -r 170 -f 3 -l 3 "$pdf" evidence/ts_ev159/pages/time-03
+          pdftoppm -png -r 170 -f 5 -l 6 "$pdf" evidence/ts_ev159/pages/time
+          python - "$pages" <<'PY'
+          import hashlib, json, sys
+          from pathlib import Path
+          root=Path('evidence/ts_ev159')
+          def h(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          result={'source_id':'TIME_V1.0','official_url':'https://www.vdv.de/301-2-10sds-v-1-01.pdfx','sha256':'d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3','size_bytes':515920,'pages':int(sys.argv[1]),'fulltext_sha256':h(root/'document.txt'),'page03_text_sha256':h(root/'page-03.txt'),'page05_text_sha256':h(root/'page-05.txt'),'page06_text_sha256':h(root/'page-06.txt'),'rendered_physical_pages':[3,5,6]}
+          (root/'source_pin.json').write_text(json.dumps(result,indent=2)+'\n')
+          PY
+
+      - name: Upload TS EV-159 source evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: ts-ev159-source
+          path: evidence/ts_ev159
+          if-no-files-found: error
