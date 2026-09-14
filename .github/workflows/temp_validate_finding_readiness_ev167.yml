@@ -1,0 +1,131 @@
+name: temp-validate-finding-readiness-ev167
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_validate_finding_readiness_ev167.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  readiness-ev167:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout canonical branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check lxml==6.1.2 pypdf
+
+      - name: Snapshot immutable audit and XSD state
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object tools/validate_finding_readiness_ev167.py)" = "69b0a5e94394e9cc1c4ba92c99dea766b7b19fb5"
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+          sha256sum ./*.xsd | sort -k2 > /tmp/ev167-xsd-before.sha256
+          git diff --exit-code
+
+      - name: Reacquire exact official CIS V1.1 PDF
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence_sources evidence_out
+          curl -fL --retry 4 --retry-all-errors --connect-timeout 20 \
+            "https://www.vdv.de/301-2-3-sds-v1-1.pdfx" \
+            -o evidence_sources/CIS_V1.1.pdf
+          test "$(stat -c '%s' evidence_sources/CIS_V1.1.pdf)" = "985025"
+          test "$(sha256sum evidence_sources/CIS_V1.1.pdf | awk '{print $1}')" = "89080a41da387270ecac5b228df6aa4903ccb123a0d37e9e73cd98396786931b"
+
+      - name: Extract and verify published CIS V1.1 fields
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          from pypdf import PdfReader
+          src = Path('evidence_sources/CIS_V1.1.pdf')
+          out = Path('evidence_out/cis_v11_text.txt')
+          reader = PdfReader(str(src))
+          text = '\n'.join((page.extract_text() or '') for page in reader.pages)
+          out.write_text(text, encoding='utf-8')
+          for token in ('SpeakerActive', 'StopInformationActive'):
+              if token not in text:
+                  raise SystemExit(f'missing published token: {token}')
+          print(f'pages={len(reader.pages)}')
+          print('published PDF fields confirmed')
+          PY
+
+      - name: Verify untagged V1.1 working family is not release authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git ls-remote --tags https://github.com/VDVde/VDV301.git refs/tags/VDV-301-1.1 | grep -q .; then
+            echo "Unexpected VDV-301-1.1 release tag exists" >&2
+            exit 1
+          fi
+          curl -fL --retry 4 --retry-all-errors --connect-timeout 20 \
+            "https://raw.githubusercontent.com/VDVde/VDV301/0a5228a768c7d710c40f5f99fbdce2e544d19883/IBIS-IP_CustomerInformationService_V1.1.xsd" \
+            -o evidence_sources/IBIS-IP_CustomerInformationService_V1.1.xsd
+          test "$(git hash-object evidence_sources/IBIS-IP_CustomerInformationService_V1.1.xsd)" = "5957e27f128a191c794b0c8081b531a07126784a"
+          ! grep -Fq 'SpeakerActive' evidence_sources/IBIS-IP_CustomerInformationService_V1.1.xsd
+          ! grep -Fq 'StopInformationActive' evidence_sources/IBIS-IP_CustomerInformationService_V1.1.xsd
+          printf '%s\n' \
+            'release_tag_VDV-301-1.1=absent' \
+            'working_commit=0a5228a768c7d710c40f5f99fbdce2e544d19883' \
+            'working_blob=5957e27f128a191c794b0c8081b531a07126784a' \
+            'SpeakerActive=absent_from_working_xsd' \
+            'StopInformationActive=absent_from_working_xsd' \
+            > evidence_out/cis_v11_authority_check.txt
+
+      - name: Run EV-167 final readiness gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_finding_readiness_ev167.py \
+            --cis-v11-pdf evidence_sources/CIS_V1.1.pdf \
+            --cis-v11-text evidence_out/cis_v11_text.txt \
+            --working-cis-xsd evidence_sources/IBIS-IP_CustomerInformationService_V1.1.xsd \
+            --output evidence_out/ev167_readiness.json \
+            | tee evidence_out/ev167.log
+          grep -Fq "PASSED: EV-167 final finding-knowledge readiness gate" evidence_out/ev167.log
+
+      - name: Run complete 50-root-XSD regression pool
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_xsd_pool.py | tee evidence_out/xsd_pool.log
+          grep -Fq "PASSED" evidence_out/xsd_pool.log
+
+      - name: Enforce immutability
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum ./*.xsd | sort -k2 > /tmp/ev167-xsd-after.sha256
+          cmp /tmp/ev167-xsd-before.sha256 /tmp/ev167-xsd-after.sha256
+          git diff --exit-code -- \
+            '*.xsd' \
+            audit_registry/finding_inventory_frozen_2026-09-03.json \
+            audit_registry/finding_revalidation_registry_v0.1.json \
+            audit_registry/pdf_source_registry_v0.1.json \
+            audit_registry/pdf_source_pins_v0.1.json \
+            00_START_HERE/CURRENT_STATE.json
+
+      - name: Upload EV-167 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: finding-readiness-ev167-evidence
+          path: evidence_out/
+          if-no-files-found: error
