@@ -168,7 +168,7 @@ def main() -> int:
 
     ev115_source = (root / "tools/validate_tvs_v24_ev115.py").read_text(encoding="utf-8")
     assert_tokens(ev115_source, [
-        "candidate/integration", "not official-release", "VDV-301-2.4",
+        "candidate/integration", "NOT official-release V2.4 XSD conformance", "VDV-301-2.4",
         "GetCurrentShortHaulStopsResponse", "TicketValidationServiceOperations",
     ], "EV-115 provenance and TVS-001 structural guard")
 
