@@ -1,7 +1,7 @@
 {
   "$schema": "./finding_semantic_classification_schema_v0.1.json",
   "classification_version": "0.1",
-  "state": "pilot",
+  "state": "in_progress",
   "source_baseline": {
     "path": "audit_registry/finding_provenance_baseline_2026-09-14.json",
     "baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
@@ -14,11 +14,589 @@
     "manual_review_required": true,
     "bilingual_user_text_required": true,
     "machine_codes_language": "en",
-    "user_languages": ["de", "en"],
+    "user_languages": [
+      "de",
+      "en"
+    ],
     "classification_does_not_mutate_frozen_baseline": true,
     "candidate_or_integration_xsd_must_not_be_presented_as_official_release_authority": true
   },
   "entries": [
+    {
+      "finding_id": "ARA-001",
+      "service": "AnalogRadioService",
+      "version_scope": [
+        {
+          "version": "V2.4",
+          "authority": "unresolved",
+          "xsd_profile": null,
+          "note": "An official V2.4 PDF exists, but no official VDV-301-2.4 release tag or official upstream AnalogRadioService V2.4 XSD was found."
+        },
+        {
+          "version": "V2.4 candidate/integration",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_AnalogRadioService_V2.4.xsd",
+          "note": "Candidate/integration material exists but is not official release authority."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "no_strict_xsd_profile",
+      "primary_surface": "provenance",
+      "primary_issue_kind": "release_authority_gap",
+      "secondary_issue_kinds": [
+        "version_routing_issue"
+      ],
+      "defect_assessment": "authority_gap",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "strict_profile_unavailable"
+      ],
+      "sdk_behavior": "unsupported_profile",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "VDV-Schrift 301-2-19 AnalogRadioService V2.4 is officially published as a PDF."
+        },
+        {
+          "type": "official_release_provenance",
+          "note": "No official VDV-301-2.4 release tag and no official upstream AnalogRadioService V2.4 service XSD were present at the audited authority point."
+        },
+        {
+          "type": "candidate_integration_provenance",
+          "note": "The available AnalogRadioService V2.4 XSD entered the integration branch as public candidate material and must remain provenance-separated."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Für AnalogRadioService V2.4 fehlt eine eindeutige offizielle XSD-Release-Autorität",
+          "short": "Die offizielle V2.4-Dokumentation ist veröffentlicht, aber für diese Version ist keine eindeutig zugehörige offizielle Release-XSD nachgewiesen.",
+          "long": "Für den AnalogRadioService V2.4 liegt eine offizielle VDV-301-Dokumentation vor. Im geprüften offiziellen GitHub-Stand gibt es jedoch weder einen VDV-301-2.4-Release-Tag noch eine offizielle AnalogRadioService-V2.4-XSD. Eine V2.4-XSD ist als Candidate/Integration-Material vorhanden, darf aber nicht wie eine offizielle Release-XSD behandelt werden. Deshalb kann das SDK für V2.4 kein striktes offizielles XSD-Profil anbieten, ohne eine Autorität zu erfinden.",
+          "recommendation": "Für ein offizielles V2.4-Striktprofil fail-closed bleiben. Candidate/Integration-XSDs nur ausdrücklich als nicht-offizielle Analyseprofile verwenden und nicht als Release-Autorität ausgeben."
+        },
+        "en": {
+          "title": "No unambiguous official XSD release authority for AnalogRadioService V2.4",
+          "short": "The official V2.4 documentation is published, but no clearly matching official release XSD has been established for this version.",
+          "long": "Official VDV 301 documentation exists for AnalogRadioService V2.4. However, at the audited official GitHub authority point there is neither a VDV-301-2.4 release tag nor an official AnalogRadioService V2.4 XSD. A V2.4 XSD exists as candidate/integration material, but it must not be treated as an official release XSD. The SDK therefore cannot offer a strict official V2.4 XSD profile without inventing authority.",
+          "recommendation": "Remain fail-closed for an official V2.4 strict profile. Use candidate/integration XSDs only as explicitly non-official analysis profiles and never present them as release authority."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "requested strict profile is AnalogRadioService V2.4",
+          "no official release-tagged V2.4 XSD authority can be selected"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARA_V24_2026-09-03.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV-Schrift 301-2-19 AnalogRadioService V2.4, official PDF SHA-256 d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/ARA_V2.4.md"
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_AnalogRadioService_V2.4.xsd blob 48fb303b80936d2d762f0889ce0c359e04c16e5b",
+          "note": "Candidate/integration only."
+        }
+      ],
+      "notes": "Provenance gap, not a claim that the official PDF itself is wrong."
+    },
+    {
+      "finding_id": "ARA-002",
+      "service": "AnalogRadioService",
+      "version_scope": [
+        {
+          "version": "V2.4",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The defect is established inside the official PDF itself; candidate XSD comparison only corroborates it."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "identifier_typo",
+      "secondary_issue_kinds": [
+        "structure_mismatch"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "info",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The RadioTelegramStructure table on page 11 calls the final member TransmitterType, while the same official PDF's embedded schema view, structure diagram and XML example use Transmitter."
+        },
+        {
+          "type": "parallel_structure_pattern",
+          "note": "Three independent representations in the same document agree on Transmitter, leaving the table label TransmitterType as the isolated conflicting identifier."
+        },
+        {
+          "type": "candidate_integration_provenance",
+          "note": "The candidate/integration XSD also uses Transmitter, which corroborates the document-internal conclusion without becoming official authority."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Abweichender Elementname in der offiziellen PDF",
+          "short": "Eine Tabelle nennt das Element TransmitterType, während Schemaansicht, Diagramm und XML-Beispiel derselben PDF Transmitter verwenden.",
+          "long": "In der Tabelle zu AnalogRadioService.RadioTelegramStructure wird das letzte Element als TransmitterType bezeichnet. Die eingebettete Schemaansicht auf derselben Seite, das Strukturdiagramm und das vollständige XML-Beispiel verwenden dagegen übereinstimmend den Namen Transmitter. Damit ist die Dokumentation bereits in sich widersprüchlich. Die Candidate/Integration-XSD verwendet ebenfalls Transmitter und bestätigt damit die wahrscheinlich beabsichtigte Bezeichnung, ohne dadurch offizielle Release-Autorität zu erhalten.",
+          "recommendation": "Den Tabelleneintrag TransmitterType als Dokumentationsfehler behandeln. Bei Implementierungs- und Analysehinweisen auf Transmitter verweisen; für eine offizielle V2.4-XSD-Prüfung bleibt die separate Authority-Lücke bestehen."
+        },
+        "en": {
+          "title": "Conflicting element name in the official PDF",
+          "short": "One table names the element TransmitterType, while the schema view, diagram and XML example in the same PDF use Transmitter.",
+          "long": "The AnalogRadioService.RadioTelegramStructure table names the final element TransmitterType. In contrast, the embedded schema view on the same page, the structure diagram and the complete XML example consistently use Transmitter. The documentation is therefore internally contradictory. The candidate/integration XSD also uses Transmitter, corroborating the likely intended name without gaining official release authority.",
+          "recommendation": "Treat the TransmitterType table entry as a documentation error. Point implementation and analysis guidance to Transmitter; the separate authority gap still applies to strict official V2.4 XSD validation."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARA_V24_2026-09-03.md"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/ARA_V2.4.md",
+          "note": "FR-ARA24-OBS-001."
+        },
+        {
+          "kind": "pdf",
+          "reference": "AnalogRadioService V2.4 PDF pages 11-13"
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_AnalogRadioService_V2.4.xsd candidate/integration blob 48fb303b80936d2d762f0889ce0c359e04c16e5b",
+          "note": "Corroboration only."
+        }
+      ],
+      "notes": "Separated from ARA-003 so the identifier and cardinality defects remain independently diagnosable."
+    },
+    {
+      "finding_id": "ARA-003",
+      "service": "AnalogRadioService",
+      "version_scope": [
+        {
+          "version": "V2.4",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The official PDF table states 1:1 while its embedded schema view shows the element as optional."
+        },
+        {
+          "version": "V2.4 candidate/integration",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_AnalogRadioService_V2.4.xsd",
+          "note": "EV-105 confirms omission and presence are both valid in candidate/integration material; this is not official release conformance."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "cardinality_mismatch",
+      "secondary_issue_kinds": [
+        "structure_mismatch"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "info",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The page-11 table marks the transmitter member as mandatory 1:1, while the embedded schema view in the same official PDF shows minOccurs=0."
+        },
+        {
+          "type": "candidate_integration_provenance",
+          "note": "The candidate/integration XSD declares Transmitter with minOccurs=0."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-105 proves that both omission and presence of Transmitter validate against the candidate/integration XSD."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Widersprüchliche Kardinalität für Transmitter in der PDF",
+          "short": "Die Tabelle verlangt Transmitter zwingend mit 1:1, während die eingebettete Schemaansicht derselben PDF das Element als optional zeigt.",
+          "long": "Die offizielle V2.4-PDF enthält zwei widersprüchliche Aussagen zur Kardinalität von Transmitter. In der Tabelle steht 1:1, also genau einmal verpflichtend. Die eingebettete Schemaansicht zeigt dagegen minOccurs=0, also optional. Die Candidate/Integration-XSD verwendet ebenfalls 0:1, und EV-105 bestätigt ausführbar, dass Nachrichten sowohl mit als auch ohne Transmitter dort gültig sind. Diese ausführbare Aussage gilt jedoch nur für Candidate/Integration-Material und ist keine offizielle V2.4-Release-Konformität.",
+          "recommendation": "Die Tabellenangabe 1:1 als Dokumentationsfehler kennzeichnen. Bei Candidate/Integration-Analysen Transmitter als optional behandeln; für ein offizielles V2.4-Striktprofil weiterhin keine Release-XSD-Autorität unterstellen."
+        },
+        "en": {
+          "title": "Conflicting Transmitter cardinality in the PDF",
+          "short": "The table requires Transmitter as 1:1, while the embedded schema view in the same PDF shows the element as optional.",
+          "long": "The official V2.4 PDF contains two contradictory statements about the Transmitter cardinality. The table states 1:1, meaning exactly one occurrence is mandatory. The embedded schema view shows minOccurs=0, meaning optional. The candidate/integration XSD also uses 0:1, and EV-105 executable evidence confirms that messages both with and without Transmitter validate there. That executable result applies only to candidate/integration material and is not official V2.4 release conformance.",
+          "recommendation": "Mark the 1:1 table entry as a documentation error. Treat Transmitter as optional when analysing candidate/integration material; do not infer official V2.4 release-XSD authority."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "candidate/integration AnalogRadioService V2.4 analysis",
+          "RadioTelegramStructure omits Transmitter although the PDF table appears to require it"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARA_V24_2026-09-03.md"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/ARA_V2.4.md",
+          "note": "FR-ARA24-OBS-001 and historical reconciliation."
+        },
+        {
+          "kind": "pdf",
+          "reference": "AnalogRadioService V2.4 PDF page 11"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-105 current-route rerun 33228250613"
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_AnalogRadioService_V2.4.xsd candidate/integration blob 48fb303b80936d2d762f0889ce0c359e04c16e5b"
+        }
+      ],
+      "notes": "Executable behavior is candidate/integration-only; the PDF defect itself is independently established by document-internal contradiction."
+    },
+    {
+      "finding_id": "ARA-004",
+      "service": "AnalogRadioService",
+      "version_scope": [
+        {
+          "version": "V2.4",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The inconsistency is fully established within the official PDF."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "wrong_operation_reference",
+      "secondary_issue_kinds": [
+        "stale_diagram_or_example",
+        "semantic_contradiction"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "warning",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The operation inventory and section heading identify the only operation as SendTelegram, and the XML example uses AnalogRadioService.SendTelegram."
+        },
+        {
+          "type": "parallel_operation_pattern",
+          "note": "Only the concrete URI example switches to SendFFSKTelegram, making it the isolated inconsistent operation name in the same official document."
+        },
+        {
+          "type": "technical_inference",
+          "note": "Because the inventory, heading and XML root agree on SendTelegram, the URI example is best classified as an editorial/copy-paste operation-name error rather than a second defined operation."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Falscher Operationsname im URI-Beispiel",
+          "short": "Das URI-Beispiel verwendet SendFFSKTelegram, obwohl die Dokumentation die Operation durchgängig als SendTelegram definiert.",
+          "long": "Die offizielle V2.4-Dokumentation beschreibt den AnalogRadioService mit genau einer Operation namens SendTelegram. Auch die Überschrift des URI-Abschnitts und das unmittelbar folgende XML-Beispiel verwenden SendTelegram. Nur das konkrete URI-Beispiel enthält den abweichenden Namen SendFFSKTelegram. Es gibt im geprüften Dokument keinen Hinweis darauf, dass dies eine zweite gültige Operation sein soll. Der URI-Eintrag ist daher als Dokumentationsfehler zu behandeln.",
+          "recommendation": "Für Implementierung und Diagnose SendTelegram als dokumentierten Operationsnamen verwenden. SendFFSKTelegram aus dem URI-Beispiel nicht automatisch als gültigen Alias übernehmen."
+        },
+        "en": {
+          "title": "Wrong operation name in the URI example",
+          "short": "The URI example uses SendFFSKTelegram even though the documentation consistently defines the operation as SendTelegram.",
+          "long": "The official V2.4 documentation describes AnalogRadioService as having exactly one operation named SendTelegram. The URI section heading and the immediately following XML example also use SendTelegram. Only the concrete URI example switches to SendFFSKTelegram. Nothing in the reviewed document indicates that this is a second valid operation, so the URI entry should be treated as a documentation error.",
+          "recommendation": "Use SendTelegram as the documented operation name for implementation and diagnostics. Do not automatically accept SendFFSKTelegram from the URI example as a valid alias."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "AnalogRadioService URI or configured operation path contains SendFFSKTelegram",
+          "context is V2.4 documentation-derived configuration"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARA_V24_2026-09-03.md"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/ARA_V2.4.md",
+          "note": "FR-ARA24-OBS-002."
+        },
+        {
+          "kind": "pdf",
+          "reference": "AnalogRadioService V2.4 PDF pages 10 and 13"
+        }
+      ],
+      "notes": "This is a documentation/runtime-guidance issue, not an XSD alias rule."
+    },
+    {
+      "finding_id": "TSD-004",
+      "service": "TrainSetDataService",
+      "version_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "official TrainSetDataService V2.2 XSD route",
+          "note": "PDF page 40 uses the TripRef response-structure name for a TripInformation update."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "wrong_structure_reference",
+      "secondary_issue_kinds": [
+        "wrong_operation_reference"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Physical page 40 names RetrieveTripRefResponseStructure for SubscribeTripInformation event updates."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact official XSD uses RetrieveTripInformationResponseStructure for the TripInformation event payload."
+        },
+        {
+          "type": "parallel_operation_pattern",
+          "note": "The TripRef parallel on physical page 38 and in the XSD is internally consistent, showing that the page-40 TripRef reference is misplaced."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-160 revalidated the exact V2.2 XSD and surrounding subscription/retrieve semantics."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Falsche Response-Struktur in der offiziellen PDF referenziert",
+          "short": "Für SubscribeTripInformation nennt die PDF versehentlich RetrieveTripRefResponseStructure. Die XSD verwendet RetrieveTripInformationResponseStructure.",
+          "long": "Die offizielle V2.2-Dokumentation verweist bei den Ereignisaktualisierungen von SubscribeTripInformation auf RetrieveTripRefResponseStructure. Das passt fachlich zum anderen TripRef-Vorgang, nicht zu TripInformation. Die ausgewählte XSD verwendet für diesen Fall RetrieveTripInformationResponseStructure, und auch die parallele TripRef-Beschreibung ist mit ihrer eigenen Struktur konsistent. Damit handelt es sich um einen bestätigten Dokumentationsverweisfehler.",
+          "recommendation": "Für TripInformation-Aktualisierungen RetrieveTripInformationResponseStructure gemäß XSD verwenden. Den TripRef-Verweis der PDF nicht übernehmen."
+        },
+        "en": {
+          "title": "Wrong response structure referenced in the official PDF",
+          "short": "For SubscribeTripInformation the PDF mistakenly names RetrieveTripRefResponseStructure. The XSD uses RetrieveTripInformationResponseStructure.",
+          "long": "The official V2.2 documentation references RetrieveTripRefResponseStructure for SubscribeTripInformation event updates. That structure belongs to the separate TripRef operation, not to TripInformation. The selected XSD uses RetrieveTripInformationResponseStructure here, and the parallel TripRef description is consistent with its own structure. This is therefore a confirmed documentation reference error.",
+          "recommendation": "Use RetrieveTripInformationResponseStructure for TripInformation updates as defined by the XSD. Do not copy the TripRef reference from the PDF."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "XSD validation failure in SubscribeTripInformation/RetrieveTripInformation event payload",
+          "payload shape or type corresponds to RetrieveTripRefResponseStructure"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSD_2026-09-14.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "TrainSetDataService V2.2 physical page 40"
+        },
+        {
+          "kind": "pdf",
+          "reference": "TrainSetDataService V2.2 physical page 38",
+          "note": "Consistent TripRef parallel."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-160"
+        }
+      ]
+    },
+    {
+      "finding_id": "TSM-002",
+      "service": "TrainSetManagementService",
+      "version_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "official TrainSetManagementService V2.2 XSD route",
+          "note": "The global response root is corrected, while the operations group retains the old member name."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "xsd",
+      "primary_issue_kind": "stale_operation_inventory_member",
+      "secondary_issue_kinds": [
+        "internal_schema_inconsistency",
+        "stale_identifier_after_rename"
+      ],
+      "defect_assessment": "likely_xsd_defect",
+      "confidence": "high",
+      "validation_effect": [
+        "xsd_internal_inventory_stale",
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "warning",
+      "semantic_basis": [
+        {
+          "type": "version_history",
+          "note": "The V2.2 documentation records the corrected GetTrainSetCompositionResponse root name."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The official V2.2 XSD contains the corrected global response root but the operations group still contains the stale old member."
+        },
+        {
+          "type": "xsd_internal_consistency",
+          "note": "The global declaration and operation-group inventory disagree within the same selected schema family."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-104 confirms the corrected global-root behaviour and the stale group boundary."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The correction history plus the corrected global root strongly indicate that the old operation-group member was left behind unintentionally."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Wahrscheinlich veralteter Eintrag in der XSD-Operationsgruppe",
+          "short": "Die XSD enthält bereits den korrigierten Response-Namen, führt in der Operationsgruppe aber noch den alten Namen.",
+          "long": "In V2.2 wurde der globale Response-Name auf GetTrainSetCompositionResponse korrigiert. Die gleiche XSD enthält in der Operationsgruppe jedoch weiterhin den früheren Namen. Damit widersprechen sich zwei Teile derselben XSD. Zusammen mit der dokumentierten Korrektur spricht das stark dafür, dass der Operationsgruppen-Eintrag versehentlich nicht mitgeändert wurde. Für die formale Prüfung bleibt trotzdem die tatsächlich ausgewählte XSD maßgeblich.",
+          "recommendation": "Den korrigierten globalen Response-Namen verwenden. Tools, die ihre Operationsliste ausschließlich aus der Operationsgruppe ableiten, sollten auf dieses bekannte XSD-Problem hinweisen."
+        },
+        "en": {
+          "title": "Likely stale entry in the XSD operations group",
+          "short": "The XSD already contains the corrected response name, but the operations group still lists the old name.",
+          "long": "In V2.2 the global response name was corrected to GetTrainSetCompositionResponse. The same XSD nevertheless retains the previous name in the operations group, so two parts of the selected XSD disagree. Together with the documented correction, this strongly indicates that the operations-group entry was unintentionally left unchanged. The selected XSD still remains authoritative for formal validation.",
+          "recommendation": "Use the corrected global response name. Tools that derive their operation inventory solely from the operations group should report this known XSD issue."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "selected profile is TSM V2.2",
+          "operation inventory is derived from TrainSetManagementServiceOperations",
+          "stale member conflicts with corrected global response root"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSM_2026-09-14.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-104 / EV-162"
+        },
+        {
+          "kind": "version_history",
+          "reference": "TrainSet V2.2 physical page 51 correction history"
+        }
+      ]
+    },
+    {
+      "finding_id": "TSM-003",
+      "service": "TrainSetManagementService",
+      "version_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "official TrainSetManagementService V2.2 XSD route",
+          "note": "The PDF diagram is stale relative to the exact selected XSD structure."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "stale_diagram_or_example",
+      "secondary_issue_kinds": [
+        "structure_mismatch"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "documentation_only"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The embedded V2.2 diagram shows the old flat coach-field structure."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact V2.2 response structure uses repeatable SingleCoach containing SingleCoachInATrainSet."
+        },
+        {
+          "type": "parallel_structure_pattern",
+          "note": "The selected XSD structure is internally consistent with the repeated SingleCoach model."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Veraltetes Strukturdiagramm in der PDF",
+          "short": "Das Diagramm in der PDF zeigt noch eine ältere, flache Wagenstruktur; die XSD verwendet eine wiederholbare SingleCoach-Struktur.",
+          "long": "Das eingebettete Diagramm der offiziellen V2.2-PDF zeigt noch die frühere flache Darstellung der Wagenfelder. Die ausgewählte XSD definiert dagegen eine wiederholbare SingleCoach-Struktur mit SingleCoachInATrainSet. Wer die Struktur ausschließlich aus dem Diagramm nachbaut, kann deshalb XML erzeugen, das nicht zur XSD passt. Für die Validierung ist die XSD-Struktur maßgeblich.",
+          "recommendation": "Die Wagenstruktur aus der ausgewählten XSD verwenden und das veraltete PDF-Diagramm nur als bekannte Dokumentationsabweichung betrachten."
+        },
+        "en": {
+          "title": "Stale structure diagram in the PDF",
+          "short": "The PDF diagram still shows an older flat coach structure, while the XSD uses a repeatable SingleCoach structure.",
+          "long": "The embedded diagram in the official V2.2 PDF still shows the earlier flat representation of coach fields. The selected XSD instead defines a repeatable SingleCoach structure containing SingleCoachInATrainSet. An implementation built only from the diagram may therefore produce XML that does not match the XSD. The XSD structure is authoritative for validation.",
+          "recommendation": "Use the coach structure defined by the selected XSD and treat the old PDF diagram as a known documentation discrepancy."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "XSD structure error in GetTrainSetCompositionResponse coach data",
+          "submitted shape resembles the stale flat coach layout rather than repeatable SingleCoach"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSM_2026-09-14.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "TrainSet V2.2 physical page 31"
+        },
+        {
+          "kind": "xsd",
+          "reference": "official V2.2 SingleCoach -> SingleCoachInATrainSet response structure"
+        }
+      ]
+    },
     {
       "finding_id": "TVS-001",
       "service": "TicketValidationService",
@@ -34,7 +612,9 @@
       "normative_authority": "no_strict_xsd_profile",
       "primary_surface": "xsd",
       "primary_issue_kind": "missing_operation_inventory_member",
-      "secondary_issue_kinds": ["internal_schema_inconsistency"],
+      "secondary_issue_kinds": [
+        "internal_schema_inconsistency"
+      ],
       "defect_assessment": "likely_xsd_defect",
       "confidence": "high",
       "validation_effect": [
@@ -134,10 +714,16 @@
       "normative_authority": "selected_xsd",
       "primary_surface": "pdf",
       "primary_issue_kind": "wrong_type_reference",
-      "secondary_issue_kinds": ["wrong_enum_reference", "semantic_contradiction"],
+      "secondary_issue_kinds": [
+        "wrong_enum_reference",
+        "semantic_contradiction"
+      ],
       "defect_assessment": "confirmed_pdf_defect",
       "confidence": "confirmed",
-      "validation_effect": ["xsd_rejects_pdf_documented_form", "pdf_can_mislead_implementation"],
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation"
+      ],
       "sdk_behavior": "error_with_advisory",
       "semantic_basis": [
         {
@@ -180,9 +766,18 @@
         ]
       },
       "source_references": [
-        {"kind": "frozen_terminal_source", "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TVS_2026-09-14.md"},
-        {"kind": "other", "reference": "docs/pdf_xsd_semantic_audit/TICKET_VALIDATION_SERVICE_FINDINGS_REGISTER_ADDENDUM.md"},
-        {"kind": "evidence", "reference": "EV-112 / EV-113 / EV-114 / EV-115"}
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TVS_2026-09-14.md"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/TICKET_VALIDATION_SERVICE_FINDINGS_REGISTER_ADDENDUM.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-112 / EV-113 / EV-114 / EV-115"
+        }
       ],
       "notes": "The V2.4 lane remains candidate/integration only."
     },
@@ -213,10 +808,16 @@
       "normative_authority": "selected_xsd",
       "primary_surface": "pdf",
       "primary_issue_kind": "stale_identifier_after_rename",
-      "secondary_issue_kinds": ["wrong_operation_reference", "editorial_residue"],
+      "secondary_issue_kinds": [
+        "wrong_operation_reference",
+        "editorial_residue"
+      ],
       "defect_assessment": "confirmed_pdf_defect",
       "confidence": "confirmed",
-      "validation_effect": ["xsd_rejects_pdf_documented_form", "pdf_can_mislead_implementation"],
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation"
+      ],
       "sdk_behavior": "error_with_advisory",
       "semantic_basis": [
         {
@@ -258,208 +859,32 @@
         ]
       },
       "source_references": [
-        {"kind": "frozen_terminal_source", "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TVS_2026-09-14.md"},
-        {"kind": "other", "reference": "docs/pdf_xsd_semantic_audit/TICKET_VALIDATION_SERVICE_FINDINGS_REGISTER_ADDENDUM.md"},
-        {"kind": "version_history", "reference": "TVS V2.2/V2.3 official version history"},
-        {"kind": "evidence", "reference": "EV-113 / EV-114 / EV-115"}
-      ]
-    },
-    {
-      "finding_id": "TSM-002",
-      "service": "TrainSetManagementService",
-      "version_scope": [
         {
-          "version": "V2.2",
-          "authority": "official_release",
-          "xsd_profile": "official TrainSetManagementService V2.2 XSD route",
-          "note": "The global response root is corrected, while the operations group retains the old member name."
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TVS_2026-09-14.md"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/TICKET_VALIDATION_SERVICE_FINDINGS_REGISTER_ADDENDUM.md"
+        },
+        {
+          "kind": "version_history",
+          "reference": "TVS V2.2/V2.3 official version history"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-113 / EV-114 / EV-115"
         }
-      ],
-      "review_state": "manually_reviewed",
-      "normative_authority": "selected_xsd",
-      "primary_surface": "xsd",
-      "primary_issue_kind": "stale_operation_inventory_member",
-      "secondary_issue_kinds": ["internal_schema_inconsistency", "stale_identifier_after_rename"],
-      "defect_assessment": "likely_xsd_defect",
-      "confidence": "high",
-      "validation_effect": ["xsd_internal_inventory_stale", "code_generation_or_discovery_affected"],
-      "sdk_behavior": "warning",
-      "semantic_basis": [
-        {
-          "type": "version_history",
-          "note": "The V2.2 documentation records the corrected GetTrainSetCompositionResponse root name."
-        },
-        {
-          "type": "official_xsd_explicit",
-          "note": "The official V2.2 XSD contains the corrected global response root but the operations group still contains the stale old member."
-        },
-        {
-          "type": "xsd_internal_consistency",
-          "note": "The global declaration and operation-group inventory disagree within the same selected schema family."
-        },
-        {
-          "type": "executable_validation",
-          "note": "EV-104 confirms the corrected global-root behaviour and the stale group boundary."
-        },
-        {
-          "type": "technical_inference",
-          "note": "The correction history plus the corrected global root strongly indicate that the old operation-group member was left behind unintentionally."
-        }
-      ],
-      "diagnostic": {
-        "de": {
-          "title": "Wahrscheinlich veralteter Eintrag in der XSD-Operationsgruppe",
-          "short": "Die XSD enthält bereits den korrigierten Response-Namen, führt in der Operationsgruppe aber noch den alten Namen.",
-          "long": "In V2.2 wurde der globale Response-Name auf GetTrainSetCompositionResponse korrigiert. Die gleiche XSD enthält in der Operationsgruppe jedoch weiterhin den früheren Namen. Damit widersprechen sich zwei Teile derselben XSD. Zusammen mit der dokumentierten Korrektur spricht das stark dafür, dass der Operationsgruppen-Eintrag versehentlich nicht mitgeändert wurde. Für die formale Prüfung bleibt trotzdem die tatsächlich ausgewählte XSD maßgeblich.",
-          "recommendation": "Den korrigierten globalen Response-Namen verwenden. Tools, die ihre Operationsliste ausschließlich aus der Operationsgruppe ableiten, sollten auf dieses bekannte XSD-Problem hinweisen."
-        },
-        "en": {
-          "title": "Likely stale entry in the XSD operations group",
-          "short": "The XSD already contains the corrected response name, but the operations group still lists the old name.",
-          "long": "In V2.2 the global response name was corrected to GetTrainSetCompositionResponse. The same XSD nevertheless retains the previous name in the operations group, so two parts of the selected XSD disagree. Together with the documented correction, this strongly indicates that the operations-group entry was unintentionally left unchanged. The selected XSD still remains authoritative for formal validation.",
-          "recommendation": "Use the corrected global response name. Tools that derive their operation inventory solely from the operations group should report this known XSD issue."
-        }
-      },
-      "runtime_match": {
-        "state": "candidate",
-        "candidate_triggers": [
-          "selected profile is TSM V2.2",
-          "operation inventory is derived from TrainSetManagementServiceOperations",
-          "stale member conflicts with corrected global response root"
-        ]
-      },
-      "source_references": [
-        {"kind": "frozen_terminal_source", "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSM_2026-09-14.md"},
-        {"kind": "evidence", "reference": "EV-104 / EV-162"},
-        {"kind": "version_history", "reference": "TrainSet V2.2 physical page 51 correction history"}
-      ]
-    },
-    {
-      "finding_id": "TSM-003",
-      "service": "TrainSetManagementService",
-      "version_scope": [
-        {
-          "version": "V2.2",
-          "authority": "official_release",
-          "xsd_profile": "official TrainSetManagementService V2.2 XSD route",
-          "note": "The PDF diagram is stale relative to the exact selected XSD structure."
-        }
-      ],
-      "review_state": "manually_reviewed",
-      "normative_authority": "selected_xsd",
-      "primary_surface": "pdf",
-      "primary_issue_kind": "stale_diagram_or_example",
-      "secondary_issue_kinds": ["structure_mismatch"],
-      "defect_assessment": "confirmed_pdf_defect",
-      "confidence": "confirmed",
-      "validation_effect": ["pdf_can_mislead_implementation", "documentation_only"],
-      "sdk_behavior": "error_with_advisory",
-      "semantic_basis": [
-        {
-          "type": "official_pdf_explicit",
-          "note": "The embedded V2.2 diagram shows the old flat coach-field structure."
-        },
-        {
-          "type": "official_xsd_explicit",
-          "note": "The exact V2.2 response structure uses repeatable SingleCoach containing SingleCoachInATrainSet."
-        },
-        {
-          "type": "parallel_structure_pattern",
-          "note": "The selected XSD structure is internally consistent with the repeated SingleCoach model."
-        }
-      ],
-      "diagnostic": {
-        "de": {
-          "title": "Veraltetes Strukturdiagramm in der PDF",
-          "short": "Das Diagramm in der PDF zeigt noch eine ältere, flache Wagenstruktur; die XSD verwendet eine wiederholbare SingleCoach-Struktur.",
-          "long": "Das eingebettete Diagramm der offiziellen V2.2-PDF zeigt noch die frühere flache Darstellung der Wagenfelder. Die ausgewählte XSD definiert dagegen eine wiederholbare SingleCoach-Struktur mit SingleCoachInATrainSet. Wer die Struktur ausschließlich aus dem Diagramm nachbaut, kann deshalb XML erzeugen, das nicht zur XSD passt. Für die Validierung ist die XSD-Struktur maßgeblich.",
-          "recommendation": "Die Wagenstruktur aus der ausgewählten XSD verwenden und das veraltete PDF-Diagramm nur als bekannte Dokumentationsabweichung betrachten."
-        },
-        "en": {
-          "title": "Stale structure diagram in the PDF",
-          "short": "The PDF diagram still shows an older flat coach structure, while the XSD uses a repeatable SingleCoach structure.",
-          "long": "The embedded diagram in the official V2.2 PDF still shows the earlier flat representation of coach fields. The selected XSD instead defines a repeatable SingleCoach structure containing SingleCoachInATrainSet. An implementation built only from the diagram may therefore produce XML that does not match the XSD. The XSD structure is authoritative for validation.",
-          "recommendation": "Use the coach structure defined by the selected XSD and treat the old PDF diagram as a known documentation discrepancy."
-        }
-      },
-      "runtime_match": {
-        "state": "candidate",
-        "candidate_triggers": [
-          "XSD structure error in GetTrainSetCompositionResponse coach data",
-          "submitted shape resembles the stale flat coach layout rather than repeatable SingleCoach"
-        ]
-      },
-      "source_references": [
-        {"kind": "frozen_terminal_source", "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSM_2026-09-14.md"},
-        {"kind": "pdf", "reference": "TrainSet V2.2 physical page 31"},
-        {"kind": "xsd", "reference": "official V2.2 SingleCoach -> SingleCoachInATrainSet response structure"}
-      ]
-    },
-    {
-      "finding_id": "TSD-004",
-      "service": "TrainSetDataService",
-      "version_scope": [
-        {
-          "version": "V2.2",
-          "authority": "official_release",
-          "xsd_profile": "official TrainSetDataService V2.2 XSD route",
-          "note": "PDF page 40 uses the TripRef response-structure name for a TripInformation update."
-        }
-      ],
-      "review_state": "manually_reviewed",
-      "normative_authority": "selected_xsd",
-      "primary_surface": "pdf",
-      "primary_issue_kind": "wrong_structure_reference",
-      "secondary_issue_kinds": ["wrong_operation_reference"],
-      "defect_assessment": "confirmed_pdf_defect",
-      "confidence": "confirmed",
-      "validation_effect": ["xsd_rejects_pdf_documented_form", "pdf_can_mislead_implementation"],
-      "sdk_behavior": "error_with_advisory",
-      "semantic_basis": [
-        {
-          "type": "official_pdf_explicit",
-          "note": "Physical page 40 names RetrieveTripRefResponseStructure for SubscribeTripInformation event updates."
-        },
-        {
-          "type": "official_xsd_explicit",
-          "note": "The exact official XSD uses RetrieveTripInformationResponseStructure for the TripInformation event payload."
-        },
-        {
-          "type": "parallel_operation_pattern",
-          "note": "The TripRef parallel on physical page 38 and in the XSD is internally consistent, showing that the page-40 TripRef reference is misplaced."
-        },
-        {
-          "type": "executable_validation",
-          "note": "EV-160 revalidated the exact V2.2 XSD and surrounding subscription/retrieve semantics."
-        }
-      ],
-      "diagnostic": {
-        "de": {
-          "title": "Falsche Response-Struktur in der offiziellen PDF referenziert",
-          "short": "Für SubscribeTripInformation nennt die PDF versehentlich RetrieveTripRefResponseStructure. Die XSD verwendet RetrieveTripInformationResponseStructure.",
-          "long": "Die offizielle V2.2-Dokumentation verweist bei den Ereignisaktualisierungen von SubscribeTripInformation auf RetrieveTripRefResponseStructure. Das passt fachlich zum anderen TripRef-Vorgang, nicht zu TripInformation. Die ausgewählte XSD verwendet für diesen Fall RetrieveTripInformationResponseStructure, und auch die parallele TripRef-Beschreibung ist mit ihrer eigenen Struktur konsistent. Damit handelt es sich um einen bestätigten Dokumentationsverweisfehler.",
-          "recommendation": "Für TripInformation-Aktualisierungen RetrieveTripInformationResponseStructure gemäß XSD verwenden. Den TripRef-Verweis der PDF nicht übernehmen."
-        },
-        "en": {
-          "title": "Wrong response structure referenced in the official PDF",
-          "short": "For SubscribeTripInformation the PDF mistakenly names RetrieveTripRefResponseStructure. The XSD uses RetrieveTripInformationResponseStructure.",
-          "long": "The official V2.2 documentation references RetrieveTripRefResponseStructure for SubscribeTripInformation event updates. That structure belongs to the separate TripRef operation, not to TripInformation. The selected XSD uses RetrieveTripInformationResponseStructure here, and the parallel TripRef description is consistent with its own structure. This is therefore a confirmed documentation reference error.",
-          "recommendation": "Use RetrieveTripInformationResponseStructure for TripInformation updates as defined by the XSD. Do not copy the TripRef reference from the PDF."
-        }
-      },
-      "runtime_match": {
-        "state": "candidate",
-        "candidate_triggers": [
-          "XSD validation failure in SubscribeTripInformation/RetrieveTripInformation event payload",
-          "payload shape or type corresponds to RetrieveTripRefResponseStructure"
-        ]
-      },
-      "source_references": [
-        {"kind": "frozen_terminal_source", "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSD_2026-09-14.md"},
-        {"kind": "pdf", "reference": "TrainSetDataService V2.2 physical page 40"},
-        {"kind": "pdf", "reference": "TrainSetDataService V2.2 physical page 38", "note": "Consistent TripRef parallel."},
-        {"kind": "evidence", "reference": "EV-160"}
       ]
     }
-  ]
+  ],
+  "progress": {
+    "classified_count": 10,
+    "remaining_count": 182,
+    "reviewed_blocks": [
+      "ARA"
+    ],
+    "latest_block": "ARA",
+    "latest_block_file": "audit_registry/semantic_classification_blocks/ARA_v0.1.json"
+  }
 }
