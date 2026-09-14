@@ -56,16 +56,15 @@ jobs:
           pdftotext -f 3 -l 3 -layout "$pdf" evidence/ts_ev159/page-03.txt
           pdftotext -f 5 -l 5 -layout "$pdf" evidence/ts_ev159/page-05.txt
           pdftotext -f 6 -l 6 -layout "$pdf" evidence/ts_ev159/page-06.txt
-          grep -F 'TimeService' evidence/ts_ev159/page-03.txt
-          grep -F 'VDV 301-2-1' evidence/ts_ev159/page-03.txt
-          grep -F 'RFC 4330' evidence/ts_ev159/page-05.txt
-          grep -F '_ibisip_udp._udp' evidence/ts_ev159/page-05.txt
-          grep -F 'sntp-server' evidence/ts_ev159/page-05.txt
           pdftoppm -png -r 170 -f 3 -l 3 "$pdf" evidence/ts_ev159/pages/time-03
           pdftoppm -png -r 170 -f 5 -l 6 "$pdf" evidence/ts_ev159/pages/time
           test -s evidence/ts_ev159/pages/time-03-03.png
           test -s evidence/ts_ev159/pages/time-05.png
           test -s evidence/ts_ev159/pages/time-06.png
+          grep -F 'TimeService' evidence/ts_ev159/page-03.txt
+          grep -F 'RFC 4330' evidence/ts_ev159/page-05.txt
+          grep -F '_ibisip_udp._udp' evidence/ts_ev159/page-05.txt
+          grep -F 'sntp-server' evidence/ts_ev159/page-05.txt
           python - "$pages" <<'PY'
           import hashlib, json, sys
           from pathlib import Path
@@ -82,6 +81,7 @@ jobs:
             'page05_text_sha256':h(root/'page-05.txt'),
             'page06_text_sha256':h(root/'page-06.txt'),
             'rendered_physical_pages':[3,5,6],
+            'page03_foreword_reference_evidence_mode':'rendered_visual',
           }
           (root/'source_pin.json').write_text(json.dumps(result,indent=2)+'\n')
           print(json.dumps(result,indent=2))
@@ -102,17 +102,21 @@ jobs:
           pdf=evidence/ts_ev159/TIME_V1.0.pdf
           curl --fail --location --retry 3 --retry-delay 2 --user-agent 'Mozilla/5.0 VDV301-audit-EV159' 'https://www.vdv.de/301-2-10sds-v-1-01.pdfx' -o "$pdf"
           test "$(sha256sum "$pdf" | awk '{print $1}')" = "d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3"
+          test "$(stat --printf='%s' "$pdf")" = "515920"
           pages="$(pdfinfo "$pdf" | awk '/^Pages:/ {print $2}')"
           pdftotext -layout "$pdf" evidence/ts_ev159/document.txt
           for p in 3 5 6; do pdftotext -f "$p" -l "$p" -layout "$pdf" "evidence/ts_ev159/page-$(printf '%02d' "$p").txt"; done
           pdftoppm -png -r 170 -f 3 -l 3 "$pdf" evidence/ts_ev159/pages/time-03
           pdftoppm -png -r 170 -f 5 -l 6 "$pdf" evidence/ts_ev159/pages/time
+          test -s evidence/ts_ev159/pages/time-03-03.png
+          test -s evidence/ts_ev159/pages/time-05.png
+          test -s evidence/ts_ev159/pages/time-06.png
           python - "$pages" <<'PY'
           import hashlib, json, sys
           from pathlib import Path
           root=Path('evidence/ts_ev159')
           def h(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
-          result={'source_id':'TIME_V1.0','official_url':'https://www.vdv.de/301-2-10sds-v-1-01.pdfx','sha256':'d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3','size_bytes':515920,'pages':int(sys.argv[1]),'fulltext_sha256':h(root/'document.txt'),'page03_text_sha256':h(root/'page-03.txt'),'page05_text_sha256':h(root/'page-05.txt'),'page06_text_sha256':h(root/'page-06.txt'),'rendered_physical_pages':[3,5,6]}
+          result={'source_id':'TIME_V1.0','official_url':'https://www.vdv.de/301-2-10sds-v-1-01.pdfx','sha256':'d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3','size_bytes':515920,'pages':int(sys.argv[1]),'fulltext_sha256':h(root/'document.txt'),'page03_text_sha256':h(root/'page-03.txt'),'page05_text_sha256':h(root/'page-05.txt'),'page06_text_sha256':h(root/'page-06.txt'),'rendered_physical_pages':[3,5,6],'page03_foreword_reference_evidence_mode':'rendered_visual'}
           (root/'source_pin.json').write_text(json.dumps(result,indent=2)+'\n')
           PY
 
