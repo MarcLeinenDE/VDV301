@@ -23,7 +23,7 @@ EXPECTED_BLOBS = {
     "audit_registry/pdf_source_registry_v0.1.json": "d3471e1cef9b099dc8764a3ee8bf234b9a658ce8",
     "audit_registry/pdf_source_pins_v0.1.json": "88349638b423689799af700e8a1c8ec99bbfb67b",
     "00_START_HERE/CURRENT_STATE.json": "6406675512fdcca7ef75fcfd788631660932fb1c",
-    "docs/pdf_xsd_semantic_audit/TICKET_VALIDATION_SERVICE_FINDINGS_REGISTER_ADDENDUM.md": "cc34ae6b82ae60d09fa84605248984b608359f09",
+    "docs/pdf_xsd_semantic_audit/TICKET_VALIDATION_SERVICE_FINDINGS_REGISTER_ADDENDUM.md": "adea51d2dc812cedaf6f8957651c7ea6ac0dfaff",
     "tools/validate_tvs_v21_ev112.py": "ac95c53ac1ca1900f51df0b06fe3f0ed623700f5",
     "tools/validate_tvs_v22_ev113.py": "097bc0fc87f80da1d1161eb49345a2603e3304d3",
     "tools/validate_tvs_v23_ev114.py": "9411dd8123d0b7019b05b495eb493208c0f0ce81",
