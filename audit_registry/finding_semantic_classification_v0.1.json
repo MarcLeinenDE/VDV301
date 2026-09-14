@@ -354,6 +354,514 @@
       "notes": "This is a documentation/runtime-guidance issue, not an XSD alias rule."
     },
     {
+      "finding_id": "ARCH-001",
+      "service": "SystemArchitecture",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "VDV 301-1 architecture authority; no XSD validation lane applies."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "contextual",
+      "primary_issue_kind": "intentional_design_misread",
+      "secondary_issue_kinds": [
+        "semantic_contradiction"
+      ],
+      "defect_assessment": "non_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The architecture document visibly replaces the former Master/Slave model with a service-oriented architecture and defines service and operation independently of a concrete device."
+        },
+        {
+          "type": "domain_semantics",
+          "note": "A logical service role is not the same thing as a physical device role; multiple devices can implement service-oriented roles without recreating a Master/Slave architecture."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Serviceorientierte Rollen sind nicht an ein bestimmtes Gerät gebunden",
+          "short": "Die Architektur löst die früheren Master/Slave-Rollen bewusst von einzelnen Geräten und beschreibt stattdessen Services und Operationen.",
+          "long": "VDV 301-1 beschreibt bewusst den Wechsel von einer festen Master/Slave-Architektur zu einer serviceorientierten Architektur. Ein Service oder eine Operation ist damit eine logische Funktion und nicht automatisch an ein bestimmtes physisches Gerät gebunden. Eine vermeintliche Abweichung, die nur daraus entsteht, dass ein bestimmtes Gerät nicht dauerhaft als Master oder Slave eingeordnet werden kann, ist daher kein Fehler der Spezifikation.",
+          "recommendation": "Geräterollen nicht als feste Master/Slave-Zuordnung in die XML- oder Serviceprüfung übertragen. Für konkrete Serviceoperationen immer die jeweilige Part-2-Spezifikation bzw. XSD verwenden."
+        },
+        "en": {
+          "title": "Service-oriented roles are not tied to one specific device",
+          "short": "The architecture deliberately replaces fixed Master/Slave device roles with services and operations.",
+          "long": "VDV 301-1 deliberately moves from a fixed Master/Slave architecture to a service-oriented architecture. A service or operation is therefore a logical function and is not automatically bound to one physical device. An apparent discrepancy caused only by the inability to classify a device permanently as master or slave is not a specification defect.",
+          "recommendation": "Do not translate device roles into fixed Master/Slave assumptions in XML or service validation. Use the relevant Part-2 specification or XSD for concrete service operations."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARCH_V10_2026-09-03.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV-Schrift 301-1 V1.0, pages 7 and 10"
+        }
+      ],
+      "notes": "Architecture context only; no executable XML rule is created."
+    },
+    {
+      "finding_id": "ARCH-002",
+      "service": "SystemArchitecture",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "General hierarchy wording; service-specific communication rules remain separate."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "contextual",
+      "primary_issue_kind": "intentional_design_misread",
+      "secondary_issue_kinds": [
+        "semantic_contradiction"
+      ],
+      "defect_assessment": "non_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The architecture document describes higher-level components as active consumers and lower-level components as providers as a general hierarchy model."
+        },
+        {
+          "type": "common_conventions",
+          "note": "Service-specific request, callback and subscription behavior is defined at the service/Common-Conventions layer and is not overridden by the architecture hierarchy wording."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Consumer und Provider beschreiben hier ein allgemeines Rollenmodell",
+          "short": "Die Aussage zu höheren Consumern und niedrigeren Providern ist ein Architekturmodell und keine starre Regel für jede einzelne Kommunikation.",
+          "long": "Die Systemarchitektur beschreibt vereinfacht, dass übergeordnete Komponenten typischerweise als Consumer und untergeordnete Komponenten als Provider auftreten. Das ist ein allgemeines Rollen- und Hierarchiemodell. Es ersetzt nicht die konkreten Kommunikationsregeln eines Services, etwa für Requests, Subscriptions oder spätere Rückmeldungen. Deshalb entsteht kein Widerspruch, wenn ein konkreter Serviceablauf differenziertere Rollen zeigt.",
+          "recommendation": "Provider/Consumer-Rollen für konkrete Nachrichten aus der jeweiligen Service- und Common-Conventions-Spezifikation ableiten, nicht aus der allgemeinen Architekturhierarchie allein."
+        },
+        "en": {
+          "title": "Consumer and provider describe a general role model here",
+          "short": "The higher-consumer/lower-provider statement is an architecture model, not a rigid rule for every individual communication flow.",
+          "long": "The system architecture describes a simplified model in which higher-level components typically act as consumers and lower-level components as providers. This is a general role and hierarchy model. It does not replace the concrete communication rules of a service, such as requests, subscriptions or later callbacks. A more differentiated role pattern in a specific service flow is therefore not a contradiction.",
+          "recommendation": "Derive provider/consumer roles for concrete messages from the relevant service and Common Conventions specification, not from the general architecture hierarchy alone."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARCH_V10_2026-09-03.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV-Schrift 301-1 V1.0, page 14"
+        }
+      ],
+      "notes": "Do not turn an architecture role heuristic into a protocol hard rule."
+    },
+    {
+      "finding_id": "ARCH-003",
+      "service": "SystemArchitecture",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Vehicle-system boundary and coupled-vehicle interface semantics."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "contextual",
+      "primary_issue_kind": "intentional_design_misread",
+      "secondary_issue_kinds": [
+        "semantic_contradiction"
+      ],
+      "defect_assessment": "non_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The document states that each vehicle forms a self-contained IBIS-IP system and that a coupled vehicle is another IBIS-IP system connected through interfaces."
+        },
+        {
+          "type": "domain_semantics",
+          "note": "A self-contained system boundary does not imply a communication prohibition; the architecture explicitly allows system-to-system connection through defined interfaces."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Ein eigenes IBIS-IP-System pro Fahrzeug schließt Fahrzeugkopplung nicht aus",
+          "short": "Jedes Fahrzeug bildet ein eigenes IBIS-IP-System, gekoppelte Fahrzeuge dürfen aber über Schnittstellen miteinander verbunden sein.",
+          "long": "Die Systemarchitektur behandelt jedes Fahrzeug zunächst als eigenständiges IBIS-IP-System. Ein gekoppeltes Fahrzeug ist ebenfalls ein eigenes IBIS-IP-System, das über vorgesehene Schnittstellen angebunden werden kann. Die Systemgrenze bedeutet daher nicht, dass Kommunikation zwischen gekoppelten Fahrzeugen verboten wäre. Eine solche Interpretation wäre strenger als die dokumentierte Architektur.",
+          "recommendation": "Die Fahrzeuggrenze als System- und Zuständigkeitsgrenze behandeln, nicht als generelles Kommunikationsverbot. Konkrete Kopplungs- und Serviceanforderungen aus den zuständigen Spezifikationen prüfen."
+        },
+        "en": {
+          "title": "A separate IBIS-IP system per vehicle does not prohibit vehicle coupling",
+          "short": "Each vehicle forms its own IBIS-IP system, but coupled vehicles may still be connected through defined interfaces.",
+          "long": "The system architecture treats each vehicle as a self-contained IBIS-IP system. A coupled vehicle is another IBIS-IP system that may be connected through the intended interfaces. The system boundary therefore does not mean that communication between coupled vehicles is prohibited. Such an interpretation would be stricter than the documented architecture.",
+          "recommendation": "Treat the vehicle boundary as a system and responsibility boundary, not as a general communication ban. Check concrete coupling and service requirements in the applicable specifications."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARCH_V10_2026-09-03.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV-Schrift 301-1 V1.0, page 16"
+        }
+      ],
+      "notes": "Architecture boundary, not an XML validation constraint."
+    },
+    {
+      "finding_id": "ARCH-004",
+      "service": "SystemArchitecture",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "General protection requirement and non-safety boundary; no concrete cryptographic profile is specified."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "contextual",
+      "primary_issue_kind": "intentional_design_misread",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "non_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The architecture document establishes a non-safety-system boundary and a general requirement for protection according to the contemporary state of technology."
+        },
+        {
+          "type": "technical_inference",
+          "note": "Because this edition specifies no concrete TLS version, certificate model or cipher suite, those details cannot be invented as mandatory VDV 301-1 validation rules."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Allgemeine Sicherheitsforderung ist kein konkretes TLS-Profil",
+          "short": "Die Architektur fordert angemessenen Schutz, legt hier aber keine bestimmte TLS-Version, Zertifikatsstruktur oder Cipher-Suite fest.",
+          "long": "VDV 301-1 grenzt das System gegenüber sicherheitskritischen Funktionen ab und fordert allgemein einen dem Stand der Technik entsprechenden Schutz. Diese Aussage ist wichtig, definiert in dieser Ausgabe aber kein konkretes kryptografisches Prüfprofil. Aus ihr allein dürfen deshalb keine bestimmten TLS-Versionen, Zertifikatsanforderungen oder Cipher-Suites als VDV-301-Pflicht abgeleitet werden.",
+          "recommendation": "Konkrete Security-Prüfungen nur aus einer dafür zuständigen, expliziten Norm- oder Profilaussage ableiten. Die allgemeine Architekturforderung nicht in erfundene Hard-Fails übersetzen."
+        },
+        "en": {
+          "title": "A general security requirement is not a concrete TLS profile",
+          "short": "The architecture requires appropriate protection but does not define a specific TLS version, certificate model or cipher suite here.",
+          "long": "VDV 301-1 separates the system from safety-critical functions and generally requires protection appropriate to the state of technology. This is an important requirement, but this edition does not define a concrete cryptographic validation profile. Specific TLS versions, certificate requirements or cipher suites must therefore not be invented as VDV 301 requirements from this statement alone.",
+          "recommendation": "Derive concrete security checks only from an applicable explicit standard or profile statement. Do not translate the general architecture requirement into invented hard failures."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARCH_V10_2026-09-03.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV-Schrift 301-1 V1.0, pages 7 and 26"
+        }
+      ],
+      "notes": "Security context only; do not synthesize a cryptographic profile."
+    },
+    {
+      "finding_id": "ARCH-005",
+      "service": "SystemArchitecture",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Architecture-level communication classes later refined by Part 2."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "contextual",
+      "primary_issue_kind": "intentional_design_misread",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "non_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The architecture distinguishes fast-changing data using UDP multicast from reliable, longer-lived information using TCP/HTTP."
+        },
+        {
+          "type": "domain_semantics",
+          "note": "These are communication classes and design guidance; they are refined by service-specific Part-2 definitions rather than acting as a universal per-packet rule."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "UDP und TCP/HTTP beschreiben Kommunikationsklassen, keine globale Paketregel",
+          "short": "Die Architektur ordnet schnelle veränderliche Daten und zuverlässige länger gültige Informationen unterschiedlichen Kommunikationsarten zu.",
+          "long": "VDV 301-1 unterscheidet auf Architekturebene zwischen schnell veränderlichen Daten, für die UDP-Multicast vorgesehen sein kann, und zuverlässig zu übertragenden, länger gültigen Informationen über TCP/HTTP. Diese Einteilung beschreibt Kommunikationsklassen. Sie bedeutet nicht, dass das SDK aus jedem einzelnen Datentyp ohne weitere Servicevorgabe automatisch ein bestimmtes Transportprotokoll erzwingen darf.",
+          "recommendation": "Den konkreten Transport für einen Service aus dessen zuständiger Part-2-Spezifikation ableiten. Die Architekturaussage nur als übergeordneten Kontext verwenden."
+        },
+        "en": {
+          "title": "UDP and TCP/HTTP describe communication classes, not a universal packet rule",
+          "short": "The architecture assigns fast-changing data and reliable longer-lived information to different communication approaches.",
+          "long": "At architecture level, VDV 301-1 distinguishes fast-changing data, for which UDP multicast may be used, from reliable longer-lived information transported via TCP/HTTP. This describes communication classes. It does not allow the SDK to force a specific transport for every individual data type without the corresponding service-specific rule.",
+          "recommendation": "Derive the concrete transport of a service from its applicable Part-2 specification. Use the architecture statement as higher-level context only."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARCH_V10_2026-09-03.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV-Schrift 301-1 V1.0, page 26"
+        }
+      ],
+      "notes": "No global transport hard rule is created."
+    },
+    {
+      "finding_id": "ARCH-006",
+      "service": "SystemArchitecture",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Part 1 establishes XML information exchange; Part 2 supplies the technical XML structures."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "contextual",
+      "primary_issue_kind": "intentional_design_misread",
+      "secondary_issue_kinds": [
+        "version_routing_issue"
+      ],
+      "defect_assessment": "non_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Part 1 establishes XML-based information exchange while explicitly leaving the technical XML structures to Part 2."
+        },
+        {
+          "type": "xml_schema_semantics",
+          "note": "Exact element names, structures and cardinalities are executable schema concerns and must be taken from the selected Part-2 XSD family when such a profile exists."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Part 1 beschreibt XML grundsätzlich, die konkrete Struktur kommt aus Part 2",
+          "short": "Die Systemarchitektur legt XML als Austauschformat fest, aber nicht die konkreten Elemente und Kardinalitäten der Services.",
+          "long": "VDV 301-1 legt auf Architekturebene fest, dass Informationen XML-basiert ausgetauscht werden. Die technischen XML-Strukturen werden jedoch in VDV 301-2 und den zugehörigen XSDs definiert. Deshalb darf aus einer allgemeinen Aussage in Part 1 keine konkrete Elementstruktur, Kardinalität oder Service-Nachricht abgeleitet werden, wenn die zuständige Part-2-XSD etwas genauer festlegt.",
+          "recommendation": "Für XML-Gültigkeit immer die exakt ausgewählte Part-2-XSD verwenden. Part 1 dient als Architekturkontext, nicht als Ersatzschema."
+        },
+        "en": {
+          "title": "Part 1 establishes XML generally; the concrete structure comes from Part 2",
+          "short": "The system architecture establishes XML as the exchange format but does not define the concrete service elements and cardinalities.",
+          "long": "VDV 301-1 establishes XML-based information exchange at architecture level. The technical XML structures are defined in VDV 301-2 and the corresponding XSDs. A general Part-1 statement must therefore not be used to derive a concrete element structure, cardinality or service message when the applicable Part-2 XSD defines it more precisely.",
+          "recommendation": "Always use the exactly selected Part-2 XSD for XML validity. Treat Part 1 as architecture context, not as a replacement schema."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARCH_V10_2026-09-03.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV-Schrift 301-1 V1.0, pages 6 and 27"
+        }
+      ],
+      "notes": "Important SDK authority boundary: Part-1 architecture does not override selected Part-2 XSDs."
+    },
+    {
+      "finding_id": "ARCH-007",
+      "service": "SystemArchitecture",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Historical wording is explicitly edition-specific."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "contextual",
+      "primary_issue_kind": "intentional_design_misread",
+      "secondary_issue_kinds": [
+        "version_routing_issue"
+      ],
+      "defect_assessment": "non_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The document says SNTP and RTP are conceivable but not yet specified in this edition."
+        },
+        {
+          "type": "version_history",
+          "note": "The phrase 'in this edition' is explicitly publication-context wording and cannot be promoted to a permanent prohibition for later VDV 301 versions."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "„In dieser Ausgabe noch nicht spezifiziert“ ist kein dauerhaftes Verbot",
+          "short": "Die historische Aussage zu SNTP und RTP gilt für den damaligen Dokumentstand und verbietet deren spätere Spezifikation nicht.",
+          "long": "VDV 301-1 V1.0 nennt SNTP und RTP als grundsätzlich denkbar, aber in dieser Ausgabe noch nicht spezifiziert. Diese Formulierung beschreibt ausdrücklich den Stand der damaligen Veröffentlichung. Sie darf nicht so verstanden werden, dass spätere VDV-301-Teile oder Versionen SNTP oder RTP niemals verwenden dürften. Für spätere Profile ist jeweils deren eigene Norm- und Versionslage maßgeblich.",
+          "recommendation": "Historische Nicht-Spezifikation nicht als dauerhaftes Protokollverbot verwenden. Für SNTP/RTP immer die für die ausgewählte Serviceversion tatsächlich geltenden Dokumente prüfen."
+        },
+        "en": {
+          "title": "“Not yet specified in this edition” is not a permanent prohibition",
+          "short": "The historical SNTP/RTP statement applies to that publication state and does not prohibit later specification of those protocols.",
+          "long": "VDV 301-1 V1.0 describes SNTP and RTP as conceivable but not yet specified in that edition. This wording explicitly describes the state of that publication. It must not be interpreted as meaning that later VDV 301 parts or versions can never use SNTP or RTP. The applicable standards and version context of the selected later profile remain authoritative.",
+          "recommendation": "Do not turn historical non-specification into a permanent protocol ban. For SNTP/RTP, check the documents that actually apply to the selected service version."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARCH_V10_2026-09-03.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV-Schrift 301-1 V1.0, page 26"
+        }
+      ],
+      "notes": "Version-context rule; no latest-wins or permanent-ban inference."
+    },
+    {
+      "finding_id": "ARCH-008",
+      "service": "SystemArchitecture",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Functional-component vocabulary is broader than executable service identity."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "contextual",
+      "primary_issue_kind": "intentional_design_misread",
+      "secondary_issue_kinds": [
+        "semantic_contradiction"
+      ],
+      "defect_assessment": "non_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The architecture document explicitly says that only part of the functional components are specified or implemented as services or applications."
+        },
+        {
+          "type": "domain_semantics",
+          "note": "A functional-component label describes architecture capability and cannot by itself establish an executable service name, endpoint or XML root."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Eine Funktionskomponente ist nicht automatisch ein ausführbarer Service",
+          "short": "Die Architektur benennt mehr Funktionskomponenten, als tatsächlich als Services oder Anwendungen spezifiziert werden.",
+          "long": "VDV 301-1 beschreibt die funktionale Architektur des Gesamtsystems. Dabei wird ausdrücklich darauf hingewiesen, dass nur ein Teil der Funktionskomponenten als konkrete Services oder Anwendungen spezifiziert beziehungsweise umgesetzt wird. Ein Komponentenname aus einem Architekturdiagramm ist deshalb noch kein gültiger Service-Identifier, kein Endpoint und kein XML-Root-Element.",
+          "recommendation": "Serviceidentitäten nur aus den dafür zuständigen Part-2-Servicebeschreibungen, Discovery-Profilen oder XSDs ableiten. Architekturkomponenten nicht automatisch zu ausführbaren Services machen."
+        },
+        "en": {
+          "title": "A functional component is not automatically an executable service",
+          "short": "The architecture names more functional components than are actually specified as services or applications.",
+          "long": "VDV 301-1 describes the functional architecture of the overall system and explicitly states that only part of the functional components are specified or implemented as concrete services or applications. A component label from an architecture diagram is therefore not automatically a valid service identifier, endpoint or XML root element.",
+          "recommendation": "Derive service identities only from the applicable Part-2 service descriptions, discovery profiles or XSDs. Do not automatically turn architecture components into executable services."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARCH_V10_2026-09-03.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV-Schrift 301-1 V1.0, page 10"
+        }
+      ],
+      "notes": "Prevents false service synthesis from architecture vocabulary."
+    },
+    {
       "finding_id": "TSD-004",
       "service": "TrainSetDataService",
       "version_scope": [
@@ -879,12 +1387,13 @@
     }
   ],
   "progress": {
-    "classified_count": 10,
-    "remaining_count": 182,
+    "classified_count": 18,
+    "remaining_count": 174,
     "reviewed_blocks": [
-      "ARA"
+      "ARA",
+      "ARCH"
     ],
-    "latest_block": "ARA",
-    "latest_block_file": "audit_registry/semantic_classification_blocks/ARA_v0.1.json"
+    "latest_block": "ARCH",
+    "latest_block_file": "audit_registry/semantic_classification_blocks/ARCH_v0.1.json"
   }
 }
