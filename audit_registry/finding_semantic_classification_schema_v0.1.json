@@ -3,18 +3,10 @@
   "$id": "https://github.com/MarcLeinenDE/VDV301/audit_registry/finding_semantic_classification_schema_v0.1.json",
   "title": "VDV 301 Finding Semantic Classification Registry",
   "type": "object",
-  "required": [
-    "classification_version",
-    "state",
-    "source_baseline",
-    "policy",
-    "entries"
-  ],
+  "required": ["classification_version", "state", "source_baseline", "policy", "entries"],
   "properties": {
     "classification_version": {"type": "string"},
-    "state": {
-      "enum": ["design", "pilot", "in_progress", "complete", "frozen"]
-    },
+    "state": {"enum": ["design", "pilot", "in_progress", "complete", "frozen"]},
     "source_baseline": {
       "type": "object",
       "required": ["path", "baseline_payload_sha256", "finding_entries_sha256", "finding_count"],
@@ -28,11 +20,7 @@
     },
     "policy": {
       "type": "object",
-      "required": [
-        "normative_xsd_result_must_not_be_overridden",
-        "manual_review_required",
-        "bilingual_user_text_required"
-      ],
+      "required": ["normative_xsd_result_must_not_be_overridden", "manual_review_required", "bilingual_user_text_required"],
       "properties": {
         "normative_xsd_result_must_not_be_overridden": {"const": true},
         "manual_review_required": {"const": true},
@@ -40,16 +28,16 @@
         "machine_codes_language": {"const": "en"},
         "user_languages": {
           "type": "array",
-          "contains": {"const": "de"},
-          "minItems": 2
+          "minItems": 2,
+          "allOf": [
+            {"contains": {"const": "de"}},
+            {"contains": {"const": "en"}}
+          ]
         }
       },
       "additionalProperties": true
     },
-    "entries": {
-      "type": "array",
-      "items": {"$ref": "#/$defs/entry"}
-    }
+    "entries": {"type": "array", "items": {"$ref": "#/$defs/entry"}}
   },
   "$defs": {
     "semanticBasis": {
@@ -58,23 +46,12 @@
       "properties": {
         "type": {
           "enum": [
-            "official_pdf_explicit",
-            "official_xsd_explicit",
-            "xsd_internal_consistency",
-            "parallel_operation_pattern",
-            "parallel_structure_pattern",
-            "common_conventions",
-            "cross_service_pattern",
-            "version_history",
-            "later_official_correction",
-            "official_release_provenance",
-            "candidate_integration_provenance",
-            "executable_validation",
-            "xml_schema_semantics",
-            "http_standard",
-            "external_protocol_standard",
-            "domain_semantics",
-            "technical_inference"
+            "official_pdf_explicit", "official_xsd_explicit", "xsd_internal_consistency",
+            "parallel_operation_pattern", "parallel_structure_pattern", "common_conventions",
+            "cross_service_pattern", "version_history", "later_official_correction",
+            "official_release_provenance", "candidate_integration_provenance", "executable_validation",
+            "xml_schema_semantics", "http_standard", "external_protocol_standard",
+            "domain_semantics", "technical_inference"
           ]
         },
         "note": {"type": "string", "minLength": 1}
@@ -96,13 +73,8 @@
       "type": "object",
       "required": ["state"],
       "properties": {
-        "state": {
-          "enum": ["not_designed", "candidate", "reviewed", "implemented", "not_applicable"]
-        },
-        "candidate_triggers": {
-          "type": "array",
-          "items": {"type": "string"}
-        }
+        "state": {"enum": ["not_designed", "candidate", "reviewed", "implemented", "not_applicable"]},
+        "candidate_triggers": {"type": "array", "items": {"type": "string"}}
       },
       "additionalProperties": true
     },
@@ -111,18 +83,20 @@
       "required": ["kind", "reference"],
       "properties": {
         "kind": {
-          "enum": [
-            "frozen_terminal_source",
-            "pdf",
-            "xsd",
-            "evidence",
-            "version_history",
-            "common_conventions",
-            "external_standard",
-            "other"
-          ]
+          "enum": ["frozen_terminal_source", "pdf", "xsd", "evidence", "version_history", "common_conventions", "external_standard", "other"]
         },
         "reference": {"type": "string", "minLength": 1},
+        "note": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "versionScopeItem": {
+      "type": "object",
+      "required": ["version", "authority"],
+      "properties": {
+        "version": {"type": "string", "minLength": 1},
+        "authority": {"enum": ["official_release", "candidate_integration", "documentation_only", "unresolved"]},
+        "xsd_profile": {"type": ["string", "null"]},
         "note": {"type": "string"}
       },
       "additionalProperties": false
@@ -130,112 +104,52 @@
     "entry": {
       "type": "object",
       "required": [
-        "finding_id",
-        "review_state",
-        "normative_authority",
-        "primary_surface",
-        "primary_issue_kind",
-        "secondary_issue_kinds",
-        "defect_assessment",
-        "confidence",
-        "validation_effect",
-        "sdk_behavior",
-        "semantic_basis",
-        "diagnostic",
-        "runtime_match",
-        "source_references"
+        "finding_id", "service", "version_scope", "review_state", "normative_authority",
+        "primary_surface", "primary_issue_kind", "secondary_issue_kinds", "defect_assessment",
+        "confidence", "validation_effect", "sdk_behavior", "semantic_basis", "diagnostic",
+        "runtime_match", "source_references"
       ],
       "properties": {
         "finding_id": {"type": "string", "minLength": 1},
-        "review_state": {
-          "enum": ["unreviewed", "in_review", "manually_reviewed", "runtime_mapping_reviewed", "sdk_ready"]
-        },
-        "normative_authority": {
-          "enum": ["selected_xsd", "no_strict_xsd_profile", "contextual_only"]
-        },
-        "primary_surface": {
-          "enum": ["xsd", "pdf", "cross_artifact", "provenance", "external_standard", "contextual", "none", "undetermined"]
-        },
+        "service": {"type": "string", "minLength": 1},
+        "version_scope": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/versionScopeItem"}},
+        "review_state": {"enum": ["unreviewed", "in_review", "manually_reviewed", "runtime_mapping_reviewed", "sdk_ready"]},
+        "normative_authority": {"enum": ["selected_xsd", "no_strict_xsd_profile", "contextual_only"]},
+        "primary_surface": {"enum": ["xsd", "pdf", "cross_artifact", "provenance", "external_standard", "contextual", "none", "undetermined"]},
         "primary_issue_kind": {
           "enum": [
-            "identifier_typo",
-            "identifier_case_error",
-            "missing_separator_or_punctuation",
-            "stale_identifier_after_rename",
-            "wrong_type_reference",
-            "wrong_enum_reference",
-            "wrong_structure_reference",
-            "wrong_operation_reference",
-            "missing_operation_inventory_member",
-            "stale_operation_inventory_member",
-            "internal_schema_inconsistency",
-            "cardinality_mismatch",
-            "structure_mismatch",
-            "namespace_mismatch",
-            "stale_diagram_or_example",
-            "documentation_spelling",
-            "version_routing_issue",
-            "release_authority_gap",
-            "semantic_contradiction",
-            "intentional_design_misread",
-            "editorial_residue",
-            "other"
+            "identifier_typo", "identifier_case_error", "missing_separator_or_punctuation",
+            "stale_identifier_after_rename", "wrong_type_reference", "wrong_enum_reference",
+            "wrong_structure_reference", "wrong_operation_reference", "missing_operation_inventory_member",
+            "stale_operation_inventory_member", "internal_schema_inconsistency", "cardinality_mismatch",
+            "structure_mismatch", "namespace_mismatch", "stale_diagram_or_example",
+            "documentation_spelling", "version_routing_issue", "release_authority_gap",
+            "semantic_contradiction", "intentional_design_misread", "editorial_residue", "other"
           ]
         },
-        "secondary_issue_kinds": {
-          "type": "array",
-          "items": {"type": "string"}
-        },
+        "secondary_issue_kinds": {"type": "array", "items": {"type": "string"}},
         "defect_assessment": {
           "enum": [
-            "confirmed_pdf_defect",
-            "likely_pdf_defect",
-            "confirmed_xsd_defect",
-            "likely_xsd_defect",
-            "cross_artifact_mismatch",
-            "authority_gap",
-            "intentional_design",
-            "non_defect",
-            "undetermined"
+            "confirmed_pdf_defect", "likely_pdf_defect", "confirmed_xsd_defect", "likely_xsd_defect",
+            "cross_artifact_mismatch", "authority_gap", "intentional_design", "non_defect", "undetermined"
           ]
         },
-        "confidence": {
-          "enum": ["confirmed", "high", "medium", "low"]
-        },
+        "confidence": {"enum": ["confirmed", "high", "medium", "low"]},
         "validation_effect": {
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
           "items": {
             "enum": [
-              "xsd_rejects_pdf_documented_form",
-              "xsd_accepts_semantically_questionable_form",
-              "xsd_internal_inventory_incomplete",
-              "xsd_internal_inventory_stale",
-              "pdf_can_mislead_implementation",
-              "code_generation_or_discovery_affected",
-              "documentation_only",
-              "strict_profile_unavailable",
-              "no_runtime_effect",
-              "other"
+              "xsd_rejects_pdf_documented_form", "xsd_accepts_semantically_questionable_form",
+              "xsd_internal_inventory_incomplete", "xsd_internal_inventory_stale",
+              "pdf_can_mislead_implementation", "code_generation_or_discovery_affected",
+              "documentation_only", "strict_profile_unavailable", "no_runtime_effect", "other"
             ]
           }
         },
-        "sdk_behavior": {
-          "enum": [
-            "error_with_advisory",
-            "valid_with_advisory",
-            "warning",
-            "info",
-            "unsupported_profile",
-            "no_runtime_diagnostic"
-          ]
-        },
-        "semantic_basis": {
-          "type": "array",
-          "minItems": 1,
-          "items": {"$ref": "#/$defs/semanticBasis"}
-        },
+        "sdk_behavior": {"enum": ["error_with_advisory", "valid_with_advisory", "warning", "info", "unsupported_profile", "no_runtime_diagnostic"]},
+        "semantic_basis": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/semanticBasis"}},
         "diagnostic": {
           "type": "object",
           "required": ["de", "en"],
@@ -246,11 +160,7 @@
           "additionalProperties": false
         },
         "runtime_match": {"$ref": "#/$defs/runtimeMatch"},
-        "source_references": {
-          "type": "array",
-          "minItems": 1,
-          "items": {"$ref": "#/$defs/sourceReference"}
-        },
+        "source_references": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/sourceReference"}},
         "notes": {"type": "string"}
       },
       "additionalProperties": false
