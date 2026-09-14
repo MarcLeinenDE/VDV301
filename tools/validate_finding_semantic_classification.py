@@ -65,12 +65,14 @@ def main() -> int:
 
     frozen_entries = baseline["inventory"]["entries"]
     frozen_by_id = {entry["finding_id"]: entry for entry in frozen_entries}
+    frozen_order = {entry["finding_id"]: idx for idx, entry in enumerate(frozen_entries)}
     require(len(frozen_by_id) == 192, "frozen baseline has 192 unique finding IDs")
 
     entries = registry["entries"]
     ids = [entry["finding_id"] for entry in entries]
     require(len(ids) == len(set(ids)), "classification entries use unique finding IDs")
     require(all(fid in frozen_by_id for fid in ids), "every classified finding exists in the frozen baseline")
+    require(ids == sorted(ids, key=lambda fid: frozen_order[fid]), "classification entries follow frozen 192-finding order")
 
     allowed_terminal = {
         "context_verified",
@@ -91,11 +93,24 @@ def main() -> int:
         require(entry["semantic_basis"], f"{fid} has an explicit semantic basis")
         require(entry["source_references"], f"{fid} has source references")
         require(entry["version_scope"], f"{fid} has explicit version/authority scope")
-        require(entry["runtime_match"]["state"] != "implemented", f"{fid} runtime mapping is not falsely marked implemented during pilot")
+        require(entry["runtime_match"]["state"] != "implemented", f"{fid} runtime mapping is not falsely marked implemented during classification")
 
     pilot_expected = {"TVS-001", "TVS-002", "TVS-003", "TSM-002", "TSM-003", "TSD-004"}
     if registry["state"] == "pilot":
         require(set(ids) == pilot_expected, "pilot contains exactly the six manually selected representative findings")
+        require("progress" not in registry, "pilot has no false block-review progress")
+    else:
+        progress = registry.get("progress")
+        require(isinstance(progress, dict), "in-progress/complete classification has progress metadata")
+        require(progress["classified_count"] == len(entries), "progress classified_count matches actual entries")
+        require(progress["remaining_count"] == 192 - len(entries), "progress remaining_count matches frozen inventory")
+        require(len(progress["reviewed_blocks"]) == len(set(progress["reviewed_blocks"])), "reviewed block list is unique")
+        require(progress["latest_block"] in progress["reviewed_blocks"], "latest block is recorded as reviewed")
+        require(bool(progress["latest_block_file"]), "latest block source file is recorded")
+
+    if registry["state"] == "complete":
+        require(len(entries) == 192, "complete classification contains all 192 findings")
+        require(registry["progress"]["remaining_count"] == 0, "complete classification has zero remaining findings")
 
     print(f"PASSED: semantic classification registry valid; {len(entries)} reviewed entries anchored to frozen baseline")
     return 0
