@@ -1,7 +1,7 @@
 {
   "registry_version": "0.1",
   "date": "2026-09-03",
-  "state": "inventory_frozen_revalidation_terminalized_readiness_pending",
+  "state": "inventory_frozen_revalidation_complete_finding_knowledge_ready",
   "policy": "no_grandfathering",
   "trigger": "after_deep_read_pass_2_before_finding_baseline_freeze_sdk_or_remediation",
   "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
@@ -350,8 +350,8 @@
       },
       {
         "finding_id": "CIS-001",
-        "revalidation_state": "unresolved",
-        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CIS_2026-09-03.md"
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_READINESS_RECONCILIATION_2026-09-14.md"
       },
       {
         "finding_id": "CIS-002",
@@ -1111,20 +1111,27 @@
     ]
   },
   "sdk_readiness": {
-    "finding_knowledge_ready": false,
+    "finding_knowledge_ready": true,
     "requires_zero_pending": true,
     "requires_zero_unreconciled_duplicates_or_supersessions": true,
     "requires_zero_unresolved_sdk_affecting_findings": true,
     "requires_executable_confirmation_for_testable_xml_behavior_claims": true,
     "selected_xsd_remains_normative_authority": true,
-    "readiness_reconciliation_pending": [
-      "CIS-001"
-    ]
+    "readiness_reconciliation_pending": [],
+    "unresolved_sdk_affecting_findings": [],
+    "strict_profile_exclusions": {
+      "CIS_V1.1": "no confirmed matching release-tag XSD authority; fail closed / unsupported strict profile"
+    },
+    "readiness_evidence_id": "EV-167",
+    "readiness_evidence_run_id": "34843562886",
+    "readiness_report": "docs/pdf_xsd_semantic_audit/FINDING_READINESS_RECONCILIATION_2026-09-14.md"
   },
   "remediation_readiness": {
     "ready": false,
     "requires_revalidation_completion": true,
-    "official_facing_action_requires_separate_explicit_decision": true
+    "official_facing_action_requires_separate_explicit_decision": true,
+    "revalidation_complete": true,
+    "note": "Finding revalidation/readiness is complete; official-facing remediation still requires a separate explicit decision."
   },
   "next_revalidation_block": null,
   "revalidation_blocks": {
@@ -3181,5 +3188,30 @@
         "CIS-001"
       ]
     }
+  },
+  "readiness_reconciliation": {
+    "date": "2026-09-14",
+    "state": "completed",
+    "evidence_id": "EV-167",
+    "pinned_successful_evidence_run": "34843562886",
+    "pinned_successful_evidence_job": "103973944657",
+    "artifact_id": "10347047619",
+    "artifact_digest": "sha256:d978765cfbd90b5f0ab345d9f6626b3ead6c051ac3477cf6a542d6db74a36bf2",
+    "evidence_head_sha": "171ff38a4b9df401429749ad9c8b5133de4d2e9a",
+    "closure_run_id": "34843828079",
+    "closure_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/34843828079",
+    "finding_reconciled": "CIS-001",
+    "prior_state": "unresolved",
+    "final_state": "context_verified",
+    "authority_boundary": {
+      "CIS_V1.1_publication": "official public VDV PDF, corrected permanent byte pin f9d63dd1f2e417691913e57a9c7121c90b4e781cbcd1328be681695975f59739 / 809729 bytes",
+      "release_tag": "VDV-301-1.1 absent",
+      "untagged_working_family": "commit 0a5228a768c7d710c40f5f99fbdce2e544d19883, CIS blob 5957e27f128a191c794b0c8081b531a07126784a; not release authority and materially behind published PDF",
+      "release_xsd_identity": "still unresolved; no matching strict release profile is invented",
+      "sdk_rule": "CIS V1.1 strict validation profile unavailable/fail-closed; do not substitute untagged working or neighbouring-version XSD"
+    },
+    "xsd_pool_result": "PASS_50_root_XSDs",
+    "xsd_mutation": false,
+    "frozen_inventory_mutation": false
   }
 }

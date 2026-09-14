@@ -3,7 +3,7 @@
   "date": "2026-09-03",
   "canonical_branch": "dev/schema-integration",
   "workflow_mode": "manual_only",
-  "project_phase": "legacy_finding_revalidation",
+  "project_phase": "finding_baseline_freeze_ready",
   "superbranch": {
     "root_xsd_count_last_executed": 50,
     "direct_include_edges_last_executed": 84,
@@ -58,7 +58,7 @@
     },
     "finding_evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
     "legacy_finding_revalidation_required": true,
-    "legacy_finding_revalidation_state": "inventory_frozen_revalidation_terminalized_readiness_pending",
+    "legacy_finding_revalidation_state": "complete_finding_knowledge_ready",
     "legacy_finding_revalidation_plan": "docs/pdf_xsd_semantic_audit/LEGACY_FINDING_REVALIDATION_PLAN.md",
     "finding_revalidation_registry": "audit_registry/finding_revalidation_registry_v0.1.json",
     "finding_revalidation_rule": "No grandfathering. After Deep Read Pass 2 freeze the full finding inventory and revalidate every finding not already explicitly revalidated under the current Evidence Gate; require zero pending SDK-relevant findings before baseline freeze.",
@@ -882,7 +882,7 @@
       "evidence_id": "EV-125",
       "run_id": "33744039627",
       "terminal_states": {
-        "CIS-001": "unresolved",
+        "CIS-001": "context_verified",
         "CIS-002": "contextual_not_defect",
         "CIS-003": "executable_confirmed",
         "CIS-004": "executable_confirmed",
@@ -892,9 +892,17 @@
       "pdf_pin_artifact_id": "9885887536",
       "rendered_pages": 105,
       "next_block": "DISC",
-      "xsd_mutation": false
+      "xsd_mutation": false,
+      "readiness_reconciliation": {
+        "evidence_id": "EV-167",
+        "prior_state": "unresolved",
+        "final_state": "context_verified",
+        "release_xsd_identity": "unresolved",
+        "sdk_rule": "CIS V1.1 strict validation profile unavailable/fail-closed; do not substitute untagged working or neighbouring-version XSD",
+        "report": "docs/pdf_xsd_semantic_audit/FINDING_READINESS_RECONCILIATION_2026-09-14.md"
+      }
     },
-    "latest_revalidation_evidence_id": "EV-166",
+    "latest_revalidation_evidence_id": "EV-167",
     "disc_revalidation": {
       "status": "completed",
       "evidence_id": "EV-126",
@@ -1866,9 +1874,7 @@
       "frozen_inventory_mutation": false
     },
     "finding_revalidation_terminalization_complete": true,
-    "finding_readiness_reconciliation_pending": [
-      "CIS-001"
-    ],
+    "finding_readiness_reconciliation_pending": [],
     "vrs_revalidation": {
       "status": "complete",
       "evidence_id": "EV-166",
@@ -1901,7 +1907,13 @@
         "CIS-001"
       ],
       "xsd_mutation": false
-    }
+    },
+    "finding_knowledge_ready": true,
+    "finding_readiness_evidence_id": "EV-167",
+    "finding_readiness_evidence_run_id": "34843562886",
+    "finding_readiness_report": "docs/pdf_xsd_semantic_audit/FINDING_READINESS_RECONCILIATION_2026-09-14.md",
+    "finding_baseline_freeze_ready": true,
+    "latest_revalidation_evidence_run_id": "34843828079"
   },
   "evidence": {
     "xsd_ev_completed": [
