@@ -955,8 +955,8 @@
       },
       {
         "finding_id": "TSI-001",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "executable_confirmed",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSI_2026-09-14.md"
       },
       {
         "finding_id": "TSM-001",
@@ -1123,7 +1123,7 @@
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true
   },
-  "next_revalidation_block": "TSI",
+  "next_revalidation_block": "TSM",
   "revalidation_blocks": {
     "ARA_V2.4": {
       "date": "2026-09-03",
@@ -2877,6 +2877,65 @@
       "frozen_inventory_mutation": false,
       "next_block": "TSI",
       "next_finding": "TSI-001"
+    },
+    "TSI": {
+      "date": "2026-09-14",
+      "state": "completed",
+      "authority_lane": "official byte-pinned TrainSetServices V2.1 PDF plus exact VDV-301-2.1 XSD, V2.2 correction-history context and executable EV-109/EV-161 evidence",
+      "evidence_id": "EV-161",
+      "evidence_run_id": "34822926605",
+      "evidence_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/34822926605",
+      "pinned_successful_evidence_run": "34822675019",
+      "pinned_successful_evidence_job": "103907586878",
+      "artifact_id": "10339022101",
+      "artifact_digest": "sha256:705aa436963a49f4478099f884b63d19d14f02f79a18c3cde89603ecb31fced8",
+      "evidence_head_sha": "c6ee1be2ef346ab5ea61615f6d29de0ea24b06d8",
+      "source_pin": {
+        "reused_from": "EV-160 source acquisition",
+        "run_id": "34816735900",
+        "job_id": "103888867262",
+        "artifact_id": "10336466475",
+        "artifact_digest": "sha256:30089b9d4f2c86dd57f8bb184844a428ee08e91b0d327517c84f6689ea231bfb",
+        "head_sha": "20785d8ee41e812a5902d49b6d4b800ef238e311"
+      },
+      "pdf_authority": {
+        "source_id": "TRAINSET_V2.1",
+        "official_url": "https://www.vdv.de/vdv-301-2-14-v2-1-sds-trainsetservices.pdfx",
+        "sha256": "8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e",
+        "size_bytes": 1708401,
+        "pages": 51,
+        "visual_pages": [
+          24,
+          25
+        ],
+        "page_25_embedded_diagram_evidence_mode": "visual_not_Poppler_text"
+      },
+      "upstream_authority": {
+        "v2_1_commit": "585e0bea34b64887db4276f1c94d5f3e78f06c66",
+        "v2_1_tree": "a8472530e840f7b365f6ba1075bfc09758ebda21",
+        "v2_2_commit": "f283697124750d12189b960b302b399769bad530",
+        "v2_2_tree": "2dbde53864ef07319016b419ff6951f6e90e79dc"
+      },
+      "xsd_authority": {
+        "v2_1_blob": "897f373e31b76aa23d8bc206854b042524e4c102",
+        "v2_2_historical_correction_blob": "7ab1f8f892bfcea2a8b8a055f07de92c143356f9",
+        "latest_wins": false
+      },
+      "underlying_executable_evidence": [
+        "EV-109"
+      ],
+      "full_xsd_regression_pool": {
+        "root_xsd_count": 50,
+        "result": "PASS"
+      },
+      "findings": {
+        "TSI-001": "executable_confirmed"
+      },
+      "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSI_2026-09-14.md",
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false,
+      "next_block": "TSM",
+      "next_finding": "TSM-001"
     }
   }
 }
