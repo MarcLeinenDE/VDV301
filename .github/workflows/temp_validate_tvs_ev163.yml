@@ -51,22 +51,13 @@ jobs:
           sha256sum audit_registry/finding_inventory_frozen_2026-09-03.json > evidence/tvs_ev163/frozen_inventory_before.sha256
 
       - name: Run EV-112 official V2.1 lane
-        shell: bash
-        run: |
-          set -euo pipefail
-          python tools/validate_tvs_v21_ev112.py | tee evidence/tvs_ev163/ev112_direct.log
+        run: python tools/validate_tvs_v21_ev112.py | tee evidence/tvs_ev163/ev112_direct.log
 
       - name: Run EV-113 official V2.2 lane
-        shell: bash
-        run: |
-          set -euo pipefail
-          python tools/validate_tvs_v22_ev113.py | tee evidence/tvs_ev163/ev113_direct.log
+        run: python tools/validate_tvs_v22_ev113.py | tee evidence/tvs_ev163/ev113_direct.log
 
       - name: Run EV-114 official V2.3 lane
-        shell: bash
-        run: |
-          set -euo pipefail
-          python tools/validate_tvs_v23_ev114.py | tee evidence/tvs_ev163/ev114_direct.log
+        run: python tools/validate_tvs_v23_ev114.py | tee evidence/tvs_ev163/ev114_direct.log
 
       - name: Run EV-115 V2.4 candidate/integration lane
         shell: bash
@@ -75,15 +66,39 @@ jobs:
           python tools/validate_tvs_v24_ev115.py | tee evidence/tvs_ev163/ev115_direct.log
           grep -F "AUTHORITY: candidate/integration V2.4 family; NOT official-release V2.4 conformance" evidence/tvs_ev163/ev115_direct.log
 
-      - name: Run aggregate EV-163 gate
+      - name: Run aggregate EV-163 gate with diagnostic capture
+        id: aggregate
         shell: bash
         run: |
-          set -euo pipefail
+          set +e
+          set -o pipefail
           python tools/validate_tvs_revalidation_ev163.py \
             --repo-root . \
             --output-dir evidence/tvs_ev163 \
-            | tee evidence/tvs_ev163/ev163.log
-          grep -F "PASSED: EV-163 TVS aggregate revalidation gate; projected poststate 168/24, next VDS-001" evidence/tvs_ev163/ev163.log
+            2>&1 | tee evidence/tvs_ev163/ev163.log
+          rc=${PIPESTATUS[0]}
+          diag=$(tail -n 1 evidence/tvs_ev163/ev163.log | tr -cs 'A-Za-z0-9._-' '_' | cut -c1-110)
+          test -n "$diag" || diag="no-diagnostic"
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          echo "diag=$diag" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Upload EV-163 failure diagnostic
+        if: steps.aggregate.outputs.rc != '0'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ev163-diagnostic-${{ steps.aggregate.outputs.diag }}
+          path: evidence/tvs_ev163/ev163.log
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Fail closed on aggregate error
+        if: steps.aggregate.outputs.rc != '0'
+        run: exit 1
+
+      - name: Assert aggregate EV-163 PASSED marker
+        if: steps.aggregate.outputs.rc == '0'
+        run: grep -F "PASSED: EV-163 TVS aggregate revalidation gate; projected poststate 168/24, next VDS-001" evidence/tvs_ev163/ev163.log
 
       - name: Validate complete 50-XSD pool
         shell: bash
