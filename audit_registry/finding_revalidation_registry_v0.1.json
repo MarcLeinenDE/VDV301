@@ -1,7 +1,7 @@
 {
   "registry_version": "0.1",
   "date": "2026-09-03",
-  "state": "inventory_frozen_revalidation_complete_finding_knowledge_ready",
+  "state": "finding_provenance_baseline_frozen",
   "policy": "no_grandfathering",
   "trigger": "after_deep_read_pass_2_before_finding_baseline_freeze_sdk_or_remediation",
   "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
@@ -1124,14 +1124,19 @@
     },
     "readiness_evidence_id": "EV-167",
     "readiness_evidence_run_id": "34843562886",
-    "readiness_report": "docs/pdf_xsd_semantic_audit/FINDING_READINESS_RECONCILIATION_2026-09-14.md"
+    "readiness_report": "docs/pdf_xsd_semantic_audit/FINDING_READINESS_RECONCILIATION_2026-09-14.md",
+    "finding_baseline_frozen": true,
+    "finding_baseline_path": "audit_registry/finding_provenance_baseline_2026-09-14.json",
+    "finding_baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576"
   },
   "remediation_readiness": {
     "ready": false,
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true,
     "revalidation_complete": true,
-    "note": "Finding revalidation/readiness is complete; official-facing remediation still requires a separate explicit decision."
+    "note": "Finding/provenance baseline is frozen. Any official-facing remediation remains a separate explicit decision.",
+    "baseline_freeze_complete": true,
+    "decision_phase_eligible": true
   },
   "next_revalidation_block": null,
   "revalidation_blocks": {
@@ -3213,5 +3218,26 @@
     "xsd_pool_result": "PASS_50_root_XSDs",
     "xsd_mutation": false,
     "frozen_inventory_mutation": false
+  },
+  "finding_provenance_baseline": {
+    "state": "frozen",
+    "date": "2026-09-14",
+    "path": "audit_registry/finding_provenance_baseline_2026-09-14.json",
+    "report": "docs/pdf_xsd_semantic_audit/FINDING_PROVENANCE_BASELINE_FREEZE_2026-09-14.md",
+    "baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
+    "finding_entries_sha256": "411519c4aaaeb370dfa336d729988d37007a78dfaf5bc6d5fcfb1dfa3f49f792",
+    "authority_snapshot_sha256": "1f4d5b9468668c7b1839585b710fc63ad6a5ef6196f14afbe58c36377c809e95",
+    "xsd_manifest_sha256": "081cff20627157441c6fb6da11f4026906080e7dd44479e45c8bbcc1ef3dcb26",
+    "evidence_id": "EV-168",
+    "evidence_run_id": "34844500027",
+    "evidence_job_id": "103977033739",
+    "evidence_artifact_id": "10347158213",
+    "evidence_artifact_digest": "sha256:cf92dcd1e0ca3ca24efc7d8327e3a9ce10d6fc1fc1e2342c0a56ac6ecf36a608",
+    "evidence_head": "f0eab8251939ef69c921e721fa5d8db1c049055e",
+    "closure_run_id": "34844751295",
+    "closure_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/34844751295",
+    "xsd_mutation": false,
+    "frozen_inventory_mutation": false,
+    "remediation_authorized": false
   }
 }
