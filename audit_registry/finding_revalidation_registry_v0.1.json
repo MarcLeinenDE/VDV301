@@ -975,18 +975,18 @@
       },
       {
         "finding_id": "TVS-001",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "executable_confirmed",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TVS_2026-09-14.md"
       },
       {
         "finding_id": "TVS-002",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "executable_confirmed",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TVS_2026-09-14.md"
       },
       {
         "finding_id": "TVS-003",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "executable_confirmed",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TVS_2026-09-14.md"
       },
       {
         "finding_id": "VDS-001",
@@ -1123,7 +1123,7 @@
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true
   },
-  "next_revalidation_block": "TVS",
+  "next_revalidation_block": "VDS",
   "revalidation_blocks": {
     "ARA_V2.4": {
       "date": "2026-09-03",
@@ -2997,6 +2997,46 @@
       "frozen_inventory_mutation": false,
       "next_block": "TVS",
       "next_finding": "TVS-001"
+    },
+    "TVS": {
+      "date": "2026-09-14",
+      "state": "completed",
+      "authority_lane": "EV-112/EV-113/EV-114 official release lanes plus EV-115 candidate/integration V2.4 continuity under an explicit non-official-release boundary",
+      "authority_boundary": {
+        "EV-112": "official VDV-301-2.1 executable route",
+        "EV-113": "official VDV-301-2.2 executable route",
+        "EV-114": "official VDV-301-2.3 route; release routes through the V2.2-named TVS service XSD",
+        "EV-115": "candidate/integration V2.4 executable evidence only; NOT official-release V2.4 XSD conformance",
+        "v2_4_release_tag": "absent"
+      },
+      "evidence_id": "EV-163",
+      "evidence_run_id": "34835864267",
+      "evidence_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/34835864267",
+      "pinned_successful_evidence_run": "34835469790",
+      "pinned_successful_evidence_job": "103948172257",
+      "artifact_id": "10343689439",
+      "artifact_digest": "sha256:dbba3bbd71adf72f0d44ba540d214291190749f5f8cbe5d0a6341461ad68f140",
+      "evidence_head_sha": "b2dc3c28bce9dc21591a3e232e12cace90637616",
+      "underlying_executable_evidence": [
+        "EV-112",
+        "EV-113",
+        "EV-114",
+        "EV-115"
+      ],
+      "full_xsd_regression_pool": {
+        "root_xsd_count": 50,
+        "result": "PASS"
+      },
+      "findings": {
+        "TVS-001": "executable_confirmed",
+        "TVS-002": "executable_confirmed",
+        "TVS-003": "executable_confirmed"
+      },
+      "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TVS_2026-09-14.md",
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false,
+      "next_block": "VDS",
+      "next_finding": "VDS-001"
     }
   }
 }

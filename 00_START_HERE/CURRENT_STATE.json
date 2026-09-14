@@ -867,15 +867,15 @@
     "finding_inventory_snapshot": "audit_registry/finding_inventory_frozen_2026-09-03.json",
     "finding_inventory_count": 192,
     "finding_inventory_source_head": "7fad145f528205ef5c40e58a3a23374379b08189",
-    "finding_revalidation_next_block": "TVS",
-    "finding_revalidation_completed_findings": 165,
-    "finding_revalidation_pending_findings": 27,
-    "finding_revalidation_current_block": "TSM",
-    "finding_revalidation_latest_completed_block": "TSM",
-    "finding_revalidation_latest_terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSM_2026-09-14.md",
-    "latest_executable_evidence_id": "EV-162",
-    "latest_executable_evidence_run_id": "34823587675",
-    "latest_executable_evidence_run": "34823587675",
+    "finding_revalidation_next_block": "VDS",
+    "finding_revalidation_completed_findings": 168,
+    "finding_revalidation_pending_findings": 24,
+    "finding_revalidation_current_block": "TVS",
+    "finding_revalidation_latest_completed_block": "TVS",
+    "finding_revalidation_latest_terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TVS_2026-09-14.md",
+    "latest_executable_evidence_id": "EV-163",
+    "latest_executable_evidence_run_id": "34835864267",
+    "latest_executable_evidence_run": "34835864267",
     "cis_revalidation": {
       "status": "complete",
       "completed_at": "2026-09-03T10:23:42Z",
@@ -894,7 +894,7 @@
       "next_block": "DISC",
       "xsd_mutation": false
     },
-    "latest_revalidation_evidence_id": "EV-162",
+    "latest_revalidation_evidence_id": "EV-163",
     "disc_revalidation": {
       "status": "completed",
       "evidence_id": "EV-126",
@@ -1772,6 +1772,34 @@
       "xsd_pool_result": "PASS_50_root_XSDs",
       "next_block": "TVS",
       "next_finding": "TVS-001",
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false
+    },
+    "tvs_revalidation": {
+      "status": "complete",
+      "completed_at_run": "34835864267",
+      "evidence_id": "EV-163",
+      "run_id": "34835864267",
+      "pinned_successful_evidence_run": "34835469790",
+      "pinned_successful_evidence_job": "103948172257",
+      "artifact_id": "10343689439",
+      "artifact_digest": "sha256:dbba3bbd71adf72f0d44ba540d214291190749f5f8cbe5d0a6341461ad68f140",
+      "evidence_head_sha": "b2dc3c28bce9dc21591a3e232e12cace90637616",
+      "terminal_states": {
+        "TVS-001": "executable_confirmed",
+        "TVS-002": "executable_confirmed",
+        "TVS-003": "executable_confirmed"
+      },
+      "authority_boundary": {
+        "EV-112": "official VDV-301-2.1 executable route",
+        "EV-113": "official VDV-301-2.2 executable route",
+        "EV-114": "official VDV-301-2.3 route; release routes through the V2.2-named TVS service XSD",
+        "EV-115": "candidate/integration V2.4 executable evidence only; NOT official-release V2.4 XSD conformance",
+        "v2_4_release_tag": "absent"
+      },
+      "xsd_pool_result": "PASS_50_root_XSDs",
+      "next_block": "VDS",
+      "next_finding": "VDS-001",
       "xsd_mutation": false,
       "frozen_inventory_mutation": false
     }
