@@ -5,6 +5,7 @@
   "type": "object",
   "required": ["classification_version", "state", "source_baseline", "policy", "entries"],
   "properties": {
+    "$schema": {"type": "string"},
     "classification_version": {"type": "string"},
     "state": {"enum": ["design", "pilot", "in_progress", "complete", "frozen"]},
     "source_baseline": {
@@ -82,9 +83,7 @@
       "type": "object",
       "required": ["kind", "reference"],
       "properties": {
-        "kind": {
-          "enum": ["frozen_terminal_source", "pdf", "xsd", "evidence", "version_history", "common_conventions", "external_standard", "other"]
-        },
+        "kind": {"enum": ["frozen_terminal_source", "pdf", "xsd", "evidence", "version_history", "common_conventions", "external_standard", "other"]},
         "reference": {"type": "string", "minLength": 1},
         "note": {"type": "string"}
       },
