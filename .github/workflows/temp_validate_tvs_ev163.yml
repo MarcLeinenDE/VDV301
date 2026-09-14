@@ -18,13 +18,13 @@ jobs:
       - name: Checkout exact triggering commit
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 2
 
       - name: Assert workflow-only trigger commit
         shell: bash
         run: |
           set -euo pipefail
-          BASE_SHA="466340965faa7cff9c6a78565396b4ea09e27bce"
+          BASE_SHA="c0182e060dda941afea394e68d0cd60150f67f4d"
           git cat-file -e "${BASE_SHA}^{commit}"
           mapfile -t changed < <(git diff --name-only "$BASE_SHA" "$GITHUB_SHA")
           test "${#changed[@]}" -eq 1
@@ -130,7 +130,7 @@ jobs:
             'EV-115: candidate/integration evidence only; not official-release conformance']:
               assert t in a, t
           s=open('tools/validate_tvs_v24_ev115.py',encoding='utf-8').read()
-          for t in ['candidate/integration','not official-release','VDV-301-2.4','GetCurrentShortHaulStopsResponse','TicketValidationServiceOperations']:
+          for t in ['candidate/integration','NOT official-release V2.4 XSD conformance','VDV-301-2.4','GetCurrentShortHaulStopsResponse','TicketValidationServiceOperations']:
               assert t in s, t
           print('PASSED authority-tokens')
           PY
