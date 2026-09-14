@@ -209,7 +209,7 @@ def main() -> int:
             "VDS V2.0 XSD must NOT be substituted for V1.0",
             "Targeted material findings are visually confirmed",
             "Fehler! Verweisquelle konnte nicht gefunden werden.",
-            "VideoDisplayService v1.1 1.0, 05/2017",
+            "cross_document_confirmed",
         ],
         "VDS V1.0 deep read",
     )
