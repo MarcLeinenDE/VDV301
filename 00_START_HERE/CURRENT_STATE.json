@@ -58,7 +58,7 @@
     },
     "finding_evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
     "legacy_finding_revalidation_required": true,
-    "legacy_finding_revalidation_state": "inventory_frozen_revalidation_in_progress",
+    "legacy_finding_revalidation_state": "inventory_frozen_revalidation_terminalized_readiness_pending",
     "legacy_finding_revalidation_plan": "docs/pdf_xsd_semantic_audit/LEGACY_FINDING_REVALIDATION_PLAN.md",
     "finding_revalidation_registry": "audit_registry/finding_revalidation_registry_v0.1.json",
     "finding_revalidation_rule": "No grandfathering. After Deep Read Pass 2 freeze the full finding inventory and revalidate every finding not already explicitly revalidated under the current Evidence Gate; require zero pending SDK-relevant findings before baseline freeze.",
@@ -867,15 +867,15 @@
     "finding_inventory_snapshot": "audit_registry/finding_inventory_frozen_2026-09-03.json",
     "finding_inventory_count": 192,
     "finding_inventory_source_head": "7fad145f528205ef5c40e58a3a23374379b08189",
-    "finding_revalidation_next_block": "VRS",
-    "finding_revalidation_completed_findings": 181,
-    "finding_revalidation_pending_findings": 11,
-    "finding_revalidation_current_block": "VLS",
-    "finding_revalidation_latest_completed_block": "VLS",
-    "finding_revalidation_latest_terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VLS_2026-09-14.md",
-    "latest_executable_evidence_id": "EV-165",
-    "latest_executable_evidence_run_id": "34840162307",
-    "latest_executable_evidence_run": "34840162307",
+    "finding_revalidation_next_block": null,
+    "finding_revalidation_completed_findings": 192,
+    "finding_revalidation_pending_findings": 0,
+    "finding_revalidation_current_block": "VRS",
+    "finding_revalidation_latest_completed_block": "VRS",
+    "finding_revalidation_latest_terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md",
+    "latest_executable_evidence_id": "EV-166",
+    "latest_executable_evidence_run_id": "34841174977",
+    "latest_executable_evidence_run": "34841174977",
     "cis_revalidation": {
       "status": "complete",
       "completed_at": "2026-09-03T10:23:42Z",
@@ -894,7 +894,7 @@
       "next_block": "DISC",
       "xsd_mutation": false
     },
-    "latest_revalidation_evidence_id": "EV-165",
+    "latest_revalidation_evidence_id": "EV-166",
     "disc_revalidation": {
       "status": "completed",
       "evidence_id": "EV-126",
@@ -1864,6 +1864,43 @@
       "next_finding": "VRS-001",
       "xsd_mutation": false,
       "frozen_inventory_mutation": false
+    },
+    "finding_revalidation_terminalization_complete": true,
+    "finding_readiness_reconciliation_pending": [
+      "CIS-001"
+    ],
+    "vrs_revalidation": {
+      "status": "complete",
+      "evidence_id": "EV-166",
+      "run_id": "34841174977",
+      "artifact_id": "10346331279",
+      "artifact_digest": "sha256:da205bc769db11a5406a11de1c2febeb6c38745924d51835fe7a22b6fd978309",
+      "evidence_head_sha": "8bcfbbc3e93fcc1bfc41e422cd5a83790ed99e9f",
+      "terminal_states": {
+        "VRS-001": "context_verified",
+        "VRS-002": "context_verified",
+        "VRS-003": "executable_confirmed",
+        "VRS-004": "context_verified",
+        "VRS-005": "context_verified",
+        "VRS-006": "context_verified",
+        "VRS-007": "withdrawn",
+        "VRS-008": "context_verified",
+        "VRS-009": "context_verified",
+        "VRS-010": "context_verified",
+        "VRS-011": "context_verified"
+      },
+      "authority_boundary": {
+        "VRS_V1.0": "official PDF; no exact official V1.0 service XSD confirmed; no nearby-version substitution",
+        "VRS_V2.0": "official VDV-301-2.0 service/Common/Enums family",
+        "VRS_V2.4": "official PDF; XSD remains open unmerged PR #27 candidate/integration only",
+        "VRS-007": "withdrawn by authoritative choice-notation correction overlay"
+      },
+      "xsd_pool_result": "PASS_50_root_XSDs",
+      "pending_after": 0,
+      "readiness_reconciliation_pending": [
+        "CIS-001"
+      ],
+      "xsd_mutation": false
     }
   },
   "evidence": {

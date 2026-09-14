@@ -1,7 +1,7 @@
 {
   "registry_version": "0.1",
   "date": "2026-09-03",
-  "state": "inventory_frozen_revalidation_in_progress",
+  "state": "inventory_frozen_revalidation_terminalized_readiness_pending",
   "policy": "no_grandfathering",
   "trigger": "after_deep_read_pass_2_before_finding_baseline_freeze_sdk_or_remediation",
   "evidence_gate": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
@@ -1055,58 +1055,58 @@
       },
       {
         "finding_id": "VRS-001",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md"
       },
       {
         "finding_id": "VRS-002",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md"
       },
       {
         "finding_id": "VRS-003",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "executable_confirmed",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md"
       },
       {
         "finding_id": "VRS-004",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md"
       },
       {
         "finding_id": "VRS-005",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md"
       },
       {
         "finding_id": "VRS-006",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md"
       },
       {
         "finding_id": "VRS-007",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "withdrawn",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md"
       },
       {
         "finding_id": "VRS-008",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md"
       },
       {
         "finding_id": "VRS-009",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md"
       },
       {
         "finding_id": "VRS-010",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md"
       },
       {
         "finding_id": "VRS-011",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md"
       }
     ]
   },
@@ -1116,14 +1116,17 @@
     "requires_zero_unreconciled_duplicates_or_supersessions": true,
     "requires_zero_unresolved_sdk_affecting_findings": true,
     "requires_executable_confirmation_for_testable_xml_behavior_claims": true,
-    "selected_xsd_remains_normative_authority": true
+    "selected_xsd_remains_normative_authority": true,
+    "readiness_reconciliation_pending": [
+      "CIS-001"
+    ]
   },
   "remediation_readiness": {
     "ready": false,
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true
   },
-  "next_revalidation_block": "VRS",
+  "next_revalidation_block": null,
   "revalidation_blocks": {
     "ARA_V2.4": {
       "date": "2026-09-03",
@@ -3126,6 +3129,57 @@
       "frozen_inventory_mutation": false,
       "next_block": "VRS",
       "next_finding": "VRS-001"
+    },
+    "VRS": {
+      "date": "2026-09-14",
+      "state": "completed",
+      "evidence_id": "EV-166",
+      "evidence_run_id": "34841174977",
+      "evidence_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/34841174977",
+      "pinned_successful_evidence_run": "34840970136",
+      "pinned_successful_evidence_job": "103965628772",
+      "artifact_id": "10346331279",
+      "artifact_digest": "sha256:da205bc769db11a5406a11de1c2febeb6c38745924d51835fe7a22b6fd978309",
+      "evidence_head_sha": "8bcfbbc3e93fcc1bfc41e422cd5a83790ed99e9f",
+      "underlying_executable_evidence": [
+        "EV-103"
+      ],
+      "visual_evidence_runs": [
+        "33204547867",
+        "33206290291",
+        "33207026201"
+      ],
+      "authority_boundary": {
+        "VRS_V1.0": "official PDF; no exact official V1.0 service XSD confirmed; no nearby-version substitution",
+        "VRS_V2.0": "official VDV-301-2.0 service/Common/Enums family",
+        "VRS_V2.4": "official PDF; XSD remains open unmerged PR #27 candidate/integration only",
+        "VRS-007": "withdrawn by authoritative choice-notation correction overlay"
+      },
+      "findings": {
+        "VRS-001": "context_verified",
+        "VRS-002": "context_verified",
+        "VRS-003": "executable_confirmed",
+        "VRS-004": "context_verified",
+        "VRS-005": "context_verified",
+        "VRS-006": "context_verified",
+        "VRS-007": "withdrawn",
+        "VRS-008": "context_verified",
+        "VRS-009": "context_verified",
+        "VRS-010": "context_verified",
+        "VRS-011": "context_verified"
+      },
+      "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md",
+      "full_xsd_regression_pool": {
+        "root_xsd_count": 50,
+        "result": "PASS"
+      },
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false,
+      "next_block": null,
+      "remaining_pending": 0,
+      "readiness_reconciliation_pending": [
+        "CIS-001"
+      ]
     }
   }
 }
