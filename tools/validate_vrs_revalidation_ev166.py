@@ -211,7 +211,7 @@ def main() -> int:
     ], "VRS V1.0 deep read")
     require_tokens(DEEP_V20, [
         "6ef0dae64ce6f4d3aa4f652d6d166896e71aaac7",
-        "VRS-003 is freshly PDF/XSD reconfirmed and remains executable-confirmed",
+        "`VRS-003` is freshly PDF/XSD reconfirmed and remains executable-confirmed.",
         "This is not a PDF/XSD mismatch.",
         "VideoRecordingService.PauseRecordingRRMRequestStruture",
         "targeted visual checks: complete",
