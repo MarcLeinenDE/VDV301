@@ -24,10 +24,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          BASE_SHA="083ffb47a029f3d161ff4718bc4443adafb2660e"
+          BASE_SHA="4f2edcfef23bb61885a78509949ac1cbda61aa0c"
           git cat-file -e "${BASE_SHA}^{commit}"
           mapfile -t changed < <(git diff --name-only "$BASE_SHA" "$GITHUB_SHA")
-          printf 'Changed paths since EV-163 gate commit:\n%s\n' "${changed[*]}"
+          printf 'Changed paths since corrected EV-163 gate commit:\n%s\n' "${changed[*]}"
           test "${#changed[@]}" -eq 1
           test "${changed[0]}" = ".github/workflows/temp_validate_tvs_ev163.yml"
 
