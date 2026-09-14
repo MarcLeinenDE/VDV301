@@ -136,6 +136,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          rm -rf evidence_out evidence_sources
           git status --porcelain=v1 --untracked-files=all
           git status --porcelain=v1 --untracked-files=all | cut -c4- | sort > /tmp/actual-paths.txt
           cat > /tmp/expected-paths.txt <<'EOF'
