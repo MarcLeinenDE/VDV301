@@ -867,15 +867,15 @@
     "finding_inventory_snapshot": "audit_registry/finding_inventory_frozen_2026-09-03.json",
     "finding_inventory_count": 192,
     "finding_inventory_source_head": "7fad145f528205ef5c40e58a3a23374379b08189",
-    "finding_revalidation_next_block": "TSD",
-    "finding_revalidation_completed_findings": 157,
-    "finding_revalidation_pending_findings": 35,
-    "finding_revalidation_current_block": "TS",
-    "finding_revalidation_latest_completed_block": "TS",
-    "finding_revalidation_latest_terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TS_2026-09-14.md",
-    "latest_executable_evidence_id": "EV-159",
-    "latest_executable_evidence_run_id": "34816125569",
-    "latest_executable_evidence_run": "34816125569",
+    "finding_revalidation_next_block": "TSI",
+    "finding_revalidation_completed_findings": 161,
+    "finding_revalidation_pending_findings": 31,
+    "finding_revalidation_current_block": "TSD",
+    "finding_revalidation_latest_completed_block": "TSD",
+    "finding_revalidation_latest_terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSD_2026-09-14.md",
+    "latest_executable_evidence_id": "EV-160",
+    "latest_executable_evidence_run_id": "34821906521",
+    "latest_executable_evidence_run": "34821906521",
     "cis_revalidation": {
       "status": "complete",
       "completed_at": "2026-09-03T10:23:42Z",
@@ -894,7 +894,7 @@
       "next_block": "DISC",
       "xsd_mutation": false
     },
-    "latest_revalidation_evidence_id": "EV-159",
+    "latest_revalidation_evidence_id": "EV-160",
     "disc_revalidation": {
       "status": "completed",
       "evidence_id": "EV-126",
@@ -1687,6 +1687,37 @@
       "runtime_result": "PASS",
       "next_block": "TSD",
       "next_finding": "TSD-001",
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false
+    },
+    "tsd_revalidation": {
+      "status": "complete",
+      "completed_at_run": "34821906521",
+      "evidence_id": "EV-160",
+      "run_id": "34821906521",
+      "pinned_successful_evidence_run": "34820627306",
+      "pinned_successful_evidence_job": "103901166925",
+      "artifact_id": "10337324977",
+      "artifact_digest": "sha256:47c862255c57a90fddbe1948f92ca1ebc991e5c5f19d1f6cc78ae117ae77fbac",
+      "source_pin_run": "34816735900",
+      "source_pin_artifact": "10336466475",
+      "terminal_states": {
+        "TSD-001": "executable_confirmed",
+        "TSD-002": "executable_confirmed",
+        "TSD-003": "contextual_not_defect",
+        "TSD-004": "context_verified"
+      },
+      "trainset_v2_1_pdf_sha256": "8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e",
+      "trainset_v2_2_pdf_sha256": "c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e",
+      "general_conventions_v2_2_pdf_sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+      "underlying_evidence": [
+        "EV-109",
+        "EV-110",
+        "EV-104"
+      ],
+      "xsd_pool_result": "PASS_50_root_XSDs",
+      "next_block": "TSI",
+      "next_finding": "TSI-001",
       "xsd_mutation": false,
       "frozen_inventory_mutation": false
     }

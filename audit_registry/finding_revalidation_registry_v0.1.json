@@ -935,23 +935,23 @@
       },
       {
         "finding_id": "TSD-001",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "executable_confirmed",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSD_2026-09-14.md"
       },
       {
         "finding_id": "TSD-002",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "executable_confirmed",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSD_2026-09-14.md"
       },
       {
         "finding_id": "TSD-003",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "contextual_not_defect",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSD_2026-09-14.md"
       },
       {
         "finding_id": "TSD-004",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSD_2026-09-14.md"
       },
       {
         "finding_id": "TSI-001",
@@ -1123,7 +1123,7 @@
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true
   },
-  "next_revalidation_block": "TSD",
+  "next_revalidation_block": "TSI",
   "revalidation_blocks": {
     "ARA_V2.4": {
       "date": "2026-09-03",
@@ -2792,6 +2792,91 @@
       "frozen_inventory_mutation": false,
       "next_block": "TSD",
       "next_finding": "TSD-001"
+    },
+    "TSD": {
+      "date": "2026-09-14",
+      "state": "completed",
+      "authority_lane": "official byte-pinned TrainSetServices V2.1/V2.2 PDFs plus exact VDV-301-2.1/2.2 release trees, General Conventions V2.2 context and executable EV-109/EV-110/EV-104 regression evidence",
+      "evidence_id": "EV-160",
+      "evidence_run_id": "34821906521",
+      "evidence_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/34821906521",
+      "pinned_successful_evidence_run": "34820627306",
+      "pinned_successful_evidence_job": "103901166925",
+      "artifact_id": "10337324977",
+      "artifact_digest": "sha256:47c862255c57a90fddbe1948f92ca1ebc991e5c5f19d1f6cc78ae117ae77fbac",
+      "evidence_head_sha": "7140be15f49b6c633faf62977e5d9ff7ad1e60a4",
+      "source_pin": {
+        "run_id": "34816735900",
+        "job_id": "103888867262",
+        "artifact_id": "10336466475",
+        "artifact_digest": "sha256:30089b9d4f2c86dd57f8bb184844a428ee08e91b0d327517c84f6689ea231bfb",
+        "head_sha": "20785d8ee41e812a5902d49b6d4b800ef238e311"
+      },
+      "pdf_authority": {
+        "TRAINSET_V2.1": {
+          "url": "https://www.vdv.de/vdv-301-2-14-v2-1-sds-trainsetservices.pdfx",
+          "sha256": "8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e",
+          "size_bytes": 1708401,
+          "pages": 51,
+          "visual_pages": [
+            33,
+            34
+          ]
+        },
+        "TRAINSET_V2.2": {
+          "url": "https://www.vdv.de/301-2-14-sdes-v2-2-trainsetservices.pdfx",
+          "sha256": "c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e",
+          "size_bytes": 1744296,
+          "pages": 54,
+          "visual_pages": [
+            34,
+            35,
+            38,
+            40
+          ]
+        },
+        "VDV301-2_GC_V2.2": {
+          "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+          "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+          "size_bytes": 1562305,
+          "pages": 79,
+          "visual_pages": [
+            47,
+            48,
+            49
+          ]
+        }
+      },
+      "upstream_authority": {
+        "v2_1_commit": "585e0bea34b64887db4276f1c94d5f3e78f06c66",
+        "v2_1_tree": "a8472530e840f7b365f6ba1075bfc09758ebda21",
+        "v2_2_commit": "f283697124750d12189b960b302b399769bad530",
+        "v2_2_tree": "2dbde53864ef07319016b419ff6951f6e90e79dc",
+        "v2_1_tsd_blob": "c2cdb73fcae265a2e4e0349ac6072e3548e36d8b",
+        "v2_2_tsd_blob": "7a132894c281d613e16514a6fa1bcbffe713d066",
+        "v2_2_common_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+        "v2_2_enumerations_blob": "2a23b512379b18e8f122ac1272cef8229fb86283"
+      },
+      "underlying_executable_evidence": [
+        "EV-109",
+        "EV-110",
+        "EV-104"
+      ],
+      "full_xsd_regression_pool": {
+        "root_xsd_count": 50,
+        "result": "PASS"
+      },
+      "findings": {
+        "TSD-001": "executable_confirmed",
+        "TSD-002": "executable_confirmed",
+        "TSD-003": "contextual_not_defect",
+        "TSD-004": "context_verified"
+      },
+      "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSD_2026-09-14.md",
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false,
+      "next_block": "TSI",
+      "next_finding": "TSI-001"
     }
   }
 }
