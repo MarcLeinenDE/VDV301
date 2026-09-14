@@ -186,7 +186,7 @@ def main() -> int:
         "VLS V2.0 XSD must NOT be substituted for V1.0",
         "VLS-003 - wrong part number in German foreword",
         "VLS-004 - VideoDisplayService in VideoLive start/stop prose",
-        "Targeted material findings are visually confirmed",
+        "targeted visual checks: complete for material findings",
     ], "VLS V1.0 deep read")
     require_tokens(DEEP_V20, [
         "d8c52f5de9ef3f5915524fef12da11eabf0ca041",
