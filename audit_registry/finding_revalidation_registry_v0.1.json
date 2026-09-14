@@ -925,13 +925,13 @@
       },
       {
         "finding_id": "TS-001",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "contextual_not_defect",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TS_2026-09-14.md"
       },
       {
         "finding_id": "TS-002",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TS_2026-09-14.md"
       },
       {
         "finding_id": "TSD-001",
@@ -1123,7 +1123,7 @@
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true
   },
-  "next_revalidation_block": "TS",
+  "next_revalidation_block": "TSD",
   "revalidation_blocks": {
     "ARA_V2.4": {
       "date": "2026-09-03",
@@ -2729,6 +2729,69 @@
       "frozen_inventory_mutation": false,
       "next_block": "TS",
       "next_finding": "TS-001"
+    },
+    "TS": {
+      "date": "2026-09-14",
+      "state": "completed",
+      "authority_lane": "official byte-pinned VDV 301-2-10 TimeService V1.0 PDF plus exact VDV-301-1.0/2.0 release trees, shared ServiceNameEnumeration and executable RV-003 SNTP/DNS-SD profile",
+      "evidence_id": "EV-159",
+      "evidence_run_id": "34816125569",
+      "evidence_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/34816125569",
+      "pinned_successful_evidence_run": "34815684895",
+      "pinned_successful_evidence_job": "103885751905",
+      "artifact_id": "10336194085",
+      "artifact_digest": "sha256:4d5c36f36c468b92e1a3ca962eb1e76b8670f6460f2ecf667bd1cdc2c2e2d010",
+      "evidence_head_sha": "8257c23dfa55e1ba3a425f8860d54913941c79ae",
+      "source_pin": {
+        "run_id": "34814542791",
+        "job_id": "103882386972",
+        "artifact_id": "10336172299",
+        "artifact_digest": "sha256:c24cfc7d8b80652a5caaeafa4d131f31c32fcbe85e45cfb4a6bb5edb2f789c94",
+        "head_sha": "bd158b2a6121a3f7e4612acca5607875ab7ab852"
+      },
+      "pdf_authority": {
+        "source_id": "TIME_V1.0",
+        "official_url": "https://www.vdv.de/301-2-10sds-v-1-01.pdfx",
+        "sha256": "d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3",
+        "size_bytes": 515920,
+        "pages": 10,
+        "visual_pages": [
+          4,
+          6
+        ],
+        "semantic_evidence_mode": "byte-pinned rendered visual; Poppler text hashes fingerprint-only"
+      },
+      "upstream_authority": {
+        "v1_0_commit": "f5b53785f703e898632603eec3bfa3555a79fdba",
+        "v1_0_tree": "729bbe3270e52fed3e0641466048a745d5a09b32",
+        "v2_0_commit": "f2569a91f0a7c737a0ca7c0280b28ad223d7ee08",
+        "v2_0_tree": "11daf0ebb3b26745c036ee19a547ad16d39f922c",
+        "enum_v1_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+        "dedicated_time_service_xsd": false
+      },
+      "runtime_authority": {
+        "profile": "tools/runtime_time_profile.py",
+        "profile_blob": "acd28ca0bd6ac1917b3d2db29745555b7e17d8dd",
+        "validator": "tools/validate_time_runtime_rv003.py",
+        "validator_blob": "ff6e3fcd35d4c2f6bff760b3e86f5adb0e72156c",
+        "result": "PASS",
+        "validation_kind": "protocol_discovery_profile",
+        "xml_operations": [],
+        "cyclic_time_broadcast_expected": false
+      },
+      "xsd_authority": {
+        "ServiceNameEnumeration_V1.0_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+        "dedicated_TimeService_XSD": false
+      },
+      "findings": {
+        "TS-001": "contextual_not_defect",
+        "TS-002": "context_verified"
+      },
+      "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TS_2026-09-14.md",
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false,
+      "next_block": "TSD",
+      "next_finding": "TSD-001"
     }
   }
 }
