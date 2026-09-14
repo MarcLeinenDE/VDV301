@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """EV-163: fail-closed aggregate revalidation gate for TVS-001..TVS-003.
 
-The gate preserves the authority boundary across the existing TicketValidationService
-lanes. EV-112..EV-114 are official release routes. EV-115 is V2.4
+EV-112..EV-114 are official release routes. EV-115 is V2.4
 candidate/integration executable evidence and MUST NOT be reported as official
 VDV-301-2.4 release conformance because no such release tag exists.
 
@@ -37,6 +36,16 @@ TARGET_STATES = {
     "TVS-003": "executable_confirmed",
 }
 
+TERMINAL = {
+    "source_verified",
+    "context_verified",
+    "executable_confirmed",
+    "contextual_not_defect",
+    "withdrawn",
+    "unresolved",
+    "superseded",
+}
+
 LANES = [
     ("EV-112", "tools/validate_tvs_v21_ev112.py", "official_release_V2.1"),
     ("EV-113", "tools/validate_tvs_v22_ev113.py", "official_release_V2.2"),
@@ -65,31 +74,26 @@ def sha256(path: Path) -> str:
     return h.hexdigest()
 
 
-def collect_findings(value) -> list[dict]:
-    out: list[dict] = []
-    if isinstance(value, dict):
-        if {"finding_id", "revalidation_state", "terminal_state_source"} <= set(value):
-            out.append(value)
-        for child in value.values():
-            out.extend(collect_findings(child))
-    elif isinstance(value, list):
-        for child in value:
-            out.extend(collect_findings(child))
-    return out
-
-
 def assert_tokens(text: str, tokens: list[str], label: str) -> None:
     missing = [token for token in tokens if token not in text]
     require(not missing, f"{label} contains required tokens" + (f"; missing={missing}" if missing else ""))
 
 
+def counts(entries: list[dict]) -> tuple[int, int]:
+    return (
+        sum(x.get("revalidation_state") in TERMINAL for x in entries),
+        sum(x.get("revalidation_state") == "pending" for x in entries),
+    )
+
+
+def first_pending(entries: list[dict]) -> str | None:
+    return next((x.get("finding_id") for x in entries if x.get("revalidation_state") == "pending"), None)
+
+
 def run_lane(root: Path, output: Path, evidence_id: str, rel: str, authority: str) -> dict:
     tool = root / rel
     proc = subprocess.run(
-        [sys.executable, str(tool)],
-        cwd=str(root),
-        text=True,
-        capture_output=True,
+        [sys.executable, str(tool)], cwd=str(root), text=True, capture_output=True
     )
     log = output / f"{evidence_id.lower().replace('-', '_')}.log"
     log.write_text(proc.stdout + ("\nSTDERR:\n" + proc.stderr if proc.stderr else ""), encoding="utf-8")
@@ -118,12 +122,12 @@ def main() -> int:
     for rel, expected in EXPECTED_BLOBS.items():
         path = root / rel
         require(path.is_file(), f"pinned prestate file exists: {rel}")
-        actual = git_blob_sha(path)
-        require(actual == expected, f"pinned prestate blob {rel} = {expected}")
+        require(git_blob_sha(path) == expected, f"pinned prestate blob {rel} = {expected}")
 
     state = json.loads((root / "00_START_HERE/CURRENT_STATE.json").read_text(encoding="utf-8"))
     registry = json.loads((root / "audit_registry/finding_revalidation_registry_v0.1.json").read_text(encoding="utf-8"))
     audit = state["audit"]
+    entries = registry["inventory"]["entries"]
 
     require(state["canonical_branch"] == "dev/schema-integration", "canonical branch is dev/schema-integration")
     require(audit["finding_inventory_count"] == 192, "frozen finding inventory count is 192")
@@ -132,24 +136,25 @@ def main() -> int:
     require(audit["finding_revalidation_next_block"] == "TVS", "prestate next block is TVS")
     require(audit["finding_revalidation_latest_completed_block"] == "TSM", "latest completed block is TSM")
     require(audit["latest_executable_evidence_id"] == "EV-162", "latest executable evidence before TVS is EV-162")
-    require(registry["next_revalidation_block"] == "TVS", "registry next block is TVS")
+    require(registry.get("next_revalidation_block") == "TVS", "registry next block is TVS")
 
-    findings = collect_findings(registry)
-    ids = [x["finding_id"] for x in findings]
-    require(len(ids) == len(set(ids)) == 192, "registry contains exactly 192 unique ordered finding states")
-    by_id = {x["finding_id"]: x for x in findings}
-    pending = [x["finding_id"] for x in findings if x["revalidation_state"] == "pending"]
-    require(len(pending) == 27 and pending[0] == "TVS-001", "registry prestate has 27 pending with TVS-001 first")
+    ids = [x["finding_id"] for x in entries]
+    require(len(ids) == len(set(ids)) == 192, "registry inventory contains exactly 192 unique findings")
+    require(counts(entries) == (165, 27), f"registry prestate counts are 165/27, got {counts(entries)}")
+    require(first_pending(entries) == "TVS-001", "registry prestate first pending is TVS-001")
+    by_id = {x["finding_id"]: x for x in entries}
+    pending = [x["finding_id"] for x in entries if x.get("revalidation_state") == "pending"]
     require(pending[:3] == ["TVS-001", "TVS-002", "TVS-003"], "TVS findings are the contiguous leading pending block")
     for fid in TARGET_STATES:
-        require(by_id[fid]["revalidation_state"] == "pending", f"{fid} is pending before EV-163")
-        require(by_id[fid]["terminal_state_source"] is None, f"{fid} has no premature terminal-state source")
+        require(by_id[fid].get("revalidation_state") == "pending", f"{fid} is pending before EV-163")
+        require(by_id[fid].get("terminal_state_source") is None, f"{fid} has no premature terminal-state source")
 
-    projected = [(x["finding_id"], TARGET_STATES.get(x["finding_id"], x["revalidation_state"])) for x in findings]
-    projected_pending = [fid for fid, status in projected if status == "pending"]
-    require(len(projected_pending) == 24, "projected post-TVS pending count is dynamically 24")
-    require(192 - len(projected_pending) == 168, "projected post-TVS terminal count is dynamically 168")
-    require(projected_pending[0] == "VDS-001", "projected next finding is VDS-001")
+    projected = [dict(x) for x in entries]
+    projected_by_id = {x["finding_id"]: x for x in projected}
+    for fid, terminal_state in TARGET_STATES.items():
+        projected_by_id[fid]["revalidation_state"] = terminal_state
+    require(counts(projected) == (168, 24), f"projected post-TVS counts are 168/24, got {counts(projected)}")
+    require(first_pending(projected) == "VDS-001", f"projected next finding is VDS-001, got {first_pending(projected)}")
 
     addendum = (root / "docs/pdf_xsd_semantic_audit/TICKET_VALIDATION_SERVICE_FINDINGS_REGISTER_ADDENDUM.md").read_text(encoding="utf-8")
     assert_tokens(addendum, [
@@ -163,11 +168,8 @@ def main() -> int:
 
     ev115_source = (root / "tools/validate_tvs_v24_ev115.py").read_text(encoding="utf-8")
     assert_tokens(ev115_source, [
-        "candidate/integration",
-        "not official-release",
-        "VDV-301-2.4",
-        "GetCurrentShortHaulStopsResponse",
-        "TicketValidationServiceOperations",
+        "candidate/integration", "not official-release", "VDV-301-2.4",
+        "GetCurrentShortHaulStopsResponse", "TicketValidationServiceOperations",
     ], "EV-115 provenance and TVS-001 structural guard")
 
     lane_results = [run_lane(root, output, *lane) for lane in LANES]
@@ -176,20 +178,9 @@ def main() -> int:
         "evidence_id": "EV-163",
         "scope": ["TVS-001", "TVS-002", "TVS-003"],
         "purpose": "aggregate fail-closed revalidation of the frozen TVS block",
-        "prestate": {
-            "terminal": 165,
-            "pending": 27,
-            "first_pending": "TVS-001",
-            "next_block": "TVS",
-            "latest_evidence": "EV-162",
-        },
+        "prestate": {"terminal": 165, "pending": 27, "first_pending": "TVS-001", "next_block": "TVS", "latest_evidence": "EV-162"},
         "target_states": TARGET_STATES,
-        "projected_poststate": {
-            "terminal": 168,
-            "pending": 24,
-            "first_pending": "VDS-001",
-            "next_block": "VDS",
-        },
+        "projected_poststate": {"terminal": 168, "pending": 24, "first_pending": "VDS-001", "next_block": "VDS"},
         "lanes": lane_results,
         "authority_boundary": {
             "TVS-001": "upstream-master structural confirmation plus EV-115 candidate/integration executable evidence",
