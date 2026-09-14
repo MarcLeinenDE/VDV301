@@ -990,43 +990,43 @@
       },
       {
         "finding_id": "VDS-001",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDS_2026-09-14.md"
       },
       {
         "finding_id": "VDS-002",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "executable_confirmed",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDS_2026-09-14.md"
       },
       {
         "finding_id": "VDS-003",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "executable_confirmed",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDS_2026-09-14.md"
       },
       {
         "finding_id": "VDS-004",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "executable_confirmed",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDS_2026-09-14.md"
       },
       {
         "finding_id": "VDS-005",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDS_2026-09-14.md"
       },
       {
         "finding_id": "VDS-006",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDS_2026-09-14.md"
       },
       {
         "finding_id": "VDS-007",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDS_2026-09-14.md"
       },
       {
         "finding_id": "VDS-008",
-        "revalidation_state": "pending",
-        "terminal_state_source": null
+        "revalidation_state": "context_verified",
+        "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDS_2026-09-14.md"
       },
       {
         "finding_id": "VLS-001",
@@ -1123,7 +1123,7 @@
     "requires_revalidation_completion": true,
     "official_facing_action_requires_separate_explicit_decision": true
   },
-  "next_revalidation_block": "VDS",
+  "next_revalidation_block": "VLS",
   "revalidation_blocks": {
     "ARA_V2.4": {
       "date": "2026-09-03",
@@ -3037,6 +3037,52 @@
       "frozen_inventory_mutation": false,
       "next_block": "VDS",
       "next_finding": "VDS-001"
+    },
+    "VDS": {
+      "date": "2026-09-14",
+      "state": "completed",
+      "authority_lane": "byte-pinned official VDS V1.0/V2.0 PDFs, exact official V2.0 release XSD route, EV-103 executable evidence, visual evidence, correction overlay, and external terminology authority",
+      "authority_boundary": {
+        "VDS_V1.0": "official public VDV PDF authority; exact official V1.0 VideoDisplayService XSD unresolved; V2.0 XSD is not substituted",
+        "VDS_V2.0": "official VDV-301-2.0 release family; service/Common/Enums exact upstream blobs",
+        "EV-103": "official V2.0 executable compositor evidence for VDS-002..004",
+        "VDS-006": "leading minus is valid VDV XML-choice notation; only the refined incomplete/degenerate application anomaly is retained",
+        "VDS-008": "RTP/SOA terminology cross-checked against RFC 3550 and OASIS SOA Reference Model; documentation-only"
+      },
+      "evidence_id": "EV-164",
+      "evidence_run_id": "34839487830",
+      "evidence_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/34839487830",
+      "pinned_successful_evidence_run": "34838003303",
+      "pinned_successful_evidence_job": "103956188197",
+      "artifact_id": "10345007994",
+      "artifact_digest": "sha256:ef85ea5999c2fee585b493fb3705031d6a231e251efab7bcce6d92e30d6f05dd",
+      "evidence_head_sha": "233e54e59bb027a629c9f16274666b336866951d",
+      "underlying_executable_evidence": [
+        "EV-103"
+      ],
+      "visual_evidence_runs": [
+        "33225843645",
+        "33226294383"
+      ],
+      "full_xsd_regression_pool": {
+        "root_xsd_count": 50,
+        "result": "PASS"
+      },
+      "findings": {
+        "VDS-001": "context_verified",
+        "VDS-002": "executable_confirmed",
+        "VDS-003": "executable_confirmed",
+        "VDS-004": "executable_confirmed",
+        "VDS-005": "context_verified",
+        "VDS-006": "context_verified",
+        "VDS-007": "context_verified",
+        "VDS-008": "context_verified"
+      },
+      "terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDS_2026-09-14.md",
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false,
+      "next_block": "VLS",
+      "next_finding": "VLS-001"
     }
   }
 }

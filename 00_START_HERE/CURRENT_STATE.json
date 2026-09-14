@@ -867,15 +867,15 @@
     "finding_inventory_snapshot": "audit_registry/finding_inventory_frozen_2026-09-03.json",
     "finding_inventory_count": 192,
     "finding_inventory_source_head": "7fad145f528205ef5c40e58a3a23374379b08189",
-    "finding_revalidation_next_block": "VDS",
-    "finding_revalidation_completed_findings": 168,
-    "finding_revalidation_pending_findings": 24,
-    "finding_revalidation_current_block": "TVS",
-    "finding_revalidation_latest_completed_block": "TVS",
-    "finding_revalidation_latest_terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TVS_2026-09-14.md",
-    "latest_executable_evidence_id": "EV-163",
-    "latest_executable_evidence_run_id": "34835864267",
-    "latest_executable_evidence_run": "34835864267",
+    "finding_revalidation_next_block": "VLS",
+    "finding_revalidation_completed_findings": 176,
+    "finding_revalidation_pending_findings": 16,
+    "finding_revalidation_current_block": "VDS",
+    "finding_revalidation_latest_completed_block": "VDS",
+    "finding_revalidation_latest_terminal_state_source": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDS_2026-09-14.md",
+    "latest_executable_evidence_id": "EV-164",
+    "latest_executable_evidence_run_id": "34839487830",
+    "latest_executable_evidence_run": "34839487830",
     "cis_revalidation": {
       "status": "complete",
       "completed_at": "2026-09-03T10:23:42Z",
@@ -894,7 +894,7 @@
       "next_block": "DISC",
       "xsd_mutation": false
     },
-    "latest_revalidation_evidence_id": "EV-163",
+    "latest_revalidation_evidence_id": "EV-164",
     "disc_revalidation": {
       "status": "completed",
       "evidence_id": "EV-126",
@@ -1800,6 +1800,39 @@
       "xsd_pool_result": "PASS_50_root_XSDs",
       "next_block": "VDS",
       "next_finding": "VDS-001",
+      "xsd_mutation": false,
+      "frozen_inventory_mutation": false
+    },
+    "vds_revalidation": {
+      "status": "complete",
+      "completed_at_run": "34839487830",
+      "evidence_id": "EV-164",
+      "run_id": "34839487830",
+      "pinned_successful_evidence_run": "34838003303",
+      "pinned_successful_evidence_job": "103956188197",
+      "artifact_id": "10345007994",
+      "artifact_digest": "sha256:ef85ea5999c2fee585b493fb3705031d6a231e251efab7bcce6d92e30d6f05dd",
+      "evidence_head_sha": "233e54e59bb027a629c9f16274666b336866951d",
+      "terminal_states": {
+        "VDS-001": "context_verified",
+        "VDS-002": "executable_confirmed",
+        "VDS-003": "executable_confirmed",
+        "VDS-004": "executable_confirmed",
+        "VDS-005": "context_verified",
+        "VDS-006": "context_verified",
+        "VDS-007": "context_verified",
+        "VDS-008": "context_verified"
+      },
+      "authority_boundary": {
+        "VDS_V1.0": "official public VDV PDF authority; exact official V1.0 VideoDisplayService XSD unresolved; V2.0 XSD is not substituted",
+        "VDS_V2.0": "official VDV-301-2.0 release family; service/Common/Enums exact upstream blobs",
+        "EV-103": "official V2.0 executable compositor evidence for VDS-002..004",
+        "VDS-006": "leading minus is valid VDV XML-choice notation; only the refined incomplete/degenerate application anomaly is retained",
+        "VDS-008": "RTP/SOA terminology cross-checked against RFC 3550 and OASIS SOA Reference Model; documentation-only"
+      },
+      "xsd_pool_result": "PASS_50_root_XSDs",
+      "next_block": "VLS",
+      "next_finding": "VLS-001",
       "xsd_mutation": false,
       "frozen_inventory_mutation": false
     }
