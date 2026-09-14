@@ -1,0 +1,77 @@
+name: temp-validate-semantic-classification-pilot
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_validate_semantic_classification_pilot.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-pilot:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout canonical branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+
+      - name: Verify exact pilot inputs and frozen source state
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "b922804508a0d5c95f16c5f93af9fe0bf43f2f22"
+          test "$(git hash-object audit_registry/finding_semantic_classification_schema_v0.1.json)" = "49f227a69c559442ed750523153468ea9e9723db"
+          test "$(git hash-object tools/validate_finding_semantic_classification.py)" = "2966e779d743611821eff8e42c5ec101e6eca174"
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "ab6d5f09081435e1d744b50af0a3a5f572eb5cef"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "6e401f0bd374379e74ce2a065fab88f2016f9f67"
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+          sha256sum ./*.xsd | sort -k2 > /tmp/classification-pilot-xsd-before.sha256
+          git diff --exit-code
+
+      - name: Validate classification schema and frozen-baseline linkage
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence_out
+          python tools/validate_finding_semantic_classification.py | tee evidence_out/classification_pilot.log
+          grep -Fq "PASSED: semantic classification registry valid; 6 reviewed entries anchored to frozen baseline" evidence_out/classification_pilot.log
+
+      - name: Run complete 50-root-XSD regression pool
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_xsd_pool.py | tee evidence_out/xsd_pool.log
+          grep -Fq "PASSED" evidence_out/xsd_pool.log
+
+      - name: Enforce classification-only immutability
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum ./*.xsd | sort -k2 > /tmp/classification-pilot-xsd-after.sha256
+          cmp /tmp/classification-pilot-xsd-before.sha256 /tmp/classification-pilot-xsd-after.sha256
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "ab6d5f09081435e1d744b50af0a3a5f572eb5cef"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "6e401f0bd374379e74ce2a065fab88f2016f9f67"
+          git diff --exit-code
+
+      - name: Upload pilot validation evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: semantic-classification-pilot-evidence
+          path: evidence_out/
