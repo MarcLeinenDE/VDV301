@@ -1,18 +1,12 @@
 #!/usr/bin/env python3
 """EV-163: fail-closed aggregate revalidation gate for TVS-001..TVS-003.
 
-The gate intentionally preserves the authority boundary across the four existing
-TicketValidationService evidence lanes:
+The gate preserves the authority boundary across the existing TicketValidationService
+lanes. EV-112..EV-114 are official release routes. EV-115 is V2.4
+candidate/integration executable evidence and MUST NOT be reported as official
+VDV-301-2.4 release conformance because no such release tag exists.
 
-* EV-112: official VDV-301-2.1 release route
-* EV-113: official VDV-301-2.2 release route
-* EV-114: official VDV-301-2.3 release route (TVS intentionally routes through
-  the V2.2-named official service XSD)
-* EV-115: V2.4 candidate/integration executable evidence plus upstream-master
-  structural correspondence; it is explicitly NOT official-release V2.4 XSD
-  conformance because no VDV-301-2.4 release tag exists.
-
-This validator mutates neither schemas nor audit state.  It emits evidence only.
+This validator mutates neither schemas nor audit state. It emits evidence only.
 """
 from __future__ import annotations
 
@@ -25,7 +19,7 @@ from pathlib import Path
 
 EXPECTED_BLOBS = {
     "audit_registry/finding_inventory_frozen_2026-09-03.json": "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf",
-    "audit_registry/finding_revalidation_registry_v0.1.json": "d8741a102586a7e6ec62af04a9f331eb9aa9a5d2",
+    "audit_registry/finding_revalidation_registry_v0.1.json": "d874cbe211d2335bb02fa9ed317244b31803e3dc",
     "audit_registry/pdf_source_registry_v0.1.json": "d3471e1cef9b099dc8764a3ee8bf234b9a658ce8",
     "audit_registry/pdf_source_pins_v0.1.json": "88349638b423689799af700e8a1c8ec99bbfb67b",
     "00_START_HERE/CURRENT_STATE.json": "6406675512fdcca7ef75fcfd788631660932fb1c",
