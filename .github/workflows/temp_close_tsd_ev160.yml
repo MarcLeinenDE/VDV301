@@ -1,0 +1,239 @@
+name: TEMP close TSD EV-160
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_close_tsd_ev160.yml
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  close-tsd:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout canonical audit branch
+        uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 0
+
+      - name: Install validation dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils unzip
+          python -m pip install --disable-pip-version-check lxml
+
+      - name: Assert exact pre-closure authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "1449e2c9fe1af2274c0d27f92927d8be74c8f54d"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "b30aebef7c89c62a351dbb6b6f756d8c9ceb30af"
+          test "$(git hash-object audit_registry/pdf_source_registry_v0.1.json)" = "d3471e1cef9b099dc8764a3ee8bf234b9a658ce8"
+          test "$(git hash-object audit_registry/pdf_source_pins_v0.1.json)" = "88349638b423689799af700e8a1c8ec99bbfb67b"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md)" = "969cce8b14b50ded2ca5eb745674b894428ecf1a"
+          test "$(git hash-object tools/validate_tsd_revalidation_ev160.py)" = "3d8cc6415517ecac7052739d3e9f456256704f19"
+          test "$(git hash-object tools/close_tsd_revalidation_block.py)" = "8fb3de2bfd0befd2c94be3e56ff9343fd916bdeb"
+          test "$(git hash-object tools/validate_trainset_v21_ev109.py)" = "f88208bff7e39bb38a86a310dc121f486984f807"
+          test "$(git hash-object tools/validate_trainset_tsd002_ev110.py)" = "34f16aec78b49af1210de6f4fd4e0ef674a21604"
+          test "$(git hash-object tools/validate_trainset_ev104.py)" = "0d7bc30b56dd3e61771e0ac0ddd7c9f06a6b0d31"
+          test "$(git hash-object tools/validate_xsd_pool.py)" = "7a682dbddaeeeb3f9cc269d2e48e5ab000aca4bd"
+          test "$(git hash-object IBIS-IP_TrainSetDataService_V2.1.xsd)" = "c2cdb73fcae265a2e4e0349ac6072e3548e36d8b"
+          test "$(git hash-object IBIS-IP_TrainSetDataService_V2.2.xsd)" = "7a132894c281d613e16514a6fa1bcbffe713d066"
+          test "$(git hash-object IBIS-IP_common_V2.2.xsd)" = "468fee6d177e7185dbcd5d3f90cfb114e29e01ae"
+          test "$(git hash-object IBIS-IP_Enumerations_V2.2.xsd)" = "2a23b512379b18e8f122ac1272cef8229fb86283"
+
+      - name: Verify pinned EV-160 and source evidence online
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api repos/MarcLeinenDE/VDV301/actions/runs/34820627306 > /tmp/ev160-run.json
+          gh api repos/MarcLeinenDE/VDV301/actions/runs/34820627306/jobs > /tmp/ev160-jobs.json
+          gh api repos/MarcLeinenDE/VDV301/actions/runs/34820627306/artifacts > /tmp/ev160-artifacts.json
+          gh api repos/MarcLeinenDE/VDV301/actions/runs/34816735900 > /tmp/source-run.json
+          gh api repos/MarcLeinenDE/VDV301/actions/runs/34816735900/jobs > /tmp/source-jobs.json
+          gh api repos/MarcLeinenDE/VDV301/actions/runs/34816735900/artifacts > /tmp/source-artifacts.json
+          python - <<'PY'
+          import json
+          ev=json.load(open('/tmp/ev160-run.json'))
+          jobs=json.load(open('/tmp/ev160-jobs.json'))['jobs']
+          arts=json.load(open('/tmp/ev160-artifacts.json'))['artifacts']
+          assert ev['conclusion']=='success'
+          assert ev['head_sha']=='7140be15f49b6c633faf62977e5d9ff7ad1e60a4'
+          j=[x for x in jobs if x['id']==103901166925]
+          assert len(j)==1 and j[0]['conclusion']=='success'
+          a=[x for x in arts if x['id']==10337324977]
+          assert len(a)==1 and a[0]['name']=='tsd-ev160-evidence'
+          assert a[0]['digest']=='sha256:47c862255c57a90fddbe1948f92ca1ebc991e5c5f19d1f6cc78ae117ae77fbac'
+          assert a[0]['expired'] is False
+          src=json.load(open('/tmp/source-run.json'))
+          sjobs=json.load(open('/tmp/source-jobs.json'))['jobs']
+          sarts=json.load(open('/tmp/source-artifacts.json'))['artifacts']
+          assert src['conclusion']=='success'
+          assert src['head_sha']=='20785d8ee41e812a5902d49b6d4b800ef238e311'
+          sj=[x for x in sjobs if x['id']==103888867262]
+          assert len(sj)==1 and sj[0]['conclusion']=='success'
+          sa=[x for x in sarts if x['id']==10336466475]
+          assert len(sa)==1 and sa[0]['name']=='tsd-ev160-source'
+          assert sa[0]['digest']=='sha256:30089b9d4f2c86dd57f8bb184844a428ee08e91b0d327517c84f6689ea231bfb'
+          assert sa[0]['expired'] is False
+          print('OK pinned EV-160 and TSD source evidence')
+          PY
+          rm -rf /tmp/tsd-source
+          mkdir -p /tmp/tsd-source
+          gh run download 34816735900 --repo MarcLeinenDE/VDV301 --name tsd-ev160-source --dir /tmp/tsd-source
+          test -f /tmp/tsd-source/manifest.json
+          test -f /tmp/tsd-source/pdfs/TRAINSET_V2.1.pdf
+          test -f /tmp/tsd-source/pdfs/TRAINSET_V2.2.pdf
+
+      - name: Fetch exact official VDV release contexts
+        shell: bash
+        run: |
+          set -euo pipefail
+          for spec in \
+            'upstream-v21 585e0bea34b64887db4276f1c94d5f3e78f06c66 a8472530e840f7b365f6ba1075bfc09758ebda21' \
+            'upstream-v22 f283697124750d12189b960b302b399769bad530 2dbde53864ef07319016b419ff6951f6e90e79dc'
+          do
+            set -- $spec
+            dir="$1"; commit="$2"; tree="$3"
+            git init "/tmp/$dir"
+            git -C "/tmp/$dir" remote add origin https://github.com/VDVde/VDV301.git
+            git -C "/tmp/$dir" fetch --depth=1 origin "$commit"
+            git -C "/tmp/$dir" checkout --detach FETCH_HEAD
+            test "$(git -C "/tmp/$dir" rev-parse HEAD)" = "$commit"
+            test "$(git -C "/tmp/$dir" rev-parse HEAD^{tree})" = "$tree"
+          done
+          test "$(git -C /tmp/upstream-v21 hash-object IBIS-IP_TrainSetDataService_V2.1.xsd)" = "c2cdb73fcae265a2e4e0349ac6072e3548e36d8b"
+          test "$(git -C /tmp/upstream-v21 hash-object IBIS-IP_common_V2.0.xsd)" = "8608e3dcd665c197c34da7f6ec6af5a3758da164"
+          test "$(git -C /tmp/upstream-v21 hash-object IBIS-IP_Enumerations_V2.0.xsd)" = "27e3c183b00381d959622d13c10543123af8eef6"
+          test "$(git -C /tmp/upstream-v21 hash-object IBIS-IP_CustomerInformationService_V2.0.xsd)" = "fa8f0a51ad5f612660c9532c8557ad1ca473a908"
+          test "$(git -C /tmp/upstream-v22 hash-object IBIS-IP_TrainSetDataService_V2.2.xsd)" = "7a132894c281d613e16514a6fa1bcbffe713d066"
+          test "$(git -C /tmp/upstream-v22 hash-object IBIS-IP_common_V2.2.xsd)" = "468fee6d177e7185dbcd5d3f90cfb114e29e01ae"
+          test "$(git -C /tmp/upstream-v22 hash-object IBIS-IP_Enumerations_V2.2.xsd)" = "2a23b512379b18e8f122ac1272cef8229fb86283"
+
+      - name: Re-acquire exact official PDFs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/tsd-closure
+          curl --fail --location --retry 3 --retry-delay 2 --user-agent 'Mozilla/5.0 VDV301-audit-EV160-closure' \
+            'https://www.vdv.de/vdv-301-2-14-v2-1-sds-trainsetservices.pdfx' \
+            -o /tmp/tsd-closure/TRAINSET_V2.1.pdf
+          curl --fail --location --retry 3 --retry-delay 2 --user-agent 'Mozilla/5.0 VDV301-audit-EV160-closure' \
+            'https://www.vdv.de/301-2-14-sdes-v2-2-trainsetservices.pdfx' \
+            -o /tmp/tsd-closure/TRAINSET_V2.2.pdf
+          curl --fail --location --retry 3 --retry-delay 2 --user-agent 'Mozilla/5.0 VDV301-audit-EV160-closure' \
+            'https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx' \
+            -o /tmp/tsd-closure/VDV301-2_GC_V2.2.pdf
+          test "$(sha256sum /tmp/tsd-closure/TRAINSET_V2.1.pdf | awk '{print $1}')" = "8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e"
+          test "$(stat --printf='%s' /tmp/tsd-closure/TRAINSET_V2.1.pdf)" = "1708401"
+          test "$(pdfinfo /tmp/tsd-closure/TRAINSET_V2.1.pdf | awk '/^Pages:/ {print $2}')" = "51"
+          test "$(sha256sum /tmp/tsd-closure/TRAINSET_V2.2.pdf | awk '{print $1}')" = "c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e"
+          test "$(stat --printf='%s' /tmp/tsd-closure/TRAINSET_V2.2.pdf)" = "1744296"
+          test "$(pdfinfo /tmp/tsd-closure/TRAINSET_V2.2.pdf | awk '/^Pages:/ {print $2}')" = "54"
+          test "$(sha256sum /tmp/tsd-closure/VDV301-2_GC_V2.2.pdf | awk '{print $1}')" = "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051"
+          test "$(stat --printf='%s' /tmp/tsd-closure/VDV301-2_GC_V2.2.pdf)" = "1562305"
+          test "$(pdfinfo /tmp/tsd-closure/VDV301-2_GC_V2.2.pdf | awk '/^Pages:/ {print $2}')" = "79"
+
+      - name: Snapshot complete XSD pool before closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          find . -maxdepth 1 -type f -name '*.xsd' -printf '%f\0' | sort -z | xargs -0 sha256sum > /tmp/tsd-xsd-before.sha256
+          test "$(wc -l < /tmp/tsd-xsd-before.sha256)" -eq 50
+
+      - name: Rerun EV-109, EV-110, EV-104, EV-160 and XSD pool
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_trainset_v21_ev109.py > /tmp/ev109.log
+          python tools/validate_trainset_tsd002_ev110.py > /tmp/ev110.log
+          python tools/validate_trainset_ev104.py > /tmp/ev104.log
+          rm -rf /tmp/ev160-closure
+          python tools/validate_tsd_revalidation_ev160.py \
+            --repo-root . \
+            --source-evidence-dir /tmp/tsd-source \
+            --v21-pdf /tmp/tsd-closure/TRAINSET_V2.1.pdf \
+            --v22-pdf /tmp/tsd-closure/TRAINSET_V2.2.pdf \
+            --general-pdf /tmp/tsd-closure/VDV301-2_GC_V2.2.pdf \
+            --output-dir /tmp/ev160-closure > /tmp/ev160.log
+          grep -q 'PASSED: EV-160 TSD revalidation gate' /tmp/ev160.log
+          python tools/validate_xsd_pool.py --repo-root . > /tmp/tsd-xsd-pool.log
+          grep -q '^PASSED$' /tmp/tsd-xsd-pool.log
+
+      - name: Apply TSD closure writer
+        env:
+          EVIDENCE_RUN_ID: ${{ github.run_id }}
+          EVIDENCE_RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/close_tsd_revalidation_block.py
+
+      - name: Verify poststate, immutability and strict allowlist
+        shell: bash
+        run: |
+          set -euo pipefail
+          find . -maxdepth 1 -type f -name '*.xsd' -printf '%f\0' | sort -z | xargs -0 sha256sum > /tmp/tsd-xsd-after.sha256
+          cmp /tmp/tsd-xsd-before.sha256 /tmp/tsd-xsd-after.sha256
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/pdf_source_registry_v0.1.json)" = "d3471e1cef9b099dc8764a3ee8bf234b9a658ce8"
+          test "$(git hash-object audit_registry/pdf_source_pins_v0.1.json)" = "88349638b423689799af700e8a1c8ec99bbfb67b"
+          test "$(git hash-object IBIS-IP_TrainSetDataService_V2.1.xsd)" = "c2cdb73fcae265a2e4e0349ac6072e3548e36d8b"
+          test "$(git hash-object IBIS-IP_TrainSetDataService_V2.2.xsd)" = "7a132894c281d613e16514a6fa1bcbffe713d066"
+          python - <<'PY'
+          import json, subprocess
+          expected={
+            'audit_registry/finding_revalidation_registry_v0.1.json',
+            '00_START_HERE/CURRENT_STATE.json',
+            'docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSD_2026-09-14.md',
+          }
+          lines=subprocess.check_output(['git','status','--porcelain'], text=True).splitlines()
+          changed={line[3:] for line in lines if line.strip()}
+          assert changed==expected, (changed, expected)
+          reg=json.load(open('audit_registry/finding_revalidation_registry_v0.1.json'))
+          entries=reg['inventory']['entries']
+          term={'context_verified','executable_confirmed','contextual_not_defect','withdrawn','unresolved','superseded'}
+          assert sum(x['revalidation_state'] in term for x in entries)==161
+          assert sum(x['revalidation_state']=='pending' for x in entries)==31
+          assert next(x['finding_id'] for x in entries if x['revalidation_state']=='pending')=='TSI-001'
+          assert reg['next_revalidation_block']=='TSI'
+          assert reg['revalidation_blocks']['TSD']['artifact_digest']=='sha256:47c862255c57a90fddbe1948f92ca1ebc991e5c5f19d1f6cc78ae117ae77fbac'
+          state=json.load(open('00_START_HERE/CURRENT_STATE.json'))['audit']
+          assert state['finding_revalidation_completed_findings']==161
+          assert state['finding_revalidation_pending_findings']==31
+          assert state['finding_revalidation_next_block']=='TSI'
+          assert state['finding_revalidation_latest_completed_block']=='TSD'
+          print('OK exact TSD poststate and path allowlist')
+          PY
+          find . -type d -name '__pycache__' -prune -exec rm -rf {} +
+          test -z "$(find . -type d -name '__pycache__' -print -quit)"
+
+      - name: Commit and push atomic TSD closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- \
+            audit_registry/finding_revalidation_registry_v0.1.json \
+            00_START_HERE/CURRENT_STATE.json \
+            docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSD_2026-09-14.md
+          staged="$(git diff --cached --name-only | sort)"
+          expected="$(printf '%s\n' \
+            00_START_HERE/CURRENT_STATE.json \
+            audit_registry/finding_revalidation_registry_v0.1.json \
+            docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSD_2026-09-14.md | sort)"
+          test "$staged" = "$expected"
+          git diff --cached --check
+          git commit -m 'audit: close TSD revalidation without schema mutation'
+          git push origin HEAD:dev/schema-integration
