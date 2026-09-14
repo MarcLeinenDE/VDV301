@@ -1,0 +1,188 @@
+name: TEMP pin TSD EV-160 sources
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_pin_tsd_ev160.yml
+
+permissions:
+  contents: read
+
+jobs:
+  pin-tSD-sources:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout canonical audit branch
+        uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 0
+
+      - name: Install PDF tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+
+      - name: Assert exact post-TS pre-TSD state
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$(git rev-parse origin/dev/schema-integration)"
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "1449e2c9fe1af2274c0d27f92927d8be74c8f54d"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "b30aebef7c89c62a351dbb6b6f756d8c9ceb30af"
+          test "$(git hash-object audit_registry/pdf_source_registry_v0.1.json)" = "d3471e1cef9b099dc8764a3ee8bf234b9a658ce8"
+          test "$(git hash-object audit_registry/pdf_source_pins_v0.1.json)" = "88349638b423689799af700e8a1c8ec99bbfb67b"
+          python - <<'PY'
+          import json
+          reg=json.load(open('audit_registry/finding_revalidation_registry_v0.1.json'))
+          entries=reg['inventory']['entries']
+          term={'context_verified','field_validated','executable_confirmed','contextual_not_defect','withdrawn','unresolved','superseded'}
+          assert sum(x['revalidation_state'] in term for x in entries)==157
+          assert sum(x['revalidation_state']=='pending' for x in entries)==35
+          assert next(x['finding_id'] for x in entries if x['revalidation_state']=='pending')=='TSD-001'
+          assert reg['next_revalidation_block']=='TSD'
+          for fid in ('TSD-001','TSD-002','TSD-003','TSD-004'):
+              e=next(x for x in entries if x['finding_id']==fid)
+              assert e['revalidation_state']=='pending' and e['terminal_state_source'] is None
+          print('OK exact 157/35 TSD prestate')
+          PY
+
+      - name: Re-acquire exact official TrainSet PDFs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/ev160-source/pdfs artifacts/ev160-source/text artifacts/ev160-source/renders/v21 artifacts/ev160-source/renders/v22
+          curl --fail --location --retry 3 --retry-delay 2 \
+            --user-agent 'Mozilla/5.0 VDV301-audit-EV160' \
+            'https://www.vdv.de/vdv-301-2-14-v2-1-sds-trainsetservices.pdfx' \
+            -o artifacts/ev160-source/pdfs/TRAINSET_V2.1.pdf
+          curl --fail --location --retry 3 --retry-delay 2 \
+            --user-agent 'Mozilla/5.0 VDV301-audit-EV160' \
+            'https://www.vdv.de/301-2-14-sdes-v2-2-trainsetservices.pdfx' \
+            -o artifacts/ev160-source/pdfs/TRAINSET_V2.2.pdf
+          test "$(sha256sum artifacts/ev160-source/pdfs/TRAINSET_V2.1.pdf | awk '{print $1}')" = "8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e"
+          test "$(stat --printf='%s' artifacts/ev160-source/pdfs/TRAINSET_V2.1.pdf)" = "1708401"
+          test "$(sha256sum artifacts/ev160-source/pdfs/TRAINSET_V2.2.pdf | awk '{print $1}')" = "c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e"
+          test "$(stat --printf='%s' artifacts/ev160-source/pdfs/TRAINSET_V2.2.pdf)" = "1744296"
+          pdfinfo artifacts/ev160-source/pdfs/TRAINSET_V2.1.pdf > artifacts/ev160-source/text/v21-pdfinfo.txt
+          pdfinfo artifacts/ev160-source/pdfs/TRAINSET_V2.2.pdf > artifacts/ev160-source/text/v22-pdfinfo.txt
+
+      - name: Build physical-page map and text fingerprints
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, re, subprocess
+          from pathlib import Path
+          base=Path('artifacts/ev160-source')
+          docs={'v21':base/'pdfs/TRAINSET_V2.1.pdf','v22':base/'pdfs/TRAINSET_V2.2.pdf'}
+          needles={
+            'v21':['SubscribeTripRef','UnsubscribeTripRef','SubscribeTripInformation','UnsubscribeTripInformation','TrainSetDataServiceOperations'],
+            'v22':['TrainSetUnsubscribeRequestStructure','UnsubscribeTripRef','UnsubscribeTripInformation','SubscribeTripRef','SubscribeTripInformation','RetrieveTripRefResponseStructure','RetrieveTripInformationResponseStructure'],
+          }
+          result={}
+          for key,pdf in docs.items():
+              info=(base/'text'/f'{key}-pdfinfo.txt').read_text(errors='replace')
+              pages=int(re.search(r'^Pages:\s+(\d+)',info,re.M).group(1))
+              full=base/'text'/f'{key}-full.txt'
+              subprocess.run(['pdftotext','-layout',str(pdf),str(full)],check=True)
+              page_hashes={}; hits={n:[] for n in needles[key]}
+              for page in range(1,pages+1):
+                  target=base/'text'/f'{key}-page-{page:03d}.txt'
+                  subprocess.run(['pdftotext','-layout','-f',str(page),'-l',str(page),str(pdf),str(target)],check=True)
+                  data=target.read_bytes(); text=data.decode('utf-8','replace')
+                  page_hashes[str(page)]=hashlib.sha256(data).hexdigest()
+                  flat=''.join(text.split()).lower()
+                  for needle in needles[key]:
+                      if ''.join(needle.split()).lower() in flat:
+                          hits[needle].append(page)
+              result[key]={
+                  'pages':pages,
+                  'pdf_sha256':hashlib.sha256(pdf.read_bytes()).hexdigest(),
+                  'pdf_bytes':pdf.stat().st_size,
+                  'full_text_sha256':hashlib.sha256(full.read_bytes()).hexdigest(),
+                  'page_text_sha256':page_hashes,
+                  'needle_hits':hits,
+              }
+          (base/'source-map.json').write_text(json.dumps(result,indent=2,ensure_ascii=False)+'\n')
+          print(json.dumps({k:{'pages':v['pages'],'needle_hits':v['needle_hits']} for k,v in result.items()},indent=2))
+          # Fail closed: the TSD vocabulary must be present in each selected publication.
+          assert result['v21']['needle_hits']['SubscribeTripRef']
+          assert result['v21']['needle_hits']['UnsubscribeTripRef']
+          assert result['v21']['needle_hits']['SubscribeTripInformation']
+          assert result['v22']['needle_hits']['TrainSetUnsubscribeRequestStructure']
+          assert result['v22']['needle_hits']['SubscribeTripInformation']
+          PY
+
+      - name: Render TSD evidence pages from exact bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          base=Path('artifacts/ev160-source')
+          m=json.load(open(base/'source-map.json'))
+          # V2.1: render union of all pages carrying the subscription operation names.
+          v21=set()
+          for token in ('SubscribeTripRef','UnsubscribeTripRef','SubscribeTripInformation','UnsubscribeTripInformation'):
+              v21.update(m['v21']['needle_hits'][token])
+          # V2.2: retain already-known visual pages and the surrounding detailed operation range.
+          v22={34,35,36,37,38,39,40}
+          assert all(1 <= p <= m['v22']['pages'] for p in v22)
+          for key,pages,pdf,outdir in (
+              ('v21',sorted(v21),base/'pdfs/TRAINSET_V2.1.pdf',base/'renders/v21'),
+              ('v22',sorted(v22),base/'pdfs/TRAINSET_V2.2.pdf',base/'renders/v22'),
+          ):
+              for p in pages:
+                  prefix=outdir/f'page-{p:03d}'
+                  subprocess.run(['pdftoppm','-png','-r','180','-f',str(p),'-l',str(p),'-singlefile',str(pdf),str(prefix)],check=True)
+                  png=prefix.with_suffix('.png')
+                  assert png.exists() and png.stat().st_size>0
+          (base/'render-pages.json').write_text(json.dumps({'v21':sorted(v21),'v22':sorted(v22)},indent=2)+'\n')
+          print('V2.1 rendered pages:',sorted(v21))
+          print('V2.2 rendered pages:',sorted(v22))
+          PY
+          find artifacts/ev160-source/renders -type f -name '*.png' -print0 | sort -z | xargs -0 sha256sum > artifacts/ev160-source/render-sha256.txt
+
+      - name: Record source-pin manifest and immutable repo state
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          base=Path('artifacts/ev160-source')
+          m=json.load(open(base/'source-map.json'))
+          manifest={
+            'evidence':'EV-160 source acquisition',
+            'head_sha':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
+            'prestate':{'terminal':157,'pending':35,'first_pending':'TSD-001','next_block':'TSD'},
+            'sources':{
+              'TRAINSET_V2.1':{'url':'https://www.vdv.de/vdv-301-2-14-v2-1-sds-trainsetservices.pdfx',**{k:m['v21'][k] for k in ('pdf_sha256','pdf_bytes','pages','full_text_sha256')}},
+              'TRAINSET_V2.2':{'url':'https://www.vdv.de/301-2-14-sdes-v2-2-trainsetservices.pdfx',**{k:m['v22'][k] for k in ('pdf_sha256','pdf_bytes','pages','full_text_sha256')}},
+            },
+            'render_pages':json.load(open(base/'render-pages.json')),
+            'semantic_rule':'rendered physical pages are semantic evidence; pdftotext is locator/fingerprint only',
+            'xsd_mutated':False,
+            'audit_state_mutated':False,
+          }
+          (base/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+          PY
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "1449e2c9fe1af2274c0d27f92927d8be74c8f54d"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "b30aebef7c89c62a351dbb6b6f756d8c9ceb30af"
+          test -z "$(git diff --name-only)"
+          test -z "$(git diff --cached --name-only)"
+
+      - name: Upload EV-160 source evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: tsd-ev160-source
+          path: artifacts/ev160-source
+          if-no-files-found: error
