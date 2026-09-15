@@ -1,0 +1,121 @@
+name: temp-merge-semantic-classification-disc
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths: [.github/workflows/temp_merge_semantic_classification_disc.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  merge-disc:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+
+      - name: Verify immutable prestate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "be39c52ba6508746145eba80cfe96fbf814e9b15"
+          test "$(git diff --name-only HEAD^ HEAD)" = ".github/workflows/temp_merge_semantic_classification_disc.yml"
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "d1ccef925452d447d9ebdb856305c0d752a8b282"
+          test "$(git hash-object audit_registry/finding_semantic_classification_schema_v0.1.json)" = "7cb69f527fe9d69e5b0fc59f6a23c36e0e426571"
+          test "$(git hash-object tools/validate_finding_semantic_classification.py)" = "3304b31b2233e48d8d85e2ef9e248397d9a86b4e"
+          test "$(git hash-object tools/merge_semantic_classification_block.py)" = "bddb17d5f264663611585cde33202c355ce9e5ca"
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "ab6d5f09081435e1d744b50af0a3a5f572eb5cef"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "6e401f0bd374379e74ce2a065fab88f2016f9f67"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DISC_2026-09-03.md)" = "f17ce8f6a3a5ad19d515552d2349baa2a62a8802"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/NETWORK_DISCOVERY_FINDINGS_REGISTER_ADDENDUM.md)" = "eb5f03d98a9a8d2dd9a0e970a2a8a8217646d765"
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+          sha256sum ./*.xsd | sort -k2 > /tmp/xsd-before.sha256
+          git diff --exit-code
+
+      - name: Materialize DISC block
+        shell: bash
+        env:
+          DISC_BLOCK_ZLIB_B64: "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"
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64, os, zlib
+          from pathlib import Path
+          raw = zlib.decompress(base64.b64decode(os.environ['DISC_BLOCK_ZLIB_B64']))
+          p = Path('audit_registry/semantic_classification_blocks/DISC_v0.1.json')
+          p.write_bytes(raw)
+          PY
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          p = Path('audit_registry/semantic_classification_blocks/DISC_v0.1.json')
+          d = json.loads(p.read_text(encoding='utf-8'))
+          assert d['block_id'] == 'DISC'
+          assert d['source_baseline_payload_sha256'] == 'd5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576'
+          assert [e['finding_id'] for e in d['entries']] == ['DISC-001','DISC-002','DISC-003']
+          assert hashlib.sha256(p.read_bytes()).hexdigest() == 'c634da04f40008a63a436a6b8d87f2c1131ebe4778b696c71666f7f9c3083c81'
+          print('DISC_BLOCK_OK')
+          PY
+
+      - name: Merge and validate DISC
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/merge_semantic_classification_block.py --block audit_registry/semantic_classification_blocks/DISC_v0.1.json | tee /tmp/merge.log
+          grep -Fq 'PASSED: merged block DISC; classified=54 remaining=138' /tmp/merge.log
+          python tools/validate_finding_semantic_classification.py | tee /tmp/classification.log
+          grep -Fq 'PASSED: semantic classification registry valid; 54 reviewed entries anchored to frozen baseline' /tmp/classification.log
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d = json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text(encoding='utf-8'))
+          assert len(d['entries']) == 54
+          assert d['progress']['classified_count'] == 54
+          assert d['progress']['remaining_count'] == 138
+          assert d['progress']['reviewed_blocks'] == ['ARA','ARCH','BG','CE','CIS','DISC']
+          assert d['progress']['latest_block'] == 'DISC'
+          assert d['progress']['latest_block_file'] == 'audit_registry/semantic_classification_blocks/DISC_v0.1.json'
+          ids = {e['finding_id'] for e in d['entries']}
+          assert all(f'DISC-{i:03d}' in ids for i in range(1,4))
+          print('DISC_REGISTRY_POSTSTATE_OK')
+          PY
+
+      - name: XSD regression and mutation guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_xsd_pool.py | tee /tmp/xsd.log
+          grep -Fq PASSED /tmp/xsd.log
+          sha256sum ./*.xsd | sort -k2 > /tmp/xsd-after.sha256
+          cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "ab6d5f09081435e1d744b50af0a3a5f572eb5cef"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "6e401f0bd374379e74ce2a065fab88f2016f9f67"
+          mapfile -t changed < <(git status --porcelain | sed 's/^...//' | sort)
+          test "${#changed[@]}" -eq 2
+          test "${changed[0]}" = 'audit_registry/finding_semantic_classification_v0.1.json'
+          test "${changed[1]}" = 'audit_registry/semantic_classification_blocks/DISC_v0.1.json'
+          git diff --check
+          ! git status --porcelain | grep -E '\.xsd$'
+
+      - name: Commit DISC semantic classification
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add audit_registry/finding_semantic_classification_v0.1.json audit_registry/semantic_classification_blocks/DISC_v0.1.json
+          git diff --cached --check
+          test "$(git diff --cached --name-only | wc -l)" -eq 2
+          git commit -m 'audit: merge DISC semantic classification'
+          git push origin HEAD:dev/schema-integration
