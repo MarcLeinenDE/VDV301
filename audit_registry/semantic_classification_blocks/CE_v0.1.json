@@ -1,0 +1,1955 @@
+{
+  "block_version": "0.1",
+  "block_id": "CE",
+  "review_date": "2026-09-15",
+  "source_baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
+  "source_terminal_report": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md",
+  "review_policy": "manual_semantic_review_bilingual_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "CE-001",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Common V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.3.xsd -> IBIS-IP_Enumerations_V2.2.xsd"
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "provenance",
+      "primary_issue_kind": "intentional_design_misread",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "non_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_xsd_explicit",
+          "note": "Official Common V2.3 explicitly includes Enumerations V2.2."
+        },
+        {
+          "type": "official_release_provenance",
+          "note": "No separate Enumerations V2.3 artifact is required by the selected official release route."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Kein fehlendes Enumerations-V2.3-Schema",
+          "short": "Common V2.3 bindet absichtlich Enumerations V2.2 ein.",
+          "long": "Die fehlende Datei IBIS-IP_Enumerations_V2.3.xsd ist kein Defekt. Maßgeblich ist die im offiziellen Common-V2.3-Schema deklarierte Abhängigkeit auf Enumerations V2.2.",
+          "recommendation": "Für V2.3 exakt den veröffentlichten Abhängigkeitsweg verwenden und kein synthetisches Enumerations-V2.3 erzeugen."
+        },
+        "en": {
+          "title": "No missing Enumerations V2.3 schema",
+          "short": "Common V2.3 intentionally includes Enumerations V2.2.",
+          "long": "The absence of IBIS-IP_Enumerations_V2.3.xsd is not a defect. The dependency declared by the official Common V2.3 schema is authoritative.",
+          "recommendation": "Use the exact published V2.3 dependency route and do not synthesize an Enumerations V2.3 file."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_common_V2.3.xsd"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-002",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd",
+          "note": "V2.4 selected XSD is candidate/integration; PDF is official documentation."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "editorial_residue",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "info",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "V2.4 version history says StopPointNumber while the actual StopInformation table says PointNumber."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The selected V2.4 XSD uses PointNumber, matching the actual table."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Versionshistorie nennt fälschlich StopPointNumber",
+          "short": "Tabelle und XSD verwenden PointNumber.",
+          "long": "Die V2.4-Versionshistorie nennt StopPointNumber, die eigentliche StopInformation-Tabelle und das ausgewählte XSD verwenden jedoch PointNumber. Für XML ist PointNumber maßgeblich.",
+          "recommendation": "PointNumber verwenden; aus der Versionshistorie keinen Alias oder Rename ableiten."
+        },
+        "en": {
+          "title": "Version history incorrectly says StopPointNumber",
+          "short": "The table and XSD use PointNumber.",
+          "long": "The V2.4 version history says StopPointNumber, while the actual StopInformation table and selected XSD use PointNumber. PointNumber is authoritative for XML.",
+          "recommendation": "Use PointNumber and do not infer an alias or rename from the version-history wording."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV 301-2-1 V2.4 version history and StopInformation table"
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_common_V2.4.xsd"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-003",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "contextual",
+      "primary_issue_kind": "other",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "non_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "technical_inference",
+          "note": "CE-003 recorded an interim audit-progress state, not a persistent PDF/XSD semantic defect."
+        },
+        {
+          "type": "executable_validation",
+          "note": "Common V2.4 Deep Read and EV-122 completed the checks that were originally pending."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Historischer Audit-Zwischenstand, kein Known Issue",
+          "short": "CE-003 ist durch die abgeschlossene V2.4-Prüfung überholt.",
+          "long": "Dieses Finding beschrieb nur, dass die V2.4-Delta-Prüfung noch nicht abgeschlossen war. Die späteren Deep-Read- und Executable-Prüfungen haben diesen Arbeitsstand ersetzt.",
+          "recommendation": "Nicht als Laufzeit- oder Providerproblem ausgeben."
+        },
+        "en": {
+          "title": "Historical audit-progress state, not a Known Issue",
+          "short": "CE-003 was superseded by the completed V2.4 review.",
+          "long": "This finding only recorded that the V2.4 delta review was incomplete. Later Deep Read and executable checks superseded that work-in-progress state.",
+          "recommendation": "Do not surface it as a runtime or provider issue."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-122"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-004",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Common/Enumerations V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.4.xsd"
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "stale_identifier_after_rename",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "version_history",
+          "note": "V2.4 history says SystemDocumentationService and SystemManagementService were removed and SystemMonitoringService added."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "The V2.4 ServiceNameEnumeration table still lists the two removed service names."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The selected V2.4 XSD contains SystemMonitoringService and omits the removed values."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Veraltete Servicenamen in der PDF-Tabelle",
+          "short": "Die PDF listet zwei bereits entfernte ServiceName-Werte.",
+          "long": "SystemDocumentationService und SystemManagementService stehen noch in der V2.4-Tabelle, obwohl Versionshistorie und XSD deren Entfernung bestätigen. Diese Werte sind keine gültigen XSD-Aliase.",
+          "recommendation": "Bei Validierungsfehlern auf die veraltete PDF-Tabelle hinweisen; nur XSD-Werte akzeptieren."
+        },
+        "en": {
+          "title": "Stale service names in the PDF table",
+          "short": "The PDF still lists two ServiceName values that were removed.",
+          "long": "SystemDocumentationService and SystemManagementService remain in the V2.4 table although the version history and XSD confirm their removal. They are not valid XSD aliases.",
+          "recommendation": "When validation fails, explain the stale PDF table and accept only XSD values."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "ServiceName value SystemDocumentationService",
+          "ServiceName value SystemManagementService"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV 301-2-1 V2.4 ServiceNameEnumeration and version history"
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_Enumerations_V2.4.xsd"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-005",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD per version"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "cardinality_mismatch",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "TripInformation documents AdditionalTextMessage and numbered variants as 0:* in checked scopes."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The selected XSD declarations permit at most one occurrence of each named field."
+        },
+        {
+          "type": "executable_validation",
+          "note": "Per-version Common validation, consolidated by EV-124, confirms the selected-XSD boundary."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "AdditionalTextMessage: PDF 0:* versus XSD 0:1",
+          "short": "Wiederholungen, die die PDF nahelegt, können an der XSD scheitern.",
+          "long": "Die PDF beschreibt AdditionalTextMessage und die nummerierten Varianten als wiederholbar. Die ausgewählten XSDs erlauben je Elementnamen höchstens eine Instanz; die Abweichung ist bestätigt, ihre normative Korrekturrichtung wird hier nicht vorweggenommen.",
+          "recommendation": "Normativ nach XSD validieren und bei einer abgewiesenen Wiederholung die PDF/XSD-Abweichung erläutern."
+        },
+        "en": {
+          "title": "AdditionalTextMessage: PDF 0:* versus XSD 0:1",
+          "short": "Repetitions suggested by the PDF can fail XSD validation.",
+          "long": "The PDF documents AdditionalTextMessage and numbered variants as repeatable. The selected XSDs allow at most one instance per element name; the mismatch is confirmed without pre-judging the remediation direction.",
+          "recommendation": "Validate against the selected XSD and explain the PDF/XSD mismatch when a repetition is rejected."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "repeated AdditionalTextMessage or AdditionalTextMessage1..9"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/01b_common_enums_v2_4_continuation.md"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-006",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Enumerations V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.4.xsd"
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "semantic_contradiction",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_accepts_semantically_questionable_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "valid_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The V2.4 DeviceStateEnumeration table omits warning."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The selected V2.4 XSD contains the value warning."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-124 confirms selected-schema enumeration behaviour."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "DeviceState warning steht nur in der XSD",
+          "short": "Die XSD akzeptiert warning, die V2.4-PDF-Tabelle führt den Wert nicht auf.",
+          "long": "Die Abweichung ist real; aus dem ausführbaren Nachweis allein folgt jedoch nicht, ob PDF oder XSD fachlich korrigiert werden soll.",
+          "recommendation": "warning bei passender XSD als gültig behandeln und optional auf die Dokumentationslücke hinweisen."
+        },
+        "en": {
+          "title": "DeviceState warning exists only in the XSD",
+          "short": "The XSD accepts warning, while the V2.4 PDF table omits it.",
+          "long": "The mismatch is real, but executable evidence alone does not establish whether the PDF or XSD should be corrected.",
+          "recommendation": "Treat warning as valid for the selected XSD and optionally explain the documentation gap."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "DeviceStateEnumeration value warning"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/01f_common_enums_v2_4_pdf_vs_xsd_enum_diff.md"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-007",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Enumerations V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Enumerations XSD per version"
+        },
+        {
+          "version": "Enumerations V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.4.xsd"
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "identifier_case_error",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Checked PDF tables contain case variants such as Other, Valid and Air."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Selected XSD enumeration lexemes use case-sensitive values such as other, valid and air."
+        },
+        {
+          "type": "xml_schema_semantics",
+          "note": "XML enumeration values are case-sensitive."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Groß-/Kleinschreibung von Enum-Werten weicht ab",
+          "short": "PDF-Lexeme wie Other, Valid oder Air sind nicht automatisch XSD-gültig.",
+          "long": "Die Dokumentation und XSD verwenden bei mehreren Enum-Werten unterschiedliche Groß-/Kleinschreibung. Da XML-Schema-Enumerationen case-sensitiv sind, muss das SDK die exakten XSD-Lexeme verwenden.",
+          "recommendation": "Bei einem Case-Mismatch ablehnen und den in der ausgewählten XSD gültigen Wert anzeigen."
+        },
+        "en": {
+          "title": "Enumeration value casing differs",
+          "short": "PDF lexemes such as Other, Valid or Air are not automatically XSD-valid.",
+          "long": "The documentation and XSD use different casing for several enumeration values. XML Schema enumerations are case-sensitive, so the SDK must use the exact selected-XSD lexeme.",
+          "recommendation": "Reject a casing mismatch and show the value accepted by the selected XSD."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "GNSSType Other",
+          "TicketValidation Valid",
+          "VehicleMode Air"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/01f_common_enums_v2_4_pdf_vs_xsd_enum_diff.md"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-008",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Enumerations V2.2-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Enumerations XSD"
+        },
+        {
+          "version": "Enumerations V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.4.xsd"
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "identifier_case_error",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "likely_pdf_defect",
+      "confidence": "high",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Funicular/Taxi tables use Unknown, Undefined and minicab in the affected documentation."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Selected XSD lexemes are unknown, undefined and miniCab."
+        },
+        {
+          "type": "parallel_structure_pattern",
+          "note": "Other submode families consistently use lower-case unknown/undefined, supporting a documentation-casing explanation."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Funicular-/Taxi-Submode-Lexeme weichen in der Schreibweise ab",
+          "short": "PDF und XSD unterscheiden sich bei Unknown/unknown, Undefined/undefined und minicab/miniCab.",
+          "long": "Die Werte sind case-sensitiv. Die parallelen Submode-Tabellen stützen die Einordnung als wahrscheinlichen Dokumentationsfehler, validiert wird dennoch ausschließlich gegen die ausgewählte XSD.",
+          "recommendation": "Exakte XSD-Lexeme verwenden und bei PDF-Schreibweisen einen erklärenden Fehlerhinweis liefern."
+        },
+        "en": {
+          "title": "Funicular/Taxi submode lexemes differ in casing",
+          "short": "PDF and XSD differ for Unknown/unknown, Undefined/undefined and minicab/miniCab.",
+          "long": "These values are case-sensitive. Parallel submode tables support a likely documentation-casing error, while validation still follows the selected XSD.",
+          "recommendation": "Use exact XSD lexemes and provide an explanatory diagnostic for the PDF spellings."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "FunicularSubmode Unknown",
+          "TaxiSubmode Unknown",
+          "TaxiSubmode Undefined",
+          "TaxiSubmode minicab"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/01e_common_enums_v2_4_enumeration_second_pass.md"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-009",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Enumerations V2.2-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Enumerations XSD"
+        },
+        {
+          "version": "Enumerations V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.4.xsd"
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "stale_identifier_after_rename",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "RailSubmode documentation uses specialRail."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The selected enumeration uses specialTrain."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-124 preserves the exact selected-XSD lexeme boundary."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "RailSubmode specialRail versus specialTrain",
+          "short": "PDF und XSD verwenden unterschiedliche Lexeme für denselben Eintrag.",
+          "long": "specialRail aus der PDF ist nicht identisch mit specialTrain aus der XSD. Die Abweichung ist bestätigt; ohne zusätzliche Autorität wird nicht festgelegt, welche Seite redaktionell zu ändern ist.",
+          "recommendation": "Für XML den XSD-Wert specialTrain verwenden und einen Known-Issue-Hinweis ausgeben."
+        },
+        "en": {
+          "title": "RailSubmode specialRail versus specialTrain",
+          "short": "PDF and XSD use different lexemes for the corresponding entry.",
+          "long": "specialRail from the PDF is not identical to specialTrain from the XSD. The mismatch is confirmed without deciding the remediation direction.",
+          "recommendation": "Use the XSD value specialTrain for XML and surface a Known-Issue advisory."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "RailSubmode value specialRail"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/01f_common_enums_v2_4_pdf_vs_xsd_enum_diff.md"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-010",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Enumerations V2.2-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.2.xsd"
+        },
+        {
+          "version": "Enumerations V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.4.xsd"
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "semantic_contradiction",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_accepts_semantically_questionable_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "valid_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_xsd_explicit",
+          "note": "canalBarge is already present in the official Enumerations V2.2 XSD and persists in later checked schemas."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "The affected AirSubmode PDF tables omit canalBarge."
+        },
+        {
+          "type": "official_release_provenance",
+          "note": "The value was not introduced by V2.4; the confirmed XSD history begins at least with V2.2."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "AirSubmode canalBarge fehlt in der PDF",
+          "short": "Die XSD erlaubt canalBarge bereits seit mindestens V2.2, die geprüfte Dokumentation listet den Wert nicht.",
+          "long": "Der Wert ist für die betroffenen ausgewählten XSDs gültig. Die Dokumentationsabweichung darf nicht zu einer zusätzlichen SDK-Ablehnung führen.",
+          "recommendation": "canalBarge XSD-konform akzeptieren und optional die fehlende PDF-Dokumentation erklären."
+        },
+        "en": {
+          "title": "AirSubmode canalBarge is missing from the PDF",
+          "short": "The XSD allows canalBarge from at least V2.2, while the checked documentation omits it.",
+          "long": "The value is valid for the affected selected XSDs. The documentation mismatch must not cause an additional SDK rejection.",
+          "recommendation": "Accept canalBarge when XSD-valid and optionally explain the missing PDF entry."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "AirSubmode value canalBarge"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/01f_common_enums_v2_4_pdf_vs_xsd_enum_diff.md"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-011",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "cardinality_mismatch",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Connection table documents TransportMode and ConnectionMode as 0:* in V2.4."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The selected V2.4 XSD has minOccurs=0 with default maxOccurs=1 for those fields."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-122/EV-124 confirm selected-XSD cardinality behaviour."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Connection-Modi: PDF 0:* versus XSD 0:1",
+          "short": "Wiederholte TransportMode/ConnectionMode-Einträge sind laut PDF möglich, laut XSD nicht.",
+          "long": "Für den bestätigten V2.4-Scope ist die XSD strenger als die Tabelle. Eine Wiederholung muss normativ an der XSD scheitern; die Korrekturrichtung bleibt Gegenstand der späteren Remediation.",
+          "recommendation": "Wiederholungen ablehnen und die abweichende PDF-Kardinalität im Hinweis nennen."
+        },
+        "en": {
+          "title": "Connection modes: PDF 0:* versus XSD 0:1",
+          "short": "Repeated TransportMode/ConnectionMode entries are suggested by the PDF but rejected by the XSD.",
+          "long": "For the confirmed V2.4 scope the XSD is stricter than the table. Repetitions must fail normative validation; remediation direction is deferred.",
+          "recommendation": "Reject repetitions and mention the differing PDF cardinality in the advisory."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "repeated Connection.TransportMode",
+          "repeated Connection.ConnectionMode"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/01h_common_enums_v2_4_core_data_structures.md"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-012",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "cardinality_mismatch",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_accepts_semantically_questionable_form"
+      ],
+      "sdk_behavior": "valid_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "DeviceSpecificationWithStateList is documented as 1:* in checked scopes."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Selected Common schemas allow 0:*."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-117/118 and later per-version checks confirm empty-list acceptance."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "DeviceSpecificationWithStateList: PDF 1:* versus XSD 0:*",
+          "short": "Eine leere Liste ist XSD-gültig, obwohl die PDF mindestens einen Eintrag fordert.",
+          "long": "Die Abweichung besteht über mehrere Common-Versionen. Das SDK darf eine XSD-gültige leere Liste nicht allein aufgrund der PDF-Kardinalität ablehnen.",
+          "recommendation": "Leere Liste bei XSD-Gültigkeit akzeptieren und als Dokumentationsabweichung erläutern."
+        },
+        "en": {
+          "title": "DeviceSpecificationWithStateList: PDF 1:* versus XSD 0:*",
+          "short": "An empty list is XSD-valid although the PDF requires at least one item.",
+          "long": "The mismatch spans multiple Common versions. The SDK must not reject an XSD-valid empty list solely because of the PDF cardinality.",
+          "recommendation": "Accept an XSD-valid empty list and explain the documentation discrepancy."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "empty DeviceSpecificationWithStateList"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/01h_common_enums_v2_4_core_data_structures.md"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-013",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "structure_mismatch",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "xsd_accepts_semantically_questionable_form"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "AdditionalAnnouncement names InformationAtSpecificPoint and presents the choice as required."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Selected XSDs use SpecificPoint and make the choice optional."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-117/118 and later per-version checks confirm both the name and optional-choice boundary."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "AdditionalAnnouncement: Choice-Name und Kardinalität weichen ab",
+          "short": "PDF InformationAtSpecificPoint steht XSD SpecificPoint gegenüber; die Choice ist in der XSD optional.",
+          "long": "Damit existieren zwei unabhängige Grenzen: der PDF-Elementname ist kein XSD-Alias, und ein Datensatz ohne Choice kann XSD-gültig sein.",
+          "recommendation": "SpecificPoint nach XSD verwenden; fehlende Choice nicht zusätzlich zur XSD ablehnen und beide Abweichungen erklären."
+        },
+        "en": {
+          "title": "AdditionalAnnouncement: choice name and cardinality differ",
+          "short": "PDF InformationAtSpecificPoint corresponds to XSD SpecificPoint, and the XSD choice is optional.",
+          "long": "There are two independent boundaries: the PDF element name is not an XSD alias, and a record without the choice can still be XSD-valid.",
+          "recommendation": "Use SpecificPoint, do not add a stricter non-XSD rejection for an absent choice, and explain both mismatches."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "AdditionalAnnouncement.InformationAtSpecificPoint",
+          "AdditionalAnnouncement without choice"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/01i_common_enums_v2_4_remaining_data_structures_part1.md"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-014",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "cardinality_mismatch",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_accepts_semantically_questionable_form"
+      ],
+      "sdk_behavior": "valid_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "DataVersionList is documented as 1:*."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Selected schemas allow DataVersion 0:*."
+        },
+        {
+          "type": "executable_validation",
+          "note": "Per-version Common checks confirm the empty-list boundary."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "DataVersionList: PDF 1:* versus XSD 0:*",
+          "short": "Die XSD erlaubt eine leere DataVersionList.",
+          "long": "Die PDF fordert mindestens einen DataVersion-Eintrag, während die ausgewählten XSDs auch null Einträge zulassen. Normative Validierung folgt der XSD.",
+          "recommendation": "Leere Liste bei XSD-Gültigkeit akzeptieren und optional auf die strengere PDF hinweisen."
+        },
+        "en": {
+          "title": "DataVersionList: PDF 1:* versus XSD 0:*",
+          "short": "The XSD permits an empty DataVersionList.",
+          "long": "The PDF requires at least one DataVersion item, while selected XSDs also allow zero items. Normative validation follows the XSD.",
+          "recommendation": "Accept an XSD-valid empty list and optionally point out the stricter PDF wording."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "empty DataVersionList"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/01i_common_enums_v2_4_remaining_data_structures_part1.md"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-015",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "identifier_case_error",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "FareZoneInformation documentation uses Farezone* casing in checked sources."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Selected XSD element names use FareZone* with capital Z."
+        },
+        {
+          "type": "xml_schema_semantics",
+          "note": "XML element names are case-sensitive."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Farezone/FareZone-Schreibweise ist XML-relevant",
+          "short": "PDF und XSD unterscheiden sich bei der Großschreibung der FareZone-Elementnamen.",
+          "long": "FarezoneID/FarezoneType aus der Dokumentation sind nicht dieselben XML-Namen wie FareZoneID/FareZoneType aus der XSD.",
+          "recommendation": "Nur die exakten XSD-Elementnamen akzeptieren und bei PDF-Schreibweise einen Known-Issue-Hinweis liefern."
+        },
+        "en": {
+          "title": "Farezone/FareZone casing is XML-significant",
+          "short": "PDF and XSD differ in the casing of FareZone element names.",
+          "long": "FarezoneID/FarezoneType from the documentation are not the same XML names as FareZoneID/FareZoneType from the XSD.",
+          "recommendation": "Accept only exact XSD element names and explain the PDF spelling when encountered."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "FarezoneID",
+          "FarezoneType",
+          "FarezoneLongName",
+          "FarezoneShortName"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/01i_common_enums_v2_4_remaining_data_structures_part1.md"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-016",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "xsd",
+      "primary_issue_kind": "identifier_typo",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "likely_xsd_defect",
+      "confidence": "high",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Documentation uses GlobalCardStatusID."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Selected XSDs use the typo-like element name GlobalCardStausID."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The transposition 'Staus' is strongly typo-like but remains executable authority until corrected."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "GlobalCardStatusID versus XSD GlobalCardStausID",
+          "short": "Die XSD verwendet den typoartigen Namen GlobalCardStausID.",
+          "long": "Ein XML mit dem in der PDF plausibel geschriebenen GlobalCardStatusID scheitert an den betroffenen XSDs. Die Schreibweise wirkt wie ein XSD-Tippfehler, wird im Audit aber nicht still korrigiert.",
+          "recommendation": "Historisch exakt nach XSD validieren und den typoartigen XSD-Namen im Fehlerhinweis erklären."
+        },
+        "en": {
+          "title": "GlobalCardStatusID versus XSD GlobalCardStausID",
+          "short": "The XSD uses the typo-like name GlobalCardStausID.",
+          "long": "XML using the plausibly spelled PDF name GlobalCardStatusID fails the affected XSDs. The schema spelling is likely a typo but is not silently corrected by the audit.",
+          "recommendation": "Validate historical profiles exactly and explain the typo-like XSD spelling in the diagnostic."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "GlobalCardStatusID"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/01i_common_enums_v2_4_remaining_data_structures_part1.md"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-017",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd",
+          "note": "TSPPoint still uses Desciption in the selected V2.4 schema."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "xsd",
+      "primary_issue_kind": "identifier_typo",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "likely_xsd_defect",
+      "confidence": "high",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Documentation uses TSPPoint Description."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Selected schemas use TSPPoint Desciption."
+        },
+        {
+          "type": "technical_inference",
+          "note": "Desciption is typo-like but remains the executable XML name for affected profiles."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "TSPPoint Description versus XSD Desciption",
+          "short": "Die betroffenen XSDs erwarten die typoartige Schreibweise Desciption.",
+          "long": "Description aus der Dokumentation ist kein automatischer XML-Alias. Anders als beim separat geführten BeaconPoint-Fall bleibt TSPPoint.Desciption auch im ausgewählten V2.4-Schema bestehen.",
+          "recommendation": "Nach XSD Desciption validieren und die Abweichung klar erklären; keine Alias-Annahme."
+        },
+        "en": {
+          "title": "TSPPoint Description versus XSD Desciption",
+          "short": "Affected XSDs require the typo-like spelling Desciption.",
+          "long": "Description from the documentation is not an automatic XML alias. Unlike the separately tracked BeaconPoint case, TSPPoint.Desciption persists in the selected V2.4 schema.",
+          "recommendation": "Validate using XSD Desciption, explain the mismatch, and do not create an alias."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "TSPPoint.Description"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/01j_common_enums_v2_4_remaining_data_structures_part2.md"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-018",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "cardinality_mismatch",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_accepts_semantically_questionable_form"
+      ],
+      "sdk_behavior": "valid_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Checked documentation describes ServiceIdentificationWithStateList as 1:*."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The Common XSD family defines ServiceIdentificationWithState as 0:*."
+        },
+        {
+          "type": "executable_validation",
+          "note": "Empty and one-item lists were executed across V1.0-V2.4; EV-124 reconfirms the current route."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "ServiceIdentificationWithStateList: PDF 1:* versus XSD 0:*",
+          "short": "Eine leere Liste ist nach XSD zulässig.",
+          "long": "Die ausführbare Common-XSD-Familie erlaubt null Einträge, während die geprüfte Dokumentation mindestens einen fordert. Das SDK darf die XSD-Gültigkeit nicht durch eine zusätzliche PDF-Regel überschreiben.",
+          "recommendation": "Leere XSD-gültige Liste akzeptieren und als Known Issue erläutern."
+        },
+        "en": {
+          "title": "ServiceIdentificationWithStateList: PDF 1:* versus XSD 0:*",
+          "short": "An empty list is valid under the XSD.",
+          "long": "The executable Common XSD family allows zero items while the checked documentation requires at least one. The SDK must not override XSD validity with an additional PDF rule.",
+          "recommendation": "Accept an XSD-valid empty list and explain it as a Known Issue."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "empty ServiceIdentificationWithStateList"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/COMMON_FINDINGS_REGISTER_ADDENDUM.md"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-019",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "wrong_structure_reference",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "likely_pdf_defect",
+      "confidence": "high",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The list row references ServiceSpecificationWithState."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The list element type is ServiceIdentificationWithStateStructure."
+        },
+        {
+          "type": "domain_semantics",
+          "note": "A system-wide service list requires the identification wrapper including device context, matching the XSD model."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Falscher Strukturverweis bei ServiceIdentificationWithStateList",
+          "short": "Die PDF verweist auf ServiceSpecificationWithState, die XSD auf ServiceIdentificationWithStateStructure.",
+          "long": "Der semantische Kontext stützt die XSD-Struktur für die systemweit eindeutige Service-Identifikation. Der PDF-Verweis darf nicht als alternativer XML-Typ interpretiert werden.",
+          "recommendation": "ServiceIdentificationWithStateStructure verwenden; PDF-Verweis nur als Dokumentationshinweis behandeln."
+        },
+        "en": {
+          "title": "Wrong structure reference for ServiceIdentificationWithStateList",
+          "short": "The PDF references ServiceSpecificationWithState, while the XSD uses ServiceIdentificationWithStateStructure.",
+          "long": "The semantic context supports the XSD structure for system-wide service identification. The PDF reference must not be treated as an alternative XML type.",
+          "recommendation": "Use ServiceIdentificationWithStateStructure and treat the PDF reference as a documentation issue."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "ServiceSpecificationWithState used for ServiceIdentificationWithState list item"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/COMMON_FINDINGS_REGISTER_ADDENDUM.md"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-020",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Common V2.3",
+          "authority": "official_release",
+          "xsd_profile": "official IBIS-IP_common_V2.3.xsd blob 0d8926c...",
+          "note": "Default official authority."
+        },
+        {
+          "version": "Common V2.3 PR #30",
+          "authority": "candidate_integration",
+          "xsd_profile": "schema_variants/upstream_pr_30/IBIS-IP_common_V2.3.xsd",
+          "note": "Explicit candidate overlay only."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "provenance",
+      "primary_issue_kind": "release_authority_gap",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "authority_gap",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "code_generation_or_discovery_affected",
+        "other"
+      ],
+      "sdk_behavior": "warning",
+      "semantic_basis": [
+        {
+          "type": "official_xsd_explicit",
+          "note": "Official V2.3 InternationalTextType uses xs:string/xs:language."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "The official PDF documents IBIS-IP.string/IBIS-IP.language."
+        },
+        {
+          "type": "candidate_integration_provenance",
+          "note": "Upstream PR #30 changes the XSD to the PDF-described wrapper types."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-106 and EV-124 confirm that official and candidate variants accept different instance shapes."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Common V2.3 hat zwei explizite InternationalTextType-Varianten",
+          "short": "Offizielles XSD und PR #30 akzeptieren unterschiedliche XML-Formen.",
+          "long": "Die offizielle V2.3-XSD bleibt Standardautorität; PR #30 ist eine explizite Candidate-Variante, die der PDF entspricht. Keine Variante darf stillschweigend die andere ersetzen.",
+          "recommendation": "Autorität/Variant-ID explizit wählen; bei unklarer Auswahl warnen und niemals latest-wins anwenden."
+        },
+        "en": {
+          "title": "Common V2.3 has two explicit InternationalTextType variants",
+          "short": "The official XSD and PR #30 accept different XML shapes.",
+          "long": "The official V2.3 XSD remains the default authority; PR #30 is an explicit candidate variant matching the PDF. Neither variant may silently replace the other.",
+          "recommendation": "Require explicit authority/variant selection, warn on ambiguity, and never apply latest-wins."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "Common V2.3 selected without explicit authority where PR30 overlay is available"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-106 run 33169314332"
+        },
+        {
+          "kind": "other",
+          "reference": "upstream PR VDVde/VDV301 #30"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-021",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "stale_identifier_after_rename",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "likely_pdf_defect",
+      "confidence": "high",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Checked LogMessage tables use MessageBody."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Selected XSDs use the element Message of MessageStructure."
+        },
+        {
+          "type": "executable_validation",
+          "note": "Per-version revalidation confirms the selected-XSD element boundary."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "LogMessage: PDF MessageBody versus XSD Message",
+          "short": "MessageBody ist kein XSD-Alias für Message.",
+          "long": "Die geprüften Dokumente verwenden MessageBody, während die XSDs Message verlangen. XML mit MessageBody scheitert daher trotz PDF-Nähe an der normativen Schema-Prüfung.",
+          "recommendation": "Message nach XSD verwenden und bei MessageBody einen erklärenden Fehlerhinweis liefern."
+        },
+        "en": {
+          "title": "LogMessage: PDF MessageBody versus XSD Message",
+          "short": "MessageBody is not an XSD alias for Message.",
+          "long": "The checked documents use MessageBody while the XSDs require Message. XML using MessageBody therefore fails normative schema validation despite matching the PDF wording.",
+          "recommendation": "Use Message and provide an explanatory diagnostic when MessageBody is encountered."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "LogMessage.MessageBody"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/COMMON_FINDINGS_REGISTER_ADDENDUM.md"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-022",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "wrong_structure_reference",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "likely_pdf_defect",
+      "confidence": "high",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "ServiceIdentification table uses outer element ServiceName."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Selected XSDs use outer element Service with type ServiceSpecificationStructure."
+        },
+        {
+          "type": "parallel_structure_pattern",
+          "note": "ServiceSpecificationStructure legitimately contains the inner ServiceName, explaining the likely table-copy/naming error."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "ServiceIdentification: äußerer Name ServiceName versus XSD Service",
+          "short": "Auf ServiceIdentification-Ebene verlangt die XSD Service.",
+          "long": "ServiceName ist ein inneres Feld der ServiceSpecification und wird in der PDF offenbar auf die äußere Ebene übertragen. Das macht ServiceName dort nicht XSD-gültig.",
+          "recommendation": "Äußeres Element Service verwenden; ServiceName an dieser Stelle mit Known-Issue-Erklärung ablehnen."
+        },
+        "en": {
+          "title": "ServiceIdentification: outer ServiceName versus XSD Service",
+          "short": "At ServiceIdentification level the XSD requires Service.",
+          "long": "ServiceName is an inner field of ServiceSpecification and appears to have been copied to the outer PDF table. That does not make it XSD-valid at the outer level.",
+          "recommendation": "Use outer element Service and reject ServiceName there with a Known-Issue explanation."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "ServiceIdentification.ServiceName"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/COMMON_FINDINGS_REGISTER_ADDENDUM.md"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-023",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Common V2.2",
+          "authority": "documentation_only",
+          "note": "Only V2.2 is confirmed affected; V2.3 scope was withdrawn and V2.4 is not affected."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "stale_diagram_or_example",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "info",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The V2.2 document contains a corrupt duplicate second NetexMode table carrying Message content."
+        },
+        {
+          "type": "official_release_provenance",
+          "note": "Fresh exact V2.3 visible evidence disproved the earlier V2.3 affected-scope claim."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Common V2.2 enthält eine fehlerhafte zweite NetexMode-Tabelle",
+          "short": "Der Fehler ist auf die V2.2-Dokumentation begrenzt.",
+          "long": "Die zweite NetexMode-Tabelle in V2.2 ist ein Copy/Paste-/Tabellenfehler. V2.3 wurde nach frischer Sichtprüfung aus dem Scope entfernt; V2.4 ist ebenfalls nicht betroffen.",
+          "recommendation": "Keine XSD-Sonderbehandlung erzeugen; bei V2.2 nur einen Dokumentationshinweis anzeigen."
+        },
+        "en": {
+          "title": "Common V2.2 contains a corrupt second NetexMode table",
+          "short": "The issue is limited to the V2.2 documentation.",
+          "long": "The second NetexMode table in V2.2 is a copy/paste table error. Fresh visible V2.3 evidence removed V2.3 from scope; V2.4 is not affected.",
+          "recommendation": "Do not add XSD special handling; surface only a V2.2 documentation note."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "pdf",
+          "reference": "Common V2.2 section 2.34"
+        },
+        {
+          "kind": "evidence",
+          "reference": "V2.3 visible render/read run 33656579631"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-024",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Common V2.2-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "cardinality_mismatch",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "UnsubscribeResponse documents Active as 0:1."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Selected XSDs require Active with default minOccurs=1."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-124 confirms the selected-schema boundary."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "UnsubscribeResponse.Active: PDF optional, XSD erforderlich",
+          "short": "Eine Antwort ohne Active kann nach PDF plausibel wirken, scheitert aber an der XSD.",
+          "long": "Die geprüften PDF-Versionen nennen Active 0:1, während die ausgewählten XSDs das Element verpflichtend machen. Die Korrekturrichtung bleibt getrennte Remediation.",
+          "recommendation": "Fehlendes Active als XSD-Fehler behandeln und den PDF-Widerspruch im Advisory erklären."
+        },
+        "en": {
+          "title": "UnsubscribeResponse.Active: optional in PDF, required in XSD",
+          "short": "A response without Active may look valid from the PDF but fails the XSD.",
+          "long": "Checked PDF versions state Active 0:1 while the selected XSDs require it. The remediation direction remains a separate decision.",
+          "recommendation": "Treat missing Active as an XSD validation error and explain the PDF contradiction in the advisory."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "UnsubscribeResponse without Active"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/COMMON_FINDINGS_REGISTER_ADDENDUM.md"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-025",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD",
+          "note": "Affected historical documentation uses Reply-Path while XSD uses ReplyPath."
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "documentation_only",
+          "note": "Documentation corrected to ReplyPath; do not extend the finding."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "missing_separator_or_punctuation",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Affected historical Subscribe/Unsubscribe request tables use Reply-Path."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The selected XSDs use ReplyPath."
+        },
+        {
+          "type": "later_official_correction",
+          "note": "Checked V2.4 documentation uses ReplyPath, resolving the documentation side."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Historische PDF: Reply-Path versus XSD ReplyPath",
+          "short": "Der Bindestrich aus älteren Tabellen ist kein XML-Alias.",
+          "long": "In den betroffenen historischen Dokumenten steht Reply-Path, die XSD verlangt ReplyPath. Die V2.4-Dokumentation ist korrigiert und darf nicht rückwirkend auf ältere Profile übertragen werden.",
+          "recommendation": "Historisch ReplyPath nach XSD verwenden; V2.4 nicht mehr als betroffen markieren."
+        },
+        "en": {
+          "title": "Historical PDF: Reply-Path versus XSD ReplyPath",
+          "short": "The hyphenated historical spelling is not an XML alias.",
+          "long": "Affected historical documents use Reply-Path while the XSD requires ReplyPath. V2.4 documentation is corrected and must not be back-applied to older profiles.",
+          "recommendation": "Use XSD ReplyPath for historical validation and do not mark V2.4 as affected."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "Reply-Path"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/COMMON_FINDINGS_REGISTER_ADDENDUM.md"
+        }
+      ]
+    },
+    {
+      "finding_id": "CE-026",
+      "service": "Common/Enumerations",
+      "version_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD",
+          "note": "Historical BeaconPoint schema spelling is Desciption."
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd",
+          "note": "BeaconPoint corrected to Description; not affected."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "xsd",
+      "primary_issue_kind": "identifier_typo",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "likely_xsd_defect",
+      "confidence": "high",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Affected historical BeaconPoint tables use Description."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Historical selected XSDs use BeaconPoint.Desciption."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The spelling is typo-like and the selected V2.4 schema corrects BeaconPoint to Description."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Historisches BeaconPoint: Description versus XSD Desciption",
+          "short": "Bis V2.3 verlangen betroffene XSDs die typoartige Schreibweise Desciption.",
+          "long": "Die Dokumentation verwendet Description. Im ausgewählten V2.4-Schema ist BeaconPoint zu Description korrigiert; diese spätere Korrektur ändert historische V2.3-Validierung nicht.",
+          "recommendation": "Historische Profile exakt mit Desciption validieren; V2.4 BeaconPoint nicht als betroffen markieren."
+        },
+        "en": {
+          "title": "Historical BeaconPoint: Description versus XSD Desciption",
+          "short": "Affected schemas through V2.3 require the typo-like spelling Desciption.",
+          "long": "The documentation uses Description. The selected V2.4 schema corrects BeaconPoint to Description; that later correction does not change historical V2.3 validation.",
+          "recommendation": "Validate historical profiles using Desciption and do not mark V2.4 BeaconPoint as affected."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "BeaconPoint.Description in historical profile"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-124 run 33735601969"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/COMMON_FINDINGS_REGISTER_ADDENDUM.md"
+        }
+      ]
+    }
+  ]
+}
