@@ -1,0 +1,290 @@
+{
+  "block_version": "0.1",
+  "block_id": "DISC",
+  "review_date": "2026-09-15",
+  "source_baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
+  "source_terminal_report": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DISC_2026-09-03.md",
+  "review_policy": "manual_semantic_review_bilingual_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "DISC-001",
+      "service": "GeneralConventions / NetworkDiscovery",
+      "version_scope": [
+        {
+          "version": "VDV 301-2 V1.0 German",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "p20 prescribes ZeroConf/169.254 and cites RFC 2927."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0/V2.1 German/English",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "German cites RFC 3927; English cites RFC 2927 for the same link-local rule."
+        },
+        {
+          "version": "VDV 301-2 General Conventions V2.2/V2.3/V2.4 German/English",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "German says no IP-allocation method is prescribed and names fixed IP/DHCP as best practice; English retains ZeroConf/RFC 2927/169.254 requirements."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "semantic_contradiction",
+      "secondary_issue_kinds": [
+        "language_version_conflict",
+        "version_dependent_discovery_semantics"
+      ],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "code_generation_or_discovery_affected",
+        "documentation_only"
+      ],
+      "sdk_behavior": "warning",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Pinned German and English publications contain conflicting IP-address allocation statements."
+        },
+        {
+          "type": "version_history",
+          "note": "V2.0/V2.1 differ in RFC citation; V2.2+ also diverge on whether an allocation method is prescribed."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-126 verifies the exact pinned sources and states that no XSD contract applies."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Widersprüchliche IP-Adressvorgaben zwischen deutschen und englischen VDV-Fassungen",
+          "short": "Die geprüften Sprachfassungen enthalten unterschiedliche bis widersprüchliche Vorgaben zu ZeroConf, DHCP/festen Adressen und 169.254/16.",
+          "long": "Ab V2.2 sagt die deutsche Fassung, dass kein Verfahren zur IP-Adressvergabe vorgeschrieben ist und nennt feste Adressen bzw. DHCP als Best Practice; die englische Fassung verlangt weiterhin ZeroConf, RFC 2927 und 169.254.x.x. Bereits V2.0/V2.1 unterscheiden sich in der RFC-Referenz. Daher darf aus der englischen Fassung allein keine universelle ZeroConf- oder 169.254/16-Pflicht abgeleitet werden.",
+          "recommendation": "Keine universelle ZeroConf-/169.254-Regel als VDV-Pflicht erzwingen; Version und Sprache der Quelle mitführen und den Konflikt sichtbar machen."
+        },
+        "en": {
+          "title": "Conflicting IP-address rules across German and English VDV publications",
+          "short": "The checked language tracks contain conflicting statements about ZeroConf, DHCP/static addressing and 169.254/16.",
+          "long": "From V2.2 onward the German text says that no IP-address allocation method is prescribed and names static addressing or DHCP as best practice, while the English text still requires ZeroConf, RFC 2927 and 169.254.x.x. V2.0/V2.1 already differ in their RFC citation. A universal ZeroConf or 169.254/16 requirement must therefore not be inferred from the English track alone.",
+          "recommendation": "Do not enforce a universal ZeroConf/169.254 requirement as a VDV rule; preserve source version/language and surface the conflict."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "discovery/configuration logic attempts to enforce ZeroConf or 169.254/16 solely as a universal VDV requirement",
+          "selected VDV 301-2 version/language track has conflicting IP-allocation semantics"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DISC_2026-09-03.md"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/NETWORK_DISCOVERY_FINDINGS_REGISTER_ADDENDUM.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-126 run 33754189273",
+          "note": "Passed against six exact pinned VDV source PDFs; XSD lane not applicable."
+        },
+        {
+          "kind": "pdf",
+          "reference": "V1.0 DE p20; Base V2.0 p21; Base V2.1 p22; General Conventions V2.2 pp17/20; V2.3 pp17/20; V2.4 pp20/23"
+        }
+      ],
+      "notes": "Do not silently choose one language track as corrected authority; this is contextual discovery guidance, not an XSD rule."
+    },
+    {
+      "finding_id": "DISC-002",
+      "service": "GeneralConventions / NetworkDiscovery",
+      "version_scope": [
+        {
+          "version": "VDV 301-2 V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "p20 cites RFC 2927 for automatic 169.254 addressing; p80 identifies RFC 2927 as MIME Directory Profile for LDAP Schema."
+        },
+        {
+          "version": "VDV 301-2 V2.0+ affected English tracks",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "English discovery wording continues to cite RFC 2927 while RFC 3927 is the IPv4 Link-Local specification."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "other",
+      "secondary_issue_kinds": [
+        "wrong_external_standard_reference",
+        "reference_number_mismatch"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "documentation_only"
+      ],
+      "sdk_behavior": "warning",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "VDV text associates RFC 2927 with automatic 169.254 addressing; V1.0 bibliography itself labels RFC 2927 as the LDAP-schema MIME profile."
+        },
+        {
+          "type": "external_protocol_standard",
+          "note": "RFC Editor provenance identifies RFC 2927 as MIME Directory Profile for LDAP Schema and RFC 3927 as Dynamic Configuration of IPv4 Link-Local Addresses."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-126 confirms the exact-source/RFC-provenance evidence path; no XSD contract is inferred."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "RFC 2927 ist keine Spezifikation für IPv4-Link-Local-Adressierung",
+          "short": "Die VDV-Dokumentation verweist auf RFC 2927, obwohl IPv4 Link-Local und 169.254/16 in RFC 3927 beschrieben werden.",
+          "long": "RFC 2927 beschreibt das MIME Directory Profile for LDAP Schema. IPv4-Link-Local einschließlich 169.254/16 ist Gegenstand von RFC 3927. Die RFC-Nummer in den betroffenen VDV-Passagen ist daher ein bestätigter Dokumentationsfehler. Diese Referenzkorrektur macht RFC 3927 jedoch nicht eigenständig zu einem universell vorgeschriebenen VDV-Adressierungsverfahren; dafür bleibt DISC-001 maßgeblich.",
+          "recommendation": "RFC 2927 nicht als technische Grundlage für IPv4 Link-Local verwenden; RFC 3927 als sachlich passende Referenz nennen, ohne daraus eine universelle VDV-Pflicht abzuleiten."
+        },
+        "en": {
+          "title": "RFC 2927 is not an IPv4 Link-Local addressing specification",
+          "short": "The VDV documentation cites RFC 2927 even though IPv4 Link-Local and 169.254/16 are defined by RFC 3927.",
+          "long": "RFC 2927 specifies the MIME Directory Profile for LDAP Schema. IPv4 Link-Local including 169.254/16 is covered by RFC 3927. The RFC number in the affected VDV passages is therefore a confirmed documentation error. Correcting the reference does not independently make RFC 3927 a universally mandatory VDV allocation method; DISC-001 remains controlling for that question.",
+          "recommendation": "Do not use RFC 2927 as the technical basis for IPv4 Link-Local; cite RFC 3927 as the relevant reference without turning it into a universal VDV mandate."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "documentation/discovery helper encounters RFC 2927 in VDV ZeroConf or 169.254 context",
+          "network-discovery guidance is generated from an affected language/version track"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DISC_2026-09-03.md"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/NETWORK_DISCOVERY_FINDINGS_REGISTER_ADDENDUM.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-126 run 33754189273"
+        },
+        {
+          "kind": "external_standard",
+          "reference": "RFC 2927 - MIME Directory Profile for LDAP Schema"
+        },
+        {
+          "kind": "external_standard",
+          "reference": "RFC 3927 - Dynamic Configuration of IPv4 Link-Local Addresses"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-2 V1.0 pp20/80 and affected V2.x discovery passages"
+        }
+      ],
+      "notes": "Reference-number defect only; it does not override DISC-001."
+    },
+    {
+      "finding_id": "DISC-003",
+      "service": "GeneralConventions / NetworkDiscovery",
+      "version_scope": [
+        {
+          "version": "VDV 301-2 General Conventions V2.3 German",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Table 3 p27 omits coachnumber, deviceclass and deviceID."
+        },
+        {
+          "version": "VDV 301-2 General Conventions V2.4 German",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Table 3 pp30-31 includes the missing entries; version history p75 records the repair."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "other",
+      "secondary_issue_kinds": [
+        "missing_table_entries",
+        "historical_documentation_correction"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "code_generation_or_discovery_affected",
+        "documentation_only"
+      ],
+      "sdk_behavior": "info",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The visible German table comparison shows V2.3 omits coachnumber, deviceclass and deviceID while V2.4 contains them."
+        },
+        {
+          "type": "later_official_correction",
+          "note": "V2.4 history explicitly records that missing entries in the German Table 3 were added."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-126 confirms the exact pinned source evidence; no XSD-validity claim is part of this finding."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "V2.3-DE enthält eine unvollständige DNS-SD-Tabelle, die in V2.4 korrigiert wurde",
+          "short": "In der deutschen V2.3-Tabelle 3 fehlen coachnumber, deviceclass und deviceID; V2.4 ergänzt sie ausdrücklich.",
+          "long": "Die deutsche General-Conventions-Fassung V2.3 enthält in Tabelle 3 die Einträge coachnumber, deviceclass und deviceID nicht. In V2.4 sind sie vorhanden, und die Versionshistorie nennt ausdrücklich das Ergänzen fehlender Einträge in der deutschen Tabelle. Damit ist die ältere Tabellenlücke als historischer Dokumentationsfehler bestätigt; das Finding beschreibt keine XSD-Korrektur.",
+          "recommendation": "Bei Auswertung der deutschen V2.3-DNS-SD-Tabelle auf die V2.4-Korrektur hinweisen und die fehlenden Tabelleneinträge nicht als XSD- oder Protokolländerung interpretieren."
+        },
+        "en": {
+          "title": "V2.3 German has an incomplete DNS-SD table that was repaired in V2.4",
+          "short": "German V2.3 Table 3 omits coachnumber, deviceclass and deviceID; V2.4 explicitly adds them.",
+          "long": "German General Conventions V2.3 Table 3 omits coachnumber, deviceclass and deviceID. V2.4 contains them, and the official version history explicitly states that missing entries were added to the German table. The older omission is therefore a confirmed historical documentation defect; this finding does not describe an XSD correction.",
+          "recommendation": "When interpreting German V2.3 DNS-SD Table 3, point to the V2.4 correction and do not treat the omitted entries as an XSD or protocol change."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "documentation/discovery helper is using German General Conventions V2.3 Table 3",
+          "coachnumber, deviceclass or deviceID is considered absent solely because V2.3 German Table 3 omits it"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DISC_2026-09-03.md"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/NETWORK_DISCOVERY_FINDINGS_REGISTER_ADDENDUM.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-126 run 33754189273"
+        },
+        {
+          "kind": "pdf",
+          "reference": "General Conventions V2.3 German Table 3 p27"
+        },
+        {
+          "kind": "pdf",
+          "reference": "General Conventions V2.4 German Table 3 pp30-31; version history p75"
+        }
+      ],
+      "notes": "Historical documentation correction; no XSD mutation is authorized."
+    }
+  ]
+}
