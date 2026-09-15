@@ -2961,6 +2961,447 @@
       ]
     },
     {
+      "finding_id": "CIS-001",
+      "service": "CustomerInformationService",
+      "version_scope": [
+        {
+          "version": "CIS V1.1",
+          "authority": "unresolved",
+          "xsd_profile": null,
+          "note": "The official V1.1 PDF is published, but no matching release-tagged V1.1 XSD authority is established. The untagged historical working snapshot is evidence only and is materially behind the published PDF."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "no_strict_xsd_profile",
+      "primary_surface": "provenance",
+      "primary_issue_kind": "release_authority_gap",
+      "secondary_issue_kinds": [
+        "version_routing_issue"
+      ],
+      "defect_assessment": "authority_gap",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "strict_profile_unavailable"
+      ],
+      "sdk_behavior": "unsupported_profile",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The published CIS V1.1 PDF contains SpeakerActive and StopInformationActive."
+        },
+        {
+          "type": "official_release_provenance",
+          "note": "No VDV-301-1.1 release tag providing a matching CIS V1.1 release XSD was found in the checked official repository history."
+        },
+        {
+          "type": "candidate_integration_provenance",
+          "note": "The untagged historical V1.1 working snapshot at commit 0a5228a768c7d710c40f5f99fbdce2e544d19883 uses CIS blob 5957e27f128a191c794b0c8081b531a07126784a and omits both published fields, so it cannot be promoted to official release authority."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Für CIS V1.1 fehlt eine bestätigte offizielle XSD-Release-Autorität",
+          "short": "Die offizielle V1.1-PDF ist veröffentlicht, aber kein eindeutig zugehöriges release-getaggtes CIS-XSD ist nachgewiesen.",
+          "long": "Für den CustomerInformationService V1.1 liegt eine offizielle PDF vor. In der geprüften offiziellen Repository-Historie gibt es jedoch keinen VDV-301-1.1-Release-Tag mit einer eindeutig zugehörigen CIS-XSD. Ein ungetaggter historischer V1.1-Arbeitsstand existiert, enthält aber die in der veröffentlichten PDF vorhandenen Felder SpeakerActive und StopInformationActive nicht. Dieser Arbeitsstand darf daher nicht als offizielle Release-XSD behandelt werden.",
+          "recommendation": "Für ein striktes CIS-V1.1-XSD-Profil fail-closed bleiben. Den ungetaggten historischen Arbeitsstand nur als Provenienz-Evidence verwenden und nicht als offizielle Release-Autorität ausgeben."
+        },
+        "en": {
+          "title": "No confirmed official XSD release authority for CIS V1.1",
+          "short": "The official V1.1 PDF is published, but no clearly matching release-tagged CIS XSD has been established.",
+          "long": "Official V1.1 documentation exists for the CustomerInformationService. However, the checked official repository history contains no VDV-301-1.1 release tag with an unambiguously matching CIS XSD. An untagged historical V1.1 working snapshot exists, but it omits SpeakerActive and StopInformationActive even though both are present in the published PDF. That working snapshot must therefore not be treated as official release-XSD authority.",
+          "recommendation": "Remain fail-closed for a strict CIS V1.1 XSD profile. Use the untagged historical working snapshot only as provenance evidence and never present it as official release authority."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "requested strict profile is CustomerInformationService V1.1",
+          "no release-tagged V1.1 CIS XSD authority can be selected"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_READINESS_RECONCILIATION_2026-09-14.md"
+        },
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CIS_2026-09-03.md",
+          "note": "Earlier revalidation established the historical working snapshot and refusal to promote it to release authority; final readiness reconciliation upgraded the finding state to context_verified."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-167 run 34843562886"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-125 run 33744039627"
+        },
+        {
+          "kind": "xsd",
+          "reference": "Historical untagged CIS V1.1 working snapshot blob 5957e27f128a191c794b0c8081b531a07126784a",
+          "note": "Historical evidence only; not release authority."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official CustomerInformationService V1.1 PDF pinned by the CIS evidence chain"
+        }
+      ],
+      "notes": "Provenance gap only. This finding does not claim that a matching official CIS V1.1 release XSD exists."
+    },
+    {
+      "finding_id": "CIS-002",
+      "service": "CustomerInformationService",
+      "version_scope": [
+        {
+          "version": "CIS V2.0",
+          "authority": "official_release",
+          "xsd_profile": "CIS blob fa8f0a51ad5f612660c9532c8557ad1ca473a908",
+          "note": "Official release route pinned by EV-125."
+        },
+        {
+          "version": "CIS V2.2",
+          "authority": "official_release",
+          "xsd_profile": "CIS blob ddc70ed9d6238f1377be1d7728ff46b36a22ee1e",
+          "note": "Official release route pinned by EV-125."
+        },
+        {
+          "version": "CIS V2.3",
+          "authority": "official_release",
+          "xsd_profile": "CIS blob bf921c857a3abfcbe9c6c24fe525d6cc7d2d399e",
+          "note": "Official release route pinned by EV-125."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "contextual",
+      "primary_issue_kind": "intentional_design_misread",
+      "secondary_issue_kinds": [],
+      "defect_assessment": "non_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_xsd_explicit",
+          "note": "The checked official CIS routes intentionally rely on generic Common Subscribe/Unsubscribe structures instead of duplicating them as CIS-specific operation structures."
+        },
+        {
+          "type": "common_conventions",
+          "note": "Subscribe and Unsubscribe are shared Common modelling constructs; absence from the CIS-specific operation group is therefore not evidence of a missing CIS schema member."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Kein fehlendes CIS-Schema für Subscribe/Unsubscribe",
+          "short": "Die gemeinsamen Subscribe-/Unsubscribe-Strukturen werden absichtlich aus Common verwendet.",
+          "long": "Die fehlende Duplizierung von Subscribe und Unsubscribe in der CIS-spezifischen Operationsgruppe ist kein XSD-Defekt. Die geprüften offiziellen CIS-Routen verwenden dafür die generischen Strukturen aus Common. Das ursprüngliche Finding entstand aus einer zu engen Interpretation der lokalen CIS-Operationsgruppe.",
+          "recommendation": "Keinen CIS-spezifischen Subscribe-/Unsubscribe-Alias oder zusätzliche XSD-Struktur erzeugen. Die veröffentlichten Common-Strukturen verwenden und dieses Finding nicht als Laufzeitproblem melden."
+        },
+        "en": {
+          "title": "No missing CIS schema member for Subscribe/Unsubscribe",
+          "short": "The shared Subscribe/Unsubscribe structures are intentionally provided by Common.",
+          "long": "The absence of duplicated Subscribe and Unsubscribe definitions in the CIS-specific operation group is not an XSD defect. The checked official CIS routes use the generic Common structures for these operations. The original finding resulted from interpreting the local CIS operation group too narrowly.",
+          "recommendation": "Do not create CIS-specific Subscribe/Unsubscribe aliases or additional XSD structures. Use the published Common structures and do not surface this finding as a runtime problem."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CIS_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-125 run 33744039627"
+        },
+        {
+          "kind": "common_conventions",
+          "reference": "Generic Common Subscribe/Unsubscribe structures used by the checked CIS routes"
+        },
+        {
+          "kind": "xsd",
+          "reference": "Official CIS V2.0/V2.2/V2.3 routes pinned by EV-125"
+        }
+      ],
+      "notes": "Intentional shared modelling; no XSD mutation is authorized."
+    },
+    {
+      "finding_id": "CIS-003",
+      "service": "CustomerInformationService",
+      "version_scope": [
+        {
+          "version": "CIS V2.0",
+          "authority": "official_release",
+          "xsd_profile": "CIS blob fa8f0a51ad5f612660c9532c8557ad1ca473a908",
+          "note": "Official release route pinned by EV-125."
+        },
+        {
+          "version": "CIS V2.2",
+          "authority": "official_release",
+          "xsd_profile": "CIS blob ddc70ed9d6238f1377be1d7728ff46b36a22ee1e",
+          "note": "Official release route pinned by EV-125."
+        },
+        {
+          "version": "CIS V2.3",
+          "authority": "official_release",
+          "xsd_profile": "CIS blob bf921c857a3abfcbe9c6c24fe525d6cc7d2d399e",
+          "note": "Official release route pinned by EV-125."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "wrong_operation_reference",
+      "secondary_issue_kinds": [
+        "structure_mismatch"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The CIS PDF detail label uses GetCurrentConnectionResponse."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The official V2.0, V2.2 and V2.3 XSD routes use the root CustomerInformationService.GetCurrentConnectionInformationResponse."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-125 proves the official XSD root valid and the PDF short root invalid on V2.0, V2.2 and V2.3."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "PDF nennt einen falschen Response-Root für GetCurrentConnection",
+          "short": "GetCurrentConnectionResponse aus der PDF ist kein gültiger XSD-Root; korrekt ist CustomerInformationService.GetCurrentConnectionInformationResponse.",
+          "long": "Die CIS-Dokumentation verwendet in der Detailbeschriftung den verkürzten Namen GetCurrentConnectionResponse. Die offiziellen XSD-Routen für V2.0, V2.2 und V2.3 definieren stattdessen CustomerInformationService.GetCurrentConnectionInformationResponse. EV-125 bestätigt ausführbar, dass der XSD-Root gültig und der PDF-Kurzname als XML-Root ungültig ist.",
+          "recommendation": "Den XSD-Root CustomerInformationService.GetCurrentConnectionInformationResponse verwenden. Bei einer Validierungsfehlermeldung zum PDF-Kurznamen einen Hinweis auf den Dokumentationsfehler ergänzen, das XSD-Ergebnis aber nicht überschreiben."
+        },
+        "en": {
+          "title": "PDF names the wrong response root for GetCurrentConnection",
+          "short": "GetCurrentConnectionResponse from the PDF is not a valid XSD root; the correct root is CustomerInformationService.GetCurrentConnectionInformationResponse.",
+          "long": "The CIS documentation uses the shortened detail label GetCurrentConnectionResponse. The official V2.0, V2.2 and V2.3 XSD routes instead define CustomerInformationService.GetCurrentConnectionInformationResponse. EV-125 executable evidence confirms that the XSD root is valid and the PDF short name is invalid when used as the XML root.",
+          "recommendation": "Use the XSD root CustomerInformationService.GetCurrentConnectionInformationResponse. If validation fails on the PDF short name, add an advisory explaining the documentation defect without overriding the XSD result."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "CustomerInformationService response root uses GetCurrentConnectionResponse from the PDF detail label",
+          "strict CIS V2.0/V2.2/V2.3 XSD validation rejects the PDF short root"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CIS_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-125 run 33744039627"
+        },
+        {
+          "kind": "pdf",
+          "reference": "CIS PDF detail label GetCurrentConnectionResponse"
+        },
+        {
+          "kind": "xsd",
+          "reference": "Official CIS V2.0/V2.2/V2.3 root CustomerInformationService.GetCurrentConnectionInformationResponse"
+        }
+      ],
+      "notes": "Known-Issue guidance explains the normative XSD rejection but never converts the invalid PDF-root form into a valid result."
+    },
+    {
+      "finding_id": "CIS-004",
+      "service": "CustomerInformationService",
+      "version_scope": [
+        {
+          "version": "CIS V2.0",
+          "authority": "official_release",
+          "xsd_profile": "CIS blob fa8f0a51ad5f612660c9532c8557ad1ca473a908",
+          "note": "Official release route pinned by EV-125."
+        },
+        {
+          "version": "CIS V2.2",
+          "authority": "official_release",
+          "xsd_profile": "CIS blob ddc70ed9d6238f1377be1d7728ff46b36a22ee1e",
+          "note": "Official release route pinned by EV-125."
+        },
+        {
+          "version": "CIS V2.3",
+          "authority": "official_release",
+          "xsd_profile": "CIS blob bf921c857a3abfcbe9c6c24fe525d6cc7d2d399e",
+          "note": "Official release route pinned by EV-125."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "wrong_operation_reference",
+      "secondary_issue_kinds": [
+        "structure_mismatch"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The CIS PDF detail label uses RetrievePartialStopRequest."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The official V2.0, V2.2 and V2.3 XSD routes use the root CustomerInformationService.RetrievePartialStopSequenceRequest."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-125 proves the XSD root boundary on all three official routes."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "PDF nennt einen falschen Request-Root für RetrievePartialStop",
+          "short": "RetrievePartialStopRequest aus der PDF ist kein gültiger XSD-Root; korrekt ist CustomerInformationService.RetrievePartialStopSequenceRequest.",
+          "long": "Die CIS-Dokumentation verwendet in der Detailbeschriftung den Namen RetrievePartialStopRequest. Die offiziellen XSD-Routen für V2.0, V2.2 und V2.3 definieren dagegen CustomerInformationService.RetrievePartialStopSequenceRequest. EV-125 bestätigt diese Root-Grenze ausführbar auf allen drei offiziellen Routen.",
+          "recommendation": "Den XSD-Root CustomerInformationService.RetrievePartialStopSequenceRequest verwenden. Bei einer Validierungsfehlermeldung zum PDF-Namen einen Hinweis auf den Dokumentationsfehler ergänzen, ohne einen Alias zu erfinden oder das XSD-Ergebnis zu überschreiben."
+        },
+        "en": {
+          "title": "PDF names the wrong request root for RetrievePartialStop",
+          "short": "RetrievePartialStopRequest from the PDF is not a valid XSD root; the correct root is CustomerInformationService.RetrievePartialStopSequenceRequest.",
+          "long": "The CIS documentation uses the detail label RetrievePartialStopRequest. The official V2.0, V2.2 and V2.3 XSD routes instead define CustomerInformationService.RetrievePartialStopSequenceRequest. EV-125 executable evidence confirms this root boundary on all three official routes.",
+          "recommendation": "Use the XSD root CustomerInformationService.RetrievePartialStopSequenceRequest. If validation fails on the PDF name, add an advisory explaining the documentation defect without inventing an alias or overriding the XSD result."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "CustomerInformationService request root uses RetrievePartialStopRequest from the PDF detail label",
+          "strict CIS V2.0/V2.2/V2.3 XSD validation rejects the PDF root name"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CIS_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-125 run 33744039627"
+        },
+        {
+          "kind": "pdf",
+          "reference": "CIS PDF detail label RetrievePartialStopRequest"
+        },
+        {
+          "kind": "xsd",
+          "reference": "Official CIS V2.0/V2.2/V2.3 root CustomerInformationService.RetrievePartialStopSequenceRequest"
+        }
+      ],
+      "notes": "Known-Issue guidance explains the normative XSD rejection but does not authorize a compatibility alias."
+    },
+    {
+      "finding_id": "CIS-005",
+      "service": "CustomerInformationService",
+      "version_scope": [
+        {
+          "version": "CIS V2.2",
+          "authority": "official_release",
+          "xsd_profile": "CIS blob ddc70ed9d6238f1377be1d7728ff46b36a22ee1e",
+          "note": "Official release route pinned by EV-125."
+        },
+        {
+          "version": "CIS V2.3",
+          "authority": "official_release",
+          "xsd_profile": "CIS blob bf921c857a3abfcbe9c6c24fe525d6cc7d2d399e",
+          "note": "Official release route pinned by EV-125."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "wrong_type_reference",
+      "secondary_issue_kinds": [
+        "semantic_contradiction"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The CIS PDF types MyOwnVehicleMode inconsistently as NetexMode in one place and PtModesEnumeration in another."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The official CIS V2.2 and V2.3 XSD routes model MyOwnVehicleMode as NetexMode."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-125 proves structured NetexMode content valid and scalar text invalid for V2.2/V2.3; MyOwnVehicleMode is not present in the V2.0 route."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "PDF widerspricht sich beim Typ von MyOwnVehicleMode",
+          "short": "Für CIS V2.2/V2.3 ist MyOwnVehicleMode im XSD als NetexMode strukturiert; die alternative PDF-Angabe PtModesEnumeration ist nicht maßgeblich.",
+          "long": "Die CIS-Dokumentation enthält für MyOwnVehicleMode widersprüchliche Typangaben: NetexMode und PtModesEnumeration. Die offiziellen XSD-Routen V2.2 und V2.3 verwenden NetexMode. EV-125 bestätigt, dass strukturierter NetexMode-Inhalt gültig ist und eine skalare Textform entsprechend PtModesEnumeration abgelehnt wird. Der Scope umfasst V2.0 nicht, weil MyOwnVehicleMode dort noch nicht vorhanden ist.",
+          "recommendation": "Für CIS V2.2/V2.3 MyOwnVehicleMode gemäß XSD als NetexMode strukturieren. Bei einer abgelehnten skalaren Form den PDF-Widerspruch als Advisory erklären, das normative XSD-Ergebnis aber beibehalten."
+        },
+        "en": {
+          "title": "PDF is internally inconsistent about the MyOwnVehicleMode type",
+          "short": "For CIS V2.2/V2.3, the XSD models MyOwnVehicleMode as structured NetexMode; the alternative PDF reference to PtModesEnumeration is not authoritative.",
+          "long": "The CIS documentation gives conflicting type information for MyOwnVehicleMode: NetexMode and PtModesEnumeration. The official V2.2 and V2.3 XSD routes use NetexMode. EV-125 confirms that structured NetexMode content is valid while a scalar text form corresponding to PtModesEnumeration is rejected. V2.0 is outside this finding's scope because MyOwnVehicleMode is not present there.",
+          "recommendation": "For CIS V2.2/V2.3, structure MyOwnVehicleMode as NetexMode according to the XSD. If a scalar form is rejected, explain the PDF inconsistency as an advisory while preserving the normative XSD result."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "MyOwnVehicleMode is supplied as scalar PtModesEnumeration text on CIS V2.2/V2.3",
+          "strict XSD expects structured NetexMode content"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CIS_2026-09-03.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-125 run 33744039627"
+        },
+        {
+          "kind": "pdf",
+          "reference": "CIS MyOwnVehicleMode type references NetexMode / PtModesEnumeration"
+        },
+        {
+          "kind": "xsd",
+          "reference": "Official CIS V2.2/V2.3 MyOwnVehicleMode definition using NetexMode"
+        }
+      ],
+      "notes": "Scope is V2.2/V2.3 only; MyOwnVehicleMode is absent from the checked V2.0 route."
+    },
+    {
       "finding_id": "TSD-004",
       "service": "TrainSetDataService",
       "version_scope": [
@@ -3486,15 +3927,16 @@
     }
   ],
   "progress": {
-    "classified_count": 46,
-    "remaining_count": 146,
+    "classified_count": 51,
+    "remaining_count": 141,
     "reviewed_blocks": [
       "ARA",
       "ARCH",
       "BG",
-      "CE"
+      "CE",
+      "CIS"
     ],
-    "latest_block": "CE",
-    "latest_block_file": "audit_registry/semantic_classification_blocks/CE_v0.1.json"
+    "latest_block": "CIS",
+    "latest_block_file": "audit_registry/semantic_classification_blocks/CIS_v0.1.json"
   }
 }
