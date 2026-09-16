@@ -1,0 +1,99 @@
+{
+  "block_version": "0.1",
+  "block_id": "DRCOM21",
+  "review_date": "2026-09-16",
+  "source_baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
+  "source_terminal_report": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V21_2026-09-04.md",
+  "source_deep_read": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.1.md",
+  "review_policy": "manual_semantic_review_bilingual_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "DRCOM21-001",
+      "service": "Common / StopInformationRequest",
+      "version_scope": [
+        {
+          "version": "Common V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.1.xsd",
+          "note": "Official PDF page 29 specifies StopName 0:1; exact official VDV-301-2.1 XSD declares StopName minOccurs=0 maxOccurs=unbounded."
+        }
+      ],
+      "review_state": "sdk_ready",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "cardinality_mismatch",
+      "secondary_issue_kinds": [
+        "pdf_maximum_stricter_than_xsd",
+        "repeatable_child_boundary"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_accepts_semantically_questionable_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "valid_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Pinned Common V2.1 page 29 visibly specifies StopInformationRequest.StopName as 0:1."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Exact official VDV-301-2.1 Common XSD declares StopName with minOccurs=0 and maxOccurs=unbounded."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-119 validates an instance containing two StopName entries, proving the executable boundary beyond the PDF maximum."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "COMMON V2.1: StopInformationRequest.StopName ist in der XSD wiederholbar",
+          "short": "Die PDF begrenzt StopName auf 0:1, die offizielle V2.1-XSD erlaubt 0:* und akzeptiert zwei Einträge.",
+          "long": "Die offizielle Common-V2.1-PDF gibt für StopInformationRequest.StopName die Kardinalität 0:1 an. Die exakte offizielle VDV-301-2.1-XSD deklariert das Element dagegen mit minOccurs=0 und maxOccurs=unbounded. EV-119 bestätigt ausführbar, dass eine Instanz mit zwei StopName-Elementen gültig ist. Die PDF-Maximalangabe ist daher kein zusätzliches Validierungslimit.",
+          "recommendation": "Gültige V2.1-Instanzen mit mehreren StopName-Elementen nicht ablehnen. Die PDF-Abweichung als Advisory melden und die offizielle XSD-Kardinalität beibehalten."
+        },
+        "en": {
+          "title": "COMMON V2.1: StopInformationRequest.StopName is repeatable in the XSD",
+          "short": "The PDF limits StopName to 0:1, while the official V2.1 XSD permits 0:* and accepts two entries.",
+          "long": "The official Common V2.1 PDF gives StopInformationRequest.StopName a cardinality of 0:1. The exact official VDV-301-2.1 XSD instead declares the element with minOccurs=0 and maxOccurs=unbounded. EV-119 executable evidence confirms that an instance containing two StopName elements is valid. The PDF maximum therefore must not become an additional validation limit.",
+          "recommendation": "Do not reject valid V2.1 instances containing multiple StopName elements. Report the PDF discrepancy as an advisory and retain the official XSD cardinality."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "Common V2.1 StopInformationRequest contains more than one StopName and passes selected XSD validation"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V21_2026-09-04.md",
+          "note": "Terminal state executable_confirmed."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.1.md",
+          "note": "FR-COM21-OBS-013 and historical reconciliation."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official Common V2.1 PDF SHA-256 a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32; page 29"
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_common_V2.1.xsd blob 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e",
+          "note": "Exact official VDV-301-2.1 authority."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-119; EV-137 closure run 33857041308",
+          "note": "Two-StopName executable boundary and current-gate closure."
+        }
+      ],
+      "notes": "This finding is limited to StopInformationRequest.StopName and does not duplicate the nineteen V2.1 observations mapped to existing Common finding identities."
+    }
+  ]
+}
