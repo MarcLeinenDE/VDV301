@@ -1,0 +1,1872 @@
+{
+  "block_version": "0.1",
+  "block_id": "DR3012",
+  "review_date": "2026-09-16",
+  "source_baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
+  "source_terminal_report": "multiple VDV301-2 subblock revalidation reports; see per-entry frozen_terminal_source references",
+  "review_policy": "manual_semantic_review_bilingual_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "DR3012-001",
+      "service": "VDV 301-2 Base / Network Discovery",
+      "version_scope": [
+        {
+          "version": "VDV 301-2 V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Page 20 cites RFC 2927 for ZeroConf/169.254; RFC 3927 is the IPv4 link-local authority."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "external_standard",
+      "primary_issue_kind": "semantic_contradiction",
+      "secondary_issue_kinds": [
+        "wrong_external_standard_reference",
+        "zeroconf_link_local_reference_mismatch"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "documentation_only"
+      ],
+      "sdk_behavior": "warning",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The pinned PDF cites RFC 2927 for ZeroConf/169.254 addressing."
+        },
+        {
+          "type": "external_protocol_standard",
+          "note": "RFC 2927 is an LDAP/MIME profile; RFC 3927 specifies IPv4 link-local configuration."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "V1.0: falscher RFC-Verweis für IPv4 Link-Local",
+          "short": "Für ZeroConf/169.254 wird RFC 2927 statt RFC 3927 zitiert.",
+          "long": "Die V1.0-Dokumentation verknüpft IPv4-Link-Local-Adressierung mit RFC 2927. Dieser RFC behandelt jedoch ein LDAP/MIME-Profil; der einschlägige Link-Local-Standard ist RFC 3927. Das ist ein Dokumentationsfehler, keine XML-Regel.",
+          "recommendation": "RFC 3927 als externen Sachstandard verwenden, aber daraus keine über den versionsspezifischen VDV-Kontext hinausgehende Universalregel ableiten."
+        },
+        "en": {
+          "title": "V1.0: wrong RFC reference for IPv4 link-local",
+          "short": "ZeroConf/169.254 is cited to RFC 2927 instead of RFC 3927.",
+          "long": "The V1.0 documentation links IPv4 link-local addressing to RFC 2927. That RFC concerns an LDAP/MIME profile; the relevant link-local standard is RFC 3927. This is a documentation defect, not an XML rule.",
+          "recommendation": "Use RFC 3927 as the external technical standard, without turning it into a universal VDV rule beyond the version-specific context."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V10_2026-09-03.md",
+          "note": "Frozen terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 V1.0 PDF SHA-256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-129 / evidence run 33765167655 / closure run 33765633886",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        },
+        {
+          "kind": "external_standard",
+          "reference": "RFC 2927",
+          "note": "Incorrectly cited by the VDV PDF for link-local addressing."
+        },
+        {
+          "kind": "external_standard",
+          "reference": "RFC 3927",
+          "note": "Primary external authority for IPv4 link-local configuration."
+        }
+      ],
+      "notes": "Do not infer a universal ZeroConf requirement solely from this citation correction."
+    },
+    {
+      "finding_id": "DR3012-002",
+      "service": "VDV 301-2 Base / DNS Service Discovery",
+      "version_scope": [
+        {
+          "version": "VDV 301-2 V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Page 26 says lower SRV Weight is preferred at equal Priority; RFC 2782 defines proportional weighted selection."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "external_standard",
+      "primary_issue_kind": "semantic_contradiction",
+      "secondary_issue_kinds": [
+        "srv_weight_semantics",
+        "wrong_external_protocol_description"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "documentation_only"
+      ],
+      "sdk_behavior": "warning",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The PDF states that lower SRV Weight is preferred at equal Priority."
+        },
+        {
+          "type": "external_protocol_standard",
+          "note": "RFC 2782 gives larger Weight values proportionally greater selection probability."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "V1.0: SRV-Weighting widerspricht RFC 2782",
+          "short": "Die PDF bevorzugt kleinere Weight-Werte; RFC 2782 definiert proportionale Gewichtung.",
+          "long": "Die beschriebene DNS-SRV-Auswahl kehrt die Weight-Semantik um. Bei gleicher Priority erhöht ein größerer Weight-Wert nach RFC 2782 die Auswahlwahrscheinlichkeit proportional. XML-Gültigkeit ist nicht betroffen.",
+          "recommendation": "SRV-Auswahl gemäß RFC 2782 implementieren und die VDV-Formulierung als Dokumentationsfehler behandeln."
+        },
+        "en": {
+          "title": "V1.0: SRV weighting contradicts RFC 2782",
+          "short": "The PDF prefers smaller Weight values; RFC 2782 defines proportional weighting.",
+          "long": "The described DNS SRV selection reverses Weight semantics. At equal Priority, a larger Weight receives proportionally greater selection probability under RFC 2782. XML validity is unaffected.",
+          "recommendation": "Implement SRV selection according to RFC 2782 and treat the VDV wording as a documentation defect."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V10_2026-09-03.md",
+          "note": "Frozen terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 V1.0 PDF SHA-256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-129 / evidence run 33765167655 / closure run 33765633886",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        },
+        {
+          "kind": "external_standard",
+          "reference": "RFC 2782",
+          "note": "Primary authority for DNS SRV Priority/Weight selection."
+        }
+      ]
+    },
+    {
+      "finding_id": "DR3012-003",
+      "service": "SystemDocumentationService",
+      "version_scope": [
+        {
+          "version": "VDV 301-2 V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemDocumentationService_v1.0.xsd",
+          "note": "PDF uses HertbeatIntervall/duration; official XSD declares HeartbeatIntervall, with double in SystemConfigurationData and duration in StoreSystemConfigurationRequestStructure."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "wrong_type_reference",
+      "secondary_issue_kinds": [
+        "identifier_typo",
+        "pdf_xsd_identifier_mismatch",
+        "heartbeat_interval_type_mismatch"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation",
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Page 65 prints HertbeatIntervall twice and documents duration for both rows."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact V1.0 XSD declares HeartbeatIntervall; SystemConfigurationData is double, StoreSystemConfigurationRequestStructure is duration."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-129 confirms identifier and lexical-type boundaries with positive/negative XML samples."
+        },
+        {
+          "type": "xml_schema_semantics",
+          "note": "The selected XSD remains executable authority; no typo alias or PDF type override is introduced."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "SystemDocumentation V1.0: HeartbeatIntervall in PDF falsch geschrieben und teilweise falsch typisiert",
+          "short": "Die PDF nennt HertbeatIntervall/duration; die XSD verlangt HeartbeatIntervall und für SystemConfigurationData double.",
+          "long": "Der korrigierte Befund umfasst Identifier und Typ. Die PDF schreibt HertbeatIntervall; die offizielle XSD deklariert HeartbeatIntervall. Für SystemConfigurationData steht in der XSD IBIS-IP.double statt PDF-duration; beim StoreSystemConfigurationRequest stimmt duration. EV-129 bestätigt die Grenzen ausführbar.",
+          "recommendation": "Für XML ausschließlich den XSD-Identifier und den je Struktur deklarierten XSD-Typ verwenden; keine PDF-Aliasse erzeugen."
+        },
+        "en": {
+          "title": "SystemDocumentation V1.0: HeartbeatIntervall is misspelled and partly mistyped in the PDF",
+          "short": "The PDF says HertbeatIntervall/duration; the XSD requires HeartbeatIntervall and double for SystemConfigurationData.",
+          "long": "The corrected finding covers both identifier and type. The PDF spells HertbeatIntervall while the official XSD declares HeartbeatIntervall. SystemConfigurationData is IBIS-IP.double in XSD rather than PDF duration; duration is correct for StoreSystemConfigurationRequest. EV-129 confirms the boundaries executably.",
+          "recommendation": "For XML use only the XSD identifier and the XSD-declared type per structure; create no PDF aliases."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "V1.0 XML uses PDF spelling HertbeatIntervall",
+          "SystemConfigurationData/HeartbeatIntervall uses a duration lexical value"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V10_2026-09-03.md",
+          "note": "Frozen terminal state executable_confirmed."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 V1.0 PDF SHA-256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_SystemDocumentationService_v1.0.xsd; blob 8995c4a230bf81d5e47b9313ee7725ff3cd4b7b5; byte-identical to official VDV-301-1.0 tag",
+          "note": "Exact selected schema context for this finding."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-129 / evidence run 33765167655 / closure run 33765633886",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_DR3012_003_V10_IDENTIFIER_TYPE_2026-09-03.md",
+          "note": "Supersedes the historical imprecise claim that HertbeatIntervall also appeared in XSD."
+        }
+      ],
+      "notes": "The explicit correction delta controls. No alias or schema override is created."
+    },
+    {
+      "finding_id": "DR3012-004",
+      "service": "VDV 301-2 Base / DeviceState",
+      "version_scope": [
+        {
+          "version": "VDV 301-2 V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "DeviceState points to section 9.3 although DeviceStateEnumeration is visibly section 9.4."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "wrong_structure_reference",
+      "secondary_issue_kinds": [
+        "wrong_section_reference",
+        "navigation_error"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The PDF points DeviceState to 9.3 while DeviceStateEnumeration is section 9.4."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "V1.0: DeviceState verweist auf den falschen Abschnitt",
+          "short": "DeviceState nennt 9.3 statt 9.4.",
+          "long": "Der Querverweis zur DeviceStateEnumeration ist um einen Abschnitt verschoben. Das ist ein reiner Navigations-/Redaktionsfehler ohne XML- oder XSD-Wirkung.",
+          "recommendation": "Nur als Dokumentationsfehler behandeln; keine technische Regel ableiten."
+        },
+        "en": {
+          "title": "V1.0: DeviceState points to the wrong section",
+          "short": "DeviceState names 9.3 instead of 9.4.",
+          "long": "The cross-reference to DeviceStateEnumeration is shifted by one section. This is purely a navigation/editorial defect with no XML or XSD impact.",
+          "recommendation": "Treat it only as a documentation defect; derive no technical rule."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V10_2026-09-03.md",
+          "note": "Frozen terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 V1.0 PDF SHA-256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-129 / evidence run 33765167655 / closure run 33765633886",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        }
+      ]
+    },
+    {
+      "finding_id": "DR3012-005",
+      "service": "SystemManagementService",
+      "version_scope": [
+        {
+          "version": "VDV 301-2 V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemManagementService_V1.0.xsd",
+          "note": "Operation inventory uses ServiceStatus terminology while detailed headings use SystemStatus; historical XSD supports ServiceStatus."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "stale_identifier_after_rename",
+      "secondary_issue_kinds": [
+        "operation_inventory_heading_mismatch",
+        "systemstatus_vs_servicestatus"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "documentation_only"
+      ],
+      "sdk_behavior": "info",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Operation inventory and detailed headings use inconsistent ServiceStatus/SystemStatus terminology."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact historical SystemManagement XSD supports ServiceStatus terminology."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "SystemManagement V1.0: ServiceStatus/SystemStatus uneinheitlich",
+          "short": "Inventar und Detailüberschriften verwenden unterschiedliche Status-Bezeichnungen.",
+          "long": "Die V1.0-Dokumentation ist terminologisch inkonsistent: das Operation-Inventar verwendet ServiceStatus, Detailüberschriften SystemStatus. Der historische XSD-Kontext stützt ServiceStatus; die andere Schreibweise ist kein bestätigter XML-Alias.",
+          "recommendation": "Keine SystemStatus-Aliasse aus den Überschriften erzeugen; konkrete XML-Namen aus dem ausgewählten XSD-Kontext beziehen."
+        },
+        "en": {
+          "title": "SystemManagement V1.0: ServiceStatus/SystemStatus terminology is inconsistent",
+          "short": "Inventory and detail headings use different status names.",
+          "long": "The V1.0 documentation is terminologically inconsistent: the operation inventory uses ServiceStatus while detailed headings use SystemStatus. The historical XSD context supports ServiceStatus; the other wording is not a confirmed XML alias.",
+          "recommendation": "Do not create SystemStatus aliases from the headings; resolve concrete XML names from the selected XSD context."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V10_2026-09-03.md",
+          "note": "Frozen terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 V1.0 PDF SHA-256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_SystemManagementService_V1.0.xsd; blob 2d32630a0f1981e980e6a466e3f6a69136410f24",
+          "note": "Exact selected schema context for this finding."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-129 / evidence run 33765167655 / closure run 33765633886",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        }
+      ],
+      "notes": "Documentation mismatch only; stale terminology must not become an SDK alias."
+    },
+    {
+      "finding_id": "DR3012-006",
+      "service": "VDV 301-2 Base / TimeService routing",
+      "version_scope": [
+        {
+          "version": "VDV 301-2 V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The TimeService reference to VDV 301-2-11 is wrong/stale in the historical context."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "version_routing_issue",
+      "secondary_issue_kinds": [
+        "wrong_document_reference",
+        "stale_service_number"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "warning",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The PDF routes TimeService to VDV 301-2-11."
+        },
+        {
+          "type": "official_release_provenance",
+          "note": "Historical document identity context confirms that reference as wrong/stale rather than merely a modern numbering difference."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "V1.0: falscher/veralteter TimeService-Dokumentverweis",
+          "short": "TimeService wird auf VDV 301-2-11 geroutet, obwohl der historische Kontext das als falsch bestätigt.",
+          "long": "Der Querverweis nennt eine falsche bzw. veraltete Teildokumentnummer. Das ist ein Dokumentations-/Routingfehler und ändert keine XML-Gültigkeit.",
+          "recommendation": "Service-/Schema-Routing aus der tatsächlichen versionsspezifischen Quellenprovenienz ableiten, nicht aus diesem Verweis."
+        },
+        "en": {
+          "title": "V1.0: wrong/stale TimeService document reference",
+          "short": "TimeService is routed to VDV 301-2-11 although historical context confirms that as wrong.",
+          "long": "The cross-reference names an incorrect or stale part-document number. This is a documentation/routing defect and does not change XML validity.",
+          "recommendation": "Derive service/schema routing from actual version-specific source provenance, not from this reference."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V10_2026-09-03.md",
+          "note": "Frozen terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 V1.0 PDF SHA-256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-129 / evidence run 33765167655 / closure run 33765633886",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        }
+      ]
+    },
+    {
+      "finding_id": "DR3012-007",
+      "service": "VDV 301-2 Base / StopService",
+      "version_scope": [
+        {
+          "version": "VDV 301-2 V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "StopService request description refers to the service to be started."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "semantic_contradiction",
+      "secondary_issue_kinds": [
+        "copy_paste_error",
+        "wrong_action_description"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "info",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The StopService text describes the service to be started instead of stopped."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "V1.0: StopService-Beschreibung spricht vom Starten",
+          "short": "Der StopService-Text beschreibt fälschlich den zu startenden Dienst.",
+          "long": "Die Beschreibung enthält einen offensichtlichen Copy/Paste-Fehler. Der Operationsname wird dadurch nicht umgedeutet und es entsteht keine alternative Operation.",
+          "recommendation": "Als Dokumentationsfehler behandeln; keine abweichende Operationssemantik ableiten."
+        },
+        "en": {
+          "title": "V1.0: StopService description says to start the service",
+          "short": "The StopService text incorrectly describes the service to be started.",
+          "long": "The description contains an evident copy/paste error. It does not redefine the operation name or create an alternate operation.",
+          "recommendation": "Treat it as a documentation defect; derive no alternate operation semantics."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V10_2026-09-03.md",
+          "note": "Frozen terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 V1.0 PDF SHA-256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-129 / evidence run 33765167655 / closure run 33765633886",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        }
+      ]
+    },
+    {
+      "finding_id": "DR3012V20-001",
+      "service": "VDV 301-2 Base / Network Discovery",
+      "version_scope": [
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "German text cites RFC 3927 for 169.254 link-local behavior while English still cites RFC 2927; bibliography points to RFC 3927."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "semantic_contradiction",
+      "secondary_issue_kinds": [
+        "language_variant_mismatch",
+        "wrong_external_standard_reference"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "documentation_only"
+      ],
+      "sdk_behavior": "warning",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "German and English tracks cite different RFCs for the same link-local behavior; bibliography supports RFC 3927."
+        },
+        {
+          "type": "external_protocol_standard",
+          "note": "RFC 3927 is IPv4 link-local authority; RFC 2927 is unrelated LDAP/MIME material."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Base V2.0: deutsche und englische RFC-Referenz widersprechen sich",
+          "short": "Deutsch nennt RFC 3927, Englisch weiterhin RFC 2927.",
+          "long": "Die zweisprachige V2.0-Dokumentation verweist für dieselbe 169.254-/ZeroConf-Aussage auf unterschiedliche RFCs. Deutsch und Bibliografie stützen RFC 3927; Englisch behält den falschen RFC 2927.",
+          "recommendation": "RFC 3927 als externen Sachstandard verwenden, den englischen Verweis als Dokumentationsfehler markieren und keine Universalregel daraus ableiten."
+        },
+        "en": {
+          "title": "Base V2.0: German and English RFC references conflict",
+          "short": "German cites RFC 3927 while English still cites RFC 2927.",
+          "long": "The bilingual V2.0 documentation cites different RFCs for the same 169.254/ZeroConf statement. German text and bibliography support RFC 3927; English retains the wrong RFC 2927.",
+          "recommendation": "Use RFC 3927 as the external technical standard, flag the English citation as a documentation defect, and derive no universal rule from it."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V20_2026-09-03.md",
+          "note": "Frozen terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 Base V2.0 PDF SHA-256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-130 / evidence run 33780668141 / closure run 33781049413",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        },
+        {
+          "kind": "external_standard",
+          "reference": "RFC 3927",
+          "note": "IPv4 link-local authority supported by German text and bibliography."
+        },
+        {
+          "kind": "external_standard",
+          "reference": "RFC 2927",
+          "note": "Incorrectly retained by the English track."
+        }
+      ]
+    },
+    {
+      "finding_id": "DR3012V20-002",
+      "service": "VDV 301-2 Base / DNS Service Discovery",
+      "version_scope": [
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Both languages say lower SRV Weight is preferred; RFC 2782 defines proportional weighted selection."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "external_standard",
+      "primary_issue_kind": "semantic_contradiction",
+      "secondary_issue_kinds": [
+        "srv_weight_semantics",
+        "wrong_external_protocol_description"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "documentation_only"
+      ],
+      "sdk_behavior": "warning",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Both V2.0 language tracks state that lower SRV Weight is preferred."
+        },
+        {
+          "type": "external_protocol_standard",
+          "note": "RFC 2782 defines proportional weighted random selection."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Base V2.0: SRV-Weighting widerspricht RFC 2782",
+          "short": "Beide Sprachfassungen bevorzugen kleinere Weight-Werte.",
+          "long": "Der V1.0-Semantikfehler besteht in V2.0 in beiden Sprachspuren fort: kleinere Weight-Werte werden als bevorzugt beschrieben, obwohl RFC 2782 die Auswahlwahrscheinlichkeit proportional zum Weight festlegt.",
+          "recommendation": "SRV-Auswahl gemäß RFC 2782 implementieren und die VDV-Formulierung als Dokumentationsfehler behandeln."
+        },
+        "en": {
+          "title": "Base V2.0: SRV weighting contradicts RFC 2782",
+          "short": "Both language tracks prefer smaller Weight values.",
+          "long": "The V1.0 semantic defect persists in both V2.0 language tracks: smaller Weight values are described as preferred although RFC 2782 makes selection probability proportional to Weight.",
+          "recommendation": "Implement SRV selection according to RFC 2782 and treat the VDV wording as a documentation defect."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V20_2026-09-03.md",
+          "note": "Frozen terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 Base V2.0 PDF SHA-256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-130 / evidence run 33780668141 / closure run 33781049413",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        },
+        {
+          "kind": "external_standard",
+          "reference": "RFC 2782",
+          "note": "Primary DNS SRV Priority/Weight authority."
+        }
+      ]
+    },
+    {
+      "finding_id": "DR3012V20-003",
+      "service": "SystemDocumentationService",
+      "version_scope": [
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemDocumentationService_V2.0.xsd",
+          "note": "Version history claims correction to HeartbeatInterval; tables still print HertbeatIntervall. Official XSD declares HeartbeatInterval as IBIS-IP.duration in both structures."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "identifier_typo",
+      "secondary_issue_kinds": [
+        "stale_identifier_after_rename",
+        "pdf_xsd_identifier_mismatch",
+        "version_history_vs_body_mismatch"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation",
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "version_history",
+          "note": "The V2.0 history states the identifier was corrected to HeartbeatInterval."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Visible V2.0 tables nevertheless print HertbeatIntervall."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The official V2.0 XSD declares HeartbeatInterval as IBIS-IP.duration in both structures."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-130 accepts HeartbeatInterval/PT5S and rejects numeric 5.5 plus stale HertbeatIntervall and HeartbeatIntervall."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "SystemDocumentation V2.0: Tabellen behalten HertbeatIntervall trotz korrigierter XSD",
+          "short": "Versionshistorie und XSD verwenden HeartbeatInterval; Tabellen weiterhin HertbeatIntervall.",
+          "long": "V2.0 korrigiert den ausführbaren Identifier auf HeartbeatInterval und nutzt duration in beiden Strukturen. Die Tabellen wurden nicht konsistent aktualisiert. EV-130 bestätigt, dass weder HertbeatIntervall noch das historische V1.0-HeartbeatIntervall akzeptiert wird.",
+          "recommendation": "Für V2.0 ausschließlich HeartbeatInterval mit IBIS-IP.duration verwenden; alte Schreibweisen nicht als Aliasse zulassen."
+        },
+        "en": {
+          "title": "SystemDocumentation V2.0: tables retain HertbeatIntervall despite corrected XSD",
+          "short": "Version history and XSD use HeartbeatInterval; tables still show HertbeatIntervall.",
+          "long": "V2.0 corrects the executable identifier to HeartbeatInterval and uses duration in both structures. The tables were not updated consistently. EV-130 confirms that neither HertbeatIntervall nor historical V1.0 HeartbeatIntervall is accepted.",
+          "recommendation": "For V2.0 use only HeartbeatInterval with IBIS-IP.duration; do not accept stale spellings as aliases."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "V2.0 input uses HertbeatIntervall",
+          "V2.0 input uses historical HeartbeatIntervall",
+          "HeartbeatInterval carries non-duration lexical content"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V20_2026-09-03.md",
+          "note": "Frozen terminal state executable_confirmed."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 Base V2.0 PDF SHA-256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_SystemDocumentationService_V2.0.xsd; blob ab959dddbfa2b8ca420af1b079501f94cff38051",
+          "note": "Exact selected schema context for this finding."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-130 / evidence run 33780668141 / closure run 33781049413",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        }
+      ],
+      "notes": "Version-specific boundary: V1.0 HeartbeatIntervall must not be normalized into V2.0."
+    },
+    {
+      "finding_id": "DR3012V20-004",
+      "service": "SystemDocumentationService",
+      "version_scope": [
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemDocumentationService_V2.0.xsd",
+          "note": "Correct heading and exact XSD use SystemDocumentationService; nearby prose contains SystemDocumenationService."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "identifier_typo",
+      "secondary_issue_kinds": [
+        "documentation_spelling",
+        "service_name_typo"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "warning",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Correct heading is followed by the narrative typo SystemDocumenationService."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact official XSD uses SystemDocumentationService."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "SystemDocumentation V2.0: SystemDocumenationService ist ein PDF-Tippfehler",
+          "short": "Überschrift und XSD verwenden SystemDocumentationService.",
+          "long": "Der Fließtext enthält eine vertauschte Schreibweise des Servicenamens. Die offizielle XSD und die korrekte Überschrift bestätigen SystemDocumentationService; die PDF-Form ist kein Alias.",
+          "recommendation": "SystemDocumentationService aus der XSD verwenden und SystemDocumenationService nur als dokumentierten Tippfehler diagnostizieren."
+        },
+        "en": {
+          "title": "SystemDocumentation V2.0: SystemDocumenationService is a PDF typo",
+          "short": "Heading and XSD use SystemDocumentationService.",
+          "long": "The prose contains a transposed spelling of the service name. The official XSD and correct heading confirm SystemDocumentationService; the PDF form is not an alias.",
+          "recommendation": "Use SystemDocumentationService from XSD and diagnose SystemDocumenationService only as a documented typo."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "Documentation-derived resolver/codegen encounters SystemDocumenationService"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V20_2026-09-03.md",
+          "note": "Frozen terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 Base V2.0 PDF SHA-256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_SystemDocumentationService_V2.0.xsd; blob ab959dddbfa2b8ca420af1b079501f94cff38051",
+          "note": "Exact selected schema context for this finding."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-130 / evidence run 33780668141 / closure run 33781049413",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        }
+      ]
+    },
+    {
+      "finding_id": "DR3012V20-005",
+      "service": "SystemManagementService",
+      "version_scope": [
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "SystemManagement introduction contains unresolved chapter-range placeholders in German and English."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "editorial_residue",
+      "secondary_issue_kinds": [
+        "unresolved_cross_reference_placeholder",
+        "bilingual_document_residue"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "info",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Both language tracks visibly contain unresolved chapter-range placeholder text."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "SystemManagement V2.0: ungelöste Kapitelbereich-Platzhalter",
+          "short": "In beiden Sprachfassungen stehen redaktionelle Platzhalter.",
+          "long": "Die Einführung enthält nicht ersetzte Platzhalter für Kapitelbereiche. Sie sind weder Identifier noch Versions- oder XML-Information und dürfen technisch nicht interpretiert werden.",
+          "recommendation": "Als Dokumentationsrest behandeln und nicht in Routing-, Versions- oder Validierungslogik übernehmen."
+        },
+        "en": {
+          "title": "SystemManagement V2.0: unresolved chapter-range placeholders",
+          "short": "Both language tracks retain editorial placeholders.",
+          "long": "The introduction contains unreplaced chapter-range placeholders. They are not identifiers, version data, or XML information and must not be interpreted technically.",
+          "recommendation": "Treat them as documentation residue and keep them out of routing, version, and validation logic."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V20_2026-09-03.md",
+          "note": "Frozen terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 Base V2.0 PDF SHA-256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-130 / evidence run 33780668141 / closure run 33781049413",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        }
+      ]
+    },
+    {
+      "finding_id": "DR3012V20-006",
+      "service": "DeviceManagementService",
+      "version_scope": [
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Operation inventory lists SubscribeDeviceInformation but detailed subsection sequence has no dedicated heading; generic subscription context remains."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "other",
+      "secondary_issue_kinds": [
+        "missing_dedicated_operation_heading",
+        "operation_inventory_detail_asymmetry",
+        "generic_subscription_context"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "info",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "SubscribeDeviceInformation appears in the operation inventory but no dedicated detailed heading exists."
+        },
+        {
+          "type": "common_conventions",
+          "note": "Generic subscription modelling remains, so the missing heading does not prove the operation unsupported."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "DMS V2.0: SubscribeDeviceInformation ohne eigene Detailüberschrift",
+          "short": "Das Inventar nennt die Operation, die Detailfolge nicht.",
+          "long": "Die Dokumentation ist strukturell asymmetrisch: SubscribeDeviceInformation steht im Operation-Inventar, besitzt aber keine eigene Detailüberschrift. Wegen des generischen Subscription-Kontexts darf daraus keine fehlende Protokollunterstützung abgeleitet werden.",
+          "recommendation": "Unterstützung nicht ausschließlich aus Detailüberschriften ableiten; den Befund als Dokumentationsasymmetrie behandeln."
+        },
+        "en": {
+          "title": "DMS V2.0: SubscribeDeviceInformation lacks a dedicated detail heading",
+          "short": "The inventory lists the operation but the detail sequence does not.",
+          "long": "The documentation is structurally asymmetric: SubscribeDeviceInformation is in the operation inventory but has no dedicated heading. Given generic subscription context, this does not prove the protocol operation unsupported.",
+          "recommendation": "Do not derive support solely from detailed headings; treat this as a documentation asymmetry."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V20_2026-09-03.md",
+          "note": "Frozen terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 Base V2.0 PDF SHA-256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-130 / evidence run 33780668141 / closure run 33781049413",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        }
+      ]
+    },
+    {
+      "finding_id": "DR3012V20-007",
+      "service": "DeviceManagementService",
+      "version_scope": [
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.0.xsd",
+          "note": "GetDeviceConfiguration prose describes setting the parameter; SetDeviceConfiguration is the actual setter and XSD preserves direction."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "wrong_operation_reference",
+      "secondary_issue_kinds": [
+        "getter_setter_semantic_swap",
+        "copy_paste_error"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "documentation_only"
+      ],
+      "sdk_behavior": "warning",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "GetDeviceConfiguration prose describes a set action; the following SetDeviceConfiguration is the actual setter."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact DMS XSD preserves separate GetDeviceConfiguration and SetDeviceConfiguration structures."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "DMS V2.0: GetDeviceConfiguration beschreibt fälschlich das Setzen",
+          "short": "Der Getter-Abschnitt enthält Setter-Semantik.",
+          "long": "Der Text zu GetDeviceConfiguration beschreibt das Setzen eines Parameters. Die folgende SetDeviceConfiguration-Operation und die offizielle XSD bestätigen die getrennte Getter-/Setter-Richtung.",
+          "recommendation": "Operationssemantik anhand von Operationsname und XSD beibehalten; den Getter-Satz als Copy/Paste-Fehler behandeln."
+        },
+        "en": {
+          "title": "DMS V2.0: GetDeviceConfiguration incorrectly describes setting",
+          "short": "The getter section contains setter semantics.",
+          "long": "The GetDeviceConfiguration prose describes setting a parameter. The following SetDeviceConfiguration operation and official XSD confirm distinct getter/setter direction.",
+          "recommendation": "Keep operation semantics aligned with operation name and XSD; treat the getter sentence as a copy/paste defect."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V20_2026-09-03.md",
+          "note": "Frozen terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 Base V2.0 PDF SHA-256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_DeviceManagementService_V2.0.xsd; blob 74189e0da65563eeb084ec2f3c400e9668d1ee1a",
+          "note": "Exact selected schema context for this finding."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-130 / evidence run 33780668141 / closure run 33781049413",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        }
+      ]
+    },
+    {
+      "finding_id": "DR3012V20-008",
+      "service": "DeviceManagementService",
+      "version_scope": [
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.0.xsd",
+          "note": "GetDeviceInformationResponseStructure and response data are described as request structures; exact XSD confirms response direction."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "wrong_structure_reference",
+      "secondary_issue_kinds": [
+        "request_response_direction_error",
+        "copy_paste_error"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "documentation_only"
+      ],
+      "sdk_behavior": "warning",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Response structure/data are described as request structures in the prose."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact DMS XSD declares them as response structures/data."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "DMS V2.0: GetDeviceInformation-Antwort wird als Request beschrieben",
+          "short": "ResponseStructure und ResponseData werden fälschlich als Request bezeichnet.",
+          "long": "Die Dokumentation weist den GetDeviceInformation-Antwortstrukturen die falsche Richtung zu. Die offizielle XSD bestätigt die Response-Strukturen; der Textfehler darf Request/Response-Mapping nicht umkehren.",
+          "recommendation": "Request/Response-Richtung aus der ausgewählten XSD übernehmen und den PDF-Text als redaktionellen Fehler behandeln."
+        },
+        "en": {
+          "title": "DMS V2.0: GetDeviceInformation response is described as a request",
+          "short": "ResponseStructure and ResponseData are incorrectly called request structures.",
+          "long": "The documentation assigns the wrong direction to GetDeviceInformation response structures. The official XSD confirms the response structures; the wording defect must not reverse request/response mapping.",
+          "recommendation": "Use request/response direction from the selected XSD and treat the PDF text as an editorial defect."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V20_2026-09-03.md",
+          "note": "Frozen terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 Base V2.0 PDF SHA-256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_DeviceManagementService_V2.0.xsd; blob 74189e0da65563eeb084ec2f3c400e9668d1ee1a",
+          "note": "Exact selected schema context for this finding."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-130 / evidence run 33780668141 / closure run 33781049413",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        }
+      ]
+    },
+    {
+      "finding_id": "DR3012V21-001",
+      "service": "VDV 301-2 Base / Service document routing",
+      "version_scope": [
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "authority": "official_release",
+          "xsd_profile": "mixed release route: DeviceManagement V2.1 / SystemDocumentation V2.0 / SystemManagement V1.0",
+          "note": "Base prose routes DMS to 301-2-2 and SystemDocumentation to 301-2-4; official document identity and VDV-301-2.1 release tag establish the actual route."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "provenance",
+      "primary_issue_kind": "version_routing_issue",
+      "secondary_issue_kinds": [
+        "wrong_document_reference",
+        "service_document_number_mismatch"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "documentation_only"
+      ],
+      "sdk_behavior": "warning",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "V2.1 Base prose repeatedly assigns DMS to VDV 301-2-2 and SystemDocumentation to VDV 301-2-4."
+        },
+        {
+          "type": "official_release_provenance",
+          "note": "Official catalog identity assigns those part numbers to other services; VDV-301-2.1 supplies DMS V2.1, SystemDocumentation V2.0, and SystemManagement V1.0."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Base V2.1: DMS/SystemDocumentation auf falsche Teildokumente geroutet",
+          "short": "Die Dokumentation nennt 301-2-2 bzw. 301-2-4, die offizielle Quellenzuordnung widerspricht dem.",
+          "long": "Die V2.1-Basisdokumentation verwendet wiederholt falsche Teildokumentnummern. Die offizielle Dokumentidentität und der VDV-301-2.1-Release-Tag liefern die tatsächliche gemischte Schemafamilie. Die falschen Nummern dürfen kein Schema-Routing steuern.",
+          "recommendation": "Service- und Schema-Routing aus der offiziellen versionsspezifischen Release-Provenienz ableiten, nicht aus den fehlerhaften Nummern im Fließtext."
+        },
+        "en": {
+          "title": "Base V2.1: DMS/SystemDocumentation routed to wrong part documents",
+          "short": "The documentation names 301-2-2 and 301-2-4, conflicting with official source identity.",
+          "long": "The V2.1 base documentation repeatedly uses wrong part-document numbers. Official document identity and the VDV-301-2.1 release tag provide the actual mixed schema family. The wrong numbers must not control schema routing.",
+          "recommendation": "Derive service and schema routing from official version-specific release provenance, not from the incorrect prose numbers."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V21_2026-09-03.md",
+          "note": "Frozen terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 Base V2.1 PDF SHA-256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "xsd",
+          "reference": "VDV-301-2.1 route: DMS 2.1 blob 191b43e01cdaba14b247725689a913c244a67eed; SystemDocumentation 2.0 blob ab959dddbfa2b8ca420af1b079501f94cff38051; SystemManagement 1.0 blob 2d32630a0f1981e980e6a466e3f6a69136410f24",
+          "note": "Exact selected schema context for this finding."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-131 / evidence run 33781385699 / closure run 33781657200",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        }
+      ]
+    },
+    {
+      "finding_id": "DR3012GC22-001",
+      "service": "VDV 301-2 General Conventions",
+      "version_scope": [
+        {
+          "version": "General Conventions V2.2",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Multiple unresolved Word-reference placeholders occur in independent contexts; history still states no technical corrections."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "editorial_residue",
+      "secondary_issue_kinds": [
+        "unresolved_cross_reference_marker",
+        "multiple_document_locations"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "info",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Multiple independent V2.2 contexts contain unresolved Word-reference placeholder text."
+        },
+        {
+          "type": "version_history",
+          "note": "V2.2 history states no technical corrections, confirming editorial residue rather than a declared semantic change."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "General Conventions V2.2: mehrere ungelöste Word-Querverweise",
+          "short": "Mehrere Stellen enthalten nicht aufgelöste Verweisfehler.",
+          "long": "Die General Conventions V2.2 enthalten an mehreren unabhängigen Stellen Word-Platzhalter für fehlgeschlagene Querverweise. Diese Texte sind redaktionelle Artefakte ohne normative XML- oder Service-Bedeutung.",
+          "recommendation": "Nicht als normative Inhalte verarbeiten; als Dokumentationsfehler kennzeichnen oder ignorieren."
+        },
+        "en": {
+          "title": "General Conventions V2.2: multiple unresolved Word cross-references",
+          "short": "Several locations contain unresolved reference errors.",
+          "long": "General Conventions V2.2 contain Word placeholders for failed cross-references in several independent locations. These strings are editorial artifacts with no normative XML or service meaning.",
+          "recommendation": "Do not process them as normative content; report or ignore them as documentation defects."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_GC22_2026-09-03.md",
+          "note": "Frozen terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 General Conventions V2.2 PDF SHA-256 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-132 / evidence run 33782124756 / closure run 33782389010",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        }
+      ]
+    },
+    {
+      "finding_id": "DR3012GC22-002",
+      "service": "VDV 301-2 General Conventions / DNS-SD",
+      "version_scope": [
+        {
+          "version": "General Conventions V2.2",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "German TOC/body number both SRV and TXT as 3.3.1; adjacent English uses 3.3.1 and 3.3.2."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "editorial_residue",
+      "secondary_issue_kinds": [
+        "duplicate_section_number",
+        "language_variant_control"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "German V2.2 numbering duplicates 3.3.1 for SRV and TXT; English distinguishes 3.3.1/3.3.2."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "General Conventions V2.2: deutsche SRV/TXT-Abschnitte teilen fälschlich 3.3.1",
+          "short": "Deutsch nummeriert SRV und TXT beide als 3.3.1.",
+          "long": "Die deutsche Nummerierung enthält eine doppelte 3.3.1, während die englische Sprachspur die beabsichtigte Folge 3.3.1/3.3.2 zeigt. Das ist ein reiner Navigationsfehler.",
+          "recommendation": "Nur als Dokumentations-/Navigationsfehler behandeln."
+        },
+        "en": {
+          "title": "General Conventions V2.2: German SRV/TXT sections incorrectly share 3.3.1",
+          "short": "German numbers both SRV and TXT as 3.3.1.",
+          "long": "The German numbering duplicates 3.3.1 while the English track shows the intended 3.3.1/3.3.2 sequence. This is a pure navigation defect.",
+          "recommendation": "Treat it only as a documentation/navigation defect."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_GC22_2026-09-03.md",
+          "note": "Frozen terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 General Conventions V2.2 PDF SHA-256 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-132 / evidence run 33782124756 / closure run 33782389010",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        }
+      ]
+    },
+    {
+      "finding_id": "DR3012GC23-001",
+      "service": "VDV 301-2 General Conventions / Version History",
+      "version_scope": [
+        {
+          "version": "General Conventions V2.3",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Under 7.2 Version 2.3, German subheadings remain 7.1.3/7.1.4 while English uses 7.2.1/7.2.2."
+        },
+        {
+          "version": "General Conventions V2.4",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "V2.4 visibly repairs the history numbering."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "editorial_residue",
+      "secondary_issue_kinds": [
+        "wrong_section_number",
+        "language_variant_control",
+        "later_documentation_correction"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "V2.3 places German 7.1.3/7.1.4 under 7.2 Version 2.3 while English uses 7.2.1/7.2.2."
+        },
+        {
+          "type": "later_official_correction",
+          "note": "V2.4 visibly repairs the numbering."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "General Conventions V2.3: deutsche Versionshistorie bleibt fälschlich im 7.1-Nummernraum",
+          "short": "Unter 7.2 stehen deutsch 7.1.3/7.1.4 statt 7.2.1/7.2.2.",
+          "long": "Die deutsche Versionshistorie setzt versehentlich die Nummerierung des vorherigen Blocks fort. Englische Sprachspur und spätere V2.4-Korrektur bestätigen den redaktionellen Fehler.",
+          "recommendation": "Als historischen Navigationsfehler behandeln; keine Versions- oder Schema-Semantik daraus ableiten."
+        },
+        "en": {
+          "title": "General Conventions V2.3: German version history incorrectly remains in the 7.1 numbering space",
+          "short": "Under 7.2, German shows 7.1.3/7.1.4 instead of 7.2.1/7.2.2.",
+          "long": "The German version history accidentally continues the preceding numbering space. The English track and later V2.4 correction confirm the editorial defect.",
+          "recommendation": "Treat it as a historical navigation defect; derive no version or schema semantics from it."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_GC23_2026-09-04.md",
+          "note": "Frozen terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 General Conventions V2.3 PDF SHA-256 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-133 / evidence run 33842952649 / closure run 33843433114",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        },
+        {
+          "kind": "version_history",
+          "reference": "General Conventions V2.4",
+          "note": "Later publication visibly repairs the V2.3 history numbering."
+        }
+      ]
+    },
+    {
+      "finding_id": "DR3012GC24-001",
+      "service": "VDV 301-2 General Conventions / DeviceClassEnumeration",
+      "version_scope": [
+        {
+          "version": "General Conventions V2.4 official PDF",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "German text uses OnBordUnit while English uses OnBoardUnit."
+        },
+        {
+          "version": "V2.4 candidate/integration schema context",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_Enumerations.xsd (V2.4 candidate/integration)",
+          "note": "Selected candidate DeviceClassEnumeration contains OnBoardUnit; no official VDV-301-2.4 release XSD is established."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "no_strict_xsd_profile",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "identifier_typo",
+      "secondary_issue_kinds": [
+        "language_variant_mismatch",
+        "device_class_spelling",
+        "candidate_only_executable_boundary"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "strict_profile_unavailable",
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "unsupported_profile",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "German V2.4 prints OnBordUnit while English uses OnBoardUnit."
+        },
+        {
+          "type": "candidate_integration_provenance",
+          "note": "The selected V2.4 Enumerations XSD is candidate/integration material from VDVde/VDV301#31, not official release authority."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-134 accepts OnBoardUnit and rejects OnBordUnit in the explicitly selected candidate profile."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "General Conventions V2.4: OnBordUnit ist PDF-Tippfehler; XSD nur Candidate",
+          "short": "Deutsch schreibt OnBordUnit, Englisch und Candidate-XSD OnBoardUnit.",
+          "long": "Die offizielle PDF widerspricht sich sprachübergreifend. Candidate/Integration-Evidence bestätigt ausführbar OnBoardUnit, darf aber nicht als offizielles V2.4-Release-XSD ausgegeben werden. Der PDF-Tippfehler ist bestätigt, ein offizielles Striktprofil nicht.",
+          "recommendation": "OnBordUnit nicht als Alias erfinden; für offizielles V2.4-Striktprofil fail-closed bleiben und Candidate-Validierung nur als nicht-offizielles Analyseprofil nutzen."
+        },
+        "en": {
+          "title": "General Conventions V2.4: OnBordUnit is a PDF typo; XSD is candidate only",
+          "short": "German uses OnBordUnit; English and candidate XSD use OnBoardUnit.",
+          "long": "The official PDF conflicts across language tracks. Candidate/integration evidence executably confirms OnBoardUnit but must not be presented as an official V2.4 release XSD. The PDF typo is confirmed while an official strict profile is not.",
+          "recommendation": "Do not invent an OnBordUnit alias; remain fail-closed for an official V2.4 strict profile and use candidate validation only as a non-official analysis profile."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_GC24_2026-09-04.md",
+          "note": "Frozen terminal state executable_confirmed."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 General Conventions V2.4 PDF SHA-256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "xsd",
+          "reference": "Candidate/integration Enumerations blob 2afed8cf23afa91db92b0f043cc5b4ad428b0f25; provenance VDVde/VDV301#31",
+          "note": "Exact selected schema context for this finding."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-134 / evidence run 33843888080 / closure run 33844432985",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        }
+      ],
+      "notes": "Executable confirmation is candidate-profile evidence only; it does not establish official V2.4 release authority."
+    },
+    {
+      "finding_id": "DR3012GC24-002",
+      "service": "VDV 301-2 General Conventions / IP addressing",
+      "version_scope": [
+        {
+          "version": "General Conventions V2.4",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "German numbering duplicates 2.1.1 for IP addresses and subnet masks/gateways; English uses 2.1.1/2.1.2."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "editorial_residue",
+      "secondary_issue_kinds": [
+        "duplicate_section_number",
+        "language_variant_control"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "German V2.4 duplicates 2.1.1; English distinguishes 2.1.1 and 2.1.2."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "General Conventions V2.4: doppelte deutsche Abschnittsnummer 2.1.1",
+          "short": "Zwei Netzwerk-Unterthemen tragen deutsch dieselbe Nummer.",
+          "long": "Die deutsche Struktur nummeriert IP-Adressen und Subnetzmasken/Gateways beide als 2.1.1. Englisch zeigt die beabsichtigte Folge 2.1.1/2.1.2. Der Fehler ist rein navigativ.",
+          "recommendation": "Als Dokumentationsnummerierungsfehler behandeln; keine technische Bedeutung ableiten."
+        },
+        "en": {
+          "title": "General Conventions V2.4: duplicate German section number 2.1.1",
+          "short": "Two network subtopics carry the same number in German.",
+          "long": "The German structure numbers IP addresses and subnet masks/gateways both as 2.1.1. English shows the intended 2.1.1/2.1.2 sequence. The defect is purely navigational.",
+          "recommendation": "Treat it as a documentation numbering defect; derive no technical meaning."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_GC24_2026-09-04.md",
+          "note": "Frozen terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 General Conventions V2.4 PDF SHA-256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-134 / evidence run 33843888080 / closure run 33844432985",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        }
+      ]
+    },
+    {
+      "finding_id": "DR3012GC24-003",
+      "service": "VDV 301-2 General Conventions / Version syntax",
+      "version_scope": [
+        {
+          "version": "General Conventions V2.4",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "English allowed-version-character list visibly duplicates digit 2; this is editorial residue, not an extension of executable syntax."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "editorial_residue",
+      "secondary_issue_kinds": [
+        "duplicate_character_in_list",
+        "version_syntax_documentation_residue"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The English V2.4 allowed-character list contains digit 2 twice."
+        },
+        {
+          "type": "common_conventions",
+          "note": "Duplicating the same token does not add a character or alter executable version syntax."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "General Conventions V2.4: Ziffer 2 in Versionszeichenliste doppelt",
+          "short": "Die englische Liste enthält die Ziffer 2 zweimal.",
+          "long": "Das ist redaktionelle Redundanz. Ein identisches Zeichen zweimal aufzulisten erweitert weder den Zeichenvorrat noch die ausführbare Syntax.",
+          "recommendation": "Keine zusätzliche Parser- oder Validierungsregel daraus ableiten."
+        },
+        "en": {
+          "title": "General Conventions V2.4: digit 2 duplicated in the version-character list",
+          "short": "The English list contains digit 2 twice.",
+          "long": "This is editorial redundancy. Listing the same character twice neither expands the character set nor changes executable syntax.",
+          "recommendation": "Derive no additional parser or validation rule from it."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_GC24_2026-09-04.md",
+          "note": "Frozen terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 General Conventions V2.4 PDF SHA-256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-134 / evidence run 33843888080 / closure run 33844432985",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        }
+      ]
+    },
+    {
+      "finding_id": "DR3012GC24-004",
+      "service": "VDV 301-2 General Conventions / ServiceNameEnumeration",
+      "version_scope": [
+        {
+          "version": "General Conventions V2.4 official PDF",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Examples/glossary contain multiple typo-like service identifiers."
+        },
+        {
+          "version": "V2.4 candidate/integration schema context",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_Enumerations.xsd (V2.4 candidate/integration)",
+          "note": "Selected candidate ServiceNameEnumeration contains corrected identifiers and rejects typo forms; profile is not official release authority."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "no_strict_xsd_profile",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "identifier_typo",
+      "secondary_issue_kinds": [
+        "service_name_typo",
+        "example_glossary_identifier_mismatch",
+        "candidate_only_executable_boundary"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "strict_profile_unavailable",
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "unsupported_profile",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Multiple typo-like service identifiers are visible in examples/glossary."
+        },
+        {
+          "type": "candidate_integration_provenance",
+          "note": "Selected ServiceNameEnumeration is candidate/integration authority, not an official V2.4 release XSD."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-134 candidate-profile samples accept corrected identifiers and reject typo forms."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "General Conventions V2.4: fehlerhafte Service-Identifier; XSD nur Candidate",
+          "short": "PDF-Bezeichnungen weichen von ServiceNameEnumeration ab; der ausführbare Gegenbeweis ist nicht-offiziell.",
+          "long": "Beispiele/Glossar enthalten mehrere serviceähnliche Tippfehler. Der Candidate/Integration-XSD-Kontext enthält die korrigierten Werte und EV-134 verwirft die Tippformen. Diese Evidence darf nicht zur offiziellen V2.4-Release-Autorität hochgestuft werden.",
+          "recommendation": "Keine Tippfehler-Aliasse erzeugen; Candidate-Enumeration nur als nicht-offizielles Analyseprofil verwenden und für offizielles V2.4-Striktprofil fail-closed bleiben."
+        },
+        "en": {
+          "title": "General Conventions V2.4: malformed service identifiers; XSD is candidate only",
+          "short": "PDF names differ from ServiceNameEnumeration; the executable disproof is non-official.",
+          "long": "Examples/glossary contain several service-like typos. The candidate/integration XSD context contains corrected values and EV-134 rejects the typo forms. This evidence must not be promoted to official V2.4 release authority.",
+          "recommendation": "Do not create typo aliases; use the candidate enumeration only as a non-official analysis profile and remain fail-closed for an official V2.4 strict profile."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_GC24_2026-09-04.md",
+          "note": "Frozen terminal state executable_confirmed."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 General Conventions V2.4 PDF SHA-256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "xsd",
+          "reference": "Candidate/integration Enumerations blob 2afed8cf23afa91db92b0f043cc5b4ad428b0f25; provenance VDVde/VDV301#31",
+          "note": "Exact selected schema context for this finding."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-134 / evidence run 33843888080 / closure run 33844432985",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        }
+      ],
+      "notes": "Candidate-profile executable evidence is preserved without promoting it to official release authority."
+    },
+    {
+      "finding_id": "DR3012GC24-005",
+      "service": "VDV 301-2 General Conventions / Version model",
+      "version_scope": [
+        {
+          "version": "General Conventions V2.4",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Document states there is no common IBIS-IP version, yet later uses stale wording 'Version 1.0 of IBIS-IP'."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "semantic_contradiction",
+      "secondary_issue_kinds": [
+        "stale_umbrella_version_wording",
+        "internal_document_contradiction"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "info",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "V2.4 both denies a common IBIS-IP version and later refers to 'Version 1.0 of IBIS-IP'."
+        },
+        {
+          "type": "common_conventions",
+          "note": "No umbrella schema version may be inferred from the stale phrase."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "General Conventions V2.4: widersprüchliche Aussage zu gemeinsamer IBIS-IP-Version",
+          "short": "Keine gemeinsame Version wird erklärt, später steht dennoch „Version 1.0 of IBIS-IP“.",
+          "long": "Die spätere Formulierung ist ein veralteter Dokumentationsrest und darf nicht als globale Versionsnummer oder Schema-Routing-Schlüssel interpretiert werden.",
+          "recommendation": "Keine gemeinsame IBIS-IP-Schemaversion daraus ableiten; versions- und servicespezifische Autorität verwenden."
+        },
+        "en": {
+          "title": "General Conventions V2.4: contradictory wording about a common IBIS-IP version",
+          "short": "The document denies a common version but later says 'Version 1.0 of IBIS-IP'.",
+          "long": "The later phrase is stale documentation residue and must not be interpreted as a global version number or schema-routing key.",
+          "recommendation": "Do not infer a common IBIS-IP schema version from it; use version- and service-specific authority."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_GC24_2026-09-04.md",
+          "note": "Frozen terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 General Conventions V2.4 PDF SHA-256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+          "note": "Byte-pinned official PDF source used by the revalidation."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-134 / evidence run 33843888080 / closure run 33844432985",
+          "note": "Pinned evidence-gate revalidation for this subblock."
+        }
+      ]
+    }
+  ]
+}
