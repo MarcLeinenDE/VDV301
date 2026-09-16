@@ -1,0 +1,164 @@
+{
+  "block_version": "0.1",
+  "block_id": "DRARA24",
+  "review_date": "2026-09-16",
+  "source_baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
+  "source_terminal_report": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARA_V24_2026-09-03.md",
+  "source_deep_read": "docs/pdf_xsd_semantic_audit/deep_read/ARA_V2.4.md",
+  "review_policy": "manual_semantic_review_bilingual_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "DRARA24-001",
+      "service": "AnalogRadioService",
+      "version_scope": [
+        {
+          "version": "V2.4",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The official PDF URI template includes http://, while the concrete page-13 example omits the scheme."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "stale_diagram_or_example",
+      "secondary_issue_kinds": [
+        "uri_example_missing_scheme",
+        "template_example_inconsistency"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "info",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Page 13 states the URI form as http://Host:Port/ServiceName/Operation and immediately follows it with a concrete example that begins 192.168.1.2:8080/... without http://."
+        },
+        {
+          "type": "parallel_structure_pattern",
+          "note": "The contradiction is between the adjacent URI template and its concrete example inside the same pinned official PDF; no XML or schema inference is required."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "AnalogRadioService V2.4: URI-Beispiel lässt das Schema http:// weg",
+          "short": "Die URI-Schablone enthält http://, das direkt folgende konkrete Beispiel beginnt jedoch ohne URI-Schema.",
+          "long": "Auf Seite 13 der offiziellen AnalogRadioService-V2.4-PDF wird die Service-URI als http://Host:Port/ServiceName/Operation beschrieben. Das unmittelbar folgende konkrete Beispiel lautet dagegen 192.168.1.2:8080/AnalogRadioService/SendFFSKTelegram und lässt http:// weg. Das ist eine bestätigte Dokumentations-/Beispielinkonsistenz und kein Nachweis eines Laufzeitfehlers.",
+          "recommendation": "Das konkrete Beispiel nicht als Beleg für eine scheme-lose Laufzeit-URI verwenden. Für Implementierungsregeln die explizite URI-Schablone bzw. die jeweils maßgebliche Protokollspezifikation heranziehen."
+        },
+        "en": {
+          "title": "AnalogRadioService V2.4: URI example omits the http:// scheme",
+          "short": "The URI template includes http://, but the immediately following concrete example starts without a URI scheme.",
+          "long": "Page 13 of the official AnalogRadioService V2.4 PDF describes the service URI as http://Host:Port/ServiceName/Operation. The immediately following concrete example is 192.168.1.2:8080/AnalogRadioService/SendFFSKTelegram and omits http://. This is a confirmed documentation/example inconsistency, not evidence of a runtime implementation defect.",
+          "recommendation": "Do not use the concrete example as evidence for a scheme-less runtime URI. Derive implementation rules from the explicit URI template or the applicable protocol specification."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARA_V24_2026-09-03.md",
+          "note": "Terminal state context_verified."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/ARA_V2.4.md",
+          "note": "FR-ARA24-OBS-003 and historical reconciliation."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official AnalogRadioService V2.4 PDF SHA-256 d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c; page 13",
+          "note": "Pinned visual source for the adjacent URI template/example inconsistency."
+        },
+        {
+          "kind": "evidence",
+          "reference": "Pinned-byte render/text run 33269472968; job 99145237184; artifact 9719652068",
+          "note": "Current-gate visible review of page 13."
+        }
+      ],
+      "notes": "Documentation-only. The separate SendFFSKTelegram operation-name inconsistency remains ARA-004 and is not duplicated here."
+    },
+    {
+      "finding_id": "DRARA24-002",
+      "service": "AnalogRadioService",
+      "version_scope": [
+        {
+          "version": "V2.4",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Grouped visible English spelling/editorial residue in the pinned official PDF."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "documentation_spelling",
+      "secondary_issue_kinds": [
+        "editorial_residue",
+        "grouped_spelling_typos"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The pinned PDF visibly contains AnlogRadioService on page 10 and additional spelling residue including pre-emtion, contians, pre-amption and BitrateEnumerationis on pages 8 and 12."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "AnalogRadioService V2.4: gruppierte redaktionelle Schreibfehler",
+          "short": "Die offizielle PDF enthält mehrere sichtbare Schreibfehler ohne technische oder ausführbare Wirkung.",
+          "long": "Im geprüften AnalogRadioService-V2.4-Dokument sind mehrere redaktionelle Schreibfehler sichtbar, darunter AnlogRadioService sowie pre-emtion, contians, pre-amption und BitrateEnumerationis. Sie werden bewusst als ein gruppierter Dokumentationsbefund geführt und nicht zu separaten technischen Findings aufgebläht.",
+          "recommendation": "Als redaktionelle Dokumentationsfehler behandeln; daraus keine XML-, XSD-, Identifier- oder Runtime-Regel ableiten."
+        },
+        "en": {
+          "title": "AnalogRadioService V2.4: grouped editorial spelling errors",
+          "short": "The official PDF contains several visible spelling errors with no technical or executable effect.",
+          "long": "The reviewed AnalogRadioService V2.4 document contains several editorial spelling errors, including AnlogRadioService as well as pre-emtion, contians, pre-amption and BitrateEnumerationis. They are intentionally retained as one grouped documentation finding rather than inflated into separate technical findings.",
+          "recommendation": "Treat these as editorial documentation errors only; do not derive XML, XSD, identifier or runtime rules from them."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARA_V24_2026-09-03.md",
+          "note": "Terminal state context_verified."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/ARA_V2.4.md",
+          "note": "FR-ARA24-OBS-004 and FR-ARA24-OBS-005."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official AnalogRadioService V2.4 PDF SHA-256 d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c; pages 8, 10 and 12",
+          "note": "Pinned visual source for the grouped editorial residue."
+        },
+        {
+          "kind": "evidence",
+          "reference": "Pinned-byte render/text run 33269472968; job 99145237184; artifact 9719652068",
+          "note": "Current-gate visible review of the affected pages."
+        }
+      ],
+      "notes": "Grouped editorial-only finding; no runtime diagnostic is warranted."
+    }
+  ]
+}
