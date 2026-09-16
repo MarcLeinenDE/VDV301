@@ -1,0 +1,106 @@
+{
+  "block_version": "0.1",
+  "block_id": "DRCOM23",
+  "review_date": "2026-09-16",
+  "source_baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
+  "source_terminal_report": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V23_2026-09-04.md",
+  "source_deep_read": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3_FRESH_2026-09-02.md",
+  "review_policy": "manual_semantic_review_bilingual_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "DRCOM23-001",
+      "service": "Common / StopInformationRequest",
+      "version_scope": [
+        {
+          "version": "Common V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.3.xsd",
+          "note": "Official PDF page 32 documents ArrivalExpected and DepartureExpected in StopInformationRequest; exact official VDV-301-2.3 XSD contains neither field there, while both are valid members of StopInformationStructure."
+        }
+      ],
+      "review_state": "sdk_ready",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "wrong_structure_reference",
+      "secondary_issue_kinds": [
+        "field_in_wrong_structure",
+        "request_vs_stop_information_model",
+        "pdf_documents_xsd_rejected_request_fields"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation",
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Pinned Common V2.3 page 32 visibly documents ArrivalExpected 0:1 and DepartureExpected 0:1 inside StopInformationRequest."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Exact official VDV-301-2.3 XSD contains neither field in StopInformationRequestStructure, but contains both in StopInformationStructure."
+        },
+        {
+          "type": "version_history",
+          "note": "The V2.3 document history states that ArrivalExpected and DepartureExpected were added to StopInformation and references both StopInformation and StopInformationRequest sections, supporting a documentation placement error rather than a hidden request-schema feature."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-121 rejects either field in StopInformationRequest and accepts both in StopInformationStructure."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "COMMON V2.3: ArrivalExpected/DepartureExpected stehen in der PDF im falschen Request-Modell",
+          "short": "Die PDF führt beide Felder in StopInformationRequest auf; die offizielle V2.3-XSD erlaubt sie dort nicht, sondern in StopInformation.",
+          "long": "Die offizielle Common-V2.3-PDF dokumentiert ArrivalExpected und DepartureExpected auf Seite 32 innerhalb von StopInformationRequest jeweils als optionale Felder. Die exakte offizielle VDV-301-2.3-XSD enthält beide Elemente jedoch nicht in StopInformationRequestStructure; sie gehören zu StopInformationStructure. EV-121 bestätigt die Grenze ausführbar: Beide Felder werden im Request abgelehnt und in StopInformation akzeptiert.",
+          "recommendation": "ArrivalExpected und DepartureExpected in V2.3 nicht als Request-Felder implementieren oder als Alias akzeptieren. Bei einem entsprechenden XSD-Fehler auf die PDF-Platzierungsabweichung hinweisen und die offizielle XSD-Struktur beibehalten."
+        },
+        "en": {
+          "title": "COMMON V2.3: ArrivalExpected/DepartureExpected are placed in the wrong request model in the PDF",
+          "short": "The PDF lists both fields in StopInformationRequest; the official V2.3 XSD does not allow them there and places them in StopInformation.",
+          "long": "The official Common V2.3 PDF documents ArrivalExpected and DepartureExpected on page 32 as optional fields of StopInformationRequest. The exact official VDV-301-2.3 XSD contains neither element in StopInformationRequestStructure; both belong to StopInformationStructure. EV-121 confirms the executable boundary: each field is rejected in the request and accepted in StopInformation.",
+          "recommendation": "Do not implement ArrivalExpected or DepartureExpected as V2.3 request fields or compatibility aliases. When the selected XSD rejects them, explain the PDF placement discrepancy and retain the official XSD structure."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "Common V2.3 StopInformationRequest is rejected because it contains ArrivalExpected",
+          "Common V2.3 StopInformationRequest is rejected because it contains DepartureExpected"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V23_2026-09-04.md",
+          "note": "Terminal state executable_confirmed."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3_FRESH_2026-09-02.md",
+          "note": "FR-COM23-011 source-only observation freeze."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official Common V2.3 PDF SHA-256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b; page 32"
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_common_V2.3.xsd blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+          "note": "Exact official VDV-301-2.3 authority."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-121; EV-139 closure run 33857906408",
+          "note": "Request rejection and StopInformation acceptance boundary plus current-gate closure."
+        }
+      ],
+      "notes": "The pre-existing DRCOM21-001 StopName cardinality facet persists separately; this V2.3-specific identity covers only ArrivalExpected/DepartureExpected being documented in the request while absent from the request XSD."
+    }
+  ]
+}
