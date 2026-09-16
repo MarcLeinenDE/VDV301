@@ -1,0 +1,114 @@
+{
+  "block_version": "0.1",
+  "block_id": "DRCOM24",
+  "review_date": "2026-09-16",
+  "source_baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
+  "source_terminal_report": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V24_2026-09-04.md",
+  "review_policy": "manual_semantic_review_bilingual_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "DRCOM24-001",
+      "service": "Common Data Structures / LineInformation",
+      "version_scope": [
+        {
+          "version": "Common V2.4 official documentation",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The official V2.4 PDF documents LineName and LineShortName as IBIS-IP.string 0:1; no official VDV-301-2.4 release tag/XSD authority is established."
+        },
+        {
+          "version": "Common V2.4 candidate/integration",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd",
+          "note": "Selected candidate/integration family from candidate/dms-v2.4-xsd / upstream draft VDVde/VDV301#31; Common blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 and Enumerations blob 2afed8cf23afa91db92b0f043cc5b4ad428b0f25. This is not official release authority."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "no_strict_xsd_profile",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "wrong_type_reference",
+      "secondary_issue_kinds": [
+        "cardinality_mismatch",
+        "simple_vs_international_text_shape",
+        "candidate_integration_only_executable_boundary"
+      ],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "strict_profile_unavailable",
+        "pdf_can_mislead_implementation",
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "unsupported_profile",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The byte-pinned official Common V2.4 PDF page 28 visibly documents LineInformation.LineName and LineShortName as IBIS-IP.string with cardinality 0:1."
+        },
+        {
+          "type": "candidate_integration_provenance",
+          "note": "The selected V2.4 Common/Enumerations schema family is candidate/integration material from candidate/dms-v2.4-xsd / upstream draft VDVde/VDV301#31 and must not be presented as an official V2.4 release."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-122 confirms InternationalTextType-shaped and repeated LineName values under the selected candidate profile and rejects the PDF-derived simple value-only shape."
+        },
+        {
+          "type": "official_release_provenance",
+          "note": "No official VDV-301-2.4 release tag is established; therefore the executable candidate result cannot define an official strict V2.4 SDK profile."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "COMMON V2.4: LineName/LineShortName unterscheiden sich zwischen PDF und Candidate-XSD",
+          "short": "Die offizielle PDF beschreibt beide Felder als einfachen IBIS-IP.string 0:1; das ausgewählte Candidate/Integration-XSD modelliert InternationalTextType 0:*.",
+          "long": "In der offiziellen COMMON-V2.4-Dokumentation werden LineInformation.LineName und LineShortName als IBIS-IP.string mit Kardinalität 0:1 beschrieben. Das ausgewählte V2.4-Candidate/Integration-XSD modelliert beide stattdessen als InternationalTextType und erlaubt Wiederholung. EV-122 bestätigt diese unterschiedliche XML-Form ausführbar. Da für V2.4 jedoch kein offizieller Release-Tag bzw. keine offizielle Release-XSD-Autorität nachgewiesen ist, ist dies eine bestätigte PDF-vs-Candidate-Abweichung und keine Aussage über ein offizielles V2.4-Striktprofil.",
+          "recommendation": "Für ein offizielles V2.4-Striktprofil fail-closed bleiben. Die Candidate/Integration-XSD nur ausdrücklich als nicht-offizielles Analyseprofil verwenden; weder deren InternationalTextType-Form noch die PDF-String-Form als offizielle V2.4-Autorität ausgeben."
+        },
+        "en": {
+          "title": "COMMON V2.4: LineName/LineShortName differ between PDF and candidate XSD",
+          "short": "The official PDF documents both fields as simple IBIS-IP.string 0:1, while the selected candidate/integration XSD models InternationalTextType 0:*.",
+          "long": "The official COMMON V2.4 documentation describes LineInformation.LineName and LineShortName as IBIS-IP.string with cardinality 0:1. The selected V2.4 candidate/integration XSD instead models both as InternationalTextType and permits repetition. EV-122 executably confirms the different XML shape. Because no official VDV-301-2.4 release tag or official release-XSD authority is established, this is a confirmed PDF-versus-candidate mismatch, not a conclusion about an official V2.4 strict profile.",
+          "recommendation": "Remain fail-closed for an official V2.4 strict profile. Use the candidate/integration XSD only as an explicitly non-official analysis profile; do not present either its InternationalTextType shape or the PDF string shape as official V2.4 authority."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V24_2026-09-04.md",
+          "note": "Terminal state executable_confirmed, explicitly scoped to selected candidate/integration V2.4 only until an official release exists."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official Common V2.4 PDF SHA-256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a; page 28",
+          "note": "Byte-pinned visual source for LineName and LineShortName as IBIS-IP.string 0:1."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_common_V2.4.xsd blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4; IBIS-IP_Enumerations_V2.4.xsd blob 2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+          "note": "Selected candidate/integration XSD family; not official release authority."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-122 / run 33716645876 / job 100527119224",
+          "note": "Executable confirmation of candidate InternationalText/repetition shape and rejection of PDF-derived simple value-only form."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-140 / closure run 33973935324",
+          "note": "Current Evidence-Gate terminal closure preserving the candidate-only authority scope."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4.md",
+          "note": "Fresh-read reconciliation and explicit candidate/integration authority boundary."
+        }
+      ],
+      "notes": "This finding is deliberately not SDK-ready as an official profile. The executable boundary is useful only inside an explicitly selected candidate/integration analysis context."
+    }
+  ]
+}
