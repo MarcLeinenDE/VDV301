@@ -1,0 +1,137 @@
+name: temp-merge-semantic-classification-drara24
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths: [.github/workflows/temp_merge_semantic_classification_drara24.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  merge-drara24:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+
+      - name: Verify immutable prestate
+        shell: bash
+        run: |
+          set -euo pipefail
+          CLEAN_BASE=79890459ac545cf1d7b8d64eb56e591d4c247cb8
+          test "$(git rev-parse HEAD^)" = "$CLEAN_BASE"
+          test "$(git diff --name-only HEAD^ HEAD)" = ".github/workflows/temp_merge_semantic_classification_drara24.yml"
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "e77984383b3c251b8d4149f2e4485f0b51640105"
+          test "$(git hash-object audit_registry/finding_semantic_classification_schema_v0.1.json)" = "7cb69f527fe9d69e5b0fc59f6a23c36e0e426571"
+          test "$(git hash-object tools/validate_finding_semantic_classification.py)" = "3304b31b2233e48d8d85e2ef9e248397d9a86b4e"
+          test "$(git hash-object tools/merge_semantic_classification_block.py)" = "bddb17d5f264663611585cde33202c355ce9e5ca"
+          test "$(git hash-object tools/validate_xsd_pool.py)" = "7a682dbddaeeeb3f9cc269d2e48e5ab000aca4bd"
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "ab6d5f09081435e1d744b50af0a3a5f572eb5cef"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "6e401f0bd374379e74ce2a065fab88f2016f9f67"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARA_V24_2026-09-03.md)" = "1977acbe8e697d878f6d4ed0ed5120953b91cf73"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/deep_read/ARA_V2.4.md)" = "e48372ecb8dd7bfcd0d2316205769a7da1bf5582"
+          test ! -e audit_registry/semantic_classification_blocks/DRARA24_v0.1.json
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+          sha256sum ./*.xsd | sort -k2 > /tmp/xsd-before.sha256
+          python - <<'PYSTATE'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text(encoding='utf-8'))
+          assert r['progress']['classified_count'] == 88
+          assert r['progress']['remaining_count'] == 104
+          assert r['progress']['reviewed_blocks'] == ['ARA','ARCH','BG','CE','CIS','DISC','DMS','DR3011','DR3012']
+          assert r['progress']['latest_block'] == 'DR3012'
+          assert r['progress']['latest_block_file'] == 'audit_registry/semantic_classification_blocks/DR3012_v0.1.json'
+          ids={e['finding_id'] for e in r['entries']}
+          assert 'DRARA24-001' not in ids and 'DRARA24-002' not in ids
+          print('PASSED: DRARA24 semantic prestate is exactly 88/192')
+          PYSTATE
+          git diff --exit-code
+
+      - name: Materialize exact DRARA24 block
+        shell: bash
+        env:
+          DRARA24_BLOCK_ZLIB_B64: "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"
+        run: |
+          set -euo pipefail
+          mkdir -p audit_registry/semantic_classification_blocks
+          python - <<'PYBLOCK'
+          import base64, os, zlib
+          from pathlib import Path
+          data=zlib.decompress(base64.b64decode(os.environ['DRARA24_BLOCK_ZLIB_B64'], validate=True))
+          Path('audit_registry/semantic_classification_blocks/DRARA24_v0.1.json').write_bytes(data)
+          PYBLOCK
+          test "$(sha256sum audit_registry/semantic_classification_blocks/DRARA24_v0.1.json | awk '{print $1}')" = "3d9282df37aae520cb0afc44f61d8c4d8dfe942fd0efea0f169f3607f46a675c"
+          python - <<'PYCHECK'
+          import json
+          from pathlib import Path
+          b=json.loads(Path('audit_registry/semantic_classification_blocks/DRARA24_v0.1.json').read_text(encoding='utf-8'))
+          assert b['block_id'] == 'DRARA24'
+          assert [e['finding_id'] for e in b['entries']] == ['DRARA24-001','DRARA24-002']
+          assert all(e['normative_authority'] == 'contextual_only' for e in b['entries'])
+          assert all(e['version_scope'][0]['authority'] == 'documentation_only' for e in b['entries'])
+          print('PASSED: exact two-entry DRARA24 documentation-only block')
+          PYCHECK
+
+      - name: Merge and validate DRARA24 classification
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/merge_semantic_classification_block.py --block audit_registry/semantic_classification_blocks/DRARA24_v0.1.json | tee /tmp/merge.log
+          grep -F "PASSED: merged block DRARA24; classified=90 remaining=102" /tmp/merge.log
+          python tools/validate_finding_semantic_classification.py | tee /tmp/semantic.log
+          grep -F "PASSED: semantic classification registry valid; 90 reviewed entries anchored to frozen baseline" /tmp/semantic.log
+          python tools/validate_xsd_pool.py --repo-root .
+          sha256sum ./*.xsd | sort -k2 > /tmp/xsd-after.sha256
+          cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+
+      - name: Verify final tree boundary and persist
+        shell: bash
+        run: |
+          set -euo pipefail
+          CLEAN_BASE=79890459ac545cf1d7b8d64eb56e591d4c247cb8
+          test "$(git hash-object audit_registry/finding_semantic_classification_schema_v0.1.json)" = "7cb69f527fe9d69e5b0fc59f6a23c36e0e426571"
+          test "$(git hash-object tools/validate_finding_semantic_classification.py)" = "3304b31b2233e48d8d85e2ef9e248397d9a86b4e"
+          test "$(git hash-object tools/merge_semantic_classification_block.py)" = "bddb17d5f264663611585cde33202c355ce9e5ca"
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "ab6d5f09081435e1d744b50af0a3a5f572eb5cef"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "6e401f0bd374379e74ce2a065fab88f2016f9f67"
+          python - <<'PYPOST'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text(encoding='utf-8'))
+          assert r['progress']['classified_count'] == 90
+          assert r['progress']['remaining_count'] == 102
+          assert r['progress']['reviewed_blocks'] == ['ARA','ARCH','BG','CE','CIS','DISC','DMS','DR3011','DR3012','DRARA24']
+          assert r['progress']['latest_block'] == 'DRARA24'
+          assert r['progress']['latest_block_file'] == 'audit_registry/semantic_classification_blocks/DRARA24_v0.1.json'
+          entries=[e for e in r['entries'] if e['finding_id'].startswith('DRARA24-')]
+          assert [e['finding_id'] for e in entries] == ['DRARA24-001','DRARA24-002']
+          print('PASSED: DRARA24 semantic poststate is exactly 90/192')
+          PYPOST
+          git diff --check
+          rm -f .github/workflows/temp_merge_semantic_classification_drara24.yml
+          git add -A
+          python - <<'PYDIFF'
+          import subprocess
+          names=subprocess.check_output(['git','diff','--cached','--name-only','79890459ac545cf1d7b8d64eb56e591d4c247cb8'], text=True).splitlines()
+          assert names == [
+              'audit_registry/finding_semantic_classification_v0.1.json',
+              'audit_registry/semantic_classification_blocks/DRARA24_v0.1.json',
+          ], names
+          print('PASSED: final tree differs from DR3012 clean prestate only by DRARA24 block and semantic registry')
+          PYDIFF
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "audit: merge DRARA24 semantic classification"
+          git push origin HEAD:dev/schema-integration
