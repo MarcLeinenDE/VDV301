@@ -25,8 +25,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD^)" = "d1dc7267b734ae437c01f8879f0a6ec604dbfcd4"
-          test "$(git rev-parse HEAD^^)" = "74d69cb56176d2f4ba4ac57d569da0104e3d489d"
+          test "$(git rev-parse HEAD^)" = "07324216ca8ab34573ce89df85ad749faa79660c"
+          test "$(git rev-parse HEAD^^)" = "d1dc7267b734ae437c01f8879f0a6ec604dbfcd4"
+          test "$(git rev-parse HEAD^^^)" = "74d69cb56176d2f4ba4ac57d569da0104e3d489d"
           python - <<'PY'
           import subprocess
           names=subprocess.check_output(
@@ -79,9 +80,16 @@ jobs:
           import base64, re, zlib
           from pathlib import Path
           src=Path(".github/workflows/temp_merge_semantic_classification_dr3012.yml").read_text(encoding="utf-8")
-          m=re.search(r'DR3012_BLOCK_ZLIB_B64: "([A-Za-z0-9+/=]+)"',src)
-          assert m, "embedded payload not found"
-          data=zlib.decompress(base64.b64decode(m.group(1)))
+          payload=None
+          for line in src.splitlines():
+              if "DR3012_BLOCK_ZLIB_B64:" in line:
+                  payload=line.split(":",1)[1].strip()
+                  if len(payload) >= 2 and payload[0] == payload[-1] and payload[0] in {"\"", "'"}:
+                      payload=payload[1:-1]
+                  break
+          assert payload, "embedded payload line not found"
+          assert all(c.isalnum() or c in "+/=" for c in payload), "embedded payload contains unexpected characters"
+          data=zlib.decompress(base64.b64decode(payload))
           Path("audit_registry/semantic_classification_blocks/DR3012_v0.1.json").write_bytes(data)
           PY
           test "$(sha256sum audit_registry/semantic_classification_blocks/DR3012_v0.1.json | awk '{print $1}')" = "d083b49a0956840fcb5d65969c8d0efdf2f113c00141a6205dbe8f9342b34e9c"
