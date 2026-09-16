@@ -1,0 +1,136 @@
+name: temp-merge-semantic-classification-drcom23
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths: [.github/workflows/temp_merge_semantic_classification_drcom23.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  merge-drcom23:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+
+      - name: Verify immutable prestate
+        shell: bash
+        run: |
+          set -euo pipefail
+          CLEAN_BASE=8878ef1caed1064f95b5d97ea926fef59a1f5393
+          test "$(git rev-parse HEAD^)" = "$CLEAN_BASE"
+          test "$(git diff --name-only HEAD^ HEAD)" = ".github/workflows/temp_merge_semantic_classification_drcom23.yml"
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "eae0922c8842818738fc2b64b061b450390416cc"
+          test "$(git hash-object audit_registry/finding_semantic_classification_schema_v0.1.json)" = "7cb69f527fe9d69e5b0fc59f6a23c36e0e426571"
+          test "$(git hash-object tools/validate_finding_semantic_classification.py)" = "3304b31b2233e48d8d85e2ef9e248397d9a86b4e"
+          test "$(git hash-object tools/merge_semantic_classification_block.py)" = "bddb17d5f264663611585cde33202c355ce9e5ca"
+          test "$(git hash-object tools/validate_xsd_pool.py)" = "7a682dbddaeeeb3f9cc269d2e48e5ab000aca4bd"
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "ab6d5f09081435e1d744b50af0a3a5f572eb5cef"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "6e401f0bd374379e74ce2a065fab88f2016f9f67"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V23_2026-09-04.md)" = "0595b6f03d2232f854f09329bc70f46a44ef3af1"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3_FRESH_2026-09-02.md)" = "cf6060cc9639de64edacdfa84a4cb336fc28c0e6"
+          test ! -e audit_registry/semantic_classification_blocks/DRCOM23_v0.1.json
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+          sha256sum ./*.xsd | sort -k2 > /tmp/xsd-before.sha256
+          python - <<'PYSTATE'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text(encoding='utf-8'))
+          assert r['progress']['classified_count'] == 100
+          assert r['progress']['remaining_count'] == 92
+          assert r['progress']['reviewed_blocks'] == ['ARA','ARCH','BG','CE','CIS','DISC','DMS','DR3011','DR3012','DRARA24','DRCOM10','DRCOM20','DRCOM21','DRCOM22']
+          assert r['progress']['latest_block'] == 'DRCOM22'
+          assert r['progress']['latest_block_file'] == 'audit_registry/semantic_classification_blocks/DRCOM22_v0.1.json'
+          assert 'DRCOM23-001' not in {e['finding_id'] for e in r['entries']}
+          print('PASSED: DRCOM23 semantic prestate is exactly 100/192')
+          PYSTATE
+          git diff --exit-code
+
+      - name: Materialize exact DRCOM23 block
+        shell: bash
+        env:
+          DRCOM23_BLOCK_ZLIB_B64: "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"
+        run: |
+          set -euo pipefail
+          mkdir -p audit_registry/semantic_classification_blocks
+          python - <<'PYBLOCK'
+          import base64, os, zlib
+          from pathlib import Path
+          data=zlib.decompress(base64.b64decode(os.environ['DRCOM23_BLOCK_ZLIB_B64'], validate=True))
+          Path('audit_registry/semantic_classification_blocks/DRCOM23_v0.1.json').write_bytes(data)
+          PYBLOCK
+          test "$(sha256sum audit_registry/semantic_classification_blocks/DRCOM23_v0.1.json | awk '{print $1}')" = "edaeb008591afd75cbf30d51bb980c806d8fce0ed7d7d345cccc7813df5782f2"
+          python - <<'PYCHECK'
+          import json
+          from pathlib import Path
+          b=json.loads(Path('audit_registry/semantic_classification_blocks/DRCOM23_v0.1.json').read_text(encoding='utf-8'))
+          assert b['block_id'] == 'DRCOM23'
+          assert [e['finding_id'] for e in b['entries']] == ['DRCOM23-001']
+          e=b['entries'][0]
+          assert e['normative_authority'] == 'selected_xsd'
+          assert e['sdk_behavior'] == 'error_with_advisory'
+          assert e['primary_issue_kind'] == 'wrong_structure_reference'
+          print('PASSED: exact DRCOM23 wrong-request-structure block')
+          PYCHECK
+
+      - name: Merge and validate DRCOM23 classification
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/merge_semantic_classification_block.py --block audit_registry/semantic_classification_blocks/DRCOM23_v0.1.json | tee /tmp/merge.log
+          grep -F "PASSED: merged block DRCOM23; classified=101 remaining=91" /tmp/merge.log
+          python tools/validate_finding_semantic_classification.py | tee /tmp/semantic.log
+          grep -F "PASSED: semantic classification registry valid; 101 reviewed entries anchored to frozen baseline" /tmp/semantic.log
+          python tools/validate_xsd_pool.py --repo-root .
+          sha256sum ./*.xsd | sort -k2 > /tmp/xsd-after.sha256
+          cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+
+      - name: Verify final tree boundary and persist
+        shell: bash
+        run: |
+          set -euo pipefail
+          CLEAN_BASE=8878ef1caed1064f95b5d97ea926fef59a1f5393
+          test "$(git hash-object audit_registry/finding_semantic_classification_schema_v0.1.json)" = "7cb69f527fe9d69e5b0fc59f6a23c36e0e426571"
+          test "$(git hash-object tools/validate_finding_semantic_classification.py)" = "3304b31b2233e48d8d85e2ef9e248397d9a86b4e"
+          test "$(git hash-object tools/merge_semantic_classification_block.py)" = "bddb17d5f264663611585cde33202c355ce9e5ca"
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "ab6d5f09081435e1d744b50af0a3a5f572eb5cef"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "6e401f0bd374379e74ce2a065fab88f2016f9f67"
+          python - <<'PYPOST'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text(encoding='utf-8'))
+          assert r['progress']['classified_count'] == 101
+          assert r['progress']['remaining_count'] == 91
+          assert r['progress']['reviewed_blocks'] == ['ARA','ARCH','BG','CE','CIS','DISC','DMS','DR3011','DR3012','DRARA24','DRCOM10','DRCOM20','DRCOM21','DRCOM22','DRCOM23']
+          assert r['progress']['latest_block'] == 'DRCOM23'
+          assert r['progress']['latest_block_file'] == 'audit_registry/semantic_classification_blocks/DRCOM23_v0.1.json'
+          print('PASSED: DRCOM23 semantic poststate is exactly 101/192')
+          PYPOST
+          git diff --check
+          rm -f .github/workflows/temp_merge_semantic_classification_drcom23.yml
+          git add -A
+          python - <<'PYDIFF'
+          import subprocess
+          names=subprocess.check_output(['git','diff','--cached','--name-only','8878ef1caed1064f95b5d97ea926fef59a1f5393'], text=True).splitlines()
+          assert names == [
+              'audit_registry/finding_semantic_classification_v0.1.json',
+              'audit_registry/semantic_classification_blocks/DRCOM23_v0.1.json',
+          ], names
+          print('PASSED: final tree differs from DRCOM22 clean prestate only by DRCOM23 block and semantic registry')
+          PYDIFF
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "audit: merge DRCOM23 semantic classification"
+          git push origin HEAD:dev/schema-integration
