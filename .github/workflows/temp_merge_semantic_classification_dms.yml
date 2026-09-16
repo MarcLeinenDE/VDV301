@@ -1,0 +1,145 @@
+name: temp-merge-semantic-classification-dms
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths: [.github/workflows/temp_merge_semantic_classification_dms.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  merge-dms:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+
+      - name: Verify immutable prestate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "14da3c2f84a490fdd65973e9a7d2a000e4721fb7"
+          test "$(git diff --name-only HEAD^ HEAD)" = ".github/workflows/temp_merge_semantic_classification_dms.yml"
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "03fa7b13120469b8971d2948f47ef8cf47464f9f"
+          test "$(git hash-object audit_registry/finding_semantic_classification_schema_v0.1.json)" = "7cb69f527fe9d69e5b0fc59f6a23c36e0e426571"
+          test "$(git hash-object tools/validate_finding_semantic_classification.py)" = "3304b31b2233e48d8d85e2ef9e248397d9a86b4e"
+          test "$(git hash-object tools/merge_semantic_classification_block.py)" = "bddb17d5f264663611585cde33202c355ce9e5ca"
+          test "$(git hash-object tools/validate_xsd_pool.py)" = "7a682dbddaeeeb3f9cc269d2e48e5ab000aca4bd"
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "ab6d5f09081435e1d744b50af0a3a5f572eb5cef"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "6e401f0bd374379e74ce2a065fab88f2016f9f67"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md)" = "252d44de861614bfc3654441c94b0e9704045dbb"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/DEVICE_MANAGEMENT_SERVICE_FINDINGS_REGISTER_ADDENDUM.md)" = "c77e703eef0b34ff1a262e531cf641c8c639e0a5"
+          test "$(git hash-object audit_registry/dms_visual_revalidation_evidence_2026-09-03.json)" = "d7748ed81015f2224155138f89cf259fd6973690"
+          test "$(git hash-object audit_registry/deep_read_findings_delta_dms_v22_2026-08-28.json)" = "e350612884c8c22ca7fc0e4839a03ac924abc076"
+          test "$(git hash-object audit_registry/deep_read_findings_delta_dms_v24_2026-08-28.json)" = "3e07eec98384744b113cb25c37916c67ac23cc6f"
+          test "$(git hash-object tools/validate_dms_instance_boundaries_ev127.py)" = "4afb5a605ef359f96eefab72f6e21a24383441c9"
+          test ! -e audit_registry/semantic_classification_blocks/DMS_v0.1.json
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+          sha256sum ./*.xsd | sort -k2 > /tmp/xsd-before.sha256
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("audit_registry/finding_semantic_classification_v0.1.json")
+          r = json.loads(p.read_text(encoding="utf-8"))
+          assert r["progress"]["classified_count"] == 54
+          assert r["progress"]["remaining_count"] == 138
+          assert r["progress"]["reviewed_blocks"] == ["ARA", "ARCH", "BG", "CE", "CIS", "DISC"]
+          assert r["progress"]["latest_block"] == "DISC"
+          assert r["progress"]["latest_block_file"] == "audit_registry/semantic_classification_blocks/DISC_v0.1.json"
+          ids = {e["finding_id"] for e in r["entries"]}
+          assert not any(f"DMS-{n:03d}" in ids for n in range(1, 8))
+          print("PASSED: DMS semantic prestate is exactly 54/192")
+          PY
+          git diff --exit-code
+
+      - name: Materialize DMS block
+        shell: bash
+        env:
+          DMS_BLOCK_ZLIB_B64: "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"
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64, hashlib, json, os, zlib
+          from pathlib import Path
+          raw = zlib.decompress(base64.b64decode(os.environ["DMS_BLOCK_ZLIB_B64"]))
+          assert hashlib.sha256(raw).hexdigest() == "e71fa5d0eabe2fb761543bd91bfa09d45aa95bd8f34841edbd192933e45516a0"
+          block = json.loads(raw.decode("utf-8"))
+          assert block["block_id"] == "DMS"
+          assert block["source_baseline_payload_sha256"] == "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576"
+          assert [e["finding_id"] for e in block["entries"]] == [f"DMS-{n:03d}" for n in range(1, 8)]
+          out = Path("audit_registry/semantic_classification_blocks/DMS_v0.1.json")
+          out.write_bytes(raw)
+          print("PASSED: materialized DMS block sha256=e71fa5d0eabe2fb761543bd91bfa09d45aa95bd8f34841edbd192933e45516a0")
+          PY
+
+      - name: Merge and validate DMS classification
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/merge_semantic_classification_block.py --block audit_registry/semantic_classification_blocks/DMS_v0.1.json | tee /tmp/merge.log
+          grep -F "PASSED: merged block DMS; classified=61 remaining=131" /tmp/merge.log
+          python tools/validate_finding_semantic_classification.py | tee /tmp/semantic.log
+          grep -F "PASSED: semantic classification registry valid; 61 reviewed entries anchored to frozen baseline" /tmp/semantic.log
+          python tools/validate_dms_instance_boundaries_ev127.py
+          python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+          sha256sum ./*.xsd | sort -k2 > /tmp/xsd-after.sha256
+          cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+
+      - name: Verify poststate and mutation boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object audit_registry/finding_semantic_classification_schema_v0.1.json)" = "7cb69f527fe9d69e5b0fc59f6a23c36e0e426571"
+          test "$(git hash-object tools/validate_finding_semantic_classification.py)" = "3304b31b2233e48d8d85e2ef9e248397d9a86b4e"
+          test "$(git hash-object tools/merge_semantic_classification_block.py)" = "bddb17d5f264663611585cde33202c355ce9e5ca"
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "ab6d5f09081435e1d744b50af0a3a5f572eb5cef"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "6e401f0bd374379e74ce2a065fab88f2016f9f67"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md)" = "252d44de861614bfc3654441c94b0e9704045dbb"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/DEVICE_MANAGEMENT_SERVICE_FINDINGS_REGISTER_ADDENDUM.md)" = "c77e703eef0b34ff1a262e531cf641c8c639e0a5"
+          test "$(git hash-object audit_registry/dms_visual_revalidation_evidence_2026-09-03.json)" = "d7748ed81015f2224155138f89cf259fd6973690"
+          test "$(git hash-object audit_registry/deep_read_findings_delta_dms_v22_2026-08-28.json)" = "e350612884c8c22ca7fc0e4839a03ac924abc076"
+          test "$(git hash-object audit_registry/deep_read_findings_delta_dms_v24_2026-08-28.json)" = "3e07eec98384744b113cb25c37916c67ac23cc6f"
+          test "$(git hash-object tools/validate_dms_instance_boundaries_ev127.py)" = "4afb5a605ef359f96eefab72f6e21a24383441c9"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r = json.loads(Path("audit_registry/finding_semantic_classification_v0.1.json").read_text(encoding="utf-8"))
+          assert r["progress"]["classified_count"] == 61
+          assert r["progress"]["remaining_count"] == 131
+          assert r["progress"]["reviewed_blocks"] == ["ARA", "ARCH", "BG", "CE", "CIS", "DISC", "DMS"]
+          assert r["progress"]["latest_block"] == "DMS"
+          assert r["progress"]["latest_block_file"] == "audit_registry/semantic_classification_blocks/DMS_v0.1.json"
+          dms = [e for e in r["entries"] if e["finding_id"].startswith("DMS-")]
+          assert [e["finding_id"] for e in dms] == [f"DMS-{n:03d}" for n in range(1, 8)]
+          print("PASSED: DMS semantic poststate is exactly 61/192")
+          PY
+          git add audit_registry/semantic_classification_blocks/DMS_v0.1.json audit_registry/finding_semantic_classification_v0.1.json
+          python - <<'PY'
+          import subprocess
+          names = subprocess.check_output(["git","diff","--cached","--name-only"], text=True).splitlines()
+          assert names == [
+              "audit_registry/finding_semantic_classification_v0.1.json",
+              "audit_registry/semantic_classification_blocks/DMS_v0.1.json",
+          ], names
+          print("PASSED: staged mutation boundary contains only DMS block and semantic registry")
+          PY
+
+      - name: Commit validated DMS classification
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "audit: merge DMS semantic classification"
+          git push origin HEAD:dev/schema-integration
