@@ -1,0 +1,715 @@
+{
+  "block_version": "0.1",
+  "block_id": "DMS",
+  "review_date": "2026-09-16",
+  "source_baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
+  "source_terminal_report": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md",
+  "review_policy": "manual_semantic_review_bilingual_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "DMS-001",
+      "service": "DeviceManagementService",
+      "version_scope": [
+        {
+          "version": "V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.0.xsd",
+          "note": "Historical V2.0 profile; wrapper/service-group representation is not a complete mirror of the public operation inventory."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "structure_mismatch",
+      "secondary_issue_kinds": [
+        "operation_inventory_vs_service_group_asymmetry",
+        "generic_common_subscription_context"
+      ],
+      "defect_assessment": "undetermined",
+      "confidence": "high",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "info",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The V2.0 public operation inventory visibly lists generic Common Subscribe/Unsubscribe structures and device operations."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact V2.0 service XSD does not represent the public operation inventory as a one-to-one set of service-group/global declarations."
+        },
+        {
+          "type": "common_conventions",
+          "note": "Generic Common Subscribe/Unsubscribe structures are intentional shared modelling and must not be classified as DMS defects merely because they are not service-prefixed."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "DMS V2.0: Operation-Inventar und XSD-Gruppierung sind nicht deckungsgleich",
+          "short": "Das öffentliche DMS-V2.0-Operation-Inventar ist kein 1:1-Abbild der lokalen Service-XSD-Gruppe.",
+          "long": "Die historische V2.0-Dokumentation enthält generische Common-Subscribe/Unsubscribe-Strukturen sowie Geräteoperationen, während die DMS-Service-XSD diese nicht vollständig als deckungsgleiche lokale Gruppen-/Root-Menge repräsentiert. Die generischen Common-Abonnementstrukturen sind beabsichtigtes Shared Modelling und kein eigenständiger DMS-Fehler.",
+          "recommendation": "Operation-Unterstützung nicht allein aus der lokalen DMS-Gruppe oder aus servicepräfixierten Subscribe/Unsubscribe-Namen ableiten; den ausgewählten V2.0-Kontext und Common-Strukturen berücksichtigen."
+        },
+        "en": {
+          "title": "DMS V2.0: operation inventory and XSD grouping are not one-to-one",
+          "short": "The public DMS V2.0 operation inventory is not a one-to-one mirror of the local service-XSD group.",
+          "long": "The historical V2.0 documentation includes generic Common Subscribe/Unsubscribe structures and device operations, while the DMS service XSD does not expose the same complete set as local group/global declarations. The generic Common subscription structures are intentional shared modelling, not a standalone DMS defect.",
+          "recommendation": "Do not derive operation support solely from the local DMS group or from service-prefixed Subscribe/Unsubscribe names; retain the selected V2.0 context and Common structures."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md",
+          "note": "Terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-2_BASE_V2.0 pages 90 and 95",
+          "note": "Byte-pinned visual evidence for operation inventory and response structures."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_DeviceManagementService_V2.0.xsd",
+          "note": "Exact selected historical service XSD."
+        },
+        {
+          "kind": "other",
+          "reference": "audit_registry/dms_visual_revalidation_evidence_2026-09-03.json",
+          "note": "Independent visual review evidence."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/DEVICE_MANAGEMENT_SERVICE_FINDINGS_REGISTER_ADDENDUM.md",
+          "note": "Service-specific first-pass classification and handling context."
+        }
+      ],
+      "notes": "Generic Common Subscribe/Unsubscribe modelling is explicitly not a defect. The remaining historical wrapper/service-group asymmetry is retained as contextual audit knowledge rather than promoted to an unsupported schema-defect claim."
+    },
+    {
+      "finding_id": "DMS-002",
+      "service": "DeviceManagementService",
+      "version_scope": [
+        {
+          "version": "V2.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Repeated unresolved Word cross-reference markers are present in the checked V2.0 document."
+        },
+        {
+          "version": "V2.1",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Checked V2.1 context does not retain the V2.0 unresolved cross-reference markers."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "editorial_residue",
+      "secondary_issue_kinds": [
+        "unresolved_cross_reference_marker",
+        "historically_corrected_documentation"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "info",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The byte-pinned V2.0 document visibly contains unresolved 'Fehler! Verweisquelle konnte nicht gefunden werden.' markers."
+        },
+        {
+          "type": "version_history",
+          "note": "The checked V2.1 context no longer shows the same unresolved cross-reference residue."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "DMS V2.0: ungelöste Dokument-Querverweise",
+          "short": "Die V2.0-Dokumentation enthält sichtbare, nicht aufgelöste Word-Querverweis-Marker.",
+          "long": "Im historischen V2.0-Dokument treten wiederholt ungelöste Querverweise wie „Fehler! Verweisquelle konnte nicht gefunden werden.“ auf. Das ist ein redaktioneller Dokumentationsfehler ohne XSD- oder XML-Validierungswirkung; im geprüften V2.1-Kontext ist dieser Befund nicht mehr vorhanden.",
+          "recommendation": "Den Text nicht als normative Referenz oder Identifier interpretieren; für XML-Validierung ausschließlich den ausgewählten XSD-Kontext verwenden."
+        },
+        "en": {
+          "title": "DMS V2.0: unresolved document cross-references",
+          "short": "The V2.0 documentation contains visible unresolved Word cross-reference markers.",
+          "long": "The historical V2.0 document repeatedly contains unresolved cross-reference text such as 'Fehler! Verweisquelle konnte nicht gefunden werden.'. This is an editorial documentation defect without XSD or XML validation impact; the checked V2.1 context no longer shows the issue.",
+          "recommendation": "Do not interpret the marker text as a normative reference or identifier; use the selected XSD context for XML validation."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md",
+          "note": "Terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-2_BASE_V2.0 page 76",
+          "note": "Byte-pinned visual evidence of unresolved cross-reference text."
+        },
+        {
+          "kind": "other",
+          "reference": "audit_registry/dms_visual_revalidation_evidence_2026-09-03.json",
+          "note": "Independent visual review evidence."
+        },
+        {
+          "kind": "version_history",
+          "reference": "DMS V2.0 -> checked V2.1 context",
+          "note": "The unresolved marker is absent in the checked later context."
+        }
+      ]
+    },
+    {
+      "finding_id": "DMS-003",
+      "service": "DeviceManagementService",
+      "version_scope": [
+        {
+          "version": "V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.0.xsd",
+          "note": "ErrorMessage cardinality 10:*; EV-127 confirms 9 rejected, 10/11 accepted."
+        },
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+          "note": "ErrorMessage cardinality 10:*; EV-127 confirms 9 rejected, 10/11 accepted."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+          "note": "PDF and exact official XSD remain aligned at 10:*; EV-127 confirms boundary."
+        },
+        {
+          "version": "V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.4.xsd",
+          "note": "Official public PDF documents 0:*; repository XSD comparison authority is candidate/integration and EV-127 confirms 0/1 accepted."
+        }
+      ],
+      "review_state": "sdk_ready",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "contextual",
+      "primary_issue_kind": "version_routing_issue",
+      "secondary_issue_kinds": [
+        "cardinality_evolution",
+        "later_official_correction"
+      ],
+      "defect_assessment": "non_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "V2.0/V2.2 documentation shows ErrorMessage 10:*; V2.4 public documentation shows the later 0:* model."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Selected V2.0-V2.2 XSDs require at least 10 ErrorMessage entries."
+        },
+        {
+          "type": "candidate_integration_provenance",
+          "note": "The repository V2.4 DMS XSD is candidate/integration authority, not an official-release XSD."
+        },
+        {
+          "type": "later_official_correction",
+          "note": "V2.4 documentation represents a later cardinality correction and must not be back-applied."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-127 confirms V2.0-V2.2 9=reject and 10/11=accept, while V2.4 candidate profile accepts 0/1."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "DMS ErrorMessage: versionsabhängige Kardinalität",
+          "short": "V2.0–V2.2 verwenden 10:*, der geprüfte V2.4-Kontext 0:*.",
+          "long": "Dieser Befund ist kein Fehler der historischen Profile. Für DMS V2.0, V2.1 und V2.2 ist die Untergrenze 10 dokumentiert und durch die ausgewählten XSDs sowie EV-127 bestätigt. Die spätere V2.4-Dokumentation und der candidate/integration-XSD-Kontext verwenden 0:*.",
+          "recommendation": "Die zur ausgewählten DMS-Version gehörende XSD-Familie verwenden und die V2.4-Lockerung niemals rückwirkend auf V2.0–V2.2 anwenden."
+        },
+        "en": {
+          "title": "DMS ErrorMessage: version-specific cardinality",
+          "short": "V2.0-V2.2 use 10:*, while the checked V2.4 context uses 0:*.",
+          "long": "This finding is not a defect in the historical profiles. DMS V2.0, V2.1 and V2.2 document a lower bound of 10, confirmed by the selected XSDs and EV-127. The later V2.4 documentation and candidate/integration XSD context use 0:*.",
+          "recommendation": "Use the XSD family belonging to the selected DMS version and never back-apply the V2.4 relaxation to V2.0-V2.2."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md",
+          "note": "Terminal state executable_confirmed."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-127 / workflow run 33762375705",
+          "note": "Positive/negative XML instance cardinality boundaries."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_DeviceManagementService_V2.0.xsd; V2.1.xsd; V2.2.xsd; V2.4.xsd",
+          "note": "Version-specific selected schema declarations."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-2_BASE_V2.0 page 95; DMS_V2.2 page 20",
+          "note": "Historical 10:* documentation."
+        },
+        {
+          "kind": "version_history",
+          "reference": "audit_registry/deep_read_findings_delta_dms_v24_2026-08-28.json",
+          "note": "V2.4 0:* correction/alignment and candidate authority boundary."
+        }
+      ],
+      "notes": "Normal XSD validation already enforces the selected version's cardinality; no extra semantic warning should reinterpret a valid selected profile."
+    },
+    {
+      "finding_id": "DMS-004",
+      "service": "DeviceManagementService",
+      "version_scope": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+          "note": "UpdateID, UpdateTimestamp and UpdateURL are required; EV-127 rejects each single omission."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+          "note": "PDF/XSD keep UpdateID, UpdateTimestamp and UpdateURL at 1:1; EV-127 rejects each single omission."
+        },
+        {
+          "version": "V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.4.xsd",
+          "note": "Official public PDF documents these fields as 0:1; candidate/integration XSD permits the empty request and EV-127 confirms it."
+        }
+      ],
+      "review_state": "sdk_ready",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "contextual",
+      "primary_issue_kind": "version_routing_issue",
+      "secondary_issue_kinds": [
+        "cardinality_evolution",
+        "later_official_correction"
+      ],
+      "defect_assessment": "non_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "V2.2 visibly documents UpdateID, UpdateTimestamp and UpdateURL as 1:1; V2.4 visibly documents them as 0:1."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Selected V2.1/V2.2 XSDs require the three fields."
+        },
+        {
+          "type": "candidate_integration_provenance",
+          "note": "The checked V2.4 repository XSD is candidate/integration authority."
+        },
+        {
+          "type": "later_official_correction",
+          "note": "V2.4 makes the InstallUpdate fields optional; that later change does not rewrite V2.1/V2.2."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-127 confirms required-field rejection for V2.1/V2.2 and empty/populated acceptance for the V2.4 candidate profile."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "DMS InstallUpdate: versionsabhängige Pflichtfelder",
+          "short": "UpdateID, UpdateTimestamp und UpdateURL sind in V2.1/V2.2 Pflicht, im geprüften V2.4-Kontext optional.",
+          "long": "Die V2.1- und V2.2-Profile verlangen UpdateID, UpdateTimestamp und UpdateURL. EV-127 bestätigt, dass das Weglassen jedes einzelnen Feldes scheitert. In der öffentlichen V2.4-Dokumentation sind diese Felder 0:1; der candidate/integration-XSD-Kontext akzeptiert auch eine leere Anforderung.",
+          "recommendation": "Pflichtfelder ausschließlich anhand der ausgewählten Version bewerten; die V2.4-Optionalität nicht auf V2.1/V2.2 zurückübertragen."
+        },
+        "en": {
+          "title": "DMS InstallUpdate: version-specific required fields",
+          "short": "UpdateID, UpdateTimestamp and UpdateURL are required in V2.1/V2.2 and optional in the checked V2.4 context.",
+          "long": "The V2.1 and V2.2 profiles require UpdateID, UpdateTimestamp and UpdateURL. EV-127 confirms that omitting any one of them fails. In the public V2.4 documentation the fields are 0:1, and the candidate/integration XSD context also accepts an empty request.",
+          "recommendation": "Evaluate required fields only against the selected version; do not back-apply V2.4 optionality to V2.1/V2.2."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md",
+          "note": "Terminal state executable_confirmed."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-127 / workflow run 33762375705",
+          "note": "Positive/negative XML instance required-field boundaries."
+        },
+        {
+          "kind": "pdf",
+          "reference": "DMS_V2.2 page 26; DMS_V2.4 page 25",
+          "note": "Visible 1:1 -> 0:1 version change."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_DeviceManagementService_V2.1.xsd; V2.2.xsd; V2.4.xsd",
+          "note": "Version-specific selected schema declarations."
+        },
+        {
+          "kind": "version_history",
+          "reference": "audit_registry/deep_read_findings_delta_dms_v24_2026-08-28.json",
+          "note": "Later optionality correction and candidate authority boundary."
+        }
+      ],
+      "notes": "Normal selected-XSD validation is sufficient; the semantic layer must prevent latest-version cardinality from being substituted into historical profiles."
+    },
+    {
+      "finding_id": "DMS-005",
+      "service": "DeviceManagementService",
+      "version_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+          "note": "PDF response choice branch omits Get prefix; exact official XSD uses the Get-prefixed branch name."
+        },
+        {
+          "version": "V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.4.xsd",
+          "note": "The official public PDF retains the non-Get spelling; candidate/integration XSD retains the Get-prefixed declaration."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "identifier_typo",
+      "secondary_issue_kinds": [
+        "operation_or_element_name_mismatch",
+        "stale_identifier_after_rename"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "warning",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "V2.2 and V2.4 PDFs visibly use DeviceManagementService.DeviceStatusInformationResponseData in the response choice."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact official V2.2 XSD declares DeviceManagementService.GetDeviceStatusInformationResponseData."
+        },
+        {
+          "type": "candidate_integration_provenance",
+          "note": "The V2.4 candidate/integration XSD also uses the Get-prefixed declaration."
+        },
+        {
+          "type": "version_history",
+          "note": "The PDF-only non-Get spelling persists in the checked V2.4 publication rather than representing a valid historical schema alias."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "DMS GetDeviceStatusInformation: PDF-Bezeichner weicht von XSD ab",
+          "short": "Die PDF nennt DeviceStatusInformationResponseData; die ausgewählte XSD verwendet GetDeviceStatusInformationResponseData.",
+          "long": "In der Antwortauswahl der V2.2- und weiterhin der V2.4-Dokumentation fehlt beim Branch-Namen das Präfix „Get“. Die ausgewählte offizielle V2.2-XSD und der geprüfte candidate/integration-V2.4-Kontext verwenden DeviceManagementService.GetDeviceStatusInformationResponseData. Der PDF-Bezeichner ist kein bestätigter Alias.",
+          "recommendation": "Für XML, Resolver und Codegenerierung den Namen aus der ausgewählten XSD verwenden und keinen DeviceStatusInformationResponseData-Kompatibilitätsalias erzeugen."
+        },
+        "en": {
+          "title": "DMS GetDeviceStatusInformation: PDF identifier differs from XSD",
+          "short": "The PDF names DeviceStatusInformationResponseData while the selected XSD uses GetDeviceStatusInformationResponseData.",
+          "long": "The response choice in the V2.2 and still in the V2.4 documentation omits the 'Get' prefix from the branch name. The selected official V2.2 XSD and the checked V2.4 candidate/integration context use DeviceManagementService.GetDeviceStatusInformationResponseData. The PDF spelling is not a confirmed alias.",
+          "recommendation": "Use the selected XSD name for XML, resolver logic and code generation; do not create a DeviceStatusInformationResponseData compatibility alias."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "DMS documentation-aware resolver/codegen encounters DeviceManagementService.DeviceStatusInformationResponseData",
+          "Unknown DMS response branch resembles the PDF-only non-Get spelling"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md",
+          "note": "Terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "DMS_V2.2 page 23; DMS_V2.4 page 22",
+          "note": "Byte-pinned visual evidence of the non-Get PDF choice-branch label."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+          "note": "Exact official selected branch declaration."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-107 / run 33181833930",
+          "note": "Confirms PDF-only non-Get branch spelling is absent from the exact V2.2 XSD."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-108 / run 33182963733",
+          "note": "Confirms persistence against the V2.4 candidate/integration XSD."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/DEVICE_MANAGEMENT_SERVICE_FINDINGS_REGISTER_ADDENDUM.md",
+          "note": "Explicit handling: do not treat the PDF spelling as an alias."
+        }
+      ]
+    },
+    {
+      "finding_id": "DMS-006",
+      "service": "DeviceManagementService",
+      "version_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+          "note": "PDF table lists Name+Flag only; exact official XSD also requires DeviceStatusImpact and DeviceStatusPriority."
+        },
+        {
+          "version": "V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.4.xsd",
+          "note": "Official public PDF and candidate/integration XSD align with Impact/Priority optional."
+        }
+      ],
+      "review_state": "sdk_ready",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "cardinality_mismatch",
+      "secondary_issue_kinds": [
+        "structure_mismatch",
+        "missing_documented_required_fields",
+        "later_official_correction"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "V2.2 table 20 visibly lists only DeviceStatusName and DeviceStatusFlag; V2.4 later documents Impact/Priority as optional."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact V2.2 XSD requires DeviceStatusImpact and DeviceStatusPriority in addition to Name and Flag."
+        },
+        {
+          "type": "candidate_integration_provenance",
+          "note": "The checked V2.4 repository XSD is candidate/integration and makes Impact/Priority optional."
+        },
+        {
+          "type": "later_official_correction",
+          "note": "The V2.4 publication aligns with the optional model; this later correction must not be back-applied to V2.2."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-127 rejects the V2.2 PDF-visible two-field shape and accepts the four-field shape; the V2.4 candidate profile accepts both two- and four-field shapes."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "DMS V2.2 DeviceStatus: PDF lässt XSD-Pflichtfelder aus",
+          "short": "Die V2.2-PDF zeigt nur Name und Flag, die ausgewählte V2.2-XSD verlangt zusätzlich Impact und Priority.",
+          "long": "Ein ausschließlich nach der V2.2-PDF-Tabelle aufgebauter DeviceStatus mit DeviceStatusName und DeviceStatusFlag ist für die ausgewählte V2.2-XSD unvollständig. EV-127 bestätigt: die Zwei-Feld-Form wird abgelehnt, mit DeviceStatusImpact und DeviceStatusPriority ist die Struktur gültig. Im geprüften V2.4-Kontext sind Impact/Priority später optional.",
+          "recommendation": "Für V2.2 DeviceStatusImpact und DeviceStatusPriority gemäß XSD mitsenden; die V2.4-Optionalität nicht rückwirkend anwenden."
+        },
+        "en": {
+          "title": "DMS V2.2 DeviceStatus: PDF omits XSD-required fields",
+          "short": "The V2.2 PDF shows only Name and Flag, while the selected V2.2 XSD additionally requires Impact and Priority.",
+          "long": "A DeviceStatus built only from the V2.2 PDF table with DeviceStatusName and DeviceStatusFlag is incomplete for the selected V2.2 XSD. EV-127 confirms that the two-field form is rejected and the structure becomes valid when DeviceStatusImpact and DeviceStatusPriority are included. In the checked V2.4 context Impact/Priority later become optional.",
+          "recommendation": "For V2.2 include DeviceStatusImpact and DeviceStatusPriority as required by the XSD; do not back-apply V2.4 optionality."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "Selected DMS V2.2 profile and DeviceStatusStructure is missing DeviceStatusImpact",
+          "Selected DMS V2.2 profile and DeviceStatusStructure is missing DeviceStatusPriority"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md",
+          "note": "Terminal state executable_confirmed."
+        },
+        {
+          "kind": "pdf",
+          "reference": "DMS_V2.2 page 23; DMS_V2.4 page 23",
+          "note": "Visual structure/cardinality evidence."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_DeviceManagementService_V2.2.xsd; IBIS-IP_DeviceManagementService_V2.4.xsd",
+          "note": "Historical official and later candidate/integration declarations."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-127 / workflow run 33762375705",
+          "note": "V2.2 two-field=reject/four-field=accept; V2.4 two-field/four-field=accept."
+        },
+        {
+          "kind": "version_history",
+          "reference": "audit_registry/deep_read_findings_delta_dms_v24_2026-08-28.json",
+          "note": "Later V2.4 alignment."
+        }
+      ]
+    },
+    {
+      "finding_id": "DMS-007",
+      "service": "DeviceManagementService",
+      "version_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+          "note": "PDF UpdateTimestamp prose says GetUpdateStates; operation inventory/XSD context use GetUpdateHistory."
+        },
+        {
+          "version": "V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.4.xsd",
+          "note": "PDF typo persists; candidate/integration XSD context continues to use GetUpdateHistory."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "wrong_operation_reference",
+      "secondary_issue_kinds": [
+        "documentation_spelling",
+        "stale_operation_reference"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "documentation_only",
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "warning",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "V2.2 and V2.4 UpdateTimestamp prose visibly says GetUpdateStates."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact V2.2 XSD annotation uses GetUpdateHistory and RetrieveUpdateState."
+        },
+        {
+          "type": "candidate_integration_provenance",
+          "note": "The V2.4 candidate/integration XSD context also uses GetUpdateHistory."
+        },
+        {
+          "type": "xsd_internal_consistency",
+          "note": "The DMS operation inventory contains GetUpdateHistory, not GetUpdateStates."
+        },
+        {
+          "type": "version_history",
+          "note": "The erroneous GetUpdateStates wording persists across the checked V2.2 and V2.4 publications."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "DMS: GetUpdateStates ist kein bestätigter Operationsname",
+          "short": "Die PDF verweist bei UpdateTimestamp auf GetUpdateStates; Operation-Inventar und XSD verwenden GetUpdateHistory.",
+          "long": "Die DMS-V2.2-Dokumentation und weiterhin die geprüfte V2.4-Dokumentation nennen im UpdateTimestamp-Text „GetUpdateStates“. Der ausgewählte XSD-/Operationskontext verwendet stattdessen GetUpdateHistory (zusammen mit RetrieveUpdateState). Ein eigenständiger GetUpdateStates-Operationsalias ist nicht belegt.",
+          "recommendation": "Keinen GetUpdateStates-Resolver- oder Kompatibilitätsalias erzeugen; für Operationen GetUpdateHistory gemäß ausgewähltem Profil verwenden."
+        },
+        "en": {
+          "title": "DMS: GetUpdateStates is not a confirmed operation name",
+          "short": "The PDF refers to GetUpdateStates for UpdateTimestamp, while the operation inventory and XSD use GetUpdateHistory.",
+          "long": "The DMS V2.2 documentation and still the checked V2.4 documentation mention 'GetUpdateStates' in the UpdateTimestamp text. The selected XSD/operation context instead uses GetUpdateHistory (together with RetrieveUpdateState). No standalone GetUpdateStates operation alias is supported by the evidence.",
+          "recommendation": "Do not create a GetUpdateStates resolver or compatibility alias; use GetUpdateHistory for operations according to the selected profile."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "DMS operation resolver receives GetUpdateStates",
+          "Documentation-derived operation map contains GetUpdateStates"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md",
+          "note": "Terminal state context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "DMS_V2.2 page 26; DMS_V2.4 page 25",
+          "note": "Visible GetUpdateStates wording."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+          "note": "Exact official XSD annotation uses GetUpdateHistory/RetrieveUpdateState."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-107 / run 33181833930",
+          "note": "Exact V2.2 declaration context."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-108 / run 33182963733",
+          "note": "V2.4 candidate/integration declaration context."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/DEVICE_MANAGEMENT_SERVICE_FINDINGS_REGISTER_ADDENDUM.md",
+          "note": "Explicit handling: do not synthesize GetUpdateStates as an operation alias."
+        }
+      ]
+    }
+  ]
+}
