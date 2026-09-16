@@ -1,0 +1,155 @@
+name: temp-merge-semantic-classification-dr3012-gate2
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths: [.github/workflows/temp_merge_semantic_classification_dr3012_gate2.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  merge-dr3012:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+
+      - name: Verify immutable prestate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "d1dc7267b734ae437c01f8879f0a6ec604dbfcd4"
+          test "$(git rev-parse HEAD^^)" = "74d69cb56176d2f4ba4ac57d569da0104e3d489d"
+          python - <<'PY'
+          import subprocess
+          names=subprocess.check_output(
+              ["git","diff","--name-only","74d69cb56176d2f4ba4ac57d569da0104e3d489d","HEAD"], text=True
+          ).splitlines()
+          assert sorted(names)==[
+              ".github/workflows/temp_merge_semantic_classification_dr3012.yml",
+              ".github/workflows/temp_merge_semantic_classification_dr3012_gate2.yml",
+          ], names
+          print("PASSED: only the two temporary DR3012 gate files differ from clean prestate")
+          PY
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "c64ce2bdd699f7d060e3a52651e10f5ad83bac05"
+          test "$(git hash-object audit_registry/finding_semantic_classification_schema_v0.1.json)" = "7cb69f527fe9d69e5b0fc59f6a23c36e0e426571"
+          test "$(git hash-object tools/validate_finding_semantic_classification.py)" = "3304b31b2233e48d8d85e2ef9e248397d9a86b4e"
+          test "$(git hash-object tools/merge_semantic_classification_block.py)" = "bddb17d5f264663611585cde33202c355ce9e5ca"
+          test "$(git hash-object tools/validate_xsd_pool.py)" = "7a682dbddaeeeb3f9cc269d2e48e5ab000aca4bd"
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "ab6d5f09081435e1d744b50af0a3a5f572eb5cef"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "6e401f0bd374379e74ce2a065fab88f2016f9f67"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V10_2026-09-03.md)" = "b4f88a71f6eb59b6cdc40defdd0185f80b5677a6"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V20_2026-09-03.md)" = "c1fdcc62da65695baf805ccdebc0833f6bcf235f"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V21_2026-09-03.md)" = "4d674e2d8e9c3404001560f1d4ea4c8befc2597d"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_GC22_2026-09-03.md)" = "1a6d9bde9695a587d0522b9bf780d5511def3b9b"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_GC23_2026-09-04.md)" = "d902ecd6264fb4a26a50b7e4567fb0a82a7066ae"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_GC24_2026-09-04.md)" = "aa6f298997d4cb3177af1864b99572a4c2f11e1a"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_DR3012_003_V10_IDENTIFIER_TYPE_2026-09-03.md)" = "7d79087ad3d850af16a6571f2c7a82b1350a8218"
+          test ! -e audit_registry/semantic_classification_blocks/DR3012_v0.1.json
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+          sha256sum ./*.xsd | sort -k2 > /tmp/xsd-before.sha256
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path("audit_registry/finding_semantic_classification_v0.1.json").read_text(encoding="utf-8"))
+          assert r["progress"]["classified_count"]==64
+          assert r["progress"]["remaining_count"]==128
+          assert r["progress"]["reviewed_blocks"]==["ARA","ARCH","BG","CE","CIS","DISC","DMS","DR3011"]
+          assert r["progress"]["latest_block"]=="DR3011"
+          assert r["progress"]["latest_block_file"]=="audit_registry/semantic_classification_blocks/DR3011_v0.1.json"
+          print("PASSED: DR3012 semantic prestate is exactly 64/192")
+          PY
+          git diff --exit-code
+
+      - name: Materialize exact DR3012 block from staged payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audit_registry/semantic_classification_blocks
+          python - <<'PY'
+          import base64, re, zlib
+          from pathlib import Path
+          src=Path(".github/workflows/temp_merge_semantic_classification_dr3012.yml").read_text(encoding="utf-8")
+          m=re.search(r'DR3012_BLOCK_ZLIB_B64: "([A-Za-z0-9+/=]+)"',src)
+          assert m, "embedded payload not found"
+          data=zlib.decompress(base64.b64decode(m.group(1)))
+          Path("audit_registry/semantic_classification_blocks/DR3012_v0.1.json").write_bytes(data)
+          PY
+          test "$(sha256sum audit_registry/semantic_classification_blocks/DR3012_v0.1.json | awk '{print $1}')" = "d083b49a0956840fcb5d65969c8d0efdf2f113c00141a6205dbe8f9342b34e9c"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          b=json.loads(Path("audit_registry/semantic_classification_blocks/DR3012_v0.1.json").read_text(encoding="utf-8"))
+          expected={
+            "DR3012-001","DR3012-002","DR3012-003","DR3012-004","DR3012-005","DR3012-006","DR3012-007",
+            "DR3012GC22-001","DR3012GC22-002","DR3012GC23-001",
+            "DR3012GC24-001","DR3012GC24-002","DR3012GC24-003","DR3012GC24-004","DR3012GC24-005",
+            "DR3012V20-001","DR3012V20-002","DR3012V20-003","DR3012V20-004","DR3012V20-005","DR3012V20-006","DR3012V20-007","DR3012V20-008",
+            "DR3012V21-001"
+          }
+          got={e["finding_id"] for e in b["entries"]}
+          assert b["block_id"]=="DR3012" and got==expected and len(b["entries"])==24
+          for e in b["entries"]:
+              if e["finding_id"] in {"DR3012GC24-001","DR3012GC24-004"}:
+                  assert e["normative_authority"]=="no_strict_xsd_profile"
+                  assert e["sdk_behavior"]=="unsupported_profile"
+                  assert any(v["authority"]=="candidate_integration" for v in e["version_scope"])
+          print("PASSED: exact DR3012 block and candidate/release authority boundary")
+          PY
+
+      - name: Merge and validate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/merge_semantic_classification_block.py --block audit_registry/semantic_classification_blocks/DR3012_v0.1.json | tee /tmp/merge.log
+          grep -F "PASSED: merged block DR3012; classified=88 remaining=104" /tmp/merge.log
+          python tools/validate_finding_semantic_classification.py | tee /tmp/semantic.log
+          grep -F "PASSED: semantic classification registry valid; 88 reviewed entries anchored to frozen baseline" /tmp/semantic.log
+          python tools/validate_xsd_pool.py --repo-root .
+          sha256sum ./*.xsd | sort -k2 > /tmp/xsd-after.sha256
+          cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path("audit_registry/finding_semantic_classification_v0.1.json").read_text(encoding="utf-8"))
+          assert r["progress"]["classified_count"]==88
+          assert r["progress"]["remaining_count"]==104
+          assert r["progress"]["reviewed_blocks"]==["ARA","ARCH","BG","CE","CIS","DISC","DMS","DR3011","DR3012"]
+          assert r["progress"]["latest_block"]=="DR3012"
+          assert r["progress"]["latest_block_file"]=="audit_registry/semantic_classification_blocks/DR3012_v0.1.json"
+          print("PASSED: DR3012 semantic poststate is exactly 88/192")
+          PY
+
+      - name: Verify mutation boundary and commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          git diff --exit-code -- ./*.xsd
+          git diff --exit-code -- audit_registry/finding_provenance_baseline_2026-09-14.json
+          git diff --exit-code -- audit_registry/finding_inventory_frozen_2026-09-03.json
+          git diff --exit-code -- audit_registry/finding_revalidation_registry_v0.1.json
+          git diff --exit-code -- 00_START_HERE/CURRENT_STATE.json
+          git add audit_registry/finding_semantic_classification_v0.1.json audit_registry/semantic_classification_blocks/DR3012_v0.1.json
+          python - <<'PY'
+          import subprocess
+          names=subprocess.check_output(["git","diff","--cached","--name-only"],text=True).splitlines()
+          assert names==[
+            "audit_registry/finding_semantic_classification_v0.1.json",
+            "audit_registry/semantic_classification_blocks/DR3012_v0.1.json",
+          ], names
+          print("PASSED: staged mutation boundary contains only DR3012 block and semantic registry")
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "audit: merge DR3012 semantic classification"
+          git push origin HEAD:dev/schema-integration
