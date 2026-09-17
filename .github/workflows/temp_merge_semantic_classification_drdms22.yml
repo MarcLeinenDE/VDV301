@@ -1,0 +1,160 @@
+name: temp-merge-semantic-classification-drdms22
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths: [.github/workflows/temp_merge_semantic_classification_drdms22.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  merge-drdms22:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+
+      - name: Verify immutable prestate
+        shell: bash
+        run: |
+          set -euo pipefail
+          CLEAN_BASE=06be154bc4281f2a420fcd0d5acf8b6892da61b5
+          test "$(git rev-parse HEAD^)" = "$CLEAN_BASE"
+          test "$(git diff --name-only HEAD^ HEAD)" = ".github/workflows/temp_merge_semantic_classification_drdms22.yml"
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "4b4fdce078ed82777c01ec6b47118923bd8fb07f"
+          test "$(git hash-object audit_registry/finding_semantic_classification_schema_v0.1.json)" = "7cb69f527fe9d69e5b0fc59f6a23c36e0e426571"
+          test "$(git hash-object tools/validate_finding_semantic_classification.py)" = "3304b31b2233e48d8d85e2ef9e248397d9a86b4e"
+          test "$(git hash-object tools/merge_semantic_classification_block.py)" = "bddb17d5f264663611585cde33202c355ce9e5ca"
+          test "$(git hash-object tools/validate_xsd_pool.py)" = "7a682dbddaeeeb3f9cc269d2e48e5ab000aca4bd"
+          test "$(git hash-object tools/validate_dms_v22_deep_read_ev107.py)" = "6acd2dc75131455e220ae18ce5131eeb5ad44789"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md)" = "e8ebcd6ee2506caa3ea5e3ff0a825ec275f3f170"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_V22_2026-09-05.md)" = "26e20cdb15cb5001ab5930baab5956f568753fa1"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/deep_read/DMS_V2.2.md)" = "009243f56e8a81e9fdac82ff96d0fb714c7ba45b"
+          test "$(git hash-object IBIS-IP_DeviceManagementService_V2.2.xsd)" = "c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d"
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "ab6d5f09081435e1d744b50af0a3a5f572eb5cef"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "6e401f0bd374379e74ce2a065fab88f2016f9f67"
+          test ! -e audit_registry/semantic_classification_blocks/DRDMS22_v0.1.json
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+          sha256sum ./*.xsd | sort -k2 > /tmp/xsd-before.sha256
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text(encoding='utf-8'))
+          assert r['progress']['classified_count']==102
+          assert r['progress']['remaining_count']==90
+          assert r['progress']['latest_block']=='DRCOM24'
+          assert r['progress']['latest_block_file']=='audit_registry/semantic_classification_blocks/DRCOM24_v0.1.json'
+          ids={e['finding_id'] for e in r['entries']}
+          target=['DRDMS22-001','DRDMS22-002','DRDMS22-003','DRDMS22-004']
+          assert not (ids & set(target))
+          p=json.loads(Path('audit_registry/finding_provenance_baseline_2026-09-14.json').read_text(encoding='utf-8'))
+          states={e['finding_id']:e['revalidation_state'] for e in p['inventory']['entries'] if e['finding_id'] in target}
+          assert states=={
+            'DRDMS22-001':'context_verified',
+            'DRDMS22-002':'context_verified',
+            'DRDMS22-003':'executable_confirmed',
+            'DRDMS22-004':'context_verified'
+          }, states
+          print('PASSED: exact DRDMS22 prestate 102/192 and frozen terminal states confirmed')
+          PY
+          git diff --exit-code
+
+      - name: Materialize exact DRDMS22 block
+        shell: bash
+        env:
+          DRDMS22_BLOCK_ZLIB_B64: "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"
+        run: |
+          set -euo pipefail
+          mkdir -p audit_registry/semantic_classification_blocks
+          python - <<'PY'
+          import base64, os, zlib
+          from pathlib import Path
+          data=zlib.decompress(base64.b64decode(os.environ['DRDMS22_BLOCK_ZLIB_B64'], validate=True))
+          Path('audit_registry/semantic_classification_blocks/DRDMS22_v0.1.json').write_bytes(data)
+          PY
+          test "$(sha256sum audit_registry/semantic_classification_blocks/DRDMS22_v0.1.json | awk '{print $1}')" = "157c3b9fe2ca37f53a6f7392e2c646a2d63fd46175f956d557bca6f417fde061"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          b=json.loads(Path('audit_registry/semantic_classification_blocks/DRDMS22_v0.1.json').read_text(encoding='utf-8'))
+          assert b['block_id']=='DRDMS22'
+          assert [e['finding_id'] for e in b['entries']]==['DRDMS22-001','DRDMS22-002','DRDMS22-003','DRDMS22-004']
+          e={x['finding_id']:x for x in b['entries']}
+          assert e['DRDMS22-001']['sdk_behavior']=='no_runtime_diagnostic'
+          assert e['DRDMS22-002']['sdk_behavior']=='no_runtime_diagnostic'
+          assert e['DRDMS22-003']['primary_issue_kind']=='documentation_spelling'
+          assert e['DRDMS22-003']['defect_assessment']=='cross_artifact_mismatch'
+          assert e['DRDMS22-003']['sdk_behavior']=='error_with_advisory'
+          assert any(s['type']=='technical_inference' and 'standard English spelling' in s['note'] for s in e['DRDMS22-003']['semantic_basis'])
+          assert any(s['type']=='xsd_internal_consistency' for s in e['DRDMS22-003']['semantic_basis'])
+          assert e['DRDMS22-004']['defect_assessment']=='confirmed_pdf_defect'
+          assert any(s['type']=='parallel_operation_pattern' for s in e['DRDMS22-004']['semantic_basis'])
+          print('PASSED: exact revised DRDMS22 block with orthography/naming safeguards')
+          PY
+
+      - name: Merge and validate DRDMS22 classification
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_dms_v22_deep_read_ev107.py | tee /tmp/ev107.log
+          grep -F "PASS" /tmp/ev107.log
+          python tools/merge_semantic_classification_block.py --block audit_registry/semantic_classification_blocks/DRDMS22_v0.1.json | tee /tmp/merge.log
+          grep -F "PASSED: merged block DRDMS22; classified=106 remaining=86" /tmp/merge.log
+          python tools/validate_finding_semantic_classification.py | tee /tmp/semantic.log
+          grep -F "PASSED: semantic classification registry valid; 106 reviewed entries anchored to frozen baseline" /tmp/semantic.log
+          python tools/validate_xsd_pool.py --repo-root .
+          sha256sum ./*.xsd | sort -k2 > /tmp/xsd-after.sha256
+          cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text(encoding='utf-8'))
+          assert r['progress']['classified_count']==106
+          assert r['progress']['remaining_count']==86
+          assert r['progress']['latest_block']=='DRDMS22'
+          assert r['progress']['latest_block_file']=='audit_registry/semantic_classification_blocks/DRDMS22_v0.1.json'
+          assert r['progress']['reviewed_blocks'][-1]=='DRDMS22'
+          print('PASSED: DRDMS22 poststate exactly 106/192')
+          PY
+
+      - name: Verify final tree boundary and persist
+        shell: bash
+        run: |
+          set -euo pipefail
+          CLEAN_BASE=06be154bc4281f2a420fcd0d5acf8b6892da61b5
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md)" = "e8ebcd6ee2506caa3ea5e3ff0a825ec275f3f170"
+          test "$(git hash-object audit_registry/finding_semantic_classification_schema_v0.1.json)" = "7cb69f527fe9d69e5b0fc59f6a23c36e0e426571"
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object IBIS-IP_DeviceManagementService_V2.2.xsd)" = "c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d"
+          git rm .github/workflows/temp_merge_semantic_classification_drdms22.yml
+          git add audit_registry/finding_semantic_classification_v0.1.json audit_registry/semantic_classification_blocks/DRDMS22_v0.1.json
+          python - <<'PY'
+          import subprocess
+          staged=set(subprocess.check_output(['git','diff','--cached','--name-only'], text=True).splitlines())
+          expected={
+            '.github/workflows/temp_merge_semantic_classification_drdms22.yml',
+            'audit_registry/finding_semantic_classification_v0.1.json',
+            'audit_registry/semantic_classification_blocks/DRDMS22_v0.1.json'
+          }
+          assert staged==expected, (staged, expected)
+          final_changed=set(subprocess.check_output(['git','diff','--name-only','06be154bc4281f2a420fcd0d5acf8b6892da61b5'], text=True).splitlines())
+          assert final_changed=={
+            'audit_registry/finding_semantic_classification_v0.1.json',
+            'audit_registry/semantic_classification_blocks/DRDMS22_v0.1.json'
+          }, final_changed
+          print('PASSED: persistent DRDMS22 boundary is registry + block only')
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "audit: merge DRDMS22 semantic classification"
+          git push origin HEAD:dev/schema-integration
