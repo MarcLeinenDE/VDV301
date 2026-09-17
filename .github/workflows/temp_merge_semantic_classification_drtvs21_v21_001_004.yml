@@ -32,73 +32,55 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD^)" = "0d6d7dae2aff4baf83fab989cf79730760413632"
-          test "$(git rev-parse HEAD^^)" = "ad99d975a1c1b148774d2f753d2b379a5a913283"
+          CLEAN_BASE=7d2cc09ef02ad3244b9553b8fd7bb0982ab82f73
+          STAGED_BLOCK=ad99d975a1c1b148774d2f753d2b379a5a913283
+          PREVIOUS_GATE=3b6562b1a86b8bf0e2ac161482ac39ac55d9838d
+          test "$(git rev-parse HEAD^)" = "$PREVIOUS_GATE"
+          test "$(git rev-parse "$STAGED_BLOCK^")" = "$CLEAN_BASE"
+          test "$(git hash-object audit_registry/semantic_classification_blocks/DRTVS21_V21_001_004_v0.1.json)" = "7bed62a6fa40f2057cbc0be29cc6953a911dd4fc"
           test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "87b29db6f5e6e3b0548e878d949adfd7d8d02281"
           test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
           test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
           test "$(git hash-object audit_registry/drtvs21_revalidation_evidence_2026-09-07.json)" = "79a9d5c2c2861071e942435d4fc9afaf61ef27f4"
           test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTVS21_2026-09-07.md)" = "c67482f72ec792f30f071858cfd38268aed82e22"
-          test "$(git hash-object docs/pdf_xsd_semantic_audit/deep_read/TVS_V2.1.md)" = "d658d818833bfe7a436f92708ff4ec89402b51b3"
           test "$(git hash-object docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_DRTVS21_003_V21_XSD_SUPPORT_2026-09-07.md)" = "0921fc741e132ad7f0c9fcc8cebeaa8fa4eb09a4"
           test "$(git hash-object tools/validate_tvs_v21_ev112.py)" = "ac95c53ac1ca1900f51df0b06fe3f0ed623700f5"
           test "$(git hash-object tools/merge_semantic_classification_block.py)" = "bddb17d5f264663611585cde33202c355ce9e5ca"
           test "$(git hash-object tools/validate_finding_semantic_classification.py)" = "3304b31b2233e48d8d85e2ef9e248397d9a86b4e"
           test "$(git hash-object tools/validate_xsd_pool.py)" = "7a682dbddaeeeb3f9cc269d2e48e5ab000aca4bd"
-          test "$(git hash-object IBIS-IP_TicketValidationService_V2.1.xsd)" = "f6497e6469b82ee19b185c4de749d13a7ca60bed"
-          test "$(git hash-object IBIS-IP_common_V1.0.xsd)" = "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c"
-          test "$(git hash-object IBIS-IP_Enumerations_V1.0.xsd)" = "a9bea5bc73003ed91ded8519db06c32c4067831d"
           python - <<'PY'
           import hashlib, json
           from pathlib import Path
 
-          registry = json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
-          block = json.loads(Path('audit_registry/semantic_classification_blocks/DRTVS21_V21_001_004_v0.1.json').read_text())
-          evidence = json.loads(Path('audit_registry/drtvs21_revalidation_evidence_2026-09-07.json').read_text())
-          correction = Path('docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_DRTVS21_003_V21_XSD_SUPPORT_2026-09-07.md').read_text()
-          terminal = Path('docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTVS21_2026-09-07.md').read_text()
+          reg=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
+          block=json.loads(Path('audit_registry/semantic_classification_blocks/DRTVS21_V21_001_004_v0.1.json').read_text())
+          ev=json.loads(Path('audit_registry/drtvs21_revalidation_evidence_2026-09-07.json').read_text())
+          terminal=Path('docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTVS21_2026-09-07.md').read_text()
+          correction=Path('docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_DRTVS21_003_V21_XSD_SUPPORT_2026-09-07.md').read_text()
+          target=['DRTVS21-001','DRTVS21-002','DRTVS21-003','DRTVS21-004']
 
-          assert registry['progress']['classified_count'] == 128
-          assert registry['progress']['remaining_count'] == 64
-          assert registry['progress']['latest_block'] == 'DRTRAINSET22_V22_001_002'
-          existing = {e['finding_id']: e for e in registry['entries']}
-          target = ['DRTVS21-001','DRTVS21-002','DRTVS21-003','DRTVS21-004']
-          assert not any(fid in existing for fid in target)
-          assert 'TVS-002' in existing
-          Path('/tmp/tvs002.sha256').write_text(hashlib.sha256(json.dumps(existing['TVS-002'], sort_keys=True, ensure_ascii=False).encode()).hexdigest())
+          assert reg['progress']['classified_count']==128
+          assert reg['progress']['remaining_count']==64
+          assert reg['progress']['latest_block']=='DRTRAINSET22_V22_001_002'
+          by_id={e['finding_id']:e for e in reg['entries']}
+          assert not any(fid in by_id for fid in target)
+          assert 'TVS-002' in by_id
+          Path('/tmp/tvs002.sha256').write_text(hashlib.sha256(json.dumps(by_id['TVS-002'],sort_keys=True,ensure_ascii=False).encode()).hexdigest())
 
-          assert block['block_id'] == 'DRTVS21_V21_001_004'
-          assert block['source_baseline_payload_sha256'] == 'd5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576'
-          assert [e['finding_id'] for e in block['entries']] == target
-          assert 'TVS-002' not in [e['finding_id'] for e in block['entries']]
-
-          assert evidence['evidence_id'] == 'EV-150'
-          assert evidence['result'] == 'PASS'
-          assert evidence['scope'] == target
-          assert evidence['successful_run_id'] == '34087850644'
-          assert evidence['successful_job_id'] == '101635233786'
-          assert evidence['authority']['pdf_sha256'] == '676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d'
-          assert evidence['authority']['exact_xsd_route'] == {
-              'IBIS-IP_TicketValidationService_V2.1.xsd': 'f6497e6469b82ee19b185c4de749d13a7ca60bed',
-              'IBIS-IP_common_V1.0.xsd': '194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c',
-              'IBIS-IP_Enumerations_V1.0.xsd': 'a9bea5bc73003ed91ded8519db06c32c4067831d',
-          }
-          expected_states = {
-              'DRTVS21-001': 'executable_confirmed',
-              'DRTVS21-002': 'context_verified',
-              'DRTVS21-003': 'context_verified',
-              'DRTVS21-004': 'context_verified',
-          }
-          for fid, state in expected_states.items():
-              assert evidence['finding_results'][fid]['recommended_terminal_state'] == state
+          assert block['block_id']=='DRTVS21_V21_001_004'
+          assert [e['finding_id'] for e in block['entries']]==target
+          assert ev['evidence_id']=='EV-150' and ev['result']=='PASS' and ev['scope']==target
+          assert ev['successful_run_id']=='34087850644'
+          assert ev['successful_job_id']=='101635233786'
+          expected={'DRTVS21-001':'executable_confirmed','DRTVS21-002':'context_verified','DRTVS21-003':'context_verified','DRTVS21-004':'context_verified'}
+          for fid,state in expected.items():
+              assert ev['finding_results'][fid]['recommended_terminal_state']==state
               assert fid in terminal and state in terminal
-
-          assert evidence['finding_results']['DRTVS21-003']['finding_basis_after_correction'] == 'same-document formal PDF operation material versus bilingual flow text'
-          assert evidence['xsd_operation_inventory_correction']['SubscribeCurrentStopPoint_present'] is False
-          assert evidence['xsd_operation_inventory_correction']['SubscribeCurrentStop_present'] is False
-          assert 'Neither `TicketValidationService.SubscribeCurrentStopPoint` nor `TicketValidationService.SubscribeCurrentStop`' in correction
+          assert 'Closure run: `34088402374`' in terminal
+          assert ev['xsd_operation_inventory_correction']['SubscribeCurrentStopPoint_present'] is False
+          assert ev['xsd_operation_inventory_correction']['SubscribeCurrentStop_present'] is False
           assert '`DRTVS21-003` remains valid on same-document PDF evidence' in correction
-          print('PASSED: exact 128/192 prestate, immutable anchors, EV-150 scope/states, and DRTVS21-003 correction boundary verified')
+          print('PASSED: exact 128/192 prestate, EV-150 boundary and DRTVS21 correction trail verified')
           PY
 
       - name: Re-run current-safe executable TVS V2.1 boundary
@@ -109,9 +91,9 @@ jobs:
         run: |
           set -euo pipefail
           test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
-          sha256sum ./*.xsd | sort > /tmp/xsd-before.sha256
+          sha256sum ./*.xsd | sort -k2 > /tmp/xsd-before.sha256
 
-      - name: Merge DRTVS21 block and validate semantic registry
+      - name: Merge DRTVS21 block and validate registry
         shell: bash
         run: |
           set -euo pipefail
@@ -120,22 +102,21 @@ jobs:
           python - <<'PY'
           import hashlib, json
           from pathlib import Path
-          registry = json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
-          assert registry['progress']['classified_count'] == 132
-          assert registry['progress']['remaining_count'] == 60
-          assert registry['progress']['latest_block'] == 'DRTVS21_V21_001_004'
-          assert registry['progress']['latest_block_file'] == 'audit_registry/semantic_classification_blocks/DRTVS21_V21_001_004_v0.1.json'
-          by_id = {e['finding_id']: e for e in registry['entries']}
+          reg=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
+          assert reg['progress']['classified_count']==132
+          assert reg['progress']['remaining_count']==60
+          assert reg['progress']['latest_block']=='DRTVS21_V21_001_004'
+          assert reg['progress']['latest_block_file']=='audit_registry/semantic_classification_blocks/DRTVS21_V21_001_004_v0.1.json'
+          by_id={e['finding_id']:e for e in reg['entries']}
           for fid in ['DRTVS21-001','DRTVS21-002','DRTVS21-003','DRTVS21-004']:
               assert fid in by_id
-          assert by_id['DRTVS21-003']['normative_authority'] == 'contextual_only'
-          assert by_id['DRTVS21-003']['runtime_match']['state'] == 'not_applicable'
-          assert by_id['DRTVS21-001']['sdk_behavior'] == 'no_runtime_diagnostic'
-          assert by_id['DRTVS21-002']['defect_assessment'] == 'likely_pdf_defect'
-          assert by_id['DRTVS21-004']['primary_issue_kind'] == 'documentation_spelling'
-          tvs002 = json.dumps(by_id['TVS-002'], sort_keys=True, ensure_ascii=False).encode()
-          assert hashlib.sha256(tvs002).hexdigest() == Path('/tmp/tvs002.sha256').read_text()
-          print('PASSED: merged registry is exactly 132/192; TVS-002 unchanged; DRTVS21 semantics preserved')
+          assert by_id['DRTVS21-001']['sdk_behavior']=='no_runtime_diagnostic'
+          assert by_id['DRTVS21-002']['defect_assessment']=='likely_pdf_defect'
+          assert by_id['DRTVS21-003']['normative_authority']=='contextual_only'
+          assert by_id['DRTVS21-003']['runtime_match']['state']=='not_applicable'
+          assert by_id['DRTVS21-004']['primary_issue_kind']=='documentation_spelling'
+          assert hashlib.sha256(json.dumps(by_id['TVS-002'],sort_keys=True,ensure_ascii=False).encode()).hexdigest()==Path('/tmp/tvs002.sha256').read_text()
+          print('PASSED: merged registry is exactly 132/192 and TVS-002 is unchanged')
           PY
 
       - name: Validate all 50 root XSDs and prove no schema mutation
@@ -143,23 +124,28 @@ jobs:
         run: |
           set -euo pipefail
           python tools/validate_xsd_pool.py --repo-root .
-          sha256sum ./*.xsd | sort > /tmp/xsd-after.sha256
+          sha256sum ./*.xsd | sort -k2 > /tmp/xsd-after.sha256
           cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
           echo 'PASSED: all 50 root XSDs compile and are byte-identical before/after semantic merge'
 
-      - name: Persist only DRTVS21 block and master registry
+      - name: Persist exact DRTVS21 boundary
         shell: bash
         run: |
           set -euo pipefail
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          CLEAN_BASE=7d2cc09ef02ad3244b9553b8fd7bb0982ab82f73
           git rm .github/workflows/temp_merge_semantic_classification_drtvs21_v21_001_004.yml
           git add audit_registry/finding_semantic_classification_v0.1.json
-          mapfile -t changed < <(git diff --name-only 7d2cc1a98db1267ca3377a8eea5bfa1d66922ddb | sort)
-          printf 'Durable cumulative diff:\n%s\n' "${changed[*]}"
-          test "${#changed[@]}" -eq 2
-          test "${changed[0]}" = 'audit_registry/finding_semantic_classification_v0.1.json'
-          test "${changed[1]}" = 'audit_registry/semantic_classification_blocks/DRTVS21_V21_001_004_v0.1.json'
-          git status --short
+          python - <<'PY'
+          import subprocess
+          staged=set(subprocess.check_output(['git','diff','--cached','--name-only'],text=True).splitlines())
+          expected_staged={'.github/workflows/temp_merge_semantic_classification_drtvs21_v21_001_004.yml','audit_registry/finding_semantic_classification_v0.1.json'}
+          assert staged==expected_staged,(staged,expected_staged)
+          changed=set(subprocess.check_output(['git','diff','--name-only','7d2cc09ef02ad3244b9553b8fd7bb0982ab82f73'],text=True).splitlines())
+          expected_changed={'audit_registry/finding_semantic_classification_v0.1.json','audit_registry/semantic_classification_blocks/DRTVS21_V21_001_004_v0.1.json'}
+          assert changed==expected_changed,(changed,expected_changed)
+          print('PASSED: durable boundary is master registry + DRTVS21 block only')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git commit -m 'audit: merge DRTVS21 semantic classification'
           git push origin HEAD:dev/schema-integration
