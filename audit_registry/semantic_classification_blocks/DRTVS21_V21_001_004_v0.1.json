@@ -1,0 +1,377 @@
+{
+  "block_version": "0.1",
+  "block_id": "DRTVS21_V21_001_004",
+  "review_date": "2026-09-17",
+  "source_baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
+  "source_terminal_report": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTVS21_2026-09-07.md",
+  "source_deep_read": "docs/pdf_xsd_semantic_audit/deep_read/TVS_V2.1.md",
+  "review_policy": "manual_semantic_review_bilingual_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "DRTVS21-001",
+      "service": "TicketValidationService",
+      "version_scope": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.1.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact official VDV-301-2.1 TicketValidationService route. Common V1.0 and Enumerations V1.0 are intentional dependencies and must not be replaced by later files."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "identifier_case_error",
+      "secondary_issue_kinds": [
+        "pdf_xsd_type_reference_mismatch",
+        "current_trip_ref_type",
+        "nm_token_case_mismatch",
+        "no_type_alias"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "pdf_can_mislead_implementation",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Physical page 14 prints the CurrentTripRef type identifier as IBIS-IP.NMToken."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact selected V2.1 service XSD types CurrentTripRef as IBIS-IP.NMTOKEN, provided by exact Common V1.0."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-112 confirms IBIS-IP.NMTOKEN exists, IBIS-IP.NMToken does not exist, and a probe schema using the PDF spelling fails to compile."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "TicketValidationService V2.1: falsche Groß-/Kleinschreibung bei NMTOKEN",
+          "short": "Die PDF nennt für CurrentTripRef den Typ IBIS-IP.NMToken; die maßgebliche V2.1-XSD verwendet ausschließlich IBIS-IP.NMTOKEN.",
+          "long": "Auf der geprüften PDF-Seite 14 wird der Typ von CurrentTripRef als IBIS-IP.NMToken dargestellt. Die exakte offizielle V2.1-Schemaroute verwendet dagegen IBIS-IP.NMTOKEN aus Common V1.0. EV-112 bestätigt ausführbar, dass IBIS-IP.NMTOKEN existiert, die gemischte Schreibweise IBIS-IP.NMToken nicht existiert und ein Schema-Probeverweis auf die PDF-Schreibweise nicht kompiliert. Die XSD bleibt für die XML-Validierung maßgeblich; aus dem PDF-Fehler darf kein case-insensitiver Typalias abgeleitet werden.",
+          "recommendation": "Bei Implementierung und Codegenerierung die exakte XSD-Schreibweise IBIS-IP.NMTOKEN verwenden. Die PDF-Schreibweise nur als Dokumentationsfehler behandeln und weder normalisieren noch als Alias zulassen."
+        },
+        "en": {
+          "title": "TicketValidationService V2.1: incorrect NMTOKEN identifier case",
+          "short": "The PDF names the CurrentTripRef type as IBIS-IP.NMToken; the authoritative V2.1 XSD uses only IBIS-IP.NMTOKEN.",
+          "long": "On reviewed PDF page 14, the CurrentTripRef type is displayed as IBIS-IP.NMToken. The exact official V2.1 schema route instead uses IBIS-IP.NMTOKEN from Common V1.0. EV-112 executable evidence confirms that IBIS-IP.NMTOKEN exists, the mixed-case IBIS-IP.NMToken spelling does not, and a probe schema referencing the PDF spelling does not compile. The XSD remains authoritative for XML validation; no case-insensitive type alias may be derived from the PDF defect.",
+          "recommendation": "Use the exact XSD spelling IBIS-IP.NMTOKEN for implementation and code generation. Treat the PDF spelling as documentation-only and do not normalize or accept it as an alias."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTVS21_2026-09-07.md",
+          "note": "Terminal TicketValidationService V2.1 revalidation report; DRTVS21-001 is executable_confirmed."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-150 / run 34087850644 / job 101635233786 / closure run 34088402374 / audit_registry/drtvs21_revalidation_evidence_2026-09-07.json",
+          "note": "Persisted DRTVS21 V2.1 revalidation evidence from the exact pinned publication and exact selected mixed-version XSD route."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/TVS_V2.1.md",
+          "note": "Canonical V2.1 deep-read record for the CurrentTripRef type-case discrepancy."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TVS_V2.1 / sha256 676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d / physical page 14",
+          "note": "Exact pinned official PDF bytes showing IBIS-IP.NMToken."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_TicketValidationService_V2.1.xsd @ f6497e6469b82ee19b185c4de749d13a7ca60bed + IBIS-IP_common_V1.0.xsd @ 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+          "note": "Exact selected release declarations using IBIS-IP.NMTOKEN."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-112 / tools/validate_tvs_v21_ev112.py @ ac95c53ac1ca1900f51df0b06fe3f0ed623700f5",
+          "note": "Current-safe executable confirmation of the exact type spelling and negative mixed-case probe."
+        }
+      ],
+      "notes": "Confirmed PDF type-identifier case defect. No runtime instance alias or normalization rule is created."
+    },
+    {
+      "finding_id": "DRTVS21-002",
+      "service": "TicketValidationService",
+      "version_scope": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.1.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact official VDV-301-2.1 TicketValidationService route. The finding is limited to the missing service-name separator in a PDF display label; omission of the Structure suffix follows surrounding PDF display conventions and is not classified as a defect."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "missing_separator_or_punctuation",
+      "secondary_issue_kinds": [
+        "pdf_type_display_identifier_typo_candidate",
+        "missing_service_name_separator_dot",
+        "current_line_data_display",
+        "structure_suffix_omission_not_defect"
+      ],
+      "defect_assessment": "likely_pdf_defect",
+      "confidence": "high",
+      "validation_effect": [
+        "documentation_only",
+        "pdf_can_mislead_implementation",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Physical page 15 displays the GetCurrentLine response data label as TicketValidationServiceCurrentLineData, while an immediately following table uses a dotted service-qualified display form."
+        },
+        {
+          "type": "common_conventions",
+          "note": "The same PDF intentionally omits the Structure suffix in several human-readable type displays, so that suffix omission is not treated as an error here."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact selected V2.1 XSD response member CurrentLineData has type TicketValidationService.CurrentLineDataStructure."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-112 confirms the exact XSD type and confirms that TicketValidationServiceCurrentLineData is not an exact service complex type."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The evidence supports the missing separator dot as the material display anomaly, but does not justify treating every shortened PDF type label as a literal XML QName."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "TicketValidationService V2.1: fehlender Trenner im CurrentLineData-Anzeigenamen",
+          "short": "Die PDF zeigt TicketValidationServiceCurrentLineData ohne Punkt; die exakte XSD verwendet TicketValidationService.CurrentLineDataStructure.",
+          "long": "Auf der geprüften PDF-Seite 15 wird für die GetCurrentLine-Antwort der Anzeigename TicketValidationServiceCurrentLineData verwendet. Die exakte V2.1-XSD deklariert dagegen TicketValidationService.CurrentLineDataStructure, und eine unmittelbar folgende PDF-Tabelle verwendet ebenfalls eine Schreibweise mit Punkt. Die in der PDF übliche Auslassung des Suffixes Structure wird ausdrücklich nicht als Fehler bewertet; auffällig ist allein der fehlende Trenner nach dem Servicenamen. Da die PDF solche Typnamen teilweise verkürzt darstellt, ist dies ein wahrscheinlicher Darstellungsfehler und kein Anlass für einen XML-Typalias.",
+          "recommendation": "Für XML und Codegenerierung ausschließlich den exakten XSD-Typ TicketValidationService.CurrentLineDataStructure verwenden. Die fehlende Punkttrennung in der PDF nicht als alternative Typbezeichnung oder Alias übernehmen."
+        },
+        "en": {
+          "title": "TicketValidationService V2.1: missing separator in CurrentLineData display name",
+          "short": "The PDF displays TicketValidationServiceCurrentLineData without a dot; the exact XSD uses TicketValidationService.CurrentLineDataStructure.",
+          "long": "On reviewed PDF page 15, the GetCurrentLine response is displayed as TicketValidationServiceCurrentLineData. The exact V2.1 XSD declares TicketValidationService.CurrentLineDataStructure, and an immediately following PDF table also uses a dotted service-qualified display form. The PDF convention of omitting the Structure suffix is explicitly not classified as a defect; only the missing separator after the service name is material. Because the PDF shortens type displays elsewhere, this remains a likely display defect rather than grounds for an XML type alias.",
+          "recommendation": "Use only the exact XSD type TicketValidationService.CurrentLineDataStructure for XML and code generation. Do not accept the PDF's missing-dot form as an alternative type name or alias."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTVS21_2026-09-07.md",
+          "note": "Terminal TicketValidationService V2.1 revalidation report; DRTVS21-002 is context_verified."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-150 / run 34087850644 / job 101635233786 / closure run 34088402374 / audit_registry/drtvs21_revalidation_evidence_2026-09-07.json",
+          "note": "Persisted DRTVS21 V2.1 revalidation evidence from the exact pinned publication and exact selected mixed-version XSD route."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/TVS_V2.1.md",
+          "note": "Canonical V2.1 deep-read record and display-convention boundary for CurrentLineData."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TVS_V2.1 / sha256 676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d / physical page 15",
+          "note": "Exact pinned PDF bytes containing the concatenated display name and nearby dotted control."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_TicketValidationService_V2.1.xsd @ f6497e6469b82ee19b185c4de749d13a7ca60bed",
+          "note": "Exact selected release type TicketValidationService.CurrentLineDataStructure."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-112 / tools/validate_tvs_v21_ev112.py @ ac95c53ac1ca1900f51df0b06fe3f0ed623700f5",
+          "note": "Current-safe executable declaration evidence for the exact response type and absence of the concatenated complex-type name."
+        }
+      ],
+      "notes": "Likely PDF display typo limited to the missing service-name separator. Structure-suffix omission is intentionally not classified as an error."
+    },
+    {
+      "finding_id": "DRTVS21-003",
+      "service": "TicketValidationService",
+      "version_scope": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.1.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Official V2.1 release context is pinned, but the finding is established only by same-document PDF evidence. The exact selected service XSD contains neither SubscribeCurrentStopPoint nor SubscribeCurrentStop and is not positive support for either spelling."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "wrong_operation_reference",
+      "secondary_issue_kinds": [
+        "pdf_operation_name_editorial_error",
+        "subscribe_current_stop_vs_subscribe_current_stop_point",
+        "bilingual_flow_text_mismatch",
+        "xsd_positive_support_withdrawn"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "pdf_can_mislead_implementation",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The same official PDF uses SubscribeCurrentStopPoint in the table of contents, German and English formal operation overviews, and the detailed operation section, but SubscribeCurrentStop in the German and English flow text."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The hypothesis that SubscribeCurrentStop is a second or legacy formal operation name is rejected by the publication's repeated formal naming. EV-150 additionally corrected the historical Deep Read: the exact V2.1 XSD contains neither Subscribe spelling and therefore cannot positively support this finding."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "TicketValidationService V2.1: inkonsistenter SubscribeCurrentStop-Operationsname in der PDF",
+          "short": "Die formalen PDF-Abschnitte verwenden SubscribeCurrentStopPoint, während der deutsche und englische Ablauftext SubscribeCurrentStop nennt.",
+          "long": "Die offizielle V2.1-PDF bezeichnet die Operation im Inhaltsverzeichnis, in beiden formalen Operationsübersichten und im Detailabschnitt als SubscribeCurrentStopPoint. Der deutsche und englische Ablauftext verwendet dagegen SubscribeCurrentStop. Die Gegenhypothese einer zweiten oder älteren formalen Operation wird durch die wiederholte formale Benennung im selben Dokument nicht gestützt. Wichtig ist die EV-150-Korrektur: Die exakte V2.1-TicketValidationService-XSD enthält weder SubscribeCurrentStopPoint noch SubscribeCurrentStop als lokale Serviceoperation oder globales Element. Der Befund ist deshalb ausschließlich ein PDF-interner redaktioneller Widerspruch.",
+          "recommendation": "Den Ablauftext als PDF-Dokumentationsfehler behandeln und bei der Interpretation des Dokuments die wiederholte formale Bezeichnung SubscribeCurrentStopPoint heranziehen. Aus diesem Befund keinerlei ausführbare V2.1-XSD-Operation und keinen Alias erfinden."
+        },
+        "en": {
+          "title": "TicketValidationService V2.1: inconsistent SubscribeCurrentStop operation name in the PDF",
+          "short": "Formal PDF sections use SubscribeCurrentStopPoint while the German and English flow text uses SubscribeCurrentStop.",
+          "long": "The official V2.1 PDF names the operation SubscribeCurrentStopPoint in the table of contents, both formal operation overviews, and the detailed operation section. The German and English flow text instead use SubscribeCurrentStop. The alternative hypothesis of a second or legacy formal operation is not supported by the repeated formal naming in the same document. Crucially, the EV-150 correction establishes that the exact V2.1 TicketValidationService XSD contains neither SubscribeCurrentStopPoint nor SubscribeCurrentStop as a local service operation or global element. The finding is therefore solely a PDF-internal editorial inconsistency.",
+          "recommendation": "Treat the flow-text spelling as a PDF documentation defect and use the repeatedly formal SubscribeCurrentStopPoint name when interpreting the document. Do not invent an executable V2.1 XSD operation or alias from this finding."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTVS21_2026-09-07.md",
+          "note": "Terminal TicketValidationService V2.1 revalidation report; DRTVS21-003 is context_verified."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-150 / run 34087850644 / job 101635233786 / closure run 34088402374 / audit_registry/drtvs21_revalidation_evidence_2026-09-07.json",
+          "note": "Persisted DRTVS21 V2.1 evidence and correction trail."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/TVS_V2.1.md",
+          "note": "Historical deep-read source; its former XSD-support sentence is superseded by the explicit correction delta."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_DRTVS21_003_V21_XSD_SUPPORT_2026-09-07.md",
+          "note": "Authoritative audit correction: selected V2.1 XSD contains neither SubscribeCurrentStopPoint nor SubscribeCurrentStop; the finding survives solely on same-PDF evidence."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TVS_V2.1 / sha256 676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d / physical pages 5,10,11,12,13,14",
+          "note": "Exact pinned PDF bytes showing formal SubscribeCurrentStopPoint versus bilingual flow-text SubscribeCurrentStop."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_TicketValidationService_V2.1.xsd @ f6497e6469b82ee19b185c4de749d13a7ca60bed",
+          "note": "Negative boundary only: neither Subscribe spelling occurs as the claimed local service operation/global element; this source is not positive support for the PDF naming."
+        }
+      ],
+      "notes": "Confirmed same-document PDF editorial mismatch. Historical XSD-positive-support sentence is explicitly withdrawn; no executable alias is created."
+    },
+    {
+      "finding_id": "DRTVS21-004",
+      "service": "TicketValidationService",
+      "version_scope": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.1.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Official V2.1 publication context. The finding concerns prose and caption spelling only and has no executable schema effect."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "documentation_spelling",
+      "secondary_issue_kinds": [
+        "pdf_documentation_typo_non_executable",
+        "caption_and_prose_spelling",
+        "unscubscribe_unscubscibe",
+        "getrazziaresponsetdata",
+        "error_respone"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Targeted visible review of the exact pinned PDF shows the non-executable strings Unscubscribe/Unscubscibe on page 10 and GetrazziaResponsetData/Error Respone on page 15 in prose or captions."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "TicketValidationService V2.1: redaktionelle Schreibfehler in PDF-Texten",
+          "short": "Mehrere Schreibfehler wie Unscubscribe, GetrazziaResponsetData und Error Respone stehen nur in Prosa bzw. Tabellenüberschriften.",
+          "long": "Die sichtbare Prüfung der offiziellen V2.1-PDF bestätigt mehrere rein redaktionelle Schreibreste: auf Seite 10 unter anderem Unscubscribe bzw. Unscubscibe und auf Seite 15 GetrazziaResponsetData sowie Error Respone. Diese Zeichenfolgen stehen in beschreibendem Text oder Überschriften und sind keine ausführbaren XML-, XSD- oder Operationsbezeichner. Sie beeinflussen daher weder Schema-Validierung noch Runtime-Verhalten.",
+          "recommendation": "Die Stellen ausschließlich als Dokumentationskorrekturen behandeln. Keine XML-Aliase, Normalisierungsregeln oder Runtime-Diagnosen daraus ableiten."
+        },
+        "en": {
+          "title": "TicketValidationService V2.1: editorial spelling errors in PDF text",
+          "short": "Several typos such as Unscubscribe, GetrazziaResponsetData and Error Respone occur only in prose or table captions.",
+          "long": "Visible review of the official V2.1 PDF confirms several purely editorial spelling residues: page 10 includes Unscubscribe/Unscubscibe, while page 15 includes GetrazziaResponsetData and Error Respone. These strings occur in descriptive text or captions and are not executable XML, XSD, or operation identifiers. They therefore do not affect schema validation or runtime behavior.",
+          "recommendation": "Treat these locations as documentation corrections only. Do not derive XML aliases, normalization rules, or runtime diagnostics from them."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTVS21_2026-09-07.md",
+          "note": "Terminal TicketValidationService V2.1 revalidation report; DRTVS21-004 is context_verified."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-150 / run 34087850644 / job 101635233786 / closure run 34088402374 / audit_registry/drtvs21_revalidation_evidence_2026-09-07.json",
+          "note": "Persisted exact-byte visible evidence for the editorial residue."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/TVS_V2.1.md",
+          "note": "Canonical deep-read record for the visible editorial spelling residue."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TVS_V2.1 / sha256 676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d / physical pages 10,15",
+          "note": "Exact pinned official PDF bytes containing the non-executable spelling errors."
+        }
+      ],
+      "notes": "Confirmed PDF spelling residue only; all occurrences are non-executable and have no runtime effect."
+    }
+  ]
+}
