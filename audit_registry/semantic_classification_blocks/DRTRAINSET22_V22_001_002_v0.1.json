@@ -1,0 +1,176 @@
+{
+  "block_version": "0.1",
+  "block_id": "DRTRAINSET22_V22_001_002",
+  "review_date": "2026-09-17",
+  "source_baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
+  "source_terminal_report": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTRAINSET22_2026-09-06.md",
+  "source_deep_read": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.2.md",
+  "review_policy": "manual_semantic_review_bilingual_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "DRTRAINSET22-001",
+      "service": "TrainSetServices",
+      "version_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TrainSetInformationService_V2.2.xsd + IBIS-IP_TrainSetManagementService_V2.2.xsd + IBIS-IP_TrainSetDataService_V2.2.xsd",
+          "note": "Exact official VDV-301-2.2 TrainSet service family. The finding itself concerns PDF navigation/section numbering; XSD semantics are not required for its terminal state."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "other",
+      "secondary_issue_kinds": [
+        "pdf_cross_reference_error",
+        "stale_section_reference",
+        "examples_section_navigation"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Physical pages 9 and 10 point service-interaction examples to section 9.1, while physical page 6 identifies 9.1 as the driving-direction re-initialisation subsection and section 10 as Examples."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The intentional-9.1 hypothesis was tested because section 9.1 contains an example-style re-initialisation scenario. It is rejected because overview item 4 already assigns re-initialisation to sections 7 and 9 while item 5 separately introduces service-interaction examples and the same document has a dedicated section 10 Examples."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "TrainSet Services V2.2: veralteter Abschnittsverweis auf 9.1",
+          "short": "Die Übersicht verweist für Beispiele zur Service-Interaktion auf Abschnitt 9.1, obwohl das dedizierte Beispielkapitel Abschnitt 10 ist.",
+          "long": "Auf den geprüften Seiten 9 und 10 verweisen die deutsche und englische Übersicht für Beispiele zur Interaktion der verschiedenen Services auf Abschnitt 9.1. Das Inhaltsverzeichnis auf Seite 6 weist 9.1 jedoch dem Thema Re-Initialisierung der Fahrtrichtung zu und führt Abschnitt 10 ausdrücklich als Examples. Der mögliche Einwand, 9.1 enthalte selbst ein beispielartiges Szenario, wurde geprüft; dennoch trennt die Übersicht Re-Initialisierung und allgemeine Service-Interaktionsbeispiele klar voneinander. Der Verweis auf 9.1 bleibt daher ein bestätigter Navigationsfehler.",
+          "recommendation": "Den Verweis als Dokumentationsfehler behandeln und für die allgemeinen Service-Interaktionsbeispiele Abschnitt 10 heranziehen. Daraus keine XML-, XSD- oder Runtime-Regel erzeugen."
+        },
+        "en": {
+          "title": "TrainSet Services V2.2: stale section reference to 9.1",
+          "short": "The overview points service-interaction examples to section 9.1 although the dedicated Examples chapter is section 10.",
+          "long": "On reviewed pages 9 and 10, both German and English overview text point examples of interaction between the different services to section 9.1. The table of contents on page 6 assigns 9.1 to driving-direction re-initialisation and explicitly labels section 10 as Examples. The counter-hypothesis that 9.1 was intentional because it contains an example-style scenario was checked, but the overview separately assigns re-initialisation and general service-interaction examples. The 9.1 pointer is therefore a confirmed navigation defect.",
+          "recommendation": "Treat the pointer as a documentation defect and use section 10 for the general service-interaction examples. Do not derive XML, XSD, or runtime rules from it."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTRAINSET22_2026-09-06.md",
+          "note": "Terminal TrainSet V2.2 revalidation report; DRTRAINSET22-001 is context_verified."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.2.md",
+          "note": "Canonical deep-read and active-disproof record for the section-reference finding."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TRAINSET_V2.2 / sha256 c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e / physical pages 6,9,10",
+          "note": "Exact official publication bytes used for the navigation comparison."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-149 / run 34029942365 / closure run 34030216416 / audit_registry/drtrainset22_revalidation_evidence_2026-09-06.json",
+          "note": "Persisted visual evidence and active falsification of the intentional-9.1 hypothesis."
+        }
+      ],
+      "notes": "Confirmed PDF navigation defect only; no executable XML effect."
+    },
+    {
+      "finding_id": "DRTRAINSET22-002",
+      "service": "TrainSetDataService",
+      "version_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TrainSetDataService_V2.2.xsd",
+          "note": "Exact official VDV-301-2.2 TrainSetDataService release context. The finding is established entirely by same-document navigation controls; XSD semantics are not required for the terminal state."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "other",
+      "secondary_issue_kinds": [
+        "pdf_cross_reference_error",
+        "stale_section_reference_after_insertion",
+        "trainset_unsubscribe_structure_navigation",
+        "retrieve_tripref_navigation"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Physical pages 38 and 40 contain three references to section 6.5.1 for TrainSetUnsubscribeRequestStructure or RetrieveTripRef, while physical pages 35 and 36 visibly place those targets at sections 6.5.2 and 6.5.3 respectively."
+        },
+        {
+          "type": "version_history",
+          "note": "The V2.2 history records insertion of the new TrainSet subscribe/unsubscribe structures and subsequent textual corrections, providing context for the stale numbering without changing the same-document proof."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The stable-or-historical-number hypothesis is rejected because the same publication visibly defines the referenced structure and operation under different current section numbers. The erroneous 6.5.1 references are navigation residue, not schema rules."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "TrainSetDataService V2.2: veraltete 6.5.1-Querverweise",
+          "short": "Mehrere Detailabschnitte verweisen noch auf 6.5.1, obwohl die tatsächlich gemeinten Ziele nach der V2.2-Erweiterung unter 6.5.2 bzw. 6.5.3 stehen.",
+          "long": "Die Abschnitte zu UnsubscribeTripRef, RetrieveTripInformation und UnsubscribeTripInformation enthalten veraltete Verweise auf 6.5.1. Die gleiche offizielle Publikation definiert die Specific TrainSetUnsubscribeRequestStructure sichtbar unter 6.5.2 und RetrieveTripRef unter 6.5.3. Damit sind die drei 6.5.1-Verweise bestätigte Navigationsreste nach der Einfügung neuer V2.2-Strukturen und keine Aussage über XML- oder Schema-Semantik.",
+          "recommendation": "Die Querverweise als Dokumentationsfehler behandeln. Für die Unsubscribe-Struktur auf Abschnitt 6.5.2 und für RetrieveTripRef auf Abschnitt 6.5.3 verweisen; daraus keine Runtime- oder XSD-Regel ableiten."
+        },
+        "en": {
+          "title": "TrainSetDataService V2.2: stale 6.5.1 cross-references",
+          "short": "Several detail sections still point to 6.5.1 although the intended targets moved to 6.5.2 and 6.5.3 after the V2.2 additions.",
+          "long": "The UnsubscribeTripRef, RetrieveTripInformation and UnsubscribeTripInformation sections contain stale references to 6.5.1. The same official publication visibly defines the Specific TrainSetUnsubscribeRequestStructure under 6.5.2 and RetrieveTripRef under 6.5.3. The three 6.5.1 pointers are therefore confirmed navigation residue after the insertion of new V2.2 structures, not statements about XML or schema semantics.",
+          "recommendation": "Treat the cross-references as documentation defects. Point the unsubscribe structure to section 6.5.2 and RetrieveTripRef to section 6.5.3; do not derive runtime or XSD rules from them."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTRAINSET22_2026-09-06.md",
+          "note": "Terminal TrainSet V2.2 revalidation report; DRTRAINSET22-002 is context_verified."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.2.md",
+          "note": "Canonical deep-read record for the stale 6.5.1 references."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TRAINSET_V2.2 / sha256 c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e / physical pages 35,36,38,40",
+          "note": "Exact official publication bytes containing both stale references and the same-document positive controls."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-149 / run 34029942365 / closure run 34030216416 / audit_registry/drtrainset22_revalidation_evidence_2026-09-06.json",
+          "note": "Persisted visual evidence proving the current section-number mismatch."
+        }
+      ],
+      "notes": "Confirmed same-document navigation defect bundle; no executable XML effect and no schema rewrite."
+    }
+  ]
+}
