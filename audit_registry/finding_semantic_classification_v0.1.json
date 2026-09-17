@@ -8826,6 +8826,186 @@
       "notes": "Executable cross-artifact mismatch with the PDF as the defective surface. Runtime advisory may explain the known PDF issue but must never override or normalize the selected XSD result."
     },
     {
+      "finding_id": "DRS-003",
+      "service": "DoorStateService",
+      "version_scope": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DoorStateService_V2.1.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact official VDV-301-2.1 mixed-version schema family. The two Get request elements are intentionally reviewed exactly as declared; no empty request type is invented."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "other",
+      "secondary_issue_kinds": [
+        "untyped_request_declaration",
+        "xs_anyType_default_semantics",
+        "request_model_permissiveness",
+        "no_empty_type_inference"
+      ],
+      "defect_assessment": "undetermined",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_accepts_semantically_questionable_form",
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "valid_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The DoorStateService V2.1 PDF states that GetDoorOpenStates and GetDoorOperationStates have no request structure."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact official XSD declares DoorStateService.GetDoorOpenStatesRequest and DoorStateService.GetDoorOperationStatesRequest without a type attribute and without an inline simple or complex type."
+        },
+        {
+          "type": "xml_schema_semantics",
+          "note": "Under XML Schema semantics an element declaration without an explicit or inline type defaults to xs:anyType; omission of a request structure therefore does not imply an empty content model."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-111, rerun under EV-145, confirms the exact declaration form and demonstrates that both an empty request and arbitrary nested child content validate under xs:anyType semantics."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "DoorStateService V2.1: untypisierte Get-Requests sind durch xs:anyType permissiv",
+          "short": "Die beiden Get-Request-Elemente besitzen keinen expliziten Typ und sind daher nicht automatisch auf leeren Inhalt beschränkt.",
+          "long": "Die offizielle DoorStateService-V2.1-XSD deklariert GetDoorOpenStatesRequest und GetDoorOperationStatesRequest ohne expliziten oder inline definierten Typ. Nach XML-Schema-Semantik gilt dadurch xs:anyType. EV-111 bestätigt, dass neben einem leeren Request auch unerwarteter verschachtelter Inhalt von dieser Deklarationsform akzeptiert wird. Die PDF-Aussage, dass keine Request-Struktur vorhanden ist, darf deshalb nicht als implizite Empty-Content-Regel umgesetzt werden. Ob diese Permissivität beabsichtigt oder ein Modellierungsfehler ist, ist durch die vorhandene Evidenz nicht entschieden.",
+          "recommendation": "Die offizielle XSD unverändert anwenden und gültige Instanzen nicht künstlich auf leeren Inhalt beschränken. Bei nichtleerem Inhalt kann das SDK ergänzend auf die ungewöhnlich permissive xs:anyType-Modellierung hinweisen, ohne einen XSD-Fehler zu erzeugen."
+        },
+        "en": {
+          "title": "DoorStateService V2.1: untyped Get requests are permissive through xs:anyType",
+          "short": "The two Get request elements have no explicit type and are therefore not automatically restricted to empty content.",
+          "long": "The official DoorStateService V2.1 XSD declares GetDoorOpenStatesRequest and GetDoorOperationStatesRequest without an explicit or inline type. Under XML Schema semantics this defaults to xs:anyType. EV-111 confirms that the declaration form accepts both an empty request and arbitrary nested child content. The PDF statement that no request structure exists must therefore not be implemented as an implicit empty-content rule. The available evidence does not establish whether this permissiveness is intentional design or a modelling defect.",
+          "recommendation": "Apply the official XSD unchanged and do not artificially restrict valid instances to empty content. For non-empty content the SDK may add an advisory about the unusually permissive xs:anyType modelling without turning it into an XSD error."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "selected profile is official DoorStateService V2.1 mixed-version XSD family",
+          "element is DoorStateService.GetDoorOpenStatesRequest or DoorStateService.GetDoorOperationStatesRequest",
+          "instance contains child content that remains XSD-valid because the declaration defaults to xs:anyType"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRS_V21_2026-09-06.md",
+          "note": "Terminal DRS V2.1 revalidation report; DRS-003 is executable_confirmed."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/DOOR_V2.1.md",
+          "note": "Canonical deep-read record for the untyped Get request declarations and the explicit no-empty-type boundary."
+        },
+        {
+          "kind": "xsd",
+          "reference": "VDV-301-2.1 / IBIS-IP_DoorStateService_V2.1.xsd blob abff0f3960e2ec7a9caaa9ddeb6efff8f4183805",
+          "note": "Exact official service XSD containing the two untyped local request declarations."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-145 / run 34026409256 / closure run 34026674927 / audit_registry/drs_v21_revalidation_evidence_2026-09-06.json",
+          "note": "Persisted DRS V2.1 revalidation evidence; EV-111 was rerun successfully under this evidence gate."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-111 / run 33242337308 / job 99073684198 / tools/validate_door_v21_ev111.py",
+          "note": "Executable boundary: exact declarations are untyped and arbitrary nested content remains valid under xs:anyType semantics."
+        }
+      ],
+      "notes": "The executable semantics are confirmed, but the defect source is intentionally left undetermined. The SDK must not silently tighten the official XSD to an invented empty request type."
+    },
+    {
+      "finding_id": "DRS-004",
+      "service": "DoorStateService",
+      "version_scope": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DoorStateService_V2.1.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact official VDV-301-2.1 mixed-version schema family. The spelling residue is confined to xs:documentation and does not alter executable identifiers."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "xsd",
+      "primary_issue_kind": "documentation_spelling",
+      "secondary_issue_kinds": [
+        "annotation_only_typo",
+        "non_executable_xsd_documentation",
+        "executable_identifiers_unaffected"
+      ],
+      "defect_assessment": "confirmed_xsd_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact official DoorStateService V2.1 XSD contains the spellings GetDoorOpeationStates, RetrieveSpecificDoorOperationnState and operationn state inside xs:documentation text."
+        },
+        {
+          "type": "xsd_internal_consistency",
+          "note": "The executable @name and @type identifiers around the affected annotations use the correctly spelled DoorOperationStates and RetrieveSpecificDoorOperationState forms."
+        },
+        {
+          "type": "technical_inference",
+          "note": "Because the residue is annotation-only and no executable identifier depends on it, it has no XML validation effect."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "DoorStateService V2.1: Schreibfehler nur in XSD-Dokumentationsannotationen",
+          "short": "Mehrere Tippfehler stehen ausschließlich in xs:documentation; ausführbare Namen und Typreferenzen sind korrekt.",
+          "long": "Die offizielle DoorStateService-V2.1-XSD enthält unter anderem GetDoorOpeationStates, RetrieveSpecificDoorOperationnState und operationn state in xs:documentation-Texten. Die zugehörigen ausführbaren @name- und @type-Bezeichner sind dagegen korrekt geschrieben. Damit ist der Befund ein bestätigter redaktioneller Fehler innerhalb der XSD-Dokumentation, jedoch kein ausführbarer Schemafehler.",
+          "recommendation": "Den Befund nur in Dokumentations- oder Auditansichten anzeigen. Keine Runtime-Regel, keinen Alias und keine Änderung des XSD-Validierungsverhaltens daraus ableiten."
+        },
+        "en": {
+          "title": "DoorStateService V2.1: spelling errors only in XSD documentation annotations",
+          "short": "Several typos occur only in xs:documentation; executable names and type references are correctly spelled.",
+          "long": "The official DoorStateService V2.1 XSD contains wording such as GetDoorOpeationStates, RetrieveSpecificDoorOperationnState and operationn state inside xs:documentation text. The corresponding executable @name and @type identifiers are correctly spelled. This is therefore a confirmed editorial defect in XSD documentation, not an executable schema defect.",
+          "recommendation": "Expose the finding only in documentation or audit views. Do not derive a runtime rule, alias, or change in XSD validation behaviour from it."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRS_V21_2026-09-06.md",
+          "note": "Terminal DRS V2.1 revalidation report; DRS-004 is context_verified."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/DOOR_V2.1.md",
+          "note": "Canonical deep-read record for the annotation-only spelling residue."
+        },
+        {
+          "kind": "xsd",
+          "reference": "VDV-301-2.1 / IBIS-IP_DoorStateService_V2.1.xsd blob abff0f3960e2ec7a9caaa9ddeb6efff8f4183805",
+          "note": "Exact official service XSD containing the annotation-only misspellings and the correctly spelled executable identifiers."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-145 / run 34026409256 / closure run 34026674927 / audit_registry/drs_v21_revalidation_evidence_2026-09-06.json",
+          "note": "Persisted DRS V2.1 revalidation evidence disproving executable identifier impact."
+        }
+      ],
+      "notes": "Confirmed XSD documentation defect only. Executable identifiers are unaffected, so no runtime diagnostic is justified."
+    },
+    {
       "finding_id": "TSD-004",
       "service": "TrainSetDataService",
       "version_scope": [
@@ -9351,8 +9531,8 @@
     }
   ],
   "progress": {
-    "classified_count": 114,
-    "remaining_count": 78,
+    "classified_count": 116,
+    "remaining_count": 76,
     "reviewed_blocks": [
       "ARA",
       "ARCH",
@@ -9374,9 +9554,10 @@
       "DRDMS24",
       "DRDOOR21",
       "DRNET20",
-      "DRS_V21_001_002"
+      "DRS_V21_001_002",
+      "DRS_V21_003_004"
     ],
-    "latest_block": "DRS_V21_001_002",
-    "latest_block_file": "audit_registry/semantic_classification_blocks/DRS_V21_001_002_v0.1.json"
+    "latest_block": "DRS_V21_003_004",
+    "latest_block_file": "audit_registry/semantic_classification_blocks/DRS_V21_003_004_v0.1.json"
   }
 }
