@@ -9361,6 +9361,176 @@
       "notes": "Confirmed PDF table-label omission only. The request/response structures exist and no executable XML effect is present."
     },
     {
+      "finding_id": "DRTIME10-001",
+      "service": "TimeService",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official byte-pinned VDV 301-2-10 TimeService V1.0 publication on the PDF/API/prose authority lane. TimeService intentionally has no XSD semantic authority in this audit."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "other",
+      "secondary_issue_kinds": [
+        "pdf_cross_reference_error",
+        "document_identity_mismatch",
+        "bilingual_foreword_mismatch",
+        "resolver_guard"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Physical page 4 of the exact pinned publication visibly places the German and English forewords together: German identifies VDV-Schrift 301-2-10 for TimeService while English incorrectly identifies VDV 301-2-1."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The publication identity and same-page bilingual comparison reject the hypothesis that VDV 301-2-1 is an equivalent TimeService document identifier. The finding is confined to documentation/resolver interpretation."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "TimeService V1.0: falscher Dokumentverweis im englischen Vorwort",
+          "short": "Das englische Vorwort verweist für TimeService auf VDV 301-2-1, obwohl die Publikation VDV 301-2-10 ist.",
+          "long": "Auf der physisch geprüften Seite 4 nennt das deutsche Vorwort korrekt VDV-Schrift 301-2-10 als TimeService-Dokument. Das unmittelbar danebenstehende englische Vorwort nennt dagegen VDV 301-2-1. Die Publikationsidentität und der direkte bilinguale Vergleich bestätigen einen Dokumentverweisfehler. TimeService wird in diesem Audit bewusst über PDF/API/Prosa und nicht über eine XSD-Semantik autorisiert.",
+          "recommendation": "TimeService nicht aufgrund dieses englischen Satzes auf VDV 301-2-1 routen. Den Fehler ausschließlich als Dokumentations-/Resolver-Hinweis führen und keine XSD- oder Runtime-Regel daraus erzeugen."
+        },
+        "en": {
+          "title": "TimeService V1.0: wrong document reference in the English foreword",
+          "short": "The English foreword points TimeService to VDV 301-2-1 although the publication is VDV 301-2-10.",
+          "long": "On physically reviewed page 4, the German foreword correctly identifies VDV-Schrift 301-2-10 as the TimeService document while the adjacent English foreword identifies VDV 301-2-1. The publication identity and direct bilingual comparison confirm a document-reference defect. TimeService is intentionally governed by the PDF/API/prose lane in this audit rather than by XSD semantics.",
+          "recommendation": "Do not route TimeService to VDV 301-2-1 because of this English sentence. Keep the issue as documentation/resolver guidance only and derive no XSD or runtime rule from it."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTIME10_2026-09-06.md",
+          "note": "Terminal TimeService V1.0 revalidation report; DRTIME10-001 is context_verified."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/TIME_V1.0.md",
+          "note": "Canonical deep-read record for the bilingual foreword/document-identity mismatch."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TIME_V1.0 / sha256 d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3 / physical page 4",
+          "note": "Exact official publication bytes used for the same-page bilingual comparison."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-147 / run 34028395412 / closure run 34028583953 / audit_registry/drtime10_revalidation_evidence_2026-09-06.json",
+          "note": "Persisted TimeService V1.0 visual revalidation evidence."
+        }
+      ],
+      "notes": "Confirmed documentation/resolver defect only. No TimeService XSD semantic authority is manufactured."
+    },
+    {
+      "finding_id": "DRTIME10-002",
+      "service": "TimeService",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official byte-pinned VDV 301-2-10 TimeService V1.0 publication on the PDF/API/prose authority lane. TimeService intentionally has no XSD semantic authority in this audit."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "other",
+      "secondary_issue_kinds": [
+        "bilingual_normative_text_omission",
+        "no_cyclic_time_transmission_statement",
+        "sntp_profile_interpretation",
+        "architecture_guard"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Physical page 6 visibly contains the German statement that cyclic transmission of the current time is not intended; the directly following English TimeService section omits that sentence."
+        },
+        {
+          "type": "external_protocol_standard",
+          "note": "The selected TimeService V1.0 publication explicitly uses SNTP under RFC 4330 and DNS-SD for discovery. This supports the conservative profile interpretation without substituting a newer NTP profile for the VDV-selected one."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The omission must not be converted into an English permission for a generic cyclic UDP time-broadcast service. Time acquisition and synchronization remain the SNTP path described by the same official publication."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "TimeService V1.0: englische Fassung lässt den Ausschluss zyklischer Zeitübertragung aus",
+          "short": "Die deutsche Fassung schließt eine zusätzliche zyklische Übertragung der aktuellen Zeit ausdrücklich aus; im englischen Abschnitt fehlt dieser Satz.",
+          "long": "Auf der physisch geprüften Seite 6 enthält die deutsche TimeService-Beschreibung ausdrücklich die Aussage, dass zusätzlich zur SNTP-Synchronisation keine zyklische Übertragung der aktuellen Zeit vorgesehen ist. Der direkt folgende englische Abschnitt lässt diesen Satz aus. Das ist eine bilinguale Auslassung und kein englischer Widerspruch. Die übrige offizielle Beschreibung bleibt beim SNTP-/DNS-SD-Profil; aus dem Discovery-Typ _ibisip_udp._udp darf deshalb kein generischer zyklischer UDP-Zeitbroadcast abgeleitet werden.",
+          "recommendation": "Das TimeService-Profil weiterhin konservativ als SNTP-basierte Synchronisation behandeln. Die fehlende englische Aussage dokumentieren, aber keinen zusätzlichen Runtime-Fehler und keinen erfundenen Broadcast-Mechanismus daraus ableiten."
+        },
+        "en": {
+          "title": "TimeService V1.0: English text omits the no-cyclic-time-transmission statement",
+          "short": "The German text explicitly excludes additional cyclic transmission of current time, while the adjacent English section omits that sentence.",
+          "long": "On physically reviewed page 6, the German TimeService description explicitly states that cyclic transmission of the current time is not intended in addition to SNTP synchronization. The directly following English section omits that sentence. This is a bilingual omission, not an English contradiction. The rest of the official profile remains SNTP/DNS-SD based, so the discovery type _ibisip_udp._udp must not be interpreted as a generic cyclic UDP time-broadcast mechanism.",
+          "recommendation": "Continue to treat TimeService conservatively as SNTP-based synchronization. Document the missing English sentence, but do not create an extra runtime error or invent a broadcast mechanism from the omission."
+        }
+      },
+      "runtime_match": {
+        "state": "not_designed",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTIME10_2026-09-06.md",
+          "note": "Terminal TimeService V1.0 revalidation report; DRTIME10-002 is context_verified."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/TIME_V1.0.md",
+          "note": "Canonical deep-read record for the bilingual omission and conservative SNTP architecture boundary."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TIME_V1.0 / sha256 d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3 / physical page 6",
+          "note": "Exact official publication bytes containing the German sentence and adjacent English omission."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-147 / run 34028395412 / closure run 34028583953 / audit_registry/drtime10_revalidation_evidence_2026-09-06.json",
+          "note": "Persisted visual evidence; re-derived invariant cyclic_time_broadcast_expected=false."
+        },
+        {
+          "kind": "external_standard",
+          "reference": "RFC 4330 as explicitly selected by VDV 301-2-10 TimeService V1.0",
+          "note": "Protocol context only; no latest-standard substitution."
+        }
+      ],
+      "notes": "Confirmed bilingual omission with a conservative profile interpretation. Historical RV-003 is not falsely presented as a current executable checker."
+    },
+    {
       "finding_id": "TSD-004",
       "service": "TrainSetDataService",
       "version_scope": [
@@ -9886,8 +10056,8 @@
     }
   ],
   "progress": {
-    "classified_count": 120,
-    "remaining_count": 72,
+    "classified_count": 122,
+    "remaining_count": 70,
     "reviewed_blocks": [
       "ARA",
       "ARCH",
@@ -9912,9 +10082,10 @@
       "DRS_V21_001_002",
       "DRS_V21_003_004",
       "DRSMS22_V22_001_002",
-      "DRSMS22_V22_003_004"
+      "DRSMS22_V22_003_004",
+      "DRTIME10_V10_001_002"
     ],
-    "latest_block": "DRSMS22_V22_003_004",
-    "latest_block_file": "audit_registry/semantic_classification_blocks/DRSMS22_V22_003_004_v0.1.json"
+    "latest_block": "DRTIME10_V10_001_002",
+    "latest_block_file": "audit_registry/semantic_classification_blocks/DRTIME10_V10_001_002_v0.1.json"
   }
 }
