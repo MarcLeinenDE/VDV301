@@ -1,0 +1,197 @@
+{
+  "block_version": "0.1",
+  "block_id": "DRDOOR21",
+  "review_date": "2026-09-17",
+  "source_baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
+  "source_terminal_report": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DOOR_V21_2026-09-05.md",
+  "source_deep_read": "docs/pdf_xsd_semantic_audit/deep_read/DOOR_V2.1.md",
+  "review_policy": "manual_semantic_review_bilingual_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "DRDOOR21-001",
+      "service": "DoorStateService",
+      "version_scope": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DoorStateService_V2.1.xsd",
+          "note": "Exact official VDV-301-2.1 route. The service XSD intentionally depends on Common V1.0 and Enumerations V1.0; no newer dependency is substituted."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "wrong_operation_reference",
+      "secondary_issue_kinds": [
+        "shortened_operation_name_in_description",
+        "misspelled_operation_name_in_description",
+        "RetrieveDoorOpenState_vs_RetrieveSpecificDoorOpenState",
+        "RetrieveDoorOpereationState_vs_RetrieveSpecificDoorOperationState"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "code_generation_or_discovery_affected",
+        "documentation_only"
+      ],
+      "sdk_behavior": "info",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The pinned PDF page 12 uses shortened/incorrect names RetrieveDoorOpenState and RetrieveDoorOpereationState in request descriptions."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact official DoorStateService V2.1 XSD service group contains RetrieveSpecificDoorOpenStateRequest and RetrieveSpecificDoorOperationStateRequest and no shortened or typo aliases."
+        },
+        {
+          "type": "parallel_operation_pattern",
+          "note": "The operation headings and surrounding RetrieveSpecific request/response family consistently use the RetrieveSpecific... operation names, independently corroborating the intended operation identity."
+        },
+        {
+          "type": "technical_inference",
+          "note": "Opereation is also an ordinary spelling error for Operation, but orthography is supporting attribution evidence only; the source attribution is independently established by the headings, operation family and exact XSD."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "DoorStateService V2.1: verkürzte bzw. vertippte RetrieveSpecific-Operationsnamen in der PDF",
+          "short": "Die PDF-Beschreibungen nennen RetrieveDoorOpenState bzw. RetrieveDoorOpereationState; die offizielle Operationfamilie verwendet RetrieveSpecificDoorOpenState bzw. RetrieveSpecificDoorOperationState.",
+          "long": "In den Request-Beschreibungen der offiziellen DoorStateService-V2.1-PDF stehen die Formen RetrieveDoorOpenState und RetrieveDoorOpereationState. Die Operationsübersicht, die Abschnittsüberschriften und die exakte offizielle VDV-301-2.1-XSD verwenden dagegen die RetrieveSpecific...-Familie. EV-143 bestätigt zusätzlich, dass die verkürzte bzw. vertippte Form keine deklarierte Alias-Operation in der ausgewählten XSD ist. Die Schreibweise Opereation ist nur zusätzliche Indiz-Evidenz; die Zuordnung als PDF-Dokumentationsfehler stützt sich nicht allein auf Rechtschreibung.",
+          "recommendation": "Für V2.1 ausschließlich die in der offiziellen XSD deklarierten RetrieveSpecific...-Operationsnamen verwenden. Die PDF-Formen nicht als Alias erzeugen oder akzeptieren; ein Tool darf sie höchstens als bekannte Dokumentationsabweichung erklären."
+        },
+        "en": {
+          "title": "DoorStateService V2.1: shortened or misspelled RetrieveSpecific operation names in the PDF",
+          "short": "The PDF descriptions use RetrieveDoorOpenState and RetrieveDoorOpereationState, while the official operation family uses RetrieveSpecificDoorOpenState and RetrieveSpecificDoorOperationState.",
+          "long": "The request descriptions in the official DoorStateService V2.1 PDF use RetrieveDoorOpenState and RetrieveDoorOpereationState. The operation overview, section headings and exact official VDV-301-2.1 XSD instead use the RetrieveSpecific... family. EV-143 also confirms that neither shortened nor misspelled form is a declared alias operation in the selected XSD. The spelling error in Opereation is supporting evidence only; source attribution does not rely on spelling alone.",
+          "recommendation": "For V2.1 use only the RetrieveSpecific... operation names declared by the official XSD. Do not generate or accept the PDF forms as aliases; a tool may at most explain them as known documentation discrepancies."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "an implementation or input references RetrieveDoorOpenState as if it were the V2.1 operation name",
+          "an implementation or input references RetrieveDoorOpereationState as if it were the V2.1 operation name"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DOOR_V21_2026-09-05.md",
+          "note": "Terminal state context_verified."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/DOOR_V2.1.md",
+          "note": "Source-first deep read and strongest-disproof analysis."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official DoorStateService V2.1 PDF SHA-256 7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8; page 12",
+          "note": "Pinned visible source for the shortened/typoed operation descriptions."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_DoorStateService_V2.1.xsd blob abff0f3960e2ec7a9caaa9ddeb6efff8f4183805",
+          "note": "Exact official VDV-301-2.1 executable service authority."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-143 successful evidence run 33976777554; closure run 34025259521",
+          "note": "Confirms exact source/XSD context, no PDF-only alias declarations and the source-attribution disproof checks."
+        }
+      ],
+      "notes": "No compatibility alias is created. The selected V2.1 DoorState XSD intentionally includes Common/Enumerations V1.0; that mixed-version dependency is authoritative and not a defect."
+    },
+    {
+      "finding_id": "DRDOOR21-002",
+      "service": "DoorStateService",
+      "version_scope": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DoorStateService_V2.1.xsd",
+          "note": "Exact official VDV-301-2.1 route with intentional Common/Enumerations V1.0 dependencies."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "semantic_contradiction",
+      "secondary_issue_kinds": [
+        "copy_paste_description",
+        "DoorOpenState_described_as_operation_state",
+        "open_state_vs_operation_state_semantics"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "In the RetrieveSpecificDoorOpenState response table, the DoorOpenState success row is described as the current door operation state."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact official XSD routes the open-state response to SpecificDoorOpenStateStructure, whose member is OpenState, while the separate operation-state structure contains OperationState."
+        },
+        {
+          "type": "parallel_structure_pattern",
+          "note": "Adjacent RetrieveSpecificDoorOpenState and RetrieveSpecificDoorOperationState families use separate structures and semantics, rejecting a deliberate shared-description explanation."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "DoorStateService V2.1: DoorOpenState ist in der PDF mit OperationState-Semantik beschrieben",
+          "short": "Die Erfolgszeile des RetrieveSpecificDoorOpenState-Responses beschreibt fälschlich einen Tür-Operationszustand statt des Tür-Öffnungszustands.",
+          "long": "Die offizielle V2.1-PDF beschreibt die DoorOpenState-Erfolgszeile im RetrieveSpecificDoorOpenState-Response als aktuellen Tür-Operationszustand. Die exakte XSD trennt die Modelle dagegen eindeutig: SpecificDoorOpenStateStructure enthält OpenState, während SpecificDoorOperationStateStructure separat OperationState enthält. Damit ist die Formulierung als Copy/Paste-Dokumentationsfehler belegt und nicht als gemeinsames Datenmodell zu interpretieren.",
+          "recommendation": "Aus diesem Beschreibungstext keine XML- oder Runtime-Regel ableiten. Für Struktur und Validierung die getrennten offiziellen XSD-Modelle OpenState und OperationState verwenden."
+        },
+        "en": {
+          "title": "DoorStateService V2.1: DoorOpenState is described with OperationState semantics in the PDF",
+          "short": "The RetrieveSpecificDoorOpenState response success row incorrectly describes a door operation state instead of the door open state.",
+          "long": "The official V2.1 PDF describes the DoorOpenState success row in RetrieveSpecificDoorOpenStateResponse as the current door operation state. The exact XSD clearly separates the models: SpecificDoorOpenStateStructure contains OpenState, while SpecificDoorOperationStateStructure separately contains OperationState. The wording is therefore a confirmed copy/paste documentation defect rather than a shared data model.",
+          "recommendation": "Do not derive XML or runtime rules from this description text. Use the separate official OpenState and OperationState XSD models for structure and validation."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DOOR_V21_2026-09-05.md",
+          "note": "Terminal state context_verified."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/DOOR_V2.1.md",
+          "note": "Source-first deep read and strongest-disproof analysis."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official DoorStateService V2.1 PDF SHA-256 7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8; page 12",
+          "note": "Pinned visible source for the copied operation-state wording."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_DoorStateService_V2.1.xsd blob abff0f3960e2ec7a9caaa9ddeb6efff8f4183805",
+          "note": "Exact official structure separation."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-143 successful evidence run 33976777554; closure run 34025259521",
+          "note": "Confirms OpenState/OperationState structure distinction and rejects shared-semantics counter-hypothesis."
+        }
+      ],
+      "notes": "Documentation-only. No validation alias, field remapping or semantic normalization is warranted."
+    }
+  ]
+}
