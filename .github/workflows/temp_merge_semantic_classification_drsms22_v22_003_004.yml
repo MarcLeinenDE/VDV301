@@ -1,0 +1,124 @@
+name: temp-merge-semantic-classification-drsms22-v22-003-004
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths: [.github/workflows/temp_merge_semantic_classification_drsms22_v22_003_004.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  merge-drsms22-v22-003-004:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+      - name: Verify exact prestate and evidence boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          STAGED_BASE=90993fc87e5465d2c2ef9eb612d12d33e431bffc
+          CLEAN_BASE=11fdbfd7a853224868ce6e602c1abd682bfa4d4e
+          test "$(git rev-parse HEAD^)" = "$STAGED_BASE"
+          test "$(git diff --name-only HEAD^ HEAD)" = ".github/workflows/temp_merge_semantic_classification_drsms22_v22_003_004.yml"
+          test "$(git hash-object audit_registry/semantic_classification_blocks/DRSMS22_V22_003_004_v0.1.json)" = "376ee291f84da88bf69d341d18f31151fbb74e8e"
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "1a16c9dcbe520111d497c85e31ef3b76d6d78836"
+          test "$(git hash-object audit_registry/drsms22_revalidation_evidence_2026-09-06.json)" = "df753dd77cee29c832d1f8b44320c49297df6e6f"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRSMS22_2026-09-06.md)" = "c43b4312faeae51b736928696b6db64a23699e04"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/deep_read/SMS_V2.2.md)" = "4eb220e43a728a0f719cdcf81fac78df058ecd08"
+          test "$(git hash-object tools/validate_sms_v22_ev116.py)" = "bac849f6c33e6084e899794564f99f0c6cbd338a"
+          test "$(git hash-object tools/validate_finding_semantic_classification.py)" = "3304b31b2233e48d8d85e2ef9e248397d9a86b4e"
+          test "$(git hash-object tools/merge_semantic_classification_block.py)" = "bddb17d5f264663611585cde33202c355ce9e5ca"
+          test "$(git hash-object tools/validate_xsd_pool.py)" = "7a682dbddaeeeb3f9cc269d2e48e5ab000aca4bd"
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+          sha256sum ./*.xsd | sort -k2 > /tmp/xsd-before.sha256
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          target={'DRSMS22-003','DRSMS22-004'}
+          reg=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
+          assert reg['progress']['classified_count']==118
+          assert reg['progress']['remaining_count']==74
+          assert reg['progress']['latest_block']=='DRSMS22_V22_001_002'
+          assert not ({e['finding_id'] for e in reg['entries']} & target)
+          prov=json.loads(Path('audit_registry/finding_provenance_baseline_2026-09-14.json').read_text())
+          states={e['finding_id']:e['revalidation_state'] for e in prov['inventory']['entries'] if e['finding_id'] in target}
+          assert states=={'DRSMS22-003':'context_verified','DRSMS22-004':'context_verified'}, states
+          ev=json.loads(Path('audit_registry/drsms22_revalidation_evidence_2026-09-06.json').read_text())
+          assert ev['evidence_id']=='EV-146' and ev['result']=='PASS'
+          assert ev['finding_results']['DRSMS22-003']['executable_effect'] is False
+          assert ev['finding_results']['DRSMS22-004']['executable_effect'] is False
+          assert 'alternate service-name' in ev['active_disproof']['DRSMS22-003']
+          assert 'Missing-structure hypothesis rejected' in ev['active_disproof']['DRSMS22-004']
+          block=json.loads(Path('audit_registry/semantic_classification_blocks/DRSMS22_V22_003_004_v0.1.json').read_text())
+          assert block['block_id']=='DRSMS22_V22_003_004'
+          assert [e['finding_id'] for e in block['entries']]==['DRSMS22-003','DRSMS22-004']
+          for e in block['entries']:
+              assert e['normative_authority']=='selected_xsd'
+              assert e['version_scope'][0]['authority']=='official_release'
+              assert e['sdk_behavior']=='no_runtime_diagnostic'
+              assert e['runtime_match']['state']=='not_applicable'
+          print('PASSED: exact DRSMS22-003/004 prestate and evidence boundary')
+          PY
+          git diff --exit-code
+      - name: Re-run exact SMS V2.2 generic unsubscribe authority guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_sms_v22_ev116.py | tee /tmp/ev116.log
+          grep -F "PASSED: EV-116 official SMS V2.2 compile, naming boundary and generic-subscription structure evidence confirmed" /tmp/ev116.log
+          grep -F "generic Common subscription type exists: UnsubscribeRequestStructure" /tmp/ev116.log
+          grep -F "generic Common subscription type exists: UnsubscribeResponseStructure" /tmp/ev116.log
+      - name: Merge two-finding block and validate registry
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/merge_semantic_classification_block.py --block audit_registry/semantic_classification_blocks/DRSMS22_V22_003_004_v0.1.json | tee /tmp/merge.log
+          grep -F "PASSED: merged block DRSMS22_V22_003_004; classified=120 remaining=72" /tmp/merge.log
+          python tools/validate_finding_semantic_classification.py | tee /tmp/semantic.log
+          grep -F "PASSED: semantic classification registry valid; 120 reviewed entries anchored to frozen baseline" /tmp/semantic.log
+          python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+          sha256sum ./*.xsd | sort -k2 > /tmp/xsd-after.sha256
+          cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
+          assert r['progress']['classified_count']==120
+          assert r['progress']['remaining_count']==72
+          assert r['progress']['latest_block']=='DRSMS22_V22_003_004'
+          assert r['progress']['latest_block_file']=='audit_registry/semantic_classification_blocks/DRSMS22_V22_003_004_v0.1.json'
+          assert r['progress']['reviewed_blocks'][-1]=='DRSMS22_V22_003_004'
+          ids={e['finding_id'] for e in r['entries']}
+          assert {'DRSMS22-001','DRSMS22-002','DRSMS22-003','DRSMS22-004'} <= ids
+          print('PASSED: complete DRSMS22 semantic block represented; poststate 120/192')
+          PY
+      - name: Persist exact two-finding boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          CLEAN_BASE=11fdbfd7a853224868ce6e602c1abd682bfa4d4e
+          git rm .github/workflows/temp_merge_semantic_classification_drsms22_v22_003_004.yml
+          git add audit_registry/finding_semantic_classification_v0.1.json
+          python - <<'PY'
+          import subprocess
+          staged=set(subprocess.check_output(['git','diff','--cached','--name-only'],text=True).splitlines())
+          expected={'.github/workflows/temp_merge_semantic_classification_drsms22_v22_003_004.yml','audit_registry/finding_semantic_classification_v0.1.json'}
+          assert staged==expected,(staged,expected)
+          changed=set(subprocess.check_output(['git','diff','--name-only','11fdbfd7a853224868ce6e602c1abd682bfa4d4e'],text=True).splitlines())
+          expected_changed={'audit_registry/finding_semantic_classification_v0.1.json','audit_registry/semantic_classification_blocks/DRSMS22_V22_003_004_v0.1.json'}
+          assert changed==expected_changed,(changed,expected_changed)
+          print('PASSED: persistent boundary is master registry + DRSMS22-003/004 block only')
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "audit: merge DRSMS22-003 and DRSMS22-004 semantic classification"
+          git push origin HEAD:dev/schema-integration
