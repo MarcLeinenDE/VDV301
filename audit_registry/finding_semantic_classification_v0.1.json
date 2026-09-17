@@ -9614,6 +9614,181 @@
       "notes": "Confirmed editorial PDF residue only. The intended correction is intentionally unresolved rather than guessed."
     },
     {
+      "finding_id": "DRTRAINSET21-001",
+      "service": "TrainSetServices",
+      "version_scope": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TrainSetInformationService_V2.1.xsd + IBIS-IP_TrainSetManagementService_V2.1.xsd + IBIS-IP_TrainSetDataService_V2.1.xsd",
+          "note": "Exact official VDV-301-2.1 TrainSet service family. The finding itself concerns PDF navigation/section numbering; XSDs are only exact-version counter-context."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "other",
+      "secondary_issue_kinds": [
+        "pdf_cross_reference_error",
+        "stale_section_reference",
+        "examples_section_navigation"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Physical pages 9 and 10 point service-interaction examples to section 9.1, while physical page 6 identifies 9.1 as the driving-direction re-initialisation subsection and section 10 as Examples."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The intentional-9.1 hypothesis was tested because section 9.1 contains an example-style re-initialisation use case. It is rejected because overview item 4 already assigns re-initialisation to sections 7 and 9 while item 5 separately introduces service-interaction examples and section 10 contains the dedicated cross-service examples."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "TrainSet Services V2.1: veralteter Abschnittsverweis auf 9.1",
+          "short": "Die Übersicht verweist für Beispiele zur Service-Interaktion auf Abschnitt 9.1, obwohl das dedizierte Beispielkapitel Abschnitt 10 ist.",
+          "long": "Auf den geprüften Seiten 9 und 10 verweisen die deutsche und englische Übersicht für Beispiele zur Interaktion der verschiedenen Services auf Abschnitt 9.1. Das Inhaltsverzeichnis auf Seite 6 weist 9.1 jedoch dem Thema Re-Initialisierung der Fahrtrichtung zu und führt Abschnitt 10 ausdrücklich als Examples. Der mögliche Einwand, 9.1 enthalte selbst ein beispielartiges Szenario, wurde geprüft; dennoch trennt die Übersicht Re-Initialisierung und allgemeine Service-Interaktionsbeispiele klar voneinander. Der Verweis auf 9.1 bleibt daher ein bestätigter Navigationsfehler.",
+          "recommendation": "Den Verweis als Dokumentationsfehler behandeln und für die allgemeinen Service-Interaktionsbeispiele Abschnitt 10 heranziehen. Daraus keine XML-, XSD- oder Runtime-Regel erzeugen."
+        },
+        "en": {
+          "title": "TrainSet Services V2.1: stale section reference to 9.1",
+          "short": "The overview points service-interaction examples to section 9.1 although the dedicated Examples chapter is section 10.",
+          "long": "On reviewed pages 9 and 10, both German and English overview text point examples of interaction between the different services to section 9.1. The table of contents on page 6 assigns 9.1 to driving-direction re-initialisation and explicitly labels section 10 as Examples. The counter-hypothesis that 9.1 was intentional because it contains an example-style use case was checked, but the overview separately assigns re-initialisation and general service-interaction examples. The 9.1 pointer is therefore a confirmed navigation defect.",
+          "recommendation": "Treat the pointer as a documentation defect and use section 10 for the general service-interaction examples. Do not derive XML, XSD, or runtime rules from it."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTRAINSET21_2026-09-06.md",
+          "note": "Terminal TrainSet V2.1 revalidation report; DRTRAINSET21-001 is context_verified."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.1.md",
+          "note": "Canonical deep-read and active-disproof record for the section-reference finding."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TRAINSET_V2.1 / sha256 8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e / physical pages 6,9,10",
+          "note": "Exact official publication bytes used for the navigation comparison."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-148 / run 34029363792 / closure run 34029618883 / audit_registry/drtrainset21_revalidation_evidence_2026-09-06.json",
+          "note": "Persisted visual evidence and active falsification of the intentional-9.1 hypothesis."
+        }
+      ],
+      "notes": "Confirmed PDF navigation defect only; no executable XML effect."
+    },
+    {
+      "finding_id": "DRTRAINSET21-002",
+      "service": "TrainSetServices",
+      "version_scope": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TrainSetInformationService_V2.1.xsd + IBIS-IP_TrainSetManagementService_V2.1.xsd + IBIS-IP_TrainSetDataService_V2.1.xsd",
+          "note": "Exact official VDV-301-2.1 TrainSet service family. Exact operation inventories are used to falsify the PDF's TrainSetDataService attribution."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "other",
+      "secondary_issue_kinds": [
+        "pdf_service_name_copy_paste_error",
+        "wrong_service_attribution",
+        "trainset_data_vs_management",
+        "composition_operation_inventory"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Physical page 44 states that TrainSetInformationService composition operations provide the same information as equally named operations of the TrainSetDataService."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Exact TrainSetDataService V2.1 exposes TripRef/TripInformation operations only and contains no TrainSetComposition operation, while TrainSetManagementService V2.1 carries composition context in the same official family."
+        },
+        {
+          "type": "technical_inference",
+          "note": "TrainSetManagementService is retained only as the likely intended reference. That inference is not used to rewrite schemas or synthesize TrainSetDataService composition aliases."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "TrainSet Services V2.1: falscher Service bei der Composition-Gegenüberstellung",
+          "short": "Die PDF schreibt gleichnamige TrainSetComposition-Operationen dem TrainSetDataService zu, obwohl dessen exakte V2.1-XSD solche Operationen nicht enthält.",
+          "long": "Auf Seite 44 behauptet die PDF, die Composition-Operationen des TrainSetInformationService lieferten dieselben Informationen wie gleichnamige Operationen des TrainSetDataService. Die exakte offizielle TrainSetDataService-V2.1-XSD enthält jedoch ausschließlich TripRef-/TripInformation-Operationen und keine TrainSetComposition-Operation. TrainSetManagementService besitzt im selben V2.1-Familienstand Composition-Kontext und ist daher die wahrscheinliche gemeinte Referenz; diese Einordnung wird aber nicht als Schema-Umschreibung verwendet.",
+          "recommendation": "Die TrainSetDataService-Zuordnung als PDF-Copy/Paste-Fehler behandeln. Keine TrainSetComposition-Operationen oder Aliase für TrainSetDataService erzeugen; für XML-Verhalten ausschließlich die exakten V2.1-XSD-Inventare verwenden."
+        },
+        "en": {
+          "title": "TrainSet Services V2.1: wrong service in the composition comparison",
+          "short": "The PDF attributes equally named TrainSetComposition operations to TrainSetDataService although its exact V2.1 XSD contains no such operations.",
+          "long": "Page 44 states that the TrainSetInformationService composition operations provide the same information as equally named operations of TrainSetDataService. The exact official TrainSetDataService V2.1 XSD exposes only TripRef/TripInformation operations and no TrainSetComposition operation. TrainSetManagementService has composition context in the same V2.1 family and is therefore the likely intended reference, but that inference is not used as a schema rewrite.",
+          "recommendation": "Treat the TrainSetDataService attribution as a PDF copy/paste defect. Do not create TrainSetComposition operations or aliases for TrainSetDataService; use only the exact V2.1 XSD inventories for XML behaviour."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTRAINSET21_2026-09-06.md",
+          "note": "Terminal TrainSet V2.1 revalidation report; DRTRAINSET21-002 is context_verified."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.1.md",
+          "note": "Canonical deep-read record for the wrong-service composition comparison."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TRAINSET_V2.1 / sha256 8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e / physical page 44",
+          "note": "Exact official publication bytes containing the TrainSetDataService attribution."
+        },
+        {
+          "kind": "xsd",
+          "reference": "VDV-301-2.1 / TrainSetDataService V2.1 blob c2cdb73fcae265a2e4e0349ac6072e3548e36d8b / TrainSetManagementService V2.1 blob add9d1cb37e5759ff7a77855b239108d38373206",
+          "note": "Exact official operation inventories used to reject the alternate-alias interpretation and bound the likely intended service reference."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-148 / run 34029363792 / closure run 34029618883 / audit_registry/drtrainset21_revalidation_evidence_2026-09-06.json",
+          "note": "Persisted visual and exact-XSD counter-context evidence."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-109 / run 33228250613 / tools/validate_trainset_v21_ev109.py",
+          "note": "Current-safe exact-version executable counter-context; not used to turn this documentation finding into an XML defect."
+        }
+      ],
+      "notes": "Confirmed PDF service-attribution defect. TrainSetManagementService is only a likely intended reference; no schema rewrite or compatibility alias is created."
+    },
+    {
       "finding_id": "TSD-004",
       "service": "TrainSetDataService",
       "version_scope": [
@@ -10139,8 +10314,8 @@
     }
   ],
   "progress": {
-    "classified_count": 123,
-    "remaining_count": 69,
+    "classified_count": 125,
+    "remaining_count": 67,
     "reviewed_blocks": [
       "ARA",
       "ARCH",
@@ -10167,9 +10342,10 @@
       "DRSMS22_V22_001_002",
       "DRSMS22_V22_003_004",
       "DRTIME10_V10_001_002",
-      "DRTIME10_V10_003"
+      "DRTIME10_V10_003",
+      "DRTRAINSET21_V21_001_002"
     ],
-    "latest_block": "DRTIME10_V10_003",
-    "latest_block_file": "audit_registry/semantic_classification_blocks/DRTIME10_V10_003_v0.1.json"
+    "latest_block": "DRTRAINSET21_V21_001_002",
+    "latest_block_file": "audit_registry/semantic_classification_blocks/DRTRAINSET21_V21_001_002_v0.1.json"
   }
 }
