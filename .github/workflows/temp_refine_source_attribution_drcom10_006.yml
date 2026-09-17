@@ -1,0 +1,254 @@
+name: temp-refine-source-attribution-drcom10-006
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths: [.github/workflows/temp_refine_source_attribution_drcom10_006.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refine-source-attribution:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+
+      - name: Verify immutable prestate
+        shell: bash
+        run: |
+          set -euo pipefail
+          CLEAN_BASE=61cd6601fdba12f65dc19ffe270c6eccefeac64e
+          test "$(git rev-parse HEAD^)" = "$CLEAN_BASE"
+          test "$(git diff --name-only HEAD^ HEAD)" = ".github/workflows/temp_refine_source_attribution_drcom10_006.yml"
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "54711372925108e2edfefb04af2d6466e8e787cb"
+          test "$(git hash-object audit_registry/semantic_classification_blocks/DRCOM10_v0.1.json)" = "bbf0c438bfac9448fc6d1e71e1bcec6effedaeb0"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md)" = "e8ebcd6ee2506caa3ea5e3ff0a825ec275f3f170"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V10_2026-09-04.md)" = "5451b70122205f80abf2f419cd4fceb999d382aa"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4.md)" = "5800c06781b17775f6763a918568d3e5712210c5"
+          test "$(git hash-object IBIS-IP_Enumerations_V1.0.xsd)" = "a9bea5bc73003ed91ded8519db06c32c4067831d"
+          test "$(git hash-object IBIS-IP_Enumerations_V2.4.xsd)" = "2afed8cf23afa91db92b0f043cc5b4ad428b0f25"
+          test "$(git hash-object audit_registry/finding_semantic_classification_schema_v0.1.json)" = "7cb69f527fe9d69e5b0fc59f6a23c36e0e426571"
+          test "$(git hash-object tools/validate_finding_semantic_classification.py)" = "3304b31b2233e48d8d85e2ef9e248397d9a86b4e"
+          test "$(git hash-object tools/validate_xsd_pool.py)" = "7a682dbddaeeeb3f9cc269d2e48e5ab000aca4bd"
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test ! -e audit_registry/source_attribution_regression_2026-09-17.json
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+          sha256sum ./*.xsd | sort -k2 > /tmp/xsd-before.sha256
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          reg=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text(encoding='utf-8'))
+          block=json.loads(Path('audit_registry/semantic_classification_blocks/DRCOM10_v0.1.json').read_text(encoding='utf-8'))
+          assert reg['progress']['classified_count'] == 102
+          assert reg['progress']['remaining_count'] == 90
+          assert reg['progress']['latest_block'] == 'DRCOM24'
+          def get(doc):
+              hits=[e for e in doc['entries'] if e['finding_id']=='DRCOM10-006']
+              assert len(hits)==1
+              return hits[0]
+          a,b=get(reg),get(block)
+          assert a==b
+          assert a['defect_assessment']=='confirmed_pdf_defect'
+          assert a['primary_surface']=='cross_artifact'
+          assert a['secondary_issue_kinds']==['enum_lexeme_mismatch','singular_plural_mismatch','Wheelchair_vs_WheelChair','Others_vs_Other']
+          assert a['diagnostic']['de']['short']=='Die PDF verwendet Wheelchair und Others; die offizielle XSD akzeptiert WheelChair und Other.'
+          print('PASSED: exact pre-correction DRCOM10-006 state confirmed at 102/192')
+          PY
+          git diff --exit-code
+
+      - name: Refine mixed source attribution and write regression record
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from copy import deepcopy
+          from pathlib import Path
+
+          reg_p=Path('audit_registry/finding_semantic_classification_v0.1.json')
+          block_p=Path('audit_registry/semantic_classification_blocks/DRCOM10_v0.1.json')
+          reg=json.loads(reg_p.read_text(encoding='utf-8'))
+          block=json.loads(block_p.read_text(encoding='utf-8'))
+
+          def get(doc, fid):
+              hits=[e for e in doc['entries'] if e['finding_id']==fid]
+              assert len(hits)==1, (fid, len(hits))
+              return hits[0]
+
+          old=deepcopy(get(block,'DRCOM10-006'))
+          assert old==get(reg,'DRCOM10-006')
+          e=get(block,'DRCOM10-006')
+          e['defect_assessment']='cross_artifact_mismatch'
+          e['confidence']='confirmed'
+          e['secondary_issue_kinds']=[
+              'enum_lexeme_mismatch',
+              'mixed_source_attribution',
+              'likely_historical_xsd_typo_WheelChair',
+              'likely_historical_pdf_plural_typo_Others',
+              'Wheelchair_vs_WheelChair',
+              'Others_vs_Other'
+          ]
+          e['semantic_basis']=[
+              {
+                  'type':'official_pdf_explicit',
+                  'note':'The V1.0 PDF lists DoorCountingObjectClassEnumeration values Wheelchair and Others.'
+              },
+              {
+                  'type':'official_xsd_explicit',
+                  'note':'The exact official Enumerations V1.0 XSD defines the executable lexemes WheelChair and Other.'
+              },
+              {
+                  'type':'xsd_internal_consistency',
+                  'note':'Within the V1.0 schema family, related enumeration families use singular Other; DoorCountingQualityEnumeration also uses Other, supporting Other rather than PDF Others.'
+              },
+              {
+                  'type':'technical_inference',
+                  'note':'Wheelchair is the standard English compound spelling. This supports a typo hypothesis for historical XSD WheelChair but is supporting attribution evidence only, not normative authority.'
+              },
+              {
+                  'type':'candidate_integration_provenance',
+                  'note':'The selected V2.4 candidate/integration Enumerations XSD uses Wheelchair and Other. It is supporting later-history evidence and is not relabelled as an official V2.4 schema release.'
+              },
+              {
+                  'type':'later_official_correction',
+                  'note':'The official V2.4 Common/Enumerations documentation uses Wheelchair and Other; the deep-read closure records the older DoorCounting mismatch as fixed in V2.4.'
+              },
+              {
+                  'type':'executable_validation',
+                  'note':'Positive/negative V1.0 enum probes confirm that historical validation still accepts only WheelChair and Other and rejects the PDF forms.'
+              }
+          ]
+          e['diagnostic']['de']={
+              'title':'COMMON V1.0: DoorCounting-Lexeme haben gemischte Fehlerquellen',
+              'short':'V1.0-PDF und XSD weichen bei Wheelchair/WheelChair und Others/Other ab; die beiden Abweichungen zeigen nicht auf dieselbe Fehlerquelle.',
+              'long':'Die V1.0-PDF nennt Wheelchair und Others, die offizielle historische XSD akzeptiert WheelChair und Other. Die Abweichung ist ausführbar bestätigt, aber die Quellenzuordnung ist gemischt: Für Wheelchair sprechen korrekte englische Schreibung sowie die spätere offizielle V2.4-Dokumentation und der ausdrücklich nur als Candidate/Integration geführte V2.4-XSD-Stand dafür, dass WheelChair sehr wahrscheinlich ein historischer XSD-Tippfehler ist. Für Other sprechen die V1.0-XSD, parallele Enum-Familien und der spätere V2.4-Stand dafür, dass Others sehr wahrscheinlich der PDF-Fehler ist. Diese Attribution ändert die historische V1.0-Validierung nicht.',
+              'recommendation':'Bei V1.0 weiterhin strikt WheelChair und Other nach XSD akzeptieren. Im Advisory die zwei Teilabweichungen getrennt erklären; weder Wheelchair noch Others als stillen Kompatibilitätsalias einführen. Für Remediation oder externe Meldungen die gemischte Quellenzuordnung beibehalten.'
+          }
+          e['diagnostic']['en']={
+              'title':'COMMON V1.0: DoorCounting lexemes have mixed source attribution',
+              'short':'The V1.0 PDF and XSD differ for Wheelchair/WheelChair and Others/Other, but the two discrepancies do not point to the same source defect.',
+              'long':'The V1.0 PDF lists Wheelchair and Others, while the official historical XSD accepts WheelChair and Other. The executable mismatch is confirmed, but source attribution is mixed. For Wheelchair, normal English spelling plus the later official V2.4 documentation and the explicitly candidate/integration V2.4 XSD support the conclusion that WheelChair is very likely a historical XSD typo. For Other, the V1.0 XSD, parallel enumeration families and the later V2.4 state support the conclusion that Others is very likely the PDF typo. This attribution does not change historical V1.0 validation.',
+              'recommendation':'For V1.0 continue to accept only WheelChair and Other exactly as declared by the XSD. Explain the two facets separately in diagnostics; do not introduce Wheelchair or Others as silent compatibility aliases. Preserve the mixed attribution for remediation or external reporting.'
+          }
+          e['source_references'] += [
+              {
+                  'kind':'other',
+                  'reference':'docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4.md',
+                  'note':'Later official-document/candidate-schema context records DoorCounting as Wheelchair / Other and the older mismatch as fixed.'
+              },
+              {
+                  'kind':'xsd',
+                  'reference':'IBIS-IP_Enumerations_V2.4.xsd blob 2afed8cf23afa91db92b0f043cc5b4ad428b0f25',
+                  'note':'Candidate/integration V2.4 evidence only; not an official release authority.'
+              }
+          ]
+          e['notes']='Source attribution refined 2026-09-17 under the orthography/local-naming evidence gate. The frozen finding remains one ID, but its two lexical facets have different likely error sources: WheelChair likely historical XSD typo; Others likely PDF typo. Historical V1.0 validation remains exact-XSD and no aliases are introduced.'
+
+          new=deepcopy(e)
+          reg_e=get(reg,'DRCOM10-006')
+          reg_e.clear(); reg_e.update(deepcopy(new))
+          assert get(reg,'DRCOM10-006')==get(block,'DRCOM10-006')
+
+          reg_p.write_text(json.dumps(reg, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
+          block_p.write_text(json.dumps(block, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
+
+          report={
+              'report_version':'0.1',
+              'date':'2026-09-17',
+              'policy':'docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md',
+              'policy_commit':'61cd6601fdba12f65dc19ffe270c6eccefeac64e',
+              'purpose':'Regression review of spelling, casing and local naming-pattern source attribution before further SDK-oriented semantic classification.',
+              'rules':[
+                  'Orthography and local naming patterns are supporting source-attribution evidence only.',
+                  'Historical selected XSD tokens remain normative for validation even when typo-like.',
+                  'No compatibility aliases are inferred from linguistic plausibility.',
+                  'Mixed-facet findings may have mixed source attribution and must not be forced into one source-defect bucket.'
+              ],
+              'reviewed':[ 
+                  {'finding_id':'DRCOM10-006','result':'corrected','reason':'Single finding contains mixed attribution: WheelChair is likely a historical XSD typo; Others is likely a PDF typo. Defect assessment changed from confirmed_pdf_defect to cross_artifact_mismatch; runtime validation unchanged.'},
+                  {'finding_id':'CE-007','result':'no_change','reason':'Already neutral cross_artifact_mismatch; exact enum case remains normative without forced remediation attribution.'},
+                  {'finding_id':'CE-015','result':'no_change','reason':'Already neutral cross_artifact_mismatch for Farezone/FareZone casing; no spelling-only source verdict.'},
+                  {'finding_id':'CE-016','result':'no_change','reason':'Already only likely_xsd_defect. PDF spelling plus XSD internal inconsistency (GlobalCardStatus structure and GlobalCardStatusText sibling versus GlobalCardStausID) support the likelihood; historical XSD spelling remains normative.'},
+                  {'finding_id':'CE-017','result':'no_change','reason':'Already only likely_xsd_defect. TSPPoint.Desciption is typo-like and persists through the selected V2.4 candidate; no alias and no stronger official correction claim is introduced.'},
+                  {'finding_id':'CE-025','result':'no_change','reason':'Confirmed historical PDF defect is supported by later official V2.4 documentation using ReplyPath, matching the selected XSD naming.'},
+                  {'finding_id':'CE-026','result':'no_change','reason':'Already only likely_xsd_defect; later V2.4 candidate corrects BeaconPoint to Description, supporting but not retroactively changing historical validation.'}
+              ],
+              'semantic_progress_unchanged':{'classified_count':102,'remaining_count':90},
+              'external_reporting_note':'This regression record is evidence for later triage. It does not itself authorize an upstream or VDV report; each external report must separately pass the External-reporting gate.'
+          }
+          rp=Path('audit_registry/source_attribution_regression_2026-09-17.json')
+          rp.write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
+          print('PASSED: DRCOM10-006 mixed source attribution refined and regression report materialized')
+          PY
+
+      - name: Validate corrected semantic state
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_finding_semantic_classification.py | tee /tmp/semantic.log
+          grep -F "PASSED: semantic classification registry valid; 102 reviewed entries anchored to frozen baseline" /tmp/semantic.log
+          python tools/validate_xsd_pool.py --repo-root .
+          sha256sum ./*.xsd | sort -k2 > /tmp/xsd-after.sha256
+          cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          reg=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text(encoding='utf-8'))
+          block=json.loads(Path('audit_registry/semantic_classification_blocks/DRCOM10_v0.1.json').read_text(encoding='utf-8'))
+          report=json.loads(Path('audit_registry/source_attribution_regression_2026-09-17.json').read_text(encoding='utf-8'))
+          def get(doc):
+              return next(e for e in doc['entries'] if e['finding_id']=='DRCOM10-006')
+          a,b=get(reg),get(block)
+          assert a==b
+          assert a['defect_assessment']=='cross_artifact_mismatch'
+          assert 'mixed_source_attribution' in a['secondary_issue_kinds']
+          assert 'likely_historical_xsd_typo_WheelChair' in a['secondary_issue_kinds']
+          assert 'likely_historical_pdf_plural_typo_Others' in a['secondary_issue_kinds']
+          assert reg['progress']['classified_count']==102 and reg['progress']['remaining_count']==90
+          assert report['semantic_progress_unchanged']=={'classified_count':102,'remaining_count':90}
+          assert len(report['reviewed'])==7
+          print('PASSED: corrected registry/block agree and progress remains 102/192')
+          PY
+
+      - name: Verify mutation boundary and persist
+        shell: bash
+        run: |
+          set -euo pipefail
+          CLEAN_BASE=61cd6601fdba12f65dc19ffe270c6eccefeac64e
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md)" = "e8ebcd6ee2506caa3ea5e3ff0a825ec275f3f170"
+          test "$(git hash-object audit_registry/finding_semantic_classification_schema_v0.1.json)" = "7cb69f527fe9d69e5b0fc59f6a23c36e0e426571"
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          git rm .github/workflows/temp_refine_source_attribution_drcom10_006.yml
+          git add audit_registry/finding_semantic_classification_v0.1.json audit_registry/semantic_classification_blocks/DRCOM10_v0.1.json audit_registry/source_attribution_regression_2026-09-17.json
+          python - <<'PY'
+          import subprocess
+          expected={
+              'audit_registry/finding_semantic_classification_v0.1.json',
+              'audit_registry/semantic_classification_blocks/DRCOM10_v0.1.json',
+              'audit_registry/source_attribution_regression_2026-09-17.json',
+              '.github/workflows/temp_refine_source_attribution_drcom10_006.yml'
+          }
+          staged=set(subprocess.check_output(['git','diff','--cached','--name-only'], text=True).splitlines())
+          assert staged==expected, (staged, expected)
+          final_changed=set(subprocess.check_output(['git','diff','--name-only', '61cd6601fdba12f65dc19ffe270c6eccefeac64e'], text=True).splitlines())
+          assert final_changed=={
+              'audit_registry/finding_semantic_classification_v0.1.json',
+              'audit_registry/semantic_classification_blocks/DRCOM10_v0.1.json',
+              'audit_registry/source_attribution_regression_2026-09-17.json'
+          }, final_changed
+          print('PASSED: persistent correction boundary is registry + DRCOM10 block + regression record only')
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "audit: refine source attribution for DRCOM10-006"
+          git push origin HEAD:dev/schema-integration
