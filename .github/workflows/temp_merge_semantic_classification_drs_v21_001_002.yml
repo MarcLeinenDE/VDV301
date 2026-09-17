@@ -1,0 +1,127 @@
+name: temp-merge-semantic-classification-drs-v21-001-002
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths: [.github/workflows/temp_merge_semantic_classification_drs_v21_001_002.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  merge-drs-v21-001-002:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+      - name: Verify exact prestate and evidence boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          STAGED_BASE=a0b3896bdf5ae481277c443f5976f25f6014eb57
+          CLEAN_BASE=b2b627871d616e46808937a34412ca39a2fa3523
+          test "$(git rev-parse HEAD^)" = "$STAGED_BASE"
+          test "$(git diff --name-only HEAD^ HEAD)" = ".github/workflows/temp_merge_semantic_classification_drs_v21_001_002.yml"
+          test "$(git hash-object audit_registry/semantic_classification_blocks/DRS_V21_001_002_v0.1.json)" = "9da264df43f86d40700c2f099d307a2fe59bbaf7"
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "303c137b2f18279b984ea817c3a6014c53e280f8"
+          test "$(git hash-object audit_registry/drs_v21_revalidation_evidence_2026-09-06.json)" = "31f80e57b2d064731038f7e691ee46e781efb484"
+          test "$(git hash-object tools/validate_door_v21_ev111.py)" = "75c7528c2f18dfe35d74a6b27e104ec006661ce1"
+          test "$(git hash-object tools/validate_finding_semantic_classification.py)" = "3304b31b2233e48d8d85e2ef9e248397d9a86b4e"
+          test "$(git hash-object tools/merge_semantic_classification_block.py)" = "bddb17d5f264663611585cde33202c355ce9e5ca"
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+          sha256sum ./*.xsd | sort -k2 > /tmp/xsd-before.sha256
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          target={'DRS-001','DRS-002'}
+          reg=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
+          assert reg['progress']['classified_count']==112
+          assert reg['progress']['remaining_count']==80
+          assert reg['progress']['latest_block']=='DRNET20'
+          assert not ({e['finding_id'] for e in reg['entries']} & target)
+          prov=json.loads(Path('audit_registry/finding_provenance_baseline_2026-09-14.json').read_text())
+          states={e['finding_id']:e['revalidation_state'] for e in prov['inventory']['entries'] if e['finding_id'] in target}
+          assert states=={'DRS-001':'context_verified','DRS-002':'executable_confirmed'}, states
+          ev=json.loads(Path('audit_registry/drs_v21_revalidation_evidence_2026-09-06.json').read_text())
+          assert ev['evidence_id']=='EV-145' and ev['result']=='PASS'
+          assert ev['authority']['source_id']=='DOOR_V2.1'
+          assert ev['authority']['official_release_tag']=='VDV-301-2.1'
+          assert ev['authority']['door_xsd_blob']=='abff0f3960e2ec7a9caaa9ddeb6efff8f4183805'
+          assert ev['authority']['common_v1_0_blob']=='194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c'
+          assert ev['authority']['enumerations_v1_0_blob']=='a9bea5bc73003ed91ded8519db06c32c4067831d'
+          assert ev['authority']['mixed_version_dependency_is_authoritative'] is True
+          assert ev['authority']['latest_xsd_wins'] is False
+          block=json.loads(Path('audit_registry/semantic_classification_blocks/DRS_V21_001_002_v0.1.json').read_text())
+          assert block['block_id']=='DRS_V21_001_002'
+          assert [e['finding_id'] for e in block['entries']]==['DRS-001','DRS-002']
+          assert block['entries'][0]['sdk_behavior']=='no_runtime_diagnostic'
+          assert block['entries'][0]['runtime_match']['state']=='not_applicable'
+          assert block['entries'][1]['sdk_behavior']=='error_with_advisory'
+          assert block['entries'][1]['runtime_match']['state']=='candidate'
+          for e in block['entries']:
+              assert e['normative_authority']=='selected_xsd'
+              assert e['version_scope'][0]['authority']=='official_release'
+              assert 'IBIS-IP_DoorStateService_V2.1.xsd' in e['version_scope'][0]['xsd_profile']
+          print('PASSED: exact DRS-001/002 prestate and authority boundary')
+          PY
+          git diff --exit-code
+      - name: Re-run executable DRS-002 boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_door_v21_ev111.py | tee /tmp/ev111.log
+          grep -F "PASSED: EV-111 DoorState V2.1 DRS-002/DRS-003 executable behaviour confirmed" /tmp/ev111.log
+          grep -F "PDF-shaped <OperationErrorMessage> branch -> invalid" /tmp/ev111.log
+      - name: Merge two-finding block and validate registry
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/merge_semantic_classification_block.py --block audit_registry/semantic_classification_blocks/DRS_V21_001_002_v0.1.json | tee /tmp/merge.log
+          grep -F "PASSED: merged block DRS_V21_001_002; classified=114 remaining=78" /tmp/merge.log
+          python tools/validate_finding_semantic_classification.py | tee /tmp/semantic.log
+          grep -F "PASSED: semantic classification registry valid; 114 reviewed entries anchored to frozen baseline" /tmp/semantic.log
+          python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+          sha256sum ./*.xsd | sort -k2 > /tmp/xsd-after.sha256
+          cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
+          assert r['progress']['classified_count']==114
+          assert r['progress']['remaining_count']==78
+          assert r['progress']['latest_block']=='DRS_V21_001_002'
+          assert r['progress']['latest_block_file']=='audit_registry/semantic_classification_blocks/DRS_V21_001_002_v0.1.json'
+          assert r['progress']['reviewed_blocks'][-1]=='DRS_V21_001_002'
+          ids={e['finding_id'] for e in r['entries']}
+          assert {'DRS-001','DRS-002'} <= ids
+          assert 'DRS-003' not in ids and 'DRS-004' not in ids
+          print('PASSED: DRS part 1 poststate 114/192; DRS-003/004 untouched')
+          PY
+      - name: Persist exact two-finding boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          CLEAN_BASE=b2b627871d616e46808937a34412ca39a2fa3523
+          git rm .github/workflows/temp_merge_semantic_classification_drs_v21_001_002.yml
+          git add audit_registry/finding_semantic_classification_v0.1.json
+          python - <<'PY'
+          import subprocess
+          staged=set(subprocess.check_output(['git','diff','--cached','--name-only'],text=True).splitlines())
+          expected={'.github/workflows/temp_merge_semantic_classification_drs_v21_001_002.yml','audit_registry/finding_semantic_classification_v0.1.json'}
+          assert staged==expected,(staged,expected)
+          changed=set(subprocess.check_output(['git','diff','--name-only','b2b627871d616e46808937a34412ca39a2fa3523'],text=True).splitlines())
+          expected_changed={'audit_registry/finding_semantic_classification_v0.1.json','audit_registry/semantic_classification_blocks/DRS_V21_001_002_v0.1.json'}
+          assert changed==expected_changed,(changed,expected_changed)
+          print('PASSED: persistent boundary is master registry + DRS-001/002 block only')
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "audit: merge DRS-001 and DRS-002 semantic classification"
+          git push origin HEAD:dev/schema-integration
