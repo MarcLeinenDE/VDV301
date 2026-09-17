@@ -9531,6 +9531,89 @@
       "notes": "Confirmed bilingual omission with a conservative profile interpretation. Historical RV-003 is not falsely presented as a current executable checker."
     },
     {
+      "finding_id": "DRTIME10-003",
+      "service": "TimeService",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official byte-pinned VDV 301-2-10 TimeService V1.0 publication on the PDF/API/prose authority lane. TimeService intentionally has no XSD semantic authority in this audit."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "editorial_residue",
+      "secondary_issue_kinds": [
+        "minor_pdf_editorial_cross_reference_typo",
+        "version_history_residue",
+        "unresolved_intended_replacement"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Physical page 7 of the exact pinned publication visibly prints 'define Type for Service-Discovery: _ibisip_udp._udp (cd. 1)' in the English version-history line."
+        },
+        {
+          "type": "version_history",
+          "note": "The wording occurs in the V1.0 technical-correction/version-history context and is inconsistent with the surrounding chapter-reference style."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The evidence supports an editorial cross-reference artifact, but it does not establish the exact intended replacement text. No correction is invented."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "TimeService V1.0: redaktionelles 'cd. 1'-Artefakt in der Versionshistorie",
+          "short": "Die englische Versionshistorie druckt hinter dem Service-Discovery-Typ den Text 'cd. 1'; eine belastbare Zielkorrektur ist nicht nachgewiesen.",
+          "long": "Auf der physisch geprüften Seite 7 steht in der englischen V1.0-Korrekturzeile 'define Type for Service-Discovery: _ibisip_udp._udp (cd. 1)'. Der Text ist im Original sichtbar und daher kein Extraktionsartefakt. Der Kontext spricht für einen redaktionellen Querverweisrest; aus der vorhandenen Evidenz lässt sich aber nicht belastbar ableiten, welcher konkrete Ersatztext gemeint war.",
+          "recommendation": "Den Befund als redaktionellen Dokumentationshinweis führen. 'cd. 1' nicht technisch interpretieren und keine vermeintliche Korrektur, Runtime-Regel oder XSD-Regel erfinden."
+        },
+        "en": {
+          "title": "TimeService V1.0: editorial 'cd. 1' residue in version history",
+          "short": "The English version history prints 'cd. 1' after the service-discovery type; no reliable intended replacement has been established.",
+          "long": "On physically reviewed page 7, the English V1.0 correction line reads 'define Type for Service-Discovery: _ibisip_udp._udp (cd. 1)'. The text is visibly present in the original and is therefore not an extraction artifact. The context supports an editorial cross-reference residue, but the available evidence does not establish what exact replacement text was intended.",
+          "recommendation": "Keep the issue as editorial documentation guidance. Do not assign technical meaning to 'cd. 1' and do not invent a correction, runtime rule, or XSD rule."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTIME10_2026-09-06.md",
+          "note": "Terminal TimeService V1.0 revalidation report; DRTIME10-003 is context_verified."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/TIME_V1.0.md",
+          "note": "Canonical deep-read record for the version-history cross-reference residue."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TIME_V1.0 / sha256 d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3 / physical page 7",
+          "note": "Exact official publication bytes visibly containing the 'cd. 1' text."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-147 / run 34028395412 / closure run 34028583953 / audit_registry/drtime10_revalidation_evidence_2026-09-06.json",
+          "note": "Persisted visual evidence rejects the extraction-only hypothesis and intentionally leaves intended replacement text null."
+        }
+      ],
+      "notes": "Confirmed editorial PDF residue only. The intended correction is intentionally unresolved rather than guessed."
+    },
+    {
       "finding_id": "TSD-004",
       "service": "TrainSetDataService",
       "version_scope": [
@@ -10056,8 +10139,8 @@
     }
   ],
   "progress": {
-    "classified_count": 122,
-    "remaining_count": 70,
+    "classified_count": 123,
+    "remaining_count": 69,
     "reviewed_blocks": [
       "ARA",
       "ARCH",
@@ -10083,9 +10166,10 @@
       "DRS_V21_003_004",
       "DRSMS22_V22_001_002",
       "DRSMS22_V22_003_004",
-      "DRTIME10_V10_001_002"
+      "DRTIME10_V10_001_002",
+      "DRTIME10_V10_003"
     ],
-    "latest_block": "DRTIME10_V10_001_002",
-    "latest_block_file": "audit_registry/semantic_classification_blocks/DRTIME10_V10_001_002_v0.1.json"
+    "latest_block": "DRTIME10_V10_003",
+    "latest_block_file": "audit_registry/semantic_classification_blocks/DRTIME10_V10_003_v0.1.json"
   }
 }
