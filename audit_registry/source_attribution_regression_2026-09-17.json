@@ -1,0 +1,55 @@
+{
+  "report_version": "0.1",
+  "date": "2026-09-17",
+  "policy": "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+  "policy_commit": "61cd6601fdba12f65dc19ffe270c6eccefeac64e",
+  "purpose": "Regression review of spelling, casing and local naming-pattern source attribution before further SDK-oriented semantic classification.",
+  "rules": [
+    "Orthography and local naming patterns are supporting source-attribution evidence only.",
+    "Historical selected XSD tokens remain normative for validation even when typo-like.",
+    "No compatibility aliases are inferred from linguistic plausibility.",
+    "Mixed-facet findings may have mixed source attribution and must not be forced into one source-defect bucket."
+  ],
+  "reviewed": [
+    {
+      "finding_id": "DRCOM10-006",
+      "result": "corrected",
+      "reason": "Single finding contains mixed attribution: WheelChair is likely a historical XSD typo; Others is likely a PDF typo. Defect assessment changed from confirmed_pdf_defect to cross_artifact_mismatch; runtime validation unchanged."
+    },
+    {
+      "finding_id": "CE-007",
+      "result": "no_change",
+      "reason": "Already neutral cross_artifact_mismatch; exact enum case remains normative without forced remediation attribution."
+    },
+    {
+      "finding_id": "CE-015",
+      "result": "no_change",
+      "reason": "Already neutral cross_artifact_mismatch for Farezone/FareZone casing; no spelling-only source verdict."
+    },
+    {
+      "finding_id": "CE-016",
+      "result": "no_change",
+      "reason": "Already only likely_xsd_defect. PDF spelling plus XSD internal inconsistency (GlobalCardStatus structure and GlobalCardStatusText sibling versus GlobalCardStausID) support the likelihood; historical XSD spelling remains normative."
+    },
+    {
+      "finding_id": "CE-017",
+      "result": "no_change",
+      "reason": "Already only likely_xsd_defect. TSPPoint.Desciption is typo-like and persists through the selected V2.4 candidate; no alias and no stronger official correction claim is introduced."
+    },
+    {
+      "finding_id": "CE-025",
+      "result": "no_change",
+      "reason": "Confirmed historical PDF defect is supported by later official V2.4 documentation using ReplyPath, matching the selected XSD naming."
+    },
+    {
+      "finding_id": "CE-026",
+      "result": "no_change",
+      "reason": "Already only likely_xsd_defect; later V2.4 candidate corrects BeaconPoint to Description, supporting but not retroactively changing historical validation."
+    }
+  ],
+  "semantic_progress_unchanged": {
+    "classified_count": 102,
+    "remaining_count": 90
+  },
+  "external_reporting_note": "This regression record is evidence for later triage. It does not itself authorize an upstream or VDV report; each external report must separately pass the External-reporting gate."
+}
