@@ -9006,6 +9006,188 @@
       "notes": "Confirmed XSD documentation defect only. Executable identifiers are unaffected, so no runtime diagnostic is justified."
     },
     {
+      "finding_id": "DRSMS22-001",
+      "service": "SystemMonitoringService",
+      "version_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemMonitoringService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Exact official VDV-301-2.2 SystemMonitoringService schema family. The finding itself is confined to generated PDF content and has no executable schema effect."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "editorial_residue",
+      "secondary_issue_kinds": [
+        "broken_bookmark_reference",
+        "pdf_generation_error",
+        "list_of_figures_residue"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The exact byte-pinned SystemMonitoringService V2.2 PDF visibly prints 'Fehler! Textmarke nicht definiert.' in the list-of-figures area on page 5."
+        },
+        {
+          "type": "technical_inference",
+          "note": "Fresh visual rendering and independent text extraction both reproduce the printed string, rejecting an extraction-only artifact hypothesis and limiting the issue to document generation."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "SystemMonitoringService V2.2: defekte Textmarke im Abbildungsverzeichnis",
+          "short": "Die offizielle PDF druckt im Abbildungsverzeichnis die Word-Fehlermeldung 'Fehler! Textmarke nicht definiert.'.",
+          "long": "Auf Seite 5 der byte-genau gepinnten SystemMonitoringService-V2.2-PDF ist im Bereich des Abbildungsverzeichnisses sichtbar die Meldung 'Fehler! Textmarke nicht definiert.' enthalten. EV-146 bestätigt den Befund sowohl per frischem Rendering als auch per Textextraktion. Es handelt sich um einen Fehler der Dokumenterzeugung ohne Auswirkung auf XML-Strukturen oder XSD-Validierung.",
+          "recommendation": "Nur als Dokumentations-/Audit-Hinweis anzeigen. Keine XML-, XSD- oder Runtime-Regel daraus ableiten."
+        },
+        "en": {
+          "title": "SystemMonitoringService V2.2: broken bookmark in the list of figures",
+          "short": "The official PDF prints the Word error message 'Fehler! Textmarke nicht definiert.' in the list-of-figures area.",
+          "long": "On page 5 of the byte-pinned SystemMonitoringService V2.2 PDF, the list-of-figures area visibly contains the message 'Fehler! Textmarke nicht definiert.'. EV-146 confirms the finding through both fresh rendering and text extraction. This is a document-generation defect with no effect on XML structures or XSD validation.",
+          "recommendation": "Expose this only as documentation/audit guidance. Do not derive XML, XSD, or runtime rules from it."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRSMS22_2026-09-06.md",
+          "note": "Terminal SystemMonitoringService V2.2 revalidation report; DRSMS22-001 is context_verified."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/SMS_V2.2.md",
+          "note": "Canonical deep-read source; FR-SMS22-OBS-002 maps to DRSMS22-001."
+        },
+        {
+          "kind": "pdf",
+          "reference": "SMS_V2.2 / sha256 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4 / page 5",
+          "note": "Exact official publication bytes containing the printed broken-bookmark message."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-146 / run 34026822637 / closure run 34026992744 / audit_registry/drsms22_revalidation_evidence_2026-09-06.json",
+          "note": "Persisted DRSMS22 revalidation evidence confirming a visible document-generation defect and no executable effect."
+        }
+      ],
+      "notes": "Confirmed PDF-generation residue only. No runtime matcher or schema rule is justified."
+    },
+    {
+      "finding_id": "DRSMS22-002",
+      "service": "SystemMonitoringService",
+      "version_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemMonitoringService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Exact official VDV-301-2.2 SystemMonitoringService schema family. Common V2.2 supplies the authoritative ServiceIdentificationWithState/ServiceState structure used to falsify the device-wording interpretation."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "semantic_contradiction",
+      "secondary_issue_kinds": [
+        "device_vs_service_state_wording",
+        "copy_paste_semantic_error",
+        "service_status_prose"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "pdf_can_mislead_implementation",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Pages 10-11 use device-oriented wording inside ServiceStatus prose, including descriptions of device state where the operation and surrounding identifiers refer to service status."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Exact Common V2.2 defines ServiceIdentificationWithStateStructure as ServiceIdentification plus ServiceState and contains no DeviceState member in that structure."
+        },
+        {
+          "type": "xsd_internal_consistency",
+          "note": "The selected service XSD uses ServiceIdentificationWithStateList for GetServiceStatusResponseData, consistently routing this operation to service-state rather than device-state semantics."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The exact operation naming plus Common V2.2 structure rejects an alternate device-oriented ServiceStatus interpretation; the inconsistent prose is a documentation copy/paste defect."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "SystemMonitoringService V2.2: Device/Service-Verwechslung in ServiceStatus-Texten",
+          "short": "Die PDF beschreibt in ServiceStatus-Abschnitten teilweise Gerätezustände, obwohl die offizielle Struktur ServiceIdentification plus ServiceState verwendet.",
+          "long": "Auf den Seiten 10 und 11 verwendet die SystemMonitoringService-V2.2-PDF in den ServiceStatus-Beschreibungen teilweise Geräte-Terminologie. Die exakte Common-V2.2-XSD definiert ServiceIdentificationWithStateStructure dagegen eindeutig mit ServiceIdentification und ServiceState; die Service-XSD verwendet diese Struktur für GetServiceStatusResponseData. Damit ist die Device-Wortwahl ein semantischer Copy/Paste-Fehler der Dokumentation und keine alternative ausführbare Semantik.",
+          "recommendation": "Für die technische Interpretation die exakte ServiceStatus-/ServiceState-Struktur der ausgewählten XSD verwenden. Den PDF-Wortlaut als bekannten Dokumentationsfehler kennzeichnen, aber keine Runtime-Regel oder automatische Umdeutung erzeugen."
+        },
+        "en": {
+          "title": "SystemMonitoringService V2.2: device/service mix-up in ServiceStatus prose",
+          "short": "The PDF sometimes describes device state in ServiceStatus sections although the official structure uses ServiceIdentification plus ServiceState.",
+          "long": "On pages 10 and 11, the SystemMonitoringService V2.2 PDF uses device-oriented terminology in ServiceStatus descriptions. Exact Common V2.2 instead defines ServiceIdentificationWithStateStructure with ServiceIdentification and ServiceState, and the service XSD uses that structure for GetServiceStatusResponseData. The device wording is therefore a semantic documentation copy/paste defect rather than an alternative executable meaning.",
+          "recommendation": "Use the exact ServiceStatus/ServiceState structure from the selected XSD for technical interpretation. Flag the PDF wording as a known documentation defect, but do not create a runtime rule or automatic reinterpretation."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRSMS22_2026-09-06.md",
+          "note": "Terminal SystemMonitoringService V2.2 revalidation report; DRSMS22-002 is context_verified."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/SMS_V2.2.md",
+          "note": "Canonical deep-read source; FR-SMS22-OBS-004 maps to DRSMS22-002."
+        },
+        {
+          "kind": "pdf",
+          "reference": "SMS_V2.2 / sha256 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4 / pages 10-11",
+          "note": "Exact official publication bytes containing the inconsistent device-oriented ServiceStatus prose."
+        },
+        {
+          "kind": "xsd",
+          "reference": "VDV-301-2.2 / IBIS-IP_common_V2.2.xsd blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+          "note": "Exact official Common V2.2 authority defining ServiceIdentificationWithStateStructure with ServiceIdentification plus ServiceState and no DeviceState."
+        },
+        {
+          "kind": "xsd",
+          "reference": "VDV-301-2.2 / IBIS-IP_SystemMonitoringService_V2.2.xsd blob d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c",
+          "note": "Exact official service XSD using ServiceIdentificationWithStateList for GetServiceStatusResponseData."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-146 / run 34026822637 / closure run 34026992744 / audit_registry/drsms22_revalidation_evidence_2026-09-06.json",
+          "note": "Persisted DRSMS22 evidence rejecting device-oriented ServiceStatus semantics and recording no executable effect."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-116 / run 33269006407 / job 99144006184 / tools/validate_sms_v22_ev116.py",
+          "note": "Executable authority support for the exact official SystemMonitoringService V2.2 family and ServiceStatus naming boundary."
+        }
+      ],
+      "notes": "Confirmed PDF semantic/copy-paste defect. The exact selected XSD remains authoritative; no runtime matcher is required because valid XML already expresses the correct ServiceState model."
+    },
+    {
       "finding_id": "TSD-004",
       "service": "TrainSetDataService",
       "version_scope": [
@@ -9531,8 +9713,8 @@
     }
   ],
   "progress": {
-    "classified_count": 116,
-    "remaining_count": 76,
+    "classified_count": 118,
+    "remaining_count": 74,
     "reviewed_blocks": [
       "ARA",
       "ARCH",
@@ -9555,9 +9737,10 @@
       "DRDOOR21",
       "DRNET20",
       "DRS_V21_001_002",
-      "DRS_V21_003_004"
+      "DRS_V21_003_004",
+      "DRSMS22_V22_001_002"
     ],
-    "latest_block": "DRS_V21_003_004",
-    "latest_block_file": "audit_registry/semantic_classification_blocks/DRS_V21_003_004_v0.1.json"
+    "latest_block": "DRSMS22_V22_001_002",
+    "latest_block_file": "audit_registry/semantic_classification_blocks/DRSMS22_V22_001_002_v0.1.json"
   }
 }
