@@ -1,0 +1,265 @@
+{
+  "block_version": "0.1",
+  "block_id": "DRNET20",
+  "review_date": "2026-09-17",
+  "source_baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
+  "source_terminal_report": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_NETWORK_V20_2026-09-06.md",
+  "source_deep_read": "docs/pdf_xsd_semantic_audit/deep_read/VDV301-3_02-2020.md",
+  "review_policy": "manual_semantic_review_bilingual_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "DRNET20-001",
+      "service": "NetworkInfrastructure",
+      "version_scope": [
+        {
+          "version": "VDV 301-3 02/2020",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official VDV 301-3 Network Infrastructure publication. This profile intentionally has no XSD lane; absence of an XSD is not a schema-authority gap."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "semantic_contradiction",
+      "secondary_issue_kinds": [
+        "network_media_terminology",
+        "1000Base-X_vs_1000BASE-T",
+        "copper_cabling_context",
+        "internal_table_prose_conflict"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The byte-pinned VDV 301-3 02/2020 publication places '1000Base-X' in the copper-cabling prose while its adjacent interface table specifies '1 GBase-T'. The contradiction is internal to the same official VDV publication."
+        },
+        {
+          "type": "external_protocol_standard",
+          "note": "IEEE 802.3 terminology distinguishes the 1000BASE-X family from 1000BASE-T. This is interpretation/falsification context only and does not replace VDV authority."
+        },
+        {
+          "type": "technical_inference",
+          "note": "Within an explicitly copper/twisted-pair context, the adjacent VDV table makes 1000BASE-T the coherent reading. The classification records the documentation conflict and does not silently rewrite the published requirement."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VDV 301-3 02/2020: widersprüchliche 1000Base-X/T-Terminologie",
+          "short": "Im Kupferverkabelungs-Kontext nennt der Fließtext 1000Base-X, während die benachbarte Tabelle 1 GBase-T vorgibt.",
+          "long": "Die gepinnte VDV-301-3-Publikation 02/2020 enthält auf den geprüften Seiten 10 und 17 innerhalb des Kupferverkabelungs-Kontexts die Bezeichnung 1000Base-X; die jeweils benachbarte Tabelle nennt dagegen 1 GBase-T. Damit liegt ein interner Dokumentationswiderspruch vor. IEEE-802.3-Material dient nur zur Terminologie-Einordnung und ersetzt nicht die VDV-Quelle. Für dieses Network-Profil existiert absichtlich keine XSD-Lane.",
+          "recommendation": "Den Widerspruch als Dokumentationshinweis ausgeben und die Quelle unverändert referenzieren. Keine XSD-Regel, keinen Alias und keine Runtime-Validierung aus diesem Finding erzeugen."
+        },
+        "en": {
+          "title": "VDV 301-3 02/2020: conflicting 1000Base-X/T terminology",
+          "short": "In the copper-cabling context the prose names 1000Base-X while the adjacent table specifies 1 GBase-T.",
+          "long": "The pinned VDV 301-3 02/2020 publication uses 1000Base-X on the checked pages 10 and 17 within the copper-cabling context, while the adjacent table specifies 1 GBase-T. This is an internal documentation contradiction. IEEE 802.3 material is used only as terminology/falsification context and does not replace VDV authority. This Network profile intentionally has no XSD lane.",
+          "recommendation": "Surface the conflict as documentation guidance while preserving the source wording. Do not generate an XSD rule, alias, or runtime validation from this finding."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_NETWORK_V20_2026-09-06.md",
+          "note": "Terminal Network V2.0 revalidation report; EV-144 established context_verified with a non-XSD authority lane."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/VDV301-3_02-2020.md",
+          "note": "Canonical deep-read source; FR-NET20-OBS-003 maps to DRNET20-001."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-3_02-2020 / sha256 edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99 / pages 10,17",
+          "note": "Exact official publication bytes used for the finding."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-144 / run 34025645375 / closure run 34025824480 / audit_registry/network_v20_revalidation_evidence_2026-09-06.json",
+          "note": "Persisted Network V2.0 revalidation evidence. EV-141 and EV-142 are DMS evidence and are intentionally not used here."
+        },
+        {
+          "kind": "external_standard",
+          "reference": "IEEE 802.3 publication and interpretation context captured by EV-144",
+          "note": "Terminology/falsification context only; not substituted VDV authority."
+        }
+      ],
+      "notes": "Documentation-only semantic classification. The official VDV 301-3 02/2020 profile intentionally has no XSD lane, so no strict XML profile or runtime diagnostic is manufactured."
+    },
+    {
+      "finding_id": "DRNET20-002",
+      "service": "NetworkInfrastructure",
+      "version_scope": [
+        {
+          "version": "VDV 301-3 02/2020",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official VDV 301-3 Network Infrastructure publication. This profile intentionally has no XSD lane; absence of an XSD is not a schema-authority gap."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "semantic_contradiction",
+      "secondary_issue_kinds": [
+        "translation_semantic_error",
+        "safety_vs_security",
+        "functional_safety_context",
+        "figure_caption_mismatch"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The German page and surrounding English body/figure establish a functional-safety boundary, while the English Figure 1 caption uses 'security-relevant'. The conflict is visible inside the same official bilingual publication."
+        },
+        {
+          "type": "domain_semantics",
+          "note": "In engineering usage, safety and security are distinct concepts; replacing a functional-safety label with security changes the described concern rather than merely its spelling."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The surrounding bilingual context makes 'safety-relevant' the coherent meaning of the English caption. This inference is used to classify the translation defect, not to create executable behavior."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VDV 301-3 02/2020: Safety/Security-Übersetzungsfehler",
+          "short": "Die englische Bildunterschrift bezeichnet einen funktional sicherheitsrelevanten Bereich als security-relevant.",
+          "long": "Auf den geprüften Seiten 7 und 8 beschreibt die deutsche Fassung sowie der umgebende englische Text bzw. die Abbildung die Grenze im Sinn der funktionalen Sicherheit. Die englische Bildunterschrift zu Figure 1 verwendet dagegen security-relevant. Da Safety und Security technisch unterschiedliche Bedeutungen haben, ist dies ein semantischer Übersetzungsfehler der Dokumentation.",
+          "recommendation": "Bei der Dokumentationsausgabe auf den Safety/Security-Konflikt hinweisen. Daraus keine XML-, XSD- oder Runtime-Regel ableiten."
+        },
+        "en": {
+          "title": "VDV 301-3 02/2020: safety/security translation error",
+          "short": "The English figure caption labels a functional-safety boundary as security-relevant.",
+          "long": "On the checked pages 7 and 8, the German text and the surrounding English body/figure establish the boundary in the functional-safety sense. The English Figure 1 caption instead uses security-relevant. Because safety and security carry distinct engineering meanings, this is a semantic translation defect in the documentation.",
+          "recommendation": "Flag the safety/security conflict in documentation guidance. Do not derive XML, XSD, or runtime rules from it."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_NETWORK_V20_2026-09-06.md",
+          "note": "Terminal Network V2.0 revalidation report; EV-144 established context_verified."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/VDV301-3_02-2020.md",
+          "note": "Canonical deep-read source; FR-NET20-OBS-004 maps to DRNET20-002."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-3_02-2020 / sha256 edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99 / pages 7,8",
+          "note": "Exact official publication bytes used for the bilingual safety/security comparison."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-144 / run 34025645375 / closure run 34025824480 / audit_registry/network_v20_revalidation_evidence_2026-09-06.json",
+          "note": "Persisted Network V2.0 revalidation evidence. EV-141 and EV-142 are unrelated DMS evidence."
+        }
+      ],
+      "notes": "Confirmed bilingual documentation defect with no executable XML effect and no runtime matching surface."
+    },
+    {
+      "finding_id": "DRNET20-003",
+      "service": "NetworkInfrastructure",
+      "version_scope": [
+        {
+          "version": "VDV 301-3 02/2020",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official VDV 301-3 Network Infrastructure publication. This profile intentionally has no XSD lane; absence of an XSD is not a schema-authority gap."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "editorial_residue",
+      "secondary_issue_kinds": [
+        "documentation_spelling",
+        "grouped_editorial_errors",
+        "deduplicated_from_NET-003"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The exact publication retains the grouped editorial residue 'Connection methodes', 'Not describede', and 'in de IEEE 802.3af/at/bt' on the checked pages 18, 19, and 29."
+        },
+        {
+          "type": "technical_inference",
+          "note": "These are editorial/spelling defects without a credible executable semantic effect. The separate page-11 'IEE 802.3' item remains historical NET-003 and is deliberately excluded from this grouped finding."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VDV 301-3 02/2020: gruppierte redaktionelle Restfehler",
+          "short": "Die Publikation enthält mehrere bestätigte Schreib- und Redaktionsfehler ohne ausführbare Auswirkung.",
+          "long": "Auf den geprüften Seiten 18, 19 und 29 verbleiben unter anderem die Formulierungen 'Connection methodes', 'Not describede' und 'in de IEEE 802.3af/at/bt'. Diese Fehler werden bewusst als ein redaktioneller Restblock geführt. Der separate Fehler 'IEE 802.3' auf Seite 11 gehört weiterhin zum historischen Finding NET-003 und wird hier nicht doppelt klassifiziert.",
+          "recommendation": "Nur als Dokumentationshinweis führen und die Abgrenzung zu NET-003 beibehalten. Keine Runtime- oder XSD-Diagnostik erzeugen."
+        },
+        "en": {
+          "title": "VDV 301-3 02/2020: grouped residual editorial errors",
+          "short": "The publication contains several confirmed spelling/editorial errors with no executable effect.",
+          "long": "The checked pages 18, 19, and 29 retain wording including 'Connection methodes', 'Not describede', and 'in de IEEE 802.3af/at/bt'. These are intentionally kept as one grouped editorial-residue finding. The separate page-11 'IEE 802.3' item remains historical finding NET-003 and is not classified twice here.",
+          "recommendation": "Keep this as documentation guidance only and preserve the deduplication boundary to NET-003. Do not create runtime or XSD diagnostics."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_NETWORK_V20_2026-09-06.md",
+          "note": "Terminal Network V2.0 revalidation report; EV-144 established context_verified and the NET-003 deduplication boundary."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/VDV301-3_02-2020.md",
+          "note": "Canonical deep-read source; residual portion of FR-NET20-OBS-005 maps to DRNET20-003."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-3_02-2020 / sha256 edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99 / pages 18,19,29",
+          "note": "Exact official publication bytes used for the grouped editorial observations."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-144 / run 34025645375 / closure run 34025824480 / audit_registry/network_v20_revalidation_evidence_2026-09-06.json",
+          "note": "Persisted Network V2.0 revalidation evidence; historical NET-003 remains separate."
+        }
+      ],
+      "notes": "Grouped documentation-only residue. No executable effect is claimed, and the historical NET-003 finding is deliberately not duplicated."
+    }
+  ]
+}
