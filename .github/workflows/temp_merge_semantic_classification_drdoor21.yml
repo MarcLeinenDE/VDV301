@@ -1,0 +1,189 @@
+name: temp-merge-semantic-classification-drdoor21
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths: [.github/workflows/temp_merge_semantic_classification_drdoor21.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  merge-drdoor21:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install evidence dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+
+      - name: Verify immutable prestate
+        shell: bash
+        run: |
+          set -euo pipefail
+          CLEAN_BASE=ff325647ae6706b972517e3037c35de6ccad0ede
+          test "$(git rev-parse HEAD^)" = "$CLEAN_BASE"
+          test "$(git diff --name-only HEAD^ HEAD)" = ".github/workflows/temp_merge_semantic_classification_drdoor21.yml"
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "53097e5d04e9a39d49e633a5c42f797e350eabed"
+          test "$(git hash-object audit_registry/finding_semantic_classification_schema_v0.1.json)" = "7cb69f527fe9d69e5b0fc59f6a23c36e0e426571"
+          test "$(git hash-object tools/validate_finding_semantic_classification.py)" = "3304b31b2233e48d8d85e2ef9e248397d9a86b4e"
+          test "$(git hash-object tools/merge_semantic_classification_block.py)" = "bddb17d5f264663611585cde33202c355ce9e5ca"
+          test "$(git hash-object tools/validate_xsd_pool.py)" = "7a682dbddaeeeb3f9cc269d2e48e5ab000aca4bd"
+          test "$(git hash-object tools/validate_door_v21_revalidation_ev143.py)" = "94f3ffa0c1771fcbadf2b5c5a7283b6d7d2761de"
+          test "$(git hash-object .github/workflows/temp_validate_door_v21_ev143.yml)" = "b68fc832eaf4ae4cde0d9c53612cff584a8190f3"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md)" = "e8ebcd6ee2506caa3ea5e3ff0a825ec275f3f170"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DOOR_V21_2026-09-05.md)" = "f041dff1f3d1cc3214a44e2ffa3fc81fdb4446b9"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/deep_read/DOOR_V2.1.md)" = "ef81d838be8d42ae9250cddb7e506f978ba75655"
+          test "$(git hash-object IBIS-IP_DoorStateService_V2.1.xsd)" = "abff0f3960e2ec7a9caaa9ddeb6efff8f4183805"
+          test "$(git hash-object IBIS-IP_common_V1.0.xsd)" = "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c"
+          test "$(git hash-object IBIS-IP_Enumerations_V1.0.xsd)" = "a9bea5bc73003ed91ded8519db06c32c4067831d"
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object audit_registry/finding_revalidation_registry_v0.1.json)" = "ab6d5f09081435e1d744b50af0a3a5f572eb5cef"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "6e401f0bd374379e74ce2a065fab88f2016f9f67"
+          test ! -e audit_registry/semantic_classification_blocks/DRDOOR21_v0.1.json
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+          sha256sum ./*.xsd | sort -k2 > /tmp/xsd-before.sha256
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text(encoding='utf-8'))
+          assert r['progress']['classified_count']==107
+          assert r['progress']['remaining_count']==85
+          assert r['progress']['latest_block']=='DRDMS24'
+          assert r['progress']['latest_block_file']=='audit_registry/semantic_classification_blocks/DRDMS24_v0.1.json'
+          target={'DRDOOR21-001','DRDOOR21-002'}
+          assert not ({e['finding_id'] for e in r['entries']} & target)
+          p=json.loads(Path('audit_registry/finding_provenance_baseline_2026-09-14.json').read_text(encoding='utf-8'))
+          states={e['finding_id']:e['revalidation_state'] for e in p['inventory']['entries'] if e['finding_id'] in target}
+          assert states=={'DRDOOR21-001':'context_verified','DRDOOR21-002':'context_verified'}, states
+          print('PASSED: exact DRDOOR21 semantic prestate 107/192 and frozen states')
+          PY
+          git diff --exit-code
+
+      - name: Fetch exact byte-pinned DOOR V2.1 PDF
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, urllib.request
+          from pathlib import Path
+          source_id='DOOR_V2.1'
+          sources=json.loads(Path('audit_registry/pdf_source_registry_v0.1.json').read_text())
+          pins=json.loads(Path('audit_registry/pdf_source_pins_v0.1.json').read_text())
+          source=next(x for x in sources['sources'] if x['source_id']==source_id)
+          pin=next(x for x in pins['sources'] if x['source_id']==source_id)
+          req=urllib.request.Request(source['official_url'],headers={'User-Agent':'VDV301-Semantic-DRDOOR21/0.1 (+https://github.com/MarcLeinenDE/VDV301)','Accept':'application/pdf,application/octet-stream;q=0.9,*/*;q=0.1'})
+          with urllib.request.urlopen(req,timeout=90) as response: data=response.read()
+          actual=hashlib.sha256(data).hexdigest()
+          assert data.startswith(b'%PDF-')
+          assert actual=='7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8', actual
+          assert len(data)==851513, len(data)
+          target=Path('local_sources/vdv_pdfs')/source['local_filename']; target.parent.mkdir(parents=True,exist_ok=True); target.write_bytes(data)
+          print(f'PIN_OK {source_id} sha256={actual} size={len(data)}')
+          PY
+
+      - name: Re-run EV-143 target evidence
+        shell: bash
+        env:
+          EV143_OUTPUT_DIR: artifacts/semantic-drdoor21-ev143
+        run: |
+          set -euo pipefail
+          python tools/validate_door_v21_revalidation_ev143.py
+
+      - name: Materialize exact DRDOOR21 block
+        shell: bash
+        env:
+          DRDOOR21_BLOCK_ZLIB_B64: "eNrtWstuG0cW3fsrClqLFB+iKEYrJbJnBCS2IXmEYAZBo9hdTVbY7O6pqhZNBvmNbGfjb5iVd/qxObeq33xJjhFMgCxsS13P+zr33lP+5RVjJ9Mo8Rfeo1BaJvHJN+yk1+2fnFYjMqCPN3c3797dDfIRJR6lWHkBN4IGB73BRac36fTHblgnmfKFN+VaRDIWXsrXUcIDT8/5YHRBK4LRNOyfB+GwNwhGY94L/WEw7o8nA9H3p73e6HIY8jAYiok/FmHQn4wH/TDoBWI4GgZYcNE4xwi1lDGPPCXSRBm7f+LrszQIvY8ax4olj430PZ4F0py9uX17c/v2b97d64fr729vrj/cvnvrkXTew6DvFbL0Rt1l0DgmECLFETw4dkA58Szftdsv98o1lyaR9Ne0EVZmuHq5RT5hKqG5GY3EiT0jgYWUDITbRsRGSaGxwb/wK2O/2L8xEMo4wMKW1Tq9nrOcnaOFepS+tdxNkqh7AzPe59/KSblDeNpPUlGeUz+rPo32IjnL9XaQZ2aeKGmsoEkYSl9aK0UCntGcSiKmKgllZO91++3tfef2vde+n1MmJjdXx4lzxNcfuW9YcRJ7uHnoDHv9DtYwlWRGdNmHuWC5/OzH+xsmYwNdQgIeRWsWiFTEgWZJzL5Llkv889Dv9hiPA/Y6zpZCcZqq7dcrFicsFiuh8mUi9tdMaqazqTbS4Lige1Le8tf8p59KDeeW1iaPIucJ0Tp3AVHJCPnUEkc/Cq+hUoSX8HGMV1fISarkkqu1pzMVcmdmOOr2uNQ6E94CDkNTViqB28DWTkZcIhQKIom63/hJHDSX6oZrnGhcDgrFlaqdYr4UnowRP9pXMqVvNeudLLFZKqLoJWvuBLn/oyD3eAfdWxfxHrVXDNynwpfwgsaEAzsgWumMY/uoatbJlj0DaMw3HtdaaL2EV5FaobFQqiWEI7BwUyqN2tHAark+txaFPJKBU4kI7dqGumlPn8cedIiYCjy5TCNBR/O2xvwkEN4MlskVnCgvkIhtxO/a43ZrUQ8qAris3MlL4mi9LbEOFt5UzPmjTBQJIOMwqbtLDmnIA1LvhxCztgBTAQRJJT6mQEhpdsc5RXEqY/gZe3/zhqV8Jlh/wDJonpUueCZjP1EKkjFyJ812eo0N7gPeAIRgSvw7E9qwmjfqemifPlMwArnjgokmiLUhkBEEWuwqcGwGbEsZvMdwGVdi7oyBu1yUutT7nbw+G2hXqpYlikG6hME9AeUvUUbKFUBORLVgT7lBCo/3a6ScyubwcqQ3bW8EgIPkNt9tyVLY7EwJncJcgoV8KQHxUBO8kUAfv8BhmMEB7dXdbrd2qPWeUzhCgfPG7oPDpwlNwfG0iU0lASmnXEmxjVSwfoF+jPDnsfThLYimFgI3FFP5KSUdHmlYI4ZhoA5ANLOYSldD2QBrhfhT2vaUTTN4mEIqmSmezvO0lVL1REtgDyUxhfZGLrIAxQgCrqygrh5qzML6pnqgej6NpJ5DH9O1XVbY7rSmoNwoZE3n9vDrg0kzkHwWJ8ivPnTwSw2uRON3Uqg00c4axwbQNwzIt3j6rDYI8elm1aXfjUxTs+0NnVJxmlwhJkgIkPYBPU3T2PiwR0pBo51vARhzJaClGNiLagGQFe/BIXuJA0B0xQLsSrCwkZQuK3NaJWIMEqzIAOYwBDRP2h/83aZwEeoDW5qR8CSEja+2iKSX6o7xFnp1SPkdAm3E4JwW4OJvUN7s1Ut2GJ+7jJRdWejp85RKUn9uTu3e11NNAWVMPoLLyhCBavelCfC7hWkotlY2dghnC73iskg0s/zSOzCj88ZZosteP3T650M2hYaePhk5M2yTafy0AfbPcTEUCXaT/U5IOmELgfYJOl1EHGcBe9k1AW7lkIUr8kzPxOrp0zwi0Wxhq41Tzb0zz0pI7fRUggbyYqbqFxPsFmi66by2Mb9xHvfPDJgSZwQLkbZefZMsqtJAh2Ie4QYQ9LPZGEaqZzHpnxHO4348C6EsfKgcpeVayNGotqFiV7bAyd5AKS7RQTKsg1Kf/kNXtFeS235GItf0FO80TzuOS8M6TZFsuSsWAmincIDoRmRk+cRqe7ERqAIIna8YifghSSIYVYUQH0D39F9/TinGwjKcYMFj5AbW1Bsnk/jzzEL0Inr6hN125wl0ey8Ft0amrirs7TTZynKkWsLq/dD2wY02aiGbR7+oujplqzlaPntmWfFspQdb1x3GtOfVM3sgjWTaVeMV2jhSi5E6vlgDriWtRKaKnNq/U5R3/nbNI/Z3uK6dhd/x4GBh45RaYpStHPLWQ2MRBywIicWq5kVx041CAieqOqAuHzGHT7YSrJc+TnVFi2oTu+u+m4UJ5jUrmVod0qo9dtQdQQLPQEUE88FP8KHcncO44jjOJDnMkMLolOeWg5XgeXVTmsQKepPYW+UNl6Ao5L4P0Ciiy6oQCtRFCX0FZRqCkSVHPWTYEkUOo2aBO00uae4iTlYkdK01Y9TGKZHy2JfNQvxVC0hOVIZiFH31kht/3iyfShIC3WQgg1azXH70oJfZDFm00c0R0wPTNXpPZk2bZmSZvIzd24AhzkImDVthntWPtUhT4S1i6UuOa3R1zzu0PPOnLWXmpGB13P4Gt6BYQpVsRFzRlW6LtosWRf9XZjG3G6v8Gsza3raP4qMhIhgu36SuTg/LlRBYfKEYB7jSrRvfW311AFQWp0XKaKFrBQ3RV1SPIhxSlSQhPvNojVbvBYLUabJtMd4dzwL3f7/uDEYXbHzeH/qTSTiY9HthfzCanI8H/eHoon8xuuRi4l/2LiejQTCajsbjXi/oj0bTyRCfJ5NADC7E5VVBaexWxHtHfTxKLadR2Y9Ri2chtyRAqEVv9KMvJDAKvWzxrQ29HOVq2TRKpoxPw7AXDicXPTEQ/phPfM75JAjE9EKEYXgZnvcvh5e90YuZXfFR+Bl1mxWzW7KkLxCySDYHJM0zps4A5VqHWVRlKGArGw4n44vxeDwanV8xP0p0pvKB895gBC8YDfq7pfuuSL8uvTuDnlFCz8PylOgXqk9tjnK51mWgnJGmIKh6804jRxYRgQLfX+iD7TVdiJDs5C3VBMsUu9NLhCnORH72CUeBDzmVnqd3GwKlB+yg1mXsRxn8LyfWz3bw6bb2WMqPIujkzwotZr0wq6XCc1LK2CKE+MtcsNzOx19EBn+9iMBSK5R6dVPttU9li911xtd82Mi9np6/LPP8O982ypxD+ypU036DHn/OwwZsvvZSjup635tE8y3CTZqKwOO6RnXq9jsEhvKv9OzQmlgmS/1/8dqw40mgJkmceEWBmS8+ffZDxdGXhdrmNQbwj3hquI13tgTNErYkmW0aOrUrmjPynIGgWxGSle5BhSjN9jOFNIOyBqtqCVu7rvUPemog1Lao4O5EvtnRLQETtlMF90ZlvkHCo44+wcSlWE7RQkLWck692deCHgJMrfPNT9LFRtWDRruHf/lbQ7np4beG6+BngEpsvgrXwHJa1rEjpbzlVfI3jCLCT6Hjn6njp94V/hHBO9yCObWZnRrquLYwtkf9QWR5UwFEHVYcOFK2admoc+/EWhADSoyrmIr4AFf+WoVJNNMbQe4RHCN7One5N+p8eyGnhoVPnyLLFPpz4uREzD48fVY1zm+TwcNsrwAfsKfYCU+/hSHRm8W43kMS3TTZ95LHrl2BuMnmTRuCyeUz5bK0IV+YzHGbu+VwnGXOXlPkGgBI7C7xQxLYSxZ8taDHGVSDs2+ORC+D98+hSNOI2qdPEBCa2+/s1Qa5o7ccotwXt+bkL+RCBfWfIUpUQTB/h0R79p4S7W6eeYpaaWYse1+RtDPkEiCFJWZucFy8tApgm8yWNipVwtG1Rwmh68wS8whLVn/Z0FSO5HT8jz9833E88J1LSbDbTESMoF8aIpMte00qgQmVveoDZdZcShJ7Jpy1iFFustidwnbNF5CWOivm+msxxu0Ir6UoWyK2LlDi1vMY42emz0aWLF7v7f/LcXexjOOODFnynuhy6DLFnDKB7qV9q8q46OGrs45k8fjYS3sRzM/I8KzKxrbrQ5GkIHeRNdwO1qn10RCu581m4n1B/Ar3VL4zAdvLruxL84w8hegfESZYzFlZVTKqmM9sxdwmLG1ZyrAjccxo+mKsc1kOgGW4k/NopOYUK+KQmkEEJXGAeZGIfyMoLVTJEgeUzuyyJ4Vyl/1DtwuRwhOaib7l92QdZwfLt1TVCs2t6uffzcNCNI+nVL8RrBwnY/8iKP8iKP8sBCWQQdZpybzyzxHlT81L6jaOtrDgz8BBlvh31s75pXDwYTQq7nmSvNu1LrroVariwE8yqr8683VKQdjy9v304009Y1jSs8veJjWAdXzkKQMSRHT+EmBJ6YgwOT+dWXIpkpvyaXHFlcJQiR10gZ9e/frqfzyyN0k="
+        run: |
+          set -euo pipefail
+          mkdir -p audit_registry/semantic_classification_blocks
+          python - <<'PY'
+          import base64, os, zlib
+          from pathlib import Path
+          data=zlib.decompress(base64.b64decode(os.environ['DRDOOR21_BLOCK_ZLIB_B64'], validate=True))
+          Path('audit_registry/semantic_classification_blocks/DRDOOR21_v0.1.json').write_bytes(data)
+          PY
+          test "$(sha256sum audit_registry/semantic_classification_blocks/DRDOOR21_v0.1.json | awk '{print $1}')" = "0601585e121f42180ec6c36529a7a1815cce905035e0fd5713da0427e3946ed7"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          b=json.loads(Path('audit_registry/semantic_classification_blocks/DRDOOR21_v0.1.json').read_text(encoding='utf-8'))
+          assert b['block_id']=='DRDOOR21'
+          assert [e['finding_id'] for e in b['entries']]==['DRDOOR21-001','DRDOOR21-002']
+          e={x['finding_id']:x for x in b['entries']}
+          assert e['DRDOOR21-001']['defect_assessment']=='confirmed_pdf_defect'
+          assert e['DRDOOR21-001']['sdk_behavior']=='info'
+          assert e['DRDOOR21-001']['runtime_match']['state']=='candidate'
+          assert any(s['type']=='technical_inference' and 'supporting attribution evidence only' in s['note'] for s in e['DRDOOR21-001']['semantic_basis'])
+          assert e['DRDOOR21-002']['sdk_behavior']=='no_runtime_diagnostic'
+          assert e['DRDOOR21-002']['runtime_match']['state']=='not_applicable'
+          print('PASSED: exact DRDOOR21 block with conservative SDK/source-attribution behavior')
+          PY
+
+      - name: Merge and validate DRDOOR21 classification
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/merge_semantic_classification_block.py --block audit_registry/semantic_classification_blocks/DRDOOR21_v0.1.json | tee /tmp/merge.log
+          grep -F "PASSED: merged block DRDOOR21; classified=109 remaining=83" /tmp/merge.log
+          python tools/validate_finding_semantic_classification.py | tee /tmp/semantic.log
+          grep -F "PASSED: semantic classification registry valid; 109 reviewed entries anchored to frozen baseline" /tmp/semantic.log
+          python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+          sha256sum ./*.xsd | sort -k2 > /tmp/xsd-after.sha256
+          cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text(encoding='utf-8'))
+          assert r['progress']['classified_count']==109
+          assert r['progress']['remaining_count']==83
+          assert r['progress']['latest_block']=='DRDOOR21'
+          assert r['progress']['latest_block_file']=='audit_registry/semantic_classification_blocks/DRDOOR21_v0.1.json'
+          assert r['progress']['reviewed_blocks'][-1]=='DRDOOR21'
+          print('PASSED: DRDOOR21 poststate exactly 109/192')
+          PY
+
+      - name: Verify final tree boundary and persist
+        shell: bash
+        run: |
+          set -euo pipefail
+          CLEAN_BASE=ff325647ae6706b972517e3037c35de6ccad0ede
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md)" = "e8ebcd6ee2506caa3ea5e3ff0a825ec275f3f170"
+          test "$(git hash-object audit_registry/finding_semantic_classification_schema_v0.1.json)" = "7cb69f527fe9d69e5b0fc59f6a23c36e0e426571"
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+          test "$(git hash-object audit_registry/finding_inventory_frozen_2026-09-03.json)" = "02fe0d5f71f2b2674319d37f970ecd2b5bfe27cf"
+          test "$(git hash-object IBIS-IP_DoorStateService_V2.1.xsd)" = "abff0f3960e2ec7a9caaa9ddeb6efff8f4183805"
+          rm -rf artifacts/semantic-drdoor21-ev143 local_sources/vdv_pdfs/DOOR_V2.1.pdf || true
+          git rm .github/workflows/temp_merge_semantic_classification_drdoor21.yml
+          git add audit_registry/finding_semantic_classification_v0.1.json audit_registry/semantic_classification_blocks/DRDOOR21_v0.1.json
+          python - <<'PY'
+          import subprocess
+          staged=set(subprocess.check_output(['git','diff','--cached','--name-only'], text=True).splitlines())
+          expected={
+            '.github/workflows/temp_merge_semantic_classification_drdoor21.yml',
+            'audit_registry/finding_semantic_classification_v0.1.json',
+            'audit_registry/semantic_classification_blocks/DRDOOR21_v0.1.json'
+          }
+          assert staged==expected, (staged, expected)
+          final_changed=set(subprocess.check_output(['git','diff','--name-only','ff325647ae6706b972517e3037c35de6ccad0ede'], text=True).splitlines())
+          assert final_changed=={
+            'audit_registry/finding_semantic_classification_v0.1.json',
+            'audit_registry/semantic_classification_blocks/DRDOOR21_v0.1.json'
+          }, final_changed
+          print('PASSED: persistent DRDOOR21 boundary is registry + block only')
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "audit: merge DRDOOR21 semantic classification"
+          git push origin HEAD:dev/schema-integration
