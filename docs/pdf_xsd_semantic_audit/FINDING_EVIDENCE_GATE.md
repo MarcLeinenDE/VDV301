@@ -1,6 +1,6 @@
 # Finding evidence gate
 
-Status: adopted as mandatory audit policy from 2026-08-29.
+Status: adopted as mandatory audit policy from 2026-08-29; source-attribution and external-reporting safeguards extended 2026-09-17.
 
 ## Purpose
 
@@ -90,6 +90,32 @@ If a finding claims that valid/invalid XML behaviour differs, add a positive/neg
 
 Static inspection alone may establish a spelling/documentation defect, but claims about accepted XML shape, cardinality, compositor behaviour, enum acceptance or root availability should be executable-confirmed before being used as SDK validation knowledge.
 
+### 7. Orthography and local naming-pattern attribution
+
+When two spellings, cases, separators, singular/plural forms or compound-word variants disagree, use orthography and naming patterns as **supporting source-attribution evidence**, never as standalone normative authority.
+
+Check, in order:
+
+1. the executable token/declaration in the exact selected XSD;
+2. other members of the same enum, operation, request/response or structure family;
+3. normal-language spelling of the underlying term;
+4. all material occurrences in the same pinned PDF, XSD annotations/comments and surrounding documentation;
+5. exact predecessor/successor history and later authoritative corrections where available;
+6. executable positive/negative evidence for the competing forms where practical.
+
+Apply naming-pattern reasoning **locally**. Do not invent a universal VDV-301 capitalization rule. Historical profiles legitimately contain different conventions, including PascalCase identifiers, lower-case enum lexemes and inherited spellings.
+
+Source-attribution rules:
+
+- If the executable XSD token, local family pattern, ordinary spelling and independent evidence agree while prose uses another form, that strongly supports a documentation/prose defect.
+- If ordinary spelling or a local naming pattern points against an executable historical XSD token, validation still follows that selected XSD. Call the executable token a likely or confirmed XSD defect only when independent evidence such as internal inconsistency, a later authoritative correction, version history or an unambiguous parallel pattern corroborates the attribution.
+- A typo in `xs:documentation`, comments or other non-executable schema annotation is a documentation defect, not an executable XSD defect.
+- An apparently misspelled identifier that is executable in a historical XSD remains normative for that selected profile until an authoritative replacement exists. Linguistic plausibility never creates an alias.
+- Do not create compatibility aliases solely from spelling, capitalization, punctuation/separators, singular/plural form or compound-word plausibility.
+- If the evidence does not establish which source is wrong, preserve a cross-artifact mismatch or `undetermined` attribution rather than forcing a PDF-versus-XSD verdict.
+
+Example: prose or an XSD annotation may say `InstallationSuccessfull`, while the executable enum says `InstallationSuccessful`. If normal English, the local enum-family construction and executable evidence all support `InstallationSuccessful`, classify the other occurrence as a non-executable documentation/annotation typo; do not introduce `InstallationSuccessfull` as an enum alias.
+
 ## Finding promotion states
 
 Use the following confidence progression conceptually even if an older register uses legacy wording:
@@ -112,6 +138,7 @@ Do not mark a finding `confirmed` when any material condition below remains unre
 - the notation/term meaning has not been traced to an authoritative definition;
 - the exact XSD family/dependency route is unknown;
 - a plausible intentional modelling explanation has not been checked;
+- source attribution depends mainly on spelling/naming plausibility without independent corroboration;
 - a claimed XML-validity difference can be tested but has not yet been tested and the finding is intended to drive SDK behaviour.
 
 Use `candidate`, `unresolved`, `needs_visual_review` or equivalent instead.
@@ -130,9 +157,11 @@ selected_xsd_family
 schema_identity / authority class
 full_context_checked
 counter_hypothesis_checked
+orthography_or_local_naming_evidence_if_material
 executable_evidence_id_or_reason_not_applicable
 confidence_state
 validation_behavior
+source_attribution
 sdk_eligibility
 ```
 
@@ -155,6 +184,25 @@ remediation decision
 ```
 
 The SDK must never normalize, reject, accept or reroute payloads because of an unverified finding.
+
+## External-reporting gate
+
+A finding intended for an upstream pull request, issue or communication to VDV must pass a stricter reporting gate in addition to ordinary audit closure.
+
+Before external reporting, record at minimum:
+
+- exact affected version/profile;
+- byte-pinned source and page/section where applicable;
+- exact XSD blob or other executable authority;
+- competing literal forms;
+- defect class: executable schema defect, documentation defect, probable typo, authority gap or unresolved mismatch;
+- strongest plausible disproof hypothesis and why it was rejected;
+- executable evidence where XML acceptance is affected;
+- local naming/orthography evidence only as supporting attribution evidence;
+- relevant version history or later correction;
+- confidence and practical validation/implementation impact.
+
+If any material part remains ambiguous, retain it internally as an investigation item rather than presenting it externally as a confirmed VDV error. External wording must distinguish observed facts from inferred source attribution and must never imply that a candidate/integration XSD is an official release authority.
 
 ## Regression rule after a corrected false finding
 
