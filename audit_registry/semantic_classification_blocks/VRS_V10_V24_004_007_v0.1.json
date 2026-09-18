@@ -1,0 +1,353 @@
+{
+  "block_version": "0.1",
+  "block_id": "VRS_V10_V24_004_007",
+  "review_date": "2026-09-18",
+  "source_baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
+  "source_terminal_report": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md",
+  "source_deep_reads": [
+    "docs/pdf_xsd_semantic_audit/deep_read/VRS_V1.0.md",
+    "docs/pdf_xsd_semantic_audit/deep_read/VRS_V2.0.md",
+    "docs/pdf_xsd_semantic_audit/deep_read/VRS_V2.4.md",
+    "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CHOICE_NOTATION_2026-08-29.md",
+    "docs/pdf_xsd_semantic_audit/VIDEO_RECORDING_SERVICE_FINDINGS_REGISTER_ADDENDUM.md"
+  ],
+  "review_policy": "manual_semantic_review_bilingual_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "VRS-004",
+      "service": "VideoRecordingService",
+      "version_scope": [
+        {
+          "version": "V1.0 / V2.0 documentation",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The operation inventory correctly uses SubscribeVideoRecordingState/UnsubscribeVideoRecordingState, while the detailed section headings incorrectly use SubscribeDisplayState/UnsubscribeDisplayState."
+        },
+        {
+          "version": "V2.4 documentation correction",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The official V2.4 publication corrects the headings to SubscribeVideoRecordingState/UnsubscribeVideoRecordingState and explicitly records the Subscribe copy/paste correction in version history."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "wrong_operation_reference",
+      "secondary_issue_kinds": [
+        "wrong_section_heading",
+        "SubscribeDisplayState",
+        "UnsubscribeDisplayState",
+        "copy_paste_service_operation_name",
+        "corrected_in_v24"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "V1.0 and V2.0 operation inventories use SubscribeVideoRecordingState/UnsubscribeVideoRecordingState while the detail headings visibly say SubscribeDisplayState/UnsubscribeDisplayState."
+        },
+        {
+          "type": "later_official_correction",
+          "note": "V2.4 corrects the headings and its version history explicitly states that copy/paste errors in the Subscribe methods were fixed."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The wrong headings do not create DisplayState operation aliases; actual operation names remain those selected by the service contract/XSD authority."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoRecordingService: falsche SubscribeDisplayState-Überschriften",
+          "short": "V1.0/V2.0 nennen in Detailüberschriften SubscribeDisplayState/UnsubscribeDisplayState, obwohl die Operationen SubscribeVideoRecordingState/UnsubscribeVideoRecordingState heißen.",
+          "long": "VRS-004 ist ein bestätigter Dokumentations-/Copy/Paste-Fehler. Die Operationsübersichten von V1.0 und V2.0 verwenden korrekt SubscribeVideoRecordingState und UnsubscribeVideoRecordingState; die zugehörigen Detailabschnitte sind dagegen als SubscribeDisplayState bzw. UnsubscribeDisplayState überschrieben. V2.4 korrigiert diese Überschriften und dokumentiert die Korrektur ausdrücklich in der Versionshistorie.",
+          "recommendation": "Keine SubscribeDisplayState-/UnsubscribeDisplayState-Aliase erzeugen. Für Operationserkennung ausschließlich die tatsächlichen VideoRecordingState-Operationen verwenden; die alten Überschriften nur als Dokumentationshinweis behandeln."
+        },
+        "en": {
+          "title": "VideoRecordingService: incorrect SubscribeDisplayState headings",
+          "short": "V1.0/V2.0 detail headings say SubscribeDisplayState/UnsubscribeDisplayState although the operations are SubscribeVideoRecordingState/UnsubscribeVideoRecordingState.",
+          "long": "VRS-004 is a confirmed documentation/copy-paste defect. The V1.0 and V2.0 operation inventories correctly use SubscribeVideoRecordingState and UnsubscribeVideoRecordingState, while the corresponding detail sections are headed SubscribeDisplayState and UnsubscribeDisplayState. V2.4 corrects those headings and explicitly records the Subscribe-method copy/paste correction in its version history.",
+          "recommendation": "Do not create SubscribeDisplayState/UnsubscribeDisplayState aliases. Use only the actual VideoRecordingState operations for operation discovery and treat the old headings as documentation guidance."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VRS V1.0 physical page 46; VRS V2.0 physical page 21; VRS V2.4 corrected headings/version history"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/VIDEO_RECORDING_SERVICE_FINDINGS_REGISTER_ADDENDUM.md"
+        }
+      ],
+      "notes": "Confirmed heading-only operation naming error; corrected in V2.4 and no alias is synthesized."
+    },
+    {
+      "finding_id": "VRS-005",
+      "service": "VideoRecordingService",
+      "version_scope": [
+        {
+          "version": "V2.0 official",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_VideoRecordingService_V2.0.xsd + selected Common/Enumerations dependencies",
+          "note": "Both the official V2.0 PDF and exact official V2.0 XSD use the typo-like identifier VideoRecordingService.PauseRecordingRRMRequestStruture."
+        },
+        {
+          "version": "V2.4 candidate/integration",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_VideoRecordingService_V2.4.xsd",
+          "note": "The checked PR #27 candidate retains the exact Struture spelling. This persistence is contextual only and does not promote candidate authority."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "identifier_typo",
+      "secondary_issue_kinds": [
+        "shared_pdf_xsd_identifier_spelling",
+        "PauseRecordingRRMRequestStruture",
+        "not_a_pdf_xsd_mismatch",
+        "do_not_normalize_executable_identifier",
+        "candidate_v24_persists"
+      ],
+      "defect_assessment": "likely_xsd_defect",
+      "confidence": "high",
+      "validation_effect": [
+        "code_generation_or_discovery_affected",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "info",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The official V2.0 operation table visibly names VideoRecordingService.PauseRecordingRRMRequestStruture."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact official V2.0 XSD uses VideoRecordingService.PauseRecordingRRMRequestStruture as the actual complexType name referenced by PauseRecordingRRMRequest."
+        },
+        {
+          "type": "candidate_integration_provenance",
+          "note": "The V2.4 PR #27 candidate retains the same exact Struture identifier spelling."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The spelling is strongly typo-like but is not a cross-artifact mismatch and has not been officially corrected. Strict XML/XSD routing and code generation must preserve the selected schema identifier exactly rather than silently normalizing it."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoRecordingService: typo-artiger, aber normativ exakter Identifier „PauseRecordingRRMRequestStruture“",
+          "short": "PDF und offizielle V2.0-XSD verwenden identisch „Struture“; die Schreibweise wirkt fehlerhaft, darf aber nicht automatisch zu „Structure“ normalisiert werden.",
+          "long": "VRS-005 ist kein PDF/XSD-Mismatch. Die offizielle V2.0-PDF und die exakte offizielle V2.0-XSD verwenden beide den Identifier VideoRecordingService.PauseRecordingRRMRequestStruture. Auch die geprüfte V2.4-Candidate-XSD behält diese Schreibweise bei. Die Form ist sehr wahrscheinlich typo-artig, aber für das ausgewählte V2.0-Schema ist genau diese Schreibweise ausführbare Autorität.",
+          "recommendation": "Bei Schemaauflösung und Codegenerierung den exakten Identifier PauseRecordingRRMRequestStruture beibehalten. Keinen stillen Alias oder Auto-Fix zu PauseRecordingRRMRequestStructure erzeugen. Eine normalisierte Bezeichnung höchstens als Anzeige-/Hilfetext verwenden."
+        },
+        "en": {
+          "title": "VideoRecordingService: typo-like but normatively exact identifier 'PauseRecordingRRMRequestStruture'",
+          "short": "The PDF and official V2.0 XSD both use 'Struture'; the spelling looks erroneous but must not be silently normalized to 'Structure'.",
+          "long": "VRS-005 is not a PDF/XSD mismatch. The official V2.0 PDF and exact official V2.0 XSD both use the identifier VideoRecordingService.PauseRecordingRRMRequestStruture. The reviewed V2.4 candidate XSD retains the same spelling. The form is strongly typo-like, but for the selected V2.0 schema this exact spelling is executable authority.",
+          "recommendation": "Preserve the exact PauseRecordingRRMRequestStruture identifier for schema resolution and code generation. Do not synthesize a silent PauseRecordingRRMRequestStructure alias or auto-fix. A normalized spelling may only be used as display/help text."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VideoRecordingService V2.0 operation table"
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_VideoRecordingService_V2.0.xsd @ 6ef0dae64ce6f4d3aa4f652d6d166896e71aaac7"
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_VideoRecordingService_V2.4.xsd @ 07ff2c41731e63fd85b203e4b8e0186136caaaaf",
+          "note": "Candidate/integration only."
+        }
+      ],
+      "notes": "Shared typo-like identifier, not a mismatch. Exact selected-XSD spelling must be preserved."
+    },
+    {
+      "finding_id": "VRS-006",
+      "service": "VideoRecordingService",
+      "version_scope": [
+        {
+          "version": "V1.0 documentation",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Both subscription paragraphs visibly contain unresolved generated Word cross-reference placeholders."
+        },
+        {
+          "version": "V2.0 / V2.4 documentation",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The broken generated references are corrected/absent from V2.0 onward; ordinary Subscribe/Unsubscribe structure prose is present."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "editorial_residue",
+      "secondary_issue_kinds": [
+        "broken_generated_cross_reference",
+        "subscription_reference_placeholder",
+        "v10_only",
+        "corrected_from_v20"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "info",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The V1.0 subscription paragraphs visibly contain literal unresolved generated-reference text ('Fehler! Verweisquelle konnte nicht gefunden werden..')."
+        },
+        {
+          "type": "version_history",
+          "note": "The corresponding V2.0 and V2.4 subscription prose uses ordinary Subscribe/Unsubscribe structure references and the broken placeholders are absent."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The missing generated reference target does not alter the Common subscription structures selected by the actual service/profile authority."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoRecordingService V1.0: gebrochene Subscription-Querverweise",
+          "short": "Die V1.0-PDF enthält in beiden Subscription-Abschnitten ungelöste Word-Verweise; ab V2.0 sind sie korrigiert.",
+          "long": "VRS-006 ist ein bestätigter Dokumentationsfehler der V1.0-Publikation. In den Subscribe-/Unsubscribe-Absätzen stehen sichtbar nicht aufgelöste, automatisch erzeugte Querverweis-Platzhalter. In V2.0 und V2.4 ist dieser Fehler nicht mehr vorhanden. Die tatsächlichen generischen Common-Subscription-Strukturen werden dadurch nicht verändert.",
+          "recommendation": "Den Befund ausschließlich als Dokumentations-/Navigationshinweis führen. Subscription-Strukturen aus der ausgewählten Common-/Service-Autorität auflösen und keine Protokollregel aus dem defekten V1.0-Verweis ableiten."
+        },
+        "en": {
+          "title": "VideoRecordingService V1.0: broken subscription cross references",
+          "short": "The V1.0 PDF contains unresolved Word references in both subscription sections; they are corrected from V2.0 onward.",
+          "long": "VRS-006 is a confirmed documentation defect in the V1.0 publication. The Subscribe/Unsubscribe paragraphs visibly contain unresolved generated cross-reference placeholders. The issue is absent in V2.0 and V2.4. The actual generic Common subscription structures are not changed by this documentation failure.",
+          "recommendation": "Treat the finding only as documentation/navigation guidance. Resolve subscription structures from the selected Common/service authority and do not derive protocol rules from the broken V1.0 reference."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VideoRecordingService V1.0 physical page 46"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/VRS_V2.0.md",
+          "note": "Confirms correction/absence from V2.0."
+        }
+      ],
+      "notes": "Documentation-only V1.0 generated-reference defect; corrected from V2.0 onward."
+    },
+    {
+      "finding_id": "VRS-007",
+      "service": "VideoRecordingService",
+      "version_scope": [
+        {
+          "version": "V1.0 / V2.0 / V2.4 documentation correction",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The finding was opened solely because leading -1:1 was misread as an invalid negative minimum. VDV notation rules establish the leading minus as XML-choice notation; visible a/b labels correctly express the alternatives. Historical statements that the defect persists or moves are superseded."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "contextual",
+      "primary_issue_kind": "intentional_design_misread",
+      "secondary_issue_kinds": [
+        "withdrawn_after_deep_read_correction",
+        "valid_vdv_choice_notation",
+        "false_negative_cardinality_premise",
+        "historical_persistence_claims_superseded",
+        "VRS_003_carries_actual_compositor_issue"
+      ],
+      "defect_assessment": "non_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "common_conventions",
+          "note": "VDV 301-2 V2.0 section 6.1.3.3 defines a prefixed minus sign as XML-choice notation and lower-case letters as the choice-alternative identifiers."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "The visible VRS V2.0 table uses 'a State -1:1' and 'b StartStopMode -1:1'; V2.4 similarly uses an a/b outer choice. These are valid choice presentations rather than negative cardinalities."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The original defect premise is false, so VRS-007 is withdrawn. The actual V2.0 PDF/XSD structural disagreement remains independently captured by VRS-003."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoRecordingService: VRS-007 zurückgezogen — „-1:1“ ist gültige Choice-Notation",
+          "short": "Der führende Minusstrich ist kein negativer Kardinalitätswert, sondern die VDV-Markierung für XML-Choice; der ursprüngliche Finding-Grund war falsch.",
+          "long": "VRS-007 ist zurückgezogen und als Non-Defect klassifiziert. Das Finding entstand ausschließlich durch die Fehlinterpretation von -1:1 als ungültige negative Mindestkardinalität. Die VDV-Notation definiert den führenden Minusstrich jedoch als Choice-Markierung; die sichtbaren a/b-Kennzeichnungen in VRS zeigen die zugehörigen Alternativen. Frühere Deep-Read-Aussagen, der vermeintliche Fehler persistiere oder verschiebe sich nach V2.4, sind durch das Korrektur-Overlay ausdrücklich ersetzt.",
+          "recommendation": "Keinen Validatorhinweis für -1:1 an sich erzeugen. Die gültige Choice-Notation akzeptieren. Für den realen V2.0-Compositor-Konflikt ausschließlich VRS-003 verwenden."
+        },
+        "en": {
+          "title": "VideoRecordingService: VRS-007 withdrawn — '-1:1' is valid choice notation",
+          "short": "The leading minus is not a negative cardinality value; it is the VDV marker for XML choice, so the original finding premise was false.",
+          "long": "VRS-007 is withdrawn and classified as a non-defect. The finding was opened solely because -1:1 had been misread as an invalid negative minimum. The VDV notation instead defines the leading minus as a choice marker, and the visible a/b labels in VRS identify the alternatives. Earlier Deep Read statements saying the supposed defect persisted or moved in V2.4 are explicitly superseded by the correction overlay.",
+          "recommendation": "Do not emit a validator diagnostic for -1:1 itself. Accept the valid choice notation. Use VRS-003 exclusively for the real V2.0 compositor mismatch."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md",
+          "note": "Terminal state is withdrawn."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CHOICE_NOTATION_2026-08-29.md"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/VIDEO_RECORDING_SERVICE_FINDINGS_REGISTER_ADDENDUM.md"
+        }
+      ],
+      "notes": "Withdrawn after correction. The old invalid-cardinality and persistence claims must never be reused."
+    }
+  ]
+}
