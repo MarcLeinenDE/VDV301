@@ -1,0 +1,180 @@
+{
+  "block_version": "0.1",
+  "block_id": "SMS_V22_003_004",
+  "review_date": "2026-09-18",
+  "source_baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
+  "source_terminal_report": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_SMS_2026-09-10.md",
+  "source_deep_read": "docs/pdf_xsd_semantic_audit/deep_read/SMS_V2.2.md",
+  "review_policy": "manual_semantic_review_bilingual_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "SMS-003",
+      "service": "SystemMonitoringService",
+      "version_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemMonitoringService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official SMS V2.2 publication and its exact XSD family. The finding is confined to the English foreword and does not alter or reinterpret the executable schema."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "wrong_service_copy_paste",
+      "secondary_issue_kinds": [
+        "HTMLDisplayService_paragraph_in_SMS",
+        "english_foreword_copy_paste",
+        "same_page_subject_positive_control",
+        "documentation_only"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Physical page 4 first identifies SystemMonitoringService as the document subject and then visibly contains an unrelated paragraph describing the HTMLDisplayService URL/web-server/HTML mechanism."
+        },
+        {
+          "type": "same_document_context",
+          "note": "The unrelated HTMLDisplayService paragraph is absent from the corresponding German foreword, while the surrounding English text remains SystemMonitoringService material."
+        },
+        {
+          "type": "technical_inference",
+          "note": "This is a local wrong-service copy/paste defect in documentation. It does not define an SMS protocol requirement and has no executable XSD or runtime consequence."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "SystemMonitoringService V2.2: fremder HTMLDisplayService-Absatz im englischen Vorwort",
+          "short": "Im englischen Vorwort steht ein Absatz zum HTMLDisplayService, obwohl die Seite und das Dokument den SystemMonitoringService beschreiben.",
+          "long": "SMS-003 ist ein bestätigter Copy/Paste-Fehler der Dokumentation. Auf der physischen Seite 4 benennt das englische Vorwort zunächst den SystemMonitoringService als Gegenstand der Schrift, enthält anschließend aber einen sachfremden Absatz über die URL-/Webserver-/HTML-Funktion des HTMLDisplayService. Im entsprechenden deutschen Vorwort gibt es diesen HDS-Absatz nicht. Für die technische Auslegung des SystemMonitoringService entsteht daraus keine zusätzliche Anforderung.",
+          "recommendation": "Den HTMLDisplayService-Absatz im englischen Vorwort als redaktionellen Fremdtext ignorieren. Daraus keine SMS-Funktion, keine XSD-Regel und keine Runtime-Diagnostik ableiten."
+        },
+        "en": {
+          "title": "SystemMonitoringService V2.2: unrelated HTMLDisplayService paragraph in the English foreword",
+          "short": "The English foreword contains a paragraph about HTMLDisplayService even though the page and document describe SystemMonitoringService.",
+          "long": "SMS-003 is a confirmed documentation copy/paste defect. On physical page 4, the English foreword first identifies SystemMonitoringService as the subject of the publication, but then contains an unrelated paragraph describing the HTMLDisplayService URL/web-server/HTML mechanism. The corresponding German foreword does not contain that HDS paragraph. It therefore creates no additional technical requirement for SystemMonitoringService.",
+          "recommendation": "Treat the HTMLDisplayService paragraph in the English foreword as unrelated editorial text. Do not derive an SMS function, XSD rule, or runtime diagnostic from it."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_SMS_2026-09-10.md",
+          "note": "Terminal SMS report; SMS-003 is context_verified."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-156 / independent run 34460160697 / artifact 10145182333 / closure run 34460497412",
+          "note": "Pinned render/read evidence confirms the wrong-service paragraph on the official PDF bytes."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/SMS_V2.2.md",
+          "note": "Deep read records FR-SMS22-OBS-001 and maps it to SMS-003."
+        },
+        {
+          "kind": "pdf",
+          "reference": "SMS V2.2 / sha256 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4 / physical page 4",
+          "note": "Exact official page showing the SystemMonitoringService subject and unrelated HTMLDisplayService paragraph."
+        }
+      ],
+      "notes": "Confirmed documentation-only wrong-service copy/paste defect. No executable alias, XSD change or runtime diagnostic is warranted."
+    },
+    {
+      "finding_id": "SMS-004",
+      "service": "SystemMonitoringService",
+      "version_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemMonitoringService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official SMS V2.2 publication and exact schema family. The finding concerns only a historical document reference in the version history; the executable schema is not implicated."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "documentation_reference_number_error",
+      "secondary_issue_kinds": [
+        "VDV_302_2_vs_VDV_301_2_0",
+        "version_history_reference",
+        "same_document_positive_control",
+        "base_services_provenance",
+        "documentation_only"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Physical page 12 states in both language lines that the service was extracted from VDV 302-2."
+        },
+        {
+          "type": "same_document_context",
+          "note": "Physical page 13 of the same official PDF identifies the earlier Base Services source as VDV 301-2-0 and names the relevant DeviceManagementService, SystemManagementService and SystemDocumentationService V2.0 family."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The internal positive control establishes the page-12 302-2 reference as a documentation reference-number error rather than an alternate normative source. It has no executable payload or XSD effect."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "SystemMonitoringService V2.2: Versionshistorie nennt VDV 302-2 statt VDV 301-2-0",
+          "short": "Seite 12 verweist auf VDV 302-2; Seite 13 derselben Schrift identifiziert die zugrunde liegenden Base Services dagegen als VDV 301-2-0.",
+          "long": "SMS-004 ist ein bestätigter Referenznummernfehler in der Dokumentation. In der Versionshistorie auf der physischen Seite 12 steht in beiden Sprachzeilen, der Dienst sei aus VDV 302-2 herausgelöst worden. Die unmittelbar folgende Seite 13 benennt die frühere Base-Services-Quelle dagegen als VDV 301-2-0 und führt die betroffenen V2.0-Dienste auf. Der 302-2-Verweis ist damit kein alternativer technischer Normpfad, sondern ein redaktioneller Fehler.",
+          "recommendation": "Die historische Quellenangabe als VDV 301-2-0 interpretieren und VDV 302-2 an dieser Stelle als Dokumentationsfehler behandeln. Keine Resolver-, XSD- oder Runtime-Regel daraus ableiten."
+        },
+        "en": {
+          "title": "SystemMonitoringService V2.2: version history cites VDV 302-2 instead of VDV 301-2-0",
+          "short": "Page 12 cites VDV 302-2, while page 13 of the same publication identifies the underlying Base Services source as VDV 301-2-0.",
+          "long": "SMS-004 is a confirmed documentation reference-number error. In the version history on physical page 12, both language lines state that the service was extracted from VDV 302-2. The immediately following page 13 instead identifies the former Base Services source as VDV 301-2-0 and lists the affected V2.0 services. The 302-2 citation is therefore not an alternative technical authority path but an editorial reference error.",
+          "recommendation": "Interpret the historical source reference as VDV 301-2-0 and treat VDV 302-2 at that location as a documentation error. Do not derive a resolver, XSD, or runtime rule from it."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_SMS_2026-09-10.md",
+          "note": "Terminal SMS report; SMS-004 is context_verified."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-156 / independent run 34460160697 / artifact 10145182333 / closure run 34460497412",
+          "note": "Pinned render/read evidence confirms the page-12/page-13 reference-number contradiction."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/SMS_V2.2.md",
+          "note": "Deep read records FR-SMS22-OBS-005 and maps it to SMS-004."
+        },
+        {
+          "kind": "pdf",
+          "reference": "SMS V2.2 / sha256 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4 / physical pages 12-13",
+          "note": "Exact official pages showing VDV 302-2 in version history and VDV 301-2-0 as the Base Services source."
+        }
+      ],
+      "notes": "Confirmed documentation-only reference-number error. Same-document evidence resolves the intended source as VDV 301-2-0; no runtime diagnostic is warranted."
+    }
+  ]
+}
