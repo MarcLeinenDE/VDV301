@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: dev/schema-integration
+          ref: ${{ github.sha }}
           fetch-depth: 2
       - uses: actions/setup-python@v5
         with:
@@ -27,7 +27,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD^)" = "9217ee9cf53e0b76daf98383ce48ab3193d164b5"
+          test "$(git rev-parse HEAD^)" = "1f15b9f8768a9634bd68dad13e09e1c75bc5fdb6"
           test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "434f59c7ce9250ad6391a5dacc0745089408801d"
           test "$(git hash-object sdk_manifest/known_issues_runtime_mapping_v0.1.json)" = "f3b13129cbf181288f3c86ee2c09a46d04d11c0f"
           test "$(git hash-object sdk_manifest/runtime_mapping_review_blocks/DMS_005_007_DRDMS22_004_v0.1.json)" = "785829049852cefc7739b62b62310ca44cc2f772"
@@ -77,16 +77,21 @@ jobs:
           tree=etree.parse('IBIS-IP_DeviceManagementService_V2.2.xsd')
           etree.XMLSchema(tree)
 
-          globals_=set(tree.xpath('/xs:schema/xs:element/@name',namespaces=NS))
-          assert 'DeviceManagementService.GetDeviceStatusInformationResponseData' in globals_
-          assert 'DeviceManagementService.DeviceStatusInformationResponseData' not in globals_
+          all_names=set(tree.xpath('//xs:element/@name',namespaces=NS))
+          response_data=tree.xpath(
+              "/xs:schema/xs:complexType[@name='DeviceManagementService.GetDeviceStatusInformationResponseStructure']"
+              "/xs:choice/xs:element/@name",
+              namespaces=NS,
+          )
+          assert 'DeviceManagementService.GetDeviceStatusInformationResponseData' in response_data
+          assert 'DeviceManagementService.DeviceStatusInformationResponseData' not in all_names
 
           group=set(tree.xpath("/xs:schema/xs:group[@name='DeviceManagementServiceGroup']//xs:element/@name",namespaces=NS))
           assert 'DeviceManagementService.GetUpdateHistoryRequest' in group
           assert not any('GetUpdateStates' in x for x in group)
           assert 'DeviceManagementService.GetDeviceErrorMessagesRequest' in group
           assert 'DeviceManagementService.GetDeviceErrorMessagesResponse' in group
-          assert not any('GetDeviceErrorMessageRequest' == x or 'GetDeviceErrorMessageResponse' == x for x in group)
+          assert not any(x.endswith('.GetDeviceErrorMessageRequest') or x.endswith('.GetDeviceErrorMessageResponse') for x in group)
 
           status=tree.xpath("/xs:schema/xs:complexType[@name='DeviceStatusStructure']",namespaces=NS)
           assert len(status)==1
