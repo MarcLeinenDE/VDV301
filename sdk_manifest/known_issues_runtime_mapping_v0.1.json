@@ -4,7 +4,7 @@
   "state": "reviewed_inventory",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "77fb96af12bb8e267c4890e4ff45e1bdbbe66b49",
+    "git_blob": "d4b4cab59ad6622cdd7afecdeb0a24b9e63cff4b",
     "classification_state": "complete",
     "finding_count": 192
   },
@@ -19,9 +19,9 @@
     "implementation_requires_separate_profile_specific_validation": true
   },
   "counts": {
-    "reviewed_mapping_count": 46,
+    "reviewed_mapping_count": 48,
     "implemented_count": 0,
-    "semantic_candidate_count": 32,
+    "semantic_candidate_count": 30,
     "semantic_not_designed_count": 1,
     "semantic_not_applicable_count": 113
   },
@@ -1139,6 +1139,40 @@
       }
     },
     {
+      "finding_id": "DRCOM10-001",
+      "service": "Common / Enumerations",
+      "semantic_issue_kind": "version_routing_issue",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "COMMON V1.0 XSD family",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact historical V1.0 schema family remains the executable authority."
+        },
+        {
+          "version": "05/2017 Common document revision 1.1",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The official PDF records internal Version 1.1 changes while IBIS-IP-VersionEnumeration remains 1.0; no Common V1.1 XSD exists and no synthetic V1.1 schema authority is inferred."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected strict profile is the official Common / Enumerations V1.0 XSD family",
+        "XSD validation result is INVALID because the submitted Common V1.0 instance contains exact PDF revision-1.1-only element ScheduledDepartureTime or RouteDirection",
+        "selected V1.0 XSD family contains neither ScheduledDepartureTime nor TripInformation.RouteDirection and no official Common V1.1 XSD profile exists"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "DRCOM10-001"
+      }
+    },
+    {
       "finding_id": "DRCOM10-002",
       "service": "Common",
       "semantic_issue_kind": "structure_mismatch",
@@ -1248,6 +1282,34 @@
       "diagnostic_source": {
         "registry": "audit_registry/finding_semantic_classification_v0.1.json",
         "finding_id": "DRCOM10-005"
+      }
+    },
+    {
+      "finding_id": "DRCOM10-006",
+      "service": "Enumerations",
+      "semantic_issue_kind": "identifier_case_error",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "COMMON / Enumerations V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "DoorCountingObjectClassEnumeration lexical values are case- and spelling-sensitive in the exact XSD."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected strict profile is official Common / Enumerations V1.0",
+        "XSD validation result is INVALID because DoorCountingObjectClassEnumeration contains exact PDF lexeme Wheelchair where selected XSD declares WheelChair",
+        "XSD validation result is INVALID because DoorCountingObjectClassEnumeration contains exact PDF lexeme Others where selected XSD declares Other"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "DRCOM10-006"
       }
     },
     {

@@ -1,0 +1,45 @@
+{
+  "block_version": "0.1",
+  "block_id": "COMMON_V10_DRCOM10_001_006",
+  "review_date": "2026-09-18",
+  "source_semantic_registry_blob": "77fb96af12bb8e267c4890e4ff45e1bdbbe66b49",
+  "policy": "selected_v10_xsd_authority_only_no_synthetic_v11_profile_no_enum_alias",
+  "entries": [
+    {
+      "finding_id": "DRCOM10-001",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual Common V1.0 XSD INVALID result caused by exact PDF revision-1.1-only identifiers ScheduledDepartureTime or RouteDirection while the official V1.0 schema family is selected.",
+      "guards": [
+        "official Common / Enumerations V1.0 strict profile only",
+        "must require XSD INVALID",
+        "match only exact known revision-1.1 PDF identifiers, not arbitrary unknown elements",
+        "must not synthesize, infer, or route to a Common V1.1 XSD profile",
+        "must not weaken required V1.0 declarations or rewrite identifiers"
+      ]
+    },
+    {
+      "finding_id": "DRCOM10-006",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual V1.0 enumeration INVALID result caused by exact PDF lexeme Wheelchair or Others in DoorCountingObjectClassEnumeration.",
+      "guards": [
+        "official Common / Enumerations V1.0 strict profile only",
+        "must require XSD INVALID",
+        "Wheelchair matches only against authoritative V1.0 WheelChair",
+        "Others matches only against authoritative V1.0 Other",
+        "must not add compatibility aliases or silently normalize enum lexemes",
+        "later V2.4 evidence may explain attribution but must not override V1.0 validity"
+      ]
+    }
+  ],
+  "implementation_state": "reviewed_not_implemented",
+  "evidence": [
+    "EV-117 / run 33279461529 / job 99172025835",
+    "EV-135 / closure run 33850713729 / artifact run 33850418941",
+    "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V10_2026-09-04.md",
+    "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V1.0.md"
+  ]
+}

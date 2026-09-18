@@ -6703,10 +6703,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "COMMON V1.0 validation rejects a field explicitly documented only by the PDF Version 1.1 revision",
-          "unknown ScheduledDepartureTime or RouteDirection appears while V1.0 is selected"
+          "selected strict profile is the official Common / Enumerations V1.0 XSD family",
+          "XSD validation result is INVALID because the submitted Common V1.0 instance contains exact PDF revision-1.1-only element ScheduledDepartureTime or RouteDirection",
+          "selected V1.0 XSD family contains neither ScheduledDepartureTime nor TripInformation.RouteDirection and no official Common V1.1 XSD profile exists"
         ]
       },
       "source_references": [
@@ -7172,10 +7173,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "COMMON V1.0 enum value Wheelchair encountered where WheelChair is declared",
-          "COMMON V1.0 enum value Others encountered where Other is declared"
+          "selected strict profile is official Common / Enumerations V1.0",
+          "XSD validation result is INVALID because DoorCountingObjectClassEnumeration contains exact PDF lexeme Wheelchair where selected XSD declares WheelChair",
+          "XSD validation result is INVALID because DoorCountingObjectClassEnumeration contains exact PDF lexeme Others where selected XSD declares Other"
         ]
       },
       "source_references": [
