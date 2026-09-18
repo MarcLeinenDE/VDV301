@@ -1,0 +1,231 @@
+{
+  "block_version": "0.1",
+  "block_id": "PCS_V10_V21_001_002",
+  "review_date": "2026-09-18",
+  "source_baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
+  "source_terminal_report": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_PCS_2026-09-10.md",
+  "source_deep_reads": [
+    "docs/pdf_xsd_semantic_audit/13a_passenger_counting_service_v1_0_v2_1_pdf_xsd_first_pass.md",
+    "docs/pdf_xsd_semantic_audit/13b_passenger_counting_service_findings_and_closure.md",
+    "docs/pdf_xsd_semantic_audit/24a_executable_validation_pcs_001.md"
+  ],
+  "review_policy": "manual_semantic_review_bilingual_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "PCS-001",
+      "service": "PassengerCountingService",
+      "version_scope": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_PassengerCountingService_V2.1.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact official PCS V2.1 route. The service XSD explicitly selects Common V1.0 and Enumerations V1.0; Enumerations V2.1 is explanatory control only and must not be substituted into the production route."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "wrong_enum_reference",
+      "secondary_issue_kinds": [
+        "dependency_value_set_mismatch",
+        "operation_not_supported",
+        "pcs_v21_selects_enumerations_v10",
+        "no_latest_wins_dependency_substitution"
+      ],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation",
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The official PCS V2.1 PDF explicitly documents OperationNotSupported for the new optional counting-control/state operations."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Exact PCS V2.1 includes Common V1.0 and Enumerations V1.0. Common V1.0 routes relevant ErrorCode positions through ErrorCodeEnumeration, while Enumerations V1.0 does not contain OperationNotSupported."
+        },
+        {
+          "type": "version_history",
+          "note": "Enumerations V2.1 contains OperationNotSupported, but that newer enum file is not selected by the exact PCS V2.1 dependency route and is therefore explanatory control only."
+        },
+        {
+          "type": "executable_validation",
+          "note": "The current PCS-001 validator compiles the exact route, accepts DataNotValid, rejects OperationNotSupported, and confirms that the separate Enumerations V2.1 control contains/accepts OperationNotSupported without substituting it into PCS V2.1."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The evidence proves a PDF/XSD dependency-value-set discrepancy but does not safely identify a one-line schema correction. Repointing PCS, Common or Enumerations dependencies could change semantics outside the documented optional-operation value."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "PassengerCountingService V2.1: OperationNotSupported fehlt im ausgewählten Enum-Pool",
+          "short": "Die PDF dokumentiert OperationNotSupported, aber die exakte PCS-V2.1-XSD wählt Common/Enumerations V1.0, deren ErrorCodeEnumeration diesen Wert nicht enthält.",
+          "long": "PCS-001 ist ein ausführbar bestätigter PDF/XSD-Dependency-/Value-Set-Konflikt. Die offizielle V2.1-PDF dokumentiert OperationNotSupported für die neuen optionalen Counting-Control-/State-Operationen. Die exakte PCS-V2.1-XSD bindet jedoch Common V1.0 und Enumerations V1.0 ein. Common V1.0 verwendet ErrorCodeEnumeration an den relevanten ErrorCode-Stellen, während Enumerations V1.0 OperationNotSupported nicht kennt. Der Kontrollbestand Enumerations V2.1 enthält den Wert, ist aber nicht Teil der ausgewählten PCS-V2.1-Route. Der ausführbare Validator akzeptiert einen V1.0-Wert wie DataNotValid und verwirft OperationNotSupported in der exakten Route.",
+          "recommendation": "Die ausgewählte PCS-V2.1-XSD-Familie unverändert normativ anwenden und OperationNotSupported nicht stillschweigend durch Einmischen von Common/Enumerations V2.1 freigeben. Bei exakt diesem Validierungsfehler den XSD-Fehler beibehalten und ergänzend auf den dokumentierten PDF/XSD-Value-Set-Konflikt hinweisen."
+        },
+        "en": {
+          "title": "PassengerCountingService V2.1: OperationNotSupported is absent from the selected enum pool",
+          "short": "The PDF documents OperationNotSupported, but the exact PCS V2.1 XSD selects Common/Enumerations V1.0 whose ErrorCodeEnumeration does not contain that value.",
+          "long": "PCS-001 is an executably confirmed PDF/XSD dependency/value-set mismatch. The official V2.1 PDF documents OperationNotSupported for the new optional counting-control/state operations. The exact PCS V2.1 XSD, however, includes Common V1.0 and Enumerations V1.0. Common V1.0 uses ErrorCodeEnumeration at the relevant ErrorCode positions, while Enumerations V1.0 does not contain OperationNotSupported. The separate Enumerations V2.1 control does contain the value but is not part of the selected PCS V2.1 route. The executable validator accepts a V1.0 value such as DataNotValid and rejects OperationNotSupported on the exact route.",
+          "recommendation": "Keep the selected PCS V2.1 XSD family authoritative and do not silently enable OperationNotSupported by mixing in Common/Enumerations V2.1. When this exact validation failure occurs, preserve the XSD error and add an advisory explaining the documented PDF/XSD value-set mismatch."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "selected profile is PassengerCountingService V2.1",
+          "XSD validation rejects ErrorCode value OperationNotSupported in a response/wrapper whose ErrorCode is typed by the selected Common V1.0 ErrorCodeEnumeration",
+          "the failure is attributable to OperationNotSupported being absent from the exact selected Enumerations V1.0 value set"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_PCS_2026-09-10.md",
+          "note": "Terminal PCS revalidation report; PCS-001 is executable_confirmed."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-155 / independent run 34447583426 / artifact 10140238171 / closure run 34448427086",
+          "note": "Revalidation confirms the exact dependency route, PDF pin and executable OperationNotSupported boundary."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/24a_executable_validation_pcs_001.md",
+          "note": "Persisted executable evidence record for PCS-001."
+        },
+        {
+          "kind": "pdf",
+          "reference": "PCS V2.1 / sha256 572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043 / physical pages 16-17",
+          "note": "Exact official PDF pages explicitly documenting OperationNotSupported for optional operations."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_PassengerCountingService_V2.1.xsd @ 59ef2ddb09b92db0d492974e38bad5b6be03865e + Common V1.0 @ 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c + Enumerations V1.0 @ a9bea5bc73003ed91ded8519db06c32c4067831d",
+          "note": "Exact selected V2.1 executable route."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_Enumerations_V2.1.xsd @ 311464690ad60749ed8d326217787e4b8ed0b718",
+          "note": "Explanatory control only; contains OperationNotSupported but is not selected by PCS V2.1."
+        },
+        {
+          "kind": "evidence",
+          "reference": "tools/validate_pcs_v21_operation_not_supported.py @ ffb932f19b669cd0584943063fc14cb4fd5daba8",
+          "note": "Current deterministic validator for the PCS-001 exact-route positive/negative boundary."
+        }
+      ],
+      "notes": "Confirmed cross-artifact dependency/value-set mismatch. No Common/Enumerations upgrade, enum injection, compatibility alias or schema mutation is introduced."
+    },
+    {
+      "finding_id": "PCS-002",
+      "service": "PassengerCountingService",
+      "version_scope": [
+        {
+          "version": "V1.0 original VDV-301-1.0 packaging",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_PassengerCountingService_V1.0.xsd + IBIS_IP_V1.0.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Original official V1.0 packaging: service file contains PCS payload structures, while the aggregate IBIS_IP_V1.0.xsd supplies PCS operation roots and PassengerCountingServiceGroup."
+        },
+        {
+          "version": "V1.0 later VDV-301-2.0 self-contained packaging",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_PassengerCountingService_V1.0.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Later official release republishes the same service version V1.0 as a self-contained service schema containing the PCS operation roots/group. This is the operational superbranch selection."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "provenance",
+      "primary_issue_kind": "version_routing_issue",
+      "secondary_issue_kinds": [
+        "historical_aggregate_packaging",
+        "later_self_contained_packaging",
+        "same_service_version_different_schema_packaging",
+        "resolver_profile_requirement",
+        "no_payload_contract_change"
+      ],
+      "defect_assessment": "non_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "code_generation_or_discovery_affected",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_release_provenance",
+          "note": "Original VDV-301-1.0 PCS service blob 600a3ee... omits PCS operation roots/group, while official aggregate IBIS_IP_V1.0.xsd blob 41289eae... supplies them."
+        },
+        {
+          "type": "later_official_correction",
+          "note": "Official VDV-301-2.0 republishes PCS service version V1.0 as self-contained blob 4161872... with the operation roots/group embedded."
+        },
+        {
+          "type": "xsd_internal_consistency",
+          "note": "Checked PCS payload complex-type signatures remain unchanged between the original service file and the later self-contained V1.0 service file."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-155 shows the same operation-root sample is invalid against the original service file alone, valid through the original aggregate route, and valid against the later self-contained service file."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The difference is historical packaging/resolver context, not a payload-contract defect. A resolver must preserve provenance rather than interpreting the original service file alone as a missing-root schema error."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "PassengerCountingService V1.0: historische Aggregate- versus Self-contained-Verpackung",
+          "short": "Die ursprüngliche V1.0-Service-XSD liefert die Payload-Typen, die Operation-Roots kommen aus dem Aggregate; eine spätere offizielle V1.0-Datei enthält beides selbständig.",
+          "long": "PCS-002 ist kein Payload- oder Schemafehler. Im ursprünglichen offiziellen VDV-301-1.0-Stand enthält die PassengerCountingService-V1.0-Datei die PCS-Payload-Strukturen, aber nicht die vollständigen globalen Operation-Roots bzw. die PassengerCountingServiceGroup; diese werden durch IBIS_IP_V1.0.xsd bereitgestellt. Im späteren offiziellen VDV-301-2.0-Stand wird dieselbe Service-Version V1.0 als selbständige PCS-XSD mit diesen Roots/Group veröffentlicht. EV-155 bestätigt, dass dasselbe Root-Beispiel nur über den ursprünglichen Aggregate-Pfad bzw. über die spätere selbständige Datei validiert, während die geprüften Payload-Typsignaturen unverändert bleiben.",
+          "recommendation": "Beim historischen VDV-301-1.0-Profil Service-XSD und Aggregate gemeinsam als Root-Validierungsfamilie behandeln. Für den aktuellen Superbranch die spätere offizielle selbständige V1.0-Datei verwenden, dabei die ursprüngliche Aggregate-Provenienz erhalten. Das Fehlen lokaler Roots im ursprünglichen Servicefile nicht als Payload-Defekt melden."
+        },
+        "en": {
+          "title": "PassengerCountingService V1.0: historical aggregate versus self-contained packaging",
+          "short": "The original V1.0 service XSD provides payload types while operation roots come from the aggregate; a later official V1.0 service file is self-contained.",
+          "long": "PCS-002 is not a payload or schema defect. In the original official VDV-301-1.0 release, the PassengerCountingService V1.0 file contains the PCS payload structures but not the complete global operation roots or PassengerCountingServiceGroup; those are supplied by IBIS_IP_V1.0.xsd. In the later official VDV-301-2.0 release, the same service version V1.0 is republished as a self-contained PCS XSD containing those roots/group. EV-155 confirms that the same root sample validates through the original aggregate route and against the later self-contained file, but not against the original service file alone, while checked payload type signatures remain unchanged.",
+          "recommendation": "For the historical VDV-301-1.0 profile, treat the service XSD and aggregate together as the root-validation family. For the current superbranch, use the later official self-contained V1.0 service file while preserving original aggregate provenance. Do not report the original service file's missing local roots as a payload defect."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_PCS_2026-09-10.md",
+          "note": "Terminal PCS revalidation report; PCS-002 is contextual_not_defect."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-155 / independent run 34447583426 / artifact 10140238171 / closure run 34448427086",
+          "note": "Historical packaging/root-validation comparison and unchanged payload-type-signature evidence."
+        },
+        {
+          "kind": "xsd",
+          "reference": "VDVde/VDV301 tag VDV-301-1.0: IBIS-IP_PassengerCountingService_V1.0.xsd @ 600a3ee6290c630a4435fb06ca9803dabaceb788; IBIS_IP_V1.0.xsd @ 41289eaed2674a169fdf77a10a2eff293c76d5c4",
+          "note": "Original official V1.0 service-plus-aggregate packaging."
+        },
+        {
+          "kind": "xsd",
+          "reference": "VDVde/VDV301 tag VDV-301-2.0: IBIS-IP_PassengerCountingService_V1.0.xsd @ 4161872be76740abfdd1cddf96f8a736333fc8be",
+          "note": "Later official self-contained packaging of the same PCS service version V1.0; matches the operational superbranch file."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/13b_passenger_counting_service_findings_and_closure.md",
+          "note": "Persisted source/diff review establishing the historical packaging distinction and superbranch selection."
+        }
+      ],
+      "notes": "Confirmed non-defect and resolver/provenance requirement. Same service version has two official historical packaging shapes; latest-wins must not erase provenance, and the original aggregate requirement must not be misreported as a payload defect."
+    }
+  ]
+}
