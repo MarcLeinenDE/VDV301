@@ -1,4 +1,4 @@
-name: temp-gate-runtime-mapping-review-system-documentation
+name: temp-gate-runtime-mapping-review-system-documentation-closure
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 jobs:
-  gate-system-documentation-runtime-review:
+  gate-system-documentation-closure:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,169 +22,44 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
-      - name: Install PDF evidence dependency
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq poppler-utils
 
-      - name: Verify exact review prestate
+      - name: Verify exact closure prestate
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD^)" = "1a062c871aab2e753d8eb2593eb0c8bfe964f50d"
+          test "$(git rev-parse HEAD^)" = "4001aaae84ee56f4bf33de8aeae667d73770b965"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "63e06d3d8220e222b99b5be5630a363acf859e01"
+          test "$(git hash-object sdk_manifest/manifest_v0.1.json)" = "4b126fe34fd32443aaf3e133cd31a6a470fa5cb8"
+          test "$(git hash-object sdk_manifest/README.md)" = "d42581a248f6e1f609256533f35b62c4ebad4c1d"
           test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "fdeacc3c79ad5527f9a6ca3124eb22753f3903a6"
           test "$(git hash-object sdk_manifest/known_issues_runtime_mapping_v0.1.json)" = "f14a61291c27069a1d3c3be0dc0ab18c20511fdb"
-          test "$(git hash-object sdk_manifest/runtime_mapping_review_blocks/SYSTEM_DOCUMENTATION_DR3012_003_V20_003_004_v0.1.json)" = "dd3468048da2ad59c2029a5cc533b16ae6da6c73"
-          test "$(git hash-object IBIS-IP_SystemDocumentationService_v1.0.xsd)" = "8995c4a230bf81d5e47b9313ee7725ff3cd4b7b5"
-          test "$(git hash-object IBIS-IP_SystemDocumentationService_V2.0.xsd)" = "ab959dddbfa2b8ca420af1b079501f94cff38051"
 
-      - name: Validate semantic registry and deterministic runtime mapping
+      - name: Validate registries and synchronized SDK manifest
         shell: bash
         run: |
           set -euo pipefail
           python tools/validate_finding_semantic_classification.py
           python tools/validate_known_issues_runtime_mapping_v0_1.py
-
-      - name: Verify exact V1.0 and V2.0 SystemDocumentation boundaries
-        shell: bash
-        run: |
-          set -euo pipefail
+          python tools/validate_sdk_manifest_v0_1.py
           python - <<'PY'
           import json
           from pathlib import Path
-          from lxml import etree
-
-          semantic=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
-          mapping=json.loads(Path('sdk_manifest/known_issues_runtime_mapping_v0.1.json').read_text())
-          block=json.loads(Path('sdk_manifest/runtime_mapping_review_blocks/SYSTEM_DOCUMENTATION_DR3012_003_V20_003_004_v0.1.json').read_text())
-          by={e['finding_id']:e for e in semantic['entries']}
-          mapped={m['finding_id']:m for m in mapping['mappings']}
-
-          for fid in ('DR3012-003','DR3012V20-003','DR3012V20-004'):
-              assert by[fid]['runtime_match']['state']=='reviewed'
-              assert mapped[fid]['implementation_state']=='reviewed_not_implemented'
-              assert mapped[fid]['authority_guard']=='selected_xsd_result_remains_normative'
-
-          assert mapped['DR3012-003']['activation_class']=='xsd_invalid_advisory'
-          assert mapped['DR3012-003']['required_precondition']=='xsd_result_invalid'
-          assert mapped['DR3012V20-003']['activation_class']=='xsd_invalid_advisory'
-          assert mapped['DR3012V20-003']['required_precondition']=='xsd_result_invalid'
-          assert mapped['DR3012V20-004']['activation_class']=='resolver_or_profile_warning'
-          assert mapping['counts']=={
+          m=json.loads(Path('sdk_manifest/manifest_v0.1.json').read_text())
+          r=json.loads(Path('sdk_manifest/known_issues_runtime_mapping_v0.1.json').read_text())
+          k=m['known_issues_knowledge']
+          assert k['runtime_match_distribution']=={'candidate':36,'not_applicable':113,'not_designed':1,'reviewed':42}
+          assert r['counts']=={
               'reviewed_mapping_count':42,
               'implemented_count':0,
               'semantic_candidate_count':36,
               'semantic_not_designed_count':1,
               'semantic_not_applicable_count':113,
           }
-
-          NS={'xs':'http://www.w3.org/2001/XMLSchema'}
-
-          v10=etree.parse('IBIS-IP_SystemDocumentationService_v1.0.xsd')
-          etree.XMLSchema(v10)
-          r10=v10.getroot()
-          syscfg10=r10.xpath("/xs:schema/xs:complexType[@name='SystemDocumentationService.SystemConfigurationData']/xs:sequence/xs:element[@name='HeartbeatIntervall']",namespaces=NS)
-          store10=r10.xpath("/xs:schema/xs:complexType[@name='SystemDocumentationService.StoreSystemConfigurationRequestStructure']/xs:sequence/xs:element[@name='HeartbeatIntervall']",namespaces=NS)
-          assert len(syscfg10)==1 and syscfg10[0].get('type')=='IBIS-IP.double'
-          assert len(store10)==1 and store10[0].get('type')=='IBIS-IP.duration'
-          assert not r10.xpath(".//xs:element[@name='HertbeatIntervall']",namespaces=NS)
-          assert not r10.xpath(".//xs:element[@name='HeartbeatInterval']",namespaces=NS)
-
-          v20=etree.parse('IBIS-IP_SystemDocumentationService_V2.0.xsd')
-          etree.XMLSchema(v20)
-          r20=v20.getroot()
-          syscfg20=r20.xpath("/xs:schema/xs:complexType[@name='SystemDocumentationService.SystemConfigurationData']/xs:sequence/xs:element[@name='HeartbeatInterval']",namespaces=NS)
-          store20=r20.xpath("/xs:schema/xs:complexType[@name='SystemDocumentationService.StoreSystemConfigurationRequestStructure']/xs:sequence/xs:element[@name='HeartbeatInterval']",namespaces=NS)
-          assert len(syscfg20)==1 and syscfg20[0].get('type')=='IBIS-IP.duration'
-          assert len(store20)==1 and store20[0].get('type')=='IBIS-IP.duration'
-          assert not r20.xpath(".//xs:element[@name='HertbeatIntervall']",namespaces=NS)
-          assert not r20.xpath(".//xs:element[@name='HeartbeatIntervall']",namespaces=NS)
-          assert r20.xpath("./xs:group[@name='SystemDocumentationServiceGroup']",namespaces=NS)
-
-          rb={e['finding_id']:e for e in block['entries']}
-          assert any('must not normalize to V2.0 HeartbeatInterval' in g for g in rb['DR3012-003']['guards'])
-          assert any('must not back-normalize to the V1.0 identifier' in g for g in rb['DR3012V20-003']['guards'])
-          assert any('must not register SystemDocumenationService as an alias' in g for g in rb['DR3012V20-004']['guards'])
-          print('PASSED: SystemDocumentation V1.0/V2.0 exact runtime boundaries verified')
+          assert k['runtime_mapping_latest_review_block']=='SYSTEM_DOCUMENTATION_DR3012_003_V20_003_004'
+          print('PASSED: SystemDocumentation closure counters and latest block are consistent')
           PY
 
-      - name: Restore exact pinned PDF bytes for historical evidence
-        shell: bash
-        run: |
-          set -euo pipefail
-          python - <<'PY'
-          import hashlib
-          import json
-          from pathlib import Path
-          import urllib.request
-
-          source_registry=json.loads(Path('audit_registry/pdf_source_registry_v0.1.json').read_text())
-          pin_registry=json.loads(Path('audit_registry/pdf_source_pins_v0.1.json').read_text())
-          sources={s['source_id']:s for s in source_registry['sources']}
-          pins={s['source_id']:s for s in pin_registry['sources']}
-          targets=('VDV301-2_V1.0_DE','VDV301-2_BASE_V2.0')
-          cache=Path('local_sources/vdv_pdfs')
-          cache.mkdir(parents=True,exist_ok=True)
-
-          for source_id in targets:
-              src=sources[source_id]
-              pin=pins[source_id]
-              req=urllib.request.Request(
-                  src['official_url'],
-                  headers={'User-Agent':'VDV301-SystemDocumentation-Runtime-Gate/0.1','Accept':'application/pdf,application/octet-stream;q=0.9,*/*;q=0.1'},
-              )
-              with urllib.request.urlopen(req,timeout=90) as response:
-                  data=response.read()
-              assert data.startswith(b'%PDF-'), source_id
-              assert len(data)==int(pin['expected_size_bytes']), (source_id,len(data))
-              digest=hashlib.sha256(data).hexdigest()
-              assert digest==pin['expected_sha256'], (source_id,digest)
-              target=cache/src['local_filename']
-              target.write_bytes(data)
-              print(f"OK {source_id} sha256={digest}")
-          PY
-
-      - name: Verify focused PDF anchors and frozen evidence provenance
-        shell: bash
-        run: |
-          set -euo pipefail
-          python - <<'PY'
-          import subprocess
-          from pathlib import Path
-
-          def page_text(pdf, page):
-              return " ".join(subprocess.check_output(
-                  ['pdftotext','-f',str(page),'-l',str(page),'-layout',pdf,'-'],
-                  text=True,errors='replace',
-              ).replace('\u00ad','').split())
-
-          v10='local_sources/vdv_pdfs/VDV301-2_V1.0_DE.pdf'
-          p65=page_text(v10,65)
-          assert p65.count('HertbeatIntervall') >= 2
-
-          v20='local_sources/vdv_pdfs/VDV301-2_BASE_V2.0.pdf'
-          p98=page_text(v20,98)
-          p100=page_text(v20,100)
-          p105=page_text(v20,105)
-          assert '7.2 Dienst SystemDocumentationService' in p98
-          assert 'Der Dienst SystemDocumenationService' in p98
-          assert p100.count('HertbeatIntervall') >= 2
-          assert 'Schreibfehler korrigiert nach HeartbeatInterval' in p105
-          assert 'typo corrected to HeartbeatInterval' in p105
-
-          r10=Path('docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V10_2026-09-03.md').read_text()
-          assert 'EV-129' in r10 and '33765167655' in r10 and '33765633886' in r10
-          assert 'DR3012-003' in r10 and 'executable_confirmed' in r10
-          assert 'HertbeatIntervall' in r10 and 'HeartbeatIntervall' in r10
-
-          r20=Path('docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V20_2026-09-03.md').read_text()
-          assert 'EV-130' in r20 and '33780668141' in r20 and '33781049413' in r20
-          assert 'DR3012V20-003' in r20 and 'DR3012V20-004' in r20
-          assert 'HeartbeatInterval' in r20 and 'SystemDocumenationService' in r20
-          print('PASSED: focused SystemDocumentation PDF anchors and frozen evidence provenance verified')
-          PY
-
-      - name: Prove root XSD immutability
+      - name: Prove XSD immutability
         shell: bash
         run: |
           set -euo pipefail
@@ -193,4 +68,4 @@ jobs:
           sha256sum ./*.xsd | sort > /tmp/xsd-after.sha256
           cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
           git diff --exit-code
-          echo "PASSED: SystemDocumentation runtime-mapping review gate complete"
+          echo "PASSED: SystemDocumentation runtime-mapping closure gate complete"
