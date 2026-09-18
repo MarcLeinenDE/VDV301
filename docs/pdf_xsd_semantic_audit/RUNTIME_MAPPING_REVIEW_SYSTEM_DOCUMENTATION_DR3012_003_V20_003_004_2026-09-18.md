@@ -57,7 +57,9 @@ implemented      0
 
 ## Gate
 
-GitHub Actions run **35346736511**: **SUCCESS**.
+Primary evidence/runtime gate **35346736511**: **SUCCESS**.
+
+Closure/consistency gate **35346884670**: **SUCCESS**.
 
 The successful gate verified:
 
@@ -69,7 +71,8 @@ The successful gate verified:
 - official PDF bytes freshly retrieved and verified against pinned SHA-256 and size;
 - stable visible identifier anchors for `HertbeatIntervall` and `SystemDocumenationService`;
 - frozen EV-129 / EV-130 revalidation provenance;
-- all root XSDs unchanged.
+- all root XSDs unchanged;
+- synchronized SDK/runtime-mapping counters validated by the hardened manifest consistency checks.
 
 Earlier temporary gate attempts exposed only harness/environment issues: missing local PDF cache, missing `pdftotext`, an unrelated live RFC-2782 string anchor inside the broad EV-129 checker, and unstable extraction of a PDF type token. None changed the reviewed decisions. The final gate deliberately checks only evidence relevant to these three findings.
 
