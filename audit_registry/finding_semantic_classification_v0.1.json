@@ -11690,6 +11690,199 @@
       "notes": "Confirmed non-defect and resolver/provenance requirement. Same service version has two official historical packaging shapes; latest-wins must not erase provenance, and the original aggregate requirement must not be misreported as a payload defect."
     },
     {
+      "finding_id": "SMS-001",
+      "service": "SystemMonitoringService",
+      "version_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemMonitoringService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Exact official VDV-301-2.2 route. The service schema includes Common V2.2 and Enumerations V2.2; generic Subscribe/Unsubscribe request/response structures are defined in Common V2.2 and are intentionally reused by the SMS subscription operations."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "generic_subscription_structure_reuse",
+      "secondary_issue_kinds": [
+        "common_structure_reuse",
+        "service_local_element_absence",
+        "subscribe_unsubscribe_from_vdv_301_2_1",
+        "resolver_and_discovery_context",
+        "rejected_schema_defect_hypothesis"
+      ],
+      "defect_assessment": "non_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "code_generation_or_discovery_affected",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The official SMS V2.2 document routes SubscribeDeviceStatus, UnsubscribeDeviceStatus, SubscribeServiceStatus/SystemStatus and UnsubscribeServiceStatus/SystemStatus payload structures to the generic subscription structures defined in VDV 301-2-1."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact SMS V2.2 schema includes Common V2.2, and Common V2.2 defines SubscribeRequestStructure, SubscribeResponseStructure, UnsubscribeRequestStructure and UnsubscribeResponseStructure."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-116 and EV-156 confirm the exact official V2.2 include route, compile the service schema and verify the presence of the generic Common subscription structures."
+        },
+        {
+          "type": "technical_inference",
+          "note": "Absence of service-local SMS Subscribe/Unsubscribe XML elements is therefore not a missing-schema defect. A resolver or generator that inspects only service-local declarations may need dependency-aware discovery, but runtime XML validity is not relaxed or changed."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "SystemMonitoringService V2.2: Subscription-Strukturen kommen aus Common V2.2",
+          "short": "Subscribe/Unsubscribe-Strukturen fehlen nicht: Die SMS-PDF verweist auf VDV 301-2-1, und die exakte XSD bindet die generischen Strukturen aus Common V2.2 ein.",
+          "long": "SMS-001 ist kein Schemafehler. Die offizielle SMS-V2.2-PDF verweist für die Subscribe-/Unsubscribe-Operationen ausdrücklich auf die allgemeinen Subscription-Strukturen aus VDV 301-2-1. Die exakte SystemMonitoringService-V2.2-XSD bindet Common V2.2 ein; dort sind SubscribeRequestStructure, SubscribeResponseStructure, UnsubscribeRequestStructure und UnsubscribeResponseStructure definiert. Dass die Service-XSD dafür keine zusätzlichen SMS-spezifischen lokalen Elemente definiert, ist damit beabsichtigte Wiederverwendung gemeinsamer Strukturen und kein fehlender Vertrag.",
+          "recommendation": "Bei Discovery und Codegenerierung die vollständige ausgewählte XSD-Familie einschließlich Common V2.2 berücksichtigen. Keine künstlichen SMS-spezifischen Subscribe-/Unsubscribe-Elemente erzeugen und aus deren lokaler Abwesenheit keinen Runtime-Fehler ableiten."
+        },
+        "en": {
+          "title": "SystemMonitoringService V2.2: subscription structures come from Common V2.2",
+          "short": "The Subscribe/Unsubscribe structures are not missing: the SMS PDF points to VDV 301-2-1 and the exact XSD includes the generic structures from Common V2.2.",
+          "long": "SMS-001 is not a schema defect. The official SMS V2.2 PDF explicitly routes the Subscribe/Unsubscribe operations to the generic subscription structures from VDV 301-2-1. The exact SystemMonitoringService V2.2 XSD includes Common V2.2, where SubscribeRequestStructure, SubscribeResponseStructure, UnsubscribeRequestStructure and UnsubscribeResponseStructure are defined. The lack of additional SMS-specific local elements for those structures is therefore intentional reuse of common structures, not a missing contract.",
+          "recommendation": "For discovery and code generation, resolve the complete selected XSD family including Common V2.2. Do not invent SMS-specific Subscribe/Unsubscribe elements and do not derive a runtime error from their local absence."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_SMS_2026-09-10.md",
+          "note": "Terminal SMS report; SMS-001 is contextual_not_defect."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-156 / independent run 34460160697 / artifact 10145182333 / closure run 34460497412; EV-116 / run 33269006407",
+          "note": "Pinned PDF/XSD revalidation plus executable Common-subscription structure and include-route evidence."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/SMS_V2.2.md",
+          "note": "Deep read rejects the missing-service-local-subscription-element hypothesis and maps it to SMS-001."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_SystemMonitoringService_V2.2.xsd @ d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c + IBIS-IP_common_V2.2.xsd @ 468fee6d177e7185dbcd5d3f90cfb114e29e01ae + IBIS-IP_Enumerations_V2.2.xsd @ 2a23b512379b18e8f122ac1272cef8229fb86283",
+          "note": "Exact official VDV-301-2.2 executable authority."
+        }
+      ],
+      "notes": "Confirmed non-defect. Generic subscription structures are dependency-provided Common V2.2 authority; no alias, synthetic service-local element or runtime diagnostic is introduced."
+    },
+    {
+      "finding_id": "SMS-002",
+      "service": "SystemMonitoringService",
+      "version_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemMonitoringService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Exact official VDV-301-2.2 route. The executable service root is SystemMonitoringService.GetServiceStatusResponse; no SystemMonitoringService.GetSystemStatusResponse root exists."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "operation_name_mismatch",
+      "secondary_issue_kinds": [
+        "ServiceStatus_vs_SystemStatus",
+        "section_heading_mismatch",
+        "operation_table_and_body_positive_control",
+        "invalid_invented_root",
+        "xsd_resolves_executable_name"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation",
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The official PDF operation overview and section body use GetServiceStatus / SubscribeServiceStatus / UnsubscribeServiceStatus, while headings 2.5-2.7 use GetSystemStatus / SubscribeSystemStatus / UnsubscribeSystemStatus."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact SMS V2.2 XSD defines SystemMonitoringService.GetServiceStatusResponse and contains no SystemMonitoringService.GetSystemStatusResponse global root."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-116 and EV-156 validate the exact GetServiceStatusResponse form and reject an invented SystemMonitoringService.GetSystemStatusResponse root against the official V2.2 schema."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The contradictory SystemStatus headings are editorial naming defects, not an alternate executable operation family. Runtime validation must remain governed by the selected XSD; a Known-Issues advisory may explain this exact rejection."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "SystemMonitoringService V2.2: Überschriften nennen SystemStatus statt ServiceStatus",
+          "short": "Die Überschriften 2.5-2.7 verwenden SystemStatus; Operationstabelle, Fließtext und XSD verwenden dagegen ServiceStatus.",
+          "long": "SMS-002 ist ein bestätigter PDF-Namensfehler. In der offiziellen SMS-V2.2-PDF heißen die Überschriften der Abschnitte 2.5 bis 2.7 GetSystemStatus, SubscribeSystemStatus und UnsubscribeSystemStatus. Die Operationstabelle sowie der Inhalt der Abschnitte verwenden jedoch GetServiceStatus, SubscribeServiceStatus und UnsubscribeServiceStatus. Die exakte V2.2-XSD bestätigt diese ausführbare Benennung: SystemMonitoringService.GetServiceStatusResponse ist gültig, ein erfundener Root SystemMonitoringService.GetSystemStatusResponse wird zurückgewiesen.",
+          "recommendation": "Für die ausführbare Schnittstelle ausschließlich ServiceStatus gemäß der ausgewählten V2.2-XSD verwenden. Wenn die XSD exakt einen GetSystemStatusResponse-Root in diesem Profil verwirft, den Fehler beibehalten und ergänzend auf den dokumentierten Überschriftenfehler der PDF hinweisen."
+        },
+        "en": {
+          "title": "SystemMonitoringService V2.2: headings say SystemStatus instead of ServiceStatus",
+          "short": "Headings 2.5-2.7 use SystemStatus, while the operation table, body text and XSD use ServiceStatus.",
+          "long": "SMS-002 is a confirmed PDF naming defect. In the official SMS V2.2 PDF, the headings for sections 2.5 through 2.7 say GetSystemStatus, SubscribeSystemStatus and UnsubscribeSystemStatus. The operation table and section body instead use GetServiceStatus, SubscribeServiceStatus and UnsubscribeServiceStatus. The exact V2.2 XSD confirms the executable naming: SystemMonitoringService.GetServiceStatusResponse is valid, while an invented SystemMonitoringService.GetSystemStatusResponse root is rejected.",
+          "recommendation": "Use only the ServiceStatus naming defined by the selected V2.2 XSD for the executable interface. If that profile rejects exactly a GetSystemStatusResponse root, preserve the XSD error and add an advisory explaining the documented PDF heading defect."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "selected profile is SystemMonitoringService V2.2",
+          "XSD validation rejects the global root SystemMonitoringService.GetSystemStatusResponse",
+          "the rejected root is attributable to following the PDF's GetSystemStatus heading rather than the authoritative GetServiceStatus operation/root naming"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_SMS_2026-09-10.md",
+          "note": "Terminal SMS report; SMS-002 is executable_confirmed."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-156 / independent run 34460160697 / artifact 10145182333 / closure run 34460497412; EV-116 / run 33269006407",
+          "note": "Pinned visual evidence plus executable positive/negative ServiceStatus/SystemStatus boundary."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/SMS_V2.2.md",
+          "note": "Deep read maps the SystemStatus/ServiceStatus heading contradiction to SMS-002."
+        },
+        {
+          "kind": "pdf",
+          "reference": "SMS V2.2 / sha256 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4 / physical pages 9-11",
+          "note": "Operation overview/body use ServiceStatus while headings use SystemStatus."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_SystemMonitoringService_V2.2.xsd @ d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c",
+          "note": "Exact executable authority defining GetServiceStatusResponse and no GetSystemStatusResponse root."
+        },
+        {
+          "kind": "evidence",
+          "reference": "tools/validate_sms_v22_ev116.py @ bac849f6c33e6084e899794564f99f0c6cbd338a",
+          "note": "Deterministic executable validator for the ServiceStatus/SystemStatus root boundary and generic subscription structures."
+        }
+      ],
+      "notes": "Confirmed PDF operation-name defect. The XSD result remains normative; only the exact invalid SystemStatus-root case is a candidate for a Known-Issues advisory."
+    },
+    {
       "finding_id": "TSD-004",
       "service": "TrainSetDataService",
       "version_scope": [
@@ -12215,8 +12408,8 @@
     }
   ],
   "progress": {
-    "classified_count": 146,
-    "remaining_count": 46,
+    "classified_count": 148,
+    "remaining_count": 44,
     "reviewed_blocks": [
       "ARA",
       "ARCH",
@@ -12256,9 +12449,10 @@
       "LS_V10_003",
       "NET_VDV3013_001_002",
       "NET_VDV3013_003",
-      "PCS_V10_V21_001_002"
+      "PCS_V10_V21_001_002",
+      "SMS_V22_001_002"
     ],
-    "latest_block": "PCS_V10_V21_001_002",
-    "latest_block_file": "audit_registry/semantic_classification_blocks/PCS_V10_V21_001_002_v0.1.json"
+    "latest_block": "SMS_V22_001_002",
+    "latest_block_file": "audit_registry/semantic_classification_blocks/SMS_V22_001_002_v0.1.json"
   }
 }
