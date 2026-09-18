@@ -13690,6 +13690,108 @@
       "notes": "Confirmed V2.1 PDF/XSD cardinality mismatch. V2.2 is explanatory correction history only; no schema substitution or wrapper synthesis is introduced."
     },
     {
+      "finding_id": "TSM-001",
+      "service": "TrainSetManagementService",
+      "version_scope": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TrainSetManagementService_V2.1.xsd + IBIS-IP_TrainSetInformationService_V2.1.xsd + selected Common/Enumerations dependencies",
+          "note": "The exact official V2.1 schema declares TrainSetManagementService.GetTrainSetComposition as the response root and operation-group member, typed as TrainSetInformationService.GetTrainSetCompositionResponseStructure. The later ...GetTrainSetCompositionResponse root is absent."
+        },
+        {
+          "version": "V2.2 correction history",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TrainSetManagementService_V2.2.xsd",
+          "note": "The official V2.2 correction history explicitly states that TrainSetManagementService.GetTrainSetCompositionResponse is now correctly entitled instead of TrainSetManagementService.GetTrainSetComposition. This is correction-history evidence only and is not back-applied to V2.1 validation."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "xsd",
+      "primary_issue_kind": "identifier_typo",
+      "secondary_issue_kinds": [
+        "response_root_missing_Response_suffix",
+        "historical_v21_root_name",
+        "later_official_correction",
+        "no_back_application_of_v22",
+        "no_compatibility_alias"
+      ],
+      "defect_assessment": "confirmed_xsd_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact V2.1 TrainSetManagementService XSD declares TrainSetManagementService.GetTrainSetComposition globally and in TrainSetManagementServiceOperations, both using TrainSetInformationService.GetTrainSetCompositionResponseStructure; the later ...Response root is absent."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-109 proves the V2.1 old-name root validates and the later corrected TrainSetManagementService.GetTrainSetCompositionResponse root is rejected because no matching V2.1 global declaration exists."
+        },
+        {
+          "type": "later_official_correction",
+          "note": "The official V2.2 version history explicitly records that TrainSetManagementService.GetTrainSetCompositionResponse is now correctly entitled instead of TrainSetManagementService.GetTrainSetComposition."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-162 revalidates the exact V2.1/V2.2 source and XSD history and closes TSM-001 as executable_confirmed without schema mutation."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The later official correction confirms the historical V2.1 identifier defect, but formal V2.1 validation must still follow the exact selected V2.1 schema. The SDK must not silently substitute V2.2 naming or synthesize an alias."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "TrainSetManagementService V2.1: Response-Root trägt den alten Namen ohne Response-Suffix",
+          "short": "Die V2.1-XSD erwartet TrainSetManagementService.GetTrainSetComposition; erst V2.2 korrigiert den Response-Root auf ...GetTrainSetCompositionResponse.",
+          "long": "TSM-001 ist ein ausführbar bestätigter historischer XSD-Identifierfehler. Die exakte V2.1-XSD deklariert TrainSetManagementService.GetTrainSetComposition als globalen Response-Root und als Eintrag der Operationsgruppe; der später korrigierte Name TrainSetManagementService.GetTrainSetCompositionResponse existiert in V2.1 nicht. EV-109 bestätigt, dass der alte V2.1-Root validiert und der spätere Name mangels globaler Deklaration verworfen wird. Die offizielle V2.2-Änderungshistorie bezeichnet ...GetTrainSetCompositionResponse ausdrücklich als nun korrekt benannten Ersatz. Für V2.1 bleibt dennoch die tatsächlich veröffentlichte V2.1-XSD normativ.",
+          "recommendation": "V2.1 strikt mit dem historischen Root TrainSetManagementService.GetTrainSetComposition validieren. Den V2.2-Namen nicht rückwirkend akzeptieren und keinen Alias erzeugen. Wenn unter ausgewähltem V2.1-Profil ...GetTrainSetCompositionResponse wegen fehlender globaler Deklaration scheitert, den XSD-Fehler beibehalten und ergänzend auf die bekannte, erst in V2.2 korrigierte Benennung hinweisen."
+        },
+        "en": {
+          "title": "TrainSetManagementService V2.1: response root uses the historical name without the Response suffix",
+          "short": "The V2.1 XSD expects TrainSetManagementService.GetTrainSetComposition; V2.2 later corrects the response root to ...GetTrainSetCompositionResponse.",
+          "long": "TSM-001 is an executably confirmed historical XSD identifier defect. The exact V2.1 XSD declares TrainSetManagementService.GetTrainSetComposition as both the global response root and the operation-group member; the later corrected TrainSetManagementService.GetTrainSetCompositionResponse name does not exist in V2.1. EV-109 confirms that the historical V2.1 root validates while the later name is rejected because no matching V2.1 global declaration exists. The official V2.2 change history explicitly records ...GetTrainSetCompositionResponse as the now correctly entitled replacement. The actually published V2.1 XSD nevertheless remains normative for V2.1 validation.",
+          "recommendation": "Validate V2.1 strictly with the historical TrainSetManagementService.GetTrainSetComposition root. Do not back-apply the V2.2 name and do not synthesize an alias. When ...GetTrainSetCompositionResponse fails under the selected V2.1 profile because the global declaration is absent, preserve the XSD error and add an advisory explaining the known naming defect corrected only in V2.2."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "selected profile is TrainSetManagementService V2.1",
+          "XSD validation rejects TrainSetManagementService.GetTrainSetCompositionResponse because no matching V2.1 global declaration exists",
+          "the payload would otherwise use the V2.1 GetTrainSetComposition response structure"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSM_2026-09-14.md",
+          "note": "Terminal TSM report; TSM-001 is executable_confirmed."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-162 / validation run 34823353897 / job 103909732702 / artifact 10339282538 / closure run 34823587675; historical control EV-109 run 33228250613",
+          "note": "Exact V2.1 old-name-valid / corrected-name-invalid boundary plus V2.2 correction history."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TrainSetServices V2.1 / sha256 8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e / physical page 30; TrainSetServices V2.2 / sha256 c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e / physical page 51",
+          "note": "V2.1 operation context and the explicit V2.2 naming correction."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_TrainSetManagementService_V2.1.xsd @ add9d1cb37e5759ff7a77855b239108d38373206; IBIS-IP_TrainSetManagementService_V2.2.xsd @ da9465d6683e3f7d54a546ab4a13739fb3c3e902",
+          "note": "Exact official V2.1 authority and later V2.2 correction-history schema."
+        }
+      ],
+      "notes": "Confirmed historical V2.1 XSD identifier defect. V2.1 remains normative for strict validation; V2.2 is explanatory correction history only and no compatibility alias is synthesized."
+    },
+    {
       "finding_id": "TSM-002",
       "service": "TrainSetManagementService",
       "version_scope": [
@@ -14131,8 +14233,8 @@
     }
   ],
   "progress": {
-    "classified_count": 167,
-    "remaining_count": 25,
+    "classified_count": 168,
+    "remaining_count": 24,
     "reviewed_blocks": [
       "ARA",
       "ARCH",
@@ -14181,9 +14283,10 @@
       "TKT_V10_007_009",
       "TS_V10_001_002",
       "TSD_V21_V22_001_003",
-      "TSI_V21_001"
+      "TSI_V21_001",
+      "TSM_V21_001"
     ],
-    "latest_block": "TSI_V21_001",
-    "latest_block_file": "audit_registry/semantic_classification_blocks/TSI_V21_001_v0.1.json"
+    "latest_block": "TSM_V21_001",
+    "latest_block_file": "audit_registry/semantic_classification_blocks/TSM_V21_001_v0.1.json"
   }
 }
