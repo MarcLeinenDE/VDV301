@@ -15972,11 +15972,350 @@
         }
       ],
       "notes": "Withdrawn after correction. The old invalid-cardinality and persistence claims must never be reused."
+    },
+    {
+      "finding_id": "VRS-008",
+      "service": "VideoRecordingService",
+      "version_scope": [
+        {
+          "version": "V1.0 / V2.0 / V2.4 documentation",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The StopRecording section/prose repeatedly names a non-existent StopRecordingERM operation although the operation inventory uses StopRecording; the error persists through V2.4."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "wrong_operation_reference",
+      "secondary_issue_kinds": [
+        "StopRecordingERM",
+        "copy_paste_operation_name",
+        "persistent_through_v24",
+        "no_alias"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "V1.0, V2.0 and V2.4 StopRecording sections state that no additional data is required for operation StopRecordingERM while their operation inventories use StopRecording."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The official V2.0 XSD declares VideoRecordingService.StopRecordingResponse and no StopRecordingERM operation; the V2.4 candidate likewise provides no StopRecordingERM alias."
+        },
+        {
+          "type": "version_history",
+          "note": "The V2.4 publication corrects specific Subscribe copy/paste issues but the StopRecordingERM prose remains, so this defect was not covered by those corrections."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The prose error must not create a StopRecordingERM routing alias; operation discovery remains anchored to the actual service operation inventory/schema authority."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoRecordingService: StopRecording-Prosa nennt fälschlich StopRecordingERM",
+          "short": "Die StopRecording-Abschnitte nennen in der Beschreibung StopRecordingERM, obwohl die tatsächliche Operation StopRecording heißt.",
+          "long": "VRS-008 ist ein bestätigter, über V1.0 bis V2.4 persistierender Dokumentations-/Copy/Paste-Fehler. Die jeweiligen StopRecording-Abschnitte sagen, dass für StopRecordingERM keine zusätzlichen Daten erforderlich seien. In der Operationsübersicht heißt die Operation jedoch StopRecording; auch die XSD-Autorität bzw. das V2.4-Candidate-Material erzeugen keinen StopRecordingERM-Alias.",
+          "recommendation": "StopRecordingERM niemals als Operation oder Alias erzeugen. Für Discovery und Routing ausschließlich StopRecording aus der tatsächlichen Service-/XSD-Autorität verwenden und die abweichende Prosa nur als Dokumentationshinweis behandeln."
+        },
+        "en": {
+          "title": "VideoRecordingService: StopRecording prose incorrectly names StopRecordingERM",
+          "short": "The StopRecording sections refer to StopRecordingERM even though the actual operation is StopRecording.",
+          "long": "VRS-008 is a confirmed documentation/copy-paste defect persisting from V1.0 through V2.4. The StopRecording sections say that no additional data is required for StopRecordingERM. The operation inventory, however, uses StopRecording, and neither the schema authority nor the V2.4 candidate creates a StopRecordingERM alias.",
+          "recommendation": "Never create StopRecordingERM as an operation or alias. Use only StopRecording from the actual service/XSD authority for discovery and routing, and treat the inconsistent prose as documentation guidance."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VRS V1.0 physical page 45; VRS V2.0 physical page 20; VRS V2.4 physical page 23"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/VIDEO_RECORDING_SERVICE_FINDINGS_REGISTER_ADDENDUM.md"
+        }
+      ],
+      "notes": "Persistent documentation-only operation-name copy/paste error; no StopRecordingERM alias is created."
+    },
+    {
+      "finding_id": "VRS-009",
+      "service": "VideoRecordingService",
+      "version_scope": [
+        {
+          "version": "V1.0 / V2.0 / V2.4 reference sections",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Neighboring video-service references label the 05/2017 VideoLiveService and VideoDisplayService publications as v1.1 although the dedicated official sources establish those publications as V1.0."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "provenance",
+      "primary_issue_kind": "version_routing_issue",
+      "secondary_issue_kinds": [
+        "cross_document_reference_label_error",
+        "VideoLiveService_v1_1",
+        "VideoDisplayService_v1_1",
+        "no_v1_1_profile_alias"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "warning",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The VRS reference pages print neighboring 05/2017 VideoLiveService/VideoDisplayService entries with erroneous v1.1 labels."
+        },
+        {
+          "type": "cross_service_pattern",
+          "note": "Dedicated VLS V1.0 and VDS V1.0 audits establish the corresponding 05/2017 VDV 301-2-11 and 301-2-13 publications as Version 1.0."
+        },
+        {
+          "type": "official_release_provenance",
+          "note": "No V1.1 resolver/schema profile is justified by these reference labels; the dedicated service sources control version identity."
+        },
+        {
+          "type": "technical_inference",
+          "note": "Cross-document bibliography labels must not override service-specific profile routing or create version aliases."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoRecordingService: benachbarte Video-Dienste fälschlich als v1.1 referenziert",
+          "short": "Die Referenzseiten nennen die 05/2017-Publikationen von VideoLiveService/VideoDisplayService teilweise v1.1; die dedizierten offiziellen Quellen belegen V1.0.",
+          "long": "VRS-009 ist ein bestätigter Cross-Document-Versionslabel-Fehler. In den VRS-Referenzabschnitten werden benachbarte Video-Dienste mit v1.1 bezeichnet, obwohl die dedizierten offiziellen VLS-/VDS-Publikationen von 05/2017 als V1.0 belegt sind. Aus diesen Literaturzeilen darf kein V1.1-Profil oder Resolver-Alias entstehen.",
+          "recommendation": "Versionen aus den dedizierten Servicequellen bzw. bestätigten Release-Profilen auflösen. Die fehlerhaften v1.1-Referenzlabels als Dokumentationswarnung behandeln und niemals daraus ein V1.1-Validierungsprofil erzeugen."
+        },
+        "en": {
+          "title": "VideoRecordingService: neighboring video services are incorrectly referenced as v1.1",
+          "short": "The reference pages label the 05/2017 VideoLiveService/VideoDisplayService publications as v1.1 in places, while the dedicated official sources establish V1.0.",
+          "long": "VRS-009 is a confirmed cross-document version-label defect. VRS reference sections label neighboring video services as v1.1 even though the dedicated official VLS/VDS publications from 05/2017 are established as V1.0. Those bibliography lines must not create a V1.1 profile or resolver alias.",
+          "recommendation": "Resolve versions from the dedicated service sources and confirmed release profiles. Treat the incorrect v1.1 labels as documentation warnings and never derive a V1.1 validation profile from them."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VRS V1.0 physical page 51; VRS V2.0 physical page 25; VRS V2.4 physical page 28"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/VLS_V1.0.md"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/VDS_V1.0.md"
+        }
+      ],
+      "notes": "Confirmed bibliography/version-label defect. No V1.1 service profile is inferred."
+    },
+    {
+      "finding_id": "VRS-010",
+      "service": "VideoRecordingService",
+      "version_scope": [
+        {
+          "version": "V1.0 / V2.0 / V2.4 documentation",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Across all checked VRS PDFs, the PauseRecordingRRM request table caption calls the table a response structure and shortens the logical structure name to PauseRecordingRequest."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "wrong_structure_reference",
+      "secondary_issue_kinds": [
+        "wrong_table_role",
+        "request_described_as_response",
+        "PauseRecordingRequest_shortened_alias",
+        "persistent_cross_version"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "V1.0 Table 9, V2.0 Table 5 and V2.4 Table 6 are PauseRecordingRRM request tables, but their captions describe a response structure named VideoRecordingService.PauseRecordingRequest."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "For official V2.0 the actual selected schema uses the exact PauseRecordingRRM request/type lane, including the typo-like type PauseRecordingRRMRequestStruture; no PauseRecordingRequest alias is declared."
+        },
+        {
+          "type": "cross_service_pattern",
+          "note": "The operation inventory consistently identifies PauseRecordingRRM, confirming the shortened caption name is not a separate supported operation/structure."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The caption is a documentation-role/name defect and must not be promoted into schema resolution or alias discovery."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoRecordingService: PauseRecordingRRM-Request-Tabelle ist falsch als Response/PauseRecordingRequest beschriftet",
+          "short": "Die Tabelle beschreibt einen PauseRecordingRRM-Request, die Bildunterschrift nennt aber eine Response-Struktur und verkürzt den Namen zu PauseRecordingRequest.",
+          "long": "VRS-010 ist ein bestätigter, versionsübergreifender Tabellenbeschriftungsfehler. In V1.0, V2.0 und V2.4 zeigt die Tabelle den Request für PauseRecordingRRM. Die Beschriftung bezeichnet sie jedoch als Response-Struktur und verwendet zusätzlich den verkürzten Namen VideoRecordingService.PauseRecordingRequest. Dieser Name ist kein belastbarer Schema-/Operationsalias.",
+          "recommendation": "Die Tabellenbeschriftung nicht für Resolver- oder Codegen-Namen verwenden. Request-/Strukturzuordnung aus Operationsübersicht und ausgewählter XSD-Autorität ableiten; keinen PauseRecordingRequest-Alias erzeugen."
+        },
+        "en": {
+          "title": "VideoRecordingService: PauseRecordingRRM request table is mislabeled as a response/PauseRecordingRequest",
+          "short": "The table describes a PauseRecordingRRM request, but the caption calls it a response structure and shortens the name to PauseRecordingRequest.",
+          "long": "VRS-010 is a confirmed cross-version table-caption defect. In V1.0, V2.0 and V2.4 the table represents the request for PauseRecordingRRM, yet the caption describes it as a response structure and additionally uses the shortened name VideoRecordingService.PauseRecordingRequest. That name is not a supported schema/operation alias.",
+          "recommendation": "Do not use the table caption for resolver or code-generation names. Resolve the request/structure from the operation inventory and selected XSD authority, and do not create a PauseRecordingRequest alias."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VRS V1.0 page 45 Table 9; V2.0 page 20 Table 5; V2.4 page 22 Table 6"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/VIDEO_RECORDING_SERVICE_FINDINGS_REGISTER_ADDENDUM.md"
+        }
+      ],
+      "notes": "Persistent table-caption role/name defect; no PauseRecordingRequest alias is created."
+    },
+    {
+      "finding_id": "VRS-011",
+      "service": "VideoRecordingService",
+      "version_scope": [
+        {
+          "version": "V2.4 documentation",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The V2.4 VideoRecordingStateStructure table is part of the corrected VideoRecordingStateResponse model but its descriptive cell incorrectly says it is request data for PauseRecordingRRM."
+        },
+        {
+          "version": "V2.4 candidate/integration control",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_VideoRecordingService_V2.4.xsd",
+          "note": "The open PR #27 candidate independently confirms VideoRecordingStateStructure is nested under VideoRecordingStateResponseStructure. Candidate authority is not promoted."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "semantic_contradiction",
+      "secondary_issue_kinds": [
+        "table_role_copy_paste",
+        "VideoRecordingStateStructure",
+        "PauseRecordingRRM_wrong_role",
+        "candidate_control_only"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The official V2.4 response section introduces VideoRecordingStateStructure, but the table's descriptive cell says 'Request data structure for operation PauseRecordingRRM'."
+        },
+        {
+          "type": "candidate_integration_provenance",
+          "note": "The PR #27 candidate models VideoRecordingStateResponseStructure -> VideoRecordingState -> VideoRecordingStateStructure, independently confirming the table's actual role while remaining non-official evidence."
+        },
+        {
+          "type": "later_official_correction",
+          "note": "V2.4 is the official documentation revision that clarifies GetVideoRecordingState response modelling, so the PauseRecordingRRM role text is inconsistent with the surrounding corrected section itself."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The table-role sentence is a copy/paste contradiction and does not create a second Pause request structure or alter candidate/official authority boundaries."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoRecordingService V2.4: VideoRecordingStateStructure fälschlich als PauseRecordingRRM-Request beschrieben",
+          "short": "Die State-Struktur gehört zur VideoRecordingStateResponse, der Tabellentext bezeichnet sie aber als Request-Daten für PauseRecordingRRM.",
+          "long": "VRS-011 ist ein bestätigter Copy/Paste-Rollenfehler in der offiziellen V2.4-Dokumentation. Die Tabelle beschreibt die neu eingeführte VideoRecordingStateStructure innerhalb der korrigierten GetVideoRecordingState-Response-Modellierung. In der beschreibenden Zelle steht jedoch, sie sei die Request-Datenstruktur für PauseRecordingRRM. Das widerspricht dem umgebenden Abschnitt; auch die Candidate-XSD aus PR #27 bestätigt die State-Response-Rolle, ohne dadurch offizielle XSD-Autorität zu werden.",
+          "recommendation": "Die fehlerhafte Rollenbeschreibung ignorieren und die State-Struktur ausschließlich als Bestandteil der VideoRecordingStateResponse behandeln. Keine zusätzliche PauseRecordingRRM-Struktur oder Aliasbeziehung aus diesem Tabellentext ableiten."
+        },
+        "en": {
+          "title": "VideoRecordingService V2.4: VideoRecordingStateStructure is incorrectly described as a PauseRecordingRRM request",
+          "short": "The state structure belongs to VideoRecordingStateResponse, but the table text labels it as request data for PauseRecordingRRM.",
+          "long": "VRS-011 is a confirmed copy-paste role defect in the official V2.4 documentation. The table describes the newly introduced VideoRecordingStateStructure within the corrected GetVideoRecordingState response model. Its descriptive cell, however, says it is the request data structure for PauseRecordingRRM. This contradicts the surrounding section; the PR #27 candidate XSD independently confirms the state-response role without becoming official XSD authority.",
+          "recommendation": "Ignore the incorrect role description and treat the state structure only as part of VideoRecordingStateResponse. Do not derive any additional PauseRecordingRRM structure or alias relationship from that table text."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VideoRecordingService V2.4 physical page 20"
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_VideoRecordingService_V2.4.xsd @ 07ff2c41731e63fd85b203e4b8e0186136caaaaf",
+          "note": "Candidate/integration only; open PR #27."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/VIDEO_RECORDING_SERVICE_FINDINGS_REGISTER_ADDENDUM.md"
+        }
+      ],
+      "notes": "V2.4 documentation-only table-role copy/paste contradiction. Candidate XSD is corroborating control only."
     }
   ],
   "progress": {
-    "classified_count": 188,
-    "remaining_count": 4,
+    "classified_count": 192,
+    "remaining_count": 0,
     "reviewed_blocks": [
       "ARA",
       "ARCH",
@@ -16031,9 +16370,10 @@
       "VDS_V10_V20_005_008",
       "VLS_V10_V20_001_005",
       "VRS_V10_V24_001_003",
-      "VRS_V10_V24_004_007"
+      "VRS_V10_V24_004_007",
+      "VRS_V10_V24_008_011"
     ],
-    "latest_block": "VRS_V10_V24_004_007",
-    "latest_block_file": "audit_registry/semantic_classification_blocks/VRS_V10_V24_004_007_v0.1.json"
+    "latest_block": "VRS_V10_V24_008_011",
+    "latest_block_file": "audit_registry/semantic_classification_blocks/VRS_V10_V24_008_011_v0.1.json"
   }
 }
