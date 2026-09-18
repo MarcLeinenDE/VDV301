@@ -1,0 +1,127 @@
+name: temp-gate-semantic-classification-tkt-v10-001-003
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_gate_semantic_classification_tkt_v10_001_003.yml
+
+permissions:
+  contents: read
+
+jobs:
+  gate-tkt-semantic-block:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact head
+        uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 2
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+
+      - name: Verify exact TKT-001-003 prestate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "67521b15228b64679a64ea61541e77623f19d766"
+          test "$(git hash-object audit_registry/semantic_classification_blocks/TKT_V10_001_003_v0.1.json)" = "203cfc96e98d4cf33664b55f2380f2e2f9eb54a9"
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "b5877b563614952131905e0a311a15cb25783904"
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TKT_2026-09-14.md)" = "3518127a74ccafbb28d642cae876d4bbe7f68878"
+          test "$(git hash-object IBIS-IP_TicketInformationService_V1.0.xsd)" = "3fda66d872ab0d1c511247f13e715cf3ad56afe7"
+          test "$(git hash-object IBIS-IP_common_V1.0.xsd)" = "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c"
+
+      - name: Verify TKT-001-003 semantic boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from lxml import etree
+
+          registry=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
+          baseline=json.loads(Path('audit_registry/finding_provenance_baseline_2026-09-14.json').read_text())
+          block=json.loads(Path('audit_registry/semantic_classification_blocks/TKT_V10_001_003_v0.1.json').read_text())
+
+          assert registry['progress']['classified_count']==152
+          assert registry['progress']['remaining_count']==40
+          assert registry['progress']['latest_block']=='SUB_V10_V24_001_002'
+          assert [e['finding_id'] for e in block['entries']]==['TKT-001','TKT-002','TKT-003']
+
+          frozen={e['finding_id']:e for e in baseline['inventory']['entries']}
+          assert frozen['TKT-001']['revalidation_state']=='context_verified'
+          assert frozen['TKT-002']['revalidation_state']=='contextual_not_defect'
+          assert frozen['TKT-003']['revalidation_state']=='context_verified'
+          for fid in ('TKT-001','TKT-002','TKT-003'):
+              assert frozen[fid]['terminal_state_source']=='docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TKT_2026-09-14.md'
+
+          t1,t2,t3=block['entries']
+          assert t1['primary_issue_kind']=='version_routing_issue'
+          assert t1['defect_assessment']=='non_defect'
+          assert t2['primary_issue_kind']=='intentional_design_misread'
+          assert t2['defect_assessment']=='non_defect'
+          assert t3['primary_issue_kind']=='wrong_type_reference'
+          assert t3['defect_assessment']=='confirmed_pdf_defect'
+          for e in (t1,t2,t3):
+              assert e['sdk_behavior']=='no_runtime_diagnostic'
+              assert e['runtime_match']['state']=='not_applicable'
+
+          NS={'xs':'http://www.w3.org/2001/XMLSchema'}
+          service=etree.parse('IBIS-IP_TicketInformationService_V1.0.xsd')
+          globals_=set(service.xpath('/xs:schema/xs:element/@name',namespaces=NS))
+          assert globals_
+          assert all(n.startswith('TicketingService.') for n in globals_)
+          assert not any(n.startswith('TicketInformationService.') for n in globals_)
+
+          common=etree.parse('IBIS-IP_common_V1.0.xsd')
+          def choice_names(type_name):
+              return common.xpath(f"//xs:complexType[@name='{type_name}']//xs:choice/xs:element/@name",namespaces=NS)
+          assert choice_names('SubscribeResponseStructure')==['Active','OperationErrorMessage']
+          assert choice_names('UnsubscribeResponseStructure')==['Active','OperationErrorMessage']
+
+          terminal=Path('docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TKT_2026-09-14.md').read_text()
+          assert 'EV-158' in terminal and '34813527845' in terminal and '34813841015' in terminal
+          deep=Path('docs/pdf_xsd_semantic_audit/14a_ticketing_ticket_information_v1_0_pdf_xsd_first_pass.md').read_text()
+          assert 'TKT-001' in deep and 'TKT-002' in deep and 'TKT-003' in deep
+          print('PASSED: TKT-001..003 authority and semantic boundaries verified')
+          PY
+
+      - name: Simulate merge and validate semantic registry
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/merge_semantic_classification_block.py \
+            --block audit_registry/semantic_classification_blocks/TKT_V10_001_003_v0.1.json \
+            --output /tmp/tkt-001-003-merged.json
+          python tools/validate_finding_semantic_classification.py \
+            --registry /tmp/tkt-001-003-merged.json
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/tkt-001-003-merged.json',encoding='utf-8'))
+          assert r['progress']['classified_count']==155
+          assert r['progress']['remaining_count']==37
+          assert r['progress']['latest_block']=='TKT_V10_001_003'
+          print('PASSED: simulated TKT-001..003 registry is exactly 155/192')
+          PY
+
+      - name: Validate all 50 root XSDs and prove read-only gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+          sha256sum ./*.xsd | sort > /tmp/xsd-before.sha256
+          python tools/validate_xsd_pool.py --repo-root .
+          sha256sum ./*.xsd | sort > /tmp/xsd-after.sha256
+          cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          git diff --exit-code
+          echo "PASSED: TKT-001..003 semantic gate complete"
