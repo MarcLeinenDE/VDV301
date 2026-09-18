@@ -72,6 +72,8 @@ implemented      0
 
 Primary Common V1.0 gate **35347544265**: **SUCCESS**.
 
+Closure/consistency gate **35347689664**: **SUCCESS**.
+
 The gate verified:
 
 - semantic registry and deterministic 46-entry runtime-mapping regeneration;
@@ -81,7 +83,8 @@ The gate verified:
 - one Announcement/FareZone validates while two repetitions fail;
 - ShortTripStop child validates while PDF-derived ShortTripStopList child fails;
 - ShortTripStopStructure and StopPointTariffInformationStructure have equivalent instance signatures in V1.0;
-- all root XSDs remain unchanged.
+- all root XSDs remain unchanged;
+- synchronized SDK/runtime-mapping counters pass the hardened consistency validator.
 
 EV-135 remains frozen provenance for the completed historical revalidation. The runtime gate intentionally uses the relevant executable boundaries directly rather than reopening the historical revalidation workflow state.
 
