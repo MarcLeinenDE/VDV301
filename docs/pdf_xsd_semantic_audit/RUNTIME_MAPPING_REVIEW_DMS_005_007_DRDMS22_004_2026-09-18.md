@@ -67,7 +67,9 @@ implemented      0
 
 ## Gate
 
-GitHub Actions run **35345700143**: **SUCCESS**.
+Primary DMS review gate **35345700143**: **SUCCESS**.
+
+Closure/consistency gate **35345873753**: **SUCCESS**.
 
 The successful gate verified:
 
@@ -77,7 +79,8 @@ The successful gate verified:
 - the response-data identifier at its actual local XSD position inside `GetDeviceStatusInformationResponseStructure`;
 - `DeviceStatusImpact` and `DeviceStatusPriority` remain part of the V2.2 `DeviceStatusStructure`;
 - EV-127 DMS instance boundaries;
-- SDK baseline and all root XSDs without mutation.
+- SDK baseline and all root XSDs without mutation;
+- synchronized Known-Issues runtime counters and the strengthened SDK manifest consistency checks.
 
 The first DMS gate attempt, run `35345479470`, failed only because the gate incorrectly assumed the response-data element was global. The corrected test follows the actual XSD structure and passed.
 
