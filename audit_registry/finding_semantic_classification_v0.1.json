@@ -12052,6 +12052,191 @@
       "notes": "Confirmed documentation-only reference-number error. Same-document evidence resolves the intended source as VDV 301-2-0; no runtime diagnostic is warranted."
     },
     {
+      "finding_id": "SUB-001",
+      "service": "Generic Subscription Layer",
+      "version_scope": [
+        {
+          "version": "VDV 301-2 V1.0 / Base Services V2.0 / Base Services V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V1.0.xsd / IBIS-IP_common_V2.0.xsd / IBIS-IP_common_V2.1.xsd",
+          "note": "Across the checked Base Services history, the documentation names TerminateSubscribeRequestStructure and TerminateSubscribeResponseStructure for UnsubscribeData, while the exact executable Common schemas use UnsubscribeRequestStructure and UnsubscribeResponseStructure and expose no TerminateSubscribe aliases."
+        },
+        {
+          "version": "General Conventions V2.2 / V2.3 / V2.4",
+          "authority": "official_release",
+          "xsd_profile": "corresponding official Common family",
+          "note": "Fresh deep reads show the same TerminateSubscribe notation persists through General Conventions V2.2, V2.3 and V2.4; no executable TerminateSubscribe alias is introduced."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "wrong_structure_reference",
+      "secondary_issue_kinds": [
+        "TerminateSubscribe_vs_Unsubscribe",
+        "unsubscribe_notation_table",
+        "missing_executable_alias",
+        "persistent_documentation_history",
+        "no_alias_synthesis"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "code_generation_or_discovery_affected",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Official Base Services V2.0/V2.1 notation tables map UnsubscribeData to TerminateSubscribeRequestStructure and TerminateSubscribeResponseStructure; fresh General Conventions V2.2-V2.4 deep reads confirm the same naming persists."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Exact Common V1.0, V2.0 and V2.1 contain UnsubscribeRequestStructure and UnsubscribeResponseStructure and contain no TerminateSubscribeRequestStructure or TerminateSubscribeResponseStructure aliases."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-157 checks the exact Common V1.0/V2.0/V2.1 type inventories and confirms the documentation-versus-XSD naming boundary without modifying any schema."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The mismatch concerns documented structure/type names rather than a uniquely observable service payload value or root suitable for stable runtime matching. Synthesizing TerminateSubscribe aliases would weaken the selected-XSD authority."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Generische Subscription: TerminateSubscribe in der PDF, Unsubscribe in der XSD",
+          "short": "Die Dokumentation nennt für UnsubscribeData TerminateSubscribeRequest/ResponseStructure; die exakten Common-XSDs definieren stattdessen UnsubscribeRequest/ResponseStructure.",
+          "long": "SUB-001 ist ein bestätigter Namenskonflikt zwischen Dokumentation und ausführbarer XSD-Familie. In den offiziellen Base-Services-Schriften V2.0/V2.1 wird UnsubscribeData den Strukturen TerminateSubscribeRequestStructure und TerminateSubscribeResponseStructure zugeordnet; dieselbe Bezeichnung bleibt in den geprüften General-Conventions-Fassungen V2.2 bis V2.4 erhalten. Die exakten Common-XSDs verwenden dagegen UnsubscribeRequestStructure und UnsubscribeResponseStructure und stellen keine ausführbaren TerminateSubscribe-Aliase bereit. Die XSD-Benennung bleibt daher normativ.",
+          "recommendation": "Bei Schemaauflösung, Codegenerierung und Implementierung ausschließlich die UnsubscribeRequestStructure-/UnsubscribeResponseStructure-Namen der ausgewählten Common-XSD verwenden. Keine TerminateSubscribe-Aliase synthetisieren. Den PDF-Namensfehler als Dokumentationshinweis führen, aber daraus keine instabile Runtime-Diagnostik erzeugen."
+        },
+        "en": {
+          "title": "Generic subscription: TerminateSubscribe in the PDF, Unsubscribe in the XSD",
+          "short": "The documentation names TerminateSubscribeRequest/ResponseStructure for UnsubscribeData; the exact Common XSDs instead define UnsubscribeRequest/ResponseStructure.",
+          "long": "SUB-001 is a confirmed naming mismatch between documentation and the executable XSD family. The official Base Services V2.0/V2.1 publications map UnsubscribeData to TerminateSubscribeRequestStructure and TerminateSubscribeResponseStructure, and the same naming persists in the reviewed General Conventions V2.2 through V2.4. The exact Common XSDs instead use UnsubscribeRequestStructure and UnsubscribeResponseStructure and provide no executable TerminateSubscribe aliases. The selected XSD naming therefore remains authoritative.",
+          "recommendation": "For schema resolution, code generation and implementation, use only the UnsubscribeRequestStructure/UnsubscribeResponseStructure names from the selected Common XSD. Do not synthesize TerminateSubscribe aliases. Retain the PDF mismatch as documentation guidance without creating an unstable runtime diagnostic."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_SUB_2026-09-10.md",
+          "note": "Terminal SUB report; SUB-001 is context_verified."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-157 / independent run 34487918692 / job 102906852658 / artifact 10156457016 / closure run 34488450123",
+          "note": "Pinned Base Services PDF evidence and exact Common type-inventory checks confirm the naming discrepancy."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Base Services V2.0 / sha256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37 / physical pages 82-83; Base Services V2.1 / sha256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a / physical pages 83-84",
+          "note": "Exact official notation tables showing UnsubscribeData with TerminateSubscribeRequest/ResponseStructure."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_common_V1.0.xsd @ 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c; IBIS-IP_common_V2.0.xsd @ 8608e3dcd665c197c34da7f6ec6af5a3758da164; IBIS-IP_common_V2.1.xsd @ 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e",
+          "note": "Exact executable Common authorities used by EV-157; they define Unsubscribe* and no TerminateSubscribe* aliases."
+        }
+      ],
+      "notes": "Confirmed PDF/XSD naming discrepancy. No alias synthesis and no runtime diagnostic; the selected Common XSD naming remains authoritative."
+    },
+    {
+      "finding_id": "SUB-002",
+      "service": "Generic Subscription Layer",
+      "version_scope": [
+        {
+          "version": "Base Services V2.0 / V2.1 service families",
+          "authority": "official_release",
+          "xsd_profile": "SystemDocumentationService V2.0 + SystemManagementService V1.0 + DeviceManagementService V2.1 with their selected Common/Enumerations dependencies",
+          "note": "Official documents describe generic subscription operations even where local service operation groups are sparse; DMS V2.1 separately demonstrates a more explicit group modelling style. Group completeness is therefore service/version dependent."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "contextual",
+      "primary_issue_kind": "intentional_design_misread",
+      "secondary_issue_kinds": [
+        "service_group_membership_not_complete_authority",
+        "generic_subscription_operations",
+        "sparse_local_groups",
+        "service_version_dependent_modelling",
+        "resolver_and_discovery_rule"
+      ],
+      "defect_assessment": "non_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "code_generation_or_discovery_affected",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Base Services V2.0/V2.1 document generic Subscribe/Unsubscribe operations for SystemDocumentation and SystemManagement even though the corresponding local XSD operation groups do not enumerate equivalent service-prefixed entries."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "SystemDocumentationService V2.0 and SystemManagementService V1.0 have sparse local groups, whereas DeviceManagementService V2.1 explicitly includes generic subscription/control entries in its local group."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-157 compiles the exact service schemas, inventories the three local groups and confirms that group-modelling style materially differs by service/version."
+        },
+        {
+          "type": "technical_inference",
+          "note": "Local group membership cannot be promoted to a universal supported-operation inventory. Operation discovery must combine the selected service/version contract with generic operation conventions and exact schema routing."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Generische Subscription: lokale Service-Gruppen sind keine vollständige Operationsliste",
+          "short": "Dokumentierte Subscribe/Unsubscribe-Operationen können fehlen, obwohl die lokale Service-XSD-Gruppe sie nicht als eigene servicepräfixierte Einträge aufführt.",
+          "long": "SUB-002 ist kein Defekt. Die offiziellen Base-Services-Dokumente beschreiben generische Subscribe-/Unsubscribe-Operationen für SystemDocumentation und SystemManagement, obwohl deren lokale Service-Gruppen in den exakten XSDs vergleichsweise sparsam modelliert sind. DeviceManagementService V2.1 zeigt dagegen eine deutlich explizitere Gruppenmodellierung mit generischen Subscription- und Control-Einträgen. EV-157 bestätigt diese Unterschiede ausführbar. Daraus folgt, dass die Mitgliedschaft in einer lokalen Service-Gruppe allein keine vollständige Aussage über alle unterstützten generischen Operationen liefert.",
+          "recommendation": "Supported Operations nicht ausschließlich aus der lokalen xs:group ableiten. Bei Discovery und Codegenerierung immer den konkreten Service-/Versionsvertrag, die generischen Subscription-Konventionen und die vollständige ausgewählte XSD-Familie gemeinsam auswerten. Fehlende lokale Gruppeneinträge nicht als Schema- oder Runtime-Defekt melden."
+        },
+        "en": {
+          "title": "Generic subscription: local service groups are not a complete operation inventory",
+          "short": "Documented Subscribe/Unsubscribe operations may be supported even when the local service XSD group does not list equivalent service-prefixed entries.",
+          "long": "SUB-002 is not a defect. The official Base Services documents describe generic Subscribe/Unsubscribe operations for SystemDocumentation and SystemManagement even though their exact XSD local service groups are comparatively sparse. DeviceManagementService V2.1, by contrast, uses a much more explicit group model including generic subscription and control entries. EV-157 confirms these differences executably. Local service-group membership therefore cannot by itself provide a complete statement of all supported generic operations.",
+          "recommendation": "Do not derive supported operations solely from the local xs:group. For discovery and code generation, evaluate the concrete service/version contract, generic subscription conventions and the complete selected XSD family together. Do not report missing local group entries as schema or runtime defects."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_SUB_2026-09-10.md",
+          "note": "Terminal SUB report; SUB-002 is contextual_not_defect."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-157 / independent run 34487918692 / job 102906852658 / artifact 10156457016 / closure run 34488450123",
+          "note": "Pinned PDF and executable group-inventory evidence demonstrates service/version-dependent group modelling."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Base Services V2.0 / physical pages 99,103; Base Services V2.1 / physical pages 112,116",
+          "note": "Official documentation retains generic SystemDocumentation/SystemManagement subscription operations despite sparse local groups."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_SystemDocumentationService_V2.0.xsd @ ab959dddbfa2b8ca420af1b079501f94cff38051; IBIS-IP_SystemManagementService_V1.0.xsd @ 2d32630a0f1981e980e6a466e3f6a69136410f24; IBIS-IP_DeviceManagementService_V2.1.xsd @ 191b43e01cdaba14b247725689a913c244a67eed",
+          "note": "Exact executable authorities used by EV-157 to prove differing local group styles."
+        }
+      ],
+      "notes": "Confirmed non-defect and discovery/resolver rule. Service-local xs:group membership is not a universal supported-operation authority."
+    },
+    {
       "finding_id": "TSD-004",
       "service": "TrainSetDataService",
       "version_scope": [
@@ -12577,8 +12762,8 @@
     }
   ],
   "progress": {
-    "classified_count": 150,
-    "remaining_count": 42,
+    "classified_count": 152,
+    "remaining_count": 40,
     "reviewed_blocks": [
       "ARA",
       "ARCH",
@@ -12620,9 +12805,10 @@
       "NET_VDV3013_003",
       "PCS_V10_V21_001_002",
       "SMS_V22_001_002",
-      "SMS_V22_003_004"
+      "SMS_V22_003_004",
+      "SUB_V10_V24_001_002"
     ],
-    "latest_block": "SMS_V22_003_004",
-    "latest_block_file": "audit_registry/semantic_classification_blocks/SMS_V22_003_004_v0.1.json"
+    "latest_block": "SUB_V10_V24_001_002",
+    "latest_block_file": "audit_registry/semantic_classification_blocks/SUB_V10_V24_001_002_v0.1.json"
   }
 }
