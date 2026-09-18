@@ -6796,9 +6796,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "DataAcceptedResponseStructure contains both DataAcceptedResponseData and OperationErrorMessage under COMMON V1.0"
+          "selected strict profile is official Common V1.0",
+          "XSD validation result is INVALID because DataAcceptedResponseStructure contains both DataAcceptedResponseData and OperationErrorMessage",
+          "selected Common V1.0 XSD defines those branches as an exclusive xs:choice"
         ]
       },
       "source_references": [
@@ -6882,9 +6884,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "COMMON V1.0 ServiceSpecificationWithStateList is present with zero ServiceSpecificationWithState children"
+          "selected strict profile is official Common V1.0",
+          "XSD validation result is VALID for a present ServiceSpecificationWithStateList containing zero ServiceSpecificationWithState children",
+          "selected Common V1.0 XSD declares ServiceSpecificationWithState minOccurs=0 maxOccurs=unbounded"
         ]
       },
       "source_references": [
@@ -6970,10 +6974,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "COMMON V1.0 JourneyStopInformation repeats Announcement",
-          "COMMON V1.0 JourneyStopInformation repeats FareZone"
+          "selected strict profile is official Common V1.0",
+          "XSD validation result is INVALID because JourneyStopInformation contains a second Announcement or a second FareZone",
+          "selected Common V1.0 XSD declares Announcement and FareZone as optional singletons with maxOccurs=1"
         ]
       },
       "source_references": [
@@ -7059,9 +7064,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "COMMON V1.0 ShortTripStopList contains a child named ShortTripStopList instead of ShortTripStop"
+          "selected strict profile is official Common V1.0",
+          "XSD validation result is INVALID because ShortTripStopListStructure contains the exact PDF-derived child name ShortTripStopList instead of ShortTripStop",
+          "selected Common V1.0 XSD declares ShortTripStop of type ShortTripStopStructure; the PDF-referenced StopPointTariffInformationStructure is instance-shape equivalent and is not treated as a separate runtime mismatch"
         ]
       },
       "source_references": [

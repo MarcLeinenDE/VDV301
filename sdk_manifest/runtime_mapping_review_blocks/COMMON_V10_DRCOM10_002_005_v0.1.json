@@ -1,0 +1,68 @@
+{
+  "block_version": "0.1",
+  "block_id": "COMMON_V10_DRCOM10_002_005",
+  "review_date": "2026-09-18",
+  "source_semantic_registry_blob": "fdeacc3c79ad5527f9a6ca3124eb22753f3903a6",
+  "policy": "exact_selected_common_v10_xsd_result_first_no_pdf_alias_no_semantic_override",
+  "entries": [
+    {
+      "finding_id": "DRCOM10-002",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual Common V1.0 XSD INVALID result where both DataAcceptedResponse choice branches are present.",
+      "guards": [
+        "official Common V1.0 strict profile only",
+        "must require XSD INVALID",
+        "both exact branches must be present",
+        "must not reinterpret xs:choice as sequence"
+      ]
+    },
+    {
+      "finding_id": "DRCOM10-003",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_valid_advisory",
+      "decision": "Allow the XSD-valid empty ServiceSpecificationWithStateList and optionally explain the stricter PDF 1:* statement.",
+      "guards": [
+        "official Common V1.0 strict profile only",
+        "must require XSD VALID",
+        "list must be present and contain zero ServiceSpecificationWithState children",
+        "must not reject an XSD-valid empty list"
+      ]
+    },
+    {
+      "finding_id": "DRCOM10-004",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual Common V1.0 XSD INVALID result caused by a second Announcement or second FareZone in JourneyStopInformation.",
+      "guards": [
+        "official Common V1.0 strict profile only",
+        "must require XSD INVALID",
+        "exact repeated element must be Announcement or FareZone",
+        "must not loosen selected-XSD maxOccurs=1"
+      ]
+    },
+    {
+      "finding_id": "DRCOM10-005",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual Common V1.0 XSD INVALID result caused by the exact PDF-derived child name ShortTripStopList where the selected XSD expects ShortTripStop.",
+      "guards": [
+        "official Common V1.0 strict profile only",
+        "must require XSD INVALID",
+        "exact child-name match only",
+        "must not register ShortTripStopList as alias",
+        "must not invent a type-shape runtime difference because the two compared XSD structures are instance-shape equivalent"
+      ]
+    }
+  ],
+  "implementation_state": "reviewed_not_implemented",
+  "evidence": [
+    "EV-117 / run 33279461529 / job 99172025835",
+    "EV-135 / closure run 33850713729 / artifact run 33850418941",
+    "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V10_2026-09-04.md"
+  ]
+}
