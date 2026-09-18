@@ -4,7 +4,7 @@
   "state": "reviewed_inventory",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "29f8de0609a0a68cfa6d1bc6a9a7aaa705ba1f54",
+    "git_blob": "434f59c7ce9250ad6391a5dacc0745089408801d",
     "classification_state": "complete",
     "finding_count": 192
   },
@@ -19,9 +19,9 @@
     "implementation_requires_separate_profile_specific_validation": true
   },
   "counts": {
-    "reviewed_mapping_count": 35,
+    "reviewed_mapping_count": 39,
     "implemented_count": 0,
-    "semantic_candidate_count": 43,
+    "semantic_candidate_count": 39,
     "semantic_not_designed_count": 1,
     "semantic_not_applicable_count": 113
   },
@@ -950,6 +950,136 @@
       "diagnostic_source": {
         "registry": "audit_registry/finding_semantic_classification_v0.1.json",
         "finding_id": "CIS-005"
+      }
+    },
+    {
+      "finding_id": "DMS-005",
+      "service": "DeviceManagementService",
+      "semantic_issue_kind": "identifier_typo",
+      "sdk_behavior": "warning",
+      "activation_class": "resolver_or_profile_warning",
+      "required_precondition": "resolver_context_matched",
+      "result_effect": "emit_warning",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+          "note": "PDF response choice branch omits Get prefix; exact official XSD uses the Get-prefixed branch name."
+        },
+        {
+          "version": "V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.4.xsd",
+          "note": "The official public PDF retains the non-Get spelling; candidate/integration XSD retains the Get-prefixed declaration."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected context is DeviceManagementService V2.2 official or explicitly selected V2.4 candidate/integration",
+        "resolver/code-generation input contains the exact identifier DeviceManagementService.DeviceStatusInformationResponseData",
+        "selected schema authority exposes DeviceManagementService.GetDeviceStatusInformationResponseData and no non-Get alias"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "DMS-005"
+      }
+    },
+    {
+      "finding_id": "DMS-006",
+      "service": "DeviceManagementService",
+      "semantic_issue_kind": "cardinality_mismatch",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+          "note": "PDF table lists Name+Flag only; exact official XSD also requires DeviceStatusImpact and DeviceStatusPriority."
+        },
+        {
+          "version": "V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.4.xsd",
+          "note": "Official public PDF and candidate/integration XSD align with Impact/Priority optional."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected strict profile is official DeviceManagementService V2.2",
+        "XSD validation result is INVALID for DeviceStatusStructure because DeviceStatusImpact or DeviceStatusPriority is missing",
+        "submitted structure otherwise follows the PDF-visible DeviceStatusName plus DeviceStatusFlag shape"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "DMS-006"
+      }
+    },
+    {
+      "finding_id": "DMS-007",
+      "service": "DeviceManagementService",
+      "semantic_issue_kind": "wrong_operation_reference",
+      "sdk_behavior": "warning",
+      "activation_class": "resolver_or_profile_warning",
+      "required_precondition": "resolver_context_matched",
+      "result_effect": "emit_warning",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+          "note": "PDF UpdateTimestamp prose says GetUpdateStates; operation inventory/XSD context use GetUpdateHistory."
+        },
+        {
+          "version": "V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.4.xsd",
+          "note": "PDF typo persists; candidate/integration XSD context continues to use GetUpdateHistory."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected DMS context is V2.2 official or explicitly selected V2.4 candidate/integration",
+        "operation resolver or documentation-derived operation inventory contains the exact operation name GetUpdateStates",
+        "selected operation inventory uses GetUpdateHistory and does not expose GetUpdateStates"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "DMS-007"
+      }
+    },
+    {
+      "finding_id": "DRDMS22-004",
+      "service": "DeviceManagementService",
+      "semantic_issue_kind": "wrong_operation_reference",
+      "sdk_behavior": "info",
+      "activation_class": "informational",
+      "required_precondition": "informational_context_matched",
+      "result_effect": "emit_info",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+          "note": "Section title and exact service group use plural GetDeviceErrorMessages; request prose uses singular GetDeviceErrorMessage."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected profile is official DeviceManagementService V2.2",
+        "documentation-derived operation inventory or resolver input contains the exact singular operation name GetDeviceErrorMessage",
+        "selected DeviceManagementServiceGroup exposes GetDeviceErrorMessagesRequest/Response and no singular operation alias"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "DRDMS22-004"
       }
     },
     {

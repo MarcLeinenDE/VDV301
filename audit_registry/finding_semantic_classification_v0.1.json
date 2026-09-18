@@ -4130,10 +4130,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "DMS documentation-aware resolver/codegen encounters DeviceManagementService.DeviceStatusInformationResponseData",
-          "Unknown DMS response branch resembles the PDF-only non-Get spelling"
+          "selected context is DeviceManagementService V2.2 official or explicitly selected V2.4 candidate/integration",
+          "resolver/code-generation input contains the exact identifier DeviceManagementService.DeviceStatusInformationResponseData",
+          "selected schema authority exposes DeviceManagementService.GetDeviceStatusInformationResponseData and no non-Get alias"
         ]
       },
       "source_references": [
@@ -4239,10 +4240,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "Selected DMS V2.2 profile and DeviceStatusStructure is missing DeviceStatusImpact",
-          "Selected DMS V2.2 profile and DeviceStatusStructure is missing DeviceStatusPriority"
+          "selected strict profile is official DeviceManagementService V2.2",
+          "XSD validation result is INVALID for DeviceStatusStructure because DeviceStatusImpact or DeviceStatusPriority is missing",
+          "submitted structure otherwise follows the PDF-visible DeviceStatusName plus DeviceStatusFlag shape"
         ]
       },
       "source_references": [
@@ -4343,10 +4345,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "DMS operation resolver receives GetUpdateStates",
-          "Documentation-derived operation map contains GetUpdateStates"
+          "selected DMS context is V2.2 official or explicitly selected V2.4 candidate/integration",
+          "operation resolver or documentation-derived operation inventory contains the exact operation name GetUpdateStates",
+          "selected operation inventory uses GetUpdateHistory and does not expose GetUpdateStates"
         ]
       },
       "source_references": [
@@ -8063,9 +8066,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "Documentation-derived DMS operation inventory contains GetDeviceErrorMessage singular"
+          "selected profile is official DeviceManagementService V2.2",
+          "documentation-derived operation inventory or resolver input contains the exact singular operation name GetDeviceErrorMessage",
+          "selected DeviceManagementServiceGroup exposes GetDeviceErrorMessagesRequest/Response and no singular operation alias"
         ]
       },
       "source_references": [

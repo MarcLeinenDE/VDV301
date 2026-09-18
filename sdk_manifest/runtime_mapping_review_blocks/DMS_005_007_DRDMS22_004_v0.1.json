@@ -1,0 +1,62 @@
+{
+  "block_version": "0.1",
+  "block_id": "DMS_005_007_DRDMS22_004",
+  "review_date": "2026-09-18",
+  "source_semantic_registry_blob": "29f8de0609a0a68cfa6d1bc6a9a7aaa705ba1f54",
+  "policy": "exact_identifier_or_xsd_failure_only_no_alias_no_back_application",
+  "entries": [
+    {
+      "finding_id": "DMS-005",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "resolver_or_profile_warning",
+      "decision": "Exact non-Get PDF identifier may produce a warning in DMS V2.2 or explicitly selected V2.4 candidate context; it is never accepted as an alias.",
+      "guards": [
+        "exact identifier match only",
+        "no fuzzy similarity matching",
+        "must resolve to GetDeviceStatusInformationResponseData according to selected schema",
+        "must not register DeviceStatusInformationResponseData as alias"
+      ]
+    },
+    {
+      "finding_id": "DMS-006",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Advisory is allowed only after official DMS V2.2 XSD rejects a DeviceStatusStructure missing DeviceStatusImpact or DeviceStatusPriority.",
+      "guards": [
+        "official V2.2 strict profile only",
+        "must require XSD INVALID before advisory",
+        "must not back-apply V2.4 optionality",
+        "must not modify payload or XSD result"
+      ]
+    },
+    {
+      "finding_id": "DMS-007",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "resolver_or_profile_warning",
+      "decision": "Exact GetUpdateStates resolver/configuration input may be warned about; selected operation inventory remains GetUpdateHistory.",
+      "guards": [
+        "exact literal match only",
+        "no GetUpdateStates compatibility alias",
+        "no automatic rewrite",
+        "selected service/version authority required"
+      ]
+    },
+    {
+      "finding_id": "DRDMS22-004",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "informational",
+      "decision": "Exact singular GetDeviceErrorMessage in documentation-derived operation input may receive an informational correction to plural GetDeviceErrorMessages.",
+      "guards": [
+        "official DMS V2.2 context only",
+        "exact literal match only",
+        "no singular alias",
+        "must not change schema validation result"
+      ]
+    }
+  ],
+  "implementation_state": "reviewed_not_implemented"
+}
