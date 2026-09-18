@@ -10874,6 +10874,98 @@
       "notes": "Confirmed PDF table-label defect only. No operation rename, compatibility alias or runtime matcher is created."
     },
     {
+      "finding_id": "JIS-005",
+      "service": "JourneyInformationService",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_JourneyInformationService_V1.0.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact official JIS V1.0 route. In RetrieveSpecificGNSSPointInformationResponse, the selected XSD choice element is SpecificGNSSPointInformation and its type is JourneyInformationService.SpecificGNSSPointInformationData."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "wrong_structure_reference",
+      "secondary_issue_kinds": [
+        "pdf_element_name_type_name_confusion",
+        "response_choice_label_mismatch",
+        "specific_gnss_point_information",
+        "no_element_alias"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Physical page 17, table 21, visibly names the successful response choice row SpecificGNSSPointInformationData; the following table defines the Data-suffixed structure."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Exact JIS V1.0 defines choice element SpecificGNSSPointInformation typed as JourneyInformationService.SpecificGNSSPointInformationData and contains no choice element named SpecificGNSSPointInformationData."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-152 accepts a response using SpecificGNSSPointInformation and rejects the otherwise equivalent PDF-row-name form SpecificGNSSPointInformationData."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The PDF has placed the structure/type name in the response choice row where the executable XML element name is required; this does not justify an alias."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "JourneyInformationService V1.0: GNSS-Antwortelement mit Struktur-/Typnamen verwechselt",
+          "short": "Die PDF nennt SpecificGNSSPointInformationData als Antwortzeile; die XSD erwartet das Element SpecificGNSSPointInformation vom Typ …SpecificGNSSPointInformationData.",
+          "long": "JIS-005 ist ein bestätigter PDF/XSD-Namenskonflikt. In Tabelle 21 der offiziellen PDF wird die erfolgreiche Choice-Zeile als SpecificGNSSPointInformationData bezeichnet. Die exakte V1.0-XSD verlangt an dieser Stelle jedoch das Element SpecificGNSSPointInformation; dieses Element ist mit dem Typ JourneyInformationService.SpecificGNSSPointInformationData typisiert. EV-152 bestätigt die Grenze ausführbar: der XSD-Elementname wird akzeptiert, die Data-suffigierte PDF-Zeilenbezeichnung als Elementname wird zurückgewiesen.",
+          "recommendation": "Im XML ausschließlich SpecificGNSSPointInformation als Choice-Element verwenden; SpecificGNSSPointInformationData bleibt der Struktur-/Typname. Die PDF-Zeilenbezeichnung nicht als Elementalias akzeptieren oder normalisieren. Bei passendem XSD-Fehler kann ergänzend auf den Dokumentationsfehler hingewiesen werden."
+        },
+        "en": {
+          "title": "JourneyInformationService V1.0: GNSS response element confused with structure/type name",
+          "short": "The PDF names the response row SpecificGNSSPointInformationData; the XSD expects element SpecificGNSSPointInformation typed as …SpecificGNSSPointInformationData.",
+          "long": "JIS-005 is a confirmed PDF/XSD naming mismatch. Table 21 of the official PDF names the successful choice row SpecificGNSSPointInformationData. The exact V1.0 XSD instead requires element SpecificGNSSPointInformation at that position, with type JourneyInformationService.SpecificGNSSPointInformationData. EV-152 confirms this boundary executably: the XSD element name is accepted, while the Data-suffixed PDF row name used as an element is rejected.",
+          "recommendation": "Use only SpecificGNSSPointInformation as the XML choice element; SpecificGNSSPointInformationData remains the structure/type name. Do not accept or normalize the PDF row label as an element alias. When the matching XSD error occurs, an advisory may explain the documentation defect."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "selected profile is JourneyInformationService V1.0",
+          "XSD validation fails in RetrieveSpecificGNSSPointInformationResponse because SpecificGNSSPointInformationData is used as the choice element",
+          "the expected selected-XSD choice element is SpecificGNSSPointInformation"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_JIS_2026-09-08.md",
+          "note": "Terminal JIS report; JIS-005 is executable_confirmed."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-152 / run 34113437268 / job 101714662141 / closure run 34224429423 / audit_registry/jis_revalidation_evidence_2026-09-08.json",
+          "note": "Executable positive/negative evidence for the exact response choice element name."
+        },
+        {
+          "kind": "pdf",
+          "reference": "JIS_V1.0 / sha256 424181b4932e18b6ac059843fa3978fdcc07a9c6acb553f9fbe8b71ef583da73 / physical page 17 / tables 21-22",
+          "note": "Exact pinned PDF showing SpecificGNSSPointInformationData in the response choice row and as the following structure name."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_JourneyInformationService_V1.0.xsd @ 8c303db5a9c0548d66b90174d9c329d33092ad24",
+          "note": "Exact response choice declares element SpecificGNSSPointInformation with type JourneyInformationService.SpecificGNSSPointInformationData."
+        }
+      ],
+      "notes": "Confirmed PDF element-vs-type naming defect. Selected XSD validity remains authoritative; no compatibility alias is created."
+    },
+    {
       "finding_id": "TSD-004",
       "service": "TrainSetDataService",
       "version_scope": [
@@ -11399,8 +11491,8 @@
     }
   ],
   "progress": {
-    "classified_count": 137,
-    "remaining_count": 55,
+    "classified_count": 138,
+    "remaining_count": 54,
     "reviewed_blocks": [
       "ARA",
       "ARCH",
@@ -11434,9 +11526,10 @@
       "DRTVS21_V21_001_004",
       "HDS_V21_V22_V22A_HDS001",
       "JIS_V10_001_002",
-      "JIS_V10_003_004"
+      "JIS_V10_003_004",
+      "JIS_V10_005"
     ],
-    "latest_block": "JIS_V10_003_004",
-    "latest_block_file": "audit_registry/semantic_classification_blocks/JIS_V10_003_004_v0.1.json"
+    "latest_block": "JIS_V10_005",
+    "latest_block_file": "audit_registry/semantic_classification_blocks/JIS_V10_005_v0.1.json"
   }
 }
