@@ -28,6 +28,7 @@ def main() -> int:
     manifest = load_json("manifest_v0.1.json")
     result_schema = load_json("public_result_contract_v0.1.schema.json")
     overrides = load_json("routing_overrides_v0.1.json")
+    runtime_mapping = load_json("known_issues_runtime_mapping_v0.1.json")
 
     expect("manifest version is 0.1", manifest["manifest_version"] == "0.1")
     expect("routing overrides version matches manifest", overrides["manifest_version"] == manifest["manifest_version"])
@@ -47,6 +48,22 @@ def main() -> int:
     expect("public result carries check_id", "check_id" in public_props)
     expect("public result carries authority", "authority" in public_props)
     expect("public result carries severity", "severity" in public_props)
+
+    knowledge = manifest["known_issues_knowledge"]
+    runtime_counts = runtime_mapping["counts"]
+    expected_runtime_distribution = {
+        "candidate": runtime_counts["semantic_candidate_count"],
+        "not_applicable": runtime_counts["semantic_not_applicable_count"],
+        "not_designed": runtime_counts["semantic_not_designed_count"],
+        "reviewed": runtime_counts["reviewed_mapping_count"],
+    }
+    expect("Known-Issues runtime distribution matches runtime-mapping manifest", knowledge["runtime_match_distribution"] == expected_runtime_distribution)
+    expect("Known-Issues runtime distribution covers all findings", sum(knowledge["runtime_match_distribution"].values()) == knowledge["finding_count"])
+    expect("Known-Issues reviewed count matches runtime-mapping manifest", knowledge["reviewed_mapping_count"] == runtime_counts["reviewed_mapping_count"])
+    expect("Known-Issues candidate count matches runtime-mapping manifest", knowledge["candidate_mapping_count"] == runtime_counts["semantic_candidate_count"])
+    expect("Known-Issues not-designed count matches runtime-mapping manifest", knowledge["not_designed_mapping_count"] == runtime_counts["semantic_not_designed_count"])
+    expect("Known-Issues not-applicable count matches runtime-mapping manifest", knowledge["not_applicable_mapping_count"] == runtime_counts["semantic_not_applicable_count"])
+    expect("Known-Issues implemented count matches runtime-mapping manifest", knowledge["runtime_mapping_implemented_count"] == runtime_counts["implemented_count"])
 
     root_map = ROOT / manifest["storage_model"]["legacy_root_metadata"]
     expect("legacy V1.0 root map exists", root_map.is_file())
