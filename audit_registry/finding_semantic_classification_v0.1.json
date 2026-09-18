@@ -4839,10 +4839,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "V1.0 XML uses PDF spelling HertbeatIntervall",
-          "SystemConfigurationData/HeartbeatIntervall uses a duration lexical value"
+          "selected strict profile is official SystemDocumentationService V1.0",
+          "XSD validation result is INVALID because the submitted element name is exactly HertbeatIntervall, or because SystemDocumentationService.SystemConfigurationData/HeartbeatIntervall carries a duration lexical value instead of the selected XSD double shape",
+          "selected V1.0 XSD declares HeartbeatIntervall, with IBIS-IP.double in SystemConfigurationData and IBIS-IP.duration in StoreSystemConfigurationRequestStructure"
         ]
       },
       "source_references": [
@@ -5998,11 +5999,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "V2.0 input uses HertbeatIntervall",
-          "V2.0 input uses historical HeartbeatIntervall",
-          "HeartbeatInterval carries non-duration lexical content"
+          "selected strict profile is official SystemDocumentationService V2.0",
+          "XSD validation result is INVALID because the submitted identifier is exactly HertbeatIntervall or historical HeartbeatIntervall, or because HeartbeatInterval carries non-duration lexical content",
+          "selected V2.0 XSD declares only HeartbeatInterval as IBIS-IP.duration in both SystemConfigurationData and StoreSystemConfigurationRequestStructure"
         ]
       },
       "source_references": [
@@ -6080,9 +6081,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "Documentation-derived resolver/codegen encounters SystemDocumenationService"
+          "selected context is official SystemDocumentationService V2.0",
+          "resolver, code-generation input, or documentation-derived service inventory contains the exact service identifier SystemDocumenationService",
+          "selected schema authority uses SystemDocumentationService and exposes no SystemDocumenationService alias"
         ]
       },
       "source_references": [

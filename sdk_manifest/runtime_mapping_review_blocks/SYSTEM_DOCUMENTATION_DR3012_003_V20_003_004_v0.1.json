@@ -1,0 +1,60 @@
+{
+  "block_version": "0.1",
+  "block_id": "SYSTEM_DOCUMENTATION_DR3012_003_V20_003_004",
+  "review_date": "2026-09-18",
+  "source_semantic_registry_blob": "434f59c7ce9250ad6391a5dacc0745089408801d",
+  "policy": "exact_versioned_identifier_and_type_boundary_no_alias_no_cross_version_normalization",
+  "entries": [
+    {
+      "finding_id": "DR3012-003",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "authority_scope": "official_SystemDocumentationService_V1.0_only",
+      "decision": "Decorate only an actual V1.0 XSD INVALID result caused by exact PDF spelling HertbeatIntervall or by duration-shaped content at SystemConfigurationData/HeartbeatIntervall where the selected XSD requires IBIS-IP.double.",
+      "guards": [
+        "must require official V1.0 strict profile and XSD INVALID",
+        "must not treat PDF HertbeatIntervall as an alias",
+        "must preserve V1.0 HeartbeatIntervall spelling",
+        "must distinguish SystemConfigurationData IBIS-IP.double from StoreSystemConfigurationRequestStructure IBIS-IP.duration",
+        "must not normalize to V2.0 HeartbeatInterval"
+      ]
+    },
+    {
+      "finding_id": "DR3012V20-003",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "authority_scope": "official_SystemDocumentationService_V2.0_only",
+      "decision": "Decorate only an actual V2.0 XSD INVALID result caused by exact stale HertbeatIntervall/HeartbeatIntervall spelling or non-duration content for HeartbeatInterval.",
+      "guards": [
+        "must require official V2.0 strict profile and XSD INVALID",
+        "must not accept HertbeatIntervall or HeartbeatIntervall as aliases",
+        "must preserve HeartbeatInterval as the sole V2.0 identifier",
+        "must require selected-XSD IBIS-IP.duration semantics",
+        "must not back-normalize to the V1.0 identifier"
+      ]
+    },
+    {
+      "finding_id": "DR3012V20-004",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "resolver_or_profile_warning",
+      "authority_scope": "official_SystemDocumentationService_V2.0_only",
+      "decision": "Warn only on the exact documentation typo SystemDocumenationService in resolver/codegen/documentation-derived service identity input.",
+      "guards": [
+        "exact literal match only",
+        "must not register SystemDocumenationService as an alias",
+        "must not fuzzy-match arbitrary service names",
+        "selected schema authority remains SystemDocumentationService"
+      ]
+    }
+  ],
+  "implementation_state": "reviewed_not_implemented",
+  "evidence": [
+    "EV-129 / run 33765167655 / closure 33765633886",
+    "EV-130 / run 33780668141 / closure 33781049413",
+    "FINDING_REVALIDATION_VDV3012_V10_2026-09-03.md",
+    "FINDING_REVALIDATION_VDV3012_V20_2026-09-03.md"
+  ]
+}
