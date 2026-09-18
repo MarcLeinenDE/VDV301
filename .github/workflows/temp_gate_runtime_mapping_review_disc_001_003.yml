@@ -1,0 +1,113 @@
+name: temp-gate-runtime-mapping-review-disc-001-003
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_gate_runtime_mapping_review_disc_001_003.yml
+
+permissions:
+  contents: read
+
+jobs:
+  gate-disc-runtime-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+
+      - name: Verify exact DISC runtime-review prestate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "0bdd66e0815db951f4afc86ab675f838fcc5d63d"
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "29f8de0609a0a68cfa6d1bc6a9a7aaa705ba1f54"
+          test "$(git hash-object sdk_manifest/known_issues_runtime_mapping_v0.1.json)" = "62be186f79669dd1e635141db68b850dc12a6adb"
+          test "$(git hash-object sdk_manifest/runtime_mapping_review_blocks/DISC_001_003_v0.1.json)" = "abeb0d8d6b321b5f0647c339883823d52c2b25cc"
+          test "$(git hash-object tools/runtime_discovery_profile.py)" = "4473b913ad4576982789b2791b44e2cf1cba0c8d"
+          test "$(git hash-object tools/validate_discovery_runtime_rv002.py)" = "946488b2b7d08d681089ec5bbbfd6558dab57e35"
+
+      - name: Validate registries
+        run: |
+          set -euo pipefail
+          python tools/validate_finding_semantic_classification.py
+          python tools/validate_known_issues_runtime_mapping_v0_1.py
+
+      - name: Verify DISC applicability decisions and independent runtime authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from tools.runtime_discovery_profile import DiscoveryAdvertisement, check_general_vdv_discovery
+
+          semantic=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
+          mapping=json.loads(Path('sdk_manifest/known_issues_runtime_mapping_v0.1.json').read_text())
+          block=json.loads(Path('sdk_manifest/runtime_mapping_review_blocks/DISC_001_003_v0.1.json').read_text())
+          by={e['finding_id']:e for e in semantic['entries']}
+          for fid in ('DISC-001','DISC-002','DISC-003'):
+              assert by[fid]['runtime_match']['state']=='not_applicable'
+              assert by[fid]['runtime_match'].get('candidate_triggers',[])==[]
+              assert fid not in {m['finding_id'] for m in mapping['mappings']}
+
+          assert mapping['counts']=={
+              'reviewed_mapping_count':35,
+              'implemented_count':0,
+              'semantic_candidate_count':43,
+              'semantic_not_designed_count':1,
+              'semantic_not_applicable_count':113,
+          }
+
+          ad=DiscoveryAdvertisement(
+              instance_name='svc._ibisip_http._tcp.local',
+              service_name='ExampleService',
+              protocol_label='_ibisip_http._tcp',
+              srv_present=True,
+              srv_instance_name='svc._ibisip_http._tcp.local',
+              target='device.local',
+              port=8080,
+              txt_present=True,
+              txt_instance_name='svc._ibisip_http._tcp.local',
+              txt={'ver':'2.3','deviceclass':'OnBoardUnit','deviceID':'1'},
+              discovery_transport='mdns',
+          )
+          ok=check_general_vdv_discovery(ad,general_conventions_version='2.3',transport_family='http')
+          ids={r.check_id:r for r in ok}
+          assert ids['DISC-V01'].ok and ids['DISC-V02'].ok and ids['DISC-V03'].ok
+
+          ad_missing=DiscoveryAdvertisement(
+              instance_name=ad.instance_name,service_name=ad.service_name,protocol_label=ad.protocol_label,
+              srv_present=True,srv_instance_name=ad.srv_instance_name,target=ad.target,port=ad.port,
+              txt_present=True,txt_instance_name=ad.txt_instance_name,
+              txt={'ver':'2.3'},discovery_transport='unicast_dns'
+          )
+          bad=check_general_vdv_discovery(ad_missing,general_conventions_version='2.3',transport_family='http')
+          ids2={r.check_id:r for r in bad}
+          assert not ids2['DISC-V02'].ok and not ids2['DISC-V03'].ok
+
+          rb={e['finding_id']:e for e in block['entries']}
+          assert 'DISC-V01..DISC-V03' in rb['DISC-003']['preserved_runtime_authority']
+          assert all(e['final_state']=='not_applicable' for e in block['entries'])
+          print('PASSED: DISC findings are documentation context only; RV-002 runtime rules remain independent')
+          PY
+          python tools/validate_discovery_runtime_rv002.py
+
+      - name: Validate SDK and XSD immutability
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_sdk_manifest_v0_1.py
+          sha256sum ./*.xsd | sort > /tmp/xsd-before.sha256
+          python tools/validate_xsd_pool.py --repo-root .
+          sha256sum ./*.xsd | sort > /tmp/xsd-after.sha256
+          cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          git diff --exit-code
+          echo "PASSED: DISC runtime applicability gate complete; repository remains unmodified"
