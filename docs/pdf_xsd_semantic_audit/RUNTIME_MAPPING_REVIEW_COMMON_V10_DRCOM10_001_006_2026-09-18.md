@@ -48,6 +48,8 @@ implemented      0
 
 Primary Common V1.0 remainder gate **35348461470**: **SUCCESS**.
 
+Closure/consistency gate **35348611447**: **SUCCESS**.
+
 The gate verified:
 
 - semantic registry and deterministic 48-entry runtime-mapping regeneration;
@@ -57,6 +59,7 @@ The gate verified:
 - authoritative V1.0 enum lexemes `WheelChair` and `Other`;
 - absence of PDF-side `Wheelchair` and `Others` from the selected XSD;
 - no synthetic V1.1 profile or enum alias policy;
-- all root XSDs unchanged.
+- all root XSDs unchanged;
+- synchronized SDK/runtime-mapping counters pass the hardened consistency validator.
 
 No executable Known-Issues matcher was added and no XSD was changed.
