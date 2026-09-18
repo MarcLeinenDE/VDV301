@@ -4,7 +4,7 @@
   "state": "reviewed_inventory",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "7ebc8c98120ae7b1740629729037c05cef4b0f38",
+    "git_blob": "7f466278c2f6dd8e7fea047a4af0a97595af2c95",
     "classification_state": "complete",
     "finding_count": 192
   },
@@ -19,9 +19,9 @@
     "implementation_requires_separate_profile_specific_validation": true
   },
   "counts": {
-    "reviewed_mapping_count": 30,
+    "reviewed_mapping_count": 32,
     "implemented_count": 0,
-    "semantic_candidate_count": 51,
+    "semantic_candidate_count": 49,
     "semantic_not_designed_count": 1,
     "semantic_not_applicable_count": 110
   },
@@ -57,6 +57,68 @@
       "diagnostic_source": {
         "registry": "audit_registry/finding_semantic_classification_v0.1.json",
         "finding_id": "ARA-001"
+      }
+    },
+    {
+      "finding_id": "ARA-003",
+      "service": "AnalogRadioService",
+      "semantic_issue_kind": "cardinality_mismatch",
+      "sdk_behavior": "info",
+      "activation_class": "informational",
+      "required_precondition": "informational_context_matched",
+      "result_effect": "emit_info",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V2.4",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The official PDF table states 1:1 while its embedded schema view shows the element as optional."
+        },
+        {
+          "version": "V2.4 candidate/integration",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_AnalogRadioService_V2.4.xsd",
+          "note": "EV-105 confirms omission and presence are both valid in candidate/integration material; this is not official release conformance."
+        }
+      ],
+      "trigger_descriptions": [
+        "explicitly selected candidate/integration profile AnalogRadioService V2.4",
+        "candidate XSD validation result is VALID for AnalogRadioService.SendTelegram",
+        "RadioTelegramStructure omits Transmitter"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "ARA-003"
+      }
+    },
+    {
+      "finding_id": "ARA-004",
+      "service": "AnalogRadioService",
+      "semantic_issue_kind": "wrong_operation_reference",
+      "sdk_behavior": "warning",
+      "activation_class": "resolver_or_profile_warning",
+      "required_precondition": "resolver_context_matched",
+      "result_effect": "emit_warning",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V2.4",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The inconsistency is fully established within the official PDF."
+        }
+      ],
+      "trigger_descriptions": [
+        "service/document context is AnalogRadioService V2.4",
+        "observed URI or configured operation path uses the exact operation segment SendFFSKTelegram",
+        "emit guidance for SendTelegram without accepting, rewriting, or registering SendFFSKTelegram as an alias"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "ARA-004"
       }
     },
     {

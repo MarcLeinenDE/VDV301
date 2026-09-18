@@ -24,6 +24,7 @@ BEHAVIOR_MAP = {
     "valid_with_advisory": ("xsd_valid_advisory", "xsd_result_valid", "decorate_existing_valid"),
     "warning": ("resolver_or_profile_warning", "resolver_context_matched", "emit_warning"),
     "no_runtime_diagnostic": ("routing_only", "routing_context_matched", "routing_only_no_public_diagnostic"),
+    "info": ("informational", "informational_context_matched", "emit_info"),
 }
 
 

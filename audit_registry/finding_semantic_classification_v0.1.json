@@ -245,10 +245,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "candidate/integration AnalogRadioService V2.4 analysis",
-          "RadioTelegramStructure omits Transmitter although the PDF table appears to require it"
+          "explicitly selected candidate/integration profile AnalogRadioService V2.4",
+          "candidate XSD validation result is VALID for AnalogRadioService.SendTelegram",
+          "RadioTelegramStructure omits Transmitter"
         ]
       },
       "source_references": [
@@ -330,10 +331,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "AnalogRadioService URI or configured operation path contains SendFFSKTelegram",
-          "context is V2.4 documentation-derived configuration"
+          "service/document context is AnalogRadioService V2.4",
+          "observed URI or configured operation path uses the exact operation segment SendFFSKTelegram",
+          "emit guidance for SendTelegram without accepting, rewriting, or registering SendFFSKTelegram as an alias"
         ]
       },
       "source_references": [

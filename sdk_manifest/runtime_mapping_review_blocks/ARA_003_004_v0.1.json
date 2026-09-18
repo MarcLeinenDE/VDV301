@@ -1,0 +1,46 @@
+{
+  "block_version": "0.1",
+  "block_id": "ARA_003_004",
+  "review_date": "2026-09-18",
+  "source_semantic_registry_blob": "7ebc8c98120ae7b1740629729037c05cef4b0f38",
+  "policy": "profile_specific_review_no_alias_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "ARA-003",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "informational",
+      "authority_scope": "candidate_integration_only",
+      "decision": "A deterministic informational mapping is justified only when the AnalogRadioService V2.4 candidate/integration profile is explicitly selected, the candidate XSD result is VALID, and RadioTelegramStructure omits Transmitter.",
+      "guards": [
+        "must not run for an official V2.4 strict profile because no official release-XSD authority exists",
+        "must not change the candidate XSD VALID result",
+        "must not claim official V2.4 conformance",
+        "must not require Transmitter despite the PDF table's 1:1 row"
+      ],
+      "evidence": [
+        "EV-105 confirms candidate XSD accepts SendTelegram with and without Transmitter",
+        "official V2.4 PDF is internally contradictory: table 1:1 vs embedded schema minOccurs=0"
+      ]
+    },
+    {
+      "finding_id": "ARA-004",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "resolver_or_profile_warning",
+      "authority_scope": "documentation_context",
+      "decision": "An exact operation-path warning is justified when AnalogRadioService V2.4 context contains the literal SendFFSKTelegram path segment from the erroneous URI example.",
+      "guards": [
+        "exact literal match only; no fuzzy operation-name matching",
+        "must recommend SendTelegram but never rewrite the observed URI",
+        "must not register SendFFSKTelegram as an operation alias",
+        "must not imply an official V2.4 XSD profile exists"
+      ],
+      "evidence": [
+        "official V2.4 operation inventory and XML example use SendTelegram",
+        "only the concrete URI example uses SendFFSKTelegram"
+      ]
+    }
+  ],
+  "implementation_state": "reviewed_not_implemented"
+}
