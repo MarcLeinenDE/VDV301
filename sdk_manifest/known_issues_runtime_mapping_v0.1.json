@@ -4,7 +4,7 @@
   "state": "reviewed_inventory",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "7f466278c2f6dd8e7fea047a4af0a97595af2c95",
+    "git_blob": "fd73c0993cf379751709f8ef51d6e4337dfd3b49",
     "classification_state": "complete",
     "finding_count": 192
   },
@@ -19,9 +19,9 @@
     "implementation_requires_separate_profile_specific_validation": true
   },
   "counts": {
-    "reviewed_mapping_count": 32,
+    "reviewed_mapping_count": 35,
     "implemented_count": 0,
-    "semantic_candidate_count": 49,
+    "semantic_candidate_count": 46,
     "semantic_not_designed_count": 1,
     "semantic_not_applicable_count": 110
   },
@@ -836,6 +836,120 @@
       "diagnostic_source": {
         "registry": "audit_registry/finding_semantic_classification_v0.1.json",
         "finding_id": "CIS-001"
+      }
+    },
+    {
+      "finding_id": "CIS-003",
+      "service": "CustomerInformationService",
+      "semantic_issue_kind": "wrong_operation_reference",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "CIS V2.0",
+          "authority": "official_release",
+          "xsd_profile": "CIS blob fa8f0a51ad5f612660c9532c8557ad1ca473a908",
+          "note": "Official release route pinned by EV-125."
+        },
+        {
+          "version": "CIS V2.2",
+          "authority": "official_release",
+          "xsd_profile": "CIS blob ddc70ed9d6238f1377be1d7728ff46b36a22ee1e",
+          "note": "Official release route pinned by EV-125."
+        },
+        {
+          "version": "CIS V2.3",
+          "authority": "official_release",
+          "xsd_profile": "CIS blob bf921c857a3abfcbe9c6c24fe525d6cc7d2d399e",
+          "note": "Official release route pinned by EV-125."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected strict profile is CustomerInformationService V2.0, V2.2, or V2.3",
+        "XSD validation result is INVALID because the global response root is exactly CustomerInformationService.GetCurrentConnectionResponse",
+        "selected XSD defines CustomerInformationService.GetCurrentConnectionInformationResponse as the valid global response root"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CIS-003"
+      }
+    },
+    {
+      "finding_id": "CIS-004",
+      "service": "CustomerInformationService",
+      "semantic_issue_kind": "wrong_operation_reference",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "CIS V2.0",
+          "authority": "official_release",
+          "xsd_profile": "CIS blob fa8f0a51ad5f612660c9532c8557ad1ca473a908",
+          "note": "Official release route pinned by EV-125."
+        },
+        {
+          "version": "CIS V2.2",
+          "authority": "official_release",
+          "xsd_profile": "CIS blob ddc70ed9d6238f1377be1d7728ff46b36a22ee1e",
+          "note": "Official release route pinned by EV-125."
+        },
+        {
+          "version": "CIS V2.3",
+          "authority": "official_release",
+          "xsd_profile": "CIS blob bf921c857a3abfcbe9c6c24fe525d6cc7d2d399e",
+          "note": "Official release route pinned by EV-125."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected strict profile is CustomerInformationService V2.0, V2.2, or V2.3",
+        "XSD validation result is INVALID because the global request root is exactly CustomerInformationService.RetrievePartialStopRequest",
+        "selected XSD defines CustomerInformationService.RetrievePartialStopSequenceRequest as the valid global request root"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CIS-004"
+      }
+    },
+    {
+      "finding_id": "CIS-005",
+      "service": "CustomerInformationService",
+      "semantic_issue_kind": "wrong_type_reference",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "CIS V2.2",
+          "authority": "official_release",
+          "xsd_profile": "CIS blob ddc70ed9d6238f1377be1d7728ff46b36a22ee1e",
+          "note": "Official release route pinned by EV-125."
+        },
+        {
+          "version": "CIS V2.3",
+          "authority": "official_release",
+          "xsd_profile": "CIS blob bf921c857a3abfcbe9c6c24fe525d6cc7d2d399e",
+          "note": "Official release route pinned by EV-125."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected strict profile is CustomerInformationService V2.2 or V2.3",
+        "XSD validation result is INVALID for MyOwnVehicleMode because the submitted value is scalar text rather than structured NetexMode content",
+        "selected XSD declares VehicleInformationGroup.MyOwnVehicleMode with type NetexMode"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CIS-005"
       }
     },
     {

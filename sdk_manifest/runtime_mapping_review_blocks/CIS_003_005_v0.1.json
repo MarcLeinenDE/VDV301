@@ -1,0 +1,56 @@
+{
+  "block_version": "0.1",
+  "block_id": "CIS_003_005",
+  "review_date": "2026-09-18",
+  "source_semantic_registry_blob": "7f466278c2f6dd8e7fea047a4af0a97595af2c95",
+  "policy": "exact_xsd_failure_boundary_no_alias_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "CIS-003",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "authority_scope": "official_CIS_V2.0_V2.2_V2.3",
+      "decision": "Match only an actual strict-XSD INVALID result caused by the exact PDF-short global root CustomerInformationService.GetCurrentConnectionResponse.",
+      "guards": [
+        "exact QName/root match only",
+        "must require XSD INVALID before advisory",
+        "must not accept or alias the PDF-short root",
+        "must recommend CustomerInformationService.GetCurrentConnectionInformationResponse"
+      ]
+    },
+    {
+      "finding_id": "CIS-004",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "authority_scope": "official_CIS_V2.0_V2.2_V2.3",
+      "decision": "Match only an actual strict-XSD INVALID result caused by the exact PDF-short global root CustomerInformationService.RetrievePartialStopRequest.",
+      "guards": [
+        "exact QName/root match only",
+        "must require XSD INVALID before advisory",
+        "must not accept or alias the PDF-short root",
+        "must recommend CustomerInformationService.RetrievePartialStopSequenceRequest"
+      ]
+    },
+    {
+      "finding_id": "CIS-005",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "authority_scope": "official_CIS_V2.2_V2.3_only",
+      "decision": "Match only an actual V2.2/V2.3 strict-XSD INVALID result where MyOwnVehicleMode was submitted as scalar text although the selected XSD requires structured NetexMode content.",
+      "guards": [
+        "must not run for CIS V2.0 where MyOwnVehicleMode is absent",
+        "must require XSD INVALID before advisory",
+        "must not rewrite scalar text into NetexMode",
+        "must preserve selected-XSD type authority"
+      ]
+    }
+  ],
+  "implementation_state": "reviewed_not_implemented",
+  "evidence": [
+    "EV-125 run 33744039627",
+    "FINDING_REVALIDATION_CIS_2026-09-03.md"
+  ]
+}

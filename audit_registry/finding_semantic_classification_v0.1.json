@@ -3199,10 +3199,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "CustomerInformationService response root uses GetCurrentConnectionResponse from the PDF detail label",
-          "strict CIS V2.0/V2.2/V2.3 XSD validation rejects the PDF short root"
+          "selected strict profile is CustomerInformationService V2.0, V2.2, or V2.3",
+          "XSD validation result is INVALID because the global response root is exactly CustomerInformationService.GetCurrentConnectionResponse",
+          "selected XSD defines CustomerInformationService.GetCurrentConnectionInformationResponse as the valid global response root"
         ]
       },
       "source_references": [
@@ -3291,10 +3292,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "CustomerInformationService request root uses RetrievePartialStopRequest from the PDF detail label",
-          "strict CIS V2.0/V2.2/V2.3 XSD validation rejects the PDF root name"
+          "selected strict profile is CustomerInformationService V2.0, V2.2, or V2.3",
+          "XSD validation result is INVALID because the global request root is exactly CustomerInformationService.RetrievePartialStopRequest",
+          "selected XSD defines CustomerInformationService.RetrievePartialStopSequenceRequest as the valid global request root"
         ]
       },
       "source_references": [
@@ -3377,10 +3379,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "MyOwnVehicleMode is supplied as scalar PtModesEnumeration text on CIS V2.2/V2.3",
-          "strict XSD expects structured NetexMode content"
+          "selected strict profile is CustomerInformationService V2.2 or V2.3",
+          "XSD validation result is INVALID for MyOwnVehicleMode because the submitted value is scalar text rather than structured NetexMode content",
+          "selected XSD declares VehicleInformationGroup.MyOwnVehicleMode with type NetexMode"
         ]
       },
       "source_references": [
