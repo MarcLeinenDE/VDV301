@@ -11399,6 +11399,81 @@
       "notes": "Documentation-only section-numbering defect. No XSD/runtime effect and no language-specific technical interpretation is created."
     },
     {
+      "finding_id": "NET-003",
+      "service": "NetworkInfrastructure",
+      "version_scope": [
+        {
+          "version": "VDV 301-3 02/2020",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official VDV 301-3 Network Infrastructure publication. This profile intentionally has no XSD lane; the finding is a local standard-name spelling error in documentation."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "documentation_spelling",
+      "secondary_issue_kinds": [
+        "IEE_vs_IEEE",
+        "IEEE_802_3_reference",
+        "local_standard_name_typo",
+        "same_document_positive_control"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "German page 11 visibly prints IEE 802.3, while the same exact official publication uses IEEE 802.3 correctly elsewhere, including pages 7/8 and the IEEE 802.3af/at/bt PoE reference on page 29."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The same-document correct spellings actively disprove an intentional alternate abbreviation. The page-11 form is therefore a local editorial typo with no executable semantic effect."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VDV 301-3 02/2020: IEE 802.3 statt IEEE 802.3",
+          "short": "Auf Seite 11 steht einmal IEE 802.3; dieselbe Veröffentlichung verwendet IEEE 802.3 an anderen Stellen korrekt.",
+          "long": "NET-003 ist ein bestätigter lokaler Schreibfehler der Dokumentation. Auf der deutschen Seite 11 steht sichtbar IEE 802.3. Dieselbe byte-gepinnte Veröffentlichung verwendet an anderen Stellen korrekt IEEE 802.3, darunter im allgemeinen Kontext auf den Seiten 7/8 sowie als IEEE 802.3af/at/bt in der PoE-Passage auf Seite 29. Eine absichtliche alternative Abkürzung ist damit aktiv widerlegt.",
+          "recommendation": "Die Stelle als IEEE 802.3 interpretieren und den Fehler nur als Dokumentationshinweis führen. Daraus keine technische Aliasregel, keine XSD-Regel und keine Runtime-Diagnostik erzeugen."
+        },
+        "en": {
+          "title": "VDV 301-3 02/2020: IEE 802.3 instead of IEEE 802.3",
+          "short": "Page 11 contains IEE 802.3 once; the same publication correctly uses IEEE 802.3 elsewhere.",
+          "long": "NET-003 is a confirmed local documentation spelling error. German page 11 visibly prints IEE 802.3. The same byte-pinned publication correctly uses IEEE 802.3 elsewhere, including the general context on pages 7/8 and the IEEE 802.3af/at/bt PoE reference on page 29. An intentional alternate abbreviation is therefore actively disproved.",
+          "recommendation": "Interpret the reference as IEEE 802.3 and retain the issue as documentation guidance only. Do not create a technical alias rule, XSD rule, or runtime diagnostic from this finding."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_NETWORK_2026-09-08.md",
+          "note": "Terminal NET report; NET-003 is context_verified."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-154 / run 34232483234 / job 102081822927 / closure run 34266935807 / audit_registry/network_vdv301_3_revalidation_evidence_2026-09-08.json",
+          "note": "Pinned visual evidence and same-document positive controls disproving an intentional IEE abbreviation."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-3_02-2020 / sha256 edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99 / physical pages 7,8,11,29",
+          "note": "Exact publication bytes showing the page-11 typo and correct IEEE spellings elsewhere."
+        }
+      ],
+      "notes": "Documentation-only local spelling typo. No XSD lane exists for VDV 301-3 and no executable diagnostic is warranted."
+    },
+    {
       "finding_id": "TSD-004",
       "service": "TrainSetDataService",
       "version_scope": [
@@ -11924,8 +11999,8 @@
     }
   ],
   "progress": {
-    "classified_count": 143,
-    "remaining_count": 49,
+    "classified_count": 144,
+    "remaining_count": 48,
     "reviewed_blocks": [
       "ARA",
       "ARCH",
@@ -11963,9 +12038,10 @@
       "JIS_V10_005",
       "LS_V10_001_002",
       "LS_V10_003",
-      "NET_VDV3013_001_002"
+      "NET_VDV3013_001_002",
+      "NET_VDV3013_003"
     ],
-    "latest_block": "NET_VDV3013_001_002",
-    "latest_block_file": "audit_registry/semantic_classification_blocks/NET_VDV3013_001_002_v0.1.json"
+    "latest_block": "NET_VDV3013_003",
+    "latest_block_file": "audit_registry/semantic_classification_blocks/NET_VDV3013_003_v0.1.json"
   }
 }
