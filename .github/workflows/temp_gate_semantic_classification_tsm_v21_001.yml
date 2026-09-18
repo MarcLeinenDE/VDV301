@@ -32,7 +32,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD^)" = "1dd621f5558efbcdf925ea3e461e94d63f23862b"
+          test "$(git rev-parse HEAD^)" = "88c18bb4f21f7470a826281879f0de0553f21b5b"
           test "$(git hash-object audit_registry/semantic_classification_blocks/TSM_V21_001_v0.1.json)" = "ff1dd05b70ab618ec001efb02c05c7f99b931e93"
           test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "e2daaf4756c5770b6f78fa1df459da38188746c1"
           test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
@@ -103,7 +103,7 @@ jobs:
           dr22=Path('docs/pdf_xsd_semantic_audit/deep_read/TRAINSET_V2.2.md').read_text()
           assert 'V2.1 old-name root GetTrainSetComposition            VALID' in dr21
           assert 'later GetTrainSetCompositionResponse root            INVALID / no matching global declaration' in dr21
-          assert 'GetTrainSetCompositionResponse replaces the V2.1 name without' in dr22
+          assert '`TrainSetManagementService.GetTrainSetCompositionResponse` replaces the V2.1 name without `Response`.' in dr22
           print('PASSED: TSM-001 authority and correction history verified')
           PY
 
