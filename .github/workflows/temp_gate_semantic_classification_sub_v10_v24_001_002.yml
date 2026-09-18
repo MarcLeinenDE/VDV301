@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: dev/schema-integration
-          fetch-depth: 2
+          fetch-depth: 4
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -32,8 +32,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD^)" = "747c7ab6bc1cc6e118c576d984b7138bdbf2b0b1"
-          test "$(git rev-parse HEAD^^)" = "85e1aa9027f4a283b61ee9580da2d275f7bd077b"
+          test "$(git rev-parse HEAD^)" = "186fad2fc514710605d4d8e44d80c86b8f65b3ac"
+          test "$(git rev-parse HEAD^^)" = "747c7ab6bc1cc6e118c576d984b7138bdbf2b0b1"
+          test "$(git rev-parse HEAD^^^)" = "85e1aa9027f4a283b61ee9580da2d275f7bd077b"
           test "$(git hash-object audit_registry/semantic_classification_blocks/SUB_V10_V24_001_002_v0.1.json)" = "f2195926fcee122c0301852aad0393ca5f61df49"
           test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "8e6ab3600a99e0373535ccd45774d781a46b1e80"
           test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
