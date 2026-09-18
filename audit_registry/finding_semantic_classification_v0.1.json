@@ -11243,6 +11243,162 @@
       "notes": "Confirmed intentional service-specific modelling. The SDK must preserve exact service/version schema routing; no generic root alias or runtime finding diagnostic is created."
     },
     {
+      "finding_id": "NET-001",
+      "service": "NetworkInfrastructure",
+      "version_scope": [
+        {
+          "version": "VDV 301-3 02/2020",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official VDV 301-3 Network Infrastructure publication. This profile intentionally has no XSD lane; the finding is limited to a local English document-number typo."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "identifier_typo",
+      "secondary_issue_kinds": [
+        "wrong_document_number",
+        "VDV_303_3_vs_VDV_301_3",
+        "english_scope_typo",
+        "document_identity"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "pdf_can_mislead_implementation",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "English Scope page 8 visibly says VDV 303-3, while German Scope page 7 and the same publication footer identify the document as VDV 301-3."
+        },
+        {
+          "type": "official_release_provenance",
+          "note": "The exact byte-pinned publication is VDV-Schrift 301-3 Network Infrastructure, 02/2020. EV-154 confirms fresh bytes match the independent historical pin."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The alternate-document hypothesis is rejected by the publication identity, footer and German Scope. The 303-3 string is therefore a local documentation-number typo, not a second authority."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VDV 301-3 02/2020: englischer Scope nennt fälschlich VDV 303-3",
+          "short": "Im englischen Scope steht VDV 303-3; Dokumentidentität, deutscher Scope und Seitenfuß bestätigen VDV 301-3.",
+          "long": "NET-001 ist ein bestätigter Dokumentationsfehler. Auf der englischen Scope-Seite steht sichtbar VDV 303-3. Die deutsche Scope-Seite, der Seitenfuß und die Identität der byte-gepinnten Veröffentlichung bestätigen dagegen durchgängig VDV 301-3. Damit ist die alternative Interpretation eines anderen Dokuments aktiv widerlegt; die falsche Nummer ist lokal auf den englischen Text begrenzt.",
+          "recommendation": "Die Veröffentlichung als VDV 301-3 behandeln. VDV 303-3 nicht als alternative Dokumentidentität, Profilkennung oder Routinginformation übernehmen. Dieses Finding nur als Dokumentationshinweis führen."
+        },
+        "en": {
+          "title": "VDV 301-3 02/2020: English Scope incorrectly says VDV 303-3",
+          "short": "The English Scope says VDV 303-3, while the document identity, German Scope and footer confirm VDV 301-3.",
+          "long": "NET-001 is a confirmed documentation defect. The English Scope visibly states VDV 303-3. The German Scope, page footer and identity of the byte-pinned publication consistently establish VDV 301-3. The alternate-document interpretation is therefore actively disproved; the wrong number is local to the English text.",
+          "recommendation": "Treat the publication as VDV 301-3. Do not use VDV 303-3 as an alternate document identity, profile identifier, or routing input. Retain this finding as documentation guidance only."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_NETWORK_2026-09-08.md",
+          "note": "Terminal NET report; NET-001 is context_verified."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-154 / run 34232483234 / job 102081822927 / closure run 34266935807 / audit_registry/network_vdv301_3_revalidation_evidence_2026-09-08.json",
+          "note": "Pinned visual evidence and active disproof of the alternate-document interpretation."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-3_02-2020 / sha256 edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99 / physical pages 7-8",
+          "note": "Exact publication bytes showing VDV 301-3 identity versus the local English VDV 303-3 typo."
+        }
+      ],
+      "notes": "Documentation-only document-number typo. VDV 301-3 intentionally has no XSD lane; no runtime or schema rule is created."
+    },
+    {
+      "finding_id": "NET-002",
+      "service": "NetworkInfrastructure",
+      "version_scope": [
+        {
+          "version": "VDV 301-3 02/2020",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official VDV 301-3 Network Infrastructure publication. This profile intentionally has no XSD lane; the finding is limited to bilingual section numbering."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "other",
+      "secondary_issue_kinds": [
+        "bilingual_subsection_number_mismatch",
+        "english_toc_sequence_gap",
+        "2_3_4_vs_2_3_5",
+        "navigation_editorial_error"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "pdf_can_mislead_implementation",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "German page 14 numbers the cabling subsection 2.3.4; English page 20 numbers the corresponding subsection 2.3.5, and the English table of contents skips from 2.3.3 directly to 2.3.5."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The matching bilingual subject matter and the English sequence gap reject intentional renumbering as a plausible explanation. The mismatch is an editorial navigation error."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VDV 301-3 02/2020: inkonsistente Abschnittsnummer 2.3.4/2.3.5",
+          "short": "Der deutsche Verkabelungsabschnitt ist 2.3.4; die entsprechende englische Fassung ist fälschlich als 2.3.5 nummeriert.",
+          "long": "NET-002 ist ein bestätigter bilingualer Redaktionsfehler. Der deutsche Abschnitt zur Verkabelung von Endgeräten mit Switches ist auf Seite 14 als 2.3.4 nummeriert. Die entsprechende englische Fassung auf Seite 20 trägt 2.3.5; zusätzlich springt das englische Inhaltsverzeichnis auf Seite 6 direkt von 2.3.3 auf 2.3.5. Für eine absichtliche sprachspezifische Umnummerierung gibt es damit keine belastbare Grundlage.",
+          "recommendation": "Die abweichende englische Abschnittsnummer nur als Navigations-/Dokumentationsfehler behandeln. Keine technische Regel, Profilversion oder ausführbare Semantik aus 2.3.5 ableiten."
+        },
+        "en": {
+          "title": "VDV 301-3 02/2020: inconsistent section numbering 2.3.4/2.3.5",
+          "short": "The German cabling subsection is 2.3.4; the corresponding English subsection is incorrectly numbered 2.3.5.",
+          "long": "NET-002 is a confirmed bilingual editorial defect. The German subsection on cabling end devices with switches is numbered 2.3.4 on page 14. The corresponding English subsection on page 20 is numbered 2.3.5, and the English table of contents on page 6 skips directly from 2.3.3 to 2.3.5. There is therefore no reliable basis for treating this as intentional language-specific renumbering.",
+          "recommendation": "Treat the differing English subsection number as a navigation/documentation error only. Do not derive a technical rule, profile version, or executable semantic from 2.3.5."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_NETWORK_2026-09-08.md",
+          "note": "Terminal NET report; NET-002 is context_verified."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-154 / run 34232483234 / job 102081822927 / closure run 34266935807 / audit_registry/network_vdv301_3_revalidation_evidence_2026-09-08.json",
+          "note": "Pinned visual evidence for the German 2.3.4, English 2.3.5 and English ToC sequence gap."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-3_02-2020 / sha256 edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99 / physical pages 6,14,20",
+          "note": "Exact publication bytes establishing the bilingual subsection-number mismatch."
+        }
+      ],
+      "notes": "Documentation-only section-numbering defect. No XSD/runtime effect and no language-specific technical interpretation is created."
+    },
+    {
       "finding_id": "TSD-004",
       "service": "TrainSetDataService",
       "version_scope": [
@@ -11768,8 +11924,8 @@
     }
   ],
   "progress": {
-    "classified_count": 141,
-    "remaining_count": 51,
+    "classified_count": 143,
+    "remaining_count": 49,
     "reviewed_blocks": [
       "ARA",
       "ARCH",
@@ -11806,9 +11962,10 @@
       "JIS_V10_003_004",
       "JIS_V10_005",
       "LS_V10_001_002",
-      "LS_V10_003"
+      "LS_V10_003",
+      "NET_VDV3013_001_002"
     ],
-    "latest_block": "LS_V10_003",
-    "latest_block_file": "audit_registry/semantic_classification_blocks/LS_V10_003_v0.1.json"
+    "latest_block": "NET_VDV3013_001_002",
+    "latest_block_file": "audit_registry/semantic_classification_blocks/NET_VDV3013_001_002_v0.1.json"
   }
 }
