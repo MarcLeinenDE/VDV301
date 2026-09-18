@@ -11143,6 +11143,106 @@
       "notes": "Confirmed non-defect. Exact punctuation is part of the XML identifier and must not be normalized."
     },
     {
+      "finding_id": "LS-003",
+      "service": "Location Services",
+      "version_scope": [
+        {
+          "version": "BeaconLocationService V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_BeaconLocationService_V1.0.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact Beacon V1.0 route. The only top-level service root is BeaconLocationService.GetDataResponse, containing the Data / OperationErrorMessage choice."
+        },
+        {
+          "version": "DistanceLocationService V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DistanceLocationService_V1.0.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact Distance V1.0 route. The top-level service root is DistanceLocationService.Data."
+        },
+        {
+          "version": "GNSSLocationService V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_GNSSLocationService_V1.0.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact GNSS V1.0 route. The top-level service root is GNSSLocationService.Data."
+        },
+        {
+          "version": "NetworkLocationService V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_NetworkLocationService_V1.0.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact Network V1.0 route. The top-level service root is NetworkLocationService.Data."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "contextual",
+      "primary_issue_kind": "intentional_design_misread",
+      "secondary_issue_kinds": [
+        "service_specific_root_modelling",
+        "beacon_wrapper_vs_raw_data_roots",
+        "schema_routing_rule",
+        "no_generic_location_root"
+      ],
+      "defect_assessment": "non_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact four V1.0 service schemas deliberately expose different top-level root models: BeaconLocationService.GetDataResponse versus raw DistanceLocationService.Data, GNSSLocationService.Data and NetworkLocationService.Data."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "The official PDFs mirror the service-specific structures; Beacon documents GetDataResponse with Data/OperationErrorMessage while the other location services document their raw Data structures."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-153 validates each positive sample against its own service schema and confirms cross-schema rejection, proving that these services must be routed by the exact selected service/version schema."
+        },
+        {
+          "type": "technical_inference",
+          "note": "Normalizing all Location Services to one generic root pattern would create a contract that is not present in the official schemas and would break otherwise valid service-specific payloads."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "Location Services V1.0: absichtlich unterschiedliche Root-Modelle",
+          "short": "Beacon nutzt GetDataResponse; Distance, GNSS und Network verwenden jeweils eigene *.Data-Roots.",
+          "long": "LS-003 ist kein Defekt. Die vier Location Services V1.0 sind absichtlich unterschiedlich modelliert. BeaconLocationService verwendet den Root BeaconLocationService.GetDataResponse mit einer Choice aus Data und OperationErrorMessage. DistanceLocationService, GNSSLocationService und NetworkLocationService verwenden dagegen jeweils einen direkten *.Data-Root. EV-153 bestätigt ausführbar, dass die jeweiligen Positivbeispiele nur auf der zugehörigen Service-XSD gültig sind und bei absichtlich falscher Schema-Zuordnung zurückgewiesen werden. Ein generisches, vereinheitlichtes Location-Root-Modell wäre daher nicht normkonform.",
+          "recommendation": "Vor der XML-Validierung den exakten Service und die ausgewählte Version bestimmen und anschließend ausschließlich gegen die passende Service-XSD routen. Kein generisches Location-Root, keinen Wrapper-Alias und keine serviceübergreifende Normalisierung erzeugen."
+        },
+        "en": {
+          "title": "Location Services V1.0: intentionally different root models",
+          "short": "Beacon uses GetDataResponse; Distance, GNSS and Network each use their own *.Data root.",
+          "long": "LS-003 is not a defect. The four V1.0 Location Services are intentionally modelled differently. BeaconLocationService uses root BeaconLocationService.GetDataResponse with a Data / OperationErrorMessage choice. DistanceLocationService, GNSSLocationService and NetworkLocationService instead use direct *.Data roots. EV-153 confirms executably that each positive sample validates only against its intended service schema and is rejected under deliberately incorrect cross-schema routing. A single normalized Location root model would therefore invent a contract not present in the official schemas.",
+          "recommendation": "Resolve the exact service and selected version before XML validation, then route only to the matching service XSD. Do not create a generic Location root, wrapper alias, or cross-service normalization."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_LOCATION_SERVICES_2026-09-08.md",
+          "note": "Terminal Location Services report; LS-003 is contextual_not_defect."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-153 / run 34229647400 / job 102072276013 / closure run 34230809592 / audit_registry/location_services_revalidation_evidence_2026-09-08.json",
+          "note": "Exact service-root inventory, own-schema positive validation and cross-schema rejection."
+        },
+        {
+          "kind": "xsd",
+          "reference": "BLS @ 791e2889f2baa4779ab66ae9e77038ff1b4be915; DLS @ e6fdc418b6ddaba75d3fbe8f048d1c6d70e023b6; GNSS @ a74a22079af25cdd028a3e519019d9b3326d9971; NLS @ bd1f83df2dfa83f36666a3ab3df4457242b387e9",
+          "note": "Exact V1.0 executable authorities for the four service-specific root models."
+        }
+      ],
+      "notes": "Confirmed intentional service-specific modelling. The SDK must preserve exact service/version schema routing; no generic root alias or runtime finding diagnostic is created."
+    },
+    {
       "finding_id": "TSD-004",
       "service": "TrainSetDataService",
       "version_scope": [
@@ -11668,8 +11768,8 @@
     }
   ],
   "progress": {
-    "classified_count": 140,
-    "remaining_count": 52,
+    "classified_count": 141,
+    "remaining_count": 51,
     "reviewed_blocks": [
       "ARA",
       "ARCH",
@@ -11705,9 +11805,10 @@
       "JIS_V10_001_002",
       "JIS_V10_003_004",
       "JIS_V10_005",
-      "LS_V10_001_002"
+      "LS_V10_001_002",
+      "LS_V10_003"
     ],
-    "latest_block": "LS_V10_001_002",
-    "latest_block_file": "audit_registry/semantic_classification_blocks/LS_V10_001_002_v0.1.json"
+    "latest_block": "LS_V10_003",
+    "latest_block_file": "audit_registry/semantic_classification_blocks/LS_V10_003_v0.1.json"
   }
 }
