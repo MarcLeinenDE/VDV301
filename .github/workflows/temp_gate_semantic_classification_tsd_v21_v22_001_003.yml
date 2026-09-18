@@ -1,0 +1,172 @@
+name: temp-gate-semantic-classification-tsd-v21-v22-001-003
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_gate_semantic_classification_tsd_v21_v22_001_003.yml
+
+permissions:
+  contents: read
+
+jobs:
+  gate-tsd-semantic-block:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact head
+        uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 2
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+
+      - name: Verify exact TSD prestate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "4a970aa6d331bb683d57859bd813f264edb06c95"
+          test "$(git hash-object audit_registry/semantic_classification_blocks/TSD_V21_V22_001_003_v0.1.json)" = "69361ff4942361ec09877d19dd97445098fce2b4"
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "3dbff3b8e91ab99b092e2844686ee8011f80ac9d"
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSD_2026-09-14.md)" = "442dc713a330a478def4bdf80a5e43dd25ac197a"
+          test "$(git hash-object IBIS-IP_TrainSetDataService_V2.1.xsd)" = "c2cdb73fcae265a2e4e0349ac6072e3548e36d8b"
+          test "$(git hash-object IBIS-IP_TrainSetDataService_V2.2.xsd)" = "7a132894c281d613e16514a6fa1bcbffe713d066"
+          test "$(git hash-object IBIS-IP_common_V2.0.xsd)" = "8608e3dcd665c197c34da7f6ec6af5a3758da164"
+          test "$(git hash-object IBIS-IP_common_V2.2.xsd)" = "468fee6d177e7185dbcd5d3f90cfb114e29e01ae"
+
+      - name: Verify TSD semantic and executable boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from lxml import etree
+
+          registry=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
+          baseline=json.loads(Path('audit_registry/finding_provenance_baseline_2026-09-14.json').read_text())
+          block=json.loads(Path('audit_registry/semantic_classification_blocks/TSD_V21_V22_001_003_v0.1.json').read_text())
+
+          assert registry['progress']['classified_count']==163
+          assert registry['progress']['remaining_count']==29
+          assert registry['progress']['latest_block']=='TS_V10_001_002'
+          assert [e['finding_id'] for e in block['entries']]==['TSD-001','TSD-002','TSD-003']
+
+          existing={e['finding_id']:e for e in registry['entries']}
+          assert 'TSD-001' not in existing and 'TSD-002' not in existing and 'TSD-003' not in existing
+          assert 'TSD-004' in existing
+          assert existing['TSD-004']['primary_issue_kind']=='wrong_structure_reference'
+          assert existing['TSD-004']['defect_assessment']=='confirmed_pdf_defect'
+
+          frozen={e['finding_id']:e for e in baseline['inventory']['entries']}
+          assert frozen['TSD-001']['revalidation_state']=='executable_confirmed'
+          assert frozen['TSD-002']['revalidation_state']=='executable_confirmed'
+          assert frozen['TSD-003']['revalidation_state']=='contextual_not_defect'
+          assert frozen['TSD-004']['revalidation_state']=='context_verified'
+
+          t1,t2,t3=block['entries']
+          assert t1['primary_issue_kind']=='missing_operation_inventory_member'
+          assert t1['defect_assessment']=='cross_artifact_mismatch'
+          assert t1['sdk_behavior']=='no_runtime_diagnostic'
+          assert t2['primary_issue_kind']=='wrong_structure_reference'
+          assert t2['defect_assessment']=='confirmed_pdf_defect'
+          assert t2['sdk_behavior']=='error_with_advisory'
+          assert t2['runtime_match']['state']=='candidate'
+          assert t3['primary_issue_kind']=='intentional_design_misread'
+          assert t3['defect_assessment']=='non_defect'
+          assert t3['sdk_behavior']=='no_runtime_diagnostic'
+
+          NS={'xs':'http://www.w3.org/2001/XMLSchema'}
+
+          v21=etree.parse('IBIS-IP_TrainSetDataService_V2.1.xsd')
+          etree.XMLSchema(v21)
+          v21_globals={e.get('name'):e.get('type') for e in v21.xpath('/xs:schema/xs:element',namespaces=NS)}
+          v21_group={e.get('name'):e.get('type') for e in v21.xpath("/xs:schema/xs:group[@name='TrainSetDataServiceOperations']//xs:element",namespaces=NS)}
+          retrieve={
+              'TrainSetDataService.RetrieveTripRefRequest',
+              'TrainSetDataService.RetrieveTripRefResponse',
+              'TrainSetDataService.RetrieveTripInformationRequest',
+              'TrainSetDataService.RetrieveTripInformationResponse',
+          }
+          subscription={
+              'TrainSetDataService.SubscribeTripRefRequest','TrainSetDataService.SubscribeTripRefResponse',
+              'TrainSetDataService.UnsubscribeTripRefRequest','TrainSetDataService.UnsubscribeTripRefResponse',
+              'TrainSetDataService.SubscribeTripInformationRequest','TrainSetDataService.SubscribeTripInformationResponse',
+              'TrainSetDataService.UnsubscribeTripInformationRequest','TrainSetDataService.UnsubscribeTripInformationResponse',
+          }
+          assert retrieve <= set(v21_globals) and retrieve <= set(v21_group)
+          assert not (subscription & set(v21_globals))
+          assert not (subscription & set(v21_group))
+
+          common20=etree.parse('IBIS-IP_common_V2.0.xsd')
+          common20_types=set(common20.xpath('/xs:schema/xs:complexType/@name',namespaces=NS))
+          assert {'SubscribeRequestStructure','SubscribeResponseStructure','UnsubscribeRequestStructure','UnsubscribeResponseStructure'} <= common20_types
+
+          v22=etree.parse('IBIS-IP_TrainSetDataService_V2.2.xsd')
+          etree.XMLSchema(v22)
+          v22_globals={e.get('name'):e.get('type') for e in v22.xpath('/xs:schema/xs:element',namespaces=NS)}
+          v22_group={e.get('name'):e.get('type') for e in v22.xpath("/xs:schema/xs:group[@name='TrainSetDataServiceOperations']//xs:element",namespaces=NS)}
+          assert v22_group['TrainSetDataService.UnsubscribeTripRefRequest']=='TrainSetDataService.TrainSetUnsubscribeRequestStructure'
+          assert v22_group['TrainSetDataService.UnsubscribeTripInformationRequest']=='TrainSetDataService.TrainSetUnsubscribeRequestStructure'
+          assert v22_group['TrainSetDataService.SubscribeTripRefResponse']=='SubscribeResponseStructure'
+          assert v22_group['TrainSetDataService.SubscribeTripInformationResponse']=='SubscribeResponseStructure'
+          assert v22_globals['TrainSetDataService.SubscribeTripRefResponse']=='TrainSetDataService.RetrieveTripRefResponseStructure'
+          assert v22_globals['TrainSetDataService.SubscribeTripInformationResponse']=='TrainSetDataService.RetrieveTripInformationResponseStructure'
+
+          terminal=Path('docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSD_2026-09-14.md').read_text()
+          assert 'EV-160' in terminal and '34820627306' in terminal and '34821906521' in terminal
+          print('PASSED: TSD-001..003 semantic and authority boundaries verified')
+          PY
+
+          python tools/validate_trainset_tsd002_ev110.py | tee /tmp/ev110.log
+          grep -F 'PASSED: EV-110 TSD-002 executable request-shape mismatch confirmed' /tmp/ev110.log
+
+      - name: Simulate merge and validate semantic registry
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, hashlib
+          from pathlib import Path
+          r=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
+          e={x['finding_id']:x for x in r['entries']}['TSD-004']
+          Path('/tmp/tsd004-before.sha256').write_text(hashlib.sha256(json.dumps(e,sort_keys=True,separators=(',',':')).encode()).hexdigest())
+          PY
+
+          python tools/merge_semantic_classification_block.py \
+            --block audit_registry/semantic_classification_blocks/TSD_V21_V22_001_003_v0.1.json \
+            --output /tmp/tsd-merged.json
+          python tools/validate_finding_semantic_classification.py --registry /tmp/tsd-merged.json
+
+          python - <<'PY'
+          import json, hashlib
+          r=json.load(open('/tmp/tsd-merged.json',encoding='utf-8'))
+          assert r['progress']['classified_count']==166
+          assert r['progress']['remaining_count']==26
+          assert r['progress']['latest_block']=='TSD_V21_V22_001_003'
+          e={x['finding_id']:x for x in r['entries']}['TSD-004']
+          after=hashlib.sha256(json.dumps(e,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+          before=open('/tmp/tsd004-before.sha256').read()
+          assert after==before
+          print('PASSED: simulated TSD registry is exactly 166/192 and TSD-004 is unchanged')
+          PY
+
+      - name: Validate all 50 root XSDs and prove read-only gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+          sha256sum ./*.xsd | sort > /tmp/xsd-before.sha256
+          python tools/validate_xsd_pool.py --repo-root .
+          sha256sum ./*.xsd | sort > /tmp/xsd-after.sha256
+          cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          git diff --exit-code
+          echo "PASSED: TSD semantic gate complete"
