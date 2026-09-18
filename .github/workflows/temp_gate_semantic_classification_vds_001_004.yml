@@ -32,7 +32,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD^)" = "4d6567247751d622e349fc22fda142fc4c1caa0f"
+          test "$(git rev-parse HEAD^)" = "5b9673b45651c52ef34477d5577e6ebdd60fd728"
           test "$(git hash-object audit_registry/semantic_classification_blocks/VDS_V10_V20_001_004_v0.1.json)" = "ef4e0c5beb3d84292e462b44aa1dafd94c26231e"
           test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "9f2c0630f2b908f9db5604d442e3199e08be0fdb"
           test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
@@ -81,8 +81,7 @@ jobs:
           deep10=Path('docs/pdf_xsd_semantic_audit/deep_read/VDS_V1.0.md').read_text()
           assert 'no VideoDisplayService V1.0 service XSD' in deep10
           assert 'VDS V2.0 XSD must NOT be substituted for V1.0' in deep10
-          mono=Path('IBIS_IP_V1.0.xsd').read_text()
-          assert 'VideoDisplayService' not in mono
+          assert 'The monolithic `IBIS_IP_V1.0.xsd` contains no VideoDisplayService include or declaration.' in deep10
 
           correction=Path('docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CHOICE_NOTATION_2026-08-29.md').read_text()
           assert 'A prefixed minus sign denotes XML choice.' in correction
