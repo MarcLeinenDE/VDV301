@@ -16,6 +16,12 @@ public_result_contract_v0.1.schema.json
 routing_overrides_v0.1.json
   only facts that cannot safely be inferred from XSD filenames/includes alone:
   aliases, legacy roots, unresolved profiles, candidate gates and operation/response-context overrides
+
+known_issues_runtime_mapping_v0.1.json
+  declarative inventory of semantically reviewed Known-Issues runtime mappings; no matcher is implemented by this file
+
+known_issues_runtime_mapping_v0.1.schema.json
+  schema for the declarative runtime-mapping inventory
 ```
 
 ## Design rule
@@ -59,8 +65,26 @@ architecture_inventory
 
 The lanes may be combined into one diagnostic result, but their source authority must remain distinguishable.
 
+## Known-Issues runtime mapping
+
+The semantic classification registry is complete at 192/192. Runtime mapping is a separate layer.
+
+The current mapping baseline contains exactly the findings whose semantic `runtime_match` state is already `reviewed`. Trigger descriptions remain **non-executable** until a later profile-specific implementation/evidence step.
+
+Current baseline:
+
+```text
+reviewed mappings      30
+candidate mappings     51
+not designed            1
+not applicable        110
+implemented             0
+```
+
+The selected authoritative XSD remains the owner of XML VALID/INVALID outcomes.
+
 ## Next manifest step
 
-Generate the ordinary service/version schema-profile inventory directly from the superbranch XSD include graph, then overlay `routing_overrides_v0.1.json`.
+Review the remaining `runtime_match=candidate` findings in tightly related blocks and resolve the single `not_designed` finding. Only then implement structured matchers with dedicated evidence.
 
-Do not hand-maintain normal include relationships in two places.
+The ordinary service/version schema-profile inventory remains generated from the superbranch XSD include graph and overlaid by `routing_overrides_v0.1.json`; do not hand-maintain normal include relationships in two places.

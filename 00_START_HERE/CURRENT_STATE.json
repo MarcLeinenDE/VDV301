@@ -3,7 +3,7 @@
   "date": "2026-09-03",
   "canonical_branch": "dev/schema-integration",
   "workflow_mode": "manual_only",
-  "project_phase": "semantic_classification_complete_runtime_mapping_pending",
+  "project_phase": "known_issues_runtime_mapping_review",
   "superbranch": {
     "root_xsd_count_last_executed": 50,
     "direct_include_edges_last_executed": 84,
@@ -1934,8 +1934,16 @@
     "semantic_classification_closure_report": "docs/pdf_xsd_semantic_audit/FINDING_SEMANTIC_CLASSIFICATION_CLOSURE_2026-09-18.md",
     "semantic_classification_gate_run_id": "35343525323",
     "semantic_classification_gate_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/35343525323",
-    "known_issues_runtime_mapping_state": "pending_review",
-    "known_issues_runtime_mapping_implemented_count": 0
+    "known_issues_runtime_mapping_state": "reviewed_inventory",
+    "known_issues_runtime_mapping_implemented_count": 0,
+    "known_issues_runtime_mapping_manifest": "sdk_manifest/known_issues_runtime_mapping_v0.1.json",
+    "known_issues_runtime_mapping_schema": "sdk_manifest/known_issues_runtime_mapping_v0.1.schema.json",
+    "known_issues_runtime_mapping_reviewed_count": 30,
+    "known_issues_runtime_mapping_candidate_count": 51,
+    "known_issues_runtime_mapping_not_designed_count": 1,
+    "known_issues_runtime_mapping_gate_run_id": "35343951758",
+    "known_issues_runtime_mapping_gate_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/35343951758",
+    "known_issues_runtime_mapping_report": "docs/pdf_xsd_semantic_audit/KNOWN_ISSUES_RUNTIME_MAPPING_BASELINE_2026-09-18.md"
   },
   "evidence": {
     "xsd_ev_completed": [
@@ -1987,7 +1995,7 @@
     "common_v2_3_executable_evidence": "EV-121 / 33657653888"
   },
   "sdk": {
-    "status": "semantic_classification_complete_runtime_mapping_pending",
+    "status": "known_issues_runtime_mapping_review",
     "implementation_frozen_during_deep_read": true,
     "manifest": "sdk_manifest/manifest_v0.1.json",
     "routing_overrides": "sdk_manifest/routing_overrides_v0.1.json",
@@ -2000,14 +2008,20 @@
     "semantic_classification_state": "complete",
     "semantic_classification_finding_count": 192,
     "semantic_classification_closure_report": "docs/pdf_xsd_semantic_audit/FINDING_SEMANTIC_CLASSIFICATION_CLOSURE_2026-09-18.md",
-    "runtime_mapping_state": "pending_review",
+    "runtime_mapping_state": "reviewed_inventory",
     "runtime_mapping_implemented_count": 0,
-    "known_issues_normative_xsd_override_allowed": false
+    "known_issues_normative_xsd_override_allowed": false,
+    "runtime_mapping_manifest": "sdk_manifest/known_issues_runtime_mapping_v0.1.json",
+    "runtime_mapping_schema": "sdk_manifest/known_issues_runtime_mapping_v0.1.schema.json",
+    "runtime_mapping_reviewed_count": 30,
+    "runtime_mapping_candidate_count": 51,
+    "runtime_mapping_not_designed_count": 1,
+    "runtime_mapping_report": "docs/pdf_xsd_semantic_audit/KNOWN_ISSUES_RUNTIME_MAPPING_BASELINE_2026-09-18.md"
   },
   "next_actions": [
-    "Review the 51 candidate runtime_match entries and the single not_designed entry; either promote them to reviewed runtime mappings or mark them not_applicable with explicit evidence.",
-    "Turn the 30 already reviewed runtime mappings into an explicit Known-Issues runtime-mapping manifest before implementation.",
-    "Implement runtime diagnostics only after profile-specific trigger validation; the selected authoritative XSD must continue to own VALID/INVALID outcomes.",
+    "Review the 51 semantic runtime_match=candidate findings in tightly related service/version blocks and either promote each to reviewed or mark it not_applicable; do not generate executable matchers from free-text trigger descriptions.",
+    "Resolve DRTIME10-002, the sole runtime_match=not_designed finding, as reviewed or not_applicable before runtime-mapping review is complete.",
+    "After candidate review, implement only structured profile-specific matchers with dedicated positive/negative evidence; preserve selected-XSD VALID/INVALID authority.",
     "Keep official-facing remediation/XSD mutation unauthorized until a separate explicit remediation phase."
   ]
 }
