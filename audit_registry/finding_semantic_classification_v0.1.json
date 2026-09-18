@@ -13581,6 +13581,115 @@
       ]
     },
     {
+      "finding_id": "TSI-001",
+      "service": "TrainSetInformationService",
+      "version_scope": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TrainSetInformationService_V2.1.xsd + selected Common/Enumerations dependencies",
+          "note": "The official V2.1 writing requires a sequence of coach data sets, one per coach, while the exact V2.1 response structure contains only one flat non-repeating coach-field sequence."
+        },
+        {
+          "version": "V2.2 correction history",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TrainSetInformationService_V2.2.xsd",
+          "note": "V2.2 introduces a repeatable SingleCoach wrapper with maxOccurs=unbounded. This is correction-history evidence only and is not substituted into V2.1 validation."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "cardinality_mismatch",
+      "secondary_issue_kinds": [
+        "documented_multi_coach_sequence",
+        "v21_flat_single_coach_record",
+        "missing_repeatable_coach_wrapper",
+        "v22_SingleCoach_correction",
+        "no_back_application_of_later_schema"
+      ],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation",
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Physical pages 24-25 define one coach data set and then state that the response returns a sequence of coach data sets, one per coach."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact V2.1 GetTrainSetCompositionResponseStructure contains a single flat sequence of CoachType, CoachNumber, FrontCabin, RearCabin, CoachPositionInTrainSet, CoupledSide and CoachState, with no repeatable coach wrapper or repeated field."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-109 and EV-161 confirm that one flat V2.1 coach record validates while a second documented coach record is rejected."
+        },
+        {
+          "type": "later_official_correction",
+          "note": "V2.2 introduces SingleCoach of type SingleCoachInATrainSet with maxOccurs=unbounded, matching the documented multi-coach concept but serving only as correction-history evidence for the V2.1 finding."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The selected V2.1 XSD remains authoritative for strict validation; the SDK must explain the confirmed PDF/XSD cardinality mismatch rather than inventing a repeated wrapper or silently validating against V2.2."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "TrainSetInformationService V2.1: dokumentierte Mehrfach-Coaches sind in der XSD nicht darstellbar",
+          "short": "Die PDF verlangt eine Folge von Coach-Datensätzen; die V2.1-XSD enthält nur einen flachen, nicht wiederholbaren Coach-Datensatz.",
+          "long": "TSI-001 ist ein ausführbar bestätigter PDF/XSD-Cardinality-Konflikt. Die offizielle V2.1-Schrift beschreibt einen Coach-Datensatz und erklärt anschließend, dass GetTrainSetCompositionResponse eine Folge solcher Datensätze liefert – einen pro Coach. Die exakte V2.1-XSD besitzt dagegen nur eine einzige flache Folge der Coach-Felder und weder einen wiederholbaren Coach-Wrapper noch wiederholbare Einzel-Felder. EV-109 und EV-161 bestätigen, dass ein einzelner flacher Datensatz validiert, ein zweiter dokumentierter Coach-Datensatz jedoch nicht. Erst V2.2 führt mit SingleCoach maxOccurs=unbounded eine passende Mehrfachmodellierung ein.",
+          "recommendation": "V2.1 weiterhin strikt gegen die ausgewählte V2.1-XSD validieren und keinen wiederholbaren Coach-Wrapper erfinden oder V2.2 stillschweigend rückwirkend anwenden. Wenn eine V2.1-Payload wegen eines zweiten Coach-Datensatzes verworfen wird, den XSD-Fehler beibehalten und ergänzend auf den bestätigten PDF/XSD-Cardinality-Konflikt hinweisen."
+        },
+        "en": {
+          "title": "TrainSetInformationService V2.1: documented multiple coaches cannot be represented by the XSD",
+          "short": "The PDF requires a sequence of coach data sets; the V2.1 XSD contains only one flat, non-repeatable coach record.",
+          "long": "TSI-001 is an executably confirmed PDF/XSD cardinality mismatch. The official V2.1 writing defines one coach data set and then states that GetTrainSetCompositionResponse returns a sequence of such data sets, one per coach. The exact V2.1 XSD instead contains only one flat sequence of coach fields, with neither a repeatable coach wrapper nor repeatable individual fields. EV-109 and EV-161 confirm that one flat record validates while a second documented coach record is rejected. Only V2.2 introduces a matching multi-coach model through SingleCoach with maxOccurs=unbounded.",
+          "recommendation": "Continue to validate V2.1 strictly against the selected V2.1 XSD and do not invent a repeatable coach wrapper or silently back-apply V2.2. When a V2.1 payload is rejected because it contains a second coach record, preserve the XSD error and add an advisory explaining the confirmed PDF/XSD cardinality mismatch."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "selected profile is TrainSetInformationService V2.1",
+          "XSD validation rejects GetTrainSetCompositionResponse when the payload attempts to carry a second coach data set",
+          "the failure is attributable to the absence of a repeatable coach wrapper or repeatable coach fields in the exact V2.1 schema"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TSI_2026-09-14.md",
+          "note": "Terminal TSI report; TSI-001 is executable_confirmed."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-161 / independent run 34822675019 / artifact 10339022101 / closure run 34822926605; historical control EV-109",
+          "note": "Exact V2.1 one-coach/two-coach executable boundary and V2.2 correction-history comparison."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TrainSetServices V2.1 / sha256 8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e / physical pages 24-25",
+          "note": "Defines coach fields and states that the response returns a sequence of coach data sets, one per coach."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_TrainSetInformationService_V2.1.xsd @ 897f373e31b76aa23d8bc206854b042524e4c102",
+          "note": "Exact V2.1 authority: one flat non-repeating coach-field sequence."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_TrainSetInformationService_V2.2.xsd @ 7ab1f8f892bfcea2a8b8a055f07de92c143356f9",
+          "note": "Correction-history evidence: repeatable SingleCoach wrapper with maxOccurs=unbounded."
+        }
+      ],
+      "notes": "Confirmed V2.1 PDF/XSD cardinality mismatch. V2.2 is explanatory correction history only; no schema substitution or wrapper synthesis is introduced."
+    },
+    {
       "finding_id": "TSM-002",
       "service": "TrainSetManagementService",
       "version_scope": [
@@ -14022,8 +14131,8 @@
     }
   ],
   "progress": {
-    "classified_count": 166,
-    "remaining_count": 26,
+    "classified_count": 167,
+    "remaining_count": 25,
     "reviewed_blocks": [
       "ARA",
       "ARCH",
@@ -14071,9 +14180,10 @@
       "TKT_V10_004_006",
       "TKT_V10_007_009",
       "TS_V10_001_002",
-      "TSD_V21_V22_001_003"
+      "TSD_V21_V22_001_003",
+      "TSI_V21_001"
     ],
-    "latest_block": "TSD_V21_V22_001_003",
-    "latest_block_file": "audit_registry/semantic_classification_blocks/TSD_V21_V22_001_003_v0.1.json"
+    "latest_block": "TSI_V21_001",
+    "latest_block_file": "audit_registry/semantic_classification_blocks/TSI_V21_001_v0.1.json"
   }
 }
