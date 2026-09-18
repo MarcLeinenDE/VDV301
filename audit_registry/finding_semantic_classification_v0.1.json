@@ -10966,6 +10966,183 @@
       "notes": "Confirmed PDF element-vs-type naming defect. Selected XSD validity remains authoritative; no compatibility alias is created."
     },
     {
+      "finding_id": "LS-001",
+      "service": "GNSSLocationService",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_GNSSLocationService_V1.0.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact official GNSSLocationService V1.0 route. PDF page 7 uses HorizontalDilutionOfPrecision while the selected XSD requires HoriziontalDilutionOfPrecision."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "identifier_typo",
+      "secondary_issue_kinds": [
+        "pdf_xsd_identifier_spelling_mismatch",
+        "horizontal_dilution_of_precision",
+        "no_compatibility_alias"
+      ],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The byte-pinned GNSS V1.0 PDF visibly prints HorizontalDilutionOfPrecision on physical page 7."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Exact GNSSLocationService V1.0 defines optional element HoriziontalDilutionOfPrecision of type IBIS-IP.double and does not define HorizontalDilutionOfPrecision."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-153 accepts the XSD spelling HoriziontalDilutionOfPrecision and rejects the PDF spelling HorizontalDilutionOfPrecision against the exact V1.0 schema."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The evidence establishes a spelling mismatch but does not by itself justify assigning the defect to the PDF or to the XSD. Selected-XSD validation therefore remains normative without inventing an alias."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "GNSSLocationService V1.0: Schreibweisenkonflikt bei HorizontalDilutionOfPrecision",
+          "short": "Die PDF nennt HorizontalDilutionOfPrecision, die maßgebliche V1.0-XSD akzeptiert nur HoriziontalDilutionOfPrecision.",
+          "long": "LS-001 ist ein bestätigter PDF/XSD-Schreibweisenkonflikt. Die offizielle GNSS-V1.0-PDF verwendet HorizontalDilutionOfPrecision, während die exakte V1.0-XSD das Element als HoriziontalDilutionOfPrecision deklariert. EV-153 bestätigt die ausführbare Grenze: die XSD-Schreibweise wird akzeptiert, die PDF-Schreibweise wird zurückgewiesen. Aus der Schreibweise allein wird nicht abgeleitet, ob PDF oder XSD die eigentliche Fehlerquelle ist; für die Validierung bleibt die ausgewählte XSD maßgeblich.",
+          "recommendation": "Im V1.0-Strict-Profil HoriziontalDilutionOfPrecision entsprechend der ausgewählten XSD verlangen. HorizontalDilutionOfPrecision nicht automatisch umbenennen oder als Alias akzeptieren. Bei passendem XSD-Fehler kann ergänzend auf den dokumentierten PDF/XSD-Konflikt hingewiesen werden."
+        },
+        "en": {
+          "title": "GNSSLocationService V1.0: spelling mismatch for HorizontalDilutionOfPrecision",
+          "short": "The PDF names HorizontalDilutionOfPrecision, while the authoritative V1.0 XSD accepts only HoriziontalDilutionOfPrecision.",
+          "long": "LS-001 is a confirmed PDF/XSD spelling mismatch. The official GNSS V1.0 PDF uses HorizontalDilutionOfPrecision, while the exact V1.0 XSD declares the element as HoriziontalDilutionOfPrecision. EV-153 confirms the executable boundary: the XSD spelling is accepted and the PDF spelling is rejected. Spelling alone is not used to decide whether the PDF or the XSD is the underlying defect source; selected-XSD validation remains authoritative.",
+          "recommendation": "In the V1.0 strict profile, require HoriziontalDilutionOfPrecision as declared by the selected XSD. Do not silently rename HorizontalDilutionOfPrecision or accept it as an alias. When the matching XSD error occurs, an advisory may explain the documented PDF/XSD mismatch."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "selected profile is GNSSLocationService V1.0",
+          "XSD validation rejects element HorizontalDilutionOfPrecision",
+          "selected XSD expects HoriziontalDilutionOfPrecision at the corresponding optional field position"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_LOCATION_SERVICES_2026-09-08.md",
+          "note": "Terminal Location Services report; LS-001 is executable_confirmed."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-153 / run 34229647400 / job 102072276013 / closure run 34230809592 / audit_registry/location_services_revalidation_evidence_2026-09-08.json",
+          "note": "Executable positive/negative evidence for the two spellings against the exact GNSS V1.0 schema."
+        },
+        {
+          "kind": "pdf",
+          "reference": "GNSS_V1.0 / sha256 e6a19a333a6c149a2d4b726a189acf16a9891d85dd28a7c5b008cdf254b631f5 / physical page 7",
+          "note": "Exact pinned PDF showing HorizontalDilutionOfPrecision."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_GNSSLocationService_V1.0.xsd @ a74a22079af25cdd028a3e519019d9b3326d9971",
+          "note": "Exact V1.0 executable authority declaring HoriziontalDilutionOfPrecision."
+        }
+      ],
+      "notes": "Confirmed cross-artifact spelling mismatch with source attribution deliberately left unresolved. Selected XSD remains normative; no compatibility alias is created."
+    },
+    {
+      "finding_id": "LS-002",
+      "service": "DistanceLocationService",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DistanceLocationService_V1.0.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact official DistanceLocationService V1.0 route. Both PDF and XSD use the exact XML element name Odometer-Pulses."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "contextual",
+      "primary_issue_kind": "intentional_design_misread",
+      "secondary_issue_kinds": [
+        "exact_hyphenated_xml_identifier",
+        "normalization_alias_rejected",
+        "identifier_preservation"
+      ],
+      "defect_assessment": "non_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "DistanceLocationService V1.0 PDF page 7 visibly uses the hyphenated identifier Odometer-Pulses."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Exact DistanceLocationService V1.0 declares optional element Odometer-Pulses of type IBIS-IP.int and no normalized OdometerPulses alias."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-153 accepts Odometer-Pulses and rejects the normalized OdometerPulses form against the exact selected schema."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The unusual punctuation is part of the published executable identifier and must be preserved exactly; normalizing it would create an unsupported alias rather than repair a defect."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "DistanceLocationService V1.0: Odometer-Pulses ist der exakte XML-Name",
+          "short": "Der Bindestrich in Odometer-Pulses ist beabsichtigt und muss unverändert erhalten bleiben.",
+          "long": "LS-002 ist kein Defekt. PDF und exakte V1.0-XSD verwenden übereinstimmend den XML-Elementnamen Odometer-Pulses. EV-153 bestätigt zusätzlich, dass diese Schreibweise validiert und die normalisierte Form OdometerPulses von der ausgewählten XSD zurückgewiesen wird. Die ungewöhnliche Interpunktion darf daher nicht als Tippfehler behandelt oder bei Modell-/Codegenerierung stillschweigend entfernt werden.",
+          "recommendation": "Den XML-Namen Odometer-Pulses exakt beibehalten. Keine Alias-, Normalisierungs- oder Auto-Korrekturregel für OdometerPulses erzeugen und dieses Finding nicht als Laufzeitfehler melden."
+        },
+        "en": {
+          "title": "DistanceLocationService V1.0: Odometer-Pulses is the exact XML name",
+          "short": "The hyphen in Odometer-Pulses is intentional and must be preserved exactly.",
+          "long": "LS-002 is not a defect. Both the PDF and the exact V1.0 XSD consistently use the XML element name Odometer-Pulses. EV-153 additionally confirms that this spelling validates while the normalized form OdometerPulses is rejected by the selected XSD. The unusual punctuation must therefore not be treated as a typo or silently removed during model or code generation.",
+          "recommendation": "Preserve the exact XML name Odometer-Pulses. Do not create an alias, normalization, or auto-correction rule for OdometerPulses, and do not surface this finding as a runtime error."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_LOCATION_SERVICES_2026-09-08.md",
+          "note": "Terminal Location Services report; LS-002 is contextual_not_defect."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-153 / run 34229647400 / job 102072276013 / closure run 34230809592 / audit_registry/location_services_revalidation_evidence_2026-09-08.json",
+          "note": "Executable positive/negative evidence for exact hyphen preservation."
+        },
+        {
+          "kind": "pdf",
+          "reference": "DLS_V1.0 / sha256 bdcbb3b2188f109944d687e6511209c5f049f25e1770bb3f4df596542d5009c4 / physical page 7",
+          "note": "Exact pinned PDF visibly using Odometer-Pulses."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_DistanceLocationService_V1.0.xsd @ e6fdc418b6ddaba75d3fbe8f048d1c6d70e023b6",
+          "note": "Exact V1.0 executable authority declaring Odometer-Pulses and no normalized alias."
+        }
+      ],
+      "notes": "Confirmed non-defect. Exact punctuation is part of the XML identifier and must not be normalized."
+    },
+    {
       "finding_id": "TSD-004",
       "service": "TrainSetDataService",
       "version_scope": [
@@ -11491,8 +11668,8 @@
     }
   ],
   "progress": {
-    "classified_count": 138,
-    "remaining_count": 54,
+    "classified_count": 140,
+    "remaining_count": 52,
     "reviewed_blocks": [
       "ARA",
       "ARCH",
@@ -11527,9 +11704,10 @@
       "HDS_V21_V22_V22A_HDS001",
       "JIS_V10_001_002",
       "JIS_V10_003_004",
-      "JIS_V10_005"
+      "JIS_V10_005",
+      "LS_V10_001_002"
     ],
-    "latest_block": "JIS_V10_005",
-    "latest_block_file": "audit_registry/semantic_classification_blocks/JIS_V10_005_v0.1.json"
+    "latest_block": "LS_V10_001_002",
+    "latest_block_file": "audit_registry/semantic_classification_blocks/LS_V10_001_002_v0.1.json"
   }
 }
