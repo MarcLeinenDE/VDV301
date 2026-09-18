@@ -14946,11 +14946,420 @@
         }
       ],
       "notes": "Documentation terminology only; no XML/XSD validation behavior changes."
+    },
+    {
+      "finding_id": "VLS-001",
+      "service": "VideoLiveService",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "unresolved",
+          "xsd_profile": null,
+          "note": "The official 05/2017 VideoLiveService V1.0 publication is confirmed, but the checked official VDV-301-1.0 release route contains no exact VideoLiveService V1.0 service XSD and the monolithic IBIS_IP_V1.0.xsd does not include or declare VideoLiveService. V2.0 must not be substituted."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "no_strict_xsd_profile",
+      "primary_surface": "provenance",
+      "primary_issue_kind": "release_authority_gap",
+      "secondary_issue_kinds": [
+        "missing_exact_official_service_xsd",
+        "historical_release_route_gap",
+        "no_v20_substitution",
+        "strict_profile_unavailable"
+      ],
+      "defect_assessment": "authority_gap",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "strict_profile_unavailable"
+      ],
+      "sdk_behavior": "unsupported_profile",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The byte-pinned official 05/2017 publication establishes VideoLiveService V1.0 documentation authority."
+        },
+        {
+          "type": "official_release_provenance",
+          "note": "The checked official VDV-301-1.0 tag contains Common/Enumerations, other service XSDs and IBIS_IP_V1.0.xsd but no VideoLiveService V1.0 service XSD; the monolithic schema contains no VideoLiveService include or declaration."
+        },
+        {
+          "type": "technical_inference",
+          "note": "A later V2.0 service schema cannot be substituted for the unresolved V1.0 strict profile without inventing cross-version authority."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoLiveService V1.0: keine eindeutig bestätigte offizielle Service-XSD",
+          "short": "Die offizielle V1.0-PDF ist bestätigt, aber im geprüften offiziellen Release-Pfad fehlt eine exakt zuordenbare VideoLiveService-V1.0-XSD.",
+          "long": "VLS-001 ist ein bestätigter Authority-/Provenance-Gap. Die offizielle VideoLiveService-Publikation von 05/2017 ist als V1.0 belegt. Im vollständig geprüften offiziellen VDV-301-1.0-Releasebaum existiert jedoch keine VideoLiveService-V1.0-Service-XSD; auch die monolithische IBIS_IP_V1.0.xsd enthält keine entsprechende Einbindung oder Deklaration. Eine spätere V2.0-XSD darf nicht als Ersatzautorität verwendet werden.",
+          "recommendation": "Für VideoLiveService V1.0 kein offizielles Strict-XSD-Profil vortäuschen. Fail-closed als nicht auflösbares offizielles Profil melden und VLS V2.0 nicht rückwirkend zur V1.0-Validierung heranziehen."
+        },
+        "en": {
+          "title": "VideoLiveService V1.0: no unambiguously confirmed official service XSD",
+          "short": "The official V1.0 PDF is confirmed, but no exactly matching VideoLiveService V1.0 XSD is established in the checked official release route.",
+          "long": "VLS-001 is a confirmed authority/provenance gap. The official VideoLiveService publication from 05/2017 is established as V1.0. However, the fully checked official VDV-301-1.0 release tree contains no VideoLiveService V1.0 service XSD, and the monolithic IBIS_IP_V1.0.xsd contains no corresponding include or declaration. A later V2.0 XSD must not be substituted as V1.0 authority.",
+          "recommendation": "Do not present an official strict XSD profile for VideoLiveService V1.0. Fail closed as an unresolved official profile and do not back-apply the VLS V2.0 schema for V1.0 validation."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "requested strict profile is VideoLiveService V1.0",
+          "no exact official V1.0 VideoLiveService service XSD authority can be selected"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VLS_2026-09-14.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VideoLiveService V1.0 / sha256 f535673427ff8f495102e1fc7723ca157408949b981572c4342b862f6d9c2a3c"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/VLS_V1.0.md"
+        },
+        {
+          "kind": "other",
+          "reference": "official VDV-301-1.0 tag @ f5b53785f703e898632603eec3bfa3555a79fdba"
+        }
+      ],
+      "notes": "Authority gap only; no V2.0 substitution."
+    },
+    {
+      "finding_id": "VLS-002",
+      "service": "VideoLiveService",
+      "version_scope": [
+        {
+          "version": "V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_VideoLiveService_V2.0.xsd + IBIS-IP_common_V2.0.xsd + IBIS-IP_Enumerations_V2.0.xsd",
+          "note": "The official PDF presents LiveStreamData as a multi-field stream record; the exact V2.0 XSD models all individual fields as alternatives of one xs:choice."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "structure_mismatch",
+      "secondary_issue_kinds": [
+        "LiveStreamData_multi_field_record",
+        "xs_choice_over_all_stream_fields",
+        "compositor_mismatch",
+        "choice_notation_correction_applied"
+      ],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation",
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The V2.0 PDF presents one LiveStreamData record with numerous ordinary required fields such as StreamID, CameraName, CameraType, rtspURI, dimensions, frame rate, bitrate and transformation fields; CameraCurrentState and VideoCodec additionally carry valid VDV choice notation."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact V2.0 VideoLiveService.LiveStreamData complex type places every individual stream field inside one xs:choice."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-103 confirms one LiveStreamData containing only StreamID validates, while StreamID + CameraName + rtspURI and a complete PDF-shaped multi-field record are rejected."
+        },
+        {
+          "type": "version_history",
+          "note": "The V1.0 publication already documents LiveStreamData as a multi-field record, strengthening the PDF-side semantic history without supplying a V1.0 executable schema."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The mismatch survives the corrected interpretation of leading-minus choice notation because many ordinary mandatory PDF rows remain grouped while the selected XSD makes all fields mutually exclusive."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoLiveService V2.0: LiveStreamData-Mehrfeldstruktur kollidiert mit xs:choice",
+          "short": "Die PDF beschreibt LiveStreamData als gemeinsamen Datensatz vieler Felder; die XSD erlaubt jeweils nur eine Alternative.",
+          "long": "VLS-002 ist ein ausführbar bestätigter PDF/XSD-Compositor-Konflikt. Die offizielle V2.0-PDF stellt LiveStreamData als einen Datensatz mit zahlreichen gemeinsam vorhandenen Streamfeldern dar. Die exakte V2.0-XSD legt dagegen sämtliche einzelnen Felder in ein einziges xs:choice. EV-103 bestätigt die Grenze: StreamID allein validiert, eine PDF-artige Kombination aus StreamID, CameraName und rtspURI sowie ein vollständiger Mehrfelddatensatz werden zurückgewiesen.",
+          "recommendation": "V2.0 strikt gegen die ausgewählte XSD validieren. Wenn eine PDF-artige Mehrfeldstruktur an der LiveStreamData-xs:choice-Grenze scheitert, den XSD-Fehler beibehalten und den bekannten PDF/XSD-Compositor-Konflikt ergänzend erklären. Die gültige führende Minus-Notation selbst nicht als Fehler behandeln."
+        },
+        "en": {
+          "title": "VideoLiveService V2.0: multi-field LiveStreamData conflicts with xs:choice",
+          "short": "The PDF describes LiveStreamData as a record containing many fields together; the XSD permits only one alternative at a time.",
+          "long": "VLS-002 is an executably confirmed PDF/XSD compositor mismatch. The official V2.0 PDF presents LiveStreamData as one record containing numerous stream fields together. The exact V2.0 XSD instead places every individual field inside a single xs:choice. EV-103 confirms the boundary: StreamID alone validates, while a PDF-shaped combination of StreamID, CameraName and rtspURI and a complete multi-field record are rejected.",
+          "recommendation": "Validate V2.0 strictly against the selected XSD. When a PDF-shaped multi-field structure fails at the LiveStreamData xs:choice boundary, preserve the XSD error and add an advisory explaining the known PDF/XSD compositor mismatch. Do not treat valid leading-minus notation itself as an error."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "selected profile is VideoLiveService V2.0",
+          "XSD validation rejects LiveStreamData after the first valid field because another PDF-documented stream field is present",
+          "the rejection is attributable to the exact LiveStreamData xs:choice compositor"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VLS_2026-09-14.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-165 / validation run 34839986276 / closure run 34840162307; EV-103 run 33111119723 / job 98653897734"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VideoLiveService V2.0 / sha256 d75a543c138f21c4ad370925ca7f306bcde7d692ce793ddc1d51bdcf6032787b / physical page 37"
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_VideoLiveService_V2.0.xsd @ d8c52f5de9ef3f5915524fef12da11eabf0ca041"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CHOICE_NOTATION_2026-08-29.md"
+        }
+      ],
+      "notes": "Confirmed V2.0 compositor mismatch; choice-notation correction applied."
+    },
+    {
+      "finding_id": "VLS-003",
+      "service": "VideoLiveService",
+      "version_scope": [
+        {
+          "version": "V1.0 documentation",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The German foreword visibly calls the service VDV-Schrift 301-2-1, while the adjacent English foreword and the dedicated publication identity use 301-2-11. V2.0 corrects the German text to 301-2-11."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "version_routing_issue",
+      "secondary_issue_kinds": [
+        "wrong_document_part_number",
+        "301_2_1_vs_301_2_11",
+        "bilingual_foreword_mismatch",
+        "corrected_in_v20"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "warning",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The pinned V1.0 German foreword visibly states VDV-Schrift 301-2-1 for the live-video service, while the adjacent English text identifies VDV 301-2-11."
+        },
+        {
+          "type": "version_history",
+          "note": "The V2.0 publication identifies itself consistently as VDV 301-2-11 in both language sections, confirming the V1.0 German part number as a documentation error."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoLiveService V1.0: falsche VDV-Teilenummer im deutschen Vorwort",
+          "short": "Das deutsche Vorwort nennt 301-2-1; das englische Vorwort und die korrekte Publikationsidentität lauten 301-2-11.",
+          "long": "VLS-003 ist ein bestätigter Dokumentations-/Referenzfehler. Im deutschen Vorwort der offiziellen V1.0-PDF steht sichtbar VDV-Schrift 301-2-1 für die Live-Video-Dienste. Der unmittelbar benachbarte englische Text nennt korrekt VDV 301-2-11; die V2.0-Publikation verwendet 301-2-11 in beiden Sprachfassungen. Der Fehler darf daher nicht zur Dokument- oder Profilauflösung herangezogen werden.",
+          "recommendation": "Für Dokument- und Profilauflösung VDV 301-2-11 verwenden. Die V1.0-Angabe 301-2-1 als bekannten Dokumentationsfehler kennzeichnen, aber daraus keine Runtime- oder Schema-Regel ableiten."
+        },
+        "en": {
+          "title": "VideoLiveService V1.0: wrong VDV part number in the German foreword",
+          "short": "The German foreword says 301-2-1; the English foreword and correct publication identity are 301-2-11.",
+          "long": "VLS-003 is a confirmed documentation/reference error. The German foreword of the official V1.0 PDF visibly states VDV-Schrift 301-2-1 for the live-video services. The immediately adjacent English text correctly says VDV 301-2-11, and the V2.0 publication uses 301-2-11 consistently in both languages. The erroneous number must therefore not drive document or profile resolution.",
+          "recommendation": "Use VDV 301-2-11 for document and profile resolution. Treat the V1.0 301-2-1 reference as a known documentation defect and do not derive runtime or schema rules from it."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VLS_2026-09-14.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VideoLiveService V1.0 / sha256 f535673427ff8f495102e1fc7723ca157408949b981572c4342b862f6d9c2a3c / physical page 4"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VideoLiveService V2.0 / sha256 d75a543c138f21c4ad370925ca7f306bcde7d692ce793ddc1d51bdcf6032787b / physical page 4"
+        }
+      ],
+      "notes": "Confirmed V1.0 part-number error; corrected in V2.0."
+    },
+    {
+      "finding_id": "VLS-004",
+      "service": "VideoLiveService",
+      "version_scope": [
+        {
+          "version": "V1.0 / V2.0 documentation",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Inside VideoLiveService start/stop prose, the text substitutes VideoDisplayService even though surrounding context and the following RTSP note clearly concern VideoLiveService. The error persists visibly into V2.0."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "editorial_residue",
+      "secondary_issue_kinds": [
+        "wrong_service_name_copy_paste",
+        "VideoDisplayService_in_VideoLive_section",
+        "persistent_v10_v20",
+        "no_alias_or_routing_rule"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The V1.0 VideoLive start/stop section says 'VideoDisplayService' in a sentence whose surrounding text and following note return to VideoLiveService."
+        },
+        {
+          "type": "version_history",
+          "note": "The same service-name substitution remains visible in the corresponding V2.0 start/stop section."
+        },
+        {
+          "type": "external_protocol_standard",
+          "note": "The surrounding service prose assigns live video session start/stop to RTSP rather than defining a VideoLive XML START/STOP operation; the wrong service name therefore does not create an alias or operation."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoLiveService: VideoDisplayService steht fälschlich im Start-/Stop-Abschnitt",
+          "short": "Im VideoLive-Kontext wird einmal VideoDisplayService genannt; der umgebende Text und der anschließende RTSP-Hinweis beziehen sich eindeutig auf VideoLiveService.",
+          "long": "VLS-004 ist ein bestätigter Copy/Paste-Dokumentationsfehler, der in V1.0 und V2.0 sichtbar ist. Im Start-/Stop-Abschnitt des VideoLiveService wird in einem Satz VideoDisplayService eingesetzt. Der unmittelbare Kontext und der folgende Hinweis kehren zu VideoLiveService zurück und erklären, dass START/STOP über RTSP erfolgt. Aus der falschen Dienstbezeichnung entsteht daher weder ein VideoDisplay-Alias noch eine zusätzliche XML-Operation oder Routingregel.",
+          "recommendation": "Den Satz als Dokumentationsfehler behandeln. Keine VideoDisplayService-Zuordnung und keine VideoLive-START/STOP-XML-Operation daraus ableiten; die dokumentierte RTSP-/RTP-Grenze beibehalten."
+        },
+        "en": {
+          "title": "VideoLiveService: VideoDisplayService is incorrectly named in the start/stop section",
+          "short": "The VideoLive context names VideoDisplayService once; the surrounding text and following RTSP note clearly concern VideoLiveService.",
+          "long": "VLS-004 is a confirmed copy/paste documentation defect visible in both V1.0 and V2.0. A sentence in the VideoLiveService start/stop section substitutes VideoDisplayService. The immediate context and the following note return to VideoLiveService and explain that START/STOP belongs to RTSP. The wrong service name therefore creates neither a VideoDisplay alias nor an additional XML operation or routing rule.",
+          "recommendation": "Treat the sentence as a documentation error. Do not infer VideoDisplayService routing or a VideoLive START/STOP XML operation from it; preserve the documented RTSP/RTP boundary."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VLS_2026-09-14.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VideoLiveService V1.0 / physical page 38; VideoLiveService V2.0 / physical page 35"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/VIDEO_LIVE_SERVICE_FINDINGS_REGISTER_ADDENDUM.md"
+        }
+      ],
+      "notes": "Persistent documentation copy/paste error only; no service alias or XML start/stop operation."
+    },
+    {
+      "finding_id": "VLS-005",
+      "service": "VideoLiveService",
+      "version_scope": [
+        {
+          "version": "V1.0 / V2.0 documentation",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Leading-minus Min:Max forms are valid VDV XML-choice notation. The remaining issue is that the checked VideoLive tables use those markers without visibly identifying the full set of lower-case choice alternatives, producing incomplete/ambiguous presentation."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "other",
+      "secondary_issue_kinds": [
+        "choice_notation_application_anomaly",
+        "incomplete_or_ambiguous_choice_presentation",
+        "valid_leading_minus_notation",
+        "supersedes_invalid_cardinality_interpretation",
+        "separate_from_VLS_002_compositor_mismatch"
+      ],
+      "defect_assessment": "likely_pdf_defect",
+      "confidence": "high",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "info",
+      "semantic_basis": [
+        {
+          "type": "common_conventions",
+          "note": "VDV 301-2 V2.0 section 6.1.3.3 establishes leading-minus Min:Max notation as XML-choice notation and lower-case letters as identifiers for listed choice alternatives."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "The checked VLS V1.0/V2.0 tables show leading-minus forms such as ListAllLiveStreamsData -1:*, CameraCurrentState -1:1 and VideoCodec -1:1, while lower-case alternative labels are not visibly present and many peer LiveStreamData fields remain ordinary 1:1 rows."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The surviving issue is incomplete or ambiguous application/presentation of the choice notation, not an invalid negative cardinality. Executable structure semantics come from the selected XSD and remain separately covered by VLS-002."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoLiveService: unvollständige bzw. mehrdeutige Anwendung der gültigen VDV-Choice-Notation",
+          "short": "Die führenden Minuswerte sind gültige Choice-Notation; problematisch ist die unvollständige sichtbare Kennzeichnung der zugehörigen Alternativen.",
+          "long": "VLS-005 ist nach der Audit-Korrektur ausdrücklich kein Kardinalitätsfehler. Formen wie -1:1 und -1:* sind gültige VDV-Min:Max-Choice-Notation. In den geprüften VideoLive-Tabellen fehlen jedoch sichtbar die üblichen Kleinbuchstabenkennzeichnungen der vollständigen Alternativgruppe; zugleich tragen nur einzelne Felder Minus-Markierungen, während zahlreiche Peer-Felder normale 1:1-Multiplizitäten besitzen. Der verbleibende Befund ist daher eine wahrscheinlich unvollständige oder mehrdeutige Darstellung der Choice-Notation.",
+          "recommendation": "Führende Minuswerte niemals als negative Mindestkardinalität oder ungültige Multiplizität melden. Den Befund ausschließlich als Dokumentationsanomalie führen und die ausführbare Struktursemantik aus der ausgewählten XSD beziehen. VLS-002 bleibt der separate Compositor-Konflikt."
+        },
+        "en": {
+          "title": "VideoLiveService: incomplete or ambiguous application of valid VDV choice notation",
+          "short": "The leading-minus values are valid choice notation; the issue is incomplete visible identification of the associated alternatives.",
+          "long": "After the audit correction, VLS-005 is explicitly not a cardinality error. Forms such as -1:1 and -1:* are valid VDV Min:Max choice notation. In the reviewed VideoLive tables, however, the usual lower-case identifiers for the complete alternative set are not visibly present; only selected fields carry minus markers while numerous peer fields retain ordinary 1:1 multiplicities. The surviving finding is therefore a likely incomplete or ambiguous presentation of the choice notation.",
+          "recommendation": "Never report leading-minus values as negative minimum cardinalities or invalid multiplicities. Retain this only as a documentation anomaly and derive executable structure semantics from the selected XSD. VLS-002 remains the separate compositor mismatch."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VLS_2026-09-14.md"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CHOICE_NOTATION_2026-08-29.md"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/VIDEO_LIVE_SERVICE_FINDINGS_REGISTER_ADDENDUM.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VideoLiveService V1.0 pages 39-40; VideoLiveService V2.0 pages 36-37"
+        }
+      ],
+      "notes": "Corrected classification only. Historical invalid-cardinality wording is superseded and must not be reused."
     }
   ],
   "progress": {
-    "classified_count": 176,
-    "remaining_count": 16,
+    "classified_count": 181,
+    "remaining_count": 11,
     "reviewed_blocks": [
       "ARA",
       "ARCH",
@@ -15002,9 +15411,10 @@
       "TSI_V21_001",
       "TSM_V21_001",
       "VDS_V10_V20_001_004",
-      "VDS_V10_V20_005_008"
+      "VDS_V10_V20_005_008",
+      "VLS_V10_V20_001_005"
     ],
-    "latest_block": "VDS_V10_V20_005_008",
-    "latest_block_file": "audit_registry/semantic_classification_blocks/VDS_V10_V20_005_008_v0.1.json"
+    "latest_block": "VLS_V10_V20_001_005",
+    "latest_block_file": "audit_registry/semantic_classification_blocks/VLS_V10_V20_001_005_v0.1.json"
   }
 }
