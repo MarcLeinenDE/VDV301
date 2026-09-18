@@ -1,0 +1,118 @@
+name: temp-gate-runtime-mapping-review-common-v10-remainder
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_gate_runtime_mapping_review_common_v10_remainder.yml
+
+permissions:
+  contents: read
+
+jobs:
+  gate-common-v10-remainder:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+
+      - name: Verify exact review prestate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "481785056092645937eb671396ff9a9a62364ce4"
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "d4b4cab59ad6622cdd7afecdeb0a24b9e63cff4b"
+          test "$(git hash-object sdk_manifest/known_issues_runtime_mapping_v0.1.json)" = "b3210b9504b8db96eef0f6c65dd0a815a0a44c3e"
+          test "$(git hash-object sdk_manifest/runtime_mapping_review_blocks/COMMON_V10_DRCOM10_001_006_v0.1.json)" = "639d9aabd02e86490de471e6c87c685a87312ec2"
+          test "$(git hash-object IBIS-IP_common_V1.0.xsd)" = "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c"
+          test "$(git hash-object IBIS-IP_Enumerations_V1.0.xsd)" = "a9bea5bc73003ed91ded8519db06c32c4067831d"
+
+      - name: Validate semantic registry and deterministic runtime mapping
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_finding_semantic_classification.py
+          python tools/validate_known_issues_runtime_mapping_v0_1.py
+
+      - name: Rerun preserved EV-117
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_common_v10_ev117.py
+
+      - name: Verify DRCOM10-001 and DRCOM10-006 exact boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from lxml import etree
+
+          sem=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
+          mapping=json.loads(Path('sdk_manifest/known_issues_runtime_mapping_v0.1.json').read_text())
+          block=json.loads(Path('sdk_manifest/runtime_mapping_review_blocks/COMMON_V10_DRCOM10_001_006_v0.1.json').read_text())
+          by={e['finding_id']:e for e in sem['entries']}
+          mapped={m['finding_id']:m for m in mapping['mappings']}
+
+          for fid in ('DRCOM10-001','DRCOM10-006'):
+              assert by[fid]['runtime_match']['state']=='reviewed'
+              assert mapped[fid]['activation_class']=='xsd_invalid_advisory'
+              assert mapped[fid]['required_precondition']=='xsd_result_invalid'
+              assert mapped[fid]['result_effect']=='decorate_existing_invalid'
+              assert mapped[fid]['implementation_state']=='reviewed_not_implemented'
+              assert mapped[fid]['authority_guard']=='selected_xsd_result_remains_normative'
+
+          assert mapping['counts']=={
+              'reviewed_mapping_count':48,
+              'implemented_count':0,
+              'semantic_candidate_count':30,
+              'semantic_not_designed_count':1,
+              'semantic_not_applicable_count':113,
+          }
+
+          NS={'xs':'http://www.w3.org/2001/XMLSchema'}
+          common=etree.parse('IBIS-IP_common_V1.0.xsd').getroot()
+          enums=etree.parse('IBIS-IP_Enumerations_V1.0.xsd').getroot()
+
+          conn=common.find("xs:complexType[@name='ConnectionStructure']/xs:sequence",NS)
+          assert conn is not None
+          names=[e.get('name') for e in conn.findall('xs:element',NS)]
+          assert 'ScheduledDepartureTime' not in names
+          assert 'ExpectedDepatureTime' in names
+
+          trip=common.find("xs:complexType[@name='TripInformationStructure']/xs:sequence",NS)
+          assert trip is not None
+          trip_names=[e.get('name') for e in trip.findall('xs:element',NS)]
+          assert 'RouteDirection' not in trip_names
+          assert enums.find("xs:simpleType[@name='RouteDirectionEnumeration']",NS) is None
+
+          enum=enums.find("xs:simpleType[@name='DoorCountingObjectClassEnumeration']",NS)
+          assert enum is not None
+          values={e.get('value') for e in enum.findall('.//xs:enumeration',NS)}
+          assert 'WheelChair' in values and 'Other' in values
+          assert 'Wheelchair' not in values and 'Others' not in values
+
+          rb={e['finding_id']:e for e in block['entries']}
+          assert any('must not synthesize, infer, or route to a Common V1.1 XSD profile' in g for g in rb['DRCOM10-001']['guards'])
+          assert any('must not add compatibility aliases or silently normalize enum lexemes' in g for g in rb['DRCOM10-006']['guards'])
+          print('PASSED: remaining Common V1.0 runtime boundaries verified')
+          PY
+
+      - name: Prove XSD immutability
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum ./*.xsd | sort > /tmp/xsd-before.sha256
+          python tools/validate_xsd_pool.py --repo-root .
+          sha256sum ./*.xsd | sort > /tmp/xsd-after.sha256
+          cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          git diff --exit-code
+          echo "PASSED: remaining Common V1.0 runtime-mapping gate complete"
