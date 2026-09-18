@@ -1,0 +1,354 @@
+{
+  "block_version": "0.1",
+  "block_id": "VDS_V10_V20_005_008",
+  "review_date": "2026-09-18",
+  "source_baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
+  "source_terminal_report": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDS_2026-09-14.md",
+  "source_deep_reads": [
+    "docs/pdf_xsd_semantic_audit/deep_read/VDS_V1.0.md",
+    "docs/pdf_xsd_semantic_audit/deep_read/VDS_V2.0.md",
+    "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CHOICE_NOTATION_2026-08-29.md",
+    "docs/pdf_xsd_semantic_audit/VIDEO_DISPLAY_SERVICE_FINDINGS_REGISTER_ADDENDUM.md",
+    "docs/pdf_xsd_semantic_audit/deep_read/VLS_V1.0.md",
+    "docs/pdf_xsd_semantic_audit/deep_read/VRS_V1.0.md"
+  ],
+  "review_policy": "manual_semantic_review_bilingual_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "VDS-005",
+      "service": "VideoDisplayService",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The byte-pinned V1.0 publication visibly contains literal generated Word cross-reference failures in common-service/startup/subscription prose."
+        },
+        {
+          "version": "V2.0",
+          "authority": "documentation_only",
+          "xsd_profile": "IBIS-IP_VideoDisplayService_V2.0.xsd",
+          "note": "The corresponding V2.0 prose was re-read and visually checked; the generated cross-reference failures are corrected/absent."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "editorial_residue",
+      "secondary_issue_kinds": [
+        "broken_generated_cross_reference",
+        "word_reference_failure",
+        "v10_only",
+        "corrected_in_v20",
+        "documentation_navigation_error"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "info",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Pinned-byte V1.0 pages visibly contain the literal generated marker 'Fehler! Verweisquelle konnte nicht gefunden werden.' in multiple service/startup/subscription locations."
+        },
+        {
+          "type": "version_history",
+          "note": "The corresponding V2.0 prose was independently re-read and visually checked; those generated-reference failures are absent and normal prose/reference text is present."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The defect affects document navigation and editorial quality only. It does not redefine Common subscription structures, routing, or XML validation."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoDisplayService V1.0: gebrochene automatisch erzeugte Querverweise",
+          "short": "Die V1.0-PDF enthält mehrfach den Word-Fehlertext „Fehler! Verweisquelle konnte nicht gefunden werden.“; in V2.0 ist das korrigiert.",
+          "long": "VDS-005 ist ein bestätigter Dokumentationsfehler der V1.0-Publikation. In mehreren Abschnitten zu Identifikation, DeviceManagement, Systemstart/-stopp und Subscription erscheinen sichtbar nicht aufgelöste Word-Querverweise. Die entsprechenden V2.0-Stellen wurden erneut gelesen und enthalten diese Fehler nicht mehr. Daraus entsteht keine Änderung an XSD-, Routing- oder Subscription-Semantik.",
+          "recommendation": "Den Befund ausschließlich als Dokumentations-/Navigationshinweis führen. Keine XML- oder Protokollregel aus dem fehlenden Verweisziel ableiten."
+        },
+        "en": {
+          "title": "VideoDisplayService V1.0: broken generated cross references",
+          "short": "The V1.0 PDF repeatedly contains the Word error text 'Fehler! Verweisquelle konnte nicht gefunden werden.'; the issue is corrected in V2.0.",
+          "long": "VDS-005 is a confirmed documentation defect in the V1.0 publication. Multiple sections covering identification, DeviceManagement, system start/stop and subscription visibly contain unresolved generated Word cross references. The corresponding V2.0 passages were re-read and no longer contain those failures. No XSD, routing or subscription semantics change as a result.",
+          "recommendation": "Treat this only as documentation/navigation guidance. Do not derive any XML or protocol rule from the missing cross-reference target."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDS_2026-09-14.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VideoDisplayService V1.0 / sha256 9280cc239cf71bb158ab5941b522a2c4c822420e07ed44f4d4111d9689418480 / visible pages 37-38 and subscription section around page 42",
+          "note": "Literal generated-reference failures visually confirmed."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VideoDisplayService V2.0 / sha256 c287df20d8225af2afcd37dfdb487eb4922b89ce78c287da91745d12b410c8a2",
+          "note": "Corresponding generated errors corrected/absent."
+        }
+      ],
+      "notes": "Documentation-only V1.0 generated cross-reference defect; corrected/absent in V2.0."
+    },
+    {
+      "finding_id": "VDS-006",
+      "service": "VideoDisplayService",
+      "version_scope": [
+        {
+          "version": "V1.0 / V2.0 documentation",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The checked tables use valid VDV leading-minus XML-choice notation but show a single lower-case 'a' alternative without a visible peer 'b' alternative in the same structure; surrounding rows use ordinary multiplicities."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "other",
+      "secondary_issue_kinds": [
+        "choice_notation_application_anomaly",
+        "single_visible_choice_alternative",
+        "incomplete_or_degenerate_choice_presentation",
+        "valid_leading_minus_notation",
+        "supersedes_invalid_cardinality_interpretation"
+      ],
+      "defect_assessment": "likely_pdf_defect",
+      "confidence": "high",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "info",
+      "semantic_basis": [
+        {
+          "type": "common_conventions",
+          "note": "VDV 301-2 V2.0 section 6.1.3.3 establishes that a prefixed minus sign denotes XML choice and a lower-case letter identifies listed choice alternatives. The minus sign is therefore not a negative cardinality."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "The checked VDS V1.0/V2.0 tables visibly show examples such as 'a ViewType -1:1' or 'a State -1:1' without a visible peer 'b' alternative in the same structure, while surrounding rows carry ordinary 1:1 or 0:1 multiplicities."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The surviving issue is the incomplete/degenerate presentation of the choice group, not the validity of -1:1 itself. Executable compositor semantics continue to come only from the selected XSD."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoDisplayService: unvollständige Anwendung der gültigen VDV-Choice-Notation",
+          "short": "„-1:1“ ist gültige Choice-Notation; auffällig ist stattdessen ein einzelnes sichtbares „a“ ohne erkennbare Peer-Alternative „b“.",
+          "long": "VDS-006 ist nach der Audit-Korrektur ausdrücklich kein Kardinalitätsfehler. Die VDV-Konvention definiert den führenden Minusstrich als XML-Choice-Markierung. In den geprüften VDS-Tabellen erscheint jedoch bei ViewType bzw. State ein einzelnes Choice-Label „a“, ohne dass in derselben Struktur eine sichtbare Peer-Alternative „b“ folgt; die übrigen Zeilen verwenden normale Multiplizitäten. Das ist eine wahrscheinlich unvollständige oder degenerierte Darstellung der Choice-Notation, ohne eigenständige XML/XSD-Auswirkung.",
+          "recommendation": "„-1:1“ niemals als negative Mindestkardinalität oder ungültige Multiplizität melden. Den Befund nur als Dokumentationsanomalie führen und für ausführbare Compositor-Semantik ausschließlich die ausgewählte XSD verwenden."
+        },
+        "en": {
+          "title": "VideoDisplayService: incomplete application of valid VDV choice notation",
+          "short": "'-1:1' is valid choice notation; the anomaly is a single visible 'a' without an apparent peer 'b' alternative.",
+          "long": "After the audit correction, VDS-006 is explicitly not a cardinality error. The VDV convention defines the leading minus sign as an XML-choice marker. In the reviewed VDS tables, however, ViewType or State is shown with a single choice label 'a' and no visible peer 'b' alternative in the same structure, while surrounding rows use ordinary multiplicities. This is a likely incomplete or degenerate presentation of the choice notation and has no independent XML/XSD effect.",
+          "recommendation": "Never report '-1:1' as a negative minimum or invalid multiplicity. Retain this only as a documentation anomaly and use the selected XSD exclusively for executable compositor semantics."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDS_2026-09-14.md",
+          "note": "Terminal report requires the corrected VDS-006 interpretation."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CHOICE_NOTATION_2026-08-29.md",
+          "note": "Corrective overlay superseding the old invalid-cardinality premise."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/VIDEO_DISPLAY_SERVICE_FINDINGS_REGISTER_ADDENDUM.md",
+          "note": "Final refined VDS-006 wording and separation from VDS-002/VDS-004."
+        }
+      ],
+      "notes": "Corrected classification only. The historical claim that -1:1 itself is invalid is superseded and must not be reused."
+    },
+    {
+      "finding_id": "VDS-007",
+      "service": "VideoDisplayService",
+      "version_scope": [
+        {
+          "version": "05/2017 V1.0 publication identity",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The dedicated official VideoDisplayService publication and VDV catalog identify VDV 301-2-13 / 05-2017 as VideoDisplayService V1.0, while neighboring VLS/VRS reference sections label that same publication as v1.1."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "provenance",
+      "primary_issue_kind": "version_routing_issue",
+      "secondary_issue_kinds": [
+        "cross_document_reference_version_label_error",
+        "VDS_v11_reference_label",
+        "dedicated_publication_is_v10",
+        "no_v11_profile_alias"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "warning",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The dedicated official VDS publication identifies the 05/2017 VDV 301-2-13 document as VideoDisplayService V1.0."
+        },
+        {
+          "type": "cross_service_pattern",
+          "note": "Neighboring official VLS/VRS reference sections label the same VideoDisplayService publication as v1.1."
+        },
+        {
+          "type": "official_release_provenance",
+          "note": "The official VDV catalog independently identifies the 05/2017 VideoDisplayService publication as V1.0."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The neighboring v1.1 labels are cross-document reference errors and do not establish a VDS V1.1 validation profile or schema alias."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoDisplayService: Nachbardokumente nennen die V1.0-Publikation fälschlich v1.1",
+          "short": "Die dedizierte VDS-Schrift und der VDV-Katalog führen 05/2017 als V1.0; VLS/VRS-Referenzen beschriften dieselbe Publikation als v1.1.",
+          "long": "VDS-007 ist ein bestätigter Cross-Document-Versionslabel-Fehler. Die offizielle VideoDisplayService-Schrift VDV 301-2-13 von 05/2017 und der offizielle VDV-Katalog identifizieren die Veröffentlichung als V1.0. In Referenzabschnitten benachbarter VideoLive-/VideoRecording-Dokumente wird dieselbe Veröffentlichung dagegen als VideoDisplayService v1.1 bezeichnet. Daraus darf weder ein VDS-V1.1-Profil noch ein Schema-Alias konstruiert werden.",
+          "recommendation": "Für Dokument-/Profilauflösung die dedizierte VDS-Publikationsidentität V1.0 verwenden. Die v1.1-Angaben in benachbarten Referenzlisten als fehlerhafte Labels behandeln und niemals daraus ein zusätzliches Validierungsprofil ableiten."
+        },
+        "en": {
+          "title": "VideoDisplayService: neighboring documents incorrectly label the V1.0 publication as v1.1",
+          "short": "The dedicated VDS publication and VDV catalog identify 05/2017 as V1.0; VLS/VRS references label the same publication as v1.1.",
+          "long": "VDS-007 is a confirmed cross-document version-label error. The official VideoDisplayService VDV 301-2-13 publication from 05/2017 and the official VDV catalog identify the publication as V1.0. Reference sections in neighboring VideoLive/VideoRecording documents instead label that same publication as VideoDisplayService v1.1. This must not be used to create a VDS V1.1 profile or schema alias.",
+          "recommendation": "Use the dedicated VDS publication identity V1.0 for document/profile resolution. Treat the v1.1 entries in neighboring reference lists as erroneous labels and never derive an additional validation profile from them."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDS_2026-09-14.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VideoDisplayService V1.0 / official VDV 301-2-13 05/2017 publication",
+          "note": "Dedicated publication identity."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/VLS_V1.0.md",
+          "note": "Neighboring reference list labels VideoDisplayService as v1.1."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/VRS_V1.0.md",
+          "note": "Independent neighboring cross-document reference evidence."
+        }
+      ],
+      "notes": "Confirmed reference-label error only. No VDS V1.1 schema/profile alias is inferred."
+    },
+    {
+      "finding_id": "VDS-008",
+      "service": "VideoDisplayService",
+      "version_scope": [
+        {
+          "version": "V1.0 / V2.0 documentation",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The VDS abbreviation table expands RTP as 'Real Time Protocol' and SOA as 'Server Oriented Architecture'; external standard terminology uses RTP as the real-time transport protocol and SOA as Service Oriented Architecture."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "semantic_contradiction",
+      "secondary_issue_kinds": [
+        "RTP_abbreviation_expansion_error",
+        "SOA_abbreviation_expansion_error",
+        "RFC3550_terminology",
+        "OASIS_SOA_terminology",
+        "documentation_only"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "info",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The VDS V1.0/V2.0 abbreviation material prints RTP as 'Real Time Protocol' and SOA as 'Server Oriented Architecture'."
+        },
+        {
+          "type": "external_protocol_standard",
+          "note": "RFC 3550 identifies RTP as the real-time transport protocol / 'RTP: A Transport Protocol for Real-Time Applications', not 'Real Time Protocol'."
+        },
+        {
+          "type": "domain_semantics",
+          "note": "The OASIS Reference Model uses SOA for Service Oriented Architecture, not Server Oriented Architecture."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The terminology defect does not change XML element names, schema validation, or the separation between VDV XML metadata and the external media/protocol layer."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoDisplayService: falsche Auflösung der Abkürzungen RTP und SOA",
+          "short": "Die PDF schreibt „Real Time Protocol“ und „Server Oriented Architecture“; die Standardbegriffe sind Real-time Transport Protocol und Service Oriented Architecture.",
+          "long": "VDS-008 ist ein bestätigter Terminologiefehler in der VDS-Dokumentation. Die Abkürzungstabelle löst RTP als „Real Time Protocol“ und SOA als „Server Oriented Architecture“ auf. Die referenzierte Standardterminologie verwendet RTP für das Real-time Transport Protocol und SOA für Service Oriented Architecture. Der Fehler betrifft ausschließlich die Begriffserklärung und verändert keine XML-/XSD-Validierung.",
+          "recommendation": "Für Protokoll- und Architekturbegriffe die externe Standardterminologie verwenden. Die fehlerhaften VDS-Auflösungen nicht in SDK-Dokumentation oder Hilfetexte übernehmen; keine Runtime-Validierungsregel daraus erzeugen."
+        },
+        "en": {
+          "title": "VideoDisplayService: incorrect expansions of RTP and SOA",
+          "short": "The PDF says 'Real Time Protocol' and 'Server Oriented Architecture'; the standard terms are Real-time Transport Protocol and Service Oriented Architecture.",
+          "long": "VDS-008 is a confirmed terminology defect in the VDS documentation. The abbreviation table expands RTP as 'Real Time Protocol' and SOA as 'Server Oriented Architecture'. The referenced standard terminology uses RTP for the Real-time Transport Protocol and SOA for Service Oriented Architecture. The defect affects terminology only and does not alter XML/XSD validation.",
+          "recommendation": "Use the external standard terminology for protocol and architecture terms. Do not reproduce the incorrect VDS expansions in SDK documentation/help text and do not create a runtime validation rule from them."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDS_2026-09-14.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VideoDisplayService V1.0 / V2.0 abbreviation tables",
+          "note": "Incorrect RTP/SOA expansions in VDS documentation."
+        },
+        {
+          "kind": "other",
+          "reference": "RFC 3550 and OASIS Reference Model for Service Oriented Architecture",
+          "note": "External terminology authority recorded by EV-164."
+        }
+      ],
+      "notes": "Documentation terminology only; no XML/XSD validation behavior changes."
+    }
+  ]
+}
