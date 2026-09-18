@@ -1,0 +1,397 @@
+{
+  "block_version": "0.1",
+  "block_id": "VDS_V10_V20_001_004",
+  "review_date": "2026-09-18",
+  "source_baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
+  "source_terminal_report": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDS_2026-09-14.md",
+  "source_deep_reads": [
+    "docs/pdf_xsd_semantic_audit/deep_read/VDS_V1.0.md",
+    "docs/pdf_xsd_semantic_audit/deep_read/VDS_V2.0.md",
+    "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CHOICE_NOTATION_2026-08-29.md",
+    "docs/pdf_xsd_semantic_audit/VIDEO_DISPLAY_SERVICE_FINDINGS_REGISTER_ADDENDUM.md",
+    "docs/pdf_xsd_semantic_audit/24c_executable_validation_video_compositors.md"
+  ],
+  "review_policy": "manual_semantic_review_bilingual_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "VDS-001",
+      "service": "VideoDisplayService",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "unresolved",
+          "xsd_profile": null,
+          "note": "The official 05/2017 VideoDisplayService V1.0 publication is confirmed, but the checked official VDV-301-1.0 release tree contains no VideoDisplayService V1.0 service XSD and the monolithic IBIS_IP_V1.0.xsd does not include or declare the service. V2.0 must not be substituted."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "no_strict_xsd_profile",
+      "primary_surface": "provenance",
+      "primary_issue_kind": "release_authority_gap",
+      "secondary_issue_kinds": [
+        "missing_exact_official_service_xsd",
+        "historical_release_route_gap",
+        "no_v20_substitution",
+        "strict_profile_unavailable"
+      ],
+      "defect_assessment": "authority_gap",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "strict_profile_unavailable"
+      ],
+      "sdk_behavior": "unsupported_profile",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The official VDV catalog and byte-pinned 05/2017 publication identify VideoDisplayService as V1.0."
+        },
+        {
+          "type": "official_release_provenance",
+          "note": "The complete checked official VDV-301-1.0 tag contains Common/Enumerations, several service schemas and IBIS_IP_V1.0.xsd but no VideoDisplayService V1.0 service XSD; the monolithic schema contains no VDS include/declaration."
+        },
+        {
+          "type": "official_release_provenance",
+          "note": "A direct checked repository-history query for IBIS-IP_VideoDisplayService_V1.0.xsd found no commit establishing an exact official V1.0 service-schema authority."
+        },
+        {
+          "type": "technical_inference",
+          "note": "A later VDS V2.0 schema cannot be silently substituted for a missing V1.0 strict profile without inventing cross-version authority."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoDisplayService V1.0: keine eindeutig bestätigte offizielle Service-XSD",
+          "short": "Die offizielle V1.0-PDF ist bestätigt, aber im geprüften offiziellen Release-Pfad fehlt eine exakt zuordenbare VDS-V1.0-Service-XSD.",
+          "long": "VDS-001 ist ein bestätigter Authority-/Provenance-Gap. Die offizielle VDV-Schrift 301-2-13 von 05/2017 ist als VideoDisplayService V1.0 veröffentlicht. Im vollständig geprüften offiziellen VDV-301-1.0-Releasebaum existiert jedoch keine VideoDisplayService-V1.0-Service-XSD; auch die monolithische IBIS_IP_V1.0.xsd enthält keine entsprechende Einbindung oder Deklaration. Eine spätere V2.0-XSD darf nicht als Ersatzautorität verwendet werden.",
+          "recommendation": "Für VideoDisplayService V1.0 kein offizielles Strict-XSD-Profil vortäuschen. Fail-closed als nicht auflösbares offizielles Profil melden und insbesondere VDS V2.0 nicht rückwirkend zur V1.0-Validierung heranziehen."
+        },
+        "en": {
+          "title": "VideoDisplayService V1.0: no unambiguously confirmed official service XSD",
+          "short": "The official V1.0 PDF is confirmed, but no exactly matching VDS V1.0 service XSD is established in the checked official release route.",
+          "long": "VDS-001 is a confirmed authority/provenance gap. The official VDV 301-2-13 publication from 05/2017 is published as VideoDisplayService V1.0. However, the fully checked official VDV-301-1.0 release tree contains no VideoDisplayService V1.0 service XSD, and the monolithic IBIS_IP_V1.0.xsd contains no corresponding include or declaration. A later V2.0 XSD must not be substituted as V1.0 authority.",
+          "recommendation": "Do not present an official strict XSD profile for VideoDisplayService V1.0. Fail closed as an unresolved official profile and, in particular, do not back-apply the VDS V2.0 schema for V1.0 validation."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "requested strict profile is VideoDisplayService V1.0",
+          "no exact official V1.0 VideoDisplayService service XSD authority can be selected"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDS_2026-09-14.md",
+          "note": "Terminal VDS report; VDS-001 is context_verified."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VideoDisplayService V1.0 / sha256 9280cc239cf71bb158ab5941b522a2c4c822420e07ed44f4d4111d9689418480",
+          "note": "Official public documentation authority."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/VDS_V1.0.md",
+          "note": "Historical release-tree and repository-history provenance check."
+        },
+        {
+          "kind": "other",
+          "reference": "official VDV-301-1.0 tag @ f5b53785f703e898632603eec3bfa3555a79fdba",
+          "note": "Checked official release route; no VDS V1.0 service XSD."
+        }
+      ],
+      "notes": "Authority gap only. The official V1.0 PDF exists; the strict V1.0 service-XSD profile remains unresolved and V2.0 is not substituted."
+    },
+    {
+      "finding_id": "VDS-002",
+      "service": "VideoDisplayService",
+      "version_scope": [
+        {
+          "version": "V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_VideoDisplayService_V2.0.xsd + IBIS-IP_common_V2.0.xsd + IBIS-IP_Enumerations_V2.0.xsd",
+          "note": "The PDF requires ViewID and ViewName as ordinary mandatory fields while ViewType carries valid VDV choice notation; the exact XSD instead makes ViewID, ViewName and ViewType mutually exclusive alternatives of one xs:choice."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "structure_mismatch",
+      "secondary_issue_kinds": [
+        "xs_choice_over_all_capability_fields",
+        "ViewID_and_ViewName_mandatory_in_pdf",
+        "ViewType_choice_notation",
+        "compositor_mismatch",
+        "choice_notation_correction_applied"
+      ],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation",
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The corrected V2.0 PDF reading shows ViewID 1:1 and ViewName 1:1 as ordinary mandatory rows, with only ViewType marked using valid VDV leading-minus choice notation."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact official V2.0 ListViewCapabilitiesResponseStructure models xs:choice(ViewID | ViewName | ViewType), making all three members mutually exclusive."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-103 confirms a single ViewID validates while ViewID + ViewName + ViewType is rejected, with ViewName as the first unexpected additional field."
+        },
+        {
+          "type": "version_history",
+          "note": "The V1.0 publication already presents the capability response as a multi-field record, strengthening the continuity of the PDF-side semantic model without creating a V1.0 executable rule."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The mismatch is independent of the old, superseded interpretation of -1:1. The selected XSD remains normative and the SDK should explain the confirmed compositor conflict rather than rewriting schema semantics."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoDisplayService V2.0: ListViewCapabilitiesResponse kollidiert mit xs:choice",
+          "short": "Die PDF verlangt ViewID und ViewName gemeinsam; die XSD erlaubt aus ViewID, ViewName und ViewType jeweils nur eine Alternative.",
+          "long": "VDS-002 ist ein ausführbar bestätigter PDF/XSD-Compositor-Konflikt. In der korrigierten Lesart der offiziellen V2.0-PDF sind ViewID und ViewName normale Pflichtfelder; ViewType trägt die gültige VDV-Choice-Markierung. Die exakte V2.0-XSD legt dagegen alle drei Felder in ein gemeinsames xs:choice. EV-103 bestätigt die Folge: ein einzelnes ViewID validiert, eine PDF-artige Mehrfeldantwort wird bereits am zusätzlichen ViewName zurückgewiesen.",
+          "recommendation": "V2.0 weiterhin strikt gegen die ausgewählte XSD validieren. Bei einer PDF-konformen Mehrfeldantwort den XSD-Fehler nicht unterdrücken, sondern ergänzend auf den bestätigten PDF/XSD-Compositor-Konflikt hinweisen. Die Choice-Markierung -1:1 selbst nicht als Fehler bezeichnen."
+        },
+        "en": {
+          "title": "VideoDisplayService V2.0: ListViewCapabilitiesResponse conflicts with xs:choice",
+          "short": "The PDF requires ViewID and ViewName together; the XSD permits only one of ViewID, ViewName and ViewType.",
+          "long": "VDS-002 is an executably confirmed PDF/XSD compositor mismatch. Under the corrected reading of the official V2.0 PDF, ViewID and ViewName are ordinary mandatory fields, while ViewType carries valid VDV choice notation. The exact V2.0 XSD instead places all three fields in one xs:choice. EV-103 confirms the consequence: a single ViewID validates, while a PDF-shaped multi-field response is rejected at the additional ViewName.",
+          "recommendation": "Continue to validate V2.0 strictly against the selected XSD. When a PDF-shaped multi-field response is rejected, preserve the XSD error and add an advisory explaining the confirmed PDF/XSD compositor mismatch. Do not describe the -1:1 choice marker itself as erroneous."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "selected profile is VideoDisplayService V2.0",
+          "XSD validation rejects ListViewCapabilitiesResponse after a first valid capability member because the payload also contains another PDF-documented member such as ViewName",
+          "the failure is attributable to the exact xs:choice(ViewID | ViewName | ViewType) compositor"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDS_2026-09-14.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-164 / validation run 34838003303 / closure run 34839487830; EV-103 run 33111119723 / job 98653897734",
+          "note": "Exact V2.0 source/XSD authority plus executable compositor boundary."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VideoDisplayService V2.0 / sha256 c287df20d8225af2afcd37dfdb487eb4922b89ce78c287da91745d12b410c8a2 / physical page 13"
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_VideoDisplayService_V2.0.xsd @ fcfdadd3b62a584370cae326004050b4dc832e23"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CHOICE_NOTATION_2026-08-29.md",
+          "note": "Confirms leading-minus notation is valid choice syntax and does not invalidate VDS-002."
+        }
+      ],
+      "notes": "Confirmed V2.0 compositor mismatch. Choice-notation correction applied; the finding does not rely on treating -1:1 as malformed."
+    },
+    {
+      "finding_id": "VDS-003",
+      "service": "VideoDisplayService",
+      "version_scope": [
+        {
+          "version": "V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_VideoDisplayService_V2.0.xsd + selected Common/Enumerations dependencies",
+          "note": "The official PDF requires both ViewID and Timeout in SetVideoViewRequest, while the exact XSD models xs:choice(ViewID | Timeout)."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "structure_mismatch",
+      "secondary_issue_kinds": [
+        "SetVideoViewRequest",
+        "ViewID_plus_Timeout_required_in_pdf",
+        "xs_choice_ViewID_Timeout",
+        "compositor_mismatch"
+      ],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation",
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The official V2.0 PDF lists ViewID 1:1 and Timeout 1:1 together for SetVideoViewRequest."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact V2.0 SetVideoViewRequestStructure models xs:choice(ViewID | Timeout), permitting only one of the two fields."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-103 confirms ViewID alone validates while ViewID + Timeout is rejected, with Timeout becoming the first unexpected additional field."
+        },
+        {
+          "type": "version_history",
+          "note": "The same ViewID + Timeout request concept is already present in the V1.0 publication, strengthening the PDF-side semantic continuity without supplying V1.0 strict XSD authority."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoDisplayService V2.0: SetVideoViewRequest verlangt laut PDF zwei Felder, die XSD macht sie alternativ",
+          "short": "Die PDF fordert ViewID und Timeout gemeinsam; die XSD erlaubt durch xs:choice nur eines von beiden.",
+          "long": "VDS-003 ist ein ausführbar bestätigter PDF/XSD-Compositor-Konflikt. Die offizielle V2.0-PDF führt für SetVideoViewRequest sowohl ViewID als auch Timeout mit 1:1 auf. Die exakte V2.0-XSD modelliert dagegen xs:choice(ViewID | Timeout). EV-103 bestätigt die praktische Grenze: ViewID allein validiert, ViewID zusammen mit Timeout wird zurückgewiesen.",
+          "recommendation": "V2.0 strikt gegen die ausgewählte XSD validieren und keine automatische Strukturumschreibung durchführen. Wenn eine Anfrage mit beiden PDF-dokumentierten Feldern an der xs:choice-Grenze scheitert, den XSD-Fehler beibehalten und den bekannten PDF/XSD-Konflikt erklären."
+        },
+        "en": {
+          "title": "VideoDisplayService V2.0: SetVideoViewRequest requires two fields in the PDF but the XSD makes them alternatives",
+          "short": "The PDF requires ViewID and Timeout together; the XSD permits only one through xs:choice.",
+          "long": "VDS-003 is an executably confirmed PDF/XSD compositor mismatch. The official V2.0 PDF lists both ViewID and Timeout as 1:1 members of SetVideoViewRequest. The exact V2.0 XSD instead models xs:choice(ViewID | Timeout). EV-103 confirms the executable boundary: ViewID alone validates, while ViewID together with Timeout is rejected.",
+          "recommendation": "Validate V2.0 strictly against the selected XSD and do not rewrite the structure automatically. When a request carrying both PDF-documented fields fails at the xs:choice boundary, preserve the XSD error and explain the known PDF/XSD mismatch."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "selected profile is VideoDisplayService V2.0",
+          "XSD validation rejects SetVideoViewRequest because both ViewID and Timeout are present",
+          "the failure is attributable to xs:choice(ViewID | Timeout)"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDS_2026-09-14.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-164 / validation run 34838003303 / closure run 34839487830; EV-103 run 33111119723"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VideoDisplayService V2.0 / sha256 c287df20d8225af2afcd37dfdb487eb4922b89ce78c287da91745d12b410c8a2 / physical page 14"
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_VideoDisplayService_V2.0.xsd @ fcfdadd3b62a584370cae326004050b4dc832e23"
+        }
+      ],
+      "notes": "Confirmed SetVideoViewRequest compositor mismatch; exact V2.0 XSD remains normative."
+    },
+    {
+      "finding_id": "VDS-004",
+      "service": "VideoDisplayService",
+      "version_scope": [
+        {
+          "version": "V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_VideoDisplayService_V2.0.xsd + selected Common/Enumerations dependencies",
+          "note": "The official response tables combine ordinary non-choice members with a choice-marked State row, while the exact XSD places all listed members of SetVideoViewResponse, SetNextViewIndexResponse and GetDisplayStateResponse into one xs:choice."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "structure_mismatch",
+      "secondary_issue_kinds": [
+        "response_compositor_family",
+        "SetVideoViewResponse",
+        "SetNextViewIndexResponse",
+        "GetDisplayStateResponse",
+        "xs_choice_over_all_response_members",
+        "choice_notation_correction_applied"
+      ],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation",
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The corrected V2.0 PDF reading shows State with valid leading-minus choice notation while CurrentViewID and/or OperationErrorMessage remain ordinary non-choice fields in the affected response tables."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact V2.0 XSD places all listed members of SetVideoViewResponse, SetNextViewIndexResponse and GetDisplayStateResponse into a single xs:choice for each response."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-103 confirms representative PDF-shaped combinations fail: State + CurrentViewID and State + OperationErrorMessage are rejected after the first choice member."
+        },
+        {
+          "type": "version_history",
+          "note": "The V1.0 publication already presents the same response concepts as grouped multi-field records, providing historical semantic support only."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The mismatch remains after correcting the meaning of the leading-minus notation because the surrounding ordinary rows are still not shown as alternatives, while the selected XSD makes every member mutually exclusive."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoDisplayService V2.0: Response-Tabellen und XSD-Compositor widersprechen sich",
+          "short": "Die PDF kombiniert State mit weiteren normalen Response-Feldern; die XSD macht alle aufgeführten Felder jeweils zu Alternativen eines einzigen xs:choice.",
+          "long": "VDS-004 ist ein ausführbar bestätigter Compositor-Konflikt für mehrere VDS-V2.0-Responses. In der korrigierten PDF-Lesart trägt State eine gültige Choice-Markierung, während CurrentViewID und/oder OperationErrorMessage als normale 1:1-/0:1-Zeilen daneben stehen. Die exakte XSD legt dagegen bei SetVideoViewResponse, SetNextViewIndexResponse und GetDisplayStateResponse sämtliche aufgeführten Mitglieder in jeweils ein einziges xs:choice. EV-103 bestätigt, dass PDF-artige Kombinationen nach dem ersten Feld verworfen werden.",
+          "recommendation": "Die ausgewählte V2.0-XSD normativ lassen. Bei einem exakt passenden Compositor-Fehler den XSD-Fehler beibehalten und einen Advisory zum bekannten PDF/XSD-Konflikt ergänzen. Die führende Minus-Markierung selbst nicht als Kardinalitätsfehler darstellen."
+        },
+        "en": {
+          "title": "VideoDisplayService V2.0: response tables conflict with the XSD compositor",
+          "short": "The PDF combines State with additional ordinary response fields; the XSD makes all listed fields alternatives of a single xs:choice.",
+          "long": "VDS-004 is an executably confirmed compositor mismatch affecting several VDS V2.0 responses. Under the corrected PDF reading, State carries valid choice notation while CurrentViewID and/or OperationErrorMessage remain ordinary 1:1/0:1 rows alongside it. The exact XSD instead places every listed member of SetVideoViewResponse, SetNextViewIndexResponse and GetDisplayStateResponse into one xs:choice per response. EV-103 confirms that PDF-shaped combinations are rejected after the first member.",
+          "recommendation": "Keep the selected V2.0 XSD authoritative. For an exact matching compositor failure, preserve the XSD error and add an advisory explaining the known PDF/XSD mismatch. Do not present the leading-minus marker itself as a cardinality error."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "selected profile is VideoDisplayService V2.0",
+          "XSD validation rejects SetVideoViewResponse or GetDisplayStateResponse when State is followed by CurrentViewID",
+          "XSD validation rejects SetNextViewIndexResponse when State is followed by OperationErrorMessage",
+          "the rejection is attributable to the corresponding single xs:choice compositor"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDS_2026-09-14.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-164 / validation run 34838003303 / closure run 34839487830; EV-103 run 33111119723"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VideoDisplayService V2.0 / sha256 c287df20d8225af2afcd37dfdb487eb4922b89ce78c287da91745d12b410c8a2 / physical pages 14-15"
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_VideoDisplayService_V2.0.xsd @ fcfdadd3b62a584370cae326004050b4dc832e23"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CHOICE_NOTATION_2026-08-29.md",
+          "note": "Correct choice-notation interpretation; confirms VDS-004 still stands."
+        }
+      ],
+      "notes": "Confirmed response-family compositor mismatch. Choice-notation correction applied; exact V2.0 XSD remains authoritative."
+    }
+  ]
+}
