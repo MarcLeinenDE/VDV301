@@ -1,0 +1,934 @@
+{
+  "manifest_version": "0.1",
+  "kind": "known-issues-runtime-mapping",
+  "state": "reviewed_inventory",
+  "source_semantic_registry": {
+    "path": "audit_registry/finding_semantic_classification_v0.1.json",
+    "git_blob": "7ebc8c98120ae7b1740629729037c05cef4b0f38",
+    "classification_state": "complete",
+    "finding_count": 192
+  },
+  "source_frozen_baseline": {
+    "path": "audit_registry/finding_provenance_baseline_2026-09-14.json",
+    "baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576"
+  },
+  "policy": {
+    "normative_xsd_result_must_not_be_overridden": true,
+    "generated_only_from_runtime_match_reviewed": true,
+    "trigger_descriptions_are_not_executable_matchers": true,
+    "implementation_requires_separate_profile_specific_validation": true
+  },
+  "counts": {
+    "reviewed_mapping_count": 30,
+    "implemented_count": 0,
+    "semantic_candidate_count": 51,
+    "semantic_not_designed_count": 1,
+    "semantic_not_applicable_count": 110
+  },
+  "mappings": [
+    {
+      "finding_id": "ARA-001",
+      "service": "AnalogRadioService",
+      "semantic_issue_kind": "release_authority_gap",
+      "sdk_behavior": "unsupported_profile",
+      "activation_class": "profile_resolution_failure",
+      "required_precondition": "strict_profile_resolution_failed",
+      "result_effect": "emit_unsupported_profile",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V2.4",
+          "authority": "unresolved",
+          "xsd_profile": null,
+          "note": "An official V2.4 PDF exists, but no official VDV-301-2.4 release tag or official upstream AnalogRadioService V2.4 XSD was found."
+        },
+        {
+          "version": "V2.4 candidate/integration",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_AnalogRadioService_V2.4.xsd",
+          "note": "Candidate/integration material exists but is not official release authority."
+        }
+      ],
+      "trigger_descriptions": [
+        "requested strict profile is AnalogRadioService V2.4",
+        "no official release-tagged V2.4 XSD authority can be selected"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "ARA-001"
+      }
+    },
+    {
+      "finding_id": "BG-001",
+      "service": "BaseGeneral",
+      "semantic_issue_kind": "version_routing_issue",
+      "sdk_behavior": "warning",
+      "activation_class": "resolver_or_profile_warning",
+      "required_precondition": "resolver_context_matched",
+      "result_effect": "emit_warning",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "VDV-301-1.0 / VDV-301-2.0 historical V1.0 service families",
+          "authority": "official_release",
+          "xsd_profile": "exact release-tag-selected service XSD pool",
+          "note": "Four same-path V1.0 service XSD files have different official blobs across the two release contexts; the semantic differences are primarily packaging/self-containment changes."
+        }
+      ],
+      "trigger_descriptions": [
+        "historical V1.0 validation profile selected without an exact release context",
+        "schema dependencies from VDV-301-1.0 and VDV-301-2.0 are mixed",
+        "latest same-named XSD is substituted for the selected historical pool"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "BG-001"
+      }
+    },
+    {
+      "finding_id": "CE-004",
+      "service": "Common/Enumerations",
+      "semantic_issue_kind": "stale_identifier_after_rename",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "Common/Enumerations V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.4.xsd"
+        }
+      ],
+      "trigger_descriptions": [
+        "ServiceName value SystemDocumentationService",
+        "ServiceName value SystemManagementService"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CE-004"
+      }
+    },
+    {
+      "finding_id": "CE-005",
+      "service": "Common/Enumerations",
+      "semantic_issue_kind": "cardinality_mismatch",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD per version"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "trigger_descriptions": [
+        "repeated AdditionalTextMessage or AdditionalTextMessage1..9"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CE-005"
+      }
+    },
+    {
+      "finding_id": "CE-006",
+      "service": "Common/Enumerations",
+      "semantic_issue_kind": "semantic_contradiction",
+      "sdk_behavior": "valid_with_advisory",
+      "activation_class": "xsd_valid_advisory",
+      "required_precondition": "xsd_result_valid",
+      "result_effect": "decorate_existing_valid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "Enumerations V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.4.xsd"
+        }
+      ],
+      "trigger_descriptions": [
+        "DeviceStateEnumeration value warning"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CE-006"
+      }
+    },
+    {
+      "finding_id": "CE-007",
+      "service": "Common/Enumerations",
+      "semantic_issue_kind": "identifier_case_error",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "Enumerations V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Enumerations XSD per version"
+        },
+        {
+          "version": "Enumerations V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.4.xsd"
+        }
+      ],
+      "trigger_descriptions": [
+        "GNSSType Other",
+        "TicketValidation Valid",
+        "VehicleMode Air"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CE-007"
+      }
+    },
+    {
+      "finding_id": "CE-008",
+      "service": "Common/Enumerations",
+      "semantic_issue_kind": "identifier_case_error",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "Enumerations V2.2-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Enumerations XSD"
+        },
+        {
+          "version": "Enumerations V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.4.xsd"
+        }
+      ],
+      "trigger_descriptions": [
+        "FunicularSubmode Unknown",
+        "TaxiSubmode Unknown",
+        "TaxiSubmode Undefined",
+        "TaxiSubmode minicab"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CE-008"
+      }
+    },
+    {
+      "finding_id": "CE-009",
+      "service": "Common/Enumerations",
+      "semantic_issue_kind": "stale_identifier_after_rename",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "Enumerations V2.2-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Enumerations XSD"
+        },
+        {
+          "version": "Enumerations V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.4.xsd"
+        }
+      ],
+      "trigger_descriptions": [
+        "RailSubmode value specialRail"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CE-009"
+      }
+    },
+    {
+      "finding_id": "CE-010",
+      "service": "Common/Enumerations",
+      "semantic_issue_kind": "semantic_contradiction",
+      "sdk_behavior": "valid_with_advisory",
+      "activation_class": "xsd_valid_advisory",
+      "required_precondition": "xsd_result_valid",
+      "result_effect": "decorate_existing_valid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "Enumerations V2.2-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.2.xsd"
+        },
+        {
+          "version": "Enumerations V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.4.xsd"
+        }
+      ],
+      "trigger_descriptions": [
+        "AirSubmode value canalBarge"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CE-010"
+      }
+    },
+    {
+      "finding_id": "CE-011",
+      "service": "Common/Enumerations",
+      "semantic_issue_kind": "cardinality_mismatch",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "trigger_descriptions": [
+        "repeated Connection.TransportMode",
+        "repeated Connection.ConnectionMode"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CE-011"
+      }
+    },
+    {
+      "finding_id": "CE-012",
+      "service": "Common/Enumerations",
+      "semantic_issue_kind": "cardinality_mismatch",
+      "sdk_behavior": "valid_with_advisory",
+      "activation_class": "xsd_valid_advisory",
+      "required_precondition": "xsd_result_valid",
+      "result_effect": "decorate_existing_valid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "trigger_descriptions": [
+        "empty DeviceSpecificationWithStateList"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CE-012"
+      }
+    },
+    {
+      "finding_id": "CE-013",
+      "service": "Common/Enumerations",
+      "semantic_issue_kind": "structure_mismatch",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "trigger_descriptions": [
+        "AdditionalAnnouncement.InformationAtSpecificPoint",
+        "AdditionalAnnouncement without choice"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CE-013"
+      }
+    },
+    {
+      "finding_id": "CE-014",
+      "service": "Common/Enumerations",
+      "semantic_issue_kind": "cardinality_mismatch",
+      "sdk_behavior": "valid_with_advisory",
+      "activation_class": "xsd_valid_advisory",
+      "required_precondition": "xsd_result_valid",
+      "result_effect": "decorate_existing_valid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "trigger_descriptions": [
+        "empty DataVersionList"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CE-014"
+      }
+    },
+    {
+      "finding_id": "CE-015",
+      "service": "Common/Enumerations",
+      "semantic_issue_kind": "identifier_case_error",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "trigger_descriptions": [
+        "FarezoneID",
+        "FarezoneType",
+        "FarezoneLongName",
+        "FarezoneShortName"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CE-015"
+      }
+    },
+    {
+      "finding_id": "CE-016",
+      "service": "Common/Enumerations",
+      "semantic_issue_kind": "identifier_typo",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "trigger_descriptions": [
+        "GlobalCardStatusID"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CE-016"
+      }
+    },
+    {
+      "finding_id": "CE-017",
+      "service": "Common/Enumerations",
+      "semantic_issue_kind": "identifier_typo",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd",
+          "note": "TSPPoint still uses Desciption in the selected V2.4 schema."
+        }
+      ],
+      "trigger_descriptions": [
+        "TSPPoint.Description"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CE-017"
+      }
+    },
+    {
+      "finding_id": "CE-018",
+      "service": "Common/Enumerations",
+      "semantic_issue_kind": "cardinality_mismatch",
+      "sdk_behavior": "valid_with_advisory",
+      "activation_class": "xsd_valid_advisory",
+      "required_precondition": "xsd_result_valid",
+      "result_effect": "decorate_existing_valid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "trigger_descriptions": [
+        "empty ServiceIdentificationWithStateList"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CE-018"
+      }
+    },
+    {
+      "finding_id": "CE-019",
+      "service": "Common/Enumerations",
+      "semantic_issue_kind": "wrong_structure_reference",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "trigger_descriptions": [
+        "ServiceSpecificationWithState used for ServiceIdentificationWithState list item"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CE-019"
+      }
+    },
+    {
+      "finding_id": "CE-020",
+      "service": "Common/Enumerations",
+      "semantic_issue_kind": "release_authority_gap",
+      "sdk_behavior": "warning",
+      "activation_class": "resolver_or_profile_warning",
+      "required_precondition": "resolver_context_matched",
+      "result_effect": "emit_warning",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "Common V2.3",
+          "authority": "official_release",
+          "xsd_profile": "official IBIS-IP_common_V2.3.xsd blob 0d8926c...",
+          "note": "Default official authority."
+        },
+        {
+          "version": "Common V2.3 PR #30",
+          "authority": "candidate_integration",
+          "xsd_profile": "schema_variants/upstream_pr_30/IBIS-IP_common_V2.3.xsd",
+          "note": "Explicit candidate overlay only."
+        }
+      ],
+      "trigger_descriptions": [
+        "Common V2.3 selected without explicit authority where PR30 overlay is available"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CE-020"
+      }
+    },
+    {
+      "finding_id": "CE-021",
+      "service": "Common/Enumerations",
+      "semantic_issue_kind": "stale_identifier_after_rename",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "trigger_descriptions": [
+        "LogMessage.MessageBody"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CE-021"
+      }
+    },
+    {
+      "finding_id": "CE-022",
+      "service": "Common/Enumerations",
+      "semantic_issue_kind": "wrong_structure_reference",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "trigger_descriptions": [
+        "ServiceIdentification.ServiceName"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CE-022"
+      }
+    },
+    {
+      "finding_id": "CE-024",
+      "service": "Common/Enumerations",
+      "semantic_issue_kind": "cardinality_mismatch",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "Common V2.2-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD"
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "trigger_descriptions": [
+        "UnsubscribeResponse without Active"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CE-024"
+      }
+    },
+    {
+      "finding_id": "CE-025",
+      "service": "Common/Enumerations",
+      "semantic_issue_kind": "missing_separator_or_punctuation",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD",
+          "note": "Affected historical documentation uses Reply-Path while XSD uses ReplyPath."
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "documentation_only",
+          "note": "Documentation corrected to ReplyPath; do not extend the finding."
+        }
+      ],
+      "trigger_descriptions": [
+        "Reply-Path"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CE-025"
+      }
+    },
+    {
+      "finding_id": "CE-026",
+      "service": "Common/Enumerations",
+      "semantic_issue_kind": "identifier_typo",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "Common V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD",
+          "note": "Historical BeaconPoint schema spelling is Desciption."
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd",
+          "note": "BeaconPoint corrected to Description; not affected."
+        }
+      ],
+      "trigger_descriptions": [
+        "BeaconPoint.Description in historical profile"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CE-026"
+      }
+    },
+    {
+      "finding_id": "CIS-001",
+      "service": "CustomerInformationService",
+      "semantic_issue_kind": "release_authority_gap",
+      "sdk_behavior": "unsupported_profile",
+      "activation_class": "profile_resolution_failure",
+      "required_precondition": "strict_profile_resolution_failed",
+      "result_effect": "emit_unsupported_profile",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "CIS V1.1",
+          "authority": "unresolved",
+          "xsd_profile": null,
+          "note": "The official V1.1 PDF is published, but no matching release-tagged V1.1 XSD authority is established. The untagged historical working snapshot is evidence only and is materially behind the published PDF."
+        }
+      ],
+      "trigger_descriptions": [
+        "requested strict profile is CustomerInformationService V1.1",
+        "no release-tagged V1.1 CIS XSD authority can be selected"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "CIS-001"
+      }
+    },
+    {
+      "finding_id": "HDS-001",
+      "service": "HTMLDisplayService",
+      "semantic_issue_kind": "intentional_design_misread",
+      "sdk_behavior": "no_runtime_diagnostic",
+      "activation_class": "routing_only",
+      "required_precondition": "routing_context_matched",
+      "result_effect": "routing_only_no_public_diagnostic",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": null,
+          "note": "Official VDV-Schrift 301-2-17 HTMLDisplayService V2.1 is the profile authority. The exact VDV-301-2.1 release inventory contains no dedicated HDS service XSD by design. Discovery uses _http._tcp with TXT content+path; the content endpoint is built from SRV target/port plus TXT path."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": null,
+          "note": "Official HTMLDisplayService V2.2 is a non-XSD DNS-SD/HTTP profile. Canonical discovery uses _http._tcp with TXT content+url; the content endpoint comes from TXT url rather than reconstructing it from SRV host/port."
+        },
+        {
+          "version": "V2.2a",
+          "authority": "official_release",
+          "xsd_profile": null,
+          "note": "Official amended/corrected V2.2a publication is normative for this HDS profile variant even though no dedicated VDV-301-2.2a repository tag exists. Both _http._tcp and _ibisip_http._tcp are recognised; _http._tcp is deprecated/future-not-recommended and _ibisip_http._tcp is the documented transition/future label. TXT remains content+url."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected service is HTMLDisplayService and selected profile version is 2.1, 2.2, or 2.2a",
+        "service validation is being routed and no dedicated HDS service XSD exists by design",
+        "apply tools/runtime_discovery_profile.py check_html_display with the exact selected HDS version instead of an XML service-XSD lane"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "HDS-001"
+      }
+    },
+    {
+      "finding_id": "VDS-001",
+      "service": "VideoDisplayService",
+      "semantic_issue_kind": "release_authority_gap",
+      "sdk_behavior": "unsupported_profile",
+      "activation_class": "profile_resolution_failure",
+      "required_precondition": "strict_profile_resolution_failed",
+      "result_effect": "emit_unsupported_profile",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V1.0",
+          "authority": "unresolved",
+          "xsd_profile": null,
+          "note": "The official 05/2017 VideoDisplayService V1.0 publication is confirmed, but the checked official VDV-301-1.0 release tree contains no VideoDisplayService V1.0 service XSD and the monolithic IBIS_IP_V1.0.xsd does not include or declare the service. V2.0 must not be substituted."
+        }
+      ],
+      "trigger_descriptions": [
+        "requested strict profile is VideoDisplayService V1.0",
+        "no exact official V1.0 VideoDisplayService service XSD authority can be selected"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "VDS-001"
+      }
+    },
+    {
+      "finding_id": "VLS-001",
+      "service": "VideoLiveService",
+      "semantic_issue_kind": "release_authority_gap",
+      "sdk_behavior": "unsupported_profile",
+      "activation_class": "profile_resolution_failure",
+      "required_precondition": "strict_profile_resolution_failed",
+      "result_effect": "emit_unsupported_profile",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V1.0",
+          "authority": "unresolved",
+          "xsd_profile": null,
+          "note": "The official 05/2017 VideoLiveService V1.0 publication is confirmed, but the checked official VDV-301-1.0 release route contains no exact VideoLiveService V1.0 service XSD and the monolithic IBIS_IP_V1.0.xsd does not include or declare VideoLiveService. V2.0 must not be substituted."
+        }
+      ],
+      "trigger_descriptions": [
+        "requested strict profile is VideoLiveService V1.0",
+        "no exact official V1.0 VideoLiveService service XSD authority can be selected"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "VLS-001"
+      }
+    },
+    {
+      "finding_id": "VRS-001",
+      "service": "VideoRecordingService",
+      "semantic_issue_kind": "release_authority_gap",
+      "sdk_behavior": "unsupported_profile",
+      "activation_class": "profile_resolution_failure",
+      "required_precondition": "strict_profile_resolution_failed",
+      "result_effect": "emit_unsupported_profile",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V1.0",
+          "authority": "unresolved",
+          "xsd_profile": null,
+          "note": "The official 05/2017 VideoRecordingService V1.0 publication is confirmed, but the checked official VDV-301-1.0 release route contains no exact VideoRecordingService V1.0 service XSD and the monolithic IBIS_IP_V1.0.xsd contains no VideoRecordingService include or declaration. V2.0/V2.4 must not be substituted."
+        }
+      ],
+      "trigger_descriptions": [
+        "requested strict profile is VideoRecordingService V1.0",
+        "no exact official V1.0 VideoRecordingService service XSD authority can be selected"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "VRS-001"
+      }
+    },
+    {
+      "finding_id": "VRS-002",
+      "service": "VideoRecordingService",
+      "semantic_issue_kind": "release_authority_gap",
+      "sdk_behavior": "unsupported_profile",
+      "activation_class": "profile_resolution_failure",
+      "required_precondition": "strict_profile_resolution_failed",
+      "result_effect": "emit_unsupported_profile",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V2.4 official documentation",
+          "authority": "unresolved",
+          "xsd_profile": null,
+          "note": "The V2.4 PDF is an official public VDV writing, but no official release-tag VRS V2.4 XSD authority is established."
+        },
+        {
+          "version": "V2.4 candidate/integration",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_VideoRecordingService_V2.4.xsd",
+          "note": "The checked V2.4 XSD is byte-identical to open, unmerged upstream PR #27 head 0aa728aab47a7f13b6f36da415581d51592c4ca7; service blob 07ff2c41731e63fd85b203e4b8e0186136caaaaf. It is candidate/integration evidence only."
+        }
+      ],
+      "trigger_descriptions": [
+        "requested profile is official VideoRecordingService V2.4 strict validation",
+        "only the open PR #27 candidate/integration XSD is available for the service version"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "VRS-002"
+      }
+    }
+  ]
+}
