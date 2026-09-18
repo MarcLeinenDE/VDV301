@@ -22,12 +22,16 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+      - name: Install PDF evidence dependency
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils
 
       - name: Verify exact review prestate
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD^)" = "524f1ad1b9eafea5fc922907f56d1606493448a9"
+          test "$(git rev-parse HEAD^)" = "cf57b3d86ab3c87c0e38d45723ade26619524cd6"
           test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "fdeacc3c79ad5527f9a6ca3124eb22753f3903a6"
           test "$(git hash-object sdk_manifest/known_issues_runtime_mapping_v0.1.json)" = "f14a61291c27069a1d3c3be0dc0ab18c20511fdb"
           test "$(git hash-object sdk_manifest/runtime_mapping_review_blocks/SYSTEM_DOCUMENTATION_DR3012_003_V20_003_004_v0.1.json)" = "dd3468048da2ad59c2029a5cc533b16ae6da6c73"
