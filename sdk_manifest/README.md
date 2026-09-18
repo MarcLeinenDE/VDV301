@@ -75,9 +75,9 @@ Current baseline:
 
 ```text
 reviewed mappings      35
-candidate mappings     46
+candidate mappings     43
 not designed            1
-not applicable        110
+not applicable        113
 implemented             0
 ```
 
