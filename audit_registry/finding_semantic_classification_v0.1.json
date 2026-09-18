@@ -10409,6 +10409,124 @@
       "notes": "Confirmed PDF spelling residue only; all occurrences are non-executable and have no runtime effect."
     },
     {
+      "finding_id": "HDS-001",
+      "service": "HTMLDisplayService",
+      "version_scope": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": null,
+          "note": "Official VDV-Schrift 301-2-17 HTMLDisplayService V2.1 is the profile authority. The exact VDV-301-2.1 release inventory contains no dedicated HDS service XSD by design. Discovery uses _http._tcp with TXT content+path; the content endpoint is built from SRV target/port plus TXT path."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": null,
+          "note": "Official HTMLDisplayService V2.2 is a non-XSD DNS-SD/HTTP profile. Canonical discovery uses _http._tcp with TXT content+url; the content endpoint comes from TXT url rather than reconstructing it from SRV host/port."
+        },
+        {
+          "version": "V2.2a",
+          "authority": "official_release",
+          "xsd_profile": null,
+          "note": "Official amended/corrected V2.2a publication is normative for this HDS profile variant even though no dedicated VDV-301-2.2a repository tag exists. Both _http._tcp and _ibisip_http._tcp are recognised; _http._tcp is deprecated/future-not-recommended and _ibisip_http._tcp is the documented transition/future label. TXT remains content+url."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "no_strict_xsd_profile",
+      "primary_surface": "contextual",
+      "primary_issue_kind": "intentional_design_misread",
+      "secondary_issue_kinds": [
+        "intentional_non_xsd_service_profile",
+        "dns_sd_http_profile_routing",
+        "version_specific_discovery_rules",
+        "no_hidden_xml_contract",
+        "latest_wins_forbidden"
+      ],
+      "defect_assessment": "intentional_design",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The byte-pinned V2.1, V2.2 and V2.2a publications establish HDS as a DNS-SD/HTTP/browser profile without its own service protocol/XSD and define the version-specific discovery fields and endpoint rules."
+        },
+        {
+          "type": "official_release_provenance",
+          "note": "EV-151 checked the exact VDV-301-2.1 and VDV-301-2.2 release inventories and the 50-root integration pool; none contains a dedicated HTMLDisplayService service XSD. V2.2a has no dedicated release tag."
+        },
+        {
+          "type": "version_history",
+          "note": "The V2.2/V2.2a source history preserves the transition from V2.1 content+path endpoint construction to content+url and, in V2.2a, the non-exclusive transition toward _ibisip_http._tcp."
+        },
+        {
+          "type": "executable_validation",
+          "note": "RV-002 rerun in EV-151 passes and deterministically verifies the V2.1, V2.2 and V2.2a discovery/endpoint rules without making live DNS/mDNS, HTTP reachability or browser-interoperability claims."
+        },
+        {
+          "type": "technical_inference",
+          "note": "Because the official profile explicitly uses DNS-SD/HTTP and exact release inventories contain no HDS XSD, treating the absent service XSD as a missing-schema defect would invent an XML contract and select the wrong validation lane."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "HTMLDisplayService: absichtlich kein eigener Service-XSD-Vertrag",
+          "short": "Für HTMLDisplayService ist kein eigener Service-XSD vorgesehen; die Prüfung erfolgt versionsabhängig über das DNS-SD/HTTP-Profil.",
+          "long": "HDS-001 ist kein Schemafehler. Die offiziellen Publikationen für V2.1, V2.2 und V2.2a beschreiben HTMLDisplayService als DNS-SD/HTTP-/Browser-Profil ohne eigenen Service-XSD-Vertrag. EV-151 bestätigt zusätzlich, dass die exakten V2.1- und V2.2-Release-Inventare sowie der 50-XSD-Integrationspool keinen dedizierten HDS-XSD enthalten. Die Versionen dürfen nicht nach dem Latest-Wins-Prinzip vereinheitlicht werden: V2.1 nutzt _http._tcp mit content+path und bildet den Endpunkt aus SRV-Ziel/Port plus TXT-path; V2.2 nutzt kanonisch _http._tcp mit content+url und übernimmt den Endpunkt aus TXT-url; V2.2a erkennt zusätzlich _ibisip_http._tcp als Übergangs-/Zukunftsbezeichnung an, während _http._tcp weiterhin akzeptiert, aber als deprecated bzw. zukünftig nicht mehr empfohlen gekennzeichnet ist.",
+          "recommendation": "Beim ausgewählten HTMLDisplayService-Profil keine fehlende Service-XSD melden und keinen XML-Vertrag ableiten. Stattdessen den versionsgenauen HDS-DNS-SD/HTTP-Validator verwenden und V2.1-, V2.2- und V2.2a-Regeln getrennt anwenden."
+        },
+        "en": {
+          "title": "HTMLDisplayService: intentionally no dedicated service XSD contract",
+          "short": "HTMLDisplayService intentionally has no dedicated service XSD; validation is performed through its version-specific DNS-SD/HTTP profile.",
+          "long": "HDS-001 is not a schema defect. The official V2.1, V2.2 and V2.2a publications define HTMLDisplayService as a DNS-SD/HTTP/browser profile without a dedicated service XSD contract. EV-151 additionally confirms that the exact V2.1 and V2.2 release inventories and the 50-root integration XSD pool contain no dedicated HDS XSD. The versions must not be collapsed using a latest-wins rule: V2.1 uses _http._tcp with content+path and constructs the endpoint from the SRV target/port plus TXT path; V2.2 canonically uses _http._tcp with content+url and takes the endpoint from TXT url; V2.2a additionally recognises _ibisip_http._tcp as the documented transition/future label while _http._tcp remains accepted but deprecated/future-not-recommended.",
+          "recommendation": "For a selected HTMLDisplayService profile, do not report a missing service XSD and do not invent an XML contract. Route to the version-specific HDS DNS-SD/HTTP validator and keep the V2.1, V2.2 and V2.2a rules separate."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "selected service is HTMLDisplayService and selected profile version is 2.1, 2.2, or 2.2a",
+          "service validation is being routed and no dedicated HDS service XSD exists by design",
+          "apply tools/runtime_discovery_profile.py check_html_display with the exact selected HDS version instead of an XML service-XSD lane"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_HDS_2026-09-07.md",
+          "note": "Terminal HDS revalidation report; HDS-001 is context_verified and explicitly classified as an intentional non-XSD DNS-SD/HTTP profile."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-151 / run 34091867070 / job 101646862752 / closure run 34092485260 / audit_registry/hds_revalidation_evidence_2026-09-07.json",
+          "note": "Persisted exact-authority evidence, release-inventory disproof of a hidden HDS XSD, RV-002 PASS and unchanged 50-root-XSD regression pool."
+        },
+        {
+          "kind": "pdf",
+          "reference": "HDS_V2.1 / sha256 c8aa91626bf60c8e74200200d63d44d497aeb3ab240c47039333b2c922a0e495 / reviewed pages 7-10",
+          "note": "Official V2.1 source for _http._tcp, TXT content+path and SRV target/port plus path endpoint construction."
+        },
+        {
+          "kind": "pdf",
+          "reference": "HDS_V2.2 / sha256 bf62b7a8b6cfdf654181b48da2d85a805118687c7463a46fadfd32679c9b7577 / reviewed pages 7-11",
+          "note": "Official V2.2 source for canonical _http._tcp, TXT content+url and TXT-url endpoint semantics."
+        },
+        {
+          "kind": "pdf",
+          "reference": "HDS_V2.2a / sha256 f3da1994e719572ba1689aea2448b9533faf9e8fbe42720b9e737b98edd8b0f8 / focus pages 8,10,11",
+          "note": "Official V2.2a source for dual protocol-label recognition, _http._tcp deprecation/future-not-recommended wording and _ibisip_http._tcp transition/future semantics."
+        },
+        {
+          "kind": "evidence",
+          "reference": "tools/validate_discovery_runtime_rv002.py @ 946488b2b7d08d681089ec5bbbfd6558dab57e35 + tools/runtime_discovery_profile.py @ 4473b913ad4576982789b2791b44e2cf1cba0c8d",
+          "note": "Current deterministic runtime evidence for version-specific HDS discovery and endpoint resolution. It validates already-observed advertisements and does not perform live DNS/mDNS or HTTP reachability."
+        }
+      ],
+      "notes": "Confirmed intentional non-XSD service model. No HDS XML alias, hidden schema contract, or latest-version backport is created. Runtime mapping is reviewed as a routing rule to the existing DNS-SD/HTTP profile checker, not as an implemented SDK finding diagnostic."
+    },
+    {
       "finding_id": "TSD-004",
       "service": "TrainSetDataService",
       "version_scope": [
@@ -10934,8 +11052,8 @@
     }
   ],
   "progress": {
-    "classified_count": 132,
-    "remaining_count": 60,
+    "classified_count": 133,
+    "remaining_count": 59,
     "reviewed_blocks": [
       "ARA",
       "ARCH",
@@ -10966,9 +11084,10 @@
       "DRTRAINSET21_V21_001_002",
       "DRTRAINSET21_V21_003",
       "DRTRAINSET22_V22_001_002",
-      "DRTVS21_V21_001_004"
+      "DRTVS21_V21_001_004",
+      "HDS_V21_V22_V22A_HDS001"
     ],
-    "latest_block": "DRTVS21_V21_001_004",
-    "latest_block_file": "audit_registry/semantic_classification_blocks/DRTVS21_V21_001_004_v0.1.json"
+    "latest_block": "HDS_V21_V22_V22A_HDS001",
+    "latest_block_file": "audit_registry/semantic_classification_blocks/HDS_V21_V22_V22A_HDS001_v0.1.json"
   }
 }
