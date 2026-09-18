@@ -1,0 +1,158 @@
+name: temp-gate-runtime-mapping-review-common-v10
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_gate_runtime_mapping_review_common_v10.yml
+
+permissions:
+  contents: read
+
+jobs:
+  gate-common-v10-runtime-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+
+      - name: Verify exact review prestate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "a6661c227f5a79d234574ebf9ef320e43bf4f42f"
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "77fb96af12bb8e267c4890e4ff45e1bdbbe66b49"
+          test "$(git hash-object sdk_manifest/known_issues_runtime_mapping_v0.1.json)" = "f095e2956c9acc4bd643fcbce732e45ab0904afe"
+          test "$(git hash-object sdk_manifest/runtime_mapping_review_blocks/COMMON_V10_DRCOM10_002_005_v0.1.json)" = "d3ece4e8aae6ce38f783bbc5408127cba25ff680"
+          test "$(git hash-object IBIS-IP_common_V1.0.xsd)" = "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c"
+          test "$(git hash-object IBIS-IP_Enumerations_V1.0.xsd)" = "a9bea5bc73003ed91ded8519db06c32c4067831d"
+
+      - name: Validate semantic registry and deterministic runtime mapping
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_finding_semantic_classification.py
+          python tools/validate_known_issues_runtime_mapping_v0_1.py
+
+      - name: Rerun preserved EV-117 Common V1.0 evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_common_v10_ev117.py
+
+      - name: Verify focused DRCOM10 runtime boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import tempfile
+          from pathlib import Path
+          from lxml import etree
+
+          semantic=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
+          mapping=json.loads(Path('sdk_manifest/known_issues_runtime_mapping_v0.1.json').read_text())
+          block=json.loads(Path('sdk_manifest/runtime_mapping_review_blocks/COMMON_V10_DRCOM10_002_005_v0.1.json').read_text())
+          by={e['finding_id']:e for e in semantic['entries']}
+          mapped={m['finding_id']:m for m in mapping['mappings']}
+          ids=('DRCOM10-002','DRCOM10-003','DRCOM10-004','DRCOM10-005')
+
+          for fid in ids:
+              assert by[fid]['runtime_match']['state']=='reviewed'
+              assert mapped[fid]['implementation_state']=='reviewed_not_implemented'
+              assert mapped[fid]['authority_guard']=='selected_xsd_result_remains_normative'
+
+          assert mapped['DRCOM10-002']['activation_class']=='xsd_invalid_advisory'
+          assert mapped['DRCOM10-003']['activation_class']=='xsd_valid_advisory'
+          assert mapped['DRCOM10-003']['required_precondition']=='xsd_result_valid'
+          assert mapped['DRCOM10-004']['activation_class']=='xsd_invalid_advisory'
+          assert mapped['DRCOM10-005']['activation_class']=='xsd_invalid_advisory'
+          assert mapping['counts']=={
+              'reviewed_mapping_count':46,
+              'implemented_count':0,
+              'semantic_candidate_count':32,
+              'semantic_not_designed_count':1,
+              'semantic_not_applicable_count':113,
+          }
+
+          XS='http://www.w3.org/2001/XMLSchema'
+          NS={'xs':XS}
+          root=etree.parse('IBIS-IP_common_V1.0.xsd').getroot()
+
+          choice=root.find("xs:complexType[@name='DataAcceptedResponseStructure']/xs:choice",NS)
+          assert choice is not None
+          assert [x.get('name') for x in choice.findall('xs:element',NS)]==['DataAcceptedResponseData','OperationErrorMessage']
+
+          empty_member=root.find("xs:complexType[@name='ServiceSpecificationWithStateListStructure']/xs:sequence/xs:element[@name='ServiceSpecificationWithState']",NS)
+          assert empty_member is not None and empty_member.get('minOccurs')=='0' and empty_member.get('maxOccurs')=='unbounded'
+
+          ann=root.find("xs:complexType[@name='JourneyStopInformationStructure']/xs:sequence/xs:element[@name='Announcement']",NS)
+          fare=root.find("xs:complexType[@name='JourneyStopInformationStructure']/xs:sequence/xs:element[@name='FareZone']",NS)
+          assert ann is not None and ann.get('minOccurs')=='0' and ann.get('maxOccurs') is None
+          assert fare is not None and fare.get('minOccurs')=='0' and fare.get('maxOccurs') is None
+
+          short=root.find("xs:complexType[@name='ShortTripStopListStructure']/xs:sequence/xs:element[@name='ShortTripStop']",NS)
+          assert short is not None and short.get('type')=='ShortTripStopStructure'
+          assert root.find("xs:complexType[@name='ShortTripStopListStructure']/xs:sequence/xs:element[@name='ShortTripStopList']",NS) is None
+
+          def sig(name):
+              n=root.find(f"xs:complexType[@name='{name}']",NS)
+              assert n is not None
+              return [(e.get('name'),e.get('type'),e.get('minOccurs','1'),e.get('maxOccurs','1')) for e in n.findall('xs:sequence/xs:element',NS)]
+          assert sig('ShortTripStopStructure')==sig('StopPointTariffInformationStructure')
+
+          harness=f'''<?xml version="1.0" encoding="UTF-8"?>
+          <xs:schema xmlns:xs="{XS}" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:include schemaLocation="IBIS-IP_common_V1.0.xsd"/>
+            <xs:element name="TestJourneyStopInformation" type="JourneyStopInformationStructure"/>
+            <xs:element name="TestShortTripStopList" type="ShortTripStopListStructure"/>
+          </xs:schema>
+          '''
+          with tempfile.NamedTemporaryFile('w',suffix='.xsd',dir='.',encoding='utf-8',delete=False) as fh:
+              fh.write(harness)
+              hp=Path(fh.name)
+          try:
+              schema=etree.XMLSchema(etree.parse(str(hp)))
+          finally:
+              hp.unlink(missing_ok=True)
+
+          display='<DisplayContent><LineInformation><LineRef><Value>L1</Value></LineRef></LineInformation><Destination><DestinationRef><Value>D1</Value></DestinationRef></Destination></DisplayContent>'
+          prefix='<StopRef><Value>S1</Value></StopRef><StopName><Value>Stop</Value><Language>de</Language></StopName>'+display
+          ann_xml='<Announcement><AnnouncementRef><Value>A1</Value></AnnouncementRef></Announcement>'
+          fare_xml='<FareZone><Value>F1</Value></FareZone>'
+
+          def valid(xml):
+              return schema.validate(etree.fromstring(xml.encode()))
+
+          assert valid('<TestJourneyStopInformation>'+prefix+ann_xml+'</TestJourneyStopInformation>')
+          assert not valid('<TestJourneyStopInformation>'+prefix+ann_xml+ann_xml+'</TestJourneyStopInformation>')
+          assert valid('<TestJourneyStopInformation>'+prefix+fare_xml+'</TestJourneyStopInformation>')
+          assert not valid('<TestJourneyStopInformation>'+prefix+fare_xml+fare_xml+'</TestJourneyStopInformation>')
+
+          short_body='<JourneyStopInformation>'+prefix+'</JourneyStopInformation><FareZoneInformation><FareZoneID><Value>FZ1</Value></FareZoneID></FareZoneInformation>'
+          assert valid('<TestShortTripStopList><ShortTripStop>'+short_body+'</ShortTripStop></TestShortTripStopList>')
+          assert not valid('<TestShortTripStopList><ShortTripStopList>'+short_body+'</ShortTripStopList></TestShortTripStopList>')
+
+          rb={e['finding_id']:e for e in block['entries']}
+          assert any('must require XSD VALID' in g for g in rb['DRCOM10-003']['guards'])
+          assert any('must not register ShortTripStopList as alias' in g for g in rb['DRCOM10-005']['guards'])
+          print('PASSED: focused Common V1.0 runtime boundaries verified')
+          PY
+
+      - name: Prove root XSD immutability
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum ./*.xsd | sort > /tmp/xsd-before.sha256
+          python tools/validate_xsd_pool.py --repo-root .
+          sha256sum ./*.xsd | sort > /tmp/xsd-after.sha256
+          cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          git diff --exit-code
+          echo "PASSED: Common V1.0 runtime-mapping review gate complete"
