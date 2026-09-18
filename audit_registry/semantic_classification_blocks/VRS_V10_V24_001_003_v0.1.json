@@ -1,0 +1,299 @@
+{
+  "block_version": "0.1",
+  "block_id": "VRS_V10_V24_001_003",
+  "review_date": "2026-09-18",
+  "source_baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
+  "source_terminal_report": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md",
+  "source_deep_reads": [
+    "docs/pdf_xsd_semantic_audit/deep_read/VRS_V1.0.md",
+    "docs/pdf_xsd_semantic_audit/deep_read/VRS_V2.0.md",
+    "docs/pdf_xsd_semantic_audit/deep_read/VRS_V2.4.md",
+    "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CHOICE_NOTATION_2026-08-29.md",
+    "docs/pdf_xsd_semantic_audit/VIDEO_RECORDING_SERVICE_FINDINGS_REGISTER_ADDENDUM.md",
+    "docs/pdf_xsd_semantic_audit/24c_executable_validation_video_compositors.md"
+  ],
+  "review_policy": "manual_semantic_review_bilingual_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "VRS-001",
+      "service": "VideoRecordingService",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "unresolved",
+          "xsd_profile": null,
+          "note": "The official 05/2017 VideoRecordingService V1.0 publication is confirmed, but the checked official VDV-301-1.0 release route contains no exact VideoRecordingService V1.0 service XSD and the monolithic IBIS_IP_V1.0.xsd contains no VideoRecordingService include or declaration. V2.0/V2.4 must not be substituted."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "no_strict_xsd_profile",
+      "primary_surface": "provenance",
+      "primary_issue_kind": "release_authority_gap",
+      "secondary_issue_kinds": [
+        "missing_exact_official_service_xsd",
+        "historical_release_route_gap",
+        "no_nearby_version_substitution",
+        "strict_profile_unavailable"
+      ],
+      "defect_assessment": "authority_gap",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "strict_profile_unavailable"
+      ],
+      "sdk_behavior": "unsupported_profile",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The byte-pinned official 05/2017 VDV 301-2-12 publication establishes VideoRecordingService V1.0 documentation authority."
+        },
+        {
+          "type": "official_release_provenance",
+          "note": "The complete checked VDV-301-1.0 release tree has no VideoRecordingService V1.0 service XSD; the monolithic V1.0 schema has no VideoRecordingService include/declaration, and repository history for the expected path yields no commit."
+        },
+        {
+          "type": "technical_inference",
+          "note": "Neither V2.0 nor V2.4 may be substituted for the unresolved V1.0 strict profile without inventing cross-version authority."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoRecordingService V1.0: keine eindeutig bestätigte offizielle Service-XSD",
+          "short": "Die offizielle V1.0-PDF ist bestätigt, aber im geprüften offiziellen Release-Pfad fehlt eine exakt zuordenbare VRS-V1.0-XSD.",
+          "long": "VRS-001 ist ein bestätigter Authority-/Provenance-Gap. Die offizielle VDV-Schrift 301-2-12 von 05/2017 ist als VideoRecordingService V1.0 belegt. Im geprüften offiziellen VDV-301-1.0-Releasebaum existiert jedoch keine VideoRecordingService-V1.0-Service-XSD; auch die monolithische V1.0-XSD bindet den Dienst nicht ein. Eine spätere V2.0- oder V2.4-XSD darf nicht rückwirkend als V1.0-Autorität verwendet werden.",
+          "recommendation": "Für VRS V1.0 kein offizielles Strict-XSD-Profil vortäuschen. Fail-closed bleiben und keine nahe Version als Ersatzschema auswählen."
+        },
+        "en": {
+          "title": "VideoRecordingService V1.0: no unambiguously confirmed official service XSD",
+          "short": "The official V1.0 PDF is confirmed, but no exactly matching VRS V1.0 XSD is established in the checked official release route.",
+          "long": "VRS-001 is a confirmed authority/provenance gap. The official VDV 301-2-12 publication from 05/2017 is established as VideoRecordingService V1.0. However, the checked official VDV-301-1.0 release tree contains no VideoRecordingService V1.0 service XSD, and the monolithic V1.0 schema does not include the service. A later V2.0 or V2.4 XSD must not be back-applied as V1.0 authority.",
+          "recommendation": "Do not present an official strict XSD profile for VRS V1.0. Fail closed and do not select a nearby version as a substitute schema."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "requested strict profile is VideoRecordingService V1.0",
+          "no exact official V1.0 VideoRecordingService service XSD authority can be selected"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VideoRecordingService V1.0 / sha256 29d0bcb270fdab2119c4653296d4bca01e0f8b127eb9aaf393f66b2b34dcd390"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/deep_read/VRS_V1.0.md"
+        },
+        {
+          "kind": "other",
+          "reference": "official VDV-301-1.0 release-tree provenance"
+        }
+      ],
+      "notes": "Confirmed V1.0 authority gap; no V2.0/V2.4 substitution."
+    },
+    {
+      "finding_id": "VRS-002",
+      "service": "VideoRecordingService",
+      "version_scope": [
+        {
+          "version": "V2.4 official documentation",
+          "authority": "unresolved",
+          "xsd_profile": null,
+          "note": "The V2.4 PDF is an official public VDV writing, but no official release-tag VRS V2.4 XSD authority is established."
+        },
+        {
+          "version": "V2.4 candidate/integration",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_VideoRecordingService_V2.4.xsd",
+          "note": "The checked V2.4 XSD is byte-identical to open, unmerged upstream PR #27 head 0aa728aab47a7f13b6f36da415581d51592c4ca7; service blob 07ff2c41731e63fd85b203e4b8e0186136caaaaf. It is candidate/integration evidence only."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "no_strict_xsd_profile",
+      "primary_surface": "provenance",
+      "primary_issue_kind": "release_authority_gap",
+      "secondary_issue_kinds": [
+        "official_pdf_candidate_xsd_split",
+        "open_unmerged_pr27",
+        "candidate_integration_only",
+        "strict_official_profile_unavailable"
+      ],
+      "defect_assessment": "authority_gap",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "strict_profile_unavailable",
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "unsupported_profile",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The VRS V2.4 PDF is an official public VDV writing."
+        },
+        {
+          "type": "candidate_integration_provenance",
+          "note": "The checked V2.4 service XSD comes from open, unmerged upstream PR #27 and is byte-identical to the candidate copy in the integration branch."
+        },
+        {
+          "type": "official_release_provenance",
+          "note": "No official V2.4 release-tag service-XSD authority is established; the official PDF does not promote the candidate XSD to release authority."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The candidate may be used only as an explicitly non-official analysis/control profile and cannot support an official strict V2.4 SDK profile."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoRecordingService V2.4: offizielle PDF, aber nur Candidate-XSD aus offenem PR",
+          "short": "Die V2.4-Dokumentation ist offiziell; die geprüfte V2.4-XSD stammt dagegen aus dem offenen, nicht gemergten PR #27.",
+          "long": "VRS-002 ist ein bestätigter Authority-Gap zwischen offizieller Dokumentation und XSD-Provenance. Die VRS-V2.4-PDF ist offiziell veröffentlicht. Die verfügbare V2.4-XSD stammt jedoch aus dem offenen, nicht gemergten Upstream-PR #27 und bleibt Candidate/Integration-Material. Die strukturelle Übereinstimmung einzelner V2.4-Korrekturen mit dieser XSD macht sie nicht zur offiziellen Release-Autorität.",
+          "recommendation": "Kein offizielles VRS-V2.4-Strictprofil aus der Candidate-XSD ableiten. Sie nur ausdrücklich als Candidate/Integration-Analyseprofil anbieten und die Provenance sichtbar halten."
+        },
+        "en": {
+          "title": "VideoRecordingService V2.4: official PDF but only a candidate XSD from an open PR",
+          "short": "The V2.4 documentation is official, but the checked V2.4 XSD comes from open, unmerged PR #27.",
+          "long": "VRS-002 is a confirmed authority gap between official documentation and XSD provenance. The VRS V2.4 PDF is officially published, but the available V2.4 XSD comes from open, unmerged upstream PR #27 and remains candidate/integration material. Structural agreement between specific V2.4 corrections and that XSD does not promote it to official release authority.",
+          "recommendation": "Do not derive an official VRS V2.4 strict profile from the candidate XSD. Offer it only as an explicitly candidate/integration analysis profile and keep its provenance visible."
+        }
+      },
+      "runtime_match": {
+        "state": "reviewed",
+        "candidate_triggers": [
+          "requested profile is official VideoRecordingService V2.4 strict validation",
+          "only the open PR #27 candidate/integration XSD is available for the service version"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VideoRecordingService V2.4 / sha256 d1a3cf36b4a9719ff8d233a84ade34ed7ff9c3dccb58f8a8688727d82a568a7b"
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_VideoRecordingService_V2.4.xsd @ 07ff2c41731e63fd85b203e4b8e0186136caaaaf",
+          "note": "Candidate/integration only; open PR #27."
+        },
+        {
+          "kind": "other",
+          "reference": "upstream PR #27 head 0aa728aab47a7f13b6f36da415581d51592c4ca7 / state open / merged false"
+        }
+      ],
+      "notes": "Official documentation and candidate-XSD lanes remain provenance-separated."
+    },
+    {
+      "finding_id": "VRS-003",
+      "service": "VideoRecordingService",
+      "version_scope": [
+        {
+          "version": "V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_VideoRecordingService_V2.0.xsd + IBIS-IP_common_V2.0.xsd + IBIS-IP_Enumerations_V2.0.xsd",
+          "note": "The corrected PDF reading shows ordinary required AlarmArchiveFillLevel and OperationErrorMessage fields plus an a/b choice between State and StartStopMode; the exact XSD instead makes all four fields mutually exclusive alternatives of one xs:choice."
+        },
+        {
+          "version": "V2.4 correction control",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_VideoRecordingService_V2.4.xsd",
+          "note": "Official V2.4 documentation restructures the response and the PR #27 candidate XSD aligns with that corrected model. This is explanatory correction evidence only and does not alter official V2.0 validation."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "structure_mismatch",
+      "secondary_issue_kinds": [
+        "VideoRecordingStateResponseStructure",
+        "choice_aware_pdf_semantics",
+        "xs_choice_over_all_four_members",
+        "compositor_mismatch",
+        "choice_notation_correction_applied",
+        "v24_explanatory_correction_only"
+      ],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation",
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The corrected V2.0 PDF reading has required AlarmArchiveFillLevel and OperationErrorMessage alongside an a/b XML-choice between State and StartStopMode."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact official V2.0 VideoRecordingStateResponseStructure places State, AlarmArchiveFillLevel, OperationErrorMessage and StartStopMode as four mutually exclusive members of one xs:choice."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-103 confirms State alone validates, while State + AlarmArchiveFillLevel is rejected by the exact official V2.0 family. State + StartStopMode is also rejected, consistent with XSD exclusivity and the PDF a/b choice."
+        },
+        {
+          "type": "later_official_correction",
+          "note": "The official V2.4 publication states that GetVideoRecordingState response ambiguities were clarified and documents a nested VideoRecordingState structure; the candidate V2.4 XSD aligns structurally but remains non-official."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The selected official V2.0 XSD remains normative. The SDK may explain the confirmed compositor mismatch only after an actual V2.0 schema rejection; it must not import candidate V2.4 semantics into V2.0."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "VideoRecordingService V2.0: State-Response-PDF und XSD-Compositor widersprechen sich",
+          "short": "Die PDF kombiniert Pflichtfelder mit einer State/StartStopMode-Choice; die XSD macht alle vier Response-Felder gegenseitig exklusiv.",
+          "long": "VRS-003 ist ein ausführbar bestätigter PDF/XSD-Compositor-Konflikt. In der korrigierten Lesart der offiziellen V2.0-PDF sind AlarmArchiveFillLevel und OperationErrorMessage normale Pflichtfelder; zusätzlich bilden State und StartStopMode eine a/b-Choice. Die exakte offizielle V2.0-XSD modelliert dagegen State, AlarmArchiveFillLevel, OperationErrorMessage und StartStopMode sämtlich als Alternativen eines einzigen xs:choice. EV-103 bestätigt, dass State allein validiert, eine PDF-konforme Kombination State + AlarmArchiveFillLevel jedoch zurückgewiesen wird.",
+          "recommendation": "V2.0 strikt gegen die offizielle XSD validieren. Bei einer PDF-konformen Mehrfeldantwort den XSD-Fehler beibehalten und den bestätigten Compositor-Konflikt erklären. Die V2.4-Korrektur nur als historische Erklärung verwenden und Candidate-Semantik nicht auf V2.0 zurückübertragen."
+        },
+        "en": {
+          "title": "VideoRecordingService V2.0: state-response PDF conflicts with the XSD compositor",
+          "short": "The PDF combines required fields with a State/StartStopMode choice; the XSD makes all four response fields mutually exclusive.",
+          "long": "VRS-003 is an executably confirmed PDF/XSD compositor mismatch. Under the corrected reading of the official V2.0 PDF, AlarmArchiveFillLevel and OperationErrorMessage are ordinary required fields, while State and StartStopMode form an a/b choice. The exact official V2.0 XSD instead models State, AlarmArchiveFillLevel, OperationErrorMessage and StartStopMode as alternatives of a single xs:choice. EV-103 confirms that State alone validates while the PDF-conforming combination State + AlarmArchiveFillLevel is rejected.",
+          "recommendation": "Validate V2.0 strictly against the official XSD. For a PDF-conforming multi-field response, preserve the XSD error and explain the confirmed compositor mismatch. Use the V2.4 correction only as historical explanation and do not back-apply candidate semantics to V2.0."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "selected profile is official VideoRecordingService V2.0",
+          "XSD validation rejects VideoRecordingStateResponse after State because AlarmArchiveFillLevel or OperationErrorMessage is also present as documented by the PDF",
+          "the rejection is attributable to the exact V2.0 single xs:choice compositor"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VRS_2026-09-14.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-166 / validation run 34840970136 / closure run 34841174977; EV-103 run 33111119723 / job 98653897734"
+        },
+        {
+          "kind": "pdf",
+          "reference": "VideoRecordingService V2.0 / sha256 fbe9e68e72de4e5450f562aa6a6117283a94f87a28bded0e05458670527b6c5f / physical page 18"
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_VideoRecordingService_V2.0.xsd @ 6ef0dae64ce6f4d3aa4f652d6d166896e71aaac7"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CHOICE_NOTATION_2026-08-29.md"
+        }
+      ],
+      "notes": "Confirmed official V2.0 compositor mismatch using corrected choice-aware PDF reading; V2.4 candidate is explanatory only."
+    }
+  ]
+}
