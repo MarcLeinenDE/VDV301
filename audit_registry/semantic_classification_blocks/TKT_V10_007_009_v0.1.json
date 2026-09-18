@@ -1,0 +1,284 @@
+{
+  "block_version": "0.1",
+  "block_id": "TKT_V10_007_009",
+  "review_date": "2026-09-18",
+  "source_baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
+  "source_terminal_report": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TKT_2026-09-14.md",
+  "source_deep_reads": [
+    "docs/pdf_xsd_semantic_audit/14a_ticketing_ticket_information_v1_0_pdf_xsd_first_pass.md",
+    "docs/pdf_xsd_semantic_audit/14b_ticketing_ticket_information_findings_and_closure.md"
+  ],
+  "review_policy": "manual_semantic_review_bilingual_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "TKT-007",
+      "service": "TicketingService",
+      "version_scope": [
+        {
+          "version": "V1.0 later official self-contained revision",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+          "note": "The outer GetValidationResult response wrapper contains ValidationResultData; TimeStamp and ValidationResult belong to TicketingService.ValidationResultDataStructure."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "wrong_structure_reference",
+      "secondary_issue_kinds": [
+        "GetValidationResult_detail_table",
+        "outer_wrapper_vs_inner_data_structure",
+        "TimeStamp_and_ValidationResult_field_owner",
+        "documentation_structure_label_error"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "code_generation_or_discovery_affected",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The detailed PDF table labels TicketingService.GetValidationResultResponseStructure while listing TimeStamp and ValidationResult fields."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact XSD defines those fields in TicketingService.ValidationResultDataStructure, nested beneath the outer GetValidationResult response wrapper."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-158 inventories the outer response choice and inner data sequence and confirms the field ownership."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The defect is the table's structure label, not an alternative serialized XML shape or executable root."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "GetValidationResult: Detailtabelle verwechselt äußeren Response-Wrapper und innere Datenstruktur",
+          "short": "Die Tabelle ist mit GetValidationResultResponseStructure überschrieben, die gezeigten Felder TimeStamp und ValidationResult gehören aber zu ValidationResultDataStructure.",
+          "long": "TKT-007 ist ein bestätigter Strukturbezeichnungsfehler der Dokumentation. Die Detailtabelle der offiziellen TicketingService-V1.0-PDF trägt die Bezeichnung TicketingService.GetValidationResultResponseStructure, zeigt darunter aber die Felder TimeStamp und ValidationResult. In der exakten XSD gehören diese Felder zur inneren TicketingService.ValidationResultDataStructure; der äußere Response-Wrapper enthält stattdessen die Choice aus ValidationResultData und OperationErrorMessage.",
+          "recommendation": "Bei Schemaauflösung und Codegenerierung die Wrapper-/Datenstrukturgrenze der XSD übernehmen. Die PDF-Tabellenüberschrift nicht als Feldzuordnung interpretieren und daraus keine Runtime-Diagnostik ableiten."
+        },
+        "en": {
+          "title": "GetValidationResult: detail table confuses the outer response wrapper with the inner data structure",
+          "short": "The table is labelled GetValidationResultResponseStructure, but the shown TimeStamp and ValidationResult fields belong to ValidationResultDataStructure.",
+          "long": "TKT-007 is a confirmed documentation structure-label defect. The detailed table in the official TicketingService V1.0 PDF is labelled TicketingService.GetValidationResultResponseStructure but lists TimeStamp and ValidationResult beneath it. In the exact XSD, those fields belong to the inner TicketingService.ValidationResultDataStructure; the outer response wrapper instead contains the choice of ValidationResultData and OperationErrorMessage.",
+          "recommendation": "For schema resolution and code generation, preserve the wrapper/data-structure boundary defined by the XSD. Do not treat the PDF table heading as field ownership and do not derive a runtime diagnostic from it."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TKT_2026-09-14.md",
+          "note": "Terminal TKT report; TKT-007 is context_verified."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-158 / independent run 34813527845 / closure run 34813841015",
+          "note": "Exact wrapper-versus-inner-data inventory."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TicketingService V1.0 / physical page 12",
+          "note": "Detailed table heading versus shown field set."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+          "note": "Defines outer GetValidationResultResponseStructure and inner ValidationResultDataStructure."
+        }
+      ],
+      "notes": "Confirmed documentation structure-reference defect with no standalone runtime token."
+    },
+    {
+      "finding_id": "TKT-008",
+      "service": "TicketingService",
+      "version_scope": [
+        {
+          "version": "V1.0 later official self-contained revision",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+          "note": "CardApplikationValidation uses the exact element spelling CardApplikationInformation; the PDF visibly spells CardApplicationInformation."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "identifier_typo",
+      "secondary_issue_kinds": [
+        "CardApplicationInformation_vs_CardApplikationInformation",
+        "element_name_spelling",
+        "exact_schema_spelling_required",
+        "visual_pdf_evidence"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Rendered physical page 11 visibly uses CardApplicationInformation."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact XSD CardApplikationValidation group declares CardApplikationInformation."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-158 validates a response using CardApplikationInformation and rejects the same payload when the element is replaced by CardApplicationInformation."
+        },
+        {
+          "type": "technical_inference",
+          "note": "This is a stable single-element spelling boundary suitable for a targeted Known-Issues advisory while preserving the XSD error."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "CardApplicationInformation in der PDF, CardApplikationInformation in der XSD",
+          "short": "Die PDF verwendet CardApplicationInformation; die exakte XSD verlangt die Schreibweise CardApplikationInformation.",
+          "long": "TKT-008 ist ein ausführbar bestätigter Bezeichnerfehler der Dokumentation. Auf der gerenderten physischen Seite 11 steht sichtbar CardApplicationInformation. Die exakte TicketingService-V1.0-XSD deklariert im CardApplikationValidation-Kontext dagegen das Element CardApplikationInformation. EV-158 bestätigt die Grenze direkt: die XSD-Schreibweise validiert, die PDF-Schreibweise wird zurückgewiesen.",
+          "recommendation": "Im XML ausschließlich CardApplikationInformation gemäß ausgewählter XSD verwenden. Wenn die XSD exakt CardApplicationInformation zurückweist, den Fehler beibehalten und ergänzend auf den dokumentierten PDF-Schreibfehler hinweisen."
+        },
+        "en": {
+          "title": "CardApplicationInformation in the PDF, CardApplikationInformation in the XSD",
+          "short": "The PDF uses CardApplicationInformation; the exact XSD requires the spelling CardApplikationInformation.",
+          "long": "TKT-008 is an executably confirmed documentation identifier defect. Rendered physical page 11 visibly shows CardApplicationInformation. The exact TicketingService V1.0 XSD instead declares CardApplikationInformation in the CardApplikationValidation context. EV-158 confirms the boundary directly: the XSD spelling validates, while the PDF spelling is rejected.",
+          "recommendation": "Use only CardApplikationInformation in XML according to the selected XSD. If XSD validation rejects exactly CardApplicationInformation, preserve the error and add an advisory explaining the documented PDF spelling defect."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "selected profile is the later official TicketingService V1.0 schema revision",
+          "XSD validation rejects element CardApplicationInformation where CardApplikationInformation is required",
+          "the invalid spelling matches the official PDF label"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TKT_2026-09-14.md",
+          "note": "Terminal TKT report; TKT-008 is executable_confirmed."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-158 / independent run 34813527845 / artifact 10336185560 / closure run 34813841015",
+          "note": "Positive/negative executable spelling boundary; page 11 retained as visual evidence."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TicketingService V1.0 / sha256 96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43 / physical page 11",
+          "note": "Rendered page visibly shows CardApplicationInformation."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+          "note": "CardApplikationValidation group declares CardApplikationInformation."
+        }
+      ],
+      "notes": "Confirmed executable spelling mismatch; exact PDF spelling rejection is a robust advisory candidate."
+    },
+    {
+      "finding_id": "TKT-009",
+      "service": "TicketingService",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd official V1.0 family",
+          "note": "PDF detail labels visibly use TicketingSevice, while the service title and executable schema identity use TicketingService; no TicketingSevice alias exists."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "identifier_typo",
+      "secondary_issue_kinds": [
+        "TicketingSevice_vs_TicketingService",
+        "missing_r_in_service_name",
+        "pdf_label_typo",
+        "no_executable_alias"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The official PDF visibly uses TicketingSevice in detailed labels while the same publication identifies the service as TicketingService."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact schema uses TicketingService identities and declares no TicketingSevice alias."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-158 confirms the schema has no TicketingSevice identity and rejects a deliberately misspelled root."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The frozen finding is documentation-focused rather than a dedicated executable runtime rule; the typo should remain guidance-only in the Known-Issues layer."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "TicketingService V1.0: TicketingSevice-Schreibfehler in PDF-Labels",
+          "short": "Einige PDF-Labels schreiben TicketingSevice ohne „r“; die korrekte Service-Identität lautet TicketingService.",
+          "long": "TKT-009 ist ein bestätigter lokaler Schreibfehler der Dokumentation. Die offizielle TicketingService-V1.0-PDF verwendet in Detail-Labels die Form TicketingSevice. Der Servicetitel und die exakte XSD verwenden dagegen durchgehend die ausführbare Identität TicketingService; ein TicketingSevice-Alias ist nicht definiert. EV-158 bestätigt zusätzlich, dass ein absichtlich mit diesem Tippfehler gebildeter Root von der XSD abgewiesen wird.",
+          "recommendation": "TicketingSevice in den betroffenen PDF-Labels als TicketingService lesen. Keine Aliasregel erzeugen und den Befund im SDK als Dokumentationswissen ohne eigene Runtime-Diagnostik führen."
+        },
+        "en": {
+          "title": "TicketingService V1.0: TicketingSevice typo in PDF labels",
+          "short": "Some PDF labels spell TicketingSevice without the “r”; the correct service identity is TicketingService.",
+          "long": "TKT-009 is a confirmed local documentation spelling defect. The official TicketingService V1.0 PDF uses TicketingSevice in detailed labels. The service title and exact XSD instead consistently use the executable identity TicketingService, and no TicketingSevice alias is defined. EV-158 also confirms that a deliberately misspelled root using this form is rejected by the XSD.",
+          "recommendation": "Read TicketingSevice in the affected PDF labels as TicketingService. Do not create an alias rule, and retain the finding as documentation knowledge without a dedicated runtime diagnostic."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TKT_2026-09-14.md",
+          "note": "Terminal TKT report; TKT-009 is context_verified."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-158 / independent run 34813527845 / closure run 34813841015",
+          "note": "PDF spelling evidence and no-alias executable check."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TicketingService V1.0 / physical page 9 and related detail labels",
+          "note": "Visible TicketingSevice spelling."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+          "note": "Executable service identity remains TicketingService."
+        }
+      ],
+      "notes": "Confirmed documentation spelling typo. No alias and no dedicated runtime diagnostic."
+    }
+  ]
+}
