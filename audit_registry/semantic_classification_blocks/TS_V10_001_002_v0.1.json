@@ -1,0 +1,187 @@
+{
+  "block_version": "0.1",
+  "block_id": "TS_V10_001_002",
+  "review_date": "2026-09-18",
+  "source_baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
+  "source_terminal_report": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TS_2026-09-14.md",
+  "source_deep_reads": [
+    "docs/pdf_xsd_semantic_audit/15a_time_service_v1_0_protocol_first_pass.md",
+    "docs/pdf_xsd_semantic_audit/15b_time_service_findings_and_closure.md",
+    "docs/pdf_xsd_semantic_audit/25d_time_service_sntp_profile.md"
+  ],
+  "review_policy": "manual_semantic_review_bilingual_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "TS-001",
+      "service": "TimeService",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "official_release",
+          "xsd_profile": null,
+          "note": "Official VDV 301-2-10 TimeService V1.0 is an SNTP/RFC-4330 plus DNS-SD discovery/profile service. Exact VDV-301-1.0 and VDV-301-2.0 release trees and the current 50-root integration pool contain no dedicated TimeService XSD by design."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "no_strict_xsd_profile",
+      "primary_surface": "external_standard",
+      "primary_issue_kind": "intentional_design_misread",
+      "secondary_issue_kinds": [
+        "protocol_discovery_profile",
+        "SNTP_RFC4330",
+        "DNS_SD",
+        "no_dedicated_TimeService_XSD",
+        "no_XML_operations",
+        "no_cyclic_time_broadcast"
+      ],
+      "defect_assessment": "non_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "VDV 301-2-10 describes TimeService V1.0 as an SNTP/RFC-4330 profile with DNS-SD discovery metadata rather than a service-specific XML payload family."
+        },
+        {
+          "type": "external_protocol_standard",
+          "note": "Actual time synchronization is delegated to SNTP according to RFC 4330."
+        },
+        {
+          "type": "official_release_provenance",
+          "note": "Exact VDV-301-1.0 and VDV-301-2.0 release trees contain no dedicated TimeService XSD, while shared Enumerations V1.0 still includes TimeService in ServiceNameEnumeration."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-159 reruns RV-003, confirming protocol/discovery routing, no synthesized XML operations and the no-cyclic-delivery invariant."
+        },
+        {
+          "type": "technical_inference",
+          "note": "Absence of a dedicated XSD is intentional architecture, not a missing schema. Runtime checks belong to the SNTP/DNS-SD protocol lane rather than the Known-Issues XSD diagnostic lane."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "TimeService V1.0 ist absichtlich ein SNTP/DNS-SD-Profil ohne eigene XSD",
+          "short": "Für TimeService V1.0 gibt es keine dedizierte XML/XSD-Payload-Familie; Zeitabgleich erfolgt über SNTP und Discovery über DNS-SD.",
+          "long": "TS-001 ist kein Defekt. Die offizielle VDV 301-2-10 beschreibt TimeService V1.0 als Protokoll-/Discovery-Profil: die eigentliche Zeitsynchronisation erfolgt über SNTP gemäß RFC 4330, während DNS-SD den Dienst und Metadaten wie sntp-server bereitstellt. In den exakten offiziellen VDV-301-1.0- und VDV-301-2.0-Releasebäumen sowie im aktuellen 50-XSD-Pool existiert bewusst keine dedizierte TimeService-XSD. Gleichzeitig enthält die gemeinsame ServiceNameEnumeration den Service TimeService. EV-159/RV-003 bestätigt ausführbar, dass keine XML-Operationen synthetisiert und keine zyklischen VDV-Zeitnachrichten erwartet werden.",
+          "recommendation": "TimeService V1.0 in die SNTP/DNS-SD-Protokollprüfung routen. Keine TimeService-XSD oder XML-Operationen erfinden und das Ausbleiben zyklischer XML-Zeittelegramme nicht als Fehler behandeln. Discovery-, Erreichbarkeits- und SNTP-Probleme separat diagnostizieren."
+        },
+        "en": {
+          "title": "TimeService V1.0 is intentionally an SNTP/DNS-SD profile without its own XSD",
+          "short": "TimeService V1.0 has no dedicated XML/XSD payload family; time synchronization uses SNTP and discovery uses DNS-SD.",
+          "long": "TS-001 is not a defect. Official VDV 301-2-10 defines TimeService V1.0 as a protocol/discovery profile: actual time synchronization is performed through SNTP according to RFC 4330, while DNS-SD advertises the service and metadata such as sntp-server. The exact official VDV-301-1.0 and VDV-301-2.0 release trees and the current 50-XSD pool intentionally contain no dedicated TimeService XSD. The shared ServiceNameEnumeration nevertheless includes TimeService. EV-159/RV-003 executably confirms that no XML operations are synthesized and no cyclic VDV time messages are expected.",
+          "recommendation": "Route TimeService V1.0 to SNTP/DNS-SD protocol checks. Do not invent a TimeService XSD or XML operations, and do not treat the absence of cyclic XML time messages as an error. Diagnose discovery, reachability and SNTP exchange failures separately."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TS_2026-09-14.md",
+          "note": "Terminal TS report; TS-001 is contextual_not_defect."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-159 / independent run 34815684895 / artifact 10336194085 / closure run 34816125569; RV-003 @ ff6e3fcd35d4c2f6bff760b3e86f5adb0e72156c",
+          "note": "Release-tree/no-XSD evidence and deterministic SNTP/DNS-SD runtime-profile validation."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TimeService V1.0 / sha256 d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3 / physical page 6",
+          "note": "Official SNTP/RFC-4330 and DNS-SD profile."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_Enumerations_V1.0.xsd @ a9bea5bc73003ed91ded8519db06c32c4067831d",
+          "note": "Shared ServiceNameEnumeration contains TimeService despite no dedicated service XSD."
+        }
+      ],
+      "notes": "Confirmed intentional non-XSD architecture. Protocol diagnostics belong to the TimeService SNTP/DNS-SD lane, not a fabricated schema finding."
+    },
+    {
+      "finding_id": "TS-002",
+      "service": "TimeService",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The exact official TimeService V1.0 writing is VDV 301-2-10. On physical page 4 the German foreword identifies VDV 301-2-10 while the adjacent English foreword incorrectly says VDV 301-2-1."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "contextual_only",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "identifier_typo",
+      "secondary_issue_kinds": [
+        "document_number_reference_error",
+        "VDV_301_2_10_vs_301_2_1",
+        "bilingual_foreword_contradiction",
+        "documentation_only"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Physical page 4 of the byte-pinned official writing visibly identifies VDV 301-2-10 in German and VDV 301-2-1 in the adjacent English foreword."
+        },
+        {
+          "type": "official_release_provenance",
+          "note": "The publication itself is the official VDV 301-2-10 TimeService V1.0 writing."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The English 301-2-1 reference is therefore a local documentation reference-number error with no schema or protocol-semantic effect."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "TimeService V1.0: englisches Vorwort nennt VDV 301-2-1 statt VDV 301-2-10",
+          "short": "Das deutsche Vorwort nennt korrekt VDV 301-2-10; das englische Vorwort derselben Seite verweist fälschlich auf VDV 301-2-1.",
+          "long": "TS-002 ist ein bestätigter Dokumentnummernfehler. Auf der physischen Seite 4 der byte-gepinnten offiziellen TimeService-V1.0-Schrift identifiziert der deutsche Vorworttext VDV 301-2-10, während der direkt benachbarte englische Text VDV 301-2-1 nennt. Die Veröffentlichung selbst ist VDV 301-2-10; der englische Verweis ist daher kein alternativer Normpfad, sondern ein redaktioneller Fehler.",
+          "recommendation": "Den englischen Verweis als VDV 301-2-10 interpretieren und den Fehler nur als Dokumentationshinweis führen. Keine XSD-, Resolver- oder Runtime-Regel daraus ableiten."
+        },
+        "en": {
+          "title": "TimeService V1.0: English foreword cites VDV 301-2-1 instead of VDV 301-2-10",
+          "short": "The German foreword correctly identifies VDV 301-2-10; the English foreword on the same page incorrectly cites VDV 301-2-1.",
+          "long": "TS-002 is a confirmed document-number error. On physical page 4 of the byte-pinned official TimeService V1.0 publication, the German foreword identifies VDV 301-2-10 while the immediately adjacent English text says VDV 301-2-1. The publication itself is VDV 301-2-10, so the English reference is not an alternate authority path but a local editorial error.",
+          "recommendation": "Interpret the English reference as VDV 301-2-10 and retain the issue as documentation guidance only. Do not derive an XSD, resolver, or runtime rule from it."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TS_2026-09-14.md",
+          "note": "Terminal TS report; TS-002 is context_verified."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-159 / independent run 34815684895 / artifact 10336194085 / closure run 34816125569",
+          "note": "Pinned visual evidence for the bilingual page-4 contradiction."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TimeService V1.0 / sha256 d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3 / physical page 4",
+          "note": "German VDV 301-2-10 versus English VDV 301-2-1."
+        }
+      ],
+      "notes": "Confirmed documentation-only reference-number typo; no executable effect."
+    }
+  ]
+}
