@@ -1,0 +1,186 @@
+{
+  "block_version": "0.1",
+  "block_id": "JIS_V10_003_004",
+  "review_date": "2026-09-18",
+  "source_baseline_payload_sha256": "d5bf14df302d57a0fc3d71792e1cb00583fafd3e9c7efd19721fd0de353dd576",
+  "source_terminal_report": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_JIS_2026-09-08.md",
+  "source_deep_read": "docs/pdf_xsd_semantic_audit/06b_jis_findings_and_closure.md",
+  "review_policy": "manual_semantic_review_bilingual_no_xsd_override",
+  "entries": [
+    {
+      "finding_id": "JIS-003",
+      "service": "JourneyInformationService",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_JourneyInformationService_V1.0.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact official JIS V1.0 route. PDF table 29 documents LineInformation as 1:*, while the selected XSD omits maxOccurs and therefore applies the XML Schema default maxOccurs=1."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "cardinality_mismatch",
+      "secondary_issue_kinds": [
+        "pdf_repeatable_vs_xsd_singleton",
+        "xml_schema_default_maxoccurs",
+        "list_all_line_information"
+      ],
+      "defect_assessment": "cross_artifact_mismatch",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "Physical page 19, table 29, visibly documents AllLineInformationData.LineInformation with cardinality 1:*."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Exact JIS V1.0 declares LineInformation in JourneyInformationService.AllLineInformationData without minOccurs or maxOccurs."
+        },
+        {
+          "type": "xml_schema_semantics",
+          "note": "Absent maxOccurs defaults to 1 under XML Schema, so the selected XSD permits exactly one LineInformation entry."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-152 validates a one-entry instance and rejects an otherwise equivalent two-entry instance against the exact selected JIS V1.0 route."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "JourneyInformationService V1.0: LineInformation 1:* in PDF, aber maximal 1 in der XSD",
+          "short": "Die PDF erlaubt mehrere LineInformation-Einträge; die maßgebliche V1.0-XSD akzeptiert wegen des fehlenden maxOccurs nur einen.",
+          "long": "JIS-003 ist ein bestätigter PDF/XSD-Kardinalitätskonflikt. Tabelle 29 der offiziellen PDF kennzeichnet LineInformation in AllLineInformationData mit 1:*. In der exakten V1.0-XSD fehlt maxOccurs an diesem Element; nach XML-Schema-Semantik gilt daher maxOccurs=1. EV-152 bestätigt das ausführbar: eine Instanz mit einem LineInformation-Eintrag ist gültig, eine ansonsten äquivalente Instanz mit zwei Einträgen wird von der XSD zurückgewiesen. Für die Validierung bleibt die ausgewählte XSD maßgeblich.",
+          "recommendation": "Mehrere LineInformation-Einträge nicht aufgrund der PDF freigeben oder normalisieren. Bei einem XSD-Fehler mit einem zweiten LineInformation-Eintrag den Fehler beibehalten und ergänzend auf den dokumentierten PDF/XSD-Kardinalitätskonflikt hinweisen."
+        },
+        "en": {
+          "title": "JourneyInformationService V1.0: PDF says LineInformation 1:* but XSD allows at most 1",
+          "short": "The PDF permits multiple LineInformation entries; the authoritative V1.0 XSD accepts only one because maxOccurs is omitted.",
+          "long": "JIS-003 is a confirmed PDF/XSD cardinality mismatch. Table 29 of the official PDF marks LineInformation in AllLineInformationData as 1:*. In the exact V1.0 XSD, maxOccurs is omitted for this element; XML Schema semantics therefore apply maxOccurs=1. EV-152 confirms this executably: an instance with one LineInformation entry validates, while an otherwise equivalent instance with two entries is rejected by the XSD. The selected XSD remains authoritative for validation.",
+          "recommendation": "Do not accept or normalize multiple LineInformation entries based on the PDF. When XSD validation fails on a second LineInformation entry, preserve the error and add an advisory explaining the documented PDF/XSD cardinality mismatch."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "selected profile is JourneyInformationService V1.0",
+          "XSD validation fails in JourneyInformationService.AllLineInformationData on a second LineInformation element",
+          "payload cardinality matches the PDF-documented 1:* form but exceeds selected-XSD maxOccurs=1"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_JIS_2026-09-08.md",
+          "note": "Terminal JIS report; JIS-003 is executable_confirmed."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-152 / run 34113437268 / job 101714662141 / closure run 34224429423 / audit_registry/jis_revalidation_evidence_2026-09-08.json",
+          "note": "Executable one-entry positive and two-entry negative evidence against the exact selected V1.0 route."
+        },
+        {
+          "kind": "pdf",
+          "reference": "JIS_V1.0 / sha256 424181b4932e18b6ac059843fa3978fdcc07a9c6acb553f9fbe8b71ef583da73 / physical page 19 / table 29",
+          "note": "Exact pinned PDF showing LineInformation cardinality 1:*."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_JourneyInformationService_V1.0.xsd @ 8c303db5a9c0548d66b90174d9c329d33092ad24",
+          "note": "Exact AllLineInformationData declaration with LineInformation and no maxOccurs attribute."
+        }
+      ],
+      "notes": "Confirmed cross-artifact mismatch. Selected XSD behavior is not overridden; runtime handling may only add an advisory to the normative validation error."
+    },
+    {
+      "finding_id": "JIS-004",
+      "service": "JourneyInformationService",
+      "version_scope": [
+        {
+          "version": "V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_JourneyInformationService_V1.0.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact official JIS V1.0 route. The finding is limited to the wrong request/table label in the PDF; the XSD operation remains RetrieveAllRoutesPerLineRequest with LineRef."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "pdf",
+      "primary_issue_kind": "wrong_structure_reference",
+      "secondary_issue_kinds": [
+        "pdf_copy_paste_label",
+        "retrieve_all_routes_per_line_vs_set_block_number",
+        "line_ref_vs_block_ref"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "documentation_only",
+        "pdf_can_mislead_implementation",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "In section 1.22 RetrieveAllRoutesPerLine, table 38 visibly labels the LineRef request as JourneyInformationService.SetBlockNumberRequest; section 1.23 separately defines SetBlockNumber with BlockRef."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Exact JIS V1.0 defines JourneyInformationService.RetrieveAllRoutesPerLineRequest typed as JourneyInformationService.RetrieveAllRoutesPerLineRequestStructure with required LineRef."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The operation heading, LineRef field and exact XSD make the SetBlockNumberRequest text a copy/paste table-label defect, not an alternate executable operation name."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "JourneyInformationService V1.0: falsches SetBlockNumberRequest-Label bei RetrieveAllRoutesPerLine",
+          "short": "Die PDF bezeichnet die RetrieveAllRoutesPerLine-Anfrage in Tabelle 38 fälschlich als SetBlockNumberRequest.",
+          "long": "JIS-004 ist ein bestätigter PDF-Copy/Paste-Fehler. Abschnitt 1.22 behandelt RetrieveAllRoutesPerLine und die Tabelle enthält das dazu passende Feld LineRef, trägt aber sichtbar die Bezeichnung JourneyInformationService.SetBlockNumberRequest. Der folgende Abschnitt 1.23 definiert die echte SetBlockNumber-Anfrage separat mit BlockRef. Die exakte V1.0-XSD definiert RetrieveAllRoutesPerLineRequest mit LineRef korrekt. Der Fehler betrifft nur die Dokumentbeschriftung und ändert die XML-Operation nicht.",
+          "recommendation": "Für Implementierung und Validierung ausschließlich JourneyInformationService.RetrieveAllRoutesPerLineRequest mit LineRef verwenden. Die PDF-Bezeichnung SetBlockNumberRequest in diesem Abschnitt nicht als Alias oder alternative Operation übernehmen."
+        },
+        "en": {
+          "title": "JourneyInformationService V1.0: wrong SetBlockNumberRequest label under RetrieveAllRoutesPerLine",
+          "short": "PDF table 38 incorrectly labels the RetrieveAllRoutesPerLine request as SetBlockNumberRequest.",
+          "long": "JIS-004 is a confirmed PDF copy/paste defect. Section 1.22 describes RetrieveAllRoutesPerLine and its table contains the matching LineRef field, but the table is visibly labelled JourneyInformationService.SetBlockNumberRequest. The following section 1.23 separately defines the actual SetBlockNumber request with BlockRef. The exact V1.0 XSD correctly defines RetrieveAllRoutesPerLineRequest with LineRef. The defect is documentation-only and does not change the XML operation.",
+          "recommendation": "For implementation and validation, use only JourneyInformationService.RetrieveAllRoutesPerLineRequest with LineRef. Do not accept the PDF's SetBlockNumberRequest label in this section as an alias or alternate operation."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_JIS_2026-09-08.md",
+          "note": "Terminal JIS report; JIS-004 is context_verified."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-152 / run 34113437268 / job 101714662141 / closure run 34224429423 / audit_registry/jis_revalidation_evidence_2026-09-08.json",
+          "note": "Pinned visual evidence and exact-XSD declaration for the documentation-only label defect."
+        },
+        {
+          "kind": "pdf",
+          "reference": "JIS_V1.0 / sha256 424181b4932e18b6ac059843fa3978fdcc07a9c6acb553f9fbe8b71ef583da73 / physical page 22 / table 38",
+          "note": "Exact pinned PDF showing SetBlockNumberRequest label in the RetrieveAllRoutesPerLine section and LineRef row."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_JourneyInformationService_V1.0.xsd @ 8c303db5a9c0548d66b90174d9c329d33092ad24",
+          "note": "Exact RetrieveAllRoutesPerLineRequest declaration and request structure with LineRef."
+        }
+      ],
+      "notes": "Confirmed PDF table-label defect only. No operation rename, compatibility alias or runtime matcher is created."
+    }
+  ]
+}
