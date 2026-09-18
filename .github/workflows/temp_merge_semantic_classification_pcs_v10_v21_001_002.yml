@@ -1,0 +1,181 @@
+name: temp-merge-semantic-classification-pcs-v10-v21-001-002
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_merge_semantic_classification_pcs_v10_v21_001_002.yml
+
+permissions:
+  contents: write
+
+jobs:
+  merge-semantic-block:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact head
+        uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+
+      - name: Verify exact prestate and PCS authority boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "5911a9250d2d24a2db2120714da69e084f8ff566"
+          test "$(git rev-parse HEAD^^)" = "560f4b797c563bb277d09f54f4e734dd9a65aad5"
+
+          test "$(git hash-object audit_registry/semantic_classification_blocks/PCS_V10_V21_001_002_v0.1.json)" = "9eeeae8302b1337ad57a22e3bd35697b874058ec"
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "4d22ca8d3e4133059c85e3a5d527bd4fffaf7d3f"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_PCS_2026-09-10.md)" = "50be2c68da47692b167aeb1fdeafac3b331b686f"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/13b_passenger_counting_service_findings_and_closure.md)" = "3f3f0e73675f32ac12cf9b69a1d45fb1449cef5d"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/24a_executable_validation_pcs_001.md)" = "68fe4648decb682e50f773b926a3efb4c113fd9e"
+          test "$(git hash-object IBIS-IP_PassengerCountingService_V1.0.xsd)" = "4161872be76740abfdd1cddf96f8a736333fc8be"
+          test "$(git hash-object IBIS-IP_PassengerCountingService_V2.1.xsd)" = "59ef2ddb09b92db0d492974e38bad5b6be03865e"
+          test "$(git hash-object IBIS-IP_common_V1.0.xsd)" = "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c"
+          test "$(git hash-object IBIS-IP_Enumerations_V1.0.xsd)" = "a9bea5bc73003ed91ded8519db06c32c4067831d"
+          test "$(git hash-object IBIS-IP_Enumerations_V2.1.xsd)" = "311464690ad60749ed8d326217787e4b8ed0b718"
+          test "$(git hash-object tools/validate_pcs_v21_operation_not_supported.py)" = "ffb932f19b669cd0584943063fc14cb4fd5daba8"
+          test "$(git hash-object tools/merge_semantic_classification_block.py)" = "bddb17d5f264663611585cde33202c355ce9e5ca"
+          test "$(git hash-object tools/validate_finding_semantic_classification.py)" = "3304b31b2233e48d8d85e2ef9e248397d9a86b4e"
+          test "$(git hash-object tools/validate_xsd_pool.py)" = "7a682dbddaeeeb3f9cc269d2e48e5ab000aca4bd"
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from lxml import etree
+
+          registry=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
+          block=json.loads(Path('audit_registry/semantic_classification_blocks/PCS_V10_V21_001_002_v0.1.json').read_text())
+          baseline=json.loads(Path('audit_registry/finding_provenance_baseline_2026-09-14.json').read_text())
+
+          assert registry['progress']['classified_count']==144
+          assert registry['progress']['remaining_count']==48
+          assert registry['progress']['latest_block']=='NET_VDV3013_003'
+          existing={e['finding_id']:e for e in registry['entries']}
+          assert 'PCS-001' not in existing and 'PCS-002' not in existing
+
+          assert block['block_id']=='PCS_V10_V21_001_002'
+          assert [e['finding_id'] for e in block['entries']]==['PCS-001','PCS-002']
+          p1,p2=block['entries']
+          assert p1['normative_authority']=='selected_xsd'
+          assert p1['primary_issue_kind']=='wrong_enum_reference'
+          assert p1['defect_assessment']=='cross_artifact_mismatch'
+          assert p1['sdk_behavior']=='error_with_advisory'
+          assert p1['runtime_match']['state']=='candidate'
+          assert p2['normative_authority']=='selected_xsd'
+          assert p2['primary_surface']=='provenance'
+          assert p2['primary_issue_kind']=='version_routing_issue'
+          assert p2['defect_assessment']=='non_defect'
+          assert p2['sdk_behavior']=='no_runtime_diagnostic'
+          assert p2['runtime_match']['state']=='not_applicable'
+
+          frozen={e['finding_id']:e for e in baseline['inventory']['entries']}
+          assert frozen['PCS-001']['revalidation_state']=='executable_confirmed'
+          assert frozen['PCS-002']['revalidation_state']=='contextual_not_defect'
+          for fid in ['PCS-001','PCS-002']:
+              assert frozen[fid]['terminal_state_source']=='docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_PCS_2026-09-10.md'
+
+          # Current exact PCS V2.1 dependency route.
+          NS={'xs':'http://www.w3.org/2001/XMLSchema'}
+          pcs21=etree.parse('IBIS-IP_PassengerCountingService_V2.1.xsd')
+          includes=[x.get('schemaLocation') for x in pcs21.xpath('/xs:schema/xs:include',namespaces=NS)]
+          assert includes==['IBIS-IP_common_V1.0.xsd','IBIS-IP_Enumerations_V1.0.xsd'], includes
+
+          def enum_values(path):
+              doc=etree.parse(path)
+              return [x.get('value') for x in doc.xpath("/xs:schema/xs:simpleType[@name='ErrorCodeEnumeration']//xs:enumeration",namespaces=NS)]
+          v1=enum_values('IBIS-IP_Enumerations_V1.0.xsd')
+          v21=enum_values('IBIS-IP_Enumerations_V2.1.xsd')
+          assert 'OperationNotSupported' not in v1
+          assert 'OperationNotSupported' in v21
+
+          # Current operational V1.0 is the later official self-contained packaging.
+          pcs10=etree.parse('IBIS-IP_PassengerCountingService_V1.0.xsd')
+          roots=[x.get('name') for x in pcs10.xpath('/xs:schema/xs:element',namespaces=NS)]
+          groups=[x.get('name') for x in pcs10.xpath('/xs:schema/xs:group',namespaces=NS)]
+          assert 'PassengerCountingService.GetAllDataResponse' in roots
+          assert 'PassengerCountingServiceGroup' in groups
+
+          closure=Path('docs/pdf_xsd_semantic_audit/13b_passenger_counting_service_findings_and_closure.md').read_text()
+          assert 'blob 600a3ee6290c630a4435fb06ca9803dabaceb788' in closure
+          assert 'operation roots/group supplied by IBIS_IP_V1.0.xsd' in closure
+          assert 'blob 4161872be76740abfdd1cddf96f8a736333fc8be' in closure
+          assert 'the checked PCS payload structures remain the same' in closure
+
+          terminal=Path('docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_PCS_2026-09-10.md').read_text()
+          assert 'EV-155' in terminal
+          assert '34447583426' in terminal
+          assert '34448427086' in terminal
+          print('PASSED: exact 144/192 prestate and PCS-001/002 authority boundaries verified')
+          PY
+
+      - name: Re-run current PCS-001 executable evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_pcs_v21_operation_not_supported.py | tee /tmp/pcs001.log
+          grep -F 'PASSED: PCS-001 executable dependency/value-set mismatch confirmed' /tmp/pcs001.log
+
+      - name: Snapshot XSD pool before semantic merge
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+          sha256sum ./*.xsd | sort > /tmp/xsd-before.sha256
+
+      - name: Merge PCS block and validate semantic registry
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/merge_semantic_classification_block.py --block audit_registry/semantic_classification_blocks/PCS_V10_V21_001_002_v0.1.json
+          python tools/validate_finding_semantic_classification.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          registry=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
+          assert registry['progress']['classified_count']==146
+          assert registry['progress']['remaining_count']==46
+          assert registry['progress']['latest_block']=='PCS_V10_V21_001_002'
+          assert registry['progress']['latest_block_file']=='audit_registry/semantic_classification_blocks/PCS_V10_V21_001_002_v0.1.json'
+          by_id={e['finding_id']:e for e in registry['entries']}
+          assert by_id['PCS-001']['sdk_behavior']=='error_with_advisory'
+          assert by_id['PCS-001']['runtime_match']['state']=='candidate'
+          assert by_id['PCS-002']['defect_assessment']=='non_defect'
+          assert by_id['PCS-002']['runtime_match']['state']=='not_applicable'
+          print('PASSED: merged registry is exactly 146/192 and PCS semantics are preserved')
+          PY
+
+      - name: Validate all 50 root XSDs and prove no schema mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_xsd_pool.py --repo-root .
+          sha256sum ./*.xsd | sort > /tmp/xsd-after.sha256
+          cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+
+      - name: Persist only PCS block and master registry
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm .github/workflows/temp_merge_semantic_classification_pcs_v10_v21_001_002.yml
+          git add audit_registry/finding_semantic_classification_v0.1.json
+          mapfile -t changed < <(git diff --name-only 560f4b797c563bb277d09f54f4e734dd9a65aad5 | sort)
+          test "${#changed[@]}" -eq 2
+          test "${changed[0]}" = 'audit_registry/finding_semantic_classification_v0.1.json'
+          test "${changed[1]}" = 'audit_registry/semantic_classification_blocks/PCS_V10_V21_001_002_v0.1.json'
+          git commit -m 'audit: merge PCS-001 and PCS-002 semantic classification'
+          git push origin HEAD:dev/schema-integration
