@@ -1,0 +1,165 @@
+name: temp-gate-semantic-classification-vls-001-005
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_gate_semantic_classification_vls_001_005.yml
+
+permissions:
+  contents: read
+
+jobs:
+  gate-vls-001-005:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact head
+        uses: actions/checkout@v4
+        with:
+          ref: dev/schema-integration
+          fetch-depth: 2
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+
+      - name: Verify exact VLS prestate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "d0f1b3a2d081cdd686f639b955f009f8976ad6d9"
+          test "$(git hash-object audit_registry/semantic_classification_blocks/VLS_V10_V20_001_005_v0.1.json)" = "0d212d155ebb72583d8433c4c6c373597a93e422"
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "1ac775903f02f0dc959255ff6346d282c00b6408"
+          test "$(git hash-object audit_registry/finding_provenance_baseline_2026-09-14.json)" = "5234317290e094962b9cde9662af856fe1fec6d1"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VLS_2026-09-14.md)" = "200a88da2b9bfb6a7456923a290d6e8db968360e"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CHOICE_NOTATION_2026-08-29.md)" = "fe024798ba1b9803ec70ee3b97def63ee03d298f"
+          test "$(git hash-object docs/pdf_xsd_semantic_audit/VIDEO_LIVE_SERVICE_FINDINGS_REGISTER_ADDENDUM.md)" = "fa3c1be9dfb34726fdf73ae8c518a051021c39ed"
+          test "$(git hash-object IBIS-IP_VideoLiveService_V2.0.xsd)" = "d8c52f5de9ef3f5915524fef12da11eabf0ca041"
+
+      - name: Verify VLS authority, compositor and corrected notation semantics
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e IBIS-IP_VideoLiveService_V1.0.xsd
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from lxml import etree
+
+          registry=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
+          baseline=json.loads(Path('audit_registry/finding_provenance_baseline_2026-09-14.json').read_text())
+          block=json.loads(Path('audit_registry/semantic_classification_blocks/VLS_V10_V20_001_005_v0.1.json').read_text())
+
+          assert registry['progress']['classified_count']==176
+          assert registry['progress']['remaining_count']==16
+          assert registry['progress']['latest_block']=='VDS_V10_V20_005_008'
+          assert [e['finding_id'] for e in block['entries']]==['VLS-001','VLS-002','VLS-003','VLS-004','VLS-005']
+
+          frozen={e['finding_id']:e for e in baseline['inventory']['entries']}
+          expected={
+              'VLS-001':'context_verified',
+              'VLS-002':'executable_confirmed',
+              'VLS-003':'context_verified',
+              'VLS-004':'context_verified',
+              'VLS-005':'context_verified',
+          }
+          for fid,state in expected.items():
+              assert frozen[fid]['revalidation_state']==state
+              assert frozen[fid]['terminal_state_source']=='docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VLS_2026-09-14.md'
+
+          by={e['finding_id']:e for e in block['entries']}
+          assert by['VLS-001']['normative_authority']=='no_strict_xsd_profile'
+          assert by['VLS-001']['defect_assessment']=='authority_gap'
+          assert by['VLS-001']['sdk_behavior']=='unsupported_profile'
+
+          assert by['VLS-002']['primary_issue_kind']=='structure_mismatch'
+          assert by['VLS-002']['defect_assessment']=='cross_artifact_mismatch'
+          assert by['VLS-002']['sdk_behavior']=='error_with_advisory'
+          assert by['VLS-002']['runtime_match']['state']=='candidate'
+
+          assert by['VLS-003']['primary_issue_kind']=='version_routing_issue'
+          assert by['VLS-003']['defect_assessment']=='confirmed_pdf_defect'
+          assert by['VLS-003']['runtime_match']['state']=='not_applicable'
+
+          assert by['VLS-004']['primary_issue_kind']=='editorial_residue'
+          assert by['VLS-004']['defect_assessment']=='confirmed_pdf_defect'
+          assert by['VLS-004']['runtime_match']['state']=='not_applicable'
+
+          assert by['VLS-005']['primary_issue_kind']=='other'
+          assert by['VLS-005']['defect_assessment']=='likely_pdf_defect'
+          assert by['VLS-005']['confidence']=='high'
+          assert 'supersedes_invalid_cardinality_interpretation' in by['VLS-005']['secondary_issue_kinds']
+          assert by['VLS-005']['runtime_match']['state']=='not_applicable'
+
+          deep10=Path('docs/pdf_xsd_semantic_audit/deep_read/VLS_V1.0.md').read_text()
+          deep20=Path('docs/pdf_xsd_semantic_audit/deep_read/VLS_V2.0.md').read_text()
+          correction=Path('docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CHOICE_NOTATION_2026-08-29.md').read_text()
+          addendum=Path('docs/pdf_xsd_semantic_audit/VIDEO_LIVE_SERVICE_FINDINGS_REGISTER_ADDENDUM.md').read_text()
+          ev=Path('docs/pdf_xsd_semantic_audit/24c_executable_validation_video_compositors.md').read_text()
+
+          assert 'no `IBIS-IP_VideoLiveService_V1.0.xsd`' in deep10
+          assert 'VLS V2.0 XSD must NOT be substituted for V1.0' in deep10
+          assert 'VLS-003 - wrong part number in German foreword' in deep10
+          assert 'VLS-004 - VideoDisplayService in VideoLive start/stop prose' in deep10
+          assert 'VLS-003 (V1.0 German foreword says 301-2-1): corrected in V2.0.' in deep20
+          assert 'VLS-004 persists visibly in V2.0.' in deep20
+
+          assert 'A prefixed minus sign denotes XML choice.' in correction
+          assert 'VLS-005 - refined, not withdrawn' in correction
+          assert 'The old premise is rejected: `-1:1` is valid VDV XML-choice notation' in addendum
+          assert 'VLS-005 refined: choice-notation application anomaly, NOT invalid cardinality' in addendum
+
+          NS={'xs':'http://www.w3.org/2001/XMLSchema'}
+          tree=etree.parse('IBIS-IP_VideoLiveService_V2.0.xsd')
+          etree.XMLSchema(tree)
+          names=tree.xpath("/xs:schema/xs:complexType[@name='VideoLiveService.LiveStreamData']/xs:choice/xs:element/@name",namespaces=NS)
+          assert names==['StreamID','CameraName','CameraType','CameraCurrentState','rtspURI','VideoWidth','VideoHeight','VideoCodec','FramesPerSecond','Bitrate','Mirrored','Flipped','Rotation','Quality']
+          assert 'VLS-002 remains executable-confirmed.' in ev
+
+          terminal=Path('docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VLS_2026-09-14.md').read_text()
+          assert 'EV-165' in terminal
+          assert '34839986276' in terminal
+          assert '34840162307' in terminal
+          print('PASSED: VLS-001..005 authority, compositor and corrected documentation semantics verified')
+          PY
+
+      - name: Simulate merge and validate semantic registry
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/merge_semantic_classification_block.py \
+            --block audit_registry/semantic_classification_blocks/VLS_V10_V20_001_005_v0.1.json \
+            --output /tmp/vls-merged.json
+          python tools/validate_finding_semantic_classification.py \
+            --registry /tmp/vls-merged.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.load(open('/tmp/vls-merged.json',encoding='utf-8'))
+          assert r['progress']['classified_count']==181
+          assert r['progress']['remaining_count']==11
+          assert r['progress']['latest_block']=='VLS_V10_V20_001_005'
+          baseline=json.loads(Path('audit_registry/finding_provenance_baseline_2026-09-14.json').read_text())
+          done={e['finding_id'] for e in r['entries']}
+          remaining=[e['finding_id'] for e in baseline['inventory']['entries'] if e['finding_id'] not in done]
+          assert len(remaining)==11
+          assert remaining[0]=='VRS-001'
+          print('PASSED: simulated registry is exactly 181/192; next open finding VRS-001')
+          PY
+
+      - name: Validate all 50 root XSDs and prove read-only gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(find . -maxdepth 1 -type f -name '*.xsd' | wc -l)" -eq 50
+          sha256sum ./*.xsd | sort > /tmp/xsd-before.sha256
+          python tools/validate_xsd_pool.py --repo-root .
+          sha256sum ./*.xsd | sort > /tmp/xsd-after.sha256
+          cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          git diff --exit-code
+          echo "PASSED: VLS semantic gate complete; repository remains unmodified"
