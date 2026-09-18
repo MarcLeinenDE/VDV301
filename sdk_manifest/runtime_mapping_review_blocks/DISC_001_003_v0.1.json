@@ -1,0 +1,46 @@
+{
+  "block_version": "0.1",
+  "block_id": "DISC_001_003",
+  "review_date": "2026-09-18",
+  "source_semantic_registry_blob": "fd73c0993cf379751709f8ef51d6e4337dfd3b49",
+  "policy": "runtime_observability_required_separate_normative_discovery_profile",
+  "entries": [
+    {
+      "finding_id": "DISC-001",
+      "prior_state": "candidate",
+      "final_state": "not_applicable",
+      "decision": "No finding-specific runtime matcher. The German/English IP-allocation conflict is source-context knowledge, not an observable DNS-SD advertisement condition.",
+      "preserved_runtime_authority": "tools/runtime_discovery_profile.py / RV-002",
+      "guards": [
+        "do not infer document language/source from a device advertisement",
+        "do not enforce universal ZeroConf or 169.254 solely from this finding",
+        "do not duplicate normative DNS-SD checks as Known-Issues heuristics"
+      ]
+    },
+    {
+      "finding_id": "DISC-002",
+      "prior_state": "candidate",
+      "final_state": "not_applicable",
+      "decision": "No finding-specific runtime matcher. The RFC 2927/3927 defect is a documentation-reference correction and does not identify a runtime packet or advertisement state.",
+      "preserved_runtime_authority": "external RFC provenance plus tools/runtime_discovery_profile.py",
+      "guards": [
+        "do not emit packet/runtime warnings merely because link-local addressing is observed",
+        "do not turn RFC 3927 into a universal VDV requirement",
+        "retain as documentation/reference knowledge"
+      ]
+    },
+    {
+      "finding_id": "DISC-003",
+      "prior_state": "candidate",
+      "final_state": "not_applicable",
+      "decision": "No finding-specific runtime matcher. Missing V2.3 German table rows are a historical documentation omission; actual V2.2+ DNS-SD key checks are already implemented from the independent runtime profile.",
+      "preserved_runtime_authority": "tools/runtime_discovery_profile.py / DISC-V01..DISC-V03 / RV-002",
+      "guards": [
+        "do not weaken required TXT-key checks because German V2.3 Table 3 omitted rows",
+        "do not emit a Known-Issues diagnostic for an ordinary observed advertisement solely from the historical table omission",
+        "keep V2.4 correction as documentation provenance"
+      ]
+    }
+  ],
+  "implementation_state": "not_applicable"
+}
