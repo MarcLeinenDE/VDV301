@@ -74,8 +74,8 @@ The current mapping baseline contains exactly the findings whose semantic `runti
 Current baseline:
 
 ```text
-reviewed mappings      32
-candidate mappings     49
+reviewed mappings      35
+candidate mappings     46
 not designed            1
 not applicable        110
 implemented             0
