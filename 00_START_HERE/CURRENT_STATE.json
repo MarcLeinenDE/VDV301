@@ -3,7 +3,7 @@
   "date": "2026-09-03",
   "canonical_branch": "dev/schema-integration",
   "workflow_mode": "manual_only",
-  "project_phase": "finding_baseline_frozen",
+  "project_phase": "semantic_classification_complete_runtime_mapping_pending",
   "superbranch": {
     "root_xsd_count_last_executed": 50,
     "direct_include_edges_last_executed": 84,
@@ -1926,7 +1926,16 @@
     "finding_authority_snapshot_sha256": "1f4d5b9468668c7b1839585b710fc63ad6a5ef6196f14afbe58c36377c809e95",
     "finding_baseline_xsd_manifest_sha256": "081cff20627157441c6fb6da11f4026906080e7dd44479e45c8bbcc1ef3dcb26",
     "audit_knowledge_phase_complete": true,
-    "remediation_authorized": false
+    "remediation_authorized": false,
+    "semantic_classification_state": "complete",
+    "semantic_classification_registry": "audit_registry/finding_semantic_classification_v0.1.json",
+    "semantic_classification_finding_count": 192,
+    "semantic_classification_remaining_count": 0,
+    "semantic_classification_closure_report": "docs/pdf_xsd_semantic_audit/FINDING_SEMANTIC_CLASSIFICATION_CLOSURE_2026-09-18.md",
+    "semantic_classification_gate_run_id": "35343525323",
+    "semantic_classification_gate_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/35343525323",
+    "known_issues_runtime_mapping_state": "pending_review",
+    "known_issues_runtime_mapping_implemented_count": 0
   },
   "evidence": {
     "xsd_ev_completed": [
@@ -1978,19 +1987,27 @@
     "common_v2_3_executable_evidence": "EV-121 / 33657653888"
   },
   "sdk": {
-    "status": "baseline_v0.1_prework_only_during_audit",
+    "status": "semantic_classification_complete_runtime_mapping_pending",
     "implementation_frozen_during_deep_read": true,
     "manifest": "sdk_manifest/manifest_v0.1.json",
     "routing_overrides": "sdk_manifest/routing_overrides_v0.1.json",
     "schema_variant_overlays": "sdk_manifest/schema_variant_overlays_v0.1.json",
-    "finding_knowledge_ready": false,
+    "finding_knowledge_ready": true,
     "finding_knowledge_ready_requires_legacy_revalidation": true,
-    "rule": "Findings/audit knowledge must later explain surprising validation results without silently changing normative XSD outcomes. No unrevalidated finding may drive SDK accept/reject/routing behaviour."
+    "rule": "Findings/audit knowledge must later explain surprising validation results without silently changing normative XSD outcomes. No unrevalidated finding may drive SDK accept/reject/routing behaviour.",
+    "legacy_revalidation_requirement_satisfied": true,
+    "semantic_classification_registry": "audit_registry/finding_semantic_classification_v0.1.json",
+    "semantic_classification_state": "complete",
+    "semantic_classification_finding_count": 192,
+    "semantic_classification_closure_report": "docs/pdf_xsd_semantic_audit/FINDING_SEMANTIC_CLASSIFICATION_CLOSURE_2026-09-18.md",
+    "runtime_mapping_state": "pending_review",
+    "runtime_mapping_implemented_count": 0,
+    "known_issues_normative_xsd_override_allowed": false
   },
   "next_actions": [
-    "Complete the independent Fresh Read of COMMON V2.2 from the exact pinned full-text/render artifact before reopening historical Common findings.",
-    "Visually falsify material table/cardinality/type observations against the exact pinned page renders.",
-    "Freeze COMMON V2.2 fresh observations before historical Common reconciliation.",
-    "After Deep Read Pass 2 freeze the complete finding inventory and run mandatory legacy finding revalidation before SDK/remediation baseline freeze."
+    "Review the 51 candidate runtime_match entries and the single not_designed entry; either promote them to reviewed runtime mappings or mark them not_applicable with explicit evidence.",
+    "Turn the 30 already reviewed runtime mappings into an explicit Known-Issues runtime-mapping manifest before implementation.",
+    "Implement runtime diagnostics only after profile-specific trigger validation; the selected authoritative XSD must continue to own VALID/INVALID outcomes.",
+    "Keep official-facing remediation/XSD mutation unauthorized until a separate explicit remediation phase."
   ]
 }

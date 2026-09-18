@@ -10,7 +10,10 @@
     "validation_backlog": "docs/pdf_xsd_semantic_audit/validation_backlog.md",
     "live_backlog": "docs/pdf_xsd_semantic_audit/26_live_integration_validation_backlog.md",
     "runtime_authority_matrix": "docs/pdf_xsd_semantic_audit/generated/runtime_protocol_authority_matrix.csv",
-    "schema_variant_registry": "audit_registry/schema_variant_registry_v0.1.json"
+    "schema_variant_registry": "audit_registry/schema_variant_registry_v0.1.json",
+    "semantic_classification_model": "docs/pdf_xsd_semantic_audit/FINDING_SEMANTIC_CLASSIFICATION_MODEL.md",
+    "semantic_classification_registry": "audit_registry/finding_semantic_classification_v0.1.json",
+    "semantic_classification_closure": "docs/pdf_xsd_semantic_audit/FINDING_SEMANTIC_CLASSIFICATION_CLOSURE_2026-09-18.md"
   },
   "invariants": {
     "xsd_is_executable_xml_authority_when_profile_exists": true,
@@ -24,18 +27,54 @@
     "superbranch_is_official_release": false
   },
   "resolver": {
-    "required_dimensions": ["service_name", "service_version", "validation_kind", "authority"],
-    "conditional_dimensions": ["schema_profile_id", "release_context", "operation_name", "response_context", "endpoint_identity", "candidate_profile_id", "schema_variant_id"],
-    "endpoint_identity_dimensions": ["host_or_ip", "port", "path"],
+    "required_dimensions": [
+      "service_name",
+      "service_version",
+      "validation_kind",
+      "authority"
+    ],
+    "conditional_dimensions": [
+      "schema_profile_id",
+      "release_context",
+      "operation_name",
+      "response_context",
+      "endpoint_identity",
+      "candidate_profile_id",
+      "schema_variant_id"
+    ],
+    "endpoint_identity_dimensions": [
+      "host_or_ip",
+      "port",
+      "path"
+    ],
     "mixed_service_versions_supported": true,
     "parallel_versions_of_same_service_supported": true,
     "ordinary_schema_profile_source": "generated from stored XSD include graph",
     "override_source": "sdk_manifest/routing_overrides_v0.1.json",
     "semantic_variant_overlay_source": "sdk_manifest/schema_variant_overlays_v0.1.json"
   },
-  "authority_classes": ["official", "candidate", "integration", "unresolved"],
-  "runtime_authority_classes": ["vdv_normative", "external_normative", "external_normative_referenced_by_vdv", "vdv_profile_exception_or_specialization", "combined_semantics", "diagnostic_heuristic"],
-  "validation_kinds": ["xsd_profile", "protocol_discovery_profile", "discovery_http_profile", "runtime_protocol_profile", "network_diagnostic", "architecture_inventory"],
+  "authority_classes": [
+    "official",
+    "candidate",
+    "integration",
+    "unresolved"
+  ],
+  "runtime_authority_classes": [
+    "vdv_normative",
+    "external_normative",
+    "external_normative_referenced_by_vdv",
+    "vdv_profile_exception_or_specialization",
+    "combined_semantics",
+    "diagnostic_heuristic"
+  ],
+  "validation_kinds": [
+    "xsd_profile",
+    "protocol_discovery_profile",
+    "discovery_http_profile",
+    "runtime_protocol_profile",
+    "network_diagnostic",
+    "architecture_inventory"
+  ],
   "storage_model": {
     "byte_identical_historical_xsd_stored_once": true,
     "packaging_only_same_version_revision_may_be_deduplicated_after_semantic_diff": true,
@@ -49,14 +88,35 @@
   },
   "operation_model": {
     "separate_manifest_required": true,
-    "minimum_dimensions": ["service_id", "service_version", "operation_name", "operation_kind", "transport", "request_payload_schema_ref", "immediate_response_schema_ref", "callback_payload_schema_ref", "response_context", "callback_endpoint_fields", "heartbeat_supported", "selection_parameters", "schema_authority", "source_reference"]
+    "minimum_dimensions": [
+      "service_id",
+      "service_version",
+      "operation_name",
+      "operation_kind",
+      "transport",
+      "request_payload_schema_ref",
+      "immediate_response_schema_ref",
+      "callback_payload_schema_ref",
+      "response_context",
+      "callback_endpoint_fields",
+      "heartbeat_supported",
+      "selection_parameters",
+      "schema_authority",
+      "source_reference"
+    ]
   },
   "public_result_contract": {
     "schema": "sdk_manifest/public_result_contract_v0.1.schema.json",
     "stable_check_ids_required": true,
     "authority_and_severity_separate": true,
     "internal_field_inventory_public": false,
-    "forbidden_contract_fields": ["field_validated", "validated_fields", "internal_field_inventory", "internal_rule_path", "schema_traversal_state"]
+    "forbidden_contract_fields": [
+      "field_validated",
+      "validated_fields",
+      "internal_field_inventory",
+      "internal_rule_path",
+      "schema_traversal_state"
+    ]
   },
   "evidence_namespaces": {
     "EV": "executable XML/XSD evidence",
@@ -96,5 +156,29 @@
     "TrainSetData Subscribe response schema selection requires acknowledgement-vs-data-event context.",
     "A semantic same-path candidate such as Common V2.3 PR #30 must be selected by schema_variant_id and never silently replace the official release root.",
     "Public DMS V2.4 documentation authority and candidate/integration DMS V2.4 XSD authority must remain separate."
-  ]
+  ],
+  "known_issues_knowledge": {
+    "classification_registry": "audit_registry/finding_semantic_classification_v0.1.json",
+    "classification_state": "complete",
+    "finding_count": 192,
+    "source_baseline": "audit_registry/finding_provenance_baseline_2026-09-14.json",
+    "normative_xsd_override_allowed": false,
+    "bilingual_diagnostics": true,
+    "runtime_mapping_state": "pending_review",
+    "runtime_mapping_implemented_count": 0,
+    "runtime_match_distribution": {
+      "candidate": 51,
+      "not_applicable": 110,
+      "not_designed": 1,
+      "reviewed": 30
+    },
+    "sdk_behavior_distribution": {
+      "error_with_advisory": 51,
+      "info": 23,
+      "no_runtime_diagnostic": 79,
+      "unsupported_profile": 10,
+      "valid_with_advisory": 9,
+      "warning": 20
+    }
+  }
 }
