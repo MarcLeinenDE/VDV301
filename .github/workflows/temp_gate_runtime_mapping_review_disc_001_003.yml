@@ -46,8 +46,10 @@ jobs:
           set -euo pipefail
           PYTHONPATH=tools python - <<'PY'
           import json
+          import sys
           from pathlib import Path
-          from tools.runtime_discovery_profile import DiscoveryAdvertisement, check_general_vdv_discovery
+          sys.path.insert(0, 'tools')
+          from runtime_discovery_profile import DiscoveryAdvertisement, check_general_vdv_discovery
 
           semantic=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
           mapping=json.loads(Path('sdk_manifest/known_issues_runtime_mapping_v0.1.json').read_text())
