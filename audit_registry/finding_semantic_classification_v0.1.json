@@ -12499,6 +12499,280 @@
       "notes": "Confirmed documentation type-name defect with no XML-shape delta; no runtime mapping is warranted."
     },
     {
+      "finding_id": "TKT-004",
+      "service": "TicketingService",
+      "version_scope": [
+        {
+          "version": "V1.0 later official self-contained revision",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7 + Common/Enumerations V1.0",
+          "note": "Executable root is TicketingService.ValidateTicketRequest mapped to TicketingService.ValidateTicketRequestStructure."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "wrong_operation_reference",
+      "secondary_issue_kinds": [
+        "ValidateTicket_request_heading",
+        "TicketInformationService_Validation_GetDataRequest",
+        "TicketingService_ValidateTicketRequest",
+        "invalid_pdf_heading_root"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation",
+        "code_generation_or_discovery_affected"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The official PDF detailed ValidateTicket request heading uses TicketInformationService.Validation.GetDataRequest."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact V1.0 schema defines TicketingService.ValidateTicketRequest and maps it to TicketingService.ValidateTicketRequestStructure."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-158 validates the exact TicketingService.ValidateTicketRequest sample and rejects the PDF-heading alias as an XML root."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The heading is a documentation operation-name defect rather than an alternate executable service identity."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "ValidateTicket: PDF-Überschrift nennt einen nicht ausführbaren TicketInformationService-Root",
+          "short": "Die PDF nennt TicketInformationService.Validation.GetDataRequest; die XSD verlangt TicketingService.ValidateTicketRequest.",
+          "long": "TKT-004 ist ein ausführbar bestätigter PDF-Namensfehler. Die Detailüberschrift der offiziellen TicketingService-V1.0-PDF verwendet TicketInformationService.Validation.GetDataRequest. Die exakte spätere V1.0-XSD definiert dagegen den globalen Root TicketingService.ValidateTicketRequest mit TicketingService.ValidateTicketRequestStructure. EV-158 bestätigt die Grenze direkt: der XSD-konforme Root validiert, der aus der PDF-Überschrift abgeleitete Root wird zurückgewiesen.",
+          "recommendation": "Für die ausführbare Schnittstelle ausschließlich TicketingService.ValidateTicketRequest verwenden. Wenn die ausgewählte V1.0-XSD exakt den PDF-Root TicketInformationService.Validation.GetDataRequest verwirft, den XSD-Fehler beibehalten und ergänzend auf den dokumentierten Überschriftenfehler hinweisen."
+        },
+        "en": {
+          "title": "ValidateTicket: PDF heading names a non-executable TicketInformationService root",
+          "short": "The PDF says TicketInformationService.Validation.GetDataRequest; the XSD requires TicketingService.ValidateTicketRequest.",
+          "long": "TKT-004 is an executably confirmed PDF naming defect. The detailed request heading in the official TicketingService V1.0 PDF uses TicketInformationService.Validation.GetDataRequest. The exact later V1.0 XSD instead defines the global root TicketingService.ValidateTicketRequest with TicketingService.ValidateTicketRequestStructure. EV-158 confirms the boundary directly: the XSD-conformant root validates and the PDF-heading-derived root is rejected.",
+          "recommendation": "Use only TicketingService.ValidateTicketRequest for the executable interface. If the selected V1.0 XSD rejects exactly the PDF root TicketInformationService.Validation.GetDataRequest, preserve the XSD error and add an advisory explaining the documented heading defect."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "selected profile is the later official TicketingService V1.0 schema revision",
+          "XSD validation rejects global root TicketInformationService.Validation.GetDataRequest",
+          "the invalid root is attributable to following the official PDF ValidateTicket request heading instead of TicketingService.ValidateTicketRequest"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TKT_2026-09-14.md",
+          "note": "Terminal TKT report; TKT-004 is executable_confirmed."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-158 / independent run 34813527845 / closure run 34813841015",
+          "note": "Positive/negative executable root boundary for ValidateTicket."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TicketingService V1.0 / sha256 96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43 / physical page 10",
+          "note": "Detailed request heading contains TicketInformationService.Validation.GetDataRequest."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+          "note": "Defines TicketingService.ValidateTicketRequest as the executable root."
+        }
+      ],
+      "notes": "Confirmed PDF operation-name defect. The selected XSD remains normative; exact wrong-root rejection is a candidate advisory."
+    },
+    {
+      "finding_id": "TKT-005",
+      "service": "TicketingService",
+      "version_scope": [
+        {
+          "version": "V1.0 later official self-contained revision",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+          "note": "Executable GetValidationResult root maps to TicketingService.GetValidationResultResponseStructure; TicketingService.ValidationResultStructure does not exist."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "wrong_type_reference",
+      "secondary_issue_kinds": [
+        "GetValidationResult_overview",
+        "ValidationResultStructure_absent",
+        "GetValidationResultResponseStructure",
+        "documentation_type_name_error"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "pdf_can_mislead_implementation",
+        "code_generation_or_discovery_affected",
+        "no_runtime_effect"
+      ],
+      "sdk_behavior": "no_runtime_diagnostic",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The official operation overview names TicketingService.ValidationResultStructure as the GetValidationResult response type."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact XSD contains no TicketingService.ValidationResultStructure type; the GetValidationResult root maps to TicketingService.GetValidationResultResponseStructure."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-158 inventories the exact type/root mapping and confirms the PDF overview type is absent."
+        },
+        {
+          "type": "technical_inference",
+          "note": "The discrepancy is a documentation type-name defect and is not itself a serialized XML token suitable for stable runtime matching."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "GetValidationResult: PDF nennt einen nicht vorhandenen Response-Typ",
+          "short": "Die Übersicht nennt TicketingService.ValidationResultStructure; die XSD verwendet TicketingService.GetValidationResultResponseStructure.",
+          "long": "TKT-005 ist ein bestätigter Typnamenfehler der Dokumentation. In der Operationsübersicht der offiziellen TicketingService-V1.0-PDF wird der Response von GetValidationResult als TicketingService.ValidationResultStructure bezeichnet. Dieser Typ existiert in der exakten XSD nicht. Der ausführbare GetValidationResult-Root ist stattdessen TicketingService.GetValidationResult und wird auf TicketingService.GetValidationResultResponseStructure abgebildet.",
+          "recommendation": "Bei Schemaauflösung und Codegenerierung TicketingService.GetValidationResultResponseStructure verwenden. Den PDF-Typ TicketingService.ValidationResultStructure nicht als Alias erzeugen; keine Runtime-Diagnostik aus dem reinen Typnamenfehler ableiten."
+        },
+        "en": {
+          "title": "GetValidationResult: PDF names a response type that does not exist",
+          "short": "The overview names TicketingService.ValidationResultStructure; the XSD uses TicketingService.GetValidationResultResponseStructure.",
+          "long": "TKT-005 is a confirmed documentation type-name defect. In the operation overview of the official TicketingService V1.0 PDF, the GetValidationResult response is labelled TicketingService.ValidationResultStructure. That type does not exist in the exact XSD. The executable GetValidationResult root is instead TicketingService.GetValidationResult and maps to TicketingService.GetValidationResultResponseStructure.",
+          "recommendation": "Use TicketingService.GetValidationResultResponseStructure for schema resolution and code generation. Do not create TicketingService.ValidationResultStructure as an alias, and do not derive a runtime diagnostic from the type-name error alone."
+        }
+      },
+      "runtime_match": {
+        "state": "not_applicable",
+        "candidate_triggers": []
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TKT_2026-09-14.md",
+          "note": "Terminal TKT report; TKT-005 is context_verified."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-158 / independent run 34813527845 / closure run 34813841015",
+          "note": "Exact type/root inventory for GetValidationResult."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TicketingService V1.0 / physical page 7",
+          "note": "Operation overview names TicketingService.ValidationResultStructure."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+          "note": "Maps GetValidationResult to TicketingService.GetValidationResultResponseStructure and contains no ValidationResultStructure type."
+        }
+      ],
+      "notes": "Confirmed documentation type-reference defect with no direct runtime token."
+    },
+    {
+      "finding_id": "TKT-006",
+      "service": "TicketingService",
+      "version_scope": [
+        {
+          "version": "V1.0 later official self-contained revision",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7 + Common/Enumerations V1.0",
+          "note": "GetTariffInformationResponseDataStructure xs:sequence begins DefaultLanguage, then TimeStamp, then the tariff-information group."
+        }
+      ],
+      "review_state": "manually_reviewed",
+      "normative_authority": "selected_xsd",
+      "primary_surface": "cross_artifact",
+      "primary_issue_kind": "structure_mismatch",
+      "secondary_issue_kinds": [
+        "element_order_mismatch",
+        "DefaultLanguage_before_TimeStamp",
+        "PDF_TimeStamp_before_DefaultLanguage",
+        "xs_sequence_enforced"
+      ],
+      "defect_assessment": "confirmed_pdf_defect",
+      "confidence": "confirmed",
+      "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
+        "pdf_can_mislead_implementation"
+      ],
+      "sdk_behavior": "error_with_advisory",
+      "semantic_basis": [
+        {
+          "type": "official_pdf_explicit",
+          "note": "The official PDF tariff-response table lists TimeStamp before DefaultLanguage."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The exact XSD sequence for TicketingService.GetTariffInformationResponseDataStructure begins DefaultLanguage then TimeStamp."
+        },
+        {
+          "type": "xml_schema_semantics",
+          "note": "xs:sequence makes the declared element order significant for validation."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-158 accepts progression with DefaultLanguage before TimeStamp and rejects the PDF-order prefix at the first misplaced field."
+        }
+      ],
+      "diagnostic": {
+        "de": {
+          "title": "GetTariffInformationResponse: PDF zeigt TimeStamp und DefaultLanguage in falscher Reihenfolge",
+          "short": "Die PDF listet TimeStamp vor DefaultLanguage; die XSD-Sequenz verlangt DefaultLanguage vor TimeStamp.",
+          "long": "TKT-006 ist ein ausführbar bestätigter Reihenfolgefehler der Dokumentation. Die offizielle TicketingService-V1.0-PDF führt im Tarif-Response TimeStamp vor DefaultLanguage auf. Die exakte XSD deklariert in TicketingService.GetTariffInformationResponseDataStructure jedoch eine xs:sequence mit DefaultLanguage vor TimeStamp. EV-158 bestätigt die praktische Wirkung: ein Prefix in XSD-Reihenfolge kommt bis zur nächsten fachlich erforderlichen Struktur weiter, während die PDF-Reihenfolge bereits an der vertauschten Position zurückgewiesen wird.",
+          "recommendation": "Elemente strikt in der Reihenfolge der ausgewählten XSD serialisieren: DefaultLanguage vor TimeStamp. Bei einer exakt passenden XSD-Rejection der PDF-Reihenfolge den Fehler beibehalten und ergänzend auf den dokumentierten Reihenfolgefehler hinweisen."
+        },
+        "en": {
+          "title": "GetTariffInformationResponse: PDF shows TimeStamp and DefaultLanguage in the wrong order",
+          "short": "The PDF lists TimeStamp before DefaultLanguage; the XSD sequence requires DefaultLanguage before TimeStamp.",
+          "long": "TKT-006 is an executably confirmed documentation ordering defect. The official TicketingService V1.0 PDF lists TimeStamp before DefaultLanguage in the tariff response. The exact XSD, however, declares an xs:sequence in TicketingService.GetTariffInformationResponseDataStructure with DefaultLanguage before TimeStamp. EV-158 confirms the practical effect: a prefix in XSD order progresses to the next required business structure, while the PDF-order prefix is rejected at the misplaced field.",
+          "recommendation": "Serialize elements strictly in the order defined by the selected XSD: DefaultLanguage before TimeStamp. For an exact XSD rejection matching the PDF order, preserve the validation error and add an advisory explaining the documented ordering defect."
+        }
+      },
+      "runtime_match": {
+        "state": "candidate",
+        "candidate_triggers": [
+          "selected profile is the later official TicketingService V1.0 schema revision",
+          "XSD validation of TicketingService.GetTariffInformationResponse fails because TimeStamp appears where DefaultLanguage is required first",
+          "the observed order matches the official PDF table order TimeStamp then DefaultLanguage"
+        ]
+      },
+      "source_references": [
+        {
+          "kind": "frozen_terminal_source",
+          "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TKT_2026-09-14.md",
+          "note": "Terminal TKT report; TKT-006 is executable_confirmed."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-158 / independent run 34813527845 / closure run 34813841015",
+          "note": "Positive/negative executable sequence-order evidence."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TicketingService V1.0 / physical page 9",
+          "note": "PDF table lists TimeStamp before DefaultLanguage."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+          "note": "Defines xs:sequence DefaultLanguage then TimeStamp in the tariff response data structure."
+        }
+      ],
+      "notes": "Confirmed PDF sequence-order defect. Exact XSD-order rejection is a robust runtime advisory candidate."
+    },
+    {
       "finding_id": "TSD-004",
       "service": "TrainSetDataService",
       "version_scope": [
@@ -13024,8 +13298,8 @@
     }
   ],
   "progress": {
-    "classified_count": 155,
-    "remaining_count": 37,
+    "classified_count": 158,
+    "remaining_count": 34,
     "reviewed_blocks": [
       "ARA",
       "ARCH",
@@ -13069,9 +13343,10 @@
       "SMS_V22_001_002",
       "SMS_V22_003_004",
       "SUB_V10_V24_001_002",
-      "TKT_V10_001_003"
+      "TKT_V10_001_003",
+      "TKT_V10_004_006"
     ],
-    "latest_block": "TKT_V10_001_003",
-    "latest_block_file": "audit_registry/semantic_classification_blocks/TKT_V10_001_003_v0.1.json"
+    "latest_block": "TKT_V10_004_006",
+    "latest_block_file": "audit_registry/semantic_classification_blocks/TKT_V10_004_006_v0.1.json"
   }
 }
