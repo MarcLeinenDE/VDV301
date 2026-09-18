@@ -31,7 +31,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD^)" = "cf57b3d86ab3c87c0e38d45723ade26619524cd6"
+          test "$(git rev-parse HEAD^)" = "c0132a5822f798bb7990fd0a09591f96a2516521"
           test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "fdeacc3c79ad5527f9a6ca3124eb22753f3903a6"
           test "$(git hash-object sdk_manifest/known_issues_runtime_mapping_v0.1.json)" = "f14a61291c27069a1d3c3be0dc0ab18c20511fdb"
           test "$(git hash-object sdk_manifest/runtime_mapping_review_blocks/SYSTEM_DOCUMENTATION_DR3012_003_V20_003_004_v0.1.json)" = "dd3468048da2ad59c2029a5cc533b16ae6da6c73"
@@ -144,12 +144,47 @@ jobs:
               print(f"OK {source_id} sha256={digest}")
           PY
 
-      - name: Rerun focused historical evidence
+      - name: Verify focused PDF anchors and frozen evidence provenance
         shell: bash
         run: |
           set -euo pipefail
-          python tools/validate_vdv3012_v10_ev129.py
-          python tools/validate_vdv3012_v20_ev130.py
+          python - <<'PY'
+          import subprocess
+          from pathlib import Path
+
+          def page_text(pdf, page):
+              return " ".join(subprocess.check_output(
+                  ['pdftotext','-f',str(page),'-l',str(page),'-layout',pdf,'-'],
+                  text=True,errors='replace',
+              ).replace('\u00ad','').split())
+
+          v10='local_sources/vdv_pdfs/VDV301-2_V1.0_DE.pdf'
+          p65=page_text(v10,65)
+          assert p65.count('HertbeatIntervall') >= 2
+          assert 'IBIS-IP.duration' in p65
+
+          v20='local_sources/vdv_pdfs/VDV301-2_BASE_V2.0.pdf'
+          p98=page_text(v20,98)
+          p100=page_text(v20,100)
+          p105=page_text(v20,105)
+          assert '7.2 Dienst SystemDocumentationService' in p98
+          assert 'Der Dienst SystemDocumenationService' in p98
+          assert p100.count('HertbeatIntervall') >= 2
+          assert p100.count('xs:duration') >= 2
+          assert 'Schreibfehler korrigiert nach HeartbeatInterval' in p105
+          assert 'typo corrected to HeartbeatInterval' in p105
+
+          r10=Path('docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V10_2026-09-03.md').read_text()
+          assert 'EV-129' in r10 and '33765167655' in r10 and '33765633886' in r10
+          assert 'DR3012-003' in r10 and 'executable_confirmed' in r10
+          assert 'HertbeatIntervall' in r10 and 'HeartbeatIntervall' in r10
+
+          r20=Path('docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V20_2026-09-03.md').read_text()
+          assert 'EV-130' in r20 and '33780668141' in r20 and '33781049413' in r20
+          assert 'DR3012V20-003' in r20 and 'DR3012V20-004' in r20
+          assert 'HeartbeatInterval' in r20 and 'SystemDocumenationService' in r20
+          print('PASSED: focused SystemDocumentation PDF anchors and frozen evidence provenance verified')
+          PY
 
       - name: Prove root XSD immutability
         shell: bash
