@@ -41,6 +41,7 @@ implemented      0
 - EV-120: run **33620003188**, job **100214595629**
 - EV-138 historical closure: run **33857443446**
 - primary runtime-mapping gate **35543624338**: **SUCCESS**
+- closure/consistency gate **35543676103**: **SUCCESS**
 
 The gate verified:
 
@@ -51,6 +52,7 @@ The gate verified:
 - both choices use `minOccurs=0`;
 - empty `NetexMode` validates;
 - a populated exact main/submode form validates;
-- all root XSDs remain unchanged.
+- all root XSDs remain unchanged;
+- synchronized SDK/runtime-mapping counters pass the hardened consistency validator.
 
 No executable Known-Issues matcher was added and no XSD was changed.
