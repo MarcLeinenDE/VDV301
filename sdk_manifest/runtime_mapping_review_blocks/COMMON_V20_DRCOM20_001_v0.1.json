@@ -1,0 +1,31 @@
+{
+  "block_version": "0.1",
+  "block_id": "COMMON_V20_DRCOM20_001",
+  "review_date": "2026-09-18",
+  "source_semantic_registry_blob": "d4b4cab59ad6622cdd7afecdeb0a24b9e63cff4b",
+  "policy": "selected_common_v20_xsd_primitives_only_no_wrapper_alias",
+  "entries": [
+    {
+      "finding_id": "DRCOM20-001",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual Common V2.0 XSD INVALID result where InternationalTextType uses the literal PDF-derived IBIS-IP wrapper shape instead of direct primitive Value/Language content.",
+      "guards": [
+        "official Common V2.0 strict profile only",
+        "must require XSD INVALID",
+        "match only nested wrapper-shaped content inside InternationalTextType.Value and/or InternationalTextType.Language",
+        "must preserve direct xs:string and xs:language declarations as authority",
+        "must not register IBIS-IP.string or IBIS-IP.language wrapper shapes as aliases",
+        "must not rewrite invalid wrapper-shaped XML into a valid primitive shape"
+      ]
+    }
+  ],
+  "implementation_state": "reviewed_not_implemented",
+  "evidence": [
+    "EV-118 / run 33280224191 / job 99174026383",
+    "EV-136 / closure run 33856581531 / artifact run 33851287947",
+    "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V20_2026-09-04.md",
+    "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.0.md"
+  ]
+}
