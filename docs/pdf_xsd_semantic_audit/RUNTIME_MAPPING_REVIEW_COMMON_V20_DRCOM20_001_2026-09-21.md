@@ -52,6 +52,7 @@ implemented      0
 - EV-118: run **33280224191**, job **99174026383**
 - EV-136 historical closure: run **33856581531**
 - primary runtime-mapping gate **35543011764**: **SUCCESS**
+- closure/consistency gate **35543062877**: **SUCCESS**
 
 The primary gate verified:
 
@@ -62,6 +63,7 @@ The primary gate verified:
 - Value-only wrapper negative instance;
 - Language-only wrapper negative instance;
 - combined wrapper negative instance;
-- all root XSDs unchanged.
+- all root XSDs unchanged;
+- synchronized SDK/runtime-mapping counters pass the hardened consistency validator.
 
 No executable Known-Issues matcher was added and no XSD was changed.
