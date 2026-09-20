@@ -1,0 +1,31 @@
+{
+  "block_version": "0.1",
+  "block_id": "COMMON_V22_DRCOM22_001",
+  "review_date": "2026-09-21",
+  "source_semantic_registry_blob": "6dbf19d0d29934783027354fe8a18aa6ea0e7e5a",
+  "policy": "selected_v22_xsd_authority_only_pdf_mandatory_choice_not_enforced",
+  "entries": [
+    {
+      "finding_id": "DRCOM22-001",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_valid_advisory",
+      "decision": "Keep an empty Common V2.2 NetexMode XSD-valid and optionally explain that the PDF presents both choice groups as mandatory.",
+      "guards": [
+        "exact historical-upstream Common V2.2 strict profile only",
+        "must require XSD VALID",
+        "match only NetexMode with neither main-mode nor submode choice populated",
+        "must not impose the PDF one-of requirement as an additional validator rule",
+        "must not invent a VDV-301-2.2 release tag or alternate schema authority",
+        "must not alter selected-XSD validity"
+      ]
+    }
+  ],
+  "implementation_state": "reviewed_not_implemented",
+  "evidence": [
+    "EV-120 / run 33620003188 / job 100214595629",
+    "EV-138 / closure run 33857443446 / artifact run 33857241506",
+    "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V22_2026-09-04.md",
+    "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.2.md"
+  ]
+}

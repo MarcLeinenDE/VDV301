@@ -7535,9 +7535,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "Common V2.2 NetexMode has neither main-mode nor submode choice populated and passes selected XSD validation"
+          "selected strict profile is the exact historical-upstream Common V2.2 XSD family",
+          "XSD validation result is VALID for an empty NetexMode with neither main-mode nor submode choice populated",
+          "selected Common V2.2 XSD defines both top-level NetexMode xs:choice compositors with minOccurs=0"
         ]
       },
       "source_references": [
