@@ -53,6 +53,7 @@ implemented      0
 - EV-121: exact official Common V2.3 executable evidence
 - EV-139 historical closure: run **33857906408**
 - primary runtime-mapping gate **35543388239**: **SUCCESS**
+- closure/consistency gate **35543443163**: **SUCCESS**
 
 The gate verified:
 
@@ -62,6 +63,7 @@ The gate verified:
 - Common V2.3 rejects `ArrivalExpected` and `DepartureExpected` in the request;
 - Common V2.3 accepts those fields in `StopInformationStructure`;
 - the valid/invalid advisory preconditions remain distinct;
-- all root XSDs remain unchanged.
+- all root XSDs remain unchanged;
+- synchronized SDK/runtime-mapping counters pass the hardened consistency validator.
 
 No executable Known-Issues matcher was added and no XSD was changed.
