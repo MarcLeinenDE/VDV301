@@ -1,0 +1,127 @@
+name: temp-gate-runtime-mapping-review-common-v20
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_gate_runtime_mapping_review_common_v20.yml
+
+permissions:
+  contents: read
+
+jobs:
+  gate-common-v20:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+
+      - name: Verify exact review prestate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "b0089d74a8e7425908b9f7f44e170c829334839d"
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "58256447700586ebd8f39ee93702b34ab09d1065"
+          test "$(git hash-object sdk_manifest/known_issues_runtime_mapping_v0.1.json)" = "a4e63ed9f5f775a5a0f382e2a9849b213035fb01"
+          test "$(git hash-object sdk_manifest/runtime_mapping_review_blocks/COMMON_V20_DRCOM20_001_v0.1.json)" = "cfadfaf673e41ac925e5a46d049adb90f1e76044"
+          test "$(git hash-object IBIS-IP_common_V2.0.xsd)" = "8608e3dcd665c197c34da7f6ec6af5a3758da164"
+          test "$(git hash-object IBIS-IP_Enumerations_V2.0.xsd)" = "27e3c183b00381d959622d13c10543123af8eef6"
+
+      - name: Validate semantic registry and deterministic runtime mapping
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_finding_semantic_classification.py
+          python tools/validate_known_issues_runtime_mapping_v0_1.py
+
+      - name: Rerun preserved EV-118
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_common_v20_ev118.py
+
+      - name: Verify DRCOM20-001 exact primitive vs wrapper boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import tempfile
+          from pathlib import Path
+          from lxml import etree
+
+          sem=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
+          mapping=json.loads(Path('sdk_manifest/known_issues_runtime_mapping_v0.1.json').read_text())
+          block=json.loads(Path('sdk_manifest/runtime_mapping_review_blocks/COMMON_V20_DRCOM20_001_v0.1.json').read_text())
+          by={e['finding_id']:e for e in sem['entries']}
+          mapped={m['finding_id']:m for m in mapping['mappings']}
+
+          e=by['DRCOM20-001']
+          m=mapped['DRCOM20-001']
+          assert e['runtime_match']['state']=='reviewed'
+          assert m['activation_class']=='xsd_invalid_advisory'
+          assert m['required_precondition']=='xsd_result_invalid'
+          assert m['result_effect']=='decorate_existing_invalid'
+          assert m['implementation_state']=='reviewed_not_implemented'
+          assert m['authority_guard']=='selected_xsd_result_remains_normative'
+          assert mapping['counts']=={
+              'reviewed_mapping_count':49,
+              'implemented_count':0,
+              'semantic_candidate_count':29,
+              'semantic_not_designed_count':1,
+              'semantic_not_applicable_count':113,
+          }
+
+          NS={'xs':'http://www.w3.org/2001/XMLSchema'}
+          root=etree.parse('IBIS-IP_common_V2.0.xsd').getroot()
+          value=root.find("xs:complexType[@name='InternationalTextType']/xs:sequence/xs:element[@name='Value']",NS)
+          language=root.find("xs:complexType[@name='InternationalTextType']/xs:sequence/xs:element[@name='Language']",NS)
+          assert value is not None and value.get('type')=='xs:string'
+          assert language is not None and language.get('type')=='xs:language'
+
+          XS='http://www.w3.org/2001/XMLSchema'
+          harness=f'''<?xml version="1.0" encoding="UTF-8"?>
+          <xs:schema xmlns:xs="{XS}" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:include schemaLocation="IBIS-IP_common_V2.0.xsd"/>
+            <xs:element name="TestInternationalText" type="InternationalTextType"/>
+          </xs:schema>
+          '''
+          with tempfile.NamedTemporaryFile('w',suffix='.xsd',dir='.',encoding='utf-8',delete=False) as fh:
+              fh.write(harness)
+              hp=Path(fh.name)
+          try:
+              schema=etree.XMLSchema(etree.parse(str(hp)))
+          finally:
+              hp.unlink(missing_ok=True)
+
+          def valid(xml):
+              return schema.validate(etree.fromstring(xml.encode()))
+
+          assert valid('<TestInternationalText><Value>Hello</Value><Language>de</Language></TestInternationalText>')
+          assert not valid('<TestInternationalText><Value><Value>Hello</Value></Value><Language>de</Language></TestInternationalText>')
+          assert not valid('<TestInternationalText><Value>Hello</Value><Language><Value>de</Value></Language></TestInternationalText>')
+          assert not valid('<TestInternationalText><Value><Value>Hello</Value></Value><Language><Value>de</Value></Language></TestInternationalText>')
+
+          rb=block['entries'][0]
+          assert any('must not register IBIS-IP.string or IBIS-IP.language wrapper shapes as aliases' in g for g in rb['guards'])
+          assert any('must not rewrite invalid wrapper-shaped XML into a valid primitive shape' in g for g in rb['guards'])
+          print('PASSED: Common V2.0 InternationalText primitive/wrapper runtime boundary verified')
+          PY
+
+      - name: Prove XSD immutability
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum ./*.xsd | sort > /tmp/xsd-before.sha256
+          python tools/validate_xsd_pool.py --repo-root .
+          sha256sum ./*.xsd | sort > /tmp/xsd-after.sha256
+          cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          git diff --exit-code
+          echo "PASSED: Common V2.0 runtime-mapping review gate complete"
