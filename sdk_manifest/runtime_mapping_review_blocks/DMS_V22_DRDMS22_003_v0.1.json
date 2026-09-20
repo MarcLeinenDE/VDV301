@@ -1,0 +1,31 @@
+{
+  "block_version": "0.1",
+  "block_id": "DMS_V22_DRDMS22_003",
+  "review_date": "2026-09-21",
+  "source_semantic_registry_blob": "8d05d5a017aa68003a9ea7aefbcec77965fd1e69",
+  "policy": "selected_dms_v22_xsd_enum_only_no_documentation_alias",
+  "entries": [
+    {
+      "finding_id": "DRDMS22-003",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual DMS V2.2 XSD INVALID result caused by exact UpdateStatusEnumeration token InstallationSuccessfull, while preserving InstallationSuccessful as the only authoritative executable lexeme.",
+      "guards": [
+        "official DeviceManagementService V2.2 strict profile only",
+        "must require XSD INVALID",
+        "match only exact UpdateStatusEnumeration token InstallationSuccessfull",
+        "must not accept, normalize, or register InstallationSuccessfull as an enum alias",
+        "must preserve InstallationSuccessful as the authoritative executable V2.2 enum value",
+        "must not generalize spelling correction to other enum tokens"
+      ]
+    }
+  ],
+  "implementation_state": "reviewed_not_implemented",
+  "evidence": [
+    "EV-107 / run 33181833930",
+    "EV-141 / closure run 33974702338 / evidence run 33974267275",
+    "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_V22_2026-09-05.md",
+    "docs/pdf_xsd_semantic_audit/deep_read/DMS_V2.2.md"
+  ]
+}
