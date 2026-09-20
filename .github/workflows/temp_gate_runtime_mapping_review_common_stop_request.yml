@@ -1,0 +1,148 @@
+name: temp-gate-runtime-mapping-review-common-stop-request
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_gate_runtime_mapping_review_common_stop_request.yml
+
+permissions:
+  contents: read
+
+jobs:
+  gate-common-stop-request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+
+      - name: Verify exact review prestate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "2939669052e190c4caad618aab1b6abfa4b0f458"
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "6dbf19d0d29934783027354fe8a18aa6ea0e7e5a"
+          test "$(git hash-object sdk_manifest/known_issues_runtime_mapping_v0.1.json)" = "5ae1b7f19d99475b22411a422484a966d69a7d01"
+          test "$(git hash-object sdk_manifest/runtime_mapping_review_blocks/COMMON_STOP_INFORMATION_REQUEST_V21_V23_v0.1.json)" = "74f4b14655d4fbe72430ea77627f1acba3099b0a"
+          test "$(git hash-object IBIS-IP_common_V2.1.xsd)" = "05977c9f86c7c9dd0b48f36a4a4e9be32e94659e"
+          test "$(git hash-object IBIS-IP_common_V2.3.xsd)" = "0d8926c4063c12de9a5e68b6f0addaab35a55dc1"
+
+      - name: Validate semantic registry and deterministic runtime mapping
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_finding_semantic_classification.py
+          python tools/validate_known_issues_runtime_mapping_v0_1.py
+
+      - name: Rerun preserved EV-119 and EV-121
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_common_v21_ev119.py
+          python tools/validate_common_v23_ev121.py
+
+      - name: Verify focused StopInformationRequest boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import tempfile
+          from pathlib import Path
+          from lxml import etree
+
+          sem=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
+          mapping=json.loads(Path('sdk_manifest/known_issues_runtime_mapping_v0.1.json').read_text())
+          block=json.loads(Path('sdk_manifest/runtime_mapping_review_blocks/COMMON_STOP_INFORMATION_REQUEST_V21_V23_v0.1.json').read_text())
+          by={e['finding_id']:e for e in sem['entries']}
+          mapped={m['finding_id']:m for m in mapping['mappings']}
+
+          assert by['DRCOM21-001']['runtime_match']['state']=='reviewed'
+          assert mapped['DRCOM21-001']['activation_class']=='xsd_valid_advisory'
+          assert mapped['DRCOM21-001']['required_precondition']=='xsd_result_valid'
+          assert mapped['DRCOM21-001']['result_effect']=='decorate_existing_valid'
+
+          assert by['DRCOM23-001']['runtime_match']['state']=='reviewed'
+          assert mapped['DRCOM23-001']['activation_class']=='xsd_invalid_advisory'
+          assert mapped['DRCOM23-001']['required_precondition']=='xsd_result_invalid'
+          assert mapped['DRCOM23-001']['result_effect']=='decorate_existing_invalid'
+
+          for fid in ('DRCOM21-001','DRCOM23-001'):
+              assert mapped[fid]['implementation_state']=='reviewed_not_implemented'
+              assert mapped[fid]['authority_guard']=='selected_xsd_result_remains_normative'
+
+          assert mapping['counts']=={
+              'reviewed_mapping_count':51,
+              'implemented_count':0,
+              'semantic_candidate_count':27,
+              'semantic_not_designed_count':1,
+              'semantic_not_applicable_count':113,
+          }
+
+          NS={'xs':'http://www.w3.org/2001/XMLSchema'}
+
+          r21=etree.parse('IBIS-IP_common_V2.1.xsd').getroot()
+          stopname=r21.find("xs:complexType[@name='StopInformationRequestStructure']/xs:sequence/xs:element[@name='StopName']",NS)
+          assert stopname is not None
+          assert stopname.get('minOccurs')=='0'
+          assert stopname.get('maxOccurs')=='unbounded'
+
+          r23=etree.parse('IBIS-IP_common_V2.3.xsd').getroot()
+          req=r23.find("xs:complexType[@name='StopInformationRequestStructure']",NS)
+          assert req is not None
+          assert req.find(".//xs:element[@name='ArrivalExpected']",NS) is None
+          assert req.find(".//xs:element[@name='DepartureExpected']",NS) is None
+          stop=r23.find("xs:complexType[@name='StopInformationStructure']",NS)
+          assert stop is not None
+          ae=stop.find(".//xs:element[@name='ArrivalExpected']",NS)
+          de=stop.find(".//xs:element[@name='DepartureExpected']",NS)
+          assert ae is not None and ae.get('type')=='IBIS-IP.dateTime'
+          assert de is not None and de.get('type')=='IBIS-IP.dateTime'
+
+          def compile_harness(xsd, roots):
+              XS='http://www.w3.org/2001/XMLSchema'
+              lines=[f'<xs:schema xmlns:xs="{XS}" elementFormDefault="qualified">',f'<xs:include schemaLocation="{xsd}"/>']
+              lines += [f'<xs:element name="{name}" type="{typ}"/>' for name,typ in roots.items()]
+              lines.append('</xs:schema>')
+              with tempfile.NamedTemporaryFile('w',suffix='.xsd',dir='.',encoding='utf-8',delete=False) as fh:
+                  fh.write('\n'.join(lines))
+                  hp=Path(fh.name)
+              try:
+                  return etree.XMLSchema(etree.parse(str(hp)))
+              finally:
+                  hp.unlink(missing_ok=True)
+
+          s21=compile_harness('IBIS-IP_common_V2.1.xsd',{'R':'StopInformationRequestStructure'})
+          display='<DisplayContent><LineInformation><LineRef><Value>L1</Value></LineRef></LineInformation><Destination><DestinationRef><Value>D1</Value></DestinationRef></Destination></DisplayContent>'
+          names='<StopName><Value>One</Value><Language>de</Language></StopName><StopName><Value>Two</Value><Language>de</Language></StopName>'
+          assert s21.validate(etree.fromstring(f'<R>{names}{display}</R>'.encode()))
+
+          s23=compile_harness('IBIS-IP_common_V2.3.xsd',{'R':'StopInformationRequestStructure','S':'StopInformationStructure'})
+          assert not s23.validate(etree.fromstring(f'<R>{display}<ArrivalExpected><Value>2026-01-01T10:00:00Z</Value></ArrivalExpected></R>'.encode()))
+          assert not s23.validate(etree.fromstring(f'<R>{display}<DepartureExpected><Value>2026-01-01T10:00:00Z</Value></DepartureExpected></R>'.encode()))
+          valid_stop=f'<S><StopIndex><Value>1</Value></StopIndex><StopRef><Value>S1</Value></StopRef><StopName><Value>Stop</Value><Language>de</Language></StopName>{display}<ArrivalExpected><Value>2026-01-01T10:00:00Z</Value></ArrivalExpected><DepartureExpected><Value>2026-01-01T10:01:00Z</Value></DepartureExpected></S>'
+          assert s23.validate(etree.fromstring(valid_stop.encode()))
+
+          rb={e['finding_id']:e for e in block['entries']}
+          assert any('must not impose the PDF 0:1 maximum as an extra validator rule' in g for g in rb['DRCOM21-001']['guards'])
+          assert any('must not register these fields as request aliases' in g for g in rb['DRCOM23-001']['guards'])
+          print('PASSED: focused StopInformationRequest runtime boundaries verified')
+          PY
+
+      - name: Prove XSD immutability
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum ./*.xsd | sort > /tmp/xsd-before.sha256
+          python tools/validate_xsd_pool.py --repo-root .
+          sha256sum ./*.xsd | sort > /tmp/xsd-after.sha256
+          cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          git diff --exit-code
+          echo "PASSED: StopInformationRequest runtime-mapping review gate complete"
