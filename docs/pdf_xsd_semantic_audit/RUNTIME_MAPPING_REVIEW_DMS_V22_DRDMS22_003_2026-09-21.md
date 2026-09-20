@@ -42,6 +42,7 @@ implemented      0
 - EV-141 historical closure: run **33974702338**
 - EV-141 successful evidence run: **33974267275**
 - primary runtime-mapping gate **35544122175**: **SUCCESS**
+- closure/consistency gate **35544172126**: **SUCCESS**
 
 The gate verified:
 
@@ -51,6 +52,7 @@ The gate verified:
 - `InstallationSuccessful` validates;
 - `InstallationSuccessfull` is rejected;
 - no alias/normalization policy is introduced;
-- all root XSDs remain unchanged.
+- all root XSDs remain unchanged;
+- synchronized SDK/runtime-mapping counters pass the hardened consistency validator.
 
 No executable Known-Issues matcher was added and no XSD was changed.
