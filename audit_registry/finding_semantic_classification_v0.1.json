@@ -7441,9 +7441,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "Common V2.1 StopInformationRequest contains more than one StopName and passes selected XSD validation"
+          "selected strict profile is official Common V2.1",
+          "XSD validation result is VALID for StopInformationRequest containing more than one StopName element",
+          "selected Common V2.1 XSD declares StopInformationRequestStructure.StopName minOccurs=0 maxOccurs=unbounded"
         ]
       },
       "source_references": [
@@ -7627,10 +7629,12 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "Common V2.3 StopInformationRequest is rejected because it contains ArrivalExpected",
-          "Common V2.3 StopInformationRequest is rejected because it contains DepartureExpected"
+          "selected strict profile is official Common V2.3",
+          "XSD validation result is INVALID because StopInformationRequest contains exact PDF-documented element ArrivalExpected",
+          "XSD validation result is INVALID because StopInformationRequest contains exact PDF-documented element DepartureExpected",
+          "selected Common V2.3 XSD contains ArrivalExpected and DepartureExpected in StopInformationStructure, not StopInformationRequestStructure"
         ]
       },
       "source_references": [

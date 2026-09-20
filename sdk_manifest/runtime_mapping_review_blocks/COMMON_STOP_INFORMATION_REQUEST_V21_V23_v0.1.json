@@ -1,0 +1,47 @@
+{
+  "block_version": "0.1",
+  "block_id": "COMMON_STOP_INFORMATION_REQUEST_V21_V23",
+  "review_date": "2026-09-21",
+  "source_semantic_registry_blob": "58256447700586ebd8f39ee93702b34ab09d1065",
+  "policy": "selected_xsd_authority_only_validity_preserved_no_request_field_alias",
+  "entries": [
+    {
+      "finding_id": "DRCOM21-001",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_valid_advisory",
+      "decision": "Keep a Common V2.1 StopInformationRequest with repeated StopName XSD-valid; optionally explain that the PDF states a stricter 0:1 maximum.",
+      "guards": [
+        "official Common V2.1 strict profile only",
+        "must require XSD VALID",
+        "match only StopInformationRequest with more than one StopName element",
+        "must not impose the PDF 0:1 maximum as an extra validator rule",
+        "must not alter selected-XSD validity"
+      ]
+    },
+    {
+      "finding_id": "DRCOM23-001",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual Common V2.3 XSD INVALID result caused by ArrivalExpected or DepartureExpected being placed inside StopInformationRequest as documented by the PDF.",
+      "guards": [
+        "official Common V2.3 strict profile only",
+        "must require XSD INVALID",
+        "match only exact ArrivalExpected or DepartureExpected child in StopInformationRequest",
+        "must not register these fields as request aliases",
+        "must preserve their valid placement in StopInformationStructure",
+        "must not rewrite or relocate invalid request XML automatically"
+      ]
+    }
+  ],
+  "implementation_state": "reviewed_not_implemented",
+  "evidence": [
+    "EV-119 / Common V2.1 exact-authority executable evidence",
+    "EV-137 / closure run 33857041308",
+    "EV-121 / Common V2.3 exact-authority executable evidence",
+    "EV-139 / closure run 33857906408",
+    "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V21_2026-09-04.md",
+    "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V23_2026-09-04.md"
+  ]
+}
