@@ -1955,8 +1955,8 @@
     "service_operation_capability_matrix_rule": "Do not derive manufacturer findings from unsupported operations until exact service-version obligation is normatively resolved as MANDATORY/OPTIONAL/CONDITIONAL/NOT_APPLICABLE; XSD operation inventory alone is insufficient authority for obligation.",
     "service_operation_capability_matrix_pilot": "DeviceManagementService",
     "finding_assessment_rule": "Continue substantive evidence-backed classification for every finding (documentation/PDF defect, XSD defect, cross-artifact mismatch, semantic contradiction, intentional design/non-defect, version/authority issue, stale artifact, unresolved). Never collapse findings to validation symptoms only.",
-    "manufacturer_protection_rule": "Do not attribute VDV artifact defects, optional/conditional/not-applicable capability gaps, version-routing errors, or test-tool errors to the manufacturer. Preserve the exact selected XSD VALID/INVALID result and explain VDV-known issues separately.",
-    "selected_xsd_authority_rule": "The exact selected VDV XSD remains executable payload authority even when the audit classifies a token/structure as typo-like, historically corrected, semantically questionable, or likely defective. No silent aliasing, rewriting, normalization, or back-application of later corrections."
+    "manufacturer_protection_rule": "Protect manufacturers from false attribution of VDV documentation issues, optional/conditional/not-applicable operations, version-routing mistakes, or tool errors. However, if the provider payload violates the exact selected XSD, the conformance result remains NOT PASSED/INVALID even when the XSD itself contains a known or likely typo/defect; the SDK only explains that context separately.",
+    "selected_xsd_authority_rule": "The exact selected VDV XSD is the executable source of truth and controls PASS/FAIL. Providers must implement it exactly, including historical typo-like identifiers. A known/likely VDV XSD or documentation defect may only add explanatory context; it never converts an XSD failure into a pass, waiver, alias, normalization, or tolerated deviation."
   },
   "evidence": {
     "xsd_ev_completed": [
@@ -2036,7 +2036,7 @@
     "runtime_mapping_latest_gate_run_id": "35552407083",
     "source_locator_completeness_state": "planned_after_runtime_mapping_review",
     "service_operation_capability_matrix_state": "planned_after_source_locator_hardening",
-    "diagnostic_goal": "For triggered findings, provide maximum verified context: exact profile, source attribution, rationale/disproof, validation effect, provider expectation, version history, source locators, and explicit separation of provider defect vs VDV artifact defect vs tool/test limitation."
+    "diagnostic_goal": "For triggered findings, report PASS/FAIL strictly from the selected XSD, then add verified explanatory context: exact profile, finding classification, source attribution, rationale/disproof, provider expectation, version history, source locators, and clear separation between conformance failure and known VDV artifact issue."
   },
   "next_actions": [
     "Resolve DRTIME10-002, the sole runtime_match=not_designed finding, to a justified terminal disposition using the existing evidence gate; do not implement a matcher.",
