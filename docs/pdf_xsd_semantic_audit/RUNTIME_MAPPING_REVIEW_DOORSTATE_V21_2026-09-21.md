@@ -52,6 +52,7 @@ implemented      0
 - EV-143: successful evidence run **33976777554**, closure **34025259521**
 - EV-145: run **34026409256**, closure **34026674927**
 - primary runtime-mapping gate **35551467491**: **SUCCESS**
+- closure/consistency gate **35551534399**: **SUCCESS**
 
 The gate verified:
 
@@ -61,6 +62,7 @@ The gate verified:
 - `ErrorMessage` is the exact RetrieveSpecific error choice member;
 - the two Get request declarations remain untyped;
 - the informational / INVALID / VALID runtime lanes remain distinct;
-- all root XSDs remain unchanged.
+- all root XSDs remain unchanged;
+- synchronized SDK/runtime-mapping counters pass the hardened consistency validator.
 
 No executable Known-Issues matcher was added and no XSD was changed.
