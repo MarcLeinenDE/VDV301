@@ -1,0 +1,30 @@
+{
+  "block_version": "0.1",
+  "block_id": "LOCATION_GNSS_V10_LS_001",
+  "review_date": "2026-09-21",
+  "source_semantic_registry_blob": "22e491c1b0e9af608dac796c6134b9f8855380f5",
+  "policy": "selected_gnss_v10_xsd_identifier_only_no_pdf_alias",
+  "entries": [
+    {
+      "finding_id": "LS-001",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual GNSS V1.0 XSD INVALID result caused by using the PDF spelling HorizontalDilutionOfPrecision instead of the selected-XSD element HoriziontalDilutionOfPrecision.",
+      "guards": [
+        "official GNSSLocationService V1.0 strict profile only",
+        "must require XSD INVALID",
+        "match only exact element name HorizontalDilutionOfPrecision in GNSSLocationService.Data",
+        "must preserve HoriziontalDilutionOfPrecision as the authoritative selected-XSD XML name",
+        "must not accept or normalize the PDF spelling as an alias",
+        "must not generalize spelling correction to other GNSS identifiers"
+      ]
+    }
+  ],
+  "implementation_state": "reviewed_not_implemented",
+  "evidence": [
+    "EV-153 / run 34229647400 / job 102072276013 / closure run 34230809592",
+    "audit_registry/location_services_revalidation_evidence_2026-09-08.json",
+    "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_LOCATION_SERVICES_2026-09-08.md"
+  ]
+}
