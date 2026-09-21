@@ -1,0 +1,121 @@
+name: TEMP runtime mapping TKT V1.0 004 006 008
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths:
+      - .github/workflows/temp_runtime_mapping_tkt_v10_004_006_008.yml
+      - audit_registry/finding_semantic_classification_v0.1.json
+      - sdk_manifest/known_issues_runtime_mapping_v0.1.json
+      - sdk_manifest/manifest_v0.1.json
+      - 00_START_HERE/CURRENT_STATE.json
+      - sdk_manifest/runtime_mapping_review_blocks/TKT_V10_004_006_008_v0.1.json
+      - docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_TKT_V10_004_006_008_2026-09-21.md
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check lxml jsonschema
+      - name: Verify TKT review boundary and exact XSD blob
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object IBIS-IP_TicketInformationService_V1.0.xsd)" = "3fda66d872ab0d1c511247f13e715cf3ad56afe7"
+          python - <<'PY'
+          import json
+          from collections import Counter
+          from pathlib import Path
+          from lxml import etree
+
+          ROOT=Path(".")
+          sem=json.loads((ROOT/"audit_registry/finding_semantic_classification_v0.1.json").read_text())
+          assert len(sem["entries"])==192
+          by={e["finding_id"]:e for e in sem["entries"]}
+          targets=["TKT-004","TKT-006","TKT-008"]
+          states={by[i]["runtime_match"]["state"] for i in targets}
+          assert states in ({"candidate"},{"reviewed"}), states
+          for i in targets:
+              e=by[i]
+              assert e["service"]=="TicketingService"
+              assert e["defect_assessment"]=="confirmed_pdf_defect"
+              assert e["confidence"]=="confirmed"
+              assert e["sdk_behavior"]=="error_with_advisory"
+              assert e["normative_authority"]=="selected_xsd"
+              scope=e["version_scope"][0]
+              assert scope["authority"]=="official_release"
+              assert "3fda66d872ab0d1c511247f13e715cf3ad56afe7" in scope["xsd_profile"]
+
+          counts=Counter(e["runtime_match"]["state"] for e in sem["entries"])
+          if states=={"candidate"}:
+              assert counts==Counter({"not_applicable":114,"reviewed":61,"candidate":17}), counts
+          else:
+              assert counts==Counter({"not_applicable":114,"reviewed":64,"candidate":14}), counts
+
+          XS="http://www.w3.org/2001/XMLSchema"
+          NS={"xs":XS}
+          p=ROOT/"IBIS-IP_TicketInformationService_V1.0.xsd"
+          tree=etree.parse(str(p))
+          schema=etree.XMLSchema(tree)
+
+          globals={x.get("name"):x.get("type") for x in tree.xpath("./xs:element",namespaces=NS)}
+          assert globals["TicketingService.ValidateTicketRequest"]=="TicketingService.ValidateTicketRequestStructure"
+          assert "TicketInformationService.Validation.GetDataRequest" not in globals
+
+          seq=tree.xpath("./xs:complexType[@name='TicketingService.GetTariffInformationResponseDataStructure']/xs:sequence/*",namespaces=NS)
+          head=[n.get("name") if n.tag==f"{{{XS}}}element" else f"group:{n.get('ref')}" for n in seq]
+          assert head[:3]==["DefaultLanguage","TimeStamp","group:TariffInformationGroup"], head
+
+          grp=tree.xpath("./xs:group[@name='CardApplikationValidation']/xs:sequence/xs:element/@name",namespaces=NS)
+          assert grp==["CardApplStatusCode","CardApplikationInformation"], grp
+
+          valid_req="""<TicketingService.ValidateTicketRequest>
+            <CardType>
+              <CardSerialNumber><Value>SERIAL1</Value></CardSerialNumber>
+              <CardTypeID><Value>TYPE1</Value></CardTypeID>
+            </CardType>
+            <NumberOfCardTicketDataBlocks><Value>1</Value></NumberOfCardTicketDataBlocks>
+            <CardTicketDataBlock>
+              <CardTicketDataID><Value>1</Value></CardTicketDataID>
+              <CardTicketDataLength><Value>1</Value></CardTicketDataLength>
+              <CardTicketData><Value>1</Value></CardTicketData>
+            </CardTicketDataBlock>
+          </TicketingService.ValidateTicketRequest>"""
+          doc=etree.fromstring(valid_req.encode())
+          assert schema.validate(doc), schema.error_log
+          wrong=etree.fromstring(valid_req.replace("TicketingService.ValidateTicketRequest","TicketInformationService.Validation.GetDataRequest").encode())
+          assert not schema.validate(wrong)
+
+          print("TKT_RUNTIME_REVIEW_BOUNDARY_OK", sorted(states), dict(counts))
+          PY
+      - name: Validate semantic registry JSON Schema
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from jsonschema import Draft202012Validator
+          from pathlib import Path
+          s=json.loads(Path("audit_registry/finding_semantic_classification_schema_v0.1.json").read_text())
+          j=json.loads(Path("audit_registry/finding_semantic_classification_v0.1.json").read_text())
+          errors=sorted(Draft202012Validator(s).iter_errors(j), key=lambda e:list(e.path))
+          if errors:
+              raise SystemExit("\n".join(f"{list(e.path)}: {e.message}" for e in errors))
+          print("SEMANTIC_SCHEMA_OK")
+          PY
+      - name: Validate deterministic Known-Issues mapping
+        run: python tools/validate_known_issues_runtime_mapping_v0_1.py
+      - name: Validate SDK manifest consistency
+        run: python tools/validate_sdk_manifest_v0_1.py
+      - name: Root XSD regression gate
+        run: python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+      - name: Verify XSD working tree remains clean
+        run: git diff --exit-code -- '*.xsd'
