@@ -1,6 +1,6 @@
 # Runtime-mapping review — TicketValidationService TVS-001 / TVS-002 / TVS-003 — 2026-09-21
 
-Status: **reviewed / persisted / closure gate pending**.
+Status: **completed / terminal / not implemented**.
 
 ## Authority boundary
 
@@ -65,3 +65,19 @@ No executable matcher, compatibility alias, enum substitution or XSD mutation is
 Primary runtime-mapping gate **35646946304**: **SUCCESS**.
 
 The gate re-ran EV-112, EV-113, EV-114 and EV-115, preserved the official-release/candidate authority split, verified the TVS-001 structural boundary without promoting it to official V2.4 conformance, and passed the semantic-registry, deterministic runtime-mapping, SDK-manifest and root-XSD regression checks.
+
+## Closure gate
+
+Closure/consistency gate **35647099114**: **SUCCESS** on persisted HEAD `3e529c761c252a60e4a3267cafe8b460582e660a`.
+
+Final runtime-mapping inventory after this block:
+
+```text
+reviewed        72
+candidate        5
+not_designed     0
+not_applicable 115
+implemented      0
+```
+
+TVS-001 remains a candidate/integration remediation finding with no Known-Issues runtime matcher. TVS-002 and TVS-003 are reviewed official-route XSD-invalid advisories. No alias, enum substitution, candidate-to-official promotion or XSD mutation was introduced.
