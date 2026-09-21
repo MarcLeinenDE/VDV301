@@ -1,0 +1,31 @@
+{
+  "block_version": "0.1",
+  "block_id": "PCS_V21_PCS_001",
+  "review_date": "2026-09-21",
+  "source_semantic_registry_blob": "d35b663fdbb5a358c42bfa4b3de80cf3b18bde33",
+  "policy": "exact_pcs_v21_dependency_route_only_no_enum_family_substitution",
+  "entries": [
+    {
+      "finding_id": "PCS-001",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual PCS V2.1 XSD INVALID result caused by ErrorCode=OperationNotSupported on the exact PCS V2.1 -> Common V1.0 -> Enumerations V1.0 route.",
+      "guards": [
+        "official PassengerCountingService V2.1 exact dependency route only",
+        "must require XSD INVALID",
+        "match only ErrorCode value OperationNotSupported in a selected Common V1.0 ErrorCodeEnumeration position",
+        "must not substitute, merge, or auto-upgrade to Enumerations V2.1",
+        "must not inject OperationNotSupported into the selected V1.0 enum pool",
+        "must preserve existing V1.0 values such as DataNotValid as normal valid values"
+      ]
+    }
+  ],
+  "implementation_state": "reviewed_not_implemented",
+  "evidence": [
+    "EV-155 / independent run 34447583426 / closure run 34448427086",
+    "tools/validate_pcs_v21_operation_not_supported.py",
+    "docs/pdf_xsd_semantic_audit/24a_executable_validation_pcs_001.md",
+    "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_PCS_2026-09-10.md"
+  ]
+}
