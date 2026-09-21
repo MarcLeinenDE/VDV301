@@ -4,7 +4,7 @@
   "state": "reviewed_inventory",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "b09abb299368d3ca950132d35a5c9e83f75dcc65",
+    "git_blob": "e9328c130420b583265ec6644a826015e14ce41c",
     "classification_state": "complete",
     "finding_count": 192
   },
@@ -19,9 +19,9 @@
     "implementation_requires_separate_profile_specific_validation": true
   },
   "counts": {
-    "reviewed_mapping_count": 66,
+    "reviewed_mapping_count": 70,
     "implemented_count": 0,
-    "semantic_candidate_count": 12,
+    "semantic_candidate_count": 8,
     "semantic_not_designed_count": 0,
     "semantic_not_applicable_count": 114
   },
@@ -1830,6 +1830,61 @@
       }
     },
     {
+      "finding_id": "TSD-002",
+      "service": "TrainSetDataService",
+      "semantic_issue_kind": "wrong_structure_reference",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TrainSetDataService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + selected Enumerations dependency",
+          "note": "The overview labels UnsubscribeTripRef and UnsubscribeTripInformation requests with Retrieve*RequestStructure names, while the detailed definition and exact XSD require TrainSetDataService.TrainSetUnsubscribeRequestStructure."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected profile is TrainSetDataService V2.2",
+        "XSD validation rejects UnsubscribeTripRefRequest or UnsubscribeTripInformationRequest because the payload follows the corresponding Retrieve*RequestStructure shape",
+        "the request lacks or misplaces fields required by TrainSetUnsubscribeRequestStructure such as Client-IP-Address"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "TSD-002"
+      }
+    },
+    {
+      "finding_id": "TSD-004",
+      "service": "TrainSetDataService",
+      "semantic_issue_kind": "wrong_structure_reference",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "official TrainSetDataService V2.2 XSD route",
+          "note": "PDF page 40 uses the TripRef response-structure name for a TripInformation update."
+        }
+      ],
+      "trigger_descriptions": [
+        "XSD validation failure in SubscribeTripInformation/RetrieveTripInformation event payload",
+        "payload shape or type corresponds to RetrieveTripRefResponseStructure"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "TSD-004"
+      }
+    },
+    {
       "finding_id": "TSI-001",
       "service": "TrainSetInformationService",
       "semantic_issue_kind": "cardinality_mismatch",
@@ -1895,6 +1950,61 @@
       "diagnostic_source": {
         "registry": "audit_registry/finding_semantic_classification_v0.1.json",
         "finding_id": "TSM-001"
+      }
+    },
+    {
+      "finding_id": "TSM-002",
+      "service": "TrainSetManagementService",
+      "semantic_issue_kind": "stale_operation_inventory_member",
+      "sdk_behavior": "warning",
+      "activation_class": "resolver_or_profile_warning",
+      "required_precondition": "resolver_context_matched",
+      "result_effect": "emit_warning",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "official TrainSetManagementService V2.2 XSD route",
+          "note": "The global response root is corrected, while the operations group retains the old member name."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected profile is TSM V2.2",
+        "operation inventory is derived from TrainSetManagementServiceOperations",
+        "stale member conflicts with corrected global response root"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "TSM-002"
+      }
+    },
+    {
+      "finding_id": "TSM-003",
+      "service": "TrainSetManagementService",
+      "semantic_issue_kind": "stale_diagram_or_example",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "official TrainSetManagementService V2.2 XSD route",
+          "note": "The PDF diagram is stale relative to the exact selected XSD structure."
+        }
+      ],
+      "trigger_descriptions": [
+        "XSD structure error in GetTrainSetCompositionResponse coach data",
+        "submitted shape resembles the stale flat coach layout rather than repeatable SingleCoach"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "TSM-003"
       }
     },
     {

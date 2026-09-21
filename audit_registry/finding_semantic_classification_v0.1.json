@@ -13395,7 +13395,7 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
           "selected profile is TrainSetDataService V2.2",
           "XSD validation rejects UnsubscribeTripRefRequest or UnsubscribeTripInformationRequest because the payload follows the corresponding Retrieve*RequestStructure shape",
@@ -13424,7 +13424,7 @@
           "note": "Exact V2.2 executable authority requiring TrainSetUnsubscribeRequestStructure."
         }
       ],
-      "notes": "Confirmed overview/XSD request-structure mismatch. The exact Retrieve-like rejection is a robust Known-Issues advisory candidate."
+      "notes": "Confirmed overview/XSD request-structure mismatch. The exact Retrieve-like rejection is a robust Known-Issues advisory candidate. Runtime-mapping review 2026-09-21: reviewed with exact official TrainSet V2.2 authority and context-specific guards; selected-XSD result remains normative."
     },
     {
       "finding_id": "TSD-003",
@@ -13577,7 +13577,7 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
           "XSD validation failure in SubscribeTripInformation/RetrieveTripInformation event payload",
           "payload shape or type corresponds to RetrieveTripRefResponseStructure"
@@ -13601,7 +13601,8 @@
           "kind": "evidence",
           "reference": "EV-160"
         }
-      ]
+      ],
+      "notes": " Runtime-mapping review 2026-09-21: reviewed with exact official TrainSet V2.2 authority and context-specific guards; selected-XSD result remains normative."
     },
     {
       "finding_id": "TSI-001",
@@ -13877,7 +13878,7 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
           "selected profile is TSM V2.2",
           "operation inventory is derived from TrainSetManagementServiceOperations",
@@ -13897,7 +13898,8 @@
           "kind": "version_history",
           "reference": "TrainSet V2.2 physical page 51 correction history"
         }
-      ]
+      ],
+      "notes": " Runtime-mapping review 2026-09-21: reviewed with exact official TrainSet V2.2 authority and context-specific guards; selected-XSD result remains normative."
     },
     {
       "finding_id": "TSM-003",
@@ -13953,7 +13955,7 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
           "XSD structure error in GetTrainSetCompositionResponse coach data",
           "submitted shape resembles the stale flat coach layout rather than repeatable SingleCoach"
@@ -13972,7 +13974,8 @@
           "kind": "xsd",
           "reference": "official V2.2 SingleCoach -> SingleCoachInATrainSet response structure"
         }
-      ]
+      ],
+      "notes": " Runtime-mapping review 2026-09-21: reviewed with exact official TrainSet V2.2 authority and context-specific guards; selected-XSD result remains normative."
     },
     {
       "finding_id": "TVS-001",

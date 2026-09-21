@@ -1,6 +1,6 @@
 # Runtime-mapping review — TrainSet V2.2 TSD-002 / TSD-004 / TSM-002 / TSM-003 — 2026-09-21
 
-Status: **review decision complete / not yet persisted into semantic registry at report creation**.
+Status: **reviewed / persisted / closure gate pending**.
 
 ## Exact authority
 
@@ -67,3 +67,9 @@ implemented      0
 ```
 
 No executable matcher, compatibility alias, payload rewrite or XSD mutation is introduced.
+
+## Primary gate
+
+Primary runtime-mapping gate **35646408602**: **SUCCESS**.
+
+The gate verified all exact official V2.2 TrainSet blob identities, re-ran EV-104 and EV-110, executable-checked the TSD-004 data-event/acknowledgement separation and TSM-003 flat-vs-SingleCoach boundary, then passed semantic-registry, deterministic runtime-mapping, SDK-manifest and complete root-XSD regression checks.
