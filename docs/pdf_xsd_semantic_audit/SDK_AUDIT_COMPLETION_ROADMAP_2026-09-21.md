@@ -37,14 +37,15 @@ Manufacturer-protection rule:
 - never attribute a VDV documentation/XSD inconsistency to a manufacturer;
 - never attribute a test-tool/version-routing error to a manufacturer;
 - never treat an optional, conditional or version-inapplicable operation as a missing mandatory capability;
-- never turn a known VDV defect into a manufacturer defect merely because the provider followed the official executable XSD;
-- where a manufacturer payload violates the selected official XSD, keep that VALID/INVALID result exactly as VDV requires, even when the XSD token or structure is itself a known likely defect;
-- in such a case, the SDK must explain both layers separately: **manufacturer payload versus selected XSD** and **known VDV documentation/schema issue**;
+- a provider is required to implement the exact selected official XSD, including historical typo-like identifiers or structures, because that XSD is the executable source of truth for that profile;
+- if a manufacturer payload violates the selected official XSD, the conformance result is **NOT PASSED / INVALID** even when the audit has independently classified the relevant XSD token or structure as a known or likely VDV defect;
+- a Known-Issue explanation never downgrades, waives or converts that failure into a pass. It only explains why the required XSD spelling/structure may look surprising or conflict with documentation/history;
+- in such a case, the SDK must report both layers separately: **manufacturer payload versus selected XSD = failed** and **known VDV documentation/schema issue = explanatory context only**;
 - if source attribution is not proven, present the result as an unresolved/cross-artifact discrepancy rather than assigning blame.
 
 XSD authority rule:
 
-The exact selected VDV XSD profile remains the executable authority for payload validation. Audit knowledge may classify a schema token as typo-like, historically corrected, semantically questionable or likely defective, but it must not silently normalize, alias, rewrite, accept or reject XML contrary to that selected XSD. A later VDV correction changes only the profile/version in which it is authoritative; it is not back-applied automatically to historical profiles.
+The exact selected VDV XSD profile is the executable source of truth for payload validation and therefore controls PASS/FAIL. A provider must implement that exact profile, including typo-like historical identifiers if they are present in the authoritative XSD. Audit knowledge may classify a schema token as typo-like, historically corrected, semantically questionable or likely defective, but it must never change the conformance outcome, silently normalize, alias, rewrite, accept or reject XML contrary to that selected XSD. A later VDV correction changes only the profile/version in which it is authoritative; it is not back-applied automatically to historical profiles.
 
 SDK explanation goal:
 
