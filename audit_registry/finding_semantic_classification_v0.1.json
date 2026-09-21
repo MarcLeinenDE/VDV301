@@ -13676,7 +13676,7 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
           "selected profile is TrainSetInformationService V2.1",
           "XSD validation rejects GetTrainSetCompositionResponse when the payload attempts to carry a second coach data set",
@@ -13710,7 +13710,7 @@
           "note": "Correction-history evidence: repeatable SingleCoach wrapper with maxOccurs=unbounded."
         }
       ],
-      "notes": "Confirmed V2.1 PDF/XSD cardinality mismatch. V2.2 is explanatory correction history only; no schema substitution or wrapper synthesis is introduced."
+      "notes": "Confirmed V2.1 PDF/XSD cardinality mismatch. V2.2 is explanatory correction history only; no schema substitution or wrapper synthesis is introduced. Runtime-mapping review 2026-09-21: reviewed for exact official V2.1 profile only; later V2.2 correction remains explanatory evidence and is never back-applied."
     },
     {
       "finding_id": "TSM-001",
@@ -13783,7 +13783,7 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
           "selected profile is TrainSetManagementService V2.1",
           "XSD validation rejects TrainSetManagementService.GetTrainSetCompositionResponse because no matching V2.1 global declaration exists",
@@ -13812,7 +13812,7 @@
           "note": "Exact official V2.1 authority and later V2.2 correction-history schema."
         }
       ],
-      "notes": "Confirmed historical V2.1 XSD identifier defect. V2.1 remains normative for strict validation; V2.2 is explanatory correction history only and no compatibility alias is synthesized."
+      "notes": "Confirmed historical V2.1 XSD identifier defect. V2.1 remains normative for strict validation; V2.2 is explanatory correction history only and no compatibility alias is synthesized. Runtime-mapping review 2026-09-21: reviewed for exact official V2.1 profile only; later V2.2 correction remains explanatory evidence and is never back-applied."
     },
     {
       "finding_id": "TSM-002",

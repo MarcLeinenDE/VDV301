@@ -1,6 +1,6 @@
 # Runtime-mapping review — TrainSet V2.1 TSI-001 / TSM-001 — 2026-09-21
 
-Status: **review decision complete / not yet persisted into semantic registry at report creation**.
+Status: **reviewed / persisted / closure gate pending**.
 
 ## Authority boundary
 
@@ -53,3 +53,9 @@ implemented      0
 ```
 
 No compatibility aliases, schema substitution or XSD mutation are introduced.
+
+## Primary gate
+
+Primary runtime-mapping gate **35645781280**: **SUCCESS**.
+
+The gate re-ran EV-109 against the exact official TrainSet V2.1 XSDs, verified the V2.1 blob identities, semantic-registry schema, deterministic Known-Issues mapping, SDK-manifest consistency and the complete root-XSD regression suite before persistence.

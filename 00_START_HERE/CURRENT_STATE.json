@@ -1958,8 +1958,8 @@
     "manufacturer_protection_rule": "Protect manufacturers from false attribution of VDV documentation issues, optional/conditional/not-applicable operations, version-routing mistakes, or tool errors. However, if the provider payload violates the exact selected XSD, the conformance result remains NOT PASSED/INVALID even when the XSD itself contains a known or likely typo/defect; the SDK only explains that context separately.",
     "selected_xsd_authority_rule": "The exact selected VDV XSD is the executable source of truth and controls PASS/FAIL. Providers must implement it exactly, including historical typo-like identifiers. A known/likely VDV XSD or documentation defect may only add explanatory context; it never converts an XSD failure into a pass, waiver, alias, normalization, or tolerated deviation.",
     "open_unmerged_pr_remediation_rule": "If a confirmed finding affects an open, unmerged upstream PR, prefer correcting that PR's source branch directly after evidence/source-attribution closure and revalidation, rather than deferring the issue to the consolidated VDV communication package. If the branch is not writable, prepare the exact patch/evidence for the author or a narrowly scoped separate PR after explicit user approval.",
-    "latest_runtime_mapping_review": "TKT_V10_004_006_008",
-    "latest_runtime_mapping_review_report": "docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_TKT_V10_004_006_008_2026-09-21.md",
+    "latest_runtime_mapping_review": "TRAINSET_V21_TSI_001_TSM_001",
+    "latest_runtime_mapping_review_report": "docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_TRAINSET_V21_TSI_001_TSM_001_2026-09-21.md",
     "latest_runtime_mapping_gate_run_id": "35645524739"
   },
   "evidence": {
@@ -2030,12 +2030,12 @@
     "known_issues_normative_xsd_override_allowed": false,
     "runtime_mapping_manifest": "sdk_manifest/known_issues_runtime_mapping_v0.1.json",
     "runtime_mapping_schema": "sdk_manifest/known_issues_runtime_mapping_v0.1.schema.json",
-    "runtime_mapping_reviewed_count": 64,
-    "runtime_mapping_candidate_count": 14,
+    "runtime_mapping_reviewed_count": 66,
+    "runtime_mapping_candidate_count": 12,
     "runtime_mapping_not_designed_count": 0,
     "runtime_mapping_report": "docs/pdf_xsd_semantic_audit/KNOWN_ISSUES_RUNTIME_MAPPING_BASELINE_2026-09-18.md",
-    "runtime_mapping_latest_review_block": "TKT_V10_004_006_008",
-    "runtime_mapping_latest_review_report": "docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_TKT_V10_004_006_008_2026-09-21.md",
+    "runtime_mapping_latest_review_block": "TRAINSET_V21_TSI_001_TSM_001",
+    "runtime_mapping_latest_review_report": "docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_TRAINSET_V21_TSI_001_TSM_001_2026-09-21.md",
     "runtime_mapping_not_applicable_count": 114,
     "runtime_mapping_latest_gate_run_id": "35645524739",
     "source_locator_completeness_state": "planned_after_runtime_mapping_review",
@@ -2043,7 +2043,7 @@
     "diagnostic_goal": "For triggered findings, report PASS/FAIL strictly from the selected XSD, then add verified explanatory context: exact profile, finding classification, source attribution, rationale/disproof, provider expectation, version history, source locators, and clear separation between conformance failure and known VDV artifact issue."
   },
   "next_actions": [
-    "Review the 14 remaining semantic runtime_match=candidate findings in small related service/version blocks until candidate=0; preserve selected-XSD authority and existing explanation data. Next: TrainSetData/Information/Management candidates.",
+    "Review the 12 remaining semantic runtime_match=candidate findings in small related service/version blocks until candidate=0. Next: TrainSet V2.2 candidates TSD-002/TSD-004/TSM-002/TSM-003.",
     "After runtime-mapping review is terminal, run a source-locator completeness pass so every SDK/reporting-relevant finding has direct PDF/document and/or XSD component locators or an explicit not-applicable reason.",
     "Then create and pilot a separate service/version/operation obligation matrix on DeviceManagementService with MANDATORY/OPTIONAL/CONDITIONAL/NOT_APPLICABLE plus audit-only UNRESOLVED and probe-safety metadata.",
     "Only after those gates, implement structured profile-specific Known-Issues matchers with positive/negative evidence; keep official-facing remediation/XSD mutation in a separate explicitly approved phase."
