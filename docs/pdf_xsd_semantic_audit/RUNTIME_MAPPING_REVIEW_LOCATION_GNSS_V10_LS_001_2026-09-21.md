@@ -40,6 +40,7 @@ implemented      0
 
 - EV-153: run **34229647400**, job **102072276013**, closure **34230809592**
 - primary runtime-mapping gate **35551852822**: **SUCCESS**
+- closure/consistency gate **35551930639**: **SUCCESS**
 
 The gate verified:
 
@@ -48,6 +49,7 @@ The gate verified:
 - `HorizontalDilutionOfPrecision` is absent and rejected;
 - preserved EV-153 evidence identity;
 - no alias/normalization policy is introduced;
-- all root XSDs remain unchanged.
+- all root XSDs remain unchanged;
+- synchronized SDK/runtime-mapping counters pass the hardened consistency validator.
 
 No executable Known-Issues matcher was added and no XSD was changed.
