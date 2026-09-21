@@ -1,6 +1,6 @@
 # Runtime-mapping review — TimeService V1.0 DRTIME10-002 — 2026-09-21
 
-Status: **review decision complete / not yet persisted into semantic registry at report creation**.
+Status: **reviewed / persisted / closure gate pending**.
 
 ## Finding assessment
 
@@ -43,5 +43,11 @@ not_designed     0
 not_applicable 114
 implemented      0
 ```
+
+## Primary gate
+
+Primary review gate **35644883474**: **SUCCESS**.
+
+The gate verified the DRTIME10-002 authority/evidence boundary, semantic-registry schema, deterministic Known-Issues mapping, SDK-manifest consistency and the complete root-XSD regression suite before persistence.
 
 No executable Known-Issues matcher is added.
