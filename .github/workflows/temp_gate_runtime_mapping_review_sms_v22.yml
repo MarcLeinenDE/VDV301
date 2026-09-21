@@ -1,4 +1,4 @@
-name: temp-gate-runtime-mapping-review-sms-v22
+name: temp-gate-runtime-mapping-review-sms-v22-closure
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 jobs:
-  gate-sms-v22:
+  gate-sms-v22-closure:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,78 +23,40 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
 
-      - name: Verify exact review prestate
+      - name: Verify exact closure prestate
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD^)" = "42939b5b5d9baf57f6388c441e9ad91ca6d774e3"
+          test "$(git rev-parse HEAD^)" = "d0a12051d6a8b8b3c91f21d1c2344d43338c68b6"
+          test "$(git hash-object 00_START_HERE/CURRENT_STATE.json)" = "e2ec9dba190f9881453e21e8e1663953bf500360"
+          test "$(git hash-object sdk_manifest/manifest_v0.1.json)" = "36736ce1dbd4cb5f0b83f77259f1e93a3a414a6c"
+          test "$(git hash-object sdk_manifest/README.md)" = "aab4de1d9efac6f2374c27ace5c55e7b3302d049"
           test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "4a98a01ba97cdf2a77260638fbc884f5ac52f16b"
           test "$(git hash-object sdk_manifest/known_issues_runtime_mapping_v0.1.json)" = "b20d492d8fa3eb46534083cc041064026f275fdc"
-          test "$(git hash-object sdk_manifest/runtime_mapping_review_blocks/SMS_V22_SMS_002_v0.1.json)" = "4819dea0cf7f0c853aede6df66673ae6e9ae6eba"
-          test "$(git hash-object IBIS-IP_SystemMonitoringService_V2.2.xsd)" = "d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c"
-          test "$(git hash-object IBIS-IP_common_V2.2.xsd)" = "468fee6d177e7185dbcd5d3f90cfb114e29e01ae"
-          test "$(git hash-object IBIS-IP_Enumerations_V2.2.xsd)" = "2a23b512379b18e8f122ac1272cef8229fb86283"
 
-      - name: Validate semantic registry and deterministic runtime mapping
+      - name: Validate synchronized runtime inventory
         shell: bash
         run: |
           set -euo pipefail
           python tools/validate_finding_semantic_classification.py
           python tools/validate_known_issues_runtime_mapping_v0_1.py
-
-      - name: Rerun preserved EV-116
-        shell: bash
-        run: |
-          set -euo pipefail
-          python tools/validate_sms_v22_ev116.py
-
-      - name: Verify focused SMS-002 mapping guards
-        shell: bash
-        run: |
-          set -euo pipefail
+          python tools/validate_sdk_manifest_v0_1.py
           python - <<'PY'
           import json
           from pathlib import Path
-          from lxml import etree
-
-          sem=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
-          mapping=json.loads(Path('sdk_manifest/known_issues_runtime_mapping_v0.1.json').read_text())
-          block=json.loads(Path('sdk_manifest/runtime_mapping_review_blocks/SMS_V22_SMS_002_v0.1.json').read_text())
-          by={e['finding_id']:e for e in sem['entries']}
-          m={x['finding_id']:x for x in mapping['mappings']}['SMS-002']
-
-          assert by['SMS-002']['runtime_match']['state']=='reviewed'
-          assert m['activation_class']=='xsd_invalid_advisory'
-          assert m['required_precondition']=='xsd_result_invalid'
-          assert m['result_effect']=='decorate_existing_invalid'
-          assert m['implementation_state']=='reviewed_not_implemented'
-          assert m['authority_guard']=='selected_xsd_result_remains_normative'
-          assert mapping['counts']=={
+          m=json.loads(Path('sdk_manifest/manifest_v0.1.json').read_text())
+          r=json.loads(Path('sdk_manifest/known_issues_runtime_mapping_v0.1.json').read_text())
+          k=m['known_issues_knowledge']
+          assert k['runtime_match_distribution']=={'candidate':17,'not_applicable':113,'not_designed':1,'reviewed':61}
+          assert r['counts']=={
               'reviewed_mapping_count':61,
               'implemented_count':0,
               'semantic_candidate_count':17,
               'semantic_not_designed_count':1,
               'semantic_not_applicable_count':113,
           }
-
-          XS='http://www.w3.org/2001/XMLSchema'
-          NS={'xs':XS}
-          doc=etree.parse('IBIS-IP_SystemMonitoringService_V2.2.xsd')
-          root=doc.getroot()
-          roots={x.get('name') for x in root.findall('xs:element',NS)}
-          assert 'SystemMonitoringService.GetServiceStatusResponse' in roots
-          assert 'SystemMonitoringService.GetSystemStatusResponse' not in roots
-
-          schema=etree.XMLSchema(doc)
-          valid=b'<SystemMonitoringService.GetServiceStatusResponse><OperationErrorMessage><Value>test</Value></OperationErrorMessage></SystemMonitoringService.GetServiceStatusResponse>'
-          invalid=b'<SystemMonitoringService.GetSystemStatusResponse><OperationErrorMessage><Value>test</Value></OperationErrorMessage></SystemMonitoringService.GetSystemStatusResponse>'
-          assert schema.validate(etree.fromstring(valid))
-          assert not schema.validate(etree.fromstring(invalid))
-
-          rb=block['entries'][0]
-          assert any('must not register GetSystemStatusResponse or broader SystemStatus operation aliases' in g for g in rb['guards'])
-          assert any('must not rewrite the invalid root automatically' in g for g in rb['guards'])
-          print('PASSED: SMS V2.2 ServiceStatus/SystemStatus runtime boundary verified')
+          assert k['runtime_mapping_latest_review_block']=='SMS_V22_SMS_002'
+          print('PASSED: SMS V2.2 closure counters and latest block are consistent')
           PY
 
       - name: Prove XSD immutability
@@ -106,4 +68,4 @@ jobs:
           sha256sum ./*.xsd | sort > /tmp/xsd-after.sha256
           cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
           git diff --exit-code
-          echo "PASSED: SMS V2.2 runtime-mapping gate complete"
+          echo "PASSED: SMS V2.2 runtime-mapping closure gate complete"
