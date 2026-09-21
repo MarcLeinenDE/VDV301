@@ -1,6 +1,6 @@
 # Runtime-mapping review — TrainSet V2.2 TSD-002 / TSD-004 / TSM-002 / TSM-003 — 2026-09-21
 
-Status: **reviewed / persisted / closure gate pending**.
+Status: **completed / reviewed / not implemented**.
 
 ## Exact authority
 
@@ -73,3 +73,19 @@ No executable matcher, compatibility alias, payload rewrite or XSD mutation is i
 Primary runtime-mapping gate **35646408602**: **SUCCESS**.
 
 The gate verified all exact official V2.2 TrainSet blob identities, re-ran EV-104 and EV-110, executable-checked the TSD-004 data-event/acknowledgement separation and TSM-003 flat-vs-SingleCoach boundary, then passed semantic-registry, deterministic runtime-mapping, SDK-manifest and complete root-XSD regression checks.
+
+## Closure gate
+
+Closure/consistency gate **35646554160**: **SUCCESS** on persisted HEAD `0b2c2336a6b179143c92b8f049a9a2ff18895291`.
+
+Final runtime-mapping inventory after this block:
+
+```text
+reviewed        70
+candidate        8
+not_designed     0
+not_applicable 114
+implemented      0
+```
+
+TSD-002, TSD-004 and TSM-003 remain explanation-only XSD INVALID advisories with narrow context guards. TSM-002 remains a resolver/operation-inventory warning for the internal V2.2 XSD inconsistency. No XSD, alias, payload or operation inventory is rewritten.
