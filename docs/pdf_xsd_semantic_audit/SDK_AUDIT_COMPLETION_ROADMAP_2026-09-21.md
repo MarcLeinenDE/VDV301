@@ -246,6 +246,24 @@ For every candidate:
 
 A finding is never automatically a remediation instruction.
 
+### Open/unmerged PR remediation rule
+
+If a confirmed finding affects content that is already under review in an **open, not-yet-merged upstream PR**, prefer correcting that PR's source branch directly instead of deferring the issue to the later consolidated VDV communication package.
+
+Requirements before touching an open PR branch:
+
+- the finding has passed the normal evidence and source-attribution gates;
+- the affected PR actually owns the relevant file/change scope;
+- the correction does not silently broaden the PR into unrelated work;
+- the exact PR head branch and current upstream state are re-fetched immediately before editing;
+- existing review comments and concurrent changes are checked;
+- targeted schema compilation / executable evidence is rerun after the correction;
+- the change is documented in the PR so reviewers can see what was corrected and why.
+
+If the PR branch is not writable by us, do not manufacture an alternate history. Instead prepare the exact patch/evidence for the PR author or, if appropriate, a separate narrowly scoped PR after user approval.
+
+Open-PR corrections are still subject to the XSD source-of-truth rule for all already released profiles. Updating an unmerged candidate PR changes only that candidate/integration line until VDV merges/releases it.
+
 ### External VDV communication package
 
 When remediation triage is mature, prepare **one consolidated, human-readable VDV communication package** rather than sending unrelated ad-hoc messages.
