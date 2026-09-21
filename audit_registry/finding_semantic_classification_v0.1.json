@@ -10781,11 +10781,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "selected profile is JourneyInformationService V1.0",
-          "XSD validation fails in JourneyInformationService.AllLineInformationData on a second LineInformation element",
-          "payload cardinality matches the PDF-documented 1:* form but exceeds selected-XSD maxOccurs=1"
+          "selected strict profile is official JourneyInformationService V1.0",
+          "XSD validation result is INVALID in JourneyInformationService.AllLineInformationData because a second LineInformation element is present",
+          "selected JIS V1.0 XSD omits maxOccurs on LineInformation so XML Schema default maxOccurs=1 applies"
         ]
       },
       "source_references": [
@@ -10957,11 +10957,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "selected profile is JourneyInformationService V1.0",
-          "XSD validation fails in RetrieveSpecificGNSSPointInformationResponse because SpecificGNSSPointInformationData is used as the choice element",
-          "the expected selected-XSD choice element is SpecificGNSSPointInformation"
+          "selected strict profile is official JourneyInformationService V1.0",
+          "XSD validation result is INVALID in RetrieveSpecificGNSSPointInformationResponse because SpecificGNSSPointInformationData is used as the choice element",
+          "selected JIS V1.0 XSD declares choice element SpecificGNSSPointInformation typed as JourneyInformationService.SpecificGNSSPointInformationData"
         ]
       },
       "source_references": [

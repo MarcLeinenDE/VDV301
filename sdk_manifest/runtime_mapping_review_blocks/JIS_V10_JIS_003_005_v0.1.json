@@ -1,0 +1,43 @@
+{
+  "block_version": "0.1",
+  "block_id": "JIS_V10_JIS_003_005",
+  "review_date": "2026-09-21",
+  "source_semantic_registry_blob": "1ab898ed4fcecb4526873faf873829bde3f5dd23",
+  "policy": "selected_jis_v10_xsd_authority_only_no_cardinality_relaxation_no_element_alias",
+  "entries": [
+    {
+      "finding_id": "JIS-003",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual JIS V1.0 XSD INVALID result caused by a second LineInformation element in AllLineInformationData.",
+      "guards": [
+        "official JourneyInformationService V1.0 strict profile only",
+        "must require XSD INVALID",
+        "match only a second LineInformation in JourneyInformationService.AllLineInformationData",
+        "must preserve selected-XSD default maxOccurs=1",
+        "must not relax cardinality to the PDF-documented 1:*"
+      ]
+    },
+    {
+      "finding_id": "JIS-005",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual JIS V1.0 XSD INVALID result caused by using SpecificGNSSPointInformationData as the response choice element instead of SpecificGNSSPointInformation.",
+      "guards": [
+        "official JourneyInformationService V1.0 strict profile only",
+        "must require XSD INVALID",
+        "match only RetrieveSpecificGNSSPointInformationResponse choice-element mismatch",
+        "must preserve SpecificGNSSPointInformation as the XML element name",
+        "must preserve JourneyInformationService.SpecificGNSSPointInformationData as the type name",
+        "must not register the Data-suffixed PDF row label as an element alias or rewrite it"
+      ]
+    }
+  ],
+  "implementation_state": "reviewed_not_implemented",
+  "evidence": [
+    "EV-152 / run 34113437268 / job 101714662141 / closure run 34224429423",
+    "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_JIS_2026-09-08.md"
+  ]
+}
