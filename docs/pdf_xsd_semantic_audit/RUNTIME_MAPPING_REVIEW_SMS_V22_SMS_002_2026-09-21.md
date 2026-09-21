@@ -42,6 +42,7 @@ implemented      0
 - EV-156: independent run **34460160697**, closure **34460497412**
 - EV-116: run **33269006407**
 - primary runtime-mapping gate **35552308342**: **SUCCESS**
+- closure/consistency gate **35552407083**: **SUCCESS**
 
 The gate verified:
 
@@ -50,6 +51,7 @@ The gate verified:
 - `GetServiceStatusResponse` validates;
 - invented `GetSystemStatusResponse` is rejected;
 - no alias or automatic rewrite is introduced;
-- all root XSDs remain unchanged.
+- all root XSDs remain unchanged;
+- synchronized SDK/runtime-mapping counters pass the hardened consistency validator.
 
 No executable Known-Issues matcher was added and no XSD was changed.
