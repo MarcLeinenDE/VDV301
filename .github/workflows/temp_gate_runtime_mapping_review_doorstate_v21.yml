@@ -1,0 +1,131 @@
+name: temp-gate-runtime-mapping-review-doorstate-v21
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_gate_runtime_mapping_review_doorstate_v21.yml
+
+permissions:
+  contents: read
+
+jobs:
+  gate-doorstate-v21:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+
+      - name: Verify exact review prestate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "a7349c14a68f6cc277b9302650f9abc2aec2df63"
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "1ab898ed4fcecb4526873faf873829bde3f5dd23"
+          test "$(git hash-object sdk_manifest/known_issues_runtime_mapping_v0.1.json)" = "9e83fb2d3f4c952a4d5cbcfc4b072bbee819cc69"
+          test "$(git hash-object sdk_manifest/runtime_mapping_review_blocks/DOORSTATE_V21_RUNTIME_REVIEW_v0.1.json)" = "5e0af8e8be85b05732432645fc9879dd2b94ef3a"
+          test "$(git hash-object IBIS-IP_DoorStateService_V2.1.xsd)" = "abff0f3960e2ec7a9caaa9ddeb6efff8f4183805"
+          test "$(git hash-object IBIS-IP_common_V1.0.xsd)" = "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c"
+          test "$(git hash-object IBIS-IP_Enumerations_V1.0.xsd)" = "a9bea5bc73003ed91ded8519db06c32c4067831d"
+
+      - name: Validate semantic registry and deterministic runtime mapping
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_finding_semantic_classification.py
+          python tools/validate_known_issues_runtime_mapping_v0_1.py
+
+      - name: Rerun preserved EV-111
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_door_v21_ev111.py
+
+      - name: Verify focused DoorState runtime boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from lxml import etree
+
+          sem=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
+          mapping=json.loads(Path('sdk_manifest/known_issues_runtime_mapping_v0.1.json').read_text())
+          block=json.loads(Path('sdk_manifest/runtime_mapping_review_blocks/DOORSTATE_V21_RUNTIME_REVIEW_v0.1.json').read_text())
+          by={e['finding_id']:e for e in sem['entries']}
+          mapped={m['finding_id']:m for m in mapping['mappings']}
+
+          assert mapping['counts']=={
+              'reviewed_mapping_count':56,
+              'implemented_count':0,
+              'semantic_candidate_count':22,
+              'semantic_not_designed_count':1,
+              'semantic_not_applicable_count':113,
+          }
+
+          assert mapped['DRDOOR21-001']['activation_class']=='informational'
+          assert mapped['DRDOOR21-001']['required_precondition']=='informational_context_matched'
+          assert mapped['DRDOOR21-001']['result_effect']=='emit_info'
+          assert mapped['DRS-002']['activation_class']=='xsd_invalid_advisory'
+          assert mapped['DRS-002']['required_precondition']=='xsd_result_invalid'
+          assert mapped['DRS-003']['activation_class']=='xsd_valid_advisory'
+          assert mapped['DRS-003']['required_precondition']=='xsd_result_valid'
+          for fid in ('DRDOOR21-001','DRS-002','DRS-003'):
+              assert by[fid]['runtime_match']['state']=='reviewed'
+              assert mapped[fid]['implementation_state']=='reviewed_not_implemented'
+              assert mapped[fid]['authority_guard']=='selected_xsd_result_remains_normative'
+
+          NS={'xs':'http://www.w3.org/2001/XMLSchema'}
+          root=etree.parse('IBIS-IP_DoorStateService_V2.1.xsd').getroot()
+          group=root.find("xs:group[@name='DoorStateServiceGroup']",NS)
+          assert group is not None
+          names={x.get('name') for x in group.findall('.//xs:element',NS)}
+          assert 'DoorStateService.RetrieveSpecificDoorOpenStateRequest' in names
+          assert 'DoorStateService.RetrieveSpecificDoorOperationStateRequest' in names
+          assert all('RetrieveDoorOpenState' not in (n or '') for n in names)
+          assert all('RetrieveDoorOpereationState' not in (n or '') for n in names)
+
+          for req in ('DoorStateService.GetDoorOpenStatesRequest','DoorStateService.GetDoorOperationStatesRequest'):
+              found=group.findall(f".//xs:element[@name='{req}']",NS)
+              assert len(found)==1
+              node=found[0]
+              assert node.get('type') is None
+              assert node.find('xs:complexType',NS) is None
+              assert node.find('xs:simpleType',NS) is None
+
+          for ctype in (
+              'DoorStateService.RetrieveSpecificDoorOpenStateResponseStructure',
+              'DoorStateService.RetrieveSpecificDoorOperationStateResponseStructure'
+          ):
+              ct=root.find(f"xs:complexType[@name='{ctype}']",NS)
+              assert ct is not None
+              choice={x.get('name') for x in ct.findall('./xs:choice/xs:element',NS)}
+              assert 'ErrorMessage' in choice
+              assert 'OperationErrorMessage' not in choice
+
+          rb={e['finding_id']:e for e in block['entries']}
+          assert any('must not register shortened or misspelled operation aliases' in g for g in rb['DRDOOR21-001']['guards'])
+          assert any('must not normalize OperationErrorMessage to ErrorMessage' in g for g in rb['DRS-002']['guards'])
+          assert any('must not synthesize an empty request complex type' in g for g in rb['DRS-003']['guards'])
+          assert any('must not infer whether the permissiveness is intentional or defective' in g for g in rb['DRS-003']['guards'])
+          print('PASSED: DoorStateService V2.1 runtime boundaries verified')
+          PY
+
+      - name: Prove XSD immutability
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum ./*.xsd | sort > /tmp/xsd-before.sha256
+          python tools/validate_xsd_pool.py --repo-root .
+          sha256sum ./*.xsd | sort > /tmp/xsd-after.sha256
+          cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          git diff --exit-code
+          echo "PASSED: DoorStateService V2.1 runtime-mapping gate complete"
