@@ -1,0 +1,33 @@
+{
+  "block_version": "0.1",
+  "block_id": "TIME_V10_DRTIME10_002",
+  "review_date": "2026-09-21",
+  "source_semantic_registry_blob": "4a98a01ba97cdf2a77260638fbc884f5ac52f16b",
+  "policy": "time_v10_bilingual_omission_is_profile_context_not_runtime_matcher",
+  "entries": [
+    {
+      "finding_id": "DRTIME10-002",
+      "prior_state": "not_designed",
+      "final_state": "not_applicable",
+      "activation_class": "none",
+      "decision": "Keep DRTIME10-002 as a confirmed TimeService V1.0 PDF/documentation defect and architecture/profile explanation, but do not create a standalone runtime matcher. The finding describes a bilingual omission on physical PDF page 6 and constrains interpretation of the SNTP/DNS-SD profile; it is not tied to an XML/XSD validation event or another discrete runtime message signature.",
+      "guards": [
+        "finding classification remains confirmed_pdf_defect",
+        "physical page 6 and EV-147 evidence remain authoritative for the bilingual omission",
+        "TimeService V1.0 remains a non-XSD protocol/discovery profile",
+        "do not infer a generic cyclic UDP current-time broadcast from _ibisip_udp._udp",
+        "do not create a synthetic runtime error solely from the missing English sentence",
+        "do not latest-wins substitute a newer NTP standard for the VDV-selected RFC 4330 profile",
+        "retain the finding as explanatory/profile knowledge for SDK documentation and future source-locator output"
+      ]
+    }
+  ],
+  "implementation_state": "not_applicable_no_runtime_matcher",
+  "evidence": [
+    "EV-147 / run 34028395412 / closure run 34028583953 / artifact 9987794844",
+    "audit_registry/drtime10_revalidation_evidence_2026-09-06.json",
+    "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTIME10_2026-09-06.md",
+    "docs/pdf_xsd_semantic_audit/deep_read/TIME_V1.0.md",
+    "TIME_V1.0 / SHA-256 d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3 / physical page 6"
+  ]
+}
