@@ -1,0 +1,80 @@
+name: TEMP runtime mapping TrainSet V2.1 TSI001 TSM001
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths:
+      - .github/workflows/temp_runtime_mapping_trainset_v21_tsi001_tsm001.yml
+      - audit_registry/finding_semantic_classification_v0.1.json
+      - sdk_manifest/known_issues_runtime_mapping_v0.1.json
+      - sdk_manifest/manifest_v0.1.json
+      - 00_START_HERE/CURRENT_STATE.json
+      - sdk_manifest/runtime_mapping_review_blocks/TRAINSET_V21_TSI_001_TSM_001_v0.1.json
+      - docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_TRAINSET_V21_TSI_001_TSM_001_2026-09-21.md
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check lxml jsonschema
+      - name: Verify exact TrainSet V2.1 authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object IBIS-IP_TrainSetInformationService_V2.1.xsd)" = "897f373e31b76aa23d8bc206854b042524e4c102"
+          test "$(git hash-object IBIS-IP_TrainSetManagementService_V2.1.xsd)" = "add9d1cb37e5759ff7a77855b239108d38373206"
+          python - <<'PY'
+          import json
+          from collections import Counter
+          from pathlib import Path
+          sem=json.loads(Path("audit_registry/finding_semantic_classification_v0.1.json").read_text())
+          by={e["finding_id"]:e for e in sem["entries"]}
+          targets=["TSI-001","TSM-001"]
+          states={by[i]["runtime_match"]["state"] for i in targets}
+          assert states in ({"candidate"},{"reviewed"}), states
+          assert by["TSI-001"]["defect_assessment"]=="cross_artifact_mismatch"
+          assert by["TSM-001"]["defect_assessment"]=="confirmed_xsd_defect"
+          for i in targets:
+              assert by[i]["confidence"]=="confirmed"
+              assert by[i]["sdk_behavior"]=="error_with_advisory"
+              assert by[i]["normative_authority"]=="selected_xsd"
+          counts=Counter(e["runtime_match"]["state"] for e in sem["entries"])
+          if states=={"candidate"}:
+              assert counts==Counter({"not_applicable":114,"reviewed":64,"candidate":14}), counts
+          else:
+              assert counts==Counter({"not_applicable":114,"reviewed":66,"candidate":12}), counts
+          print("TRAINSET_V21_RUNTIME_REVIEW_BOUNDARY_OK", sorted(states), dict(counts))
+          PY
+      - name: Re-run EV-109 executable V2.1 boundaries
+        run: python tools/validate_trainset_v21_ev109.py
+      - name: Validate semantic registry JSON Schema
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from jsonschema import Draft202012Validator
+          from pathlib import Path
+          s=json.loads(Path("audit_registry/finding_semantic_classification_schema_v0.1.json").read_text())
+          j=json.loads(Path("audit_registry/finding_semantic_classification_v0.1.json").read_text())
+          errors=sorted(Draft202012Validator(s).iter_errors(j), key=lambda e:list(e.path))
+          if errors:
+              raise SystemExit("\n".join(f"{list(e.path)}: {e.message}" for e in errors))
+          print("SEMANTIC_SCHEMA_OK")
+          PY
+      - name: Validate deterministic Known-Issues mapping
+        run: python tools/validate_known_issues_runtime_mapping_v0_1.py
+      - name: Validate SDK manifest consistency
+        run: python tools/validate_sdk_manifest_v0_1.py
+      - name: Root XSD regression gate
+        run: python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+      - name: Verify XSD working tree remains clean
+        run: git diff --exit-code -- '*.xsd'
