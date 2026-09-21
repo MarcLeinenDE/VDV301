@@ -1,0 +1,114 @@
+name: temp-gate-runtime-mapping-review-gnss-v10
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_gate_runtime_mapping_review_gnss_v10.yml
+
+permissions:
+  contents: read
+
+jobs:
+  gate-gnss-v10:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+
+      - name: Verify exact review prestate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "6877a3ff04e1a6f86dc9bd3aafae568eb5cbb92e"
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "d35b663fdbb5a358c42bfa4b3de80cf3b18bde33"
+          test "$(git hash-object sdk_manifest/known_issues_runtime_mapping_v0.1.json)" = "beb82867cd54f657943b27f8e5ab75a632a93e81"
+          test "$(git hash-object sdk_manifest/runtime_mapping_review_blocks/LOCATION_GNSS_V10_LS_001_v0.1.json)" = "019fff19557b060be782bf0f2008e8792f165f28"
+          test "$(git hash-object IBIS-IP_GNSSLocationService_V1.0.xsd)" = "a74a22079af25cdd028a3e519019d9b3326d9971"
+          test "$(git hash-object IBIS-IP_common_V1.0.xsd)" = "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c"
+          test "$(git hash-object IBIS-IP_Enumerations_V1.0.xsd)" = "a9bea5bc73003ed91ded8519db06c32c4067831d"
+
+      - name: Validate semantic registry and deterministic runtime mapping
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_finding_semantic_classification.py
+          python tools/validate_known_issues_runtime_mapping_v0_1.py
+
+      - name: Verify focused LS-001 executable boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from lxml import etree
+
+          sem=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
+          mapping=json.loads(Path('sdk_manifest/known_issues_runtime_mapping_v0.1.json').read_text())
+          block=json.loads(Path('sdk_manifest/runtime_mapping_review_blocks/LOCATION_GNSS_V10_LS_001_v0.1.json').read_text())
+          by={e['finding_id']:e for e in sem['entries']}
+          m={x['finding_id']:x for x in mapping['mappings']}['LS-001']
+
+          assert by['LS-001']['runtime_match']['state']=='reviewed'
+          assert m['activation_class']=='xsd_invalid_advisory'
+          assert m['required_precondition']=='xsd_result_invalid'
+          assert m['result_effect']=='decorate_existing_invalid'
+          assert m['implementation_state']=='reviewed_not_implemented'
+          assert m['authority_guard']=='selected_xsd_result_remains_normative'
+          assert mapping['counts']=={
+              'reviewed_mapping_count':59,
+              'implemented_count':0,
+              'semantic_candidate_count':19,
+              'semantic_not_designed_count':1,
+              'semantic_not_applicable_count':113,
+          }
+
+          XS='http://www.w3.org/2001/XMLSchema'
+          NS={'xs':XS}
+          doc=etree.parse('IBIS-IP_GNSSLocationService_V1.0.xsd')
+          root=doc.getroot()
+          ctype=root.find("xs:complexType[@name='GNSSLocationService.DataStructure']",NS)
+          assert ctype is not None
+          good=ctype.find("./xs:sequence/xs:element[@name='HoriziontalDilutionOfPrecision']",NS)
+          bad=ctype.find("./xs:sequence/xs:element[@name='HorizontalDilutionOfPrecision']",NS)
+          assert good is not None and good.get('type')=='IBIS-IP.double' and good.get('minOccurs')=='0'
+          assert bad is None
+
+          schema=etree.XMLSchema(doc)
+          def xml(name):
+              return f'''<GNSSLocationService.Data>
+                <latitude><Degree><Value>50.93</Value></Degree><Direction><Value>N</Value></Direction></latitude>
+                <longitude><Degree><Value>6.95</Value></Degree><Direction><Value>E</Value></Direction></longitude>
+                <{name}><Value>1.1</Value></{name}>
+                <GNSSType>GPS</GNSSType>
+              </GNSSLocationService.Data>'''
+
+          assert schema.validate(etree.fromstring(xml('HoriziontalDilutionOfPrecision').encode()))
+          assert not schema.validate(etree.fromstring(xml('HorizontalDilutionOfPrecision').encode()))
+
+          rb=block['entries'][0]
+          assert any('must not accept or normalize the PDF spelling as an alias' in g for g in rb['guards'])
+          assert any('must not generalize spelling correction to other GNSS identifiers' in g for g in rb['guards'])
+          print('PASSED: GNSS V1.0 LS-001 identifier boundary verified')
+          PY
+
+      - name: Prove preserved EV-153 reference and XSD immutability
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q '"evidence_id": "EV-153"' audit_registry/location_services_revalidation_evidence_2026-09-08.json
+          grep -q '"successful_run_id": "34229647400"' audit_registry/location_services_revalidation_evidence_2026-09-08.json
+          sha256sum ./*.xsd | sort > /tmp/xsd-before.sha256
+          python tools/validate_xsd_pool.py --repo-root .
+          sha256sum ./*.xsd | sort > /tmp/xsd-after.sha256
+          cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          git diff --exit-code
+          echo "PASSED: GNSS V1.0 runtime-mapping gate complete"
