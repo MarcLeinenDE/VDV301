@@ -1,0 +1,109 @@
+name: temp-gate-runtime-mapping-review-pcs-v21
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - .github/workflows/temp_gate_runtime_mapping_review_pcs_v21.yml
+
+permissions:
+  contents: read
+
+jobs:
+  gate-pcs-v21:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check jsonschema lxml==6.1.2
+
+      - name: Verify exact review prestate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "f3bd492a93d4c59837e620e13e1d441e9f248140"
+          test "$(git hash-object audit_registry/finding_semantic_classification_v0.1.json)" = "ee65aaa1ce0390bf5eb5049b1dd32b51a76781e7"
+          test "$(git hash-object sdk_manifest/known_issues_runtime_mapping_v0.1.json)" = "6b84f871e0411649669fb9a0a3ee496cf084bb27"
+          test "$(git hash-object sdk_manifest/runtime_mapping_review_blocks/PCS_V21_PCS_001_v0.1.json)" = "3742b2a9637fbd6c61a269c3aa4ee8ce503ddc05"
+          test "$(git hash-object IBIS-IP_PassengerCountingService_V2.1.xsd)" = "59ef2ddb09b92db0d492974e38bad5b6be03865e"
+          test "$(git hash-object IBIS-IP_common_V1.0.xsd)" = "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c"
+          test "$(git hash-object IBIS-IP_Enumerations_V1.0.xsd)" = "a9bea5bc73003ed91ded8519db06c32c4067831d"
+          test "$(git hash-object IBIS-IP_Enumerations_V2.1.xsd)" = "311464690ad60749ed8d326217787e4b8ed0b718"
+
+      - name: Validate semantic registry and deterministic runtime mapping
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_finding_semantic_classification.py
+          python tools/validate_known_issues_runtime_mapping_v0_1.py
+
+      - name: Rerun deterministic PCS-001 validator
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_pcs_v21_operation_not_supported.py
+
+      - name: Verify focused PCS-001 mapping guards
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from lxml import etree
+
+          sem=json.loads(Path('audit_registry/finding_semantic_classification_v0.1.json').read_text())
+          mapping=json.loads(Path('sdk_manifest/known_issues_runtime_mapping_v0.1.json').read_text())
+          block=json.loads(Path('sdk_manifest/runtime_mapping_review_blocks/PCS_V21_PCS_001_v0.1.json').read_text())
+          by={e['finding_id']:e for e in sem['entries']}
+          m={x['finding_id']:x for x in mapping['mappings']}['PCS-001']
+
+          assert by['PCS-001']['runtime_match']['state']=='reviewed'
+          assert m['activation_class']=='xsd_invalid_advisory'
+          assert m['required_precondition']=='xsd_result_invalid'
+          assert m['result_effect']=='decorate_existing_invalid'
+          assert m['implementation_state']=='reviewed_not_implemented'
+          assert m['authority_guard']=='selected_xsd_result_remains_normative'
+          assert mapping['counts']=={
+              'reviewed_mapping_count':60,
+              'implemented_count':0,
+              'semantic_candidate_count':18,
+              'semantic_not_designed_count':1,
+              'semantic_not_applicable_count':113,
+          }
+
+          NS={'xs':'http://www.w3.org/2001/XMLSchema'}
+          pcs=etree.parse('IBIS-IP_PassengerCountingService_V2.1.xsd').getroot()
+          includes=[x.get('schemaLocation') for x in pcs.findall('xs:include',NS)]
+          assert includes==['IBIS-IP_common_V1.0.xsd','IBIS-IP_Enumerations_V1.0.xsd']
+
+          e10=etree.parse('IBIS-IP_Enumerations_V1.0.xsd').getroot()
+          e21=etree.parse('IBIS-IP_Enumerations_V2.1.xsd').getroot()
+          vals10={x.get('value') for x in e10.findall("xs:simpleType[@name='ErrorCodeEnumeration']//xs:enumeration",NS)}
+          vals21={x.get('value') for x in e21.findall("xs:simpleType[@name='ErrorCodeEnumeration']//xs:enumeration",NS)}
+          assert 'DataNotValid' in vals10
+          assert 'OperationNotSupported' not in vals10
+          assert 'OperationNotSupported' in vals21
+
+          rb=block['entries'][0]
+          assert any('must not substitute, merge, or auto-upgrade to Enumerations V2.1' in g for g in rb['guards'])
+          assert any('must not inject OperationNotSupported into the selected V1.0 enum pool' in g for g in rb['guards'])
+          print('PASSED: PCS V2.1 dependency/value-set runtime boundary verified')
+          PY
+
+      - name: Prove XSD immutability
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum ./*.xsd | sort > /tmp/xsd-before.sha256
+          python tools/validate_xsd_pool.py --repo-root .
+          sha256sum ./*.xsd | sort > /tmp/xsd-after.sha256
+          cmp /tmp/xsd-before.sha256 /tmp/xsd-after.sha256
+          git diff --exit-code
+          echo "PASSED: PCS V2.1 runtime-mapping gate complete"
