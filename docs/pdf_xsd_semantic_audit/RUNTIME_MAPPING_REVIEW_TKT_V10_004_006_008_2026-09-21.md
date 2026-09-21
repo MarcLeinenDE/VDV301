@@ -1,6 +1,6 @@
 # Runtime-mapping review — TicketingService V1.0 TKT-004 / TKT-006 / TKT-008 — 2026-09-21
 
-Status: **review decision complete / not yet persisted into semantic registry at report creation**.
+Status: **reviewed / persisted / closure gate pending**.
 
 ## Authority boundary
 
@@ -63,3 +63,9 @@ implemented      0
 ```
 
 No executable matcher is implemented in this review block and no XSD is changed.
+
+## Primary gate
+
+Primary runtime-mapping gate **35645362893**: **SUCCESS**.
+
+The gate verified the exact VDV-301-2.0 TicketInformationService V1.0 blob, the three TKT XSD boundaries, semantic-registry schema, deterministic Known-Issues mapping, SDK-manifest consistency and the complete root-XSD regression suite before persistence.

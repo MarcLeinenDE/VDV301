@@ -4,7 +4,7 @@
   "state": "reviewed_inventory",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "08e74ccc49ba52d675a8f8b7ea43a06b3d9c7420",
+    "git_blob": "2c431f86a85a10554be584de84bd23f6b5f00fc0",
     "classification_state": "complete",
     "finding_count": 192
   },
@@ -19,9 +19,9 @@
     "implementation_requires_separate_profile_specific_validation": true
   },
   "counts": {
-    "reviewed_mapping_count": 61,
+    "reviewed_mapping_count": 64,
     "implemented_count": 0,
-    "semantic_candidate_count": 17,
+    "semantic_candidate_count": 14,
     "semantic_not_designed_count": 0,
     "semantic_not_applicable_count": 114
   },
@@ -1743,6 +1743,90 @@
       "diagnostic_source": {
         "registry": "audit_registry/finding_semantic_classification_v0.1.json",
         "finding_id": "SMS-002"
+      }
+    },
+    {
+      "finding_id": "TKT-004",
+      "service": "TicketingService",
+      "semantic_issue_kind": "wrong_operation_reference",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V1.0 later official self-contained revision",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7 + Common/Enumerations V1.0",
+          "note": "Executable root is TicketingService.ValidateTicketRequest mapped to TicketingService.ValidateTicketRequestStructure."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected profile is the later official TicketingService V1.0 schema revision",
+        "XSD validation rejects global root TicketInformationService.Validation.GetDataRequest",
+        "the invalid root is attributable to following the official PDF ValidateTicket request heading instead of TicketingService.ValidateTicketRequest"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "TKT-004"
+      }
+    },
+    {
+      "finding_id": "TKT-006",
+      "service": "TicketingService",
+      "semantic_issue_kind": "structure_mismatch",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V1.0 later official self-contained revision",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7 + Common/Enumerations V1.0",
+          "note": "GetTariffInformationResponseDataStructure xs:sequence begins DefaultLanguage, then TimeStamp, then the tariff-information group."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected profile is the later official TicketingService V1.0 schema revision",
+        "XSD validation of TicketingService.GetTariffInformationResponse fails because TimeStamp appears where DefaultLanguage is required first",
+        "the observed order matches the official PDF table order TimeStamp then DefaultLanguage"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "TKT-006"
+      }
+    },
+    {
+      "finding_id": "TKT-008",
+      "service": "TicketingService",
+      "semantic_issue_kind": "identifier_typo",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V1.0 later official self-contained revision",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+          "note": "CardApplikationValidation uses the exact element spelling CardApplikationInformation; the PDF visibly spells CardApplicationInformation."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected profile is the later official TicketingService V1.0 schema revision",
+        "XSD validation rejects element CardApplicationInformation where CardApplikationInformation is required",
+        "the invalid spelling matches the official PDF label"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "TKT-008"
       }
     },
     {
