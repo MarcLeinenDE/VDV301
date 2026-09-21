@@ -42,6 +42,7 @@ implemented      0
 - EV-155: independent run **34447583426**, closure **34448427086**
 - deterministic validator: `tools/validate_pcs_v21_operation_not_supported.py`
 - primary runtime-mapping gate **35552057273**: **SUCCESS**
+- closure/consistency gate **35552137233**: **SUCCESS**
 
 The gate verified:
 
@@ -51,6 +52,7 @@ The gate verified:
 - `OperationNotSupported` is rejected on the selected route;
 - the separate Enumerations V2.1 control contains/accepts `OperationNotSupported`;
 - no newer enum family is substituted into PCS V2.1;
-- all root XSDs remain unchanged.
+- all root XSDs remain unchanged;
+- synchronized SDK/runtime-mapping counters pass the hardened consistency validator.
 
 No executable Known-Issues matcher was added and no XSD was changed.
