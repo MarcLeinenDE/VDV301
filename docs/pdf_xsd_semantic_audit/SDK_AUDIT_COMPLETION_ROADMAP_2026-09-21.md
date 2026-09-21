@@ -246,6 +246,30 @@ For every candidate:
 
 A finding is never automatically a remediation instruction.
 
+### External VDV communication package
+
+When remediation triage is mature, prepare **one consolidated, human-readable VDV communication package** rather than sending unrelated ad-hoc messages.
+
+The package should contain:
+
+- a short cover letter explaining scope, audit method and the strict XSD-as-source-of-truth validation rule;
+- an executive overview grouped by affected released version/service;
+- a finding matrix with stable IDs and severity/impact described factually, not sensationally;
+- a documentation-findings section;
+- an executable-XSD-findings section;
+- cross-artifact / semantic / authority-gap findings in their own section;
+- a historical-correction section identifying findings that may justify a correction branch for an already released version;
+- a next-version section for changes that may be inappropriate for a historical correction because of compatibility or semantic scope;
+- exact PDF/XSD source locators and evidence for every externally reported item;
+- explicit status per item: confirmed, likely, unresolved/not for external reporting;
+- proposed handling per item: documentation clarification, correction-branch candidate, next-version candidate, GitHub issue, or no external action.
+
+Correction-branch requests may be included in this same overall communication. If no suitable correction branch exists for an affected released version, the package may ask VDV whether such a branch should be created from the corresponding release tag.
+
+Any actual GitHub pull request should nevertheless remain **small, technically isolated and reviewable**. The consolidated communication may reference multiple planned PRs, but unrelated fixes must not be bundled into one large code change.
+
+Before sending the package, perform a final external-reporting review over every included finding and exclude any item whose attribution, version scope or evidence is not sufficiently closed.
+
 ## Phase G — release/freeze gate
 
 Before calling the audit/SDK knowledge base complete:
