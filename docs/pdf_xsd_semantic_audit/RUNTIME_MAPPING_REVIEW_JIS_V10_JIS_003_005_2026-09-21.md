@@ -42,6 +42,7 @@ implemented      0
 
 - EV-152: run **34113437268**, job **101714662141**, closure **34224429423**
 - primary runtime-mapping gate **35551649878**: **SUCCESS**
+- closure/consistency gate **35551713393**: **SUCCESS**
 
 The current gate independently reproduced the decisive executable boundaries against the unchanged exact JIS V1.0 XSD route:
 
@@ -50,6 +51,7 @@ The current gate independently reproduced the decisive executable boundaries aga
 - `SpecificGNSSPointInformation` validates;
 - `SpecificGNSSPointInformationData` as an XML choice element is rejected;
 - exact JIS/Common/Enumerations V1.0 blobs remain unchanged;
-- all root XSDs remain unchanged.
+- all root XSDs remain unchanged;
+- synchronized SDK/runtime-mapping counters pass the hardened consistency validator.
 
 No executable Known-Issues matcher was added and no XSD was changed.
