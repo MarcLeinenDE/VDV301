@@ -1947,7 +1947,13 @@
     "known_issues_runtime_mapping_latest_review_block": "SMS_V22_SMS_002",
     "known_issues_runtime_mapping_latest_review_report": "docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_SMS_V22_SMS_002_2026-09-21.md",
     "known_issues_runtime_mapping_latest_gate_run_id": "35552407083",
-    "known_issues_runtime_mapping_not_applicable_count": 113
+    "known_issues_runtime_mapping_not_applicable_count": 113,
+    "sdk_audit_completion_roadmap": "docs/pdf_xsd_semantic_audit/SDK_AUDIT_COMPLETION_ROADMAP_2026-09-21.md",
+    "source_locator_completeness_state": "planned_after_runtime_mapping_review",
+    "service_operation_capability_matrix_state": "planned_after_source_locator_hardening",
+    "service_operation_capability_matrix_origin": "field_test_frozen_legacy_VDV301_ServiceTool_2026-09-21",
+    "service_operation_capability_matrix_rule": "Do not derive manufacturer findings from unsupported operations until exact service-version obligation is normatively resolved as MANDATORY/OPTIONAL/CONDITIONAL/NOT_APPLICABLE; XSD operation inventory alone is insufficient authority for obligation.",
+    "service_operation_capability_matrix_pilot": "DeviceManagementService"
   },
   "evidence": {
     "xsd_ev_completed": [
@@ -2024,12 +2030,15 @@
     "runtime_mapping_latest_review_block": "SMS_V22_SMS_002",
     "runtime_mapping_latest_review_report": "docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_SMS_V22_SMS_002_2026-09-21.md",
     "runtime_mapping_not_applicable_count": 113,
-    "runtime_mapping_latest_gate_run_id": "35552407083"
+    "runtime_mapping_latest_gate_run_id": "35552407083",
+    "source_locator_completeness_state": "planned_after_runtime_mapping_review",
+    "service_operation_capability_matrix_state": "planned_after_source_locator_hardening"
   },
   "next_actions": [
-    "Review the 17 remaining semantic runtime_match=candidate findings in tightly related service/version blocks and either promote each to reviewed or mark it not_applicable; do not generate executable matchers from free-text trigger descriptions.",
-    "Resolve DRTIME10-002, the sole runtime_match=not_designed finding, as reviewed or not_applicable before runtime-mapping review is complete.",
-    "After candidate review, implement only structured profile-specific matchers with dedicated positive/negative evidence; preserve selected-XSD VALID/INVALID authority.",
-    "Keep official-facing remediation/XSD mutation unauthorized until a separate explicit remediation phase."
+    "Resolve DRTIME10-002, the sole runtime_match=not_designed finding, to a justified terminal disposition using the existing evidence gate; do not implement a matcher.",
+    "Review the 17 remaining semantic runtime_match=candidate findings in small related service/version blocks until candidate=0; preserve selected-XSD authority and existing explanation data.",
+    "After runtime-mapping review is terminal, run a source-locator completeness pass so every SDK/reporting-relevant finding has direct PDF/document and/or XSD component locators or an explicit not-applicable reason.",
+    "Then create and pilot a separate service/version/operation obligation matrix on DeviceManagementService with MANDATORY/OPTIONAL/CONDITIONAL/NOT_APPLICABLE plus audit-only UNRESOLVED and probe-safety metadata.",
+    "Only after those gates, implement structured profile-specific Known-Issues matchers with positive/negative evidence; keep official-facing remediation/XSD mutation in a separate explicitly approved phase."
   ]
 }
