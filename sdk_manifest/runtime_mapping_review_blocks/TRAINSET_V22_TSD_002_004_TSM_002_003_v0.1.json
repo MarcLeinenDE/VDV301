@@ -1,0 +1,85 @@
+{
+  "block_version": "0.1",
+  "block_id": "TRAINSET_V22_TSD_002_004_TSM_002_003",
+  "review_date": "2026-09-21",
+  "source_semantic_registry_blob": "b09abb299368d3ca950132d35a5c9e83f75dcc65",
+  "policy": "exact_official_trainset_v22_context_specific_runtime_boundaries",
+  "entries": [
+    {
+      "finding_id": "TSD-002",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual TrainSetDataService V2.2 XSD INVALID result for UnsubscribeTripRefRequest or UnsubscribeTripInformationRequest when the payload follows the corresponding Retrieve request shape from the stale PDF overview instead of TrainSetUnsubscribeRequestStructure.",
+      "guards": [
+        "official TrainSetDataService V2.2 strict profile only",
+        "selected service XSD blob must be 7a132894c281d613e16514a6fa1bcbffe713d066",
+        "must require XSD INVALID",
+        "root must be exactly TrainSetDataService.UnsubscribeTripRefRequest or TrainSetDataService.UnsubscribeTripInformationRequest",
+        "failure must match the Retrieve-like request shape boundary, including missing/misplaced Client-IP-Address before CoachNumber",
+        "must not classify arbitrary missing-field errors as TSD-002",
+        "must preserve TrainSetUnsubscribeRequestStructure as authoritative"
+      ]
+    },
+    {
+      "finding_id": "TSD-004",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual V2.2 subscription data-event/callback payload failure for SubscribeTripInformation where the payload follows RetrieveTripRefResponseStructure as stated on PDF page 40 instead of the authoritative RetrieveTripInformationResponseStructure.",
+      "guards": [
+        "official TrainSetDataService V2.2 strict profile only",
+        "selected service XSD blob must be 7a132894c281d613e16514a6fa1bcbffe713d066",
+        "must require XSD INVALID",
+        "response context must be the later subscription data-event/callback context, not the immediate Subscribe acknowledgement",
+        "global TrainSetDataService.SubscribeTripInformationResponse event root must resolve to TrainSetDataService.RetrieveTripInformationResponseStructure",
+        "must match a TripRef-shaped payload in the TripInformation event context",
+        "must not interfere with the intentional immediate acknowledgement mapping to SubscribeResponseStructure",
+        "must not rewrite TripRef data into TripInformation data"
+      ]
+    },
+    {
+      "finding_id": "TSM-002",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "resolver_or_profile_warning",
+      "decision": "Emit a resolver/operation-inventory warning only when TrainSetManagementService V2.2 operation inventory is derived from TrainSetManagementServiceOperations and the stale GetTrainSetComposition member conflicts with the corrected global GetTrainSetCompositionResponse root.",
+      "guards": [
+        "official TrainSetManagementService V2.2 profile only",
+        "selected service XSD blob must be da9465d6683e3f7d54a546ab4a13739fb3c3e902",
+        "do not change global-root XSD validation",
+        "corrected global TrainSetManagementService.GetTrainSetCompositionResponse remains authoritative for serialized response payloads",
+        "stale TrainSetManagementService.GetTrainSetComposition remains only the selected XSD operation-group member",
+        "warning applies to inventory/resolver derivation, not arbitrary GetTrainSetComposition traffic",
+        "do not synthesize a corrected operation-group member at runtime"
+      ]
+    },
+    {
+      "finding_id": "TSM-003",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual TrainSetManagementService V2.2 XSD INVALID composition response whose coach data follows the stale flat V2.1-style diagram instead of the authoritative repeatable SingleCoach -> SingleCoachInATrainSet structure.",
+      "guards": [
+        "official TrainSetManagementService V2.2 strict profile only",
+        "selected TSM V2.2 XSD blob must be da9465d6683e3f7d54a546ab4a13739fb3c3e902",
+        "selected reused TSI V2.2 XSD blob must be 7ab1f8f892bfcea2a8b8a055f07de92c143356f9",
+        "must require XSD INVALID",
+        "response must be TrainSetManagementService.GetTrainSetCompositionResponse or its exact reused response-structure context",
+        "submitted coach shape must begin with old flat coach fields where SingleCoach is required",
+        "must not classify unrelated composition validation errors as TSM-003",
+        "must not flatten, wrap or otherwise rewrite the payload automatically"
+      ]
+    }
+  ],
+  "implementation_state": "reviewed_not_implemented",
+  "evidence": [
+    "TSD-002: EV-110 and EV-160 / independent EV-160 run 34820627306 / closure run 34821906521",
+    "TSD-004: EV-160 plus TrainSet V2.2 physical pages 38 and 40",
+    "TSM-002: EV-104 and EV-162 / V2.2 correction history physical page 51",
+    "TSM-003: EV-162 / TrainSet V2.2 physical page 31 visual evidence",
+    "IBIS-IP_TrainSetDataService_V2.2.xsd @ 7a132894c281d613e16514a6fa1bcbffe713d066",
+    "IBIS-IP_TrainSetManagementService_V2.2.xsd @ da9465d6683e3f7d54a546ab4a13739fb3c3e902",
+    "IBIS-IP_TrainSetInformationService_V2.2.xsd @ 7ab1f8f892bfcea2a8b8a055f07de92c143356f9"
+  ]
+}
