@@ -1,6 +1,6 @@
 # Runtime-mapping review — TrainSet V2.1 TSI-001 / TSM-001 — 2026-09-21
 
-Status: **reviewed / persisted / closure gate pending**.
+Status: **completed / reviewed / not implemented**.
 
 ## Authority boundary
 
@@ -59,3 +59,19 @@ No compatibility aliases, schema substitution or XSD mutation are introduced.
 Primary runtime-mapping gate **35645781280**: **SUCCESS**.
 
 The gate re-ran EV-109 against the exact official TrainSet V2.1 XSDs, verified the V2.1 blob identities, semantic-registry schema, deterministic Known-Issues mapping, SDK-manifest consistency and the complete root-XSD regression suite before persistence.
+
+## Closure gate
+
+Closure/consistency gate **35645913665**: **SUCCESS** on persisted HEAD `ab5064d71fb34aaa8bab0c7d44731d148daa88b6`.
+
+Final runtime-mapping inventory after this block:
+
+```text
+reviewed        66
+candidate       12
+not_designed     0
+not_applicable 114
+implemented      0
+```
+
+TSI-001 remains a confirmed V2.1 PDF/XSD cardinality mismatch and TSM-001 remains a confirmed historical V2.1 XSD identifier defect. V2.2 is explanation/correction-history evidence only. No compatibility alias, back-application or XSD mutation was introduced.
