@@ -1,6 +1,6 @@
 # Runtime-mapping review — TimeService V1.0 DRTIME10-002 — 2026-09-21
 
-Status: **reviewed / persisted / closure gate pending**.
+Status: **completed / terminal / not applicable / no matcher implemented**.
 
 ## Finding assessment
 
@@ -51,3 +51,19 @@ Primary review gate **35644883474**: **SUCCESS**.
 The gate verified the DRTIME10-002 authority/evidence boundary, semantic-registry schema, deterministic Known-Issues mapping, SDK-manifest consistency and the complete root-XSD regression suite before persistence.
 
 No executable Known-Issues matcher is added.
+
+## Closure gate
+
+Closure/consistency gate **35645067236**: **SUCCESS** on persisted HEAD `22d43a7af43570845a757649b989e2963776ab54`.
+
+Final runtime-mapping inventory after this block:
+
+```text
+reviewed        61
+candidate       17
+not_designed     0
+not_applicable 114
+implemented      0
+```
+
+The sole `not_designed` state is eliminated. DRTIME10-002 remains a confirmed PDF defect and explanatory TimeService profile guard; no executable matcher was created and no XSD was changed.
