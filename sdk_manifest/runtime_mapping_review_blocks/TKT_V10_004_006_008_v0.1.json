@@ -1,0 +1,65 @@
+{
+  "block_version": "0.1",
+  "block_id": "TKT_V10_004_006_008",
+  "review_date": "2026-09-21",
+  "source_semantic_registry_blob": "08e74ccc49ba52d675a8f8b7ea43a06b3d9c7420",
+  "policy": "later_official_ticketing_v10_revision_exact_blob_only_preserve_xsd_failure",
+  "entries": [
+    {
+      "finding_id": "TKT-004",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual XSD INVALID result for the later official TicketingService V1.0 self-contained revision when the submitted global root is exactly TicketInformationService.Validation.GetDataRequest from the PDF heading instead of the authoritative TicketingService.ValidateTicketRequest root.",
+      "guards": [
+        "release context must be official VDV-301-2.0",
+        "selected TicketInformationService V1.0 XSD blob must be 3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+        "must require XSD INVALID",
+        "match only exact global root TicketInformationService.Validation.GetDataRequest",
+        "must preserve TicketingService.ValidateTicketRequest as authoritative executable root",
+        "must not create TicketInformationService.* aliases",
+        "must not broaden this advisory to the earlier VDV-301-1.0 service-file revision"
+      ]
+    },
+    {
+      "finding_id": "TKT-006",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual XSD INVALID result in TicketingService.GetTariffInformationResponse where TimeStamp precedes DefaultLanguage exactly as shown in the PDF while the selected XSD xs:sequence requires DefaultLanguage before TimeStamp.",
+      "guards": [
+        "release context must be official VDV-301-2.0",
+        "selected TicketInformationService V1.0 XSD blob must be 3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+        "must require XSD INVALID",
+        "parent context must be TicketingService.GetTariffInformationResponseDataStructure",
+        "match the PDF-order boundary TimeStamp before DefaultLanguage, not arbitrary sequence errors",
+        "must preserve XSD order DefaultLanguage then TimeStamp",
+        "must not reorder or normalize the payload automatically"
+      ]
+    },
+    {
+      "finding_id": "TKT-008",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual XSD INVALID result where CardApplicationInformation is used in the CardApplikationValidation context and the selected XSD requires CardApplikationInformation.",
+      "guards": [
+        "release context must be official VDV-301-2.0",
+        "selected TicketInformationService V1.0 XSD blob must be 3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+        "must require XSD INVALID",
+        "match only exact element CardApplicationInformation in the CardApplikationValidation context",
+        "must preserve CardApplikationInformation as the authoritative executable XSD spelling",
+        "must not accept, normalize or alias the PDF spelling",
+        "must not generalize Application/Applikation spelling changes to unrelated identifiers"
+      ]
+    }
+  ],
+  "implementation_state": "reviewed_not_implemented",
+  "evidence": [
+    "EV-158 / independent run 34813527845 / closure run 34813841015 / artifact 10336185560",
+    "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_TKT_2026-09-14.md",
+    "tools/validate_tkt_revalidation_ev158.py",
+    "TicketingService V1.0 PDF / SHA-256 96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43 / physical pages 9-11",
+    "official VDV-301-2.0 TicketInformationService V1.0 blob 3fda66d872ab0d1c511247f13e715cf3ad56afe7"
+  ]
+}
