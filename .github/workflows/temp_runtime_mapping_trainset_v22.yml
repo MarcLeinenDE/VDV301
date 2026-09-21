@@ -1,0 +1,157 @@
+name: TEMP runtime mapping TrainSet V2.2
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths:
+      - .github/workflows/temp_runtime_mapping_trainset_v22.yml
+      - audit_registry/finding_semantic_classification_v0.1.json
+      - sdk_manifest/known_issues_runtime_mapping_v0.1.json
+      - sdk_manifest/manifest_v0.1.json
+      - 00_START_HERE/CURRENT_STATE.json
+      - sdk_manifest/runtime_mapping_review_blocks/TRAINSET_V22_TSD_002_004_TSM_002_003_v0.1.json
+      - docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_TRAINSET_V22_TSD_002_004_TSM_002_003_2026-09-21.md
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check lxml jsonschema
+
+      - name: Verify exact TrainSet V2.2 authority and review boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object IBIS-IP_TrainSetDataService_V2.2.xsd)" = "7a132894c281d613e16514a6fa1bcbffe713d066"
+          test "$(git hash-object IBIS-IP_TrainSetManagementService_V2.2.xsd)" = "da9465d6683e3f7d54a546ab4a13739fb3c3e902"
+          test "$(git hash-object IBIS-IP_TrainSetInformationService_V2.2.xsd)" = "7ab1f8f892bfcea2a8b8a055f07de92c143356f9"
+          test "$(git hash-object IBIS-IP_common_V2.2.xsd)" = "468fee6d177e7185dbcd5d3f90cfb114e29e01ae"
+          test "$(git hash-object IBIS-IP_Enumerations_V2.2.xsd)" = "2a23b512379b18e8f122ac1272cef8229fb86283"
+
+          python - <<'PY'
+          import json
+          from collections import Counter
+          from pathlib import Path
+          from lxml import etree
+
+          ROOT=Path(".")
+          XS="http://www.w3.org/2001/XMLSchema"
+          NS={"xs":XS}
+          sem=json.loads((ROOT/"audit_registry/finding_semantic_classification_v0.1.json").read_text())
+          by={e["finding_id"]:e for e in sem["entries"]}
+          targets=["TSD-002","TSD-004","TSM-002","TSM-003"]
+          states={by[i]["runtime_match"]["state"] for i in targets}
+          assert states in ({"candidate"},{"reviewed"}), states
+          assert by["TSD-002"]["defect_assessment"]=="confirmed_pdf_defect"
+          assert by["TSD-004"]["defect_assessment"]=="confirmed_pdf_defect"
+          assert by["TSM-002"]["defect_assessment"]=="likely_xsd_defect"
+          assert by["TSM-003"]["defect_assessment"]=="confirmed_pdf_defect"
+          assert by["TSM-002"]["sdk_behavior"]=="warning"
+          for i in ("TSD-002","TSD-004","TSM-003"):
+              assert by[i]["sdk_behavior"]=="error_with_advisory"
+          counts=Counter(e["runtime_match"]["state"] for e in sem["entries"])
+          if states=={"candidate"}:
+              assert counts==Counter({"not_applicable":114,"reviewed":66,"candidate":12}), counts
+          else:
+              assert counts==Counter({"not_applicable":114,"reviewed":70,"candidate":8}), counts
+
+          # TSD-004 context boundary: global data-event response is TripInformation,
+          # while the operation-group response is the immediate Subscribe acknowledgement.
+          tds=etree.parse(str(ROOT/"IBIS-IP_TrainSetDataService_V2.2.xsd"))
+          tds_schema=etree.XMLSchema(tds)
+          globals_={n.get("name"):n.get("type") for n in tds.xpath("/xs:schema/xs:element",namespaces=NS)}
+          group={n.get("name"):n.get("type") for n in tds.xpath("/xs:schema/xs:group[@name='TrainSetDataServiceOperations']//xs:element",namespaces=NS)}
+          name="TrainSetDataService.SubscribeTripInformationResponse"
+          assert globals_[name]=="TrainSetDataService.RetrieveTripInformationResponseStructure"
+          assert group[name]=="SubscribeResponseStructure"
+
+          wrong_event=f"""<{name}>
+            <TripRef><Value>trip-1</Value></TripRef>
+          </{name}>"""
+          node=etree.fromstring(wrong_event.encode())
+          assert not tds_schema.validate(node)
+          assert tds_schema.error_log.last_error is not None
+          assert "TripInformation" in str(tds_schema.error_log.last_error)
+
+          # TSM-002 exact internal inventory mismatch.
+          tsm=etree.parse(str(ROOT/"IBIS-IP_TrainSetManagementService_V2.2.xsd"))
+          tsm_schema=etree.XMLSchema(tsm)
+          tsm_globals={n.get("name"):n.get("type") for n in tsm.xpath("/xs:schema/xs:element",namespaces=NS)}
+          tsm_group={n.get("name"):n.get("type") for n in tsm.xpath("/xs:schema/xs:group[@name='TrainSetManagementServiceOperations']//xs:element",namespaces=NS)}
+          old="TrainSetManagementService.GetTrainSetComposition"
+          corrected="TrainSetManagementService.GetTrainSetCompositionResponse"
+          assert corrected in tsm_globals and old not in tsm_globals
+          assert old in tsm_group and corrected not in tsm_group
+
+          # TSM-003 exact stale-flat-diagram boundary.
+          correct=f"""<{corrected}>
+            <SingleCoach>
+              <CoachNumber><Value>coach-1</Value></CoachNumber>
+              <FrontCabin><Value>A</Value></FrontCabin>
+              <RearCabin><Value>B</Value></RearCabin>
+              <CoachPositionInTrainSet><Value>1</Value></CoachPositionInTrainSet>
+              <CoachState>Master</CoachState>
+            </SingleCoach>
+          </{corrected}>"""
+          assert tsm_schema.validate(etree.fromstring(correct.encode())), tsm_schema.error_log
+          flat=f"""<{corrected}>
+            <CoachNumber><Value>coach-1</Value></CoachNumber>
+            <FrontCabin><Value>A</Value></FrontCabin>
+            <RearCabin><Value>B</Value></RearCabin>
+            <CoachPositionInTrainSet><Value>1</Value></CoachPositionInTrainSet>
+            <CoachState>Master</CoachState>
+          </{corrected}>"""
+          assert not tsm_schema.validate(etree.fromstring(flat.encode()))
+          assert tsm_schema.error_log.last_error is not None
+          assert "SingleCoach" in str(tsm_schema.error_log.last_error)
+
+          tsi=etree.parse(str(ROOT/"IBIS-IP_TrainSetInformationService_V2.2.xsd"))
+          sc=tsi.xpath("/xs:schema/xs:complexType[@name='TrainSetInformationService.GetTrainSetCompositionResponseStructure']/xs:sequence/xs:element",namespaces=NS)
+          assert len(sc)==1
+          assert sc[0].get("name")=="SingleCoach"
+          assert sc[0].get("type")=="SingleCoachInATrainSet"
+          assert sc[0].get("maxOccurs")=="unbounded"
+          print("TRAINSET_V22_RUNTIME_REVIEW_BOUNDARY_OK", sorted(states), dict(counts))
+          PY
+
+      - name: Re-run EV-104 TSM inventory/context evidence
+        run: python tools/validate_trainset_ev104.py
+
+      - name: Re-run EV-110 TSD unsubscribe evidence
+        run: python tools/validate_trainset_tsd002_ev110.py
+
+      - name: Validate semantic registry JSON Schema
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from jsonschema import Draft202012Validator
+          from pathlib import Path
+          s=json.loads(Path("audit_registry/finding_semantic_classification_schema_v0.1.json").read_text())
+          j=json.loads(Path("audit_registry/finding_semantic_classification_v0.1.json").read_text())
+          errors=sorted(Draft202012Validator(s).iter_errors(j), key=lambda e:list(e.path))
+          if errors:
+              raise SystemExit("\n".join(f"{list(e.path)}: {e.message}" for e in errors))
+          print("SEMANTIC_SCHEMA_OK")
+          PY
+
+      - name: Validate deterministic Known-Issues mapping
+        run: python tools/validate_known_issues_runtime_mapping_v0_1.py
+
+      - name: Validate SDK manifest consistency
+        run: python tools/validate_sdk_manifest_v0_1.py
+
+      - name: Root XSD regression gate
+        run: python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+
+      - name: Verify XSD working tree remains clean
+        run: git diff --exit-code -- '*.xsd'
