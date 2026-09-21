@@ -1,0 +1,70 @@
+{
+  "block_version": "0.1",
+  "block_id": "TVS_001_002_003",
+  "review_date": "2026-09-21",
+  "source_semantic_registry_blob": "e9328c130420b583265ec6644a826015e14ce41c",
+  "policy": "official_tvs_release_routes_only_candidate_v24_never_promoted_to_official_conformance",
+  "entries": [
+    {
+      "finding_id": "TVS-001",
+      "prior_state": "candidate",
+      "final_state": "not_applicable",
+      "activation_class": "none",
+      "decision": "Retain the confirmed candidate/integration structural observation and remediation candidate, but do not create a Known-Issues runtime matcher. No official VDV-301-2.4 release XSD authority exists, so the candidate operation-group omission cannot drive official manufacturer conformance or a strict-profile runtime diagnostic.",
+      "guards": [
+        "TVS V2.4 evidence remains candidate/integration only",
+        "candidate service XSD blob is 34b18b8c874e325dd923b366a72bb0ebee32e59e",
+        "do not present the missing operation-group member as official V2.4 release conformance",
+        "strict official TVS V2.4 profile resolution remains fail-closed independently of this structural finding",
+        "retain TVS-001 for remediation/upstream review and candidate-profile analysis",
+        "do not infer a manufacturer defect from the candidate operation inventory"
+      ]
+    },
+    {
+      "finding_id": "TVS-002",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual selected-XSD INVALID result at VehicleData.RouteDeviation where the submitted value follows the documentation's RouteDirection concept instead of the authoritative RouteDeviationEnumeration for the selected official profile.",
+      "guards": [
+        "official V2.1, V2.2 or V2.3 route only for manufacturer conformance",
+        "V2.1 service XSD blob f6497e6469b82ee19b185c4de749d13a7ca60bed or official V2.2/V2.3 route blob 5a4be2b2ba66860f035777ec0458dba0790880e1",
+        "must require XSD INVALID at VehicleData.RouteDeviation",
+        "selected XSD must declare RouteDeviation type as RouteDeviationEnumeration",
+        "must not label arbitrary invalid RouteDeviation lexical values as TVS-002",
+        "for V2.2/V2.3, directional values must be members of RouteDirectionEnumeration and not RouteDeviationEnumeration",
+        "V2.1 matching must remain fail-closed unless the submitted value can be independently tied to the documentation's wrong RouteDirection reference; later enum values must not be back-applied merely to manufacture a match",
+        "V2.4 candidate/integration may be analysed only when explicitly selected and clearly marked non-official; it cannot establish official V2.4 conformance",
+        "no compatibility alias or enum substitution"
+      ]
+    },
+    {
+      "finding_id": "TVS-003",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual selected-XSD INVALID result in an affected official profile when a stale CurrentStopPoint identifier retained in the PDF is used where the renamed CurrentTariffStop identifier is authoritative.",
+      "guards": [
+        "official V2.2 or V2.3 route only for manufacturer conformance",
+        "official selected service XSD blob is 5a4be2b2ba66860f035777ec0458dba0790880e1",
+        "must require XSD INVALID",
+        "match only documented stale CurrentStopPoint identifiers such as TicketValidationService.GetCurrentStopPointResponse or CurrentStopPointData in the corresponding renamed context",
+        "corresponding CurrentTariffStop identifier must exist in the selected XSD",
+        "must not generalize StopPoint to TariffStop renames outside this operation family",
+        "V2.4 candidate/integration continuity is explanatory only unless explicitly selected as candidate analysis",
+        "no stale-name alias or automatic rewrite"
+      ]
+    }
+  ],
+  "implementation_state": "reviewed_not_implemented",
+  "evidence": [
+    "EV-163 / validation run 34835469790 / closure run 34835864267",
+    "EV-112 official V2.1",
+    "EV-113 official V2.2",
+    "EV-114 official V2.3 route using V2.2-named service XSD",
+    "EV-115 V2.4 candidate/integration only, not official-release conformance",
+    "IBIS-IP_TicketValidationService_V2.1.xsd @ f6497e6469b82ee19b185c4de749d13a7ca60bed",
+    "IBIS-IP_TicketValidationService_V2.2.xsd @ 5a4be2b2ba66860f035777ec0458dba0790880e1",
+    "IBIS-IP_TicketValidationService_V2.4.xsd candidate/integration @ 34b18b8c874e325dd923b366a72bb0ebee32e59e"
+  ]
+}
