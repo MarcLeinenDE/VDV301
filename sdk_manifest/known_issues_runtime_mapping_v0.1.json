@@ -4,7 +4,7 @@
   "state": "reviewed_inventory",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "ee65aaa1ce0390bf5eb5049b1dd32b51a76781e7",
+    "git_blob": "4a98a01ba97cdf2a77260638fbc884f5ac52f16b",
     "classification_state": "complete",
     "finding_count": 192
   },
@@ -19,9 +19,9 @@
     "implementation_requires_separate_profile_specific_validation": true
   },
   "counts": {
-    "reviewed_mapping_count": 60,
+    "reviewed_mapping_count": 61,
     "implemented_count": 0,
-    "semantic_candidate_count": 18,
+    "semantic_candidate_count": 17,
     "semantic_not_designed_count": 1,
     "semantic_not_applicable_count": 113
   },
@@ -1715,6 +1715,34 @@
       "diagnostic_source": {
         "registry": "audit_registry/finding_semantic_classification_v0.1.json",
         "finding_id": "PCS-001"
+      }
+    },
+    {
+      "finding_id": "SMS-002",
+      "service": "SystemMonitoringService",
+      "semantic_issue_kind": "wrong_operation_reference",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemMonitoringService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Exact official VDV-301-2.2 route. The executable service root is SystemMonitoringService.GetServiceStatusResponse; no SystemMonitoringService.GetSystemStatusResponse root exists."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected strict profile is official SystemMonitoringService V2.2",
+        "XSD validation result is INVALID because global root SystemMonitoringService.GetSystemStatusResponse is used",
+        "selected SMS V2.2 XSD declares SystemMonitoringService.GetServiceStatusResponse and no GetSystemStatusResponse root"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "SMS-002"
       }
     },
     {

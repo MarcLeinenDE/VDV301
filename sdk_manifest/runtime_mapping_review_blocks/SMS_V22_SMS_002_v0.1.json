@@ -1,0 +1,32 @@
+{
+  "block_version": "0.1",
+  "block_id": "SMS_V22_SMS_002",
+  "review_date": "2026-09-21",
+  "source_semantic_registry_blob": "ee65aaa1ce0390bf5eb5049b1dd32b51a76781e7",
+  "policy": "selected_sms_v22_service_status_root_only_no_system_status_alias",
+  "entries": [
+    {
+      "finding_id": "SMS-002",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual SMS V2.2 XSD INVALID result caused by using global root SystemMonitoringService.GetSystemStatusResponse from the PDF heading instead of selected-XSD root SystemMonitoringService.GetServiceStatusResponse.",
+      "guards": [
+        "official SystemMonitoringService V2.2 strict profile only",
+        "must require XSD INVALID",
+        "match only exact global root SystemMonitoringService.GetSystemStatusResponse",
+        "must preserve SystemMonitoringService.GetServiceStatusResponse as the authoritative executable root",
+        "must not register GetSystemStatusResponse or broader SystemStatus operation aliases",
+        "must not rewrite the invalid root automatically"
+      ]
+    }
+  ],
+  "implementation_state": "reviewed_not_implemented",
+  "evidence": [
+    "EV-156 / independent run 34460160697 / closure run 34460497412",
+    "EV-116 / run 33269006407",
+    "tools/validate_sms_v22_ev116.py",
+    "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_SMS_2026-09-10.md",
+    "docs/pdf_xsd_semantic_audit/deep_read/SMS_V2.2.md"
+  ]
+}
