@@ -1,6 +1,6 @@
 # Runtime-mapping review — TicketValidationService TVS-001 / TVS-002 / TVS-003 — 2026-09-21
 
-Status: **review decision complete / not yet persisted into semantic registry at report creation**.
+Status: **reviewed / persisted / closure gate pending**.
 
 ## Authority boundary
 
@@ -59,3 +59,9 @@ implemented      0
 ```
 
 No executable matcher, compatibility alias, enum substitution or XSD mutation is introduced.
+
+## Primary gate
+
+Primary runtime-mapping gate **35646946304**: **SUCCESS**.
+
+The gate re-ran EV-112, EV-113, EV-114 and EV-115, preserved the official-release/candidate authority split, verified the TVS-001 structural boundary without promoting it to official V2.4 conformance, and passed the semantic-registry, deterministic runtime-mapping, SDK-manifest and root-XSD regression checks.
