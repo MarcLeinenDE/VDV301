@@ -4,7 +4,7 @@
   "state": "reviewed_inventory",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "dca923c3ba4954e78eea219229f0a2a0c2e08520",
+    "git_blob": "1ab898ed4fcecb4526873faf873829bde3f5dd23",
     "classification_state": "complete",
     "finding_count": 192
   },
@@ -19,9 +19,9 @@
     "implementation_requires_separate_profile_specific_validation": true
   },
   "counts": {
-    "reviewed_mapping_count": 53,
+    "reviewed_mapping_count": 56,
     "implemented_count": 0,
-    "semantic_candidate_count": 25,
+    "semantic_candidate_count": 22,
     "semantic_not_designed_count": 1,
     "semantic_not_applicable_count": 113
   },
@@ -1479,6 +1479,90 @@
       "diagnostic_source": {
         "registry": "audit_registry/finding_semantic_classification_v0.1.json",
         "finding_id": "DRDMS22-004"
+      }
+    },
+    {
+      "finding_id": "DRDOOR21-001",
+      "service": "DoorStateService",
+      "semantic_issue_kind": "wrong_operation_reference",
+      "sdk_behavior": "info",
+      "activation_class": "informational",
+      "required_precondition": "informational_context_matched",
+      "result_effect": "emit_info",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DoorStateService_V2.1.xsd",
+          "note": "Exact official VDV-301-2.1 route. The service XSD intentionally depends on Common V1.0 and Enumerations V1.0; no newer dependency is substituted."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected profile context is official DoorStateService V2.1",
+        "exact documentation-side operation reference RetrieveDoorOpenState is encountered where selected XSD operation family declares RetrieveSpecificDoorOpenState",
+        "exact documentation-side operation reference RetrieveDoorOpereationState is encountered where selected XSD operation family declares RetrieveSpecificDoorOperationState"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "DRDOOR21-001"
+      }
+    },
+    {
+      "finding_id": "DRS-002",
+      "service": "DoorStateService",
+      "semantic_issue_kind": "other",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DoorStateService_V2.1.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact official VDV-301-2.1 mixed-version schema family. The V1.0 Common/Enumerations dependencies are intentional authority and must not be silently replaced by later versions."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected strict profile is official DoorStateService V2.1 mixed-version XSD family",
+        "XSD validation result is INVALID in RetrieveSpecificDoorOpenStateResponse or RetrieveSpecificDoorOperationStateResponse because OperationErrorMessage is used",
+        "selected XSD allows ErrorMessage as the RetrieveSpecific error choice member and does not allow OperationErrorMessage there"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "DRS-002"
+      }
+    },
+    {
+      "finding_id": "DRS-003",
+      "service": "DoorStateService",
+      "semantic_issue_kind": "other",
+      "sdk_behavior": "valid_with_advisory",
+      "activation_class": "xsd_valid_advisory",
+      "required_precondition": "xsd_result_valid",
+      "result_effect": "decorate_existing_valid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DoorStateService_V2.1.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact official VDV-301-2.1 mixed-version schema family. The two Get request elements are intentionally reviewed exactly as declared; no empty request type is invented."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected strict profile is official DoorStateService V2.1 mixed-version XSD family",
+        "XSD validation result is VALID for DoorStateService.GetDoorOpenStatesRequest or DoorStateService.GetDoorOperationStatesRequest containing child content",
+        "selected XSD request declaration has no explicit or inline type and therefore uses xs:anyType semantics"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "DRS-003"
       }
     },
     {

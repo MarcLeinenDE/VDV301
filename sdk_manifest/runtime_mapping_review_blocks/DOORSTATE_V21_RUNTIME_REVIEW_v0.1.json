@@ -1,0 +1,59 @@
+{
+  "block_version": "0.1",
+  "block_id": "DOORSTATE_V21_RUNTIME_REVIEW",
+  "review_date": "2026-09-21",
+  "source_semantic_registry_blob": "dca923c3ba4954e78eea219229f0a2a0c2e08520",
+  "policy": "exact_door_v21_mixed_version_authority_no_alias_no_synthetic_empty_request",
+  "entries": [
+    {
+      "finding_id": "DRDOOR21-001",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "informational",
+      "decision": "Explain only exact shortened/misspelled PDF operation references; do not create executable operation aliases.",
+      "guards": [
+        "official DoorStateService V2.1 context only",
+        "match only exact RetrieveDoorOpenState or RetrieveDoorOpereationState documentation-side references",
+        "must not register shortened or misspelled operation aliases",
+        "must preserve RetrieveSpecificDoorOpenState and RetrieveSpecificDoorOperationState as selected-XSD operation identities"
+      ]
+    },
+    {
+      "finding_id": "DRS-002",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual selected-XSD INVALID result caused by OperationErrorMessage in a RetrieveSpecific response where ErrorMessage is the declared choice member.",
+      "guards": [
+        "official DoorStateService V2.1 mixed-version strict profile only",
+        "must require XSD INVALID",
+        "match only RetrieveSpecificDoorOpenStateResponse or RetrieveSpecificDoorOperationStateResponse",
+        "must not normalize OperationErrorMessage to ErrorMessage",
+        "must not register OperationErrorMessage as a RetrieveSpecific alias"
+      ]
+    },
+    {
+      "finding_id": "DRS-003",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_valid_advisory",
+      "decision": "Keep non-empty untyped Get request instances XSD-valid under xs:anyType semantics and optionally explain the unusually permissive declaration.",
+      "guards": [
+        "official DoorStateService V2.1 mixed-version strict profile only",
+        "must require XSD VALID",
+        "match only GetDoorOpenStatesRequest or GetDoorOperationStatesRequest with child content",
+        "must not synthesize an empty request complex type",
+        "must not reject content that the selected XSD accepts through xs:anyType",
+        "must not infer whether the permissiveness is intentional or defective"
+      ]
+    }
+  ],
+  "implementation_state": "reviewed_not_implemented",
+  "evidence": [
+    "EV-111 / run 33242337308 / job 99073684198",
+    "EV-143 / successful evidence run 33976777554 / closure run 34025259521",
+    "EV-145 / run 34026409256 / closure run 34026674927",
+    "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DOOR_V21_2026-09-05.md",
+    "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRS_V21_2026-09-06.md"
+  ]
+}

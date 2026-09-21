@@ -8283,10 +8283,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "an implementation or input references RetrieveDoorOpenState as if it were the V2.1 operation name",
-          "an implementation or input references RetrieveDoorOpereationState as if it were the V2.1 operation name"
+          "selected profile context is official DoorStateService V2.1",
+          "exact documentation-side operation reference RetrieveDoorOpenState is encountered where selected XSD operation family declares RetrieveSpecificDoorOpenState",
+          "exact documentation-side operation reference RetrieveDoorOpereationState is encountered where selected XSD operation family declares RetrieveSpecificDoorOperationState"
         ]
       },
       "source_references": [
@@ -8806,11 +8807,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "selected profile is official DoorStateService V2.1 mixed-version XSD family",
-          "validation context is RetrieveSpecificDoorOpenStateResponse or RetrieveSpecificDoorOperationStateResponse",
-          "XSD rejection involves OperationErrorMessage where ErrorMessage is the allowed choice member"
+          "selected strict profile is official DoorStateService V2.1 mixed-version XSD family",
+          "XSD validation result is INVALID in RetrieveSpecificDoorOpenStateResponse or RetrieveSpecificDoorOperationStateResponse because OperationErrorMessage is used",
+          "selected XSD allows ErrorMessage as the RetrieveSpecific error choice member and does not allow OperationErrorMessage there"
         ]
       },
       "source_references": [
@@ -8908,11 +8909,11 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
-          "selected profile is official DoorStateService V2.1 mixed-version XSD family",
-          "element is DoorStateService.GetDoorOpenStatesRequest or DoorStateService.GetDoorOperationStatesRequest",
-          "instance contains child content that remains XSD-valid because the declaration defaults to xs:anyType"
+          "selected strict profile is official DoorStateService V2.1 mixed-version XSD family",
+          "XSD validation result is VALID for DoorStateService.GetDoorOpenStatesRequest or DoorStateService.GetDoorOperationStatesRequest containing child content",
+          "selected XSD request declaration has no explicit or inline type and therefore uses xs:anyType semantics"
         ]
       },
       "source_references": [
