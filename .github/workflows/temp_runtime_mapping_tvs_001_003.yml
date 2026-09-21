@@ -1,0 +1,126 @@
+name: TEMP runtime mapping TVS 001 003
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths:
+      - .github/workflows/temp_runtime_mapping_tvs_001_003.yml
+      - audit_registry/finding_semantic_classification_v0.1.json
+      - sdk_manifest/known_issues_runtime_mapping_v0.1.json
+      - sdk_manifest/manifest_v0.1.json
+      - 00_START_HERE/CURRENT_STATE.json
+      - sdk_manifest/runtime_mapping_review_blocks/TVS_001_002_003_v0.1.json
+      - docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_TVS_001_002_003_2026-09-21.md
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check lxml jsonschema
+
+      - name: Verify TVS runtime review authority boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object IBIS-IP_TicketValidationService_V2.1.xsd)" = "f6497e6469b82ee19b185c4de749d13a7ca60bed"
+          test "$(git hash-object IBIS-IP_TicketValidationService_V2.2.xsd)" = "5a4be2b2ba66860f035777ec0458dba0790880e1"
+          test "$(git hash-object IBIS-IP_TicketValidationService_V2.4.xsd)" = "34b18b8c874e325dd923b366a72bb0ebee32e59e"
+
+          python - <<'PY'
+          import json
+          from collections import Counter
+          from pathlib import Path
+          from lxml import etree
+
+          ROOT=Path(".")
+          XS="http://www.w3.org/2001/XMLSchema"
+          NS={"xs":XS}
+          sem=json.loads((ROOT/"audit_registry/finding_semantic_classification_v0.1.json").read_text())
+          by={e["finding_id"]:e for e in sem["entries"]}
+
+          # Pre/post state acceptance for this review gate.
+          states={i:by[i]["runtime_match"]["state"] for i in ["TVS-001","TVS-002","TVS-003"]}
+          assert states in (
+              {"TVS-001":"candidate","TVS-002":"candidate","TVS-003":"candidate"},
+              {"TVS-001":"not_applicable","TVS-002":"reviewed","TVS-003":"reviewed"},
+          ), states
+
+          assert by["TVS-001"]["normative_authority"]=="no_strict_xsd_profile"
+          assert by["TVS-001"]["sdk_behavior"]=="unsupported_profile"
+          assert by["TVS-001"]["version_scope"][0]["authority"]=="candidate_integration"
+          assert by["TVS-002"]["defect_assessment"]=="confirmed_pdf_defect"
+          assert by["TVS-003"]["defect_assessment"]=="confirmed_pdf_defect"
+
+          counts=Counter(e["runtime_match"]["state"] for e in sem["entries"])
+          if states["TVS-001"]=="candidate":
+              assert counts==Counter({"not_applicable":114,"reviewed":70,"candidate":8}), counts
+          else:
+              assert counts==Counter({"not_applicable":115,"reviewed":72,"candidate":5}), counts
+
+          # Candidate V2.4 TVS-001 structural observation: evidence only, never official release authority.
+          v24=etree.parse(str(ROOT/"IBIS-IP_TicketValidationService_V2.4.xsd"))
+          globals24=set(v24.xpath("/xs:schema/xs:element/@name",namespaces=NS))
+          group24=set(v24.xpath("/xs:schema/xs:group[@name='TicketValidationServiceOperations']/xs:sequence/xs:element/@name",namespaces=NS))
+          short="TicketValidationService.GetCurrentShortHaulStopsResponse"
+          assert short in globals24
+          assert short not in group24
+
+          # TVS-002 exact type in official V2.1/V2.2 routes.
+          for f in ["IBIS-IP_TicketValidationService_V2.1.xsd","IBIS-IP_TicketValidationService_V2.2.xsd"]:
+              t=etree.parse(str(ROOT/f))
+              typ=t.xpath("string(//xs:complexType[@name='TicketValidationService.VehicleDataStructure']/xs:sequence/xs:element[@name='RouteDeviation']/@type)",namespaces=NS)
+              assert typ=="RouteDeviationEnumeration", (f,typ)
+
+          # TVS-003 rename boundary exists in official V2.2 route.
+          v22=etree.parse(str(ROOT/"IBIS-IP_TicketValidationService_V2.2.xsd"))
+          g22=set(v22.xpath("/xs:schema/xs:element/@name",namespaces=NS))
+          types22=set(v22.xpath("/xs:schema/xs:complexType/@name",namespaces=NS))
+          assert "TicketValidationService.GetCurrentTariffStopResponse" in g22
+          assert "TicketValidationService.GetCurrentStopPointResponse" not in g22
+          assert "TicketValidationService.CurrentTariffStopDataStructure" in types22
+          assert "TicketValidationService.CurrentStopPointDataStructure" not in types22
+
+          print("TVS_RUNTIME_REVIEW_BOUNDARY_OK", states, dict(counts))
+          PY
+
+      - name: Re-run EV-112 official TVS V2.1
+        run: python tools/validate_tvs_v21_ev112.py
+      - name: Re-run EV-113 official TVS V2.2
+        run: python tools/validate_tvs_v22_ev113.py
+      - name: Re-run EV-114 official TVS V2.3 route
+        run: python tools/validate_tvs_v23_ev114.py
+      - name: Re-run EV-115 candidate TVS V2.4
+        run: python tools/validate_tvs_v24_ev115.py
+
+      - name: Validate semantic registry JSON Schema
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from jsonschema import Draft202012Validator
+          from pathlib import Path
+          s=json.loads(Path("audit_registry/finding_semantic_classification_schema_v0.1.json").read_text())
+          j=json.loads(Path("audit_registry/finding_semantic_classification_v0.1.json").read_text())
+          errors=sorted(Draft202012Validator(s).iter_errors(j), key=lambda e:list(e.path))
+          if errors:
+              raise SystemExit("\n".join(f"{list(e.path)}: {e.message}" for e in errors))
+          print("SEMANTIC_SCHEMA_OK")
+          PY
+
+      - name: Validate deterministic Known-Issues mapping
+        run: python tools/validate_known_issues_runtime_mapping_v0_1.py
+      - name: Validate SDK manifest consistency
+        run: python tools/validate_sdk_manifest_v0_1.py
+      - name: Root XSD regression gate
+        run: python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+      - name: Verify XSD working tree remains clean
+        run: git diff --exit-code -- '*.xsd'
