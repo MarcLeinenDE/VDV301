@@ -15,6 +15,52 @@ Purpose: preserve the remaining work after the completed 192/192 semantic findin
 7. Every external-facing correction must pass the stricter External-reporting gate in `FINDING_EVIDENCE_GATE.md`.
 8. The additional service-operation obligation requirement originates from a field test of the frozen legacy VDV301 ServiceTool. It is a **new audit/SDK requirement**, not part of the original 192-finding classification, and must not rewrite existing findings without independent revalidation.
 
+## Finding evaluation and manufacturer-protection rule
+
+Every finding must continue to carry a **substantive technical assessment**, not merely a validation symptom.
+
+The semantic classification remains authoritative for describing what kind of discrepancy was found. Depending on the evidence, findings may remain classified as, for example:
+
+- confirmed or likely documentation/PDF defect;
+- confirmed or likely executable XSD defect;
+- cross-artifact mismatch;
+- semantic contradiction;
+- intentional design / non-defect;
+- version-routing or release-authority problem;
+- stale example/diagram/operation inventory;
+- unresolved/undetermined where source attribution is not proven.
+
+The auditor must continue to decide whether the observed difference is actually a defect, an intentional VDV-301 design choice, a historical compatibility constraint, a documentation-only problem, or an implementation/test-harness misunderstanding. Familiarity with the VDV-301 model may guide hypotheses, but the terminal assessment must remain evidence-backed and must pass the Finding Evidence Gate, including an active disproof attempt.
+
+Manufacturer-protection rule:
+
+- never attribute a VDV documentation/XSD inconsistency to a manufacturer;
+- never attribute a test-tool/version-routing error to a manufacturer;
+- never treat an optional, conditional or version-inapplicable operation as a missing mandatory capability;
+- never turn a known VDV defect into a manufacturer defect merely because the provider followed the official executable XSD;
+- where a manufacturer payload violates the selected official XSD, keep that VALID/INVALID result exactly as VDV requires, even when the XSD token or structure is itself a known likely defect;
+- in such a case, the SDK must explain both layers separately: **manufacturer payload versus selected XSD** and **known VDV documentation/schema issue**;
+- if source attribution is not proven, present the result as an unresolved/cross-artifact discrepancy rather than assigning blame.
+
+XSD authority rule:
+
+The exact selected VDV XSD profile remains the executable authority for payload validation. Audit knowledge may classify a schema token as typo-like, historically corrected, semantically questionable or likely defective, but it must not silently normalize, alias, rewrite, accept or reject XML contrary to that selected XSD. A later VDV correction changes only the profile/version in which it is authoritative; it is not back-applied automatically to historical profiles.
+
+SDK explanation goal:
+
+For every triggered known issue, provide as much verified context as possible, including:
+
+- what was observed;
+- exact service/version/profile;
+- whether the discrepancy is attributed to PDF/documentation, XSD, cross-artifact semantics, history/provenance or remains unresolved;
+- why that attribution is justified;
+- strongest plausible alternative explanation checked;
+- actual validation effect;
+- what the provider is expected to do for the selected profile;
+- whether a later version corrected or changed the behavior;
+- exact source locators and evidence;
+- clear separation between a provider defect, a VDV artifact defect and a tool/test limitation.
+
 ## Phase A — complete the current Known-Issues runtime-mapping review
 
 Current frozen state at roadmap creation:
