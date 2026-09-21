@@ -1,0 +1,50 @@
+{
+  "block_version": "0.1",
+  "block_id": "TRAINSET_V21_TSI_001_TSM_001",
+  "review_date": "2026-09-21",
+  "source_semantic_registry_blob": "2c431f86a85a10554be584de84bd23f6b5f00fc0",
+  "policy": "exact_trainset_v21_authority_later_v22_correction_is_explanation_only",
+  "entries": [
+    {
+      "finding_id": "TSI-001",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual TrainSetInformationService V2.1 XSD INVALID result caused by attempting to serialize a second coach data set after a complete first flat coach record, matching the documented multi-coach concept that the exact V2.1 schema cannot represent.",
+      "guards": [
+        "official TrainSetInformationService V2.1 strict profile only",
+        "selected V2.1 service XSD blob must be 897f373e31b76aa23d8bc206854b042524e4c102",
+        "must require XSD INVALID",
+        "must establish that one complete flat V2.1 coach record is present and validation fails on the attempted second coach data set",
+        "must not treat unrelated CoachNumber/coach-field errors as TSI-001",
+        "must not synthesize the V2.2 SingleCoach wrapper in V2.1",
+        "must not validate the payload against V2.2 or back-apply maxOccurs=unbounded"
+      ]
+    },
+    {
+      "finding_id": "TSM-001",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual TrainSetManagementService V2.1 XSD INVALID result caused by using the later corrected global root TrainSetManagementService.GetTrainSetCompositionResponse, which is absent in V2.1 while the historical V2.1 root TrainSetManagementService.GetTrainSetComposition is authoritative.",
+      "guards": [
+        "official TrainSetManagementService V2.1 strict profile only",
+        "selected V2.1 service XSD blob must be add9d1cb37e5759ff7a77855b239108d38373206",
+        "must require XSD INVALID",
+        "match only exact global root TrainSetManagementService.GetTrainSetCompositionResponse",
+        "must preserve TrainSetManagementService.GetTrainSetComposition as the mandatory historical V2.1 executable root",
+        "V2.2 correction history is explanatory evidence only",
+        "must not register the V2.2 root as a V2.1 alias or rewrite the payload automatically"
+      ]
+    }
+  ],
+  "implementation_state": "reviewed_not_implemented",
+  "evidence": [
+    "TSI-001: EV-161 / run 34822675019 / closure run 34822926605; historical control EV-109",
+    "TSM-001: EV-162 / run 34823353897 / closure run 34823587675; historical control EV-109",
+    "TrainSetServices V2.1 PDF / SHA-256 8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e / physical pages 24-25 and 30",
+    "TrainSetServices V2.2 PDF / SHA-256 c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e / correction-history page 51",
+    "IBIS-IP_TrainSetInformationService_V2.1.xsd @ 897f373e31b76aa23d8bc206854b042524e4c102",
+    "IBIS-IP_TrainSetManagementService_V2.1.xsd @ add9d1cb37e5759ff7a77855b239108d38373206"
+  ]
+}
