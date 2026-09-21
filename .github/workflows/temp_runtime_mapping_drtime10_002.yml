@@ -1,0 +1,83 @@
+name: TEMP runtime mapping DRTIME10-002
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths:
+      - .github/workflows/temp_runtime_mapping_drtime10_002.yml
+      - audit_registry/finding_semantic_classification_v0.1.json
+      - sdk_manifest/known_issues_runtime_mapping_v0.1.json
+      - sdk_manifest/manifest_v0.1.json
+      - 00_START_HERE/CURRENT_STATE.json
+      - sdk_manifest/runtime_mapping_review_blocks/TIME_V10_DRTIME10_002_v0.1.json
+      - docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_TIME_V10_DRTIME10_002_2026-09-21.md
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check lxml jsonschema
+      - name: Verify DRTIME10-002 review boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from collections import Counter
+          from pathlib import Path
+          p=Path("audit_registry/finding_semantic_classification_v0.1.json")
+          j=json.loads(p.read_text(encoding="utf-8"))
+          assert len(j["entries"]) == 192
+          e=next(x for x in j["entries"] if x["finding_id"]=="DRTIME10-002")
+          assert e["service"]=="TimeService"
+          assert e["defect_assessment"]=="confirmed_pdf_defect"
+          assert e["confidence"]=="confirmed"
+          assert e["sdk_behavior"]=="no_runtime_diagnostic"
+          assert e["normative_authority"]=="contextual_only"
+          assert e["version_scope"][0]["version"]=="V1.0"
+          assert e["version_scope"][0]["authority"]=="documentation_only"
+          assert e["version_scope"][0]["xsd_profile"] is None
+          assert e["runtime_match"].get("candidate_triggers",[]) == []
+          state=e["runtime_match"]["state"]
+          assert state in {"not_designed","not_applicable"}, state
+          refs=e["source_references"]
+          assert any(r["kind"]=="pdf" and "physical page 6" in r["reference"] for r in refs)
+          assert any(r["kind"]=="evidence" and "EV-147" in r["reference"] for r in refs)
+          counts=Counter(x["runtime_match"]["state"] for x in j["entries"])
+          if state=="not_designed":
+              assert counts==Counter({"not_applicable":113,"reviewed":61,"candidate":17,"not_designed":1}), counts
+          else:
+              assert counts==Counter({"not_applicable":114,"reviewed":61,"candidate":17}), counts
+          print("DRTIME10_002_REVIEW_BOUNDARY_OK", state, dict(counts))
+          PY
+      - name: Validate semantic registry JSON Schema
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from jsonschema import Draft202012Validator
+          from pathlib import Path
+          s=json.loads(Path("audit_registry/finding_semantic_classification_schema_v0.1.json").read_text())
+          j=json.loads(Path("audit_registry/finding_semantic_classification_v0.1.json").read_text())
+          errors=sorted(Draft202012Validator(s).iter_errors(j), key=lambda e:list(e.path))
+          if errors:
+              raise SystemExit("\n".join(f"{list(e.path)}: {e.message}" for e in errors))
+          print("SEMANTIC_SCHEMA_OK")
+          PY
+      - name: Validate deterministic Known-Issues mapping
+        run: python tools/validate_known_issues_runtime_mapping_v0_1.py
+      - name: Validate SDK manifest consistency
+        run: python tools/validate_sdk_manifest_v0_1.py
+      - name: Root XSD regression gate
+        run: python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+      - name: Verify XSD working tree remains clean
+        run: git diff --exit-code -- '*.xsd'
