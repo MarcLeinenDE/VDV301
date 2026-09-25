@@ -118,14 +118,24 @@ jobs:
           assert sdk["known_issues_normative_xsd_override_allowed"] is False
           assert sdk["runtime_mapping_state"] in {"terminal_review_inventory_closure_pending","terminal_review_inventory_closed"}
 
-          # Candidate/integration authority must remain explicit and never be silently
-          # rewritten as official_release inside mappings.
-          for e in sem["entries"]:
-              for scope in e.get("version_scope",[]):
-                  if scope.get("authority")=="candidate_integration":
-                      assert "candidate" in (scope.get("note","")+" "+str(scope.get("xsd_profile",""))).lower() or "integration" in (scope.get("note","")+" "+str(scope.get("xsd_profile",""))).lower()
+          # Provenance must be preserved structurally, not inferred from prose.
+          # Every reviewed runtime mapping must carry the exact profile_scope
+          # object from its semantic-registry source entry.
+          sem_by_id={e["finding_id"]:e for e in sem["entries"]}
+          for m in mapping["mappings"]:
+              assert m["profile_scope"]==sem_by_id[m["finding_id"]]["version_scope"],m["finding_id"]
 
-          print("PHASE_A_TERMINAL_INVENTORY_OK",dict(counts),"mapping_count",len(map_ids),"semantic_blob",sem_blob)
+          # Candidate/integration authorities remain explicitly typed in the
+          # canonical authority field; no prose-token requirement is imposed.
+          candidate_scopes=sum(
+              1
+              for e in sem["entries"]
+              for scope in e.get("version_scope",[])
+              if scope.get("authority")=="candidate_integration"
+          )
+          assert candidate_scopes>0
+
+          print("PHASE_A_TERMINAL_INVENTORY_OK",dict(counts),"mapping_count",len(map_ids),"candidate_scopes",candidate_scopes,"semantic_blob",sem_blob)
           PY
 
       - name: Validate semantic registry JSON Schema
