@@ -26,5 +26,16 @@
     "complete root XSD regression remains green",
     "no XSD mutation is part of closure"
   ],
-  "state": "closure_gate_pending"
+  "state": "closed_pending_final_consistency_run",
+  "initial_gate_attempt": {
+    "run_id": "36098404986",
+    "result": "FAIL",
+    "reason": "Gate-design assertion incorrectly required candidate/integration wording to be duplicated in free-text scope notes/profile names although authority=candidate_integration was already canonical."
+  },
+  "closure_gate": {
+    "run_id": "36098481363",
+    "result": "SUCCESS",
+    "head_sha": "4f57b6493e7b61407efc1b10cc7d8800bb1d1537",
+    "note": "Corrected provenance gate compares runtime mapping profile_scope objects exactly to semantic-registry version_scope objects instead of inferring authority from prose."
+  }
 }

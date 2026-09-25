@@ -1,6 +1,6 @@
 # Known-Issues runtime mapping — Phase A terminal closure — 2026-09-25
 
-Status: **terminal inventory assembled / closure gate pending**.
+Status: **Phase A closure accepted / final persisted-state consistency run pending**.
 
 ## Purpose
 
@@ -49,3 +49,24 @@ It does **not** yet answer:
 That second question remains a separate capability-conformance artifact after the source-locator hardening pass, beginning with DeviceManagementService.
 
 No executable matcher or XSD mutation is authorized by this closure.
+
+## Gate history
+
+Initial closure attempt **36098404986** stopped on an over-strict gate-design assertion: older CE V2.4 semantic entries correctly use the canonical field `authority: candidate_integration` but do not redundantly repeat the words “candidate” or “integration” in every free-text note/profile label. No audit data was changed for that failure.
+
+The gate was hardened to compare each reviewed runtime mapping's complete `profile_scope` object directly against the source semantic finding's `version_scope`. This is the stronger provenance invariant.
+
+Corrected Phase-A closure gate **36098481363**: **SUCCESS**.
+
+Verified terminal inventory:
+
+```text
+reviewed        77
+not_applicable 115
+candidate        0
+not_designed     0
+implemented      0
+total           192
+```
+
+The final persisted-state consistency run is triggered by recording this closure state.
