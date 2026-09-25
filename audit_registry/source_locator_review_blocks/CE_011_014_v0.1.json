@@ -1,0 +1,33 @@
+{
+  "block_version": "0.1",
+  "block_id": "CE_011_014",
+  "review_date": "2026-09-25",
+  "source_semantic_registry_blob": "83a66f05b0f7cda0fb1631d19fc2efd6dfd4804e",
+  "locator_manifest": "audit_registry/finding_source_locators_v0.1.json",
+  "finding_ids": [
+    "CE-011",
+    "CE-012",
+    "CE-013",
+    "CE-014"
+  ],
+  "added_coverage_lanes": 21,
+  "resulting_manifest": {
+    "entries": 10,
+    "coverage_lanes": 44,
+    "complete": 10,
+    "partial": 0,
+    "remaining": 182
+  },
+  "decision": "complete",
+  "notes": [
+    "CE-011 uses the post-closure corrected V2.2-V2.4 scope; V2.1 is a documented aligned negative control and is not a finding lane.",
+    "CE-012/013/014 retain their V1.0-V2.3 official plus V2.4 candidate/integration semantic scopes.",
+    "CE-014 V1.0 locator preserves the anonymous DataVersionList declaration inside DeviceInformationStructure instead of inventing a named V1.0 DataVersionListStructure.",
+    "PDF locations were visually rechecked against the byte-pinned official publications.",
+    "V2.4 PDF authority remains official-publication while paired Common V2.4 XSD authority remains candidate/integration.",
+    "No XSD bytes, finding classifications or runtime dispositions are changed."
+  ],
+  "primary_gate": null,
+  "closure_gate": null,
+  "state": "assembled_gate_pending"
+}
