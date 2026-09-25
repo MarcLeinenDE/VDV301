@@ -89,3 +89,9 @@ Finding classifications and Phase-A counts are unchanged. The closure remains su
 ## CE-005 / CE-006 correction revalidation
 
 The post-closure scope correction was revalidated successfully in run **36100346868**. Phase-A counts remain **77 reviewed / 115 not_applicable / 0 candidate / 0 not_designed / 0 implemented**. Only evidence-backed version scope and CE-006 explanatory wording changed; PASS/FAIL semantics remain unchanged.
+
+## Post-closure CE-011 scope correction discovered during Phase B
+
+Phase-B locator hardening found that CE-011 was incorrectly narrowed to V2.4 in the semantic registry. Historical closure and version-specific evidence establish V2.2–V2.4, with V2.1 as an aligned negative control. See `docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CE011_VERSION_SCOPE_2026-09-25.md`.
+
+Classification, runtime disposition, counts and selected-XSD authority are unchanged. A fresh consistency gate is required.

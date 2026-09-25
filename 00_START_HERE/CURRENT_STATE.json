@@ -1962,7 +1962,7 @@
     "latest_runtime_mapping_review_report": "docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_VIDEO_V20_VDS_002_004_VLS_002_VRS_003_2026-09-25.md",
     "latest_runtime_mapping_gate_run_id": "36100477654",
     "runtime_mapping_phase_a_closure_report": "docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_PHASE_A_CLOSURE_2026-09-25.md",
-    "latest_post_closure_correction": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CE005_CE006_VERSION_SCOPE_2026-09-25.md",
+    "latest_post_closure_correction": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CE011_VERSION_SCOPE_2026-09-25.md",
     "latest_post_closure_correction_gate_run_id": "36100477654",
     "latest_source_locator_review": "CE_005_010",
     "latest_source_locator_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_CE_005_010_2026-09-25.md",
@@ -2031,7 +2031,7 @@
     "semantic_classification_state": "complete",
     "semantic_classification_finding_count": 192,
     "semantic_classification_closure_report": "docs/pdf_xsd_semantic_audit/FINDING_SEMANTIC_CLASSIFICATION_CLOSURE_2026-09-18.md",
-    "runtime_mapping_state": "terminal_review_inventory_closed",
+    "runtime_mapping_state": "terminal_review_inventory_scope_correction_revalidation_pending",
     "runtime_mapping_implemented_count": 0,
     "known_issues_normative_xsd_override_allowed": false,
     "runtime_mapping_manifest": "sdk_manifest/known_issues_runtime_mapping_v0.1.json",
@@ -2044,7 +2044,7 @@
     "runtime_mapping_latest_review_report": "docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_VIDEO_V20_VDS_002_004_VLS_002_VRS_003_2026-09-25.md",
     "runtime_mapping_not_applicable_count": 115,
     "runtime_mapping_latest_gate_run_id": "36100477654",
-    "source_locator_completeness_state": "in_progress",
+    "source_locator_completeness_state": "paused_for_CE011_scope_correction_revalidation",
     "service_operation_capability_matrix_state": "planned_after_source_locator_hardening",
     "diagnostic_goal": "For triggered findings, report PASS/FAIL strictly from the selected XSD, then add verified explanatory context: exact profile, finding classification, source attribution, rationale/disproof, provider expectation, version history, source locators, and clear separation between conformance failure and known VDV artifact issue.",
     "runtime_mapping_phase_a_closure_report": "docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_PHASE_A_CLOSURE_2026-09-25.md",
@@ -2060,9 +2060,9 @@
     "source_locator_latest_gate_run_id": "36129067095"
   },
   "next_actions": [
-    "Continue Phase B source-locator hardening from the canonical CE-005..CE-010 pilot model; add small related blocks while preserving exact semantic scope and authority.",
-    "After the locator target is terminally closed, create and pilot the separate DeviceManagementService service/version/operation obligation matrix.",
-    "Only after those gates, implement structured profile-specific Known-Issues matchers with dedicated positive/negative runtime evidence.",
-    "Keep official-facing remediation/XSD mutation separate and explicitly approved."
+    "Revalidate Phase A and the existing CE-005..CE-010 locator pilot after the CE-011 version-scope correction; require unchanged counts and exact semantic/runtime/locator source pins.",
+    "Then continue Phase B with CE-011..CE-014.",
+    "After source-locator closure, pilot the separate DeviceManagementService operation-obligation matrix.",
+    "Keep executable matcher implementation and remediation/XSD mutation in later separately gated phases."
   ]
 }
