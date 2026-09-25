@@ -81,3 +81,7 @@ The semantic-basis and bilingual diagnostic text for CE-006 were also updated be
 Post-closure scope-correction gate **36100346868**: **SUCCESS**.
 
 The gate verified the corrected CE-005/CE-006 scopes, preserved finding classifications and runtime states, exact semantic-to-runtime `profile_scope` projection, all Common validation lanes V2.0–V2.4, semantic and runtime-mapping validators, SDK-manifest consistency, the complete root-XSD regression pool and a clean XSD working tree.
+
+## Persisted-state closure
+
+Final persisted-state gate **36100477654**: **SUCCESS** on HEAD `40dfd6a640ac948ccdf308abb73f3ec66328029f`. The temporary correction workflow is removed after this closure.
