@@ -1,0 +1,117 @@
+name: TEMP CE011 scope correction
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths:
+      - .github/workflows/temp_ce011_scope_correction.yml
+      - audit_registry/finding_semantic_classification_v0.1.json
+      - sdk_manifest/known_issues_runtime_mapping_v0.1.json
+      - audit_registry/finding_source_locators_v0.1.json
+      - 00_START_HERE/CURRENT_STATE.json
+      - docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CE011_VERSION_SCOPE_2026-09-25.md
+      - docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_PHASE_A_CLOSURE_2026-09-25.md
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check lxml jsonschema
+
+      - name: Verify CE-011 corrected scope and executable boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from collections import Counter
+          from pathlib import Path
+          from lxml import etree
+
+          ROOT=Path(".")
+          NS={"xs":"http://www.w3.org/2001/XMLSchema"}
+          sem=json.loads((ROOT/"audit_registry/finding_semantic_classification_v0.1.json").read_text())
+          rm=json.loads((ROOT/"sdk_manifest/known_issues_runtime_mapping_v0.1.json").read_text())
+          loc=json.loads((ROOT/"audit_registry/finding_source_locators_v0.1.json").read_text())
+
+          by={e["finding_id"]:e for e in sem["entries"]}
+          e=by["CE-011"]
+          assert e["runtime_match"]["state"]=="reviewed"
+          assert e["defect_assessment"]=="cross_artifact_mismatch"
+          assert e["confidence"]=="confirmed"
+          assert e["sdk_behavior"]=="error_with_advisory"
+          assert [x["version"] for x in e["version_scope"]]==["Common V2.2-V2.3","Common V2.4"]
+          assert [x["authority"] for x in e["version_scope"]]==["official_release","candidate_integration"]
+
+          m=next(x for x in rm["mappings"] if x["finding_id"]=="CE-011")
+          assert m["profile_scope"]==e["version_scope"]
+          assert m["implementation_state"]=="reviewed_not_implemented"
+          assert m["authority_guard"]=="selected_xsd_result_remains_normative"
+
+          counts=Counter(x["runtime_match"]["state"] for x in sem["entries"])
+          assert counts==Counter({"not_applicable":115,"reviewed":77}),counts
+          assert rm["counts"]=={
+              "reviewed_mapping_count":77,
+              "implemented_count":0,
+              "semantic_candidate_count":0,
+              "semantic_not_designed_count":0,
+              "semantic_not_applicable_count":115,
+          }
+
+          # Locator pilot is not changed, but must point at the corrected current semantic blob.
+          import subprocess
+          blob=subprocess.check_output(["git","hash-object","audit_registry/finding_semantic_classification_v0.1.json"],text=True).strip()
+          assert loc["source_semantic_registry"]["git_blob"]==blob
+          assert loc["counts"]["locator_entry_count"]==6
+
+          def conn(file):
+              t=etree.parse(str(ROOT/file))
+              els=t.xpath("/xs:schema/xs:complexType[@name='ConnectionStructure']/xs:sequence/xs:element",namespaces=NS)
+              return {x.get("name"):x for x in els}
+
+          v21=conn("IBIS-IP_common_V2.1.xsd")
+          assert "TransportMode" in v21
+          assert v21["TransportMode"].get("minOccurs")=="0"
+          assert v21["TransportMode"].get("maxOccurs") is None
+          assert "ConnectionMode" not in v21
+
+          for f in ("IBIS-IP_common_V2.2.xsd","IBIS-IP_common_V2.3.xsd","IBIS-IP_common_V2.4.xsd"):
+              got=conn(f)
+              for n in ("TransportMode","ConnectionMode"):
+                  assert n in got,(f,n)
+                  assert got[n].get("minOccurs")=="0",(f,n)
+                  assert got[n].get("maxOccurs") is None,(f,n)
+
+          print("CE011_SCOPE_CORRECTION_OK",dict(counts),blob)
+          PY
+
+      - name: Re-run V2.1 negative control
+        run: python tools/validate_common_v21_ev119.py
+      - name: Re-run V2.2 affected profile
+        run: python tools/validate_common_v22_ev120.py
+      - name: Re-run V2.3 affected profile
+        run: python tools/validate_common_v23_ev121.py
+      - name: Re-run V2.4 candidate affected profile
+        run: python tools/validate_common_v24_ev122.py
+
+      - name: Validate semantic registry
+        run: python tools/validate_finding_semantic_classification.py
+      - name: Validate runtime mapping
+        run: python tools/validate_known_issues_runtime_mapping_v0_1.py
+      - name: Validate existing source-locator pilot
+        run: python tools/validate_finding_source_locators_v0_1.py
+      - name: Validate SDK manifest
+        run: python tools/validate_sdk_manifest_v0_1.py
+      - name: Root XSD regression
+        run: python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+      - name: Verify XSD tree clean
+        run: git diff --exit-code -- '*.xsd'
