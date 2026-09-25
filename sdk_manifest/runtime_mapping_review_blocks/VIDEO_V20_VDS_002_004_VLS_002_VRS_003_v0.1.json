@@ -1,0 +1,102 @@
+{
+  "block_version": "0.1",
+  "block_id": "VIDEO_V20_VDS_002_004_VLS_002_VRS_003",
+  "review_date": "2026-09-25",
+  "source_semantic_registry_blob": "5abda833e7059ef5d6e532dd9ebfa9cac918cd20",
+  "policy": "official_video_v20_exact_xsd_invalid_compositor_advisories_only",
+  "entries": [
+    {
+      "finding_id": "VDS-002",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual VideoDisplayService V2.0 XSD INVALID ListViewCapabilitiesResponse in which more than one PDF-documented capability member is serialized although the exact XSD models ViewID, ViewName and ViewType as one xs:choice.",
+      "guards": [
+        "official VideoDisplayService V2.0 profile only",
+        "selected VDS V2.0 XSD blob must be fcfdadd3b62a584370cae326004050b4dc832e23",
+        "must require XSD INVALID",
+        "root/context must be VideoDisplayService.ListViewCapabilitiesResponse / ListViewCapabilitiesResponseStructure",
+        "match the exact multi-member-after-first-choice boundary such as ViewID followed by ViewName",
+        "do not treat valid VDV leading-minus choice notation as an error",
+        "do not rewrite the payload or expand xs:choice semantics"
+      ]
+    },
+    {
+      "finding_id": "VDS-003",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual VideoDisplayService V2.0 XSD INVALID SetVideoViewRequest containing both PDF-required ViewID and Timeout where the exact XSD permits only one through xs:choice(ViewID | Timeout).",
+      "guards": [
+        "official VideoDisplayService V2.0 profile only",
+        "selected VDS V2.0 XSD blob must be fcfdadd3b62a584370cae326004050b4dc832e23",
+        "must require XSD INVALID",
+        "root must be VideoDisplayService.SetVideoViewRequest",
+        "both ViewID and Timeout must be present in the failing request",
+        "failure must be attributable to xs:choice(ViewID | Timeout)",
+        "no structure rewrite or compatibility relaxation"
+      ]
+    },
+    {
+      "finding_id": "VDS-004",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual VideoDisplayService V2.0 XSD INVALID response matching the documented multi-field combinations that conflict with the exact single xs:choice compositor in SetVideoViewResponse, SetNextViewIndexResponse or GetDisplayStateResponse.",
+      "guards": [
+        "official VideoDisplayService V2.0 profile only",
+        "selected VDS V2.0 XSD blob must be fcfdadd3b62a584370cae326004050b4dc832e23",
+        "must require XSD INVALID",
+        "supported exact boundaries are State plus CurrentViewID for SetVideoViewResponse/GetDisplayStateResponse, or State plus OperationErrorMessage for SetNextViewIndexResponse",
+        "do not match unrelated response-shape errors",
+        "do not treat valid VDV leading-minus notation itself as a defect",
+        "selected XSD PASS/FAIL remains authoritative"
+      ]
+    },
+    {
+      "finding_id": "VLS-002",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual VideoLiveService V2.0 XSD INVALID LiveStreamData payload where multiple PDF-documented stream fields are serialized but the exact XSD permits one field only through a single xs:choice.",
+      "guards": [
+        "official VideoLiveService V2.0 profile only",
+        "selected VLS V2.0 XSD blob must be d8c52f5de9ef3f5915524fef12da11eabf0ca041",
+        "must require XSD INVALID",
+        "context must be VideoLiveService LiveStreamData/ListAllLiveStreamsResponse",
+        "failure must occur after a first valid stream field because a further PDF-documented stream field is present",
+        "do not treat valid VDV leading-minus notation itself as a defect",
+        "do not auto-collapse a multi-field record into one choice member"
+      ]
+    },
+    {
+      "finding_id": "VRS-003",
+      "prior_state": "candidate",
+      "final_state": "reviewed",
+      "activation_class": "xsd_invalid_advisory",
+      "decision": "Decorate only an actual official VideoRecordingService V2.0 XSD INVALID GetVideoRecordingStateResponse where State is combined with PDF-documented ordinary fields such as AlarmArchiveFillLevel or OperationErrorMessage but the exact V2.0 XSD places all members in one xs:choice.",
+      "guards": [
+        "official VideoRecordingService V2.0 profile only",
+        "selected VRS V2.0 XSD blob must be 6ef0dae64ce6f4d3aa4f652d6d166896e71aaac7",
+        "must require XSD INVALID",
+        "root must be VideoRecordingService.GetVideoRecordingStateResponse",
+        "match State plus AlarmArchiveFillLevel or State plus OperationErrorMessage as the PDF/XSD mismatch boundary",
+        "State plus StartStopMode is also XSD-invalid but reflects the PDF's own a/b choice and must not by itself be used as evidence of VRS-003's surviving mismatch",
+        "V2.4 candidate/integration structure is correction-history evidence only and must never be back-applied to V2.0",
+        "do not treat valid VDV leading-minus notation itself as a defect",
+        "no payload wrapping or schema substitution"
+      ]
+    }
+  ],
+  "implementation_state": "reviewed_not_implemented",
+  "evidence": [
+    "EV-103 / run 33111119723 / job 98653897734 / artifact 9662552176",
+    "VDS: EV-164 / validation run 34838003303 / closure run 34839487830",
+    "VLS: EV-165 / validation run 34839986276 / closure run 34840162307",
+    "VRS: EV-166 / validation run 34840970136 / closure run 34841174977",
+    "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CHOICE_NOTATION_2026-08-29.md",
+    "IBIS-IP_VideoDisplayService_V2.0.xsd @ fcfdadd3b62a584370cae326004050b4dc832e23",
+    "IBIS-IP_VideoLiveService_V2.0.xsd @ d8c52f5de9ef3f5915524fef12da11eabf0ca041",
+    "IBIS-IP_VideoRecordingService_V2.0.xsd @ 6ef0dae64ce6f4d3aa4f652d6d166896e71aaac7"
+  ]
+}
