@@ -14415,7 +14415,7 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
           "selected profile is VideoDisplayService V2.0",
           "XSD validation rejects ListViewCapabilitiesResponse after a first valid capability member because the payload also contains another PDF-documented member such as ViewName",
@@ -14446,7 +14446,7 @@
           "note": "Confirms leading-minus notation is valid choice syntax and does not invalidate VDS-002."
         }
       ],
-      "notes": "Confirmed V2.0 compositor mismatch. Choice-notation correction applied; the finding does not rely on treating -1:1 as malformed."
+      "notes": "Confirmed V2.0 compositor mismatch. Choice-notation correction applied; the finding does not rely on treating -1:1 as malformed. Runtime-mapping review 2026-09-25: reviewed for exact official V2.0 XSD-invalid compositor advisory; VDV leading-minus choice notation correction preserved."
     },
     {
       "finding_id": "VDS-003",
@@ -14510,7 +14510,7 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
           "selected profile is VideoDisplayService V2.0",
           "XSD validation rejects SetVideoViewRequest because both ViewID and Timeout are present",
@@ -14535,7 +14535,7 @@
           "reference": "IBIS-IP_VideoDisplayService_V2.0.xsd @ fcfdadd3b62a584370cae326004050b4dc832e23"
         }
       ],
-      "notes": "Confirmed SetVideoViewRequest compositor mismatch; exact V2.0 XSD remains normative."
+      "notes": "Confirmed SetVideoViewRequest compositor mismatch; exact V2.0 XSD remains normative. Runtime-mapping review 2026-09-25: reviewed for exact official V2.0 XSD-invalid compositor advisory; VDV leading-minus choice notation correction preserved."
     },
     {
       "finding_id": "VDS-004",
@@ -14605,7 +14605,7 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
           "selected profile is VideoDisplayService V2.0",
           "XSD validation rejects SetVideoViewResponse or GetDisplayStateResponse when State is followed by CurrentViewID",
@@ -14636,7 +14636,7 @@
           "note": "Correct choice-notation interpretation; confirms VDS-004 still stands."
         }
       ],
-      "notes": "Confirmed response-family compositor mismatch. Choice-notation correction applied; exact V2.0 XSD remains authoritative."
+      "notes": "Confirmed response-family compositor mismatch. Choice-notation correction applied; exact V2.0 XSD remains authoritative. Runtime-mapping review 2026-09-25: reviewed for exact official V2.0 XSD-invalid compositor advisory; VDV leading-minus choice notation correction preserved."
     },
     {
       "finding_id": "VDS-005",
@@ -15122,7 +15122,7 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
           "selected profile is VideoLiveService V2.0",
           "XSD validation rejects LiveStreamData after the first valid field because another PDF-documented stream field is present",
@@ -15151,7 +15151,7 @@
           "reference": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CHOICE_NOTATION_2026-08-29.md"
         }
       ],
-      "notes": "Confirmed V2.0 compositor mismatch; choice-notation correction applied."
+      "notes": "Confirmed V2.0 compositor mismatch; choice-notation correction applied. Runtime-mapping review 2026-09-25: reviewed for exact official V2.0 XSD-invalid compositor advisory; VDV leading-minus choice notation correction preserved."
     },
     {
       "finding_id": "VLS-003",
@@ -15633,7 +15633,7 @@
         }
       },
       "runtime_match": {
-        "state": "candidate",
+        "state": "reviewed",
         "candidate_triggers": [
           "selected profile is official VideoRecordingService V2.0",
           "XSD validation rejects VideoRecordingStateResponse after State because AlarmArchiveFillLevel or OperationErrorMessage is also present as documented by the PDF",
@@ -15662,7 +15662,7 @@
           "reference": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CHOICE_NOTATION_2026-08-29.md"
         }
       ],
-      "notes": "Confirmed official V2.0 compositor mismatch using corrected choice-aware PDF reading; V2.4 candidate is explanatory only."
+      "notes": "Confirmed official V2.0 compositor mismatch using corrected choice-aware PDF reading; V2.4 candidate is explanatory only. Runtime-mapping review 2026-09-25: reviewed for exact official V2.0 XSD-invalid compositor advisory; VDV leading-minus choice notation correction preserved."
     },
     {
       "finding_id": "VRS-004",

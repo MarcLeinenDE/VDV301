@@ -4,7 +4,7 @@
   "state": "reviewed_inventory",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "5abda833e7059ef5d6e532dd9ebfa9cac918cd20",
+    "git_blob": "a8c274ea552518783ea1da70413acf248164a65b",
     "classification_state": "complete",
     "finding_count": 192
   },
@@ -19,9 +19,9 @@
     "implementation_requires_separate_profile_specific_validation": true
   },
   "counts": {
-    "reviewed_mapping_count": 72,
+    "reviewed_mapping_count": 77,
     "implemented_count": 0,
-    "semantic_candidate_count": 5,
+    "semantic_candidate_count": 0,
     "semantic_not_designed_count": 0,
     "semantic_not_applicable_count": 115
   },
@@ -2120,6 +2120,91 @@
       }
     },
     {
+      "finding_id": "VDS-002",
+      "service": "VideoDisplayService",
+      "semantic_issue_kind": "structure_mismatch",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_VideoDisplayService_V2.0.xsd + IBIS-IP_common_V2.0.xsd + IBIS-IP_Enumerations_V2.0.xsd",
+          "note": "The PDF requires ViewID and ViewName as ordinary mandatory fields while ViewType carries valid VDV choice notation; the exact XSD instead makes ViewID, ViewName and ViewType mutually exclusive alternatives of one xs:choice."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected profile is VideoDisplayService V2.0",
+        "XSD validation rejects ListViewCapabilitiesResponse after a first valid capability member because the payload also contains another PDF-documented member such as ViewName",
+        "the failure is attributable to the exact xs:choice(ViewID | ViewName | ViewType) compositor"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "VDS-002"
+      }
+    },
+    {
+      "finding_id": "VDS-003",
+      "service": "VideoDisplayService",
+      "semantic_issue_kind": "structure_mismatch",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_VideoDisplayService_V2.0.xsd + selected Common/Enumerations dependencies",
+          "note": "The official PDF requires both ViewID and Timeout in SetVideoViewRequest, while the exact XSD models xs:choice(ViewID | Timeout)."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected profile is VideoDisplayService V2.0",
+        "XSD validation rejects SetVideoViewRequest because both ViewID and Timeout are present",
+        "the failure is attributable to xs:choice(ViewID | Timeout)"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "VDS-003"
+      }
+    },
+    {
+      "finding_id": "VDS-004",
+      "service": "VideoDisplayService",
+      "semantic_issue_kind": "structure_mismatch",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_VideoDisplayService_V2.0.xsd + selected Common/Enumerations dependencies",
+          "note": "The official response tables combine ordinary non-choice members with a choice-marked State row, while the exact XSD places all listed members of SetVideoViewResponse, SetNextViewIndexResponse and GetDisplayStateResponse into one xs:choice."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected profile is VideoDisplayService V2.0",
+        "XSD validation rejects SetVideoViewResponse or GetDisplayStateResponse when State is followed by CurrentViewID",
+        "XSD validation rejects SetNextViewIndexResponse when State is followed by OperationErrorMessage",
+        "the rejection is attributable to the corresponding single xs:choice compositor"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "VDS-004"
+      }
+    },
+    {
       "finding_id": "VLS-001",
       "service": "VideoLiveService",
       "semantic_issue_kind": "release_authority_gap",
@@ -2144,6 +2229,34 @@
       "diagnostic_source": {
         "registry": "audit_registry/finding_semantic_classification_v0.1.json",
         "finding_id": "VLS-001"
+      }
+    },
+    {
+      "finding_id": "VLS-002",
+      "service": "VideoLiveService",
+      "semantic_issue_kind": "structure_mismatch",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_VideoLiveService_V2.0.xsd + IBIS-IP_common_V2.0.xsd + IBIS-IP_Enumerations_V2.0.xsd",
+          "note": "The official PDF presents LiveStreamData as a multi-field stream record; the exact V2.0 XSD models all individual fields as alternatives of one xs:choice."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected profile is VideoLiveService V2.0",
+        "XSD validation rejects LiveStreamData after the first valid field because another PDF-documented stream field is present",
+        "the rejection is attributable to the exact LiveStreamData xs:choice compositor"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "VLS-002"
       }
     },
     {
@@ -2204,6 +2317,40 @@
       "diagnostic_source": {
         "registry": "audit_registry/finding_semantic_classification_v0.1.json",
         "finding_id": "VRS-002"
+      }
+    },
+    {
+      "finding_id": "VRS-003",
+      "service": "VideoRecordingService",
+      "semantic_issue_kind": "structure_mismatch",
+      "sdk_behavior": "error_with_advisory",
+      "activation_class": "xsd_invalid_advisory",
+      "required_precondition": "xsd_result_invalid",
+      "result_effect": "decorate_existing_invalid",
+      "implementation_state": "reviewed_not_implemented",
+      "authority_guard": "selected_xsd_result_remains_normative",
+      "profile_scope": [
+        {
+          "version": "V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_VideoRecordingService_V2.0.xsd + IBIS-IP_common_V2.0.xsd + IBIS-IP_Enumerations_V2.0.xsd",
+          "note": "The corrected PDF reading shows ordinary required AlarmArchiveFillLevel and OperationErrorMessage fields plus an a/b choice between State and StartStopMode; the exact XSD instead makes all four fields mutually exclusive alternatives of one xs:choice."
+        },
+        {
+          "version": "V2.4 correction control",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_VideoRecordingService_V2.4.xsd",
+          "note": "Official V2.4 documentation restructures the response and the PR #27 candidate XSD aligns with that corrected model. This is explanatory correction evidence only and does not alter official V2.0 validation."
+        }
+      ],
+      "trigger_descriptions": [
+        "selected profile is official VideoRecordingService V2.0",
+        "XSD validation rejects VideoRecordingStateResponse after State because AlarmArchiveFillLevel or OperationErrorMessage is also present as documented by the PDF",
+        "the rejection is attributable to the exact V2.0 single xs:choice compositor"
+      ],
+      "diagnostic_source": {
+        "registry": "audit_registry/finding_semantic_classification_v0.1.json",
+        "finding_id": "VRS-003"
       }
     }
   ]

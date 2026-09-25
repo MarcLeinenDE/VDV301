@@ -1958,8 +1958,8 @@
     "manufacturer_protection_rule": "Protect manufacturers from false attribution of VDV documentation issues, optional/conditional/not-applicable operations, version-routing mistakes, or tool errors. However, if the provider payload violates the exact selected XSD, the conformance result remains NOT PASSED/INVALID even when the XSD itself contains a known or likely typo/defect; the SDK only explains that context separately.",
     "selected_xsd_authority_rule": "The exact selected VDV XSD is the executable source of truth and controls PASS/FAIL. Providers must implement it exactly, including historical typo-like identifiers. A known/likely VDV XSD or documentation defect may only add explanatory context; it never converts an XSD failure into a pass, waiver, alias, normalization, or tolerated deviation.",
     "open_unmerged_pr_remediation_rule": "If a confirmed finding affects an open, unmerged upstream PR, prefer correcting that PR's source branch directly after evidence/source-attribution closure and revalidation, rather than deferring the issue to the consolidated VDV communication package. If the branch is not writable, prepare the exact patch/evidence for the author or a narrowly scoped separate PR after explicit user approval.",
-    "latest_runtime_mapping_review": "TVS_001_002_003",
-    "latest_runtime_mapping_review_report": "docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_TVS_001_002_003_2026-09-21.md",
+    "latest_runtime_mapping_review": "VIDEO_V20_VDS_002_004_VLS_002_VRS_003",
+    "latest_runtime_mapping_review_report": "docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_VIDEO_V20_VDS_002_004_VLS_002_VRS_003_2026-09-25.md",
     "latest_runtime_mapping_gate_run_id": "35647099114"
   },
   "evidence": {
@@ -2025,17 +2025,17 @@
     "semantic_classification_state": "complete",
     "semantic_classification_finding_count": 192,
     "semantic_classification_closure_report": "docs/pdf_xsd_semantic_audit/FINDING_SEMANTIC_CLASSIFICATION_CLOSURE_2026-09-18.md",
-    "runtime_mapping_state": "reviewed_inventory",
+    "runtime_mapping_state": "terminal_review_inventory_closure_pending",
     "runtime_mapping_implemented_count": 0,
     "known_issues_normative_xsd_override_allowed": false,
     "runtime_mapping_manifest": "sdk_manifest/known_issues_runtime_mapping_v0.1.json",
     "runtime_mapping_schema": "sdk_manifest/known_issues_runtime_mapping_v0.1.schema.json",
-    "runtime_mapping_reviewed_count": 72,
-    "runtime_mapping_candidate_count": 5,
+    "runtime_mapping_reviewed_count": 77,
+    "runtime_mapping_candidate_count": 0,
     "runtime_mapping_not_designed_count": 0,
     "runtime_mapping_report": "docs/pdf_xsd_semantic_audit/KNOWN_ISSUES_RUNTIME_MAPPING_BASELINE_2026-09-18.md",
-    "runtime_mapping_latest_review_block": "TVS_001_002_003",
-    "runtime_mapping_latest_review_report": "docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_TVS_001_002_003_2026-09-21.md",
+    "runtime_mapping_latest_review_block": "VIDEO_V20_VDS_002_004_VLS_002_VRS_003",
+    "runtime_mapping_latest_review_report": "docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_VIDEO_V20_VDS_002_004_VLS_002_VRS_003_2026-09-25.md",
     "runtime_mapping_not_applicable_count": 115,
     "runtime_mapping_latest_gate_run_id": "35647099114",
     "source_locator_completeness_state": "planned_after_runtime_mapping_review",
@@ -2043,10 +2043,9 @@
     "diagnostic_goal": "For triggered findings, report PASS/FAIL strictly from the selected XSD, then add verified explanatory context: exact profile, finding classification, source attribution, rationale/disproof, provider expectation, version history, source locators, and clear separation between conformance failure and known VDV artifact issue."
   },
   "next_actions": [
-    "Review the final 5 semantic runtime_match=candidate findings: VideoDisplayService VDS-002/VDS-003/VDS-004, VideoLiveService VLS-002, and VideoRecordingService VRS-003. Preserve exact service/version authority and separate documentation errors from payload failures.",
-    "After candidate=0, run the Phase-A terminal consistency/closure gate over all 192 runtime dispositions.",
-    "Then run the source-locator completeness pass so every SDK/reporting-relevant finding has direct PDF/document and/or XSD component locators or an explicit not-applicable reason.",
-    "After source-locator closure, create and pilot the separate DeviceManagementService operation-obligation matrix.",
-    "Only after those gates, implement structured profile-specific Known-Issues matchers with positive/negative evidence; remediation remains separate."
+    "Run the Phase-A terminal consistency/closure gate across all 192 runtime dispositions; require candidate=0, not_designed=0, reviewed=77, not_applicable=115, implemented=0 and deterministic mapping/manifest agreement.",
+    "After Phase-A closure, run the source-locator completeness pass so every SDK/reporting-relevant finding has direct PDF/document and/or XSD component locators or an explicit not-applicable reason.",
+    "After source-locator closure, create and pilot the separate DeviceManagementService operation-obligation matrix with MANDATORY/OPTIONAL/CONDITIONAL/NOT_APPLICABLE plus audit-only UNRESOLVED and probe-safety metadata.",
+    "Only after those gates, implement structured profile-specific Known-Issues matchers with dedicated positive/negative evidence; remediation/XSD mutation remains separate and explicitly approved."
   ]
 }
