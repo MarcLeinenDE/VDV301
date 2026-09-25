@@ -10,6 +10,8 @@ ROOT=Path(__file__).resolve().parents[1]
 MANIFEST=ROOT/"audit_registry/finding_source_locators_v0.1.json"
 SCHEMA=ROOT/"audit_registry/finding_source_locators_v0.1.schema.json"
 SEMANTIC=ROOT/"audit_registry/finding_semantic_classification_v0.1.json"
+PDF_REGISTRY=ROOT/"audit_registry/pdf_source_registry_v0.1.json"
+PDF_PINS=ROOT/"audit_registry/pdf_source_pins_v0.1.json"
 
 def load(p: Path):
     return json.loads(p.read_text(encoding="utf-8"))
@@ -24,6 +26,9 @@ def require(cond: bool,msg: str):
 
 def main() -> int:
     m=load(MANIFEST); s=load(SCHEMA); sem=load(SEMANTIC)
+    pdf_registry=load(PDF_REGISTRY); pdf_pins=load(PDF_PINS)
+    pdf_by_id={x["source_id"]:x for x in pdf_registry["sources"]}
+    pin_by_id={x["source_id"]:x for x in pdf_pins["sources"]}
     errors=sorted(Draft202012Validator(s).iter_errors(m),key=lambda e:list(e.path))
     if errors:
         raise SystemExit("\n".join(f"{list(e.path)}: {e.message}" for e in errors))
@@ -45,6 +50,13 @@ def main() -> int:
             require(all(c["coverage_status"]=="complete" for c in e["coverage"]),f"{e['finding_id']} complete entry has no partial coverage lane")
         for c in e["coverage"]:
             require(c["pdf_locators"] or c["xsd_locators"],f"{e['finding_id']} {c['version']} has at least one direct locator")
+            for p_loc in c["pdf_locators"]:
+                sid=p_loc["source_id"]
+                require(sid in pdf_by_id,f"{e['finding_id']} PDF source is registered: {sid}")
+                require(sid in pin_by_id,f"{e['finding_id']} PDF source is byte-pinned: {sid}")
+                require(pdf_by_id[sid]["official_url"]==p_loc["url"],f"{e['finding_id']} PDF official URL matches registry: {sid}")
+                require(str(pdf_by_id[sid]["version"])==p_loc["document_version"],f"{e['finding_id']} PDF version matches registry: {sid}")
+                require(pin_by_id[sid]["expected_sha256"]==p_loc["sha256"],f"{e['finding_id']} PDF SHA-256 matches pin registry: {sid}")
             for x in c["xsd_locators"]:
                 p=ROOT/x["file"]
                 require(p.is_file(),f"{e['finding_id']} XSD exists: {x['file']}")
