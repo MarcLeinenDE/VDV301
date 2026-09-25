@@ -85,3 +85,7 @@ On 2026-09-25 the source-locator pass exposed two metadata-scope errors in the s
 - CE-006: terminal scope corrected to V2.2–V2.4 (not V2.4-only).
 
 Finding classifications and Phase-A counts are unchanged. The closure remains subject to a fresh consistency gate after persistence of this correction.
+
+## CE-005 / CE-006 correction revalidation
+
+The post-closure scope correction was revalidated successfully in run **36100346868**. Phase-A counts remain **77 reviewed / 115 not_applicable / 0 candidate / 0 not_designed / 0 implemented**. Only evidence-backed version scope and CE-006 explanatory wording changed; PASS/FAIL semantics remain unchanged.

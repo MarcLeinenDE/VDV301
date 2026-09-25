@@ -1960,9 +1960,10 @@
     "open_unmerged_pr_remediation_rule": "If a confirmed finding affects an open, unmerged upstream PR, prefer correcting that PR's source branch directly after evidence/source-attribution closure and revalidation, rather than deferring the issue to the consolidated VDV communication package. If the branch is not writable, prepare the exact patch/evidence for the author or a narrowly scoped separate PR after explicit user approval.",
     "latest_runtime_mapping_review": "VIDEO_V20_VDS_002_004_VLS_002_VRS_003",
     "latest_runtime_mapping_review_report": "docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_VIDEO_V20_VDS_002_004_VLS_002_VRS_003_2026-09-25.md",
-    "latest_runtime_mapping_gate_run_id": "36098583648",
+    "latest_runtime_mapping_gate_run_id": "36100346868",
     "runtime_mapping_phase_a_closure_report": "docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_PHASE_A_CLOSURE_2026-09-25.md",
-    "latest_post_closure_correction": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CE005_CE006_VERSION_SCOPE_2026-09-25.md"
+    "latest_post_closure_correction": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CE005_CE006_VERSION_SCOPE_2026-09-25.md",
+    "latest_post_closure_correction_gate_run_id": "36100346868"
   },
   "evidence": {
     "xsd_ev_completed": [
@@ -2027,7 +2028,7 @@
     "semantic_classification_state": "complete",
     "semantic_classification_finding_count": 192,
     "semantic_classification_closure_report": "docs/pdf_xsd_semantic_audit/FINDING_SEMANTIC_CLASSIFICATION_CLOSURE_2026-09-18.md",
-    "runtime_mapping_state": "terminal_review_inventory_scope_correction_revalidation_pending",
+    "runtime_mapping_state": "terminal_review_inventory_closed",
     "runtime_mapping_implemented_count": 0,
     "known_issues_normative_xsd_override_allowed": false,
     "runtime_mapping_manifest": "sdk_manifest/known_issues_runtime_mapping_v0.1.json",
@@ -2039,16 +2040,16 @@
     "runtime_mapping_latest_review_block": "VIDEO_V20_VDS_002_004_VLS_002_VRS_003",
     "runtime_mapping_latest_review_report": "docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_VIDEO_V20_VDS_002_004_VLS_002_VRS_003_2026-09-25.md",
     "runtime_mapping_not_applicable_count": 115,
-    "runtime_mapping_latest_gate_run_id": "36098583648",
-    "source_locator_completeness_state": "in_progress_scope_correction_gate_pending",
+    "runtime_mapping_latest_gate_run_id": "36100346868",
+    "source_locator_completeness_state": "in_progress",
     "service_operation_capability_matrix_state": "planned_after_source_locator_hardening",
     "diagnostic_goal": "For triggered findings, report PASS/FAIL strictly from the selected XSD, then add verified explanatory context: exact profile, finding classification, source attribution, rationale/disproof, provider expectation, version history, source locators, and clear separation between conformance failure and known VDV artifact issue.",
     "runtime_mapping_phase_a_closure_report": "docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_PHASE_A_CLOSURE_2026-09-25.md"
   },
   "next_actions": [
-    "Re-run Phase-A terminal consistency after the CE-005/CE-006 version-scope correction; require unchanged counts and exact semantic-to-runtime profile_scope equality.",
-    "Resume Phase B source-locator hardening with CE-005..CE-010 after the correction gate is green.",
-    "After source-locator closure, create and pilot the separate DeviceManagementService operation-obligation matrix.",
-    "Only after those gates, implement structured Known-Issues runtime matchers; remediation remains separate."
+    "Continue Phase B source-locator completeness hardening, starting with CE-005..CE-010 and using exact PDF page/table/section plus XSD blob/component locators.",
+    "After source-locator closure, create and pilot the separate DeviceManagementService service/version/operation obligation matrix.",
+    "Only after those gates, implement structured profile-specific Known-Issues matchers with dedicated positive/negative runtime evidence.",
+    "Keep official-facing remediation/XSD mutation separate and explicitly approved."
   ]
 }

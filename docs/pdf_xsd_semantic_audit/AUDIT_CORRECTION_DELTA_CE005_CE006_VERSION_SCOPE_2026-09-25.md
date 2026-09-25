@@ -75,3 +75,9 @@ Phase A must be re-gated after this post-closure correction. Only after a green 
 ## Diagnostic alignment
 
 The semantic-basis and bilingual diagnostic text for CE-006 were also updated because the earlier wording still spoke only about V2.4. The revised text now describes the evidence-backed V2.2/V2.3 official-profile range and the separate V2.4 candidate/integration lane. This is explanatory metadata only; `valid_with_advisory`, `runtime_match=reviewed`, the finding assessment and XSD PASS/FAIL behaviour are unchanged.
+
+## Revalidation gate
+
+Post-closure scope-correction gate **36100346868**: **SUCCESS**.
+
+The gate verified the corrected CE-005/CE-006 scopes, preserved finding classifications and runtime states, exact semantic-to-runtime `profile_scope` projection, all Common validation lanes V2.0–V2.4, semantic and runtime-mapping validators, SDK-manifest consistency, the complete root-XSD regression pool and a clean XSD working tree.
