@@ -1,0 +1,127 @@
+name: TEMP runtime mapping Video V2.0 final
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths:
+      - .github/workflows/temp_runtime_mapping_video_v20_final.yml
+      - audit_registry/finding_semantic_classification_v0.1.json
+      - sdk_manifest/known_issues_runtime_mapping_v0.1.json
+      - sdk_manifest/manifest_v0.1.json
+      - 00_START_HERE/CURRENT_STATE.json
+      - sdk_manifest/runtime_mapping_review_blocks/VIDEO_V20_VDS_002_004_VLS_002_VRS_003_v0.1.json
+      - docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_VIDEO_V20_VDS_002_004_VLS_002_VRS_003_2026-09-25.md
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check lxml jsonschema
+
+      - name: Verify exact Video V2.0 authority and review boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object IBIS-IP_VideoDisplayService_V2.0.xsd)" = "fcfdadd3b62a584370cae326004050b4dc832e23"
+          test "$(git hash-object IBIS-IP_VideoLiveService_V2.0.xsd)" = "d8c52f5de9ef3f5915524fef12da11eabf0ca041"
+          test "$(git hash-object IBIS-IP_VideoRecordingService_V2.0.xsd)" = "6ef0dae64ce6f4d3aa4f652d6d166896e71aaac7"
+          test "$(git hash-object IBIS-IP_common_V2.0.xsd)" = "8608e3dcd665c197c34da7f6ec6af5a3758da164"
+          test "$(git hash-object IBIS-IP_Enumerations_V2.0.xsd)" = "27e3c183b00381d959622d13c10543123af8eef6"
+
+          python - <<'PY'
+          import json
+          from collections import Counter
+          from pathlib import Path
+          from lxml import etree
+
+          ROOT=Path(".")
+          XS="http://www.w3.org/2001/XMLSchema"
+          NS={"xs":XS}
+          sem=json.loads((ROOT/"audit_registry/finding_semantic_classification_v0.1.json").read_text())
+          by={e["finding_id"]:e for e in sem["entries"]}
+          targets=["VDS-002","VDS-003","VDS-004","VLS-002","VRS-003"]
+          states={by[i]["runtime_match"]["state"] for i in targets}
+          assert states in ({"candidate"},{"reviewed"}), states
+          for i in targets:
+              assert by[i]["confidence"]=="confirmed"
+              assert by[i]["sdk_behavior"]=="error_with_advisory"
+              assert by[i]["normative_authority"]=="selected_xsd"
+              assert by[i]["defect_assessment"]=="cross_artifact_mismatch"
+
+          counts=Counter(e["runtime_match"]["state"] for e in sem["entries"])
+          if states=={"candidate"}:
+              assert counts==Counter({"not_applicable":115,"reviewed":72,"candidate":5}), counts
+          else:
+              assert counts==Counter({"not_applicable":115,"reviewed":77}), counts
+
+          # VDS exact compositor boundaries.
+          vds=etree.parse(str(ROOT/"IBIS-IP_VideoDisplayService_V2.0.xsd"))
+          caps=vds.xpath("/xs:schema/xs:complexType[@name='VideoDisplayService.ListViewCapabilitiesResponseStructure']/xs:choice/xs:element/@name",namespaces=NS)
+          req=vds.xpath("/xs:schema/xs:complexType[@name='VideoDisplayService.SetVideoViewRequestStructure']/xs:choice/xs:element/@name",namespaces=NS)
+          assert caps==["ViewID","ViewName","ViewType"], caps
+          assert req==["ViewID","Timeout"], req
+
+          for typ,expected in {
+              "VideoDisplayService.SetVideoViewResponseStructure":["State","CurrentViewID","OperationErrorMessage"],
+              "VideoDisplayService.SetNextViewIndexResponseStructure":["State","OperationErrorMessage"],
+              "VideoDisplayService.GetDisplayStateResponseStructure":["State","CurrentViewID","OperationErrorMessage"],
+          }.items():
+              got=vds.xpath(f"/xs:schema/xs:complexType[@name='{typ}']/xs:choice/xs:element/@name",namespaces=NS)
+              assert got==expected,(typ,got)
+
+          # VLS exact one-choice LiveStreamData.
+          vls=etree.parse(str(ROOT/"IBIS-IP_VideoLiveService_V2.0.xsd"))
+          live=vls.xpath("/xs:schema/xs:complexType[@name='VideoLiveService.LiveStreamData']/xs:choice/xs:element/@name",namespaces=NS)
+          assert "StreamID" in live and "CameraName" in live and "rtspURI" in live and len(live)>3, live
+
+          # VRS exact one-choice state response.
+          vrs=etree.parse(str(ROOT/"IBIS-IP_VideoRecordingService_V2.0.xsd"))
+          state=vrs.xpath("/xs:schema/xs:complexType[@name='VideoRecordingService.VideoRecordingStateResponseStructure']/xs:choice/xs:element/@name",namespaces=NS)
+          assert state==["State","AlarmArchiveFillLevel","OperationErrorMessage","StartStopMode"], state
+
+          overlay=(ROOT/"docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CHOICE_NOTATION_2026-08-29.md").read_text()
+          assert "minus sign is a choice marker, not a negative cardinality bound" in overlay
+          assert "VLS-002: remains executable-confirmed" in overlay
+          assert "VRS-003: remains executable-confirmed" in overlay
+          assert "VDS-002: remains executable-confirmed" in overlay
+          assert "VDS-003: remains executable-confirmed" in overlay
+          assert "VDS-004: remains executable-confirmed" in overlay
+
+          print("VIDEO_V20_RUNTIME_REVIEW_BOUNDARY_OK", sorted(states), dict(counts))
+          PY
+
+      - name: Re-run EV-103 Video V2.0 compositor evidence
+        run: python tools/validate_video_v20_compositors.py
+
+      - name: Validate semantic registry JSON Schema
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from jsonschema import Draft202012Validator
+          from pathlib import Path
+          s=json.loads(Path("audit_registry/finding_semantic_classification_schema_v0.1.json").read_text())
+          j=json.loads(Path("audit_registry/finding_semantic_classification_v0.1.json").read_text())
+          errors=sorted(Draft202012Validator(s).iter_errors(j), key=lambda e:list(e.path))
+          if errors:
+              raise SystemExit("\n".join(f"{list(e.path)}: {e.message}" for e in errors))
+          print("SEMANTIC_SCHEMA_OK")
+          PY
+
+      - name: Validate deterministic Known-Issues mapping
+        run: python tools/validate_known_issues_runtime_mapping_v0_1.py
+      - name: Validate SDK manifest consistency
+        run: python tools/validate_sdk_manifest_v0_1.py
+      - name: Root XSD regression gate
+        run: python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+      - name: Verify XSD working tree remains clean
+        run: git diff --exit-code -- '*.xsd'
