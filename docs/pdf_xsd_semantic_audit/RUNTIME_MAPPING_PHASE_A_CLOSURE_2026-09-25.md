@@ -76,3 +76,12 @@ The final persisted-state consistency run is triggered by recording this closure
 Run **36098583648**: **SUCCESS** on persisted closure HEAD `02fe789c38f255dcb318e80f70dc30dda90870a0`.
 
 Phase A is therefore terminally closed. The canonical runtime-review inventory is **77 reviewed + 115 not_applicable = 192**, with **0 candidate, 0 not_designed and 0 implemented**. Trigger descriptions remain non-executable. No Known-Issues matcher may alter the selected XSD PASS/FAIL result.
+
+## Post-closure scope correction discovered during Phase B
+
+On 2026-09-25 the source-locator pass exposed two metadata-scope errors in the semantic registry. See `docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CE005_CE006_VERSION_SCOPE_2026-09-25.md`.
+
+- CE-005: terminal scope corrected to V2.0–V2.4 (not V1.0–V2.4).
+- CE-006: terminal scope corrected to V2.2–V2.4 (not V2.4-only).
+
+Finding classifications and Phase-A counts are unchanged. The closure remains subject to a fresh consistency gate after persistence of this correction.
