@@ -1,6 +1,6 @@
 # Runtime-mapping review — Video V2.0 final candidate block — 2026-09-25
 
-Status: **reviewed / persisted / closure gate pending**.
+Status: **completed / reviewed / not implemented**.
 
 ## Scope
 
@@ -120,3 +120,20 @@ No executable matcher, compatibility alias, payload rewrite, schema substitution
 Primary runtime-mapping gate **36098151397**: **SUCCESS**.
 
 The gate verified the exact official VDS/VLS/VRS V2.0 authority blobs, the five compositor boundaries, the binding choice-notation correction, re-ran EV-103, and passed semantic-registry schema, deterministic Known-Issues mapping, SDK-manifest consistency and the complete root-XSD regression suite.
+
+## Closure gate
+
+Closure/consistency gate **36098238186**: **SUCCESS** on persisted HEAD `260c240982b667909be82474d6e98b04939111d3`.
+
+Final runtime-mapping inventory after the last fachlicher Reviewblock:
+
+```text
+reviewed        77
+candidate        0
+not_designed     0
+not_applicable 115
+implemented      0
+total           192
+```
+
+All semantic runtime dispositions are now terminal. The five video findings remain reviewed explanation-only XSD-invalid advisories; no matcher has been implemented and no XSD was changed.
