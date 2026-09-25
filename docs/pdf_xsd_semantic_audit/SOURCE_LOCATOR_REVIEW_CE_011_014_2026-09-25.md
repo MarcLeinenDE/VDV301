@@ -1,6 +1,6 @@
 # Source-locator review — CE-011 through CE-014 — 2026-09-25
 
-Status: **persisted / closure gate pending**.
+Status: **COMPLETED / terminally closed**.
 
 ## Scope
 
@@ -92,3 +92,9 @@ No finding semantics, runtime mapping state or XSD PASS/FAIL rule is changed.
 Run **36130205489**: **SUCCESS** on HEAD `c2ae3f47e4985e6d2754251a3d9f3a80b6863dc9`.
 
 The gate validated the canonical locator manifest, all **44 stored coverage lanes**, every XSD XPath against its exact blob, the CE-011..CE-014 PDF page/table matrix, corrected CE-011 scope, all Common V1.0–V2.4 executable evidence lanes, semantic/runtime/SDK consistency, full root-XSD regression and a clean XSD tree.
+
+## Closure gate
+
+Run **36130319991**: **SUCCESS** on persisted HEAD `a3401bb49ba203d9ac691b181937a001cfa0b9c1`.
+
+The CE-011..CE-014 locator block is terminally closed. Phase B now contains **10 complete findings / 44 version-specific coverage lanes**, with **182 findings remaining** in the manifest-wide target. No XSD, semantic classification, runtime disposition or conformance result was changed.
