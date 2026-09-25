@@ -1,6 +1,6 @@
 # Source-locator review — CE-005 through CE-010 — 2026-09-25
 
-Status: **pilot persisted / closure gate pending**.
+Status: **COMPLETED / pilot terminally closed**.
 
 ## Purpose
 
@@ -74,3 +74,9 @@ The primary gate must validate schema, exact semantic scope projection, exact XS
 Run **36128950500**: **SUCCESS** on HEAD `f7a21412a04d95335691c78a9f8a3d921e97082c`.
 
 The gate validated the locator JSON Schema, exact semantic-scope projection, all six PDF source registrations and byte pins, all 23 version lanes, the expected printed page/table matrix, every stored XSD XPath against the exact pinned Git blob, semantic/runtime manifests, SDK-manifest integration, the full root-XSD regression pool and a clean XSD working tree.
+
+## Closure gate
+
+Run **36129067095**: **SUCCESS** on persisted HEAD `6085d5b81a4d29020053e9dbdc3bea988c749237`.
+
+The CE-005..CE-010 source-locator pilot is terminally closed. The canonical locator manifest now contains **6 complete findings / 23 version lanes**, with **186 findings remaining** in Phase B. No XSD bytes, finding classifications, runtime dispositions or PASS/FAIL rules were changed.
