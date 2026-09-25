@@ -71,3 +71,7 @@ The deterministic Known-Issues mapping must be regenerated so its `profile_scope
 ## Follow-up
 
 Phase A must be re-gated after this post-closure correction. Only after a green revalidation may Phase B source-locator persistence continue.
+
+## Diagnostic alignment
+
+The semantic-basis and bilingual diagnostic text for CE-006 were also updated because the earlier wording still spoke only about V2.4. The revised text now describes the evidence-backed V2.2/V2.3 official-profile range and the separate V2.4 candidate/integration lane. This is explanatory metadata only; `valid_with_advisory`, `runtime_match=reviewed`, the finding assessment and XSD PASS/FAIL behaviour are unchanged.

@@ -1401,29 +1401,29 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "The V2.4 DeviceStateEnumeration table omits warning."
+          "note": "The affected V2.2 and V2.3 PDF DeviceStateEnumeration tables omit warning; the V2.4 PDF table also omits warning."
         },
         {
           "type": "official_xsd_explicit",
-          "note": "The selected V2.4 XSD contains the value warning."
+          "note": "Enumerations V2.2 contains warning; Common V2.3 reuses that exact V2.2 enumeration pool; the selected candidate/integration V2.4 enumeration also contains warning."
         },
         {
           "type": "executable_validation",
-          "note": "EV-124 confirms selected-schema enumeration behaviour."
+          "note": "EV-124 and the per-version Common/Enumerations validation lanes confirm the selected-schema enumeration behaviour without substituting neighbouring versions."
         }
       ],
       "diagnostic": {
         "de": {
           "title": "DeviceState warning steht nur in der XSD",
-          "short": "Die XSD akzeptiert warning, die V2.4-PDF-Tabelle führt den Wert nicht auf.",
-          "long": "Die Abweichung ist real; aus dem ausführbaren Nachweis allein folgt jedoch nicht, ob PDF oder XSD fachlich korrigiert werden soll.",
-          "recommendation": "warning bei passender XSD als gültig behandeln und optional auf die Dokumentationslücke hinweisen."
+          "short": "Die ausgewählte XSD akzeptiert warning, die zugehörigen geprüften PDF-Tabellen ab V2.2 führen den Wert nicht auf.",
+          "long": "Die Abweichung ist für die geprüften V2.2-/V2.3-Profile und den ausgewählten V2.4-Candidate/Integration-Pfad belegt: Die jeweils maßgebliche Enumeration enthält warning, die zugehörige PDF-Tabelle nicht. Das ändert die XSD-Konformität nicht.",
+          "recommendation": "warning bei passender ausgewählter XSD als gültig behandeln und auf die versionsgenaue Dokumentationslücke hinweisen."
         },
         "en": {
           "title": "DeviceState warning exists only in the XSD",
-          "short": "The XSD accepts warning, while the V2.4 PDF table omits it.",
-          "long": "The mismatch is real, but executable evidence alone does not establish whether the PDF or XSD should be corrected.",
-          "recommendation": "Treat warning as valid for the selected XSD and optionally explain the documentation gap."
+          "short": "The selected XSD accepts warning, while the corresponding checked PDF tables from V2.2 onward omit it.",
+          "long": "The mismatch is evidenced for the checked V2.2/V2.3 profiles and the selected V2.4 candidate/integration lane: the applicable enumeration contains warning while the corresponding PDF table does not. This does not change XSD conformance.",
+          "recommendation": "Treat warning as valid for the selected XSD and explain the version-specific documentation gap."
         }
       },
       "runtime_match": {
