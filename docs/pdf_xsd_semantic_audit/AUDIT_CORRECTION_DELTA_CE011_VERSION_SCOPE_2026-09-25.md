@@ -73,3 +73,9 @@ The deterministic runtime mapping is regenerated only to carry the corrected `pr
 ## Follow-up
 
 Phase A and the source-locator pilot must be revalidated before CE-011..CE-014 locator persistence continues.
+
+## Primary revalidation gate
+
+Run **36129458624**: **SUCCESS** on HEAD `346e21797405779ab9904db5903f6470cbe7b66f`.
+
+The gate verified the corrected CE-011 scope, V2.1 as an aligned negative control, V2.2/V2.3/V2.4 affected XSD boundaries, unchanged 77/115 runtime counts, exact semantic-to-runtime profile projection, the existing locator pilot's semantic pin, all per-version Common validators, SDK consistency, root-XSD regression and a clean XSD tree.

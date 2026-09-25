@@ -95,3 +95,5 @@ The post-closure scope correction was revalidated successfully in run **36100346
 Phase-B locator hardening found that CE-011 was incorrectly narrowed to V2.4 in the semantic registry. Historical closure and version-specific evidence establish V2.2–V2.4, with V2.1 as an aligned negative control. See `docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CE011_VERSION_SCOPE_2026-09-25.md`.
 
 Classification, runtime disposition, counts and selected-XSD authority are unchanged. A fresh consistency gate is required.
+
+CE-011 scope-correction primary gate **36129458624**: **SUCCESS**. Persisted-state closure is pending.
