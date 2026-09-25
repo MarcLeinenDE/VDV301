@@ -1,0 +1,156 @@
+name: TEMP runtime mapping Phase A closure
+
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths:
+      - .github/workflows/temp_runtime_mapping_phase_a_closure.yml
+      - audit_registry/finding_semantic_classification_v0.1.json
+      - sdk_manifest/known_issues_runtime_mapping_v0.1.json
+      - sdk_manifest/manifest_v0.1.json
+      - 00_START_HERE/CURRENT_STATE.json
+      - sdk_manifest/runtime_mapping_review_blocks/PHASE_A_TERMINAL_CLOSURE_v0.1.json
+      - docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_PHASE_A_CLOSURE_2026-09-25.md
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check lxml jsonschema
+
+      - name: Verify Phase A terminal inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import hashlib
+          from collections import Counter
+          from pathlib import Path
+
+          def git_blob_sha(data: bytes) -> str:
+              return hashlib.sha1(f"blob {len(data)}\0".encode("ascii")+data).hexdigest()
+
+          sem_path=Path("audit_registry/finding_semantic_classification_v0.1.json")
+          map_path=Path("sdk_manifest/known_issues_runtime_mapping_v0.1.json")
+          manifest_path=Path("sdk_manifest/manifest_v0.1.json")
+          state_path=Path("00_START_HERE/CURRENT_STATE.json")
+
+          sem=json.loads(sem_path.read_text())
+          mapping=json.loads(map_path.read_text())
+          manifest=json.loads(manifest_path.read_text())
+          state=json.loads(state_path.read_text())
+
+          assert len(sem["entries"])==192
+          ids=[e["finding_id"] for e in sem["entries"]]
+          assert len(ids)==len(set(ids))==192
+
+          counts=Counter(e["runtime_match"]["state"] for e in sem["entries"])
+          assert counts==Counter({"not_applicable":115,"reviewed":77}), counts
+          assert counts.get("candidate",0)==0
+          assert counts.get("not_designed",0)==0
+          assert counts.get("implemented",0)==0
+
+          reviewed_ids={e["finding_id"] for e in sem["entries"] if e["runtime_match"]["state"]=="reviewed"}
+          na_ids={e["finding_id"] for e in sem["entries"] if e["runtime_match"]["state"]=="not_applicable"}
+          assert reviewed_ids.isdisjoint(na_ids)
+          assert reviewed_ids|na_ids==set(ids)
+
+          map_ids=[m["finding_id"] for m in mapping["mappings"]]
+          assert len(map_ids)==len(set(map_ids))==77
+          assert set(map_ids)==reviewed_ids
+
+          sem_blob=git_blob_sha(sem_path.read_bytes())
+          assert mapping["source_semantic_registry"]["git_blob"]==sem_blob
+          assert mapping["source_semantic_registry"]["finding_count"]==192
+          assert mapping["source_semantic_registry"]["classification_state"]=="complete"
+
+          mc=mapping["counts"]
+          assert mc=={
+              "reviewed_mapping_count":77,
+              "implemented_count":0,
+              "semantic_candidate_count":0,
+              "semantic_not_designed_count":0,
+              "semantic_not_applicable_count":115,
+          },mc
+
+          assert mapping["state"]=="reviewed_inventory"
+          assert mapping["policy"]["normative_xsd_result_must_not_be_overridden"] is True
+          assert mapping["policy"]["generated_only_from_runtime_match_reviewed"] is True
+          assert mapping["policy"]["trigger_descriptions_are_not_executable_matchers"] is True
+          assert mapping["policy"]["implementation_requires_separate_profile_specific_validation"] is True
+
+          for m in mapping["mappings"]:
+              assert m["implementation_state"]=="reviewed_not_implemented",m["finding_id"]
+              assert m["authority_guard"]=="selected_xsd_result_remains_normative",m["finding_id"]
+              assert m["diagnostic_source"]["finding_id"]==m["finding_id"]
+              assert m["diagnostic_source"]["registry"]=="audit_registry/finding_semantic_classification_v0.1.json"
+              assert m["trigger_descriptions"],m["finding_id"]
+
+          kk=manifest["known_issues_knowledge"]
+          assert kk["finding_count"]==192
+          assert kk["runtime_match_distribution"]=={"candidate":0,"not_applicable":115,"not_designed":0,"reviewed":77}
+          assert kk["reviewed_mapping_count"]==77
+          assert kk["candidate_mapping_count"]==0
+          assert kk["not_designed_mapping_count"]==0
+          assert kk["not_applicable_mapping_count"]==115
+          assert kk["runtime_mapping_implemented_count"]==0
+          assert kk["trigger_descriptions_are_executable"] is False
+          assert kk["normative_xsd_override_allowed"] is False
+          assert kk["runtime_mapping_review_state"]=="all_semantic_findings_terminal_reviewed_or_not_applicable"
+
+          sdk=state["sdk"]
+          assert sdk["semantic_classification_finding_count"]==192
+          assert sdk["runtime_mapping_reviewed_count"]==77
+          assert sdk["runtime_mapping_candidate_count"]==0
+          assert sdk["runtime_mapping_not_designed_count"]==0
+          assert sdk["runtime_mapping_not_applicable_count"]==115
+          assert sdk["runtime_mapping_implemented_count"]==0
+          assert sdk["known_issues_normative_xsd_override_allowed"] is False
+          assert sdk["runtime_mapping_state"] in {"terminal_review_inventory_closure_pending","terminal_review_inventory_closed"}
+
+          # Candidate/integration authority must remain explicit and never be silently
+          # rewritten as official_release inside mappings.
+          for e in sem["entries"]:
+              for scope in e.get("version_scope",[]):
+                  if scope.get("authority")=="candidate_integration":
+                      assert "candidate" in (scope.get("note","")+" "+str(scope.get("xsd_profile",""))).lower() or "integration" in (scope.get("note","")+" "+str(scope.get("xsd_profile",""))).lower()
+
+          print("PHASE_A_TERMINAL_INVENTORY_OK",dict(counts),"mapping_count",len(map_ids),"semantic_blob",sem_blob)
+          PY
+
+      - name: Validate semantic registry JSON Schema
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from jsonschema import Draft202012Validator
+          from pathlib import Path
+          s=json.loads(Path("audit_registry/finding_semantic_classification_schema_v0.1.json").read_text())
+          j=json.loads(Path("audit_registry/finding_semantic_classification_v0.1.json").read_text())
+          errors=sorted(Draft202012Validator(s).iter_errors(j), key=lambda e:list(e.path))
+          if errors:
+              raise SystemExit("\n".join(f"{list(e.path)}: {e.message}" for e in errors))
+          print("SEMANTIC_SCHEMA_OK")
+          PY
+
+      - name: Validate runtime mapping JSON Schema and deterministic generator
+        run: python tools/validate_known_issues_runtime_mapping_v0_1.py
+
+      - name: Validate SDK manifest consistency
+        run: python tools/validate_sdk_manifest_v0_1.py
+
+      - name: Root XSD regression gate
+        run: python tools/validate_xsd_pool.py --repo-root . --dms-v24-tests
+
+      - name: Verify XSD working tree remains clean
+        run: git diff --exit-code -- '*.xsd'
