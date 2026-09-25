@@ -1,0 +1,30 @@
+{
+  "block_version": "0.1",
+  "block_id": "PHASE_A_TERMINAL_CLOSURE",
+  "review_date": "2026-09-25",
+  "source_semantic_registry_blob": "a8c274ea552518783ea1da70413acf248164a65b",
+  "source_runtime_mapping_blob": "ae2e85f07dbfd2408ba35b3602df0cd9038f1225",
+  "purpose": "Close the review-only runtime-mapping phase after every one of the 192 semantic findings has a terminal runtime disposition.",
+  "expected_terminal_inventory": {
+    "total": 192,
+    "reviewed": 77,
+    "not_applicable": 115,
+    "candidate": 0,
+    "not_designed": 0,
+    "implemented": 0
+  },
+  "closure_guards": [
+    "all 192 finding IDs are unique and runtime-terminal",
+    "reviewed mappings are generated only from semantic runtime_match=reviewed",
+    "the 77 runtime mapping IDs equal the 77 semantic reviewed IDs exactly",
+    "candidate and not_designed are both zero",
+    "no executable matcher is implemented in Phase A",
+    "trigger descriptions remain non-executable review knowledge",
+    "selected XSD result remains normative and no known-issue mapping may override PASS/FAIL",
+    "candidate/integration authorities remain provenance-separated from official release authorities",
+    "all manifest and CURRENT_STATE counters agree",
+    "complete root XSD regression remains green",
+    "no XSD mutation is part of closure"
+  ],
+  "state": "closure_gate_pending"
+}
