@@ -1,6 +1,6 @@
 # Source-locator review — CE-005 through CE-010 — 2026-09-25
 
-Status: **assembled / primary gate pending**.
+Status: **pilot persisted / closure gate pending**.
 
 ## Purpose
 
@@ -68,3 +68,9 @@ remaining                 186
 ```
 
 The primary gate must validate schema, exact semantic scope projection, exact XSD blobs/components, pilot PDF identities/locations, SDK-manifest integration and the complete root-XSD regression pool.
+
+## Primary gate
+
+Run **36128950500**: **SUCCESS** on HEAD `f7a21412a04d95335691c78a9f8a3d921e97082c`.
+
+The gate validated the locator JSON Schema, exact semantic-scope projection, all six PDF source registrations and byte pins, all 23 version lanes, the expected printed page/table matrix, every stored XSD XPath against the exact pinned Git blob, semantic/runtime manifests, SDK-manifest integration, the full root-XSD regression pool and a clean XSD working tree.
