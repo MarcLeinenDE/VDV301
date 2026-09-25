@@ -1,0 +1,1419 @@
+{
+  "manifest_version": "0.1",
+  "kind": "finding-source-locators",
+  "state": "in_progress",
+  "source_semantic_registry": {
+    "path": "audit_registry/finding_semantic_classification_v0.1.json",
+    "git_blob": "a1393cdfdea11f6c80de394da3e32b6f6ae15548",
+    "finding_count": 192
+  },
+  "policy": {
+    "selected_xsd_remains_normative": true,
+    "locators_are_explanatory_evidence": true,
+    "authority_must_be_explicit": true,
+    "pdf_locator_requires_byte_identity": true,
+    "xsd_locator_requires_git_blob": true,
+    "line_hints_are_noncanonical": true
+  },
+  "counts": {
+    "semantic_finding_count": 192,
+    "locator_entry_count": 6,
+    "coverage_complete_count": 6,
+    "coverage_partial_count": 0,
+    "remaining_finding_count": 186
+  },
+  "entries": [
+    {
+      "finding_id": "CE-005",
+      "service": "Common/Enumerations",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "Common V2.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Common XSD per version",
+          "note": "Post-closure scope correction 2026-09-25: historical closure supports CE-005 from V2.0 through V2.3. The ambiguous V1.x publication is not used to extend this finding."
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd",
+          "note": "Selected candidate/integration V2.4 lane retains the same bounded named-field modelling; it is not promoted to official-release authority."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "2.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v-2-0.pdfx",
+              "sha256": "23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088",
+              "printed_pages": [
+                29
+              ],
+              "section": "2.57 TripInformation",
+              "table": "Table 57",
+              "point_summary": "AdditionalTextMessage is documented as 0:* InternationalTextType."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.0.xsd",
+              "git_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+              "authority_detail": "exact selected official/historical VDV profile authority",
+              "component_kind": "complexType",
+              "component": "TripInformationStructure",
+              "member": "AdditionalTextMessage",
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TripInformationStructure']/xs:sequence/xs:element[@name='AdditionalTextMessage']",
+              "line_hint": "637",
+              "point_summary": "Element is minOccurs=0 with no maxOccurs, therefore XML Schema default maxOccurs=1."
+            }
+          ],
+          "coverage_note": "V2.0 PDF repeatability conflicts with the exact V2.0 Common XSD boundary."
+        },
+        {
+          "version": "2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.1",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v2-1-commonstructure-enums.pdfx",
+              "sha256": "a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32",
+              "printed_pages": [
+                31
+              ],
+              "section": "2.57 TripInformation",
+              "table": "Table 57",
+              "point_summary": "AdditionalTextMessage is documented as 0:* InternationalTextType."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.1.xsd",
+              "git_blob": "05977c9f86c7c9dd0b48f36a4a4e9be32e94659e",
+              "authority_detail": "exact selected official/historical VDV profile authority",
+              "component_kind": "complexType",
+              "component": "TripInformationStructure",
+              "member": "AdditionalTextMessage",
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TripInformationStructure']/xs:sequence/xs:element[@name='AdditionalTextMessage']",
+              "line_hint": "636",
+              "point_summary": "Element is minOccurs=0 with no maxOccurs, therefore maxOccurs=1."
+            }
+          ],
+          "coverage_note": "V2.1 retains the same base-field mismatch."
+        },
+        {
+          "version": "2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.2",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-2-commonstructure-enums.pdfx",
+              "sha256": "85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203",
+              "printed_pages": [
+                33
+              ],
+              "section": "2.58 TripInformation",
+              "table": "Table 58",
+              "point_summary": "AdditionalTextMessage is documented as 0:* InternationalTextType."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "exact selected official/historical VDV profile authority",
+              "component_kind": "complexType",
+              "component": "TripInformationStructure",
+              "member": "AdditionalTextMessage",
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TripInformationStructure']/xs:sequence/xs:element[@name='AdditionalTextMessage']",
+              "line_hint": "645",
+              "point_summary": "Element has no maxOccurs, therefore maxOccurs=1."
+            }
+          ],
+          "coverage_note": "V2.2 still rejects repeated base AdditionalTextMessage."
+        },
+        {
+          "version": "2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.3",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx",
+              "sha256": "d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b",
+              "printed_pages": [
+                34
+              ],
+              "section": "2.58 TripInformation",
+              "table": "Table 58",
+              "point_summary": "Base AdditionalTextMessage and AdditionalTextMessage(n), n=1..9, are documented as 0:*."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.3.xsd",
+              "git_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+              "authority_detail": "exact selected official/historical VDV profile authority",
+              "component_kind": "complexType",
+              "component": "TripInformationStructure",
+              "member": "AdditionalTextMessage",
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TripInformationStructure']/xs:sequence/xs:element[@name='AdditionalTextMessage']",
+              "line_hint": "701",
+              "point_summary": "Base field has no maxOccurs, therefore maxOccurs=1."
+            },
+            {
+              "file": "IBIS-IP_common_V2.3.xsd",
+              "git_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+              "authority_detail": "exact selected official/historical VDV profile authority",
+              "component_kind": "complexType",
+              "component": "TripInformationStructure",
+              "member": "AdditionalTextMessage1..9",
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TripInformationStructure']/xs:sequence/xs:element[starts-with(@name,'AdditionalTextMessage')]",
+              "line_hint": "701-710",
+              "point_summary": "Each explicitly numbered field has no maxOccurs and is individually bounded to one."
+            }
+          ],
+          "coverage_note": "V2.3 adds numbered fields but does not make any named field repeatable."
+        },
+        {
+          "version": "2.4",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.4",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sde-v2-4-commonstructure-enums.pdfx",
+              "sha256": "01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a",
+              "printed_pages": [
+                36,
+                37
+              ],
+              "section": "2.57 TripInformation",
+              "table": "Table 57",
+              "point_summary": "Base and numbered AdditionalTextMessage rows are documented as 0:*."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.4.xsd",
+              "git_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+              "authority_detail": "explicit selected candidate/integration authority; not official-release XSD authority",
+              "component_kind": "complexType",
+              "component": "TripInformationStructure",
+              "member": "AdditionalTextMessage",
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TripInformationStructure']/xs:sequence/xs:element[@name='AdditionalTextMessage']",
+              "line_hint": "743",
+              "point_summary": "Selected candidate base field has no maxOccurs, therefore maxOccurs=1."
+            },
+            {
+              "file": "IBIS-IP_common_V2.4.xsd",
+              "git_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+              "authority_detail": "explicit selected candidate/integration authority; not official-release XSD authority",
+              "component_kind": "complexType",
+              "component": "TripInformationStructure",
+              "member": "AdditionalTextMessage1..9",
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TripInformationStructure']/xs:sequence/xs:element[starts-with(@name,'AdditionalTextMessage')]",
+              "line_hint": "743-752",
+              "point_summary": "Selected candidate numbered fields are each individually bounded to one."
+            }
+          ],
+          "coverage_note": "Official V2.4 PDF is compared only with the explicitly selected candidate/integration XSD lane."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/04e_common_enums_v2_3_v2_4_history_and_closure.md",
+        "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CE005_CE006_VERSION_SCOPE_2026-09-25.md",
+        "EV-124 run 33735601969"
+      ]
+    },
+    {
+      "finding_id": "CE-006",
+      "service": "Common/Enumerations",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "Enumerations V2.2-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "V2.2 introduces DeviceStateEnumeration.warning while the V2.2 PDF table omits it; Common V2.3 reuses the exact Enumerations V2.2 dependency pool and its PDF table also omits warning."
+        },
+        {
+          "version": "Enumerations V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.4.xsd",
+          "note": "Selected candidate/integration V2.4 enumeration still contains warning while the official V2.4 PDF table omits it."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.2",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-2-commonstructure-enums.pdfx",
+              "sha256": "85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203",
+              "printed_pages": [
+                37
+              ],
+              "section": "3.5 DeviceStateEnumeration",
+              "table": "Table 70",
+              "point_summary": "PDF lists defective, notavailable, running and readyForShutdown; warning is absent."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "exact selected official/historical VDV profile authority",
+              "component_kind": "enumeration_value",
+              "component": "DeviceStateEnumeration",
+              "member": null,
+              "value": "warning",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='DeviceStateEnumeration']/xs:restriction/xs:enumeration[@value='warning']",
+              "line_hint": "56",
+              "point_summary": "Exact V2.2 enumeration contains warning."
+            }
+          ],
+          "coverage_note": "The official V2.2 PDF omits an XSD-valid value."
+        },
+        {
+          "version": "2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.3",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx",
+              "sha256": "d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b",
+              "printed_pages": [
+                38
+              ],
+              "section": "3.5 DeviceStateEnumeration",
+              "table": "Table 70",
+              "point_summary": "V2.3 PDF table omits warning."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "official V2.3 dependency route reuses exact Enumerations V2.2 blob",
+              "component_kind": "enumeration_value",
+              "component": "DeviceStateEnumeration",
+              "member": null,
+              "value": "warning",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='DeviceStateEnumeration']/xs:restriction/xs:enumeration[@value='warning']",
+              "line_hint": "56",
+              "point_summary": "Common V2.3 routes to Enumerations V2.2, which contains warning."
+            }
+          ],
+          "coverage_note": "V2.3 has no Enumerations V2.3 file; its official Common route reuses the V2.2 enumeration pool."
+        },
+        {
+          "version": "2.4",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.4",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sde-v2-4-commonstructure-enums.pdfx",
+              "sha256": "01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a",
+              "printed_pages": [
+                41
+              ],
+              "section": "3.5 DeviceStateEnumeration",
+              "table": "Table 69",
+              "point_summary": "Official V2.4 PDF table omits warning."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.4.xsd",
+              "git_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+              "authority_detail": "explicit selected candidate/integration authority; not official-release XSD authority",
+              "component_kind": "enumeration_value",
+              "component": "DeviceStateEnumeration",
+              "member": null,
+              "value": "warning",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='DeviceStateEnumeration']/xs:restriction/xs:enumeration[@value='warning']",
+              "line_hint": "56",
+              "point_summary": "Selected candidate/integration V2.4 enumeration contains warning."
+            }
+          ],
+          "coverage_note": "V2.4 XSD evidence remains candidate/integration only."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/04c_common_enums_v2_1_v2_2_history.md",
+        "docs/pdf_xsd_semantic_audit/04d_common_enums_v2_2_v2_3_history.md",
+        "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CE005_CE006_VERSION_SCOPE_2026-09-25.md"
+      ]
+    },
+    {
+      "finding_id": "CE-007",
+      "service": "Common/Enumerations",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "Enumerations V1.0-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Enumerations XSD per version"
+        },
+        {
+          "version": "Enumerations V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.4.xsd"
+        }
+      ],
+      "coverage": [
+        {
+          "version": "1.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V1.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds.pdfx",
+              "sha256": "a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf",
+              "printed_pages": [
+                27
+              ],
+              "section": "2.13 GNSSTypeEnumeration",
+              "table": "Table 74",
+              "point_summary": "PDF uses GNSSTypeEnumeration lexeme Other."
+            },
+            {
+              "source_id": "COMMON_V1.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds.pdfx",
+              "sha256": "a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf",
+              "printed_pages": [
+                29
+              ],
+              "section": "2.24 TicketValidationEnumeration",
+              "table": "Table 85",
+              "point_summary": "PDF uses TicketValidationEnumeration lexeme Valid."
+            },
+            {
+              "source_id": "COMMON_V1.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds.pdfx",
+              "sha256": "a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf",
+              "printed_pages": [
+                29
+              ],
+              "section": "2.25 VehicleModeEnumeration",
+              "table": "Table 86",
+              "point_summary": "PDF uses VehicleModeEnumeration lexeme Air."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "exact selected official/historical VDV profile authority",
+              "component_kind": "enumeration_value",
+              "component": "GNSSTypeEnumeration",
+              "member": null,
+              "value": "other",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='GNSSTypeEnumeration']/xs:restriction/xs:enumeration[@value='other']",
+              "line_hint": "160",
+              "point_summary": "Selected XSD uses lower-case other."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "exact selected official/historical VDV profile authority",
+              "component_kind": "enumeration_value",
+              "component": "TicketValidationEnumeration",
+              "member": null,
+              "value": "valid",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='TicketValidationEnumeration']/xs:restriction/xs:enumeration[@value='valid']",
+              "line_hint": "253",
+              "point_summary": "Selected XSD uses lower-case valid."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "exact selected official/historical VDV profile authority",
+              "component_kind": "enumeration_value",
+              "component": "VehicleModeEnumeration",
+              "member": null,
+              "value": "air",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='VehicleModeEnumeration']/xs:restriction/xs:enumeration[@value='air']",
+              "line_hint": "260",
+              "point_summary": "Selected XSD uses lower-case air."
+            }
+          ],
+          "coverage_note": "All three lexemes are case-sensitive XML Schema enumeration boundaries."
+        },
+        {
+          "version": "2.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v-2-0.pdfx",
+              "sha256": "23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088",
+              "printed_pages": [
+                35
+              ],
+              "section": "3.15 GNSSTypeEnumeration",
+              "table": "Table 79",
+              "point_summary": "PDF uses GNSSTypeEnumeration lexeme Other."
+            },
+            {
+              "source_id": "COMMON_V2.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v-2-0.pdfx",
+              "sha256": "23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088",
+              "printed_pages": [
+                37
+              ],
+              "section": "3.25 TicketValidationEnumeration",
+              "table": "Table 89",
+              "point_summary": "PDF uses TicketValidationEnumeration lexeme Valid."
+            },
+            {
+              "source_id": "COMMON_V2.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v-2-0.pdfx",
+              "sha256": "23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088",
+              "printed_pages": [
+                37
+              ],
+              "section": "3.26 VehicleModeEnumeration",
+              "table": "Table 90",
+              "point_summary": "PDF uses VehicleModeEnumeration lexeme Air."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.0.xsd",
+              "git_blob": "27e3c183b00381d959622d13c10543123af8eef6",
+              "authority_detail": "exact selected official/historical VDV profile authority",
+              "component_kind": "enumeration_value",
+              "component": "GNSSTypeEnumeration",
+              "member": null,
+              "value": "other",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='GNSSTypeEnumeration']/xs:restriction/xs:enumeration[@value='other']",
+              "line_hint": "163",
+              "point_summary": "Selected XSD uses lower-case other."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.0.xsd",
+              "git_blob": "27e3c183b00381d959622d13c10543123af8eef6",
+              "authority_detail": "exact selected official/historical VDV profile authority",
+              "component_kind": "enumeration_value",
+              "component": "TicketValidationEnumeration",
+              "member": null,
+              "value": "valid",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='TicketValidationEnumeration']/xs:restriction/xs:enumeration[@value='valid']",
+              "line_hint": "268",
+              "point_summary": "Selected XSD uses lower-case valid."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.0.xsd",
+              "git_blob": "27e3c183b00381d959622d13c10543123af8eef6",
+              "authority_detail": "exact selected official/historical VDV profile authority",
+              "component_kind": "enumeration_value",
+              "component": "VehicleModeEnumeration",
+              "member": null,
+              "value": "air",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='VehicleModeEnumeration']/xs:restriction/xs:enumeration[@value='air']",
+              "line_hint": "275",
+              "point_summary": "Selected XSD uses lower-case air."
+            }
+          ],
+          "coverage_note": "All three lexemes are case-sensitive XML Schema enumeration boundaries."
+        },
+        {
+          "version": "2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.1",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v2-1-commonstructure-enums.pdfx",
+              "sha256": "a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32",
+              "printed_pages": [
+                37
+              ],
+              "section": "3.15 GNSSTypeEnumeration",
+              "table": "Table 79",
+              "point_summary": "PDF uses GNSSTypeEnumeration lexeme Other."
+            },
+            {
+              "source_id": "COMMON_V2.1",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v2-1-commonstructure-enums.pdfx",
+              "sha256": "a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32",
+              "printed_pages": [
+                39
+              ],
+              "section": "3.25 TicketValidationEnumeration",
+              "table": "Table 89",
+              "point_summary": "PDF uses TicketValidationEnumeration lexeme Valid."
+            },
+            {
+              "source_id": "COMMON_V2.1",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v2-1-commonstructure-enums.pdfx",
+              "sha256": "a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32",
+              "printed_pages": [
+                39
+              ],
+              "section": "3.26 VehicleModeEnumeration",
+              "table": "Table 90",
+              "point_summary": "PDF uses VehicleModeEnumeration lexeme Air."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.1.xsd",
+              "git_blob": "311464690ad60749ed8d326217787e4b8ed0b718",
+              "authority_detail": "exact selected official/historical VDV profile authority",
+              "component_kind": "enumeration_value",
+              "component": "GNSSTypeEnumeration",
+              "member": null,
+              "value": "other",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='GNSSTypeEnumeration']/xs:restriction/xs:enumeration[@value='other']",
+              "line_hint": "165",
+              "point_summary": "Selected XSD uses lower-case other."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.1.xsd",
+              "git_blob": "311464690ad60749ed8d326217787e4b8ed0b718",
+              "authority_detail": "exact selected official/historical VDV profile authority",
+              "component_kind": "enumeration_value",
+              "component": "TicketValidationEnumeration",
+              "member": null,
+              "value": "valid",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='TicketValidationEnumeration']/xs:restriction/xs:enumeration[@value='valid']",
+              "line_hint": "276",
+              "point_summary": "Selected XSD uses lower-case valid."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.1.xsd",
+              "git_blob": "311464690ad60749ed8d326217787e4b8ed0b718",
+              "authority_detail": "exact selected official/historical VDV profile authority",
+              "component_kind": "enumeration_value",
+              "component": "VehicleModeEnumeration",
+              "member": null,
+              "value": "air",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='VehicleModeEnumeration']/xs:restriction/xs:enumeration[@value='air']",
+              "line_hint": "283",
+              "point_summary": "Selected XSD uses lower-case air."
+            }
+          ],
+          "coverage_note": "All three lexemes are case-sensitive XML Schema enumeration boundaries."
+        },
+        {
+          "version": "2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.2",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-2-commonstructure-enums.pdfx",
+              "sha256": "85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203",
+              "printed_pages": [
+                39
+              ],
+              "section": "3.15 GNSSTypeEnumeration",
+              "table": "Table 80",
+              "point_summary": "PDF uses GNSSTypeEnumeration lexeme Other."
+            },
+            {
+              "source_id": "COMMON_V2.2",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-2-commonstructure-enums.pdfx",
+              "sha256": "85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203",
+              "printed_pages": [
+                41
+              ],
+              "section": "3.25 TicketValidationEnumeration",
+              "table": "Table 90",
+              "point_summary": "PDF uses TicketValidationEnumeration lexeme Valid."
+            },
+            {
+              "source_id": "COMMON_V2.2",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-2-commonstructure-enums.pdfx",
+              "sha256": "85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203",
+              "printed_pages": [
+                41
+              ],
+              "section": "3.26 VehicleModeEnumeration",
+              "table": "Table 91",
+              "point_summary": "PDF uses VehicleModeEnumeration lexeme Air."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "exact selected official/historical VDV profile authority",
+              "component_kind": "enumeration_value",
+              "component": "GNSSTypeEnumeration",
+              "member": null,
+              "value": "other",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='GNSSTypeEnumeration']/xs:restriction/xs:enumeration[@value='other']",
+              "line_hint": "~167",
+              "point_summary": "Selected XSD uses lower-case other."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "exact selected official/historical VDV profile authority",
+              "component_kind": "enumeration_value",
+              "component": "TicketValidationEnumeration",
+              "member": null,
+              "value": "valid",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='TicketValidationEnumeration']/xs:restriction/xs:enumeration[@value='valid']",
+              "line_hint": "277",
+              "point_summary": "Selected XSD uses lower-case valid."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "exact selected official/historical VDV profile authority",
+              "component_kind": "enumeration_value",
+              "component": "VehicleModeEnumeration",
+              "member": null,
+              "value": "air",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='VehicleModeEnumeration']/xs:restriction/xs:enumeration[@value='air']",
+              "line_hint": "284",
+              "point_summary": "Selected XSD uses lower-case air."
+            }
+          ],
+          "coverage_note": "All three lexemes are case-sensitive XML Schema enumeration boundaries."
+        },
+        {
+          "version": "2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.3",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx",
+              "sha256": "d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b",
+              "printed_pages": [
+                40
+              ],
+              "section": "3.15 GNSSTypeEnumeration",
+              "table": "Table 80",
+              "point_summary": "PDF uses GNSSTypeEnumeration lexeme Other."
+            },
+            {
+              "source_id": "COMMON_V2.3",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx",
+              "sha256": "d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b",
+              "printed_pages": [
+                42
+              ],
+              "section": "3.25 TicketValidationEnumeration",
+              "table": "Table 90",
+              "point_summary": "PDF uses TicketValidationEnumeration lexeme Valid."
+            },
+            {
+              "source_id": "COMMON_V2.3",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx",
+              "sha256": "d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b",
+              "printed_pages": [
+                42
+              ],
+              "section": "3.26 VehicleModeEnumeration",
+              "table": "Table 91",
+              "point_summary": "PDF uses VehicleModeEnumeration lexeme Air."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "official V2.3 dependency route reuses exact Enumerations V2.2 blob",
+              "component_kind": "enumeration_value",
+              "component": "GNSSTypeEnumeration",
+              "member": null,
+              "value": "other",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='GNSSTypeEnumeration']/xs:restriction/xs:enumeration[@value='other']",
+              "line_hint": "~167",
+              "point_summary": "Selected XSD uses lower-case other."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "official V2.3 dependency route reuses exact Enumerations V2.2 blob",
+              "component_kind": "enumeration_value",
+              "component": "TicketValidationEnumeration",
+              "member": null,
+              "value": "valid",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='TicketValidationEnumeration']/xs:restriction/xs:enumeration[@value='valid']",
+              "line_hint": "277",
+              "point_summary": "Selected XSD uses lower-case valid."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "official V2.3 dependency route reuses exact Enumerations V2.2 blob",
+              "component_kind": "enumeration_value",
+              "component": "VehicleModeEnumeration",
+              "member": null,
+              "value": "air",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='VehicleModeEnumeration']/xs:restriction/xs:enumeration[@value='air']",
+              "line_hint": "284",
+              "point_summary": "Selected XSD uses lower-case air."
+            }
+          ],
+          "coverage_note": "All three lexemes are case-sensitive XML Schema enumeration boundaries."
+        },
+        {
+          "version": "2.4",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.4",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sde-v2-4-commonstructure-enums.pdfx",
+              "sha256": "01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a",
+              "printed_pages": [
+                43
+              ],
+              "section": "3.15 GNSSTypeEnumeration",
+              "table": "Table 79",
+              "point_summary": "PDF uses GNSSTypeEnumeration lexeme Other."
+            },
+            {
+              "source_id": "COMMON_V2.4",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sde-v2-4-commonstructure-enums.pdfx",
+              "sha256": "01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a",
+              "printed_pages": [
+                45
+              ],
+              "section": "3.25 TicketValidationEnumeration",
+              "table": "Table 89",
+              "point_summary": "PDF uses TicketValidationEnumeration lexeme Valid."
+            },
+            {
+              "source_id": "COMMON_V2.4",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sde-v2-4-commonstructure-enums.pdfx",
+              "sha256": "01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a",
+              "printed_pages": [
+                45
+              ],
+              "section": "3.26 VehicleModeEnumeration",
+              "table": "Table 90",
+              "point_summary": "PDF uses VehicleModeEnumeration lexeme Air."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.4.xsd",
+              "git_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+              "authority_detail": "explicit selected candidate/integration authority; not official-release XSD authority",
+              "component_kind": "enumeration_value",
+              "component": "GNSSTypeEnumeration",
+              "member": null,
+              "value": "other",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='GNSSTypeEnumeration']/xs:restriction/xs:enumeration[@value='other']",
+              "line_hint": "~168",
+              "point_summary": "Selected XSD uses lower-case other."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.4.xsd",
+              "git_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+              "authority_detail": "explicit selected candidate/integration authority; not official-release XSD authority",
+              "component_kind": "enumeration_value",
+              "component": "TicketValidationEnumeration",
+              "member": null,
+              "value": "valid",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='TicketValidationEnumeration']/xs:restriction/xs:enumeration[@value='valid']",
+              "line_hint": "278",
+              "point_summary": "Selected XSD uses lower-case valid."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.4.xsd",
+              "git_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+              "authority_detail": "explicit selected candidate/integration authority; not official-release XSD authority",
+              "component_kind": "enumeration_value",
+              "component": "VehicleModeEnumeration",
+              "member": null,
+              "value": "air",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='VehicleModeEnumeration']/xs:restriction/xs:enumeration[@value='air']",
+              "line_hint": "285",
+              "point_summary": "Selected XSD uses lower-case air."
+            }
+          ],
+          "coverage_note": "All three lexemes are case-sensitive XML Schema enumeration boundaries."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/04a_common_enums_v1_0_v2_0_history.md",
+        "docs/pdf_xsd_semantic_audit/04b_common_enums_v2_0_v2_1_history.md",
+        "docs/pdf_xsd_semantic_audit/04c_common_enums_v2_1_v2_2_history.md",
+        "docs/pdf_xsd_semantic_audit/01e_common_enums_v2_4_enumeration_second_pass.md"
+      ]
+    },
+    {
+      "finding_id": "CE-008",
+      "service": "Common/Enumerations",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "Enumerations V2.2-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Enumerations XSD"
+        },
+        {
+          "version": "Enumerations V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.4.xsd"
+        }
+      ],
+      "coverage": [
+        {
+          "version": "2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.2",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-2-commonstructure-enums.pdfx",
+              "sha256": "85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203",
+              "printed_pages": [
+                46
+              ],
+              "section": "3.38 FunicularSubmodeEnumeration",
+              "table": "Table 103",
+              "point_summary": "PDF uses Unknown where XSD uses unknown."
+            },
+            {
+              "source_id": "COMMON_V2.2",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-2-commonstructure-enums.pdfx",
+              "sha256": "85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203",
+              "printed_pages": [
+                46
+              ],
+              "section": "3.39 TaxiSubmodeEnumeration",
+              "table": "Table 104",
+              "point_summary": "PDF uses Unknown, Undefined and minicab where XSD uses unknown, undefined and miniCab."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "exact selected official/historical VDV profile authority",
+              "component_kind": "simpleType",
+              "component": "FunicularSubmodeEnumeration",
+              "member": null,
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='FunicularSubmodeEnumeration']",
+              "line_hint": "622-631",
+              "point_summary": "Selected XSD contains lower-case unknown."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "exact selected official/historical VDV profile authority",
+              "component_kind": "simpleType",
+              "component": "TaxiSubmodeEnumeration",
+              "member": null,
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='TaxiSubmodeEnumeration']",
+              "line_hint": "640-654",
+              "point_summary": "Selected XSD contains unknown, undefined and miniCab."
+            }
+          ],
+          "coverage_note": "Funicular and Taxi submode spellings are case-sensitive."
+        },
+        {
+          "version": "2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.3",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx",
+              "sha256": "d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b",
+              "printed_pages": [
+                47
+              ],
+              "section": "3.38 FunicularSubmodeEnumeration",
+              "table": "Table 103",
+              "point_summary": "PDF uses Unknown where XSD uses unknown."
+            },
+            {
+              "source_id": "COMMON_V2.3",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx",
+              "sha256": "d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b",
+              "printed_pages": [
+                47
+              ],
+              "section": "3.39 TaxiSubmodeEnumeration",
+              "table": "Table 104",
+              "point_summary": "PDF uses Unknown, Undefined and minicab where XSD uses unknown, undefined and miniCab."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "official V2.3 dependency route reuses exact Enumerations V2.2 blob",
+              "component_kind": "simpleType",
+              "component": "FunicularSubmodeEnumeration",
+              "member": null,
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='FunicularSubmodeEnumeration']",
+              "line_hint": "622-631",
+              "point_summary": "Selected XSD contains lower-case unknown."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "official V2.3 dependency route reuses exact Enumerations V2.2 blob",
+              "component_kind": "simpleType",
+              "component": "TaxiSubmodeEnumeration",
+              "member": null,
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='TaxiSubmodeEnumeration']",
+              "line_hint": "640-654",
+              "point_summary": "Selected XSD contains unknown, undefined and miniCab."
+            }
+          ],
+          "coverage_note": "Funicular and Taxi submode spellings are case-sensitive."
+        },
+        {
+          "version": "2.4",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.4",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sde-v2-4-commonstructure-enums.pdfx",
+              "sha256": "01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a",
+              "printed_pages": [
+                50
+              ],
+              "section": "3.38 FunicularSubmodeEnumeration",
+              "table": "Table 102",
+              "point_summary": "PDF uses Unknown where XSD uses unknown."
+            },
+            {
+              "source_id": "COMMON_V2.4",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sde-v2-4-commonstructure-enums.pdfx",
+              "sha256": "01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a",
+              "printed_pages": [
+                50
+              ],
+              "section": "3.39 TaxiSubmodeEnumeration",
+              "table": "Table 103",
+              "point_summary": "PDF uses Unknown, Undefined and minicab where XSD uses unknown, undefined and miniCab."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.4.xsd",
+              "git_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+              "authority_detail": "explicit selected candidate/integration authority; not official-release XSD authority",
+              "component_kind": "simpleType",
+              "component": "FunicularSubmodeEnumeration",
+              "member": null,
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='FunicularSubmodeEnumeration']",
+              "line_hint": "623-632",
+              "point_summary": "Selected XSD contains lower-case unknown."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.4.xsd",
+              "git_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+              "authority_detail": "explicit selected candidate/integration authority; not official-release XSD authority",
+              "component_kind": "simpleType",
+              "component": "TaxiSubmodeEnumeration",
+              "member": null,
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='TaxiSubmodeEnumeration']",
+              "line_hint": "641-655",
+              "point_summary": "Selected XSD contains unknown, undefined and miniCab."
+            }
+          ],
+          "coverage_note": "Funicular and Taxi submode spellings are case-sensitive."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/04c_common_enums_v2_1_v2_2_history.md",
+        "docs/pdf_xsd_semantic_audit/01e_common_enums_v2_4_enumeration_second_pass.md",
+        "EV-124 run 33735601969"
+      ]
+    },
+    {
+      "finding_id": "CE-009",
+      "service": "Common/Enumerations",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "Enumerations V2.2-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "exact selected Enumerations XSD"
+        },
+        {
+          "version": "Enumerations V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.4.xsd"
+        }
+      ],
+      "coverage": [
+        {
+          "version": "2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.2",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-2-commonstructure-enums.pdfx",
+              "sha256": "85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203",
+              "printed_pages": [
+                43
+              ],
+              "section": "3.30 RailSubmodeEnumeration",
+              "table": "Table 95",
+              "point_summary": "PDF uses specialRail."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "exact selected official/historical VDV profile authority",
+              "component_kind": "enumeration_value",
+              "component": "RailSubmodeEnumeration",
+              "member": null,
+              "value": "specialTrain",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='RailSubmodeEnumeration']/xs:restriction/xs:enumeration[@value='specialTrain']",
+              "line_hint": "422",
+              "point_summary": "Selected XSD uses specialTrain."
+            }
+          ],
+          "coverage_note": "The PDF and XSD use different case-sensitive lexemes for the corresponding rail submode."
+        },
+        {
+          "version": "2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.3",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx",
+              "sha256": "d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b",
+              "printed_pages": [
+                44
+              ],
+              "section": "3.30 RailSubmodeEnumeration",
+              "table": "Table 95",
+              "point_summary": "PDF uses specialRail."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "official V2.3 dependency route reuses exact Enumerations V2.2 blob",
+              "component_kind": "enumeration_value",
+              "component": "RailSubmodeEnumeration",
+              "member": null,
+              "value": "specialTrain",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='RailSubmodeEnumeration']/xs:restriction/xs:enumeration[@value='specialTrain']",
+              "line_hint": "422",
+              "point_summary": "Selected XSD uses specialTrain."
+            }
+          ],
+          "coverage_note": "The PDF and XSD use different case-sensitive lexemes for the corresponding rail submode."
+        },
+        {
+          "version": "2.4",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.4",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sde-v2-4-commonstructure-enums.pdfx",
+              "sha256": "01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a",
+              "printed_pages": [
+                47
+              ],
+              "section": "3.30 RailSubmodeEnumeration",
+              "table": "Table 94",
+              "point_summary": "PDF uses specialRail."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.4.xsd",
+              "git_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+              "authority_detail": "explicit selected candidate/integration authority; not official-release XSD authority",
+              "component_kind": "enumeration_value",
+              "component": "RailSubmodeEnumeration",
+              "member": null,
+              "value": "specialTrain",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='RailSubmodeEnumeration']/xs:restriction/xs:enumeration[@value='specialTrain']",
+              "line_hint": "423",
+              "point_summary": "Selected XSD uses specialTrain."
+            }
+          ],
+          "coverage_note": "The PDF and XSD use different case-sensitive lexemes for the corresponding rail submode."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/04c_common_enums_v2_1_v2_2_history.md",
+        "docs/pdf_xsd_semantic_audit/01f_common_enums_v2_4_pdf_vs_xsd_enum_diff.md",
+        "EV-124 run 33735601969"
+      ]
+    },
+    {
+      "finding_id": "CE-010",
+      "service": "Common/Enumerations",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "Enumerations V2.2-V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.2.xsd"
+        },
+        {
+          "version": "Enumerations V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.4.xsd"
+        }
+      ],
+      "coverage": [
+        {
+          "version": "2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.2",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-2-commonstructure-enums.pdfx",
+              "sha256": "85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203",
+              "printed_pages": [
+                45
+              ],
+              "section": "3.36 AirSubmodeEnumeration",
+              "table": "Table 101",
+              "point_summary": "PDF table omits canalBarge."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "exact selected official/historical VDV profile authority",
+              "component_kind": "enumeration_value",
+              "component": "AirSubmodeEnumeration",
+              "member": null,
+              "value": "canalBarge",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='AirSubmodeEnumeration']/xs:restriction/xs:enumeration[@value='canalBarge']",
+              "line_hint": "588-592",
+              "point_summary": "Selected XSD contains canalBarge; annotation marks it as not in TPEG."
+            }
+          ],
+          "coverage_note": "canalBarge is XSD-valid although absent from the corresponding PDF table."
+        },
+        {
+          "version": "2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.3",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx",
+              "sha256": "d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b",
+              "printed_pages": [
+                46
+              ],
+              "section": "3.36 AirSubmodeEnumeration",
+              "table": "Table 101",
+              "point_summary": "PDF table omits canalBarge."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "official V2.3 dependency route reuses exact Enumerations V2.2 blob",
+              "component_kind": "enumeration_value",
+              "component": "AirSubmodeEnumeration",
+              "member": null,
+              "value": "canalBarge",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='AirSubmodeEnumeration']/xs:restriction/xs:enumeration[@value='canalBarge']",
+              "line_hint": "588-592",
+              "point_summary": "Selected XSD contains canalBarge; annotation marks it as not in TPEG."
+            }
+          ],
+          "coverage_note": "canalBarge is XSD-valid although absent from the corresponding PDF table."
+        },
+        {
+          "version": "2.4",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.4",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sde-v2-4-commonstructure-enums.pdfx",
+              "sha256": "01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a",
+              "printed_pages": [
+                49
+              ],
+              "section": "3.36 AirSubmodeEnumeration",
+              "table": "Table 100",
+              "point_summary": "PDF table omits canalBarge."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.4.xsd",
+              "git_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+              "authority_detail": "explicit selected candidate/integration authority; not official-release XSD authority",
+              "component_kind": "enumeration_value",
+              "component": "AirSubmodeEnumeration",
+              "member": null,
+              "value": "canalBarge",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='AirSubmodeEnumeration']/xs:restriction/xs:enumeration[@value='canalBarge']",
+              "line_hint": "589-593",
+              "point_summary": "Selected XSD contains canalBarge; annotation marks it as not in TPEG."
+            }
+          ],
+          "coverage_note": "canalBarge is XSD-valid although absent from the corresponding PDF table."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/04e_common_enums_v2_3_v2_4_history_and_closure.md",
+        "docs/pdf_xsd_semantic_audit/01f_common_enums_v2_4_pdf_vs_xsd_enum_diff.md",
+        "EV-124 run 33735601969"
+      ]
+    }
+  ]
+}

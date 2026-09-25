@@ -1,0 +1,371 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/vdv301/finding_source_locators_v0.1.schema.json",
+  "title": "VDV 301 finding source locator manifest v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifest_version",
+    "kind",
+    "state",
+    "source_semantic_registry",
+    "policy",
+    "counts",
+    "entries"
+  ],
+  "properties": {
+    "manifest_version": {
+      "const": "0.1"
+    },
+    "kind": {
+      "const": "finding-source-locators"
+    },
+    "state": {
+      "enum": [
+        "in_progress",
+        "complete"
+      ]
+    },
+    "source_semantic_registry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "git_blob",
+        "finding_count"
+      ],
+      "properties": {
+        "path": {
+          "const": "audit_registry/finding_semantic_classification_v0.1.json"
+        },
+        "git_blob": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "finding_count": {
+          "const": 192
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "selected_xsd_remains_normative",
+        "locators_are_explanatory_evidence",
+        "authority_must_be_explicit",
+        "pdf_locator_requires_byte_identity",
+        "xsd_locator_requires_git_blob",
+        "line_hints_are_noncanonical"
+      ],
+      "properties": {
+        "selected_xsd_remains_normative": {
+          "const": true
+        },
+        "locators_are_explanatory_evidence": {
+          "const": true
+        },
+        "authority_must_be_explicit": {
+          "const": true
+        },
+        "pdf_locator_requires_byte_identity": {
+          "const": true
+        },
+        "xsd_locator_requires_git_blob": {
+          "const": true
+        },
+        "line_hints_are_noncanonical": {
+          "const": true
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "semantic_finding_count",
+        "locator_entry_count",
+        "coverage_complete_count",
+        "coverage_partial_count",
+        "remaining_finding_count"
+      ],
+      "properties": {
+        "semantic_finding_count": {
+          "const": 192
+        },
+        "locator_entry_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 192
+        },
+        "coverage_complete_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 192
+        },
+        "coverage_partial_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 192
+        },
+        "remaining_finding_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 192
+        }
+      }
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    }
+  },
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "finding_id",
+        "service",
+        "coverage_state",
+        "scope_claims",
+        "coverage",
+        "supporting_evidence"
+      ],
+      "properties": {
+        "finding_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "service": {
+          "type": "string",
+          "minLength": 1
+        },
+        "coverage_state": {
+          "enum": [
+            "complete",
+            "partial"
+          ]
+        },
+        "scope_claims": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object"
+          }
+        },
+        "coverage": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/coverage"
+          }
+        },
+        "supporting_evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "authority",
+        "coverage_status",
+        "pdf_locators",
+        "xsd_locators",
+        "coverage_note"
+      ],
+      "properties": {
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority": {
+          "enum": [
+            "official_release",
+            "candidate_integration"
+          ]
+        },
+        "coverage_status": {
+          "enum": [
+            "complete",
+            "partial"
+          ]
+        },
+        "pdf_locators": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pdf_locator"
+          }
+        },
+        "xsd_locators": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/xsd_locator"
+          }
+        },
+        "coverage_note": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "properties": {
+                "pdf_locators": {
+                  "minItems": 1
+                }
+              }
+            },
+            {
+              "properties": {
+                "xsd_locators": {
+                  "minItems": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "pdf_locator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "document_title",
+        "document_version",
+        "publication_authority",
+        "url",
+        "sha256",
+        "printed_pages",
+        "section",
+        "point_summary"
+      ],
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "document_title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "document_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publication_authority": {
+          "const": "official_publication"
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https://"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "printed_pages": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "section": {
+          "type": "string",
+          "minLength": 1
+        },
+        "table": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "point_summary": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "xsd_locator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "file",
+        "git_blob",
+        "authority_detail",
+        "component_kind",
+        "component",
+        "xpath_hint",
+        "point_summary"
+      ],
+      "properties": {
+        "file": {
+          "type": "string",
+          "pattern": "\\.xsd$"
+        },
+        "git_blob": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "authority_detail": {
+          "type": "string",
+          "minLength": 1
+        },
+        "component_kind": {
+          "enum": [
+            "complexType",
+            "simpleType",
+            "element",
+            "group",
+            "enumeration_value"
+          ]
+        },
+        "component": {
+          "type": "string",
+          "minLength": 1
+        },
+        "member": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "xpath_hint": {
+          "type": "string",
+          "minLength": 1
+        },
+        "line_hint": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "point_summary": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

@@ -29,6 +29,7 @@ def main() -> int:
     result_schema = load_json("public_result_contract_v0.1.schema.json")
     overrides = load_json("routing_overrides_v0.1.json")
     runtime_mapping = load_json("known_issues_runtime_mapping_v0.1.json")
+    source_locators = json.loads((ROOT / manifest["source_documents"]["finding_source_locators"]).read_text(encoding="utf-8"))
 
     expect("manifest version is 0.1", manifest["manifest_version"] == "0.1")
     expect("routing overrides version matches manifest", overrides["manifest_version"] == manifest["manifest_version"])
@@ -64,6 +65,15 @@ def main() -> int:
     expect("Known-Issues not-designed count matches runtime-mapping manifest", knowledge["not_designed_mapping_count"] == runtime_counts["semantic_not_designed_count"])
     expect("Known-Issues not-applicable count matches runtime-mapping manifest", knowledge["not_applicable_mapping_count"] == runtime_counts["semantic_not_applicable_count"])
     expect("Known-Issues implemented count matches runtime-mapping manifest", knowledge["runtime_mapping_implemented_count"] == runtime_counts["implemented_count"])
+
+    expect("source-locator manifest path matches Known-Issues knowledge", knowledge["source_locator_manifest"] == manifest["source_documents"]["finding_source_locators"])
+    expect("source-locator schema path matches Known-Issues knowledge", knowledge["source_locator_schema"] == manifest["source_documents"]["finding_source_locator_schema"])
+    locator_counts = source_locators["counts"]
+    expect("source-locator entry count matches SDK manifest", knowledge["source_locator_entry_count"] == locator_counts["locator_entry_count"])
+    expect("source-locator complete count matches SDK manifest", knowledge["source_locator_complete_count"] == locator_counts["coverage_complete_count"])
+    expect("source-locator partial count matches SDK manifest", knowledge["source_locator_partial_count"] == locator_counts["coverage_partial_count"])
+    expect("source-locator remaining count matches SDK manifest", knowledge["source_locator_remaining_count"] == locator_counts["remaining_finding_count"])
+    expect("source-locator manifest preserves selected-XSD authority", source_locators["policy"]["selected_xsd_remains_normative"] is True)
 
     root_map = ROOT / manifest["storage_model"]["legacy_root_metadata"]
     expect("legacy V1.0 root map exists", root_map.is_file())
