@@ -1970,7 +1970,13 @@
     "version_and_finding_governance": "docs/pdf_xsd_semantic_audit/SDK_VERSION_AND_FINDING_GOVERNANCE.md",
     "historical_finding_rule": "Findings are immutable per exact profile/version. Later corrections are version-history evidence only and never retroactively alter older PASS/FAIL or remove an older finding.",
     "candidate_profile_rule": "Candidate/integration profiles are included for SDK completeness through V2.4 but remain explicitly non-official.",
-    "vdv3_boundary_rule": "VDV 3.0 is treated as a separate redesign generation; do not infer V3 rules into V1.x/V2.x."
+    "vdv3_boundary_rule": "VDV 3.0 is treated as a separate redesign generation; do not infer V3 rules into V1.x/V2.x.",
+    "source_locator_entry_count": 11,
+    "source_locator_complete_count": 11,
+    "source_locator_partial_count": 0,
+    "source_locator_remaining_count": 181,
+    "source_locator_latest_review_block": "CE_015",
+    "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_CE_015_2026-09-28.md"
   },
   "evidence": {
     "xsd_ev_completed": [
@@ -2055,16 +2061,16 @@
     "source_locator_manifest": "audit_registry/finding_source_locators_v0.1.json",
     "source_locator_schema": "audit_registry/finding_source_locators_v0.1.schema.json",
     "source_locator_validator": "tools/validate_finding_source_locators_v0_1.py",
-    "source_locator_entry_count": 10,
-    "source_locator_complete_count": 10,
+    "source_locator_entry_count": 11,
+    "source_locator_complete_count": 11,
     "source_locator_partial_count": 0,
-    "source_locator_remaining_count": 182,
-    "source_locator_latest_review_block": "CE_011_014",
-    "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_CE_011_014_2026-09-25.md",
+    "source_locator_remaining_count": 181,
+    "source_locator_latest_review_block": "CE_015",
+    "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_CE_015_2026-09-28.md",
     "source_locator_latest_gate_run_id": "36130319991"
   },
   "next_actions": [
-    "Continue Phase B with the next related Common/Enumerations source-locator block, beginning CE-015 onward; verify semantic version scopes against the historical closure before adding locators.",
+    "Validate and terminally close the CE-015 source-locator block, then continue Phase B with CE-016 in another small block.",
     "Preserve every historical finding per exact profile even when a later version or candidate corrects it; later corrections are evidence/history only.",
     "After source-locator closure, create and pilot the separate DeviceManagementService service/version/operation obligation matrix.",
     "Only after those gates, implement structured profile-specific Known-Issues matchers with positive/negative evidence."
