@@ -17,10 +17,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 18,
-    "coverage_complete_count": 18,
+    "locator_entry_count": 19,
+    "coverage_complete_count": 19,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 174
+    "remaining_finding_count": 173
   },
   "entries": [
     {
@@ -4498,6 +4498,77 @@
         "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4_FRESH_2026-09-03.md",
         "EV-117",
         "EV-118",
+        "EV-124 run 33735601969"
+      ]
+    },
+    {
+      "finding_id": "CE-023",
+      "service": "Common/Enumerations",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "Common V2.2",
+          "authority": "documentation_only",
+          "note": "Only V2.2 is confirmed affected; V2.3 scope was withdrawn and V2.4 is not affected."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "2.2",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.2",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-2-commonstructure-enums.pdfx",
+              "sha256": "85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203",
+              "printed_pages": [
+                26
+              ],
+              "section": "2.34 NetexMode",
+              "table": "NetexMode table (corrupt duplicate)",
+              "point_summary": "Section 2.34 is headed NetexMode but the displayed table contains Message fields: Message, Message-ID, TimeStamp, MessageType, MessageText."
+            },
+            {
+              "source_id": "COMMON_V2.2",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-2-commonstructure-enums.pdfx",
+              "sha256": "85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203",
+              "printed_pages": [
+                15
+              ],
+              "section": "1.18 NetexMode",
+              "table": "NetexMode structure table",
+              "point_summary": "Earlier table in the same PDF contains the actual NetexMode main-mode/submode choice model."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "exact selected official Common V2.2 XSD authority",
+              "component_kind": "complexType",
+              "component": "NetexMode",
+              "value": "main-mode choice plus submode choice",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='NetexMode']",
+              "line_hint": "956-970",
+              "point_summary": "Exact XSD contains the NetexMode choice model, not the Message fields shown in the corrupt second PDF table."
+            }
+          ],
+          "coverage_note": "Documentation-only V2.2 copy/paste defect. No XSD special handling or XML alias follows. Fresh exact V2.3 evidence explicitly falsifies extension of this finding to V2.3."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.2.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3_FRESH_2026-09-02.md",
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md",
+        "docs/pdf_xsd_semantic_audit/COMMON_FINDINGS_REGISTER_ADDENDUM.md",
+        "V2.3 visible render/read run 33656579631",
         "EV-124 run 33735601969"
       ]
     }
