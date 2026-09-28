@@ -18,7 +18,8 @@
     "known_issues_runtime_mapping_schema": "sdk_manifest/known_issues_runtime_mapping_v0.1.schema.json",
     "known_issues_runtime_mapping_report": "docs/pdf_xsd_semantic_audit/KNOWN_ISSUES_RUNTIME_MAPPING_BASELINE_2026-09-18.md",
     "finding_source_locators": "audit_registry/finding_source_locators_v0.1.json",
-    "finding_source_locator_schema": "audit_registry/finding_source_locators_v0.1.schema.json"
+    "finding_source_locator_schema": "audit_registry/finding_source_locators_v0.1.schema.json",
+    "version_and_finding_governance": "docs/pdf_xsd_semantic_audit/SDK_VERSION_AND_FINDING_GOVERNANCE.md"
   },
   "invariants": {
     "xsd_is_executable_xml_authority_when_profile_exists": true,
@@ -29,7 +30,12 @@
     "candidate_selection_is_explicit_only": true,
     "operation_inventory_from_xsd_group_only": false,
     "unexecuted_live_test_is_failure": false,
-    "superbranch_is_official_release": false
+    "superbranch_is_official_release": false,
+    "historical_findings_are_version_bound": true,
+    "later_correction_never_retroactively_removes_historical_finding": true,
+    "later_version_evidence_does_not_change_earlier_profile_pass_fail": true,
+    "candidate_integration_profiles_supported_but_never_promoted_to_official": true,
+    "v3_rules_must_not_be_inferred_into_v1_v2_profiles": true
   },
   "resolver": {
     "required_dimensions": [
@@ -160,7 +166,10 @@
     "Valid VideoLive XML metadata does not imply RTSP/RTP media availability.",
     "TrainSetData Subscribe response schema selection requires acknowledgement-vs-data-event context.",
     "A semantic same-path candidate such as Common V2.3 PR #30 must be selected by schema_variant_id and never silently replace the official release root.",
-    "Public DMS V2.4 documentation authority and candidate/integration DMS V2.4 XSD authority must remain separate."
+    "Public DMS V2.4 documentation authority and candidate/integration DMS V2.4 XSD authority must remain separate.",
+    "Historical findings are immutable per profile: a later correction is version-history evidence and must never retroactively change an older profile's finding or PASS/FAIL result.",
+    "Candidate/integration profiles may be validated for completeness through V2.4 but must always remain explicitly non-official.",
+    "VDV 3.0 is a separate redesign generation; no V3.0 rule may be inferred into V1.x/V2.x without explicit verified compatibility evidence."
   ],
   "known_issues_knowledge": {
     "classification_registry": "audit_registry/finding_semantic_classification_v0.1.json",
