@@ -19,7 +19,8 @@
     "known_issues_runtime_mapping_report": "docs/pdf_xsd_semantic_audit/KNOWN_ISSUES_RUNTIME_MAPPING_BASELINE_2026-09-18.md",
     "finding_source_locators": "audit_registry/finding_source_locators_v0.1.json",
     "finding_source_locator_schema": "audit_registry/finding_source_locators_v0.1.schema.json",
-    "version_and_finding_governance": "docs/pdf_xsd_semantic_audit/SDK_VERSION_AND_FINDING_GOVERNANCE.md"
+    "version_and_finding_governance": "docs/pdf_xsd_semantic_audit/SDK_VERSION_AND_FINDING_GOVERNANCE.md",
+    "audit_diagnostic_reporting_model": "docs/pdf_xsd_semantic_audit/SDK_AUDIT_DIAGNOSTIC_REPORTING_MODEL.md"
   },
   "invariants": {
     "xsd_is_executable_xml_authority_when_profile_exists": true,
@@ -35,7 +36,10 @@
     "later_correction_never_retroactively_removes_historical_finding": true,
     "later_version_evidence_does_not_change_earlier_profile_pass_fail": true,
     "candidate_integration_profiles_supported_but_never_promoted_to_official": true,
-    "unpublished_future_profile_rules_must_not_be_inferred_into_supported_profiles": true
+    "unpublished_future_profile_rules_must_not_be_inferred_into_supported_profiles": true,
+    "audit_report_diagnostics_bilingual_de_en": true,
+    "repeated_diagnostics_are_losslessly_aggregated_for_report_presentation": true,
+    "known_finding_advisory_never_waives_xsd_failure": true
   },
   "resolver": {
     "required_dimensions": [
