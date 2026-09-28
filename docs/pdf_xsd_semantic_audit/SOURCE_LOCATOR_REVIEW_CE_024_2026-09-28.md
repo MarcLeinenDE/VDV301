@@ -20,7 +20,15 @@ The corresponding selected XSD declares `Active` without `minOccurs` or `maxOccu
 | Common V2.3 | official release | 989 | 1:1 |
 | Common V2.4 | candidate/integration XSD; official PDF separate | 1041 | 1:1 |
 
-The PDF-side `0:1` evidence is explicitly frozen in the V2.2, fresh V2.3 and fresh V2.4 Deep Reads. The current canonical evidence does not freeze an exact printed page/table locator for this field, so no page number is invented here.
+Exact PDF locators were re-verified against the hash-pinned official PDFs:
+
+| Profile | PDF page | Section | Table |
+|---|---:|---|---|
+| Common V2.2 | 34 | 2.62 UnsubscribeResponse | Table 62 |
+| Common V2.3 | 35 | 2.62 UnsubscribeResponse | Table 62 |
+| Common V2.4 | 38 | 2.61 UnsubscribeResponse | Table 61 |
+
+All three tables explicitly document `Active 0:1`.
 
 ## Conformance rule
 The selected XSD remains executable authority.
