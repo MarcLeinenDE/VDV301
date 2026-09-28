@@ -1977,8 +1977,10 @@
     "source_locator_latest_review_block": "CE_024",
     "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_CE_024_2026-09-28.md",
     "source_locator_latest_gate_status": "terminally_validated",
-    "source_locator_latest_gate_note": "CE-024 verified for Common V2.2-V2.4: PDF UnsubscribeResponse.Active 0:1 versus selected-XSD required 1:1. Missing Active remains FAIL with advisory.",
-    "unpublished_future_profile_boundary_rule": "Rules from unpublished or future profiles must not be inferred into supported profiles."
+    "source_locator_latest_gate_note": "CE-024 exact PDF locators backfilled: V2.2 p34 §2.62 Table62; V2.3 p35 §2.62 Table62; V2.4 p38 §2.61 Table61. Hygiene scan found no other complete locator entry missing PDF page/section; strict completeness policy now canonical.",
+    "unpublished_future_profile_boundary_rule": "Rules from unpublished or future profiles must not be inferred into supported profiles.",
+    "source_locator_completeness_policy": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_COMPLETENESS_POLICY.md",
+    "source_locator_complete_requires_exact_pdf_page_section_table_when_applicable": true
   },
   "evidence": {
     "xsd_ev_completed": [
@@ -2077,7 +2079,9 @@
       "en"
     ],
     "repeated_failure_reporting": "lossless occurrence capture; grouped report presentation by diagnostic aggregation key; first 5 occurrences inline by default",
-    "diagnostic_coverage_gate": "every reportable diagnostic class requires DE+EN short/report/remediation templates"
+    "diagnostic_coverage_gate": "every reportable diagnostic class requires DE+EN short/report/remediation templates",
+    "source_locator_completeness_policy": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_COMPLETENESS_POLICY.md",
+    "source_locator_complete_requires_exact_pdf_page_section_table_when_applicable": true
   },
   "next_actions": [
     "Continue Phase B with CE-025 as a separate small source-locator block; verify historical Reply-Path versus ReplyPath scope and explicitly preserve the V2.4 correction boundary.",
