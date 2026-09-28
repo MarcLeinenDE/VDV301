@@ -33,11 +33,11 @@ They must remain explicitly labelled non-official and must never be presented as
 
 Where a defect is found in a PR candidate, a correction may be contributed to that PR with a technical explanation so the correction remains discoverable even while the upstream Git repository is not actively maintained.
 
-## VDV 3.0 boundary
+## Unpublished/future profile boundary
 
-VDV is working on a 3.0 redesign. The existing 1.x/2.x SDK remains a separate compatibility and audit baseline because these profiles remain in operational use. V3.0 rules must not be inferred into or retroactively applied to 1.x/2.x profiles.
+VDV is working on a 3.0 redesign. The existing 1.x/2.x SDK remains a separate compatibility and audit baseline because these profiles remain in operational use. unpublished/future-profile rules must not be inferred into or retroactively applied to 1.x/2.x profiles.
 
-Future V3.0 support must be modelled as a separate generation/profile family unless verified source evidence justifies a specific compatibility relationship.
+Future unpublished/future-profile support must be modelled as a separate generation/profile family unless verified source evidence justifies a specific compatibility relationship.
 
 ## Diagnostic contract
 
