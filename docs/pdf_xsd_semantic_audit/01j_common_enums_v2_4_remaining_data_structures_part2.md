@@ -135,7 +135,7 @@ The choice structure is present. TSPPoint spelling is handled below as a separat
 
 ### PDF expectation
 
-The PDF-side spelling for the description field still needs visual confirmation in the table. Semantically, this field is expected to be a description text for the TSP point.
+Historical intermediate state: at the time of this block the PDF-side spelling still required visual confirmation. **Superseded:** the later fresh V2.4 rendered-table review (`deep_read/COMMON_V2.4_FRESH_2026-09-03.md`, FR-COM24-009) visually confirmed PDF `TSPPoint.Description` versus candidate XSD `TSPPoint.Desciption`.
 
 ### XSD observation
 
@@ -163,7 +163,7 @@ The XSD-valid element name is <Desciption>.
 Provider-facing note should say that the XSD spelling looks typo-like but is the executable validation authority unless an official schema correction exists.
 ```
 
-PDF visual confirmation is required before final classification.
+Historical gate, now **satisfied/superseded** by `deep_read/COMMON_V2.4_FRESH_2026-09-03.md` FR-COM24-009. The canonical semantic registry classifies CE-017 as manually reviewed; this older working note must not be interpreted as current open work.
 
 ## 5. SpecificPoint
 
