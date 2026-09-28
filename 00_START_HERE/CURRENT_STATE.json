@@ -3,7 +3,7 @@
   "date": "2026-09-03",
   "canonical_branch": "dev/schema-integration",
   "workflow_mode": "manual_only",
-  "project_phase": "known_issues_runtime_mapping_review",
+  "project_phase": "source_locator_completeness",
   "superbranch": {
     "root_xsd_count_last_executed": 50,
     "direct_include_edges_last_executed": 84,
@@ -1938,16 +1938,16 @@
     "known_issues_runtime_mapping_implemented_count": 0,
     "known_issues_runtime_mapping_manifest": "sdk_manifest/known_issues_runtime_mapping_v0.1.json",
     "known_issues_runtime_mapping_schema": "sdk_manifest/known_issues_runtime_mapping_v0.1.schema.json",
-    "known_issues_runtime_mapping_reviewed_count": 61,
-    "known_issues_runtime_mapping_candidate_count": 17,
-    "known_issues_runtime_mapping_not_designed_count": 1,
+    "known_issues_runtime_mapping_reviewed_count": 77,
+    "known_issues_runtime_mapping_candidate_count": 0,
+    "known_issues_runtime_mapping_not_designed_count": 0,
     "known_issues_runtime_mapping_gate_run_id": "35343951758",
     "known_issues_runtime_mapping_gate_run_url": "https://github.com/MarcLeinenDE/VDV301/actions/runs/35343951758",
     "known_issues_runtime_mapping_report": "docs/pdf_xsd_semantic_audit/KNOWN_ISSUES_RUNTIME_MAPPING_BASELINE_2026-09-18.md",
-    "known_issues_runtime_mapping_latest_review_block": "SMS_V22_SMS_002",
-    "known_issues_runtime_mapping_latest_review_report": "docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_SMS_V22_SMS_002_2026-09-21.md",
-    "known_issues_runtime_mapping_latest_gate_run_id": "35552407083",
-    "known_issues_runtime_mapping_not_applicable_count": 113,
+    "known_issues_runtime_mapping_latest_review_block": "VIDEO_V20_VDS_002_004_VLS_002_VRS_003",
+    "known_issues_runtime_mapping_latest_review_report": "docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_VIDEO_V20_VDS_002_004_VLS_002_VRS_003_2026-09-25.md",
+    "known_issues_runtime_mapping_latest_gate_run_id": "36129554314",
+    "known_issues_runtime_mapping_not_applicable_count": 115,
     "sdk_audit_completion_roadmap": "docs/pdf_xsd_semantic_audit/SDK_AUDIT_COMPLETION_ROADMAP_2026-09-21.md",
     "source_locator_completeness_state": "planned_after_runtime_mapping_review",
     "service_operation_capability_matrix_state": "planned_after_source_locator_hardening",
@@ -1966,7 +1966,11 @@
     "latest_post_closure_correction_gate_run_id": "36129554314",
     "latest_source_locator_review": "CE_011_014",
     "latest_source_locator_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_CE_011_014_2026-09-25.md",
-    "latest_source_locator_gate_run_id": "36130319991"
+    "latest_source_locator_gate_run_id": "36130319991",
+    "version_and_finding_governance": "docs/pdf_xsd_semantic_audit/SDK_VERSION_AND_FINDING_GOVERNANCE.md",
+    "historical_finding_rule": "Findings are immutable per exact profile/version. Later corrections are version-history evidence only and never retroactively alter older PASS/FAIL or remove an older finding.",
+    "candidate_profile_rule": "Candidate/integration profiles are included for SDK completeness through V2.4 but remain explicitly non-official.",
+    "vdv3_boundary_rule": "VDV 3.0 is treated as a separate redesign generation; do not infer V3 rules into V1.x/V2.x."
   },
   "evidence": {
     "xsd_ev_completed": [
@@ -2061,8 +2065,8 @@
   },
   "next_actions": [
     "Continue Phase B with the next related Common/Enumerations source-locator block, beginning CE-015 onward; verify semantic version scopes against the historical closure before adding locators.",
+    "Preserve every historical finding per exact profile even when a later version or candidate corrects it; later corrections are evidence/history only.",
     "After source-locator closure, create and pilot the separate DeviceManagementService service/version/operation obligation matrix.",
-    "Only after those gates, implement structured profile-specific Known-Issues matchers with positive/negative evidence.",
-    "Keep official-facing remediation/XSD mutation separate and explicitly approved."
+    "Only after those gates, implement structured profile-specific Known-Issues matchers with positive/negative evidence."
   ]
 }
