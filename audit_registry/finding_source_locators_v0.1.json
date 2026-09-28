@@ -17,10 +17,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 15,
-    "coverage_complete_count": 15,
+    "locator_entry_count": 16,
+    "coverage_complete_count": 16,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 177
+    "remaining_finding_count": 176
   },
   "entries": [
     {
@@ -3831,6 +3831,106 @@
         "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3_FRESH_2026-09-02.md",
         "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4_FRESH_2026-09-03.md",
         "EV-124 run 33735601969"
+      ]
+    },
+    {
+      "finding_id": "CE-020",
+      "service": "Common/Enumerations",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "Common V2.3",
+          "authority": "official_release",
+          "xsd_profile": "official IBIS-IP_common_V2.3.xsd blob 0d8926c...",
+          "note": "Default official authority."
+        },
+        {
+          "version": "Common V2.3 PR #30",
+          "authority": "candidate_integration",
+          "xsd_profile": "schema_variants/upstream_pr_30/IBIS-IP_common_V2.3.xsd",
+          "note": "Explicit candidate overlay only."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.3",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx",
+              "sha256": "d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b",
+              "printed_pages": [
+                36
+              ],
+              "section": "2.61 InternationalTextType",
+              "table": "Table 61",
+              "point_summary": "Official PDF documents Value as IBIS-IP.string and Language as IBIS-IP.language."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.3.xsd",
+              "git_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+              "authority_detail": "exact selected official Common V2.3 XSD authority; default authority",
+              "component_kind": "complexType",
+              "component": "InternationalTextType",
+              "member": "Value; Language",
+              "value": "Value=xs:string; Language=xs:language",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='InternationalTextType']/xs:sequence",
+              "line_hint": "805-809",
+              "point_summary": "Official V2.3 XSD uses primitive xs:string and xs:language, producing a different instance shape from the PDF wrapper types."
+            }
+          ],
+          "coverage_note": "Official V2.3 authority. PDF and official XSD differ in InternationalTextType member types; official XSD remains default conformance authority."
+        },
+        {
+          "version": "2.3-pr30",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.3",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx",
+              "sha256": "d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b",
+              "printed_pages": [
+                36
+              ],
+              "section": "2.61 InternationalTextType",
+              "table": "Table 61",
+              "point_summary": "Official PDF documents Value as IBIS-IP.string and Language as IBIS-IP.language."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "schema_variants/upstream_pr_30/IBIS-IP_common_V2.3.xsd",
+              "git_blob": "456a7db179ce14bc3f04e2bc05e42e16545fb0c5",
+              "authority_detail": "explicit candidate variant common-v2.3-upstream-pr30; opt-in required; never replaces official V2.3 by latest-wins",
+              "component_kind": "complexType",
+              "component": "InternationalTextType",
+              "member": "Value; Language",
+              "value": "Value=IBIS-IP.string; Language=IBIS-IP.language",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='InternationalTextType']/xs:sequence",
+              "line_hint": "805-809",
+              "point_summary": "PR #30 candidate changes the two member types to the IBIS-IP wrapper types documented by the official PDF."
+            }
+          ],
+          "coverage_note": "Candidate overlay only. It aligns these two member types with the PDF but is not promoted to official V2.3 authority."
+        }
+      ],
+      "supporting_evidence": [
+        "audit_registry/schema_variant_registry_v0.1.json",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3_FRESH_2026-09-02.md",
+        "EV-106 run 33169314332",
+        "EV-124 run 33735601969",
+        "upstream PR VDVde/VDV301 #30"
       ]
     }
   ]
