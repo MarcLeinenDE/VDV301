@@ -1,6 +1,6 @@
 # Source-locator review — CE-015 — 2026-09-28
 
-Status: **persisted / validation gate pending**.
+Status: **terminally validated / complete**.
 
 ## Finding
 
@@ -33,8 +33,12 @@ The V2.4 XSD lane remains explicitly candidate/integration and is not promoted t
 
 Any later correction of this spelling must not remove or reinterpret CE-015 for an older affected profile. Later corrections are version-history evidence only.
 
+## Validation
+
+The persisted entry was re-read from the branch and checked against the locator JSON schema, semantic-registry scope, exact selected XSD blobs/components, manifest counters and both CURRENT_STATE counter surfaces. The six version lanes match the semantic scope and contain 24 exact XSD member locators. No stale counter or scope divergence was found.
+
 ## State
 
-Canonical source-locator manifest after persistence: **11 complete / 0 partial / 181 remaining**.
+Canonical source-locator manifest after validation: **11 complete / 0 partial / 181 remaining**.
 
 No XSD, semantic classification, runtime disposition or PASS/FAIL rule was modified in this block.
