@@ -13,7 +13,9 @@
     "authority_must_be_explicit": true,
     "pdf_locator_requires_byte_identity": true,
     "xsd_locator_requires_git_blob": true,
-    "line_hints_are_noncanonical": true
+    "line_hints_are_noncanonical": true,
+    "candidate_xsd_is_valid_selectable_validation_authority": true,
+    "candidate_results_must_disclose_candidate_status_and_exact_xsd_source": true
   },
   "counts": {
     "semantic_finding_count": 192,
@@ -5429,7 +5431,7 @@
               "point_summary": "Candidate/integration service schema exists and must remain provenance-distinct from official release authority."
             }
           ],
-          "coverage_note": "Candidate/integration schema can be selected explicitly for candidate testing but must never silently satisfy the missing official-release-schema authority."
+          "coverage_note": "Candidate/integration XSD is a valid selectable validation authority. When selected, PASS/FAIL follows that exact XSD just like an official selected XSD; the result must explicitly identify candidate/integration status and cite the exact XSD source/provenance. It must not be relabelled as official release authority."
         }
       ],
       "supporting_evidence": [
