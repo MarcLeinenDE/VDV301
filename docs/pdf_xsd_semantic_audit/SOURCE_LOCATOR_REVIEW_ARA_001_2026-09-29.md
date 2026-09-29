@@ -23,9 +23,11 @@ A service schema does exist in the integration corpus:
 Its existence must not be used to manufacture official V2.4 release-schema authority.
 
 ## SDK consequence
-Official-document mode and candidate/integration schema mode remain distinct.
+Official and candidate/integration schema provenance remain distinct, but both are valid selectable validation authorities.
 
-The SDK may test the explicit candidate/integration profile when selected, but it must not label that result as conformance against an official AnalogRadioService V2.4 release XSD.
+When a candidate/integration XSD is selected, the SDK validates against that exact XSD and derives PASS/FAIL from it in the same way as for a selected official XSD. The result must explicitly state that the selected authority is candidate/integration and must reference the exact XSD source/provenance (including the pinned blob/source route).
+
+A candidate result must not be relabelled as official release authority; this provenance label does not reduce the candidate XSD's role as the selected executable validation authority.
 
 This is an authority warning/context finding, not an instruction to modify an XSD.
 
