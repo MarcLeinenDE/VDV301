@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 23,
-    "coverage_complete_count": 23,
+    "locator_entry_count": 24,
+    "coverage_complete_count": 24,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 169
+    "remaining_finding_count": 168
   },
   "entries": [
     {
@@ -5440,6 +5440,89 @@
         "pin run 33269415752",
         "render/text run 33269472968",
         "artifact ara-v24-pinned-read digest sha256:06c2ce302b1b98d5bbe22265806ea605bbc2abe62327b8d809a0e27da19592a3"
+      ]
+    },
+    {
+      "finding_id": "ARA-002",
+      "service": "AnalogRadioService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V2.4",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Defect established inside official PDF; candidate XSD corroborates only."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "2.4",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "ARA_V2.4",
+              "document_title": "VDV-Schrift 301-2-19 AnalogRadioService",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-19-sde-v2.4-analogradioservice.pdfx",
+              "sha256": "d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c",
+              "printed_pages": [
+                11
+              ],
+              "section": "AnalogRadioService.RadioTelegramStructure",
+              "table": "RadioTelegramStructure table",
+              "point_summary": "Table names final member TransmitterType (1:1, type TransmitterStructure); embedded schema view on the same page instead shows Transmitter."
+            },
+            {
+              "source_id": "ARA_V2.4",
+              "document_title": "VDV-Schrift 301-2-19 AnalogRadioService",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-19-sde-v2.4-analogradioservice.pdfx",
+              "sha256": "d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c",
+              "printed_pages": [
+                12
+              ],
+              "section": "RadioTelegramStructure structure diagram",
+              "point_summary": "Structure diagram names the member Transmitter."
+            },
+            {
+              "source_id": "ARA_V2.4",
+              "document_title": "VDV-Schrift 301-2-19 AnalogRadioService",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-19-sde-v2.4-analogradioservice.pdfx",
+              "sha256": "d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c",
+              "printed_pages": [
+                13
+              ],
+              "section": "SendTelegram XML example",
+              "point_summary": "Complete XML example uses <Transmitter>."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_AnalogRadioService_V2.4.xsd",
+              "git_blob": "48fb303b80936d2d762f0889ce0c359e04c16e5b",
+              "authority_detail": "candidate/integration corroboration; valid selectable candidate validation authority but not the official authority for this documentation-only finding",
+              "component_kind": "element",
+              "component": "RadioTelegramStructure",
+              "member": "Transmitter",
+              "value": "type=TransmitterStructure; minOccurs=\"0\"",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='RadioTelegramStructure']/xs:sequence/xs:element[@name='Transmitter']",
+              "line_hint": "27",
+              "point_summary": "Candidate/integration XSD independently uses Transmitter, corroborating the PDF-internal majority evidence."
+            }
+          ],
+          "coverage_note": "Official PDF internally proves the identifier defect: isolated table label TransmitterType conflicts with embedded schema view, diagram and XML example Transmitter. Candidate XSD corroborates Transmitter but is not needed to establish the PDF defect."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/deep_read/ARA_V2.4.md FR-ARA24-OBS-001",
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARA_V24_2026-09-03.md",
+        "pin run 33269415752",
+        "render/text run 33269472968"
       ]
     }
   ]
