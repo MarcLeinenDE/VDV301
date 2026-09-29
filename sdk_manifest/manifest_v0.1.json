@@ -31,7 +31,7 @@
     "candidate_selection_is_explicit_only": true,
     "operation_inventory_from_xsd_group_only": false,
     "unexecuted_live_test_is_failure": false,
-    "superbranch_is_official_release": false,
+    "dev/schema-integration_is_official_release": false,
     "historical_findings_are_version_bound": true,
     "later_correction_never_retroactively_removes_historical_finding": true,
     "later_version_evidence_does_not_change_earlier_profile_pass_fail": true,
@@ -40,7 +40,7 @@
     "audit_report_diagnostics_bilingual_de_en": true,
     "repeated_diagnostics_are_losslessly_aggregated_for_report_presentation": true,
     "known_finding_advisory_never_waives_xsd_failure": true,
-    "candidate_correction_requires_sdk_and_superbranch_sync": true
+    "candidate_correction_requires_sdk_and_dev/schema-integration_sync": true
   },
   "resolver": {
     "required_dimensions": [
@@ -101,8 +101,8 @@
     "semantic_variant_registry": "audit_registry/schema_variant_registry_v0.1.json",
     "semantic_variant_overlay_manifest": "sdk_manifest/schema_variant_overlays_v0.1.json",
     "candidate_variant_requires_explicit_overlay_selection": true,
-    "superbranch_role": "most_current_and_complete_project_xsd_collection",
-    "candidate_correction_propagation_rule": "A confirmed correction to a candidate/integration XSD creates a new exact schema revision/variant. Preserve the old candidate for reproducibility; pin the corrected source; update SDK variant routing/provenance and affected Known-Issue version history; synchronize the corrected XSD into the Superbranch, which is the project's most current and complete XSD collection. Correction propagation is not complete until SDK and Superbranch are synchronized. Never promote the corrected candidate to official unless upstream official authority actually changes."
+    "dev/schema-integration_role": "most_current_and_complete_project_xsd_collection",
+    "candidate_correction_propagation_rule": "A confirmed correction to a candidate/integration XSD creates a new exact schema revision/variant. Preserve the old candidate for reproducibility; pin the corrected source; update SDK variant routing/provenance and affected Known-Issue version history; synchronize the corrected XSD into the dev/schema-integration, which is the project's most current and complete XSD collection. Correction propagation is not complete until SDK and dev/schema-integration are synchronized. Never promote the corrected candidate to official unless upstream official authority actually changes."
   },
   "operation_model": {
     "separate_manifest_required": true,
@@ -214,18 +214,18 @@
     "source_locator_manifest": "audit_registry/finding_source_locators_v0.1.json",
     "source_locator_schema": "audit_registry/finding_source_locators_v0.1.schema.json",
     "source_locator_state": "in_progress",
-    "source_locator_entry_count": 23,
-    "source_locator_complete_count": 23,
+    "source_locator_entry_count": 24,
+    "source_locator_complete_count": 24,
     "source_locator_partial_count": 0,
-    "source_locator_remaining_count": 169,
-    "source_locator_latest_review_block": "ARA_001",
-    "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_ARA_001_2026-09-29.md",
+    "source_locator_remaining_count": 168,
+    "source_locator_latest_review_block": "ARA_002",
+    "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_ARA_002_2026-09-29.md",
     "source_locator_latest_gate_run_id": "36130319991",
     "runtime_mapping_latest_gate_run_id": "36129554314",
     "source_locator_completeness_policy": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_COMPLETENESS_POLICY.md",
     "source_locator_complete_requires_exact_pdf_page_section_table_when_applicable": true,
     "candidate_profile_rule": "Official and candidate/integration XSDs are both valid selectable executable validation authorities. PASS/FAIL follows the exact selected XSD. Every result must disclose the selected authority class (official or candidate/integration) and reference the exact XSD source/provenance; candidate/integration must never be relabelled as official.",
     "candidate_xsd_validation_rule": "Official and candidate/integration XSDs are both valid selectable executable validation authorities. PASS/FAIL follows the exact selected XSD. Every result must disclose the selected authority class (official or candidate/integration) and reference the exact XSD source/provenance; candidate/integration must never be relabelled as official.",
-    "candidate_correction_propagation_rule": "A confirmed correction to a candidate/integration XSD creates a new exact schema revision/variant. Preserve the old candidate for reproducibility; pin the corrected source; update SDK variant routing/provenance and affected Known-Issue version history; synchronize the corrected XSD into the Superbranch, which is the project's most current and complete XSD collection. Correction propagation is not complete until SDK and Superbranch are synchronized. Never promote the corrected candidate to official unless upstream official authority actually changes."
+    "candidate_correction_propagation_rule": "A confirmed correction to a candidate/integration XSD creates a new exact schema revision/variant. Preserve the old candidate for reproducibility; pin the corrected source; update SDK variant routing/provenance and affected Known-Issue version history; synchronize the corrected XSD into the dev/schema-integration, which is the project's most current and complete XSD collection. Correction propagation is not complete until SDK and dev/schema-integration are synchronized. Never promote the corrected candidate to official unless upstream official authority actually changes."
   }
 }
