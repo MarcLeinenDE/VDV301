@@ -19,7 +19,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install validation dependency
-        run: python -m pip install --disable-pip-version-check lxml
+        run: python -m pip install --disable-pip-version-check lxml jsonschema
 
       - name: Run audit checks
         shell: bash
@@ -59,6 +59,8 @@ jobs:
           video_runtime_status=$?
           python tools/validate_sdk_manifest_v0_1.py > audit-results/sdk_manifest_v0_1.log 2>&1
           sdk_manifest_status=$?
+          python tools/validate_finding_source_locators_v0_1.py > audit-results/finding_source_locators_v0_1.log 2>&1
+          source_locator_status=$?
           python tools/generate_schema_profile_inventory_v0_1.py --repo-root . --output audit-results/schema_profile_inventory_v0.1.json --check-only > audit-results/sdk_profile_generator_v0_1.log 2>&1
           sdk_profile_status=$?
 
@@ -80,6 +82,7 @@ jobs:
             echo "rv_003_time_sntp,VDV_TimeService_V1.0_plus_RFC4330,deterministic_classifier,$time_status"
             echo "rv_004_video_rtsp_rtp,VDV_VideoLive_boundary_plus_RTSP1_RTSP2_RFC3550,deterministic_classifier,$video_runtime_status"
             echo "sdk_manifest_v0_1,audit_derived_manifest_and_stored_xsd_graph,sdk_manifest,$sdk_manifest_status"
+            echo "finding_source_locators_v0_1,pinned_PDF_XSD_sources_plus_bilingual_semantic_diagnostics,27_completed_findings,$source_locator_status"
             echo "sdk_profile_inventory_v0_1,fail_closed_authority_plus_xsd_include_graph,sdk_manifest,$sdk_profile_status"
           } > audit-results/validation_status.csv
 
@@ -104,6 +107,7 @@ jobs:
           echo "$time_status" > audit-results/time_status.txt
           echo "$video_runtime_status" > audit-results/video_runtime_status.txt
           echo "$sdk_manifest_status" > audit-results/sdk_manifest_status.txt
+          echo "$source_locator_status" > audit-results/source_locator_status.txt
           echo "$sdk_profile_status" > audit-results/sdk_profile_status.txt
 
       - name: Upload validation evidence
@@ -133,9 +137,10 @@ jobs:
           time_status=$(cat audit-results/time_status.txt)
           video_runtime_status=$(cat audit-results/video_runtime_status.txt)
           sdk_manifest_status=$(cat audit-results/sdk_manifest_status.txt)
+          source_locator_status=$(cat audit-results/source_locator_status.txt)
           sdk_profile_status=$(cat audit-results/sdk_profile_status.txt)
-          echo "root_status=$root_status legacy_status=$legacy_status pcs_status=$pcs_status ce018_status=$ce018_status video_status=$video_status trainset_status=$trainset_status analog_status=$analog_status common_v23_variant_status=$common_v23_variant_status dms_v22_status=$dms_v22_status dms_v24_status=$dms_v24_status trainset_v21_status=$trainset_v21_status http_status=$http_status discovery_status=$discovery_status time_status=$time_status video_runtime_status=$video_runtime_status sdk_manifest_status=$sdk_manifest_status sdk_profile_status=$sdk_profile_status"
-          if [ "$root_status" -ne 0 ] || [ "$legacy_status" -ne 0 ] || [ "$pcs_status" -ne 0 ] || [ "$ce018_status" -ne 0 ] || [ "$video_status" -ne 0 ] || [ "$trainset_status" -ne 0 ] || [ "$analog_status" -ne 0 ] || [ "$common_v23_variant_status" -ne 0 ] || [ "$dms_v22_status" -ne 0 ] || [ "$dms_v24_status" -ne 0 ] || [ "$trainset_v21_status" -ne 0 ] || [ "$http_status" -ne 0 ] || [ "$discovery_status" -ne 0 ] || [ "$time_status" -ne 0 ] || [ "$video_runtime_status" -ne 0 ] || [ "$sdk_manifest_status" -ne 0 ] || [ "$sdk_profile_status" -ne 0 ]; then
+          echo "root_status=$root_status legacy_status=$legacy_status pcs_status=$pcs_status ce018_status=$ce018_status video_status=$video_status trainset_status=$trainset_status analog_status=$analog_status common_v23_variant_status=$common_v23_variant_status dms_v22_status=$dms_v22_status dms_v24_status=$dms_v24_status trainset_v21_status=$trainset_v21_status http_status=$http_status discovery_status=$discovery_status time_status=$time_status video_runtime_status=$video_runtime_status sdk_manifest_status=$sdk_manifest_status source_locator_status=$source_locator_status sdk_profile_status=$sdk_profile_status"
+          if [ "$root_status" -ne 0 ] || [ "$legacy_status" -ne 0 ] || [ "$pcs_status" -ne 0 ] || [ "$ce018_status" -ne 0 ] || [ "$video_status" -ne 0 ] || [ "$trainset_status" -ne 0 ] || [ "$analog_status" -ne 0 ] || [ "$common_v23_variant_status" -ne 0 ] || [ "$dms_v22_status" -ne 0 ] || [ "$dms_v24_status" -ne 0 ] || [ "$trainset_v21_status" -ne 0 ] || [ "$http_status" -ne 0 ] || [ "$discovery_status" -ne 0 ] || [ "$time_status" -ne 0 ] || [ "$video_runtime_status" -ne 0 ] || [ "$sdk_manifest_status" -ne 0 ] || [ "$source_locator_status" -ne 0 ] || [ "$sdk_profile_status" -ne 0 ]; then
             echo "Validation evidence contains failures; inspect uploaded logs."
             exit 1
           else
