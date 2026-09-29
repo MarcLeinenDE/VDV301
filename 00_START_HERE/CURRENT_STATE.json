@@ -1981,7 +1981,9 @@
     "unpublished_future_profile_boundary_rule": "Rules from unpublished or future profiles must not be inferred into supported profiles.",
     "source_locator_completeness_policy": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_COMPLETENESS_POLICY.md",
     "source_locator_complete_requires_exact_pdf_page_section_table_when_applicable": true,
-    "candidate_xsd_validation_rule": "Official and candidate/integration XSDs are both valid selectable executable validation authorities. PASS/FAIL follows the exact selected XSD. Every result must disclose the selected authority class (official or candidate/integration) and reference the exact XSD source/provenance; candidate/integration must never be relabelled as official."
+    "candidate_xsd_validation_rule": "Official and candidate/integration XSDs are both valid selectable executable validation authorities. PASS/FAIL follows the exact selected XSD. Every result must disclose the selected authority class (official or candidate/integration) and reference the exact XSD source/provenance; candidate/integration must never be relabelled as official.",
+    "candidate_correction_propagation_rule": "A confirmed correction to a candidate/integration XSD creates a new exact schema revision/variant. Preserve the old candidate for reproducibility; pin the corrected source; update SDK variant routing/provenance and affected Known-Issue version history; synchronize the corrected XSD into the Superbranch, which is the project's most current and complete XSD collection. Correction propagation is not complete until SDK and Superbranch are synchronized. Never promote the corrected candidate to official unless upstream official authority actually changes.",
+    "superbranch_role": "most_current_and_complete_project_xsd_collection"
   },
   "evidence": {
     "xsd_ev_completed": [
@@ -2083,7 +2085,9 @@
     "diagnostic_coverage_gate": "every reportable diagnostic class requires DE+EN short/report/remediation templates",
     "source_locator_completeness_policy": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_COMPLETENESS_POLICY.md",
     "source_locator_complete_requires_exact_pdf_page_section_table_when_applicable": true,
-    "candidate_xsd_validation_rule": "Official and candidate/integration XSDs are both valid selectable executable validation authorities. PASS/FAIL follows the exact selected XSD. Every result must disclose the selected authority class (official or candidate/integration) and reference the exact XSD source/provenance; candidate/integration must never be relabelled as official."
+    "candidate_xsd_validation_rule": "Official and candidate/integration XSDs are both valid selectable executable validation authorities. PASS/FAIL follows the exact selected XSD. Every result must disclose the selected authority class (official or candidate/integration) and reference the exact XSD source/provenance; candidate/integration must never be relabelled as official.",
+    "candidate_correction_propagation_rule": "A confirmed correction to a candidate/integration XSD creates a new exact schema revision/variant. Preserve the old candidate for reproducibility; pin the corrected source; update SDK variant routing/provenance and affected Known-Issue version history; synchronize the corrected XSD into the Superbranch, which is the project's most current and complete XSD collection. Correction propagation is not complete until SDK and Superbranch are synchronized. Never promote the corrected candidate to official unless upstream official authority actually changes.",
+    "superbranch_role": "most_current_and_complete_project_xsd_collection"
   },
   "next_actions": [
     "Continue Phase B with ARA-002; pin the exact page-11 table, embedded schema view, page-12 structure diagram, page-13 XML example and candidate-XSD corroboration for TransmitterType versus Transmitter.",
