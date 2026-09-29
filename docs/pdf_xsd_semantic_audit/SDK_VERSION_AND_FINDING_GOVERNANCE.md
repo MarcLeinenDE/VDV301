@@ -33,6 +33,19 @@ They must remain explicitly labelled non-official and must never be presented as
 
 Where a defect is found in a PR candidate, a correction may be contributed to that PR with a technical explanation so the correction remains discoverable even while the upstream Git repository is not actively maintained.
 
+### Candidate correction lifecycle
+
+When a candidate/integration XSD is corrected because of a confirmed finding, the correction is a new exact schema variant/revision and must be propagated consistently:
+
+- preserve the pre-correction candidate and its findings for reproducibility;
+- pin the corrected XSD with its new exact source provenance/blob/commit/PR state;
+- update the SDK schema-variant registry/resolver so the corrected candidate can be selected and its result reports the corrected source;
+- update affected Known-Issue/version-history metadata so diagnostics distinguish pre-correction and corrected candidate revisions;
+- add/synchronize the corrected XSD into the project's Superbranch schema collection;
+- never overwrite historical evidence or silently make the corrected candidate an official release.
+
+The Superbranch is the project's most current and complete XSD collection. Any XSD correction accepted into the project corpus is incomplete until the corresponding Superbranch copy/variant and SDK routing/provenance state are synchronized.
+
 ## Unpublished/future profile boundary
 
 VDV is working on a 3.0 redesign. The existing 1.x/2.x SDK remains a separate compatibility and audit baseline because these profiles remain in operational use. unpublished/future-profile rules must not be inferred into or retroactively applied to 1.x/2.x profiles.
