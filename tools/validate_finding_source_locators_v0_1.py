@@ -44,6 +44,11 @@ def main() -> int:
         src=by[e["finding_id"]]
         require(e["service"]==src["service"],f"{e['finding_id']} service matches semantic registry")
         require(e["scope_claims"]==src["version_scope"],f"{e['finding_id']} scope_claims exactly match semantic version_scope")
+        diagnostic=src.get("diagnostic",{})
+        for lang in ("de","en"):
+            require(lang in diagnostic,f"{e['finding_id']} has {lang.upper()} diagnostic block")
+            for field in ("title","short","long","recommendation"):
+                require(bool(str(diagnostic[lang].get(field,"")).strip()),f"{e['finding_id']} has non-empty {lang}.{field}")
         versions=[c["version"] for c in e["coverage"]]
         require(len(versions)==len(set(versions)),f"{e['finding_id']} coverage versions are unique")
         if e["coverage_state"]=="complete":
