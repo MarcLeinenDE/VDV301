@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 25,
-    "coverage_complete_count": 25,
+    "locator_entry_count": 26,
+    "coverage_complete_count": 26,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 167
+    "remaining_finding_count": 166
   },
   "entries": [
     {
@@ -5608,6 +5608,74 @@
         "docs/pdf_xsd_semantic_audit/deep_read/ARA_V2.4.md FR-ARA24-OBS-001",
         "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARA_V24_2026-09-03.md",
         "EV-105 run 33228250613 / job 99036090357: PASSED ARA-003 candidate XSD 0:1 Transmitter behavior executable-confirmed"
+      ]
+    },
+    {
+      "finding_id": "ARA-004",
+      "service": "AnalogRadioService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V2.4",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The inconsistency is fully established within the official PDF."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "2.4",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "ARA_V2.4",
+              "document_title": "VDV-Schrift 301-2-19 AnalogRadioService",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-19-sde-v2.4-analogradioservice.pdfx",
+              "sha256": "d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c",
+              "printed_pages": [
+                10
+              ],
+              "section": "AnalogRadioService operation inventory",
+              "table": "Operation inventory",
+              "point_summary": "Official operation inventory defines the service operation as SendTelegram; no SendFFSKTelegram operation is listed."
+            },
+            {
+              "source_id": "ARA_V2.4",
+              "document_title": "VDV-Schrift 301-2-19 AnalogRadioService",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-19-sde-v2.4-analogradioservice.pdfx",
+              "sha256": "d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c",
+              "printed_pages": [
+                13
+              ],
+              "section": "2.5.1 URI for the Operation SendTelegram",
+              "point_summary": "Section heading identifies SendTelegram, but the concrete URI example ends in /AnalogRadioService/SendFFSKTelegram."
+            },
+            {
+              "source_id": "ARA_V2.4",
+              "document_title": "VDV-Schrift 301-2-19 AnalogRadioService",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-19-sde-v2.4-analogradioservice.pdfx",
+              "sha256": "d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c",
+              "printed_pages": [
+                13
+              ],
+              "section": "SendTelegram XML example",
+              "point_summary": "XML example immediately below the URI example uses root AnalogRadioService.SendTelegram, corroborating SendTelegram as the documented operation name."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Documentation-only operation-name contradiction is fully established inside the official PDF. No XSD alias or rewrite rule is inferred."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/deep_read/ARA_V2.4.md FR-ARA24-OBS-002",
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARA_V24_2026-09-03.md"
       ]
     }
   ]
