@@ -41,10 +41,10 @@ When a candidate/integration XSD is corrected because of a confirmed finding, th
 - pin the corrected XSD with its new exact source provenance/blob/commit/PR state;
 - update the SDK schema-variant registry/resolver so the corrected candidate can be selected and its result reports the corrected source;
 - update affected Known-Issue/version-history metadata so diagnostics distinguish pre-correction and corrected candidate revisions;
-- add/synchronize the corrected XSD into the project's Superbranch schema collection;
+- add/synchronize the corrected XSD into the project's `dev/schema-integration` schema collection;
 - never overwrite historical evidence or silently make the corrected candidate an official release.
 
-The Superbranch is the project's most current and complete XSD collection. Any XSD correction accepted into the project corpus is incomplete until the corresponding Superbranch copy/variant and SDK routing/provenance state are synchronized.
+The `dev/schema-integration` branch is the project's most current and complete XSD collection. Any XSD correction accepted into the project corpus is incomplete until the corresponding `dev/schema-integration` copy/variant and SDK routing/provenance state are synchronized.
 
 ## Unpublished/future profile boundary
 
