@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 28,
-    "coverage_complete_count": 28,
+    "locator_entry_count": 29,
+    "coverage_complete_count": 29,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 164
+    "remaining_finding_count": 163
   },
   "entries": [
     {
@@ -447,6 +447,49 @@
           ],
           "xsd_locators": [],
           "coverage_note": "The Part-1 hierarchy wording establishes a general architecture role model. Part 1 itself points concrete service details to Part 2; therefore the hierarchy must not be promoted into a rigid message-level rule that overrides service-specific request, subscription or callback semantics."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARCH_V10_2026-09-03.md",
+        "docs/pdf_xsd_semantic_audit/28_vdv301_1_system_architecture_first_pass.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/VDV301-1_V1.0_DE.md",
+        "pin/render run 33725750019 / job 100554215021 / artifact 9881897572"
+      ]
+    },
+    {
+      "finding_id": "ARCH-003",
+      "service": "SystemArchitecture",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Vehicle-system boundary and coupled-vehicle interface semantics."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "1.0",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-1_V1.0_DE",
+              "document_title": "VDV-Schrift 301-1 IBIS-IP Teil 1: Systemarchitektur",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/vdv-301-1-ibis-ip-teil-1-systemarchitektur.pdfx",
+              "sha256": "5418f24190468a1823699688cf86f98d812591ad2c7c2eada07b1d34889c20c2",
+              "printed_pages": [
+                16
+              ],
+              "section": "4 Systemarchitektur / vehicle-system architecture figure and accompanying coupling description",
+              "point_summary": "The architecture treats each vehicle as a self-contained IBIS-IP system. A coupled vehicle remains another IBIS-IP system and is connected through interfaces; the vehicle boundary therefore does not establish a general prohibition on cross-vehicle communication."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Architecture/context authority only. Preserve the per-vehicle IBIS-IP system boundary in evidence and routing context, but do not infer a blanket communication prohibition; concrete coupling/service behavior belongs to the applicable service/interface specifications."
         }
       ],
       "supporting_evidence": [
