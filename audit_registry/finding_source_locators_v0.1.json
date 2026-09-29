@@ -17,10 +17,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 22,
-    "coverage_complete_count": 22,
+    "locator_entry_count": 23,
+    "coverage_complete_count": 23,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 170
+    "remaining_finding_count": 169
   },
   "entries": [
     {
@@ -5356,6 +5356,88 @@
         "EV-117",
         "EV-118",
         "EV-124 run 33735601969"
+      ]
+    },
+    {
+      "finding_id": "ARA-001",
+      "service": "AnalogRadioService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V2.4",
+          "authority": "unresolved",
+          "xsd_profile": null,
+          "note": "An official V2.4 PDF exists, but no official VDV-301-2.4 release tag or official upstream AnalogRadioService V2.4 XSD was found."
+        },
+        {
+          "version": "V2.4 candidate/integration",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_AnalogRadioService_V2.4.xsd",
+          "note": "Candidate/integration material exists but is not official release authority."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "2.4",
+          "authority": "unresolved_official_release_schema",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "ARA_V2.4",
+              "document_title": "VDV-Schrift 301-2-19 AnalogRadioService",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-19-sde-v2.4-analogradioservice.pdfx",
+              "sha256": "d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c",
+              "printed_pages": [
+                1
+              ],
+              "section": "Cover / document identity",
+              "point_summary": "Official VDV publication establishes AnalogRadioService V2.4 documentation authority; full pinned PDF has 16 pages."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Authority-gap finding: official V2.4 PDF is pinned, but audit evidence found no official VDV-301-2.4 release tag and no official upstream AnalogRadioService V2.4 service XSD. Absence is evidenced by the frozen revalidation/provenance record rather than an invented XSD locator."
+        },
+        {
+          "version": "2.4 candidate/integration",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "ARA_V2.4",
+              "document_title": "VDV-Schrift 301-2-19 AnalogRadioService",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-19-sde-v2.4-analogradioservice.pdfx",
+              "sha256": "d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c",
+              "printed_pages": [
+                1
+              ],
+              "section": "Cover / document identity",
+              "point_summary": "Official PDF remains documentation authority and is not converted into official schema authority by candidate availability."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_AnalogRadioService_V2.4.xsd",
+              "git_blob": "48fb303b80936d2d762f0889ce0c359e04c16e5b",
+              "authority_detail": "candidate/integration only; entered via integration commit c9c086ac07f7e9bdb271c54f7a274e3cf0d03749; not official-release authority",
+              "component_kind": "schema",
+              "component": "AnalogRadioService V2.4 candidate",
+              "line_hint": "1-49",
+              "point_summary": "Candidate/integration service schema exists and must remain provenance-distinct from official release authority."
+            }
+          ],
+          "coverage_note": "Candidate/integration schema can be selected explicitly for candidate testing but must never silently satisfy the missing official-release-schema authority."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARA_V24_2026-09-03.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/ARA_V2.4.md",
+        "pin run 33269415752",
+        "render/text run 33269472968",
+        "artifact ara-v24-pinned-read digest sha256:06c2ce302b1b98d5bbe22265806ea605bbc2abe62327b8d809a0e27da19592a3"
       ]
     }
   ]
