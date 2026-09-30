@@ -24,15 +24,17 @@ Maintain one audited VDV301 superbranch that:
 
 ## Read in this order
 
-1. `00_START_HERE/CURRENT_STATE.json`
-2. `00_START_HERE/MAINTENANCE_PLAYBOOK.md`
-3. `docs/pdf_xsd_semantic_audit/DEEP_READ_METHOD.md`
-4. `audit_registry/document_registry_v0.1.json`
-5. `audit_registry/deep_read_registry_v0.1.json`
-6. `docs/pdf_xsd_semantic_audit/findings.md`
-7. `sdk_manifest/README.md` and `sdk_manifest/manifest_v0.1.json`
+1. `00_START_HERE/AUDIT_WORKFLOW_CONTRACT.md` — **canonical methodology; mandatory for every new chat/maintainer**
+2. `00_START_HERE/CURRENT_STATE.json` — current phase, quality gates, counts and next canonical work item
+3. `00_START_HERE/MAINTENANCE_PLAYBOOK.md`
+4. `docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md`
+5. `docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_COMPLETENESS_POLICY.md`
+6. current canonical registries/manifests named by `CURRENT_STATE.json`
+7. only then relevant historical/deep-read/correction evidence
 
-Detailed historical audit addenda remain evidence/background, but the files above define the continuation path.
+`AUDIT_WORKFLOW_CONTRACT.md` plus `CURRENT_STATE.json` are the restart contract. A future chat must be able to continue without a chat handoff and must not reconstruct methodology from conversational memory.
+
+Detailed historical audit addenda remain evidence/background. If an older handoff, historical report or chat statement conflicts with the current canonical contract/state/registries, resolve the repository evidence before continuing.
 
 ## Authority rule
 
@@ -43,3 +45,8 @@ Candidate/integration schemas may be compiled and audited, but they must never b
 ## Change rule
 
 Any new VDV PDF, release/tag, upstream merge or new/updated PR triggers an incremental change/impact audit before the superbranch and SDK manifest are considered current again. Follow `MAINTENANCE_PLAYBOOK.md`.
+
+
+## PDF locator hard rule
+
+Canonical PDF locators use the **actual visible body heading/table/figure on the byte-pinned page**. The table of contents, version-history cross-references and inferred sequential numbering are navigation/evidence aids only and must never be substituted for the visible target locator. See `AUDIT_WORKFLOW_CONTRACT.md`.
