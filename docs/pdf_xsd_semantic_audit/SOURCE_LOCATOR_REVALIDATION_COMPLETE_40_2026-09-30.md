@@ -130,4 +130,11 @@ Source-locator progress remains:
 
 ## Gate
 
-Final gate result is recorded in CURRENT_STATE after the corrected manifests and strengthened validator pass.
+Final strengthened validation gate:
+
+- GitHub Actions run: **36715477452**
+- result: **SUCCESS**
+- validated commit: `869daa8f5c7f6760b88a7fbe9399c955edbd472e`
+- source-locator validator result: `entries=40 complete=40 remaining=152 upstream_checks=19`
+
+The gate also passed the full existing schema/audit regression suite. No XSD bytes were changed.
