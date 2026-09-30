@@ -306,6 +306,85 @@ def main() -> int:
                 f"CE-004 {c['version']} pins verified ServiceName table number",
             )
 
+    ce020 = loc_by.get("CE-020")
+    if ce020:
+        require(
+            [c["version"] for c in ce020["coverage"]] == ["2.3", "2.3-pr30"],
+            "CE-020 keeps official V2.3 and explicit PR30 candidate lanes",
+        )
+        for lane in ce020["coverage"]:
+            p = lane["pdf_locators"][0]
+            require(
+                p["printed_pages"] == [12],
+                f"CE-020 {lane['version']} pins InternationalTextType printed page 12",
+            )
+            require(
+                p["section"] == "1.17 InternationalTextType",
+                f"CE-020 {lane['version']} pins section 1.17 InternationalTextType",
+            )
+            require(
+                "Table 17" in p.get("table", ""),
+                f"CE-020 {lane['version']} pins Table 17 InternationalTextType",
+            )
+
+    ce025 = loc_by.get("CE-025")
+    if ce025:
+        expected_025 = {
+            "1.0": (([20], "1.51 SubscribeRequest", "Table 51"), ([22], "1.57 UnsubscribeRequest", "Table 57")),
+            "2.0": (([28], "2.54 SubscribeRequest", "Table 54"), ([30], "2.60 UnsubscribeRequest", "Table 60")),
+            "2.1": (([30], "2.54 SubscribeRequest", "Table 54"), ([32], "2.60 UnsubscribeRequest", "Table 60")),
+            "2.2": (([32], "2.55 SubscribeRequest", "Table 55"), ([34], "2.61 UnsubscribeRequest", "Table 61")),
+            "2.3": (([33], "2.55 SubscribeRequest", "Table 55"), ([35], "2.61 UnsubscribeRequest", "Table 61")),
+            "2.4": (([35], "2.54 SubscribeRequest", "Table 54"), ([38], "2.60 UnsubscribeRequest", "Table 60")),
+        }
+        for lane in ce025["coverage"]:
+            require(
+                len(lane["pdf_locators"]) == 2,
+                f"CE-025 {lane['version']} has SubscribeRequest and UnsubscribeRequest PDF locators",
+            )
+            for p, expected_locator in zip(
+                lane["pdf_locators"], expected_025[lane["version"]], strict=True
+            ):
+                pages, section, table = expected_locator
+                require(
+                    p["printed_pages"] == pages,
+                    f"CE-025 {lane['version']} pins verified printed page for {section}",
+                )
+                require(
+                    p["section"] == section,
+                    f"CE-025 {lane['version']} pins verified section {section}",
+                )
+                require(
+                    table in p.get("table", ""),
+                    f"CE-025 {lane['version']} pins verified table for {section}",
+                )
+
+    ce026 = loc_by.get("CE-026")
+    if ce026:
+        expected_026 = {
+            "1.0": ([8], "1.4 BeaconPoint"),
+            "2.0": ([15], "2.4 BeaconPoint"),
+            "2.1": ([16], "2.4 BeaconPoint"),
+            "2.2": ([17], "2.4 BeaconPoint"),
+            "2.3": ([17], "2.4 BeaconPoint"),
+            "2.4": ([19], "2.4 BeaconPoint"),
+        }
+        for lane in ce026["coverage"]:
+            p = lane["pdf_locators"][0]
+            pages, section = expected_026[lane["version"]]
+            require(
+                p["printed_pages"] == pages,
+                f"CE-026 {lane['version']} pins verified BeaconPoint printed page",
+            )
+            require(
+                p["section"] == section,
+                f"CE-026 {lane['version']} pins verified BeaconPoint section",
+            )
+            require(
+                "Table 4" in p.get("table", ""),
+                f"CE-026 {lane['version']} pins Table 4 BeaconPoint",
+            )
+
     for fid in ("CE-025", "CE-026"):
         e = loc_by.get(fid)
         if e:
