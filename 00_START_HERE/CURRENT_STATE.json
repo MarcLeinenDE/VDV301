@@ -1,6 +1,6 @@
 {
   "state_schema_version": "0.1",
-  "date": "2026-09-03",
+  "date": "2026-09-30",
   "canonical_branch": "dev/schema-integration",
   "workflow_mode": "manual_only",
   "project_phase": "source_locator_completeness",
@@ -1976,8 +1976,8 @@
     "source_locator_remaining_count": 152,
     "source_locator_latest_review_block": "COMPLETE_40_REVALIDATION",
     "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVALIDATION_COMPLETE_40_2026-09-30.md",
-    "source_locator_latest_gate_status": "terminally_validated",
-    "source_locator_latest_gate_note": "All 40 currently complete findings passed semantic/authority/runtime revalidation plus a second PDF-locator quality pass. Corrections: CE-002 PDF locator; CE-004 affected scope and locators; CE-020 InternationalTextType locator; CE-025 affected runtime scope plus six-version Subscribe/Unsubscribe locator matrix; CE-026 affected runtime scope plus six-version BeaconPoint locator matrix. Hardened gate also performs 19 upstream release-tag XSD blob checks.",
+    "source_locator_latest_gate_status": "structural_and_targeted_body_validated_full_body_backlog_pending",
+    "source_locator_latest_gate_note": "40 structural locator entries exist. Semantic/authority/runtime consistency and critical corrected locator matrices are gated, but only CE-002, CE-004, CE-020, CE-025 and CE-026 are explicitly tracked as current-standard visible-body verified. 35 existing entries remain to be revalidated under the uniform body-locator rule before new structural progress.",
     "unpublished_future_profile_boundary_rule": "Rules from unpublished or future profiles must not be inferred into supported profiles.",
     "source_locator_completeness_policy": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_COMPLETENESS_POLICY.md",
     "source_locator_complete_requires_exact_pdf_page_section_table_when_applicable": true,
@@ -1985,8 +1985,16 @@
     "candidate_correction_propagation_rule": "A confirmed correction to a candidate/integration XSD creates a new exact schema revision/variant. Preserve the old candidate for reproducibility; pin the corrected source; update SDK variant routing/provenance and affected Known-Issue version history; synchronize the corrected XSD into the dev/schema-integration, which is the project's most current and complete XSD collection. Correction propagation is not complete until SDK and dev/schema-integration are synchronized. Never promote the corrected candidate to official unless upstream official authority actually changes.",
     "dev/schema-integration_role": "most_current_and_complete_project_xsd_collection",
     "arch_source_locator_block": "ARCH-001..ARCH-008 complete; architecture vocabulary must not synthesize executable service/protocol obligations.",
-    "latest_source_locator_rule": "Complete-40 two-pass revalidation terminal: exact selected XSD is normative; official-release XSDs are upstream-tag checked; semantic/runtime affected scopes must match; non-affected correction boundaries cannot trigger runtime findings; exact critical PDF locator matrices are regression-guarded; DE/EN diagnostics are mandatory.",
-    "historical_upstream_locator_support": "schema+validator support exact repository/ref/blob identity for official historical XSD sources"
+    "latest_source_locator_rule": "Visible-body backlog gate active: no new structural source-locator progress beyond 40 until all 40 existing locator findings are revalidated under the canonical visible-body rule.",
+    "historical_upstream_locator_support": "schema+validator support exact repository/ref/blob identity for official historical XSD sources",
+    "source_locator_body_verification_registry": "audit_registry/pdf_locator_body_verification_v0.1.json",
+    "source_locator_body_verification_state": "in_progress",
+    "source_locator_body_verified_current_standard_count": 5,
+    "source_locator_body_pending_current_standard_count": 35,
+    "source_locator_body_progress_frozen_at_structural_count": 40,
+    "source_locator_body_rule": "Canonical PDF target locator uses the actual visible body heading/table/figure on the byte-pinned page. TOC/history cross-references/inferred sequence are not final locator authority.",
+    "source_locator_body_correction_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVALIDATION_CORRECTION_VISIBLE_BODY_SCOPE_2026-09-30.md",
+    "workflow_contract": "00_START_HERE/AUDIT_WORKFLOW_CONTRACT.md"
   },
   "evidence": {
     "xsd_ev_completed": [
@@ -2078,7 +2086,7 @@
     "source_locator_latest_review_block": "COMPLETE_40_REVALIDATION",
     "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVALIDATION_COMPLETE_40_2026-09-30.md",
     "source_locator_latest_gate_run_id": "36716551728",
-    "source_locator_latest_gate_status": "terminally_validated",
+    "source_locator_latest_gate_status": "structural_and_targeted_body_validated_full_body_backlog_pending",
     "audit_diagnostic_reporting_model": "docs/pdf_xsd_semantic_audit/SDK_AUDIT_DIAGNOSTIC_REPORTING_MODEL.md",
     "audit_report_languages": [
       "de",
@@ -2090,13 +2098,18 @@
     "source_locator_complete_requires_exact_pdf_page_section_table_when_applicable": true,
     "candidate_xsd_validation_rule": "Official and candidate/integration XSDs are both valid selectable executable validation authorities. PASS/FAIL follows the exact selected XSD. Every result must disclose the selected authority class (official or candidate/integration) and reference the exact XSD source/provenance; candidate/integration must never be relabelled as official.",
     "candidate_correction_propagation_rule": "A confirmed correction to a candidate/integration XSD creates a new exact schema revision/variant. Preserve the old candidate for reproducibility; pin the corrected source; update SDK variant routing/provenance and affected Known-Issue version history; synchronize the corrected XSD into the dev/schema-integration, which is the project's most current and complete XSD collection. Correction propagation is not complete until SDK and dev/schema-integration are synchronized. Never promote the corrected candidate to official unless upstream official authority actually changes.",
-    "dev/schema-integration_role": "most_current_and_complete_project_xsd_collection"
+    "dev/schema-integration_role": "most_current_and_complete_project_xsd_collection",
+    "source_locator_body_verification_registry": "audit_registry/pdf_locator_body_verification_v0.1.json",
+    "source_locator_body_verification_state": "in_progress",
+    "source_locator_body_verified_current_standard_count": 5,
+    "source_locator_body_pending_current_standard_count": 35
   },
   "next_actions": [
-    "Continue source-locator hardening with ARCH-003 as the next canonical unresolved finding; keep work blocks small and run the strengthened locator gate.",
-    "Preserve every historical finding per exact profile even when a later version or candidate corrects it; later corrections are evidence/history only.",
-    "After source-locator closure, create and pilot the separate DeviceManagementService service/version/operation obligation matrix.",
-    "Only after those gates, implement structured profile-specific Known-Issues matchers with positive/negative evidence."
+    "Revalidate the 35 pending existing PDF locator findings under the 2026-09-30 visible-body rule, in canonical semantic order starting with ARA-001. Do not add new structural locator progress while this backlog is pending.",
+    "For every PDF locator, use the actual visible body heading/table/figure on the byte-pinned page; TOC, version-history cross-references and inferred numbering are navigation/evidence only.",
+    "After body-verification backlog reaches zero and the strengthened gate is SUCCESS, resume structural source-locator expansion at CIS-001.",
+    "Preserve exact selected-XSD PASS/FAIL authority and keep candidate/integration authority distinct from official release authority.",
+    "After source-locator closure, create and pilot the separate DeviceManagementService service/version/operation obligation matrix."
   ],
   "source_locator_progress": {
     "locator_entry_count": 40,
@@ -2105,7 +2118,14 @@
     "remaining_finding_count": 152,
     "latest_review_block": "COMPLETE_40_REVALIDATION",
     "latest_gate_status": "terminally_validated",
-    "latest_gate_run_id": "36716551728"
+    "latest_gate_run_id": "36716551728",
+    "body_verification_state": "in_progress",
+    "body_verified_current_standard_count": 5,
+    "body_pending_current_standard_count": 35,
+    "structural_progress_frozen": true,
+    "structural_progress_freeze_count": 40,
+    "next_body_revalidation_finding": "ARA-001",
+    "next_structurally_missing_finding_after_body_backlog": "CIS-001"
   },
   "external_protocol_authority": {
     "policy": "docs/pdf_xsd_semantic_audit/EXTERNAL_PROTOCOL_STANDARD_AUTHORITY.md",
@@ -2139,5 +2159,14 @@
       "BLOCKED_BY_DEPENDENCY"
     ],
     "status": "baseline_frozen_before_runtime_implementation"
-  }
+  },
+  "continuation_contract": "00_START_HERE/AUDIT_WORKFLOW_CONTRACT.md",
+  "restart_read_order": [
+    "00_START_HERE/AUDIT_WORKFLOW_CONTRACT.md",
+    "00_START_HERE/CURRENT_STATE.json",
+    "00_START_HERE/MAINTENANCE_PLAYBOOK.md",
+    "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
+    "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_COMPLETENESS_POLICY.md"
+  ],
+  "restart_rule": "A new chat/maintainer must continue from repository state, not conversational memory: read the canonical workflow contract first, verify actual branch HEAD/latest gate, then derive the next work item from canonical registries."
 }
