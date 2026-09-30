@@ -1985,7 +1985,7 @@
     "candidate_correction_propagation_rule": "A confirmed correction to a candidate/integration XSD creates a new exact schema revision/variant. Preserve the old candidate for reproducibility; pin the corrected source; update SDK variant routing/provenance and affected Known-Issue version history; synchronize the corrected XSD into the dev/schema-integration, which is the project's most current and complete XSD collection. Correction propagation is not complete until SDK and dev/schema-integration are synchronized. Never promote the corrected candidate to official unless upstream official authority actually changes.",
     "dev/schema-integration_role": "most_current_and_complete_project_xsd_collection",
     "arch_source_locator_block": "ARCH-001..ARCH-008 complete; architecture vocabulary must not synthesize executable service/protocol obligations.",
-    "latest_source_locator_rule": "CE-001: selected XSD include graph is authoritative; Common V2.3 intentionally consumes Enumerations V2.2; no synthetic same-number enumeration schema.",
+    "latest_source_locator_rule": "CE-002: V2.4 history StopPointNumber is PDF editorial residue; selected candidate XSD and actual table use PointNumber; no alias/normalization.",
     "historical_upstream_locator_support": "schema+validator support exact repository/ref/blob identity for official historical XSD sources"
   },
   "evidence": {
@@ -2099,13 +2099,13 @@
     "Only after those gates, implement structured profile-specific Known-Issues matchers with positive/negative evidence."
   ],
   "source_locator_progress": {
-    "locator_entry_count": 37,
-    "coverage_complete_count": 37,
+    "locator_entry_count": 38,
+    "coverage_complete_count": 38,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 155,
-    "latest_review_block": "CE_001",
-    "latest_gate_status": "terminally_validated",
-    "latest_gate_run_id": "36679177360"
+    "remaining_finding_count": 154,
+    "latest_review_block": "CE_002",
+    "latest_gate_status": "pending_gate",
+    "latest_gate_run_id": null
   },
   "external_protocol_authority": {
     "policy": "docs/pdf_xsd_semantic_audit/EXTERNAL_PROTOCOL_STANDARD_AUTHORITY.md",
