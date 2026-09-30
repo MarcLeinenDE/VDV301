@@ -20,7 +20,8 @@
     "finding_source_locators": "audit_registry/finding_source_locators_v0.1.json",
     "finding_source_locator_schema": "audit_registry/finding_source_locators_v0.1.schema.json",
     "version_and_finding_governance": "docs/pdf_xsd_semantic_audit/SDK_VERSION_AND_FINDING_GOVERNANCE.md",
-    "audit_diagnostic_reporting_model": "docs/pdf_xsd_semantic_audit/SDK_AUDIT_DIAGNOSTIC_REPORTING_MODEL.md"
+    "audit_diagnostic_reporting_model": "docs/pdf_xsd_semantic_audit/SDK_AUDIT_DIAGNOSTIC_REPORTING_MODEL.md",
+    "external_protocol_standard_authority": "docs/pdf_xsd_semantic_audit/EXTERNAL_PROTOCOL_STANDARD_AUTHORITY.md"
   },
   "invariants": {
     "xsd_is_executable_xml_authority_when_profile_exists": true,
@@ -40,7 +41,11 @@
     "audit_report_diagnostics_bilingual_de_en": true,
     "repeated_diagnostics_are_losslessly_aggregated_for_report_presentation": true,
     "known_finding_advisory_never_waives_xsd_failure": true,
-    "candidate_correction_requires_sdk_and_dev/schema-integration_sync": true
+    "candidate_correction_requires_sdk_and_dev/schema-integration_sync": true,
+    "external_protocol_hard_fail_requires_complete_authority_chain": true,
+    "external_protocol_requirement_strength_must_be_preserved": true,
+    "vdv_protocol_specialization_precedes_generic_external_rule": true,
+    "external_protocol_successor_standard_never_silently_replaces_profile_selected_standard": true
   },
   "resolver": {
     "required_dimensions": [
