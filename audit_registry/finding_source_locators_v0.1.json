@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 29,
-    "coverage_complete_count": 29,
+    "locator_entry_count": 30,
+    "coverage_complete_count": 30,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 163
+    "remaining_finding_count": 162
   },
   "entries": [
     {
@@ -490,6 +490,62 @@
           ],
           "xsd_locators": [],
           "coverage_note": "Architecture/context authority only. Preserve the per-vehicle IBIS-IP system boundary in evidence and routing context, but do not infer a blanket communication prohibition; concrete coupling/service behavior belongs to the applicable service/interface specifications."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARCH_V10_2026-09-03.md",
+        "docs/pdf_xsd_semantic_audit/28_vdv301_1_system_architecture_first_pass.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/VDV301-1_V1.0_DE.md",
+        "pin/render run 33725750019 / job 100554215021 / artifact 9881897572"
+      ]
+    },
+    {
+      "finding_id": "ARCH-004",
+      "service": "SystemArchitecture",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "General protection requirement and non-safety boundary; no concrete cryptographic profile is specified."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "1.0",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-1_V1.0_DE",
+              "document_title": "VDV-Schrift 301-1 IBIS-IP Teil 1: Systemarchitektur",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/vdv-301-1-ibis-ip-teil-1-systemarchitektur.pdfx",
+              "sha256": "5418f24190468a1823699688cf86f98d812591ad2c7c2eada07b1d34889c20c2",
+              "printed_pages": [
+                7
+              ],
+              "section": "2 Anwendungsbereich",
+              "point_summary": "The architecture and applications described by VDV 301-1 are scoped to non-safety-related systems; safety-relevant systems may be connected through defined interfaces/gateways while non-interference with safety functions must be maintained."
+            },
+            {
+              "source_id": "VDV301-1_V1.0_DE",
+              "document_title": "VDV-Schrift 301-1 IBIS-IP Teil 1: Systemarchitektur",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/vdv-301-1-ibis-ip-teil-1-systemarchitektur.pdfx",
+              "sha256": "5418f24190468a1823699688cf86f98d812591ad2c7c2eada07b1d34889c20c2",
+              "printed_pages": [
+                26
+              ],
+              "section": "6 Kommunikation / security and protection context",
+              "point_summary": "The architecture requires contemporary adequate protection against unauthorized intrusion and adverse effects on safety-relevant components. This is a general protection requirement; the cited architecture text does not define a TLS version, certificate model or cipher suite."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Architecture/context authority only. The source supports the non-safety boundary and a general state-of-technology protection requirement. It does not supply a concrete cryptographic validation profile, so no TLS/certificate/cipher hard-fail may be synthesized from ARCH-004 alone."
         }
       ],
       "supporting_evidence": [
