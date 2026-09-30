@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 34,
-    "coverage_complete_count": 34,
+    "locator_entry_count": 35,
+    "coverage_complete_count": 35,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 158
+    "remaining_finding_count": 157
   },
   "entries": [
     {
@@ -744,6 +744,116 @@
         "docs/pdf_xsd_semantic_audit/deep_read/VDV301-1_V1.0_DE.md",
         "docs/pdf_xsd_semantic_audit/EXTERNAL_PROTOCOL_STANDARD_AUTHORITY.md",
         "pin/render run 33725750019 / job 100554215021 / artifact 9881897572"
+      ]
+    },
+    {
+      "finding_id": "BG-001",
+      "service": "BaseGeneral",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "VDV-301-1.0 / VDV-301-2.0 historical V1.0 service families",
+          "authority": "official_release",
+          "xsd_profile": "exact release-tag-selected service XSD pool",
+          "note": "Four same-path V1.0 service XSD files have different official blobs across the two release contexts; the semantic differences are primarily packaging/self-containment changes."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "VDV-301-1.0 historical V1.0 service pool",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_JourneyInformationService_V1.0.xsd",
+              "git_blob": "1ee4d7aeb15f3269c5335313be9e214bdb519d2e",
+              "authority_detail": "official upstream VDVde/VDV301 tag VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "IBIS-IP_JourneyInformationService_V1.0.xsd official VDV-301-1.0 release instance",
+              "xpath_hint": "/xs:schema",
+              "point_summary": "Same V1.0 path/version token has this exact official blob in VDV-301-1.0; compare with the other release context before selecting a historical schema pool."
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "600a3ee6290c630a4435fb06ca9803dabaceb788",
+              "authority_detail": "official upstream VDVde/VDV301 tag VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "IBIS-IP_PassengerCountingService_V1.0.xsd official VDV-301-1.0 release instance",
+              "xpath_hint": "/xs:schema",
+              "point_summary": "Same V1.0 path/version token has this exact official blob in VDV-301-1.0; compare with the other release context before selecting a historical schema pool."
+            },
+            {
+              "file": "IBIS-IP_SystemManagementService_V1.0.xsd",
+              "git_blob": "85390f99d6c19c88923ed9a5fc8a5706137708af",
+              "authority_detail": "official upstream VDVde/VDV301 tag VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "IBIS-IP_SystemManagementService_V1.0.xsd official VDV-301-1.0 release instance",
+              "xpath_hint": "/xs:schema",
+              "point_summary": "Same V1.0 path/version token has this exact official blob in VDV-301-1.0; compare with the other release context before selecting a historical schema pool."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "017ca64666e25d757fc0cde1f1be817f06a743fc",
+              "authority_detail": "official upstream VDVde/VDV301 tag VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "IBIS-IP_TicketInformationService_V1.0.xsd official VDV-301-1.0 release instance",
+              "xpath_hint": "/xs:schema",
+              "point_summary": "Same V1.0 path/version token has this exact official blob in VDV-301-1.0; compare with the other release context before selecting a historical schema pool."
+            }
+          ],
+          "coverage_note": "Exact official historical release lane. Blob identity is provenance/routing evidence; it does not by itself prove a changed payload-validity model."
+        },
+        {
+          "version": "VDV-301-2.0 historical V1.0 service pool",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_JourneyInformationService_V1.0.xsd",
+              "git_blob": "8c303db5a9c0548d66b90174d9c329d33092ad24",
+              "authority_detail": "official upstream VDVde/VDV301 tag VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "IBIS-IP_JourneyInformationService_V1.0.xsd official VDV-301-2.0 release instance",
+              "xpath_hint": "/xs:schema",
+              "point_summary": "Same V1.0 path/version token has this exact official blob in VDV-301-2.0; compare with the other release context before selecting a historical schema pool."
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "4161872be76740abfdd1cddf96f8a736333fc8be",
+              "authority_detail": "official upstream VDVde/VDV301 tag VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "IBIS-IP_PassengerCountingService_V1.0.xsd official VDV-301-2.0 release instance",
+              "xpath_hint": "/xs:schema",
+              "point_summary": "Same V1.0 path/version token has this exact official blob in VDV-301-2.0; compare with the other release context before selecting a historical schema pool."
+            },
+            {
+              "file": "IBIS-IP_SystemManagementService_V1.0.xsd",
+              "git_blob": "2d32630a0f1981e980e6a466e3f6a69136410f24",
+              "authority_detail": "official upstream VDVde/VDV301 tag VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "IBIS-IP_SystemManagementService_V1.0.xsd official VDV-301-2.0 release instance",
+              "xpath_hint": "/xs:schema",
+              "point_summary": "Same V1.0 path/version token has this exact official blob in VDV-301-2.0; compare with the other release context before selecting a historical schema pool."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "official upstream VDVde/VDV301 tag VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "IBIS-IP_TicketInformationService_V1.0.xsd official VDV-301-2.0 release instance",
+              "xpath_hint": "/xs:schema",
+              "point_summary": "Same V1.0 path/version token has this exact official blob in VDV-301-2.0; compare with the other release context before selecting a historical schema pool."
+            }
+          ],
+          "coverage_note": "Exact official later release lane for the same V1.0 service paths. The SDK must not silently substitute this pool for VDV-301-1.0 merely because names/version tokens match. Semantic differences must be established separately."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_BG_2026-09-03.md",
+        "EV-123 run 33726364976: exact legacy root mappings compile through adapters without modifying/replacing official schemas",
+        "fresh upstream tag/blob recheck 2026-09-30 against VDVde/VDV301 tags VDV-301-1.0 and VDV-301-2.0"
       ]
     },
     {
