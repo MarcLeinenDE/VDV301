@@ -76,3 +76,17 @@ The PDF locator hard rule is also explicit in:
 This correction changes the claim about **locator-quality verification coverage**, not XSD conformance behavior.
 
 The selected XSD remains normative for PASS/FAIL.
+
+
+## Gate proof
+
+The strengthened visible-body backlog gate passed:
+
+- GitHub Actions run: **36718104921**
+- result: **SUCCESS**
+- validated commit: `7d4a84dd0c699b3d0260c6a46c7a329dfdc72a1c`
+- structural locators: **40**
+- current-standard visible-body verified: **5**
+- pending current-standard body revalidation: **35**
+- upstream exact release-tag XSD checks: **19**
+- structural locator progress freeze: **active and validated**
