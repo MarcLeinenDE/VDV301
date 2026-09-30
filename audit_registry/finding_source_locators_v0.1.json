@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 30,
-    "coverage_complete_count": 30,
+    "locator_entry_count": 31,
+    "coverage_complete_count": 31,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 162
+    "remaining_finding_count": 161
   },
   "entries": [
     {
@@ -552,6 +552,51 @@
         "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARCH_V10_2026-09-03.md",
         "docs/pdf_xsd_semantic_audit/28_vdv301_1_system_architecture_first_pass.md",
         "docs/pdf_xsd_semantic_audit/deep_read/VDV301-1_V1.0_DE.md",
+        "pin/render run 33725750019 / job 100554215021 / artifact 9881897572"
+      ]
+    },
+    {
+      "finding_id": "ARCH-005",
+      "service": "SystemArchitecture",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Architecture-level communication classes later refined by Part 2."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "1.0",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-1_V1.0_DE",
+              "document_title": "VDV-Schrift 301-1 IBIS-IP Teil 1: Systemarchitektur",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/vdv-301-1-ibis-ip-teil-1-systemarchitektur.pdfx",
+              "sha256": "5418f24190468a1823699688cf86f98d812591ad2c7c2eada07b1d34889c20c2",
+              "printed_pages": [
+                26
+              ],
+              "section": "6 Kommunikation",
+              "point_summary": "The architecture distinguishes rapidly changing information, where simultaneous distribution is more important than guaranteed delivery and UDP multicast is used, from less frequently changing/reliable information for which TCP is suitable and HTTP over TCP is specified for reliable IBIS-IP communication."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Architecture-level communication-class authority only. This locator establishes the UDP-multicast versus TCP/HTTP architecture distinction, but it does not by itself authorize a universal per-service/per-packet transport hard-fail. Executable transport and external-standard checks require the applicable Part-2/service profile and the complete external-protocol authority chain."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARCH_V10_2026-09-03.md",
+        "docs/pdf_xsd_semantic_audit/28_vdv301_1_system_architecture_first_pass.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/VDV301-1_V1.0_DE.md",
+        "docs/pdf_xsd_semantic_audit/EXTERNAL_PROTOCOL_STANDARD_AUTHORITY.md",
+        "docs/pdf_xsd_semantic_audit/EXTERNAL_PROTOCOL_AUTHORITY_BACKCHECK_ARCH_001_004_2026-09-30.md",
         "pin/render run 33725750019 / job 100554215021 / artifact 9881897572"
       ]
     },
