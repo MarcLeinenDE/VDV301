@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 38,
-    "coverage_complete_count": 38,
+    "locator_entry_count": 39,
+    "coverage_complete_count": 39,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 154
+    "remaining_finding_count": 153
   },
   "entries": [
     {
@@ -1041,6 +1041,34 @@
         "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4.md",
         "EV-124 run 33735601969",
         "COMMON V2.4 PDF pin/render run 33658306978"
+      ]
+    },
+    {
+      "finding_id": "CE-003",
+      "service": "Common/Enumerations",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd"
+        }
+      ],
+      "coverage": [
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "pdf_locators": [],
+          "xsd_locators": [],
+          "coverage_note": "CE-003 is not a source-level PDF/XSD discrepancy. It recorded an interim project state that the Common V2.4 delta review was not yet closed. The later frozen Fresh Read traversed the complete V2.4 document inventory, the closure reconciled all 15 frozen observation groups, and EV-122 supplied executable evidence for material V2.4 checks. Therefore no PDF page or XSD component is legitimately attachable as a defect locator; preserving empty source locators is intentional and prevents fabrication of a provider-facing issue."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md — CE-003 terminal state superseded",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4_FRESH_2026-09-03.md — frozen full-document source read",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4.md — Deep Read closure and historical reconciliation",
+        "EV-122 run 33716645876"
       ]
     },
     {
