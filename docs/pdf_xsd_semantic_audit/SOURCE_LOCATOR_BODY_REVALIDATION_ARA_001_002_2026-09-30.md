@@ -119,3 +119,17 @@ After this block:
 - visible-body verified count becomes 7
 - pending visible-body revalidation becomes 33
 - next canonical body-revalidation finding: `ARA-003`
+
+
+## Gate
+
+- GitHub Actions run: **36720086602**
+- result: **SUCCESS**
+- validated commit: `10725bbad4aa4ccb7566411e0203f83297cac6de`
+- structural locators: **40**
+- visible-body verified: **7**
+- visible-body pending: **33**
+- next body-revalidation finding: **ARA-003**
+- upstream exact release-tag XSD checks: **19**
+
+The gate also verified that `CURRENT_STATE.json` matches the body-verification registry and that the ARA-001/ARA-002 canonical locator strings match the revalidated body positions.
