@@ -421,6 +421,54 @@ def main() -> int:
             "ARA-002 page 13 pins the actual visible XML-example heading",
         )
 
+    ara003 = loc_by.get("ARA-003")
+    if ara003:
+        for lane in ara003["coverage"]:
+            p = lane["pdf_locators"][0]
+            require(
+                p["printed_pages"] == [11],
+                f"ARA-003 {lane['version']} pins printed page 11",
+            )
+            require(
+                p["section"]
+                == "2.2 DataStructure of SendTelegram Operation / 2.2.1 Request",
+                f"ARA-003 {lane['version']} pins the actual visible request heading",
+            )
+            require(
+                p.get("table")
+                == "AnalogRadioService.RadioTelegramStructure request-structure table/model",
+                f"ARA-003 {lane['version']} pins the visible RadioTelegramStructure table/model",
+            )
+
+    ara004 = loc_by.get("ARA-004")
+    if ara004:
+        lane = ara004["coverage"][0]
+        by_page = {}
+        for p in lane["pdf_locators"]:
+            by_page.setdefault(p["printed_pages"][0], []).append(p)
+        require(
+            sorted(by_page) == [10, 13],
+            "ARA-004 pins operation inventory page 10 and example page 13",
+        )
+        p10 = by_page[10][0]
+        require(
+            p10["section"] == "2.1 Operations of the AnalogRadioService",
+            "ARA-004 page 10 pins the actual visible operation heading",
+        )
+        require(
+            p10.get("table") == "Operation inventory and Request / Response table",
+            "ARA-004 page 10 pins both visible operation tables",
+        )
+        sections13 = {p["section"] for p in by_page[13]}
+        require(
+            "2.5 Examples / 2.5.1 URI for the Operation SendTelegram" in sections13,
+            "ARA-004 page 13 pins the URI section heading",
+        )
+        require(
+            "2.5 Examples / 2.5.2 XML of a complete telegram" in sections13,
+            "ARA-004 page 13 pins the XML example heading",
+        )
+
     ce002 = loc_by.get("CE-002")
     if ce002:
         p = ce002["coverage"][0]["pdf_locators"][0]
