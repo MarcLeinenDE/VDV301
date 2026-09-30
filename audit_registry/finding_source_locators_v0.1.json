@@ -229,9 +229,9 @@
               "printed_pages": [
                 11
               ],
-              "section": "AnalogRadioService.RadioTelegramStructure",
-              "table": "RadioTelegramStructure table",
-              "point_summary": "Table marks the final transmitter member as cardinality 1:1, while the embedded schema view on the same printed page shows Transmitter with minOccurs=0."
+              "section": "2.2 DataStructure of SendTelegram Operation / 2.2.1 Request",
+              "table": "AnalogRadioService.RadioTelegramStructure request-structure table/model",
+              "point_summary": "Visible body: table row TransmitterType is 1:1 while the embedded schema view on the same page shows Transmitter with minOccurs=0, establishing the PDF-internal cardinality contradiction."
             }
           ],
           "xsd_locators": [],
@@ -252,9 +252,9 @@
               "printed_pages": [
                 11
               ],
-              "section": "AnalogRadioService.RadioTelegramStructure",
-              "table": "RadioTelegramStructure table / embedded schema view",
-              "point_summary": "Official PDF provides the comparison surface: table 1:1, embedded schema view minOccurs=0."
+              "section": "2.2 DataStructure of SendTelegram Operation / 2.2.1 Request",
+              "table": "AnalogRadioService.RadioTelegramStructure request-structure table/model",
+              "point_summary": "Visible body: table row TransmitterType is 1:1 while the embedded schema view on the same page shows Transmitter with minOccurs=0; selected candidate/integration XSD also defines Transmitter as 0:1."
             }
           ],
           "xsd_locators": [
@@ -277,7 +277,8 @@
       "supporting_evidence": [
         "docs/pdf_xsd_semantic_audit/deep_read/ARA_V2.4.md FR-ARA24-OBS-001",
         "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARA_V24_2026-09-03.md",
-        "EV-105 run 33228250613 / job 99036090357: PASSED ARA-003 candidate XSD 0:1 Transmitter behavior executable-confirmed"
+        "EV-105 run 33228250613 / job 99036090357: PASSED ARA-003 candidate XSD 0:1 Transmitter behavior executable-confirmed",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_BODY_REVALIDATION_ARA_003_004_2026-09-30.md"
       ]
     },
     {
@@ -308,9 +309,9 @@
               "printed_pages": [
                 10
               ],
-              "section": "AnalogRadioService operation inventory",
-              "table": "Operation inventory",
-              "point_summary": "Official operation inventory defines the service operation as SendTelegram; no SendFFSKTelegram operation is listed."
+              "section": "2.1 Operations of the AnalogRadioService",
+              "table": "Operation inventory and Request / Response table",
+              "point_summary": "Visible body states the service has only one operation and both operation tables identify it as SendTelegram."
             },
             {
               "source_id": "ARA_V2.4",
@@ -322,8 +323,9 @@
               "printed_pages": [
                 13
               ],
-              "section": "2.5.1 URI for the Operation SendTelegram",
-              "point_summary": "Section heading identifies SendTelegram, but the concrete URI example ends in /AnalogRadioService/SendFFSKTelegram."
+              "section": "2.5 Examples / 2.5.1 URI for the Operation SendTelegram",
+              "point_summary": "Visible section heading says SendTelegram, but the concrete URI example ends in /AnalogRadioService/SendFFSKTelegram.",
+              "table": null
             },
             {
               "source_id": "ARA_V2.4",
@@ -335,8 +337,9 @@
               "printed_pages": [
                 13
               ],
-              "section": "SendTelegram XML example",
-              "point_summary": "XML example immediately below the URI example uses root AnalogRadioService.SendTelegram, corroborating SendTelegram as the documented operation name."
+              "section": "2.5 Examples / 2.5.2 XML of a complete telegram",
+              "point_summary": "Visible XML example immediately below the URI section uses root <AnalogRadioService.SendTelegram>, corroborating SendTelegram as the documented operation name.",
+              "table": null
             }
           ],
           "xsd_locators": [],
@@ -345,7 +348,8 @@
       ],
       "supporting_evidence": [
         "docs/pdf_xsd_semantic_audit/deep_read/ARA_V2.4.md FR-ARA24-OBS-002",
-        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARA_V24_2026-09-03.md"
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARA_V24_2026-09-03.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_BODY_REVALIDATION_ARA_003_004_2026-09-30.md"
       ]
     },
     {
