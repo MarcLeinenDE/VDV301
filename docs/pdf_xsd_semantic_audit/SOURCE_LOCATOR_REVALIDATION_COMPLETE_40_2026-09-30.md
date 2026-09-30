@@ -7,7 +7,7 @@ This pass revalidated all 40 findings currently marked `coverage_state=complete`
 
 `ARA-001..ARA-004`, `ARCH-001..ARCH-008`, `BG-001..BG-002`, and `CE-001..CE-026`.
 
-The purpose was defensive SDK hardening after an authority-classification mistake was detected and corrected for CE-007. The pass checks finding identity, version scope, release/candidate authority, exact XSD provenance, PDF/XSD interpretation, PASS/FAIL consequence, runtime scope, DE/EN diagnostics and locator quality.
+The purpose was defensive SDK hardening after an authority-classification mistake was detected and corrected for CE-007. The work was deliberately performed in two layers: first a semantic/authority/runtime revalidation of all 40 findings, then a second locator-quality pass across all eight referenced PDF source families to detect plausible-but-wrong page/section/table references that a structural JSON gate alone cannot detect. The pass checks finding identity, version scope, release/candidate authority, exact XSD provenance, PDF/XSD interpretation, PASS/FAIL consequence, runtime scope, DE/EN diagnostics and locator quality.
 
 ## Global invariants revalidated
 
@@ -71,32 +71,64 @@ The previous V2.4 locator also incorrectly named section 3.28. The correct secti
 
 SDK consequence remains XSD-invalid + advisory. The stale PDF service names are never aliases.
 
-### CE-025 — runtime affected-scope correction
+### CE-020 — PDF source-locator correction
+
+The technical finding remains unchanged: official Common V2.3 uses primitive `xs:string` / `xs:language` in the selected XSD, while the official PDF documents `IBIS-IP.string` / `IBIS-IP.language`; PR #30 is an explicit candidate overlay that aligns those two member types with the PDF.
+
+The stored PDF locator was wrong for both the official and PR30 lanes. The exact official V2.3 source location is:
+
+- **1.17 InternationalTextType**
+- **Table 17 Description of InternationalTextType**
+- printed page **12**
+
+The prior `2.61 / Table 61 / page 36` locator was unrelated to InternationalTextType and has been removed.
+
+Finding identity, official-vs-candidate authority split and PASS/FAIL behavior do not change.
+
+### CE-025 — affected-scope and PDF source-locator correction
 
 V2.4 is an explicit **non-affected correction boundary**: PDF and selected V2.4 XSD align on `ReplyPath`.
 
-V2.4 is therefore removed from the semantic/runtime affected scope. It remains in source-locator coverage only to prove the correction boundary.
+V2.4 is therefore removed from the semantic/runtime affected scope. It remains in source-locator coverage only to prove the correction boundary. Affected runtime scope is now only Common V1.0-V2.3.
 
-Affected runtime scope is now only Common V1.0-V2.3.
+The second locator-quality pass also found that several stored SubscribeRequest/UnsubscribeRequest page, section and table references had been derived from an incorrect numbering sequence. The exact visible body locations are now pinned per version:
 
-### CE-026 — runtime affected-scope correction
+- V1.0: SubscribeRequest **1.51 / Table 51 / p.20**; UnsubscribeRequest **1.57 / Table 57 / p.22**
+- V2.0: **2.54 / Table 54 / p.28**; **2.60 / Table 60 / p.30**
+- V2.1: **2.54 / Table 54 / p.30**; **2.60 / Table 60 / p.32**
+- V2.2: actual body headings **2.55 / Table 55 / p.32** and **2.61 / Table 61 / p.34**
+- V2.3: **2.55 / Table 55 / p.33** and **2.61 / Table 61 / p.35**
+- V2.4: **2.54 / Table 54 / p.35** and **2.60 / Table 60 / p.38**
+
+The V2.2 distinction is intentional: its table of contents and visible body numbering are internally inconsistent in this area; locators follow the actual visible body heading/table, not a synthesized sequence.
+
+### CE-026 — affected-scope and PDF source-locator correction
 
 V2.4 corrects BeaconPoint to `Description`; it is an explicit **non-affected correction boundary**.
 
-V2.4 is therefore removed from the semantic/runtime affected scope. It remains in source-locator coverage only to prove that the historical `Desciption` finding ends with V2.3.
+V2.4 is therefore removed from the semantic/runtime affected scope. It remains in source-locator coverage only to prove that the historical `Desciption` finding ends with V2.3. Affected runtime scope is now only Common V1.0-V2.3.
 
-Affected runtime scope is now only Common V1.0-V2.3.
+The second locator-quality pass also corrected the BeaconPoint source matrix. The exact visible PDF locations are:
+
+- V1.0: **1.4 BeaconPoint / Table 4 / p.8**
+- V2.0: **2.4 / Table 4 / p.15**
+- V2.1: **2.4 / Table 4 / p.16**
+- V2.2: **2.4 / Table 4 / p.17**
+- V2.3: **2.4 / Table 4 / p.17**
+- V2.4: **2.4 / Table 4 / p.19**
+
+The earlier 1.5/2.5 and Table-5 references pointed to the following CardApplInformation section and were incorrect.
 
 ## Reaffirmed findings
 
-The other 36 complete findings were rechecked without a terminal finding/scope/PASS-FAIL change:
+The other 35 complete findings were rechecked without a terminal finding/scope/PASS-FAIL change:
 
 - ARA-001..ARA-004
 - ARCH-001..ARCH-008
 - BG-001..BG-002
 - CE-001
 - CE-003
-- CE-005..CE-024 excluding the corrected CE-025 boundary case above
+- CE-005..CE-024 excluding CE-020, which required a locator correction
 - CE-007 official V1.0 release-tag authority was specifically rechecked and remains `official_release`
 - CE-008/CE-009 current identities are correct; the historical swapped-label delta remains quarantined by its explicit correction overlay
 
@@ -118,7 +150,10 @@ The source-locator gate is strengthened by this revalidation to guard against re
 1. semantic and runtime affected profile scopes must remain synchronized where a runtime mapping exists;
 2. `correction_boundary_not_affected` coverage lanes are forbidden from affected semantic/runtime scope;
 3. official-release local XSD locators are cross-checked against the corresponding upstream VDV release tag when a deterministic release tag can be resolved;
-4. CE-002 and CE-004 retain regression assertions for their corrected source locations/scope.
+4. CE-002 and CE-004 retain regression assertions for their corrected source locations/scope;
+5. CE-020 retains exact 1.17 / Table 17 / page-12 assertions for both official and PR30 lanes;
+6. CE-025 retains a version-by-version SubscribeRequest/UnsubscribeRequest source matrix and correction-boundary guard;
+7. CE-026 retains a version-by-version BeaconPoint source matrix and correction-boundary guard.
 
 ## Progress accounting
 
@@ -130,11 +165,11 @@ Source-locator progress remains:
 
 ## Gate
 
-Final strengthened validation gate:
+Final strengthened validation gate after the second locator-quality pass:
 
-- GitHub Actions run: **36715477452**
+- GitHub Actions run: **36716551728**
 - result: **SUCCESS**
-- validated commit: `869daa8f5c7f6760b88a7fbe9399c955edbd472e`
+- validated commit: `2ec8a7a856888dd9950f3414da707575f167844a`
 - source-locator validator result: `entries=40 complete=40 remaining=152 upstream_checks=19`
 
-The gate also passed the full existing schema/audit regression suite. No XSD bytes were changed.
+The gate explicitly passed the corrected CE-002, CE-004, CE-020, CE-025 and CE-026 regression matrices, semantic/runtime scope synchronization, non-affected correction-boundary exclusion, upstream release-tag XSD verification and the full existing schema/audit regression suite. No XSD bytes were changed.
