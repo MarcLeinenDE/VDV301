@@ -3,6 +3,7 @@
 from __future__ import annotations
 import json
 import subprocess
+import urllib.parse
 from pathlib import Path
 from jsonschema import Draft202012Validator
 
@@ -63,9 +64,19 @@ def main() -> int:
                 require(str(pdf_by_id[sid]["version"])==p_loc["document_version"],f"{e['finding_id']} PDF version matches registry: {sid}")
                 require(pin_by_id[sid]["expected_sha256"]==p_loc["sha256"],f"{e['finding_id']} PDF SHA-256 matches pin registry: {sid}")
             for x in c["xsd_locators"]:
-                p=ROOT/x["file"]
-                require(p.is_file(),f"{e['finding_id']} XSD exists: {x['file']}")
-                require(git_blob(p)==x["git_blob"],f"{e['finding_id']} XSD blob matches: {x['file']}")
+                if x.get("repository") or x.get("ref"):
+                    require(bool(x.get("repository")) and bool(x.get("ref")),f"{e['finding_id']} external XSD locator has repository and ref: {x['file']}")
+                    require(x["repository"]=="VDVde/VDV301",f"{e['finding_id']} external XSD repository is approved upstream: {x['file']}")
+                    import urllib.request
+                    api=f"https://api.github.com/repos/{x['repository']}/contents/{x['file']}?ref={urllib.parse.quote(x['ref'],safe='')}"
+                    req=urllib.request.Request(api,headers={"Accept":"application/vnd.github+json","User-Agent":"VDV301-locator-validator"})
+                    with urllib.request.urlopen(req,timeout=20) as resp:
+                        upstream=json.load(resp)
+                    require(upstream.get("sha")==x["git_blob"],f"{e['finding_id']} external XSD blob matches {x['repository']}@{x['ref']}: {x['file']}")
+                else:
+                    p=ROOT/x["file"]
+                    require(p.is_file(),f"{e['finding_id']} XSD exists: {x['file']}")
+                    require(git_blob(p)==x["git_blob"],f"{e['finding_id']} XSD blob matches: {x['file']}")
     counts=m["counts"]
     require(counts["locator_entry_count"]==len(m["entries"]),"locator_entry_count matches entries")
     require(counts["coverage_complete_count"]==sum(e["coverage_state"]=="complete" for e in m["entries"]),"complete count matches")
