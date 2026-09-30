@@ -1059,9 +1059,34 @@
           "version": "Common V2.4",
           "authority": "candidate_integration",
           "coverage_status": "complete",
-          "pdf_locators": [],
-          "xsd_locators": [],
-          "coverage_note": "CE-003 is not a source-level PDF/XSD discrepancy. It recorded an interim project state that the Common V2.4 delta review was not yet closed. The later frozen Fresh Read traversed the complete V2.4 document inventory, the closure reconciled all 15 frozen observation groups, and EV-122 supplied executable evidence for material V2.4 checks. Therefore no PDF page or XSD component is legitimately attachable as a defect locator; preserving empty source locators is intentional and prevents fabrication of a provider-facing issue."
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.4",
+              "document_title": "VDV 301-2-1 Common Structures and Enumerations",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sde-v2-4-commonstructure-enums.pdfx",
+              "sha256": "01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a",
+              "printed_pages": [
+                1,
+                63
+              ],
+              "section": "complete-document review scope",
+              "point_summary": "CE-003 did not identify a persistent page-level defect. The later frozen V2.4 Fresh Read traversed the complete 63-page publication and superseded the earlier incomplete-audit progress state; pages 1 and 63 delimit the reviewed publication scope rather than a defect location."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.4.xsd",
+              "git_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+              "authority_detail": "selected candidate/integration Common V2.4 family; not official release authority",
+              "component_kind": "schema",
+              "component": "IBIS-IP_common_V2.4.xsd complete selected schema scope",
+              "xpath_hint": "/xs:schema",
+              "point_summary": "Exact selected candidate Common V2.4 schema used by the completed review. CE-003 has no persistent component-level mismatch; this locator pins the reviewed executable authority rather than asserting a defect."
+            }
+          ],
+          "coverage_note": "CE-003 is a superseded audit-progress state, not a source defect. PDF and XSD locators pin the complete reviewed source scope and must not be interpreted as defect positions or runtime triggers."
         }
       ],
       "supporting_evidence": [
