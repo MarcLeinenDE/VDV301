@@ -1985,7 +1985,7 @@
     "candidate_correction_propagation_rule": "A confirmed correction to a candidate/integration XSD creates a new exact schema revision/variant. Preserve the old candidate for reproducibility; pin the corrected source; update SDK variant routing/provenance and affected Known-Issue version history; synchronize the corrected XSD into the dev/schema-integration, which is the project's most current and complete XSD collection. Correction propagation is not complete until SDK and dev/schema-integration are synchronized. Never promote the corrected candidate to official unless upstream official authority actually changes.",
     "dev/schema-integration_role": "most_current_and_complete_project_xsd_collection",
     "arch_source_locator_block": "ARCH-001..ARCH-008 complete; architecture vocabulary must not synthesize executable service/protocol obligations.",
-    "latest_source_locator_rule": "CE-003: superseded audit-progress findings may close with intentionally empty PDF/XSD locators when closure evidence proves there is no persistent source defect; never surface as provider/runtime issue.",
+    "latest_source_locator_rule": "CE-003: superseded audit-progress finding pins complete reviewed PDF/XSD scope but has no defect position and must never become a runtime/provider diagnostic.",
     "historical_upstream_locator_support": "schema+validator support exact repository/ref/blob identity for official historical XSD sources"
   },
   "evidence": {
@@ -2104,8 +2104,8 @@
     "coverage_partial_count": 0,
     "remaining_finding_count": 153,
     "latest_review_block": "CE_003",
-    "latest_gate_status": "pending_gate",
-    "latest_gate_run_id": null
+    "latest_gate_status": "terminally_validated",
+    "latest_gate_run_id": "36680077819"
   },
   "external_protocol_authority": {
     "policy": "docs/pdf_xsd_semantic_audit/EXTERNAL_PROTOCOL_STANDARD_AUTHORITY.md",
