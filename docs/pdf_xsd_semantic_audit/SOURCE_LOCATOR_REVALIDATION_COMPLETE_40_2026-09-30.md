@@ -1,3 +1,5 @@
+> **Correction notice — 2026-09-30:** This report's wording about the second locator-quality pass was broader than the evidence supports. It does **not** establish that every PDF locator of all 40 findings was newly verified against the visible document body under one uniform standard. The canonical correction is `SOURCE_LOCATOR_REVALIDATION_CORRECTION_VISIBLE_BODY_SCOPE_2026-09-30.md`. Current-standard visible-body verification is explicitly tracked in `audit_registry/pdf_locator_body_verification_v0.1.json`.
+
 # Complete revalidation of all currently source-locator-complete findings — 2026-09-30
 
 ## Scope
