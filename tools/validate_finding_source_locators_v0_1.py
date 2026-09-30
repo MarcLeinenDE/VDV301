@@ -19,6 +19,7 @@ RUNTIME = ROOT / "sdk_manifest/known_issues_runtime_mapping_v0.1.json"
 PDF_REGISTRY = ROOT / "audit_registry/pdf_source_registry_v0.1.json"
 PDF_PINS = ROOT / "audit_registry/pdf_source_pins_v0.1.json"
 BODY_VERIFICATION = ROOT / "audit_registry/pdf_locator_body_verification_v0.1.json"
+CURRENT_STATE = ROOT / "00_START_HERE/CURRENT_STATE.json"
 
 UPSTREAM_REPOSITORY = "VDVde/VDV301"
 _UPSTREAM_CACHE: dict[tuple[str, str, str], str] = {}
@@ -96,6 +97,7 @@ def main() -> int:
     pdf_registry = load(PDF_REGISTRY)
     pdf_pins = load(PDF_PINS)
     body_verification = load(BODY_VERIFICATION)
+    current_state = load(CURRENT_STATE)
 
     pdf_by_id = {x["source_id"]: x for x in pdf_registry["sources"]}
     pin_by_id = {x["source_id"]: x for x in pdf_pins["sources"]}
@@ -178,6 +180,62 @@ def main() -> int:
             body_counts["pending_current_standard"] == 0,
             "complete body-verification registry has zero pending findings",
         )
+
+    # Keep the restart state machine-readable and synchronized with the body
+    # registry. This prevents a future chat from following stale counts or a
+    # stale next-finding pointer even when the registry itself is correct.
+    progress = current_state["source_locator_progress"]
+    require(
+        progress["body_verified_current_standard_count"]
+        == body_counts["verified_current_standard"],
+        "CURRENT_STATE body verified count matches body-verification registry",
+    )
+    require(
+        progress["body_pending_current_standard_count"]
+        == body_counts["pending_current_standard"],
+        "CURRENT_STATE body pending count matches body-verification registry",
+    )
+    require(
+        progress["structural_progress_freeze_count"]
+        == body_verification["frozen_structural_entry_count"],
+        "CURRENT_STATE structural freeze count matches body-verification registry",
+    )
+    pending_ids = [
+        e["finding_id"]
+        for e in body_entries
+        if e["state"] == "pending_current_standard"
+    ]
+    expected_next = pending_ids[0] if pending_ids else None
+    require(
+        progress.get("next_body_revalidation_finding") == expected_next,
+        "CURRENT_STATE next body-revalidation finding matches first pending registry entry",
+    )
+    require(
+        current_state["audit"]["source_locator_body_verified_current_standard_count"]
+        == body_counts["verified_current_standard"],
+        "audit body verified count matches body-verification registry",
+    )
+    require(
+        current_state["audit"]["source_locator_body_pending_current_standard_count"]
+        == body_counts["pending_current_standard"],
+        "audit body pending count matches body-verification registry",
+    )
+    require(
+        current_state["sdk"]["source_locator_body_verified_current_standard_count"]
+        == body_counts["verified_current_standard"],
+        "sdk body verified count matches body-verification registry",
+    )
+    require(
+        current_state["sdk"]["source_locator_body_pending_current_standard_count"]
+        == body_counts["pending_current_standard"],
+        "sdk body pending count matches body-verification registry",
+    )
+    for body_entry in body_entries:
+        if body_entry["state"] == "verified_current_standard":
+            require(
+                bool(body_entry.get("evidence")),
+                f"{body_entry['finding_id']} current-standard body verification has evidence",
+            )
 
     for e in m["entries"]:
         fid = e["finding_id"]
@@ -311,6 +369,57 @@ def main() -> int:
 
     # Regression guards for issues found by the 2026-09-30 full revalidation.
     loc_by = {e["finding_id"]: e for e in m["entries"]}
+
+    ara001 = loc_by.get("ARA-001")
+    if ara001:
+        for lane in ara001["coverage"]:
+            p = lane["pdf_locators"][0]
+            require(
+                p["printed_pages"] == [1],
+                f"ARA-001 {lane['version']} pins the official document-identity cover page",
+            )
+            require(
+                p["section"]
+                == "Cover — VDV-Schrift 301-2-19 / Dienst – AnalogRadioService / V 2.4",
+                f"ARA-001 {lane['version']} pins the visible cover identity",
+            )
+
+    ara002 = loc_by.get("ARA-002")
+    if ara002:
+        lane = ara002["coverage"][0]
+        by_page = {
+            p["printed_pages"][0]: p
+            for p in lane["pdf_locators"]
+        }
+        require(
+            sorted(by_page) == [11, 12, 13],
+            "ARA-002 pins the three visible contradiction surfaces on pages 11-13",
+        )
+        require(
+            by_page[11]["section"]
+            == "2.2 DataStructure of SendTelegram Operation / 2.2.1 Request",
+            "ARA-002 page 11 pins the actual visible request heading",
+        )
+        require(
+            by_page[11].get("table")
+            == "AnalogRadioService.RadioTelegramStructure request-structure table/model",
+            "ARA-002 page 11 pins the visible RadioTelegramStructure table/model",
+        )
+        require(
+            by_page[12]["section"]
+            == "2.2.1 Request — continuation diagram on printed page 12",
+            "ARA-002 page 12 pins the request continuation rather than inventing a new heading",
+        )
+        require(
+            by_page[12].get("table")
+            == "AnalogRadioService.RadioTelegramStructure diagram",
+            "ARA-002 page 12 pins the visible diagram label",
+        )
+        require(
+            by_page[13]["section"]
+            == "2.5 Examples / 2.5.2 XML of a complete telegram",
+            "ARA-002 page 13 pins the actual visible XML-example heading",
+        )
 
     ce002 = loc_by.get("CE-002")
     if ce002:
