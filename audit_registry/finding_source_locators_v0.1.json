@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 31,
-    "coverage_complete_count": 31,
+    "locator_entry_count": 32,
+    "coverage_complete_count": 32,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 161
+    "remaining_finding_count": 160
   },
   "entries": [
     {
@@ -597,6 +597,64 @@
         "docs/pdf_xsd_semantic_audit/deep_read/VDV301-1_V1.0_DE.md",
         "docs/pdf_xsd_semantic_audit/EXTERNAL_PROTOCOL_STANDARD_AUTHORITY.md",
         "docs/pdf_xsd_semantic_audit/EXTERNAL_PROTOCOL_AUTHORITY_BACKCHECK_ARCH_001_004_2026-09-30.md",
+        "pin/render run 33725750019 / job 100554215021 / artifact 9881897572"
+      ]
+    },
+    {
+      "finding_id": "ARCH-006",
+      "service": "SystemArchitecture",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Part 1 establishes XML information exchange; Part 2 supplies the technical XML structures."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "1.0",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-1_V1.0_DE",
+              "document_title": "VDV-Schrift 301-1 IBIS-IP Teil 1: Systemarchitektur",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/vdv-301-1-ibis-ip-teil-1-systemarchitektur.pdfx",
+              "sha256": "5418f24190468a1823699688cf86f98d812591ad2c7c2eada07b1d34889c20c2",
+              "printed_pages": [
+                6
+              ],
+              "section": "1 Vorbemerkung / document-part boundary",
+              "point_summary": "Part 1 establishes the architecture context while Part 2 contains the technical interface specifications; Part 1 is not a replacement schema authority."
+            },
+            {
+              "source_id": "VDV301-1_V1.0_DE",
+              "document_title": "VDV-Schrift 301-1 IBIS-IP Teil 1: Systemarchitektur",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/vdv-301-1-ibis-ip-teil-1-systemarchitektur.pdfx",
+              "sha256": "5418f24190468a1823699688cf86f98d812591ad2c7c2eada07b1d34889c20c2",
+              "printed_pages": [
+                27
+              ],
+              "section": "6 Kommunikation / XML information exchange",
+              "point_summary": "The architecture specifies XML for information exchange between services and points the technical XML interface implementation to Part 2. Exact service elements, types and cardinalities therefore belong to the selected Part-2/XSD profile."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Architecture/context authority only. XML is established as the information-exchange format, but concrete VDV XML validity remains governed by the exactly selected Part-2 XSD when available. Generic XML, encoding and XML media-type standards may form separate validation layers only through the applicable authority chain; they do not override or silently repair the selected XSD."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARCH_V10_2026-09-03.md",
+        "docs/pdf_xsd_semantic_audit/28_vdv301_1_system_architecture_first_pass.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/VDV301-1_V1.0_DE.md",
+        "docs/pdf_xsd_semantic_audit/EXTERNAL_PROTOCOL_STANDARD_AUTHORITY.md",
+        "docs/pdf_xsd_semantic_audit/generated/runtime_protocol_authority_matrix.csv",
         "pin/render run 33725750019 / job 100554215021 / artifact 9881897572"
       ]
     },
