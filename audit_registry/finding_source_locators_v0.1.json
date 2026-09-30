@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 37,
-    "coverage_complete_count": 37,
+    "locator_entry_count": 38,
+    "coverage_complete_count": 38,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 155
+    "remaining_finding_count": 154
   },
   "entries": [
     {
@@ -984,6 +984,63 @@
       "supporting_evidence": [
         "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md",
         "EV-124 run 33735601969"
+      ]
+    },
+    {
+      "finding_id": "CE-002",
+      "service": "Common/Enumerations",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd",
+          "note": "V2.4 selected XSD is candidate/integration; PDF is official documentation."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.4",
+              "document_title": "VDV 301-2-1 Common Structures and Enumerations",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sde-v2-4-commonstructure-enums.pdfx",
+              "sha256": "01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a",
+              "printed_pages": [
+                6,
+                35
+              ],
+              "section": "Version history and StopInformation (2.52)",
+              "point_summary": "The V2.4 version-history wording records StopPointNumber as added to StopInformation, while the actual StopInformation definition uses PointNumber. This is documentation/editorial residue, not an XML alias."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.4.xsd",
+              "git_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+              "authority_detail": "selected candidate/integration Common V2.4 family; bytes match candidate/dms-v2.4-xsd / VDVde/VDV301 draft PR #31; not an official VDV-301-2.4 release tag",
+              "component_kind": "complexType",
+              "component": "StopInformationStructure",
+              "member": "PointNumber",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='StopInformationStructure']//xs:element[@name='PointNumber']",
+              "line_hint": "636-706; PointNumber at 687",
+              "point_summary": "Selected V2.4 XSD defines PointNumber in StopInformationStructure and does not establish StopPointNumber as an accepted alias."
+            }
+          ],
+          "coverage_note": "Official PDF is documentation authority; selected V2.4 XSD is explicitly candidate/integration authority. XML validation follows PointNumber in that selected XSD. The version-history token StopPointNumber remains explanatory documentation defect only and must not be normalized or accepted as an alias."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4_FRESH_2026-09-03.md §FR-COM24-014",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4.md",
+        "EV-124 run 33735601969",
+        "COMMON V2.4 PDF pin/render run 33658306978"
       ]
     },
     {
