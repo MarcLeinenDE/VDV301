@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 39,
-    "coverage_complete_count": 39,
+    "locator_entry_count": 40,
+    "coverage_complete_count": 40,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 153
+    "remaining_finding_count": 152
   },
   "entries": [
     {
@@ -1094,6 +1094,62 @@
         "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4_FRESH_2026-09-03.md — frozen full-document source read",
         "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4.md — Deep Read closure and historical reconciliation",
         "EV-122 run 33716645876"
+      ]
+    },
+    {
+      "finding_id": "CE-004",
+      "service": "Common/Enumerations",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "Common/Enumerations V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.4.xsd"
+        }
+      ],
+      "coverage": [
+        {
+          "version": "Common/Enumerations V2.4",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.4",
+              "document_title": "VDV 301-2-1 Common Structures and Enumerations",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sde-v2-4-commonstructure-enums.pdfx",
+              "sha256": "01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a",
+              "printed_pages": [
+                5,
+                51
+              ],
+              "section": "Version history; 3.28 ServiceNameEnumeration",
+              "table_or_figure": "Table 85 ServiceNameEnumeration",
+              "point_summary": "V2.4 history records deletion of SystemDocumentationService and SystemManagementService and insertion of SystemMonitoringService, while Table 85 still lists the two removed names alongside the replacement. This is stale documentation content."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.4.xsd",
+              "git_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+              "authority_detail": "selected candidate/integration Enumerations V2.4 family; not an official VDV-301-2.4 release tag",
+              "component_kind": "simpleType",
+              "component": "ServiceNameEnumeration",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='ServiceNameEnumeration']",
+              "line_hint": "222-237",
+              "point_summary": "Selected V2.4 enumeration contains SystemMonitoringService and omits SystemDocumentationService and SystemManagementService. EV-122 confirms replacement value valid and both stale PDF values invalid."
+            }
+          ],
+          "coverage_note": "The selected candidate/integration XSD is executable authority for candidate-mode validation. The official PDF table is stale relative to its own version history. Removed names are not aliases and must not be normalized into SystemMonitoringService."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md",
+        "docs/pdf_xsd_semantic_audit/01d_common_enums_v2_4_enumeration_first_pass.md",
+        "docs/pdf_xsd_semantic_audit/01f_common_enums_v2_4_pdf_vs_xsd_enum_diff.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4_FRESH_2026-09-03.md §FR-COM24-012",
+        "EV-122 / EV-124 run 33735601969"
       ]
     },
     {
