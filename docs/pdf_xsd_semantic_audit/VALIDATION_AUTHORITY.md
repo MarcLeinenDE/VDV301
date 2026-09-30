@@ -80,3 +80,12 @@ Workflow:
 5. For provider feedback, explain the PDF discrepancy and XSD precedence.
 6. Only propose a schema correction later if the discrepancy is confirmed as an XSD defect through historical checks, examples, maintainer feedback, or upstream VDV clarification.
 ```
+
+
+## External protocol standards
+
+Protocol/runtime validation follows the separate authority-chain policy in `EXTERNAL_PROTOCOL_STANDARD_AUTHORITY.md`.
+
+A VDV-selected protocol may make externally normative protocol requirements executable, but only after the exact VDV profile, external standard/version, normative clause, applicability condition and any VDV specialization have been resolved. Requirement strength is preserved: recommendations and best practices are not promoted to hard failures. Newer external standards never silently replace the version selected by a historical VDV profile.
+
+This layer is separate from XSD validation: XSD governs XML structure/content for the selected schema profile; HTTP, DNS-SD, SNTP/NTP, RTSP/RTP and other protocol rules are reported with their own authority source.
