@@ -18,6 +18,7 @@ SEMANTIC = ROOT / "audit_registry/finding_semantic_classification_v0.1.json"
 RUNTIME = ROOT / "sdk_manifest/known_issues_runtime_mapping_v0.1.json"
 PDF_REGISTRY = ROOT / "audit_registry/pdf_source_registry_v0.1.json"
 PDF_PINS = ROOT / "audit_registry/pdf_source_pins_v0.1.json"
+BODY_VERIFICATION = ROOT / "audit_registry/pdf_locator_body_verification_v0.1.json"
 
 UPSTREAM_REPOSITORY = "VDVde/VDV301"
 _UPSTREAM_CACHE: dict[tuple[str, str, str], str] = {}
@@ -94,6 +95,7 @@ def main() -> int:
     runtime = load(RUNTIME)
     pdf_registry = load(PDF_REGISTRY)
     pdf_pins = load(PDF_PINS)
+    body_verification = load(BODY_VERIFICATION)
 
     pdf_by_id = {x["source_id"]: x for x in pdf_registry["sources"]}
     pin_by_id = {x["source_id"]: x for x in pdf_pins["sources"]}
@@ -127,6 +129,55 @@ def main() -> int:
         ids == sorted(ids, key=lambda i: order[i]),
         "locator entries follow semantic finding order",
     )
+
+    # Visible-body verification is deliberately tracked separately from
+    # structural locator completeness. Until the existing complete set has
+    # been revalidated under the explicit body-locator rule, freeze structural
+    # progress so a future maintainer/chat cannot skip the quality backlog.
+    body_entries = body_verification.get("entries", [])
+    body_ids = [e["finding_id"] for e in body_entries]
+    require(
+        body_ids == ids,
+        "body-verification registry tracks exactly the current structural locator finding IDs",
+    )
+    require(
+        len(body_ids) == len(set(body_ids)),
+        "body-verification registry uses unique finding IDs",
+    )
+    body_counts = body_verification["counts"]
+    require(
+        body_counts["tracked_findings"] == len(body_entries),
+        "body-verification tracked count matches entries",
+    )
+    require(
+        body_counts["verified_current_standard"]
+        == sum(e["state"] == "verified_current_standard" for e in body_entries),
+        "body-verification verified count matches entries",
+    )
+    require(
+        body_counts["pending_current_standard"]
+        == sum(e["state"] == "pending_current_standard" for e in body_entries),
+        "body-verification pending count matches entries",
+    )
+    require(
+        body_counts["verified_current_standard"]
+        + body_counts["pending_current_standard"]
+        == body_counts["tracked_findings"],
+        "body-verification states account for every tracked finding",
+    )
+    if (
+        body_verification.get("state") != "complete"
+        and body_verification.get("block_new_structural_progress_until_complete")
+    ):
+        require(
+            len(ids) == body_verification["frozen_structural_entry_count"],
+            "structural locator progress remains frozen until visible-body backlog is complete",
+        )
+    if body_verification.get("state") == "complete":
+        require(
+            body_counts["pending_current_standard"] == 0,
+            "complete body-verification registry has zero pending findings",
+        )
 
     for e in m["entries"]:
         fid = e["finding_id"]
