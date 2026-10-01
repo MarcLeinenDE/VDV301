@@ -469,6 +469,47 @@ def main() -> int:
             "ARA-004 page 13 pins the XML example heading",
         )
 
+    arch001 = loc_by.get("ARCH-001")
+    if arch001:
+        lane = arch001["coverage"][0]
+        by_page = {p["printed_pages"][0]: p for p in lane["pdf_locators"]}
+        require(
+            sorted(by_page) == [7, 10],
+            "ARCH-001 pins visible architecture surfaces on pages 7 and 10",
+        )
+        require(
+            by_page[7]["section"] == "2. Anwendungsbereich",
+            "ARCH-001 page 7 pins the actual visible application-scope heading",
+        )
+        require(
+            by_page[10]["section"]
+            == "3.2. Begriffe — Dienstorientierte Architektur / Dienst bzw. Service / Operationen",
+            "ARCH-001 page 10 pins the visible terminology anchors",
+        )
+
+    arch002 = loc_by.get("ARCH-002")
+    if arch002:
+        lane = arch002["coverage"][0]
+        by_page = {p["printed_pages"][0]: p for p in lane["pdf_locators"]}
+        require(
+            sorted(by_page) == [12, 14],
+            "ARCH-002 pins hierarchy context on pages 12 and 14",
+        )
+        require(
+            by_page[12]["section"] == "4.1. Ermittlung der Fachkomponenten",
+            "ARCH-002 page 12 pins the actual visible 4.1 heading",
+        )
+        require(
+            by_page[14]["section"]
+            == "Abbildung 5: Hierarchisierung durch Ordnung der Fachkomponenten nach Aufrufrichtungen / unmittelbar folgende Client-/Server-Regeln",
+            "ARCH-002 page 14 pins the actual visible figure/rule anchor instead of inherited 4.2 context",
+        )
+        require(
+            by_page[14].get("table")
+            == "Abbildung 5 and following hierarchy-rule bullets",
+            "ARCH-002 page 14 pins Figure 5 and the visible hierarchy-rule bullets",
+        )
+
     ce002 = loc_by.get("CE-002")
     if ce002:
         p = ce002["coverage"][0]["pdf_locators"][0]
