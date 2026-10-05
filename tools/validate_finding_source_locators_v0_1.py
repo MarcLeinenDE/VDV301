@@ -549,6 +549,44 @@ def main() -> int:
             "ARCH-004 page 26 does not invent a table identifier",
         )
 
+    arch005 = loc_by.get("ARCH-005")
+    if arch005:
+        lane = arch005["coverage"][0]
+        p = lane["pdf_locators"][0]
+        require(
+            p["printed_pages"] == [26],
+            "ARCH-005 pins printed page 26",
+        )
+        require(
+            p["section"] == "7. Kommunikation mit Diensten",
+            "ARCH-005 page 26 pins the actual visible communication heading",
+        )
+        require(
+            p.get("table") is None,
+            "ARCH-005 page 26 does not invent a table identifier",
+        )
+
+    arch006 = loc_by.get("ARCH-006")
+    if arch006:
+        lane = arch006["coverage"][0]
+        by_page = {p["printed_pages"][0]: p for p in lane["pdf_locators"]}
+        require(
+            sorted(by_page) == [6, 27],
+            "ARCH-006 pins Part-1/Part-2 boundary page 6 and XML page 27",
+        )
+        require(
+            by_page[6]["section"] == "1. Einleitung",
+            "ARCH-006 page 6 pins the actual visible introduction heading",
+        )
+        require(
+            by_page[27]["section"] == "7.1. Strukturierung der Informationsinhalte",
+            "ARCH-006 page 27 pins the actual visible XML-structure heading",
+        )
+        require(
+            by_page[6].get("table") is None and by_page[27].get("table") is None,
+            "ARCH-006 does not invent table identifiers",
+        )
+
     ce002 = loc_by.get("CE-002")
     if ce002:
         p = ce002["coverage"][0]["pdf_locators"][0]
