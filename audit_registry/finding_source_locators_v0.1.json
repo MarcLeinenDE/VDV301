@@ -5760,9 +5760,9 @@
       "coverage_state": "complete",
       "scope_claims": [
         {
-          "version": "Common V2.2",
+          "version": "Common V2.2-V2.3",
           "authority": "documentation_only",
-          "note": "Only V2.2 is confirmed affected; V2.3 scope was withdrawn and V2.4 is not affected."
+          "note": "V2.2 and V2.3 are confirmed affected by the corrupt duplicate NetexMode table; V2.4 is not affected."
         }
       ],
       "coverage": [
@@ -5814,6 +5814,43 @@
             }
           ],
           "coverage_note": "Documentation-only V2.2 copy/paste defect. No XSD special handling or XML alias follows. Fresh exact V2.3 evidence explicitly falsifies extension of this finding to V2.3."
+        },
+        {
+          "version": "2.3",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.3",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx",
+              "sha256": "d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b",
+              "printed_pages": [
+                26,
+                27
+              ],
+              "section": "2.34 NetexMode",
+              "table": "Table 34 (corrupt duplicate)",
+              "point_summary": "Section 2.34 begins on p.26; its continued Table 34 on p.27 contains Message fields (Message-ID, TimeStamp, MessageType, MessageText) instead of the NetexMode model."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.3.xsd",
+              "git_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+              "authority_detail": "exact selected official Common V2.3 XSD authority",
+              "component_kind": "complexType",
+              "component": "NetexMode",
+              "member": null,
+              "value": "main-mode choice plus submode choice",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='NetexMode']",
+              "line_hint": "1036-1050",
+              "point_summary": "Exact V2.3 XSD contains the NetexMode choice model, not the Message fields shown in the corrupt continued PDF table."
+            }
+          ],
+          "coverage_note": "Documentation-only V2.3 copy/paste defect. Earlier scope withdrawal inspected p.26 only and missed the continued corrupt table on p.27. No XSD special handling follows; V2.4 remains a negative control."
         }
       ],
       "supporting_evidence": [
@@ -5822,7 +5859,8 @@
         "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md",
         "docs/pdf_xsd_semantic_audit/COMMON_FINDINGS_REGISTER_ADDENDUM.md",
         "V2.3 visible render/read run 33656579631",
-        "EV-124 run 33735601969"
+        "EV-124 run 33735601969",
+        "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CE023_V23_SCOPE_2026-10-05.md"
       ]
     },
     {
