@@ -2702,9 +2702,9 @@
       "service": "Common/Enumerations",
       "version_scope": [
         {
-          "version": "Common V2.2",
+          "version": "Common V2.2-V2.3",
           "authority": "documentation_only",
-          "note": "Only V2.2 is confirmed affected; V2.3 scope was withdrawn and V2.4 is not affected."
+          "note": "Both V2.2 and V2.3 are confirmed affected. The prior V2.3 scope withdrawal was based on p.26 only and missed the continued corrupt table on p.27. V2.4 is not affected."
         }
       ],
       "review_state": "manually_reviewed",
@@ -2722,25 +2722,25 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "The V2.2 document contains a corrupt duplicate second NetexMode table carrying Message content."
+          "note": "The exact V2.2 and V2.3 publications contain a corrupt duplicate NetexMode table carrying Message content."
         },
         {
           "type": "official_release_provenance",
-          "note": "Fresh exact V2.3 visible evidence disproved the earlier V2.3 affected-scope claim."
+          "note": "Exact byte-pinned V2.3 pages 26-27 prove the corrupt Table 34 continues onto p.27; prior p.26-only falsification was incomplete. Exact V2.4 visible evidence is a negative control and is not affected."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "Common V2.2 enthält eine fehlerhafte zweite NetexMode-Tabelle",
-          "short": "Der Fehler ist auf die V2.2-Dokumentation begrenzt.",
-          "long": "Die zweite NetexMode-Tabelle in V2.2 ist ein Copy/Paste-/Tabellenfehler. V2.3 wurde nach frischer Sichtprüfung aus dem Scope entfernt; V2.4 ist ebenfalls nicht betroffen.",
-          "recommendation": "Keine XSD-Sonderbehandlung erzeugen; bei V2.2 nur einen Dokumentationshinweis anzeigen."
+          "title": "Common V2.2/V2.3 enthalten eine fehlerhafte NetexMode-Tabelle",
+          "short": "Der Copy/Paste-Fehler betrifft die Dokumentationen V2.2 und V2.3.",
+          "long": "Die NetexMode-Tabelle enthält in V2.2 und V2.3 fälschlich Message-Felder. Die frühere Herausnahme von V2.3 beruhte auf einer unvollständigen Sichtprüfung nur von Seite 26; die Tabelle setzt sich auf Seite 27 fort. V2.4 ist nicht betroffen.",
+          "recommendation": "Keine XSD-Sonderbehandlung erzeugen; bei V2.2/V2.3 nur einen Dokumentationshinweis anzeigen."
         },
         "en": {
-          "title": "Common V2.2 contains a corrupt second NetexMode table",
-          "short": "The issue is limited to the V2.2 documentation.",
-          "long": "The second NetexMode table in V2.2 is a copy/paste table error. Fresh visible V2.3 evidence removed V2.3 from scope; V2.4 is not affected.",
-          "recommendation": "Do not add XSD special handling; surface only a V2.2 documentation note."
+          "title": "Common V2.2/V2.3 contain a corrupt NetexMode table",
+          "short": "The copy/paste defect affects the V2.2 and V2.3 documentation.",
+          "long": "The NetexMode table incorrectly contains Message fields in V2.2 and V2.3. The earlier removal of V2.3 was based on an incomplete p.26-only visual check; the table continues on p.27. V2.4 is not affected.",
+          "recommendation": "Do not add XSD special handling; surface only a V2.2/V2.3 documentation note."
         }
       },
       "runtime_match": {
@@ -2763,6 +2763,10 @@
         {
           "kind": "evidence",
           "reference": "V2.3 visible render/read run 33656579631"
+        },
+        {
+          "kind": "correction_delta",
+          "reference": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CE023_V23_SCOPE_2026-10-05.md"
         }
       ]
     },
