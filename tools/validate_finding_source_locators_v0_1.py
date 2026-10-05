@@ -788,6 +788,40 @@ def main() -> int:
             require((p["printed_pages"], p["section"], p["table"]) == (pages, section, table), f"CE-014 {lane['version']} pins visible DataVersionList table")
             require(lane["xsd_locators"][0]["member"] == "DataVersion", f"CE-014 {lane['version']} pins DataVersion member")
 
+    ce015 = loc_by.get("CE-015")
+    if ce015:
+        expected_pages = {
+            "1.0": ([14], "1.26 FareZoneInformation", "Table 26"),
+            "2.0": ([21], "2.26 FareZoneInformation", "Table 26"),
+            "2.1": ([23], "2.26 FareZoneInformation", "Table 26"),
+            "2.2": ([24], "2.26 FareZoneInformation", "Table 26"),
+            "2.3": ([24], "2.26 FareZoneInformation", "Table 26"),
+            "2.4": ([26], "2.26 FareZoneInformation", "Table 26"),
+        }
+        expected_members = {"FareZoneID", "FareZoneType", "FareZoneLongName", "FareZoneShortName"}
+        for lane in ce015["coverage"]:
+            p = lane["pdf_locators"][0]
+            pages, section, table = expected_pages[lane["version"]]
+            require((p["printed_pages"], p["section"], p["table"]) == (pages, section, table), f"CE-015 {lane['version']} pins visible FareZoneInformation table")
+            members = {x["member"] for x in lane["xsd_locators"]}
+            require(members == expected_members, f"CE-015 {lane['version']} pins exact FareZone* XSD identifiers")
+
+    ce016 = loc_by.get("CE-016")
+    if ce016:
+        expected_pages = {
+            "1.0": ([14], "1.27 GlobalCardStatus", "Table 27"),
+            "2.0": ([21], "2.27 GlobalCardStatus", "Table 27"),
+            "2.1": ([23], "2.27 GlobalCardStatus", "Table 27"),
+            "2.2": ([24], "2.27 GlobalCardStatus", "Table 27"),
+            "2.3": ([24], "2.27 GlobalCardStatus", "Table 27"),
+            "2.4": ([26], "2.27 GlobalCardStatus", "Table 27"),
+        }
+        for lane in ce016["coverage"]:
+            p = lane["pdf_locators"][0]
+            pages, section, table = expected_pages[lane["version"]]
+            require((p["printed_pages"], p["section"], p["table"]) == (pages, section, table), f"CE-016 {lane['version']} pins visible GlobalCardStatus table")
+            require(len(lane["xsd_locators"]) == 1 and lane["xsd_locators"][0]["member"] == "GlobalCardStausID", f"CE-016 {lane['version']} pins exact typo-like XSD identifier")
+
     ce002 = loc_by.get("CE-002")
     if ce002:
         p = ce002["coverage"][0]["pdf_locators"][0]
