@@ -161,4 +161,10 @@ The visible-body quality backlog is therefore complete. Structural source-locato
 
 ## Gate
 
-Pending.
+- final GitHub Actions run: **37366792584**
+- validated target commit: `60e939711b01301361b24f6b9af681fe9c5172df`
+- current status at handoff: **QUEUED**
+- evidence/body accounting: **40/40 verified**, **0 pending**
+- structural expansion must not resume until this exact final gate reaches **SUCCESS**
+
+The run is queued during a GitHub-hosted Actions runner-assignment incident. This is an external execution delay, not a substitute for the required green terminal gate.
