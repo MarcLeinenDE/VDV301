@@ -18,7 +18,7 @@ The interactive PDF renderer returned cache misses for the required pages. Per t
 - run `33725750019`
 - job `100554215021`
 - artifact `9881897572` (`arch-v10-pinned-read`)
-- artifact digest `sha256:b1805ba4137d5418671a9bb20fcd6ff0654331acc0356d8e1b838c9cec83d4510`
+- artifact digest `sha256:b1805ba4137d541867a9bb20fcd6ff0654331acc0356d8e1b838c9cec83d4510`
 - same pinned PDF SHA-256 as above
 - all rendered page hashes previously verified against the artifact manifest
 
