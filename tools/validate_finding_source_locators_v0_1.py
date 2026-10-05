@@ -856,6 +856,42 @@ def main() -> int:
             require(x["member"] == "ServiceIdentificationWithState", f"CE-018 {lane['version']} pins list member")
             require(x["value"] == "minOccurs=0; maxOccurs=unbounded", f"CE-018 {lane['version']} pins 0:* XSD cardinality")
 
+    ce019 = loc_by.get("CE-019")
+    if ce019:
+        expected_pages = {
+            "1.0": ([17], "1.39 ServiceIdentificationWithStateList", "Table 39"),
+            "2.0": ([24], "2.39 ServiceIdentificationWithStateList", "Table 39"),
+            "2.1": ([26], "2.39 ServiceIdentificationWithStateList", "Table 39"),
+            "2.2": ([27], "2.40 ServiceIdentificationWithStateList", "Table 40"),
+            "2.3": ([28], "2.40 ServiceIdentificationWithStateList", "Table 40"),
+            "2.4": ([30], "2.39 ServiceIdentificationWithStateList", "Table 39"),
+        }
+        for lane in ce019["coverage"]:
+            p = lane["pdf_locators"][0]
+            pages, section, table = expected_pages[lane["version"]]
+            require((p["printed_pages"], p["section"], p["table"]) == (pages, section, table), f"CE-019 {lane['version']} pins visible ServiceIdentificationWithStateList table")
+            x = lane["xsd_locators"][0]
+            require(x["member"] == "ServiceIdentificationWithState", f"CE-019 {lane['version']} pins list member")
+            require(x["value"] == "type=ServiceIdentificationWithStateStructure", f"CE-019 {lane['version']} pins exact XSD structure type")
+
+    ce021 = loc_by.get("CE-021")
+    if ce021:
+        expected_pages = {
+            "1.0": ([15], "1.32 LogMessage", "Table 32"),
+            "2.0": ([22], "2.32 LogMessage", "Table 32"),
+            "2.1": ([24], "2.32 LogMessage", "Table 32"),
+            "2.2": ([25], "2.32 LogMessage", "Table 32"),
+            "2.3": ([26], "2.32 LogMessage", "Table 32"),
+            "2.4": ([29], "2.32 LogMessage", "Table 32"),
+        }
+        for lane in ce021["coverage"]:
+            p = lane["pdf_locators"][0]
+            pages, section, table = expected_pages[lane["version"]]
+            require((p["printed_pages"], p["section"], p["table"]) == (pages, section, table), f"CE-021 {lane['version']} pins visible LogMessage table")
+            x = lane["xsd_locators"][0]
+            require(x["member"] == "Message", f"CE-021 {lane['version']} pins exact XSD child name")
+            require(x["value"] == "type=MessageStructure; required", f"CE-021 {lane['version']} pins MessageStructure requirement")
+
     ce002 = loc_by.get("CE-002")
     if ce002:
         p = ce002["coverage"][0]["pdf_locators"][0]
