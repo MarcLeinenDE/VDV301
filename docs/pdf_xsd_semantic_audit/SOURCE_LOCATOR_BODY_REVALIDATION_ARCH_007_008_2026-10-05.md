@@ -115,3 +115,17 @@ After this block:
 - visible-body verified count becomes 17
 - pending visible-body revalidation becomes 23
 - next canonical body-revalidation finding: `BG-001`
+
+
+## Gate
+
+- GitHub Actions run: **37286137293**
+- result: **SUCCESS**
+- validated commit: `f2ce3a4a8f794caed300ee1574bc5f48a493d104`
+- structural locators: **40**
+- visible-body verified: **17**
+- visible-body pending: **23**
+- next body-revalidation finding: **BG-001**
+- upstream exact release-tag XSD checks: **19**
+
+The gate verified CURRENT_STATE/body-registry synchronization and the ARCH-007/ARCH-008 visible-body locator assertions in addition to the existing audit regression suite.
