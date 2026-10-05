@@ -180,6 +180,14 @@ def main() -> int:
             body_counts["pending_current_standard"] == 0,
             "complete body-verification registry has zero pending findings",
         )
+        require(
+            body_counts["verified_current_standard"] == body_counts["tracked_findings"],
+            "complete body-verification registry has every tracked finding verified",
+        )
+        require(
+            body_verification.get("block_new_structural_progress_until_complete") is False,
+            "complete body-verification registry releases the structural-progress block",
+        )
 
     # Keep the restart state machine-readable and synchronized with the body
     # registry. This prevents a future chat from following stale counts or a
@@ -210,6 +218,15 @@ def main() -> int:
         progress.get("next_body_revalidation_finding") == expected_next,
         "CURRENT_STATE next body-revalidation finding matches first pending registry entry",
     )
+    if body_verification.get("state") == "complete":
+        require(
+            progress.get("body_verification_state") == "complete",
+            "CURRENT_STATE marks body verification complete",
+        )
+        require(
+            progress.get("structural_progress_frozen") is False,
+            "CURRENT_STATE releases structural locator progress after 40/40 closure",
+        )
     require(
         current_state["audit"]["source_locator_body_verified_current_standard_count"]
         == body_counts["verified_current_standard"],
@@ -891,6 +908,71 @@ def main() -> int:
             x = lane["xsd_locators"][0]
             require(x["member"] == "Message", f"CE-021 {lane['version']} pins exact XSD child name")
             require(x["value"] == "type=MessageStructure; required", f"CE-021 {lane['version']} pins MessageStructure requirement")
+
+    ce022 = loc_by.get("CE-022")
+    if ce022:
+        expected_pages = {
+            "1.0": ([17], "1.37 ServiceIdentification", "Table 37"),
+            "2.0": ([24], "2.37 ServiceIdentification", "Table 37"),
+            "2.1": ([26], "2.37 ServiceIdentification", "Table 37"),
+            "2.2": ([27], "2.38 ServiceIdentification", "Table 38"),
+            "2.3": ([28], "2.38 ServiceIdentification", "Table 38"),
+            "2.4": ([30], "2.37 ServiceIdentification", "Table 37"),
+        }
+        for lane in ce022["coverage"]:
+            p = lane["pdf_locators"][0]
+            pages, section, table = expected_pages[lane["version"]]
+            require((p["printed_pages"], p["section"], p["table"]) == (pages, section, table), f"CE-022 {lane['version']} pins visible ServiceIdentification table")
+            vals = {x["member"]: x["value"] for x in lane["xsd_locators"]}
+            require(vals == {"Service": "type=ServiceSpecificationStructure; required", "ServiceName": "type=ServiceNameEnumeration; required"}, f"CE-022 {lane['version']} pins outer Service and nested ServiceName XSD boundaries")
+
+    ce023 = loc_by.get("CE-023")
+    if ce023:
+        require(
+            [lane["version"] for lane in ce023["coverage"]] == ["2.2", "2.3"],
+            "CE-023 current affected documentation scope is V2.2-V2.3",
+        )
+        require(
+            ce023["scope_claims"] == [{
+                "version": "Common V2.2-V2.3",
+                "authority": "documentation_only",
+                "note": "V2.2 and V2.3 are confirmed affected by the corrupt duplicate NetexMode table; V2.4 is not affected.",
+            }],
+            "CE-023 scope claim records V2.2-V2.3 and excludes V2.4",
+        )
+        expected_023 = {
+            "2.2": [
+                ([26], "2.34 NetexMode", "Table 34 (corrupt duplicate)"),
+                ([15], "1.18 NetexMode", "Table 20"),
+            ],
+            "2.3": [
+                ([26, 27], "2.34 NetexMode", "Table 34 (corrupt duplicate)"),
+                ([15], "1.18 NetexMode", "Table 20"),
+            ],
+        }
+        expected_lines = {"2.2": "956-970", "2.3": "1036-1050"}
+        for lane in ce023["coverage"]:
+            actual = [(p["printed_pages"], p["section"], p["table"]) for p in lane["pdf_locators"]]
+            require(actual == expected_023[lane["version"]], f"CE-023 {lane['version']} pins corrupt and actual NetexMode visible tables")
+            x = lane["xsd_locators"][0]
+            require(x["component"] == "NetexMode", f"CE-023 {lane['version']} pins NetexMode XSD component")
+            require(x["value"] == "main-mode choice plus submode choice", f"CE-023 {lane['version']} pins actual NetexMode XSD model")
+            require(x["line_hint"] == expected_lines[lane["version"]], f"CE-023 {lane['version']} pins exact NetexMode XSD line range")
+
+    ce024 = loc_by.get("CE-024")
+    if ce024:
+        expected_pages = {
+            "2.2": ([34], "2.62 UnsubscribeResponse", "Table 62"),
+            "2.3": ([35], "2.62 UnsubscribeResponse", "Table 62"),
+            "2.4": ([38], "2.61 UnsubscribeResponse", "Table 61"),
+        }
+        for lane in ce024["coverage"]:
+            p = lane["pdf_locators"][0]
+            pages, section, table = expected_pages[lane["version"]]
+            require((p["printed_pages"], p["section"], p["table"]) == (pages, section, table), f"CE-024 {lane['version']} pins visible UnsubscribeResponse table")
+            x = lane["xsd_locators"][0]
+            require(x["member"] == "Active", f"CE-024 {lane['version']} pins Active member")
+            require(x["value"] == "type=IBIS-IP.boolean; minOccurs omitted => 1; maxOccurs omitted => 1", f"CE-024 {lane['version']} pins exact 1:1 XSD default cardinality")
 
     ce002 = loc_by.get("CE-002")
     if ce002:
