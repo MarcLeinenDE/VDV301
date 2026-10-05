@@ -1,0 +1,56 @@
+name: temp-ce1516-visible-body-render
+
+on:
+  push:
+    branches:
+      - dev/schema-integration
+    paths:
+      - '.github/workflows/temp-ce1516-visible-body-render.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install PyMuPDF
+        run: python -m pip install --disable-pip-version-check pymupdf
+
+      - name: Download, pin and render
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audit-results/ce1516-visible-body
+          curl -L --fail --retry 3 -o /tmp/v22.pdf 'https://www.vdv.de/301-2-1-sdes-v2-2-commonstructure-enums.pdfx'
+          curl -L --fail --retry 3 -o /tmp/v23.pdf 'https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx'
+          curl -L --fail --retry 3 -o /tmp/v24.pdf 'https://www.vdv.de/301-2-1-sde-v2-4-commonstructure-enums.pdfx'
+          echo '85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203  /tmp/v22.pdf' | sha256sum -c -
+          echo 'd59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b  /tmp/v23.pdf' | sha256sum -c -
+          echo '01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a  /tmp/v24.pdf' | sha256sum -c -
+          python - <<'PY'
+          import fitz, hashlib, json
+          from pathlib import Path
+          out=Path('audit-results/ce1516-visible-body')
+          specs=[('v22','/tmp/v22.pdf',23,24),('v23','/tmp/v23.pdf',23,24),('v24','/tmp/v24.pdf',25,26)]
+          manifest={}
+          for key,pdf,index,printed in specs:
+              doc=fitz.open(pdf)
+              page=doc[index]
+              pix=page.get_pixmap(matrix=fitz.Matrix(2,2), alpha=False)
+              dest=out/f'{key}_printed_{printed:02d}.png'
+              pix.save(dest)
+              manifest[key]={'printed_page':printed,'pdf_page_index':index,'png_sha256':hashlib.sha256(dest.read_bytes()).hexdigest()}
+          (out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
+          PY
+
+      - name: Upload exact-byte visible-body pages
+        uses: actions/upload-artifact@v4
+        with:
+          name: ce1516-visible-body
+          path: audit-results/ce1516-visible-body/
+          if-no-files-found: error
+          retention-days: 30
