@@ -510,6 +510,45 @@ def main() -> int:
             "ARCH-002 page 14 pins Figure 5 and the visible hierarchy-rule bullets",
         )
 
+    arch003 = loc_by.get("ARCH-003")
+    if arch003:
+        lane = arch003["coverage"][0]
+        p = lane["pdf_locators"][0]
+        require(
+            p["printed_pages"] == [16],
+            "ARCH-003 pins printed page 16",
+        )
+        require(
+            p["section"]
+            == "Fortsetzung der Beschreibung zu Abbildung 6 — Absatz zum gekuppelten Fahrzeug / unmittelbar vor 5. Funktionsgruppen",
+            "ARCH-003 page 16 pins the actual visible coupling paragraph anchor",
+        )
+        require(
+            p.get("table") is None,
+            "ARCH-003 page 16 does not invent a visible figure/table identifier",
+        )
+
+    arch004 = loc_by.get("ARCH-004")
+    if arch004:
+        lane = arch004["coverage"][0]
+        by_page = {p["printed_pages"][0]: p for p in lane["pdf_locators"]}
+        require(
+            sorted(by_page) == [7, 26],
+            "ARCH-004 pins scope/security surfaces on pages 7 and 26",
+        )
+        require(
+            by_page[7]["section"] == "2. Anwendungsbereich",
+            "ARCH-004 page 7 pins the actual visible application-scope heading",
+        )
+        require(
+            by_page[26]["section"] == "6. Systemsicherheit",
+            "ARCH-004 page 26 pins the actual visible security heading",
+        )
+        require(
+            by_page[26].get("table") is None,
+            "ARCH-004 page 26 does not invent a table identifier",
+        )
+
     ce002 = loc_by.get("CE-002")
     if ce002:
         p = ce002["coverage"][0]["pdf_locators"][0]
