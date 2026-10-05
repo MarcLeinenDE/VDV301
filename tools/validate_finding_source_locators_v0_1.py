@@ -622,6 +622,51 @@ def main() -> int:
             "ARCH-008 page 10 does not invent a table identifier",
         )
 
+    bg001 = loc_by.get("BG-001")
+    if bg001:
+        require(
+            all(not lane.get("pdf_locators") for lane in bg001["coverage"]),
+            "BG-001 is provenance/XSD-only and does not invent PDF locators",
+        )
+        expected = {
+            ("VDV-301-1.0 historical V1.0 service pool", "IBIS-IP_JourneyInformationService_V1.0.xsd"): "1ee4d7aeb15f3269c5335313be9e214bdb519d2e",
+            ("VDV-301-1.0 historical V1.0 service pool", "IBIS-IP_PassengerCountingService_V1.0.xsd"): "600a3ee6290c630a4435fb06ca9803dabaceb788",
+            ("VDV-301-1.0 historical V1.0 service pool", "IBIS-IP_SystemManagementService_V1.0.xsd"): "85390f99d6c19c88923ed9a5fc8a5706137708af",
+            ("VDV-301-1.0 historical V1.0 service pool", "IBIS-IP_TicketInformationService_V1.0.xsd"): "017ca64666e25d757fc0cde1f1be817f06a743fc",
+            ("VDV-301-2.0 historical V1.0 service pool", "IBIS-IP_JourneyInformationService_V1.0.xsd"): "8c303db5a9c0548d66b90174d9c329d33092ad24",
+            ("VDV-301-2.0 historical V1.0 service pool", "IBIS-IP_PassengerCountingService_V1.0.xsd"): "4161872be76740abfdd1cddf96f8a736333fc8be",
+            ("VDV-301-2.0 historical V1.0 service pool", "IBIS-IP_SystemManagementService_V1.0.xsd"): "2d32630a0f1981e980e6a466e3f6a69136410f24",
+            ("VDV-301-2.0 historical V1.0 service pool", "IBIS-IP_TicketInformationService_V1.0.xsd"): "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+        }
+        actual = {
+            (lane["version"], x["file"]): x["git_blob"]
+            for lane in bg001["coverage"]
+            for x in lane["xsd_locators"]
+        }
+        require(actual == expected, "BG-001 pins the exact two official historical V1.0 service pools")
+
+    bg002 = loc_by.get("BG-002")
+    if bg002:
+        require(
+            all(not lane.get("pdf_locators") for lane in bg002["coverage"]),
+            "BG-002 is provenance/XSD-only and does not invent PDF locators",
+        )
+        old_lane, later_lane = bg002["coverage"]
+        require(
+            old_lane["xsd_locators"][0]["git_blob"]
+            == "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+            "BG-002 pins the VDV-301-1.0 historical aggregate blob",
+        )
+        require(
+            old_lane["xsd_locators"][0]["ref"] == "VDV-301-1.0",
+            "BG-002 aggregate is scoped only to VDV-301-1.0",
+        )
+        require(
+            later_lane["xsd_locators"][0]["git_blob"]
+            == "8c303db5a9c0548d66b90174d9c329d33092ad24",
+            "BG-002 later lane pins an actually published VDV-301-2.0 service XSD",
+        )
+
     ce002 = loc_by.get("CE-002")
     if ce002:
         p = ce002["coverage"][0]["pdf_locators"][0]
