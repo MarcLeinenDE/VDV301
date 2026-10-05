@@ -39,4 +39,12 @@ Fallback artifacts:
 
 ## Gate
 
-Pending.
+- GitHub Actions run: **37295002908**
+- result: **SUCCESS**
+- validated manifest commit: `ffba6e0024c34b6c362a4cecac0804c3011e6264`
+- structural locators: **40**
+- current-standard verified: **25**
+- pending current-standard revalidation: **15**
+- next pending finding: **CE-009**
+
+The gate validated the current locator manifest/body-registry synchronization and the existing audit regression suite.
