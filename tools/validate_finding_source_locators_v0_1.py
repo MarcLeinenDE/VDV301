@@ -822,6 +822,40 @@ def main() -> int:
             require((p["printed_pages"], p["section"], p["table"]) == (pages, section, table), f"CE-016 {lane['version']} pins visible GlobalCardStatus table")
             require(len(lane["xsd_locators"]) == 1 and lane["xsd_locators"][0]["member"] == "GlobalCardStausID", f"CE-016 {lane['version']} pins exact typo-like XSD identifier")
 
+    ce017 = loc_by.get("CE-017")
+    if ce017:
+        expected_pages = {
+            "1.0": ([21], "1.56 TSPPoint", "Table 56"),
+            "2.0": ([29], "2.59 TSPPoint", "Table 59"),
+            "2.1": ([31], "2.59 TSPPoint", "Table 59"),
+            "2.2": ([33], "2.60 TSPPoint", "Table 60"),
+            "2.3": ([35], "2.60 TSPPoint", "Table 60"),
+            "2.4": ([37], "2.59 TSPPoint", "Table 59"),
+        }
+        for lane in ce017["coverage"]:
+            p = lane["pdf_locators"][0]
+            pages, section, table = expected_pages[lane["version"]]
+            require((p["printed_pages"], p["section"], p["table"]) == (pages, section, table), f"CE-017 {lane['version']} pins visible TSPPoint table")
+            require(len(lane["xsd_locators"]) == 1 and lane["xsd_locators"][0]["member"] == "Desciption", f"CE-017 {lane['version']} pins exact typo-like XSD identifier")
+
+    ce018 = loc_by.get("CE-018")
+    if ce018:
+        expected_pages = {
+            "1.0": ([17], "1.39 ServiceIdentificationWithStateList", "Table 39"),
+            "2.0": ([24], "2.39 ServiceIdentificationWithStateList", "Table 39"),
+            "2.1": ([26], "2.39 ServiceIdentificationWithStateList", "Table 39"),
+            "2.2": ([27], "2.40 ServiceIdentificationWithStateList", "Table 40"),
+            "2.3": ([28], "2.40 ServiceIdentificationWithStateList", "Table 40"),
+            "2.4": ([30], "2.39 ServiceIdentificationWithStateList", "Table 39"),
+        }
+        for lane in ce018["coverage"]:
+            p = lane["pdf_locators"][0]
+            pages, section, table = expected_pages[lane["version"]]
+            require((p["printed_pages"], p["section"], p["table"]) == (pages, section, table), f"CE-018 {lane['version']} pins visible ServiceIdentificationWithStateList table")
+            x = lane["xsd_locators"][0]
+            require(x["member"] == "ServiceIdentificationWithState", f"CE-018 {lane['version']} pins list member")
+            require(x["value"] == "minOccurs=0; maxOccurs=unbounded", f"CE-018 {lane['version']} pins 0:* XSD cardinality")
+
     ce002 = loc_by.get("CE-002")
     if ce002:
         p = ce002["coverage"][0]["pdf_locators"][0]
