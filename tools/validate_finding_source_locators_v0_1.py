@@ -936,7 +936,7 @@ def main() -> int:
             ce023["scope_claims"] == [{
                 "version": "Common V2.2-V2.3",
                 "authority": "documentation_only",
-                "note": "V2.2 and V2.3 are confirmed affected by the corrupt duplicate NetexMode table; V2.4 is not affected.",
+                "note": "Both V2.2 and V2.3 are confirmed affected. The prior V2.3 scope withdrawal was based on p.26 only and missed the continued corrupt table on p.27. V2.4 is not affected.",
             }],
             "CE-023 scope claim records V2.2-V2.3 and excludes V2.4",
         )
