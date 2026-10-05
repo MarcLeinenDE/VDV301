@@ -58,6 +58,18 @@ For any PDF-backed claim where layout or location matters, inspect the **visible
 
 Text extraction/OCR/search may locate a page, but they are not the locator authority when visible layout is material.
 
+#### Mandatory visual-render fallback
+
+If the interactive/live PDF renderer returns a cache miss or otherwise cannot render the required page, immediately switch to the deterministic fallback renderer:
+
+`tools/render_vdv_pdf_pages.py`
+
+The fallback must use the same byte-pinned official PDF source resolved through `audit_registry/pdf_source_registry_v0.1.json` and `audit_registry/pdf_source_pins_v0.1.json`. It must verify SHA-256 and byte size before rendering. A source mismatch terminates with `SOURCE_CHANGED_SINCE_AUDIT`.
+
+A live-render cache miss is therefore **not** a visual-review limitation by itself. It is only a trigger to use the fallback path. The finding may remain visually unresolved only if **both** the interactive renderer and the exact-byte fallback fail to produce a usable visible page.
+
+An already existing fallback render artifact may be reused only when it is tied to the same exact byte-pinned source and includes the required page with verifiable render metadata/hashes.
+
 ### Step 4 — hard PDF locator rule: body beats TOC/history/sequence inference
 
 For a canonical PDF locator:
