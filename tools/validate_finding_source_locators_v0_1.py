@@ -708,6 +708,53 @@ def main() -> int:
             "CE-003 pins the selected candidate Common V2.4 schema blob",
         )
 
+    ce005 = loc_by.get("CE-005")
+    if ce005:
+        expected_pdf = {
+            "2.0": ([29], "2.57 TripInformation", "Table 57"),
+            "2.1": ([31], "2.57 TripInformation", "Table 57"),
+            "2.2": ([33], "2.58 TripInformation", "Table 58"),
+            "2.3": ([34], "2.58 TripInformation", "Table 58"),
+            "2.4": ([36, 37], "2.57 TripInformation", "Table 57"),
+        }
+        for lane in ce005["coverage"]:
+            p = lane["pdf_locators"][0]
+            pages, section, table = expected_pdf[lane["version"]]
+            require(p["printed_pages"] == pages, f"CE-005 {lane['version']} pins visible TripInformation page(s)")
+            require(p["section"] == section, f"CE-005 {lane['version']} pins visible TripInformation heading")
+            require(p["table"] == table, f"CE-005 {lane['version']} pins visible TripInformation table")
+        require(
+            all(
+                x["git_blob"] in {
+                    "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+                    "05977c9f86c7c9dd0b48f36a4a4e9be32e94659e",
+                    "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+                    "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+                    "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+                }
+                for lane in ce005["coverage"] for x in lane["xsd_locators"]
+            ),
+            "CE-005 XSD locators remain on the exact selected Common blobs",
+        )
+
+    ce006 = loc_by.get("CE-006")
+    if ce006:
+        expected_pdf = {
+            "2.2": ([37], "3.5 DeviceStateEnumeration", "Table 70"),
+            "2.3": ([38], "3.5 DeviceStateEnumeration", "Table 70"),
+            "2.4": ([41], "3.5 DeviceStateEnumeration", "Table 69"),
+        }
+        for lane in ce006["coverage"]:
+            p = lane["pdf_locators"][0]
+            pages, section, table = expected_pdf[lane["version"]]
+            require(p["printed_pages"] == pages, f"CE-006 {lane['version']} pins visible DeviceStateEnumeration page")
+            require(p["section"] == section, f"CE-006 {lane['version']} pins visible DeviceStateEnumeration heading")
+            require(p["table"] == table, f"CE-006 {lane['version']} pins visible DeviceStateEnumeration table")
+            require(
+                lane["xsd_locators"][0]["value"] == "warning",
+                f"CE-006 {lane['version']} pins XSD enumeration value warning",
+            )
+
     ce002 = loc_by.get("CE-002")
     if ce002:
         p = ce002["coverage"][0]["pdf_locators"][0]
