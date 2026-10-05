@@ -1,17 +1,17 @@
 {
   "schema_version": "0.1",
   "date": "2026-10-05",
-  "state": "in_progress",
+  "state": "complete",
   "purpose": "Track standardized visible-body revalidation of all source-locator-complete findings. This is separate from structural locator completeness.",
   "rule_document": "00_START_HERE/AUDIT_WORKFLOW_CONTRACT.md",
   "source_locator_policy": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_COMPLETENESS_POLICY.md",
   "source_locator_manifest": "audit_registry/finding_source_locators_v0.1.json",
   "frozen_structural_entry_count": 40,
-  "block_new_structural_progress_until_complete": true,
+  "block_new_structural_progress_until_complete": false,
   "counts": {
     "tracked_findings": 40,
-    "verified_current_standard": 37,
-    "pending_current_standard": 3
+    "verified_current_standard": 40,
+    "pending_current_standard": 0
   },
   "entries": [
     {
@@ -299,21 +299,27 @@
     },
     {
       "finding_id": "CE-022",
-      "state": "pending_current_standard",
-      "evidence": [],
-      "note": "Historical locator/evidence exists, but this finding has not yet been re-run end-to-end under the explicit 2026-09-30 visible-body locator rule."
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_BODY_REVALIDATION_CE_022_023_024_2026-10-05.md"
+      ],
+      "note": "Revalidated end-to-end under the current visible-body locator rule. Exact visible PDF body anchors and exact selected XSD boundaries were freshly verified across all affected lanes."
     },
     {
       "finding_id": "CE-023",
-      "state": "pending_current_standard",
-      "evidence": [],
-      "note": "Historical locator/evidence exists, but this finding has not yet been re-run end-to-end under the explicit 2026-09-30 visible-body locator rule."
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_BODY_REVALIDATION_CE_022_023_024_2026-10-05.md"
+      ],
+      "note": "Revalidated under the current visible-body rule. Exact V2.3 pages 26-27 correct the prior incomplete p.26-only scope withdrawal: the corrupt Message table continues onto p.27. Canonical affected documentation scope is V2.2-V2.3; V2.4 is a visible negative control."
     },
     {
       "finding_id": "CE-024",
-      "state": "pending_current_standard",
-      "evidence": [],
-      "note": "Historical locator/evidence exists, but this finding has not yet been re-run end-to-end under the explicit 2026-09-30 visible-body locator rule."
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_BODY_REVALIDATION_CE_022_023_024_2026-10-05.md"
+      ],
+      "note": "Revalidated end-to-end under the current visible-body locator rule. Exact visible PDF body anchors and exact selected XSD boundaries were freshly verified across all affected lanes."
     },
     {
       "finding_id": "CE-025",
