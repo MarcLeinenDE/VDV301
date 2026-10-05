@@ -59,4 +59,12 @@ Result: no semantic change.
 
 ## Gate
 
-Pending.
+- GitHub Actions run: **37325591823**
+- result: **SUCCESS**
+- validated manifest commit: `ebbc890cc3ab60e0e977c5fd7c407acdcfdb6be6`
+- structural locators: **40**
+- current-standard verified: **27**
+- pending current-standard revalidation: **13**
+- next pending finding: **CE-011**
+
+The gate validated the current locator manifest/body-registry synchronization and the existing audit regression suite.
