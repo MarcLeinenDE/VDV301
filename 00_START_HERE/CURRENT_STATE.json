@@ -68,7 +68,7 @@
     "pdf_source_fetcher": "tools/fetch_vdv_pdf_sources.py",
     "pdf_visual_render_fallback": "docs/pdf_xsd_semantic_audit/PDF_VISUAL_RENDER_FALLBACK.md",
     "pdf_visual_renderer": "tools/render_vdv_pdf_pages.py",
-    "pdf_visual_render_rule": "interactive screenshot cache miss is not a source failure; render exact byte-pinned source independently and inspect visible output before promoting visual status",
+    "pdf_visual_render_rule": "If the interactive/live renderer cache-misses or cannot render a required page, immediately use tools/render_vdv_pdf_pages.py on the same byte-pinned official source. A cache miss alone is never a visual-review limitation. Reuse an existing fallback artifact only if exact source bytes and required page/render hashes are verifiable; only if both render paths fail may visual status remain unresolved.",
     "pdf_sources_byte_pinned": 40,
     "pinned_active_sources": [
       "VDV301-2_GC_V2.3",
