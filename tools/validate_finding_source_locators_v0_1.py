@@ -755,6 +755,39 @@ def main() -> int:
                 f"CE-006 {lane['version']} pins XSD enumeration value warning",
             )
 
+    ce013 = loc_by.get("CE-013")
+    if ce013:
+        expected_pages = {
+            "1.0": ([7], "1.1 AdditionalAnnouncement", "Table 1"),
+            "2.0": ([14], "2.1 AdditionalAnnouncement", "Table 1"),
+            "2.1": ([15], "2.1 AdditionalAnnouncement", "Table 1"),
+            "2.2": ([16], "2.1 AdditionalAnnouncement", "Table 1"),
+            "2.3": ([16], "2.1 AdditionalAnnouncement", "Table 1"),
+            "2.4": ([18], "2.1 AdditionalAnnouncement", "Table 1"),
+        }
+        for lane in ce013["coverage"]:
+            p = lane["pdf_locators"][0]
+            pages, section, table = expected_pages[lane["version"]]
+            require((p["printed_pages"], p["section"], p["table"]) == (pages, section, table), f"CE-013 {lane['version']} pins visible AdditionalAnnouncement table")
+            members = {x["member"] for x in lane["xsd_locators"]}
+            require(members == {"xs:choice minOccurs=0", "SpecificPoint"}, f"CE-013 {lane['version']} pins optional choice and SpecificPoint")
+
+    ce014 = loc_by.get("CE-014")
+    if ce014:
+        expected_pages = {
+            "1.0": ([10], "1.12 DataVersionList", "Table 12"),
+            "2.0": ([17], "2.12 DataVersionList", "Table 12"),
+            "2.1": ([18], "2.12 DataVersionList", "Table 12"),
+            "2.2": ([19], "2.12 DataVersionList", "Table 12"),
+            "2.3": ([19], "2.12 DataVersionList", "Table 12"),
+            "2.4": ([21], "2.12 DataVersionList", "Table 12"),
+        }
+        for lane in ce014["coverage"]:
+            p = lane["pdf_locators"][0]
+            pages, section, table = expected_pages[lane["version"]]
+            require((p["printed_pages"], p["section"], p["table"]) == (pages, section, table), f"CE-014 {lane['version']} pins visible DataVersionList table")
+            require(lane["xsd_locators"][0]["member"] == "DataVersion", f"CE-014 {lane['version']} pins DataVersion member")
+
     ce002 = loc_by.get("CE-002")
     if ce002:
         p = ce002["coverage"][0]["pdf_locators"][0]
