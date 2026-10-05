@@ -587,6 +587,41 @@ def main() -> int:
             "ARCH-006 does not invent table identifiers",
         )
 
+    arch007 = loc_by.get("ARCH-007")
+    if arch007:
+        lane = arch007["coverage"][0]
+        p = lane["pdf_locators"][0]
+        require(
+            p["printed_pages"] == [26],
+            "ARCH-007 pins printed page 26",
+        )
+        require(
+            p["section"] == "7. Kommunikation mit Diensten",
+            "ARCH-007 page 26 pins the actual visible communication heading",
+        )
+        require(
+            p.get("table") is None,
+            "ARCH-007 page 26 does not invent a table identifier",
+        )
+
+    arch008 = loc_by.get("ARCH-008")
+    if arch008:
+        lane = arch008["coverage"][0]
+        p = lane["pdf_locators"][0]
+        require(
+            p["printed_pages"] == [10],
+            "ARCH-008 pins printed page 10",
+        )
+        require(
+            p["section"]
+            == "Fortsetzung der Definition Fachkomponente — Absatz „nur ein Teil der Fachkomponenten … in Form von Diensten bzw. Applikationen …“ / unmittelbar vor Funktionsgruppe",
+            "ARCH-008 page 10 pins the actual visible Fachkomponente continuation anchor",
+        )
+        require(
+            p.get("table") is None,
+            "ARCH-008 page 10 does not invent a table identifier",
+        )
+
     ce002 = loc_by.get("CE-002")
     if ce002:
         p = ce002["coverage"][0]["pdf_locators"][0]
