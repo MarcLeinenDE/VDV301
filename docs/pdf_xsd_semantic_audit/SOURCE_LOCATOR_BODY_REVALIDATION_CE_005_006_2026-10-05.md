@@ -103,4 +103,12 @@ After this block:
 
 ## Gate
 
-Pending. The work commit records the block before the Actions result is known.
+- GitHub Actions run: **37291258017**
+- result: **SUCCESS**
+- validated commit: `bf43f301fb10f6288af89f4e6f8728d4add5da84`
+- structural locators: **40**
+- current-standard verified: **23**
+- pending current-standard revalidation: **17**
+- next pending finding: **CE-007**
+
+The gate verified CURRENT_STATE/body-registry synchronization, the CE-005 per-version TripInformation locator assertions, the CE-006 DeviceStateEnumeration locator/value assertions, and the existing audit regression suite.
