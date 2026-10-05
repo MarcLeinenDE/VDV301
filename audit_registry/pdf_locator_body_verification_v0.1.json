@@ -10,8 +10,8 @@
   "block_new_structural_progress_until_complete": true,
   "counts": {
     "tracked_findings": 40,
-    "verified_current_standard": 19,
-    "pending_current_standard": 21
+    "verified_current_standard": 21,
+    "pending_current_standard": 19
   },
   "entries": [
     {
@@ -128,9 +128,11 @@
     },
     {
       "finding_id": "CE-001",
-      "state": "pending_current_standard",
-      "evidence": [],
-      "note": "Historical locator/evidence exists, but this finding has not yet been re-run end-to-end under the explicit 2026-09-30 visible-body locator rule."
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_BODY_REVALIDATION_CE_001_003_2026-10-05.md"
+      ],
+      "note": "Current-standard source-locator revalidation completed. CE-001 is XSD/dependency-provenance-only; no PDF body surface applies. The exact official Common V2.3 -> Enumerations V2.2 include route and blobs were freshly rechecked."
     },
     {
       "finding_id": "CE-002",
@@ -143,9 +145,11 @@
     },
     {
       "finding_id": "CE-003",
-      "state": "pending_current_standard",
-      "evidence": [],
-      "note": "Historical locator/evidence exists, but this finding has not yet been re-run end-to-end under the explicit 2026-09-30 visible-body locator rule."
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_BODY_REVALIDATION_CE_001_003_2026-10-05.md"
+      ],
+      "note": "Current-standard revalidation completed. CE-003 is a superseded audit-progress finding, not a persistent defect. Exact-byte COMMON V2.4 artifact boundaries (pages 1 and 63) were visibly rechecked and render hashes matched the artifact manifest; selected candidate Common V2.4 blob was also rechecked."
     },
     {
       "finding_id": "CE-004",

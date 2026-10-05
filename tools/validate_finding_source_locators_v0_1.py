@@ -667,6 +667,47 @@ def main() -> int:
             "BG-002 later lane pins an actually published VDV-301-2.0 service XSD",
         )
 
+    ce001 = loc_by.get("CE-001")
+    if ce001:
+        lane = ce001["coverage"][0]
+        require(
+            not lane.get("pdf_locators"),
+            "CE-001 is XSD/dependency-only and does not invent PDF locators",
+        )
+        x = {item["file"]: item for item in lane["xsd_locators"]}
+        require(
+            x["IBIS-IP_common_V2.3.xsd"]["git_blob"]
+            == "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+            "CE-001 pins official Common V2.3 blob",
+        )
+        require(
+            x["IBIS-IP_common_V2.3.xsd"].get("line_hint") == "5",
+            "CE-001 pins the explicit Common V2.3 include line",
+        )
+        require(
+            x["IBIS-IP_Enumerations_V2.2.xsd"]["git_blob"]
+            == "2a23b512379b18e8f122ac1272cef8229fb86283",
+            "CE-001 pins the exact Enumerations V2.2 dependency blob used by V2.3",
+        )
+
+    ce003 = loc_by.get("CE-003")
+    if ce003:
+        lane = ce003["coverage"][0]
+        p = lane["pdf_locators"][0]
+        require(
+            p["printed_pages"] == [1, 63],
+            "CE-003 full-document scope remains bounded by printed pages 1 and 63",
+        )
+        require(
+            p["section"] == "complete-document review scope",
+            "CE-003 does not misrepresent a review-scope boundary as a defect section",
+        )
+        require(
+            lane["xsd_locators"][0]["git_blob"]
+            == "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+            "CE-003 pins the selected candidate Common V2.4 schema blob",
+        )
+
     ce002 = loc_by.get("CE-002")
     if ce002:
         p = ce002["coverage"][0]["pdf_locators"][0]
