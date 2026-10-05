@@ -63,4 +63,12 @@ The term `body-registry` is retained because that is the existing registry name.
 
 ## Gate
 
-Pending. The work commit intentionally records the block before the GitHub Actions gate result is known.
+- GitHub Actions run: **37288058025**
+- result: **SUCCESS**
+- validated commit: `c85b87ad8442660ce3138d08e82747d3757e331b`
+- structural locators: **40**
+- current-standard/body-registry verified: **19**
+- pending current-standard revalidation: **21**
+- next pending finding: **CE-001**
+
+The gate verified CURRENT_STATE/body-registry synchronization, the new BG-001/BG-002 exact XSD-locator assertions, and the existing audit regression suite.
