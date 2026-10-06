@@ -175,4 +175,17 @@ After this review block:
 
 ## Gate
 
-Pending.
+- GitHub Actions run: **37399414861**
+- attempt: **2**
+- result: **SUCCESS**
+- validated commit: `6068082b9a918385338c74a46f267755d672295b`
+- structural locators: **40**
+- current-standard verified: **40**
+- pending current-standard revalidation: **0**
+- body/source-surface backlog: **CLOSED**
+- structural locator expansion: **UNFROZEN**
+- next structurally missing finding: **CIS-001**
+
+Attempt 1 of the same run failed only because the live BG-001 upstream verification hit GitHub HTTP 403 rate limiting. No audit data were changed for that transient infrastructure failure. Re-running the failed job on the identical commit succeeded.
+
+The final gate validates the corrected CE-023 V2.2+V2.3 scope, CE-022/CE-024 source locators, body-registry/CURRENT_STATE synchronization, and the existing regression suite.
