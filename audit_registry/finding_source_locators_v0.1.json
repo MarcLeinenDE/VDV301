@@ -8973,11 +8973,31 @@
               "file": "IBIS-IP_SystemManagementService_V1.0.xsd",
               "git_blob": "2d32630a0f1981e980e6a466e3f6a69136410f24",
               "authority_detail": "selected historical schema on dev/schema-integration; corroborating terminology/schema context only and not promoted by this finding to independent official-release authority",
-              "component_kind": "group_and_response_declarations",
-              "component": "SystemManagementServiceGroup / GetDeviceStatusResponse / GetServiceStatusResponse",
+              "component_kind": "group",
+              "component": "SystemManagementServiceGroup",
               "xpath_hint": "/xs:schema/xs:group[@name='SystemManagementServiceGroup']",
-              "line_hint": "8-37",
-              "point_summary": "Selected historical schema declares SystemManagementService.GetDeviceStatusResponse and SystemManagementService.GetServiceStatusResponse structures, corroborating the Status terminology used by official Part 2."
+              "line_hint": "8-13",
+              "point_summary": "Operation group contains SystemManagementService.GetDeviceStatusResponse and SystemManagementService.GetServiceStatusResponse, corroborating the Status terminology used by official Part 2."
+            },
+            {
+              "file": "IBIS-IP_SystemManagementService_V1.0.xsd",
+              "git_blob": "2d32630a0f1981e980e6a466e3f6a69136410f24",
+              "authority_detail": "selected historical schema on dev/schema-integration; corroborating terminology/schema context only and not promoted by this finding to independent official-release authority",
+              "component_kind": "element",
+              "component": "SystemManagementService.GetDeviceStatusResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='SystemManagementService.GetDeviceStatusResponse']",
+              "line_hint": "16",
+              "point_summary": "Global response element uses GetDeviceStatus rather than the stale Part-1 GetDeviceState wording."
+            },
+            {
+              "file": "IBIS-IP_SystemManagementService_V1.0.xsd",
+              "git_blob": "2d32630a0f1981e980e6a466e3f6a69136410f24",
+              "authority_detail": "selected historical schema on dev/schema-integration; corroborating terminology/schema context only and not promoted by this finding to independent official-release authority",
+              "component_kind": "element",
+              "component": "SystemManagementService.GetServiceStatusResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='SystemManagementService.GetServiceStatusResponse']",
+              "line_hint": "30",
+              "point_summary": "Global response element uses GetServiceStatus rather than the stale Part-1 GetSystemStatus wording."
             }
           ],
           "coverage_note": "Confirmed Part-1/Part-2 terminology mismatch. Part 2 and the selected historical XSD context use Status terminology; no aliases are created for stale Part-1 names."
