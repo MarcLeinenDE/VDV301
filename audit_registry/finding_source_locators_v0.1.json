@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 47,
-    "coverage_complete_count": 47,
+    "locator_entry_count": 48,
+    "coverage_complete_count": 48,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 145
+    "remaining_finding_count": 144
   },
   "entries": [
     {
@@ -7959,6 +7959,95 @@
         "RFC Editor: RFC 2927 - MIME Directory Profile for LDAP Schema",
         "RFC Editor: RFC 3927 - Dynamic Configuration of IPv4 Link-Local Addresses",
         "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DISC_002_2026-10-06.md"
+      ]
+    },
+    {
+      "finding_id": "DISC-003",
+      "service": "GeneralConventions / NetworkDiscovery",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "VDV 301-2 General Conventions V2.3 German",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Table 3 p27 omits coachnumber, deviceclass and deviceID."
+        },
+        {
+          "version": "VDV 301-2 General Conventions V2.4 German",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Table 3 pp30-31 includes the missing entries; version history p75 records the repair."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "2.3",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "VDV-Schrift 301-2 General Conventions",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                27
+              ],
+              "section": "3.3.1 Nutzung des TXT-Records",
+              "table": "Tabelle 3 — Bedeutungen der TXT-Records in DNS-SD (inklusive Festlegungen für IBIS-IP)",
+              "point_summary": "Visible German V2.3 Table 3 ends after ver, path, multicast and sntp-server; coachnumber, deviceclass and deviceID are absent."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Historical documentation defect in the German table; no XSD lane applies."
+        },
+        {
+          "version": "2.4",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV-Schrift 301-2 General Conventions",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                30,
+                31
+              ],
+              "section": "3.3.1 Nutzung des TXT-Records",
+              "table": "Tabelle 3 — Bedeutungen der TXT-Records in DNS-SD (inklusive Festlegungen für IBIS-IP)",
+              "point_summary": "Visible German V2.4 Table 3 adds coachnumber on page 30 and deviceclass/deviceID on page 31."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV-Schrift 301-2 General Conventions",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                75
+              ],
+              "section": "7.3 Version 2.4 / 7.3.2 Technische Ergänzungen/Korrekturen - Technical Upgrade/Corrections",
+              "table": null,
+              "point_summary": "Visible version history explicitly states that missing entries in the German version of Table 3 were added."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Later official documentation correction confirms the V2.3 German omission; it does not establish an XSD or protocol change."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DISC_2026-09-03.md",
+        "docs/pdf_xsd_semantic_audit/NETWORK_DISCOVERY_FINDINGS_REGISTER_ADDENDUM.md",
+        "EV-126 run 33754189273",
+        "source/render artifact 9892036202",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DISC_003_2026-10-06.md"
       ]
     }
   ]
