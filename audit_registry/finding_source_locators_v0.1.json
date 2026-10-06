@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 48,
-    "coverage_complete_count": 48,
+    "locator_entry_count": 49,
+    "coverage_complete_count": 49,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 144
+    "remaining_finding_count": 143
   },
   "entries": [
     {
@@ -8048,6 +8048,92 @@
         "EV-126 run 33754189273",
         "source/render artifact 9892036202",
         "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DISC_003_2026-10-06.md"
+      ]
+    },
+    {
+      "finding_id": "DMS-001",
+      "service": "DeviceManagementService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.0.xsd",
+          "note": "Historical V2.0 profile; wrapper/service-group representation is not a complete mirror of the public operation inventory."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "2.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV-Schrift 301-2 Basisdienste / Base Services",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                90
+              ],
+              "section": "7.1.1 Operationen DeviceManagementService / Operations DeviceManagementService",
+              "table": "Tabelle 11 / Description of Operations of DeviceManagementService",
+              "point_summary": "Visible operation inventory uses generic Common SubscribeRequestStructure/SubscribeResponseStructure and UnsubscribeRequestStructure/UnsubscribeResponseStructure for DMS subscription operations, while device-specific operations use DMS structures or Common DataAcceptedResponseStructure."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV-Schrift 301-2 Basisdienste / Base Services",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                95
+              ],
+              "section": "DeviceManagementService operation detail context",
+              "table": null,
+              "point_summary": "Visible DMS detail context continues to reference shared Common response structures, supporting that the public operation inventory is not intended as a one-to-one mirror of local DMS declarations."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.0.xsd",
+              "git_blob": "74189e0da65563eeb084ec2f3c400e9668d1ee1a",
+              "authority_detail": "official historical DMS V2.0 XSD selected for the V2.0 release context",
+              "component_kind": "group",
+              "component": "DeviceManagementServiceGroup",
+              "member": null,
+              "value": "Local DMS group contains service-specific DMS elements only and is not a one-to-one copy of the PDF operation inventory.",
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']",
+              "line_hint": "8-21",
+              "point_summary": "The selected DMS XSD groups service-specific DMS roots but does not duplicate generic Common Subscribe/Unsubscribe or DataAccepted structures as DMS-prefixed members.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_common_V2.0.xsd",
+              "git_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+              "authority_detail": "official Common dependency in the V2.0 release context",
+              "component_kind": "complexType",
+              "component": "SubscribeRequestStructure / SubscribeResponseStructure / UnsubscribeRequestStructure / UnsubscribeResponseStructure / DataAcceptedResponseStructure",
+              "member": null,
+              "value": "Generic Common structures used by the DMS operation inventory.",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SubscribeRequestStructure' or @name='SubscribeResponseStructure' or @name='UnsubscribeRequestStructure' or @name='UnsubscribeResponseStructure' or @name='DataAcceptedResponseStructure']",
+              "line_hint": "867-898",
+              "point_summary": "The selected Common dependency explicitly provides the generic structures referenced by the DMS V2.0 PDF."
+            }
+          ],
+          "coverage_note": "Contextual asymmetry only. The public DMS operation inventory and the local DeviceManagementServiceGroup are not one-to-one, but generic Common subscription/acknowledgement structures are intentional shared modelling. This review does not classify the asymmetry as an XSD defect."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md",
+        "audit_registry/dms_visual_revalidation_evidence_2026-09-03.json",
+        "visual run 33758274931 artifact 9894357560",
+        "EV-127 run 33762375705",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DMS_001_2026-10-06.md"
       ]
     }
   ]
