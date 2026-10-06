@@ -2704,7 +2704,7 @@
         {
           "version": "Common V2.2-V2.3",
           "authority": "documentation_only",
-          "note": "Both V2.2 and V2.3 are confirmed affected. The prior V2.3 scope withdrawal was based on p.26 only and missed the continued corrupt table on p.27. V2.4 is not affected."
+          "note": "Exact visible-body revalidation confirms the corrupt duplicate NetexMode table in both V2.2 and V2.3; V2.4 is not affected."
         }
       ],
       "review_state": "manually_reviewed",
@@ -2722,25 +2722,33 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "The exact V2.2 and V2.3 publications contain a corrupt duplicate NetexMode table carrying Message content."
+          "note": "Exact visible V2.2 and V2.3 pages both show section 2.34 NetexMode with a corrupt Message structure table captioned as NetexMode."
         },
         {
-          "type": "official_release_provenance",
-          "note": "Exact byte-pinned V2.3 pages 26-27 prove the corrupt Table 34 continues onto p.27; prior p.26-only falsification was incomplete. Exact V2.4 visible evidence is a negative control and is not affected."
+          "type": "official_xsd_explicit",
+          "note": "Exact selected V2.2 and V2.3 XSDs contain the NetexMode main-mode/submode choice model, not Message fields."
+        },
+        {
+          "type": "active_disproof",
+          "note": "The prior V2.3 scope withdrawal was falsified by reopening the byte-pinned official V2.3 artifact; p.26 starts section 2.34 NetexMode and p.27 visibly carries the corrupt Message table."
+        },
+        {
+          "type": "negative_control",
+          "note": "Common V2.4 visibly has 2.34 Point and no second NetexMode table, so the defect is not extended to V2.4."
         }
       ],
       "diagnostic": {
         "de": {
           "title": "Common V2.2/V2.3 enthalten eine fehlerhafte NetexMode-Tabelle",
-          "short": "Der Copy/Paste-Fehler betrifft die Dokumentationen V2.2 und V2.3.",
-          "long": "Die NetexMode-Tabelle enthält in V2.2 und V2.3 fälschlich Message-Felder. Die frühere Herausnahme von V2.3 beruhte auf einer unvollständigen Sichtprüfung nur von Seite 26; die Tabelle setzt sich auf Seite 27 fort. V2.4 ist nicht betroffen.",
-          "recommendation": "Keine XSD-Sonderbehandlung erzeugen; bei V2.2/V2.3 nur einen Dokumentationshinweis anzeigen."
+          "short": "Der Copy/Paste-Fehler ist in V2.2 und V2.3 bestätigt; V2.4 ist nicht betroffen.",
+          "long": "In den offiziellen Common-Dokumenten V2.2 und V2.3 ist die als NetexMode beschriftete zweite Tabelle tatsächlich eine Message-Struktur mit Message-ID, TimeStamp, MessageType und MessageText. Die XSD enthält dagegen das korrekte NetexMode-Auswahlmodell. Die frühere Aussage, V2.3 sei nicht betroffen, wurde durch erneute Exact-Byte-Sichtprüfung widerlegt.",
+          "recommendation": "Keine XSD-Sonderbehandlung erzeugen; für V2.2 und V2.3 nur einen Dokumentationshinweis anzeigen."
         },
         "en": {
           "title": "Common V2.2/V2.3 contain a corrupt NetexMode table",
-          "short": "The copy/paste defect affects the V2.2 and V2.3 documentation.",
-          "long": "The NetexMode table incorrectly contains Message fields in V2.2 and V2.3. The earlier removal of V2.3 was based on an incomplete p.26-only visual check; the table continues on p.27. V2.4 is not affected.",
-          "recommendation": "Do not add XSD special handling; surface only a V2.2/V2.3 documentation note."
+          "short": "The copy/paste defect is confirmed in V2.2 and V2.3; V2.4 is not affected.",
+          "long": "In the official Common V2.2 and V2.3 documents, the second table captioned as NetexMode is actually a Message structure containing Message-ID, TimeStamp, MessageType and MessageText. The XSD instead contains the correct NetexMode choice model. The previous conclusion that V2.3 was unaffected was disproved by a renewed exact-byte visible review.",
+          "recommendation": "Do not add XSD special handling; surface only a documentation note for V2.2 and V2.3."
         }
       },
       "runtime_match": {
@@ -2757,16 +2765,28 @@
           "reference": "EV-124 run 33735601969"
         },
         {
-          "kind": "pdf",
-          "reference": "Common V2.2 section 2.34"
-        },
-        {
           "kind": "evidence",
           "reference": "V2.3 visible render/read run 33656579631"
         },
         {
           "kind": "correction_delta",
           "reference": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CE023_V23_SCOPE_2026-10-05.md"
+        },
+        {
+          "kind": "correction",
+          "reference": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CE023_V23_SCOPE_2026-10-06.md"
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_BODY_REVALIDATION_CE_022_023_024_2026-10-06.md"
+        },
+        {
+          "kind": "pdf",
+          "reference": "Exact official Common V2.2 PDF SHA-256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203; visible p.26"
+        },
+        {
+          "kind": "pdf",
+          "reference": "Exact official Common V2.3 PDF SHA-256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b; exact-byte visible pp.26-27"
         }
       ]
     },
