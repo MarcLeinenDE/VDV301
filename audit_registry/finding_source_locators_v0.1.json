@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 49,
-    "coverage_complete_count": 49,
+    "locator_entry_count": 50,
+    "coverage_complete_count": 50,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 143
+    "remaining_finding_count": 142
   },
   "entries": [
     {
@@ -8134,6 +8134,79 @@
         "visual run 33758274931 artifact 9894357560",
         "EV-127 run 33762375705",
         "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DMS_001_2026-10-06.md"
+      ]
+    },
+    {
+      "finding_id": "DMS-002",
+      "service": "DeviceManagementService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V2.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Repeated unresolved Word cross-reference markers are present in the checked V2.0 document."
+        },
+        {
+          "version": "V2.1",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Checked V2.1 context does not retain the V2.0 unresolved cross-reference markers."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "2.0",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV-Schrift 301-2 Basisdienste / Base Services",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                76
+              ],
+              "section": "5.3.2.1 Start weiterer Dienste / Start of further Services",
+              "table": null,
+              "point_summary": "Visible V2.0 body contains the unresolved Word cross-reference marker 'Fehler! Verweisquelle konnte nicht gefunden werden.' in the Start-further-services context. The same marker also recurs elsewhere in the document."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Confirmed editorial documentation defect; no XML/XSD rule applies."
+        },
+        {
+          "version": "2.1",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 Basisdienste / Base Services",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                77
+              ],
+              "section": "5.3.2.1 Start weiterer Dienste / Start of further Services",
+              "table": null,
+              "point_summary": "Corresponding V2.1 body uses a resolved reference to chapter 7.1.23. Full-document text search finds no remaining 'Fehler! Verweisquelle konnte nicht gefunden werden.' marker."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Correction boundary: checked V2.1 context no longer retains the V2.0 unresolved cross-reference residue."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md",
+        "audit_registry/dms_visual_revalidation_evidence_2026-09-03.json",
+        "visual run 33758274931 artifact 9894357560",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DMS_002_2026-10-06.md"
       ]
     }
   ]
