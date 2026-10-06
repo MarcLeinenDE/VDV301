@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 59,
-    "coverage_complete_count": 59,
+    "locator_entry_count": 60,
+    "coverage_complete_count": 60,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 133
+    "remaining_finding_count": 132
   },
   "entries": [
     {
@@ -9102,6 +9102,52 @@
         "RFC Editor: RFC 2927 - MIME Directory Profile for LDAP Schema",
         "RFC Editor: RFC 3927 - Dynamic Configuration of IPv4 Link-Local Addresses",
         "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_001_2026-10-06.md"
+      ]
+    },
+    {
+      "finding_id": "DR3012-002",
+      "service": "VDV 301-2 Base / DNS Service Discovery",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "VDV 301-2 V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Page 26 says lower SRV Weight is preferred at equal Priority; RFC 2782 defines proportional weighted selection."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "VDV 301-2 V1.0",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_DE",
+              "document_title": "VDV-Schrift 301-2",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2sds-v1-0.pdfx",
+              "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+              "printed_pages": [
+                26
+              ],
+              "section": "2 Verwendete Kommunikationsprotokolle / DNS-SD SRV-Record description",
+              "table": "Tabelle 2 Bedeutungen der SRV-Records in DNS-SD",
+              "point_summary": "Visible Weight row says: 'bei gleichem Gewicht wird der Dienst mit dem geringeren Gewicht bevorzugt'. Read literally, the sentence is internally inconsistent; read in context as a statement about equal Priority, it reverses RFC 2782 Weight semantics."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Documentation/external-protocol defect only. RFC 2782 states that, among entries with the same Priority, larger Weight values should receive proportionately higher selection probability. XML/XSD validity is unaffected."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V10_2026-09-03.md",
+        "EV-129 closure run 33765633886",
+        "EV-129 pinned evidence run 33765167655 artifact 9897171006 digest sha256:a410cdc7103b2ed01f61570b6435a5b2319d2b80f4fec2802929359058a51cc7",
+        "EV-129 page 26 PNG SHA-256 704181401df2300d23caac7683713b363d0ae06e688fe77908c431294b4b5ca5",
+        "RFC Editor RFC 2782: https://www.rfc-editor.org/rfc/rfc2782.html",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_002_2026-10-06.md"
       ]
     }
   ]
