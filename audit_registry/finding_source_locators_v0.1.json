@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 56,
-    "coverage_complete_count": 56,
+    "locator_entry_count": 57,
+    "coverage_complete_count": 57,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 136
+    "remaining_finding_count": 135
   },
   "entries": [
     {
@@ -8904,6 +8904,92 @@
         "EV-128 run 33763071038",
         "visual run 33725750019 artifact 9881897572",
         "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3011_001_2026-10-06.md"
+      ]
+    },
+    {
+      "finding_id": "DR3011-002",
+      "service": "VDV 301-1 / SystemManagement",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "VDV 301-1 V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Part 1 page 11 uses stale/conceptual GetDeviceState, GetSystemStatus and SystemStatus subscription terminology."
+        },
+        {
+          "version": "VDV 301-2 SystemManagementService V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official Part 2 V1.0 page 67 uses GetDeviceStatus / GetServiceStatus and DeviceStatus / ServiceStatus subscription terminology; the selected historical SystemManagementService XSD corroborates the Status response identifiers but is not promoted here as independent release authority."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "VDV 301-1 V1.0",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-1_V1.0_DE",
+              "document_title": "VDV-Schrift 301-1 IBIS-IP Teil 1: Systemarchitektur",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/vdv-301-1-ibis-ip-teil-1-systemarchitektur.pdfx",
+              "sha256": "5418f24190468a1823699688cf86f98d812591ad2c7c2eada07b1d34889c20c2",
+              "printed_pages": [
+                11
+              ],
+              "section": "3.2 Begriffe / Abbildung 3: Einordnung der Begriffe Gerät, Dienst und Operation",
+              "table": null,
+              "point_summary": "Visible SystemManagementService example uses GetDeviceState and GetSystemStatus and pairs SubscribeDeviceStatus with SubscribeSystemStatus plus corresponding Unsubscribe names."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Part 1 terminology is contextual/stale documentation; it does not define alternative XML operation aliases."
+        },
+        {
+          "version": "VDV 301-2 SystemManagementService V1.0",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_DE",
+              "document_title": "VDV-Schrift 301-2 IBIS-IP Teil 2: Schnittstellenspezifikation",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2sds-v1-0.pdfx",
+              "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+              "printed_pages": [
+                67
+              ],
+              "section": "7.3.1 Operationen des SystemManagementService",
+              "table": "Tabelle 31 Beschreibung von Operationen des SystemManagementService",
+              "point_summary": "Visible operation table uses GetDeviceStatus, SubscribeDeviceStatus, UnsubscribeDeviceStatus, GetServiceStatus, SubscribeServiceStatus and UnsubscribeServiceStatus."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_SystemManagementService_V1.0.xsd",
+              "git_blob": "2d32630a0f1981e980e6a466e3f6a69136410f24",
+              "authority_detail": "selected historical schema on dev/schema-integration; corroborating terminology/schema context only and not promoted by this finding to independent official-release authority",
+              "component_kind": "group_and_response_declarations",
+              "component": "SystemManagementServiceGroup / GetDeviceStatusResponse / GetServiceStatusResponse",
+              "xpath_hint": "/xs:schema/xs:group[@name='SystemManagementServiceGroup']",
+              "line_hint": "8-37",
+              "point_summary": "Selected historical schema declares SystemManagementService.GetDeviceStatusResponse and SystemManagementService.GetServiceStatusResponse structures, corroborating the Status terminology used by official Part 2."
+            }
+          ],
+          "coverage_note": "Confirmed Part-1/Part-2 terminology mismatch. Part 2 and the selected historical XSD context use Status terminology; no aliases are created for stale Part-1 names."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3011_2026-09-03.md",
+        "audit_registry/vdv3011_visual_revalidation_evidence_2026-09-03.json",
+        "EV-128 run 33763071038",
+        "Part 1 visual run 33725750019 artifact 9881897572 page 11 PNG SHA-256 16fe0129866d3ca79ea64f047354fd2ea90c824e18e06332581e5b3d547d4bef",
+        "Part 2 source-pin run 33752224704 artifact 9892036202 page 67 PNG SHA-256 2241db5cef5651ee67e2fd80bd1db142df53b00ed13c5817f8c67139c4770bfe",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3011_002_2026-10-06.md"
       ]
     }
   ]
