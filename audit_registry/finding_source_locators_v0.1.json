@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "f3a2f31ec5692e09c425fc1cea688e564046967c",
+    "git_blob": "63a6ebd3b6d70bcb1a537fffad322052bb7c91c2",
     "finding_count": 192
   },
   "policy": {
@@ -5764,7 +5764,7 @@
         {
           "version": "Common V2.2-V2.3",
           "authority": "documentation_only",
-          "note": "V2.2 and V2.3 are confirmed affected by the corrupt duplicate/copy-paste NetexMode table; V2.4 is confirmed not affected."
+          "note": "Both V2.2 and V2.3 are confirmed affected. The prior V2.3 scope withdrawal was based on p.26 only and missed the continued corrupt table on p.27. V2.4 is not affected."
         }
       ],
       "coverage": [
@@ -5815,7 +5815,7 @@
               "point_summary": "Exact XSD contains the NetexMode choice model, not the Message fields shown in the corrupt second PDF table."
             }
           ],
-          "coverage_note": "Documentation-only V2.2 copy/paste defect. No XSD special handling or XML alias follows. Fresh exact V2.3 evidence explicitly falsifies extension of this finding to V2.3."
+          "coverage_note": "Documentation-only V2.2 copy/paste defect confirmed. No XSD special handling or XML alias follows."
         },
         {
           "version": "2.3",
@@ -5834,8 +5834,22 @@
                 27
               ],
               "section": "2.34 NetexMode",
-              "table": "Table 34 (corrupt Message table)",
+              "table": "Table 34 (corrupt duplicate)",
               "point_summary": "Section 2.34 begins on p.26; p.27 visibly shows a Message structure table (Message-ID, TimeStamp, MessageType, MessageText) captioned Table 34 Description of NetexMode."
+            },
+            {
+              "source_id": "COMMON_V2.3",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx",
+              "sha256": "d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b",
+              "printed_pages": [
+                15
+              ],
+              "section": "1.18 NetexMode",
+              "table": "Table 20",
+              "point_summary": "Earlier table in the same PDF contains the actual NetexMode main-mode/submode choice model."
             }
           ],
           "xsd_locators": [
@@ -5851,7 +5865,7 @@
               "point_summary": "Exact V2.3 XSD contains the NetexMode choice model, not the Message fields shown in the corrupt PDF table."
             }
           ],
-          "coverage_note": "Documentation-only V2.3 copy/paste defect confirmed by exact-byte visible pages 26-27. No XSD special handling or XML alias follows."
+          "coverage_note": "Documentation-only V2.3 copy/paste defect confirmed by exact-byte visible pages 26-27; the actual NetexMode table remains visible on p.15. No XSD special handling or XML alias follows."
         }
       ],
       "supporting_evidence": [
@@ -5861,8 +5875,6 @@
         "docs/pdf_xsd_semantic_audit/COMMON_FINDINGS_REGISTER_ADDENDUM.md",
         "V2.3 visible render/read run 33656579631",
         "EV-124 run 33735601969",
-        "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CE023_V23_SCOPE_2026-10-05.md",
-        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_BODY_REVALIDATION_CE_022_023_024_2026-10-05.md",
         "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CE023_V23_SCOPE_2026-10-06.md",
         "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_BODY_REVALIDATION_CE_022_023_024_2026-10-06.md"
       ]
