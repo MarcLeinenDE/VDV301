@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 57,
-    "coverage_complete_count": 57,
+    "locator_entry_count": 58,
+    "coverage_complete_count": 58,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 135
+    "remaining_finding_count": 134
   },
   "entries": [
     {
@@ -9010,6 +9010,51 @@
         "Part 1 visual run 33725750019 artifact 9881897572 page 11 PNG SHA-256 16fe0129866d3ca79ea64f047354fd2ea90c824e18e06332581e5b3d547d4bef",
         "Part 2 source-pin run 33752224704 artifact 9892036202 page 67 PNG SHA-256 2241db5cef5651ee67e2fd80bd1db142df53b00ed13c5817f8c67139c4770bfe",
         "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3011_002_2026-10-06.md"
+      ]
+    },
+    {
+      "finding_id": "DR3011-003",
+      "service": "VDV 301-1 / General Documentation",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "VDV 301-1 V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Page 34 contains two consecutive IBIS-IP abbreviation rows with slightly different expansion wording."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "VDV 301-1 V1.0",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-1_V1.0_DE",
+              "document_title": "VDV-Schrift 301-1 IBIS-IP Teil 1: Systemarchitektur",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/vdv-301-1-ibis-ip-teil-1-systemarchitektur.pdfx",
+              "sha256": "5418f24190468a1823699688cf86f98d812591ad2c7c2eada07b1d34889c20c2",
+              "printed_pages": [
+                34
+              ],
+              "section": "9. Abkürzungen",
+              "table": "Abkürzung / Beschreibung",
+              "point_summary": "The visible abbreviation table contains two immediately consecutive IBIS-IP rows. The first expands to 'Integriertes-Bord Informations-System auf Basis Internet Protokoll'; the second to 'Integriertes-Bord-Informations-System auf Internet-Protokoll Basis'."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Confirmed editorial duplication/wording inconsistency in the abbreviation list only; no XML, XSD or runtime behavior is implied."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3011_2026-09-03.md",
+        "audit_registry/vdv3011_visual_revalidation_evidence_2026-09-03.json",
+        "EV-128 run 33763071038",
+        "visual run 33725750019 artifact 9881897572 page 34 PNG SHA-256 c61689499c594d47cd99cc7b61de57b4f0183b20ca9c33ee508ab411bc7a709b",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3011_003_2026-10-06.md"
       ]
     }
   ]
