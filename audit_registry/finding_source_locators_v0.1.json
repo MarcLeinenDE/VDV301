@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 40,
-    "coverage_complete_count": 40,
+    "locator_entry_count": 41,
+    "coverage_complete_count": 41,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 152
+    "remaining_finding_count": 151
   },
   "entries": [
     {
@@ -6658,6 +6658,109 @@
         "EV-118",
         "EV-124 run 33735601969",
         "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVALIDATION_COMPLETE_40_2026-09-30.md"
+      ]
+    },
+    {
+      "finding_id": "CIS-001",
+      "service": "CustomerInformationService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "CIS V1.1",
+          "authority": "unresolved",
+          "xsd_profile": null,
+          "note": "The official V1.1 PDF is published, but no matching release-tagged V1.1 XSD authority is established. The untagged historical working snapshot is evidence only and is materially behind the published PDF."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "1.1",
+          "authority": "unresolved_official_release_schema",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "CIS_V1.1",
+              "document_title": "VDV-Schrift 301-2-3 Dienst CustomerInformationService",
+              "document_version": "1.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-3-sds-v1-1.pdfx",
+              "sha256": "f9d63dd1f2e417691913e57a9c7121c90b4e781cbcd1328be681695975f59739",
+              "printed_pages": [
+                13
+              ],
+              "section": "1.3 Data Structure of GetAllData Operation / 1.3.2 Response — continuation on printed page 13",
+              "table": "Table 3: Description ofCustomerInformationService.AllData",
+              "point_summary": "Visible body: the VehicleInformationGroup rows in CustomerInformationService.AllData include SpeakerActive 0:1 and StopInformationActive 0:1."
+            },
+            {
+              "source_id": "CIS_V1.1",
+              "document_title": "VDV-Schrift 301-2-3 Dienst CustomerInformationService",
+              "document_version": "1.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-3-sds-v1-1.pdfx",
+              "sha256": "f9d63dd1f2e417691913e57a9c7121c90b4e781cbcd1328be681695975f59739",
+              "printed_pages": [
+                20
+              ],
+              "section": "1.24 Data Structure of GetVehicleData Operation / 1.24.2 Response",
+              "table": "Table 17: Description of CustomerInformationService.VehicleData",
+              "point_summary": "Visible body: CustomerInformationService.VehicleData again includes SpeakerActive 0:1 and StopInformationActive 0:1 in VehicleInformationGroup."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_CustomerInformationService_V1.1.xsd",
+              "git_blob": "5957e27f128a191c794b0c8081b531a07126784a",
+              "authority_detail": "historical untagged upstream working snapshot at commit 0a5228a768c7d710c40f5f99fbdce2e544d19883; evidence only, not official V1.1 release authority",
+              "component_kind": "group",
+              "component": "VehicleInformationGroup",
+              "member": null,
+              "value": "Group ends after optional VehicleMode; SpeakerActive and StopInformationActive are absent.",
+              "xpath_hint": "/xs:schema/xs:group[@name='VehicleInformationGroup']",
+              "line_hint": "8-42",
+              "point_summary": "The untagged historical V1.1 working XSD omits both fields that are visibly present in the published V1.1 PDF, so this snapshot cannot be promoted to matching release authority.",
+              "repository": "VDVde/VDV301",
+              "ref": "0a5228a768c7d710c40f5f99fbdce2e544d19883"
+            },
+            {
+              "file": "IBIS-IP_CustomerInformationService_V1.1.xsd",
+              "git_blob": "5957e27f128a191c794b0c8081b531a07126784a",
+              "authority_detail": "historical untagged upstream working snapshot at commit 0a5228a768c7d710c40f5f99fbdce2e544d19883; evidence only, not official V1.1 release authority",
+              "component_kind": "complexType",
+              "component": "CustomerInformationService.AllData",
+              "member": "VehicleInformationGroup",
+              "value": "ref=VehicleInformationGroup",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='CustomerInformationService.AllData']/xs:sequence/xs:group[@ref='VehicleInformationGroup']",
+              "line_hint": "51-64",
+              "point_summary": "AllData consumes the historical VehicleInformationGroup whose published V1.1 fields SpeakerActive and StopInformationActive are missing.",
+              "repository": "VDVde/VDV301",
+              "ref": "0a5228a768c7d710c40f5f99fbdce2e544d19883"
+            },
+            {
+              "file": "IBIS-IP_CustomerInformationService_V1.1.xsd",
+              "git_blob": "5957e27f128a191c794b0c8081b531a07126784a",
+              "authority_detail": "historical untagged upstream working snapshot at commit 0a5228a768c7d710c40f5f99fbdce2e544d19883; evidence only, not official V1.1 release authority",
+              "component_kind": "complexType",
+              "component": "CustomerInformationService.VehicleData",
+              "member": "VehicleInformationGroup",
+              "value": "ref=VehicleInformationGroup",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='CustomerInformationService.VehicleData']/xs:sequence/xs:group[@ref='VehicleInformationGroup']",
+              "line_hint": "157-163",
+              "point_summary": "VehicleData consumes the same historical VehicleInformationGroup and therefore also lacks the two fields shown in the published V1.1 table.",
+              "repository": "VDVde/VDV301",
+              "ref": "0a5228a768c7d710c40f5f99fbdce2e544d19883"
+            }
+          ],
+          "coverage_note": "CIS-001 is an authority-gap finding, not a claim that this untagged snapshot is normative. The official V1.1 PDF is byte-pinned and visibly contains SpeakerActive and StopInformationActive, while the verified upstream working snapshot omits them and no matching release-tagged V1.1 CIS authority is established. Strict CIS V1.1 therefore remains unsupported/fail-closed."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CIS_2026-09-03.md",
+        "docs/pdf_xsd_semantic_audit/FINDING_READINESS_RECONCILIATION_2026-09-14.md",
+        "EV-125 run 33744039627",
+        "EV-167 run 34843562886",
+        "CIS source artifact 9885887536, exact PDF SHA-256 f9d63dd1f2e417691913e57a9c7121c90b4e781cbcd1328be681695975f59739",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_CIS_001_2026-10-06.md"
       ]
     }
   ]
