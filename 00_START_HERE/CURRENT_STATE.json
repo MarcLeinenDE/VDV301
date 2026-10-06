@@ -833,7 +833,7 @@
     "common_v2_2_fresh_read_status": "historical_reconciliation_complete",
     "common_v2_2_findings": {
       "DRCOM22-001": "executable_confirmed_NetexMode_empty_valid_EV-120",
-      "CE-023": "scope_confirmed_V2.2_and_V2.3_duplicate_table_V2.4_not_affected",
+      "CE-023": "scope_confirmed_V2.2_and_V2.3_duplicate_table_V2.4_not_affected_2026-10-06",
       "CE-011": "V2.2_scope_executable_Connection_cardinality_EV-120",
       "CE-024": "V2.2_scope_executable_UnsubscribeResponse_Active_required_EV-120",
       "DRCOM20-001": "V2.2_scope_executable_InternationalTextType_shape_EV-120",
@@ -851,7 +851,7 @@
     "common_v2_3_executable_evidence": "EV-121 / 33657653888",
     "common_v2_3_findings": {
       "DRCOM23-001": "executable_confirmed_EV-121",
-      "CE-023": "V2.3_scope_confirmed_corrupt_NetexMode_table_pages_26_27_current_standard_recheck_2026_10_05"
+      "CE-023": "V2.3_scope_confirmed_corrupt_duplicate_NetexMode_table_current_standard_2026-10-06"
     },
     "deep_read_pass_2_status": "frozen_complete",
     "next_project_phase": "legacy_finding_revalidation",
@@ -1976,8 +1976,8 @@
     "source_locator_remaining_count": 152,
     "source_locator_latest_review_block": "COMPLETE_40_REVALIDATION",
     "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVALIDATION_COMPLETE_40_2026-09-30.md",
-    "source_locator_latest_gate_status": "awaiting_final_body_backlog_gate",
-    "source_locator_latest_gate_note": "Current-standard body/source-locator revalidation is evidence-complete at 40/40 with 0 pending, including corrected CE-023 V2.2-V2.3 scope. Final schema-audit-validation run 37366792584 for commit 60e939711b01301361b24f6b9af681fe9c5172df is queued and not yet terminal. Do not resume structural expansion at CIS-001 until this run succeeds.",
+    "source_locator_latest_gate_status": "pending_final_body_backlog_gate",
+    "source_locator_latest_gate_note": "Final current-standard body block CE-022/CE-023/CE-024 reviewed. CE-023 scope was corrected to V2.2+V2.3 affected with V2.4 negative control. Accounting is now 40/40 verified and 0 pending; structural expansion remains frozen until the strengthened gate succeeds.",
     "unpublished_future_profile_boundary_rule": "Rules from unpublished or future profiles must not be inferred into supported profiles.",
     "source_locator_completeness_policy": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_COMPLETENESS_POLICY.md",
     "source_locator_complete_requires_exact_pdf_page_section_table_when_applicable": true,
@@ -1998,7 +1998,7 @@
     "source_locator_latest_gate_run_id": "37366792584",
     "source_locator_body_latest_gate_run_id": "37366792584",
     "source_locator_body_latest_review_block": "CE_022_023_024",
-    "source_locator_body_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_BODY_REVALIDATION_CE_022_023_024_2026-10-05.md"
+    "source_locator_body_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_BODY_REVALIDATION_CE_022_023_024_2026-10-06.md"
   },
   "evidence": {
     "xsd_ev_completed": [
@@ -2090,7 +2090,7 @@
     "source_locator_latest_review_block": "COMPLETE_40_REVALIDATION",
     "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVALIDATION_COMPLETE_40_2026-09-30.md",
     "source_locator_latest_gate_run_id": "37366792584",
-    "source_locator_latest_gate_status": "awaiting_final_body_backlog_gate",
+    "source_locator_latest_gate_status": "pending_final_body_backlog_gate",
     "audit_diagnostic_reporting_model": "docs/pdf_xsd_semantic_audit/SDK_AUDIT_DIAGNOSTIC_REPORTING_MODEL.md",
     "audit_report_languages": [
       "de",
@@ -2110,7 +2110,7 @@
     "source_locator_body_latest_gate_run_id": "37366792584"
   },
   "next_actions": [
-    "Check final schema-audit-validation run 37366792584 for commit 60e939711b01301361b24f6b9af681fe9c5172df. Only after SUCCESS, record terminal 40/40 closure and resume structural source-locator expansion at CIS-001.",
+    "Run the strengthened final source-locator/body gate for the now-complete 40/40 current-standard backlog. If SUCCESS, unfreeze structural locator expansion and resume at CIS-001.",
     "For every PDF locator, use the actual visible body heading/table/figure on the byte-pinned page; if the live renderer cache-misses, immediately use the exact-byte fallback renderer.",
     "Resume structural source-locator expansion at CIS-001 only after the final 40/40 strengthened gate is SUCCESS.",
     "Preserve exact selected-XSD PASS/FAIL authority and keep candidate/integration authority distinct from official release authority.",
@@ -2122,12 +2122,12 @@
     "coverage_partial_count": 0,
     "remaining_finding_count": 152,
     "latest_review_block": "CE_022_023_024_BODY_REVALIDATION",
-    "latest_gate_status": "awaiting_final_body_backlog_gate",
-    "latest_gate_run_id": "37366792584",
-    "body_verification_state": "complete",
+    "latest_gate_status": "pending_final_body_backlog_gate",
+    "latest_gate_run_id": null,
+    "body_verification_state": "complete_pending_gate",
     "body_verified_current_standard_count": 40,
     "body_pending_current_standard_count": 0,
-    "structural_progress_frozen": false,
+    "structural_progress_frozen": true,
     "structural_progress_freeze_count": 40,
     "next_body_revalidation_finding": null,
     "next_structurally_missing_finding_after_body_backlog": "CIS-001"
