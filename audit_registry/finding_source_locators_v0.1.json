@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 45,
-    "coverage_complete_count": 45,
+    "locator_entry_count": 46,
+    "coverage_complete_count": 46,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 147
+    "remaining_finding_count": 146
   },
   "entries": [
     {
@@ -7615,6 +7615,181 @@
         "EV-125 run 33744039627",
         "CIS source artifact 9885887536 with exact byte-pinned V2.2/V2.3 PDFs and rendered pages",
         "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_CIS_005_2026-10-06.md"
+      ]
+    },
+    {
+      "finding_id": "DISC-001",
+      "service": "GeneralConventions / NetworkDiscovery",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "VDV 301-2 V1.0 German",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "p20 prescribes ZeroConf/169.254 and cites RFC 2927."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0/V2.1 German/English",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "German cites RFC 3927; English cites RFC 2927 for the same link-local rule."
+        },
+        {
+          "version": "VDV 301-2 General Conventions V2.2/V2.3/V2.4 German/English",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "German says no IP-allocation method is prescribed and names fixed IP/DHCP as best practice; English retains ZeroConf/RFC 2927/169.254 requirements."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "1.0",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_DE",
+              "document_title": "VDV-Schrift 301-2",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2sds-v1-0.pdfx",
+              "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+              "printed_pages": [
+                20
+              ],
+              "section": "2.1 Adressierung / 2.1.1 IP-Adressen",
+              "table": null,
+              "point_summary": "German V1.0 visibly prescribes decentralized ZeroConf-style allocation, cites RFC 2927 and identifies 169.254.xxx.xxx as the address range to observe."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Documentation-only discovery guidance. No XML/XSD authority applies; the locator preserves the exact version/language wording rather than choosing one language track as silently corrected."
+        },
+        {
+          "version": "2.0",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV-Schrift 301-2",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                21
+              ],
+              "section": "2.1 Adressierung / Adressing / 2.1.1 IP-Adressen / IP Addresses",
+              "table": null,
+              "point_summary": "On the same visible bilingual page, German cites RFC 3927 for ZeroConf/link-local addressing while English cites RFC 2927 for the same 169.254.xxx.xxx rule."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Documentation-only discovery guidance. No XML/XSD authority applies; the locator preserves the exact version/language wording rather than choosing one language track as silently corrected."
+        },
+        {
+          "version": "2.1",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                22
+              ],
+              "section": "2.1 Adressierung / Adressing / 2.1.1 IP-Adressen / IP Addresses",
+              "table": null,
+              "point_summary": "Visible bilingual page repeats the split: German RFC 3927, English RFC 2927, both otherwise retaining the ZeroConf/169.254.xxx.xxx rule."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Documentation-only discovery guidance. No XML/XSD authority applies; the locator preserves the exact version/language wording rather than choosing one language track as silently corrected."
+        },
+        {
+          "version": "2.2",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "VDV-Schrift 301-2",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                17,
+                20
+              ],
+              "section": "2.1 Adressierung / Addressing / 2.1.1 IP-Adressen / IP Addresses",
+              "table": null,
+              "point_summary": "German page 17 says no IP-address allocation rules exist and recommends fixed addresses or DHCP; English page 20 still requires ZeroConf, cites RFC 2927 and 169.254.xxx.xxx."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Documentation-only discovery guidance. No XML/XSD authority applies; the locator preserves the exact version/language wording rather than choosing one language track as silently corrected."
+        },
+        {
+          "version": "2.3",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "VDV-Schrift 301-2",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                17,
+                20
+              ],
+              "section": "2.1 Adressierung / Addressing / 2.1.1 IP-Adressen / IP Addresses",
+              "table": null,
+              "point_summary": "German page 17 retains no-prescribed-allocation wording with fixed-IP/DHCP best practice; English page 20 retains ZeroConf/RFC 2927/169.254.xxx.xxx."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Documentation-only discovery guidance. No XML/XSD authority applies; the locator preserves the exact version/language wording rather than choosing one language track as silently corrected."
+        },
+        {
+          "version": "2.4",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV-Schrift 301-2",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                20,
+                23
+              ],
+              "section": "2.1 Adressierung / Addressing / 2.1.1 IP-Adressen / IP Addresses",
+              "table": null,
+              "point_summary": "German page 20 retains no-prescribed-allocation wording with fixed-IP/DHCP best practice; English page 23 retains ZeroConf/RFC 2927/169.254.xxx.xxx."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Documentation-only discovery guidance. No XML/XSD authority applies; the locator preserves the exact version/language wording rather than choosing one language track as silently corrected."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DISC_2026-09-03.md",
+        "docs/pdf_xsd_semantic_audit/NETWORK_DISCOVERY_FINDINGS_REGISTER_ADDENDUM.md",
+        "EV-126 run 33754189273",
+        "source/render run 33752224704 artifact 9892036202 digest sha256:263b468f0d5752fa160e7d03e5097482c49e3e56650c8b33d014cc0cf5297030",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DISC_001_2026-10-06.md"
       ]
     }
   ]
