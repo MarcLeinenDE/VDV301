@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 46,
-    "coverage_complete_count": 46,
+    "locator_entry_count": 47,
+    "coverage_complete_count": 47,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 146
+    "remaining_finding_count": 145
   },
   "entries": [
     {
@@ -7790,6 +7790,175 @@
         "EV-126 run 33754189273",
         "source/render run 33752224704 artifact 9892036202 digest sha256:263b468f0d5752fa160e7d03e5097482c49e3e56650c8b33d014cc0cf5297030",
         "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DISC_001_2026-10-06.md"
+      ]
+    },
+    {
+      "finding_id": "DISC-002",
+      "service": "GeneralConventions / NetworkDiscovery",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "VDV 301-2 V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "p20 cites RFC 2927 for automatic 169.254 addressing; p80 identifies RFC 2927 as MIME Directory Profile for LDAP Schema."
+        },
+        {
+          "version": "VDV 301-2 V2.0+ affected English tracks",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "English discovery wording continues to cite RFC 2927 while RFC 3927 is the IPv4 Link-Local specification."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "1.0",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_DE",
+              "document_title": "VDV-Schrift 301-2",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2sds-v1-0.pdfx",
+              "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+              "printed_pages": [
+                20,
+                80
+              ],
+              "section": "2.1.1 IP-Adressen + Regelwerke – Normen und Empfehlungen",
+              "table": null,
+              "point_summary": "Visible p20 cites RFC 2927 for automatic 169.254 addressing, while visible p80 bibliography identifies RFC 2927 as MIME Directory Profile for LDAP Schema."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Documentation/reference finding only. No XSD authority applies. RFC Editor provenance independently identifies RFC 2927 as LDAP-schema MIME profile and RFC 3927 as IPv4 Link-Local/169.254/16."
+        },
+        {
+          "version": "2.0",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV-Schrift 301-2",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                21
+              ],
+              "section": "2.1.1 IP-Adressen / IP Addresses",
+              "table": null,
+              "point_summary": "Visible bilingual page shows the English track still citing RFC 2927 for ZeroConf/link-local 169.254 addressing, while German uses RFC 3927."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Documentation/reference finding only. No XSD authority applies. RFC Editor provenance independently identifies RFC 2927 as LDAP-schema MIME profile and RFC 3927 as IPv4 Link-Local/169.254/16."
+        },
+        {
+          "version": "2.1",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                22
+              ],
+              "section": "2.1.1 IP-Adressen / IP Addresses",
+              "table": null,
+              "point_summary": "Visible bilingual page repeats the English RFC 2927 reference for link-local addressing while German uses RFC 3927."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Documentation/reference finding only. No XSD authority applies. RFC Editor provenance independently identifies RFC 2927 as LDAP-schema MIME profile and RFC 3927 as IPv4 Link-Local/169.254/16."
+        },
+        {
+          "version": "2.2",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "VDV-Schrift 301-2",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                20
+              ],
+              "section": "2.1.1 IP Addresses",
+              "table": null,
+              "point_summary": "Visible English track retains RFC 2927 in the ZeroConf/169.254 link-local paragraph."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Documentation/reference finding only. No XSD authority applies. RFC Editor provenance independently identifies RFC 2927 as LDAP-schema MIME profile and RFC 3927 as IPv4 Link-Local/169.254/16."
+        },
+        {
+          "version": "2.3",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "VDV-Schrift 301-2",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                20
+              ],
+              "section": "2.1.1 IP Addresses",
+              "table": null,
+              "point_summary": "Visible English track retains RFC 2927 in the ZeroConf/169.254 link-local paragraph."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Documentation/reference finding only. No XSD authority applies. RFC Editor provenance independently identifies RFC 2927 as LDAP-schema MIME profile and RFC 3927 as IPv4 Link-Local/169.254/16."
+        },
+        {
+          "version": "2.4",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV-Schrift 301-2",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                23
+              ],
+              "section": "2.1.1 IP Addresses",
+              "table": null,
+              "point_summary": "Visible English track retains RFC 2927 in the ZeroConf/169.254 link-local paragraph."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Documentation/reference finding only. No XSD authority applies. RFC Editor provenance independently identifies RFC 2927 as LDAP-schema MIME profile and RFC 3927 as IPv4 Link-Local/169.254/16."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DISC_2026-09-03.md",
+        "docs/pdf_xsd_semantic_audit/NETWORK_DISCOVERY_FINDINGS_REGISTER_ADDENDUM.md",
+        "EV-126 run 33754189273",
+        "source/render artifact 9892036202",
+        "RFC Editor: RFC 2927 - MIME Directory Profile for LDAP Schema",
+        "RFC Editor: RFC 3927 - Dynamic Configuration of IPv4 Link-Local Addresses",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DISC_002_2026-10-06.md"
       ]
     }
   ]
