@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 41,
-    "coverage_complete_count": 41,
+    "locator_entry_count": 42,
+    "coverage_complete_count": 42,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 151
+    "remaining_finding_count": 150
   },
   "entries": [
     {
@@ -6761,6 +6761,237 @@
         "EV-167 run 34843562886",
         "CIS source artifact 9885887536, exact PDF SHA-256 f9d63dd1f2e417691913e57a9c7121c90b4e781cbcd1328be681695975f59739",
         "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_CIS_001_2026-10-06.md"
+      ]
+    },
+    {
+      "finding_id": "CIS-002",
+      "service": "CustomerInformationService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "CIS V2.0",
+          "authority": "official_release",
+          "xsd_profile": "CIS blob fa8f0a51ad5f612660c9532c8557ad1ca473a908",
+          "note": "Official release route pinned by EV-125."
+        },
+        {
+          "version": "CIS V2.2",
+          "authority": "official_release",
+          "xsd_profile": "CIS blob ddc70ed9d6238f1377be1d7728ff46b36a22ee1e",
+          "note": "Official release route pinned by EV-125."
+        },
+        {
+          "version": "CIS V2.3",
+          "authority": "official_release",
+          "xsd_profile": "CIS blob bf921c857a3abfcbe9c6c24fe525d6cc7d2d399e",
+          "note": "Official release route pinned by EV-125."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "2.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "CIS_V2.0",
+              "document_title": "VDV-Schrift 301-2-3 Dienst CustomerInformationService",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-3sds-v-2-0.pdfx",
+              "sha256": "d4a4a0ab89b1dfbf47a2d69e5bd73ec511bb515fff0c147794087ed0ebbecf3d",
+              "printed_pages": [
+                13
+              ],
+              "section": "1.5 Data Structures of SubscribeAllData Operation",
+              "table": null,
+              "point_summary": "Visible body explicitly states that the subscription uses the data structures described in VDV 301-2-1, referring to SubscribeRequest and SubscribeResponse rather than defining CIS-specific duplicates."
+            },
+            {
+              "source_id": "CIS_V2.0",
+              "document_title": "VDV-Schrift 301-2-3 Dienst CustomerInformationService",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-3sds-v-2-0.pdfx",
+              "sha256": "d4a4a0ab89b1dfbf47a2d69e5bd73ec511bb515fff0c147794087ed0ebbecf3d",
+              "printed_pages": [
+                13
+              ],
+              "section": "1.6 Data Structures of UnsubscribeAllData Operation",
+              "table": null,
+              "point_summary": "Visible body explicitly states that termination of the subscription uses the VDV 301-2-1 UnsubscribeRequest and UnsubscribeResponse data structures."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_CustomerInformationService_V2.0.xsd",
+              "git_blob": "fa8f0a51ad5f612660c9532c8557ad1ca473a908",
+              "authority_detail": "official release XSD at VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "group",
+              "component": "CustomerInformationServiceOperations",
+              "member": null,
+              "value": "CIS-specific operation group contains service-specific response/retrieve elements and intentionally does not duplicate generic Subscribe/Unsubscribe structures.",
+              "xpath_hint": "/xs:schema/xs:group[@name='CustomerInformationServiceOperations']",
+              "line_hint": "7-20",
+              "point_summary": "The local CIS operation group does not contain Subscribe/Unsubscribe aliases; this absence is contextual evidence only and is explained by the PDF/Common model.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_common_V2.0.xsd",
+              "git_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+              "authority_detail": "official Common dependency in release context VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "SubscribeRequestStructure / SubscribeResponseStructure / UnsubscribeRequestStructure / UnsubscribeResponseStructure",
+              "member": null,
+              "value": "Generic Common subscription request/response structures used by CIS.",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SubscribeRequestStructure' or @name='SubscribeResponseStructure' or @name='UnsubscribeRequestStructure' or @name='UnsubscribeResponseStructure']",
+              "line_hint": "867-892",
+              "point_summary": "The selected Common dependency explicitly defines the generic Subscribe/Unsubscribe structures referenced by the CIS documentation.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            }
+          ],
+          "coverage_note": "CIS-002 is a confirmed non-defect. The visible CIS body explicitly delegates subscription and unsubscription structures to VDV 301-2-1/Common, while the selected Common dependency provides those generic structures. The absence of duplicates from CustomerInformationServiceOperations is therefore intentional shared modelling, not a missing CIS XSD member."
+        },
+        {
+          "version": "2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "CIS_V2.2",
+              "document_title": "VDV-Schrift 301-2-3 Dienst CustomerInformationService",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-3-sdes-v2-2-customerinformationservice.pdfx",
+              "sha256": "789abcd3ea9b42ef7393b09484bfd5257e20a069dbd7d1ca99409fc80a5e76f0",
+              "printed_pages": [
+                14
+              ],
+              "section": "1.6 Data Structures of SubscribeAllData Operation",
+              "table": null,
+              "point_summary": "Visible body explicitly states that the subscription uses the data structures described in VDV 301-2-1, referring to SubscribeRequest and SubscribeResponse rather than defining CIS-specific duplicates."
+            },
+            {
+              "source_id": "CIS_V2.2",
+              "document_title": "VDV-Schrift 301-2-3 Dienst CustomerInformationService",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-3-sdes-v2-2-customerinformationservice.pdfx",
+              "sha256": "789abcd3ea9b42ef7393b09484bfd5257e20a069dbd7d1ca99409fc80a5e76f0",
+              "printed_pages": [
+                14
+              ],
+              "section": "1.7 Data Structures of UnsubscribeAllData Operation",
+              "table": null,
+              "point_summary": "Visible body explicitly states that termination of the subscription uses the VDV 301-2-1 UnsubscribeRequest and UnsubscribeResponse data structures."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_CustomerInformationService_V2.2.xsd",
+              "git_blob": "ddc70ed9d6238f1377be1d7728ff46b36a22ee1e",
+              "authority_detail": "official release XSD at VDVde/VDV301@VDV-301-2.2",
+              "component_kind": "group",
+              "component": "CustomerInformationServiceOperations",
+              "member": null,
+              "value": "CIS-specific operation group contains service-specific response/retrieve elements and intentionally does not duplicate generic Subscribe/Unsubscribe structures.",
+              "xpath_hint": "/xs:schema/xs:group[@name='CustomerInformationServiceOperations']",
+              "line_hint": "7-20",
+              "point_summary": "The local CIS operation group does not contain Subscribe/Unsubscribe aliases; this absence is contextual evidence only and is explained by the PDF/Common model.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2"
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "official Common dependency in release context VDVde/VDV301@VDV-301-2.2",
+              "component_kind": "complexType",
+              "component": "SubscribeRequestStructure / SubscribeResponseStructure / UnsubscribeRequestStructure / UnsubscribeResponseStructure",
+              "member": null,
+              "value": "Generic Common subscription request/response structures used by CIS.",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SubscribeRequestStructure' or @name='SubscribeResponseStructure' or @name='UnsubscribeRequestStructure' or @name='UnsubscribeResponseStructure']",
+              "line_hint": "875-912",
+              "point_summary": "The selected Common dependency explicitly defines the generic Subscribe/Unsubscribe structures referenced by the CIS documentation.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2"
+            }
+          ],
+          "coverage_note": "CIS-002 is a confirmed non-defect. The visible CIS body explicitly delegates subscription and unsubscription structures to VDV 301-2-1/Common, while the selected Common dependency provides those generic structures. The absence of duplicates from CustomerInformationServiceOperations is therefore intentional shared modelling, not a missing CIS XSD member."
+        },
+        {
+          "version": "2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "CIS_V2.3",
+              "document_title": "VDV-Schrift 301-2-3 Dienst CustomerInformationService",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-3-sdes-v2-3-customerinformationservice.pdfx",
+              "sha256": "b9e057a96dfbd824e18b4ace0958a6f80f62cd853ad6360bc2c76ea5db837f87",
+              "printed_pages": [
+                14
+              ],
+              "section": "1.6 Data Structures of SubscribeAllData Operation",
+              "table": null,
+              "point_summary": "Visible body explicitly states that the subscription uses the data structures described in VDV 301-2-1, referring to SubscribeRequest and SubscribeResponse rather than defining CIS-specific duplicates."
+            },
+            {
+              "source_id": "CIS_V2.3",
+              "document_title": "VDV-Schrift 301-2-3 Dienst CustomerInformationService",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-3-sdes-v2-3-customerinformationservice.pdfx",
+              "sha256": "b9e057a96dfbd824e18b4ace0958a6f80f62cd853ad6360bc2c76ea5db837f87",
+              "printed_pages": [
+                14
+              ],
+              "section": "1.7 Data Structures of UnsubscribeAllData Operation",
+              "table": null,
+              "point_summary": "Visible body explicitly states that termination of the subscription uses the VDV 301-2-1 UnsubscribeRequest and UnsubscribeResponse data structures."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_CustomerInformationService_V2.3.xsd",
+              "git_blob": "bf921c857a3abfcbe9c6c24fe525d6cc7d2d399e",
+              "authority_detail": "official release XSD at VDVde/VDV301@VDV-301-2.3",
+              "component_kind": "group",
+              "component": "CustomerInformationServiceOperations",
+              "member": null,
+              "value": "CIS-specific operation group contains service-specific response/retrieve elements and intentionally does not duplicate generic Subscribe/Unsubscribe structures.",
+              "xpath_hint": "/xs:schema/xs:group[@name='CustomerInformationServiceOperations']",
+              "line_hint": "7-20",
+              "point_summary": "The local CIS operation group does not contain Subscribe/Unsubscribe aliases; this absence is contextual evidence only and is explained by the PDF/Common model.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3"
+            },
+            {
+              "file": "IBIS-IP_common_V2.3.xsd",
+              "git_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+              "authority_detail": "official Common dependency in release context VDVde/VDV301@VDV-301-2.3",
+              "component_kind": "complexType",
+              "component": "SubscribeRequestStructure / SubscribeResponseStructure / UnsubscribeRequestStructure / UnsubscribeResponseStructure",
+              "member": null,
+              "value": "Generic Common subscription request/response structures used by CIS.",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SubscribeRequestStructure' or @name='SubscribeResponseStructure' or @name='UnsubscribeRequestStructure' or @name='UnsubscribeResponseStructure']",
+              "line_hint": "955-992",
+              "point_summary": "The selected Common dependency explicitly defines the generic Subscribe/Unsubscribe structures referenced by the CIS documentation.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3"
+            }
+          ],
+          "coverage_note": "CIS-002 is a confirmed non-defect. The visible CIS body explicitly delegates subscription and unsubscription structures to VDV 301-2-1/Common, while the selected Common dependency provides those generic structures. The absence of duplicates from CustomerInformationServiceOperations is therefore intentional shared modelling, not a missing CIS XSD member."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CIS_2026-09-03.md",
+        "EV-125 run 33744039627",
+        "CIS source artifact 9885887536 with byte-pinned V2.0/V2.2/V2.3 PDFs",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_CIS_002_2026-10-06.md"
       ]
     }
   ]
