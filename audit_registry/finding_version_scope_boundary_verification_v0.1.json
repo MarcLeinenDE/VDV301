@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 3,
-    "pending_revalidation": 67
+    "verified": 4,
+    "pending_revalidation": 66
   },
-  "next_pending_finding": "ARA-003",
+  "next_pending_finding": "ARA-004",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -105,9 +105,51 @@
     },
     {
       "finding_id": "ARA-003",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_ARA_003_2026-10-07.md",
+        "VDV current IP-KOM-ÖV publication index checked 2026-10-07: AnalogRadioService listed only as V2.4",
+        "VDV current Schriften & Mitteilungen entry checked 2026-10-07: publication 301-2-19, issue 01/2023, languages D/E, version V2.4",
+        "VDVde/VDV301 releases checked 2026-10-07: latest official release remains VDV-301-2.3",
+        "VDVde/VDV301 master 14880bb33beec5c5dffe96315b730bd6c094a585 checked 2026-10-07: IBIS-IP_AnalogRadioService_V2.4.xsd absent",
+        "EV-105 run 33228250613 / job 99036090357"
+      ],
+      "note": "Boundary verified independently for the cardinality mismatch. The official AnalogRadioService publication lineage currently contains only V2.4. No predecessor or successor publication exists. Candidate/integration executable evidence remains explicitly non-official and does not widen or alter the official documentation scope.",
+      "scope_conclusion": "The Transmitter cardinality contradiction is confined to AnalogRadioService V2.4. There is no earlier AnalogRadioService publication to inherit the issue and no later publication to establish a correction boundary. Candidate/integration V2.4 remains a separate authority lane whose 0:1 behavior is executable-confirmed by EV-105.",
+      "boundary_checks": [
+        {
+          "version": "AnalogRadioService before V2.4",
+          "role": "no_predecessor_publication_available",
+          "language_status": "not_applicable:no earlier AnalogRadioService publication in current VDV catalog/project source registry",
+          "source_ids": [
+            "ARA_V2.4"
+          ]
+        },
+        {
+          "version": "AnalogRadioService V2.4",
+          "role": "affected_documentation_only",
+          "language_status": "de-en:single bilingual publication; shared technical representation carries the 1:1 versus 0:1 contradiction",
+          "source_ids": [
+            "ARA_V2.4"
+          ]
+        },
+        {
+          "version": "AnalogRadioService V2.4 candidate/integration",
+          "role": "affected_candidate_authority_lane",
+          "language_status": "not_applicable:xsd authority lane; Transmitter is 0:1 and EV-105 confirms omission and presence validate",
+          "source_ids": [
+            "ARA_V2.4"
+          ]
+        },
+        {
+          "version": "AnalogRadioService after V2.4",
+          "role": "no_successor_publication_available",
+          "language_status": "not_applicable:no later AnalogRadioService publication in current VDV catalog/project source registry",
+          "source_ids": [
+            "ARA_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "ARA-004",
