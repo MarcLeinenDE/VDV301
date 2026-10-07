@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 27,
-    "pending_revalidation": 43
+    "verified": 28,
+    "pending_revalidation": 42
   },
-  "next_pending_finding": "CE-013",
+  "next_pending_finding": "CE-014",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -1261,9 +1261,79 @@
     },
     {
       "finding_id": "CE-013",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_CE_013_2026-10-08.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V1.0.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.0.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.1.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.2.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3_FRESH_2026-09-02.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4_FRESH_2026-09-03.md",
+        "EV-117/118/119/120/121/122 aggregated by EV-124",
+        "audit_registry/finding_source_locators_v0.1.json",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_BODY_REVALIDATION_CE_013_014_2026-10-05.md"
+      ],
+      "note": "Boundary verified across the complete retained Common publication lineage. Both CE-013 sub-boundaries are already present in Common V1.0: the PDF names InformationAtSpecificPoint while the selected XSD uses SpecificPoint, and the PDF presents a mandatory one-of choice while the selected XSD makes the choice optional. Both persist through official V2.3 and selected V2.4 candidate/integration. No earlier retained Common publication exists.",
+      "scope_conclusion": "Affected from the earliest available Common V1.0 publication through official V2.3, with selected V2.4 candidate/integration also affected. No earlier Common publication exists as a predecessor control. Existing semantic/runtime scope is unchanged.",
+      "boundary_checks": [
+        {
+          "version": "Common before V1.0",
+          "role": "no_predecessor_publication_available",
+          "language_status": "not_applicable:no earlier retained Common publication exists",
+          "source_ids": [
+            "COMMON_V1.0"
+          ]
+        },
+        {
+          "version": "Common V1.0",
+          "role": "first_affected_official_release",
+          "language_status": "de-en:PDF uses InformationAtSpecificPoint and mandatory choice; exact XSD uses SpecificPoint and optional choice",
+          "source_ids": [
+            "COMMON_V1.0"
+          ]
+        },
+        {
+          "version": "Common V2.0",
+          "role": "affected_official_release",
+          "language_status": "de-en:both CE-013 name and optional-choice mismatches persist",
+          "source_ids": [
+            "COMMON_V2.0"
+          ]
+        },
+        {
+          "version": "Common V2.1",
+          "role": "affected_official_release",
+          "language_status": "de-en:both CE-013 name and optional-choice mismatches persist",
+          "source_ids": [
+            "COMMON_V2.1"
+          ]
+        },
+        {
+          "version": "Common V2.2",
+          "role": "affected_official_release",
+          "language_status": "de-en:both CE-013 name and optional-choice mismatches persist",
+          "source_ids": [
+            "COMMON_V2.2"
+          ]
+        },
+        {
+          "version": "Common V2.3",
+          "role": "last_affected_official_release",
+          "language_status": "de-en:both CE-013 name and optional-choice mismatches persist",
+          "source_ids": [
+            "COMMON_V2.3"
+          ]
+        },
+        {
+          "version": "Common V2.4",
+          "role": "affected_candidate_integration_lane",
+          "language_status": "de-en:official PDF retains InformationAtSpecificPoint/mandatory choice; selected candidate XSD retains SpecificPoint/optional choice",
+          "source_ids": [
+            "COMMON_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "CE-014",
