@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 15,
-    "pending_revalidation": 55
+    "verified": 16,
+    "pending_revalidation": 54
   },
-  "next_pending_finding": "CE-001",
+  "next_pending_finding": "CE-002",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -618,9 +618,50 @@
     },
     {
       "finding_id": "CE-001",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_CE_001_2026-10-07.md",
+        "VDVde/VDV301 official tag VDV-301-2.2 rechecked 2026-10-07: IBIS-IP_common_V2.2.xsd blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae includes IBIS-IP_Enumerations_V2.2.xsd",
+        "VDVde/VDV301 official tag VDV-301-2.3 rechecked 2026-10-07: IBIS-IP_common_V2.3.xsd blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 includes IBIS-IP_Enumerations_V2.2.xsd",
+        "selected Common V2.4 candidate/integration blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 includes IBIS-IP_Enumerations_V2.4.xsd",
+        "current official master rechecked 2026-10-07: IBIS-IP_common_V2.4.xsd absent; no official VDV-301-2.4 release authority"
+      ],
+      "note": "Boundary verified for the V2.3 dependency-route non-defect. V2.2 Common includes Enumerations V2.2; V2.3 intentionally continues to include Enumerations V2.2; selected V2.4 candidate switches to Enumerations V2.4. Therefore the potentially misleading 'missing Enumerations V2.3' interpretation is confined to Common V2.3.",
+      "scope_conclusion": "CE-001 is specific to Common V2.3: its official schema intentionally reuses Enumerations V2.2. Predecessor V2.2 also uses Enumerations V2.2 under a matching version, while the selected V2.4 candidate uses Enumerations V2.4. Existing Common V2.3-only semantic scope is confirmed unchanged.",
+      "boundary_checks": [
+        {
+          "version": "Common V2.2",
+          "role": "predecessor_not_affected_same_version_dependency",
+          "language_status": "not_applicable:XSD dependency finding",
+          "source_ids": [
+            "VDVde/VDV301@VDV-301-2.2"
+          ]
+        },
+        {
+          "version": "Common V2.3",
+          "role": "applicable_context_non_defect_reuses_enumerations_v2_2",
+          "language_status": "not_applicable:XSD dependency finding",
+          "source_ids": [
+            "VDVde/VDV301@VDV-301-2.3"
+          ]
+        },
+        {
+          "version": "Common V2.4 candidate/integration",
+          "role": "successor_candidate_not_affected_uses_enumerations_v2_4",
+          "language_status": "not_applicable:candidate/integration XSD dependency finding",
+          "source_ids": [
+            "candidate Common V2.4"
+          ]
+        },
+        {
+          "version": "official VDV-301-2.4",
+          "role": "no_official_release_available",
+          "language_status": "not_applicable:official release authority absent",
+          "source_ids": [
+            "VDVde/VDV301@master"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "CE-002",
