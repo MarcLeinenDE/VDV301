@@ -12,7 +12,9 @@ def req(c,m):
     print("OK  "+m)
 def blob(p): return subprocess.check_output(["git","hash-object",str(p)],cwd=ROOT,text=True).strip()
 def main():
-    argparse.ArgumentParser().add_argument("--handoff-only",action="store_true").parse_args()
+    parser=argparse.ArgumentParser()
+    parser.add_argument("--handoff-only",action="store_true")
+    parser.parse_args()
     for p in CANON: req((ROOT/p).is_file(),f"canonical restart document exists: {p}")
     state=load(ROOT/"00_START_HERE/CURRENT_STATE.json"); loc=load(ROOT/"audit_registry/finding_source_locators_v0.1.json"); sem=ROOT/"audit_registry/finding_semantic_classification_v0.1.json"; body=load(ROOT/"audit_registry/pdf_locator_body_verification_v0.1.json"); runtime=load(ROOT/"sdk_manifest/known_issues_runtime_mapping_v0.1.json"); manifest=load(ROOT/"sdk_manifest/manifest_v0.1.json"); boundary=load(ROOT/"audit_registry/finding_version_scope_boundary_verification_v0.1.json")
     req(state["canonical_branch"]=="dev/schema-integration","canonical branch is dev/schema-integration")
