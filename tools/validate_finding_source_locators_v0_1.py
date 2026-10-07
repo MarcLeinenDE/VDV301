@@ -656,13 +656,20 @@ def main() -> int:
             ("VDV-301-2.0 historical V1.0 service pool", "IBIS-IP_PassengerCountingService_V1.0.xsd"): "4161872be76740abfdd1cddf96f8a736333fc8be",
             ("VDV-301-2.0 historical V1.0 service pool", "IBIS-IP_SystemManagementService_V1.0.xsd"): "2d32630a0f1981e980e6a466e3f6a69136410f24",
             ("VDV-301-2.0 historical V1.0 service pool", "IBIS-IP_TicketInformationService_V1.0.xsd"): "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+            ("VDV-301-2.1 retained historical V1.0 service pool", "IBIS-IP_JourneyInformationService_V1.0.xsd"): "8c303db5a9c0548d66b90174d9c329d33092ad24",
+            ("VDV-301-2.1 retained historical V1.0 service pool", "IBIS-IP_SystemManagementService_V1.0.xsd"): "2d32630a0f1981e980e6a466e3f6a69136410f24",
+            ("VDV-301-2.1 retained historical V1.0 service pool", "IBIS-IP_TicketInformationService_V1.0.xsd"): "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+            ("VDV-301-2.2 retained historical V1.0 service pool", "IBIS-IP_JourneyInformationService_V1.0.xsd"): "8c303db5a9c0548d66b90174d9c329d33092ad24",
+            ("VDV-301-2.2 retained historical V1.0 service pool", "IBIS-IP_TicketInformationService_V1.0.xsd"): "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+            ("VDV-301-2.3 retained historical V1.0 service pool", "IBIS-IP_JourneyInformationService_V1.0.xsd"): "8c303db5a9c0548d66b90174d9c329d33092ad24",
+            ("VDV-301-2.3 retained historical V1.0 service pool", "IBIS-IP_TicketInformationService_V1.0.xsd"): "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
         }
         actual = {
             (lane["version"], x["file"]): x["git_blob"]
             for lane in bg001["coverage"]
             for x in lane["xsd_locators"]
         }
-        require(actual == expected, "BG-001 pins the exact two official historical V1.0 service pools")
+        require(actual == expected, "BG-001 pins the complete official V1.0 same-path release-context lineage through VDV-301-2.3")
 
     bg002 = loc_by.get("BG-002")
     if bg002:
