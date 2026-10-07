@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 10,
-    "pending_revalidation": 60
+    "verified": 11,
+    "pending_revalidation": 59
   },
-  "next_pending_finding": "ARCH-006",
+  "next_pending_finding": "ARCH-007",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -381,9 +381,41 @@
     },
     {
       "finding_id": "ARCH-006",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_ARCH_006_2026-10-07.md",
+        "VDV current IP-KOM-ÖV publication index checked 2026-10-07: only German/English VDV 301-1 V1.0 publication pair, no later architecture version",
+        "official English VDV 301-1 Introduction checked 2026-10-07: Part 1 defines architecture, Part 2 specifies technical interface implementation based on XML structures",
+        "official English VDV 301-1 section 7.1 checked 2026-10-07: XML is used for transfer of information between two services"
+      ],
+      "note": "Boundary verified for the Part-1/Part-2 XML authority separation. The sole V1.0 architecture publication and English translation carry the same architecture-versus-technical-interface split. No later VDV 301-1 version exists.",
+      "scope_conclusion": "ARCH-006 applies to the sole VDV 301-1 V1.0 architecture publication. English V1.0 independently confirms that Part 1 provides architecture context while Part 2 supplies technical XML structures. No predecessor or successor architecture version exists.",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-1 before V1.0",
+          "role": "no_predecessor_publication_available",
+          "language_status": "de/en:no earlier VDV 301-1 publication in current VDV catalog",
+          "source_ids": [
+            "VDV301-1_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-1 V1.0",
+          "role": "applicable_context_non_defect",
+          "language_status": "de:normative original; en:official convenience translation independently confirms Part-1 architecture / Part-2 XML-structure authority split; German original prevails",
+          "source_ids": [
+            "VDV301-1_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-1 after V1.0",
+          "role": "no_successor_publication_available",
+          "language_status": "de/en:no later VDV 301-1 publication in current VDV catalog",
+          "source_ids": [
+            "VDV301-1_V1.0_DE"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "ARCH-007",
