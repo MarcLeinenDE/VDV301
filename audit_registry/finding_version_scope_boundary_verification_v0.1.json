@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 19,
-    "pending_revalidation": 51
+    "verified": 20,
+    "pending_revalidation": 50
   },
-  "next_pending_finding": "CE-005",
+  "next_pending_finding": "CE-006",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -819,9 +819,65 @@
     },
     {
       "finding_id": "CE-005",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_CE_005_2026-10-07.md",
+        "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CE005_CE006_VERSION_SCOPE_2026-09-25.md",
+        "docs/pdf_xsd_semantic_audit/04a_common_enums_v1_0_v2_0_history.md",
+        "docs/pdf_xsd_semantic_audit/04e_common_enums_v2_3_v2_4_history_and_closure.md"
+      ],
+      "note": "Boundary verified. The public V1.x source is not a clean V1.0 baseline, but the official version history explicitly places the unbounded AdditionalTextMessage documentation change in V2.0. The mismatch then persists through official V2.3 and the selected V2.4 candidate/integration lane.",
+      "scope_conclusion": "First evidence-backed affected version is Common V2.0; affected official scope continues through V2.3; selected V2.4 candidate/integration remains affected. Existing semantic scope is unchanged.",
+      "boundary_checks": [
+        {
+          "version": "Common V1.x predecessor context",
+          "role": "predecessor_not_used_as_affected_scope",
+          "language_status": "public V1.x source is consolidated; official V2.0 history explicitly introduces unbounded maxOccurs in V2.0",
+          "source_ids": [
+            "COMMON_V1.0"
+          ]
+        },
+        {
+          "version": "Common V2.0",
+          "role": "first_affected_official_release",
+          "language_status": "de-en:PDF/history says unbounded while exact XSD remains max 1",
+          "source_ids": [
+            "COMMON_V2.0"
+          ]
+        },
+        {
+          "version": "Common V2.1",
+          "role": "affected_official_release",
+          "language_status": "de-en:mismatch persists",
+          "source_ids": [
+            "COMMON_V2.1"
+          ]
+        },
+        {
+          "version": "Common V2.2",
+          "role": "affected_official_release",
+          "language_status": "de-en:mismatch persists",
+          "source_ids": [
+            "COMMON_V2.2"
+          ]
+        },
+        {
+          "version": "Common V2.3",
+          "role": "last_affected_official_release",
+          "language_status": "de-en:mismatch persists; each named field remains bounded",
+          "source_ids": [
+            "COMMON_V2.3"
+          ]
+        },
+        {
+          "version": "Common V2.4",
+          "role": "affected_candidate_integration_lane",
+          "language_status": "de-en:official PDF repeatability versus selected candidate XSD max 1",
+          "source_ids": [
+            "COMMON_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "CE-006",
