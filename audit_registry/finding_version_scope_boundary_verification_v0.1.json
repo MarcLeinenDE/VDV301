@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 2,
-    "pending_revalidation": 68
+    "verified": 3,
+    "pending_revalidation": 67
   },
-  "next_pending_finding": "ARA-002",
+  "next_pending_finding": "ARA-003",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -67,9 +67,41 @@
     },
     {
       "finding_id": "ARA-002",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_ARA_002_2026-10-07.md",
+        "audit_registry/pdf_source_registry_v0.1.json: only ARA_V2.4 is registered for AnalogRadioService",
+        "VDV current IP-KOM-ÖV publication index checked 2026-10-07: 301-2-19 AnalogRadioService is listed only as V2.4",
+        "VDV current Schriften & Mitteilungen entry checked 2026-10-07: publication 301-2-19, issue 01/2023, languages D/E, version V2.4"
+      ],
+      "note": "Boundary verification is independent of ARA-001 despite sharing the same service lineage. ARA-002 is a documentation-only identifier inconsistency internal to the official V2.4 publication. Current VDV publication surfaces expose no earlier or later AnalogRadioService version, so no predecessor defect scope or successor correction boundary exists.",
+      "scope_conclusion": "AnalogRadioService has only the V2.4 publication in the current VDV lineage. The TransmitterType-versus-Transmitter documentation inconsistency is therefore confined to V2.4; no earlier publication can inherit it and no later publication exists to establish a correction boundary.",
+      "boundary_checks": [
+        {
+          "version": "AnalogRadioService before V2.4",
+          "role": "no_predecessor_publication_available",
+          "language_status": "not_applicable:no earlier AnalogRadioService publication in current VDV catalog/project source registry",
+          "source_ids": [
+            "ARA_V2.4"
+          ]
+        },
+        {
+          "version": "AnalogRadioService V2.4",
+          "role": "affected_documentation_only",
+          "language_status": "de-en:single bilingual publication; conflicting identifier is inside the shared technical content",
+          "source_ids": [
+            "ARA_V2.4"
+          ]
+        },
+        {
+          "version": "AnalogRadioService after V2.4",
+          "role": "no_successor_publication_available",
+          "language_status": "not_applicable:no later AnalogRadioService publication in current VDV catalog/project source registry",
+          "source_ids": [
+            "ARA_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "ARA-003",

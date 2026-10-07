@@ -2003,9 +2003,9 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 2,
-    "version_scope_boundary_pending_count": 68,
-    "version_scope_boundary_next_finding": "ARA-002"
+    "version_scope_boundary_verified_count": 3,
+    "version_scope_boundary_pending_count": 67,
+    "version_scope_boundary_next_finding": "ARA-003"
   },
   "evidence": {
     "xsd_ev_completed": [
@@ -2118,14 +2118,14 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 2,
-    "version_scope_boundary_pending_count": 68
+    "version_scope_boundary_verified_count": 3,
+    "version_scope_boundary_pending_count": 67
   },
   "next_actions": [
-    "Revalidate ARA-002 version-scope boundaries; 68 findings remain pending after ARA-001.",
-    "For each boundary review, prove predecessor/first affected/last affected/successor-or-lineage-end independently and evaluate DE/EN tracks separately where applicable.",
+    "Complete the pending ARA-002 version-scope boundary gate and finalize the handoff state.",
+    "Then revalidate ARA-003 version-scope boundaries; 67 findings remain pending after ARA-002.",
     "Keep structural locator expansion at DR3012V20-006 paused until the retroactive boundary pending count is zero.",
-    "At the end of every project prompt/work cycle, execute the repository handoff-integrity procedure and leave either a recoverable gate_pending state or a terminal_clean state."
+    "At the end of every project prompt/work cycle, execute the repository handoff-integrity procedure."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2203,12 +2203,14 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "37604832990",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "37604832968",
-    "resume_instruction": "Continue retroactive version-scope boundary revalidation at ARA-002. Keep structural source-locator expansion at DR3012V20-006 paused until boundary pending_revalidation reaches zero."
+    "resume_instruction": "After ARA-002 gate success, continue retroactive version-scope boundary revalidation at ARA-003. Keep DR3012V20-006 paused until boundary pending_revalidation reaches zero.",
+    "pending_block": "version_scope_boundary_revalidation_ARA_002",
+    "recovery_instruction": "Inspect the full schema-audit-validation run for the current HEAD. If successful, finalize ARA-002 as terminal_clean and resume at ARA-003; if failed, repair ARA-002 boundary evidence/state before unrelated work."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2218,9 +2220,9 @@
     "state": "in_progress",
     "adoption_locator_count": 70,
     "tracked_findings": 70,
-    "verified": 2,
-    "pending_revalidation": 68,
-    "next_pending_finding": "ARA-002",
+    "verified": 3,
+    "pending_revalidation": 67,
+    "next_pending_finding": "ARA-003",
     "locator_expansion_frozen": true,
     "future_locator_completion_requires_verified_boundary_same_block": true
   }
