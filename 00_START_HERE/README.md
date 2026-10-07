@@ -25,12 +25,14 @@ Maintain one audited VDV301 superbranch that:
 ## Read in this order
 
 1. `00_START_HERE/AUDIT_WORKFLOW_CONTRACT.md` — **canonical methodology; mandatory for every new chat/maintainer**
-2. `00_START_HERE/CURRENT_STATE.json` — current phase, quality gates, counts and next canonical work item
-3. `00_START_HERE/MAINTENANCE_PLAYBOOK.md`
-4. `docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md`
-5. `docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_COMPLETENESS_POLICY.md`
-6. current canonical registries/manifests named by `CURRENT_STATE.json`
-7. only then relevant historical/deep-read/correction evidence
+2. `00_START_HERE/CURRENT_STATE.json` — current phase, interruption state, counts, latest gates and next canonical work item
+3. `00_START_HERE/HANDOFF_INTEGRITY_POLICY.md` — mandatory prompt-end / crash-recovery rules
+4. `00_START_HERE/MAINTENANCE_PLAYBOOK.md`
+5. `docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md`
+6. `docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_COMPLETENESS_POLICY.md`
+7. `docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md`
+8. current canonical registries/manifests named by `CURRENT_STATE.json`
+9. only then relevant historical/deep-read/correction evidence
 
 `AUDIT_WORKFLOW_CONTRACT.md` plus `CURRENT_STATE.json` are the restart contract. A future chat must be able to continue without a chat handoff and must not reconstruct methodology from conversational memory.
 
@@ -50,3 +52,9 @@ Any new VDV PDF, release/tag, upstream merge or new/updated PR triggers an incre
 ## PDF locator hard rule
 
 Canonical PDF locators use the **actual visible body heading/table/figure on the byte-pinned page**. The table of contents, version-history cross-references and inferred sequential numbering are navigation/evidence aids only and must never be substituted for the visible target locator. See `AUDIT_WORKFLOW_CONTRACT.md`.
+
+## Prompt-end handoff rule
+
+Every project prompt/work cycle must finish with the repository handoff-integrity check defined in `HANDOFF_INTEGRITY_POLICY.md`. A substantive block is not complete merely because chat text says it is complete.
+
+Old files such as `docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF.md`, `00_index.md`, `AUDIT_SCOPE_MATRIX.md`, `findings.md` and `validation_backlog.md` are historical evidence only and must never override the canonical restart set.

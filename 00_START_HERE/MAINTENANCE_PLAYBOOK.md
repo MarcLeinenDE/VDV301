@@ -130,12 +130,15 @@ A payload that follows a PDF but fails the exact official XSD must still be repo
 
 ## H. Handoff/baseline update
 
-At a meaningful phase boundary:
+Every prompt/work cycle is a handoff boundary. Follow `00_START_HERE/HANDOFF_INTEGRITY_POLICY.md`.
 
-- update `CURRENT_STATE.json`;
-- update registries;
-- consolidate stale central indexes;
-- keep Git history as history rather than embedding superseded full snapshots;
-- record exact baseline commit and evidence run IDs in the next handoff delta/current-state update.
+For every substantive block:
+- update `CURRENT_STATE.json` in the same recoverable block;
+- update canonical registries/manifests;
+- do not create another current-state authority outside `00_START_HERE`;
+- mark old current-sounding control documents non-canonical;
+- keep Git history as history;
+- run the applicable full gate;
+- finish with the all-push handoff-integrity check on the final HEAD.
 
-A future maintainer should be able to continue using only this branch plus public upstream sources.
+A future maintainer must be able to continue using only this branch plus public upstream sources even if the previous chat ended immediately after any individual commit.

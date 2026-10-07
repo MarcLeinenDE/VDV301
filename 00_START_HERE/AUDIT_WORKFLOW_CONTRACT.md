@@ -39,10 +39,15 @@ For every potentially affected version:
 - inspect the exact publication/version;
 - inspect the exact XSD/dependency profile;
 - classify authority independently;
-- verify first/last affected version;
-- identify explicit later correction boundaries.
+- verify the last available non-affected predecessor when one exists;
+- verify the first affected version;
+- inspect every materially adjacent release that could carry the same issue;
+- verify the last affected version;
+- identify the first corrected/non-affected successor when one exists;
+- record explicitly when no predecessor/successor publication exists;
+- treat German and English language tracks independently when both are present.
 
-Never extrapolate one version to another merely because filenames or structures look similar.
+Never extrapolate one version to another merely because filenames or structures look similar. A re-read of one version does not establish the finding's version boundary. Boundary evidence is tracked by `VERSION_SCOPE_BOUNDARY_POLICY.md` and its machine registry.
 
 ### Step 3 — inspect the original PDF source
 
@@ -279,11 +284,13 @@ Read in this order:
 
 1. `00_START_HERE/AUDIT_WORKFLOW_CONTRACT.md` — methodology and non-negotiable rules.
 2. `00_START_HERE/CURRENT_STATE.json` — current phase, counts, latest gate, next work.
-3. `00_START_HERE/MAINTENANCE_PLAYBOOK.md` — upstream-change handling.
-4. `docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md`.
-5. `docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_COMPLETENESS_POLICY.md`.
-6. current canonical registries/manifests named by `CURRENT_STATE.json`.
-7. only then the relevant historical/deep-read/correction evidence for the next finding.
+3. `00_START_HERE/HANDOFF_INTEGRITY_POLICY.md` — prompt-end and interruption recovery.
+4. `00_START_HERE/MAINTENANCE_PLAYBOOK.md` — upstream-change handling.
+5. `docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md`.
+6. `docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_COMPLETENESS_POLICY.md`.
+7. `docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md`.
+8. current canonical registries/manifests named by `CURRENT_STATE.json`.
+9. only then the relevant historical/deep-read/correction evidence for the next finding.
 
 Before writing:
 
@@ -349,3 +356,27 @@ The project is consistent only when all of the following agree:
 - latest successful gate.
 
 A green gate is necessary but not sufficient if the gate does not cover the relevant failure mode. When a new failure mode is discovered, extend the methodology/gate before continuing.
+
+---
+
+## 10. Version-scope boundary hard gate
+
+The affected-version scope is itself an audited claim. A finding is not boundary-verified merely because it was confirmed in the version named by its original finding ID.
+
+Apply `docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md` and track it in `audit_registry/finding_version_scope_boundary_verification_v0.1.json`.
+
+The retroactive pass covers all locators already complete when this rule was adopted. Structural locator expansion is held at the adoption count until that pending backlog is zero. Thereafter each new locator must carry verified boundary evidence in the same terminal block.
+
+---
+
+## 11. Prompt-cycle durability and repository hygiene
+
+Every prompt/work cycle is a potential handoff boundary.
+
+Before work, fetch actual HEAD, read the canonical restart set and recover any `gate_pending` state before unrelated work.
+
+During work, keep blocks small and Git-visible. A substantive commit must already make an interruption recoverable from repository state alone; never rely on a final chat message to carry unique state.
+
+Before the final reply, apply `00_START_HERE/HANDOFF_INTEGRITY_POLICY.md`, resolve required gates, leave `CURRENT_STATE.json` either explicitly recoverable as `gate_pending` or, for a completed prompt, `terminal_clean`, and verify the final HEAD with handoff integrity.
+
+Known historical control documents must remain explicitly non-canonical for continuation. A new current-state/handoff authority outside `00_START_HERE` is forbidden.

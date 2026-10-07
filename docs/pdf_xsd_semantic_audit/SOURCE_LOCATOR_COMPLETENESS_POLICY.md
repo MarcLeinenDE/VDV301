@@ -67,3 +67,12 @@ Historical and candidate authorities remain separate. Locator completion never p
 The canonical workflow is defined in:
 
 `00_START_HERE/AUDIT_WORKFLOW_CONTRACT.md`
+
+## Version-scope boundary dimension
+
+Locator completeness does not prove that affected-version scope starts and ends in the correct releases.
+
+Mandatory policy: `docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md`  
+Registry: `audit_registry/finding_version_scope_boundary_verification_v0.1.json`
+
+During retroactive adoption, already complete locators may remain structurally complete while boundary verification is pending. After that backlog reaches zero, every newly completed locator must have boundary state `verified` in the same terminal block.
