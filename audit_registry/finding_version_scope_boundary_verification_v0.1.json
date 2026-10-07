@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 9,
-    "pending_revalidation": 61
+    "verified": 10,
+    "pending_revalidation": 60
   },
-  "next_pending_finding": "ARCH-005",
+  "next_pending_finding": "ARCH-006",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -344,9 +344,40 @@
     },
     {
       "finding_id": "ARCH-005",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_ARCH_005_2026-10-07.md",
+        "VDV current IP-KOM-ÖV publication index checked 2026-10-07: only German/English VDV 301-1 V1.0 publication pair, no later architecture version",
+        "official English VDV 301-1 PDF text checked 2026-10-07: UDP/UDP multicast for rapidly changing information and TCP/HTTP for reliable longer-valid information; text refers to Part 2"
+      ],
+      "note": "Boundary verified for the transport-class architecture context. The sole V1.0 architecture publication and its English translation carry the same UDP-multicast versus TCP/HTTP distinction as high-level communication guidance. No later VDV 301-1 version exists.",
+      "scope_conclusion": "ARCH-005 is confined to/applicable in the sole VDV 301-1 V1.0 architecture publication. English V1.0 independently confirms the same transport-class distinction. No predecessor or successor architecture version exists.",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-1 before V1.0",
+          "role": "no_predecessor_publication_available",
+          "language_status": "de/en:no earlier VDV 301-1 publication in current VDV catalog",
+          "source_ids": [
+            "VDV301-1_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-1 V1.0",
+          "role": "applicable_context_non_defect",
+          "language_status": "de:normative original; en:official convenience translation independently confirms UDP-multicast vs TCP/HTTP architecture classes; German original prevails",
+          "source_ids": [
+            "VDV301-1_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-1 after V1.0",
+          "role": "no_successor_publication_available",
+          "language_status": "de/en:no later VDV 301-1 publication in current VDV catalog",
+          "source_ids": [
+            "VDV301-1_V1.0_DE"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "ARCH-006",
