@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 21,
-    "pending_revalidation": 49
+    "verified": 22,
+    "pending_revalidation": 48
   },
-  "next_pending_finding": "CE-007",
+  "next_pending_finding": "CE-008",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -927,9 +927,73 @@
     },
     {
       "finding_id": "CE-007",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_CE_007_2026-10-07.md",
+        "docs/pdf_xsd_semantic_audit/04a_common_enums_v1_0_v2_0_history.md",
+        "docs/pdf_xsd_semantic_audit/04e_common_enums_v2_3_v2_4_history_and_closure.md",
+        "audit_registry/finding_source_locators_v0.1.json"
+      ],
+      "note": "Boundary verified. The mismatch is already present in the earliest available Common/Enumerations V1.0 publication/XSD lane and persists through official V2.3 plus the selected V2.4 candidate/integration lane.",
+      "scope_conclusion": "Earliest available and first affected version is Enumerations V1.0; official affected scope continues through V2.3; selected V2.4 candidate/integration remains affected. Existing semantic scope is unchanged.",
+      "boundary_checks": [
+        {
+          "version": "before Common/Enumerations V1.0",
+          "role": "no_predecessor_publication_available",
+          "language_status": "no earlier Common/Enumerations publication in current VDV lineage",
+          "source_ids": [
+            "COMMON_V1.0"
+          ]
+        },
+        {
+          "version": "Enumerations V1.0",
+          "role": "first_affected_official_release",
+          "language_status": "PDF uses Other/Valid/Air; exact XSD uses other/valid/air",
+          "source_ids": [
+            "COMMON_V1.0"
+          ]
+        },
+        {
+          "version": "Enumerations V2.0",
+          "role": "affected_official_release",
+          "language_status": "de-en:case mismatch persists",
+          "source_ids": [
+            "COMMON_V2.0"
+          ]
+        },
+        {
+          "version": "Enumerations V2.1",
+          "role": "affected_official_release",
+          "language_status": "de-en:case mismatch persists",
+          "source_ids": [
+            "COMMON_V2.1"
+          ]
+        },
+        {
+          "version": "Enumerations V2.2",
+          "role": "affected_official_release",
+          "language_status": "de-en:case mismatch persists",
+          "source_ids": [
+            "COMMON_V2.2"
+          ]
+        },
+        {
+          "version": "Enumerations V2.3",
+          "role": "last_affected_official_release",
+          "language_status": "de-en:case mismatch persists via exact V2.2 enumeration dependency pool",
+          "source_ids": [
+            "COMMON_V2.3"
+          ]
+        },
+        {
+          "version": "Enumerations V2.4",
+          "role": "affected_candidate_integration_lane",
+          "language_status": "de-en:official PDF case mismatch persists; selected candidate XSD retains lowercase lexemes",
+          "source_ids": [
+            "COMMON_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "CE-008",
