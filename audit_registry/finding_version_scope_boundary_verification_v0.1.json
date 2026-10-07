@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 6,
-    "pending_revalidation": 64
+    "verified": 7,
+    "pending_revalidation": 63
   },
-  "next_pending_finding": "ARCH-002",
+  "next_pending_finding": "ARCH-003",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -229,9 +229,41 @@
     },
     {
       "finding_id": "ARCH-002",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_ARCH_002_2026-10-07.md",
+        "VDV current IP-KOM-ÖV publication index checked 2026-10-07: only German/English VDV 301-1 V1.0 publication pair, no later architecture version",
+        "official English VDV 301-1 PDF text checked 2026-10-07: translation disclaimer identifies German original v1.0 and German authority",
+        "official English VDV 301-1 PDF page-14 text checked 2026-10-07: higher components are active information users/client role; lower components are passive providers/server role"
+      ],
+      "note": "Boundary verified for the architecture hierarchy non-defect. The sole V1.0 architecture publication and its English convenience translation contain the same general client/provider hierarchy wording. No later VDV 301-1 version exists. Service-specific communication remains governed by Part 2/Common Conventions.",
+      "scope_conclusion": "ARCH-002 is confined to/applicable in the sole VDV 301-1 V1.0 architecture publication. English V1.0 translation independently confirms the same hierarchy model and does not alter German normative authority. No predecessor or successor architecture version exists.",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-1 before V1.0",
+          "role": "no_predecessor_publication_available",
+          "language_status": "de/en:no earlier VDV 301-1 publication in current VDV catalog",
+          "source_ids": [
+            "VDV301-1_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-1 V1.0",
+          "role": "applicable_context_non_defect",
+          "language_status": "de:normative original; en:official convenience translation independently confirms client/provider hierarchy and German original prevails",
+          "source_ids": [
+            "VDV301-1_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-1 after V1.0",
+          "role": "no_successor_publication_available",
+          "language_status": "de/en:no later VDV 301-1 publication in current VDV catalog",
+          "source_ids": [
+            "VDV301-1_V1.0_DE"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "ARCH-003",
