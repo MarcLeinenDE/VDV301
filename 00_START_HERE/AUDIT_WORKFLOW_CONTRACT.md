@@ -321,6 +321,14 @@ For each completed finding/block, report:
 
 Do not batch so much work that a timeout can leave several findings half-written and ambiguous.
 
+Exception for the active retroactive version-scope boundary revalidation only:
+- one user prompt may authorize a package of multiple findings;
+- default package size is five findings unless complexity suggests a smaller package;
+- every finding inside the package remains its own complete crash-safe mini-cycle;
+- after each finding: write evidence + registry/state, mark gate_pending, run/observe the full gate, finalize terminal_clean, and verify the final handoff-integrity gate before starting the next finding;
+- never defer several findings into one combined commit/gate/handoff;
+- if any finding fails a gate or needs semantic-scope correction, stop the package at that finding and resolve it before continuing.
+
 ---
 
 ## 8. Current audit/remediation separation

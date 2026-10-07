@@ -82,3 +82,21 @@ Every-push workflow: `.github/workflows/handoff-integrity.yml`
 5. If `pending_gate=true`, inspect the gate for the actual HEAD.
 6. Repair a failed block or finalize a successful-but-unfinalized block.
 7. Only then execute the recorded next work item.
+
+## Boundary-revalidation package mode
+
+Only for the active retroactive version-scope boundary revalidation, one user prompt may cover multiple findings.
+
+Package mode changes only the number of mini-cycles executed before replying to the user. It does **not** merge durability boundaries.
+
+For each finding in the package:
+
+1. start only from a `terminal_clean` HEAD;
+2. create finding-specific evidence and canonical registry/state changes;
+3. leave the work commit as `gate_pending`;
+4. require the full schema/audit gate to succeed;
+5. write a finding-specific `terminal_clean` handoff commit;
+6. require the every-push handoff-integrity gate to succeed on that final HEAD;
+7. only then continue automatically to the next finding.
+
+If a gate fails, if scope changes materially, or if evidence is ambiguous, stop the package at that finding. The repository must already contain the recoverable state.

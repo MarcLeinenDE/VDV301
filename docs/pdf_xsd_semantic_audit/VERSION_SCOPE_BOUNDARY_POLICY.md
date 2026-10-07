@@ -34,3 +34,20 @@ At adoption, all already locator-complete findings are tracked. Structural locat
 After that backlog closes, each newly completed locator must enter the boundary registry as `verified` in the same terminal block.
 
 Boundary verification is separate from semantic classification, locator structural completeness, visible-body verification and runtime mapping.
+
+## Package execution for the retroactive pass
+
+The retroactive pass may be executed in packages to reduce user interaction overhead.
+
+Default package size: **5 findings**.
+
+This is an orchestration convenience only. Each finding remains an independent terminal work cycle with its own:
+
+- evidence report;
+- registry/current-state write;
+- `gate_pending` recovery state;
+- full validation gate;
+- `terminal_clean` handoff commit;
+- final handoff-integrity gate.
+
+A package must stop at the first failed gate, ambiguous boundary or material scope correction.
