@@ -868,10 +868,34 @@
       "service": "BaseGeneral",
       "version_scope": [
         {
-          "version": "VDV-301-1.0 / VDV-301-2.0 historical V1.0 service families",
+          "version": "VDV-301-1.0 historical V1.0 service pool",
           "authority": "official_release",
           "xsd_profile": "exact release-tag-selected service XSD pool",
-          "note": "Four same-path V1.0 service XSD files have different official blobs across the two release contexts; the semantic differences are primarily packaging/self-containment changes."
+          "note": "Baseline release context: JIS/PCS/SystemManagement/TicketInformation V1.0 paths use the original official blobs."
+        },
+        {
+          "version": "VDV-301-2.0 historical V1.0 service pool",
+          "authority": "official_release",
+          "xsd_profile": "exact release-tag-selected service XSD pool",
+          "note": "All four same-path V1.0 service XSDs use different official blobs than VDV-301-1.0."
+        },
+        {
+          "version": "VDV-301-2.1 retained historical V1.0 service pool",
+          "authority": "official_release",
+          "xsd_profile": "exact release-tag-selected service XSD pool",
+          "note": "JIS, SystemManagement and TicketInformation V1.0 remain present with the VDV-301-2.0 blobs; PassengerCountingService V1.0 is no longer present."
+        },
+        {
+          "version": "VDV-301-2.2 retained historical V1.0 service pool",
+          "authority": "official_release",
+          "xsd_profile": "exact release-tag-selected service XSD pool",
+          "note": "JIS and TicketInformation V1.0 remain present with the VDV-301-2.0 blobs; PassengerCountingService and SystemManagementService V1.0 are no longer present."
+        },
+        {
+          "version": "VDV-301-2.3 retained historical V1.0 service pool",
+          "authority": "official_release",
+          "xsd_profile": "exact release-tag-selected service XSD pool",
+          "note": "JIS and TicketInformation V1.0 remain present with the VDV-301-2.0 blobs through the latest official VDV-301-2.3 release; the other two paths are absent."
         }
       ],
       "review_state": "manually_reviewed",
@@ -890,37 +914,37 @@
       "semantic_basis": [
         {
           "type": "official_release_provenance",
-          "note": "Official tag comparison proves that several V1.0 service files kept the same path/version token but changed blob identity between VDV-301-1.0 and VDV-301-2.0."
+          "note": "Fresh official tag matrix proves that the same V1.0 service path/version token can resolve to different bytes by release context. All four paths change between VDV-301-1.0 and VDV-301-2.0; JIS/SystemManagement/TicketInformation persist into 2.1, and JIS/TicketInformation persist unchanged through 2.2 and 2.3."
         },
         {
           "type": "technical_inference",
-          "note": "Byte identity and semantic validation identity are separate questions: a changed blob alone is not sufficient evidence that payload-validity rules changed."
+          "note": "Byte identity and semantic validation identity are separate questions: a changed blob alone is not sufficient evidence that payload-validity rules changed. Exact release context is still required for reproducible authority selection."
         },
         {
           "type": "executable_validation",
-          "note": "EV-123 confirms that the exact legacy root mappings can still be compiled through adapters without modifying or replacing the official schemas."
+          "note": "EV-123 confirms that the exact legacy root mappings can be compiled through adapters without modifying or replacing the official schemas."
         }
       ],
       "diagnostic": {
         "de": {
           "title": "Versionsname allein reicht für die Auswahl einer historischen XSD nicht immer aus",
           "short": "Bei einigen V1.0-Services existieren unter demselben Dateinamen unterschiedliche offizielle XSD-Bytes in verschiedenen Release-Kontexten.",
-          "long": "Bei mehreren historischen V1.0-Service-XSDs bleibt Dateiname beziehungsweise Versionsbezeichnung gleich, obwohl sich die offiziellen Dateien zwischen den Release-Ständen VDV-301-1.0 und VDV-301-2.0 unterscheiden. Daraus folgt nicht automatisch, dass sich auch die fachliche XML-Gültigkeit geändert hat; ein Teil der Änderungen betrifft lediglich Verpackung und Selbstständigkeit der Dateien. Für eine reproduzierbare Prüfung muss das SDK trotzdem wissen, aus welchem offiziellen Release-Kontext der ausgewählte Schema-Pool stammt und darf nicht einfach die neueste gleichnamige Datei verwenden.",
-          "recommendation": "Für historische Prüfprofile den konkreten offiziellen Release-/Schema-Pool auswählen. Eine reine Blob-Abweichung nicht automatisch als semantischen Fehler melden, aber einen unklaren oder vermischten Release-Kontext als Routingproblem kennzeichnen."
+          "long": "Bei mehreren historischen V1.0-Service-XSDs bleibt Dateiname beziehungsweise Versionsbezeichnung gleich, obwohl die offiziellen Dateien abhängig vom Release-Kontext unterschiedlich sind. Alle vier geprüften V1.0-Pfade wechseln zwischen VDV-301-1.0 und VDV-301-2.0 auf andere Blobs. Ein Teil dieser 2.0-Blobs bleibt in späteren offiziellen Releases erhalten: JIS, SystemManagement und TicketInformation in 2.1 sowie JIS und TicketInformation bis einschließlich 2.3. Daraus folgt nicht automatisch eine geänderte fachliche XML-Gültigkeit; für reproduzierbare Prüfung muss das SDK dennoch den exakten offiziellen Release-/Schema-Pool auswählen und darf gleichnamige Dateien nicht kontextlos ersetzen.",
+          "recommendation": "Für historische Prüfprofile immer den konkreten offiziellen Release-Tag/Schema-Pool auswählen. Eine reine Blob-Abweichung nicht automatisch als semantischen Fehler melden; einen fehlenden, vermischten oder stillschweigend auf einen anderen Release-Tag verschobenen Kontext als Routingproblem kennzeichnen."
         },
         "en": {
           "title": "A version name alone is not always sufficient to select a historical XSD",
           "short": "Some V1.0 services have different official XSD bytes under the same file name in different release contexts.",
-          "long": "For several historical V1.0 service XSDs, the file name or version label remains the same even though the official files differ between the VDV-301-1.0 and VDV-301-2.0 release contexts. This does not automatically mean that the semantic XML-validity model changed; some transitions are primarily packaging and self-containment changes. For reproducible validation, however, the SDK still needs to know which official release/schema pool was selected and must not simply use the newest file with the same name.",
-          "recommendation": "Select the concrete official release/schema pool for historical profiles. Do not report a byte difference alone as a semantic defect, but flag an ambiguous or mixed release context as a routing problem."
+          "long": "For several historical V1.0 service XSDs, the file name/version token stays the same although the official bytes depend on the release context. All four reviewed V1.0 paths switch to different blobs between VDV-301-1.0 and VDV-301-2.0. Some of those 2.0 blobs remain in later official releases: JIS, SystemManagement and TicketInformation in 2.1, and JIS plus TicketInformation through 2.3. This does not automatically imply changed payload-validity semantics; reproducible validation still requires the exact official release/schema pool and must not substitute same-named files without context.",
+          "recommendation": "Always select the concrete official release tag/schema pool for historical profiles. Do not report a byte difference alone as a semantic defect; flag missing, mixed, or silently shifted release context as a routing problem."
         }
       },
       "runtime_match": {
         "state": "reviewed",
         "candidate_triggers": [
-          "historical V1.0 validation profile selected without an exact release context",
-          "schema dependencies from VDV-301-1.0 and VDV-301-2.0 are mixed",
-          "latest same-named XSD is substituted for the selected historical pool"
+          "historical V1.0 validation profile selected without an exact official release-tag context",
+          "schema dependencies from different official release contexts VDV-301-1.0 through VDV-301-2.3 are mixed",
+          "a same-named V1.0 XSD from another release context is substituted for the selected historical pool"
         ]
       },
       "source_references": [
@@ -934,10 +958,14 @@
         },
         {
           "kind": "other",
-          "reference": "official VDVde/VDV301 tags VDV-301-1.0 and VDV-301-2.0"
+          "reference": "official VDVde/VDV301 release-tag matrix VDV-301-1.0, VDV-301-2.0, VDV-301-2.1, VDV-301-2.2, VDV-301-2.3; rechecked 2026-10-07"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_BG_001_RELEASE_SCOPE_2026-10-07.md"
         }
       ],
-      "notes": "Routing/provenance safeguard, not a statement that every differing blob changes XML validity."
+      "notes": "Routing/provenance safeguard. Scope corrected on 2026-10-07 to include every official release context that still carries one or more of the affected same-named V1.0 paths; no claim that every differing blob changes XML validity."
     },
     {
       "finding_id": "BG-002",

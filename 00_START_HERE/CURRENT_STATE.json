@@ -2003,9 +2003,9 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 13,
-    "version_scope_boundary_pending_count": 57,
-    "version_scope_boundary_next_finding": "BG-001"
+    "version_scope_boundary_verified_count": 14,
+    "version_scope_boundary_pending_count": 56,
+    "version_scope_boundary_next_finding": "BG-002"
   },
   "evidence": {
     "xsd_ev_completed": [
@@ -2118,13 +2118,13 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 13,
-    "version_scope_boundary_pending_count": 57
+    "version_scope_boundary_verified_count": 14,
+    "version_scope_boundary_pending_count": 56
   },
   "next_actions": [
-    "Continue current boundary package at BG-001; inspect VDV-301-1.0, 2.0, 2.1, 2.2, 2.3 and any later official release context for the four same-path V1.0 XSDs.",
-    "If BG-001 scope must change, stop package progression after resolving that correction and its gates.",
-    "If unchanged, close the package after BG-001 terminal-clean handoff.",
+    "Complete the BG-001 material scope-correction full gate and terminal-clean handoff.",
+    "Do not start BG-002 until BG-001 semantic, locator, runtime and boundary scopes all pass the full gate.",
+    "After closure, compute the next five-finding package from the canonical boundary registry.",
     "Keep structural locator expansion at DR3012V20-006 paused until boundary backlog is zero."
   ],
   "source_locator_progress": {
@@ -2203,12 +2203,14 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "37634246735",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "37634246796",
-    "resume_instruction": "Continue current boundary package at BG-001. Revalidate the complete official release-tag lineage for the four same-path V1.0 service XSDs before deciding scope."
+    "resume_instruction": "After BG-001 correction gate success, close the current package. Because a material scope correction occurred, do not continue to BG-002 until the correction has a final terminal-clean handoff.",
+    "pending_block": "version_scope_boundary_revalidation_BG_001_with_release_scope_correction",
+    "recovery_instruction": "Inspect full schema-audit-validation for this HEAD. If successful, finalize the BG-001 scope correction terminal_clean and close the package; if failed, repair semantic/locator/runtime/boundary scope consistency before any further finding."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2218,9 +2220,9 @@
     "state": "in_progress",
     "adoption_locator_count": 70,
     "tracked_findings": 70,
-    "verified": 13,
-    "pending_revalidation": 57,
-    "next_pending_finding": "BG-001",
+    "verified": 14,
+    "pending_revalidation": 56,
+    "next_pending_finding": "BG-002",
     "locator_expansion_frozen": true,
     "future_locator_completion_requires_verified_boundary_same_block": true
   },

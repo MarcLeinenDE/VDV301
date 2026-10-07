@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 13,
-    "pending_revalidation": 57
+    "verified": 14,
+    "pending_revalidation": 56
   },
-  "next_pending_finding": "BG-001",
+  "next_pending_finding": "BG-002",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -494,9 +494,66 @@
     },
     {
       "finding_id": "BG-001",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_BG_001_2026-10-07.md",
+        "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_BG_001_RELEASE_SCOPE_2026-10-07.md",
+        "fresh VDVde/VDV301 official tag root matrix recheck 2026-10-07: VDV-301-1.0, 2.0, 2.1, 2.2, 2.3",
+        "official GitHub releases rechecked 2026-10-07: VDV-301-2.3 remains latest official release",
+        "master rechecked 2026-10-07: JIS/TicketInformation V1.0 retained with 2.0 blobs but master is not official release authority"
+      ],
+      "note": "Material scope correction. The old BG-001 scope stopped at the first changed later pool (VDV-301-2.0). Boundary revalidation shows that same-name V1.0 paths continue in later official release contexts: JIS/SMS/TicketInformation in 2.1, and JIS/TicketInformation through 2.2/2.3. Exact release-tag selection therefore remains relevant through 2.3 for the surviving paths.",
+      "scope_conclusion": "First compared official context is VDV-301-1.0; all four target paths change in VDV-301-2.0. The 2.0 blobs then persist per path: PCS ends after 2.0, SystemManagement after 2.1, JIS and TicketInformation through latest official release 2.3. No later official release exists. BG-001 scope is expanded to all official contexts 1.0..2.3 carrying at least one affected same-name V1.0 path.",
+      "boundary_checks": [
+        {
+          "version": "VDV-301-1.0",
+          "role": "baseline_official_release_context_original_blobs",
+          "language_status": "not_applicable:XSD provenance finding",
+          "source_ids": [
+            "VDVde/VDV301@VDV-301-1.0"
+          ]
+        },
+        {
+          "version": "VDV-301-2.0",
+          "role": "affected_official_release_context_all_four_paths_changed",
+          "language_status": "not_applicable:XSD provenance finding",
+          "source_ids": [
+            "VDVde/VDV301@VDV-301-2.0"
+          ]
+        },
+        {
+          "version": "VDV-301-2.1",
+          "role": "affected_official_release_context_three_paths_retained",
+          "language_status": "not_applicable:JIS/SystemManagement/TicketInformation V1.0 retain 2.0 blobs; PCS V1.0 absent",
+          "source_ids": [
+            "VDVde/VDV301@VDV-301-2.1"
+          ]
+        },
+        {
+          "version": "VDV-301-2.2",
+          "role": "affected_official_release_context_two_paths_retained",
+          "language_status": "not_applicable:JIS/TicketInformation V1.0 retain 2.0 blobs; PCS/SystemManagement V1.0 absent",
+          "source_ids": [
+            "VDVde/VDV301@VDV-301-2.2"
+          ]
+        },
+        {
+          "version": "VDV-301-2.3",
+          "role": "last_official_release_context_two_paths_retained",
+          "language_status": "not_applicable:JIS/TicketInformation V1.0 retain 2.0 blobs; latest official release",
+          "source_ids": [
+            "VDVde/VDV301@VDV-301-2.3"
+          ]
+        },
+        {
+          "version": "after VDV-301-2.3",
+          "role": "no_later_official_release_available",
+          "language_status": "not_applicable:current master is integration state, not official release authority",
+          "source_ids": [
+            "VDVde/VDV301@master"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "BG-002",
