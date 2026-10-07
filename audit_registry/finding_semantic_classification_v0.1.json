@@ -6164,7 +6164,13 @@
           "version": "VDV 301-2 Base V2.0",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "SystemManagement introduction contains unresolved chapter-range placeholders in German and English."
+          "note": "SystemManagement introduction contains unresolved chapter-range placeholders in both German and English."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The English track corrects the range to chapter 5.2 to 5.3, but the German track still retains an unresolved start-chapter placeholder before 'bis 5.3'; the same editorial defect therefore persists partially."
         }
       ],
       "review_state": "manually_reviewed",
@@ -6185,21 +6191,29 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "Both language tracks visibly contain unresolved chapter-range placeholder text."
+          "note": "Base V2.0 visibly contains unresolved chapter-range placeholders in both language tracks."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Base V2.1 visibly corrects the English range to chapter 5.2 to 5.3 while the German range still lacks the start chapter before 'bis 5.3'."
+        },
+        {
+          "type": "version_history",
+          "note": "The historical V1.0 control visibly contains the complete German reference 'Kapitel 5.2 bis 5.3'; the defect begins in V2.0 rather than being inherited unchanged from V1.0."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "SystemManagement V2.0: ungelöste Kapitelbereich-Platzhalter",
-          "short": "In beiden Sprachfassungen stehen redaktionelle Platzhalter.",
-          "long": "Die Einführung enthält nicht ersetzte Platzhalter für Kapitelbereiche. Sie sind weder Identifier noch Versions- oder XML-Information und dürfen technisch nicht interpretiert werden.",
+          "title": "SystemManagement V2.0/V2.1: ungelöster Kapitelbereich-Verweis",
+          "short": "V2.0 enthält den Platzhalter in beiden Sprachfassungen; in V2.1 bleibt der deutsche Startverweis ungelöst.",
+          "long": "Die SystemManagement-Einführung enthält in V2.0 nicht ersetzte Platzhalter für den Kapitelbereich. In V2.1 ist die englische Fassung auf Kapitel 5.2 bis 5.3 korrigiert, während in der deutschen Fassung der Start des Bereichs vor „bis 5.3“ weiterhin fehlt. Die Stelle ist weder Identifier noch Versions- oder XML-Information und darf technisch nicht interpretiert werden.",
           "recommendation": "Als Dokumentationsrest behandeln und nicht in Routing-, Versions- oder Validierungslogik übernehmen."
         },
         "en": {
-          "title": "SystemManagement V2.0: unresolved chapter-range placeholders",
-          "short": "Both language tracks retain editorial placeholders.",
-          "long": "The introduction contains unreplaced chapter-range placeholders. They are not identifiers, version data, or XML information and must not be interpreted technically.",
-          "recommendation": "Treat them as documentation residue and keep them out of routing, version, and validation logic."
+          "title": "SystemManagement V2.0/V2.1: unresolved chapter-range reference",
+          "short": "V2.0 retains the placeholder in both language tracks; V2.1 still lacks the German range start.",
+          "long": "The SystemManagement introduction contains unreplaced chapter-range placeholders in V2.0. In V2.1 the English track is corrected to chapter 5.2 to 5.3, while the German track still lacks the range start before 'bis 5.3'. The text is not an identifier, version datum, or XML information and must not be interpreted technically.",
+          "recommendation": "Treat it as documentation residue and keep it out of routing, version, and validation logic."
         }
       },
       "runtime_match": {
@@ -6210,17 +6224,27 @@
         {
           "kind": "frozen_terminal_source",
           "reference": "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V20_2026-09-03.md",
-          "note": "Frozen terminal state context_verified."
+          "note": "Frozen terminal state context_verified; locator review refined the affected scope without creating a new finding identity."
         },
         {
           "kind": "pdf",
           "reference": "Official VDV 301-2 Base V2.0 PDF SHA-256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
-          "note": "Byte-pinned official PDF source used by the revalidation."
+          "note": "Byte-pinned official V2.0 source: both language tracks contain the unresolved range."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official VDV 301-2 Base V2.1 PDF SHA-256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+          "note": "Byte-pinned official V2.1 source: English is corrected, German still retains the unresolved start reference."
         },
         {
           "kind": "evidence",
           "reference": "EV-130 / evidence run 33780668141 / closure run 33781049413",
-          "note": "Pinned evidence-gate revalidation for this subblock."
+          "note": "Pinned evidence-gate revalidation for the Base V2.0 subblock."
+        },
+        {
+          "kind": "correction",
+          "reference": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_DR3012V20_005_V21_SCOPE_2026-10-07.md",
+          "note": "Post-closure scope correction preserving the existing finding identity and recording partial persistence into V2.1."
         }
       ]
     },

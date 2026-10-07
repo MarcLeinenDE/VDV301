@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "63a6ebd3b6d70bcb1a537fffad322052bb7c91c2",
+    "git_blob": "e9f02e00ab771fc4b2dc53a8241304da98c2587c",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 69,
-    "coverage_complete_count": 69,
+    "locator_entry_count": 70,
+    "coverage_complete_count": 70,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 123
+    "remaining_finding_count": 122
   },
   "entries": [
     {
@@ -9780,6 +9780,123 @@
         "EV-130 page 98 PNG SHA-256 ef250716223afaa4c777db354f9e54d8ad96664b950cdc5b3312173bfd2eef47",
         "official upstream VDVde/VDV301@VDV-301-2.0 blob ab959dddbfa2b8ca420af1b079501f94cff38051",
         "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_004_2026-10-07.md"
+      ]
+    },
+    {
+      "finding_id": "DR3012V20-005",
+      "service": "SystemManagementService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "SystemManagement introduction contains unresolved chapter-range placeholders in both German and English."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The English track corrects the range to chapter 5.2 to 5.3, but the German track still retains an unresolved start-chapter placeholder before 'bis 5.3'; the same editorial defect therefore persists partially."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "VDV 301-2 V1.0",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_DE",
+              "document_title": "VDV-Schrift 301-2",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2sds-v1-0.pdfx",
+              "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+              "printed_pages": [
+                66
+              ],
+              "section": "7.3 Dienst SystemManagementService",
+              "table": null,
+              "point_summary": "Historical unaffected control: the visible German introduction contains the complete range reference 'Kapitel 5.2 bis 5.3'."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Unaffected historical control proving that the missing range start is not inherited unchanged from V1.0.",
+          "scope_role": "historical_unaffected_control"
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV-Schrift 301-2",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                101
+              ],
+              "section": "7.3 Dienst SystemManagementService",
+              "table": null,
+              "point_summary": "Visible German introduction retains unresolved chapter-range placeholders instead of a complete 5.2-to-5.3 range."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV-Schrift 301-2",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                102
+              ],
+              "section": "SystemManagementService",
+              "table": null,
+              "point_summary": "Visible English introduction retains the same unresolved chapter-range placeholders."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Confirmed bilingual documentation residue in Base V2.0; there is no XML/XSD implication."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                115
+              ],
+              "section": "7.3 Dienst SystemManagementService / SystemManagementService",
+              "table": null,
+              "point_summary": "On the same visible bilingual page, German still lacks the start chapter before 'bis 5.3', while English is corrected to 'chapter 5.2 to 5.3'."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Partial persistence of the existing finding: V2.1 fixes the English language track but not the German start reference."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V20_2026-09-03.md",
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V21_2026-09-03.md",
+        "EV-130 closure run 33781049413",
+        "EV-130 pinned evidence run 33780668141 artifact 9903434312",
+        "EV-130 page 101 PNG SHA-256 ffcd3e8eed4a21b3def22231efc418699904765ce5da5fcca70a56a0a19abe45",
+        "EV-130 page 102 PNG SHA-256 e363907c96eedf70df39a46dacaabda9e005adbaf5fb2dfe7046309428151d55",
+        "VDV301-2 Base V2.1 exact-byte page 115 PNG SHA-256 95e9f06d767164d6310d2f0c2001d22e1d86e950d350d4aecbc9d0384b00e6a5",
+        "VDV301-2 V1.0 exact-byte page 66 PNG SHA-256 98925a4af4b14ddd2b2bbb3c7feaf78f9a00f2aa78e3ee3bd3dc28ee6c33960d",
+        "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_DR3012V20_005_V21_SCOPE_2026-10-07.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_005_2026-10-07.md"
       ]
     }
   ]
