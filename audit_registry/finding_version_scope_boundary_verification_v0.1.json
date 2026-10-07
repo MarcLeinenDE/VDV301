@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 11,
-    "pending_revalidation": 59
+    "verified": 12,
+    "pending_revalidation": 58
   },
-  "next_pending_finding": "ARCH-007",
+  "next_pending_finding": "ARCH-008",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -419,9 +419,41 @@
     },
     {
       "finding_id": "ARCH-007",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_ARCH_007_2026-10-07.md",
+        "VDV current IP-KOM-ÖV publication index checked 2026-10-07: only German/English VDV 301-1 V1.0 publication pair, no later architecture version",
+        "official English VDV 301-1 section 7 checked 2026-10-07: SNTP/RTP are conceivable but not yet specified in this issue",
+        "project source registry later service-context controls: TIME_V1.0, VLS_V1.0, VLS_V2.0"
+      ],
+      "note": "Boundary verified for the edition-specific SNTP/RTP wording. The sole VDV 301-1 architecture edition is V1.0 and the English translation explicitly says these protocols are not yet specified in 'this issue'. Later Time/Video service publications are separate service authority lanes, not successor versions of Part 1 and therefore do not widen ARCH-007.",
+      "scope_conclusion": "ARCH-007 remains confined to VDV 301-1 V1.0 architecture context. The phrase is explicitly edition-specific in both language tracks. There is no later VDV 301-1 publication; later service publications must be evaluated under their own authority rather than treated as a correction boundary for Part 1.",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-1 before V1.0",
+          "role": "no_predecessor_publication_available",
+          "language_status": "de/en:no earlier VDV 301-1 publication in current VDV catalog",
+          "source_ids": [
+            "VDV301-1_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-1 V1.0",
+          "role": "applicable_context_non_defect",
+          "language_status": "de:normative original edition-specific wording; en:translation explicitly says SNTP/RTP not yet specified in this issue; German original prevails",
+          "source_ids": [
+            "VDV301-1_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-1 after V1.0",
+          "role": "no_successor_publication_available",
+          "language_status": "de/en:no later VDV 301-1 publication; later TimeService/VideoLiveService documents are separate service authority lineages",
+          "source_ids": [
+            "VDV301-1_V1.0_DE"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "ARCH-008",
