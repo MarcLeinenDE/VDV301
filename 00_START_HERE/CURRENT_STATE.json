@@ -2122,10 +2122,10 @@
     "version_scope_boundary_pending_count": 66
   },
   "next_actions": [
-    "Revalidate ARA-004 version-scope boundaries; 66 findings remain pending after ARA-003.",
-    "For each boundary review, prove predecessor/first affected/last affected/successor-or-lineage-end independently and evaluate DE/EN tracks separately where applicable.",
-    "Keep structural locator expansion at DR3012V20-006 paused until the retroactive boundary pending count is zero.",
-    "At the end of every project prompt/work cycle, execute the repository handoff-integrity procedure and leave either a recoverable gate_pending state or a terminal_clean state."
+    "Run the next retroactive boundary-revalidation package starting at ARA-004. Default package size is five findings, but every finding remains an independent terminal mini-cycle.",
+    "Current package target: ARA-004, ARCH-001, ARCH-002, ARCH-003, ARCH-004.",
+    "Stop the package immediately on a failed gate, ambiguous boundary, or material semantic-scope correction.",
+    "Keep structural locator expansion at DR3012V20-006 paused until the retroactive boundary pending count is zero."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2205,10 +2205,10 @@
     ],
     "work_cycle_state": "terminal_clean",
     "pending_gate": false,
-    "latest_completed_full_gate_run_id": "37606727534",
+    "latest_completed_full_gate_run_id": "37625618267",
     "latest_completed_full_gate_status": "success",
-    "latest_handoff_check_before_finalization_run_id": "37606727548",
-    "resume_instruction": "Continue retroactive version-scope boundary revalidation at ARA-004. Keep structural source-locator expansion at DR3012V20-006 paused until boundary pending_revalidation reaches zero."
+    "latest_handoff_check_before_finalization_run_id": "37625618197",
+    "resume_instruction": "Boundary package mode is active for retroactive revalidation only. Start the next five-finding package at ARA-004; each finding must still complete its own full gate and terminal-clean handoff before the next begins."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
