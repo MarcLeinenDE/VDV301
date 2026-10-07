@@ -21,16 +21,49 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 1,
-    "pending_revalidation": 69
+    "verified": 2,
+    "pending_revalidation": 68
   },
-  "next_pending_finding": "ARA-001",
+  "next_pending_finding": "ARA-002",
   "entries": [
     {
       "finding_id": "ARA-001",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_ARA_001_2026-10-07.md",
+        "audit_registry/pdf_source_registry_v0.1.json: only ARA_V2.4 is registered for AnalogRadioService",
+        "VDV public IP-KOM-ÖV publication index checked 2026-10-07: AnalogRadioService listed only as V2.4",
+        "VDVde/VDV301 releases checked 2026-10-07: latest official release remains VDV-301-2.3",
+        "VDVde/VDV301 master 14880bb33beec5c5dffe96315b730bd6c094a585 checked 2026-10-07: IBIS-IP_AnalogRadioService_V2.4.xsd absent"
+      ],
+      "note": "Version boundary verified against the current official publication lineage and current upstream release/master state. AnalogRadioService has only the V2.4 publication in the VDV catalog; no predecessor or successor AnalogRadio publication is available. The official GitHub release line ends at VDV-301-2.3 and current master has no AnalogRadioService V2.4 XSD, so the release-authority gap remains confined to the published V2.4 / candidate-integration V2.4 authority split.",
+      "scope_conclusion": "AnalogRadioService publication lineage contains only V2.4. No predecessor or successor publication exists to widen the finding. Official VDV GitHub release authority still ends at 2.3 and current master lacks the AnalogRadioService V2.4 XSD; existing V2.4 unresolved-official vs V2.4 candidate/integration scope is confirmed unchanged.",
+      "boundary_checks": [
+        {
+          "version": "AnalogRadioService before V2.4",
+          "role": "no_predecessor_publication_available",
+          "language_status": "not_applicable:no earlier AnalogRadioService publication in current VDV catalog/project source registry",
+          "source_ids": [
+            "ARA_V2.4"
+          ]
+        },
+        {
+          "version": "AnalogRadioService V2.4",
+          "role": "affected_authority_gap",
+          "language_status": "de-en:same publication authority state",
+          "source_ids": [
+            "ARA_V2.4"
+          ]
+        },
+        {
+          "version": "AnalogRadioService after V2.4",
+          "role": "no_successor_publication_available",
+          "language_status": "not_applicable:no later AnalogRadioService publication in current VDV catalog/project source registry",
+          "source_ids": [
+            "ARA_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "ARA-002",
