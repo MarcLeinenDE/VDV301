@@ -2003,9 +2003,9 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 18,
-    "version_scope_boundary_pending_count": 52,
-    "version_scope_boundary_next_finding": "CE-004",
+    "version_scope_boundary_verified_count": 19,
+    "version_scope_boundary_pending_count": 51,
+    "version_scope_boundary_next_finding": "CE-005",
     "version_scope_boundary_latest_finding": "BG-001",
     "version_scope_boundary_latest_gate_run_id": "37635320402",
     "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_BG_001_2026-10-07.md",
@@ -2122,14 +2122,14 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 18,
-    "version_scope_boundary_pending_count": 52
+    "version_scope_boundary_verified_count": 19,
+    "version_scope_boundary_pending_count": 51
   },
   "next_actions": [
-    "Continue current boundary package at CE-004.",
-    "CE-004 must independently prove V2.1 predecessor state, V2.2 first affected state, V2.3 persistence and V2.4 candidate/latest publication boundary.",
-    "Stop package on any failed gate, ambiguous boundary or material scope correction.",
-    "After CE-004, close the package and derive the next five findings from the canonical boundary registry."
+    "Complete CE-004 full gate and terminal-clean handoff.",
+    "Close the current five-finding package after the final handoff-integrity gate.",
+    "Next canonical boundary finding after package closure: CE-005.",
+    "Keep DR3012V20-006 paused until boundary backlog is zero."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2207,12 +2207,14 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "37645276914",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "37645276917",
-    "resume_instruction": "Continue current boundary package at CE-004."
+    "resume_instruction": "After CE-004 gate success, close the current package. Next canonical pending boundary finding is CE-005.",
+    "pending_block": "version_scope_boundary_revalidation_CE_004",
+    "recovery_instruction": "Inspect full schema-audit-validation for this HEAD. If successful, finalize CE-004 terminal_clean and close the current five-finding package; otherwise repair CE-004."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2222,9 +2224,9 @@
     "state": "in_progress",
     "adoption_locator_count": 70,
     "tracked_findings": 70,
-    "verified": 18,
-    "pending_revalidation": 52,
-    "next_pending_finding": "CE-004",
+    "verified": 19,
+    "pending_revalidation": 51,
+    "next_pending_finding": "CE-005",
     "locator_expansion_frozen": true,
     "future_locator_completion_requires_verified_boundary_same_block": true,
     "latest_verified_finding": "BG-001",

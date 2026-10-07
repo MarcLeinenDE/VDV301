@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 18,
-    "pending_revalidation": 52
+    "verified": 19,
+    "pending_revalidation": 51
   },
-  "next_pending_finding": "CE-004",
+  "next_pending_finding": "CE-005",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -761,9 +761,61 @@
     },
     {
       "finding_id": "CE-004",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_CE_004_2026-10-07.md",
+        "official Common V2.1 PDF text rechecked 2026-10-07: ServiceNameEnumeration contains SystemDocumentationService and SystemManagementService and not SystemMonitoringService",
+        "official VDV-301-2.1 Enumerations XSD blob 311464690ad60749ed8d326217787e4b8ed0b718 rechecked 2026-10-07: contains SystemDocumentationService and SystemManagementService",
+        "existing byte-pinned V2.2 locator: PDF table retains both old names while V2.2 history records deletion and SystemMonitoringService addition; official Enumerations V2.2 omits old names",
+        "existing byte-pinned V2.3 locator: stale PDF names persist while official Common V2.3 reuses Enumerations V2.2",
+        "existing byte-pinned V2.4 locator: stale PDF names persist; selected candidate/integration Enumerations V2.4 omits old names",
+        "VDV current IP-KOM-ÖV publication index checked 2026-10-07: Common V2.4 remains latest listed publication",
+        "interactive V2.1 screenshot retry returned cache-miss; deterministic fallback host download is unavailable in this runtime due DNS, so V2.1 predecessor proof uses official PDF text extraction plus exact official XSD"
+      ],
+      "note": "Boundary verified for the stale ServiceNameEnumeration documentation defect. V2.1 is a proven unaffected predecessor because both old service names are still valid in the PDF and exact official XSD. V2.2 is the first affected version: history removes the two names and adds SystemMonitoringService, while the table remains stale. The stale table persists in V2.3 and V2.4. No later Common publication is currently listed.",
+      "scope_conclusion": "CE-004 begins at Common/Enumerations V2.2, persists through official V2.3, and remains present in the official V2.4 PDF under the selected candidate/integration V2.4 XSD lane. V2.1 is unaffected and no successor after V2.4 is currently published. Existing semantic scope is confirmed unchanged.",
+      "boundary_checks": [
+        {
+          "version": "Enumerations/Common V2.1",
+          "role": "last_predecessor_not_affected",
+          "language_status": "de-en:PDF table and exact official XSD both still validly contain SystemDocumentationService and SystemManagementService; SystemMonitoringService not yet introduced",
+          "source_ids": [
+            "COMMON_V2.1"
+          ]
+        },
+        {
+          "version": "Enumerations/Common V2.2",
+          "role": "first_affected_official_release",
+          "language_status": "de-en:history deletes old names/adds SystemMonitoringService but PDF table still lists old names; exact XSD rejects old names",
+          "source_ids": [
+            "COMMON_V2.2"
+          ]
+        },
+        {
+          "version": "Enumerations/Common V2.3",
+          "role": "affected_official_release_persistence",
+          "language_status": "de-en:stale table persists; exact official dependency route reuses Enumerations V2.2 without old names",
+          "source_ids": [
+            "COMMON_V2.3"
+          ]
+        },
+        {
+          "version": "Enumerations/Common V2.4",
+          "role": "affected_latest_publication_candidate_xsd_lane",
+          "language_status": "de-en:official PDF remains stale; selected candidate/integration Enumerations V2.4 omits old names",
+          "source_ids": [
+            "COMMON_V2.4"
+          ]
+        },
+        {
+          "version": "after Common V2.4",
+          "role": "no_successor_publication_available",
+          "language_status": "de-en:no later Common publication in current VDV catalog",
+          "source_ids": [
+            "COMMON_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "CE-005",
