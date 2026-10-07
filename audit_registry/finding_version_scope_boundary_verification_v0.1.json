@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 33,
-    "pending_revalidation": 37
+    "verified": 34,
+    "pending_revalidation": 36
   },
-  "next_pending_finding": "CE-019",
+  "next_pending_finding": "CE-020",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -1712,9 +1712,78 @@
     },
     {
       "finding_id": "CE-019",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_CE_019_2026-10-08.md",
+        "audit_registry/finding_source_locators_v0.1.json",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V1.0.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.0.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.1.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.2.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3_FRESH_2026-09-02.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4_FRESH_2026-09-03.md",
+        "EV-117/118/119/120/121/122 aggregated by EV-124"
+      ],
+      "note": "Boundary verified across the complete retained Common lineage. The PDF list item ServiceIdentificationWithState is referenced/typed as ServiceSpecificationWithState while every selected Common XSD from V1.0 through V2.3 types the item as ServiceIdentificationWithStateStructure; selected V2.4 candidate/integration retains the XSD model. No earlier retained Common publication exists.",
+      "scope_conclusion": "Affected from earliest available Common V1.0 through official V2.3, with selected V2.4 candidate/integration also affected. No predecessor publication exists. Existing semantic/runtime scope is unchanged.",
+      "boundary_checks": [
+        {
+          "version": "Common before V1.0",
+          "role": "no_predecessor_publication_available",
+          "language_status": "not_applicable:no earlier retained Common publication exists",
+          "source_ids": [
+            "COMMON_V1.0"
+          ]
+        },
+        {
+          "version": "Common V1.0",
+          "role": "first_affected_official_release",
+          "language_status": "de-en:PDF references ServiceSpecificationWithState; exact XSD requires ServiceIdentificationWithStateStructure",
+          "source_ids": [
+            "COMMON_V1.0"
+          ]
+        },
+        {
+          "version": "Common V2.0",
+          "role": "affected_official_release",
+          "language_status": "de-en:type-reference mismatch persists",
+          "source_ids": [
+            "COMMON_V2.0"
+          ]
+        },
+        {
+          "version": "Common V2.1",
+          "role": "affected_official_release",
+          "language_status": "de-en:type-reference mismatch persists",
+          "source_ids": [
+            "COMMON_V2.1"
+          ]
+        },
+        {
+          "version": "Common V2.2",
+          "role": "affected_official_release",
+          "language_status": "de-en:type-reference mismatch persists",
+          "source_ids": [
+            "COMMON_V2.2"
+          ]
+        },
+        {
+          "version": "Common V2.3",
+          "role": "last_affected_official_release",
+          "language_status": "de-en:type-reference mismatch persists",
+          "source_ids": [
+            "COMMON_V2.3"
+          ]
+        },
+        {
+          "version": "Common V2.4",
+          "role": "affected_candidate_integration_lane",
+          "language_status": "de-en:official PDF retains ServiceSpecificationWithState reference while selected candidate XSD retains ServiceIdentificationWithStateStructure",
+          "source_ids": [
+            "COMMON_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "CE-020",
