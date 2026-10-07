@@ -2003,9 +2003,9 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 16,
-    "version_scope_boundary_pending_count": 54,
-    "version_scope_boundary_next_finding": "CE-002",
+    "version_scope_boundary_verified_count": 17,
+    "version_scope_boundary_pending_count": 53,
+    "version_scope_boundary_next_finding": "CE-003",
     "version_scope_boundary_latest_finding": "BG-001",
     "version_scope_boundary_latest_gate_run_id": "37635320402",
     "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_BG_001_2026-10-07.md",
@@ -2122,14 +2122,14 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 16,
-    "version_scope_boundary_pending_count": 54
+    "version_scope_boundary_verified_count": 17,
+    "version_scope_boundary_pending_count": 53
   },
   "next_actions": [
-    "Continue current boundary package at CE-002, then CE-003 and CE-004.",
-    "Each finding remains an independent terminal mini-cycle.",
+    "Complete CE-002 full gate and terminal-clean handoff.",
+    "Continue package with CE-003 and CE-004.",
     "Stop package on any failed gate, ambiguous boundary or material scope correction.",
-    "Keep structural locator expansion at DR3012V20-006 paused until boundary backlog is zero."
+    "Keep DR3012V20-006 paused until boundary backlog is zero."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2207,12 +2207,14 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "37644409518",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "37644409647",
-    "resume_instruction": "Continue current boundary package at CE-002, then CE-003 and CE-004."
+    "resume_instruction": "After CE-002 gate success, continue package mini-cycle at CE-003.",
+    "pending_block": "version_scope_boundary_revalidation_CE_002",
+    "recovery_instruction": "Inspect full schema-audit-validation for this HEAD. If successful, finalize CE-002 terminal_clean and continue package at CE-003; otherwise repair CE-002."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2222,9 +2224,9 @@
     "state": "in_progress",
     "adoption_locator_count": 70,
     "tracked_findings": 70,
-    "verified": 16,
-    "pending_revalidation": 54,
-    "next_pending_finding": "CE-002",
+    "verified": 17,
+    "pending_revalidation": 53,
+    "next_pending_finding": "CE-003",
     "locator_expansion_frozen": true,
     "future_locator_completion_requires_verified_boundary_same_block": true,
     "latest_verified_finding": "BG-001",

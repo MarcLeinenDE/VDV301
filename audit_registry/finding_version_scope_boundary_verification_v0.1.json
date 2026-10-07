@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 16,
-    "pending_revalidation": 54
+    "verified": 17,
+    "pending_revalidation": 53
   },
-  "next_pending_finding": "CE-002",
+  "next_pending_finding": "CE-003",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -665,9 +665,51 @@
     },
     {
       "finding_id": "CE-002",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_CE_002_2026-10-07.md",
+        "official Common V2.2 PDF text rechecked 2026-10-07: StopInformation has no PointNumber/StopPointNumber member and V2.2 history contains no such insertion",
+        "official Common V2.3 PDF text rechecked 2026-10-07: StopInformation has no PointNumber/StopPointNumber member and V2.3 history adds ArrivalExpected/DepartureExpected, not PointNumber",
+        "existing byte-pinned visible-body V2.4 locator: printed pages 34 and 55 prove PointNumber table vs StopPointNumber history",
+        "VDV current IP-KOM-ÖV publication index checked 2026-10-07: Common Data Structures and Enumerations latest listed version is V2.4",
+        "interactive PDF screenshot retry for V2.2/V2.3 returned cache-miss; deterministic local fallback attempted but runtime DNS prevented redownload, so predecessor boundary additionally relies on official PDF text extraction plus existing frozen deep-read evidence"
+      ],
+      "note": "Boundary verified for the V2.4 version-history typo. V2.2 and V2.3 StopInformation do not contain PointNumber at all and their histories do not mention StopPointNumber. V2.4 is the first publication that introduces the field and simultaneously contains the StopPointNumber-vs-PointNumber documentation inconsistency. No later Common publication is currently listed.",
+      "scope_conclusion": "CE-002 first appears in Common V2.4 and remains V2.4-only because V2.2/V2.3 precede the PointNumber addition and no successor publication exists. The official V2.4 PDF is affected; the selected V2.4 XSD remains candidate/integration authority and uses PointNumber.",
+      "boundary_checks": [
+        {
+          "version": "Common V2.2",
+          "role": "predecessor_not_affected_field_not_present",
+          "language_status": "de-en:shared bilingual StopInformation table has no PointNumber/StopPointNumber",
+          "source_ids": [
+            "COMMON_V2.2"
+          ]
+        },
+        {
+          "version": "Common V2.3",
+          "role": "last_predecessor_not_affected_field_not_present",
+          "language_status": "de-en:shared bilingual StopInformation table has no PointNumber/StopPointNumber; V2.3 history does not add it",
+          "source_ids": [
+            "COMMON_V2.3"
+          ]
+        },
+        {
+          "version": "Common V2.4",
+          "role": "first_and_last_affected_publication",
+          "language_status": "de-en:shared bilingual V2.4 history says StopPointNumber while actual table uses PointNumber",
+          "source_ids": [
+            "COMMON_V2.4"
+          ]
+        },
+        {
+          "version": "after Common V2.4",
+          "role": "no_successor_publication_available",
+          "language_status": "de-en:no later Common publication in current VDV catalog",
+          "source_ids": [
+            "COMMON_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "CE-003",
