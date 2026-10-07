@@ -2003,9 +2003,9 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 8,
-    "version_scope_boundary_pending_count": 62,
-    "version_scope_boundary_next_finding": "ARCH-004"
+    "version_scope_boundary_verified_count": 9,
+    "version_scope_boundary_pending_count": 61,
+    "version_scope_boundary_next_finding": "ARCH-005"
   },
   "evidence": {
     "xsd_ev_completed": [
@@ -2118,14 +2118,14 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 8,
-    "version_scope_boundary_pending_count": 62
+    "version_scope_boundary_verified_count": 9,
+    "version_scope_boundary_pending_count": 61
   },
   "next_actions": [
-    "Continue current boundary package at ARCH-004.",
-    "Preserve German VDV 301-1 V1.0 as normative authority; use the English V1.0 translation as an independently checked language control.",
-    "Stop package on any failed gate, ambiguous boundary or material scope correction.",
-    "After ARCH-004, close this five-finding package and set the next package start from the canonical boundary registry."
+    "Complete ARCH-004 full gate and terminal-clean handoff.",
+    "Close the current five-finding package after the final handoff-integrity gate.",
+    "Next canonical boundary finding is ARCH-005; use it as the start of the next package.",
+    "Keep structural locator expansion at DR3012V20-006 paused until the retroactive boundary backlog is zero."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2203,12 +2203,14 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "37627056902",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "37627056832",
-    "resume_instruction": "Continue current five-finding boundary package at ARCH-004."
+    "resume_instruction": "After ARCH-004 gate success, close the current package and begin the next package at ARCH-005.",
+    "pending_block": "version_scope_boundary_revalidation_ARCH_004",
+    "recovery_instruction": "Inspect the full schema-audit-validation run for this HEAD. If successful, finalize ARCH-004 terminal_clean and close the current five-finding package; otherwise repair ARCH-004."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2218,9 +2220,9 @@
     "state": "in_progress",
     "adoption_locator_count": 70,
     "tracked_findings": 70,
-    "verified": 8,
-    "pending_revalidation": 62,
-    "next_pending_finding": "ARCH-004",
+    "verified": 9,
+    "pending_revalidation": 61,
+    "next_pending_finding": "ARCH-005",
     "locator_expansion_frozen": true,
     "future_locator_completion_requires_verified_boundary_same_block": true
   },
