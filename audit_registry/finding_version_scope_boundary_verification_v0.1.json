@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 17,
-    "pending_revalidation": 53
+    "verified": 18,
+    "pending_revalidation": 52
   },
-  "next_pending_finding": "CE-003",
+  "next_pending_finding": "CE-004",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -713,9 +713,51 @@
     },
     {
       "finding_id": "CE-003",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_CE_003_2026-10-07.md",
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CE_2026-09-03.md: CE-003 terminal classification as superseded audit-progress state",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4_FRESH_2026-09-03.md: complete V2.4 fresh read",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4.md: reconciled V2.4 deep-read closure",
+        "EV-122 run 33716645876: completed executable checks",
+        "VDV current IP-KOM-ÖV publication index checked 2026-10-07: Common V2.4 remains latest listed publication"
+      ],
+      "note": "Boundary verified as an audit-state finding rather than a source defect. CE-003 only described that the Common V2.4 delta review was incomplete at an earlier point in the audit. The later complete V2.4 Fresh Read, reconciled Deep Read and EV-122 supersede that state. It does not propagate to other document versions and creates no runtime/provider issue.",
+      "scope_conclusion": "CE-003 is confined to the historical audit-progress state of Common V2.4 and is fully superseded within that same version by completed review evidence. It is not a persistent source condition, has no predecessor/successor defect boundary, and remains non-applicable for runtime diagnostics.",
+      "boundary_checks": [
+        {
+          "version": "Common before V2.4",
+          "role": "not_applicable_no_historical_audit_progress_finding",
+          "language_status": "not_applicable:CE-003 did not describe source content in predecessor publications",
+          "source_ids": [
+            "COMMON_V2.4"
+          ]
+        },
+        {
+          "version": "Common V2.4 initial audit state",
+          "role": "historical_progress_state_recorded",
+          "language_status": "de-en:not a language/content defect; only review-progress state",
+          "source_ids": [
+            "COMMON_V2.4"
+          ]
+        },
+        {
+          "version": "Common V2.4 completed audit state",
+          "role": "superseding_review_closure",
+          "language_status": "de-en:complete Fresh Read/Deep Read and executable evidence supersede the incomplete-state record",
+          "source_ids": [
+            "COMMON_V2.4"
+          ]
+        },
+        {
+          "version": "after Common V2.4",
+          "role": "no_source_defect_to_propagate_and_no_later_publication",
+          "language_status": "not_applicable:no later Common publication currently listed",
+          "source_ids": [
+            "COMMON_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "CE-004",
