@@ -2212,7 +2212,9 @@
     "latest_completed_full_gate_run_id": "37648138276",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "37648138167",
-    "resume_instruction": "CE-010 evidence is committed and boundary registry/state are advanced to 25/70. Inspect the full schema/audit gate for this HEAD; on SUCCESS finalize CE-010 as terminal_clean, otherwise repair CE-010 before any CE-011 work."
+    "resume_instruction": "CE-010 evidence is committed and boundary registry/state are advanced to 25/70. Inspect the full schema/audit gate for this HEAD; on SUCCESS finalize CE-010 as terminal_clean, otherwise repair CE-010 before any CE-011 work.",
+    "pending_block": "CE-010 version-scope boundary revalidation",
+    "recovery_instruction": "Inspect schema-audit-validation for the current HEAD. CE-010 canonical evidence is already written. If the gate succeeds, finalize CE-010 to terminal_clean and preserve 25/70 verified; if it fails, repair CE-010 before starting CE-011."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
