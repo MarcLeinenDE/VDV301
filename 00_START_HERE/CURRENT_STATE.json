@@ -2126,10 +2126,10 @@
     "version_scope_boundary_pending_count": 49
   },
   "next_actions": [
-    "Continue current boundary package at CE-007, then CE-008 and CE-009.",
-    "Each finding remains an independent terminal mini-cycle.",
-    "Stop package on any failed gate, ambiguous boundary or material scope correction.",
-    "Keep structural locator expansion at DR3012V20-006 paused until boundary backlog is zero."
+    "Finish CE-007 boundary evidence and full gate.",
+    "Do not start CE-008 until CE-007 is terminal_clean.",
+    "Then continue package with CE-008 and CE-009.",
+    "Keep DR3012V20-006 paused until boundary backlog is zero."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2207,12 +2207,14 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "37647279150",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "37647279142",
-    "resume_instruction": "Continue current boundary package at CE-007, then CE-008 and CE-009."
+    "resume_instruction": "After CE-007 gate success, continue package at CE-008.",
+    "pending_block": "version_scope_boundary_revalidation_CE_007",
+    "recovery_instruction": "Finish CE-007 boundary review and gate. Do not start CE-008 until CE-007 is terminal_clean."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
