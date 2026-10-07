@@ -2005,7 +2005,11 @@
     "version_scope_boundary_tracked_count": 70,
     "version_scope_boundary_verified_count": 14,
     "version_scope_boundary_pending_count": 56,
-    "version_scope_boundary_next_finding": "BG-002"
+    "version_scope_boundary_next_finding": "BG-002",
+    "version_scope_boundary_latest_finding": "BG-001",
+    "version_scope_boundary_latest_gate_run_id": "37635320402",
+    "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_BG_001_2026-10-07.md",
+    "latest_scope_correction": "BG-001 expanded from release-context pair 1.0/2.0 to complete official retained V1.0 path lineage through VDV-301-2.3; semantic/locator/runtime scopes synchronized."
   },
   "evidence": {
     "xsd_ev_completed": [
@@ -2122,10 +2126,10 @@
     "version_scope_boundary_pending_count": 56
   },
   "next_actions": [
-    "Complete the BG-001 material scope-correction full gate and terminal-clean handoff.",
-    "Do not start BG-002 until BG-001 semantic, locator, runtime and boundary scopes all pass the full gate.",
-    "After closure, compute the next five-finding package from the canonical boundary registry.",
-    "Keep structural locator expansion at DR3012V20-006 paused until boundary backlog is zero."
+    "Next boundary package: BG-002, CE-001, CE-002, CE-003, CE-004.",
+    "For each finding, perform evidence write -> gate_pending -> full gate -> terminal_clean handoff -> final handoff-integrity gate before continuing.",
+    "Stop a package on any failed gate, ambiguous boundary or material semantic-scope correction.",
+    "Keep structural locator expansion at DR3012V20-006 paused until the retroactive boundary backlog is zero."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2203,14 +2207,12 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "gate_pending",
-    "pending_gate": true,
-    "latest_completed_full_gate_run_id": "37634246735",
+    "work_cycle_state": "terminal_clean",
+    "pending_gate": false,
+    "latest_completed_full_gate_run_id": "37635320402",
     "latest_completed_full_gate_status": "success",
-    "latest_handoff_check_before_finalization_run_id": "37634246796",
-    "resume_instruction": "After BG-001 correction gate success, close the current package. Because a material scope correction occurred, do not continue to BG-002 until the correction has a final terminal-clean handoff.",
-    "pending_block": "version_scope_boundary_revalidation_BG_001_with_release_scope_correction",
-    "recovery_instruction": "Inspect full schema-audit-validation for this HEAD. If successful, finalize the BG-001 scope correction terminal_clean and close the package; if failed, repair semantic/locator/runtime/boundary scope consistency before any further finding."
+    "latest_handoff_check_before_finalization_run_id": "37635320186",
+    "resume_instruction": "Current boundary package is complete, including the resolved BG-001 material scope correction. Start the next package at BG-002, CE-001, CE-002, CE-003, CE-004 in canonical order; each finding remains an independent terminal mini-cycle."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2224,7 +2226,10 @@
     "pending_revalidation": 56,
     "next_pending_finding": "BG-002",
     "locator_expansion_frozen": true,
-    "future_locator_completion_requires_verified_boundary_same_block": true
+    "future_locator_completion_requires_verified_boundary_same_block": true,
+    "latest_verified_finding": "BG-001",
+    "latest_gate_run_id": "37635320402",
+    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_BG_001_2026-10-07.md"
   },
   "boundary_revalidation_package_mode": {
     "enabled": true,
@@ -2235,22 +2240,23 @@
     "last_completed_package": {
       "completed_at": "2026-10-07",
       "findings": [
-        "ARA-004",
-        "ARCH-001",
-        "ARCH-002",
-        "ARCH-003",
-        "ARCH-004"
+        "ARCH-005",
+        "ARCH-006",
+        "ARCH-007",
+        "ARCH-008",
+        "BG-001"
       ],
-      "result": "all_terminal_clean",
-      "final_verified_count": 9,
-      "final_pending_count": 61
+      "result": "all_terminal_clean_with_material_scope_correction_resolved_at_BG-001",
+      "final_verified_count": 14,
+      "final_pending_count": 56,
+      "correction_report": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_BG_001_RELEASE_SCOPE_2026-10-07.md"
     },
     "next_package": [
-      "ARCH-005",
-      "ARCH-006",
-      "ARCH-007",
-      "ARCH-008",
-      "BG-001"
+      "BG-002",
+      "CE-001",
+      "CE-002",
+      "CE-003",
+      "CE-004"
     ]
   }
 }
