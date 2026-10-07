@@ -2122,9 +2122,9 @@
     "version_scope_boundary_pending_count": 61
   },
   "next_actions": [
-    "Complete ARCH-004 full gate and terminal-clean handoff.",
-    "Close the current five-finding package after the final handoff-integrity gate.",
-    "Next canonical boundary finding is ARCH-005; use it as the start of the next package.",
+    "Next boundary package: ARCH-005, ARCH-006, ARCH-007, ARCH-008, BG-001.",
+    "For each finding, perform evidence write -> gate_pending -> full gate -> terminal_clean handoff -> final handoff-integrity gate before continuing.",
+    "Stop a package on any failed gate, ambiguous boundary or material semantic-scope correction.",
     "Keep structural locator expansion at DR3012V20-006 paused until the retroactive boundary backlog is zero."
   ],
   "source_locator_progress": {
@@ -2203,14 +2203,12 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "gate_pending",
-    "pending_gate": true,
-    "latest_completed_full_gate_run_id": "37627056902",
+    "work_cycle_state": "terminal_clean",
+    "pending_gate": false,
+    "latest_completed_full_gate_run_id": "37627297540",
     "latest_completed_full_gate_status": "success",
-    "latest_handoff_check_before_finalization_run_id": "37627056832",
-    "resume_instruction": "After ARCH-004 gate success, close the current package and begin the next package at ARCH-005.",
-    "pending_block": "version_scope_boundary_revalidation_ARCH_004",
-    "recovery_instruction": "Inspect the full schema-audit-validation run for this HEAD. If successful, finalize ARCH-004 terminal_clean and close the current five-finding package; otherwise repair ARCH-004."
+    "latest_handoff_check_before_finalization_run_id": "37627297529",
+    "resume_instruction": "Current five-finding package is complete. Start the next retroactive boundary package at ARCH-005, ARCH-006, ARCH-007, ARCH-008, BG-001 in canonical order; each finding remains an independent terminal mini-cycle."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2231,6 +2229,26 @@
     "scope": "retroactive_version_scope_boundary_revalidation_only",
     "default_package_size": 5,
     "per_finding_terminal_cycle_required": true,
-    "stop_on_failed_gate_or_scope_correction": true
+    "stop_on_failed_gate_or_scope_correction": true,
+    "last_completed_package": {
+      "completed_at": "2026-10-07",
+      "findings": [
+        "ARA-004",
+        "ARCH-001",
+        "ARCH-002",
+        "ARCH-003",
+        "ARCH-004"
+      ],
+      "result": "all_terminal_clean",
+      "final_verified_count": 9,
+      "final_pending_count": 61
+    },
+    "next_package": [
+      "ARCH-005",
+      "ARCH-006",
+      "ARCH-007",
+      "ARCH-008",
+      "BG-001"
+    ]
   }
 }
