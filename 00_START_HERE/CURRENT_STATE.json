@@ -2003,9 +2003,9 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 4,
-    "version_scope_boundary_pending_count": 66,
-    "version_scope_boundary_next_finding": "ARA-004"
+    "version_scope_boundary_verified_count": 5,
+    "version_scope_boundary_pending_count": 65,
+    "version_scope_boundary_next_finding": "ARCH-001"
   },
   "evidence": {
     "xsd_ev_completed": [
@@ -2118,14 +2118,14 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 4,
-    "version_scope_boundary_pending_count": 66
+    "version_scope_boundary_verified_count": 5,
+    "version_scope_boundary_pending_count": 65
   },
   "next_actions": [
-    "Run the next retroactive boundary-revalidation package starting at ARA-004. Default package size is five findings, but every finding remains an independent terminal mini-cycle.",
-    "Current package target: ARA-004, ARCH-001, ARCH-002, ARCH-003, ARCH-004.",
-    "Stop the package immediately on a failed gate, ambiguous boundary, or material semantic-scope correction.",
-    "Keep structural locator expansion at DR3012V20-006 paused until the retroactive boundary pending count is zero."
+    "Complete the pending ARA-004 full gate and terminal-clean handoff.",
+    "Continue current boundary package with ARCH-001, ARCH-002, ARCH-003 and ARCH-004, each as an independent terminal mini-cycle.",
+    "Stop package on any failed gate, ambiguous boundary or material scope correction.",
+    "Keep DR3012V20-006 paused until the retroactive boundary backlog is zero."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2203,12 +2203,14 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "37625618267",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "37625618197",
-    "resume_instruction": "Boundary package mode is active for retroactive revalidation only. Start the next five-finding package at ARA-004; each finding must still complete its own full gate and terminal-clean handoff before the next begins."
+    "resume_instruction": "After ARA-004 gate success, continue package mini-cycle at ARCH-001.",
+    "pending_block": "version_scope_boundary_revalidation_ARA_004",
+    "recovery_instruction": "Inspect the full schema-audit-validation run for the current HEAD. If successful, finalize ARA-004 as terminal_clean and continue package at ARCH-001; if failed, repair ARA-004 before continuing."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2218,9 +2220,9 @@
     "state": "in_progress",
     "adoption_locator_count": 70,
     "tracked_findings": 70,
-    "verified": 4,
-    "pending_revalidation": 66,
-    "next_pending_finding": "ARA-004",
+    "verified": 5,
+    "pending_revalidation": 65,
+    "next_pending_finding": "ARCH-001",
     "locator_expansion_frozen": true,
     "future_locator_completion_requires_verified_boundary_same_block": true
   },

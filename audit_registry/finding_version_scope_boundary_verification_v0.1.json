@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 4,
-    "pending_revalidation": 66
+    "verified": 5,
+    "pending_revalidation": 65
   },
-  "next_pending_finding": "ARA-004",
+  "next_pending_finding": "ARCH-001",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -153,9 +153,40 @@
     },
     {
       "finding_id": "ARA-004",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_ARA_004_2026-10-07.md",
+        "VDV current IP-KOM-ÖV publication index checked 2026-10-07: AnalogRadioService listed only as V2.4",
+        "audit_registry/pdf_source_registry_v0.1.json: only ARA_V2.4 is registered for AnalogRadioService"
+      ],
+      "note": "Boundary verified independently for the wrong-operation-reference finding. The current AnalogRadioService publication lineage contains only V2.4, so the SendFFSKTelegram URI typo cannot extend to an earlier publication and no later correction publication exists.",
+      "scope_conclusion": "The SendFFSKTelegram-versus-SendTelegram URI inconsistency is confined to AnalogRadioService V2.4. No predecessor or successor AnalogRadioService publication exists in the current VDV lineage.",
+      "boundary_checks": [
+        {
+          "version": "AnalogRadioService before V2.4",
+          "role": "no_predecessor_publication_available",
+          "language_status": "not_applicable:no earlier AnalogRadioService publication in current VDV catalog/project source registry",
+          "source_ids": [
+            "ARA_V2.4"
+          ]
+        },
+        {
+          "version": "AnalogRadioService V2.4",
+          "role": "affected_documentation_only",
+          "language_status": "de-en:single bilingual publication; URI example is inconsistent with operation inventory/heading/XML example",
+          "source_ids": [
+            "ARA_V2.4"
+          ]
+        },
+        {
+          "version": "AnalogRadioService after V2.4",
+          "role": "no_successor_publication_available",
+          "language_status": "not_applicable:no later AnalogRadioService publication in current VDV catalog/project source registry",
+          "source_ids": [
+            "ARA_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "ARCH-001",
