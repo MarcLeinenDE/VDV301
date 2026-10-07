@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 14,
-    "pending_revalidation": 56
+    "verified": 15,
+    "pending_revalidation": 55
   },
-  "next_pending_finding": "BG-002",
+  "next_pending_finding": "CE-001",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -557,9 +557,64 @@
     },
     {
       "finding_id": "BG-002",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_BG_002_2026-10-07.md",
+        "VDVde/VDV301 tag VDV-301-1.0 root recheck 2026-10-07: IBIS_IP_V1.0.xsd blob 41289eaed2674a169fdf77a10a2eff293c76d5c4 present",
+        "VDVde/VDV301 exact-path recheck 2026-10-07: IBIS_IP_V1.0.xsd absent in VDV-301-2.0, 2.1, 2.2, 2.3 and master"
+      ],
+      "note": "Boundary verified for the historical aggregate-packaging non-defect. IBIS_IP_V1.0.xsd exists only in the official VDV-301-1.0 tag and is absent from every later official release tag through 2.3 as well as current master. The existing semantic scope is therefore correct and no synthetic later aggregate is authorized.",
+      "scope_conclusion": "IBIS_IP_V1.0.xsd belongs exclusively to VDV-301-1.0 historical packaging. It is absent from all later official releases 2.0 through 2.3; VDV-301-2.3 is the latest official release. Existing 'VDV-301-2.0 and later' absence scope is confirmed unchanged.",
+      "boundary_checks": [
+        {
+          "version": "VDV-301-1.0",
+          "role": "historical_aggregate_present",
+          "language_status": "not_applicable:XSD packaging/provenance finding",
+          "source_ids": [
+            "VDVde/VDV301@VDV-301-1.0"
+          ]
+        },
+        {
+          "version": "VDV-301-2.0",
+          "role": "aggregate_absent_official_release",
+          "language_status": "not_applicable:XSD packaging/provenance finding",
+          "source_ids": [
+            "VDVde/VDV301@VDV-301-2.0"
+          ]
+        },
+        {
+          "version": "VDV-301-2.1",
+          "role": "aggregate_absent_official_release",
+          "language_status": "not_applicable:XSD packaging/provenance finding",
+          "source_ids": [
+            "VDVde/VDV301@VDV-301-2.1"
+          ]
+        },
+        {
+          "version": "VDV-301-2.2",
+          "role": "aggregate_absent_official_release",
+          "language_status": "not_applicable:XSD packaging/provenance finding",
+          "source_ids": [
+            "VDVde/VDV301@VDV-301-2.2"
+          ]
+        },
+        {
+          "version": "VDV-301-2.3",
+          "role": "aggregate_absent_latest_official_release",
+          "language_status": "not_applicable:XSD packaging/provenance finding",
+          "source_ids": [
+            "VDVde/VDV301@VDV-301-2.3"
+          ]
+        },
+        {
+          "version": "master",
+          "role": "aggregate_absent_integration_state",
+          "language_status": "not_applicable:not official release authority",
+          "source_ids": [
+            "VDVde/VDV301@master"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "CE-001",
