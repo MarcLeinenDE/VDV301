@@ -2,7 +2,7 @@
   "state_schema_version": "0.1",
   "date": "2026-10-07",
   "canonical_branch": "dev/schema-integration",
-  "workflow_mode": "handoff_bootstrap_pending",
+  "workflow_mode": "full_gate_on_canonical_changes_plus_handoff_check_on_every_push",
   "project_phase": "version_scope_boundary_revalidation",
   "dev/schema-integration": {
     "root_xsd_count_last_executed": 50,
@@ -2122,9 +2122,10 @@
     "version_scope_boundary_pending_count": 69
   },
   "next_actions": [
-    "Finish the repository-handoff hygiene bootstrap recorded in handoff_integrity.pending_block before any finding work.",
-    "Then revalidate version-scope boundaries for the 70 locator-complete findings starting at ARA-001; 69 remain pending after DR3012V20-005.",
-    "Keep structural locator expansion at DR3012V20-006 paused until the retroactive boundary pending count is zero."
+    "Revalidate version-scope boundaries for the 70 locator-complete findings starting with ARA-001; 69 remain pending after DR3012V20-005. Keep structural source-locator expansion at DR3012V20-006 paused until this retroactive boundary backlog reaches zero.",
+    "For each boundary review, prove predecessor/first affected/last affected/successor-or-lineage-end independently and evaluate DE/EN tracks separately where applicable.",
+    "After the retroactive boundary pass closes, resume DR3012V20-006 and require verified boundary evidence in the same terminal block for every newly completed locator.",
+    "At the end of every project prompt/work cycle, execute the repository handoff-integrity procedure and leave either a recoverable gate_pending state or a terminal_clean state."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2202,13 +2203,12 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "gate_pending",
-    "pending_gate": true,
-    "pending_block": "repository_handoff_hygiene_and_version_boundary_guard_adoption",
-    "latest_completed_full_gate_run_id": "37601934452",
+    "work_cycle_state": "terminal_clean",
+    "pending_gate": false,
+    "latest_completed_full_gate_run_id": "37604367461",
     "latest_completed_full_gate_status": "success",
-    "recovery_instruction": "Complete the repository-handoff hygiene bootstrap: add validators/workflows, mark legacy control docs non-canonical, run the full gate, then finalize terminal_clean.",
-    "resume_instruction": "After this bootstrap is terminal-clean, start retroactive version-scope boundary revalidation at ARA-001; do not resume DR3012V20-006 until boundary pending is zero."
+    "latest_handoff_check_before_finalization_run_id": "37604367478",
+    "resume_instruction": "Start retroactive version-scope boundary revalidation at ARA-001. Keep structural source-locator expansion at DR3012V20-006 paused until boundary pending_revalidation reaches zero."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
