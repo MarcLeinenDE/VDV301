@@ -1,0 +1,25 @@
+name: handoff-integrity
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - dev/schema-integration
+
+permissions:
+  contents: read
+
+jobs:
+  handoff-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout canonical branch state
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate repository handoff integrity
+        run: python tools/validate_repository_handoff.py --handoff-only
