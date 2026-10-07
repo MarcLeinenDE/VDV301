@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 63,
-    "coverage_complete_count": 63,
+    "locator_entry_count": 64,
+    "coverage_complete_count": 64,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 129
+    "remaining_finding_count": 128
   },
   "entries": [
     {
@@ -9401,6 +9401,54 @@
         "EV-129 page 69 PNG SHA-256 11f732afa98020a4256af71aa1063ac06fc55312e5853538f4efe89dcb8b4656",
         "official upstream VDVde/VDV301@VDV-301-2.0 blob 2d32630a0f1981e980e6a466e3f6a69136410f24",
         "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_005_2026-10-07.md"
+      ]
+    },
+    {
+      "finding_id": "DR3012-006",
+      "service": "VDV 301-2 Base / TimeService routing",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "VDV 301-2 V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The TimeService reference to VDV 301-2-11 is wrong/stale in the historical context."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "VDV 301-2 V1.0",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_DE",
+              "document_title": "VDV-Schrift 301-2",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2sds-v1-0.pdfx",
+              "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+              "printed_pages": [
+                22
+              ],
+              "section": "2 Verwendete Kommunikationsprotokolle / 2.5 Weitere Protokolle",
+              "table": null,
+              "point_summary": "Visible SNTP paragraph says: 'Weitere Informationen zur Umsetzung siehe VDV 301-2-11.' Historical source identity maps TimeService to 301-2-10 and VideoLiveService to 301-2-11."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Documentation/source-routing defect only. Historical official-source registry identifies TIME_V1.0 as part 301-2-10 and VLS_V1.0 as part 301-2-11; therefore the page-22 TimeService/SNTP cross-reference to 301-2-11 is wrong/stale."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V10_2026-09-03.md",
+        "EV-129 closure run 33765633886",
+        "EV-129 pinned evidence run 33765167655 artifact 9897171006 digest sha256:a410cdc7103b2ed01f61570b6435a5b2319d2b80f4fec2802929359058a51cc7",
+        "EV-129 page 22 PNG SHA-256 1c5e8cfab04e35ecb0e8640b5740ab788f265a8997373465bb8c659b4c53322c",
+        "audit_registry/document_registry_v0.1.json: TIME_V1.0 part 301-2-10 / VLS_V1.0 part 301-2-11",
+        "audit_registry/pdf_source_registry_v0.1.json: TIME_V1.0 official URL 301-2-10sds-v-1-01.pdfx / VLS_V1.0 official URL 301-2-11-sds.pdfx",
+        "audit_registry/pdf_source_pins_v0.1.json: TIME_V1.0 SHA-256 d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3 / VLS_V1.0 SHA-256 f535673427ff8f495102e1fc7723ca157408949b981572c4342b862f6d9c2a3c",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_006_2026-10-07.md"
       ]
     }
   ]
