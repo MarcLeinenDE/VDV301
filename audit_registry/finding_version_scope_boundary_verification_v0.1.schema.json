@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/vdv301/finding_version_scope_boundary_verification_v0.1.schema.json",
+  "title": "VDV301 finding version-scope boundary verification v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "registry_version",
+    "kind",
+    "state",
+    "adopted_at",
+    "source_locator_manifest",
+    "policy",
+    "freeze",
+    "counts",
+    "next_pending_finding",
+    "entries"
+  ],
+  "properties": {
+    "registry_version": {
+      "const": "0.1"
+    },
+    "kind": {
+      "const": "finding-version-scope-boundary-verification"
+    },
+    "state": {
+      "enum": [
+        "in_progress",
+        "complete"
+      ]
+    },
+    "adopted_at": {
+      "type": "string",
+      "minLength": 10
+    },
+    "source_locator_manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "adoption_entry_count"
+      ],
+      "properties": {
+        "path": {
+          "const": "audit_registry/finding_source_locators_v0.1.json"
+        },
+        "adoption_entry_count": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "policy": {
+      "type": "object"
+    },
+    "freeze": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "locator_expansion_frozen_until_pending_zero",
+        "baseline_locator_count"
+      ],
+      "properties": {
+        "locator_expansion_frozen_until_pending_zero": {
+          "type": "boolean"
+        },
+        "baseline_locator_count": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tracked_findings",
+        "verified",
+        "pending_revalidation"
+      ],
+      "properties": {
+        "tracked_findings": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "verified": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "pending_revalidation": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "next_pending_finding": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "finding_id",
+          "state",
+          "evidence",
+          "note"
+        ],
+        "properties": {
+          "finding_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "state": {
+            "enum": [
+              "pending_revalidation",
+              "verified"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "note": {
+            "type": "string",
+            "minLength": 1
+          },
+          "scope_conclusion": {
+            "type": "string",
+            "minLength": 1
+          },
+          "boundary_checks": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "version",
+                "role",
+                "language_status",
+                "source_ids"
+              ],
+              "properties": {
+                "version": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "role": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "language_status": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "source_ids": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "state": {
+                  "const": "verified"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "scope_conclusion",
+                "boundary_checks"
+              ],
+              "properties": {
+                "evidence": {
+                  "minItems": 1
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

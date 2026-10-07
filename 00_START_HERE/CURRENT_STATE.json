@@ -2,8 +2,8 @@
   "state_schema_version": "0.1",
   "date": "2026-10-07",
   "canonical_branch": "dev/schema-integration",
-  "workflow_mode": "manual_only",
-  "project_phase": "source_locator_completeness",
+  "workflow_mode": "handoff_bootstrap_pending",
+  "project_phase": "version_scope_boundary_revalidation",
   "dev/schema-integration": {
     "root_xsd_count_last_executed": 50,
     "direct_include_edges_last_executed": 84,
@@ -854,7 +854,7 @@
       "CE-023": "V2.3_scope_confirmed_corrupt_duplicate_NetexMode_table_current_standard_2026-10-06"
     },
     "deep_read_pass_2_status": "frozen_complete",
-    "next_project_phase": "legacy_finding_revalidation",
+    "next_project_phase": "source_locator_completeness_after_version_scope_boundary_revalidation",
     "common_v2_4_deep_read_report": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4.md",
     "common_v2_4_source_freeze": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4_FRESH_2026-09-03.md",
     "common_v2_4_authority": {
@@ -1985,7 +1985,7 @@
     "candidate_correction_propagation_rule": "A confirmed correction to a candidate/integration XSD creates a new exact schema revision/variant. Preserve the old candidate for reproducibility; pin the corrected source; update SDK variant routing/provenance and affected Known-Issue version history; synchronize the corrected XSD into the dev/schema-integration, which is the project's most current and complete XSD collection. Correction propagation is not complete until SDK and dev/schema-integration are synchronized. Never promote the corrected candidate to official unless upstream official authority actually changes.",
     "dev/schema-integration_role": "most_current_and_complete_project_xsd_collection",
     "arch_source_locator_block": "ARCH-001..ARCH-008 complete; architecture vocabulary must not synthesize executable service/protocol obligations.",
-    "latest_source_locator_rule": "Visible-body backlog gate active: no new structural source-locator progress beyond 40 until all 40 existing locator findings are revalidated under the canonical visible-body rule.",
+    "latest_source_locator_rule": "Visible-body backlog is complete. Structural source-locator expansion is temporarily paused at 70 entries by the retroactive version-scope boundary hard gate; resume at DR3012V20-006 only after boundary pending reaches zero.",
     "historical_upstream_locator_support": "schema+validator support exact repository/ref/blob identity for official historical XSD sources",
     "source_locator_body_verification_registry": "audit_registry/pdf_locator_body_verification_v0.1.json",
     "source_locator_body_verification_state": "complete",
@@ -1998,7 +1998,14 @@
     "source_locator_latest_gate_run_id": "37601934452",
     "source_locator_body_latest_gate_run_id": "37601934452",
     "source_locator_body_latest_review_block": "DR3012V20_005",
-    "source_locator_body_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_005_2026-10-07.md"
+    "source_locator_body_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_005_2026-10-07.md",
+    "version_scope_boundary_policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
+    "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
+    "version_scope_boundary_state": "in_progress",
+    "version_scope_boundary_tracked_count": 70,
+    "version_scope_boundary_verified_count": 1,
+    "version_scope_boundary_pending_count": 69,
+    "version_scope_boundary_next_finding": "ARA-001"
   },
   "evidence": {
     "xsd_ev_completed": [
@@ -2107,13 +2114,17 @@
     "source_locator_body_verification_state": "complete",
     "source_locator_body_verified_current_standard_count": 70,
     "source_locator_body_pending_current_standard_count": 0,
-    "source_locator_body_latest_gate_run_id": "37601934452"
+    "source_locator_body_latest_gate_run_id": "37601934452",
+    "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
+    "version_scope_boundary_state": "in_progress",
+    "version_scope_boundary_tracked_count": 70,
+    "version_scope_boundary_verified_count": 1,
+    "version_scope_boundary_pending_count": 69
   },
   "next_actions": [
-    "Resume structural source-locator expansion at DR3012V20-006 in small blocks, applying the current visible-body/exact-authority workflow to every newly completed locator.",
-    "Preserve exact selected-XSD PASS/FAIL authority; DR3012V20-005 remains documentation-only and must not create XML aliases, validation rules or runtime matchers.",
-    "Preserve bilingual version history separately where a defect is only partially corrected between releases.",
-    "After source-locator closure, create and pilot the separate DeviceManagementService service/version/operation obligation matrix."
+    "Finish the repository-handoff hygiene bootstrap recorded in handoff_integrity.pending_block before any finding work.",
+    "Then revalidate version-scope boundaries for the 70 locator-complete findings starting at ARA-001; 69 remain pending after DR3012V20-005.",
+    "Keep structural locator expansion at DR3012V20-006 paused until the retroactive boundary pending count is zero."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2129,7 +2140,8 @@
     "structural_progress_frozen": false,
     "structural_progress_freeze_count": 40,
     "next_body_revalidation_finding": null,
-    "next_structurally_missing_finding_after_body_backlog": "DR3012V20-006"
+    "next_structurally_missing_finding_after_body_backlog": "DR3012V20-006",
+    "locator_expansion_paused_by_scope_boundary_revalidation": true
   },
   "external_protocol_authority": {
     "policy": "docs/pdf_xsd_semantic_audit/EXTERNAL_PROTOCOL_STANDARD_AUTHORITY.md",
@@ -2172,5 +2184,44 @@
     "docs/pdf_xsd_semantic_audit/FINDING_EVIDENCE_GATE.md",
     "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_COMPLETENESS_POLICY.md"
   ],
-  "restart_rule": "A new chat/maintainer must continue from repository state, not conversational memory: read the canonical workflow contract first, verify actual branch HEAD/latest gate, then derive the next work item from canonical registries."
+  "restart_rule": "A new chat/maintainer must continue from repository state, not conversational memory: read the canonical workflow contract first, verify actual branch HEAD/latest gate, then derive the next work item from canonical registries.",
+  "handoff_integrity": {
+    "policy": "00_START_HERE/HANDOFF_INTEGRITY_POLICY.md",
+    "post_prompt_check_required": true,
+    "canonical_restart_documents": [
+      "00_START_HERE/README.md",
+      "00_START_HERE/AUDIT_WORKFLOW_CONTRACT.md",
+      "00_START_HERE/CURRENT_STATE.json",
+      "00_START_HERE/HANDOFF_INTEGRITY_POLICY.md"
+    ],
+    "legacy_control_documents_noncanonical": [
+      "docs/pdf_xsd_semantic_audit/00_index.md",
+      "docs/pdf_xsd_semantic_audit/AUDIT_HANDOFF.md",
+      "docs/pdf_xsd_semantic_audit/AUDIT_SCOPE_MATRIX.md",
+      "docs/pdf_xsd_semantic_audit/findings.md",
+      "docs/pdf_xsd_semantic_audit/validation_backlog.md",
+      "docs/superbranch_status.md"
+    ],
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
+    "pending_block": "repository_handoff_hygiene_and_version_boundary_guard_adoption",
+    "latest_completed_full_gate_run_id": "37601934452",
+    "latest_completed_full_gate_status": "success",
+    "recovery_instruction": "Complete the repository-handoff hygiene bootstrap: add validators/workflows, mark legacy control docs non-canonical, run the full gate, then finalize terminal_clean.",
+    "resume_instruction": "After this bootstrap is terminal-clean, start retroactive version-scope boundary revalidation at ARA-001; do not resume DR3012V20-006 until boundary pending is zero."
+  },
+  "scope_boundary_progress": {
+    "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
+    "registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
+    "schema": "audit_registry/finding_version_scope_boundary_verification_v0.1.schema.json",
+    "validator": "tools/validate_finding_version_boundaries_v0_1.py",
+    "state": "in_progress",
+    "adoption_locator_count": 70,
+    "tracked_findings": 70,
+    "verified": 1,
+    "pending_revalidation": 69,
+    "next_pending_finding": "ARA-001",
+    "locator_expansion_frozen": true,
+    "future_locator_completion_requires_verified_boundary_same_block": true
+  }
 }
