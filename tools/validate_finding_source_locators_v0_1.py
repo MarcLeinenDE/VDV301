@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import subprocess
 import urllib.parse
@@ -50,13 +51,14 @@ def upstream_blob(repository: str, ref: str, file: str) -> str:
         f"{urllib.parse.quote(file, safe='/')}?ref="
         f"{urllib.parse.quote(ref, safe='')}"
     )
-    req = urllib.request.Request(
-        api,
-        headers={
-            "Accept": "application/vnd.github+json",
-            "User-Agent": "VDV301-locator-validator",
-        },
-    )
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "User-Agent": "VDV301-locator-validator",
+    }
+    token = os.environ.get("GITHUB_TOKEN")
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    req = urllib.request.Request(api, headers=headers)
     with urllib.request.urlopen(req, timeout=20) as resp:
         data = json.load(resp)
     sha = str(data.get("sha", ""))
