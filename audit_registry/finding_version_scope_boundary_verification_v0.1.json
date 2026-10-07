@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 25,
-    "pending_revalidation": 45
+    "verified": 26,
+    "pending_revalidation": 44
   },
-  "next_pending_finding": "CE-011",
+  "next_pending_finding": "CE-012",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -1137,9 +1137,52 @@
     },
     {
       "finding_id": "CE-011",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_CE_011_2026-10-07.md",
+        "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CE011_VERSION_SCOPE_2026-09-25.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.1.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.2.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3_FRESH_2026-09-02.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4_FRESH_2026-09-03.md",
+        "audit_registry/finding_source_locators_v0.1.json"
+      ],
+      "note": "Boundary verified. Common V2.1 is an aligned predecessor: PDF and selected XSD both constrain TransportMode to 0:1 and ConnectionMode is not yet present. V2.2 introduces ConnectionMode and the 0:* PDF cardinalities while the exact selected XSD remains effective 0:1; the mismatch persists through official V2.3 and selected V2.4 candidate/integration.",
+      "scope_conclusion": "First affected version is Common V2.2; official affected scope continues through V2.3; selected V2.4 candidate/integration remains affected. V2.1 is explicitly not affected. Existing corrected semantic/runtime scope is confirmed unchanged.",
+      "boundary_checks": [
+        {
+          "version": "Common V2.1",
+          "role": "predecessor_not_affected",
+          "language_status": "de-en:TransportMode is aligned at 0:1 and ConnectionMode is not yet present",
+          "source_ids": [
+            "COMMON_V2.1"
+          ]
+        },
+        {
+          "version": "Common V2.2",
+          "role": "first_affected_official_release",
+          "language_status": "de-en:PDF documents TransportMode and ConnectionMode 0:*; exact XSD constrains each to effective 0:1",
+          "source_ids": [
+            "COMMON_V2.2"
+          ]
+        },
+        {
+          "version": "Common V2.3",
+          "role": "last_affected_official_release",
+          "language_status": "de-en:0:* PDF versus effective 0:1 XSD mismatch persists",
+          "source_ids": [
+            "COMMON_V2.3"
+          ]
+        },
+        {
+          "version": "Common V2.4",
+          "role": "affected_candidate_integration_lane",
+          "language_status": "de-en:official PDF retains 0:* while selected candidate XSD retains effective 0:1",
+          "source_ids": [
+            "COMMON_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "CE-012",
