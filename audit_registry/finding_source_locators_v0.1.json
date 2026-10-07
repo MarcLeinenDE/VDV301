@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 65,
-    "coverage_complete_count": 65,
+    "locator_entry_count": 66,
+    "coverage_complete_count": 66,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 127
+    "remaining_finding_count": 126
   },
   "entries": [
     {
@@ -9494,6 +9494,68 @@
         "EV-129 pinned evidence run 33765167655 artifact 9897171006 digest sha256:a410cdc7103b2ed01f61570b6435a5b2319d2b80f4fec2802929359058a51cc7",
         "EV-129 page 63 PNG SHA-256 8b5d94ed59fef404b29af34cedb7218e9ae564fbc8f5abcf7ffca055739b2839",
         "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_007_2026-10-07.md"
+      ]
+    },
+    {
+      "finding_id": "DR3012V20-001",
+      "service": "VDV 301-2 Base / Network Discovery",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "German text cites RFC 3927 for 169.254 link-local behavior while English still cites RFC 2927; bibliography points to RFC 3927."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV-Schrift 301-2",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                21
+              ],
+              "section": "2 Verwendete Kommunikationsprotokolle / 2.1 Adressierung / 2.1.1 IP-Adressen / IP Addresses",
+              "table": null,
+              "point_summary": "On the same visible bilingual page, German cites RFC 3927 for ZeroConf/169.254 link-local addressing while English cites RFC 2927 for the same behavior."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV-Schrift 301-2",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                110
+              ],
+              "section": "Regelwerke – Normen und Empfehlungen",
+              "table": null,
+              "point_summary": "Visible bibliography entry (13) names RFC 3927 as 'Dynamic Configuration of IPv4 Link-Local Addresses'; no corresponding RFC 2927 link-local authority is listed."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Documentation/language-variant mismatch only. German body text and the bibliography align on RFC 3927; English retains RFC 2927 for the same 169.254 link-local statement. RFC 3927 is the applicable external authority."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V20_2026-09-03.md",
+        "EV-130 closure run 33781049413",
+        "EV-130 pinned evidence run 33780668141 artifact 9903434312 digest sha256:d5e003a68cce78cff35882a98cd418876482e80f4fec2802929359058a51cc7",
+        "EV-130 page 21 PNG SHA-256 30d0cdb4e77b5f8aedec7a46fb2ac68d98ef8b21dc262e25f80bbe5e41e953cf",
+        "EV-130 page 110 PNG SHA-256 7544bb9c0d39d842e653f244c084d5b78cfa8e01efbbb3726b907d18f646ed4b",
+        "RFC Editor: RFC 3927 - Dynamic Configuration of IPv4 Link-Local Addresses",
+        "RFC Editor: RFC 2927 - MIME Directory Profile for LDAP Schema",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_001_2026-10-07.md"
       ]
     }
   ]
