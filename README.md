@@ -1,3 +1,7 @@
+<!-- VDV301_AUDIT_BRANCH_NOTICE -->
+> [!IMPORTANT]
+> On branch `dev/schema-integration`, audit/project continuation starts at `00_START_HERE/README.md`. The upstream VDV workflow text below is retained as background and is not current audit-state authority.
+
 # VDV 301 
 ## Internet protocol based communication services in public transport - IBIS-IP
 

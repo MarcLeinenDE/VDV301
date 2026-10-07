@@ -1,3 +1,8 @@
+<!-- NON_CANONICAL_CONTINUATION_DOCUMENT -->
+> [!IMPORTANT]
+> **Historische / nicht-kanonische Zustandsdatei.** The matrix below is retained as historical scope/evidence context, not current phase authority.
+> Für aktuellen Arbeitsstand, Zähler, Gates und „NEXT“-Anweisungen ausschließlich `00_START_HERE/README.md`, `AUDIT_WORKFLOW_CONTRACT.md`, `HANDOFF_INTEGRITY_POLICY.md` und `CURRENT_STATE.json` verwenden. „current/next/active/pending“-Aussagen weiter unten sind historische Momentaufnahmen.
+
 # PDF/XSD audit scope matrix
 
 Status: semantic/provenance first pass completed; executable XSD evidence completed; deterministic runtime/protocol evidence RV-001 through RV-004 completed. Remaining technical work is live/integration evidence plus SDK implementation.

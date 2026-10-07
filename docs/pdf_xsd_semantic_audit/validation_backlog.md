@@ -1,3 +1,8 @@
+<!-- NON_CANONICAL_CONTINUATION_DOCUMENT -->
+> [!IMPORTANT]
+> **Historische / nicht-kanonische Zustandsdatei.** The backlog below is historical/supporting inventory; current priority comes only from CURRENT_STATE.json.
+> Für aktuellen Arbeitsstand, Zähler, Gates und „NEXT“-Anweisungen ausschließlich `00_START_HERE/README.md`, `AUDIT_WORKFLOW_CONTRACT.md`, `HANDOFF_INTEGRITY_POLICY.md` und `CURRENT_STATE.json` verwenden. „current/next/active/pending“-Aussagen weiter unten sind historische Momentaufnahmen.
+
 # PDF/XSD semantic audit - current validation backlog
 
 Status: deterministic repository validation includes EV-116 for exact official SystemMonitoringService V2.2 operation-name/generic-subscription evidence, while EV-115 retains its explicit non-release authority guard. Remaining work includes continuing Deep Read Pass 2, mandatory post-Deep-Read legacy-finding revalidation, targeted finding regression, visual closure, live/integration evidence and later provider-specific work.

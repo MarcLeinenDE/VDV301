@@ -1,3 +1,8 @@
+<!-- NON_CANONICAL_CONTINUATION_DOCUMENT -->
+> [!IMPORTANT]
+> **Historische / nicht-kanonische Zustandsdatei.** The narrative index below is supporting history; canonical finding state is machine-readable in registries named by CURRENT_STATE.json.
+> Für aktuellen Arbeitsstand, Zähler, Gates und „NEXT“-Anweisungen ausschließlich `00_START_HERE/README.md`, `AUDIT_WORKFLOW_CONTRACT.md`, `HANDOFF_INTEGRITY_POLICY.md` und `CURRENT_STATE.json` verwenden. „current/next/active/pending“-Aussagen weiter unten sind historische Momentaufnahmen.
+
 # PDF/XSD semantic audit - consolidated findings index
 
 Status: central current-state index after completion of the semantic/provenance first pass, executable XSD evidence, deterministic runtime evidence and ongoing Deep Read Pass 2.

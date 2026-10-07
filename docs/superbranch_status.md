@@ -1,3 +1,8 @@
+<!-- NON_CANONICAL_CONTINUATION_DOCUMENT -->
+> [!IMPORTANT]
+> **Historische / nicht-kanonische Zustandsdatei.** This file describes branch purpose/history only; it does not define current audit phase or NEXT.
+> Für aktuellen Arbeitsstand, Zähler, Gates und „NEXT“-Anweisungen ausschließlich `00_START_HERE/README.md`, `AUDIT_WORKFLOW_CONTRACT.md`, `HANDOFF_INTEGRITY_POLICY.md` und `CURRENT_STATE.json` verwenden. „current/next/active/pending“-Aussagen weiter unten sind historische Momentaufnahmen.
+
 # Schema integration superbranch status
 
 Status: working branch for the VDV301 Tool, not an upstream pull-request branch.
