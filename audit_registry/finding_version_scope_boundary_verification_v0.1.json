@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 47,
-    "pending_revalidation": 23
+    "verified": 48,
+    "pending_revalidation": 22
   },
-  "next_pending_finding": "DISC-002",
+  "next_pending_finding": "DISC-003",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -2567,9 +2567,67 @@
     },
     {
       "finding_id": "DISC-002",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DISC_002_2026-10-08.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DISC_002_2026-10-06.md",
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DISC_2026-09-03.md",
+        "audit_registry/finding_source_locators_v0.1.json",
+        "RFC Editor https://www.rfc-editor.org/info/rfc2927/ and https://www.rfc-editor.org/info/rfc3927/ reviewed 2026-10-08",
+        "Byte-pinned VDV V1.0 DE, V2.0/V2.1 Base EN, V2.2/V2.3/V2.4 GC EN body pins and EV-126 run 33754189273"
+      ],
+      "note": "Version- and language-specific reference number error verified. V1.0 German p20 erroneously cites RFC2927 for 169.254 automatic IP addressing and its own p80 bibliography calls RFC2927 MIME Directory Profile for LDAP Schema. V2.0/V2.1 English repeats RFC2927 while same-page German correctly cites RFC3927; V2.2/2.3/2.4 English preserves RFC2927, German changes allocation semantics separately (DISC-001). RFC Editor establishes RFC3927 as link-local specification. No corrected English successor is established through V2.4.",
+      "scope_conclusion": "The RFC2927 reference defect affects V1.0 German and English language tracks V2.0, V2.1, V2.2, V2.3, V2.4; German V2.0/V2.1 citation RFC3927 is a negative language control; no universal IP-allocation duty arises from correcting the RFC number. Documentation-only, unchanged scope.",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-2 V1.0 DE",
+          "role": "first_affected_available_publication",
+          "language_status": "de:IP auto-config p20 incorrectly cites RFC2927, bibliography p80 independently names RFC2927 LDAP MIME; en:unavailable",
+          "source_ids": [
+            "VDV301-2_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "role": "affected_english_only",
+          "language_status": "de:correct RFC3927 link-local citation, unaffected reference number; en:incorrect RFC2927",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "role": "affected_english_only",
+          "language_status": "de:correct RFC3927 reference; en:incorrect RFC2927",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "VDV 301-2 General Conventions V2.2",
+          "role": "affected_english_only",
+          "language_status": "de:no mandatory allocation method, no incorrect RFC2927 requirement; en:incorrect RFC2927 in ZeroConf link-local context",
+          "source_ids": [
+            "VDV301-2_GC_V2.2"
+          ]
+        },
+        {
+          "version": "VDV 301-2 General Conventions V2.3",
+          "role": "affected_english_only",
+          "language_status": "de:fixed IP/DHCP best practice without RFC2927; en:incorrect RFC2927 persists",
+          "source_ids": [
+            "VDV301-2_GC_V2.3"
+          ]
+        },
+        {
+          "version": "VDV 301-2 General Conventions V2.4",
+          "role": "last_checked_affected_english_publication",
+          "language_status": "de:no incorrect RFC2927 reference; en:incorrect RFC2927 remains on p23; no corrected English successor pinned",
+          "source_ids": [
+            "VDV301-2_GC_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DISC-003",

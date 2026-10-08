@@ -2003,12 +2003,12 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 47,
-    "version_scope_boundary_pending_count": 23,
-    "version_scope_boundary_next_finding": "DISC-002",
-    "version_scope_boundary_latest_finding": "DISC-001",
+    "version_scope_boundary_verified_count": 48,
+    "version_scope_boundary_pending_count": 22,
+    "version_scope_boundary_next_finding": "DISC-003",
+    "version_scope_boundary_latest_finding": "DISC-002",
     "version_scope_boundary_latest_gate_run_id": "37834161058",
-    "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DISC_001_2026-10-08.md",
+    "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DISC_002_2026-10-08.md",
     "latest_scope_correction": "BG-001 expanded from release-context pair 1.0/2.0 to complete official retained V1.0 path lineage through VDV-301-2.3; semantic/locator/runtime scopes synchronized."
   },
   "evidence": {
@@ -2126,10 +2126,10 @@
     "version_scope_boundary_pending_count": 46
   },
   "next_actions": [
-    "Next DISC-002 after final HEAD gates.",
-    "Continue DISC-003 after independent predecessor terminal.",
-    "Stop on failed gate, ambiguity or scope correction.",
-    "Locator expansion frozen."
+    "DISC-002 gate_pending: full gate -> terminal_clean handoff -> final gate.",
+    "Then DISC-003 independently.",
+    "Stop on gate failure/ambiguous scope correction.",
+    "Keep structural locator expansion paused."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2207,12 +2207,14 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "37834161058",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "37834160988",
-    "resume_instruction": "DISC-001 terminal_clean at 47/70. Next DISC-002 after final HEAD gate success."
+    "resume_instruction": "DISC-002 evidence committed; 48/70 verified. Require full schema-audit SUCCESS before terminal_clean and final handoff-integrity SUCCESS; do not start DISC-003 yet.",
+    "pending_block": "DISC-002 boundary revalidation",
+    "recovery_instruction": "DISC-002 evidence committed; 48/70 verified. Require full schema-audit SUCCESS before terminal_clean and final handoff-integrity SUCCESS; do not start DISC-003 yet."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2222,14 +2224,14 @@
     "state": "in_progress",
     "adoption_locator_count": 70,
     "tracked_findings": 70,
-    "verified": 47,
-    "pending_revalidation": 23,
-    "next_pending_finding": "DISC-002",
+    "verified": 48,
+    "pending_revalidation": 22,
+    "next_pending_finding": "DISC-003",
     "locator_expansion_frozen": true,
     "future_locator_completion_requires_verified_boundary_same_block": true,
-    "latest_verified_finding": "DISC-001",
+    "latest_verified_finding": "DISC-002",
     "latest_gate_run_id": "37834161058",
-    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DISC_001_2026-10-08.md"
+    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DISC_002_2026-10-08.md"
   },
   "boundary_revalidation_package_mode": {
     "enabled": true,
