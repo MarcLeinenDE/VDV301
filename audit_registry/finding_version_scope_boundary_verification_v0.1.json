@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 39,
-    "pending_revalidation": 31
+    "verified": 40,
+    "pending_revalidation": 30
   },
-  "next_pending_finding": "CE-025",
+  "next_pending_finding": "CE-026",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -2081,9 +2081,77 @@
     },
     {
       "finding_id": "CE-025",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_CE_025_2026-10-08.md",
+        "audit_registry/finding_source_locators_v0.1.json",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V1.0.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.0.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.1.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.2.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3_FRESH_2026-09-02.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4_FRESH_2026-09-03.md"
+      ],
+      "note": "Boundary verified across the retained Common lineage. Historical documentation from V1.0 through V2.3 uses Reply-Path while the selected XSDs require ReplyPath. V2.4 documentation is corrected to ReplyPath and aligns with the selected V2.4 XSD, making V2.4 an explicit non-affected correction boundary. No earlier retained Common publication exists.",
+      "scope_conclusion": "Affected from earliest available Common V1.0 through official V2.3. Common V2.4 is explicitly not affected because both PDF and selected XSD use ReplyPath. Existing semantic/runtime scope is unchanged.",
+      "boundary_checks": [
+        {
+          "version": "Common before V1.0",
+          "role": "no_predecessor_publication_available",
+          "language_status": "not_applicable:no earlier retained Common publication exists",
+          "source_ids": [
+            "COMMON_V1.0"
+          ]
+        },
+        {
+          "version": "Common V1.0",
+          "role": "first_affected_official_release",
+          "language_status": "de-en:PDF Subscribe/Unsubscribe tables use Reply-Path while exact XSD uses ReplyPath",
+          "source_ids": [
+            "COMMON_V1.0"
+          ]
+        },
+        {
+          "version": "Common V2.0",
+          "role": "affected_official_release",
+          "language_status": "de-en:Reply-Path/ReplyPath mismatch persists",
+          "source_ids": [
+            "COMMON_V2.0"
+          ]
+        },
+        {
+          "version": "Common V2.1",
+          "role": "affected_official_release",
+          "language_status": "de-en:Reply-Path/ReplyPath mismatch persists",
+          "source_ids": [
+            "COMMON_V2.1"
+          ]
+        },
+        {
+          "version": "Common V2.2",
+          "role": "affected_official_release",
+          "language_status": "de-en:Reply-Path/ReplyPath mismatch persists",
+          "source_ids": [
+            "COMMON_V2.2"
+          ]
+        },
+        {
+          "version": "Common V2.3",
+          "role": "last_affected_official_release",
+          "language_status": "de-en:Reply-Path/ReplyPath mismatch persists",
+          "source_ids": [
+            "COMMON_V2.3"
+          ]
+        },
+        {
+          "version": "Common V2.4",
+          "role": "successor_not_affected_corrected_documentation",
+          "language_status": "de-en:PDF and selected XSD both use ReplyPath",
+          "source_ids": [
+            "COMMON_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "CE-026",
