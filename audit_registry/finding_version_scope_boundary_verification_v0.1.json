@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 42,
-    "pending_revalidation": 28
+    "verified": 43,
+    "pending_revalidation": 27
   },
-  "next_pending_finding": "CIS-002",
+  "next_pending_finding": "CIS-003",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -2244,9 +2244,68 @@
     },
     {
       "finding_id": "CIS-002",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_CIS_002_2026-10-08.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_CIS_002_2026-10-06.md",
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CIS_2026-09-03.md",
+        "audit_registry/finding_source_locators_v0.1.json",
+        "Official VDVde/VDV301 release trees VDV-301-2.0/2.1/2.2/2.3 checked 2026-10-08",
+        "Official VDV IP-KOM-ÖV publication index checked 2026-10-08 (CIS V1.1, V2.0, V2.2, V2.3; no CIS V2.4 publication)",
+        "EV-125 run 33744039627"
+      ],
+      "note": "Non-defect scope confirmed for exact official CIS V2.0, V2.2, V2.3 routes. The PDFs explicitly delegate Subscribe/Unsubscribe request/response to VDV 301-2-1 Common; these structures exist in each selected dependency. Global VDV-301-2.1 release reuses CIS V2.0 blob fa8f0a51..., not an independent CIS V2.1 service. Historical CIS V1.1 remains unresolved for strict authority; candidate CIS V2.4 is not a published CIS V2.4 documentation lane.",
+      "scope_conclusion": "No semantic scope change: intentional Common delegation confirmed on CIS V2.0, V2.2, V2.3 official service profiles; CIS V2.0 reused at 2.1 global release context. CIS V1.1 strict authority unresolved and V2.4 candidate lacks an official CIS V2.4 PDF comparison; neither is silently added. Finding remains non_defect/no_runtime_diagnostic.",
+      "boundary_checks": [
+        {
+          "version": "CIS V1.1",
+          "role": "predecessor_authority_unresolved_not_adjudicated",
+          "language_status": "de-en:published V1.1 has no established strict release-XSD authority (CIS-001); no normative V1.1 routing extrapolation",
+          "source_ids": [
+            "CIS_V1.1"
+          ]
+        },
+        {
+          "version": "CIS V2.0",
+          "role": "first_in_scope_official_release",
+          "language_status": "de-en:PDF explicit VDV 301-2-1 Common delegation and matching Common generic Subscribe/Unsubscribe structures",
+          "source_ids": [
+            "CIS_V2.0"
+          ]
+        },
+        {
+          "version": "Global release VDV-301-2.1",
+          "role": "carry_forward_not_separate_service_version",
+          "language_status": "de-en:VDV-301-2.1 tree retains exact CIS V2.0 XSD blob fa8f0a51...; no independent CIS V2.1 profile",
+          "source_ids": [
+            "CIS_V2.0"
+          ]
+        },
+        {
+          "version": "CIS V2.2",
+          "role": "in_scope_official_release",
+          "language_status": "de-en:PDF Common delegation and selected XSD Common structures persist",
+          "source_ids": [
+            "CIS_V2.2"
+          ]
+        },
+        {
+          "version": "CIS V2.3",
+          "role": "last_in_scope_official_release",
+          "language_status": "de-en:PDF Common delegation and selected XSD Common structures persist",
+          "source_ids": [
+            "CIS_V2.3"
+          ]
+        },
+        {
+          "version": "CIS V2.4",
+          "role": "successor_not_claimed_candidate_only",
+          "language_status": "de-en:root candidate CIS V2.4 XSD exists; no official CIS V2.4 PDF located on checked VDV publication index, so this documentation-specific finding is not extended",
+          "source_ids": [
+            "CIS_V2.3"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "CIS-003",
