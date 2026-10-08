@@ -2126,10 +2126,10 @@
     "version_scope_boundary_pending_count": 46
   },
   "next_actions": [
-    "Next boundary finding: CE-021.",
-    "After CE-021 reaches terminal_clean, continue with CE-022, CE-023 and CE-024.",
-    "Stop on any failed gate, ambiguous boundary or material semantic-scope correction.",
-    "Keep structural locator expansion at DR3012V20-006 paused until the boundary backlog is zero."
+    "CE-020 semantic/boundary evidence is complete; this HEAD exists only to re-establish terminal-head gate evidence after GitHub did not create runs for cf4f9c6d2d66b0d8d79fcf0a7e2fa594fa3ab63d.",
+    "Require schema-audit-validation SUCCESS and handoff-integrity SUCCESS on this retry HEAD, then write a final terminal_clean CE-020 handoff.",
+    "Only after that start CE-021.",
+    "Keep structural locator expansion at DR3012V20-006 paused until the retroactive boundary backlog is zero."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2207,12 +2207,14 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "37827518057",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "37827518106",
-    "resume_instruction": "CE-020 is terminal_clean at 35/70 verified. Start CE-021 next."
+    "resume_instruction": "CE-020 evidence already passed full gate 37827518057. The first terminal_clean commit cf4f9c6d2d66b0d8d79fcf0a7e2fa594fa3ab63d received no GitHub Actions runs/check-suites. Require full schema-audit-validation and handoff-integrity SUCCESS on this retry HEAD before starting CE-021.",
+    "pending_block": "CE-020 terminal-head verification retry",
+    "recovery_instruction": "CE-020 evidence already passed full gate 37827518057. The first terminal_clean commit cf4f9c6d2d66b0d8d79fcf0a7e2fa594fa3ab63d received no GitHub Actions runs/check-suites. Require full schema-audit-validation and handoff-integrity SUCCESS on this retry HEAD before starting CE-021."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
