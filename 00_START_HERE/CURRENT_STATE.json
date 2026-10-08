@@ -2003,12 +2003,12 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 38,
-    "version_scope_boundary_pending_count": 32,
-    "version_scope_boundary_next_finding": "CE-024",
-    "version_scope_boundary_latest_finding": "CE-023",
+    "version_scope_boundary_verified_count": 39,
+    "version_scope_boundary_pending_count": 31,
+    "version_scope_boundary_next_finding": "CE-025",
+    "version_scope_boundary_latest_finding": "CE-024",
     "version_scope_boundary_latest_gate_run_id": "37828910228",
-    "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_CE_023_2026-10-08.md",
+    "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_CE_024_2026-10-08.md",
     "latest_scope_correction": "BG-001 expanded from release-context pair 1.0/2.0 to complete official retained V1.0 path lineage through VDV-301-2.3; semantic/locator/runtime scopes synchronized."
   },
   "evidence": {
@@ -2126,8 +2126,8 @@
     "version_scope_boundary_pending_count": 46
   },
   "next_actions": [
-    "Next boundary finding: CE-024.",
-    "After CE-024 reaches terminal_clean, close the CE-020..CE-024 package and continue from the next canonical pending finding.",
+    "CE-024 is gate_pending: require full schema/audit gate SUCCESS, then terminal_clean handoff and final handoff-integrity SUCCESS.",
+    "After CE-024 is terminal_clean, close the CE-020..CE-024 package and continue from CE-025.",
     "Stop on any failed gate, ambiguous boundary or material semantic-scope correction.",
     "Keep structural locator expansion at DR3012V20-006 paused until the boundary backlog is zero."
   ],
@@ -2207,12 +2207,14 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "37828910228",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "37828910103",
-    "resume_instruction": "CE-023 is terminal_clean at 38/70 verified. Start CE-024 next."
+    "resume_instruction": "Inspect the full schema/audit gate for the current HEAD. CE-024 evidence and 39/70 boundary state are persisted. On SUCCESS finalize CE-024 as terminal_clean and close the CE-020..CE-024 package; on failure repair before CE-025.",
+    "pending_block": "CE-024 version-scope boundary revalidation",
+    "recovery_instruction": "Inspect the full schema/audit gate for the current HEAD. CE-024 evidence and 39/70 boundary state are persisted. On SUCCESS finalize CE-024 as terminal_clean and close the CE-020..CE-024 package; on failure repair before CE-025."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2222,14 +2224,14 @@
     "state": "in_progress",
     "adoption_locator_count": 70,
     "tracked_findings": 70,
-    "verified": 38,
-    "pending_revalidation": 32,
-    "next_pending_finding": "CE-024",
+    "verified": 39,
+    "pending_revalidation": 31,
+    "next_pending_finding": "CE-025",
     "locator_expansion_frozen": true,
     "future_locator_completion_requires_verified_boundary_same_block": true,
-    "latest_verified_finding": "CE-023",
+    "latest_verified_finding": "CE-024",
     "latest_gate_run_id": "37828910228",
-    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_CE_023_2026-10-08.md"
+    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_CE_024_2026-10-08.md"
   },
   "boundary_revalidation_package_mode": {
     "enabled": true,
