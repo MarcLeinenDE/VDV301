@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 40,
-    "pending_revalidation": 30
+    "verified": 41,
+    "pending_revalidation": 29
   },
-  "next_pending_finding": "CE-026",
+  "next_pending_finding": "CIS-001",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -2155,9 +2155,50 @@
     },
     {
       "finding_id": "CE-026",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_CE_026_2026-10-08.md",
+        "audit_registry/finding_source_locators_v0.1.json",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V1.0.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3_FRESH_2026-09-02.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4_FRESH_2026-09-03.md"
+      ],
+      "note": "Historical Common V1.0-V2.3 PDFs use BeaconPoint.Description while selected XSDs require typo-like BeaconPoint.Desciption. Selected V2.4 corrects BeaconPoint to Description and aligns with its PDF.",
+      "scope_conclusion": "Affected Common V1.0-V2.3; V2.4 is an explicit non-affected correction boundary. Existing semantic/runtime scope unchanged.",
+      "boundary_checks": [
+        {
+          "version": "Common before V1.0",
+          "role": "no_predecessor_publication_available",
+          "language_status": "not_applicable:no earlier retained Common publication",
+          "source_ids": [
+            "COMMON_V1.0"
+          ]
+        },
+        {
+          "version": "Common V1.0",
+          "role": "first_affected_official_release",
+          "language_status": "de-en:PDF Description; XSD Desciption",
+          "source_ids": [
+            "COMMON_V1.0"
+          ]
+        },
+        {
+          "version": "Common V2.3",
+          "role": "last_affected_official_release",
+          "language_status": "de-en:Description/Desciption mismatch persists",
+          "source_ids": [
+            "COMMON_V2.3"
+          ]
+        },
+        {
+          "version": "Common V2.4",
+          "role": "successor_not_affected_corrected_xsd",
+          "language_status": "de-en:PDF and selected candidate XSD both use Description",
+          "source_ids": [
+            "COMMON_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "CIS-001",
