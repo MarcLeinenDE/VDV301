@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 41,
-    "pending_revalidation": 29
+    "verified": 42,
+    "pending_revalidation": 28
   },
-  "next_pending_finding": "CIS-001",
+  "next_pending_finding": "CIS-002",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -2202,9 +2202,45 @@
     },
     {
       "finding_id": "CIS-001",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_CIS_001_2026-10-08.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_CIS_001_2026-10-06.md",
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CIS_2026-09-03.md",
+        "docs/pdf_xsd_semantic_audit/FINDING_READINESS_RECONCILIATION_2026-09-14.md",
+        "audit_registry/finding_source_locators_v0.1.json",
+        "Official VDVde/VDV301 release tags VDV-301-1.0 and VDV-301-2.0 trees, checked 2026-10-08",
+        "VDVde/VDV301 untagged history commit 0a5228a768c7d710c40f5f99fbdce2e544d19883, CIS V1.1 blob 5957e27f128a191c794b0c8081b531a07126784a",
+        "EV-125 run 33744039627; EV-167 run 34843562886"
+      ],
+      "note": "V1.1-only release authority gap confirmed. Official release-tagged CIS V1.0 exists (blob 7a95fc...) and official release-tagged CIS V2.0 exists (blob fa8f0a...), but no VDV-301-1.1 release tag with matching CIS V1.1 XSD is established. The untagged V1.1 working XSD omits SpeakerActive and StopInformationActive published in the V1.1 PDF; it remains evidence only.",
+      "scope_conclusion": "First and only affected version is published CIS V1.1: official PDF available but strict release-XSD authority unresolved. CIS V1.0 is predecessor with official tagged authority, and CIS V2.0 is first successor with tagged authority. No backfilling, candidate promotion or latest-wins permitted; semantic/runtime scope unchanged.",
+      "boundary_checks": [
+        {
+          "version": "CIS V1.0",
+          "role": "predecessor_not_affected",
+          "language_status": "de-en:VDV-301-1.0 release tree contains tagged CIS V1.0 XSD 7a95fc03c06c8c84d078bf06d18ef5873a15c215; no V1.1 authority gap applies",
+          "source_ids": [
+            "CIS_V1.1"
+          ]
+        },
+        {
+          "version": "CIS V1.1",
+          "role": "first_affected_unresolved_release_authority",
+          "language_status": "de-en:official V1.1 PDF includes SpeakerActive and StopInformationActive; no matching release-tagged V1.1 CIS XSD established; untagged working XSD omits both",
+          "source_ids": [
+            "CIS_V1.1"
+          ]
+        },
+        {
+          "version": "CIS V2.0",
+          "role": "successor_not_affected",
+          "language_status": "de-en:VDV-301-2.0 release tree contains official tagged CIS V2.0 XSD fa8f0a51ad5f612660c9532c8557ad1ca473a908; V1.1 authority gap ends",
+          "source_ids": [
+            "CIS_V2.0"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "CIS-002",
