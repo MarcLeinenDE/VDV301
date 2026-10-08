@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 34,
-    "pending_revalidation": 36
+    "verified": 35,
+    "pending_revalidation": 35
   },
-  "next_pending_finding": "CE-020",
+  "next_pending_finding": "CE-021",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -1787,9 +1787,52 @@
     },
     {
       "finding_id": "CE-020",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_CE_020_2026-10-08.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_CE_020_2026-09-28.md",
+        "audit_registry/finding_source_locators_v0.1.json",
+        "IBIS-IP_common_V2.2.xsd",
+        "IBIS-IP_common_V2.3.xsd",
+        "schema_variants/upstream_pr_30/IBIS-IP_common_V2.3.xsd",
+        "IBIS-IP_common_V2.4.xsd"
+      ],
+      "note": "Boundary verified as a V2.3-specific authority split, not a generic InternationalTextType PDF/XSD mismatch. Official V2.3 remains the default selected authority and retained upstream PR #30 is an explicit candidate overlay with a different accepted XML shape. V2.2 and V2.4 have no corresponding retained alternate authority variant in the canonical model, so the release-authority-gap finding is not widened.",
+      "scope_conclusion": "CE-020 remains confined to Common V2.3 official authority plus the explicit Common V2.3 PR #30 candidate overlay. No predecessor or successor authority split is present in the canonical variant inventory. Existing semantic/runtime scope is unchanged.",
+      "boundary_checks": [
+        {
+          "version": "Common V2.2",
+          "role": "predecessor_not_affected",
+          "language_status": "de-en:no competing retained authority variant; exact selected XSD uses primitive xs:string/xs:language",
+          "source_ids": [
+            "COMMON_V2.2"
+          ]
+        },
+        {
+          "version": "Common V2.3 official",
+          "role": "affected_official_release",
+          "language_status": "de-en:official PDF documents IBIS-IP wrapper types while official selected XSD uses primitive xs:string/xs:language",
+          "source_ids": [
+            "COMMON_V2.3"
+          ]
+        },
+        {
+          "version": "Common V2.3 PR #30",
+          "role": "affected_candidate_integration_lane",
+          "language_status": "de-en:explicit candidate overlay changes InternationalTextType to IBIS-IP.string/IBIS-IP.language and must be opt-in",
+          "source_ids": [
+            "COMMON_V2.3"
+          ]
+        },
+        {
+          "version": "Common V2.4",
+          "role": "successor_not_affected",
+          "language_status": "de-en:no competing retained authority variant; selected candidate/integration XSD uses primitive xs:string/xs:language",
+          "source_ids": [
+            "COMMON_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "CE-021",
