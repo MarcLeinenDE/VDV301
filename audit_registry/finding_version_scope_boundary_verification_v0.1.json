@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 46,
-    "pending_revalidation": 24
+    "verified": 47,
+    "pending_revalidation": 23
   },
-  "next_pending_finding": "DISC-001",
+  "next_pending_finding": "DISC-002",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -2503,9 +2503,67 @@
     },
     {
       "finding_id": "DISC-001",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DISC_001_2026-10-08.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DISC_001_2026-10-06.md",
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DISC_2026-09-03.md",
+        "audit_registry/finding_source_locators_v0.1.json",
+        "VDV pinned V1.0 DE / Base V2.0 V2.1 bilingual / General Conventions V2.2 V2.3 V2.4 DE+EN visible PDF body (EV-126 run 33754189273)",
+        "RFC Editor RFC2927 and RFC3927 verified 2026-10-08"
+      ],
+      "note": "Version/language boundary verified: V1.0 DE is ZeroConf/169.254 with wrong RFC2927; V2.0/V2.1 bilingual retains ZeroConf/169.254 but has DE RFC3927 vs EN RFC2927; V2.2/V2.3/V2.4 DE changes allocation policy to no prescribed method (fixed IP/DHCP best practice), while EN retains mandatory ZeroConf/169.254 and stale RFC2927. Differences after V2.2 are materially semantic, not only RFC number. Latest retained reviewed V2.4 remains conflicting; no corrected successor established.",
+      "scope_conclusion": "Confirmed documentation-only affected chain: V1.0 DE historical ZeroConf wording, V2.0/V2.1 language-specific citation difference, V2.2-V2.4 DE/EN allocation-policy contradiction; no XSD contract or provider fail. No version or language track may be silently chosen as corrected normative authority.",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-2 V1.0 DE",
+          "role": "earliest_available_documented_predecessor",
+          "language_status": "de:ZeroConf/169.254 prescribed; RFC2927 cited; en: no separate English source established",
+          "source_ids": [
+            "VDV301-2_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "role": "affected_bilingual_citation_divergence",
+          "language_status": "de:ZeroConf/169.254 cites RFC3927; en:same allocation rule cites RFC2927; no allocation policy split yet",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "role": "affected_bilingual_citation_divergence",
+          "language_status": "de:ZeroConf cites RFC3927; en:ZeroConf cites RFC2927; policy otherwise aligned",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "VDV 301-2 General Conventions V2.2",
+          "role": "first_affected_bilingual_allocation_policy_contradiction",
+          "language_status": "de:no prescribed allocation method, fixed IP/DHCP best practice; en:ZeroConf/169.254 required, RFC2927",
+          "source_ids": [
+            "VDV301-2_GC_V2.2"
+          ]
+        },
+        {
+          "version": "VDV 301-2 General Conventions V2.3",
+          "role": "affected_bilingual_allocation_policy_contradiction",
+          "language_status": "de:no allocation method mandate, fixed IP/DHCP best practice; en:ZeroConf/169.254 mandatory",
+          "source_ids": [
+            "VDV301-2_GC_V2.3"
+          ]
+        },
+        {
+          "version": "VDV 301-2 General Conventions V2.4",
+          "role": "last_checked_affected_publication_no_corrected_successor",
+          "language_status": "de:no prescribed allocation method (p20); en:ZeroConf/169.254 continues (p23); no corrected successor evidenced",
+          "source_ids": [
+            "VDV301-2_GC_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DISC-002",
