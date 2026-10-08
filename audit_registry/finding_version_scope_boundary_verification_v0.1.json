@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 37,
-    "pending_revalidation": 33
+    "verified": 38,
+    "pending_revalidation": 32
   },
-  "next_pending_finding": "CE-023",
+  "next_pending_finding": "CE-024",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -1984,9 +1984,50 @@
     },
     {
       "finding_id": "CE-023",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_CE_023_2026-10-08.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_BODY_REVALIDATION_CE_022_023_024_2026-10-06.md",
+        "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_CE023_V23_SCOPE_2026-10-06.md",
+        "audit_registry/finding_source_locators_v0.1.json",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_CE_023_2026-09-28.md (historical/superseded V2.2-only conclusion)"
+      ],
+      "note": "Boundary verified with corrected current scope. V2.1 is an unaffected predecessor because the relevant NetexMode family is introduced in V2.2. Exact visible-body evidence confirms the corrupt duplicate NetexMode/Message table in both V2.2 and V2.3. V2.4 is an explicit unaffected successor control: section 2.34 is Point and the duplicate NetexMode table is absent. The older V2.2-only conclusion is historical and superseded.",
+      "scope_conclusion": "Documentation-only defect affects Common V2.2 and V2.3. Common V2.1 is predecessor-not-affected; Common V2.4 is successor-not-affected. No XSD/runtime exception follows. Existing corrected semantic scope is confirmed unchanged.",
+      "boundary_checks": [
+        {
+          "version": "Common V2.1",
+          "role": "predecessor_not_affected",
+          "language_status": "de-en:relevant NetexMode family not yet present; no duplicate NetexMode table defect",
+          "source_ids": [
+            "COMMON_V2.1"
+          ]
+        },
+        {
+          "version": "Common V2.2",
+          "role": "first_affected_documentation_release",
+          "language_status": "de-en:second NetexMode table visibly contains Message fields while exact XSD contains proper NetexMode choice",
+          "source_ids": [
+            "COMMON_V2.2"
+          ]
+        },
+        {
+          "version": "Common V2.3",
+          "role": "last_affected_documentation_release",
+          "language_status": "de-en:p.27 visibly continues section 2.34 with corrupt Message table captioned as NetexMode; prior p.26-only disproof superseded",
+          "source_ids": [
+            "COMMON_V2.3"
+          ]
+        },
+        {
+          "version": "Common V2.4",
+          "role": "successor_not_affected",
+          "language_status": "de-en:section 2.34 is Point; corrupt second NetexMode table is absent",
+          "source_ids": [
+            "COMMON_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "CE-024",
