@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 44,
-    "pending_revalidation": 26
+    "verified": 45,
+    "pending_revalidation": 25
   },
-  "next_pending_finding": "CIS-004",
+  "next_pending_finding": "CIS-005",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -2383,9 +2383,75 @@
     },
     {
       "finding_id": "CIS-004",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_CIS_004_2026-10-08.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_CIS_004_2026-10-06.md",
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CIS_2026-09-03.md",
+        "audit_registry/finding_source_locators_v0.1.json",
+        "Official VDVde/VDV301 CIS V1.0/V2.0/V2.2/V2.3 exact tagged schemas checked 2026-10-08",
+        "EV-125 run 33744039627"
+      ],
+      "note": "Confirmed version-scope boundary: V1.0 root model lacks the V2.x RetrievePartialStopSequenceRequest global root; published V1.1 has unresolved strict schema authority. On official CIS V2.0/V2.2/V2.3 PDFs, Table 18 shortens the request label to RetrievePartialStopRequest although same-document Table 1 and release-tagged XSDs use RetrievePartialStopSequenceRequest. Global release 2.1 carries CIS V2.0 schema; candidate CIS V2.4 has no matching published official CIS V2.4 PDF for extending a PDF-defect claim.",
+      "scope_conclusion": "CIS V2.0, V2.2 and V2.3 official releases affected, V2.0 reused in global 2.1 release. Earlier strict V1.1 unresolved, V1.0 different model, V2.4 candidate only. Existing semantic/runtime scope unchanged.",
+      "boundary_checks": [
+        {
+          "version": "CIS V1.0",
+          "role": "predecessor_not_same_root_model",
+          "language_status": "de-en:earlier CIS V1.0 XSD does not define V2.x global RetrievePartialStopSequenceRequest/short alternative",
+          "source_ids": [
+            "CIS_V2.0"
+          ]
+        },
+        {
+          "version": "CIS V1.1",
+          "role": "predecessor_authority_unresolved_not_adjudicated",
+          "language_status": "de-en:strict release XSD authority unresolved; do not infer mismatch",
+          "source_ids": [
+            "CIS_V1.1"
+          ]
+        },
+        {
+          "version": "CIS V2.0",
+          "role": "first_affected_official_release",
+          "language_status": "de-en:PDF p20 Table18 short root vs official XSD full RetrievePartialStopSequenceRequest, PDF Table1 full name",
+          "source_ids": [
+            "CIS_V2.0"
+          ]
+        },
+        {
+          "version": "VDV-301-2.1 global release",
+          "role": "carry_forward_not_separate_service_version",
+          "language_status": "de-en:reuses CIS V2.0 schema, not an independent CIS V2.1 publication",
+          "source_ids": [
+            "CIS_V2.0"
+          ]
+        },
+        {
+          "version": "CIS V2.2",
+          "role": "affected_official_release",
+          "language_status": "de-en:PDF p21 Table18 short root vs official XSD full root",
+          "source_ids": [
+            "CIS_V2.2"
+          ]
+        },
+        {
+          "version": "CIS V2.3",
+          "role": "last_affected_official_release",
+          "language_status": "de-en:PDF p21 Table18 short root vs official XSD full root",
+          "source_ids": [
+            "CIS_V2.3"
+          ]
+        },
+        {
+          "version": "CIS V2.4",
+          "role": "successor_not_claimed_candidate_only",
+          "language_status": "de-en:candidate XSD retains full root; no official CIS V2.4 PDF pinned as a published documentation comparison",
+          "source_ids": [
+            "CIS_V2.3"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "CIS-005",
