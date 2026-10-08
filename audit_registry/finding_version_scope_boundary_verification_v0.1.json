@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 45,
-    "pending_revalidation": 25
+    "verified": 46,
+    "pending_revalidation": 24
   },
-  "next_pending_finding": "CIS-005",
+  "next_pending_finding": "DISC-001",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -2455,9 +2455,51 @@
     },
     {
       "finding_id": "CIS-005",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_CIS_005_2026-10-08.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_CIS_005_2026-10-06.md",
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_CIS_2026-09-03.md",
+        "audit_registry/finding_source_locators_v0.1.json",
+        "Exact CIS V2.0/V2.2/V2.3/V2.4 schemas checked 2026-10-08",
+        "EV-125 run 33744039627"
+      ],
+      "note": "CIS V2.0 exact schema lacks MyOwnVehicleMode (explicit unaffected predecessor). CIS V2.2/V2.3 PDFs each contradict themselves: AllData Table3 requires structured NetexMode; VehicleData Table17 describes scalar PtModesEnumeration. Exact selected official CIS V2.2/V2.3 XSD declares MyOwnVehicleMode type NetexMode. V2.4 candidate schema retains NetexMode but no official V2.4 PDF proves the contradictory Table17 persisted; not a publication-backed affected successor.",
+      "scope_conclusion": "First affected official service version CIS V2.2; last affected verified official CIS V2.3. CIS V2.0 is not affected because member absent; CIS V2.4 candidate schema alone cannot establish PDF-internal mismatch. Scope unchanged.",
+      "boundary_checks": [
+        {
+          "version": "CIS V2.0",
+          "role": "predecessor_not_affected",
+          "language_status": "de-en:exact official CIS V2.0 XSD lacks MyOwnVehicleMode; no equivalent conflicting row asserted",
+          "source_ids": [
+            "CIS_V2.0"
+          ]
+        },
+        {
+          "version": "CIS V2.2",
+          "role": "first_affected_official_release",
+          "language_status": "de-en:official PDF Table3 p14 MyOwnVehicleMode=NetexMode vs Table17 p20 PtModesEnumeration; exact XSD NetexMode",
+          "source_ids": [
+            "CIS_V2.2"
+          ]
+        },
+        {
+          "version": "CIS V2.3",
+          "role": "last_affected_official_release",
+          "language_status": "de-en:PDF internal Table3/Table17 contradiction persists; exact XSD NetexMode",
+          "source_ids": [
+            "CIS_V2.3"
+          ]
+        },
+        {
+          "version": "CIS V2.4",
+          "role": "successor_not_claimed_candidate_only",
+          "language_status": "de-en:selected candidate XSD retains NetexMode but no matching official CIS V2.4 PDF available to check Table17 for continuation/correction",
+          "source_ids": [
+            "CIS_V2.3"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DISC-001",
