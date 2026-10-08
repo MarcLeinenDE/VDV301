@@ -2126,10 +2126,10 @@
     "version_scope_boundary_pending_count": 46
   },
   "next_actions": [
-    "Next DISC-003 after final HEAD gate SUCCESS.",
-    "Complete current boundary package only after DISC-003 independent terminal.",
-    "Stop on failed gate, ambiguity or scope correction.",
-    "Locator expansion frozen."
+    "STOP current package: DISC-003 semantic version-scope disproof discovered (V2.2 German also affected).",
+    "After terminal handoff, correct DISC-003 semantic registry, source locators, and PDF-body verification in one independently gated correction cycle; the finding remains pending at 48/70.",
+    "Only then resume the next pending boundary finding from the canonical registry.",
+    "Do not resume DR3012V20-006 structural locator expansion before retroactive boundary backlog reaches zero."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2207,12 +2207,14 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "37834424585",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "37834424577",
-    "resume_instruction": "DISC-002 terminal_clean at 48/70. Next DISC-003 after final HEAD gates."
+    "resume_instruction": "DISC-003 scope disproof has been committed without advancing verification counts: 48/70 verified, 22 pending. Require full gate for this HEAD then terminal_clean handoff. Next action is canonical cross-store material correction adding V2.2 German; do not mark DISC-003 verified or continue next findings until that correction independently passes gates.",
+    "pending_block": "DISC-003 material version-scope disproof",
+    "recovery_instruction": "DISC-003 scope disproof has been committed without advancing verification counts: 48/70 verified, 22 pending. Require full gate for this HEAD then terminal_clean handoff. Next action is canonical cross-store material correction adding V2.2 German; do not mark DISC-003 verified or continue next findings until that correction independently passes gates."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
