@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 55,
-    "pending_revalidation": 15
+    "verified": 56,
+    "pending_revalidation": 14
   },
-  "next_pending_finding": "DMS-007",
+  "next_pending_finding": "DR3011-001",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -3062,9 +3062,66 @@
     },
     {
       "finding_id": "DMS-007",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DMS_007_2026-10-09.md",
+        "audit_registry/dms_visual_revalidation_evidence_2026-09-03.json",
+        "tools/validate_dms_instance_boundaries_ev127.py"
+      ],
+      "note": "Material scope expansion: V2.1 official PDF p107 Table 41 already prints GetUpdateStates; V2.1 selected official XSD uses GetUpdateHistory and RetrieveUpdateState. PDF typo persists in V2.2/V2.4. V2.3 integration XSD correct, no official PDF source. Older V1.0/V2.0 no InstallUpdate.",
+      "scope_conclusion": "First affected official PDF publication V2.1 p107 Table 41. Persists in V2.2 p26 and V2.4 p25, last checked affected published successor V2.4. Official V2.0 and V1.0 DMS service XSD have no InstallUpdate (predicate inapplicable). V2.3 integration-only XSD correctly declares GetUpdateHistory/RetrieveUpdateState but no official DMS V2.3 PDF is independently pinned, so its PDF typo remains unresolved. No verified later corrected publication. Exact XSD never defines GetUpdateStates.",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-2 V1.0 German and English",
+          "role": "earlier_nonapplicable_predecessor",
+          "language_status": "Independent German and English official V1.0 publication tracks; selected official DMS V1.0 schema has no InstallUpdate or GetUpdateHistory. Specific UpdateTimestamp description error not applicable.",
+          "source_ids": [
+            "VDV301-2_V1.0_DE",
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "role": "last_nonapplicable_predecessor",
+          "language_status": "Official bilingual V2.0 DMS XSD has no InstallUpdate or GetUpdateHistory. No earlier erroneous UpdateTimestamp prose in the nonexistent operation is inferred.",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "role": "first_confirmed_affected_official_publication",
+          "language_status": "Bilingual official Base V2.1 technical English body §7.1.40.1 p107 Table 41 visibly says GetUpdateStates; official release XSD annotation/operation says GetUpdateHistory and RetrieveUpdateState.",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "VDV 301-2-0 DMS V2.2",
+          "role": "continuing_affected_official_publication",
+          "language_status": "Official DMS V2.2 printed p26 UpdateTimestamp row retains GetUpdateStates; official release-tagged XSD defines GetUpdateHistory/RetrieveUpdateState.",
+          "source_ids": [
+            "DMS_V2.2"
+          ]
+        },
+        {
+          "version": "DMS V2.3 integration only",
+          "role": "no_official_pdf_unknown_documentation",
+          "language_status": "No pinned official DMS V2.3 PDF; integration-only DMS XSD uses GetUpdateHistory/RetrieveUpdateState and no GetUpdateStates alias. Documentation issue cannot be independently attributed to this context.",
+          "source_ids": [
+            "DMS_V2.2",
+            "DMS_V2.4"
+          ]
+        },
+        {
+          "version": "VDV 301-2-0 DMS V2.4",
+          "role": "last_affected_official_publication_no_corrected_successor",
+          "language_status": "Official DMS V2.4 PDF printed p25 retains GetUpdateStates; associated candidate/integration XSD only contains correct names, not labelled official release.",
+          "source_ids": [
+            "DMS_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DR3011-001",

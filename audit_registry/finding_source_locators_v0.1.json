@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "97ae0ec47dc68e6573b1dc4b667201c012b681b7",
+    "git_blob": "2bf529692bdff33824e6486363850044bd255d23",
     "finding_count": 192
   },
   "policy": {
@@ -9150,6 +9150,12 @@
       "coverage_state": "complete",
       "scope_claims": [
         {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+          "note": "First visually confirmed PDF-only GetUpdateStates reference: official bilingual V2.1 p107 §7.1.40.1 Table 41 InstallUpdate.UpdateTimestamp. Exact official V2.1 XSD only has GetUpdateHistory/RetrieveUpdateState; pinned visual run 37904165247, artifact 11604160294."
+        },
+        {
           "version": "V2.2",
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_DeviceManagementService_V2.2.xsd",
@@ -9163,6 +9169,44 @@
         }
       ],
       "coverage": [
+        {
+          "version": "2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 Basic Services / DeviceManagementService",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                107
+              ],
+              "section": "7.1.40.1 Request — Data Structures of Operation InstallUpdate",
+              "table": "Table 41 — Description of DeviceManagementService.InstallUpdateRequestStructure",
+              "point_summary": "Actual visible original p107 Table 41 UpdateTimestamp row says 'Timestamp used for GetUpdateStates and RetrieveUpdateState responses and for logging'; matching official XSD has GetUpdateHistory instead. Source pinned and rendered via run 37904165247, artifact 11604160294, PNG sha256 cffa7a1a2b7ad5bfbbd6c53724e52d405bc354c0b817495192ee9a975183f4c1."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+              "git_blob": "191b43e01cdaba14b247725689a913c244a67eed",
+              "authority_detail": "Exact upstream official release-tag VDVde/VDV301@VDV-301-2.1 DMS service XSD",
+              "component_kind": "complexType",
+              "component": "DeviceManagementService.InstallUpdateRequestStructure",
+              "member": "UpdateTimestamp",
+              "value": "annotation: Timestamp used for GetUpdateHistory and RetrieveUpdateState responses and for logging",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceManagementService.InstallUpdateRequestStructure']/xs:sequence/xs:element[@name='UpdateTimestamp']",
+              "line_hint": "301-303",
+              "point_summary": "Official schema documents GetUpdateHistory/RetrieveUpdateState, and real operation declarations use GetUpdateHistoryRequest/Response; no GetUpdateStates alias.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            }
+          ],
+          "coverage_note": "First affected official publication V2.1. Source actual visible body p107 §7.1.40.1 Table 41 and exact official DMS XSD compared. PDF operation name GetUpdateStates has no schema declaration."
+        },
         {
           "version": "2.2",
           "authority": "official_release",
@@ -9200,6 +9244,28 @@
             }
           ],
           "coverage_note": "Confirmed PDF operation-reference typo. No GetUpdateStates alias is supported; selected operation context uses GetUpdateHistory."
+        },
+        {
+          "version": "2.3",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "integration_xsd_comparison_documentation_unresolved",
+          "pdf_locators": [],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.3.xsd",
+              "git_blob": "5fe444cf6d10462cc23fd159eb963abbec42248f",
+              "authority_detail": "Integration-only DMS V2.3 schema present in dev/schema-integration; no pinned independent official DMS V2.3 PDF and no official release-tag DMS schema proven.",
+              "component_kind": "complexType",
+              "component": "DeviceManagementService.InstallUpdateRequestStructure",
+              "member": "UpdateTimestamp",
+              "value": "annotation and operation inventory: GetUpdateHistory, RetrieveUpdateState; GetUpdateStates absent",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceManagementService.InstallUpdateRequestStructure']/xs:sequence/xs:element[@name='UpdateTimestamp']",
+              "line_hint": "252-253",
+              "point_summary": "V2.3 integration XSD has no GetUpdateStates alias; cannot establish whether a non-existent/not pinned official V2.3 DMS PDF carries the typo."
+            }
+          ],
+          "coverage_note": "Only integration XSD proves the accepted operation names; no independently verified official DMS V2.3 publication, hence this is context-only, not affected PDF-doc-runtime scope."
         },
         {
           "version": "2.4",
@@ -9243,7 +9309,10 @@
         "audit_registry/dms_visual_revalidation_evidence_2026-09-03.json",
         "EV-107 run 33181833930",
         "EV-108 run 33182963733",
-        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DMS_007_2026-10-06.md"
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DMS_007_2026-10-06.md",
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DMS_007_2026-10-09.md",
+        "GitHub pinned byte-verified V2.1 p107 render run 37904165247 artifact 11604160294",
+        "GitHub executed EV-127 operation-name guard 37904419555"
       ]
     },
     {

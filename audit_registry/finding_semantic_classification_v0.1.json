@@ -4489,6 +4489,12 @@
       "service": "DeviceManagementService",
       "version_scope": [
         {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+          "note": "First visually confirmed PDF-only GetUpdateStates reference: official bilingual V2.1 p107 §7.1.40.1 Table 41 InstallUpdate.UpdateTimestamp. Exact official V2.1 XSD only has GetUpdateHistory/RetrieveUpdateState; pinned visual run 37904165247, artifact 11604160294."
+        },
+        {
           "version": "V2.2",
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_DeviceManagementService_V2.2.xsd",
@@ -4520,45 +4526,49 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "V2.2 and V2.4 UpdateTimestamp prose visibly says GetUpdateStates."
+          "note": "The actual printed p107 of byte-pinned official V2.1 bilingual Base PDF, §7.1.40.1 Table 41, InstallUpdate UpdateTimestamp description already prints 'GetUpdateStates and RetrieveUpdateState responses'. Direct visually reviewed PNG SHA-256 cffa7a1a2b7ad5bfbbd6c53724e52d405bc354c0b817495192ee9a975183f4c1. First affected published version now V2.1."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "The exact original official DMS V2.2 printed p26 InstallUpdate request table and official DMS V2.4 p25 table retain the wrong 'GetUpdateStates' reference (pinned visible-body review in audit_registry/dms_visual_revalidation_evidence_2026-09-03.json)."
         },
         {
           "type": "official_xsd_explicit",
-          "note": "The exact V2.2 XSD annotation uses GetUpdateHistory and RetrieveUpdateState."
+          "note": "Upstream official VDVde/VDV301 release V2.1 blob 191b43e01cdaba14b247725689a913c244a67eed and official V2.2 blob c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d both declare GetUpdateHistory and RetrieveUpdateState Request/Response and their UpdateTimestamp annotation uses GetUpdateHistory, not GetUpdateStates."
         },
         {
           "type": "candidate_integration_provenance",
-          "note": "The V2.4 candidate/integration XSD context also uses GetUpdateHistory."
+          "note": "Local V2.3 integration-only DMS XSD blob 5fe444cf6d10462cc23fd159eb963abbec42248f has correct operations and no alias. No separately pinned official DMS V2.3 PDF; do not assert its editorial PDF is affected. V2.4 candidate/integration XSD blob d222dfd98b2be3777576388da7ace8f333d24c3f likewise uses only correct operation names."
         },
         {
           "type": "xsd_internal_consistency",
-          "note": "The DMS operation inventory contains GetUpdateHistory, not GetUpdateStates."
+          "note": "Exact selected DMS XSDs V2.1–V2.4 contain GetUpdateHistoryRequest/Response and RetrieveUpdateStateRequest/Response; no GetUpdateStates element. The PDF word cannot become an operation or compatibility alias."
         },
         {
-          "type": "version_history",
-          "note": "The erroneous GetUpdateStates wording persists across the checked V2.2 and V2.4 publications."
+          "type": "executable_validation",
+          "note": "EV-127 supplemental DMS-007 schema-structure guard GitHub run 37904419555 SUCCESS checks four version-specific exact XSDs, positive correct operation declarations, negative GetUpdateStates alias absence, and correct UpdateTimestamp annotation. This is declaration inspection executed in CI, not an XML-instance validity test."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "DMS: GetUpdateStates ist kein bestätigter Operationsname",
-          "short": "Die PDF verweist bei UpdateTimestamp auf GetUpdateStates; Operation-Inventar und XSD verwenden GetUpdateHistory.",
-          "long": "Die DMS-V2.2-Dokumentation und weiterhin die geprüfte V2.4-Dokumentation nennen im UpdateTimestamp-Text „GetUpdateStates“. Der ausgewählte XSD-/Operationskontext verwendet stattdessen GetUpdateHistory (zusammen mit RetrieveUpdateState). Ein eigenständiger GetUpdateStates-Operationsalias ist nicht belegt.",
-          "recommendation": "Keinen GetUpdateStates-Resolver- oder Kompatibilitätsalias erzeugen; für Operationen GetUpdateHistory gemäß ausgewähltem Profil verwenden."
+          "title": "DMS: GetUpdateStates ist seit V2.1 ein PDF-Operationsverweisfehler",
+          "short": "Schon V2.1 nennt bei UpdateTimestamp GetUpdateStates; die ausgewählten XSDs kennen nur GetUpdateHistory und RetrieveUpdateState.",
+          "long": "Bereits die offizielle V2.1-Schrift nennt auf Seite 107 in Tabelle 41 bei InstallUpdate.UpdateTimestamp die Operation „GetUpdateStates“. Der Fehler steht auch in den geprüften offiziellen DMS-Schriften V2.2 und V2.4. In den ausgewählten XSDs heißen die tatsächlich definierten Operationen GetUpdateHistory und RetrieveUpdateState; für GetUpdateStates existiert keine Request-/Response-Operation. Die V2.3-Integrations-XSD enthält ebenfalls nur die richtigen Namen, jedoch ist keine eigenständige offizielle DMS-V2.3-PDF für einen Dokumentationsfehler nachgewiesen. In V1.0/V2.0 gibt es die InstallUpdate-Struktur noch nicht. Die fehlerhafte PDF-Benennung ist somit keine gültige Alternative für XML oder Resolver.",
+          "recommendation": "Nur die Operationen des gewählten exakten XSD-Profils verwenden, insbesondere GetUpdateHistory und RetrieveUpdateState. Keinen GetUpdateStates-Resolver oder Kompatibilitätsalias erzeugen; V2.4-XSD nur als Kandidaten-/Integrationsautorität behandeln."
         },
         "en": {
-          "title": "DMS: GetUpdateStates is not a confirmed operation name",
-          "short": "The PDF refers to GetUpdateStates for UpdateTimestamp, while the operation inventory and XSD use GetUpdateHistory.",
-          "long": "The DMS V2.2 documentation and still the checked V2.4 documentation mention 'GetUpdateStates' in the UpdateTimestamp text. The selected XSD/operation context instead uses GetUpdateHistory (together with RetrieveUpdateState). No standalone GetUpdateStates operation alias is supported by the evidence.",
-          "recommendation": "Do not create a GetUpdateStates resolver or compatibility alias; use GetUpdateHistory for operations according to the selected profile."
+          "title": "DMS: GetUpdateStates is a PDF operation-reference error from V2.1",
+          "short": "The V2.1 UpdateTimestamp description already says GetUpdateStates, while selected XSDs define GetUpdateHistory and RetrieveUpdateState only.",
+          "long": "The official V2.1 publication already refers to 'GetUpdateStates' in the InstallUpdate.UpdateTimestamp description on printed page 107, Table 41. The error persists in the verified official V2.2 and V2.4 DMS PDFs. Exact selected XSDs define GetUpdateHistory and RetrieveUpdateState Request/Response operations, without a GetUpdateStates operation. The V2.3 integration-only XSD also has the correct names, but a separate official V2.3 DMS PDF is not verified and no publication defect is asserted for it. The older V1.0/V2.0 schemas lack InstallUpdate. This PDF-only name is not an authorized XML or operation-resolver alias.",
+          "recommendation": "Use only operation names supplied by the exact selected XSD, specifically GetUpdateHistory and RetrieveUpdateState. Do not create a GetUpdateStates resolver/compatibility alias, and do not label the V2.4 candidate schema as official."
         }
       },
       "runtime_match": {
         "state": "reviewed",
         "candidate_triggers": [
-          "selected DMS context is V2.2 official or explicitly selected V2.4 candidate/integration",
-          "operation resolver or documentation-derived operation inventory contains the exact operation name GetUpdateStates",
-          "selected operation inventory uses GetUpdateHistory and does not expose GetUpdateStates"
+          "selected DMS context is official V2.1 or V2.2, or the explicitly chosen V2.4 candidate/integration matched to the official V2.4 PDF; V2.3 has XSD-only comparison, no known official PDF typo",
+          "operation resolver or documentation-derived operation inventory contains the exact PDF-only name GetUpdateStates",
+          "selected service XSD operation inventory declares GetUpdateHistory/RetrieveUpdateState and does not declare GetUpdateStates"
         ]
       },
       "source_references": [
@@ -4591,8 +4601,29 @@
           "kind": "other",
           "reference": "docs/pdf_xsd_semantic_audit/DEVICE_MANAGEMENT_SERVICE_FINDINGS_REGISTER_ADDENDUM.md",
           "note": "Explicit handling: do not synthesize GetUpdateStates as an operation alias."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-2_BASE_V2.1 (SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a) p107 §7.1.40.1 Table 41 UpdateTimestamp",
+          "note": "Visible PDF body inspected; pinned fallback render run 37904165247, artifact 11604160294, PNG SHA-256 cffa7a1a2b7ad5bfbbd6c53724e52d405bc354c0b817495192ee9a975183f4c1."
+        },
+        {
+          "kind": "xsd",
+          "reference": "VDVde/VDV301@VDV-301-2.1 IBIS-IP_DeviceManagementService_V2.1.xsd blob 191b43e01cdaba14b247725689a913c244a67eed, lines 87–90,302",
+          "note": "Exact official introduction of InstallUpdate; correct GetUpdateHistory and RetrieveUpdateState names, no GetUpdateStates alias."
+        },
+        {
+          "kind": "evidence",
+          "reference": "GitHub Actions EV-127 run 37904419555",
+          "note": "Executed exact-XSD structural positive/negative checks in V2.1/V2.2/V2.3-integration/V2.4-candidate; not XML instance test."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DMS_007_2026-10-09.md",
+          "note": "Full predecessor/successor corrected boundary report for DMS-007."
         }
-      ]
+      ],
+      "notes": "Material DMS-007 version boundary correction 2026-10-09: first affected official V2.1 Table 41 (p107), continues official V2.2/V2.4 PDFs; V2.3 integration-only XSD checked but no official DMS V2.3 PDF defect asserted; V1.0/V2.0 no InstallUpdate. Keep selected XSD normative and do not create alias."
     },
     {
       "finding_id": "DR3011-001",
