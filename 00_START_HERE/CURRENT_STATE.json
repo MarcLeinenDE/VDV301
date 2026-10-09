@@ -2126,10 +2126,10 @@
     "version_scope_boundary_pending_count": 46
   },
   "next_actions": [
-    "Continue DMS-001: check docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_PROBE_DMS_001_2026-10-09.md and verify byte-pinned V2.1 PDF body Table 11, printed pp91–94, before marking boundary verified.",
-    "Preserve 49/70 verified and next DMS-001 while visual evidence is missing; do not silently treat text extraction as body verification.",
-    "Only after DMS-001 terminal closure with full gate and handoff-integrity SUCCESS continue DMS-002..DMS-005.",
-    "DR3012V20-006 structural locator expansion remains paused until retroactive boundary backlog zero."
+    "Resolve gate_pending for DMS-001: require schema-audit-validation SUCCESS for actual current HEAD.",
+    "Finalize DMS-001 terminal_clean and successful handoff-integrity on final HEAD before DMS-002.",
+    "Continue retroactive boundary package with DMS-002, then DMS-003..005 if each previous cycle green.",
+    "DR3012V20-006 locator expansion remains paused until retroactive boundary backlog reaches zero."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2207,12 +2207,13 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "37893141369",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "37893141382",
-    "resume_instruction": "DMS-001 boundary probe evidence saved at docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_PROBE_DMS_001_2026-10-09.md; V2.1 official PDF visible-body check blocked in this execution, so DMS-001 stays pending, 49/70 verified. Resume exact-byte render of V2.1 pp91–94 before closure; do not advance to DMS-002. Work cycle terminal_clean; no pending gate."
+    "resume_instruction": "DMS-001 canonical boundary registry and report committed; gate_pending: check full schema-audit-validation result for this exact HEAD, then finalize terminal_clean and handoff-integrity before DMS-002. 50/70 pending 20.",
+    "pending_block": "DMS-001 boundary terminal verification; await full schema-audit gate on this HEAD"
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2222,16 +2223,14 @@
     "state": "in_progress",
     "adoption_locator_count": 70,
     "tracked_findings": 70,
-    "verified": 49,
-    "pending_revalidation": 21,
-    "next_pending_finding": "DMS-001",
+    "verified": 50,
+    "pending_revalidation": 20,
+    "next_pending_finding": "DMS-002",
     "locator_expansion_frozen": true,
     "future_locator_completion_requires_verified_boundary_same_block": true,
-    "latest_verified_finding": "DISC-003",
+    "latest_verified_finding": "DMS-001",
     "latest_gate_run_id": "37891116591",
-    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DISC_003_2026-10-09.md",
-    "active_boundary_probe_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_PROBE_DMS_001_2026-10-09.md",
-    "active_boundary_probe_status": "DMS-001 evidence in progress, pinned V2.1 PDF body verification still required; no boundary progress credit"
+    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DMS_001_2026-10-09.md"
   },
   "boundary_revalidation_package_mode": {
     "enabled": true,
