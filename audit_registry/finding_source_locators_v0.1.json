@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "6d007ae11fa1ec04e6ef9c80bcc5ab58a2fe61ea",
+    "git_blob": "c07ea886a9dbd90f0255b5dfd4186810321286cf",
     "finding_count": 192
   },
   "policy": {
@@ -8680,6 +8680,12 @@
           "note": "PDF/XSD keep UpdateID, UpdateTimestamp and UpdateURL at 1:1; EV-127 rejects each single omission."
         },
         {
+          "version": "V2.3 integration comparison",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.3.xsd",
+          "note": "Only integration comparison, not a proven official V2.3 DMS release. All of UpdateID, UpdateTimestamp and UpdateURL are still required, checksum and size optional; executable EV-127 run 37896539178 rejects each missing field."
+        },
+        {
           "version": "V2.4",
           "authority": "candidate_integration",
           "xsd_profile": "IBIS-IP_DeviceManagementService_V2.4.xsd",
@@ -8764,6 +8770,27 @@
           "coverage_note": "Historical official profile; the three core InstallUpdate fields are required and later V2.4 optionality does not rewrite this release."
         },
         {
+          "version": "2.3",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "pdf_locators": [],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.3.xsd",
+              "git_blob": "5fe444cf6d10462cc23fd159eb963abbec42248f",
+              "authority_detail": "Integration-only XSD comparison in dev/schema-integration; VDVde/VDV301 official DMS V2.3 release-tag file not available. Never mark as official_release.",
+              "component_kind": "complexType",
+              "component": "DeviceManagementService.InstallUpdateRequestStructure",
+              "member": "UpdateID; UpdateTimestamp; UpdateURL; UpdateFileChecksum; UpdateFileSize",
+              "value": "UpdateID, UpdateTimestamp, UpdateURL required (implicit minOccurs=1); UpdateFileChecksum and UpdateFileSize minOccurs=0",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceManagementService.InstallUpdateRequestStructure']/xs:sequence",
+              "line_hint": "247-265",
+              "point_summary": "Exact local V2.3 integration XSD remains identical in field optionality to V2.2: the first three fields required, last two optional. EV-127 37896539178 confirms omitted trio fields fail."
+            }
+          ],
+          "coverage_note": "This version lane is candidate/integration **only** and has no separately pinned official DMS V2.3 PDF. Its inclusion closes the otherwise missing XSD behaviour boundary before V2.4."
+        },
+        {
           "version": "2.4",
           "authority": "candidate_integration",
           "coverage_status": "complete",
@@ -8804,7 +8831,9 @@
         "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md",
         "EV-127 run 33762375705",
         "audit_registry/dms_visual_revalidation_evidence_2026-09-03.json",
-        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DMS_004_2026-10-06.md"
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DMS_004_2026-10-06.md",
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DMS_004_2026-10-09.md",
+        "extended EV-127 DMS-004 integration V2.3 run 37896539178"
       ]
     },
     {

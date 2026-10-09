@@ -4103,6 +4103,12 @@
           "note": "PDF/XSD keep UpdateID, UpdateTimestamp and UpdateURL at 1:1; EV-127 rejects each single omission."
         },
         {
+          "version": "V2.3 integration comparison",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.3.xsd",
+          "note": "Only integration comparison, not a proven official V2.3 DMS release. All of UpdateID, UpdateTimestamp and UpdateURL are still required, checksum and size optional; executable EV-127 run 37896539178 rejects each missing field."
+        },
+        {
           "version": "V2.4",
           "authority": "candidate_integration",
           "xsd_profile": "IBIS-IP_DeviceManagementService_V2.4.xsd",
@@ -4143,20 +4149,28 @@
         {
           "type": "executable_validation",
           "note": "EV-127 confirms required-field rejection for V2.1/V2.2 and empty/populated acceptance for the V2.4 candidate profile."
+        },
+        {
+          "type": "candidate_integration_provenance",
+          "note": "V2.3 DMS XSD blob 5fe444cf6d10462cc23fd159eb963abbec42248f is integration-only and still requires UpdateID/UpdateTimestamp/UpdateURL. Official tag VDV-301-2.3 DMS XSD not present at upstream; do not promote candidate material."
+        },
+        {
+          "type": "executable_validation",
+          "note": "Extended EV-127 run 37896539178 SUCCESS: V2.1/2.2 official and V2.3 integration accept the complete required trio and reject each omission; V2.4 candidate accepts an empty InstallUpdate request."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "DMS InstallUpdate: versionsabhängige Pflichtfelder",
-          "short": "UpdateID, UpdateTimestamp und UpdateURL sind in V2.1/V2.2 Pflicht, im geprüften V2.4-Kontext optional.",
-          "long": "Die V2.1- und V2.2-Profile verlangen UpdateID, UpdateTimestamp und UpdateURL. EV-127 bestätigt, dass das Weglassen jedes einzelnen Feldes scheitert. In der öffentlichen V2.4-Dokumentation sind diese Felder 0:1; der candidate/integration-XSD-Kontext akzeptiert auch eine leere Anforderung.",
-          "recommendation": "Pflichtfelder ausschließlich anhand der ausgewählten Version bewerten; die V2.4-Optionalität nicht auf V2.1/V2.2 zurückübertragen."
+          "title": "DMS InstallUpdate: Pflichtfelder bis einschließlich Integrationsstand V2.3",
+          "short": "V2.1/V2.2 und die V2.3-Integrations-XSD verlangen UpdateID, UpdateTimestamp und UpdateURL; V2.4-Kandidat erlaubt alle fünf Felder optional.",
+          "long": "InstallUpdate ist in den geprüften DMS-V1.0/V2.0-XSDs noch nicht enthalten. Die offiziellen V2.1- und V2.2-Spezifikationen verlangen UpdateID, UpdateTimestamp und UpdateURL; die beiden übrigen Felder sind optional. Dies gilt auch für die V2.3-Integrations-XSD, die keinen nachgewiesenen offiziellen V2.3-Release darstellt. Erst die offizielle V2.4-Dokumentation und die V2.4-Kandidaten-XSD zeigen alle fünf Felder als 0:1. Ausführbare XML-Grenztests bestätigen die jeweilige Prüfung.",
+          "recommendation": "Die exakt ausgewählte XSD samt Abhängigkeiten verwenden: fehlende Pflichtfelder in V2.1/V2.2 und im V2.3-Integrationsprofil sind FAIL. V2.4-Optionalität nicht auf frühere Profile übertragen; V2.3 nicht als offiziellen Release ausgeben."
         },
         "en": {
-          "title": "DMS InstallUpdate: version-specific required fields",
-          "short": "UpdateID, UpdateTimestamp and UpdateURL are required in V2.1/V2.2 and optional in the checked V2.4 context.",
-          "long": "The V2.1 and V2.2 profiles require UpdateID, UpdateTimestamp and UpdateURL. EV-127 confirms that omitting any one of them fails. In the public V2.4 documentation the fields are 0:1, and the candidate/integration XSD context also accepts an empty request.",
-          "recommendation": "Evaluate required fields only against the selected version; do not back-apply V2.4 optionality to V2.1/V2.2."
+          "title": "DMS InstallUpdate: required fields through V2.3 integration",
+          "short": "V2.1/V2.2 and the V2.3 integration schema require UpdateID, UpdateTimestamp and UpdateURL; the V2.4 candidate makes all five fields optional.",
+          "long": "The checked V1.0/V2.0 DMS service XSDs do not yet include InstallUpdate. Official V2.1/V2.2 require UpdateID, UpdateTimestamp and UpdateURL, while checksum and size are optional. The V2.3 integration-only schema preserves these requirements, but is not evidence of an official V2.3 release. The official V2.4 PDF and V2.4 candidate XSD first show all five fields as optional in the checked publication/schema sequence. Executable XML tests confirm the selected profile behaviour.",
+          "recommendation": "Use the exact selected XSD and dependencies: omission of a required field fails in V2.1/V2.2 and the V2.3 integration profile. Never back-apply V2.4 optionality or present V2.3 integration as an official release."
         }
       },
       "runtime_match": {
@@ -4188,9 +4202,24 @@
           "kind": "version_history",
           "reference": "audit_registry/deep_read_findings_delta_dms_v24_2026-08-28.json",
           "note": "Later optionality correction and candidate authority boundary."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_DeviceManagementService_V2.3.xsd local Git blob 5fe444cf6d10462cc23fd159eb963abbec42248f lines 247–265",
+          "note": "Integration-only candidate comparison, three required InstallUpdate fields."
+        },
+        {
+          "kind": "evidence",
+          "reference": "Extended EV-127 run 37896539178",
+          "note": "Actual selected-XSD XML boundary: v23 complete accepted; omission of each required field rejected."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DMS_004_2026-10-09.md",
+          "note": "2026-10-09 independent predecessor/successor version-boundary correction."
         }
       ],
-      "notes": "Normal selected-XSD validation is sufficient; the semantic layer must prevent latest-version cardinality from being substituted into historical profiles."
+      "notes": "Material 2026-10-09 scope correction: InstallUpdate absent V1.0/V2.0; official V2.1/V2.2 and integration-only V2.3 require trio; V2.4 official PDF and candidate XSD relax all five to 0:1. Normal XSD validation remains sole authoritative PASS/FAIL, no extra runtime matcher."
     },
     {
       "finding_id": "DMS-005",

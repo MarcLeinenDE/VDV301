@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 52,
-    "pending_revalidation": 18
+    "verified": 53,
+    "pending_revalidation": 17
   },
-  "next_pending_finding": "DMS-004",
+  "next_pending_finding": "DMS-005",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -2871,9 +2871,67 @@
     },
     {
       "finding_id": "DMS-004",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DMS_004_2026-10-09.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DMS_004_2026-10-06.md",
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md",
+        "tools/validate_dms_instance_boundaries_ev127.py"
+      ],
+      "note": "Material scope correction: InstallUpdate absent in official V1.0/V2.0; required trio in official V2.1/V2.2 and integration-only V2.3; first documented V2.4 0:1 optionality with candidate XSD. EV-127 v23 confirms required trio.",
+      "scope_conclusion": "First supported InstallUpdate operation in official V2.1: three required fields UpdateID/UpdateTimestamp/UpdateURL. Last official required-trio evidence V2.2; integration-only V2.3 also requires the trio but has no authoritative public DMS V2.3 release PDF. First checked official publication showing 0:1 for all five is V2.4, aligned to V2.4 candidate schema. No InstallUpdate operation exists in earlier V1.0/V2.0 selected DMS XSDs.",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-2 V1.0",
+          "role": "earlier_non_applicable_predecessor",
+          "language_status": "de/en: first-version DMS service XSD contains no InstallUpdate request structure or operation; no cardinality claim for absent operation",
+          "source_ids": [
+            "VDV301-2_V1.0_DE",
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "role": "last_pre_introduction_non_applicable",
+          "language_status": "de-en: exact official DMS V2.0 XSD has no InstallUpdate request type/operation",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "role": "first_affected_required_trio",
+          "language_status": "de-en: published InstallUpdate request table p107, three 1:1 and two 0:1; official selected XSD requires trio",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "VDV 301-2-0 DMS V2.2",
+          "role": "last_official_required_trio_release",
+          "language_status": "de-en: published p26 request table three 1:1, two 0:1, official XSD aligned",
+          "source_ids": [
+            "DMS_V2.2"
+          ]
+        },
+        {
+          "version": "DMS V2.3 integration comparison",
+          "role": "last_selected_required_trio_comparison",
+          "language_status": "No separately pinned public V2.3 DMS PDF or official release-tag XSD. Integration-only XSD requires three fields, EV-127 run 37896539178 validates omissions fail",
+          "source_ids": [
+            "DMS_V2.2",
+            "DMS_V2.4"
+          ]
+        },
+        {
+          "version": "VDV 301-2-0 DMS V2.4",
+          "role": "first_documented_optional_successor",
+          "language_status": "de-en: official p25 documents all five fields 0:1, V2.4 candidate XSD accepts empty InstallUpdate; not an official released XSD",
+          "source_ids": [
+            "DMS_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DMS-005",
