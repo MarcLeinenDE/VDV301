@@ -1,0 +1,31 @@
+name: DMS-003 historical version boundary evidence
+on:
+  push:
+    branches: [dev/schema-integration]
+    paths:
+      - tools/validate_dms_instance_boundaries_ev127.py
+      - .github/workflows/dms003-version-boundary.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check lxml
+      - name: Execute actual XML Schema boundary tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/validate_dms_instance_boundaries_ev127.py | tee dms003-ev127.log
+      - name: Upload executable test log
+        uses: actions/upload-artifact@v4
+        with:
+          name: dms003-executable-boundaries
+          path: dms003-ev127.log
+          retention-days: 90
+          if-no-files-found: error

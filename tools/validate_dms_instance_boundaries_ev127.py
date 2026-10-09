@@ -14,15 +14,19 @@ from lxml import etree
 NS = {"xs": "http://www.w3.org/2001/XMLSchema"}
 
 DMS = {
+    "v10": Path("IBIS-IP_DeviceManagementService_V1.0.xsd"),
     "v20": Path("IBIS-IP_DeviceManagementService_V2.0.xsd"),
     "v21": Path("IBIS-IP_DeviceManagementService_V2.1.xsd"),
     "v22": Path("IBIS-IP_DeviceManagementService_V2.2.xsd"),
+    "v23": Path("IBIS-IP_DeviceManagementService_V2.3.xsd"),
     "v24": Path("IBIS-IP_DeviceManagementService_V2.4.xsd"),
 }
 ENUM = {
+    "v10": Path("IBIS-IP_Enumerations_V1.0.xsd"),
     "v20": Path("IBIS-IP_Enumerations_V2.0.xsd"),
     "v21": Path("IBIS-IP_Enumerations_V2.1.xsd"),
     "v22": Path("IBIS-IP_Enumerations_V2.2.xsd"),
+    "v23": Path("IBIS-IP_Enumerations_V2.2.xsd"),
     "v24": Path("IBIS-IP_Enumerations_V2.4.xsd"),
 }
 
@@ -109,7 +113,7 @@ def error_data_xml(count: int, message_type: str) -> str:
 
 
 def test_dms003() -> None:
-    for version in ("v20", "v21", "v22"):
+    for version in ("v10", "v20", "v21", "v22"):
         schema = wrapper_schema(
             DMS[version],
             "EV127ErrorData",
@@ -121,15 +125,16 @@ def test_dms003() -> None:
         require_valid(schema, error_data_xml(11, msg_type), f"DMS-003 {version} 11 ErrorMessage")
         print(f"INSTANCE_OK DMS-003 {version}: 9=reject 10=accept 11=accept")
 
-    schema24 = wrapper_schema(
-        DMS["v24"],
-        "EV127ErrorData",
-        "DeviceManagementService.GetDeviceErrorMessagesResponseDataStructure",
-    )
-    msg_type24 = first_enum(ENUM["v24"], "MessageTypeEnumeration")
-    require_valid(schema24, error_data_xml(0, msg_type24), "DMS-003 v24 0 ErrorMessage")
-    require_valid(schema24, error_data_xml(1, msg_type24), "DMS-003 v24 1 ErrorMessage")
-    print("INSTANCE_OK DMS-003 v24: 0=accept 1=accept")
+    for version in ("v23", "v24"):
+        schema = wrapper_schema(
+            DMS[version],
+            "EV127ErrorData",
+            "DeviceManagementService.GetDeviceErrorMessagesResponseDataStructure",
+        )
+        msg_type = first_enum(ENUM[version], "MessageTypeEnumeration")
+        require_valid(schema, error_data_xml(0, msg_type), f"DMS-003 {version} 0 ErrorMessage")
+        require_valid(schema, error_data_xml(1, msg_type), f"DMS-003 {version} 1 ErrorMessage")
+        print(f"INSTANCE_OK DMS-003 {version}: 0=accept 1=accept")
 
 
 def install_xml(fields: tuple[str, ...]) -> str:
