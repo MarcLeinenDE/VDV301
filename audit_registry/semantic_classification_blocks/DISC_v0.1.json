@@ -200,16 +200,22 @@
       "service": "GeneralConventions / NetworkDiscovery",
       "version_scope": [
         {
+          "version": "VDV 301-2 General Conventions V2.2 German",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "First affected: German Table 3 p27 omits coachnumber/deviceclass/deviceID while English Table 3 p33 already includes them."
+        },
+        {
           "version": "VDV 301-2 General Conventions V2.3 German",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "Table 3 p27 omits coachnumber, deviceclass and deviceID."
+          "note": "German Table 3 p27 still omits coachnumber, deviceclass and deviceID; English lists them."
         },
         {
           "version": "VDV 301-2 General Conventions V2.4 German",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "Table 3 pp30-31 includes the missing entries; version history p75 records the repair."
+          "note": "First corrected successor: German Table 3 pp30-31 includes all three; version history p75 explicitly identifies the repair."
         }
       ],
       "review_state": "manually_reviewed",
@@ -230,37 +236,38 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "The visible German table comparison shows V2.3 omits coachnumber, deviceclass and deviceID while V2.4 contains them."
+          "note": "Same official General Conventions V2.2 PDF: German Table 3 p27 omits coachnumber, deviceclass and deviceID, while English Table 3 p33 includes all three. Both visible bodies independently checked on 2026-10-09."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "German General Conventions V2.3 Table 3 p27 continues the omission. Earlier Base V2.0/V2.1 tables did not yet list the three later attributes in either language."
         },
         {
           "type": "later_official_correction",
-          "note": "V2.4 history explicitly records that missing entries in the German Table 3 were added."
+          "note": "General Conventions V2.4 German pp30-31 includes all three attributes; official version history p75 expressly records adding missing German Table 3 entries."
         },
         {
           "type": "executable_validation",
-          "note": "EV-126 confirms the exact pinned source evidence; no XSD-validity claim is part of this finding."
+          "note": "EV-126 validates exact source provenance, not XML/XSD conformance; DISC-003 is documentation-only."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "V2.3-DE enthält eine unvollständige DNS-SD-Tabelle, die in V2.4 korrigiert wurde",
-          "short": "In der deutschen V2.3-Tabelle 3 fehlen coachnumber, deviceclass und deviceID; V2.4 ergänzt sie ausdrücklich.",
-          "long": "Die deutsche General-Conventions-Fassung V2.3 enthält in Tabelle 3 die Einträge coachnumber, deviceclass und deviceID nicht. In V2.4 sind sie vorhanden, und die Versionshistorie nennt ausdrücklich das Ergänzen fehlender Einträge in der deutschen Tabelle. Damit ist die ältere Tabellenlücke als historischer Dokumentationsfehler bestätigt; das Finding beschreibt keine XSD-Korrektur.",
-          "recommendation": "Bei Auswertung der deutschen V2.3-DNS-SD-Tabelle auf die V2.4-Korrektur hinweisen und die fehlenden Tabelleneinträge nicht als XSD- oder Protokolländerung interpretieren."
+          "title": "Deutsche DNS-SD-Tabelle in V2.2/V2.3 unvollständig; in V2.4 korrigiert",
+          "short": "Deutsch V2.2/V2.3 Tabelle 3 lässt coachnumber, deviceclass und deviceID aus, obwohl sie in Englisch V2.2 bereits aufgeführt sind.",
+          "long": "Schon in General Conventions V2.2 fehlen in der deutschen Tabelle 3 die DNS-SD-TXT-Attribute coachnumber, deviceclass und deviceID. Die englische Tabelle derselben V2.2-Publikation enthält sie bereits. Die Lücke bleibt in der deutschen V2.3 bestehen. V2.4 ergänzt die Einträge und nennt die Korrektur ausdrücklich in der Versionshistorie. In V2.0/V2.1 fehlen die später hinzugekommenen Einträge noch in beiden Sprachfassungen. Es handelt sich um eine historische Dokumentationslücke, nicht um eine XSD-Änderung.",
+          "recommendation": "Für V2.2/V2.3 die englische Tabelle und die V2.4-Korrektur beachten. Fehlende deutsche Tabellenzeilen nicht als fehlende Protokollfunktionen oder als XSD-Konformitätsfehler eines Anbieters werten."
         },
         "en": {
-          "title": "V2.3 German has an incomplete DNS-SD table that was repaired in V2.4",
-          "short": "German V2.3 Table 3 omits coachnumber, deviceclass and deviceID; V2.4 explicitly adds them.",
-          "long": "German General Conventions V2.3 Table 3 omits coachnumber, deviceclass and deviceID. V2.4 contains them, and the official version history explicitly states that missing entries were added to the German table. The older omission is therefore a confirmed historical documentation defect; this finding does not describe an XSD correction.",
-          "recommendation": "When interpreting German V2.3 DNS-SD Table 3, point to the V2.4 correction and do not treat the omitted entries as an XSD or protocol change."
+          "title": "German DNS-SD Table 3 incomplete in V2.2/V2.3; fixed in V2.4",
+          "short": "German V2.2/V2.3 omits coachnumber, deviceclass and deviceID even though English V2.2 already lists them.",
+          "long": "German General Conventions V2.2 Table 3 omits coachnumber, deviceclass and deviceID, although English Table 3 in the same V2.2 publication includes them. The omission persists in German V2.3; V2.4 adds the entries and explicitly records the repair in its version history. The earlier V2.0/V2.1 publications do not yet list the three later attributes in either language. This is a documentation omission, not an XSD modification.",
+          "recommendation": "Use the same-version English table and V2.4 documented correction when interpreting German V2.2/V2.3. Never infer a provider XSD conformance failure or a new protocol feature from missing German table rows."
         }
       },
       "runtime_match": {
-        "state": "candidate",
-        "candidate_triggers": [
-          "documentation/discovery helper is using German General Conventions V2.3 Table 3",
-          "coachnumber, deviceclass or deviceID is considered absent solely because V2.3 German Table 3 omits it"
-        ]
+        "state": "not_applicable",
+        "candidate_triggers": []
       },
       "source_references": [
         {
@@ -282,9 +289,21 @@
         {
           "kind": "pdf",
           "reference": "General Conventions V2.4 German Table 3 pp30-31; version history p75"
+        },
+        {
+          "kind": "pdf",
+          "reference": "General Conventions V2.2 Deutsch p27 Tabelle 3 / Englisch p33 Table 3, official sha256 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_DISPROOF_DISC_003_2026-10-08.md"
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DISC_003_2026-10-09.md"
         }
       ],
-      "notes": "Historical documentation correction; no XSD mutation is authorized."
+      "notes": "Material semantic version-scope correction 2026-10-09: German-only TXT Table 3 omission begins V2.2, persists V2.3, corrected V2.4; documentation only, no XSD mutation or runtime matcher."
     }
   ]
 }

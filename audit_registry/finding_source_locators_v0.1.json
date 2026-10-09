@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "158cb628a595eece09f6ed724ce45a9dad0343f9",
+    "git_blob": "cb789ab5739851204486b914ec41b2c7b8ceae37",
     "finding_count": 192
   },
   "policy": {
@@ -8097,19 +8097,62 @@
       "coverage_state": "complete",
       "scope_claims": [
         {
+          "version": "VDV 301-2 General Conventions V2.2 German",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "First affected: German Table 3 p27 omits coachnumber/deviceclass/deviceID while English Table 3 p33 already includes them."
+        },
+        {
           "version": "VDV 301-2 General Conventions V2.3 German",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "Table 3 p27 omits coachnumber, deviceclass and deviceID."
+          "note": "German Table 3 p27 still omits coachnumber, deviceclass and deviceID; English lists them."
         },
         {
           "version": "VDV 301-2 General Conventions V2.4 German",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "Table 3 pp30-31 includes the missing entries; version history p75 records the repair."
+          "note": "First corrected successor: German Table 3 pp30-31 includes all three; version history p75 explicitly identifies the repair."
         }
       ],
       "coverage": [
+        {
+          "version": "2.2",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "VDV-Schrift 301-2 General Conventions",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                27
+              ],
+              "section": "3.3.1 Nutzung des TXT-Records",
+              "table": "Tabelle 3 — Bedeutungen der TXT-Records in DNS-SD (inklusive Festlegungen für IBIS-IP)",
+              "point_summary": "V2.2 German visible table ends with Ver/Path/multicast/sntp-server, omitting coachnumber, deviceclass and deviceID."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "VDV-Schrift 301-2 General Conventions",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                33
+              ],
+              "section": "3.3.2 Use of TXT Records",
+              "table": "Table 3 — Meanings of the TXT record in DNS-SD (including the definitions for IBIS-IP)",
+              "point_summary": "Same V2.2 English Table 3 visibly includes coachnumber, deviceclass, deviceID; latter two specified mandatory from IBIS-IP 2.2."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "V2.2 German omission confirmed by same-document English positive control; documentation-only."
+        },
         {
           "version": "2.3",
           "authority": "documentation_only",
@@ -8131,7 +8174,7 @@
             }
           ],
           "xsd_locators": [],
-          "coverage_note": "Historical documentation defect in the German table; no XSD lane applies."
+          "coverage_note": "Omission persists from V2.2 German into V2.3 German. No XSD failure rule."
         },
         {
           "version": "2.4",
@@ -8169,7 +8212,7 @@
             }
           ],
           "xsd_locators": [],
-          "coverage_note": "Later official documentation correction confirms the V2.3 German omission; it does not establish an XSD or protocol change."
+          "coverage_note": "First corrected German successor; all three rows restored, version history p75 confirms repair."
         }
       ],
       "supporting_evidence": [
@@ -8177,7 +8220,10 @@
         "docs/pdf_xsd_semantic_audit/NETWORK_DISCOVERY_FINDINGS_REGISTER_ADDENDUM.md",
         "EV-126 run 33754189273",
         "source/render artifact 9892036202",
-        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DISC_003_2026-10-06.md"
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DISC_003_2026-10-06.md",
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DISC_003_2026-10-09.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_BODY_REVALIDATION_DISC_003_SCOPE_CORRECTION_2026-10-09.md",
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_DISPROOF_DISC_003_2026-10-08.md"
       ]
     },
     {

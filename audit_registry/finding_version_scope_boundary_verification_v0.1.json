@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 48,
-    "pending_revalidation": 22
+    "verified": 49,
+    "pending_revalidation": 21
   },
-  "next_pending_finding": "DISC-003",
+  "next_pending_finding": "DMS-001",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -2631,9 +2631,57 @@
     },
     {
       "finding_id": "DISC-003",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "MATERIAL_SCOPE_DISPROOF 2026-10-08: V2.2 German Table3 p27 also omits coachnumber/deviceclass/deviceID while same V2.2 English Table3 p33 includes them. V2.0/V2.1 predecessor tracks lack those newer rows in both languages; V2.3 German omission persists; V2.4 corrects. Existing semantic scope V2.3-only is false. STOP package; retain pending_revalidation until semantic classification, source locators and body verification have been corrected together. See docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_DISPROOF_DISC_003_2026-10-08.md"
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DISC_003_2026-10-09.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_BODY_REVALIDATION_DISC_003_SCOPE_CORRECTION_2026-10-09.md",
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_DISPROOF_DISC_003_2026-10-08.md",
+        "audit_registry/pdf_source_pins_v0.1.json"
+      ],
+      "note": "Material scope correction: German V2.2 p27 first omits coachnumber/deviceclass/deviceID while same V2.2 English p33 contains them; V2.3 German persists and V2.4 German corrects. No XSD provider FAIL.",
+      "scope_conclusion": "German V2.2 and V2.3 affected, German V2.4 first corrected, V2.1 last unaffected predecessor (in same-language-mismatch sense).",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "role": "earlier_non_affected_baseline",
+          "language_status": "de-en:later TXT fields not yet part of either language table",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "role": "last_non_affected_predecessor",
+          "language_status": "de-en:later fields absent in both tracks, source text pinned; live screenshot cache-missed",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "VDV 301-2 General Conventions V2.2",
+          "role": "first_affected_german_publication",
+          "language_status": "de:p27 missing all three, en:p33 includes all three; visible source bodies rechecked",
+          "source_ids": [
+            "VDV301-2_GC_V2.2"
+          ]
+        },
+        {
+          "version": "VDV 301-2 General Conventions V2.3",
+          "role": "last_affected_german_publication",
+          "language_status": "de:p27 missing, en:lists all three; prior pinned evidence",
+          "source_ids": [
+            "VDV301-2_GC_V2.3"
+          ]
+        },
+        {
+          "version": "VDV 301-2 General Conventions V2.4",
+          "role": "first_corrected_successor",
+          "language_status": "de:pp30-31 restored all three, version history p75 documents repair",
+          "source_ids": [
+            "VDV301-2_GC_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DMS-001",

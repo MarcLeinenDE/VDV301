@@ -2003,12 +2003,12 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 48,
-    "version_scope_boundary_pending_count": 22,
-    "version_scope_boundary_next_finding": "DISC-003",
-    "version_scope_boundary_latest_finding": "DISC-002",
+    "version_scope_boundary_verified_count": 49,
+    "version_scope_boundary_pending_count": 21,
+    "version_scope_boundary_next_finding": "DMS-001",
+    "version_scope_boundary_latest_finding": "DISC-003",
     "version_scope_boundary_latest_gate_run_id": "37834984983",
-    "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DISC_002_2026-10-08.md",
+    "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DISC_003_2026-10-09.md",
     "latest_scope_correction": "BG-001 expanded from release-context pair 1.0/2.0 to complete official retained V1.0 path lineage through VDV-301-2.3; semantic/locator/runtime scopes synchronized."
   },
   "evidence": {
@@ -2126,10 +2126,10 @@
     "version_scope_boundary_pending_count": 46
   },
   "next_actions": [
-    "STOP PACKAGE: DISC-003 semantic scope V2.3-only is disproved by official V2.2 DE/EN Table 3 comparison; do not count DISC-003 verified.",
-    "Read docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_DISPROOF_DISC_003_2026-10-08.md and independently reconcile CIS-004..DISC-002 completed with DISC-003 correction requiring affected V2.2+V2.3 DE, corrected V2.4 DE.",
-    "Next mini-cycle correct DISC-003 semantic classification, source locators and visible PDF body verification in one consistent gated change; then terminalize it before DMS-001.",
-    "Keep structural locator expansion DR3012V20-006 frozen until backlog zero."
+    "DISC-003 gate_pending: check full audit gate before terminalization.",
+    "After full gate SUCCESS write terminal_clean and verify final HEAD handoff.",
+    "Only then proceed to DMS-001.",
+    "Structural locator expansion remains frozen."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2207,12 +2207,14 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "37834984983",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "37834984911",
-    "resume_instruction": "STOP PACKAGE on DISC-003 material scope disproof at 48/70 verified. Confirmed V2.2 German Table 3 also omits coachnumber/deviceclass/deviceID although V2.2 English Table 3 includes them. See docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_DISPROOF_DISC_003_2026-10-08.md. Next independent correction cycle: amend semantic classification, source-locator coverage and PDF-body verification to include V2.2; then mark DISC-003 verified only after full and handoff gates. Do not move to DMS or locator expansion before correction."
+    "resume_instruction": "DISC-003 V2.2 DE newly affected corrected atomically across semantic/locator/body/runtime pins and boundary. Require full gate SUCCESS for this HEAD, then terminal_clean and final handoff-integrity SUCCESS. Do not begin DMS-001 on failure.",
+    "pending_block": "DISC-003 V2.2 German scope correction",
+    "recovery_instruction": "DISC-003 V2.2 DE newly affected corrected atomically across semantic/locator/body/runtime pins and boundary. Require full gate SUCCESS for this HEAD, then terminal_clean and final handoff-integrity SUCCESS. Do not begin DMS-001 on failure."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2222,14 +2224,14 @@
     "state": "in_progress",
     "adoption_locator_count": 70,
     "tracked_findings": 70,
-    "verified": 48,
-    "pending_revalidation": 22,
-    "next_pending_finding": "DISC-003",
+    "verified": 49,
+    "pending_revalidation": 21,
+    "next_pending_finding": "DMS-001",
     "locator_expansion_frozen": true,
     "future_locator_completion_requires_verified_boundary_same_block": true,
-    "latest_verified_finding": "DISC-002",
+    "latest_verified_finding": "DISC-003",
     "latest_gate_run_id": "37834984983",
-    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DISC_002_2026-10-08.md"
+    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DISC_003_2026-10-09.md"
   },
   "boundary_revalidation_package_mode": {
     "enabled": true,
