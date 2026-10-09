@@ -4369,12 +4369,6 @@
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_DeviceManagementService_V2.2.xsd",
           "note": "PDF table lists Name+Flag only; exact official XSD also requires DeviceStatusImpact and DeviceStatusPriority."
-        },
-        {
-          "version": "V2.4",
-          "authority": "candidate_integration",
-          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.4.xsd",
-          "note": "Official public PDF and candidate/integration XSD align with Impact/Priority optional."
         }
       ],
       "review_state": "sdk_ready",
@@ -4396,45 +4390,49 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "V2.2 table 20 visibly lists only DeviceStatusName and DeviceStatusFlag; V2.4 later documents Impact/Priority as optional."
+          "note": "The official bilingual VDV301-2_BASE_V2.1 printed p105 actual body Table 34 documents DeviceStatusStructure with only DeviceStatusName 1:1 and DeviceStatusFlag 1:1; the exact official V2.1 XSD contains only these two mandatory fields. Byte-pinned render 37903052606 artifact 11603326400."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "The official V2.2 DMS printed p23 Table 20 continues to show only DeviceStatusName and DeviceStatusFlag, despite two additional mandatory fields in the selected official V2.2 XSD. Historical pinned visual run 33758274931 confirmed the actual body."
         },
         {
           "type": "official_xsd_explicit",
-          "note": "The exact V2.2 XSD requires DeviceStatusImpact and DeviceStatusPriority in addition to Name and Flag."
+          "note": "VDVde/VDV301 release-tagged DMS V2.1 blob 191b43e01cdaba14b247725689a913c244a67eed defines only Name/Flag; V2.2 official blob c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d additionally requires DeviceStatusImpact and DeviceStatusPriority (implicit minOccurs=1)."
         },
         {
           "type": "candidate_integration_provenance",
-          "note": "The checked V2.4 repository XSD is candidate/integration and makes Impact/Priority optional."
+          "note": "DMS V2.3 integration-only XSD blob 5fe444cf6d10462cc23fd159eb963abbec42248f also requires Impact/Priority, but no official DMS V2.3 PDF is pinned: documentation defect cannot be attributed to a missing publication."
         },
         {
           "type": "later_official_correction",
-          "note": "The V2.4 publication aligns with the optional model; this later correction must not be back-applied to V2.2."
+          "note": "Official DMS V2.4 published PDF p23 Table 20 documents Impact/Priority 0:1; candidate/integration DMS V2.4 XSD blob d222dfd98b2be3777576388da7ace8f333d24c3f makes both optional. V2.4 is a correction boundary, not part of the PDF/XSD mismatch's affected version scope. The separate V2.4 eDeviceStatusPriority PDF typo is tracked as DRDMS24-002."
         },
         {
           "type": "executable_validation",
-          "note": "EV-127 rejects the V2.2 PDF-visible two-field shape and accepts the four-field shape; the V2.4 candidate profile accepts both two- and four-field shapes."
+          "note": "Extended EV-127 run 37903327050 SUCCESS: official V2.1 two-field=accept and four-field=reject; V2.2 official and V2.3 integration two-field=reject/four-field=accept, omission of either Impact/Priority individually=reject; V2.4 candidate two-/four-field and either single-optional accepted."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "DMS V2.2 DeviceStatus: PDF lässt XSD-Pflichtfelder aus",
-          "short": "Die V2.2-PDF zeigt nur Name und Flag, die ausgewählte V2.2-XSD verlangt zusätzlich Impact und Priority.",
-          "long": "Ein ausschließlich nach der V2.2-PDF-Tabelle aufgebauter DeviceStatus mit DeviceStatusName und DeviceStatusFlag ist für die ausgewählte V2.2-XSD unvollständig. EV-127 bestätigt: die Zwei-Feld-Form wird abgelehnt, mit DeviceStatusImpact und DeviceStatusPriority ist die Struktur gültig. Im geprüften V2.4-Kontext sind Impact/Priority später optional.",
-          "recommendation": "Für V2.2 DeviceStatusImpact und DeviceStatusPriority gemäß XSD mitsenden; die V2.4-Optionalität nicht rückwirkend anwenden."
+          "title": "DMS V2.2 DeviceStatus: PDF lässt zwei XSD-Pflichtfelder aus",
+          "short": "Nur V2.2 zeigt den Widerspruch: Die PDF nennt Name/Flag, die offizielle XSD verlangt zusätzlich Impact/Priority.",
+          "long": "Die offizielle V2.1-Schrift dokumentiert DeviceStatusStructure auf Seite 105 in Tabelle 34 mit Name und Flag; ihre XSD verlangt ebenfalls nur diese beiden Felder. In V2.2 führt die offizielle PDF in Tabelle 20 weiterhin nur diese zwei Felder auf, während die ausgewählte offizielle V2.2-XSD zusätzlich DeviceStatusImpact und DeviceStatusPriority zwingend verlangt. Die V2.3-Integrations-XSD behält diese Pflichtfelder bei, ohne dass eine offizielle V2.3-DMS-PDF für einen eigenen Dokumentationsfehler nachgewiesen ist. Die offizielle V2.4-Schrift dokumentiert die Zusatzfelder als optional, ebenso die V2.4-Kandidaten-XSD. Ausführbare XML-Tests bestätigen die exakten Grenzen.",
+          "recommendation": "Für DMS V2.2 müssen auch DeviceStatusImpact und DeviceStatusPriority in der richtigen Reihenfolge vorhanden sein, sonst XSD-FAIL. Eine Dokumentationswarnung darf dieses FAIL nicht aufheben. V2.4 nicht als betroffene Dokumentationsversion oder offizielle XSD umdeuten."
         },
         "en": {
-          "title": "DMS V2.2 DeviceStatus: PDF omits XSD-required fields",
-          "short": "The V2.2 PDF shows only Name and Flag, while the selected V2.2 XSD additionally requires Impact and Priority.",
-          "long": "A DeviceStatus built only from the V2.2 PDF table with DeviceStatusName and DeviceStatusFlag is incomplete for the selected V2.2 XSD. EV-127 confirms that the two-field form is rejected and the structure becomes valid when DeviceStatusImpact and DeviceStatusPriority are included. In the checked V2.4 context Impact/Priority later become optional.",
-          "recommendation": "For V2.2 include DeviceStatusImpact and DeviceStatusPriority as required by the XSD; do not back-apply V2.4 optionality."
+          "title": "DMS V2.2 DeviceStatus: PDF omits two XSD-required fields",
+          "short": "The contradiction is confined to V2.2: its PDF lists Name/Flag, while the official selected XSD also requires Impact/Priority.",
+          "long": "The official V2.1 publication describes DeviceStatusStructure on printed page 105, Table 34, with Name and Flag, matching its official XSD. In V2.2 the official PDF Table 20 still lists only these two fields, whereas the selected official V2.2 XSD also requires DeviceStatusImpact and DeviceStatusPriority. The V2.3 integration-only schema retains the required fields, but there is no independently pinned official V2.3 DMS PDF from which to assert a documentation defect. The published V2.4 specification documents the two added fields as optional, as does the V2.4 candidate schema. Executable XML tests confirm these precise boundaries.",
+          "recommendation": "For official DMS V2.2, include DeviceStatusImpact and DeviceStatusPriority in schema sequence order or the document must fail XSD validation. The advisory must never waive that failure; keep V2.4 as a non-affected correction-boundary candidate schema."
         }
       },
       "runtime_match": {
         "state": "reviewed",
         "candidate_triggers": [
-          "selected strict profile is official DeviceManagementService V2.2",
+          "selected strict profile is official DeviceManagementService V2.2; V2.1 predecessor and V2.4 candidate correction boundary are not affected documentation lanes",
           "XSD validation result is INVALID for DeviceStatusStructure because DeviceStatusImpact or DeviceStatusPriority is missing",
-          "submitted structure otherwise follows the PDF-visible DeviceStatusName plus DeviceStatusFlag shape"
+          "submitted structure otherwise follows the V2.2 PDF-visible DeviceStatusName plus DeviceStatusFlag shape"
         ]
       },
       "source_references": [
@@ -4462,8 +4460,29 @@
           "kind": "version_history",
           "reference": "audit_registry/deep_read_findings_delta_dms_v24_2026-08-28.json",
           "note": "Later V2.4 alignment."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-2_BASE_V2.1 printed p105 Table 34, actual DeviceManagementService.DeviceStatusStructure (run 37903052606, artifact 11603326400; PNG sha256 410fef8472cabb9ac343ada24dba932bc0a61dbb2c0378e10472fcab9ad43e23)",
+          "note": "Non-affected predecessor confirmed by original visible table and corresponding V2.1 official XSD."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_DeviceManagementService_V2.3.xsd integration-only Git blob 5fe444cf6d10462cc23fd159eb963abbec42248f, DeviceStatusStructure",
+          "note": "Required Impact/Priority persist in V2.3 integration; no official PDF contradiction asserted."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-127 extended selected-XSD positive/negative run 37903327050",
+          "note": "V2.1 two-field valid; V2.2 and V2.3 require both additional fields; V2.4 optional."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DMS_006_2026-10-09.md",
+          "note": "Material DMS-006 correction: excluded V2.4 from affected scope and established nonaffected predecessor."
         }
-      ]
+      ],
+      "notes": "Material boundary correction on 2026-10-09: only V2.2 official PDF is proven to omit required XSD fields. V2.1 PDF and XSD align at two fields. V2.3 integration XSD requires four fields but has no official PDF for attribution. V2.4 documented optional correction must be excluded from affected semantic/runtime scope. Separate V2.4 eDeviceStatusPriority PDF typo remains DRDMS24-002."
     },
     {
       "finding_id": "DMS-007",

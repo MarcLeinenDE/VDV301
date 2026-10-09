@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "b52224023bcbd0823c9710bbd2b286663111fe50",
+    "git_blob": "97ae0ec47dc68e6573b1dc4b667201c012b681b7",
     "finding_count": 192
   },
   "policy": {
@@ -8994,15 +8994,48 @@
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_DeviceManagementService_V2.2.xsd",
           "note": "PDF table lists Name+Flag only; exact official XSD also requires DeviceStatusImpact and DeviceStatusPriority."
-        },
-        {
-          "version": "V2.4",
-          "authority": "candidate_integration",
-          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.4.xsd",
-          "note": "Official public PDF and candidate/integration XSD align with Impact/Priority optional."
         }
       ],
       "coverage": [
+        {
+          "version": "2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "predecessor_not_affected",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 Basic Services / DeviceManagementService",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                105
+              ],
+              "section": "GetDeviceStatusInformation response — visible DeviceManagementService.DeviceStatusStructure description (continuation)",
+              "table": "Table 34 — Description of DeviceManagementService.DeviceStatusStructure",
+              "point_summary": "Actual p105 table 34 visually lists DeviceStatusName 1:1 and DeviceStatusFlag 1:1 only; no Impact/Priority in this version. Pinned source render run 37903052606, artifact 11603326400, p105 PNG SHA-256 410fef8472cabb9ac343ada24dba932bc0a61dbb2c0378e10472fcab9ad43e23."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+              "git_blob": "191b43e01cdaba14b247725689a913c244a67eed",
+              "authority_detail": "Official VDVde/VDV301 release tag VDV-301-2.1, selected DMS service schema exact blob",
+              "component_kind": "complexType",
+              "component": "DeviceStatusStructure",
+              "member": "DeviceStatusName; DeviceStatusFlag",
+              "value": "Both Name and Flag required (implicit minOccurs=1); no Impact/Priority fields in V2.1 structure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceStatusStructure']/xs:sequence",
+              "line_hint": "DeviceStatusStructure towards end of schema",
+              "point_summary": "Official predecessor XSD exactly matches the two-field Table 34 layout, so DMS-006 mismatch does not apply to V2.1.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            }
+          ],
+          "coverage_note": "Last nonaffected official predecessor: same two fields in original official PDF Table 34 and in selected official V2.1 DMS XSD. Actual visible body checked against exact PDF bytes."
+        },
         {
           "version": "2.2",
           "authority": "official_release",
@@ -9042,6 +9075,28 @@
           "coverage_note": "Confirmed PDF defect. A PDF-shaped Name+Flag DeviceStatus is invalid under the selected official V2.2 XSD; Impact+Priority are required."
         },
         {
+          "version": "2.3",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "integration_xsd_comparison_documentation_unresolved",
+          "pdf_locators": [],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.3.xsd",
+              "git_blob": "5fe444cf6d10462cc23fd159eb963abbec42248f",
+              "authority_detail": "Selectable integration-only V2.3 DMS schema, not proven official release. No independently pinned public DMS V2.3 PDF to assess documentation.",
+              "component_kind": "complexType",
+              "component": "DeviceStatusStructure",
+              "member": "DeviceStatusImpact; DeviceStatusPriority",
+              "value": "Impact and Priority required (implicit minOccurs=1), as in official V2.2 XSD",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceStatusStructure']/xs:sequence",
+              "line_hint": "DeviceStatusStructure towards end of schema",
+              "point_summary": "Integration V2.3 XSD still rejects Name+Flag-only DeviceStatus (EV-127 37903327050), but no V2.3 PDF defect is asserted."
+            }
+          ],
+          "coverage_note": "Intermediate comparison only; has the old four-field XSD requirement but no known official PDF/Release for confirming or denying this specific PDF-XSD mismatch."
+        },
+        {
           "version": "2.4",
           "authority": "candidate_integration",
           "coverage_status": "complete",
@@ -9075,14 +9130,18 @@
               "point_summary": "Selected candidate/integration V2.4 XSD makes Impact and Priority optional."
             }
           ],
-          "coverage_note": "Later correction boundary. V2.4 PDF and candidate/integration XSD align on optional Impact/Priority; this does not retroactively change V2.2."
+          "coverage_note": "First verified later corrected official publication V2.4: original PDF p23 documents Impact/Priority optional and candidate/integration XSD matches. This version is NOT in affected semantic/runtime scope. Separate eDeviceStatusPriority typo remains DRDMS24-002.",
+          "scope_role": "correction_boundary_not_affected"
         }
       ],
       "supporting_evidence": [
         "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md",
         "audit_registry/dms_visual_revalidation_evidence_2026-09-03.json",
         "EV-127 run 33762375705",
-        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DMS_006_2026-10-06.md"
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DMS_006_2026-10-06.md",
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DMS_006_2026-10-09.md",
+        "V2.1 pinned visible-body Table 34 render run 37903052606 artifact 11603326400",
+        "extended EV-127 DMS-006 run 37903327050"
       ]
     },
     {
