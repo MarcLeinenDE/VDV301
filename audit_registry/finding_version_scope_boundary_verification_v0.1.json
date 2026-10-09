@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 50,
-    "pending_revalidation": 20
+    "verified": 51,
+    "pending_revalidation": 19
   },
-  "next_pending_finding": "DMS-002",
+  "next_pending_finding": "DMS-003",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -2739,9 +2739,64 @@
     },
     {
       "finding_id": "DMS-002",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DMS_002_2026-10-09.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DMS_002_2026-10-06.md",
+        "audit_registry/dms_visual_revalidation_evidence_2026-09-03.json"
+      ],
+      "note": "PDF-only unresolved Word cross-reference marker first and last in V2.0, absent from V1.0 German/English predecessor and resolved in V2.1; later DMS V2.2/V2.4 absence text-checked. No normative provider check.",
+      "scope_conclusion": "The specific unresolved 'Fehler! Verweisquelle konnte nicht gefunden werden.' residue affects bilingual VDV 301-2 Base V2.0; German V1.0 and independently issued English V1.0 negative predecessors; bilingual V2.1 first corrected successor; separate DMS V2.2/V2.4 no persistence.",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-2 V1.0 German",
+          "role": "last_earlier_german_non_affected_predecessor",
+          "language_status": "de:full original PDF text search for specific unresolved Word marker negative",
+          "source_ids": [
+            "VDV301-2_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V1.0 English",
+          "role": "earlier_english_non_affected_predecessor",
+          "language_status": "en:independently published text search for Word error markers negative; not proof every reference correct",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V2.0 Base",
+          "role": "first_and_last_affected",
+          "language_status": "de-en:visible body printed p76 contains exact German Word error in DMS-start context; same literal recurs elsewhere across bilingual document",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V2.1 Base",
+          "role": "first_corrected_successor",
+          "language_status": "de-en:printed §5.3.2.1 p77 uses resolved §7.1.23 reference; full-document original text marker search negative",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "VDV 301-2-0 DMS V2.2",
+          "role": "later_non_affected",
+          "language_status": "de-en:exact unresolved Word marker not present in text of separately published DMS document",
+          "source_ids": [
+            "DMS_V2.2"
+          ]
+        },
+        {
+          "version": "VDV 301-2-0 DMS V2.4",
+          "role": "later_non_affected",
+          "language_status": "de-en:exact unresolved Word marker not present in text of separately published DMS document",
+          "source_ids": [
+            "DMS_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DMS-003",
