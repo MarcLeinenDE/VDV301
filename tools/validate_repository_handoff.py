@@ -20,6 +20,16 @@ def main():
     req(state["canonical_branch"]=="dev/schema-integration","canonical branch is dev/schema-integration")
     h=state["handoff_integrity"]; req(h["policy"]=="00_START_HERE/HANDOFF_INTEGRITY_POLICY.md","handoff policy pointer is canonical"); req(h["post_prompt_check_required"] is True,"post-prompt check is mandatory"); req(h["canonical_restart_documents"]==CANON,"canonical restart list is exact"); req(h["legacy_control_documents_noncanonical"]==LEGACY,"legacy-control list is exact")
     req(h["work_cycle_state"] in ("gate_pending","terminal_clean"),"work-cycle state recognized")
+    changed=subprocess.check_output(["git","diff-tree","--root","--no-commit-id","--name-only","-r","HEAD"],cwd=ROOT,text=True).splitlines()
+    external=[p for p in changed if p!="00_START_HERE/CURRENT_STATE.json"]
+    if external:
+        req("00_START_HERE/CURRENT_STATE.json" in changed,"every substantive commit updates CURRENT_STATE in same commit")
+        if any(p!="sdk_manifest/manifest_v0.1.json" for p in external):
+            req(h["work_cycle_state"]=="gate_pending","substantive commit uses recoverable gate_pending")
+    if h["work_cycle_state"]=="gate_pending":
+        for field in ("pending_block","active_finding","active_step","next_step","recovery_instruction","resume_instruction"):
+            req(isinstance(h.get(field),str) and len(h[field].strip())>=12,f"gate_pending {field} actionable")
+        req(isinstance(h.get("evidence_refs"),list) and len(h["evidence_refs"])>0,"gate_pending evidence references present")
     if h["work_cycle_state"]=="terminal_clean":
         req(h["pending_gate"] is False,"terminal-clean has no pending gate")
         req(state["workflow_mode"]=="full_gate_on_canonical_changes_plus_handoff_check_on_every_push","terminal-clean workflow mode is final")
@@ -39,6 +49,9 @@ def main():
     k=manifest["known_issues_knowledge"]; req(k["source_locator_entry_count"]==count,"SDK manifest locator count matches"); req(k["source_locator_latest_review_block"]==state["audit"]["source_locator_latest_review_block"],"SDK manifest latest locator review matches"); req(k["source_locator_latest_review_report"]==state["audit"]["source_locator_latest_review_report"],"SDK manifest latest locator report matches"); req(k["source_locator_latest_gate_run_id"]==state["audit"]["source_locator_latest_gate_run_id"],"SDK manifest latest locator gate matches")
     bp=state["scope_boundary_progress"]; req(boundary["counts"]["tracked_findings"]==bp["tracked_findings"],"boundary tracked count sync"); req(boundary["counts"]["verified"]==bp["verified"],"boundary verified count sync"); req(boundary["counts"]["pending_revalidation"]==bp["pending_revalidation"],"boundary pending count sync"); req(boundary["next_pending_finding"]==bp["next_pending_finding"],"boundary next sync")
     req(k["version_scope_boundary_tracked_count"]==bp["tracked_findings"],"SDK manifest boundary tracked count matches"); req(k["version_scope_boundary_verified_count"]==bp["verified"],"SDK manifest boundary verified count matches"); req(k["version_scope_boundary_pending_count"]==bp["pending_revalidation"],"SDK manifest boundary pending count matches")
+    for section in ("audit","sdk"):
+        for key,bp_key in (("version_scope_boundary_tracked_count","tracked_findings"),("version_scope_boundary_verified_count","verified"),("version_scope_boundary_pending_count","pending_revalidation")):
+            req(state[section][key]==bp[bp_key],f"{section} {key} matches canonical boundary count")
     if bp["pending_revalidation"]>0:
         req(bp["locator_expansion_frozen"] is True,"locator expansion frozen for boundary backlog"); req(state["project_phase"]=="version_scope_boundary_revalidation","boundary phase active")
     full=(ROOT/".github/workflows/schema-audit-validation.yml").read_text(encoding="utf-8"); hw=ROOT/".github/workflows/handoff-integrity.yml"

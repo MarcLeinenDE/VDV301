@@ -60,6 +60,21 @@ A completed prompt must end with:
 - `pending_gate = false`;
 - one explicit resume instruction.
 
+## Intermediate-commit integrity (hard requirement)
+
+Every substantive commit on the canonical branch, including PDF render requests, source-pin changes, tool/workflow changes, evidence and registry updates, must update `00_START_HERE/CURRENT_STATE.json` **in the same commit**. Do not leave a predecessor finding's `terminal_clean` while already working on a new finding.
+
+Until the block is finished, set `handoff_integrity.work_cycle_state = "gate_pending"` and `pending_gate = true` and maintain all fields:
+
+- `pending_block`: exact ongoing finding or maintenance block;
+- `active_finding`: identifier of that block;
+- `active_step`: what has just been committed;
+- `next_step`: the concrete next action and gate;
+- `evidence_refs`: tracked inputs and evidence references;
+- `recovery_instruction` and `resume_instruction`: executable no-chat continuation.
+
+Intermediate evidence commits do not each need a completed full audit gate, but must be immediately recoverable. After the full gate succeeds for the pending commit, commit a separately documented `terminal_clean` handoff and verify its handoff-integrity gate before beginning another finding. The handoff validator inspects the commit/parent diff; checkout uses depth 2. A terminal closure may update only the status and SDK summary manifest; source/evidence changes must first be committed in `gate_pending`. All duplicated status counts must mirror canonical registries.
+
 ## Historical control-document rule
 
 Known old current-sounding documents must begin with:
