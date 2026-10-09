@@ -149,7 +149,7 @@ def install_xml(fields: tuple[str, ...]) -> str:
 
 def test_dms004() -> None:
     required = ("UpdateID", "UpdateTimestamp", "UpdateURL")
-    for version in ("v21", "v22"):
+    for version in ("v21", "v22", "v23"):
         schema = wrapper_schema(
             DMS[version],
             "EV127Install",
