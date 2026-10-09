@@ -2207,12 +2207,21 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "37912821328",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "37912821354",
-    "resume_instruction": "DR3011-002 DE/EN Part1 conceptual terminology mismatch independently verified against unaffected DE/EN Part2 V1.0 Table31/Table110. Original byte-pinned pages personally inspected, report docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3011_002_2026-10-09.md. Full schema-audit-validation run 37912821328 SUCCESS; pending-HEAD handoff run 37912821354 SUCCESS. Now 58/70 boundaries verified, 12 pending. Final HEAD must pass handoff-integrity. Next independent block DR3011-003 (duplicate IBIS-IP glossary entry), check DE/EN V1.0 language scope without assuming the English duplicates the German."
+    "resume_instruction": "DR3011-002 audited content complete at 58/70. Full workflow uses shallow depth-one checkout, so per-commit diff is unavailable there; guard now defers per-commit enforcement to the always-run depth-two handoff-integrity. Verify full repair gate and handoff, then terminal-clean with state-only commit.",
+    "pending_block": "DR3011-002 full-gate shallow checkout guard false positive recovery",
+    "active_finding": "DR3011-002",
+    "active_step": "Make per-commit guard defer to depth-two handoff workflow if full gate checkout lacks parent",
+    "next_step": "Verify full audit plus handoff at repair commit, then final terminal-clean state-only handoff",
+    "evidence_refs": [
+      "failed final full audit 37912951031; full job depth1 checkout, handoff depth2 green 37912951083",
+      "tools/validate_repository_handoff.py"
+    ],
+    "recovery_instruction": "DR3011-002 audited content complete at 58/70. Full workflow uses shallow depth-one checkout, so per-commit diff is unavailable there; guard now defers per-commit enforcement to the always-run depth-two handoff-integrity. Verify full repair gate and handoff, then terminal-clean with state-only commit."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",

@@ -20,7 +20,9 @@ def main():
     req(state["canonical_branch"]=="dev/schema-integration","canonical branch is dev/schema-integration")
     h=state["handoff_integrity"]; req(h["policy"]=="00_START_HERE/HANDOFF_INTEGRITY_POLICY.md","handoff policy pointer is canonical"); req(h["post_prompt_check_required"] is True,"post-prompt check is mandatory"); req(h["canonical_restart_documents"]==CANON,"canonical restart list is exact"); req(h["legacy_control_documents_noncanonical"]==LEGACY,"legacy-control list is exact")
     req(h["work_cycle_state"] in ("gate_pending","terminal_clean"),"work-cycle state recognized")
-    changed=subprocess.check_output(["git","diff-tree","--root","--no-commit-id","--name-only","-r","HEAD"],cwd=ROOT,text=True).splitlines()
+    parent_ready=subprocess.run(["git","rev-parse","--verify","HEAD^"],cwd=ROOT,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0
+    changed=subprocess.check_output(["git","diff-tree","--root","--no-commit-id","--name-only","-r","HEAD"],cwd=ROOT,text=True).splitlines() if parent_ready else []
+    if not parent_ready: req(True,"shallow full-checkout: commit-level guard delegated to depth-2 every-push handoff workflow")
     external=[p for p in changed if p!="00_START_HERE/CURRENT_STATE.json"]
     if external:
         req("00_START_HERE/CURRENT_STATE.json" in changed,"every substantive commit updates CURRENT_STATE in same commit")
