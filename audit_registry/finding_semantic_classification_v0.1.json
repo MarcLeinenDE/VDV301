@@ -4633,7 +4633,13 @@
           "version": "VDV 301-1 V1.0",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "Part 1 page 2 assigns section 5.1.2 to system documentation and 5.1.3 to system management, while the SystemManagementService example on page 10 points to 5.1.2."
+          "note": "Official German original V1.0: page 10 Example 1 wrongly references 5.1.2, but original visible body p17 heading 5.1.2 is System-Dokumentation and p18 heading 5.1.3 is System-Management (not only TOC p2)."
+        },
+        {
+          "version": "VDV 301-1 V1.0 EN",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Independent officially published English translation (explicitly non-authoritative relative to German original) repeats wrong chapter 5.1.2 reference in Example 1 p11; visible body p17=5.1.2 System Documentation, p18=5.1.3 System Management; byte-pinned 508cb52a9d9d459461954d46618d7b62a0ab9dc5698ef24e97fca2c458c551e4."
         }
       ],
       "review_state": "manually_reviewed",
@@ -4654,21 +4660,29 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "The pinned Part 1 V1.0 PDF visibly assigns 5.1.2 to system documentation and 5.1.3 to system management, but the page-10 SystemManagementService example refers to 5.1.2."
+          "note": "German official VDV301-1 V1.0 exact source sha256 5418f24190468a1823699688cf86f98d812591ad2c7c2eada07b1d34889c20c2: actual rendered example p10 explicitly says vgl. 5.1.2; actual BODY headings p17 §5.1.2 System-Dokumentation, p18 §5.1.3 System-Management. The TOC on p2 agrees but is not locator authority. Pinned render run 37906160717."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Independent official VDV301-1 V1.0 English translation exact source sha256 508cb52a9d9d459461954d46618d7b62a0ab9dc5698ef24e97fca2c458c551e4: actual example p11 says cf. chapter 5.1.2; actual BODY headings p17 §5.1.2 System Documentation and p18 §5.1.3 System Management. Pinned render run 37906694433. English translation notes German original controls if inconsistent."
+        },
+        {
+          "type": "version_history",
+          "note": "Official VDV public IP-KOM-ÖV index and current canonical pinned PDF source registry list Part-1 system architecture V1.0 German and English; no Part-1 predecessor or independently pinned later corrected Part-1 edition in this source corpus. No claim that no successor exists anywhere; boundary stops at available official versions."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "VDV 301-1 V1.0: SystemManagement-Beispiel verweist auf den falschen Abschnitt",
-          "short": "Das SystemManagementService-Beispiel verweist auf 5.1.2, obwohl die Gliederung System-Management unter 5.1.3 führt.",
-          "long": "Im Part-1-Dokument V1.0 ordnet die Gliederung Abschnitt 5.1.2 der System-Dokumentation und 5.1.3 dem System-Management zu. Das SystemManagementService-Beispiel auf Seite 10 verweist dennoch auf 5.1.2. Das ist ein bestätigter Dokumentations-Querverweisfehler ohne Einfluss auf XML- oder XSD-Gültigkeit.",
-          "recommendation": "Den Abschnittsverweis nur als redaktionellen Fehler behandeln und daraus keine zusätzliche SDK- oder XML-Konformitätsregel ableiten."
+          "title": "VDV 301-1 V1.0: SystemManagement-Beispiel verweist in beiden Sprachfassungen falsch",
+          "short": "Beispiel 1 verweist auf 5.1.2, obwohl der Dokumentkörper System-Management unter 5.1.3 führt – in Deutsch und Englisch.",
+          "long": "Die offizielle deutsche VDV 301-1 V1.0 nennt in Beispiel 1 auf Seite 10 für den SystemManagementService Abschnitt 5.1.2. Die tatsächlichen Kapitelüberschriften im Dokumentkörper lauten auf Seite 17 jedoch 5.1.2 System-Dokumentation und auf Seite 18 5.1.3 System-Management. Die separat veröffentlichte englische Übersetzung wiederholt den falschen Verweis in Example 1 auf Seite 11; ihre Kapitelüberschriften auf Seiten 17 und 18 stimmen ebenfalls mit 5.1.2 System Documentation und 5.1.3 System Management überein. Die englische Ausgabe ist eine ausdrücklich unverbindliche Übersetzung; die deutsche Urschrift ist maßgeblich. Es handelt sich ausschließlich um einen redaktionellen Querverweisfehler, nicht um eine XML-/XSD-Konformitätsabweichung.",
+          "recommendation": "Für die fachliche Komponente System-Management auf den tatsächlichen Abschnitt 5.1.3 verweisen. Keine zusätzliche Anbieterprüfung, keine XML-Normalisierung und keinen SDK-Matcher aus dem PDF-Verweis ableiten."
         },
         "en": {
-          "title": "VDV 301-1 V1.0: SystemManagement example points to the wrong section",
-          "short": "The SystemManagementService example points to 5.1.2 even though the document structure places system management in 5.1.3.",
-          "long": "In the V1.0 Part 1 document, section 5.1.2 is assigned to system documentation and 5.1.3 to system management. The SystemManagementService example on page 10 nevertheless points to 5.1.2. This is a confirmed documentation cross-reference defect without XML or XSD validity impact.",
-          "recommendation": "Treat the section reference as an editorial defect only and do not derive an additional SDK or XML conformance rule from it."
+          "title": "VDV 301-1 V1.0: SystemManagement example has wrong section reference in both languages",
+          "short": "Example 1 refers to 5.1.2 in German and English, but the actual System Management body section is 5.1.3.",
+          "long": "Official German VDV 301-1 V1.0 Example 1 on printed page 10 links SystemManagementService to section 5.1.2, while the actual document body titles section 5.1.2 System-Dokumentation on page 17 and section 5.1.3 System-Management on page 18. The separately published English translation repeats the wrong 'cf. chapter 5.1.2' link in Example 1 on printed page 11, while its body headings on pages 17 and 18 respectively read 5.1.2 System Documentation and 5.1.3 System Management. The English translation explicitly defers to the German original in case of discrepancies. This is a documentation-only cross-reference error without XML/XSD conformance impact.",
+          "recommendation": "Refer to section 5.1.3 for the System Management component. Do not derive provider XML validation rules or an SDK runtime matcher from this editorial issue."
         }
       },
       "runtime_match": {
@@ -4690,9 +4704,24 @@
           "kind": "evidence",
           "reference": "EV-128 / workflow run 33763071038",
           "note": "Current evidence-gate revalidation of the exact pinned source; finding remains contextual/documentation-only."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-1_V1.0_DE p10 Example 1 vs actual body p17 §5.1.2 and p18 §5.1.3 (SHA256 5418f24190468a1823699688cf86f98d812591ad2c7c2eada07b1d34889c20c2)",
+          "note": "Exact-byte GitHub pinned run 37906160717, artifact 11604806247; original body inspected."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-1_V1.0_EN p11 Example 1 vs body p17 §5.1.2 and p18 §5.1.3 (SHA256 508cb52a9d9d459461954d46618d7b62a0ab9dc5698ef24e97fca2c458c551e4)",
+          "note": "Official English first pin proposal run 37906414201 artifact 11604343550; strict byte-pinned run 37906694433 artifact 11603974595; original pages visually inspected."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3011_001_2026-10-09.md",
+          "note": "Complete independent bilingual V1.0 affected scope and absence of a documented later successor in pinned corpus."
         }
       ],
-      "notes": "The finding is intentionally not promoted into an SDK conformance rule."
+      "notes": "2026-10-09 boundary review corrected original TOC-only inference to actual German/English document-body headings. Affected both independently published V1.0 languages. No newer official VDV 301-1 edition pinned or indexed by the checked VDV official catalog. No runtime/XSD effect."
     },
     {
       "finding_id": "DR3011-002",

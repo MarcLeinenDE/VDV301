@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "2bf529692bdff33824e6486363850044bd255d23",
+    "git_blob": "899cb05e57a5ebd23b94e8ee13ccb2b0a2b5c4e9",
     "finding_count": 192
   },
   "policy": {
@@ -9324,7 +9324,13 @@
           "version": "VDV 301-1 V1.0",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "Part 1 page 2 assigns section 5.1.2 to system documentation and 5.1.3 to system management, while the SystemManagementService example on page 10 points to 5.1.2."
+          "note": "Official German original V1.0: page 10 Example 1 wrongly references 5.1.2, but original visible body p17 heading 5.1.2 is System-Dokumentation and p18 heading 5.1.3 is System-Management (not only TOC p2)."
+        },
+        {
+          "version": "VDV 301-1 V1.0 EN",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Independent officially published English translation (explicitly non-authoritative relative to German original) repeats wrong chapter 5.1.2 reference in Example 1 p11; visible body p17=5.1.2 System Documentation, p18=5.1.3 System Management; byte-pinned 508cb52a9d9d459461954d46618d7b62a0ab9dc5698ef24e97fca2c458c551e4."
         }
       ],
       "coverage": [
@@ -9360,10 +9366,63 @@
               "section": "3.2 Begriffe / Beispiel SystemManagementService",
               "table": null,
               "point_summary": "Visible example describes SystemManagementService as an implementation of System-Management but points to section 5.1.2, conflicting with the document structure."
+            },
+            {
+              "source_id": "VDV301-1_V1.0_DE",
+              "document_title": "VDV-Schrift 301-1 IBIS-IP Teil 1: Systemarchitektur",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/vdv-301-1-ibis-ip-teil-1-systemarchitektur.pdfx",
+              "sha256": "5418f24190468a1823699688cf86f98d812591ad2c7c2eada07b1d34889c20c2",
+              "printed_pages": [
+                17,
+                18
+              ],
+              "section": "5.1.2 System-Dokumentation; 5.1.3 System-Management (actual body headings)",
+              "table": null,
+              "point_summary": "Actual visible body p17 assigns §5.1.2 to System-Dokumentation; p18 begins §5.1.3 System-Management. This disproves that the mismatch was TOC-only. Pinned render 37906160717 artifact 11604806247."
             }
           ],
           "xsd_locators": [],
-          "coverage_note": "Confirmed documentation cross-reference defect only; no XML/XSD validity behavior is implied."
+          "coverage_note": "German official V1.0 actual body (not merely TOC) confirms wrong Example1 reference: p10 points to 5.1.2; p17 body §5.1.2 System-Dokumentation; p18 body §5.1.3 System-Management. Pinned run 37906160717."
+        },
+        {
+          "version": "VDV 301-1 V1.0 EN",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-1_V1.0_EN",
+              "document_title": "VDV 301-1 IBIS-IP Part 1: System architecture (English translation)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-1ses.pdfx",
+              "sha256": "508cb52a9d9d459461954d46618d7b62a0ab9dc5698ef24e97fca2c458c551e4",
+              "printed_pages": [
+                11
+              ],
+              "section": "3 terminology — Example 1 SystemManagementService",
+              "table": null,
+              "point_summary": "Visible Example 1 in English translation says 'cf. chapter 5.1.2' for functional component System Management. Pinned render 37906694433, p11 PNG sha256 83cb92ecee31b4b618b839c70386093bb0af7659d64e75bf68577ea6cd9e4889."
+            },
+            {
+              "source_id": "VDV301-1_V1.0_EN",
+              "document_title": "VDV 301-1 IBIS-IP Part 1: System architecture (English translation)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-1ses.pdfx",
+              "sha256": "508cb52a9d9d459461954d46618d7b62a0ab9dc5698ef24e97fca2c458c551e4",
+              "printed_pages": [
+                17,
+                18
+              ],
+              "section": "5.1.2 System Documentation; 5.1.3 System Management (actual body headings)",
+              "table": null,
+              "point_summary": "Actual visible English body p17 is §5.1.2 System Documentation, p18 is §5.1.3 System Management. Strict run 37906694433, p17 PNG sha256 9637bbaf9eaeac43c0a4b79b73614836f1b3554917e424524d2fa01535c3619f, p18 sha256 4b306d690a8ccbdbcb3d977dac72ccbf5074b37f73984cea1e1eacd1cbbaab50."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Independently published English V1.0 translation exhibits identical editorial error; its translation disclaimer says German original applies in case of inconsistencies; no XSD runtime authority."
         }
       ],
       "supporting_evidence": [
@@ -9371,7 +9430,10 @@
         "audit_registry/vdv3011_visual_revalidation_evidence_2026-09-03.json",
         "EV-128 run 33763071038",
         "visual run 33725750019 artifact 9881897572",
-        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3011_001_2026-10-06.md"
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3011_001_2026-10-06.md",
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3011_001_2026-10-09.md",
+        "German pinned body run 37906160717 artifact 11604806247",
+        "English source proposal 37906414201 artifact 11604343550 and strict pinned render 37906694433 artifact 11603974595"
       ]
     },
     {

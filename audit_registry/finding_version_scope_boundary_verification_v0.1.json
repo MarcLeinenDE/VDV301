@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 56,
-    "pending_revalidation": 14
+    "verified": 57,
+    "pending_revalidation": 13
   },
-  "next_pending_finding": "DR3011-001",
+  "next_pending_finding": "DR3011-002",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -3125,9 +3125,33 @@
     },
     {
       "finding_id": "DR3011-001",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3011_001_2026-10-09.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3011_001_2026-10-06.md",
+        "audit_registry/vdv3011_visual_revalidation_evidence_2026-09-03.json",
+        "audit_registry/pdf_source_pins_v0.1.json"
+      ],
+      "note": "Full original-body cross-reference confirmed DE and EN independently: DE Example1 p10, English Example1 p11 wrong 5.1.2; actual body sections on p17 5.1.2 System Documentation and p18 5.1.3 System Management. No prior 301-1 release or later corrected Part1 successor in checked official corpus.",
+      "scope_conclusion": "Affected earliest and latest available VDV 301-1 system architecture V1.0 German original and separately published V1.0 English translation. German p10 and English p11 example point to 5.1.2, while actual visible DE/EN chapter bodies p17 and p18 assign System Management to 5.1.3. No earlier published Part1 predecessor; no independently verified newer corrected Part1 successor in official VDV index/source registry. Documentation-only, no XML/XSD/provider/runtime implication.",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-1 V1.0 German original",
+          "role": "first_and_last_known_affected_german_publication",
+          "language_status": "de: original page10 Example1 wrong 5.1.2, actual body page17 §5.1.2 System-Dokumentation and p18 §5.1.3 System-Management; exact pinned visual run 37906160717",
+          "source_ids": [
+            "VDV301-1_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-1 V1.0 English translation",
+          "role": "first_and_last_known_affected_english_publication",
+          "language_status": "en: independent translated Example1 p11 wrong 5.1.2, actual body p17 §5.1.2 System Documentation and p18 §5.1.3 System Management; exact pinned visual run 37906694433. Non-authoritative English translation expressly defers to DE original",
+          "source_ids": [
+            "VDV301-1_V1.0_EN"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DR3011-002",
