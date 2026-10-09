@@ -1,0 +1,73 @@
+name: VDV PDF unpinned source proposal
+on:
+  workflow_dispatch:
+    inputs:
+      source_id:
+        description: Unpinned official source ID (proposal ONLY)
+        default: VDV301-2_V1.0_EN
+        type: string
+        required: true
+      pages:
+        description: 1-based PDF pages for preliminary proof
+        default: 66-68
+        type: string
+        required: true
+  push:
+    branches: [dev/schema-integration]
+    paths:
+      - .github/workflows/pdf-source-pin-proposal.yml
+permissions:
+  contents: read
+jobs:
+  propose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check pymupdf
+      - name: Retrieve official URL, compute untrusted first pin proposal, render original
+        env:
+          SOURCE_ID: ${{ inputs.source_id || 'VDV301-2_V1.0_EN' }}
+          PDF_PAGES: ${{ inputs.pages || '66-68' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib,json,urllib.request,fitz
+          from pathlib import Path
+          catalog=json.loads(Path('audit_registry/pdf_source_registry_v0.1.json').read_text())
+          import os
+          source_id=os.environ['SOURCE_ID']
+          sources=[s for s in catalog['sources'] if s['source_id']==source_id]
+          assert len(sources)==1
+          source=sources[0]
+          assert source['official_url'].startswith('https://www.vdv.de/')
+          request=urllib.request.Request(source['official_url'],headers={'User-Agent':'VDV301-Audit-PinProposal/0.1'})
+          data=urllib.request.urlopen(request,timeout=120).read()
+          assert data.startswith(b'%PDF-')
+          sha=hashlib.sha256(data).hexdigest()
+          doc=fitz.open(stream=data,filetype='pdf')
+          pages=set()
+          for v in os.environ['PDF_PAGES'].split(','):
+              if '-' in v:
+                  a,b=map(int,v.split('-',1));pages.update(range(a,b+1))
+              else:pages.add(int(v))
+          out=Path('audit-pin-proposal');out.mkdir()
+          renders=[]
+          for n in sorted(pages):
+              p=doc[n-1];blob=p.get_pixmap(matrix=fitz.Matrix(2,2),alpha=False).tobytes('png')
+              name=f'{source_id}_page_{n:04d}.png'
+              (out/name).write_bytes(blob)
+              renders.append({'page':n,'png_sha256':hashlib.sha256(blob).hexdigest(),'filename':name})
+          proposal={'status':'UNTRUSTED_FIRST_PIN_PROPOSAL_not_pinned_audit_authority','source_id':source_id,'official_url':source['official_url'],'sha256':sha,'size_bytes':len(data),'page_count':len(doc),'renders':renders}
+          (out/'source_pin_proposal.json').write_text(json.dumps(proposal,indent=2)+'\n')
+          print(json.dumps(proposal))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: vdv-pdf-source-pin-proposal
+          path: audit-pin-proposal/
+          retention-days: 90
+          if-no-files-found: error
