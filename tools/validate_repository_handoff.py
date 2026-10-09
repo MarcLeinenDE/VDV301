@@ -28,7 +28,8 @@ def main():
             req(h["work_cycle_state"]=="gate_pending","substantive commit uses recoverable gate_pending")
     if h["work_cycle_state"]=="gate_pending":
         for field in ("pending_block","active_finding","active_step","next_step","recovery_instruction","resume_instruction"):
-            req(isinstance(h.get(field),str) and len(h[field].strip())>=12,f"gate_pending {field} actionable")
+            minimum=1 if field=="active_finding" else 12
+            req(isinstance(h.get(field),str) and len(h[field].strip())>=minimum,f"gate_pending {field} actionable")
         req(isinstance(h.get("evidence_refs"),list) and len(h["evidence_refs"])>0,"gate_pending evidence references present")
     if h["work_cycle_state"]=="terminal_clean":
         req(h["pending_gate"] is False,"terminal-clean has no pending gate")

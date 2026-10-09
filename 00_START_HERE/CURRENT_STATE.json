@@ -2212,17 +2212,18 @@
     "latest_completed_full_gate_run_id": "37911793460",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "37911793257",
-    "resume_instruction": "DR3011-002 in progress; strict English Part2 V1.0 page90 Table110 render request committed. Inspect PDF-render-fallback Actions for this HEAD, verify exact bytes, visible headings/table/operations and original EN Part1 p11 evidence. Then update finding/boundary registries with complete DE/EN scope and gates. No next finding until terminal_clean.",
+    "resume_instruction": "DR3011-002 pending. Initial handoff run 37912096299 failed because active_finding ID was incorrectly required >=12 characters; validator is corrected to >=1. Verify new handoff and PDF render run 37912096325 for exact Part2 English V1.0 page90; then continue boundary audit.",
     "pending_block": "DR3011-002: independently verify Part1 DE/EN V1.0 against Part2 DE/EN V1.0 exact source and XSD authority",
     "active_finding": "DR3011-002",
-    "active_step": "Request strict byte-pinned visible render of official Part2 English V1.0 printed page90, Table110",
-    "next_step": "Inspect renderer run, visible Table110 and English Part1 page11 predecessor artifact, then decide boundary; do not close before full gate",
+    "active_step": "Correct over-strict active_finding minimum length; a normal DR3011-002 ID is valid; strict Part2 English PDF render remains requested",
+    "next_step": "Confirm handoff-integrity of corrected validator and finish English Part2 Table110 render evidence before boundary registry updates",
     "evidence_refs": [
       "audit_registry/pdf_source_pins_v0.1.json:VDV301-2_V1.0_EN",
       "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3011_002_2026-10-06.md",
-      "tools/pdf_render_request_v0.1.json"
+      "tools/pdf_render_request_v0.1.json",
+      "handoff failed run 37912096299: invalid minlen on active_finding, not missing state"
     ],
-    "recovery_instruction": "DR3011-002 in progress; strict English Part2 V1.0 page90 Table110 render request committed. Inspect PDF-render-fallback Actions for this HEAD, verify exact bytes, visible headings/table/operations and original EN Part1 p11 evidence. Then update finding/boundary registries with complete DE/EN scope and gates. No next finding until terminal_clean."
+    "recovery_instruction": "DR3011-002 pending. Initial handoff run 37912096299 failed because active_finding ID was incorrectly required >=12 characters; validator is corrected to >=1. Verify new handoff and PDF render run 37912096325 for exact Part2 English V1.0 page90; then continue boundary audit."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
