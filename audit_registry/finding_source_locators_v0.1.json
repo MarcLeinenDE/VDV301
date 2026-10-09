@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "c07ea886a9dbd90f0255b5dfd4186810321286cf",
+    "git_blob": "b52224023bcbd0823c9710bbd2b286663111fe50",
     "finding_count": 192
   },
   "policy": {
@@ -8842,6 +8842,12 @@
       "coverage_state": "complete",
       "scope_claims": [
         {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+          "note": "Official bilingual Base V2.1 PDF p104 actual body Table 31 already prints PDF-only DeviceManagementService.DeviceStatusInformationResponseData in choice branch a; adjacent type and Table 32 correctly use Get prefix. Selected official V2.1 XSD blob 191b43e01cdaba14b247725689a913c244a67eed declares only Get-prefixed branch. Executable run 37897942988 confirms typo alias rejected."
+        },
+        {
           "version": "V2.2",
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_DeviceManagementService_V2.2.xsd",
@@ -8855,6 +8861,44 @@
         }
       ],
       "coverage": [
+        {
+          "version": "2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 Basisdienste / Base Services",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                104
+              ],
+              "section": "7.1.31.2 Response – Data Structures of Operation GetDeviceStatusInformation",
+              "table": "Table 31 (wrong response choice branch a); Table 32 (correct response data identifier)",
+              "point_summary": "Actual visible page 104 Table 31 prints DeviceManagementService.DeviceStatusInformationResponseData without Get for choice branch a, while its adjacent type column and Table 32 immediately below print GetDeviceStatusInformationResponseData. Pinned runner 37897714010, artifact 11600767562, p104 PNG f38528dd5e1f818280cb38d4a141664146c2ea4280cba40c04e0abd4e78e88df."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+              "git_blob": "191b43e01cdaba14b247725689a913c244a67eed",
+              "authority_detail": "Verified exact official release-tagged VDVde/VDV301@VDV-301-2.1 service XSD",
+              "component_kind": "element",
+              "component": "DeviceManagementService.GetDeviceStatusInformationResponseData",
+              "member": null,
+              "value": "type=DeviceManagementService.GetDeviceStatusInformationResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceManagementService.GetDeviceStatusInformationResponseStructure']/xs:choice/xs:element[@name='DeviceManagementService.GetDeviceStatusInformationResponseData']",
+              "line_hint": "172",
+              "point_summary": "The selected official V2.1 response choice accepts only the Get-prefixed branch. The PDF-only non-Get branch is not declared and XML test 37897942988 rejects it.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            }
+          ],
+          "coverage_note": "First proven affected release V2.1, directly visible p104 Table 31 vs Table 32 and exact upstream official XSD. PDF typo is not a valid XML alias; provider FAIL derives from selected XSD, not from documentation warning."
+        },
         {
           "version": "2.2",
           "authority": "official_release",
@@ -8934,7 +8978,10 @@
         "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_2026-09-03.md",
         "audit_registry/dms_visual_revalidation_evidence_2026-09-03.json",
         "EV-127 run 33762375705",
-        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DMS_005_2026-10-06.md"
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DMS_005_2026-10-06.md",
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DMS_005_2026-10-09.md",
+        "pinned official Base V2.1 p104 visual render run 37897714010 artifact 11600767562",
+        "EV-127 DMS-005 executable positive/negative run 37897942988"
       ]
     },
     {

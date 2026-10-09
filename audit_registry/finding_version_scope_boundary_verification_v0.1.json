@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 53,
-    "pending_revalidation": 17
+    "verified": 54,
+    "pending_revalidation": 16
   },
-  "next_pending_finding": "DMS-005",
+  "next_pending_finding": "DMS-006",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -2935,9 +2935,66 @@
     },
     {
       "finding_id": "DMS-005",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DMS_005_2026-10-09.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DMS_005_2026-10-06.md",
+        "audit_registry/dms_visual_revalidation_evidence_2026-09-03.json",
+        "tools/validate_dms_instance_boundaries_ev127.py"
+      ],
+      "note": "Material first-affected boundary correction to V2.1: official bilingual Base V2.1 p104 Table 31 already omits Get, selected official XSD line 172 requires Get. Persists in V2.2 and V2.4 PDFs; V2.3 has only an integration XSD; V1.0/V2.0 operation absent. No corrected successor proven.",
+      "scope_conclusion": "First verified affected publication V2.1 (printed p104 Table 31 response choice, adjacent correct Table 32). Persisting PDF-only alias at V2.2 (p23 Table 17) and V2.4 (p22 Table 17). Last available non-applicable predecessor V2.0 has no GetDeviceStatusInformation response group; V1.0 also absent. V2.3 local integration XSD has the correct Get branch but no official PDF to assess documentation typo. No first corrected publication successor established. Exact selected XSD rejects PDF non-Get alias.",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-2 V1.0",
+          "role": "earlier_non_applicable_predecessor",
+          "language_status": "Separate DE/EN V1.0 publication tracks; DMS V1.0 official schema has no GetDeviceStatusInformationResponseStructure, so the exact PDF-versus-XSD branch typo is not yet applicable",
+          "source_ids": [
+            "VDV301-2_V1.0_DE",
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "role": "last_non_applicable_predecessor",
+          "language_status": "Official bilingual Base V2.0 DMS XSD lacks the target GetDeviceStatusInformationResponseStructure; cannot attribute the later response-choice typo to this earlier absent operation",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "role": "first_affected",
+          "language_status": "Official bilingual Base V2.1 actual English-language technical response table p104 Table 31: choice a non-Get, adjacent type and Table 32 Get; official release XSD Get-only",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "VDV 301-2-0 DMS V2.2",
+          "role": "continuing_affected_official_publication",
+          "language_status": "Official DMS V2.2 original printed p23 Table 17 non-Get branch label and Get type; official release XSD Get-only; earlier byte-pinned visual body verified",
+          "source_ids": [
+            "DMS_V2.2"
+          ]
+        },
+        {
+          "version": "DMS V2.3 integration only",
+          "role": "undetermined_publication_no_official_pdf",
+          "language_status": "No independently pinned official DMS V2.3 PDF; its integration-only XSD still uses the correct Get branch, so the PDF typo cannot be positively or negatively attributed to a published V2.3 document",
+          "source_ids": [
+            "IBIS-IP_DeviceManagementService_V2.3.xsd"
+          ]
+        },
+        {
+          "version": "VDV 301-2-0 DMS V2.4",
+          "role": "last_verified_affected_no_corrected_successor",
+          "language_status": "Official published DMS V2.4 original printed p22 Table 17 persists with non-Get choice a; candidate/integration V2.4 XSD Get-only; no later corrected publication verified",
+          "source_ids": [
+            "DMS_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DMS-006",

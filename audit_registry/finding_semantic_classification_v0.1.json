@@ -4226,6 +4226,12 @@
       "service": "DeviceManagementService",
       "version_scope": [
         {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+          "note": "Official bilingual Base V2.1 PDF p104 actual body Table 31 already prints PDF-only DeviceManagementService.DeviceStatusInformationResponseData in choice branch a; adjacent type and Table 32 correctly use Get prefix. Selected official V2.1 XSD blob 191b43e01cdaba14b247725689a913c244a67eed declares only Get-prefixed branch. Executable run 37897942988 confirms typo alias rejected."
+        },
+        {
           "version": "V2.2",
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_DeviceManagementService_V2.2.xsd",
@@ -4256,39 +4262,47 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "V2.2 and V2.4 PDFs visibly use DeviceManagementService.DeviceStatusInformationResponseData in the response choice."
+          "note": "Earliest verified affected official publication is V2.1 Base, visible body printed page 104 Table 31: choice-branch a omits Get; type column and immediately adjacent Table 32 use Get. Pinned render run 37897714010, artifact 11600767562, source SHA-256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "V2.2 official DMS p23 Table 17 and V2.4 official DMS p22 Table 17 independently show the same non-Get choice label; visually checked earlier in audit_registry/dms_visual_revalidation_evidence_2026-09-03.json."
         },
         {
           "type": "official_xsd_explicit",
-          "note": "The exact official V2.2 XSD declares DeviceManagementService.GetDeviceStatusInformationResponseData."
+          "note": "Exact official upstream VDVde/VDV301 release-tagged DMS V2.1 (blob 191b43e01cdaba14b247725689a913c244a67eed) and V2.2 (blob c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d) define only DeviceManagementService.GetDeviceStatusInformationResponseData in the response choice; no non-Get alias."
         },
         {
           "type": "candidate_integration_provenance",
-          "note": "The V2.4 candidate/integration XSD also uses the Get-prefixed declaration."
+          "note": "The DMS V2.3 integration-only XSD (blob 5fe444cf6d10462cc23fd159eb963abbec42248f) and V2.4 candidate/integration XSD (blob d222dfd98b2be3777576388da7ace8f333d24c3f) also retain correct Get-prefixed branch; no official DMS V2.3 PDF is pinned, so its PDF defect status cannot be established."
+        },
+        {
+          "type": "executable_validation",
+          "note": "EV-127 run 37897942988 SUCCESS: official V2.1/V2.2, integration V2.3 and candidate V2.4, correct Get-prefixed response XML accepted, identical XML using PDF-only non-Get branch rejected."
         },
         {
           "type": "version_history",
-          "note": "The PDF-only non-Get spelling persists in the checked V2.4 publication rather than representing a valid historical schema alias."
+          "note": "GetDeviceStatusInformationResponseStructure absent from V1.0 and V2.0 selected DMS service XSDs; first confirmed PDF typo in V2.1 and persists in available published V2.2 and V2.4. No subsequent documented corrected successor has been established."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "DMS GetDeviceStatusInformation: PDF-Bezeichner weicht von XSD ab",
-          "short": "Die PDF nennt DeviceStatusInformationResponseData; die ausgewählte XSD verwendet GetDeviceStatusInformationResponseData.",
-          "long": "In der Antwortauswahl der V2.2- und weiterhin der V2.4-Dokumentation fehlt beim Branch-Namen das Präfix „Get“. Die ausgewählte offizielle V2.2-XSD und der geprüfte candidate/integration-V2.4-Kontext verwenden DeviceManagementService.GetDeviceStatusInformationResponseData. Der PDF-Bezeichner ist kein bestätigter Alias.",
-          "recommendation": "Für XML, Resolver und Codegenerierung den Namen aus der ausgewählten XSD verwenden und keinen DeviceStatusInformationResponseData-Kompatibilitätsalias erzeugen."
+          "title": "DMS GetDeviceStatusInformation: PDF-Bezeichner seit V2.1 falsch",
+          "short": "Schon die V2.1-PDF bezeichnet den Antwortzweig ohne „Get“; die ausgewählte XSD verwendet ausschließlich den Get-präfigierten Namen.",
+          "long": "Die offiziellen DMS-Dokumentationen V2.1 (Tabelle 31, Seite 104), V2.2 (Tabelle 17, Seite 23) und V2.4 (Tabelle 17, Seite 22) verwenden im Auswahlzweig den Bezeichner DeviceManagementService.DeviceStatusInformationResponseData. Die unmittelbar benachbarte Typangabe beziehungsweise Datenstruktur-Tabelle sowie sämtliche geprüften ausgewählten XSDs verwenden dagegen DeviceManagementService.GetDeviceStatusInformationResponseData. V2.3 ist nur als Integrations-XSD belegt; eine eigene offizielle DMS-V2.3-PDF zum Vergleich liegt nicht vor. Die alten V1.0/V2.0-XSDs besitzen die Operation noch nicht. Ein XML-Dokument mit dem abgekürzten PDF-Bezeichner verletzt die gewählte XSD und muss als ungültig bewertet werden.",
+          "recommendation": "Für XML, Resolver und Codegenerierung stets den exakten Get-Bezeichner der ausgewählten XSD verwenden; keinen Alias für den PDF-Tippfehler erzeugen. V2.4-XSD nur mit ausgewiesener Kandidatenautorität betrachten."
         },
         "en": {
-          "title": "DMS GetDeviceStatusInformation: PDF identifier differs from XSD",
-          "short": "The PDF names DeviceStatusInformationResponseData while the selected XSD uses GetDeviceStatusInformationResponseData.",
-          "long": "The response choice in the V2.2 and still in the V2.4 documentation omits the 'Get' prefix from the branch name. The selected official V2.2 XSD and the checked V2.4 candidate/integration context use DeviceManagementService.GetDeviceStatusInformationResponseData. The PDF spelling is not a confirmed alias.",
-          "recommendation": "Use the selected XSD name for XML, resolver logic and code generation; do not create a DeviceStatusInformationResponseData compatibility alias."
+          "title": "DMS GetDeviceStatusInformation: incorrect PDF identifier since V2.1",
+          "short": "The V2.1 PDF already omits 'Get' in the response choice; the selected XSD accepts only the Get-prefixed name.",
+          "long": "Official DMS publications V2.1 (Table 31, printed p104), V2.2 (Table 17, p23) and V2.4 (Table 17, p22) name choice branch a DeviceManagementService.DeviceStatusInformationResponseData. The adjacent type/data table and all examined selected DMS XSDs instead use DeviceManagementService.GetDeviceStatusInformationResponseData. V2.3 has only an integration schema as evidence, without a pinned official DMS V2.3 PDF from which to claim the editorial typo. V1.0/V2.0 service schemas do not yet define the operation. XML with the shortened PDF spelling fails the exact selected XSD.",
+          "recommendation": "Use the exact Get-prefixed name from the selected XSD for XML, resolver and code generation; never invent an alias for the PDF typo. Keep V2.4 candidate XSD authority explicitly labelled."
         }
       },
       "runtime_match": {
         "state": "reviewed",
         "candidate_triggers": [
-          "selected context is DeviceManagementService V2.2 official or explicitly selected V2.4 candidate/integration",
+          "selected context is DeviceManagementService V2.1 or V2.2 official, or explicitly selected V2.4 candidate/integration with the corresponding published PDF typo; V2.3 is an XSD-only integration comparison with no verified PDF typo",
           "resolver/code-generation input contains the exact identifier DeviceManagementService.DeviceStatusInformationResponseData",
           "selected schema authority exposes DeviceManagementService.GetDeviceStatusInformationResponseData and no non-Get alias"
         ]
@@ -4323,6 +4337,26 @@
           "kind": "other",
           "reference": "docs/pdf_xsd_semantic_audit/DEVICE_MANAGEMENT_SERVICE_FINDINGS_REGISTER_ADDENDUM.md",
           "note": "Explicit handling: do not treat the PDF spelling as an alias."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-2_BASE_V2.1 p104 §7.1.31.2 Table 31 choice a; Table 32 adjacent correct data structure; source sha256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+          "note": "Actual rendered PDF visually inspected: pinned GitHub run 37897714010, artifact 11600767562, PNG SHA-256 f38528dd5e1f818280cb38d4a141664146c2ea4280cba40c04e0abd4e78e88df."
+        },
+        {
+          "kind": "xsd",
+          "reference": "VDVde/VDV301@VDV-301-2.1 IBIS-IP_DeviceManagementService_V2.1.xsd blob 191b43e01cdaba14b247725689a913c244a67eed, response choice line 172",
+          "note": "Earliest published affected PDF paired with exact official executable Get-prefixed element."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-127 executable run 37897942988 (DMS-005 v21/v22/v23/v24)",
+          "note": "Correct response-data branch accepted; PDF-only non-Get name rejected under each exact selected XSD."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DMS_005_2026-10-09.md",
+          "note": "Independent version boundary correction, no new finding identity."
         }
       ]
     },
