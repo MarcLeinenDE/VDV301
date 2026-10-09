@@ -191,12 +191,41 @@ def test_dms006() -> None:
     print("INSTANCE_OK DMS-006 v24: two-field=accept four-field=accept")
 
 
+
+def test_dms005() -> None:
+    """Selected-XSD proof: do not accept a PDF-only non-Get response choice name.
+
+    This is a positive/negative XML test of the *actual response choice* in each
+    selected service XSD (official V2.1/V2.2, integration V2.3, candidate V2.4).
+    The V2.3 XSD check does not assert existence of an official V2.3 PDF.
+    """
+    root = "EV127DMS005"
+    correct = "DeviceManagementService.GetDeviceStatusInformationResponseData"
+    pdf_only = "DeviceManagementService.DeviceStatusInformationResponseData"
+    for version in ("v21", "v22", "v23", "v24"):
+        schema = wrapper_schema(
+            DMS[version], root,
+            "DeviceManagementService.GetDeviceStatusInformationResponseStructure",
+        )
+        device_state = first_enum(ENUM[version], "DeviceStateEnumeration")
+        body = (
+            ibis("TimeStamp", "2026-10-09T08:00:00Z")
+            + f"<DeviceStatusInformation><DeviceState>{device_state}</DeviceState></DeviceStatusInformation>"
+        )
+        good = f"<{root}><{correct}>{body}</{correct}></{root}>"
+        wrong = f"<{root}><{pdf_only}>{body}</{pdf_only}></{root}>"
+        require_valid(schema, good, f"DMS-005 {version} exact Get-prefixed response data")
+        require_invalid(schema, wrong, f"DMS-005 {version} PDF-only non-Get alias")
+        print(f"INSTANCE_OK DMS-005 {version}: correct Get=accept PDF-only non-Get=reject")
+
+
 def main() -> int:
     for path in (*DMS.values(), *ENUM.values()):
         require(path.is_file(), f"missing selected authority file {path}")
     test_dms003()
     test_dms004()
     test_dms006()
+    test_dms005()
     print("PASSED: EV-127 supplemental DMS positive/negative XML instance boundaries")
     return 0
 
