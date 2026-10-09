@@ -2126,10 +2126,9 @@
     "version_scope_boundary_pending_count": 46
   },
   "next_actions": [
-    "DMS-003 52/70 with material version scope expansion: run full schema-audit-validation SUCCESS on exact current HEAD, then terminal_clean and final handoff-integrity SUCCESS. STOP automatic package here; next DMS-004 only in a new cycle.",
-    "Do not automatically proceed to DMS-004 in this package: material correction detected.",
-    "Preserve official V1.0–V2.2 / V2.3 integration / V2.4 candidate authority separation; no XSD mutation.",
-    "DR3012V20-006 structural locator expansion remains paused pending 18 boundary checks."
+    "Next finding DMS-004 with independent exact-version boundary proof. Do not treat V2.3 integration XSD as official.",
+    "Last package DMS-001..003 stopped after material DMS-003 scope correction as required; restart at DMS-004 in a new independent cycle.",
+    "Preserve 52/70 verified, 18 pending; structural locator expansion remains paused until boundary backlog reaches zero."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2207,14 +2206,12 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "gate_pending",
-    "pending_gate": true,
-    "latest_completed_full_gate_run_id": "37894833605",
+    "work_cycle_state": "terminal_clean",
+    "pending_gate": false,
+    "latest_completed_full_gate_run_id": "37896110667",
     "latest_completed_full_gate_status": "success",
-    "latest_handoff_check_before_finalization_run_id": "37894833651",
-    "resume_instruction": "DMS-003 52/70 with material version scope expansion: run full schema-audit-validation SUCCESS on exact current HEAD, then terminal_clean and final handoff-integrity SUCCESS. STOP automatic package here; next DMS-004 only in a new cycle.",
-    "pending_block": "DMS-003 material V1.0 and V2.3 scope correction requires full gate on exact HEAD",
-    "recovery_instruction": "DMS-003 52/70 with material version scope expansion: run full schema-audit-validation SUCCESS on exact current HEAD, then terminal_clean and final handoff-integrity SUCCESS. STOP automatic package here; next DMS-004 only in a new cycle."
+    "latest_handoff_check_before_finalization_run_id": "37896110727",
+    "resume_instruction": "DMS-003 materially expanded V1.0 official and V2.3 integration scope; 52/70 verified, 18 pending. Full gate run 37896110667 SUCCESS. DMS-001/002/003 each closed; package STOPPED because DMS-003 scope correction. Next DMS-004, only after final HEAD handoff-integrity SUCCESS."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2230,7 +2227,7 @@
     "locator_expansion_frozen": true,
     "future_locator_completion_requires_verified_boundary_same_block": true,
     "latest_verified_finding": "DMS-003",
-    "latest_gate_run_id": "37894833605",
+    "latest_gate_run_id": "37896110667",
     "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DMS_003_2026-10-09.md"
   },
   "boundary_revalidation_package_mode": {
@@ -2242,20 +2239,15 @@
     "last_completed_package": {
       "completed_at": "2026-10-09",
       "findings": [
-        "CIS-004",
-        "CIS-005",
-        "DISC-001",
-        "DISC-002",
-        "DISC-003"
+        "DMS-001",
+        "DMS-002",
+        "DMS-003"
       ],
-      "result": "all_terminal_clean_after_material_DISC-003_scope_correction; automatic package stopped for safety",
-      "final_verified_count": 49,
-      "final_pending_count": 21
+      "result": "all_individually_closed; package_stopped_after_material_DMS-003_V1.0_and_V2.3_scope_correction",
+      "final_verified_count": 52,
+      "final_pending_count": 18
     },
     "next_package": [
-      "DMS-001",
-      "DMS-002",
-      "DMS-003",
       "DMS-004",
       "DMS-005"
     ]
