@@ -2213,7 +2213,8 @@
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "37893141382",
     "resume_instruction": "DMS-001 canonical boundary registry and report committed; gate_pending: check full schema-audit-validation result for this exact HEAD, then finalize terminal_clean and handoff-integrity before DMS-002. 50/70 pending 20.",
-    "pending_block": "DMS-001 boundary terminal verification; await full schema-audit gate on this HEAD"
+    "pending_block": "DMS-001 verified boundary awaiting validated terminal commit",
+    "recovery_instruction": "The DMS-001 boundary verified write is recoverable at 50/70; run full schema-audit-validation after state/manifest synchronization, then only if SUCCESS finalize terminal_clean and require final handoff-integrity check. Never start DMS-002 from gate_pending."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
