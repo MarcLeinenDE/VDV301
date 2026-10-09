@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 51,
-    "pending_revalidation": 19
+    "verified": 52,
+    "pending_revalidation": 18
   },
-  "next_pending_finding": "DMS-003",
+  "next_pending_finding": "DMS-004",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -2800,9 +2800,74 @@
     },
     {
       "finding_id": "DMS-003",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DMS_003_2026-10-09.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DMS_003_2026-10-06.md",
+        "audit_registry/pdf_source_pins_v0.1.json",
+        "tools/validate_dms_instance_boundaries_ev127.py"
+      ],
+      "note": "Material scope expansion: official V1.0 German p60 Table 15 and English p67 Table 39 10:*; official through V2.2 10:*; V2.3 integration-only and V2.4 candidate 0:*. No provider FAIL.",
+      "scope_conclusion": "Earliest documented and official-executable 10:* at V1.0 (DE+EN), persists official V2.0/2.1/2.2. First 0:* selectable comparison XSD in integration-only V2.3, and official published V2.4 PDF plus candidate XSD; official V2.3 correction date cannot be inferred.",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-2 V1.0 German",
+          "role": "first_supported_historical_10_minimum",
+          "language_status": "de:printed p60 §7.1.11.2 Tabelle 15 visually verified, 10:*; official V1.0 XSD minOccurs=10",
+          "source_ids": [
+            "VDV301-2_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V1.0 English",
+          "role": "independent_same_version_positive_control",
+          "language_status": "en:printed p67 §9.3.12.2 Table 39 independently byte-pinned and visibly verified, ErrorMessage 10:*",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "role": "continuing_official_10_minimum",
+          "language_status": "de-en:visible published p95 10:* and official XSD minOccurs=10",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "role": "continuing_official_10_minimum",
+          "language_status": "de-en:visible published p100 Table 20 10:* and official XSD minOccurs=10",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "VDV 301-2-0 DMS V2.2",
+          "role": "last_proven_official_10_minimum",
+          "language_status": "de-en:visible published p20 Table 9 10:* and official XSD minOccurs=10",
+          "source_ids": [
+            "DMS_V2.2"
+          ]
+        },
+        {
+          "version": "DMS V2.3 integration comparison",
+          "role": "first_0_minimum_in_non_official_xsd",
+          "language_status": "No independently pinned official V2.3 DMS PDF; integration-only XSD minOccurs=0, cannot establish correction in official release",
+          "source_ids": [
+            "DMS_V2.2",
+            "DMS_V2.4"
+          ]
+        },
+        {
+          "version": "VDV 301-2-0 DMS V2.4",
+          "role": "later_0_minimum_official_pdf_candidate_xsd",
+          "language_status": "de-en:official PDF p19 Table 9 0:*; candidate/integration XSD minOccurs=0; not promoted to official schema",
+          "source_ids": [
+            "DMS_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DMS-004",
