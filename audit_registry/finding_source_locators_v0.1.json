@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "1eeb4b6c5beb0ce27713fffe49fbeb38c36777c0",
+    "git_blob": "4a9bdd4403d97b4442398c4e77987a3fee011ceb",
     "finding_count": 192
   },
   "policy": {
@@ -9613,7 +9613,13 @@
           "version": "VDV 301-1 V1.0",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "Page 34 contains two consecutive IBIS-IP abbreviation rows with slightly different expansion wording."
+          "note": "German original printed p34 §9 Abkürzungen has two adjacent IBIS-IP abbreviation rows with DIFFERENT expanded wording. Exact pinned DE PDF 5418f24190468a1823699688cf86f98d812591ad2c7c2eada07b1d34889c20c2."
+        },
+        {
+          "version": "VDV 301-1 V1.0 EN",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Separately published English translation printed p32 §9 Abbreviations also has two adjacent IBIS-IP rows, but the expanded description is IDENTICAL in both rows. Exact pinned EN PDF 508cb52a9d9d459461954d46618d7b62a0ab9dc5698ef24e97fca2c458c551e4; translation nonbinding against DE original."
         }
       ],
       "coverage": [
@@ -9638,7 +9644,30 @@
             }
           ],
           "xsd_locators": [],
-          "coverage_note": "Confirmed editorial duplication/wording inconsistency in the abbreviation list only; no XML, XSD or runtime behavior is implied."
+          "coverage_note": "German original V1.0 §9 p34 shows duplicate IBIS-IP with two DIFFERENT expansions. Pinned actual body confirmed. Documentation-only; no XSD/runtime consequence."
+        },
+        {
+          "version": "VDV 301-1 V1.0 EN",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-1_V1.0_EN",
+              "document_title": "VDV 301-1 IBIS-IP Part 1: System Architecture (official English translation)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-1ses.pdfx",
+              "sha256": "508cb52a9d9d459461954d46618d7b62a0ab9dc5698ef24e97fca2c458c551e4",
+              "printed_pages": [
+                32
+              ],
+              "section": "9 Abbreviations (actual visible body)",
+              "table": "Abbreviation / Description",
+              "point_summary": "Two adjacent IBIS-IP rows repeat the IDENTICAL text 'Integrated On-board Information System based on Internet Protocol'. Strict byte-pin render 37955160113 artifact 11627128733, original visible p32 PNG sha256 1d6a01918ab3e058578455c777c31743a949fcd1a556fa402c3b74683b936061. Distinct from German wording difference."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Official separately issued EN translation V1.0 has duplicate identical IBIS-IP rows, no wording discrepancy between the two rows. German original is authoritative in case of inconsistencies; no XML conformance consequence."
         }
       ],
       "supporting_evidence": [
@@ -9646,7 +9675,10 @@
         "audit_registry/vdv3011_visual_revalidation_evidence_2026-09-03.json",
         "EV-128 run 33763071038",
         "visual run 33725750019 artifact 9881897572 page 34 PNG SHA-256 c61689499c594d47cd99cc7b61de57b4f0183b20ca9c33ee508ab411bc7a709b",
-        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3011_003_2026-10-06.md"
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3011_003_2026-10-06.md",
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3011_003_2026-10-09.md",
+        "Strict pinned EN render 37955160113 artifact 11627128733 digest sha256:c7b827d5d65107ae3b314be797846eaf9f9ca1421beed052d7f13d7744ea5021",
+        "EN p32 PNG sha256 1d6a01918ab3e058578455c777c31743a949fcd1a556fa402c3b74683b936061 independent visible-body inspection"
       ]
     },
     {

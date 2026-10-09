@@ -2003,12 +2003,12 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 58,
-    "version_scope_boundary_pending_count": 12,
-    "version_scope_boundary_next_finding": "DR3011-003",
-    "version_scope_boundary_latest_finding": "DR3011-002",
+    "version_scope_boundary_verified_count": 59,
+    "version_scope_boundary_pending_count": 11,
+    "version_scope_boundary_next_finding": "DR3012-001",
+    "version_scope_boundary_latest_finding": "DR3011-003",
     "version_scope_boundary_latest_gate_run_id": "37912821328",
-    "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3011_002_2026-10-09.md",
+    "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3011_003_2026-10-09.md",
     "latest_scope_correction": "BG-001 expanded from release-context pair 1.0/2.0 to complete official retained V1.0 path lineage through VDV-301-2.3; semantic/locator/runtime scopes synchronized."
   },
   "evidence": {
@@ -2122,13 +2122,13 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 58,
-    "version_scope_boundary_pending_count": 12
+    "version_scope_boundary_verified_count": 59,
+    "version_scope_boundary_pending_count": 11
   },
   "next_actions": [
-    "Next DR3011-003: check DE and EN Part1 V1.0 abbreviation tables and verify affected language versions.",
-    "Keep 12 remaining version-boundary entries before adding locators.",
-    "Checkpoint every substantive commit."
+    "DR3011-003 is evidence-complete gate_pending: run full schema-audit-validation on exact HEAD, only then finalize terminal_clean and final handoff-integrity.",
+    "Stop current five-finding package after material independent English-language finding extension and DE-vs-EN wording refinement. Do NOT start DR3012-001 in this package.",
+    "New cycle resumes at DR3012-001 with 59/70 boundary verified, 11 remaining; no locator expansion until pending zero."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2211,16 +2211,18 @@
     "latest_completed_full_gate_run_id": "37913294017",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "37913293723",
-    "resume_instruction": "DR3011-003 pending: a byte-pinned VDV301-1_V1.0_EN pages29-34 render request is committed. Locate abbreviations and independently verify duplication against DE p34, then update semantic/locator/boundary and run full gate before terminal_clean. Stop package if material language-scope change.",
+    "resume_instruction": "DR3011-003 semantic, locator, body and version-boundary records were updated to independent DE/EN V1.0 scope: DE p34 wording differs; EN p32 repeated identical wording. Now 59/70 verified, 11 pending; must run full gate for this exact HEAD before terminal-clean. Stop five-finding package for material language-scope correction, next fresh cycle DR3012-001.",
     "pending_block": "DR3011-003 independent DE/EN V1.0 duplicate IBIS-IP abbreviations boundary",
     "active_finding": "DR3011-003",
-    "active_step": "Request strict official English Part1 V1.0 pages 29-34 render to locate original abbreviation table",
-    "next_step": "Inspect byte-pinned EN abbreviation list, recheck DE p34 original, determine affected DE/EN releases before registry updates",
+    "active_step": "Independent bilingual scope evidence committed: DE p34 different expansions, EN p32 identical expansions; canonical registries and manifest synchronized",
+    "next_step": "Run full schema-audit-validation on exact pending HEAD; if success separately terminal-close DR3011-003 and verify final handoff-integrity",
     "evidence_refs": [
       "audit_registry/pdf_source_pins_v0.1.json:VDV301-1_V1.0_EN",
-      "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3011_003_2026-10-06.md"
+      "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3011_003_2026-10-06.md",
+      "EN exact pinned render 37955160113 artifact 11627128733 p32 PNG 1d6a01918ab3e058578455c777c31743a949fcd1a556fa402c3b74683b936061",
+      "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3011_003_2026-10-09.md"
     ],
-    "recovery_instruction": "DR3011-003 pending: a byte-pinned VDV301-1_V1.0_EN pages29-34 render request is committed. Locate abbreviations and independently verify duplication against DE p34, then update semantic/locator/boundary and run full gate before terminal_clean. Stop package if material language-scope change."
+    "recovery_instruction": "DR3011-003 semantic, locator, body and version-boundary records were updated to independent DE/EN V1.0 scope: DE p34 wording differs; EN p32 repeated identical wording. Now 59/70 verified, 11 pending; must run full gate for this exact HEAD before terminal-clean. Stop five-finding package for material language-scope correction, next fresh cycle DR3012-001."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2230,14 +2232,14 @@
     "state": "in_progress",
     "adoption_locator_count": 70,
     "tracked_findings": 70,
-    "verified": 58,
-    "pending_revalidation": 12,
-    "next_pending_finding": "DR3011-003",
+    "verified": 59,
+    "pending_revalidation": 11,
+    "next_pending_finding": "DR3012-001",
     "locator_expansion_frozen": true,
     "future_locator_completion_requires_verified_boundary_same_block": true,
-    "latest_verified_finding": "DR3011-002",
+    "latest_verified_finding": "DR3011-003",
     "latest_gate_run_id": "37912821328",
-    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3011_002_2026-10-09.md"
+    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3011_003_2026-10-09.md"
   },
   "boundary_revalidation_package_mode": {
     "enabled": true,

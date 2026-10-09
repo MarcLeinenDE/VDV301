@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 58,
-    "pending_revalidation": 12
+    "verified": 59,
+    "pending_revalidation": 11
   },
-  "next_pending_finding": "DR3011-003",
+  "next_pending_finding": "DR3012-001",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -3221,9 +3221,52 @@
     },
     {
       "finding_id": "DR3011-003",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3011_003_2026-10-09.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3011_003_2026-10-06.md",
+        "audit_registry/pdf_source_pins_v0.1.json",
+        "DE source pin 33725750019 artifact 9881897572, page34 PNG c61689499c594d47cd99cc7b61de57b4f0183b20ca9c33ee508ab411bc7a709b",
+        "EN original strict render 37955160113 artifact 11627128733 p32 PNG 1d6a01918ab3e058578455c777c31743a949fcd1a556fa402c3b74683b936061"
+      ],
+      "note": "Independent same-version DE and EN original-body review shows one underlying editorial duplicate: DE p34 two differently worded IBIS-IP rows, EN p32 two identically worded IBIS-IP rows. Both language editions affected V1.0, no predecessor or later corrected Part1 successor independently established.",
+      "scope_conclusion": "First and last known affected Part1 architecture release V1.0 in German original and independently issued English translation. Both have adjacent duplicate IBIS-IP abbreviation entries. Only the German edition has differing long forms; the English translation duplicates the same long form verbatim. No earlier Part1 edition or independently verified newer corrected successor in checked VDV official index/pinned registry; no universal claim. This is editorial only with no selected-XSD, provider or runtime implication.",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-1 before V1.0",
+          "role": "no_predecessor_publication_available",
+          "language_status": "de-en:no earlier Part1 architecture publication established in verified official corpus",
+          "source_ids": [
+            "VDV301-1_V1.0_DE",
+            "VDV301-1_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-1 V1.0 German original",
+          "role": "first_and_last_known_affected_german_publication",
+          "language_status": "de:p34 §9 table has two consecutive IBIS-IP rows with DIFFERENT expanded wording; exact official PDF pin and p34 image verified",
+          "source_ids": [
+            "VDV301-1_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-1 V1.0 English translation",
+          "role": "first_and_last_known_affected_english_publication",
+          "language_status": "en:p32 §9 Abbreviations has two consecutive IBIS-IP rows with IDENTICAL expanded wording; original visible page and source SHA verified by run 37955160113, translation nonbinding",
+          "source_ids": [
+            "VDV301-1_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-1 after V1.0",
+          "role": "no_successor_publication_available",
+          "language_status": "de-en:no newer corrected Part1 publication independently pinned or catalogued in checked official source corpus; no unsupported global assertion",
+          "source_ids": [
+            "VDV301-1_V1.0_DE",
+            "VDV301-1_V1.0_EN"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DR3012-001",
