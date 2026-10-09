@@ -234,6 +234,35 @@ def test_dms005() -> None:
         print(f"INSTANCE_OK DMS-005 {version}: correct Get=accept PDF-only non-Get=reject")
 
 
+def test_dms007() -> None:
+    """Guard version-exact operation identifiers; PDF prose is not an alias."""
+    for version in ("v21", "v22", "v23", "v24"):
+        schema_root = etree.parse(str(DMS[version])).getroot()
+        element_names = set(schema_root.xpath(".//xs:element/@name", namespaces=NS))
+        for operation in ("GetUpdateHistory", "RetrieveUpdateState"):
+            for suffix in ("Request", "Response"):
+                expected = f"DeviceManagementService.{operation}{suffix}"
+                require(expected in element_names, f"DMS-007 {version} declares {expected}")
+        require(
+            not any("GetUpdateStates" in name for name in element_names),
+            f"DMS-007 {version} does not declare fake GetUpdateStates alias",
+        )
+        update_timestamp_docs = schema_root.xpath(
+            "./xs:complexType[@name='DeviceManagementService.InstallUpdateRequestStructure']"
+            "/xs:sequence/xs:element[@name='UpdateTimestamp']"
+            "/xs:annotation/xs:documentation/text()",
+            namespaces=NS,
+        )
+        require(
+            len(update_timestamp_docs) == 1
+            and "GetUpdateHistory" in update_timestamp_docs[0]
+            and "RetrieveUpdateState" in update_timestamp_docs[0]
+            and "GetUpdateStates" not in update_timestamp_docs[0],
+            f"DMS-007 {version} exact selected XSD annotation points to actual operations",
+        )
+        print(f"INSTANCE_OK DMS-007 {version}: correct operations present; GetUpdateStates alias absent")
+
+
 def main() -> int:
     for path in (*DMS.values(), *ENUM.values()):
         require(path.is_file(), f"missing selected authority file {path}")
@@ -241,6 +270,7 @@ def main() -> int:
     test_dms004()
     test_dms006()
     test_dms005()
+    test_dms007()
     print("PASSED: EV-127 supplemental DMS positive/negative XML instance boundaries")
     return 0
 
