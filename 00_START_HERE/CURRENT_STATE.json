@@ -2126,10 +2126,10 @@
     "version_scope_boundary_pending_count": 46
   },
   "next_actions": [
-    "Recover DMS-006 gate_pending at 55/70 verified, 15 pending. Verify full schema-audit-validation SUCCESS on this exact HEAD. Then terminal_clean, final handoff-integrity SUCCESS. Stop current package at DMS-006 due material affected-scope correction. Next DMS-007 in fresh cycle.",
-    "Do not start DMS-007 until this material DMS-006 scope correction is fully closed and a new cycle begins.",
-    "Selected official V2.2 XSD remains mandatory; integration V2.3 evidence not relabelled official; V2.4 is correction boundary only.",
-    "Structural locator expansion frozen until remaining 15 boundaries verified."
+    "Next new mini-cycle: DMS-007 independently verify GetUpdateStates vs GetUpdateHistory version/language boundaries, including V2.1 introduction, V2.2, V2.3 integration comparison and V2.4 publication.",
+    "Only begin from terminal_clean with final HEAD handoff-integrity SUCCESS. Stop any package on material scope correction, ambiguous evidence or gate failure.",
+    "Preserve exact selected-XSD authority: no normalization, alias, released schema edit or remediation PR authorized.",
+    "Keep locator expansion frozen until all 15 remaining retroactive boundary reviews are terminal."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2207,14 +2207,12 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "gate_pending",
-    "pending_gate": true,
-    "latest_completed_full_gate_run_id": "37898265100",
+    "work_cycle_state": "terminal_clean",
+    "pending_gate": false,
+    "latest_completed_full_gate_run_id": "37903643239",
     "latest_completed_full_gate_status": "success",
-    "latest_handoff_check_before_finalization_run_id": "37898265087",
-    "resume_instruction": "Recover DMS-006 gate_pending at 55/70 verified, 15 pending. Verify full schema-audit-validation SUCCESS on this exact HEAD. Then terminal_clean, final handoff-integrity SUCCESS. Stop current package at DMS-006 due material affected-scope correction. Next DMS-007 in fresh cycle.",
-    "pending_block": "DMS-006 material correction removes V2.4 from affected scope; full schema-audit-validation required.",
-    "recovery_instruction": "Recover DMS-006 gate_pending at 55/70 verified, 15 pending. Verify full schema-audit-validation SUCCESS on this exact HEAD. Then terminal_clean, final handoff-integrity SUCCESS. Stop current package at DMS-006 due material affected-scope correction. Next DMS-007 in fresh cycle."
+    "latest_handoff_check_before_finalization_run_id": "37903643306",
+    "resume_instruction": "DMS-006 material correction completed: only official V2.2 is PDF/XSD mismatch, V2.4 removed from affected runtime scope (nonaffected correction), V2.1 exact PDF/XSD two-field predecessor, V2.3 integration XSD-only. Boundary 55/70 verified, 15 pending; full gate 37903643239 SUCCESS. Package stopped. Next DMS-007 in a fresh independent mini-cycle after final HEAD handoff-integrity SUCCESS."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2230,7 +2228,7 @@
     "locator_expansion_frozen": true,
     "future_locator_completion_requires_verified_boundary_same_block": true,
     "latest_verified_finding": "DMS-006",
-    "latest_gate_run_id": "37898265100",
+    "latest_gate_run_id": "37903643239",
     "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DMS_006_2026-10-09.md"
   },
   "boundary_revalidation_package_mode": {
@@ -2242,14 +2240,13 @@
     "last_completed_package": {
       "completed_at": "2026-10-09",
       "findings": [
-        "DMS-005"
+        "DMS-006"
       ],
-      "result": "terminal_clean; material V2.1 scope correction stopped package",
-      "final_verified_count": 54,
-      "final_pending_count": 16
+      "result": "terminal_clean after material V2.4 affected-scope removal; package stopped per canonical boundary policy",
+      "final_verified_count": 55,
+      "final_pending_count": 15
     },
     "next_package": [
-      "DMS-006",
       "DMS-007"
     ]
   }
