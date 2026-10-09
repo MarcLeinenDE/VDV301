@@ -16,6 +16,7 @@ on:
     branches: [dev/schema-integration]
     paths:
       - .github/workflows/pdf-render-fallback.yml
+      - tools/pdf_render_request_v0.1.json
 permissions:
   contents: read
 jobs:
@@ -32,9 +33,15 @@ jobs:
         env:
           SOURCE_ID: ${{ github.event.inputs.source_id || 'VDV301-2_BASE_V2.1' }}
           PDF_PAGES: ${{ github.event.inputs.pages || '88-102' }}
+          EVENT_NAME: ${{ github.event_name }}
         shell: bash
         run: |
           set -euo pipefail
+          if [ "$EVENT_NAME" = "push" ] && [ -f tools/pdf_render_request_v0.1.json ]; then
+            SOURCE_ID="$(python -c 'import json; print(json.load(open("tools/pdf_render_request_v0.1.json"))["source_id"])')"
+            PDF_PAGES="$(python -c 'import json; print(json.load(open("tools/pdf_render_request_v0.1.json"))["pages"])')"
+          fi
+          echo "Pinned source request: source_id=$SOURCE_ID pages=$PDF_PAGES"
           python tools/render_vdv_pdf_pages.py --source-id "$SOURCE_ID" --pages "$PDF_PAGES" --dpi 160 --out-dir audit-render
       - name: Print document-body navigation report
         shell: bash
