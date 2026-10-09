@@ -172,24 +172,39 @@ def test_dms004() -> None:
 
 
 def status_xml(version: str, include_impact_priority: bool) -> str:
+    return status_xml_fields(version, include_impact_priority, include_impact_priority)
+
+
+def status_xml_fields(version: str, include_impact: bool, include_priority: bool) -> str:
     body = ibis("DeviceStatusName", "status") + ibis("DeviceStatusFlag", "true")
-    if include_impact_priority:
+    if include_impact:
         state = first_enum(ENUM[version], "DeviceStateEnumeration")
-        body += f"<DeviceStatusImpact>{state}</DeviceStatusImpact>" + ibis("DeviceStatusPriority", "1")
+        body += f"<DeviceStatusImpact>{state}</DeviceStatusImpact>"
+    if include_priority:
+        body += ibis("DeviceStatusPriority", "1")
     return f"<EV127Status>{body}</EV127Status>"
 
 
 def test_dms006() -> None:
-    schema22 = wrapper_schema(DMS["v22"], "EV127Status", "DeviceStatusStructure")
-    require_invalid(schema22, status_xml("v22", False), "DMS-006 v22 PDF-visible Name+Flag-only")
-    require_valid(schema22, status_xml("v22", True), "DMS-006 v22 full four-field status")
-    print("INSTANCE_OK DMS-006 v22: PDF-visible two-field shape=reject; XSD-required four-field shape=accept")
+    schema21 = wrapper_schema(DMS["v21"], "EV127Status", "DeviceStatusStructure")
+    require_valid(schema21, status_xml("v21", False), "DMS-006 v21 PDF-visible two-field predecessor")
+    require_invalid(schema21, status_xml("v21", True), "DMS-006 v21 unexpected future Impact and Priority fields")
+    print("INSTANCE_OK DMS-006 v21: two-field predecessor=accept; future four-field form=reject")
+
+    for version in ("v22", "v23"):
+        schema = wrapper_schema(DMS[version], "EV127Status", "DeviceStatusStructure")
+        require_invalid(schema, status_xml(version, False), f"DMS-006 {version} Name+Flag-only")
+        require_valid(schema, status_xml(version, True), f"DMS-006 {version} full required four fields")
+        require_invalid(schema, status_xml_fields(version, True, False), f"DMS-006 {version} missing Priority")
+        require_invalid(schema, status_xml_fields(version, False, True), f"DMS-006 {version} missing Impact")
+        print(f"INSTANCE_OK DMS-006 {version}: two-field=reject four-field=accept each missing Impact/Priority=reject")
 
     schema24 = wrapper_schema(DMS["v24"], "EV127Status", "DeviceStatusStructure")
     require_valid(schema24, status_xml("v24", False), "DMS-006 v24 Name+Flag-only")
     require_valid(schema24, status_xml("v24", True), "DMS-006 v24 populated optional fields")
-    print("INSTANCE_OK DMS-006 v24: two-field=accept four-field=accept")
-
+    require_valid(schema24, status_xml_fields("v24", True, False), "DMS-006 v24 optional Priority omitted")
+    require_valid(schema24, status_xml_fields("v24", False, True), "DMS-006 v24 optional Impact omitted")
+    print("INSTANCE_OK DMS-006 v24: both optional 0/1; two-field, four-field, either single optional=accept")
 
 
 def test_dms005() -> None:
