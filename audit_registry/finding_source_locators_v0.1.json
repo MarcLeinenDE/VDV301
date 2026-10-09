@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "899cb05e57a5ebd23b94e8ee13ccb2b0a2b5c4e9",
+    "git_blob": "1eeb4b6c5beb0ce27713fffe49fbeb38c36777c0",
     "finding_count": 192
   },
   "policy": {
@@ -9445,13 +9445,25 @@
           "version": "VDV 301-1 V1.0",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "Part 1 uses stale/conceptual GetDeviceState, GetSystemStatus and SystemStatus subscription terminology."
+          "note": "German original (affected): printed page 11, section 3.2 Figure 3, uses GetDeviceState, GetSystemStatus, SubscribeSystemStatus and UnsubscribeSystemStatus in the conceptual SystemManagementService example; compare exact Part2 V1.0 operation names."
+        },
+        {
+          "version": "VDV 301-1 V1.0 EN",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Independent English translation (also affected): exact-byte pinned printed p11 Example1/Figure3 repeats GetDeviceState, GetSystemStatus, SubscribeSystemStatus and UnsubscribeSystemStatus. The translation defers to the German original."
         },
         {
           "version": "VDV 301-2 SystemManagementService V1.0",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "The official Part 2 V1.0 documentation uses GetDeviceStatus / GetServiceStatus terminology; the selected historical IBIS-IP_SystemManagementService_V1.0.xsd corroborates that terminology but is not promoted here as independent release authority."
+          "note": "German Part2 V1.0 printed p67 §7.3.1 Table31 is the unaffected implementation-terminology control, using GetDeviceStatus, GetServiceStatus and SubscribeServiceStatus; selected historical XSD corroborates, not independently promoted to release authority."
+        },
+        {
+          "version": "VDV 301-2 SystemManagementService V1.0 EN",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "English Part2 V1.0 pp89-90 §9.10.1 Table110 is an independently verified non-affected reference control with GetDeviceStatus, GetServiceStatus and SubscribeServiceStatus; exact source SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7."
         }
       ],
       "coverage": [
@@ -9477,6 +9489,29 @@
           ],
           "xsd_locators": [],
           "coverage_note": "Part 1 terminology is contextual/stale documentation; it does not define alternative XML operation aliases."
+        },
+        {
+          "version": "VDV 301-1 V1.0 EN",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-1_V1.0_EN",
+              "document_title": "VDV 301-1 IBIS-IP Part 1: System architecture (English translation)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-1ses.pdfx",
+              "sha256": "508cb52a9d9d459461954d46618d7b62a0ab9dc5698ef24e97fca2c458c551e4",
+              "printed_pages": [
+                11
+              ],
+              "section": "3.2 Terminology — Example 1 / Figure 3: Classification of the terms device, service and operation",
+              "table": null,
+              "point_summary": "Visible English example calls the conceptual SystemManagementService operations GetDeviceState and GetSystemStatus and SubscribeSystemStatus/UnsubscribeSystemStatus (distinct from Part2). Strict pinned run 37906694433, PNG p11 sha256 83cb92ecee31b4b618b839c70386093bb0af7659d64e75bf68577ea6cd9e4889."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Independent English V1.0 translation confirms the documentation-only example mismatch; German original remains controlling; no XML alias."
         },
         {
           "version": "VDV 301-2 SystemManagementService V1.0",
@@ -9531,6 +9566,30 @@
             }
           ],
           "coverage_note": "Confirmed Part-1/Part-2 terminology mismatch. Part 2 and the selected historical XSD context use Status terminology; no aliases are created for stale Part-1 names."
+        },
+        {
+          "version": "VDV 301-2 SystemManagementService V1.0 EN",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0 (English translation)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                89,
+                90
+              ],
+              "section": "9.10 SystemManagementService / 9.10.1 Operations of the SystemManagementService",
+              "table": "Table 110: Description of Operations at the SystemManagementService",
+              "point_summary": "Visible Table110 begins p89 with GetDeviceStatus and continues p90 with GetServiceStatus, SubscribeServiceStatus and UnsubscribeServiceStatus. Strict original-byte render run 37912352625; p89 png sha256 2730117d4cacae6ee5717dfff4778e822bd0737a7cc71a404a47fede0eafdf35, p90 sha256 b96ce25f700a7f45da21bb1fc4ad2d593e2a5768fdd67b80a0d092b8f36f6726."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Unaffected bilingual terminology control, not an affected version; official published English Part2 V1.0 operation table, no independent release-XSD authority claim."
         }
       ],
       "supporting_evidence": [
@@ -9539,7 +9598,10 @@
         "EV-128 run 33763071038",
         "Part 1 visual run 33725750019 artifact 9881897572 page 11 PNG SHA-256 16fe0129866d3ca79ea64f047354fd2ea90c824e18e06332581e5b3d547d4bef",
         "Part 2 source-pin run 33752224704 artifact 9892036202 page 67 PNG SHA-256 2241db5cef5651ee67e2fd80bd1db142df53b00ed13c5817f8c67139c4770bfe",
-        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3011_002_2026-10-06.md"
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3011_002_2026-10-06.md",
+        "Official Part1 EN p11 strict render run 37906694433 artifact 11603974595 and PNG sha256 83cb92ecee31b4b618b839c70386093bb0af7659d64e75bf68577ea6cd9e4889",
+        "Official Part2 EN pp89-90 strict render run 37912352625 artifact 11607067999 digest sha256:51aa36c980aba1179f2dca01d89459334ab995661baa1f7353a96a68add927f6",
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3011_002_2026-10-09.md"
       ]
     },
     {

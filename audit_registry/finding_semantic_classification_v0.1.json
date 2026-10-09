@@ -4731,13 +4731,25 @@
           "version": "VDV 301-1 V1.0",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "Part 1 uses stale/conceptual GetDeviceState, GetSystemStatus and SystemStatus subscription terminology."
+          "note": "German original (affected): printed page 11, section 3.2 Figure 3, uses GetDeviceState, GetSystemStatus, SubscribeSystemStatus and UnsubscribeSystemStatus in the conceptual SystemManagementService example; compare exact Part2 V1.0 operation names."
+        },
+        {
+          "version": "VDV 301-1 V1.0 EN",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Independent English translation (also affected): exact-byte pinned printed p11 Example1/Figure3 repeats GetDeviceState, GetSystemStatus, SubscribeSystemStatus and UnsubscribeSystemStatus. The translation defers to the German original."
         },
         {
           "version": "VDV 301-2 SystemManagementService V1.0",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "The official Part 2 V1.0 documentation uses GetDeviceStatus / GetServiceStatus terminology; the selected historical IBIS-IP_SystemManagementService_V1.0.xsd corroborates that terminology but is not promoted here as independent release authority."
+          "note": "German Part2 V1.0 printed p67 §7.3.1 Table31 is the unaffected implementation-terminology control, using GetDeviceStatus, GetServiceStatus and SubscribeServiceStatus; selected historical XSD corroborates, not independently promoted to release authority."
+        },
+        {
+          "version": "VDV 301-2 SystemManagementService V1.0 EN",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "English Part2 V1.0 pp89-90 §9.10.1 Table110 is an independently verified non-affected reference control with GetDeviceStatus, GetServiceStatus and SubscribeServiceStatus; exact source SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7."
         }
       ],
       "review_state": "manually_reviewed",
@@ -4760,29 +4772,41 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "Pinned Part 1 V1.0 visibly uses GetDeviceState / GetSystemStatus / SystemStatus subscription names, while official Part 2 V1.0 uses GetDeviceStatus / GetServiceStatus terminology."
+          "note": "German Part1 official V1.0 p11 Figure3 and example use GetDeviceState/GetSystemStatus/SubscribeSystemStatus/UnsubscribeSystemStatus; original German Part2 V1.0 p67 §7.3.1 Table31 instead uses GetDeviceStatus/GetServiceStatus/SubscribeServiceStatus/UnsubscribeServiceStatus. Previously pinned visible-body evidence retained."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Official independent English Part1 V1.0 p11 Example1/Figure3 visually re-inspected, pinned source sha256 508cb52a9d9d459461954d46618d7b62a0ab9dc5698ef24e97fca2c458c551e4, render 37906694433 p11 sha256 83cb92ecee31b4b618b839c70386093bb0af7659d64e75bf68577ea6cd9e4889."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Independent English Part2 V1.0 official p89-90 §9.10.1 Table110 visually verified via strict exact-byte renderer 37912352625, artifact 11607067999; first GetDeviceStatus row p89, remaining GetServiceStatus and SubscribeServiceStatus rows p90. SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7."
         },
         {
           "type": "official_xsd_explicit",
-          "note": "The selected historical IBIS-IP_SystemManagementService_V1.0.xsd uses the status terminology and serves as corroborating schema context."
+          "note": "Selected historical IBIS-IP_SystemManagementService_V1.0.xsd blob 2d32630a0f1981e980e6a466e3f6a69136410f24 has GetDeviceStatusResponse and GetServiceStatusResponse; this is corroborating schema context only, not independent official release tag provenance."
+        },
+        {
+          "type": "version_history",
+          "note": "Checked official VDV 301-1 system architecture lineage registers only German and English V1.0; no earlier Part1 issue or verified later corrected successor in checked source registry. Do not extrapolate to unpublished hypothetical versions; English translation is nonbinding."
         },
         {
           "type": "common_conventions",
-          "note": "The revalidation explicitly forbids creating aliases for the stale Part 1 terminology."
+          "note": "Part1 presents conceptual example and explicitly points to Part2; a mismatch in this example is not an executable alias or evidence of a historic rename. No alias roots and no runtime conformance change."
         }
       ],
       "diagnostic": {
         "de": {
           "title": "VDV 301-1 V1.0: veraltete SystemManagement-Bezeichner",
-          "short": "Part 1 verwendet GetDeviceState, GetSystemStatus und SystemStatus-Bezeichnungen, während Part 2 V1.0 die Status-Terminologie GetDeviceStatus/GetServiceStatus verwendet.",
-          "long": "Die Part-1-Dokumentation V1.0 enthält konzeptionelle bzw. veraltete SystemManagement-Namen wie GetDeviceState, GetSystemStatus und SystemStatus im Abonnementkontext. Die offizielle Part-2-V1.0-Dokumentation und der ausgewählte historische SystemManagementService-XSD-Kontext verwenden GetDeviceStatus bzw. GetServiceStatus. Die alten Namen sind deshalb Dokumentationskontext und keine alternativen XML-Operationen.",
-          "recommendation": "Keine Alias-Operationen für die veralteten Part-1-Namen erzeugen. Für konkrete XML-Namen den ausgewählten Part-2-/XSD-Kontext verwenden."
+          "short": "Teil 1 V1.0 nennt in Deutsch und Englisch GetDeviceState, GetSystemStatus und SubscribeSystemStatus; die zugehörige Teil-2-Tabelle V1.0 verwendet GetDeviceStatus, GetServiceStatus und SubscribeServiceStatus.",
+          "long": "Das SystemManagementService-Beispiel der deutschen VDV 301-1 V1.0 (S. 11, Abschnitt 3.2, Abbildung 3) und die separat veröffentlichte englische V1.0-Übersetzung (S. 11, Example 1/Figure 3) verwenden GetDeviceState, GetSystemStatus sowie SubscribeSystemStatus/UnsubscribeSystemStatus. Die tatsächlich sichtbaren Operationstabellen der deutschen VDV 301-2 V1.0 (S. 67, §7.3.1, Tabelle 31) und der englischen Übersetzung (S. 89–90, §9.10.1, Table 110) verwenden dagegen GetDeviceStatus, GetServiceStatus sowie SubscribeServiceStatus/UnsubscribeServiceStatus. Die historische ausgewählte SystemManagementService-V1.0-XSD bestätigt die Response-Bezeichner mit Status. Es handelt sich um einen konzeptionellen Dokumentationswiderspruch, nicht um zusätzliche normative XML-Operationen. Die englische Teil-1-Übersetzung ist ausdrücklich unverbindlich; eine tatsächliche zeitliche Umbenennung lässt sich aus dem gleichzeitigen V1.0-Vergleich nicht beweisen.",
+          "recommendation": "Für XML-Namen nur die exakt ausgewählte Teil-2-/XSD-Operation berücksichtigen. Kein GetDeviceState-, GetSystemStatus- oder SubscribeSystemStatus-Alias, keine abweichende XSD-Konformitätsbewertung und keine Anbieter-FAIL-Meldung aufgrund des Teil-1-Beispiels."
         },
         "en": {
           "title": "VDV 301-1 V1.0: stale SystemManagement identifiers",
-          "short": "Part 1 uses GetDeviceState, GetSystemStatus and SystemStatus wording while Part 2 V1.0 uses the GetDeviceStatus/GetServiceStatus terminology.",
-          "long": "The V1.0 Part 1 documentation contains conceptual or stale SystemManagement names such as GetDeviceState, GetSystemStatus and SystemStatus in the subscription context. Official Part 2 V1.0 and the selected historical SystemManagementService XSD context use GetDeviceStatus and GetServiceStatus terminology. The older names are documentation context, not alternative XML operations.",
-          "recommendation": "Do not generate alias operations for the stale Part 1 names. Use the selected Part 2/XSD context for concrete XML identifiers."
+          "short": "German and English Part 1 V1.0 use GetDeviceState, GetSystemStatus and SubscribeSystemStatus; the Part 2 V1.0 operation tables use GetDeviceStatus, GetServiceStatus and SubscribeServiceStatus.",
+          "long": "The conceptual SystemManagementService example in German VDV 301-1 V1.0 (p11, §3.2 Figure3) and the independently published English V1.0 translation (p11, Example1/Figure3) use GetDeviceState, GetSystemStatus and SubscribeSystemStatus/UnsubscribeSystemStatus. The original German VDV 301-2 V1.0 operation table (p67 §7.3.1 Table31) and independent English Part2 V1.0 translation (pp89–90 §9.10.1 Table110) use GetDeviceStatus, GetServiceStatus and SubscribeServiceStatus/UnsubscribeServiceStatus. The selected historical SystemManagementService V1.0 XSD corroborates the Status response names. This is a conceptual cross-document terminology inconsistency, not additional executable XML operation aliases. The English Part1 translation expressly defers to the German original; the contemporaneous V1.0 mismatch does not itself prove a historical rename.",
+          "recommendation": "Use only the selected Part2/XSD operation names for executable XML. Do not create GetDeviceState/GetSystemStatus/SubscribeSystemStatus aliases or fail a provider because of the Part1 example."
         }
       },
       "runtime_match": {
@@ -4814,9 +4838,24 @@
           "kind": "evidence",
           "reference": "EV-128 / workflow run 33763071038",
           "note": "Current evidence-gate revalidation; no aliases created."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-1_V1.0_EN p11 Example1/Figure3, SHA256 508cb52a9d9d459461954d46618d7b62a0ab9dc5698ef24e97fca2c458c551e4",
+          "note": "Official EN V1.0 original, pinned render run 37906694433, artifact 11603974595, p11 PNG sha256 83cb92ecee31b4b618b839c70386093bb0af7659d64e75bf68577ea6cd9e4889."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-2_V1.0_EN pp89-90 §9.10.1 Table110, SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+          "note": "Official EN Part2 exact-byte render 37912352625 artifact 11607067999, original visible pages inspected."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3011_002_2026-10-09.md",
+          "note": "Independent DE/EN affected and unaffected control boundary verification."
         }
       ],
-      "notes": "The stale Part 1 identifiers must not become SDK aliases or new accepted XML roots."
+      "notes": "Independent original-body checks in German and English establish the Part1 V1.0 example as affected in both languages; Part2 V1.0 German and English operation tables are unaffected control documents. No earlier/later Part1 edition independently established; not proof of an actual rename; no normative XSD or SDK alias effect."
     },
     {
       "finding_id": "DR3011-003",

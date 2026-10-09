@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 57,
-    "pending_revalidation": 13
+    "verified": 58,
+    "pending_revalidation": 12
   },
-  "next_pending_finding": "DR3011-002",
+  "next_pending_finding": "DR3011-003",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -3155,9 +3155,69 @@
     },
     {
       "finding_id": "DR3011-002",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3011_002_2026-10-09.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3011_002_2026-10-06.md",
+        "audit_registry/pdf_source_pins_v0.1.json",
+        "Part1 EN render 37906694433 artifact 11603974595",
+        "Part2 EN render 37912352625 artifact 11607067999"
+      ],
+      "note": "German+English Part1 V1.0 conceptual example is affected; independently selected German+English Part2 V1.0 concrete SystemManagement operation tables are non-affected controls, checked with original visible bodies and exact pins. No earlier/later Part1 publication established within checked official lineage.",
+      "scope_conclusion": "First and last independently verified affected architecture publication is Part1 V1.0 in German original and separately issued nonbinding English translation; same conceptual operation mismatch in both. Part2 V1.0 DE/EN are adjacent contemporaneous unaffected control documents with concrete GetDeviceStatus/GetServiceStatus and SubscribeServiceStatus names, corroborated by historical selected SystemManagementService V1.0 XSD; this does not prove a rename event or create XML aliases. The checked official Part1 catalog/source registry contains no preceding Part1 issue or verified corrected successor; no claim about hypothetical external later publications.",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-1 before V1.0",
+          "role": "no_predecessor_publication_available",
+          "language_status": "de-en:no earlier Part1 issue identified in current official VDV index and pinned source registry",
+          "source_ids": [
+            "VDV301-1_V1.0_DE",
+            "VDV301-1_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-1 V1.0 German original",
+          "role": "first_and_last_known_affected_german_publication",
+          "language_status": "de:Part1 p11 §3.2 Figure3/Example uses GetDeviceState, GetSystemStatus, SubscribeSystemStatus; German Part2 V1.0 p67 Table31 confirms different concrete operation terms",
+          "source_ids": [
+            "VDV301-1_V1.0_DE",
+            "VDV301-2_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-1 V1.0 English translation",
+          "role": "first_and_last_known_affected_english_publication",
+          "language_status": "en:Part1 p11 Example1/Figure3 repeats stale names; pinned 37906694433 and visually reviewed; English is nonbinding against German original",
+          "source_ids": [
+            "VDV301-1_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 SystemManagementService V1.0 German",
+          "role": "unaffected_contemporaneous_reference_control",
+          "language_status": "de:Part2 p67 §7.3.1 Table31 uses GetDeviceStatus/GetServiceStatus and SubscribeServiceStatus, not an affected conceptual example",
+          "source_ids": [
+            "VDV301-2_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-2 SystemManagementService V1.0 English",
+          "role": "unaffected_contemporaneous_reference_control",
+          "language_status": "en:Part2 pp89-90 §9.10.1 Table110 uses Status names, exact pinned render 37912352625; not an affected Part1 example",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-1 after V1.0",
+          "role": "no_successor_publication_available",
+          "language_status": "de-en:no independently established later corrected Part1 edition in checked official index/source registry; do not infer universal absence",
+          "source_ids": [
+            "VDV301-1_V1.0_DE",
+            "VDV301-1_V1.0_EN"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DR3011-003",
