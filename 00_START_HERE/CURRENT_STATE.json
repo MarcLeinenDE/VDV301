@@ -2126,9 +2126,9 @@
     "version_scope_boundary_pending_count": 46
   },
   "next_actions": [
-    "Next canonical boundary package: DMS-001, DMS-002, DMS-003, DMS-004, DMS-005; start with DMS-001.",
-    "Apply one independently terminal mini-cycle per finding: evidence, gate_pending, full validation SUCCESS, terminal_clean, final handoff-integrity SUCCESS.",
-    "Stop on failed gates, ambiguous evidence or material scope change.",
+    "Continue DMS-001: check docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_PROBE_DMS_001_2026-10-09.md and verify byte-pinned V2.1 PDF body Table 11, printed pp91–94, before marking boundary verified.",
+    "Preserve 49/70 verified and next DMS-001 while visual evidence is missing; do not silently treat text extraction as body verification.",
+    "Only after DMS-001 terminal closure with full gate and handoff-integrity SUCCESS continue DMS-002..DMS-005.",
     "DR3012V20-006 structural locator expansion remains paused until retroactive boundary backlog zero."
   ],
   "source_locator_progress": {
@@ -2212,7 +2212,7 @@
     "latest_completed_full_gate_run_id": "37891116591",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "37891116565",
-    "resume_instruction": "DISC-003 material V2.2 German scope correction is terminal_clean at 49/70 verified. Next DMS-001, then follow canonical pending order. Do not resume structural locator expansion before boundary backlog zero."
+    "resume_instruction": "DMS-001 boundary probe evidence saved at docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_PROBE_DMS_001_2026-10-09.md; V2.1 official PDF visible-body check blocked in this execution, so DMS-001 stays pending, 49/70 verified. Resume exact-byte render of V2.1 pp91–94 before closure; do not advance to DMS-002. Work cycle terminal_clean; no pending gate."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2229,7 +2229,9 @@
     "future_locator_completion_requires_verified_boundary_same_block": true,
     "latest_verified_finding": "DISC-003",
     "latest_gate_run_id": "37891116591",
-    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DISC_003_2026-10-09.md"
+    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DISC_003_2026-10-09.md",
+    "active_boundary_probe_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_PROBE_DMS_001_2026-10-09.md",
+    "active_boundary_probe_status": "DMS-001 evidence in progress, pinned V2.1 PDF body verification still required; no boundary progress credit"
   },
   "boundary_revalidation_package_mode": {
     "enabled": true,
