@@ -2211,17 +2211,17 @@
     "latest_completed_full_gate_run_id": "38033140916",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38033140939",
-    "resume_instruction": "DR3012-004 gate_pending; English original PDF render requested; pending registry count unchanged 62/70. Continue evidence. Material language scope extension requires stop package after closure.",
-    "pending_block": "DR3012-004 DE/EN V1.0 DeviceStateEnumeration reference and V2.0–V2.4 successors",
+    "resume_instruction": "DR3012-004 in progress; verified original English PDF carries wrong chapter 12.3 vs actual 12.4. Bilingual Base V2.0 shows broken Word crossref; V2.1 apparently corrected to VDV301-2-1; visually verify before terminal. STOP package after this material expansion.",
+    "pending_block": "DR3012-004 complete bilingual historic DeviceState cross-reference version boundary verification",
     "active_finding": "DR3012-004",
-    "active_step": "Checkpoint: request pinned original EN V1.0 PDF visual pages66,114 after live screenshot cache misses.",
-    "next_step": "Inspect EN p66 Table37 and p114 Tables205/206; compare DE and V2.0/2.1/DMS2.2/2.4; complete evidence, synchronize registries; full schema-audit-validation; terminal_clean handoff.",
+    "active_step": "Visual fallback request 2/3: VDV301-2_BASE_V2.0 page 94; V1.0 EN p66/114 already independent byte-pin verified via run 38036341219",
+    "next_step": "Inspect exact pinned V2.0 p94 and V2.1 p99 body table; then check DMS V2.2/V2.4; write report and synchronize semantic+locator+runtime+boundary registers, full schema-audit gate, terminal-clean.",
     "evidence_refs": [
       "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_004_2026-10-07.md",
-      "tools/pdf_render_request_v0.1.json",
-      "Official VDV 301-2 V1.0 EN pinned SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7"
+      "English original render 38036341219 artifact 11663712895",
+      "tools/pdf_render_request_v0.1.json"
     ],
-    "recovery_instruction": "DR3012-004 checkpoint committed, not verified. Check exact pinned English PDF fallback run; inspect visible p66,114, successor lanes; write evidence and sync canonical registries; full gate; terminal-clean."
+    "recovery_instruction": "DR3012-004 gate_pending. Latest page render requested VDV301-2_BASE_V2.0 p94; pending count unchanged. Inspect CI artifact; continue cross-release scope check, update all canonical stores and gates."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
