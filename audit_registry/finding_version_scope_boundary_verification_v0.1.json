@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 62,
-    "pending_revalidation": 8
+    "verified": 63,
+    "pending_revalidation": 7
   },
-  "next_pending_finding": "DR3012-004",
+  "next_pending_finding": "DR3012-005",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -3570,9 +3570,77 @@
     },
     {
       "finding_id": "DR3012-004",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_004_2026-10-10.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_004_2026-10-07.md",
+        "EN 38036341219/11663712895",
+        "Base2.0 38036493374/11664521701",
+        "Base2.1 38036504458/11664037877",
+        "DMS2.2 38036530592/11664432671",
+        "DMS2.4 38036541437/11664581546"
+      ],
+      "note": "Material cross-language and release expansion. V1.0 German wrong9.3, English wrong12.3; V2.0 broken Word reference; V2.1 first corrected; DMS2.2/2.4 remain corrected. Pure documentation, no XML effect; STOP current package.",
+      "scope_conclusion": "First affected: German and separate English V1.0 publication. Last affected: bilingual Base V2.0 with unresolved DeviceState cross-reference. First corrected: bilingual Base V2.1 referring to VDV301-2-1. Independently checked DMS V2.2 and V2.4 stay corrected. No other earlier publication in current official source lineage; DMS V2.3 separate source publication not registered. Affected scope is documentation-only; no XSD runtime scope.",
+      "boundary_checks": [
+        {
+          "version": "Before V1.0",
+          "role": "no_predecessor_publication_available",
+          "language_status": "not_applicable:no earlier official Part2 publication in catalog",
+          "source_ids": [
+            "VDV301-2_V1.0_DE",
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V1.0 German",
+          "role": "first_affected",
+          "language_status": "de:p59 Table13 vs p74/75 Tables55/56 verified",
+          "source_ids": [
+            "VDV301-2_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V1.0 English",
+          "role": "first_affected_english_translation",
+          "language_status": "en:p66 Table37 vs p114 Tables205/206 verified",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.0",
+          "role": "last_affected",
+          "language_status": "de-en:p94 Table18 has unresolved Word reference",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.1",
+          "role": "first_corrected_successor",
+          "language_status": "de-en:p99 Table18 correct VDV301-2-1 reference",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "VDV 301-2-0 DMS V2.2",
+          "role": "later_corrected",
+          "language_status": "de-en:p19 Table7 correct VDV301-2-1",
+          "source_ids": [
+            "DMS_V2.2"
+          ]
+        },
+        {
+          "version": "VDV 301-2-0 DMS V2.4",
+          "role": "later_corrected",
+          "language_status": "de-en:p18 Table7 correct VDV301-2-1",
+          "source_ids": [
+            "DMS_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DR3012-005",

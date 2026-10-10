@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "f7c6d4091636b5ba63a6eca457aff6f47816bf50",
+    "git_blob": "c299c0f3c7435c1b67feb0698cb58c12024d9d15",
     "finding_count": 192
   },
   "policy": {
@@ -10597,15 +10597,27 @@
       "coverage_state": "complete",
       "scope_claims": [
         {
-          "version": "VDV 301-2 V1.0",
+          "version": "VDV 301-2 V1.0 German",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "DeviceState points to section 9.3 although DeviceStateEnumeration is visibly section 9.4."
+          "note": "p59 Table13 wrong DeviceState target §9.3 DeviceClassEnumeration (p74 Table55), correct target §9.4 DeviceStateEnumeration (p75 Table56)."
+        },
+        {
+          "version": "VDV 301-2 V1.0 English",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Independently issued translation p66 Table37 cites chapter12.3 DeviceClassEnumeration (p114 Table205); correct chapter12.4 DeviceStateEnumeration (p114 Table206)."
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Bilingual service publication p94 Table18 contains unresolved Word reference 'Fehler! Verweisquelle konnte nicht gefunden werden.' for DeviceState; corrected by V2.1 p99 Table18 reference to VDV301-2-1."
         }
       ],
       "coverage": [
         {
-          "version": "VDV 301-2 V1.0",
+          "version": "VDV 301-2 V1.0 German",
           "authority": "documentation_only",
           "coverage_status": "complete",
           "pdf_locators": [
@@ -10653,7 +10665,67 @@
             }
           ],
           "xsd_locators": [],
-          "coverage_note": "Confirmed documentation/navigation defect only. The DeviceState row points to 9.3, but the referenced enumeration is visibly 9.4; no XML/XSD validity behavior changes."
+          "coverage_note": "V1.0 original DE wrong §9.3/§9.4; exact pinned body verified. Documentation only."
+        },
+        {
+          "version": "VDV 301-2 V1.0 English",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                66
+              ],
+              "section": "9.3.9.2 GetDeviceStatus Response",
+              "table": "Table 37 Description of DeviceManagementService.GetDeviceStatusResponseData",
+              "point_summary": "DeviceState cites chapter12.3."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                114
+              ],
+              "section": "12.3 DeviceClassEnumeration; 12.4 DeviceStateEnumeration",
+              "table": "Table 205 DeviceClassEnumeration; Table 206 DeviceStateEnumeration",
+              "point_summary": "The target12.3 is DeviceClass; actual DeviceState is12.4."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Separately issued English translation: pin-verified visible p66 and p114; documentation-only navigation defect."
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.0",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV-Schrift 301-2 Base Services",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                94
+              ],
+              "section": "7.1.8.2 GetDeviceStatus Response",
+              "table": "Table 18 Description of DeviceManagementService.GetDeviceStatusResponseData",
+              "point_summary": "DeviceState uses the literal unresolved reference 'Fehler! Verweisquelle konnte nicht gefunden werden.'."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Bilingual V2.0 same cross-reference remains defective; V2.1 first corrected successor."
         }
       ],
       "supporting_evidence": [
@@ -10663,7 +10735,13 @@
         "EV-129 page 59 PNG SHA-256 1e0a9ee8be0fffcb6414c89ca4c02107deffd12ba5270319fcb71589335a17f7",
         "EV-129 page 75 PNG SHA-256 4b95e3f8487f3e83ca30ebf0c722786c9906b0f1b0057fc05447864c8619e6e4",
         "source-pin run 33752224704 artifact 9892036202 exact PDF SHA-256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75; fresh page-74 render SHA-256 5e3e35656acba17390d1f3a6fa0151678f6392546a891f755edce3466b4955fd",
-        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_004_2026-10-07.md"
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_004_2026-10-07.md",
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_004_2026-10-10.md",
+        "EN V1.0 run38036341219 artifact11663712895 p66 PNG 48d490502d9bab10a7e75e5d48ae536176e594cd4c462e0a5c76590c2549215b p114 b733ce90d6fbeb221c3a3786ee9268b3c30ecfb5885c15119c7c6c8f6ff327e1",
+        "Base V2.0 run38036493374 artifact11664521701 p94 PNG bfeaf84c5ef07d0b57ff64790c3e689adf4192613d6300e602f53f0865a9654f",
+        "Base V2.1 corrected run38036504458 artifact11664037877 p99 PNG 7a719650d552ea42a7fc0ef29f8b0d66cd7639ca10c98245ac676f2b36ecf6dd",
+        "DMS V2.2 corrected run38036530592 artifact11664432671 p19 PNG e8b80be432f161601d1349bf36d18fa1240b2fe406eae8d7cd766af2177b327f",
+        "DMS V2.4 corrected run38036541437 artifact11664581546 p18 PNG df7a2f470db3e4b20a9c582ebade9f9c87ae755be850ce36488cb7fa5128ab5a"
       ]
     },
     {

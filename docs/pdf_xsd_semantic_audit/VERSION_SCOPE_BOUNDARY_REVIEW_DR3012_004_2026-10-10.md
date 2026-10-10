@@ -1,0 +1,22 @@
+# DR3012-004 — DeviceState cross-reference original PDF and version boundary (2026-10-10)
+
+**Scope/material correction verified from original visible body; full gate pending. Stop package after this finding.** Retain DR3012-004 identity; no new XML rules.
+
+| Version / byte-pinned source | Exact visible body | Result | Reproducible render |
+|---|---|---|---|
+| V1.0 DE, SHA256 2214b36f83cfcac7fade934fa8b2f c866a84be85f2f8b615957972238f2ed75 (remove display space) | p59 §7.1.8.2 Tabelle13; p74 §9.3 Tabelle55 DeviceClass; p75 §9.4 Tabelle56 DeviceState | Wrong §9.3 instead of §9.4 | existing source-locator review and pinned EV129 |
+| V1.0 EN, SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 | p66 §9.3.9.2 Table37; p114 §12.3 Table205 DeviceClass / §12.4 Table206 DeviceState | Wrong chapter12.3 instead of12.4 | run [38036341219](https://github.com/MarcLeinenDE/VDV301/actions/runs/38036341219) artifact11663712895; PNG p66 `48d490502d9bab10a7e75e5d48ae536176e594cd4c462e0a5c76590c2549215b` p114 `b733ce90d6fbeb221c3a3786ee9268b3c30ecfb5885c15119c7c6c8f6ff327e1` |
+| Base V2.0 bilingual, SHA256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37 | p94 §7.1.8.2 Table18 | DeviceState literal broken Word ref: `Fehler! Verweisquelle konnte nicht gefunden werden.` | run [38036493374](https://github.com/MarcLeinenDE/VDV301/actions/runs/38036493374) artifact11664521701; PNG `bfeaf84c5ef07d0b57ff64790c3e689adf4192613d6300e602f53f0865a9654f` |
+| Base V2.1 bilingual, SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a | p99 §7.1.10.2 Table18 | First corrected: `cf. VDV 301-2-1` | run [38036504458](https://github.com/MarcLeinenDE/VDV301/actions/runs/38036504458) artifact11664037877; PNG `7a719650d552ea42a7fc0ef29f8b0d66cd7639ca10c98245ac676f2b36ecf6dd` |
+| DMS V2.2 bilingual, SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e | p19 §2.6.2 Table7 | Retains correct `cf. VDV 301-2-1` | run [38036530592](https://github.com/MarcLeinenDE/VDV301/actions/runs/38036530592) artifact11664432671; PNG `e8b80be432f161601d1349bf36d18fa1240b2fe406eae8d7cd766af2177b327f` |
+| DMS V2.4 bilingual, SHA256 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd | p18 §2.6.2 Table7 | Retains correct `cf. VDV 301-2-1` | run [38036541437](https://github.com/MarcLeinenDE/VDV301/actions/runs/38036541437) artifact11664581546; PNG `df7a2f470db3e4b20a9c582ebade9f9c87ae755be850ce36488cb7fa5128ab5a` |
+
+Official source IDs, exact SHA256 and byte sizes: `audit_registry/pdf_source_registry_v0.1.json` and `audit_registry/pdf_source_pins_v0.1.json`. Original V1.0 German pages59/74/75 already visually/body verified by `SOURCE_LOCATOR_REVIEW_DR3012_004_2026-10-07.md`; its exact pin SHA256 is `2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75`. All newly requested pages inspected visually from strict byte-pin fallback renders after interactive screenshot cache misses.
+
+## Active disproof
+The V1.0 DE/EN wrong targets both visibly contain `DeviceClassEnumeration`, not `DeviceStateEnumeration`. The difference in numbering between DE and EN is genuine language-specific structure, not a reason to reuse German locators in English. The V2.0 dangling Microsoft Word reference is not a corrected target; the actual V2.1 page changes the description to a cross-document reference. Independent DMS V2.2 and V2.4 bodies are also corrected. A PDF table of contents, index, section-number inference or future-version backport does not override the visible source.
+
+## Authority, SDK consequence and next
+Confirmed **PDF documentation/navigation defect**, not a malformed XML element. Affected: V1.0 German, V1.0 English translation, bilingual Base V2.0. First corrected successor: bilingual Base V2.1. Later separately issued DMS V2.2 and V2.4 remain corrected; no distinct published DMS V2.3 original registered for this direct comparison. `normative_authority=contextual_only`, `sdk_behavior=no_runtime_diagnostic`, `runtime_match=not_applicable`. An XML payload that fails selected official XSD still fails for that actual reason, not for this PDF cross-reference; no invented alias, runtime matcher, operation-obligation rule or XSD rewrite.
+
+Progress **62/70 → 63/70 verified, 7 pending; next DR3012-005** in a new package, because material bilingual/release scope change ends the current package. Full schema gate required for this pending HEAD; separately confirm terminal-clean and handoff-integrity before further work.

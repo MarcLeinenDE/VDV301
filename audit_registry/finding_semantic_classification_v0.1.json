@@ -5380,10 +5380,22 @@
       "service": "VDV 301-2 Base / DeviceState",
       "version_scope": [
         {
-          "version": "VDV 301-2 V1.0",
+          "version": "VDV 301-2 V1.0 German",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "DeviceState points to section 9.3 although DeviceStateEnumeration is visibly section 9.4."
+          "note": "p59 Table13 wrong DeviceState target §9.3 DeviceClassEnumeration (p74 Table55), correct target §9.4 DeviceStateEnumeration (p75 Table56)."
+        },
+        {
+          "version": "VDV 301-2 V1.0 English",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Independently issued translation p66 Table37 cites chapter12.3 DeviceClassEnumeration (p114 Table205); correct chapter12.4 DeviceStateEnumeration (p114 Table206)."
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Bilingual service publication p94 Table18 contains unresolved Word reference 'Fehler! Verweisquelle konnte nicht gefunden werden.' for DeviceState; corrected by V2.1 p99 Table18 reference to VDV301-2-1."
         }
       ],
       "review_state": "manually_reviewed",
@@ -5392,7 +5404,8 @@
       "primary_issue_kind": "wrong_structure_reference",
       "secondary_issue_kinds": [
         "wrong_section_reference",
-        "navigation_error"
+        "navigation_error",
+        "broken_cross_reference"
       ],
       "defect_assessment": "confirmed_pdf_defect",
       "confidence": "confirmed",
@@ -5404,21 +5417,33 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "The PDF points DeviceState to 9.3 while DeviceStateEnumeration is section 9.4."
+          "note": "V1.0 German pinned body p59 Table13 versus p74 Table55 and p75 Table56: 9.3 is DeviceClass, 9.4 DeviceState."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "V1.0 English pinned body p66 Table37 versus p114 Tables205/206: 12.3 is DeviceClass, 12.4 DeviceState. Strict original render run38036341219."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Bilingual Base V2.0 original p94 Table18 displays broken unresolved Word DeviceState cross-reference. Strict render run38036493374."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Bilingual Base V2.1 p99 Table18 and DMS V2.2 p19 / DMS V2.4 p18 Table7 use a corrected reference to VDV301-2-1."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "V1.0: DeviceState verweist auf den falschen Abschnitt",
-          "short": "DeviceState nennt 9.3 statt 9.4.",
-          "long": "Der Querverweis zur DeviceStateEnumeration ist um einen Abschnitt verschoben. Das ist ein reiner Navigations-/Redaktionsfehler ohne XML- oder XSD-Wirkung.",
-          "recommendation": "Nur als Dokumentationsfehler behandeln; keine technische Regel ableiten."
+          "title": "DeviceState: ungültiger Abschnittsverweis in V1.0 und V2.0",
+          "short": "V1.0 DE/EN verweist fälschlich auf DeviceClass; V2.0 enthält einen beschädigten Querverweis.",
+          "long": "Die V1.0 nennt deutsch §9.3 statt §9.4, englisch §12.3 statt §12.4; beide falschen Abschnitte beschreiben DeviceClassEnumeration statt DeviceStateEnumeration. Die bilinguale Basisdienste-V2.0 zeigt beim DeviceState einen nicht aufgelösten Word-Verweis. Die V2.1 ist mit dem Verweis auf VDV 301-2-1 korrigiert; DMS V2.2 und V2.4 bleiben korrigiert. Der Befund betrifft ausschließlich die Dokumentation und ändert keine XML-/XSD-Anforderung.",
+          "recommendation": "Versionsspezifische Dokumentationsabweichung erklären; für XML weiterhin die ausgewählte XSD verwenden. Keine XML-Aliasse, neuen Pflichtprüfungen oder Hersteller-FAILs aus dem bloßen Querverweis ableiten."
         },
         "en": {
-          "title": "V1.0: DeviceState points to the wrong section",
-          "short": "DeviceState names 9.3 instead of 9.4.",
-          "long": "The cross-reference to DeviceStateEnumeration is shifted by one section. This is purely a navigation/editorial defect with no XML or XSD impact.",
-          "recommendation": "Treat it only as a documentation defect; derive no technical rule."
+          "title": "DeviceState: invalid section references in V1.0 and V2.0",
+          "short": "V1.0 DE/EN wrongly points to DeviceClass; V2.0 contains a broken cross-reference.",
+          "long": "The V1.0 German DeviceState row points to §9.3 rather than §9.4; the English row points to chapter12.3 rather than12.4. Both wrong targets describe DeviceClassEnumeration, not DeviceStateEnumeration. Bilingual Base Services V2.0 contains an unresolved Word reference at the same row. V2.1 corrects the reference to VDV301-2-1 and later DMS V2.2/V2.4 retain it. This documentation-only mismatch does not alter any XML/XSD validity requirement.",
+          "recommendation": "Explain the version-specific editorial defect while applying only the selected XSD for XML conformance. Do not introduce aliases, additional mandatory checks or manufacturer failures."
         }
       },
       "runtime_match": {
@@ -5440,6 +5465,21 @@
           "kind": "evidence",
           "reference": "EV-129 / evidence run 33765167655 / closure run 33765633886",
           "note": "Pinned evidence-gate revalidation for this subblock."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official V1.0 English pin e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+          "note": "p66 Table37 and p114 Tables205/206 independently visually checked: run38036341219 artifact11663712895."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official Base V2.0 pin fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+          "note": "p94 Table18 broken reference independently visually checked: run38036493374 artifact11664521701."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_004_2026-10-10.md",
+          "note": "Cross-release original-body and language track comparison plus first corrected successor."
         }
       ]
     },
