@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 63,
-    "pending_revalidation": 7
+    "verified": 64,
+    "pending_revalidation": 6
   },
-  "next_pending_finding": "DR3012-005",
+  "next_pending_finding": "DR3012-006",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -3644,9 +3644,60 @@
     },
     {
       "finding_id": "DR3012-005",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_005_2026-10-10.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_005_2026-10-07.md",
+        "Original EN render run38038067682",
+        "Base V2.0 render38038078632",
+        "Base V2.1 render38038111823",
+        "Exact released SystemManagementService V1.0 blob 2d32630a at upstream tags2.0/2.1"
+      ],
+      "note": "V1.0 DE and EN inventory/detail nomenclature contradiction persists in V2.0 and V2.1 bilingual publications. No later dedicated SystemManagement specification identified in source catalog. Documentation-only; no runtime alias.",
+      "scope_conclusion": "First independently affected dedicated publication V1.0 German and separately translated EN. Bilingual V2.0 and V2.1 remain affected, last checked dedicated SystemManagement specification V2.1. Later Common Conventions or SystemMonitoringService publications are not successors to the dedicated SystemManagementService operation tables. No verified corrected successor in checked corpus.",
+      "boundary_checks": [
+        {
+          "version": "Before V1.0",
+          "role": "no_predecessor_publication_available",
+          "language_status": "not_applicable:earliest available original",
+          "source_ids": [
+            "VDV301-2_V1.0_DE",
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V1.0 German",
+          "role": "first_affected",
+          "language_status": "de:source body p67 Table31 versus p69 §7.3.6/7",
+          "source_ids": [
+            "VDV301-2_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V1.0 English",
+          "role": "first_affected_en",
+          "language_status": "en:p90 Table110 versus p91 §9.10.5/6/7",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.0 bilingual",
+          "role": "affected_next_publication",
+          "language_status": "de-en:p103 Table36 versus p104 §7.3.5/6/7",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.1 bilingual",
+          "role": "last_checked_affected",
+          "language_status": "de-en:p116 Table61 versus p117 §7.3.5/6/7; no later dedicated publication in source registry",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DR3012-006",

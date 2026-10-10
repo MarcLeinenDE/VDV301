@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "c299c0f3c7435c1b67feb0698cb58c12024d9d15",
+    "git_blob": "cd9d9dfcbdf16e14e8c2407f98096f462c9e375e",
     "finding_count": 192
   },
   "policy": {
@@ -10750,15 +10750,33 @@
       "coverage_state": "complete",
       "scope_claims": [
         {
-          "version": "VDV 301-2 V1.0",
+          "version": "VDV 301-2 V1.0 German",
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_SystemManagementService_V1.0.xsd",
-          "note": "Operation inventory uses ServiceStatus terminology while detailed headings use SystemStatus; historical XSD supports ServiceStatus."
+          "note": "DE p67 Table31 inventory Get/Subscribe/UnsubscribeServiceStatus; p69 detailed §7.3.6/§7.3.7 falsely Subscribe/UnsubscribeSystemStatus."
+        },
+        {
+          "version": "VDV 301-2 V1.0 English",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemManagementService_V1.0.xsd",
+          "note": "EN p90 Table110 inventory Get/Subscribe/UnsubscribeServiceStatus; p91 §9.10.5 falsely GetSystemStatus and §9.10.6/7 Subscribe/UnsubscribeSystemStatus; actual response types still GetServiceStatus."
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.0 bilingual",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemManagementService_V1.0.xsd",
+          "note": "Original bilingual p103 Table36 lists ServiceStatus names; p104 §7.3.5/6/7 uses Get/Subscribe/UnsubscribeSystemStatus, though text and response types say GetServiceStatus."
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.1 bilingual",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemManagementService_V1.0.xsd",
+          "note": "Original bilingual p116 Table61 lists ServiceStatus operations; p117 §7.3.5/6/7 persists Get/Subscribe/UnsubscribeSystemStatus, in conflict with response names. Last dedicated SystemManagement publication independently checked in source catalog."
         }
       ],
       "coverage": [
         {
-          "version": "VDV 301-2 V1.0",
+          "version": "VDV 301-2 V1.0 German",
           "authority": "official_release",
           "coverage_status": "complete",
           "pdf_locators": [
@@ -10820,6 +10838,117 @@
             }
           ],
           "coverage_note": "Confirmed documentation terminology mismatch. Page 67 operation inventory uses ServiceStatus while page 69 subscription detail headings use SystemStatus. Exact historical XSD corroborates ServiceStatus for modeled response identifiers; SystemStatus headings must not become XML aliases."
+        },
+        {
+          "version": "VDV 301-2 V1.0 English",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 Base and Services",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                90
+              ],
+              "section": "§9.10.1 Operations of SystemManagementService",
+              "table": "Table 110: Description of Operations at the SystemManagementService",
+              "point_summary": "Inventory Get/Subscribe/UnsubscribeServiceStatus."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 Base and Services",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                91
+              ],
+              "section": "§9.10.5 GetSystemStatus, §9.10.6 SubscribeSystemStatus, §9.10.7 UnsubscribeSystemStatus",
+              "table": "Table 113/114 GetServiceStatus response below GetSystemStatus heading",
+              "point_summary": "Detailed headings switch to SystemStatus while underlying response names use ServiceStatus."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "English original release body visually verified (run38038067682 artifact11663978950), direct section-level conflict; same official tagged historical XSD as existing German lane."
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.0 bilingual",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV 301-2 Base and Services",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                103
+              ],
+              "section": "§7.3.1 Operationen SystemManagementService",
+              "table": "Tabelle 36 Beschreibung von Operationen des SystemManagementService",
+              "point_summary": "Inventory includes Get/Subscribe/UnsubscribeServiceStatus."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV 301-2 Base and Services",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                104
+              ],
+              "section": "§7.3.5/6/7 SystemStatus headings",
+              "table": "Table 39/40 SystemManagementService.GetServiceStatusResponse",
+              "point_summary": "Heading GetSystemStatus, SubscribeSystemStatus, UnsubscribeSystemStatus despite ServiceStatus inventory and response."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Bilingual V2.0 original visually verified run38038078632 artifact11664756069. Tag VDV-301-2.0 selected SystemManagementService_V1.0.xsd original blob2d32630a."
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.1 bilingual",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV 301-2 Base and Services",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                116
+              ],
+              "section": "§7.3.1 Operationen SystemManagementService",
+              "table": "Tabelle 61 Beschreibung von Operationen des SystemManagementService",
+              "point_summary": "Inventory includes Get/Subscribe/UnsubscribeServiceStatus."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV 301-2 Base and Services",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                117
+              ],
+              "section": "§7.3.5/6/7 SystemStatus headings",
+              "table": "Table 64/65 SystemManagementService.GetServiceStatusResponse",
+              "point_summary": "Detail headings remain Get/Subscribe/UnsubscribeSystemStatus despite ServiceStatus inventory and response."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Bilingual V2.1 original visually verified run38038111823 artifact11665100674. Official tag VDV-301-2.1 retains same original blob."
         }
       ],
       "supporting_evidence": [
@@ -10829,7 +10958,12 @@
         "EV-129 page 67 PNG SHA-256 2241db5cef5651ee67e2fd80bd1db142df53b00ed13c5817f8c67139c4770bfe",
         "EV-129 page 69 PNG SHA-256 11f732afa98020a4256af71aa1063ac06fc55312e5853538f4efe89dcb8b4656",
         "official upstream VDVde/VDV301@VDV-301-2.0 blob 2d32630a0f1981e980e6a466e3f6a69136410f24",
-        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_005_2026-10-07.md"
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_005_2026-10-07.md",
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_005_2026-10-10.md",
+        "Run38038067682 artifact11663978950 (EN original pp90/91)",
+        "Run38038078632 artifact11664756069 (V2.0 pp103/104)",
+        "Run38038111823 artifact11665100674 (V2.1 pp116/117)",
+        "VDVde tags VDV-301-2.0/2.1 byte-identical SystemManagementService_V1.0.xsd blob 2d32630a0f1981e980e6a466e3f6a69136410f24"
       ]
     },
     {

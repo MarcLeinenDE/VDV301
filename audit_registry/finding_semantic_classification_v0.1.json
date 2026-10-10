@@ -5488,10 +5488,28 @@
       "service": "SystemManagementService",
       "version_scope": [
         {
-          "version": "VDV 301-2 V1.0",
+          "version": "VDV 301-2 V1.0 German",
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_SystemManagementService_V1.0.xsd",
-          "note": "Operation inventory uses ServiceStatus terminology while detailed headings use SystemStatus; historical XSD supports ServiceStatus."
+          "note": "DE p67 Table31 inventory Get/Subscribe/UnsubscribeServiceStatus; p69 detailed §7.3.6/§7.3.7 falsely Subscribe/UnsubscribeSystemStatus."
+        },
+        {
+          "version": "VDV 301-2 V1.0 English",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemManagementService_V1.0.xsd",
+          "note": "EN p90 Table110 inventory Get/Subscribe/UnsubscribeServiceStatus; p91 §9.10.5 falsely GetSystemStatus and §9.10.6/7 Subscribe/UnsubscribeSystemStatus; actual response types still GetServiceStatus."
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.0 bilingual",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemManagementService_V1.0.xsd",
+          "note": "Original bilingual p103 Table36 lists ServiceStatus names; p104 §7.3.5/6/7 uses Get/Subscribe/UnsubscribeSystemStatus, though text and response types say GetServiceStatus."
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.1 bilingual",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemManagementService_V1.0.xsd",
+          "note": "Original bilingual p116 Table61 lists ServiceStatus operations; p117 §7.3.5/6/7 persists Get/Subscribe/UnsubscribeSystemStatus, in conflict with response names. Last dedicated SystemManagement publication independently checked in source catalog."
         }
       ],
       "review_state": "manually_reviewed",
@@ -5500,7 +5518,9 @@
       "primary_issue_kind": "stale_identifier_after_rename",
       "secondary_issue_kinds": [
         "operation_inventory_heading_mismatch",
-        "systemstatus_vs_servicestatus"
+        "systemstatus_vs_servicestatus",
+        "operation_name_mismatch",
+        "bilingual_heading_mismatch"
       ],
       "defect_assessment": "confirmed_pdf_defect",
       "confidence": "confirmed",
@@ -5517,20 +5537,28 @@
         {
           "type": "official_xsd_explicit",
           "note": "The exact historical SystemManagement XSD supports ServiceStatus terminology."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "EN original p90 Table110 vs p91 headings §9.10.5/6/7; V2.0 p103 Table36 vs p104 §7.3.5/6/7; V2.1 p116 Table61 vs p117 §7.3.5/6/7, all rendered from byte pinned original."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Official IBIS-IP_SystemManagementService_V1.0.xsd Git blob 2d32630a0f1981e980e6a466e3f6a69136410f24 identical at VDV-301-2.0 and VDV-301-2.1 tags, defines GetServiceStatus response, not subscriptions as XSD roots."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "SystemManagement V1.0: ServiceStatus/SystemStatus uneinheitlich",
-          "short": "Inventar und Detailüberschriften verwenden unterschiedliche Status-Bezeichnungen.",
-          "long": "Die V1.0-Dokumentation ist terminologisch inkonsistent: das Operation-Inventar verwendet ServiceStatus, Detailüberschriften SystemStatus. Der historische XSD-Kontext stützt ServiceStatus; die andere Schreibweise ist kein bestätigter XML-Alias.",
-          "recommendation": "Keine SystemStatus-Aliasse aus den Überschriften erzeugen; konkrete XML-Namen aus dem ausgewählten XSD-Kontext beziehen."
+          "title": "SystemManagementService V1.0–V2.1: ServiceStatus/SystemStatus widersprüchlich",
+          "short": "Inventare nennen ServiceStatus, detaillierte Überschriften dagegen SystemStatus – auch in EN und V2.0/V2.1.",
+          "long": "Die deutsche V1.0 (S.67/69) nennt im Operationsinventar SubscribeServiceStatus/UnsubscribeServiceStatus, überschreibt die Detailkapitel aber mit SubscribeSystemStatus/UnsubscribeSystemStatus. Die englische V1.0 (S.90/91) und die bilingualen Basisdienste V2.0 (S.103/104) sowie V2.1 (S.116/117) führen die Abweichung fort; dort steht zusätzlich GetSystemStatus als Detailüberschrift, während Inventar, Fließtext bzw. GetServiceStatus-Response-Strukturen ServiceStatus verwenden. Die unveränderte offizielle V1.0-SystemManagementService-XSD stützt nur die GetServiceStatus-Response, nicht direkt die Subscription-Operationsnamen. Kein weiterer eigenständiger SystemManagement-Nachfolger ist im geprüften Veröffentlichungskorpus belegt.",
+          "recommendation": "Für die Operationsliste die ServiceStatus-Namen des jeweiligen verbindlichen Profils heranziehen; SystemStatus-Überschriften nicht als alternative Operations-/XML-Aliasse behandeln. Keine eigenständige XML-FAIL-Regel aus diesem Dokumentationsfehler ableiten."
         },
         "en": {
-          "title": "SystemManagement V1.0: ServiceStatus/SystemStatus terminology is inconsistent",
-          "short": "Inventory and detail headings use different status names.",
-          "long": "The V1.0 documentation is terminologically inconsistent: the operation inventory uses ServiceStatus while detailed headings use SystemStatus. The historical XSD context supports ServiceStatus; the other wording is not a confirmed XML alias.",
-          "recommendation": "Do not create SystemStatus aliases from the headings; resolve concrete XML names from the selected XSD context."
+          "title": "SystemManagementService V1.0–V2.1: conflicting ServiceStatus/SystemStatus naming",
+          "short": "Inventories name ServiceStatus, while detailed headings say SystemStatus, also in English and V2.0/V2.1.",
+          "long": "German V1.0 (pp67/69) lists SubscribeServiceStatus and UnsubscribeServiceStatus but uses SubscribeSystemStatus/UnsubscribeSystemStatus in detail headings. English V1.0 (pp90/91), bilingual Base V2.0 (pp103/104) and V2.1 (pp116/117) continue the mismatch and also title the Get detail GetSystemStatus while ServiceStatus remains the listed operation and GetServiceStatus response. Official unchanged V1.0 SystemManagementService schema confirms the response nomenclature, but does not independently declare subscription operation roots. No later dedicated SystemManagement publication is established in the checked corpus.",
+          "recommendation": "Use profile-supported ServiceStatus operation inventory; do not infer XML aliases, additional mandatory methods or manufacturer failures from incorrect SystemStatus section headings."
         }
       },
       "runtime_match": {
@@ -5557,6 +5585,11 @@
           "kind": "evidence",
           "reference": "EV-129 / evidence run 33765167655 / closure run 33765633886",
           "note": "Pinned evidence-gate revalidation for this subblock."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_005_2026-10-10.md",
+          "note": "German/English and 2.0/2.1 publication-body boundary report; original rendered pages and exact XSD blob."
         }
       ],
       "notes": "Documentation mismatch only; stale terminology must not become an SDK alias."
