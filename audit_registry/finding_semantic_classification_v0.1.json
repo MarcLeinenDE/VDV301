@@ -6627,7 +6627,13 @@
           "version": "VDV 301-2 Base V2.0",
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_SystemDocumentationService_V2.0.xsd",
-          "note": "Version history claims correction to HeartbeatInterval; tables still print HertbeatIntervall. Official XSD declares HeartbeatInterval as IBIS-IP.duration in both structures."
+          "note": "Version history claims correction to HeartbeatInterval; tables still print HertbeatIntervall. Official XSD declares HeartbeatInterval as IBIS-IP.duration in both structures. Same underlying root as DR3012-003; do not double-report."
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemDocumentationService_V2.0.xsd",
+          "note": "Bilingual Base V2.1 p113 Tables55/56 still use HertbeatIntervall xs:duration despite p118 history claiming corrected; exact official tag VDV-301-2.1 XSD uses HeartbeatInterval duration in both structures; historical overlap with DR3012-003."
         }
       ],
       "review_state": "manually_reviewed",
@@ -6667,24 +6673,25 @@
       ],
       "diagnostic": {
         "de": {
-          "title": "SystemDocumentation V2.0: Tabellen behalten HertbeatIntervall trotz korrigierter XSD",
-          "short": "Versionshistorie und XSD verwenden HeartbeatInterval; Tabellen weiterhin HertbeatIntervall.",
-          "long": "V2.0 korrigiert den ausführbaren Identifier auf HeartbeatInterval und nutzt duration in beiden Strukturen. Die Tabellen wurden nicht konsistent aktualisiert. EV-130 bestätigt, dass weder HertbeatIntervall noch das historische V1.0-HeartbeatIntervall akzeptiert wird.",
-          "recommendation": "Für V2.0 ausschließlich HeartbeatInterval mit IBIS-IP.duration verwenden; alte Schreibweisen nicht als Aliasse zulassen."
+          "title": "SystemDocumentation V2.0–V2.1: Tabellen behalten HertbeatIntervall trotz korrigierter XSD",
+          "short": "V2.0 und V2.1 nennen HertbeatIntervall; ihre offizielle XSD verlangt HeartbeatInterval.",
+          "long": "Die offiziellen bilingualen VDV 301-2 Base V2.0 (S.100 Tabellen30/31) und V2.1 (S.113 Tabellen55/56) verwenden HertbeatIntervall, obwohl die für beide Releases identische offizielle XSD HeartbeatInterval mit IBIS-IP.duration in beiden Strukturen verlangt. V2.1 S.118 behauptet bereits eine Korrektur, die in den Tabellen fehlt. Die V1.0-XSD hat dagegen HeartbeatIntervall und unterscheidet double/duration; sie darf nicht auf V2.0/V2.1 übertragen werden. Historisch gleiche Fehlerursache wie DR3012-003; keine zweite unabhängige Anbieterdiagnose und keine Alias-Akzeptanz.",
+          "recommendation": "Für V2.0 und V2.1 ausschließlich HeartbeatInterval mit IBIS-IP.duration in beiden Strukturen zulassen; XSD-invalid bleibt FAIL, doppelte Fehlerausgabe mit DR3012-003 vermeiden."
         },
         "en": {
-          "title": "SystemDocumentation V2.0: tables retain HertbeatIntervall despite corrected XSD",
-          "short": "Version history and XSD use HeartbeatInterval; tables still show HertbeatIntervall.",
-          "long": "V2.0 corrects the executable identifier to HeartbeatInterval and uses duration in both structures. The tables were not updated consistently. EV-130 confirms that neither HertbeatIntervall nor historical V1.0 HeartbeatIntervall is accepted.",
-          "recommendation": "For V2.0 use only HeartbeatInterval with IBIS-IP.duration; do not accept stale spellings as aliases."
+          "title": "SystemDocumentation V2.0–V2.1: stale heartbeat spelling in PDF tables",
+          "short": "Both V2.0 and V2.1 PDF tables say HertbeatIntervall; their official XSD requires HeartbeatInterval.",
+          "long": "Bilingual Base V2.0 p100 Tables30/31 and V2.1 p113 Tables55/56 still show HertbeatIntervall although the byte-identical released schema in tags 2.0 and 2.1 requires HeartbeatInterval with duration type for both structures. V2.1 p118 correction history contradicts its actual body tables. V1.0 instead requires HeartbeatIntervall, with a structure-specific double/duration distinction, not applicable to the later releases. This historical finding overlaps primary DR3012-003 and must not produce a second independent provider diagnostic or any schema alias.",
+          "recommendation": "Strictly validate V2.0 and V2.1 against exact official HeartbeatInterval duration/duration; no stale aliases and deduplicate with DR3012-003."
         }
       },
       "runtime_match": {
         "state": "reviewed",
         "candidate_triggers": [
-          "selected strict profile is official SystemDocumentationService V2.0",
-          "XSD validation result is INVALID because the submitted identifier is exactly HertbeatIntervall or historical HeartbeatIntervall, or because HeartbeatInterval carries non-duration lexical content",
-          "selected V2.0 XSD declares only HeartbeatInterval as IBIS-IP.duration in both SystemConfigurationData and StoreSystemConfigurationRequestStructure"
+          "Selected strict official SystemDocumentationService profile is Base V2.0 or Base V2.1 (same released V2.0 XSD).",
+          "An existing selected-XSD INVALID result is caused by HertbeatIntervall, obsolete V1.0 HeartbeatIntervall, or non-duration lexical content for HeartbeatInterval.",
+          "V2.0 XSD lines30/39 declare exactly HeartbeatInterval of IBIS-IP.duration in both structures.",
+          "Duplicate guard: historical DR3012V20-003 correlates to DR3012-003; at most one provider advisory for the same XML failure."
         ]
       },
       "source_references": [
@@ -6707,9 +6714,14 @@
           "kind": "evidence",
           "reference": "EV-130 / evidence run 33780668141 / closure run 33781049413",
           "note": "Pinned evidence-gate revalidation for this subblock."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012V20_003_2026-10-10.md",
+          "note": "Independent V2.0–V2.1 bilingual version boundary and same-root correlation to DR3012-003."
         }
       ],
-      "notes": "Version-specific boundary: V1.0 HeartbeatIntervall must not be normalized into V2.0."
+      "notes": "Version-specific boundary: V1.0 HeartbeatIntervall must not be normalized into V2.0. Independent 2026-10-10 scope: V2.0 and V2.1 both affected, last checked dedicated service V2.1; correlate with DR3012-003."
     },
     {
       "finding_id": "DR3012V20-004",

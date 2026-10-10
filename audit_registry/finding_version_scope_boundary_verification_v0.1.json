@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 68,
-    "pending_revalidation": 2
+    "verified": 69,
+    "pending_revalidation": 1
   },
-  "next_pending_finding": "DR3012V20-003",
+  "next_pending_finding": "DR3012V20-004",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -3970,9 +3970,60 @@
     },
     {
       "finding_id": "DR3012V20-003",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012V20_003_2026-10-10.md",
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_003_2026-10-10.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_003_2026-10-07.md",
+        "Pinned DE/EN V2.0 and V2.1 original pages and p118 history from primary review",
+        "VDVde/VDV301 tags VDV-301-2.0/2.1 XSD blob ab959dddbfa2b8ca420af1b079501f94cff38051 freshly confirmed 2026-10-10"
+      ],
+      "note": "Historical V2.0 finding persists into bilingual Base V2.1; V1.0 predecessor already contains root typo but has different XSD identifier/type; align DR3012-003 and avoid provider double diagnostics.",
+      "scope_conclusion": "Root PDF typo starts V1.0 DE and independently published EN; historical V20-003 first source bilingual Base V2.0 and last independently verified affected dedicated publication Base V2.1. No proven later dedicated service correction. Both official V2.0/2.1 tags use HeartbeatInterval duration/duration; primary DR3012-003 covers root.",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-2 V1.0 German original",
+          "role": "affected_predecessor_same_root",
+          "language_status": "de:p65 Tables25/26 HertbeatIntervall, V1 XSD HeartbeatIntervall double/duration",
+          "source_ids": [
+            "VDV301-2_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V1.0 English translation",
+          "role": "affected_predecessor_same_root",
+          "language_status": "en:p88 Tables104/105 same typo, V1 released XSD same different identifier/type",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.0 bilingual",
+          "role": "first_historical_id_source",
+          "language_status": "de-en:p100 Tables30/31 wrong HertbeatIntervall; p105 history claims fix; released XSD HeartbeatInterval duration/duration",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.1 bilingual",
+          "role": "last_known_affected_dedicated_service_publication",
+          "language_status": "de-en:p113 Tables55/56 wrong HertbeatIntervall; p118 history falsely says corrected; released V2.1 tag same V2.0 XSD",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.2–V2.4",
+          "role": "non_applicable_different_publication_scope",
+          "language_status": "de-en:not a separately verified later dedicated SystemDocumentationService heartbeat table",
+          "source_ids": [
+            "VDV301-2_GC_V2.2",
+            "VDV301-2_GC_V2.3",
+            "VDV301-2_GC_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DR3012V20-004",

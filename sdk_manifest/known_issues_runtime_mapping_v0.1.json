@@ -4,7 +4,7 @@
   "state": "reviewed_inventory",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "4724c4b4a5ce1a2caf9711e7b7c51204ddd4050e",
+    "git_blob": "d21f0527eb1db8bf9bde80a3595a93a279b29f7d",
     "classification_state": "complete",
     "finding_count": 192
   },
@@ -1154,13 +1154,20 @@
           "version": "VDV 301-2 Base V2.0",
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_SystemDocumentationService_V2.0.xsd",
-          "note": "Version history claims correction to HeartbeatInterval; tables still print HertbeatIntervall. Official XSD declares HeartbeatInterval as IBIS-IP.duration in both structures."
+          "note": "Version history claims correction to HeartbeatInterval; tables still print HertbeatIntervall. Official XSD declares HeartbeatInterval as IBIS-IP.duration in both structures. Same underlying root as DR3012-003; do not double-report."
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemDocumentationService_V2.0.xsd",
+          "note": "Bilingual Base V2.1 p113 Tables55/56 still use HertbeatIntervall xs:duration despite p118 history claiming corrected; exact official tag VDV-301-2.1 XSD uses HeartbeatInterval duration in both structures; historical overlap with DR3012-003."
         }
       ],
       "trigger_descriptions": [
-        "selected strict profile is official SystemDocumentationService V2.0",
-        "XSD validation result is INVALID because the submitted identifier is exactly HertbeatIntervall or historical HeartbeatIntervall, or because HeartbeatInterval carries non-duration lexical content",
-        "selected V2.0 XSD declares only HeartbeatInterval as IBIS-IP.duration in both SystemConfigurationData and StoreSystemConfigurationRequestStructure"
+        "Selected strict official SystemDocumentationService profile is Base V2.0 or Base V2.1 (same released V2.0 XSD).",
+        "An existing selected-XSD INVALID result is caused by HertbeatIntervall, obsolete V1.0 HeartbeatIntervall, or non-duration lexical content for HeartbeatInterval.",
+        "V2.0 XSD lines30/39 declare exactly HeartbeatInterval of IBIS-IP.duration in both structures.",
+        "Duplicate guard: historical DR3012V20-003 correlates to DR3012-003; at most one provider advisory for the same XML failure."
       ],
       "diagnostic_source": {
         "registry": "audit_registry/finding_semantic_classification_v0.1.json",
