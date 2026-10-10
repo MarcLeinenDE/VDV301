@@ -3374,9 +3374,131 @@
     },
     {
       "finding_id": "DR3012-002",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_002_2026-10-10.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_002_2026-10-06.md",
+        "audit_registry/pdf_source_pins_v0.1.json",
+        "33752224704 artifact 9892036202, 38027748616 artifact 11661241034",
+        "https://www.rfc-editor.org/rfc/rfc2782.html"
+      ],
+      "note": "Confirmed original table Weight lower-preference defect in DE and EN in 1.0/2.0/2.1/2.2/2.3/2.4. Material scope correction from V1.0-only; latest pinned V2.4 remains affected. Stop package.",
+      "scope_conclusion": "First known affected Part2 V1.0 both German and English; all intervening pinned 2.0,2.1,2.2,2.3 both languages; last checked 2.4 both languages still affected; no first corrected successor established. German V1.0 wording additionally internally contradictory. RFC 2782 prefers lower Priority and proportionately greater selection of larger Weight among same Priority, unlike VDV text. Scope only official source corpus, no XML/XSD/provider failure.",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-2 prior to V1.0",
+          "role": "no_predecessor_publication_available",
+          "language_status": "de-en:no prior Part2 published original independently established in pinned VDV corpus",
+          "source_ids": [
+            "VDV301-2_V1.0_DE",
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V1.0 German original",
+          "role": "first_affected_source_language",
+          "language_status": "de:Tabelle 2 Bedeutungen der SRV-Records in DNS-SD p26, incorrect low-Weight preference, original PDF SHA256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+          "source_ids": [
+            "VDV301-2_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V1.0 English translation",
+          "role": "first_affected_source_language",
+          "language_status": "en:Table 3: Meanings of the SRV record in DNS-SD (caption p29) p28, incorrect low-Weight preference, original PDF SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V2.0 German section",
+          "role": "affected_intervening_source_language",
+          "language_status": "de:Tabelle 3 Bedeutungen der SRV-Records in DNS-SD p33, incorrect low-Weight preference, original PDF SHA256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V2.0 English section",
+          "role": "affected_intervening_source_language",
+          "language_status": "en:Table 4: Meanings of the SRV record in DNS-SD p34, incorrect low-Weight preference, original PDF SHA256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V2.1 German section",
+          "role": "affected_intervening_source_language",
+          "language_status": "de:Tabelle 3 Bedeutungen der SRV-Records in DNS-SD p34, incorrect low-Weight preference, original PDF SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V2.1 English section",
+          "role": "affected_intervening_source_language",
+          "language_status": "en:Table 4: Meanings of the SRV record in DNS-SD (caption p36) p35, incorrect low-Weight preference, original PDF SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V2.2 German section",
+          "role": "affected_intervening_source_language",
+          "language_status": "de:Tabelle 2 Bedeutungen der SRV-Records in DNS-SD p26, incorrect low-Weight preference, original PDF SHA256 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+          "source_ids": [
+            "VDV301-2_GC_V2.2"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V2.2 English section",
+          "role": "affected_intervening_source_language",
+          "language_status": "en:Table 2: Meanings of the SRV record in DNS-SD p32, incorrect low-Weight preference, original PDF SHA256 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+          "source_ids": [
+            "VDV301-2_GC_V2.2"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V2.3 German section",
+          "role": "affected_intervening_source_language",
+          "language_status": "de:Tabelle 2 Bedeutungen der SRV-Records in DNS-SD p26, incorrect low-Weight preference, original PDF SHA256 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+          "source_ids": [
+            "VDV301-2_GC_V2.3"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V2.3 English section",
+          "role": "affected_intervening_source_language",
+          "language_status": "en:Table 2: Meanings of the SRV record in DNS-SD p32, incorrect low-Weight preference, original PDF SHA256 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+          "source_ids": [
+            "VDV301-2_GC_V2.3"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V2.4 German section",
+          "role": "last_known_affected_source_language",
+          "language_status": "de:Tabelle 2 Bedeutungen der SRV-Records in DNS-SD p29, incorrect low-Weight preference, original PDF SHA256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+          "source_ids": [
+            "VDV301-2_GC_V2.4"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V2.4 English section",
+          "role": "last_known_affected_source_language",
+          "language_status": "en:Table 2: Meanings of the SRV record in DNS-SD p36, incorrect low-Weight preference, original PDF SHA256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+          "source_ids": [
+            "VDV301-2_GC_V2.4"
+          ]
+        },
+        {
+          "version": "VDV 301-2 later than 2.4",
+          "role": "no_corrected_successor_publication_available",
+          "language_status": "de-en:last independently checked pinned Common Conventions 2.4 affected, no verified newer corrected publication; no global absence claim",
+          "source_ids": [
+            "VDV301-2_GC_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DR3012-003",

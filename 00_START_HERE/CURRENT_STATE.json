@@ -2003,12 +2003,12 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 60,
-    "version_scope_boundary_pending_count": 10,
-    "version_scope_boundary_next_finding": "DR3012-002",
-    "version_scope_boundary_latest_finding": "DR3012-001",
+    "version_scope_boundary_verified_count": 61,
+    "version_scope_boundary_pending_count": 9,
+    "version_scope_boundary_next_finding": "DR3012-003",
+    "version_scope_boundary_latest_finding": "DR3012-002",
     "version_scope_boundary_latest_gate_run_id": "38026636524",
-    "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_001_2026-10-10.md",
+    "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_002_2026-10-10.md",
     "latest_scope_correction": "BG-001 expanded from release-context pair 1.0/2.0 to complete official retained V1.0 path lineage through VDV-301-2.3; semantic/locator/runtime scopes synchronized."
   },
   "evidence": {
@@ -2122,13 +2122,13 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 60,
-    "version_scope_boundary_pending_count": 10
+    "version_scope_boundary_verified_count": 61,
+    "version_scope_boundary_pending_count": 9
   },
   "next_actions": [
-    "DR3012-002 pending English V1.0 strictly byte-pinned PDF render and full DE/EN version boundary evidence; stop current five-finding package after material scope expansion.",
-    "Retain snapshot 60/70 verified and 10 pending until evidence review and full gate. No new finding ID.",
-    "Next finding DR3012-003 only in a fresh package after DR3012-002 terminal_clean and final handoff SUCCESS."
+    "DR3012-002 independently corrected all 12 DE/EN affected lanes from V1.0 through V2.4: require full schema-audit-validation on exact pending HEAD before terminal_clean.",
+    "STOP current five-finding package for material DE/EN version scope expansion; fresh package begins DR3012-003 after final handoff gate SUCCESS.",
+    "9 retroactive boundary verifications remain; source locator expansion frozen. No XSD edits or new provider FAIL from external DNS SRV documentation."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2211,19 +2211,22 @@
     "latest_completed_full_gate_run_id": "38026636524",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38026636569",
-    "resume_instruction": "DR3012-002 is gate_pending. Verified pinned originals for DE V1.0 p26; Base V2.0 DE p33 EN p34; Base V2.1 DE p34 EN p35; Common V2.2 EN p32, V2.3 EN p32, V2.4 EN p36. Wrong Weight guidance persists through V2.4. First strict V1.0 EN render pp30-42 was beyond the table; next request pp22-29. Inspect and finish evidence. Stop package on material scope expansion, require full gate and terminal-clean.",
+    "resume_instruction": "DR3012-002 evidence registry update saved gate_pending; 12 DE/EN lanes from V1.0 to V2.4 incorrectly favor lower SRV Weight, original body captions confirmed, source pins and report docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_002_2026-10-10.md. Current 61/70 boundaries verified, 9 pending; next DR3012-003 only in fresh package. Full gate required before closure; no XML/provider change.",
     "pending_block": "DR3012-002 RFC2782 DNS SRV Weight description DE/EN V1.0 to Common Conventions V2.4",
     "active_finding": "DR3012-002",
-    "active_step": "Strict EN V1.0 first render 30-42 completed (38027636615, artifact 11661350729); these original pages start after DNS-SRV record table, so request 22-29 instead",
-    "next_step": "Locate actual EN V1.0 SRV Weight table on p22-29, inspect original visible table and exact SHA, then update all canonical registries",
+    "active_step": "Persist DE/EN V1.0–V2.4 DNS SRV Weight finding and locator/body/boundary/runtime/SDK mirrors atomically, 61/70 verified",
+    "next_step": "Observe full schema-audit-validation on exact pending HEAD, remediate failures, then commit terminal_clean and verify final handoff-integrity; stop package",
     "evidence_refs": [
       "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_002_2026-10-06.md",
       "audit_registry/pdf_source_pins_v0.1.json:VDV301-2_V1.0_EN",
       "RFC Editor RFC2782 https://www.rfc-editor.org/rfc/rfc2782.html",
       "Official PDF source archive 33752224704 / artifact 9892036202",
-      "Strict EN first original render run 38027636615 artifact 11661350729, pages30-42, did not contain sought SRV Weight table"
+      "Strict EN first original render run 38027636615 artifact 11661350729, pages30-42, did not contain sought SRV Weight table",
+      "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_002_2026-10-10.md",
+      "V1.0 EN strict render 38027748616 artifact 11661241034",
+      "Original DE/EN V2.0–V2.4 PDFs via pinned artifact 9892036202"
     ],
-    "recovery_instruction": "DR3012-002 is gate_pending. Verified pinned originals for DE V1.0 p26; Base V2.0 DE p33 EN p34; Base V2.1 DE p34 EN p35; Common V2.2 EN p32, V2.3 EN p32, V2.4 EN p36. Wrong Weight guidance persists through V2.4. First strict V1.0 EN render pp30-42 was beyond the table; next request pp22-29. Inspect and finish evidence. Stop package on material scope expansion, require full gate and terminal-clean."
+    "recovery_instruction": "DR3012-002 evidence registry update saved gate_pending; 12 DE/EN lanes from V1.0 to V2.4 incorrectly favor lower SRV Weight, original body captions confirmed, source pins and report docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_002_2026-10-10.md. Current 61/70 boundaries verified, 9 pending; next DR3012-003 only in fresh package. Full gate required before closure; no XML/provider change."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2233,14 +2236,14 @@
     "state": "in_progress",
     "adoption_locator_count": 70,
     "tracked_findings": 70,
-    "verified": 60,
-    "pending_revalidation": 10,
-    "next_pending_finding": "DR3012-002",
+    "verified": 61,
+    "pending_revalidation": 9,
+    "next_pending_finding": "DR3012-003",
     "locator_expansion_frozen": true,
     "future_locator_completion_requires_verified_boundary_same_block": true,
-    "latest_verified_finding": "DR3012-001",
+    "latest_verified_finding": "DR3012-002",
     "latest_gate_run_id": "38026636524",
-    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_001_2026-10-10.md"
+    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_002_2026-10-10.md"
   },
   "boundary_revalidation_package_mode": {
     "enabled": true,

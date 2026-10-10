@@ -5091,10 +5091,76 @@
       "service": "VDV 301-2 Base / DNS Service Discovery",
       "version_scope": [
         {
-          "version": "VDV 301-2 V1.0",
+          "version": "VDV 301-2 V1.0 German original",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "Page 26 says lower SRV Weight is preferred at equal Priority; RFC 2782 defines proportional weighted selection."
+          "note": "Affected DE original visible SRV Weight table p26: falsely prefers lower Weight, exact PDF SHA256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75; documented external protocol deviation, no XSD effect."
+        },
+        {
+          "version": "VDV 301-2 V1.0 English translation",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected EN original visible SRV Weight table p28: falsely prefers lower Weight, exact PDF SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7; documented external protocol deviation, no XSD effect."
+        },
+        {
+          "version": "VDV 301-2 V2.0 German section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected DE original visible SRV Weight table p33: falsely prefers lower Weight, exact PDF SHA256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37; documented external protocol deviation, no XSD effect."
+        },
+        {
+          "version": "VDV 301-2 V2.0 English section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected EN original visible SRV Weight table p34: falsely prefers lower Weight, exact PDF SHA256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37; documented external protocol deviation, no XSD effect."
+        },
+        {
+          "version": "VDV 301-2 V2.1 German section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected DE original visible SRV Weight table p34: falsely prefers lower Weight, exact PDF SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a; documented external protocol deviation, no XSD effect."
+        },
+        {
+          "version": "VDV 301-2 V2.1 English section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected EN original visible SRV Weight table p35: falsely prefers lower Weight, exact PDF SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a; documented external protocol deviation, no XSD effect."
+        },
+        {
+          "version": "VDV 301-2 V2.2 German section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected DE original visible SRV Weight table p26: falsely prefers lower Weight, exact PDF SHA256 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051; documented external protocol deviation, no XSD effect."
+        },
+        {
+          "version": "VDV 301-2 V2.2 English section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected EN original visible SRV Weight table p32: falsely prefers lower Weight, exact PDF SHA256 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051; documented external protocol deviation, no XSD effect."
+        },
+        {
+          "version": "VDV 301-2 V2.3 German section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected DE original visible SRV Weight table p26: falsely prefers lower Weight, exact PDF SHA256 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603; documented external protocol deviation, no XSD effect."
+        },
+        {
+          "version": "VDV 301-2 V2.3 English section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected EN original visible SRV Weight table p32: falsely prefers lower Weight, exact PDF SHA256 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603; documented external protocol deviation, no XSD effect."
+        },
+        {
+          "version": "VDV 301-2 V2.4 German section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected DE original visible SRV Weight table p29: falsely prefers lower Weight, exact PDF SHA256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d; documented external protocol deviation, no XSD effect."
+        },
+        {
+          "version": "VDV 301-2 V2.4 English section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected EN original visible SRV Weight table p36: falsely prefers lower Weight, exact PDF SHA256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d; documented external protocol deviation, no XSD effect."
         }
       ],
       "review_state": "manually_reviewed",
@@ -5115,25 +5181,37 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "The PDF states that lower SRV Weight is preferred at equal Priority."
+          "note": "V1.0 German p26 Table2 contains the internal contradiction 'bei gleichem Gewicht ... geringeren Gewicht'. Independent English V1.0 translation p28 Table3 (caption p29) explicitly prefers lower Weight; strict source-pinned render 38027748616 artifact 11661241034."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Base V2.0 German p33 Table3 / English p34 Table4 and V2.1 German p34 Table3 / English p35 Table4 (caption p36) retain smaller-Weight preference; all four original PDF pages independently visually inspected at exact publisher source SHA256."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Common Conventions V2.2 and V2.3 German p26 Table2 / English p32 Table2 and V2.4 German p29 Table2 / English p36 Table2 also preserve erroneous preference; latest pinned V2.4 still affected."
         },
         {
           "type": "external_protocol_standard",
-          "note": "RFC 2782 gives larger Weight values proportionally greater selection probability."
+          "note": "RFC Editor https://www.rfc-editor.org/rfc/rfc2782.html priority is smallest reachable priority; among equal priority larger weight SHOULD give proportionately higher selection probability. Weight 0 with nonzero weights has very small chance."
+        },
+        {
+          "type": "version_history",
+          "note": "Each German and English lane separately inspected from first known V1.0 through intervening Base V2.0,V2.1 and Common Conventions V2.2,V2.3 to last checked V2.4. No verified earlier or later corrected Part2 in exact pinned official corpus."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "V1.0: SRV-Weighting widerspricht RFC 2782",
-          "short": "Die PDF bevorzugt kleinere Weight-Werte; RFC 2782 definiert proportionale Gewichtung.",
-          "long": "Die beschriebene DNS-SRV-Auswahl kehrt die Weight-Semantik um. Bei gleicher Priority erhöht ein größerer Weight-Wert nach RFC 2782 die Auswahlwahrscheinlichkeit proportional. XML-Gültigkeit ist nicht betroffen.",
-          "recommendation": "SRV-Auswahl gemäß RFC 2782 implementieren und die VDV-Formulierung als Dokumentationsfehler behandeln."
+          "title": "VDV 301-2 V1.0–V2.4: falsche DNS-SRV-Weight-Gewichtung in beiden Sprachen",
+          "short": "V1.0 bis V2.4 bevorzugen in deutschen und englischen SRV-Tabellen kleinere Weight-Werte; RFC 2782 verlangt proportional höhere Chancen für größere Weights bei gleicher Priority.",
+          "long": "Die offiziellen VDV-301-2-Texte von V1.0 bis V2.4 wurden für die SRV-Weight-Tabellen in Deutsch und Englisch unabhängig anhand exakt gepinnter Original-PDFs überprüft. V1.0 DE p26 Tabelle 2 enthält wörtlich die widersprüchliche Angabe, bei gleichem Gewicht werde ein Dienst mit geringerem Gewicht bevorzugt. V1.0 EN p28 Table 3 beschreibt ausdrücklich eine Präferenz für das kleinere Weight. Der Fehler bleibt in Base V2.0 (DE p33/EN p34), Base V2.1 (DE p34/EN p35) sowie Common Conventions V2.2 und V2.3 (DE p26/EN p32) und V2.4 (DE p29/EN p36) bestehen. RFC 2782 unterscheidet niedrigere Priority (bevorzugt) von größerem Weight (proportional höhere Auswahlwahrscheinlichkeit bei gleicher Priority). Dies ist ein Dokumentationsfehler mit externer Netzwerksemantik, keine neue XML-/XSD- oder VDV-Anbieter-Fail-Regel.",
+          "recommendation": "Deutsche und englische SRV-Weight-Tabellen der geprüften V1.0–V2.4 redaktionell nach RFC 2782 berichtigen. Niedrigste erreichbare Priority vorziehen; bei gleicher Priority größere Weight-Werte proportional häufiger wählen. Keine XSD-Aliasse, keine erfundenen XML-Prüfregeln oder VDV-FAIL-Meldungen."
         },
         "en": {
-          "title": "V1.0: SRV weighting contradicts RFC 2782",
-          "short": "The PDF prefers smaller Weight values; RFC 2782 defines proportional weighting.",
-          "long": "The described DNS SRV selection reverses Weight semantics. At equal Priority, a larger Weight receives proportionally greater selection probability under RFC 2782. XML validity is unaffected.",
-          "recommendation": "Implement SRV selection according to RFC 2782 and treat the VDV wording as a documentation defect."
+          "title": "VDV 301-2 V1.0–V2.4: incorrect DNS SRV Weight in German and English",
+          "short": "German and English SRV tables throughout V1.0–V2.4 prefer lower Weight, contrary to RFC 2782's relative weighted probability at equal Priority.",
+          "long": "All twelve published German and English language lanes of VDV 301-2 from V1.0 through the latest checked V2.4 have been independently checked against exact SHA256-pinned original PDF tables. German V1.0 p26 Table2 even contradicts itself ('same weight' yet 'lower weight'); English V1.0 p28 Table3 and later bilingual Base V2.0 (DE p33/EN p34), Base V2.1 (DE p34/EN p35), Common Conventions V2.2/V2.3 (DE p26/EN p32) and V2.4 (DE p29/EN p36) all prefer smaller Weight. RFC 2782 says the lowest reachable Priority is preferred, but at the same Priority larger Weight SHOULD receive a proportionately higher selection probability. The latest checked V2.4 remains affected, with no independently verified newer corrected edition. This finding is external-standard documentation guidance, not an XML/XSD acceptance rule.",
+          "recommendation": "Correct the published DNS-SRV table text in both language tracks. Keep low Priority distinct from relatively high Weight. No schema edits, XML aliases, SDK runtime matcher or invented VDV provider-conformance failure."
         }
       },
       "runtime_match": {
@@ -5160,8 +5238,19 @@
           "kind": "external_standard",
           "reference": "RFC 2782",
           "note": "Primary authority for DNS SRV Priority/Weight selection."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_002_2026-10-10.md",
+          "note": "Complete source-hash-pinned visible-body DE+EN boundary and RFC2782 reference proof."
+        },
+        {
+          "kind": "evidence",
+          "reference": "Official EN V1.0 render 38027748616 artifact 11661241034, p28 sha256 ed70b72dc2a367b76ed3846c7345d2f09249766f3ae426fe3a94f11b1fac7432",
+          "note": "Original independent English publication uses lower Weight preference and Table3 caption on p29."
         }
-      ]
+      ],
+      "notes": "2026-10-10 material version scope expansion: DR3012-002 covers 12 distinct DE/EN body lanes for versions 1.0,2.0,2.1,2.2,2.3,2.4; the last checked 2.4 still has the defect. A single retained finding, external RFC warning/advice, runtime not applicable."
     },
     {
       "finding_id": "DR3012-003",
