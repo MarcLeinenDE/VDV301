@@ -2126,9 +2126,9 @@
     "version_scope_boundary_pending_count": 0
   },
   "next_actions": [
-    "Retrospective 70/70 boundary revalidation terminalized DR3012V20-004; full audit 38041766085 SUCCESS. Confirm final terminal HEAD handoff-integrity.",
-    "Continue next structurally missing source locator DR3012V20-006 (70/192 complete, 122 remaining), with exact original PDF visible-body locator, source pins, version boundaries and DE/EN diagnostics in the same terminal block.",
-    "Retain exact selected-XSD PASS/FAIL, no remediation to historical XSDs without separate authorization."
+    "DR3012V20-006: inspect source-specific PDF pinned renders and original-body headings/tables; German V1.0 preliminary missing heading, separately published English V1.0 has heading, Base V2.0 missing heading, Base V2.1 onward corrected.",
+    "Independently compare official V1/2.0/2.1/2.2 DMS exact XSD authority and generic subscription rules; avoid false vendor FAIL on documentation asymmetry.",
+    "Then in single substantive gate_pending commit add finding 006 to locator/body/boundary, synchronize SDK/state, run complete gate, close terminal_clean separately."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2206,12 +2206,20 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "38041766085",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38041766033",
-    "resume_instruction": "DR3012V20-004 terminal_clean; actual original DE V1.0 p63 typo, EN V1.0 p86 correct, Base V2.0/V2.1 bilingual prose typo; official 1.0 / 2.0 / 2.1 XSDs correct SystemDocumentationService. No XML alias or extra manufacturer FAIL. Report docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012V20_004_2026-10-10.md. Schema-audit-validation 38041766085 SUCCESS and pending-head handoff-integrity 38041766033 SUCCESS. Entire 70/70 retroactive version boundary audit complete, structural locator expansion unfrozen. Verify this final terminal HEAD handoff-integrity then resume first missing source locator DR3012V20-006 and prove its version boundary in the same work cycle."
+    "resume_instruction": "DR3012V20-006 evidence renders being requested; 70/192 structural locators, 70/70 existing boundaries; no new finding promoted yet.",
+    "pending_block": "DR3012V20-006 source-locator/version boundary",
+    "active_finding": "DR3012V20-006",
+    "active_step": "Requested pinned visible-body render VDV301-2_V1.0_DE pages 55-58",
+    "next_step": "Inspect all pinned source render action results, exact XSD official release tags and V1.0 DE-vs-EN asymmetry before promoting the locator.",
+    "evidence_refs": [
+      "VDV301-2_V1.0_DE pages 55-58 pinned original render request"
+    ],
+    "recovery_instruction": "Resume DR3012V20-006 from current work HEAD. Inspect PDF pinned visual fallback runs for DE V1.0, EN V1.0, Base V2.0, Base V2.1 and DMS V2.4; verify pages visually; do not count new locator until structural and body/version boundary gates all pass."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
