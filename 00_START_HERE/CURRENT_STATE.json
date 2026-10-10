@@ -2007,7 +2007,7 @@
     "version_scope_boundary_pending_count": 7,
     "version_scope_boundary_next_finding": "DR3012-005",
     "version_scope_boundary_latest_finding": "DR3012-004",
-    "version_scope_boundary_latest_gate_run_id": "38033140916",
+    "version_scope_boundary_latest_gate_run_id": "38037037593",
     "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_004_2026-10-10.md",
     "latest_scope_correction": "DR3012-004 independently expanded from V1 DE to V1 DE+EN and bilingual Base V2.0 unresolved Word reference, corrected Base V2.1."
   },
@@ -2126,9 +2126,9 @@
     "version_scope_boundary_pending_count": 7
   },
   "next_actions": [
-    "DR3012-004 canonical evidence and registers saved; inspect exact-HEAD full schema-audit-validation SUCCESS before closing.",
-    "Then terminal_clean handoff on final HEAD; stop package due material scope expansion, next DR3012-005 fresh package.",
-    "7 pending boundaries; 70-locator freeze and exact-XSD authority remain unchanged."
+    "Start a NEW five-finding package at DR3012-005 (SystemManagementService subscription naming inconsistency) only after final terminal HEAD handoff-integrity succeeds; inspect original DE/EN V1.0 and adjacent Base V2.0/V2.1 and successor service publications for exact language/release boundary.",
+    "Keep each finding separately gate_pending -> full schema-audit-validation SUCCESS -> terminal_clean -> exact-HEAD handoff-integrity; stop package on material expansion, ambiguity or failure.",
+    "7 pending boundaries; locator expansion frozen at 70. Selected official XSD controls XML conformance regardless of PDF errors."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2206,25 +2206,12 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "gate_pending",
-    "pending_gate": true,
-    "latest_completed_full_gate_run_id": "38033140916",
+    "work_cycle_state": "terminal_clean",
+    "pending_gate": false,
+    "latest_completed_full_gate_run_id": "38037037593",
     "latest_completed_full_gate_status": "success",
-    "latest_handoff_check_before_finalization_run_id": "38033140939",
-    "resume_instruction": "DR3012-004 gate_pending awaiting full gate; material DE+EN V1.0 and V2.0 broken reference; V2.1 first corrected, DMS2.2/2.4 confirmed; STOP package after terminal closure.",
-    "pending_block": "DR3012-004 scope correction pending full validation",
-    "active_finding": "DR3012-004",
-    "active_step": "Repair SDK manifest duplicated boundary count and report source-pin line after validation gate failure 38036959484; pending full revalidation",
-    "next_step": "Observe fresh full schema-audit-validation and handoff-integrity success; then terminal_clean handoff; next DR3012-005 in new package",
-    "evidence_refs": [
-      "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_004_2026-10-10.md",
-      "EN render38036341219",
-      "Base V2.0 render38036493374",
-      "Base V2.1 render38036504458",
-      "DMS2.2 render38036530592",
-      "DMS2.4 render38036541437"
-    ],
-    "recovery_instruction": "First gate on 6e133cc failed solely SDK manifest boundary count stale (62 vs 63); SDK manifest updated in this recovery commit, run fresh full schema gate. Do not terminal close until full success."
+    "latest_handoff_check_before_finalization_run_id": "38037037608",
+    "resume_instruction": "DR3012-004 completed; original V1.0 DE p59/p74/p75 and EN p66/p114 independently pinned and compared, Base V2.0 p94 broken Word reference, Base V2.1 p99 first corrected, DMS V2.2 p19 and V2.4 p18 also corrected. Canonical report docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_004_2026-10-10.md. Full schema-audit-validation 38037037593 SUCCESS and prefinal handoff-integrity 38037037608 SUCCESS. Verify final exact-HEAD handoff success. Counts 63/70 verified, 7 pending; STOP old five-pack for material scope expansion; next DR3012-005 in new five-pack. No runtime matcher, XSD changes or provider FAIL from PDF-only crossref."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2240,7 +2227,7 @@
     "locator_expansion_frozen": true,
     "future_locator_completion_requires_verified_boundary_same_block": true,
     "latest_verified_finding": "DR3012-004",
-    "latest_gate_run_id": "38033140916",
+    "latest_gate_run_id": "38037037593",
     "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_004_2026-10-10.md"
   },
   "boundary_revalidation_package_mode": {
@@ -2252,18 +2239,18 @@
     "last_completed_package": {
       "completed_at": "2026-10-10",
       "findings": [
-        "DR3012-003"
+        "DR3012-004"
       ],
-      "result": "terminal_clean after material source-language expansion V1.0 DE+EN and affected Base V2.0/V2.1 with release-specific official XSD identifier/type change; package stopped per policy",
-      "final_verified_count": 62,
-      "final_pending_count": 8
+      "result": "terminal_clean after separately verified German and English V1.0 wrong DeviceState section, Base V2.0 unresolved Word cross-reference and first corrected Base V2.1; material scope expansion stops package; exact full gate SUCCESS",
+      "final_verified_count": 63,
+      "final_pending_count": 7
     },
     "next_package": [
-      "DR3012-004",
       "DR3012-005",
       "DR3012-006",
       "DR3012-007",
-      "DR3012V20-001"
+      "DR3012V20-001",
+      "DR3012V20-002"
     ]
   }
 }
