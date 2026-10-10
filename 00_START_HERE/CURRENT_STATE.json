@@ -2126,9 +2126,9 @@
     "version_scope_boundary_pending_count": 1
   },
   "next_actions": [
-    "DE V1.0 render run 38041326281 SUCCESS; now verify separate EN V1.0 p86 render on current HEAD.",
-    "Then request V1.0 EN p86 and Base V2.1 p112 using separate crash-safe request commits and inspect their original bodies; prior V2.0 p98 already byte-pinned.",
-    "Only after original body verification update finding scope and DE/EN diagnostics, boundary 70/70, full audit and terminal_clean handoff; no XSD changes."
+    "DE V1.0 p63 strict render SUCCESS run38041326281 and EN V1.0 p86 strict render SUCCESS run38041399999; verify next V2.1 p112.",
+    "Then commit final finding evidence + synchronized registries as gate_pending; validate full schema-audit.",
+    "After full gate SUCCESS terminal_clean/handoff; 70/70 boundaries and reopen source locators at DR3012V20-006."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2211,17 +2211,18 @@
     "latest_completed_full_gate_run_id": "38040975881",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38040975897",
-    "resume_instruction": "DR3012V20-004 gate_pending. DE original p63 render success; EN original p86 render requested; V2.1 p112 follows.",
+    "resume_instruction": "DR3012V20-004 gate_pending. Source renders DE V1.0 and EN V1.0 successful; last V2.1 p112 requested.",
     "pending_block": "DR3012V20-004 / original-PDF verification",
     "active_finding": "DR3012V20-004",
-    "active_step": "German original V1.0 p63 strict pinned render SUCCESS run 38041326281 artifact 11666156248; now request independently issued English V1.0 p86.",
-    "next_step": "Verify pinned English V1.0 p86 PDF render and then separately request bilingual Base V2.1 p112; retain gate_pending.",
+    "active_step": "Pinned renders now successful: original DE V1.0 p63 run 38041326281 artifact 11666156248, original EN V1.0 p86 run 38041399999 artifact 11666116355. Request final bilingual V2.1 p112.",
+    "next_step": "Validate V2.1 p112 pinned render run/artifact and canonical original service-name evidence. Then synchronize audit registries scope, DE/EN diagnostics, body evidence, SDK mapping, and terminalize with full schema and handoff gates.",
     "evidence_refs": [
       "audit_registry/pdf_source_registry_v0.1.json:VDV301-2_V1.0_DE",
       "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_004_2026-10-07.md",
-      "GitHub Actions render run 38041326281 / artifact 11666156248, DE v1.0 SHA256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75"
+      "GitHub Actions render run 38041326281 / artifact 11666156248, DE v1.0 SHA256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+      "V1.0 EN pin e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 run 38041399999 artifact 11666116355"
     ],
-    "recovery_instruction": "DE V1.0 pinned PDF render succeeded run 38041326281. On current HEAD inspect EN V1.0 p86 fallback run, verify source SHA256 and artifact, then render V2.1 bilingual original p112. Only afterward complete audit finding with synchronized registry/manifest."
+    "recovery_instruction": "DE V1.0 p63 and EN V1.0 p86 byte-pinned render runs have succeeded; V2.1 p112 render requested at current HEAD. Once success verified, complete DR3012V20-004 boundary and full gate; do not skip exact final handoff."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
