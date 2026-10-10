@@ -2007,7 +2007,7 @@
     "version_scope_boundary_pending_count": 9,
     "version_scope_boundary_next_finding": "DR3012-003",
     "version_scope_boundary_latest_finding": "DR3012-002",
-    "version_scope_boundary_latest_gate_run_id": "38026636524",
+    "version_scope_boundary_latest_gate_run_id": "38028230234",
     "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_002_2026-10-10.md",
     "latest_scope_correction": "BG-001 expanded from release-context pair 1.0/2.0 to complete official retained V1.0 path lineage through VDV-301-2.3; semantic/locator/runtime scopes synchronized."
   },
@@ -2126,9 +2126,10 @@
     "version_scope_boundary_pending_count": 9
   },
   "next_actions": [
-    "DR3012-002 independently corrected all 12 DE/EN affected lanes from V1.0 through V2.4: require full schema-audit-validation on exact pending HEAD before terminal_clean.",
-    "STOP current five-finding package for material DE/EN version scope expansion; fresh package begins DR3012-003 after final handoff gate SUCCESS.",
-    "9 retroactive boundary verifications remain; source locator expansion frozen. No XSD edits or new provider FAIL from external DNS SRV documentation."
+    "Next independent five-finding package begins DR3012-003: selected official SystemDocumentationService V1.0 HeartbeatIntervall name/type vs VDV PDF and adjacent version boundaries; verify both language editions, released upstream XSD tag provenance, and no alias rule.",
+    "Current package stopped after DR3012-002 material bilingual V1.0–V2.4 scope expansion; each subsequent finding requires separate complete gate and terminal handoff.",
+    "Keep source-locator expansion frozen with nine retroactive boundaries pending. No provider FAIL for documentation-only RFC2782 guidance.",
+    "Before new work require successful handoff-integrity at final terminal_clean HEAD."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2206,28 +2207,12 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "gate_pending",
-    "pending_gate": true,
-    "latest_completed_full_gate_run_id": "38026636524",
+    "work_cycle_state": "terminal_clean",
+    "pending_gate": false,
+    "latest_completed_full_gate_run_id": "38028230234",
     "latest_completed_full_gate_status": "success",
-    "latest_handoff_check_before_finalization_run_id": "38026636569",
-    "resume_instruction": "DR3012-002 evidence and semantic scope in canonical registries are complete, but initial full gate failed because version-boundary registry counted 60 while 61 entries were verified. This repair changes counts to 61/9, next DR3012-003, recheck both full audit and handoff, then terminal_clean. Stop package due material DE/EN through V2.4 expansion.",
-    "pending_block": "DR3012-002 RFC2782 DNS SRV Weight description DE/EN V1.0 to Common Conventions V2.4",
-    "active_finding": "DR3012-002",
-    "active_step": "Fix boundary registry summary 60->61 and 10->9 after verifying actual 61 verified entry states",
-    "next_step": "Observe handoff-integrity and full schema-audit-validation at exact repair HEAD, terminal-close only if both success",
-    "evidence_refs": [
-      "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_002_2026-10-06.md",
-      "audit_registry/pdf_source_pins_v0.1.json:VDV301-2_V1.0_EN",
-      "RFC Editor RFC2782 https://www.rfc-editor.org/rfc/rfc2782.html",
-      "Official PDF source archive 33752224704 / artifact 9892036202",
-      "Strict EN first original render run 38027636615 artifact 11661350729, pages30-42, did not contain sought SRV Weight table",
-      "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_002_2026-10-10.md",
-      "V1.0 EN strict render 38027748616 artifact 11661241034",
-      "Original DE/EN V2.0–V2.4 PDFs via pinned artifact 9892036202",
-      "Failed initial audit/handoff on ffa568d: boundary registry counts stale although 61 verified entries; no semantic evidence change."
-    ],
-    "recovery_instruction": "DR3012-002 evidence and semantic scope in canonical registries are complete, but initial full gate failed because version-boundary registry counted 60 while 61 entries were verified. This repair changes counts to 61/9, next DR3012-003, recheck both full audit and handoff, then terminal_clean. Stop package due material DE/EN through V2.4 expansion."
+    "latest_handoff_check_before_finalization_run_id": "38028230225",
+    "resume_instruction": "DR3012-002 independently verified: DNS-SRV Weight lower-preference error in 12 German/English lanes of VDV 301-2 V1.0, V2.0, V2.1 and Common Conventions V2.2–V2.4. Original byte-pinned PDF pages and actual Table captions in docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_002_2026-10-10.md. Full schema-audit-validation run 38028230234 SUCCESS, pending-HEAD handoff run 38028230225 SUCCESS; after this terminal commit confirm final handoff-integrity SUCCESS. Boundary progress 61/70 verified, 9 pending. Current five-finding package stopped due material V1-only to V2.4 bilingual scope correction; next new package starts DR3012-003. No XSD/runtime/provider FAIL effect."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2243,7 +2228,7 @@
     "locator_expansion_frozen": true,
     "future_locator_completion_requires_verified_boundary_same_block": true,
     "latest_verified_finding": "DR3012-002",
-    "latest_gate_run_id": "38026636524",
+    "latest_gate_run_id": "38028230234",
     "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_002_2026-10-10.md"
   },
   "boundary_revalidation_package_mode": {
@@ -2255,18 +2240,18 @@
     "last_completed_package": {
       "completed_at": "2026-10-10",
       "findings": [
-        "DR3012-001"
+        "DR3012-002"
       ],
-      "result": "terminal_clean after material DE/EN source-scope expansion from V1.0 to English Common Conventions V2.4, and first corrected German V2.0; package stopped per policy",
-      "final_verified_count": 60,
-      "final_pending_count": 10
+      "result": "terminal_clean after independent DE/EN V1.0–V2.4 material scope expansion; package stopped as required",
+      "final_verified_count": 61,
+      "final_pending_count": 9
     },
     "next_package": [
-      "DR3012-002",
       "DR3012-003",
       "DR3012-004",
       "DR3012-005",
-      "DR3012-006"
+      "DR3012-006",
+      "DR3012-007"
     ]
   }
 }
