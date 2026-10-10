@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 65,
-    "pending_revalidation": 5
+    "verified": 66,
+    "pending_revalidation": 4
   },
-  "next_pending_finding": "DR3012-007",
+  "next_pending_finding": "DR3012V20-001",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -3784,9 +3784,67 @@
     },
     {
       "finding_id": "DR3012-007",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_007_2026-10-10.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_007_2026-10-07.md",
+        "EN original render38038947278",
+        "Base2.0 render38038963374",
+        "Base2.1 render38038996070"
+      ],
+      "note": "German V1.0 alone copy-paste start/stop wording. English V1.0 already says stopped; V2.0/2.1 also correctly say stopped. V2.0 unrelated broken Word reference not a continuation of this semantic contradiction.",
+      "scope_conclusion": "First/last affected original version: German V1.0 p63 Table21. Parallel V1.0 English translation p69 Table45 already correct. First next bilingual Base V2.0 p98 Table26 correct StopService wording, later V2.1 p103 Table26 correct. Later separate DMS2.2/2.4 do not independently establish a corresponding StopServiceRequestStructure member-table successor in checked source corpus; no unverified later claim.",
+      "boundary_checks": [
+        {
+          "version": "Prior to V1.0",
+          "role": "no_predecessor_publication_available",
+          "language_status": "not_applicable:earliest original in catalog",
+          "source_ids": [
+            "VDV301-2_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V1.0 German original",
+          "role": "first_and_last_affected",
+          "language_status": "de:p63 §7.1.24 Table21 erroneous 'zu startenden Dienst' inside StopService",
+          "source_ids": [
+            "VDV301-2_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V1.0 English",
+          "role": "unaffected_parallel_translation",
+          "language_status": "en:p69 §9.3.25 Table45 says 'stopped services'",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "role": "first_corrected_successor",
+          "language_status": "de-en:p98 §7.1.24 Table26 says 'stopped services'; separate unresolved Word reference is not this defect",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "role": "later_corrected",
+          "language_status": "de-en:p103 §7.1.26 Table26 says 'stopped services'; cross-reference VDV301-2-1",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "DMS V2.2 and V2.4",
+          "role": "later_member_table_not_established",
+          "language_status": "not_applicable:later DMS publications checked for matching member table; no independent later StopServiceRequestStructure description verified; do not infer affected/unaffected.",
+          "source_ids": [
+            "DMS_V2.2",
+            "DMS_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DR3012V20-001",

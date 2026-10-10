@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "5b566ef7df521600d0338092751eecd66dc22823",
+    "git_blob": "5ddc0074bc07b1e494fcc0b6a461c2fbb63b297a",
     "finding_count": 192
   },
   "policy": {
@@ -11027,15 +11027,15 @@
       "coverage_state": "complete",
       "scope_claims": [
         {
-          "version": "VDV 301-2 V1.0",
+          "version": "VDV 301-2 V1.0 German original",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "StopService request description refers to the service to be started."
+          "note": "Only V1 German p63 §7.1.24 Table21 StopServiceRequestStructure ServiceSpecification says 'zu startenden Dienst' despite 'gestoppt wird' in enclosing structure. Separate EN V1.0 p69 Table45 and Base V2.0 p98 Table26/V2.1 p103 Table26 correctly say stopped services."
         }
       ],
       "coverage": [
         {
-          "version": "VDV 301-2 V1.0",
+          "version": "VDV 301-2 V1.0 German original",
           "authority": "documentation_only",
           "coverage_status": "complete",
           "pdf_locators": [
@@ -11055,7 +11055,7 @@
             }
           ],
           "xsd_locators": [],
-          "coverage_note": "Confirmed documentation/copy-paste defect only. The StopService operation is not redefined by the erroneous 'zu startenden Dienst' field description; no XML/XSD or runtime behavior changes."
+          "coverage_note": "Only German V1.0 Start/Stop wording defect; English V1.0 and V2.0/2.1 use correct 'stopped'. V2.0's separate broken cross-reference excluded from this issue."
         }
       ],
       "supporting_evidence": [
@@ -11063,7 +11063,11 @@
         "EV-129 closure run 33765633886",
         "EV-129 pinned evidence run 33765167655 artifact 9897171006 digest sha256:a410cdc7103b2ed01f61570b6435a5b2319d2b80f4fec2802929359058a51cc7",
         "EV-129 page 63 PNG SHA-256 8b5d94ed59fef404b29af34cedb7218e9ae564fbc8f5abcf7ffca055739b2839",
-        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_007_2026-10-07.md"
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_007_2026-10-07.md",
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_007_2026-10-10.md",
+        "EN V1 p69 run38038947278 artifact11665042099 PNG0a883b0bec59fb3d3cf1ef13bb49a85b0dc27802d11f3b1c9afa4cb19f3c1c21",
+        "Base2.0 p98 run38038963374 artifact11664652708 PNG5d45c5901ef5452868f48c7734b21a6302c568f4e0a313d6e28541a9e7be59cf",
+        "Base2.1 p103 run38038996070 artifact11665291907 PNGaf75f882cc630d8cbeeb60d68aed2e3fbb47675fc50e38624ddc3b86c99f801a"
       ]
     },
     {

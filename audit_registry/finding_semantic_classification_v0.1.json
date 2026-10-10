@@ -5681,10 +5681,10 @@
       "service": "VDV 301-2 Base / StopService",
       "version_scope": [
         {
-          "version": "VDV 301-2 V1.0",
+          "version": "VDV 301-2 V1.0 German original",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "StopService request description refers to the service to be started."
+          "note": "Only V1 German p63 §7.1.24 Table21 StopServiceRequestStructure ServiceSpecification says 'zu startenden Dienst' despite 'gestoppt wird' in enclosing structure. Separate EN V1.0 p69 Table45 and Base V2.0 p98 Table26/V2.1 p103 Table26 correctly say stopped services."
         }
       ],
       "review_state": "manually_reviewed",
@@ -5706,20 +5706,24 @@
         {
           "type": "official_pdf_explicit",
           "note": "The StopService text describes the service to be started instead of stopped."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Exact visibly rendered separate English V1.0 p69 Table45 says stopped services; Base V2.0 p98 Table26 says stopped services despite unrelated broken cross-reference; Base V2.1 p103 Table26 correctly says stopped services and refers VDV301-2-1."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "V1.0: StopService-Beschreibung spricht vom Starten",
-          "short": "Der StopService-Text beschreibt fälschlich den zu startenden Dienst.",
-          "long": "Die Beschreibung enthält einen offensichtlichen Copy/Paste-Fehler. Der Operationsname wird dadurch nicht umgedeutet und es entsteht keine alternative Operation.",
-          "recommendation": "Als Dokumentationsfehler behandeln; keine abweichende Operationssemantik ableiten."
+          "title": "Nur V1.0 Deutsch: StopService-Feldbeschreibung nennt „starten“",
+          "short": "V1.0 DE widerspricht im StopService-Request dem Operationszweck; die englische V1.0 und V2.0/2.1 sind hier korrekt.",
+          "long": "Die deutsche V1.0 (S.63, Tabelle21) sagt in der StopServiceRequestStructure zutreffend, dass der identifizierte Dienst gestoppt wird, bezeichnet den ServiceSpecification-Member jedoch irrtümlich als Verweis auf den „zu startenden Dienst“. Bereits die separate englische V1.0 (S.69, Tabelle45) spricht korrekt von stopped services. Die bilinguale Basisdienste-V2.0 (S.98, Tabelle26) und V2.1 (S.103, Tabelle26) verwenden ebenfalls die korrekte StopService-Bedeutung. Der in V2.0 zusätzlich beschädigte Word-Querverweis ist ein eigenständiger Navigationsmangel, kein Fortbestand dieses Start/Stop-Fehlers. Es handelt sich nur um einen Dokumentations-/Copy-Paste-Fehler; keine Änderung an XML oder verbindlicher XSD.",
+          "recommendation": "ServiceSpecification bezeichnet beim StopService den zu stoppenden Dienst; aus dem deutschen V1.0-Text weder StartService-Semantik noch alternative XML-Operationsnamen ableiten. Keine Hersteller-FAIL-Klassifikation allein aus dem Textfehler."
         },
         "en": {
-          "title": "V1.0: StopService description says to start the service",
-          "short": "The StopService text incorrectly describes the service to be started.",
-          "long": "The description contains an evident copy/paste error. It does not redefine the operation name or create an alternate operation.",
-          "recommendation": "Treat it as a documentation defect; derive no alternate operation semantics."
+          "title": "German V1.0 only: StopService member incorrectly says start",
+          "short": "German V1.0 StopService field text contradicts the enclosing request; English V1.0 and V2.0/2.1 are correct.",
+          "long": "German V1.0 p63 Table21 correctly describes a service being stopped, yet its ServiceSpecification member says 'zu startenden Dienst' (service to be started). The separately published V1.0 English p69 Table45 already says stopped services; bilingual Base V2.0 p98 and V2.1 p103 also use stopped services. Base V2.0 still has an unrelated unresolved Word cross-reference, which is not the semantic Start/Stop error under this finding. The error is documentation-only and does not modify exact-XSD conformance.",
+          "recommendation": "Treat ServiceSpecification in StopService as identifying the service to stop. Do not invent StartService aliases or vendor failures from the German editorial mistake."
         }
       },
       "runtime_match": {
@@ -5741,6 +5745,11 @@
           "kind": "evidence",
           "reference": "EV-129 / evidence run 33765167655 / closure run 33765633886",
           "note": "Pinned evidence-gate revalidation for this subblock."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_007_2026-10-10.md",
+          "note": "Independent V1.0 English, bilingual Base V2.0 and V2.1 visible original StopService comparison."
         }
       ]
     },
