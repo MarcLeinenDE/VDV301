@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 64,
-    "pending_revalidation": 6
+    "verified": 65,
+    "pending_revalidation": 5
   },
-  "next_pending_finding": "DR3012-006",
+  "next_pending_finding": "DR3012-007",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -3701,9 +3701,86 @@
     },
     {
       "finding_id": "DR3012-006",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_006_2026-10-10.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_006_2026-10-07.md",
+        "Official TimeService V1.0 part301-2-10 and VLS V1.0 part301-2-11 source pins",
+        "V1 EN 38038529046",
+        "Base2.0 38038541699",
+        "Base2.1 38038566530",
+        "Common2.2 38038579949",
+        "Common2.3 38038603575",
+        "Common2.4 38038616040"
+      ],
+      "note": "Affected only V1.0 German; English V1.0 already directly references correct internal TimeService section 9.12; next Base V2.0 and later through Common2.4 refer 301-2-10. No XML effect.",
+      "scope_conclusion": "First and last affected checked edition: V1.0 German original p22. Co-published EN V1.0 is nonaffected (internal §9.12 TimeService); earliest next bilingual Base V2.0 and V2.1 are corrected (VDV301-2-10); later bilingual Common Conventions V2.2–V2.4 also correct. No preceding publication predating original V1.0 in corpus; no source-routing XML effect.",
+      "boundary_checks": [
+        {
+          "version": "Before V1.0",
+          "role": "no_predecessor_publication_available",
+          "language_status": "not_applicable:earliest original",
+          "source_ids": [
+            "VDV301-2_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V1.0 German original",
+          "role": "first_and_last_affected",
+          "language_status": "de:visible p22 §2.5 cites wrong part301-2-11",
+          "source_ids": [
+            "VDV301-2_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V1.0 English translation",
+          "role": "unaffected_parallel_translation",
+          "language_status": "en:original p23 §4.5 correct internal chapter9.12 TimeService",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "role": "first_corrected_successor",
+          "language_status": "de-en:original p25 §2.5 correct VDV301-2-10",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "role": "later_corrected",
+          "language_status": "de-en:original p26 §2.5 correct VDV301-2-10",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.2",
+          "role": "later_corrected",
+          "language_status": "de p19 en p22 correct VDV301-2-10",
+          "source_ids": [
+            "VDV301-2_GC_V2.2"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.3",
+          "role": "later_corrected",
+          "language_status": "de p19 en p22 correct VDV301-2-10",
+          "source_ids": [
+            "VDV301-2_GC_V2.3"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.4",
+          "role": "latest_checked_corrected",
+          "language_status": "de p22 en p25 correct VDV301-2-10",
+          "source_ids": [
+            "VDV301-2_GC_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DR3012-007",

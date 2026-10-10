@@ -5599,10 +5599,10 @@
       "service": "VDV 301-2 Base / TimeService routing",
       "version_scope": [
         {
-          "version": "VDV 301-2 V1.0",
+          "version": "VDV 301-2 V1.0 German original",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "The TimeService reference to VDV 301-2-11 is wrong/stale in the historical context."
+          "note": "Only original German p22 §2.5 misroutes SNTP implementation to VDV301-2-11 instead of TimeService VDV301-2-10; V1.0 EN p23 chapter9.12 is correct, and V2.0–V2.4 DE+EN use correct part10."
         }
       ],
       "review_state": "manually_reviewed",
@@ -5629,20 +5629,24 @@
         {
           "type": "official_release_provenance",
           "note": "Historical document identity context confirms that reference as wrong/stale rather than merely a modern numbering difference."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Original separate EN V1.0 p23 §4.5 visibly says cf. chapter9.12, which is TimeService, unlike erroneous DE original p22 §2.5. Bilingual V2.0 p25 and V2.1 p26 use correct VDV301-2-10 in both tracks; Common V2.2 p19/22, V2.3 p19/22 and V2.4 p22/25 are also corrected."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "V1.0: falscher/veralteter TimeService-Dokumentverweis",
-          "short": "TimeService wird auf VDV 301-2-11 geroutet, obwohl der historische Kontext das als falsch bestätigt.",
-          "long": "Der Querverweis nennt eine falsche bzw. veraltete Teildokumentnummer. Das ist ein Dokumentations-/Routingfehler und ändert keine XML-Gültigkeit.",
-          "recommendation": "Service-/Schema-Routing aus der tatsächlichen versionsspezifischen Quellenprovenienz ableiten, nicht aus diesem Verweis."
+          "title": "Nur V1.0 Deutsch: falscher SNTP-Verweis auf 301-2-11",
+          "short": "V1.0 DE verweist vom SNTP-Kapitel auf VideoLiveService statt TimeService; V1.0 EN ist bereits korrekt.",
+          "long": "Die deutsche ursprüngliche VDV 301-2 V1.0 nennt in §2.5 auf S.22 für SNTP die VDV 301-2-11 (VideoLiveService). Bereits die separat veröffentlichte englische V1.0 nennt im entsprechenden §4.5 auf S.23 korrekt das interne TimeService-Kapitel 9.12. Die bilingualen Basisdienste V2.0 (S.25) und V2.1 (S.26) sowie Common Conventions V2.2–V2.4 referenzieren übereinstimmend den richtigen Teil VDV 301-2-10. Die historischen offiziellen Service-Schriften bestätigen die Teile-Zuordnung: TimeService 301-2-10 und VideoLiveService 301-2-11. Nur der deutsche V1.0-Verweis ist in der geprüften Folge betroffen; keine XML-Regel.",
+          "recommendation": "Für die technische Spezifikation TimeService VDV 301-2-10 verwenden; den einzelnen alten deutschen Verweis als Dokumentationsfehler erklären, ohne XML-Validierung oder Herstellerkonformität daraus abzuleiten."
         },
         "en": {
-          "title": "V1.0: wrong/stale TimeService document reference",
-          "short": "TimeService is routed to VDV 301-2-11 although historical context confirms that as wrong.",
-          "long": "The cross-reference names an incorrect or stale part-document number. This is a documentation/routing defect and does not change XML validity.",
-          "recommendation": "Derive service/schema routing from actual version-specific source provenance, not from this reference."
+          "title": "German V1.0 only: wrong SNTP reference to part 301-2-11",
+          "short": "Original German V1.0 sends SNTP readers to VideoLiveService; the separate English V1.0 is already correct.",
+          "long": "German original VDV301-2 V1.0 §2.5 p22 cites part 301-2-11 for SNTP, but historical official TimeService is part301-2-10 and VideoLiveService part301-2-11. The separate original English V1.0 §4.5 p23 correctly links the internal TimeService chapter9.12. Bilingual Base V2.0 p25 and V2.1 p26, plus Common Conventions V2.2–2.4, consistently cite VDV301-2-10. The affected release/language lane is German V1.0 only; this editorial source-routing error does not modify selected-XSD validation.",
+          "recommendation": "Read TimeService VDV301-2-10, classify the old German part-number reference as documentation-only, and do not derive any provider/XML failure from it."
         }
       },
       "runtime_match": {
@@ -5664,6 +5668,11 @@
           "kind": "evidence",
           "reference": "EV-129 / evidence run 33765167655 / closure run 33765633886",
           "note": "Pinned evidence-gate revalidation for this subblock."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_006_2026-10-10.md",
+          "note": "Original EN, Base V2.0/2.1 and Common V2.2/2.3/2.4 source-pinned visual boundary evidence."
         }
       ]
     },

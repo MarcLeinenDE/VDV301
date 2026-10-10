@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "cd9d9dfcbdf16e14e8c2407f98096f462c9e375e",
+    "git_blob": "5b566ef7df521600d0338092751eecd66dc22823",
     "finding_count": 192
   },
   "policy": {
@@ -10972,15 +10972,15 @@
       "coverage_state": "complete",
       "scope_claims": [
         {
-          "version": "VDV 301-2 V1.0",
+          "version": "VDV 301-2 V1.0 German original",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "The TimeService reference to VDV 301-2-11 is wrong/stale in the historical context."
+          "note": "Only original German p22 §2.5 misroutes SNTP implementation to VDV301-2-11 instead of TimeService VDV301-2-10; V1.0 EN p23 chapter9.12 is correct, and V2.0–V2.4 DE+EN use correct part10."
         }
       ],
       "coverage": [
         {
-          "version": "VDV 301-2 V1.0",
+          "version": "VDV 301-2 V1.0 German original",
           "authority": "documentation_only",
           "coverage_status": "complete",
           "pdf_locators": [
@@ -11000,7 +11000,7 @@
             }
           ],
           "xsd_locators": [],
-          "coverage_note": "Documentation/source-routing defect only. Historical official-source registry identifies TIME_V1.0 as part 301-2-10 and VLS_V1.0 as part 301-2-11; therefore the page-22 TimeService/SNTP cross-reference to 301-2-11 is wrong/stale."
+          "coverage_note": "Only German original V1.0 source-routing error; independent English V1.0 p23 refers correctly to TimeService chapter9.12. Later bilingual Base2.0/2.1 and Common2.2/2.3/2.4 refer correctly to part301-2-10."
         }
       ],
       "supporting_evidence": [
@@ -11011,7 +11011,14 @@
         "audit_registry/document_registry_v0.1.json: TIME_V1.0 part 301-2-10 / VLS_V1.0 part 301-2-11",
         "audit_registry/pdf_source_registry_v0.1.json: TIME_V1.0 official URL 301-2-10sds-v-1-01.pdfx / VLS_V1.0 official URL 301-2-11-sds.pdfx",
         "audit_registry/pdf_source_pins_v0.1.json: TIME_V1.0 SHA-256 d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3 / VLS_V1.0 SHA-256 f535673427ff8f495102e1fc7723ca157408949b981572c4342b862f6d9c2a3c",
-        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_006_2026-10-07.md"
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_006_2026-10-07.md",
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_006_2026-10-10.md",
+        "V1.0 EN p23 run38038529046 artifact11664686883 png ceb0e04095e9576a40121435e29816c6229db9be8454193e96a66e072bf1c722",
+        "Base V2.0 p25 run38038541699 artifact11664264479 png d4e13d1542bd8874adc3c6347e3129ba9565a62f8bb282929e4e1563cd0df1e3",
+        "Base V2.1 p26 run38038566530 artifact11665201453 png 15fc91c1bd3c51c2056ff925e611f15ede31da6ac09c4f86a6294105031ebc87",
+        "Common V2.2 p19/22 run38038579949 artifact11664459254",
+        "Common V2.3 p19/22 run38038603575 artifact11664886682",
+        "Common V2.4 p22/25 run38038616040 artifact11664901737"
       ]
     },
     {

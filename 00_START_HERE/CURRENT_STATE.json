@@ -2003,12 +2003,12 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 64,
-    "version_scope_boundary_pending_count": 6,
-    "version_scope_boundary_next_finding": "DR3012-006",
-    "version_scope_boundary_latest_finding": "DR3012-005",
+    "version_scope_boundary_verified_count": 65,
+    "version_scope_boundary_pending_count": 5,
+    "version_scope_boundary_next_finding": "DR3012-007",
+    "version_scope_boundary_latest_finding": "DR3012-006",
     "version_scope_boundary_latest_gate_run_id": "38038407295",
-    "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_005_2026-10-10.md",
+    "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_006_2026-10-10.md",
     "latest_scope_correction": "DR3012-004 independently expanded from V1 DE to V1 DE+EN and bilingual Base V2.0 unresolved Word reference, corrected Base V2.1."
   },
   "evidence": {
@@ -2122,13 +2122,13 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 64,
-    "version_scope_boundary_pending_count": 6
+    "version_scope_boundary_verified_count": 65,
+    "version_scope_boundary_pending_count": 5
   },
   "next_actions": [
-    "DR3012-005 closed after SUCCESS full gate. Verify final exact-HEAD handoff-integrity before DR3012-006.",
-    "Continue same five-package: DR3012-006, DR3012-007, DR3012V20-001/002 in per-finding independent cycles; verified scope expansion alone not a stop.",
-    "6 remaining boundary items; exact XSD remains normative."
+    "DR3012-006 complete original-body evidence gate_pending, run/verify exact-HEAD full schema audit then terminal close and handoff before DR3012-007.",
+    "Continue five-package with DR3012-007, DR3012V20-001, DR3012V20-002 independently after terminal handoff.",
+    "5 remaining boundary findings, original selected-XSD authority unchanged."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2211,16 +2211,21 @@
     "latest_completed_full_gate_run_id": "38038407295",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38038407360",
-    "resume_instruction": "DR3012-006 gate_pending; original source renders requested up to Common2.4; 64/70 remains until evidence complete.",
-    "pending_block": "DR3012-006 SNTP wrong VDV301-2-11 routing V1 DE versus V1 EN and later release corrections",
+    "resume_instruction": "DR3012-006 German V1.0 only; original EN V1.0 internally correct and V2.0–2.4 later correct. Pending full gate. Next DR3012-007 after clean.",
+    "pending_block": "DR3012-006 German V1.0-only source routing boundary evidence, full gate pending",
     "active_finding": "DR3012-006",
-    "active_step": "DR3012-006 request VDV301-2_GC_V2.4 p22,25 exact pinned original",
-    "next_step": "Verify EN1, Base2.0, Base2.1, GC2.2/2.3/2.4 original body then conclude 006 and full gate",
+    "active_step": "Original EN V1.0 and bilingual Base2.0/2.1/GC2.2–2.4 verified; semantic/locators/runtime pins/boundary/state synchronized",
+    "next_step": "Require full schema-audit-validation SUCCESS then separate terminal_clean + final handoff-integrity before DR3012-007",
     "evidence_refs": [
-      "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_006_2026-10-07.md",
-      "tools/pdf_render_request_v0.1.json"
+      "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_006_2026-10-10.md",
+      "38038529046",
+      "38038541699",
+      "38038566530",
+      "38038579949",
+      "38038603575",
+      "38038616040"
     ],
-    "recovery_instruction": "DR3012-006 evidence-only renders gate_pending. Continue original PDF language and successor checks, no boundary progress yet; full gate and terminal closure required."
+    "recovery_instruction": "DR3012-006 updated to 65/70 gate_pending; check full gate, fix if needed; terminal-close and validate handoff before DR3012-007."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2230,14 +2235,14 @@
     "state": "in_progress",
     "adoption_locator_count": 70,
     "tracked_findings": 70,
-    "verified": 64,
-    "pending_revalidation": 6,
-    "next_pending_finding": "DR3012-006",
+    "verified": 65,
+    "pending_revalidation": 5,
+    "next_pending_finding": "DR3012-007",
     "locator_expansion_frozen": true,
     "future_locator_completion_requires_verified_boundary_same_block": true,
-    "latest_verified_finding": "DR3012-005",
+    "latest_verified_finding": "DR3012-006",
     "latest_gate_run_id": "38038407295",
-    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_005_2026-10-10.md"
+    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_006_2026-10-10.md"
   },
   "boundary_revalidation_package_mode": {
     "enabled": true,
