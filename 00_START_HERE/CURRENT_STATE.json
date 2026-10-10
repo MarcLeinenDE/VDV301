@@ -2211,18 +2211,19 @@
     "latest_completed_full_gate_run_id": "38026636524",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38026636569",
-    "resume_instruction": "DR3012-002 source search shows wrong Weight preference survives verified source-hash PDF Base V2.0 both DE/EN, V2.1 DE/EN and English Common Conventions V2.2–V2.4; historical DE V1.0 p26 is affected. Strict EN V1.0 p30-42 PDF render requested to locate actual table and determine its scope. Stop package after material version/language expansion. Do not edit official XSD or broaden SDK runtime triggers. Finish full evidence, atomic registry state gate_pending, await full gate, terminal-clean, verify final handoff.",
+    "resume_instruction": "DR3012-002 is gate_pending. Verified pinned originals for DE V1.0 p26; Base V2.0 DE p33 EN p34; Base V2.1 DE p34 EN p35; Common V2.2 EN p32, V2.3 EN p32, V2.4 EN p36. Wrong Weight guidance persists through V2.4. First strict V1.0 EN render pp30-42 was beyond the table; next request pp22-29. Inspect and finish evidence. Stop package on material scope expansion, require full gate and terminal-clean.",
     "pending_block": "DR3012-002 RFC2782 DNS SRV Weight description DE/EN V1.0 to Common Conventions V2.4",
     "active_finding": "DR3012-002",
-    "active_step": "Verified local official PDF exact source hashes and located incorrect Weight descriptions at V1 DE p26, Base V2.0 DE p33/EN p34, Base V2.1 DE p34/EN p35, GC V2.2 EN p32, GC V2.3 EN p32, GC V2.4 EN p36",
-    "next_step": "Render and inspect independent official V1.0 English translation original pages 30-42; reverify visible DE/EN later rows, classify first/last affected and report; then full gate and terminal close",
+    "active_step": "Strict EN V1.0 first render 30-42 completed (38027636615, artifact 11661350729); these original pages start after DNS-SRV record table, so request 22-29 instead",
+    "next_step": "Locate actual EN V1.0 SRV Weight table on p22-29, inspect original visible table and exact SHA, then update all canonical registries",
     "evidence_refs": [
       "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_002_2026-10-06.md",
       "audit_registry/pdf_source_pins_v0.1.json:VDV301-2_V1.0_EN",
       "RFC Editor RFC2782 https://www.rfc-editor.org/rfc/rfc2782.html",
-      "Official PDF source archive 33752224704 / artifact 9892036202"
+      "Official PDF source archive 33752224704 / artifact 9892036202",
+      "Strict EN first original render run 38027636615 artifact 11661350729, pages30-42, did not contain sought SRV Weight table"
     ],
-    "recovery_instruction": "DR3012-002 source search shows wrong Weight preference survives verified source-hash PDF Base V2.0 both DE/EN, V2.1 DE/EN and English Common Conventions V2.2–V2.4; historical DE V1.0 p26 is affected. Strict EN V1.0 p30-42 PDF render requested to locate actual table and determine its scope. Stop package after material version/language expansion. Do not edit official XSD or broaden SDK runtime triggers. Finish full evidence, atomic registry state gate_pending, await full gate, terminal-clean, verify final handoff."
+    "recovery_instruction": "DR3012-002 is gate_pending. Verified pinned originals for DE V1.0 p26; Base V2.0 DE p33 EN p34; Base V2.1 DE p34 EN p35; Common V2.2 EN p32, V2.3 EN p32, V2.4 EN p36. Wrong Weight guidance persists through V2.4. First strict V1.0 EN render pp30-42 was beyond the table; next request pp22-29. Inspect and finish evidence. Stop package on material scope expansion, require full gate and terminal-clean."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
