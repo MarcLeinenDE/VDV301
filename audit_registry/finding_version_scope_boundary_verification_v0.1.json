@@ -1,7 +1,7 @@
 {
   "registry_version": "0.1",
   "kind": "finding-version-scope-boundary-verification",
-  "state": "in_progress",
+  "state": "complete",
   "adopted_at": "2026-10-07",
   "source_locator_manifest": {
     "path": "audit_registry/finding_source_locators_v0.1.json",
@@ -16,15 +16,15 @@
     "no_boundary_inference_from_finding_id": true
   },
   "freeze": {
-    "locator_expansion_frozen_until_pending_zero": true,
+    "locator_expansion_frozen_until_pending_zero": false,
     "baseline_locator_count": 70
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 69,
-    "pending_revalidation": 1
+    "verified": 70,
+    "pending_revalidation": 0
   },
-  "next_pending_finding": "DR3012V20-004",
+  "next_pending_finding": null,
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -4027,9 +4027,71 @@
     },
     {
       "finding_id": "DR3012V20-004",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012V20_004_2026-10-10.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_004_2026-10-07.md",
+        "Official byte-pinned V1 DE p63 original render artifact 11666156248 run38041326281 PNG c24bead10e953a31c84d719f878092ebb32521182514cb9fc61e3df9e5c02248",
+        "Original V1 EN p86 nonaffected render artifact 11666116355 run38041399999 PNG aed7ed1880d8a7f1f82fc839c051f39dcd027288c7c761b1e9c8de7d31f956c2",
+        "Original bilingual V2.0 DE/EN p98 EV130 PNG ef250716223afaa4c777db354f9e54d8ad96664b950cdc5b3312173bfd2eef47",
+        "Official byte-pinned V2.1 DE/EN p112 render artifact 11666121559 run38041466615 PNG 81aafe63728781c934231f4f6d30dccfac2336ec38f9e508079b09bb443c5fc2",
+        "VDVde/VDV301 official XSD exact 1.0 / 2.0 / 2.1 release tags independently inspected"
+      ],
+      "note": "Direct original visual inspection: first affected V1.0 German, V1.0 English explicitly non-affected; both DE/EN V2.0 and V2.1 affected. Typo is editorial prose only; no XSD alias or extra vendor FAIL.",
+      "scope_conclusion": "First affected available dedicated service publication is V1.0 German original p63; separately published English V1.0 p86 shows correct service name and is not affected. Bilingual Base V2.0 p98 and Base V2.1 p112 each reproduce typo in German and English prose; latest checked affected dedicated service publication is V2.1. No independently proven later dedicated corrected successor: Common Conventions V2.2–2.4 not SystemDocumentationService reissues. Selected released XSD in all lanes consistently spells SystemDocumentationService.",
+      "boundary_checks": [
+        {
+          "version": "Before VDV301-2 V1.0",
+          "role": "no_predecessor_publication_available",
+          "language_status": "de-en:no earlier dedicated SystemDocumentationService publication independently established",
+          "source_ids": [
+            "VDV301-2_V1.0_DE",
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV301-2 V1.0 German original",
+          "role": "first_affected_german",
+          "language_status": "de:visible p63 §7.2 correct heading, wrong following prose SystemDocumenationService; official V1.0 XSD correct",
+          "source_ids": [
+            "VDV301-2_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV301-2 V1.0 English original translation",
+          "role": "nonaffected_english_control",
+          "language_status": "en:visible p86 §9.9 heading and immediate paragraph use correct SystemDocumentationService/no transposed typo; independent translation, no English-specific XSD",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV301-2 Base V2.0 bilingual",
+          "role": "first_affected_english_and_german_successor",
+          "language_status": "de-en:visible p98 §7.2 correct heading, both following paragraphs wrong SystemDocumenationService",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV301-2 Base V2.1 bilingual",
+          "role": "last_known_affected_dedicated_service_publication",
+          "language_status": "de-en:visible p112 §7.2 correct heading, both following paragraphs wrong SystemDocumenationService",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "VDV301-2 Common Conventions V2.2–V2.4",
+          "role": "non_applicable_different_publication_scope",
+          "language_status": "de-en:independent Common Conventions not a corrected SystemDocumentationService publication; no later correction claimed",
+          "source_ids": [
+            "VDV301-2_GC_V2.2",
+            "VDV301-2_GC_V2.3",
+            "VDV301-2_GC_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DR3012V20-005",

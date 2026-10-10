@@ -3,7 +3,7 @@
   "date": "2026-10-07",
   "canonical_branch": "dev/schema-integration",
   "workflow_mode": "full_gate_on_canonical_changes_plus_handoff_check_on_every_push",
-  "project_phase": "version_scope_boundary_revalidation",
+  "project_phase": "source_locator_structural_completion",
   "dev/schema-integration": {
     "root_xsd_count_last_executed": 50,
     "direct_include_edges_last_executed": 84,
@@ -1985,7 +1985,7 @@
     "candidate_correction_propagation_rule": "A confirmed correction to a candidate/integration XSD creates a new exact schema revision/variant. Preserve the old candidate for reproducibility; pin the corrected source; update SDK variant routing/provenance and affected Known-Issue version history; synchronize the corrected XSD into the dev/schema-integration, which is the project's most current and complete XSD collection. Correction propagation is not complete until SDK and dev/schema-integration are synchronized. Never promote the corrected candidate to official unless upstream official authority actually changes.",
     "dev/schema-integration_role": "most_current_and_complete_project_xsd_collection",
     "arch_source_locator_block": "ARCH-001..ARCH-008 complete; architecture vocabulary must not synthesize executable service/protocol obligations.",
-    "latest_source_locator_rule": "Visible-body backlog is complete. Structural source-locator expansion is temporarily paused at 70 entries by the retroactive version-scope boundary hard gate; resume at DR3012V20-006 only after boundary pending reaches zero.",
+    "latest_source_locator_rule": "Retroactive version-scope boundary hard gate finished (70/70 independently verified). Structural source-locator completion can resume at DR3012V20-006 with per-finding verified boundary evidence in same terminal block.",
     "historical_upstream_locator_support": "schema+validator support exact repository/ref/blob identity for official historical XSD sources",
     "source_locator_body_verification_registry": "audit_registry/pdf_locator_body_verification_v0.1.json",
     "source_locator_body_verification_state": "complete",
@@ -2001,14 +2001,14 @@
     "source_locator_body_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_005_2026-10-07.md",
     "version_scope_boundary_policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
-    "version_scope_boundary_state": "in_progress",
+    "version_scope_boundary_state": "complete",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 69,
-    "version_scope_boundary_pending_count": 1,
-    "version_scope_boundary_next_finding": "DR3012V20-004",
-    "version_scope_boundary_latest_finding": "DR3012V20-003",
+    "version_scope_boundary_verified_count": 70,
+    "version_scope_boundary_pending_count": 0,
+    "version_scope_boundary_next_finding": null,
+    "version_scope_boundary_latest_finding": "DR3012V20-004",
     "version_scope_boundary_latest_gate_run_id": "38040975881",
-    "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012V20_003_2026-10-10.md",
+    "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012V20_004_2026-10-10.md",
     "latest_scope_correction": "DR3012-004 independently expanded from V1 DE to V1 DE+EN and bilingual Base V2.0 unresolved Word reference, corrected Base V2.1."
   },
   "evidence": {
@@ -2120,15 +2120,15 @@
     "source_locator_body_pending_current_standard_count": 0,
     "source_locator_body_latest_gate_run_id": "37601934452",
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
-    "version_scope_boundary_state": "in_progress",
+    "version_scope_boundary_state": "complete",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 69,
-    "version_scope_boundary_pending_count": 1
+    "version_scope_boundary_verified_count": 70,
+    "version_scope_boundary_pending_count": 0
   },
   "next_actions": [
-    "DE V1.0 p63 strict render SUCCESS run38041326281 and EN V1.0 p86 strict render SUCCESS run38041399999; verify next V2.1 p112.",
-    "Then commit final finding evidence + synchronized registries as gate_pending; validate full schema-audit.",
-    "After full gate SUCCESS terminal_clean/handoff; 70/70 boundaries and reopen source locators at DR3012V20-006."
+    "DR3012V20-004 gate_pending canonical evidence commit: await schema-audit-validation on exact pending HEAD; fix failures before terminal closure.",
+    "After full SUCCESS, separate terminal_clean handoff commit; confirm final-HEAD handoff-integrity SUCCESS.",
+    "Then resume source-locator structural expansion at DR3012V20-006, with mandatory same-block version-boundary checks; 122 source locators remain."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2145,7 +2145,7 @@
     "structural_progress_freeze_count": 40,
     "next_body_revalidation_finding": null,
     "next_structurally_missing_finding_after_body_backlog": "DR3012V20-006",
-    "locator_expansion_paused_by_scope_boundary_revalidation": true
+    "locator_expansion_paused_by_scope_boundary_revalidation": false
   },
   "external_protocol_authority": {
     "policy": "docs/pdf_xsd_semantic_audit/EXTERNAL_PROTOCOL_STANDARD_AUTHORITY.md",
@@ -2211,38 +2211,39 @@
     "latest_completed_full_gate_run_id": "38040975881",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38040975897",
-    "resume_instruction": "DR3012V20-004 gate_pending. Source renders DE V1.0 and EN V1.0 successful; last V2.1 p112 requested.",
-    "pending_block": "DR3012V20-004 / original-PDF verification",
+    "resume_instruction": "DR3012V20-004 evidence completed, registry 70/70 verified, full audit gate pending; terminal_clean closure then resume structural source-locator DR3012V20-006.",
+    "pending_block": "DR3012V20-004",
     "active_finding": "DR3012V20-004",
-    "active_step": "Pinned renders now successful: original DE V1.0 p63 run 38041326281 artifact 11666156248, original EN V1.0 p86 run 38041399999 artifact 11666116355. Request final bilingual V2.1 p112.",
-    "next_step": "Validate V2.1 p112 pinned render run/artifact and canonical original service-name evidence. Then synchronize audit registries scope, DE/EN diagnostics, body evidence, SDK mapping, and terminalize with full schema and handoff gates.",
+    "active_step": "Exact pinned original V1.0 DE/EN + Base V2.0/2.1 DE/EN and official XSD fully visually reviewed; version scopes, source locators, runtime, diagnostics, body evidence, 70/70 boundary closure and SDK/state synchronized atomically.",
+    "next_step": "Check full schema-audit-validation on exact pending HEAD; resolve any failures. Only on SUCCESS issue separate terminal_clean closure and verify final handoff-integrity.",
     "evidence_refs": [
-      "audit_registry/pdf_source_registry_v0.1.json:VDV301-2_V1.0_DE",
-      "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_004_2026-10-07.md",
-      "GitHub Actions render run 38041326281 / artifact 11666156248, DE v1.0 SHA256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
-      "V1.0 EN pin e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 run 38041399999 artifact 11666116355"
+      "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012V20_004_2026-10-10.md",
+      "pinned German V1.0 run38041326281 artifact11666156248",
+      "pinned English V1.0 run38041399999 artifact11666116355",
+      "pinned bilingual Base V2.1 run38041466615 artifact11666121559",
+      "previous EV130 V2.0 p98 render"
     ],
-    "recovery_instruction": "DE V1.0 p63 and EN V1.0 p86 byte-pinned render runs have succeeded; V2.1 p112 render requested at current HEAD. Once success verified, complete DR3012V20-004 boundary and full gate; do not skip exact final handoff."
+    "recovery_instruction": "Exact current HEAD has DR3012V20-004 as gate_pending but registry 70/70 complete. Inspect full exact-HEAD schema audit; repair if failed, then separately terminalize and check handoff. Next DR3012V20-006 source locator, not DR3012V20-005 because 005 already complete."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
     "registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "schema": "audit_registry/finding_version_scope_boundary_verification_v0.1.schema.json",
     "validator": "tools/validate_finding_version_boundaries_v0_1.py",
-    "state": "in_progress",
+    "state": "complete",
     "adoption_locator_count": 70,
     "tracked_findings": 70,
-    "verified": 69,
-    "pending_revalidation": 1,
-    "next_pending_finding": "DR3012V20-004",
-    "locator_expansion_frozen": true,
+    "verified": 70,
+    "pending_revalidation": 0,
+    "next_pending_finding": null,
+    "locator_expansion_frozen": false,
     "future_locator_completion_requires_verified_boundary_same_block": true,
-    "latest_verified_finding": "DR3012V20-003",
+    "latest_verified_finding": "DR3012V20-004",
     "latest_gate_run_id": "38040975881",
-    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012V20_003_2026-10-10.md"
+    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012V20_004_2026-10-10.md"
   },
   "boundary_revalidation_package_mode": {
-    "enabled": true,
+    "enabled": false,
     "scope": "retroactive_version_scope_boundary_revalidation_only",
     "default_package_size": 5,
     "per_finding_terminal_cycle_required": true,
@@ -2250,19 +2251,14 @@
     "last_completed_package": {
       "completed_at": "2026-10-10",
       "findings": [
-        "DR3012-005",
-        "DR3012-006",
-        "DR3012-007",
-        "DR3012V20-001",
-        "DR3012V20-002"
+        "DR3012V20-003",
+        "DR3012V20-004"
       ],
-      "result": "Five independent finding cycles: original DE/EN version boundaries fully verified, V20 legacy IDs correlated with same-root DR3012-001/002 to prevent duplicate provider diagnoses, each with full schema-audit SUCCESS and terminal_clean final handoff; final fifth-gate 38040267763 SUCCESS.",
-      "final_verified_count": 68,
-      "final_pending_count": 2
+      "result": "Two individually gated findings; V20-003 same root as DR3012-003, V20-004 separately verified V1.0 German-only versus correct English V1.0 and bilingual V2.0–V2.1 typo. All 70 historical boundaries now verified.",
+      "final_verified_count": 70,
+      "final_pending_count": 0
     },
-    "next_package": [
-      "DR3012V20-004"
-    ],
+    "next_package": [],
     "stop_only_on_unresolved_failure_ambiguity_or_cross_finding_impact": true
   }
 }
