@@ -89,15 +89,15 @@ def scope_mentions_version(scopes: list[dict], version: str) -> bool:
     # An unaffected German passage in Base V2.0 must not be treated as affected
     # merely because the English passage from that exact PDF/version is affected.
     def language_tag(value: str) -> str | None:
-        if re.search(r"\\b(?:German|DE)\\b", value, re.I):
+        if re.search(r"\b(?:German|DE)\b", value, re.I):
             return "de"
-        if re.search(r"\\b(?:English|EN)\\b", value, re.I):
+        if re.search(r"\b(?:English|EN)\b", value, re.I):
             return "en"
         return None
     requested_language = language_tag(version)
     for scope in scopes:
         name = str(scope.get("version", ""))
-        if not re.search(rf"(?<!\\d){token}(?!\\d)", name):
+        if not re.search(rf"(?<!\d){token}(?!\d)", name):
             continue
         scoped_language = language_tag(name)
         if requested_language and scoped_language and requested_language != scoped_language:

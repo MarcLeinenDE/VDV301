@@ -2211,11 +2211,11 @@
     "latest_completed_full_gate_run_id": "37955636168",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "37955636235",
-    "resume_instruction": "DR3012-001 multi-version RFC findings were committed to canonical source/semantic/boundary; first gate 38026461279 failed because PDF document_version used V prefix. Repair normalizes to exact registry 1.0..2.4, and removes CORRECTED German Base V2.0/V2.1 from semantic affected scope while marking them correction_boundary_not_affected in locator evidence. Validator now compares explicit DE/EN lanes independently within same version. Run full gate; on pass terminal-close and STOP package.",
+    "resume_instruction": "DR3012-001 full multi-release evidence preserved, status gate_pending 60/70, 10 pending. Prior repair excluded corrected DE lanes and normalized document_version. This mini-commit fixes Python regular expression escaping so DE/EN matcher actually distinguishes language: r'\\b' and r'\\d'. Verify full gate at this HEAD before terminal_clean; stop package due scope expansion.",
     "pending_block": "DR3012-001: verify wrong RFC2927 reference across full Part2 v1.0..v2.4 language/version boundary",
     "active_finding": "DR3012-001",
-    "active_step": "Repair PDF document_version canonical spelling and enforce affected-only semantic scope: DE Base V2.0/V2.1 correction lanes stay source-locator evidence only",
-    "next_step": "Re-run schema-audit-validation on this exact repair HEAD; verify language-aware correction boundary guard; then terminal-clean DR3012-001",
+    "active_step": "Correct Python regex escaping in language-aware source locator guard (must compare DE vs EN lanes rather than silently miss both)",
+    "next_step": "Verify full schema-audit-validation and handoff-integrity on exact regex-fix HEAD, then DR3012-001 terminal closure",
     "evidence_refs": [
       "audit_registry/pdf_source_pins_v0.1.json",
       "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_001_2026-10-06.md",
@@ -2225,9 +2225,10 @@
       "English V1.0 strict render 38026242425 artifact 11659004456",
       "Official six-version pinned source archive artifact 9892036202",
       "full gate 38026461279 failed source locator document_version metadata 'V1.0' vs registered '1.0'",
-      "tools/validate_finding_source_locators_v0_1.py language-aware bilingual correction guard"
+      "tools/validate_finding_source_locators_v0_1.py language-aware bilingual correction guard",
+      "Regex guard fix on tools/validate_finding_source_locators_v0_1.py, scopes V2.0/V2.1 German vs English"
     ],
-    "recovery_instruction": "DR3012-001 multi-version RFC findings were committed to canonical source/semantic/boundary; first gate 38026461279 failed because PDF document_version used V prefix. Repair normalizes to exact registry 1.0..2.4, and removes CORRECTED German Base V2.0/V2.1 from semantic affected scope while marking them correction_boundary_not_affected in locator evidence. Validator now compares explicit DE/EN lanes independently within same version. Run full gate; on pass terminal-close and STOP package."
+    "recovery_instruction": "DR3012-001 full multi-release evidence preserved, status gate_pending 60/70, 10 pending. Prior repair excluded corrected DE lanes and normalized document_version. This mini-commit fixes Python regular expression escaping so DE/EN matcher actually distinguishes language: r'\\b' and r'\\d'. Verify full gate at this HEAD before terminal_clean; stop package due scope expansion."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
