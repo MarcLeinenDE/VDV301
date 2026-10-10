@@ -2126,7 +2126,7 @@
     "version_scope_boundary_pending_count": 1
   },
   "next_actions": [
-    "DR3012V20-004 first source-render request V1.0 German p63; verify strict PDF SHA-256 and render artifact/action success.",
+    "DE V1.0 render run 38041326281 SUCCESS; now verify separate EN V1.0 p86 render on current HEAD.",
     "Then request V1.0 EN p86 and Base V2.1 p112 using separate crash-safe request commits and inspect their original bodies; prior V2.0 p98 already byte-pinned.",
     "Only after original body verification update finding scope and DE/EN diagnostics, boundary 70/70, full audit and terminal_clean handoff; no XSD changes."
   ],
@@ -2211,16 +2211,17 @@
     "latest_completed_full_gate_run_id": "38040975881",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38040975897",
-    "resume_instruction": "DR3012V20-004 is mid-visual-proof: render DE V1.0 p63 then EN V1.0 p86 then bilingual Base V2.1 p112; previous 69/70 remains unchanged.",
+    "resume_instruction": "DR3012V20-004 gate_pending. DE original p63 render success; EN original p86 render requested; V2.1 p112 follows.",
     "pending_block": "DR3012V20-004 / original-PDF verification",
     "active_finding": "DR3012V20-004",
-    "active_step": "Requested exact-byte rendering of V1.0 German p63 original; no registry scope promotion before original-body evidence",
-    "next_step": "Wait for pdf-render-fallback action on this HEAD; inspect pin and render evidence, then request next V1.0 EN p86 and V2.1 p112 separately.",
+    "active_step": "German original V1.0 p63 strict pinned render SUCCESS run 38041326281 artifact 11666156248; now request independently issued English V1.0 p86.",
+    "next_step": "Verify pinned English V1.0 p86 PDF render and then separately request bilingual Base V2.1 p112; retain gate_pending.",
     "evidence_refs": [
       "audit_registry/pdf_source_registry_v0.1.json:VDV301-2_V1.0_DE",
-      "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_004_2026-10-07.md"
+      "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_004_2026-10-07.md",
+      "GitHub Actions render run 38041326281 / artifact 11666156248, DE v1.0 SHA256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75"
     ],
-    "recovery_instruction": "Current HEAD is an explicit PDF visual-evidence request for DR3012V20-004. Inspect pdf-render-fallback run for VDV301-2_V1.0_DE pages 63 and its SHA256-pinned artifact; if successful request V1.0 EN page86 next, then V2.1 page112. Do not mark boundary verified until all necessary original bodies and exact XSD lanes established."
+    "recovery_instruction": "DE V1.0 pinned PDF render succeeded run 38041326281. On current HEAD inspect EN V1.0 p86 fallback run, verify source SHA256 and artifact, then render V2.1 bilingual original p112. Only afterward complete audit finding with synchronized registry/manifest."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
