@@ -2211,11 +2211,11 @@
     "latest_completed_full_gate_run_id": "37955636168",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "37955636235",
-    "resume_instruction": "DR3012-001 evidence and 60/70 progress committed pending full audit gate. Major boundary correction: V1.0 DE/EN wrong RFC2927; DE correct from Base V2.0; EN wrong in Base V2.0,V2.1, Common Conventions V2.2,V2.3,V2.4 (latest checked). Source ref report docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_001_2026-10-10.md. Run full gate; on green terminal-close. STOP package, next finding DR3012-002 fresh.",
+    "resume_instruction": "DR3012-001 multi-version RFC findings were committed to canonical source/semantic/boundary; first gate 38026461279 failed because PDF document_version used V prefix. Repair normalizes to exact registry 1.0..2.4, and removes CORRECTED German Base V2.0/V2.1 from semantic affected scope while marking them correction_boundary_not_affected in locator evidence. Validator now compares explicit DE/EN lanes independently within same version. Run full gate; on pass terminal-close and STOP package.",
     "pending_block": "DR3012-001: verify wrong RFC2927 reference across full Part2 v1.0..v2.4 language/version boundary",
     "active_finding": "DR3012-001",
-    "active_step": "Material DR3012-001 full DE/EN V1.0..V2.4 original-body boundary verified; update semantic/locators/body/boundary and SDK counters in one atomic evidence commit",
-    "next_step": "Observe full schema-audit-validation exact HEAD; after green separately terminal-close DR3012-001 and require final Handoff-Integrity SUCCESS; stop current package",
+    "active_step": "Repair PDF document_version canonical spelling and enforce affected-only semantic scope: DE Base V2.0/V2.1 correction lanes stay source-locator evidence only",
+    "next_step": "Re-run schema-audit-validation on this exact repair HEAD; verify language-aware correction boundary guard; then terminal-clean DR3012-001",
     "evidence_refs": [
       "audit_registry/pdf_source_pins_v0.1.json",
       "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_001_2026-10-06.md",
@@ -2223,9 +2223,11 @@
       "GitHub official source pin run 33752224704 artifact 9892036202",
       "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_001_2026-10-10.md",
       "English V1.0 strict render 38026242425 artifact 11659004456",
-      "Official six-version pinned source archive artifact 9892036202"
+      "Official six-version pinned source archive artifact 9892036202",
+      "full gate 38026461279 failed source locator document_version metadata 'V1.0' vs registered '1.0'",
+      "tools/validate_finding_source_locators_v0_1.py language-aware bilingual correction guard"
     ],
-    "recovery_instruction": "DR3012-001 evidence and 60/70 progress committed pending full audit gate. Major boundary correction: V1.0 DE/EN wrong RFC2927; DE correct from Base V2.0; EN wrong in Base V2.0,V2.1, Common Conventions V2.2,V2.3,V2.4 (latest checked). Source ref report docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_001_2026-10-10.md. Run full gate; on green terminal-close. STOP package, next finding DR3012-002 fresh."
+    "recovery_instruction": "DR3012-001 multi-version RFC findings were committed to canonical source/semantic/boundary; first gate 38026461279 failed because PDF document_version used V prefix. Repair normalizes to exact registry 1.0..2.4, and removes CORRECTED German Base V2.0/V2.1 from semantic affected scope while marking them correction_boundary_not_affected in locator evidence. Validator now compares explicit DE/EN lanes independently within same version. Run full gate; on pass terminal-close and STOP package."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
