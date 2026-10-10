@@ -6375,10 +6375,16 @@
       "service": "VDV 301-2 Base / Network Discovery",
       "version_scope": [
         {
-          "version": "VDV 301-2 Base V2.0",
+          "version": "VDV 301-2 Base V2.0 bilingual RFC cross-reference",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "German text cites RFC 3927 for 169.254 link-local behavior while English still cites RFC 2927; bibliography points to RFC 3927."
+          "note": "Bilingual Base V2.0 p21 same IPv4 link-local paragraph: German RFC3927 correctly, English RFC2927 incorrectly; V2.0 bibliography p110 RFC3927."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1 bilingual RFC cross-reference",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Bilingual Base V2.1 p22 same IPv4 link-local paragraph: German RFC3927 correctly, English RFC2927 incorrectly; same error continues in EN Common Conventions 2.2–2.4, tracked by DR3012-001."
         }
       ],
       "review_state": "manually_reviewed",
@@ -6404,20 +6410,24 @@
         {
           "type": "external_protocol_standard",
           "note": "RFC 3927 is IPv4 link-local authority; RFC 2927 is unrelated LDAP/MIME material."
+        },
+        {
+          "type": "version_boundary",
+          "note": "Independently rendered V2.1 Base §2.1.1 p22 shows same DE correct/EN incorrect bilingual conflict as V2.0. Legacy finding records bilingual contrast V2.0/V2.1; authoritative cross-release root finding DR3012-001 covers first V1.0 both languages and English error through 2.4. Do not duplicate the same root defect."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "Base V2.0: deutsche und englische RFC-Referenz widersprechen sich",
-          "short": "Deutsch nennt RFC 3927, Englisch weiterhin RFC 2927.",
-          "long": "Die zweisprachige V2.0-Dokumentation verweist für dieselbe 169.254-/ZeroConf-Aussage auf unterschiedliche RFCs. Deutsch und Bibliografie stützen RFC 3927; Englisch behält den falschen RFC 2927.",
-          "recommendation": "RFC 3927 als externen Sachstandard verwenden, den englischen Verweis als Dokumentationsfehler markieren und keine Universalregel daraus ableiten."
+          "title": "Historischer V2.0/V2.1-Teilbefund: RFC-Widerspruch DE/EN",
+          "short": "Deutsch verweist in V2.0/V2.1 korrekt auf RFC3927, Englisch dort weiter auf RFC2927.",
+          "long": "Die bilingualen Base-Versionen V2.0 (S.21) und V2.1 (S.22) enthalten denselben RFC-Konflikt: für die automatische IPv4-Link-Local-Adressierung (169.254/16) verweist die deutsche Fassung auf RFC3927 und die englische fälschlich auf RFC2927. Bereits DR3012-001 dokumentiert denselben zugrunde liegenden RFC-Fehler mit seinen Sprach- und Versionsgrenzen von V1.0 bis V2.4. DR3012V20-001 bleibt als historischer Nachweis der bilingualen Widersprüchlichkeit erhalten, darf aber nicht zu einer zweiten, unabhängigen SDK-/Herstellerwarnung führen. Das hat keinen XSD-Einfluss.",
+          "recommendation": "RFC3927 als fachliche Protokollreferenz nutzen; als Teilbefund DR3012-001 zuordnen und zusammengefasst statt doppelt melden. Keine XML- oder Herstellerkonformitätsbewertung aus der PDF-Zitation ableiten."
         },
         "en": {
-          "title": "Base V2.0: German and English RFC references conflict",
-          "short": "German cites RFC 3927 while English still cites RFC 2927.",
-          "long": "The bilingual V2.0 documentation cites different RFCs for the same 169.254/ZeroConf statement. German text and bibliography support RFC 3927; English retains the wrong RFC 2927.",
-          "recommendation": "Use RFC 3927 as the external technical standard, flag the English citation as a documentation defect, and derive no universal rule from it."
+          "title": "Historical V2.0/V2.1 bilingual subfinding: contradictory RFC citations",
+          "short": "The German Base V2.0/V2.1 passage correctly cites RFC3927; English still cites RFC2927.",
+          "long": "Bilingual Base V2.0 (p21) and V2.1 (p22) document the same IPv4 link-local 169.254/16 behavior with correct RFC3927 in German but erroneous RFC2927 in English. The complete underlying RFC citation defect is already tracked by DR3012-001 across V1.0–V2.4 language tracks. Retain DR3012V20-001 for frozen historical provenance only; avoid creating a second independent SDK or manufacturer failure. No XSD conformance effect.",
+          "recommendation": "Use RFC3927 for protocol context, cross-reference the parent issue DR3012-001 and deduplicate reporting; derive no XML validation failure from either documentation reference."
         }
       },
       "runtime_match": {
@@ -6449,8 +6459,19 @@
           "kind": "external_standard",
           "reference": "RFC 2927",
           "note": "Incorrectly retained by the English track."
+        },
+        {
+          "kind": "other",
+          "reference": "DR3012-001",
+          "note": "Canonical cross-version same root cause; this historic V2.0/V2.1 bilingual contradiction is a subset, not a distinct conformance issue."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012V20_001_2026-10-10.md",
+          "note": "Verified adjacent bilingual release and identity overlap with DR3012-001."
         }
-      ]
+      ],
+      "notes": "Frozen V2.0 legacy finding ID; historical bilingual-contradiction manifestation of the identical underlying RFC2927-vs-RFC3927 error whose full release/language continuum is already classified, scoped and boundary-verified as DR3012-001. Do not count twice in provider/SDK outcomes; no extra runtime matcher or provider XML failure."
     },
     {
       "finding_id": "DR3012V20-002",

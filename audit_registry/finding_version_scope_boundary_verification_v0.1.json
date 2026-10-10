@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 66,
-    "pending_revalidation": 4
+    "verified": 67,
+    "pending_revalidation": 3
   },
-  "next_pending_finding": "DR3012V20-001",
+  "next_pending_finding": "DR3012V20-002",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -3848,9 +3848,53 @@
     },
     {
       "finding_id": "DR3012V20-001",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012V20_001_2026-10-10.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_001_2026-10-07.md",
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_001_2026-10-10.md",
+        "Official original V2.0 p21 SHA256 30d0cdb4e77b5f8aedec7a46fb2ac68d98ef8b21dc262e25f80bbe5e41e953cf",
+        "V2.1 p22 SHA256 b1d9cc76d350ae67d368caf32979294f54e371a3843c9f46dfe513272c941293"
+      ],
+      "note": "Legacy V2.0-specific bilingual contrast continues into bilingual V2.1; same underlying RFC citation mistake as fully scoped DR3012-001, with English-only continuation V2.2–2.4. Retain historical identity without independent duplicate report.",
+      "scope_conclusion": "First bilingual split DE correct/EN wrong occurs at Base V2.0; continues in Base V2.1. Earlier separate V1.0 originals DE+EN both cite wrong RFC2927 (root issue DR3012-001), so no DE-correct/EN-wrong contrast yet. Later Common2.2/2.3/2.4 retain English wrong citation but no equivalent German §2.1.1 passage was independently established; cannot extend this bilingual-contrast subfinding to those releases. Entire underlying defect remains in DR3012-001. No extra manufacturer finding.",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-2 V1.0 DE/EN",
+          "role": "predecessor_no_bilingual_contrast",
+          "language_status": "de-en:both separate V1.0 originals cite wrong RFC2927; underlying issue DR3012-001, but no DE-correct/EN-wrong contrast",
+          "source_ids": [
+            "VDV301-2_V1.0_DE",
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.0 bilingual RFC cross-reference",
+          "role": "first_affected_bilingual_contrast",
+          "language_status": "de:RFC3927 correct, en:RFC2927 wrong on p21; bibliography p110 RFC3927",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.1 bilingual RFC cross-reference",
+          "role": "last_checked_bilingual_contrast",
+          "language_status": "de:RFC3927 correct, en:RFC2927 wrong on p22",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "Common Conventions V2.2–V2.4",
+          "role": "continuation_of_underlying_english_defect_not_independent_bilingual_contrast",
+          "language_status": "en:wrong RFC2927 persists through V2.4; corresponding German addressing paragraph not established. Parent DR3012-001 controls.",
+          "source_ids": [
+            "VDV301-2_GC_V2.2",
+            "VDV301-2_GC_V2.3",
+            "VDV301-2_GC_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DR3012V20-002",

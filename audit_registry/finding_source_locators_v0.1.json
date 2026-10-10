@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "5ddc0074bc07b1e494fcc0b6a461c2fbb63b297a",
+    "git_blob": "e4ba268391c7254179bd6808aad5821eeb400b99",
     "finding_count": 192
   },
   "policy": {
@@ -11076,15 +11076,21 @@
       "coverage_state": "complete",
       "scope_claims": [
         {
-          "version": "VDV 301-2 Base V2.0",
+          "version": "VDV 301-2 Base V2.0 bilingual RFC cross-reference",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "German text cites RFC 3927 for 169.254 link-local behavior while English still cites RFC 2927; bibliography points to RFC 3927."
+          "note": "Bilingual Base V2.0 p21 same IPv4 link-local paragraph: German RFC3927 correctly, English RFC2927 incorrectly; V2.0 bibliography p110 RFC3927."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1 bilingual RFC cross-reference",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Bilingual Base V2.1 p22 same IPv4 link-local paragraph: German RFC3927 correctly, English RFC2927 incorrectly; same error continues in EN Common Conventions 2.2–2.4, tracked by DR3012-001."
         }
       ],
       "coverage": [
         {
-          "version": "VDV 301-2 Base V2.0",
+          "version": "VDV 301-2 Base V2.0 bilingual RFC cross-reference",
           "authority": "documentation_only",
           "coverage_status": "complete",
           "pdf_locators": [
@@ -11118,7 +11124,29 @@
             }
           ],
           "xsd_locators": [],
-          "coverage_note": "Documentation/language-variant mismatch only. German body text and the bibliography align on RFC 3927; English retains RFC 2927 for the same 169.254 link-local statement. RFC 3927 is the applicable external authority."
+          "coverage_note": "Confirmed V2.0 bilingual contradiction, already subset of DR3012-001; no duplicate provider or SDK warning."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1 bilingual RFC cross-reference",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV 301-2 Base Services",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                22
+              ],
+              "section": "2.1.1 IP-Adressen / IP Addresses",
+              "point_summary": "Original bilingual p22 German cites RFC3927 for IPv4 link-local and English cites RFC2927; continuation from Base V2.0 exact same passage."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "V2.1 bilingual contrast proven in same strict-pin body review as DR3012-001; complete root-cause lineage belongs to DR3012-001 and must not be double-reported."
         }
       ],
       "supporting_evidence": [
@@ -11129,7 +11157,10 @@
         "EV-130 page 110 PNG SHA-256 7544bb9c0d39d842e653f244c084d5b78cfa8e01efbbb3726b907d18f646ed4b",
         "RFC Editor: RFC 3927 - Dynamic Configuration of IPv4 Link-Local Addresses",
         "RFC Editor: RFC 2927 - MIME Directory Profile for LDAP Schema",
-        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_001_2026-10-07.md"
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_001_2026-10-07.md",
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012V20_001_2026-10-10.md",
+        "DR3012-001 same-root full boundary report docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_001_2026-10-10.md",
+        "Original Base V2.1 p22 body pinned PNG SHA256 b1d9cc76d350ae67d368caf32979294f54e371a3843c9f46dfe513272c941293"
       ]
     },
     {
