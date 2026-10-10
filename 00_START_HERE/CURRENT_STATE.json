@@ -2214,8 +2214,8 @@
     "resume_instruction": "DR3012-004 gate_pending awaiting full gate; material DE+EN V1.0 and V2.0 broken reference; V2.1 first corrected, DMS2.2/2.4 confirmed; STOP package after terminal closure.",
     "pending_block": "DR3012-004 scope correction pending full validation",
     "active_finding": "DR3012-004",
-    "active_step": "Body evidence and semantic/source-locator/runtime-pin/boundary registry synchronized; full gate pending",
-    "next_step": "Check full schema-audit-validation on this exact HEAD; repair failures then terminal-clean status and handoff-integrity; next DR3012-005.",
+    "active_step": "Repair SDK manifest duplicated boundary count and report source-pin line after validation gate failure 38036959484; pending full revalidation",
+    "next_step": "Observe fresh full schema-audit-validation and handoff-integrity success; then terminal_clean handoff; next DR3012-005 in new package",
     "evidence_refs": [
       "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_004_2026-10-10.md",
       "EN render38036341219",
@@ -2224,7 +2224,7 @@
       "DMS2.2 render38036530592",
       "DMS2.4 render38036541437"
     ],
-    "recovery_instruction": "DR3012-004 evidence written gate_pending. Verify exact-HEAD full schema audit, correct if failure, then terminal_clean with 63/70 next DR3012-005 and green handoff-integrity."
+    "recovery_instruction": "First gate on 6e133cc failed solely SDK manifest boundary count stale (62 vs 63); SDK manifest updated in this recovery commit, run fresh full schema gate. Do not terminal close until full success."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
