@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "4a9bdd4403d97b4442398c4e77987a3fee011ceb",
+    "git_blob": "d95bf3924cdd62bf532f09ffefcbcd9d61902156",
     "finding_count": 192
   },
   "policy": {
@@ -9687,35 +9687,268 @@
       "coverage_state": "complete",
       "scope_claims": [
         {
-          "version": "VDV 301-2 V1.0",
+          "version": "VDV 301-2 V1.0 German original",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "Page 20 cites RFC 2927 for ZeroConf/169.254; RFC 3927 is the IPv4 link-local authority."
+          "note": "affected: German §2.1.1 cites RFC 2927 for Zero Conf and adjacent 169.254/16 automatic addressing; confirmed byte pinned rendered p20; official VDV301-2_V1.0_DE SHA256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75"
+        },
+        {
+          "version": "VDV 301-2 V1.0 English translation",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "affected: English §4.1.1 p21 RFC 2927; continuation 169.254.xxx.xxx p22; nonbinding separately published translation; official VDV301-2_V1.0_EN SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7"
+        },
+        {
+          "version": "VDV 301-2 Base V2.0 German body",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "correction_boundary_not_affected: German paragraph on exact p21 corrected to RFC 3927; same bilingual PDF still has wrong EN passage; official VDV301-2_BASE_V2.0 SHA256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37"
+        },
+        {
+          "version": "VDV 301-2 Base V2.0 English body",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "affected: English subsection in the same bilingual PDF p21 still cites RFC 2927, unlike corrected German immediately above; official VDV301-2_BASE_V2.0 SHA256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37"
+        },
+        {
+          "version": "VDV 301-2 Base V2.1 German body",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "correction_boundary_not_affected: German subsection p22 cites correct RFC 3927; English subsection in same release remains wrong; official VDV301-2_BASE_V2.1 SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a"
+        },
+        {
+          "version": "VDV 301-2 Base V2.1 English body",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "affected: English subsection p22 still cites RFC 2927, despite German same page corrected; official VDV301-2_BASE_V2.1 SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a"
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.2 English addressing body",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "affected: Common Conventions text p20 uses RFC 2927, even though same document bibliography cites RFC 3927 p75; official VDV301-2_GC_V2.2 SHA256 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051"
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.3 English addressing body",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "affected: Common Conventions body p20 cites RFC 2927; bibliography elsewhere describes RFC 3927; official VDV301-2_GC_V2.3 SHA256 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603"
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.4 English addressing body",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "affected: Latest pinned Common Conventions V2.4 body p23 still cites RFC 2927, while bibliography p80 cites RFC 3927; no later successor pinned; official VDV301-2_GC_V2.4 SHA256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d"
         }
       ],
       "coverage": [
         {
-          "version": "VDV 301-2 V1.0",
+          "version": "VDV 301-2 V1.0 German original",
           "authority": "documentation_only",
           "coverage_status": "complete",
           "pdf_locators": [
             {
               "source_id": "VDV301-2_V1.0_DE",
-              "document_title": "VDV-Schrift 301-2",
-              "document_version": "1.0",
+              "document_title": "VDV 301-2 Part 2 V1.0 German original",
+              "document_version": "V1.0",
               "publication_authority": "official_publication",
               "url": "https://www.vdv.de/301-2sds-v1-0.pdfx",
               "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
               "printed_pages": [
                 20
               ],
-              "section": "2 Verwendete Kommunikationsprotokolle / 2.1 Adressierung / 2.1.1 IP-Adressen",
+              "section": "2.1.1 IP-Adressen",
               "table": null,
-              "point_summary": "Visible paragraph states that IBIS-IP addresses are assigned decentrally using part of 'Zero Conf' and cites RFC 2927, then identifies 169.254.xxx.xxx as the address range governed by that RFC."
+              "point_summary": "German §2.1.1 cites RFC 2927 for Zero Conf and adjacent 169.254/16 automatic addressing; confirmed byte pinned rendered p20; original image PNG SHA256 f47019ea03dcccdb4277894ee82af43aa290b781fbd4e963385e21ceadedb949"
             }
           ],
           "xsd_locators": [],
-          "coverage_note": "Documentation/reference defect only. RFC Editor identifies RFC 2927 as 'MIME Directory Profile for LDAP Schema'; RFC 3927 is 'Dynamic Configuration of IPv4 Link-Local Addresses' and explicitly covers automatic addressing in 169.254/16."
+          "coverage_note": "affected: de source-body paragraph. This is external RFC citation only; never an XML/XSD or provider-validation condition."
+        },
+        {
+          "version": "VDV 301-2 V1.0 English translation",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 Part 2 V1.0 English translation",
+              "document_version": "V1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                21,
+                22
+              ],
+              "section": "4.1.1 IP Addresses",
+              "table": null,
+              "point_summary": "English §4.1.1 p21 RFC 2927; continuation 169.254.xxx.xxx p22; nonbinding separately published translation; original image PNG SHA256 d524a49f288e265eb5b5fe5a25fa5ff30d16e3d3ec5397d8068851936b562995"
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "affected: en source-body paragraph. This is external RFC citation only; never an XML/XSD or provider-validation condition."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0 German body",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV 301-2 Basic Services V2.0 bilingual",
+              "document_version": "V2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                21
+              ],
+              "section": "2.1.1 IP-Adressen",
+              "table": null,
+              "point_summary": "German paragraph on exact p21 corrected to RFC 3927; same bilingual PDF still has wrong EN passage; original image PNG SHA256 30d0cdb4e77b5f8aedec7a46fb2ac68d98ef8b21dc262e25f80bbe5e41e953cf"
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "correction_boundary_not_affected: de source-body paragraph. This is external RFC citation only; never an XML/XSD or provider-validation condition."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0 English body",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV 301-2 Basic Services V2.0 bilingual",
+              "document_version": "V2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                21
+              ],
+              "section": "2.1.1 IP Addresses",
+              "table": null,
+              "point_summary": "English subsection in the same bilingual PDF p21 still cites RFC 2927, unlike corrected German immediately above; original image PNG SHA256 30d0cdb4e77b5f8aedec7a46fb2ac68d98ef8b21dc262e25f80bbe5e41e953cf"
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "affected: en source-body paragraph. This is external RFC citation only; never an XML/XSD or provider-validation condition."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1 German body",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV 301-2 Basic Services V2.1 bilingual",
+              "document_version": "V2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                22
+              ],
+              "section": "2.1.1 IP-Adressen",
+              "table": null,
+              "point_summary": "German subsection p22 cites correct RFC 3927; English subsection in same release remains wrong; original image PNG SHA256 b1d9cc76d350ae67d368caf32979294f54e371a3843c9f46dfe513272c941293"
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "correction_boundary_not_affected: de source-body paragraph. This is external RFC citation only; never an XML/XSD or provider-validation condition."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1 English body",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV 301-2 Basic Services V2.1 bilingual",
+              "document_version": "V2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                22
+              ],
+              "section": "2.1.1 IP Addresses",
+              "table": null,
+              "point_summary": "English subsection p22 still cites RFC 2927, despite German same page corrected; original image PNG SHA256 b1d9cc76d350ae67d368caf32979294f54e371a3843c9f46dfe513272c941293"
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "affected: en source-body paragraph. This is external RFC citation only; never an XML/XSD or provider-validation condition."
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.2 English addressing body",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "VDV 301-2 Common Conventions V2.2",
+              "document_version": "V2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                20
+              ],
+              "section": "2.1.1 IP Addresses",
+              "table": null,
+              "point_summary": "Common Conventions text p20 uses RFC 2927, even though same document bibliography cites RFC 3927 p75; original image PNG SHA256 5271e6215e176558a9c23a11bfffc3fd3ed43c2e9b892eac272b383f83243eaa"
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "affected: en source-body paragraph. This is external RFC citation only; never an XML/XSD or provider-validation condition."
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.3 English addressing body",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "VDV 301-2 Common Conventions V2.3",
+              "document_version": "V2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                20
+              ],
+              "section": "2.1.1 IP Addresses",
+              "table": null,
+              "point_summary": "Common Conventions body p20 cites RFC 2927; bibliography elsewhere describes RFC 3927; original image PNG SHA256 d5e9199369836dcdeb96371ed575f83928f9fdbe1df610b72b87c6a54baa670e"
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "affected: en source-body paragraph. This is external RFC citation only; never an XML/XSD or provider-validation condition."
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.4 English addressing body",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV 301-2 Common Conventions V2.4",
+              "document_version": "V2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                23
+              ],
+              "section": "2.1.1 IP Addresses",
+              "table": null,
+              "point_summary": "Latest pinned Common Conventions V2.4 body p23 still cites RFC 2927, while bibliography p80 cites RFC 3927; no later successor pinned; original image PNG SHA256 7d9e66400fe71ab7803188bc72d80babcbe76b42c419ab59684d3ff0e9dca97c"
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "affected: en source-body paragraph. This is external RFC citation only; never an XML/XSD or provider-validation condition."
         }
       ],
       "supporting_evidence": [
@@ -9725,7 +9958,11 @@
         "EV-129 page 20 PNG SHA-256 f47019ea03dcccdb4277894ee82af43aa290b781fbd4e963385e21ceadedb949",
         "RFC Editor: RFC 2927 - MIME Directory Profile for LDAP Schema",
         "RFC Editor: RFC 3927 - Dynamic Configuration of IPv4 Link-Local Addresses",
-        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_001_2026-10-06.md"
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_001_2026-10-06.md",
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_001_2026-10-10.md",
+        "Full pinned original-PDF render collection artifact 9892036202, run 33752224704, six known original publication SHA-256 pins; p20/p21/p22/p23 original body images verified",
+        "V1.0 EN strict original hash render 38026242425 artifact 11659004456 digest sha256:49a717470990a2214b3b9c8b0ff96371b3e535ebbcd7dcedc5268bb606d96302",
+        "RFC Editor official https://www.rfc-editor.org/rfc/rfc2927.html and https://www.rfc-editor.org/rfc/rfc3927.html"
       ]
     },
     {

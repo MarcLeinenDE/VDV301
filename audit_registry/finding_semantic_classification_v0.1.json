@@ -4955,10 +4955,58 @@
       "service": "VDV 301-2 Base / Network Discovery",
       "version_scope": [
         {
-          "version": "VDV 301-2 V1.0",
+          "version": "VDV 301-2 V1.0 German original",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "Page 20 cites RFC 2927 for ZeroConf/169.254; RFC 3927 is the IPv4 link-local authority."
+          "note": "affected: German §2.1.1 cites RFC 2927 for Zero Conf and adjacent 169.254/16 automatic addressing; confirmed byte pinned rendered p20; official VDV301-2_V1.0_DE SHA256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75"
+        },
+        {
+          "version": "VDV 301-2 V1.0 English translation",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "affected: English §4.1.1 p21 RFC 2927; continuation 169.254.xxx.xxx p22; nonbinding separately published translation; official VDV301-2_V1.0_EN SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7"
+        },
+        {
+          "version": "VDV 301-2 Base V2.0 German body",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "correction_boundary_not_affected: German paragraph on exact p21 corrected to RFC 3927; same bilingual PDF still has wrong EN passage; official VDV301-2_BASE_V2.0 SHA256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37"
+        },
+        {
+          "version": "VDV 301-2 Base V2.0 English body",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "affected: English subsection in the same bilingual PDF p21 still cites RFC 2927, unlike corrected German immediately above; official VDV301-2_BASE_V2.0 SHA256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37"
+        },
+        {
+          "version": "VDV 301-2 Base V2.1 German body",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "correction_boundary_not_affected: German subsection p22 cites correct RFC 3927; English subsection in same release remains wrong; official VDV301-2_BASE_V2.1 SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a"
+        },
+        {
+          "version": "VDV 301-2 Base V2.1 English body",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "affected: English subsection p22 still cites RFC 2927, despite German same page corrected; official VDV301-2_BASE_V2.1 SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a"
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.2 English addressing body",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "affected: Common Conventions text p20 uses RFC 2927, even though same document bibliography cites RFC 3927 p75; official VDV301-2_GC_V2.2 SHA256 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051"
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.3 English addressing body",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "affected: Common Conventions body p20 cites RFC 2927; bibliography elsewhere describes RFC 3927; official VDV301-2_GC_V2.3 SHA256 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603"
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.4 English addressing body",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "affected: Latest pinned Common Conventions V2.4 body p23 still cites RFC 2927, while bibliography p80 cites RFC 3927; no later successor pinned; official VDV301-2_GC_V2.4 SHA256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d"
         }
       ],
       "review_state": "manually_reviewed",
@@ -4979,25 +5027,37 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "The pinned PDF cites RFC 2927 for ZeroConf/169.254 addressing."
+          "note": "Original German Part2 V1.0 §2.1.1 p20 says RFC 2927 for automatic IPv4 169.254 addressing; separate English V1.0 translation §4.1.1 p21 (169.254 on p22) repeats RFC 2927; English strict render 38026242425 artifact 11659004456."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Bilingual original Part2 Base V2.0 p21 and V2.1 p22: German IP-Adressen paragraph explicitly corrected to RFC 3927, adjacent English IP Addresses paragraph still wrongly says RFC 2927. Source pins identical to official PDFs."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Official common-conventions V2.2 p20, V2.3 p20, V2.4 p23 retain English RFC 2927 error in visible §2.1.1 IP Addresses, even though each bibliography cites RFC 3927. Latest checked V2.4 still affected; no later corrected release established in pinned corpus."
         },
         {
           "type": "external_protocol_standard",
-          "note": "RFC 2927 is an LDAP/MIME profile; RFC 3927 specifies IPv4 link-local configuration."
+          "note": "RFC Editor primary RFC 2927 titled MIME Directory Profile for LDAP Schema is unrelated to automatic IPv4 169.254/16 addressing; RFC 3927 explicitly defines Dynamic Configuration of IPv4 Link-Local Addresses."
+        },
+        {
+          "type": "version_history",
+          "note": "First verified issue in Part2 V1.0 both DE and separately published EN; DE first verified corrected Base V2.0 and still corrected Base V2.1; EN persists V2.0 through Common Conventions V2.4. No independently verified later successor; do not treat multi-language release as corrected when only DE was corrected."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "V1.0: falscher RFC-Verweis für IPv4 Link-Local",
-          "short": "Für ZeroConf/169.254 wird RFC 2927 statt RFC 3927 zitiert.",
-          "long": "Die V1.0-Dokumentation verknüpft IPv4-Link-Local-Adressierung mit RFC 2927. Dieser RFC behandelt jedoch ein LDAP/MIME-Profil; der einschlägige Link-Local-Standard ist RFC 3927. Das ist ein Dokumentationsfehler, keine XML-Regel.",
-          "recommendation": "RFC 3927 als externen Sachstandard verwenden, aber daraus keine über den versionsspezifischen VDV-Kontext hinausgehende Universalregel ableiten."
+          "title": "VDV 301-2 V1.0–V2.4: falscher ZeroConf-RFC-Verweis in versionsabhängigen Sprachfassungen",
+          "short": "V1.0 nennt RFC 2927 in DE und EN; ab V2.0 nennt DE korrekt RFC 3927, die EN-Abschnitte bis mindestens V2.4 weiterhin RFC 2927.",
+          "long": "Die offizielle VDV 301-2 V1.0 zitiert in §2.1.1 (deutsche Druckseite 20) und in der getrennten englischen Übersetzung §4.1.1 (Druckseiten 21–22) RFC 2927 für ZeroConf/169.254. Dieser RFC behandelt ein LDAP/MIME-Profil, nicht IPv4-Link-Local. RFC 3927 ist die passende externe Norm. Die deutsch-englischen Grundlagendokumente V2.0 (S. 21) und V2.1 (S. 22) korrigieren die deutsche Textstelle bereits auf RFC 3927, enthalten aber weiterhin RFC 2927 im danebenstehenden englischen Text. Auch die englischen Common-Conventions-Texte V2.2 (S. 20), V2.3 (S. 20) und V2.4 (S. 23) nennen noch RFC 2927. Der Fehler reicht somit in der englischen Sprachspur bis zur zuletzt überprüften V2.4, nicht nur bis V1.0. Die Normquelle beeinflusst keine XML-Schema-Gültigkeit; auch lassen sich aus diesem Literaturfehler keine zusätzlich verbindlichen VDV-Verhaltensvorgaben ableiten.",
+          "recommendation": "VDV-Dokumentation versions- und sprachspezifisch auf RFC 3927 korrigieren. Insbesondere EN-Abschnitte von V2.0 bis einschließlich zuletzt geprüfter V2.4 berücksichtigen; nicht annehmen, die Korrektur der deutschen V2.0 betreffe automatisch Englisch. Keine XML-Aliasse oder VDV-Anbieterfehlermeldung daraus ableiten."
         },
         "en": {
-          "title": "V1.0: wrong RFC reference for IPv4 link-local",
-          "short": "ZeroConf/169.254 is cited to RFC 2927 instead of RFC 3927.",
-          "long": "The V1.0 documentation links IPv4 link-local addressing to RFC 2927. That RFC concerns an LDAP/MIME profile; the relevant link-local standard is RFC 3927. This is a documentation defect, not an XML rule.",
-          "recommendation": "Use RFC 3927 as the external technical standard, without turning it into a universal VDV rule beyond the version-specific context."
+          "title": "VDV 301-2 V1.0–V2.4: incorrect link-local RFC survives in English",
+          "short": "V1.0 cites RFC 2927 in both languages; German V2.0–V2.1 correct it to RFC 3927, but English references still say RFC 2927 through V2.4.",
+          "long": "The original German Part2 V1.0 (p20 §2.1.1) and separately issued English translation (p21–22 §4.1.1) wrongly cite RFC 2927 for ZeroConf/169.254 IPv4 link-local configuration. RFC 2927 defines an LDAP/MIME profile; RFC 3927 is the relevant IPv4 link-local standard. In bilingual Base V2.0 (p21) and V2.1 (p22), the German paragraph uses corrected RFC 3927 while the adjacent English paragraph continues to cite RFC 2927. The English Common Conventions publications V2.2 (p20), V2.3 (p20) and V2.4 (p23) also retain RFC 2927, despite bibliographies listing RFC 3927. Thus the defect is not V1.0-only. The latest independently verified English V2.4 remains affected; no later correction established. This is an external-standard reference/documentation defect, not an XML/XSD or provider conformance rule.",
+          "recommendation": "Correct the English and historical German references to RFC 3927, preserving release/language scope. Do not infer that the German V2.0 correction fixed English; do not introduce XML normalization, aliases, or universal additional VDV validation rules."
         }
       },
       "runtime_match": {
@@ -5029,9 +5089,14 @@
           "kind": "external_standard",
           "reference": "RFC 3927",
           "note": "Primary external authority for IPv4 link-local configuration."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_001_2026-10-10.md",
+          "note": "Independent full original-source DE/EN version/language and RFC Editor authority boundary proof (V1.0 through Common Conventions V2.4)."
         }
       ],
-      "notes": "Do not infer a universal ZeroConf requirement solely from this citation correction."
+      "notes": "2026-10-10 material version/language scope correction: affected V1.0 DE+EN, V2.0/V2.1 EN, V2.2–V2.4 English Common Conventions; German Base V2.0/V2.1 corrected. One finding only; runtime_match not applicable; selected XML/XSD behavior unchanged."
     },
     {
       "finding_id": "DR3012-002",

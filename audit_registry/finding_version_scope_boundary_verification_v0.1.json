@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 59,
-    "pending_revalidation": 11
+    "verified": 60,
+    "pending_revalidation": 10
   },
-  "next_pending_finding": "DR3012-001",
+  "next_pending_finding": "DR3012-002",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -3270,9 +3270,107 @@
     },
     {
       "finding_id": "DR3012-001",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_001_2026-10-10.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_001_2026-10-06.md",
+        "EV-129 33765167655 and original six-version source artifact 9892036202",
+        "Official EN v1.0 strictly pinned visual render 38026242425 artifact 11659004456",
+        "RFC Editor RFC 2927 and RFC 3927"
+      ],
+      "note": "Material expanded boundary after independent review: V1.0 DE+EN wrong; V2.0 and V2.1 German prose corrected to RFC3927 but same PDFs contain wrong English RFC2927; V2.2, V2.3, V2.4 common-conventions English prose remains wrong. Latest verified V2.4 still affected; package STOP.",
+      "scope_conclusion": "First checked affected publication is Part2 V1.0 (German original AND separate English translation). German correction boundary occurs at bilingual Base V2.0 and persists V2.1. English defective reference persists through Base V2.0, Base V2.1, Common Conventions V2.2, V2.3 and V2.4 (last checked current pinned publication); no corrected English successor independently established. No pre-V1.0 predecessor in official pinned corpus. RFC 2927 is LDAP/MIME, RFC 3927 specifies IPv4 link-local; effect limited to external protocol citation/documentation, not normative XSD/XML validity.",
+      "boundary_checks": [
+        {
+          "version": "VDV301-2 pre-V1.0",
+          "role": "no_predecessor_publication_available",
+          "language_status": "de-en:no earlier original Part2 source in current official pinned corpus",
+          "source_ids": [
+            "VDV301-2_V1.0_DE",
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V1.0 German original",
+          "role": "first_affected_source_language",
+          "language_status": "de:German §2.1.1 cites RFC 2927 for Zero Conf and adjacent 169.254/16 automatic addressing; confirmed byte pinned rendered p20",
+          "source_ids": [
+            "VDV301-2_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V1.0 English translation",
+          "role": "first_affected_source_language",
+          "language_status": "en:English §4.1.1 p21 RFC 2927; continuation 169.254.xxx.xxx p22; nonbinding separately published translation",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.0 German body",
+          "role": "correction_boundary_not_affected",
+          "language_status": "de:German paragraph on exact p21 corrected to RFC 3927; same bilingual PDF still has wrong EN passage",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.0 English body",
+          "role": "affected_intervening_or_latest_source_language",
+          "language_status": "en:English subsection in the same bilingual PDF p21 still cites RFC 2927, unlike corrected German immediately above",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.1 German body",
+          "role": "correction_boundary_not_affected",
+          "language_status": "de:German subsection p22 cites correct RFC 3927; English subsection in same release remains wrong",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.1 English body",
+          "role": "affected_intervening_or_latest_source_language",
+          "language_status": "en:English subsection p22 still cites RFC 2927, despite German same page corrected",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.2 English addressing body",
+          "role": "affected_intervening_or_latest_source_language",
+          "language_status": "en:Common Conventions text p20 uses RFC 2927, even though same document bibliography cites RFC 3927 p75",
+          "source_ids": [
+            "VDV301-2_GC_V2.2"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.3 English addressing body",
+          "role": "affected_intervening_or_latest_source_language",
+          "language_status": "en:Common Conventions body p20 cites RFC 2927; bibliography elsewhere describes RFC 3927",
+          "source_ids": [
+            "VDV301-2_GC_V2.3"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.4 English addressing body",
+          "role": "affected_intervening_or_latest_source_language",
+          "language_status": "en:Latest pinned Common Conventions V2.4 body p23 still cites RFC 2927, while bibliography p80 cites RFC 3927; no later successor pinned",
+          "source_ids": [
+            "VDV301-2_GC_V2.4"
+          ]
+        },
+        {
+          "version": "VDV301-2 after Common Conventions V2.4",
+          "role": "no_later_corrected_successor_available",
+          "language_status": "en:no independently pinned successor correcting this specific paragraph; do not extrapolate to unknown future releases",
+          "source_ids": [
+            "VDV301-2_GC_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DR3012-002",

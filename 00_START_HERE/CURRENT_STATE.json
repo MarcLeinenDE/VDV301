@@ -2003,12 +2003,12 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 59,
-    "version_scope_boundary_pending_count": 11,
-    "version_scope_boundary_next_finding": "DR3012-001",
-    "version_scope_boundary_latest_finding": "DR3011-003",
+    "version_scope_boundary_verified_count": 60,
+    "version_scope_boundary_pending_count": 10,
+    "version_scope_boundary_next_finding": "DR3012-002",
+    "version_scope_boundary_latest_finding": "DR3012-001",
     "version_scope_boundary_latest_gate_run_id": "37955636168",
-    "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3011_003_2026-10-09.md",
+    "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_001_2026-10-10.md",
     "latest_scope_correction": "BG-001 expanded from release-context pair 1.0/2.0 to complete official retained V1.0 path lineage through VDV-301-2.3; semantic/locator/runtime scopes synchronized."
   },
   "evidence": {
@@ -2122,13 +2122,13 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 59,
-    "version_scope_boundary_pending_count": 11
+    "version_scope_boundary_verified_count": 60,
+    "version_scope_boundary_pending_count": 10
   },
   "next_actions": [
-    "DR3012-001 research pending: inspect exact source-hash-matched English V1.0 pages21-22 render and reconcile language/version scope; do not claim completion before full gate.",
-    "First substantive commit must carry checkpoint and render request; expand same finding to V2.0..V2.4 English tracks if evidence survives visual check.",
-    "Stop five-finding package after material scope change; do not start DR3012-002 within this package."
+    "DR3012-001 material scope extension committed gate_pending: require exact-HEAD full schema-audit-validation SUCCESS before terminal_clean and final handoff-integrity SUCCESS.",
+    "STOP current five-finding package because RFC2927 error extends into V2.4 English with independent German correction at V2.0; next fresh package begins DR3012-002.",
+    "Do not add a duplicate finding or XSD/provider-validation checks from documentation-only RFC citation. Structural locator expansion frozen pending remaining 10 boundaries."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2211,18 +2211,21 @@
     "latest_completed_full_gate_run_id": "37955636168",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "37955636235",
-    "resume_instruction": "DR3012-001 is active: downloaded and SHA256-compared six official Part2 PDF source files from pinned workflow artifact 9892036202. Pinned original pages visually confirm RFC2927 in DE V1.0 p20, EN embedded V2.0 p21, EN embedded V2.1 p22, English-only GC V2.2 p20, V2.3 p20, V2.4 p23; DE embedded V2.0 and V2.1 use corrected RFC3927. Official EN V1.0 document p21-22 requested strict renderer; after that update all mirrors/evidence and stop package due material version/language scope extension. No new finding ID or normative XML effect.",
+    "resume_instruction": "DR3012-001 evidence and 60/70 progress committed pending full audit gate. Major boundary correction: V1.0 DE/EN wrong RFC2927; DE correct from Base V2.0; EN wrong in Base V2.0,V2.1, Common Conventions V2.2,V2.3,V2.4 (latest checked). Source ref report docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_001_2026-10-10.md. Run full gate; on green terminal-close. STOP package, next finding DR3012-002 fresh.",
     "pending_block": "DR3012-001: verify wrong RFC2927 reference across full Part2 v1.0..v2.4 language/version boundary",
     "active_finding": "DR3012-001",
-    "active_step": "Independent pinned source SHA256 and visual reviews show DE v1.0 wrong, DE v2.0/v2.1 corrected; EN v2.0,v2.1,v2.2,v2.3,v2.4 still wrong; request strict v1.0 EN original render",
-    "next_step": "Inspect V1.0 EN body pp21-22, finalize exact version/language coverage and source locators with signed/hash-pinned originals; then full audit gate and terminal-close",
+    "active_step": "Material DR3012-001 full DE/EN V1.0..V2.4 original-body boundary verified; update semantic/locators/body/boundary and SDK counters in one atomic evidence commit",
+    "next_step": "Observe full schema-audit-validation exact HEAD; after green separately terminal-close DR3012-001 and require final Handoff-Integrity SUCCESS; stop current package",
     "evidence_refs": [
       "audit_registry/pdf_source_pins_v0.1.json",
       "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_001_2026-10-06.md",
       "official RFC Editor RFC2927 and RFC3927",
-      "GitHub official source pin run 33752224704 artifact 9892036202"
+      "GitHub official source pin run 33752224704 artifact 9892036202",
+      "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_001_2026-10-10.md",
+      "English V1.0 strict render 38026242425 artifact 11659004456",
+      "Official six-version pinned source archive artifact 9892036202"
     ],
-    "recovery_instruction": "DR3012-001 is active: downloaded and SHA256-compared six official Part2 PDF source files from pinned workflow artifact 9892036202. Pinned original pages visually confirm RFC2927 in DE V1.0 p20, EN embedded V2.0 p21, EN embedded V2.1 p22, English-only GC V2.2 p20, V2.3 p20, V2.4 p23; DE embedded V2.0 and V2.1 use corrected RFC3927. Official EN V1.0 document p21-22 requested strict renderer; after that update all mirrors/evidence and stop package due material version/language scope extension. No new finding ID or normative XML effect."
+    "recovery_instruction": "DR3012-001 evidence and 60/70 progress committed pending full audit gate. Major boundary correction: V1.0 DE/EN wrong RFC2927; DE correct from Base V2.0; EN wrong in Base V2.0,V2.1, Common Conventions V2.2,V2.3,V2.4 (latest checked). Source ref report docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_001_2026-10-10.md. Run full gate; on green terminal-close. STOP package, next finding DR3012-002 fresh."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2232,14 +2235,14 @@
     "state": "in_progress",
     "adoption_locator_count": 70,
     "tracked_findings": 70,
-    "verified": 59,
-    "pending_revalidation": 11,
-    "next_pending_finding": "DR3012-001",
+    "verified": 60,
+    "pending_revalidation": 10,
+    "next_pending_finding": "DR3012-002",
     "locator_expansion_frozen": true,
     "future_locator_completion_requires_verified_boundary_same_block": true,
-    "latest_verified_finding": "DR3011-003",
+    "latest_verified_finding": "DR3012-001",
     "latest_gate_run_id": "37955636168",
-    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3011_003_2026-10-09.md"
+    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_001_2026-10-10.md"
   },
   "boundary_revalidation_package_mode": {
     "enabled": true,
