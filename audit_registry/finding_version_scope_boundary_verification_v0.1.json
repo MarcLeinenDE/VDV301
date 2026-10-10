@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 61,
-    "pending_revalidation": 9
+    "verified": 62,
+    "pending_revalidation": 8
   },
-  "next_pending_finding": "DR3012-003",
+  "next_pending_finding": "DR3012-004",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -3502,9 +3502,71 @@
     },
     {
       "finding_id": "DR3012-003",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_003_2026-10-10.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_003_2026-10-06.md",
+        "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_DR3012_003_V10_IDENTIFIER_TYPE_2026-09-03.md",
+        "VDVde/VDV301 tag VDV-301-1.0 blob 8995c4a230bf81d5e47b9313ee7725ff3cd4b7b5",
+        "VDVde/VDV301 tags VDV-301-2.0 and VDV-301-2.1 identical V2.0 XSD blob ab959dddbfa2b8ca420af1b079501f94cff38051",
+        "Official V1.0 EN exact render 38032750261 artifact 11662262438",
+        "Official byte pinned V2.0/2.1 PDF original sources SHA256 in source pin registry"
+      ],
+      "note": "Independent cross-artifact and language boundary: Part2 V1.0 German+EN PDF typo HertbeatIntervall duration in both versus official v1.0 XSD HeartbeatIntervall double (configuration) / duration (request). Bilingual Base V2.0 and V2.1 PDF persist typo HertbeatIntervall duration/duration, but official released V2.0 XSD in both tags 2.0/2.1 uses HeartbeatInterval duration/duration. V2.1 history incorrectly claims already corrected in actual table. Material scope correction; STOP package.",
+      "scope_conclusion": "First affected official dedicated SystemDocumentationService publication V1.0 DE and EN; next dedicated Base Services V2.0 bilingual and V2.1 bilingual also have the same PDF typo but selected XSD identifier changed from V1.0 HeartbeatIntervall to V2.0 HeartbeatInterval. V1.0 SystemConfigurationData has a distinct type error double vs PDF duration; this type mismatch is not valid for V2.0/V2.1 where both XSD members are duration. Last independently checked dedicated service specification is V2.1, no later dedicated service description established within checked official corpus; Common Conventions 2.2–2.4 are not evidence of a correction. Only exact selected released XSD governs XML validation.",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-2 earlier than V1.0",
+          "role": "no_predecessor_publication_available",
+          "language_status": "de-en:no earlier dedicated SystemDocumentationService original verified in pinned corpus",
+          "source_ids": [
+            "VDV301-2_V1.0_DE",
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 SystemDocumentationService V1.0 German original",
+          "role": "first_affected_german_source",
+          "language_status": "de:p65 Tables25/26 HertbeatIntervall duration; released XSD 1.0 HeartbeatIntervall double/duration",
+          "source_ids": [
+            "VDV301-2_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-2 SystemDocumentationService V1.0 English translation",
+          "role": "first_affected_english_source",
+          "language_status": "en:p88 Tables104/105 HertbeatIntervall xs:duration; released XSD 1.0 HeartbeatIntervall double/duration, translation nonbinding",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.0 bilingual",
+          "role": "affected_intervening_publication",
+          "language_status": "de-en:p100 Tables30/31 typo HertbeatIntervall xs:duration; official VDV-301-2.0 tag XSD V2.0 HeartbeatInterval duration/duration",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.1 bilingual",
+          "role": "last_known_affected_dedicated_service_publication",
+          "language_status": "de-en:p113 Tables55/56 typo HertbeatIntervall xs:duration despite p118 version-history correction claim; official VDV-301-2.1 tag uses identical v2.0 XSD HeartbeatInterval duration/duration",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.2–V2.4",
+          "role": "non_applicable_different_publication_scope",
+          "language_status": "de-en:Common Conventions are separately scoped documents; no later dedicated SystemDocumentationService heartbeat field tables verified from them",
+          "source_ids": [
+            "VDV301-2_GC_V2.2",
+            "VDV301-2_GC_V2.3",
+            "VDV301-2_GC_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DR3012-004",

@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "2d096cae7920a0f1e5118c559ab70b141176d2bd",
+    "git_blob": "f7c6d4091636b5ba63a6eca457aff6f47816bf50",
     "finding_count": 192
   },
   "policy": {
@@ -10331,15 +10331,27 @@
       "coverage_state": "complete",
       "scope_claims": [
         {
-          "version": "VDV 301-2 V1.0",
+          "version": "VDV 301-2 SystemDocumentationService V1.0",
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_SystemDocumentationService_v1.0.xsd",
-          "note": "PDF uses HertbeatIntervall/duration; official XSD declares HeartbeatIntervall, with double in SystemConfigurationData and duration in StoreSystemConfigurationRequestStructure."
+          "note": "Official V1.0 German p65 Tables25/26 and independently published English p88 Tables104/105 use HertbeatIntervall duration. Official tag VDV-301-1.0 XSD uses HeartbeatIntervall: double for SystemConfigurationData and duration for StoreSystemConfigurationRequestStructure."
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemDocumentationService_V2.0.xsd",
+          "note": "Bilingual Basic Services V2.0 visible PDF p100 Tables30/31 retains HertbeatIntervall xs:duration; official VDV-301-2.0 XSD v2.0 requires HeartbeatInterval duration in both structures."
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemDocumentationService_V2.0.xsd",
+          "note": "Bilingual Basic Services V2.1 visible PDF p113 Tables55/56 still prints HertbeatIntervall xs:duration; official VDV-301-2.1 tag carries byte-identical v2.0 XSD declaring HeartbeatInterval duration. V2.1 p118 change history claims correction to HeartbeatInterval but actual tables still misspelled."
         }
       ],
       "coverage": [
         {
-          "version": "VDV 301-2 V1.0",
+          "version": "VDV 301-2 SystemDocumentationService V1.0",
           "authority": "official_release",
           "coverage_status": "complete",
           "pdf_locators": [
@@ -10370,6 +10382,34 @@
               "section": "7.2.5 Datenstruktur der Operation StoreSystemConfiguration / 7.2.5.1 Request",
               "table": "Tabelle 26 Beschreibung von SystemDocumentationService.StoreSystemConfigurationRequest",
               "point_summary": "Visible row is named HertbeatIntervall, cardinality 0:1, type IBIS-IP.duration."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 Part2 V1.0 official English translation",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                88
+              ],
+              "section": "9.9.2.2 Response / SystemConfigurationData",
+              "table": "Table 104 Description of SystemDocumentationService.SystemConfigurationData",
+              "point_summary": "Actual p88 row HertbeatIntervall 0:1 xs:duration, confirmed original byte-pinned visible render 38032750261 artifact 11662262438 PNG SHA256 c9bce23ac4f0eaf8cfe873982fd6735b22c71bc25723caffe3499eaba7523ae1"
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 Part2 V1.0 official English translation",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                88
+              ],
+              "section": "9.9.5.1 StoreSystemConfiguration Request",
+              "table": "Table 105 Description of SystemDocumentationService.StoreSystemConfigurationRequest",
+              "point_summary": "Actual p88 row HertbeatIntervall 0:1 xs:duration, confirmed original byte-pinned visible render 38032750261 artifact 11662262438 PNG SHA256 c9bce23ac4f0eaf8cfe873982fd6735b22c71bc25723caffe3499eaba7523ae1"
             }
           ],
           "xsd_locators": [
@@ -10402,7 +10442,139 @@
               "ref": "VDV-301-1.0"
             }
           ],
-          "coverage_note": "Executable cross-artifact mismatch. The exact selected official XSD remains normative: no HertbeatIntervall alias and no PDF-driven duration override is permitted for SystemConfigurationData."
+          "coverage_note": "Confirmed original V1.0 German and separately issued English translation both show HertbeatIntervall 0:1 duration for configuration and request. Official XSD V1.0 says HeartbeatIntervall, type double/duration by structure; exact original selected XSD controls."
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV-Schrift 301-2 bilingual Base Services V2.0",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                100
+              ],
+              "section": "7.2.2.2 Response / SystemDocumentationService.SystemConfigurationData",
+              "table": "Table 30 Description of SystemDocumentationService.SystemConfigurationData",
+              "point_summary": "The visible bilingual service table actually prints HertbeatIntervall 0:1 xs:duration, while selected official schema V2.0 requires HeartbeatInterval 0:1 duration; release PDF fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV-Schrift 301-2 bilingual Base Services V2.0",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                100
+              ],
+              "section": "7.2.5.1 Request / StoreSystemConfiguration",
+              "table": "Table 31 Description of SystemDocumentationService.StoreSystemConfigurationRequest",
+              "point_summary": "The visible bilingual service table actually prints HertbeatIntervall 0:1 xs:duration, while selected official schema V2.0 requires HeartbeatInterval 0:1 duration; release PDF fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_SystemDocumentationService_V2.0.xsd",
+              "git_blob": "ab959dddbfa2b8ca420af1b079501f94cff38051",
+              "authority_detail": "Official upstream VDVde/VDV301 tag VDV-301-2.0, selected released SystemDocumentationService v2.0 schema exact blob ab959dddbfa2b8ca420af1b079501f94cff38051 (byte-identical at tags 2.0 and 2.1)",
+              "component_kind": "element",
+              "component": "SystemDocumentationService.SystemConfigurationData",
+              "member": "HeartbeatInterval",
+              "value": "type=\"IBIS-IP.duration\" minOccurs=\"0\"",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SystemDocumentationService.SystemConfigurationData']/xs:sequence/xs:element[@name='HeartbeatInterval']",
+              "line_hint": "30",
+              "point_summary": "The official V2.0 schema requires exact HeartbeatInterval duration, not the PDF HertbeatIntervall nor earlier V1.0 HeartbeatIntervall; XML is judged on exact selected release bytes.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_SystemDocumentationService_V2.0.xsd",
+              "git_blob": "ab959dddbfa2b8ca420af1b079501f94cff38051",
+              "authority_detail": "Official upstream VDVde/VDV301 tag VDV-301-2.0, selected released SystemDocumentationService v2.0 schema exact blob ab959dddbfa2b8ca420af1b079501f94cff38051 (byte-identical at tags 2.0 and 2.1)",
+              "component_kind": "element",
+              "component": "SystemDocumentationService.StoreSystemConfigurationRequestStructure",
+              "member": "HeartbeatInterval",
+              "value": "type=\"IBIS-IP.duration\" minOccurs=\"0\"",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SystemDocumentationService.StoreSystemConfigurationRequestStructure']/xs:sequence/xs:element[@name='HeartbeatInterval']",
+              "line_hint": "39",
+              "point_summary": "The official V2.0 schema requires exact HeartbeatInterval duration, not the PDF HertbeatIntervall nor earlier V1.0 HeartbeatIntervall; XML is judged on exact selected release bytes.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            }
+          ],
+          "coverage_note": "Both actual printed tables retain the spelling error, even though VDV-301-2.0 XSD is corrected to HeartbeatInterval duration/duration; bilingual PDF source exact SHA verified."
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 bilingual Base Services V2.1",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                113
+              ],
+              "section": "7.2.2.2 Response / SystemDocumentationService.SystemConfigurationData",
+              "table": "Table 55 Description of SystemDocumentationService.SystemConfigurationData",
+              "point_summary": "The visible bilingual service table actually prints HertbeatIntervall 0:1 xs:duration, while selected official schema V2.0 requires HeartbeatInterval 0:1 duration; release PDF 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 bilingual Base Services V2.1",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                113
+              ],
+              "section": "7.2.5.1 Request / StoreSystemConfiguration",
+              "table": "Table 56 Description of SystemDocumentationService.StoreSystemConfigurationRequest",
+              "point_summary": "The visible bilingual service table actually prints HertbeatIntervall 0:1 xs:duration, while selected official schema V2.0 requires HeartbeatInterval 0:1 duration; release PDF 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_SystemDocumentationService_V2.0.xsd",
+              "git_blob": "ab959dddbfa2b8ca420af1b079501f94cff38051",
+              "authority_detail": "Official upstream VDVde/VDV301 tag VDV-301-2.1, selected released SystemDocumentationService v2.0 schema exact blob ab959dddbfa2b8ca420af1b079501f94cff38051 (byte-identical at tags 2.0 and 2.1)",
+              "component_kind": "element",
+              "component": "SystemDocumentationService.SystemConfigurationData",
+              "member": "HeartbeatInterval",
+              "value": "type=\"IBIS-IP.duration\" minOccurs=\"0\"",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SystemDocumentationService.SystemConfigurationData']/xs:sequence/xs:element[@name='HeartbeatInterval']",
+              "line_hint": "30",
+              "point_summary": "The official V2.0 schema requires exact HeartbeatInterval duration, not the PDF HertbeatIntervall nor earlier V1.0 HeartbeatIntervall; XML is judged on exact selected release bytes.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            },
+            {
+              "file": "IBIS-IP_SystemDocumentationService_V2.0.xsd",
+              "git_blob": "ab959dddbfa2b8ca420af1b079501f94cff38051",
+              "authority_detail": "Official upstream VDVde/VDV301 tag VDV-301-2.1, selected released SystemDocumentationService v2.0 schema exact blob ab959dddbfa2b8ca420af1b079501f94cff38051 (byte-identical at tags 2.0 and 2.1)",
+              "component_kind": "element",
+              "component": "SystemDocumentationService.StoreSystemConfigurationRequestStructure",
+              "member": "HeartbeatInterval",
+              "value": "type=\"IBIS-IP.duration\" minOccurs=\"0\"",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SystemDocumentationService.StoreSystemConfigurationRequestStructure']/xs:sequence/xs:element[@name='HeartbeatInterval']",
+              "line_hint": "39",
+              "point_summary": "The official V2.0 schema requires exact HeartbeatInterval duration, not the PDF HertbeatIntervall nor earlier V1.0 HeartbeatIntervall; XML is judged on exact selected release bytes.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            }
+          ],
+          "coverage_note": "Both actual printed tables retain the spelling error, even though VDV-301-2.1 XSD is corrected to HeartbeatInterval duration/duration; version history p118 incorrectly claims the visible spelling was fixed; bilingual PDF source exact SHA verified."
         }
       ],
       "supporting_evidence": [
@@ -10412,7 +10584,11 @@
         "EV-129 pinned evidence run 33765167655 artifact 9897171006 digest sha256:a410cdc7103b2ed01f61570b6435a5b2319d2b80f4fec2802929359058a51cc7",
         "EV-129 page 65 PNG SHA-256 1bf5fc05dcc3313bc74ff8994187fedaea0249fb2c9bc1a723a6fd37abff0b36",
         "official upstream VDVde/VDV301@VDV-301-1.0 blob 8995c4a230bf81d5e47b9313ee7725ff3cd4b7b5",
-        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_003_2026-10-06.md"
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_003_2026-10-06.md",
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_003_2026-10-10.md",
+        "V1.0 EN strict PDF render run 38032750261 artifact 11662262438 sha256:3fabdd9ecb1a0857b2ac935c42349eb6dfb695794aafc0fa7a76d52de5086e5b",
+        "Official VDV XSD V2.0 blob ab959dddbfa2b8ca420af1b079501f94cff38051 on tags VDV-301-2.0 and VDV-301-2.1",
+        "Official pinned bilingual PDF V2.0 p100 Tables30/31 and V2.1 p113 Tables55/56, V2.1 release history p118"
       ]
     },
     {

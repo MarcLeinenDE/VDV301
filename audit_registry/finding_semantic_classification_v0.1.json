@@ -5257,10 +5257,22 @@
       "service": "SystemDocumentationService",
       "version_scope": [
         {
-          "version": "VDV 301-2 V1.0",
+          "version": "VDV 301-2 SystemDocumentationService V1.0",
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_SystemDocumentationService_v1.0.xsd",
-          "note": "PDF uses HertbeatIntervall/duration; official XSD declares HeartbeatIntervall, with double in SystemConfigurationData and duration in StoreSystemConfigurationRequestStructure."
+          "note": "Official V1.0 German p65 Tables25/26 and independently published English p88 Tables104/105 use HertbeatIntervall duration. Official tag VDV-301-1.0 XSD uses HeartbeatIntervall: double for SystemConfigurationData and duration for StoreSystemConfigurationRequestStructure."
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemDocumentationService_V2.0.xsd",
+          "note": "Bilingual Basic Services V2.0 visible PDF p100 Tables30/31 retains HertbeatIntervall xs:duration; official VDV-301-2.0 XSD v2.0 requires HeartbeatInterval duration in both structures."
+        },
+        {
+          "version": "VDV 301-2 Base Services V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemDocumentationService_V2.0.xsd",
+          "note": "Bilingual Basic Services V2.1 visible PDF p113 Tables55/56 still prints HertbeatIntervall xs:duration; official VDV-301-2.1 tag carries byte-identical v2.0 XSD declaring HeartbeatInterval duration. V2.1 p118 change history claims correction to HeartbeatInterval but actual tables still misspelled."
         }
       ],
       "review_state": "manually_reviewed",
@@ -5283,41 +5295,50 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "Page 65 prints HertbeatIntervall twice and documents duration for both rows."
+          "note": "VDV301-2 original German V1.0 p65 Tables25/26 and separate English translation V1.0 p88 Tables104/105 all print HertbeatIntervall 0:1 duration. EN strict exact SHA256 pinned renderer 38032750261 artifact 11662262438 p88 PNG c9bce23ac4f0eaf8cfe873982fd6735b22c71bc25723caffe3499eaba7523ae1."
         },
         {
           "type": "official_xsd_explicit",
-          "note": "The exact V1.0 XSD declares HeartbeatIntervall; SystemConfigurationData is double, StoreSystemConfigurationRequestStructure is duration."
+          "note": "VDVde/VDV301 official release tag VDV-301-1.0 exact XSD blob 8995c4a230bf81d5e47b9313ee7725ff3cd4b7b5: HeartbeatIntervall type IBIS-IP.double in SystemConfigurationData line43, IBIS-IP.duration in StoreSystemConfigurationRequestStructure line50; never HertbeatIntervall."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Original byte pinned bilingual Base Services V2.0 PDF p100 Table30 SystemConfigurationData and Table31 StoreSystemConfigurationRequest both say HertbeatIntervall xs:duration. Same in bilingual V2.1 PDF p113 Table55/Table56. V2.1 history p118 explicitly claims typo fixed to HeartbeatInterval but real bodies still wrong."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Official VDVde/VDV301 release VDV-301-2.0 and VDV-301-2.1 each contain exact XSD IBIS-IP_SystemDocumentationService_V2.0.xsd blob ab959dddbfa2b8ca420af1b079501f94cff38051: HeartbeatInterval type IBIS-IP.duration in both structures lines30,39; no typo aliases or inherited V1.0 HeartbeatIntervall."
         },
         {
           "type": "executable_validation",
-          "note": "EV-129 confirms identifier and lexical-type boundaries with positive/negative XML samples."
+          "note": "EV-129 historical exact V1.0 selected-XSD tests already show misspelled XML rejected, IBIS-IP.double lane rejects PT5S and accepts numeric value; for V2.0/V2.1 the applicable XSD defines HeartbeatInterval as duration in both lanes and must be separately selected, without improperly reusing V1.0 numeric validation semantics."
         },
         {
-          "type": "xml_schema_semantics",
-          "note": "The selected XSD remains executable authority; no typo alias or PDF type override is introduced."
+          "type": "version_history",
+          "note": "First affected service release V1.0 both German/English publication lanes, affected next dedicated Basic Services V2.0 and V2.1; no independent later dedicated SystemDocumentationService service-spec PDF in checked VDV catalogue. V2.2–V2.4 published Common Conventions are not adjacent SystemDocumentationService version publications and do not prove correction."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "SystemDocumentation V1.0: HeartbeatIntervall in PDF falsch geschrieben und teilweise falsch typisiert",
-          "short": "Die PDF nennt HertbeatIntervall/duration; die XSD verlangt HeartbeatIntervall und für SystemConfigurationData double.",
-          "long": "Der korrigierte Befund umfasst Identifier und Typ. Die PDF schreibt HertbeatIntervall; die offizielle XSD deklariert HeartbeatIntervall. Für SystemConfigurationData steht in der XSD IBIS-IP.double statt PDF-duration; beim StoreSystemConfigurationRequest stimmt duration. EV-129 bestätigt die Grenzen ausführbar.",
-          "recommendation": "Für XML ausschließlich den XSD-Identifier und den je Struktur deklarierten XSD-Typ verwenden; keine PDF-Aliasse erzeugen."
+          "title": "SystemDocumentationService V1.0–V2.1: Heartbeat-Element in PDF falsch, Typabweichung nur V1.0",
+          "short": "Die PDFs V1.0, V2.0 und V2.1 nennen HertbeatIntervall; V1.0-XSD verlangt HeartbeatIntervall (bei SystemConfigurationData double), V2.0-XSD HeartbeatInterval (duration in beiden Strukturen).",
+          "long": "Die ursprüngliche deutsche VDV 301-2 V1.0 (S.65, Tabellen25/26) und ihre separate englische Übersetzung (S.88, Tabellen104/105) schreiben HertbeatIntervall und dokumentieren duration in beiden Strukturen. Die offizielle XSD des Tags VDV-301-1.0 schreibt dagegen HeartbeatIntervall (mit doppeltem l): In SystemDocumentationService.SystemConfigurationData gilt IBIS-IP.double, im StoreSystemConfigurationRequestStructure IBIS-IP.duration. Die bilingualen Basisdienste V2.0 (S.100, Tabellen30/31) und V2.1 (S.113, Tabellen55/56) enthalten weiterhin HertbeatIntervall mit xs:duration. Der offizielle Release-Tag VDV-301-2.0 und auch VDV-301-2.1 führen jedoch dieselbe V2.0-XSD mit HeartbeatInterval (ein l am Ende) und IBIS-IP.duration in beiden Strukturen. Die Versionshistorie V2.1 S.118 behauptet eine Korrektur, die in den eigentlichen Tabellen nicht übernommen wurde. Die PDF-Abweichung besteht somit bis zur zuletzt unabhängig geprüften spezialisierten V2.1-Schrift; die XSD-Namen unterscheiden sich zwischen V1.0 und V2.0 und sind jeweils verbindlich. Eine XSD-invalidierte Nachricht ist ein Konformitätsfehler, aber nur gegen die tatsächlich gewählte Release-XSD, nie gegen erfundene PDF-Aliasse.",
+          "recommendation": "XML je nach gewähltem offiziellen Profil strikt validieren: V1.0 HeartbeatIntervall und strukturabhängig double/duration; V2.0-XSD (offizielle Releases V2.0 und V2.1) HeartbeatInterval und in beiden Strukturen duration. HertbeatIntervall nicht akzeptieren; keinen V1.0-Identifier oder V1.0-Typ ungeprüft auf V2.0/V2.1 übertragen."
         },
         "en": {
-          "title": "SystemDocumentation V1.0: HeartbeatIntervall is misspelled and partly mistyped in the PDF",
-          "short": "The PDF says HertbeatIntervall/duration; the XSD requires HeartbeatIntervall and double for SystemConfigurationData.",
-          "long": "The corrected finding covers both identifier and type. The PDF spells HertbeatIntervall while the official XSD declares HeartbeatIntervall. SystemConfigurationData is IBIS-IP.double in XSD rather than PDF duration; duration is correct for StoreSystemConfigurationRequest. EV-129 confirms the boundaries executably.",
-          "recommendation": "For XML use only the XSD identifier and the XSD-declared type per structure; create no PDF aliases."
+          "title": "SystemDocumentationService V1.0–V2.1: PDF heartbeat typo persists across XSD name and type change",
+          "short": "V1.0, V2.0 and V2.1 PDF tables say HertbeatIntervall; released V1.0 XSD requires HeartbeatIntervall (double in configuration data), while V2.0 XSD used for 2.0/2.1 requires HeartbeatInterval (duration for both).",
+          "long": "German Part2 V1.0 p65 Tables25/26 and its independent English translation p88 Tables104/105 incorrectly call the optional member HertbeatIntervall with duration in both structures. The official V1.0 XSD uses HeartbeatIntervall, with IBIS-IP.double for SystemConfigurationData and IBIS-IP.duration for StoreSystemConfigurationRequestStructure. The official bilingual Base Services V2.0 p100 Tables30/31 and V2.1 p113 Tables55/56 still print HertbeatIntervall with xs:duration. The published VDV-301-2.0 and VDV-301-2.1 XSD release tags, however, share the identical V2.0 schema requiring HeartbeatInterval and IBIS-IP.duration in both structures. V2.1 page118 release history claims correction to HeartbeatInterval even though the visible tables were not corrected. The typo survives into the last independently verified dedicated service document V2.1. Only the exact selected XSD controls XML acceptance; the 1.0 numeric-type difference does not transfer to later profiles.",
+          "recommendation": "Validate against the selected official schema: V1.0 HeartbeatIntervall with structure-specific double/duration; V2.0 XSD in releases 2.0 and 2.1 HeartbeatInterval with duration in both structures. Reject the PDF typo when schema-invalid and do not invent compatibility aliases."
         }
       },
       "runtime_match": {
         "state": "reviewed",
         "candidate_triggers": [
-          "selected strict profile is official SystemDocumentationService V1.0",
-          "XSD validation result is INVALID because the submitted element name is exactly HertbeatIntervall, or because SystemDocumentationService.SystemConfigurationData/HeartbeatIntervall carries a duration lexical value instead of the selected XSD double shape",
-          "selected V1.0 XSD declares HeartbeatIntervall, with IBIS-IP.double in SystemConfigurationData and IBIS-IP.duration in StoreSystemConfigurationRequestStructure"
+          "selected strict official SystemDocumentationService release profile and XSD outcome INVALID, not merely presence of documentation typo",
+          "for official V1.0 XSD selected: invalid because actual XML has the PDF typo HertbeatIntervall in either affected structure, or SystemConfigurationData/HeartbeatIntervall contains invalid duration lexical content where IBIS-IP.double is required; StoreSystemConfigurationRequestStructure/HeartbeatIntervall is duration in this release",
+          "for selected official V2.0 XSD present under release tags VDV-301-2.0 and VDV-301-2.1: invalid because XML used PDF typo HertbeatIntervall or the obsolete V1.0 name HeartbeatIntervall, rather than exact HeartbeatInterval; value type is IBIS-IP.duration in both structures",
+          "do not turn a document mismatch into provider FAIL if XML validated successfully against the selected released XSD"
         ]
       },
       "source_references": [
@@ -5345,9 +5366,14 @@
           "kind": "other",
           "reference": "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_DR3012_003_V10_IDENTIFIER_TYPE_2026-09-03.md",
           "note": "Supersedes the historical imprecise claim that HertbeatIntervall also appeared in XSD."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_003_2026-10-10.md",
+          "note": "Original DE/EN V1.0 and bilingual Base V2.0/V2.1 documentation, release-tag XSD bytes and historical release-history conflict."
         }
       ],
-      "notes": "The explicit correction delta controls. No alias or schema override is created."
+      "notes": "2026-10-10 material independent version/language boundary correction. V1.0 affected original DE and independent EN translation; Base V2.0/V2.1 bilingual PDF body still typo. V2.1 history claims corrected, contradicting actual table. V1.0 XSD HeartbeatIntervall double/duration; V2.0 official XSD HeartbeatInterval duration/duration (also selected in release tag V2.1). No official XSD edits, no alias, release-specific XSD normative."
     },
     {
       "finding_id": "DR3012-004",

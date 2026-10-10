@@ -2003,12 +2003,12 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 61,
-    "version_scope_boundary_pending_count": 9,
-    "version_scope_boundary_next_finding": "DR3012-003",
-    "version_scope_boundary_latest_finding": "DR3012-002",
+    "version_scope_boundary_verified_count": 62,
+    "version_scope_boundary_pending_count": 8,
+    "version_scope_boundary_next_finding": "DR3012-004",
+    "version_scope_boundary_latest_finding": "DR3012-003",
     "version_scope_boundary_latest_gate_run_id": "38028230234",
-    "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_002_2026-10-10.md",
+    "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_003_2026-10-10.md",
     "latest_scope_correction": "BG-001 expanded from release-context pair 1.0/2.0 to complete official retained V1.0 path lineage through VDV-301-2.3; semantic/locator/runtime scopes synchronized."
   },
   "evidence": {
@@ -2122,13 +2122,14 @@
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "in_progress",
     "version_scope_boundary_tracked_count": 70,
-    "version_scope_boundary_verified_count": 61,
-    "version_scope_boundary_pending_count": 9
+    "version_scope_boundary_verified_count": 62,
+    "version_scope_boundary_pending_count": 8
   },
   "next_actions": [
-    "DR3012-003 gate_pending: inspect EN V1.0 p88 original and DE/EN V2.0/2.1 table originals; source semantics differ by release.",
-    "Do not mark boundary 62 until full evidence/gate. STOP five-finding package at this finding due material scope expansion.",
-    "No XSD rewriting or typo normalization. Selected released XSD is authoritative; investigate upstream release variants before scope promotion."
+    "DR3012-003 registers updated: await exact-HEAD full schema-audit-validation SUCCESS, then separately terminal_clean and require final handoff-integrity SUCCESS.",
+    "STOP current five-finding package after material V1.0-only to dedicated V2.0/V2.1 release-scope expansion and official XSD identifier/type change.",
+    "New package begins DR3012-004 after clean closure; 8 pending retroactive boundaries. Do not expand source locators before backlog zero.",
+    "SDK XSD authority strictly release-specific: V1.0 HeartbeatIntervall double/duration; V2.0 XSD in tags2.0/2.1 HeartbeatInterval duration/duration; no aliases."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2211,18 +2212,21 @@
     "latest_completed_full_gate_run_id": "38028230234",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38028230225",
-    "resume_instruction": "DR3012-003 active. Official DE V1.0 p65 PDF HertbeatIntervall duration both structures; exact XSD V1.0 HeartbeatIntervall double in SystemConfigurationData, duration in StoreSystemConfigurationRequestStructure. Bilingual Base V2.0 p100 Tables30-31 and Base V2.1 p113 Tables55-56 PDFs HertbeatIntervall xs:duration; official XSD V2.0 in tags 2.0 and 2.1 requires HeartbeatInterval duration both, blob ab959ddd. EN V1.0 p88 strict render requested, avoid assumptions. Finish language boundary, gate, terminal clean; stop package on material scope correction.",
+    "resume_instruction": "DR3012-003 all canonical registries are updated but pending full audit gate. First affected V1.0 DE/EN PDF misspells HertbeatIntervall with duration/duration; official V1.0 XSD requires HeartbeatIntervall double/duration. Next Base V2.0/V2.1 bilingual PDFs persist HertbeatIntervall duration/duration while official released V2.0 XSD in both tags2.0/2.1 requires HeartbeatInterval duration/duration. V2.1 p118 history falsely claims fixed visible p113. 62/70 verified and 8 pending after gate. STOP package on material scope; see docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_003_2026-10-10.md.",
     "pending_block": "DR3012-003 SystemDocumentationService Heartbeat identifier/type PDF-to-XSD DE/EN V1.0, Base V2.0 and Base V2.1",
     "active_finding": "DR3012-003",
-    "active_step": "Confirmed official PDF V1.0 DE p65 typo duration vs official XSD 1.0 HeartbeatIntervall double/duration; Base V2.0 p100 and Base V2.1 p113 both retain PDF typo, while upstream official XSD 2.0/2.1 expects HeartbeatInterval duration in both structures",
-    "next_step": "Inspect exact pinned V1.0 EN p88 SystemDocumentationService tables by strict renderer; establish updated release/language boundary, write evidence and synchronized semantic/locator/SDK registers, run full gate",
+    "active_step": "Checkpoint independently validated DE/EN V1.0 and bilingual V2.0/V2.1 PDF/XSD heartbeat release boundaries, dual XSD types, all locator/body/SDK mirrors in one atomic audit commit",
+    "next_step": "Wait for full schema-audit-validation on exact pending HEAD, repair failures, then separate terminal_clean and final handoff-integrity before next finding",
     "evidence_refs": [
       "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_003_2026-10-06.md",
       "Official VDVde/VDV301 tag VDV-301-1.0 XSD blob 8995c4a230bf81d5e47b9313ee7725ff3cd4b7b5",
       "Official VDVde/VDV301 tags VDV-301-2.0 and VDV-301-2.1 XSD V2.0 blob ab959dddbfa2b8ca420af1b079501f94cff38051",
-      "audit_registry/pdf_source_pins_v0.1.json"
+      "audit_registry/pdf_source_pins_v0.1.json",
+      "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_003_2026-10-10.md",
+      "VDV release-tag XSD V2.0 blob ab959dddbfa2b8ca420af1b079501f94cff38051",
+      "EN V1.0 p88 artifact 11662262438"
     ],
-    "recovery_instruction": "DR3012-003 active. Official DE V1.0 p65 PDF HertbeatIntervall duration both structures; exact XSD V1.0 HeartbeatIntervall double in SystemConfigurationData, duration in StoreSystemConfigurationRequestStructure. Bilingual Base V2.0 p100 Tables30-31 and Base V2.1 p113 Tables55-56 PDFs HertbeatIntervall xs:duration; official XSD V2.0 in tags 2.0 and 2.1 requires HeartbeatInterval duration both, blob ab959ddd. EN V1.0 p88 strict render requested, avoid assumptions. Finish language boundary, gate, terminal clean; stop package on material scope correction."
+    "recovery_instruction": "DR3012-003 all canonical registries are updated but pending full audit gate. First affected V1.0 DE/EN PDF misspells HertbeatIntervall with duration/duration; official V1.0 XSD requires HeartbeatIntervall double/duration. Next Base V2.0/V2.1 bilingual PDFs persist HertbeatIntervall duration/duration while official released V2.0 XSD in both tags2.0/2.1 requires HeartbeatInterval duration/duration. V2.1 p118 history falsely claims fixed visible p113. 62/70 verified and 8 pending after gate. STOP package on material scope; see docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_003_2026-10-10.md."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2232,14 +2236,14 @@
     "state": "in_progress",
     "adoption_locator_count": 70,
     "tracked_findings": 70,
-    "verified": 61,
-    "pending_revalidation": 9,
-    "next_pending_finding": "DR3012-003",
+    "verified": 62,
+    "pending_revalidation": 8,
+    "next_pending_finding": "DR3012-004",
     "locator_expansion_frozen": true,
     "future_locator_completion_requires_verified_boundary_same_block": true,
-    "latest_verified_finding": "DR3012-002",
+    "latest_verified_finding": "DR3012-003",
     "latest_gate_run_id": "38028230234",
-    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_002_2026-10-10.md"
+    "latest_review_report": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_003_2026-10-10.md"
   },
   "boundary_revalidation_package_mode": {
     "enabled": true,
