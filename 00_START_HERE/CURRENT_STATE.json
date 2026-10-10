@@ -2126,9 +2126,9 @@
     "version_scope_boundary_pending_count": 7
   },
   "next_actions": [
-    "Start a NEW five-finding package at DR3012-005 (SystemManagementService subscription naming inconsistency) only after final terminal HEAD handoff-integrity succeeds; inspect original DE/EN V1.0 and adjacent Base V2.0/V2.1 and successor service publications for exact language/release boundary.",
-    "Keep each finding separately gate_pending -> full schema-audit-validation SUCCESS -> terminal_clean -> exact-HEAD handoff-integrity; stop package on material expansion, ambiguity or failure.",
-    "7 pending boundaries; locator expansion frozen at 70. Selected official XSD controls XML conformance regardless of PDF errors."
+    "Validate updated five-finding workflow policy on exact HEAD, terminal-close maintenance, then restart DR3012-005.",
+    "Continue per-finding cycles across DR3012-005/006/007 and DR3012V20-001/002, including verified scope expansions.",
+    "Current boundaries 63/70; never waive exact-XSD conformance."
   ],
   "source_locator_progress": {
     "locator_entry_count": 70,
@@ -2206,12 +2206,22 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "38037037593",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38037037608",
-    "resume_instruction": "DR3012-004 completed; original V1.0 DE p59/p74/p75 and EN p66/p114 independently pinned and compared, Base V2.0 p94 broken Word reference, Base V2.1 p99 first corrected, DMS V2.2 p19 and V2.4 p18 also corrected. Canonical report docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_004_2026-10-10.md. Full schema-audit-validation 38037037593 SUCCESS and prefinal handoff-integrity 38037037608 SUCCESS. Verify final exact-HEAD handoff success. Counts 63/70 verified, 7 pending; STOP old five-pack for material scope expansion; next DR3012-005 in new five-pack. No runtime matcher, XSD changes or provider FAIL from PDF-only crossref."
+    "resume_instruction": "Policy now allows continuing five-pack after verified scope changes; currently gate_pending; 63/70 verified.",
+    "pending_block": "five-finding package policy maintenance",
+    "active_finding": "policy-maintenance",
+    "active_step": "Contract and two policy files updated together with recovery state",
+    "next_step": "Run full schema audit on this HEAD and terminal-close after SUCCESS",
+    "evidence_refs": [
+      "00_START_HERE/AUDIT_WORKFLOW_CONTRACT.md",
+      "00_START_HERE/HANDOFF_INTEGRITY_POLICY.md",
+      "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md"
+    ],
+    "recovery_instruction": "Policy edit pending full audit. Verify gates, repair if necessary, then terminal-close before DR3012-005."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2235,7 +2245,7 @@
     "scope": "retroactive_version_scope_boundary_revalidation_only",
     "default_package_size": 5,
     "per_finding_terminal_cycle_required": true,
-    "stop_on_failed_gate_or_scope_correction": true,
+    "stop_on_failed_gate_or_scope_correction": false,
     "last_completed_package": {
       "completed_at": "2026-10-10",
       "findings": [
@@ -2251,6 +2261,7 @@
       "DR3012-007",
       "DR3012V20-001",
       "DR3012V20-002"
-    ]
+    ],
+    "stop_only_on_unresolved_failure_ambiguity_or_cross_finding_impact": true
   }
 }

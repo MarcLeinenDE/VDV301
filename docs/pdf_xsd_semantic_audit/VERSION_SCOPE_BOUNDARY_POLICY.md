@@ -50,4 +50,4 @@ This is an orchestration convenience only. Each finding remains an independent t
 - `terminal_clean` handoff commit;
 - final handoff-integrity gate.
 
-A package must stop at the first failed gate, ambiguous boundary or material scope correction.
+Material but fully verified scope expansion is not a package stop. Synchronize affected registries and close the finding with full validation and handoff before continuing. Gate failure pauses progression and must be repaired first. Stop only for unresolved ambiguity, persistent gate failure, or proven cross-finding impact on following findings; record the reason in CURRENT_STATE.

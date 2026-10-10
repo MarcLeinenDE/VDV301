@@ -327,7 +327,9 @@ Exception for the active retroactive version-scope boundary revalidation only:
 - every finding inside the package remains its own complete crash-safe mini-cycle;
 - after each finding: write evidence + registry/state, mark gate_pending, run/observe the full gate, finalize terminal_clean, and verify the final handoff-integrity gate before starting the next finding;
 - never defer several findings into one combined commit/gate/handoff;
-- if any finding fails a gate or needs semantic-scope correction, stop the package at that finding and resolve it before continuing.
+- a verified language/version-scope correction does not by itself end a package: synchronize the existing finding in all canonical registries, complete its full gate and terminal handoff, then continue;
+- a failed gate pauses progress until repaired and revalidated; after both gates succeed, continue;
+- stop only for unresolved boundary ambiguity, a persistent failed gate, or a demonstrated cross-finding impact on the next item; record a recoverable explanation in CURRENT_STATE.
 
 ---
 

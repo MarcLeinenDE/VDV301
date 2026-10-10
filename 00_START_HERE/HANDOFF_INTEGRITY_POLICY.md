@@ -114,4 +114,4 @@ For each finding in the package:
 6. require the every-push handoff-integrity gate to succeed on that final HEAD;
 7. only then continue automatically to the next finding.
 
-If a gate fails, if scope changes materially, or if evidence is ambiguous, stop the package at that finding. The repository must already contain the recoverable state.
+Verified scope corrections are expected and do not alone end the package. Close each changed finding with a complete gate and terminal handoff. Repair transient gate failures before continuing. Stop only for unresolved ambiguity, persistent gate failure, or demonstrated cross-finding impact. Always preserve a recoverable repository state.
