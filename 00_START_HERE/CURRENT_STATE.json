@@ -2206,12 +2206,22 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "38033140916",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38033140939",
-    "resume_instruction": "DR3012-003 independently verified; exact pinned original DE+EN V1.0 p65/p88 PDFs and bilingual Base V2.0 p100, Base V2.1 p113 show HertbeatIntervall typo. Official XSD V1.0 HeartbeatIntervall type double/duration (VDV-301-1.0 blob 8995c4a2), official XSD V2.0 in tags VDV-301-2.0 and VDV-301-2.1 HeartbeatInterval duration/duration (blob ab959ddd). V2.1 p118 history falsely claims body corrected. Full schema-audit-validation 38033140916 SUCCESS and pending-head handoff-integrity 38033140939 SUCCESS; verify final handoff-integrity at this terminal HEAD before next. Boundary 62/70 verified, 8 pending. Stop five-finding package for material scope correction; next fresh package begins DR3012-004. Canonical report: docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_003_2026-10-10.md"
+    "resume_instruction": "DR3012-004 gate_pending; English original PDF render requested; pending registry count unchanged 62/70. Continue evidence. Material language scope extension requires stop package after closure.",
+    "pending_block": "DR3012-004 DE/EN V1.0 DeviceStateEnumeration reference and V2.0–V2.4 successors",
+    "active_finding": "DR3012-004",
+    "active_step": "Checkpoint: request pinned original EN V1.0 PDF visual pages66,114 after live screenshot cache misses.",
+    "next_step": "Inspect EN p66 Table37 and p114 Tables205/206; compare DE and V2.0/2.1/DMS2.2/2.4; complete evidence, synchronize registries; full schema-audit-validation; terminal_clean handoff.",
+    "evidence_refs": [
+      "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012_004_2026-10-07.md",
+      "tools/pdf_render_request_v0.1.json",
+      "Official VDV 301-2 V1.0 EN pinned SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7"
+    ],
+    "recovery_instruction": "DR3012-004 checkpoint committed, not verified. Check exact pinned English PDF fallback run; inspect visible p66,114, successor lanes; write evidence and sync canonical registries; full gate; terminal-clean."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
