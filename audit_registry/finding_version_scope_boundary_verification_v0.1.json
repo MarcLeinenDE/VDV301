@@ -21,10 +21,10 @@
   },
   "counts": {
     "tracked_findings": 70,
-    "verified": 67,
-    "pending_revalidation": 3
+    "verified": 68,
+    "pending_revalidation": 2
   },
-  "next_pending_finding": "DR3012V20-002",
+  "next_pending_finding": "DR3012V20-003",
   "entries": [
     {
       "finding_id": "ARA-001",
@@ -3898,9 +3898,75 @@
     },
     {
       "finding_id": "DR3012V20-002",
-      "state": "pending_revalidation",
-      "evidence": [],
-      "note": "Retroactive version-scope boundary verification required after adoption of the 2026-10-07 boundary hard gate."
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012V20_002_2026-10-10.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_002_2026-10-07.md",
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_002_2026-10-10.md",
+        "Pinned V2.0 DE p33 and EN p34 EV130; subsequent original DE/EN V2.1–V2.4 page PNG hashes in root review",
+        "https://www.rfc-editor.org/rfc/rfc2782.html"
+      ],
+      "note": "Historical V2.0 ID is same underlying wrong lower-SRV-Weight selection as DR3012-002, proven in original Base2.0/2.1 and Common2.2/2.3/2.4 both language tracks. Preserve ID for provenance, deduplicate SDK/provider warning against DR3012-002; no XSD effect.",
+      "scope_conclusion": "Original German and English V1.0 already affected same root cause (DR3012-002), so no semantic debut at 2.0. First historical V20-002 source is bilingual Base V2.0; the same DE/EN wrong Weight description persists through bilingual Base V2.1 and Common Conventions V2.2, V2.3 and latest checked V2.4; no corrected successor is in the currently pinned official publication corpus. This historical ID remains a correlated source-trace slice; DR3012-002 is authoritative for full 1.0–2.4 root boundary and should yield only one provider/SDK documentation diagnosis.",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-2 V1.0 German and English originals",
+          "role": "affected_predecessor_same_root",
+          "language_status": "de-en:both original V1.0 SRV Weight rows already wrong; historical V2.0-only ID is not distinct underlying defect",
+          "source_ids": [
+            "VDV301-2_V1.0_DE",
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "role": "first_historical_id_source",
+          "language_status": "de:p33 and en:p34 each state lower numeric SRV Weight preferred; independently verified original body; same root DR3012-002",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "role": "affected_successor",
+          "language_status": "de:p34 and en:p35 each state lower numeric SRV Weight preferred; independently verified original body; same root DR3012-002",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.2",
+          "role": "affected_successor",
+          "language_status": "de:p26 and en:p32 each state lower numeric SRV Weight preferred; independently verified original body; same root DR3012-002",
+          "source_ids": [
+            "VDV301-2_GC_V2.2"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.3",
+          "role": "affected_successor",
+          "language_status": "de:p26 and en:p32 each state lower numeric SRV Weight preferred; independently verified original body; same root DR3012-002",
+          "source_ids": [
+            "VDV301-2_GC_V2.3"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.4",
+          "role": "latest_checked_affected",
+          "language_status": "de:p29 and en:p36 each state lower numeric SRV Weight preferred; independently verified original body; same root DR3012-002",
+          "source_ids": [
+            "VDV301-2_GC_V2.4"
+          ]
+        },
+        {
+          "version": "After Common Conventions V2.4",
+          "role": "no_corrected_successor_in_pinned_corpus",
+          "language_status": "de-en:later same-subject original body not independently verified; cannot claim correction or persistence beyond V2.4",
+          "source_ids": [
+            "VDV301-2_GC_V2.4"
+          ]
+        }
+      ]
     },
     {
       "finding_id": "DR3012V20-003",

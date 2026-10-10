@@ -6478,10 +6478,64 @@
       "service": "VDV 301-2 Base / DNS Service Discovery",
       "version_scope": [
         {
-          "version": "VDV 301-2 Base V2.0",
+          "version": "VDV 301-2 Base V2.0 German section",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "Both languages say lower SRV Weight is preferred; RFC 2782 defines proportional weighted selection."
+          "note": "Affected original DE SRV Weight row on printed p33 of pinned VDV301-2_BASE_V2.0 SHA256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37; claims lower Weight preferred. Primary same-root finding DR3012-002 already covers it, RFC2782 contradicts preference."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0 English section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected original EN SRV Weight row on printed p34 of pinned VDV301-2_BASE_V2.0 SHA256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37; claims lower Weight preferred. Primary same-root finding DR3012-002 already covers it, RFC2782 contradicts preference."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1 German section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected original DE SRV Weight row on printed p34 of pinned VDV301-2_BASE_V2.1 SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a; claims lower Weight preferred. Primary same-root finding DR3012-002 already covers it, RFC2782 contradicts preference."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1 English section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected original EN SRV Weight row on printed p35 of pinned VDV301-2_BASE_V2.1 SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a; claims lower Weight preferred. Primary same-root finding DR3012-002 already covers it, RFC2782 contradicts preference."
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.2 German section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected original DE SRV Weight row on printed p26 of pinned VDV301-2_GC_V2.2 SHA256 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051; claims lower Weight preferred. Primary same-root finding DR3012-002 already covers it, RFC2782 contradicts preference."
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.2 English section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected original EN SRV Weight row on printed p32 of pinned VDV301-2_GC_V2.2 SHA256 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051; claims lower Weight preferred. Primary same-root finding DR3012-002 already covers it, RFC2782 contradicts preference."
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.3 German section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected original DE SRV Weight row on printed p26 of pinned VDV301-2_GC_V2.3 SHA256 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603; claims lower Weight preferred. Primary same-root finding DR3012-002 already covers it, RFC2782 contradicts preference."
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.3 English section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected original EN SRV Weight row on printed p32 of pinned VDV301-2_GC_V2.3 SHA256 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603; claims lower Weight preferred. Primary same-root finding DR3012-002 already covers it, RFC2782 contradicts preference."
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.4 German section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected original DE SRV Weight row on printed p29 of pinned VDV301-2_GC_V2.4 SHA256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d; claims lower Weight preferred. Primary same-root finding DR3012-002 already covers it, RFC2782 contradicts preference."
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.4 English section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected original EN SRV Weight row on printed p36 of pinned VDV301-2_GC_V2.4 SHA256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d; claims lower Weight preferred. Primary same-root finding DR3012-002 already covers it, RFC2782 contradicts preference."
         }
       ],
       "review_state": "manually_reviewed",
@@ -6502,25 +6556,29 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "Both V2.0 language tracks state that lower SRV Weight is preferred."
+          "note": "The official byte-pinned V2.0 German p33 and English p34 SRV Weight rows both prefer smaller numeric Weight; the original V2.1 p34/p35 and Common Conventions V2.2 p26/p32, V2.3 p26/p32, V2.4 p29/p36 do the same. Original-body page PNGs and hashes were independently reviewed in the DR3012-002 version-boundary evidence."
         },
         {
           "type": "external_protocol_standard",
-          "note": "RFC 2782 defines proportional weighted random selection."
+          "note": "RFC 2782 specifies lowest numeric Priority as preferred, but amongst equal Priority selects SRV records by weighted randomized proportional chances; a smaller numeric Weight is not categorically preferred."
+        },
+        {
+          "type": "technical_inference",
+          "note": "DR3012V20-002 is the frozen historical V2.0 slice of identical underlying semantic error DR3012-002. Retain legacy ID and 10 source-language lanes for provenance, but correlate duplicate root cause into one provider/SDK issue."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "Base V2.0: SRV-Weighting widerspricht RFC 2782",
-          "short": "Beide Sprachfassungen bevorzugen kleinere Weight-Werte.",
-          "long": "Der V1.0-Semantikfehler besteht in V2.0 in beiden Sprachspuren fort: kleinere Weight-Werte werden als bevorzugt beschrieben, obwohl RFC 2782 die Auswahlwahrscheinlichkeit proportional zum Weight festlegt.",
-          "recommendation": "SRV-Auswahl gemäß RFC 2782 implementieren und die VDV-Formulierung als Dokumentationsfehler behandeln."
+          "title": "Historischer V2.0-Teilbefund: DNS-SRV-Weight widerspricht RFC 2782",
+          "short": "V2.0–V2.4 DE/EN bevorzugt fälschlich niedrigere Weight-Werte; bereits unter DR3012-002 geprüft.",
+          "long": "Die DNS-SRV-Tabellen der zweisprachigen VDV 301-2 Basisdienste V2.0 und V2.1 sowie der Common Conventions V2.2 bis V2.4 beschreiben eine Bevorzugung kleinerer Weight-Werte. RFC 2782 verlangt dagegen bei gleicher Priority eine gewichtete Zufallsauswahl, bei der größere Weight-Werte verhältnismäßig häufiger ausgewählt werden. Das ist dieselbe bereits in beiden Sprachfassungen ab V1.0 nachgewiesene Fehlerursache aus DR3012-002; DR3012V20-002 bleibt als historischer V2.0-Einzelnachweis erhalten. Keine zweite unabhängige Anbieterwarnung, keine XSD-Wirkung.",
+          "recommendation": "DNS-SRV entsprechend RFC 2782 bewerten. Beim Audit DR3012V20-002 mit DR3012-002 zu einem Fehlerursachenbefund zusammenführen; weder XML-Validierungsfehler noch zusätzliche Pflichtoperationen oder Aliasnamen ableiten."
         },
         "en": {
-          "title": "Base V2.0: SRV weighting contradicts RFC 2782",
-          "short": "Both language tracks prefer smaller Weight values.",
-          "long": "The V1.0 semantic defect persists in both V2.0 language tracks: smaller Weight values are described as preferred although RFC 2782 makes selection probability proportional to Weight.",
-          "recommendation": "Implement SRV selection according to RFC 2782 and treat the VDV wording as a documentation defect."
+          "title": "Historical V2.0 slice: DNS SRV Weight description contradicts RFC 2782",
+          "short": "V2.0–V2.4 DE/EN wrongly prefers lower Weight, already tracked as DR3012-002.",
+          "long": "German and English SRV Weight tables in Base V2.0 and V2.1 and Common Conventions V2.2–V2.4 prefer smaller numeric weights. RFC 2782 instead provides weighted random selection at equal Priority, generally giving larger Weight proportionally higher selection probabilities. This is the same root defect already verified in original German and English V1.0 and the subsequent releases as DR3012-002. Retain DR3012V20-002 as its historical V2.0 evidence slice, without a second vendor error, SDK matcher or XML/XSD failure.",
+          "recommendation": "Follow RFC 2782 for SRV selection and correlate DR3012V20-002 with primary DR3012-002 into one root-cause diagnostic. Do not infer additional XML aliases or conformance requirements."
         }
       },
       "runtime_match": {
@@ -6547,8 +6605,19 @@
           "kind": "external_standard",
           "reference": "RFC 2782",
           "note": "Primary DNS SRV Priority/Weight authority."
+        },
+        {
+          "kind": "other",
+          "reference": "DR3012-002",
+          "note": "Full root finding: exact publication-and-language scope V1.0–V2.4; correlate historic V2.0 finding, avoid duplicate provider reporting."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012V20_002_2026-10-10.md",
+          "note": "Version boundary and same-root correlation for frozen V2.0 finding."
         }
-      ]
+      ],
+      "notes": "Legacy V2.0 document issue, independently verified as the very same DNS SRV Weight RFC2782 contradiction already fully covered V1.0–V2.4 by DR3012-002. Retain ID and historical source trace; do NOT emit a second independent SDK diagnostic or manufacturer finding."
     },
     {
       "finding_id": "DR3012V20-003",

@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "e4ba268391c7254179bd6808aad5821eeb400b99",
+    "git_blob": "4724c4b4a5ce1a2caf9711e7b7c51204ddd4050e",
     "finding_count": 192
   },
   "policy": {
@@ -11169,10 +11169,64 @@
       "coverage_state": "complete",
       "scope_claims": [
         {
-          "version": "VDV 301-2 Base V2.0",
+          "version": "VDV 301-2 Base V2.0 German section",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "Both languages say lower SRV Weight is preferred; RFC 2782 defines proportional weighted selection."
+          "note": "Affected original DE SRV Weight row on printed p33 of pinned VDV301-2_BASE_V2.0 SHA256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37; claims lower Weight preferred. Primary same-root finding DR3012-002 already covers it, RFC2782 contradicts preference."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0 English section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected original EN SRV Weight row on printed p34 of pinned VDV301-2_BASE_V2.0 SHA256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37; claims lower Weight preferred. Primary same-root finding DR3012-002 already covers it, RFC2782 contradicts preference."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1 German section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected original DE SRV Weight row on printed p34 of pinned VDV301-2_BASE_V2.1 SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a; claims lower Weight preferred. Primary same-root finding DR3012-002 already covers it, RFC2782 contradicts preference."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1 English section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected original EN SRV Weight row on printed p35 of pinned VDV301-2_BASE_V2.1 SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a; claims lower Weight preferred. Primary same-root finding DR3012-002 already covers it, RFC2782 contradicts preference."
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.2 German section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected original DE SRV Weight row on printed p26 of pinned VDV301-2_GC_V2.2 SHA256 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051; claims lower Weight preferred. Primary same-root finding DR3012-002 already covers it, RFC2782 contradicts preference."
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.2 English section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected original EN SRV Weight row on printed p32 of pinned VDV301-2_GC_V2.2 SHA256 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051; claims lower Weight preferred. Primary same-root finding DR3012-002 already covers it, RFC2782 contradicts preference."
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.3 German section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected original DE SRV Weight row on printed p26 of pinned VDV301-2_GC_V2.3 SHA256 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603; claims lower Weight preferred. Primary same-root finding DR3012-002 already covers it, RFC2782 contradicts preference."
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.3 English section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected original EN SRV Weight row on printed p32 of pinned VDV301-2_GC_V2.3 SHA256 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603; claims lower Weight preferred. Primary same-root finding DR3012-002 already covers it, RFC2782 contradicts preference."
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.4 German section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected original DE SRV Weight row on printed p29 of pinned VDV301-2_GC_V2.4 SHA256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d; claims lower Weight preferred. Primary same-root finding DR3012-002 already covers it, RFC2782 contradicts preference."
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.4 English section",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Affected original EN SRV Weight row on printed p36 of pinned VDV301-2_GC_V2.4 SHA256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d; claims lower Weight preferred. Primary same-root finding DR3012-002 already covers it, RFC2782 contradicts preference."
         }
       ],
       "coverage": [
@@ -11183,7 +11237,7 @@
           "pdf_locators": [
             {
               "source_id": "VDV301-2_BASE_V2.0",
-              "document_title": "VDV-Schrift 301-2",
+              "document_title": "VDV-Schrift 301-2 Base",
               "document_version": "2.0",
               "publication_authority": "official_publication",
               "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
@@ -11193,11 +11247,11 @@
               ],
               "section": "DNS-SD / Verwendung von SRV-Records",
               "table": "Tabelle 3 Bedeutungen der SRV-Records in DNS-SD",
-              "point_summary": "Visible German Weight row says that the service with the lower Weight is preferred."
+              "point_summary": "Original German Weight row says lower SRV Weight is preferred; external RFC2782 calls for weighted random selection at equal Priority; same root issue DR3012-002."
             },
             {
               "source_id": "VDV301-2_BASE_V2.0",
-              "document_title": "VDV-Schrift 301-2",
+              "document_title": "VDV-Schrift 301-2 Base",
               "document_version": "2.0",
               "publication_authority": "official_publication",
               "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
@@ -11205,13 +11259,161 @@
               "printed_pages": [
                 34
               ],
-              "section": "Use of SRV Records",
+              "section": "DNS-SD / Use of SRV Records",
               "table": "Table 4 Meanings of the SRV record in DNS-SD",
-              "point_summary": "Visible English Weight row says that, for two services with the same name, the service with the lower Weight is preferred."
+              "point_summary": "Original English Weight row says lower SRV Weight is preferred; external RFC2782 calls for weighted random selection at equal Priority; same root issue DR3012-002."
             }
           ],
           "xsd_locators": [],
-          "coverage_note": "Documentation/external-protocol defect only. Both language tracks reverse RFC 2782 Weight semantics. At equal Priority, RFC 2782 gives larger Weight values proportionately higher selection probability."
+          "coverage_note": "DE and EN originals independently captured at p33/p34. This is the historical V2.0 slice of underlying DR3012-002; 2.1–2.4 persistence does not imply a separate vendor/SDK failure."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 Base",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                34
+              ],
+              "section": "DNS-SD / Verwendung von SRV-Records",
+              "table": "Tabelle 3 Bedeutungen der SRV-Records in DNS-SD",
+              "point_summary": "Original German Weight row says lower SRV Weight is preferred; external RFC2782 calls for weighted random selection at equal Priority; same root issue DR3012-002."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 Base",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                35
+              ],
+              "section": "DNS-SD / Use of SRV Records",
+              "table": "Table 4 Meanings of the SRV record in DNS-SD (caption printed p36)",
+              "point_summary": "Original English Weight row says lower SRV Weight is preferred; external RFC2782 calls for weighted random selection at equal Priority; same root issue DR3012-002."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "DE and EN originals independently captured at p34/p35. This is the historical V2.0 slice of underlying DR3012-002; 2.1–2.4 persistence does not imply a separate vendor/SDK failure."
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.2",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "VDV-Schrift 301-2 Common Conventions",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                26
+              ],
+              "section": "DNS-SD / Verwendung von SRV-Records",
+              "table": "Tabelle 2 Bedeutungen der SRV-Records in DNS-SD",
+              "point_summary": "Original German Weight row says lower SRV Weight is preferred; external RFC2782 calls for weighted random selection at equal Priority; same root issue DR3012-002."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "VDV-Schrift 301-2 Common Conventions",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                32
+              ],
+              "section": "DNS-SD / Use of SRV Records",
+              "table": "Table 2 Meanings of the SRV record in DNS-SD",
+              "point_summary": "Original English Weight row says lower SRV Weight is preferred; external RFC2782 calls for weighted random selection at equal Priority; same root issue DR3012-002."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "DE and EN originals independently captured at p26/p32. This is the historical V2.0 slice of underlying DR3012-002; 2.1–2.4 persistence does not imply a separate vendor/SDK failure."
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.3",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "VDV-Schrift 301-2 Common Conventions",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                26
+              ],
+              "section": "DNS-SD / Verwendung von SRV-Records",
+              "table": "Tabelle 2 Bedeutungen der SRV-Records in DNS-SD",
+              "point_summary": "Original German Weight row says lower SRV Weight is preferred; external RFC2782 calls for weighted random selection at equal Priority; same root issue DR3012-002."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "VDV-Schrift 301-2 Common Conventions",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                32
+              ],
+              "section": "DNS-SD / Use of SRV Records",
+              "table": "Table 2 Meanings of the SRV record in DNS-SD",
+              "point_summary": "Original English Weight row says lower SRV Weight is preferred; external RFC2782 calls for weighted random selection at equal Priority; same root issue DR3012-002."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "DE and EN originals independently captured at p26/p32. This is the historical V2.0 slice of underlying DR3012-002; 2.1–2.4 persistence does not imply a separate vendor/SDK failure."
+        },
+        {
+          "version": "VDV 301-2 Common Conventions V2.4",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV-Schrift 301-2 Common Conventions",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                29
+              ],
+              "section": "DNS-SD / Verwendung von SRV-Records",
+              "table": "Tabelle 2 Bedeutungen der SRV-Records in DNS-SD",
+              "point_summary": "Original German Weight row says lower SRV Weight is preferred; external RFC2782 calls for weighted random selection at equal Priority; same root issue DR3012-002."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV-Schrift 301-2 Common Conventions",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                36
+              ],
+              "section": "DNS-SD / Use of SRV Records",
+              "table": "Table 2 Meanings of the SRV record in DNS-SD",
+              "point_summary": "Original English Weight row says lower SRV Weight is preferred; external RFC2782 calls for weighted random selection at equal Priority; same root issue DR3012-002."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "DE and EN originals independently captured at p29/p36. This is the historical V2.0 slice of underlying DR3012-002; 2.1–2.4 persistence does not imply a separate vendor/SDK failure."
         }
       ],
       "supporting_evidence": [
@@ -11221,7 +11423,15 @@
         "EV-130 page 33 PNG SHA-256 ab523621ba1f0c9bc3eb338b4e084e067feae0abd2af7ac57e7394bf07133b53",
         "EV-130 page 34 PNG SHA-256 5a11906f6aa7ad965389ae406d0ce0fa6c3dbd16c3be83083d6724e8d59b924f",
         "RFC Editor RFC 2782",
-        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_002_2026-10-07.md"
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_002_2026-10-07.md",
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012V20_002_2026-10-10.md",
+        "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_002_2026-10-10.md",
+        "DR3012-002 original root finding: 12 language/release lanes V1.0–V2.4; this historical ID corresponds to the later ten DE/EN lanes V2.0–V2.4",
+        "VDV301-2_BASE_V2.0 strict source SHA256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37, rendered original DE p33 PNG SHA256 9dcb6b8b0f295137d8646bfcf683735cf345a27af8351d8283312950a2a10e51, EN p34 PNG SHA256 bbdcc253188db6442fbdd747762e46661b51085cd4429837129830f50bfa7d89",
+        "VDV301-2_BASE_V2.1 strict source SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a, rendered original DE p34 PNG SHA256 c9106f49fb5afe450dde43cd588560b496db2a05729075771a044317084eb85d, EN p35 PNG SHA256 156bdeb5f86a288e468141e5fd6278f06020326b97c7441495b28e0baf2b713c",
+        "VDV301-2_GC_V2.2 strict source SHA256 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051, rendered original DE p26 PNG SHA256 ba892aff84631ef60326b02ed6e6972ecce578b873a52ac62c570126ae56f0c8, EN p32 PNG SHA256 7fa22804a7084cd46a0a6880dbcc86873fdc034b6f23f16c534e1d857459b1ec",
+        "VDV301-2_GC_V2.3 strict source SHA256 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603, rendered original DE p26 PNG SHA256 f350e73e4273f2eae550bae036328e2504bc4b43778b4a272c586e0622a8181e, EN p32 PNG SHA256 d308b4730abdf7b9663ca9d8cbf9907faf5a458a0c601d6e67a4f049c89733d9",
+        "VDV301-2_GC_V2.4 strict source SHA256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d, rendered original DE p29 PNG SHA256 6c54279504998e27cc096beff1d6260abf01ed1e77bce71b43e893aabb0e6968, EN p36 PNG SHA256 bda39111ffe5c0d5b018dacddf330607030c2e3d9971737e2b6ad10378d87afc"
       ]
     },
     {
