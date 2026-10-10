@@ -6936,10 +6936,16 @@
       "service": "DeviceManagementService",
       "version_scope": [
         {
-          "version": "VDV 301-2 Base V2.0",
+          "version": "VDV 301-2 V1.0 German original",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "Operation inventory lists SubscribeDeviceInformation but detailed subsection sequence has no dedicated heading; generic subscription context remains."
+          "note": "German original printed p55 Table6 operation inventory lists SubscribeDeviceInformation with generic SubscribeRequest/ResponseStructure, but p57 §7.1.2 GetDeviceInformation flows directly into orphan subscription sentence and §7.1.3 UnsubscribeDeviceInformation; missing own Subscribe heading. Separate official English V1.0 p64 §9.3.3 is NOT affected."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0 bilingual",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Bilingual Base V2.0 original p90 Table11 lists SubscribeDeviceInformation, but p92 after Table13 shows generic subscription prose with no heading before §7.1.3 UnsubscribeDeviceInformation. Official DMS V2.0 XSD service group does not individually declare SubscribeDeviceInformationRequest/Response; generic subscription presentation is not proof of conformance obligation."
         }
       ],
       "review_state": "manually_reviewed",
@@ -6961,25 +6967,41 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "SubscribeDeviceInformation appears in the operation inventory but no dedicated detailed heading exists."
+          "note": "Exact-byte original German V1.0 p55 inventory (Table6 caption p56), p57 §7.1.2.2 GetDeviceInformation Response Tables7/8 and orphan subscription sentence immediately before §7.1.3 UnsubscribeDeviceInformation; no Subscribe heading. Original verified run38042683113, p55 PNG 506b04b236373bdc25d0545af6b722514fbd6656c9378d9e8204e8da4d7bc4f9, p57 c58ce817ac87cf344feb18c55a20676c3db03f86e34973b689b4afafe00797fb."
         },
         {
-          "type": "common_conventions",
-          "note": "Generic subscription modelling remains, so the missing heading does not prove the operation unsupported."
+          "type": "official_pdf_explicit",
+          "note": "V1.0 English original p64 Table30 then §9.3.2 GetDeviceInformation Tables31/32 followed by explicit §9.3.3 Data Structure of Operation SubscribeDeviceInformation and generic subscription paragraph: non-affected independently issued language track. Strict original render run38042692039 p64 PNG 15340364b3cd739d266d24fc3ab7f70b91021cd8bae1a0d6d689fb3726a2e578."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Bilingual Base V2.0 p90 inventory Table11 (caption p92), p92 §7.1.2 GetDeviceInformation Tables12/13 and orphan generic subscription paragraph before §7.1.3 UnsubscribeDeviceInformation. Strict run38042731143 p90 042fb374f27bd754f6e55e12bd884e138fc7675c4811c218b3f36993798a3999 and p92 05ed33fbde5e167ea5e480b3ac9d8a89594ecb50ba51bc4205452566cdd8e2ba."
+        },
+        {
+          "type": "version_history",
+          "note": "Bilingual Base V2.1 p97 explicitly restores §7.1.4 SubscribeDeviceInformation with generic subscription prose, immediately followed by §7.1.5 UnsubscribeDeviceInformation. Strict run38042738286 p97 PNG 4daca79147ffef4a7e5945d0ad0631f23d60e78368f391d6f623685a37972c18."
+        },
+        {
+          "type": "version_history",
+          "note": "Separate official DMS V2.2 printed p18 §2.3 and DMS V2.4 printed p17 §2.3 explicitly include SubscribeDeviceInformation heading, independently pinned original runs38042908251 and38042746163 with respective page PNG 947e51b4cfc795dcd9dcdd5ea92068075e6c9310fcfe8e653b8cad16a8b8aaa9 and3845362f1563a109a6f9b396ed580d6114380b1dcd055538c3caf6fb7c30f018."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Official upstream VDVde/VDV301 tag VDV-301-1.0 DMS blob602a963f91000d0d39e3c271bacb3c7aba73e6d4 contains DMS response types but no explicit SubscribeDeviceInformation operation entry; VDV-301-2.0 DMS XSD blob74189e0da65563eeb084ec2f3c400e9668d1ee1a DeviceManagementServiceGroup likewise lacks SubscribeDeviceInformationRequest/Response, while official VDV-301-2.1 DMS XSD blob191b43e01cdaba14b247725689a913c244a67eed has explicit lines13/14 for those generic SubscribeRequest/ResponseStructure elements, retained in tag 2.2 blob c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "DMS V2.0: SubscribeDeviceInformation ohne eigene Detailüberschrift",
-          "short": "Das Inventar nennt die Operation, die Detailfolge nicht.",
-          "long": "Die Dokumentation ist strukturell asymmetrisch: SubscribeDeviceInformation steht im Operation-Inventar, besitzt aber keine eigene Detailüberschrift. Wegen des generischen Subscription-Kontexts darf daraus keine fehlende Protokollunterstützung abgeleitet werden.",
-          "recommendation": "Unterstützung nicht ausschließlich aus Detailüberschriften ableiten; den Befund als Dokumentationsasymmetrie behandeln."
+          "title": "DeviceManagementService: SubscribeDeviceInformation ohne eigene Überschrift in V1.0 DE und Base V2.0",
+          "short": "V1.0 Deutsch und zweisprachige Base V2.0 listen die Operation, lassen aber die Detailüberschrift aus. V1.0 Englisch und Base V2.1 enthalten sie.",
+          "long": "Die originale deutsche VDV 301-2 V1.0 führt SubscribeDeviceInformation auf S.55 in der Operationstabelle (Tabelle 6 auf S.56). Im Detailteil S.57 steht lediglich ein nicht eigens überschriebenes Subscription-Statement zwischen GetDeviceInformation (§7.1.2) und UnsubscribeDeviceInformation (§7.1.3). Die separat veröffentlichte englische V1.0 ist dagegen korrekt und nennt §9.3.3 auf S.64. In der zweisprachigen Base V2.0 findet sich dieselbe Asymmetrie: Tabelle 11 nennt die Operation (S.90), während auf S.92 nach GetDeviceInformation ohne Subscribe-Überschrift unmittelbar §7.1.3 UnsubscribeDeviceInformation folgt. Base V2.1 korrigiert dies in §7.1.4 (S.97). Die separaten DMS-Schriften V2.2 (S.18) und V2.4 (S.17) haben ebenfalls §2.3. Die genaue XSD-Operationserfassung unterscheidet sich historisch: Die offizielle V2.0-DMS-XSD enthält keine gesonderten SubscribeDeviceInformationRequest/Response-Mitglieder in der Servicegruppe; die V2.1-XSD dagegen schon. Aus einer fehlenden PDF-Überschrift oder einer Operation im Tabelleninventar folgt weder eine zwingende Anbieterunterstützung noch ein eigenständiger XML-Konformitätsfehler. Der jeweils gewählte XSD-Profilstand bleibt alleinige XML-Gültigkeitsautorität.",
+          "recommendation": "Fehlende Überschrift als Dokumentationsasymmetrie behandeln. Operationen, optionale Unterstützung und XML-Verhalten ausschließlich aus der tatsächlich ausgewählten Dienstversion, den verbindlichen Regeln und dem zugehörigen exakten XSD-Profil bewerten; keine aus Tabellenüberschriften erfundenen Anbieterfehler."
         },
         "en": {
-          "title": "DMS V2.0: SubscribeDeviceInformation lacks a dedicated detail heading",
-          "short": "The inventory lists the operation but the detail sequence does not.",
-          "long": "The documentation is structurally asymmetric: SubscribeDeviceInformation is in the operation inventory but has no dedicated heading. Given generic subscription context, this does not prove the protocol operation unsupported.",
-          "recommendation": "Do not derive support solely from detailed headings; treat this as a documentation asymmetry."
+          "title": "DeviceManagementService: missing SubscribeDeviceInformation heading in German V1.0 and bilingual Base V2.0",
+          "short": "German V1.0 and bilingual Base V2.0 list the operation without its own detailed heading; independent V1.0 English and bilingual Base V2.1 contain one.",
+          "long": "The official VDV 301-2 V1.0 German operation inventory lists SubscribeDeviceInformation on printed p55 (Table6 caption p56), but detailed p57 proceeds from §7.1.2 GetDeviceInformation through an unheaded generic subscription sentence to §7.1.3 UnsubscribeDeviceInformation. The separately published V1.0 English original corrects this with explicit §9.3.3 on p64. Bilingual Base V2.0 lists SubscribeDeviceInformation in Table11 (p90/92) yet similarly leaves the generic subscription sentence unheaded before §7.1.3 UnsubscribeDeviceInformation on p92. Bilingual Base V2.1 p97 §7.1.4 and separate DMS V2.2 p18 / V2.4 p17 §2.3 have the heading. The official V2.0 DMS XSD does not explicitly include SubscribeDeviceInformationRequest/Response in its service group, while official V2.1 does. This documentary omission cannot establish an unsupported mandatory operation or independent vendor XML failure. Only the exact selected release XSD and explicit version-specific protocol obligations govern conformance.",
+          "recommendation": "Record the missing heading as documentation asymmetry only. Derive operation support, optionality and XML PASS/FAIL solely from the exact selected service/version authority; never infer provider errors from missing or present documentation headings."
         }
       },
       "runtime_match": {
@@ -7001,8 +7023,14 @@
           "kind": "evidence",
           "reference": "EV-130 / evidence run 33780668141 / closure run 33781049413",
           "note": "Pinned evidence-gate revalidation for this subblock."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_006_2026-10-10.md",
+          "note": "Byte-pinned visible body original DE/EN V1.0, Base V2.0/2.1 and later DMS 2.2/2.4, plus exact XSD change evidence."
         }
-      ]
+      ],
+      "notes": " 2026-10-10 scope correction: first affected V1.0 German only; independent English V1.0 correct; bilingual Base V2.0 affected; first corrected successor bilingual Base V2.1, supported by separate DMS V2.2/2.4. DMS V2.0 XSD operation group lacks explicit subscribe members, V2.1 adds them; documentation finding remains info/not-applicable, no invented vendor obligation."
     },
     {
       "finding_id": "DR3012V20-007",

@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "b9f9ef736f47d6b8ba34e1f06573cbbe3978ad58",
+    "git_blob": "47e6d67a7fb50eded0b0bf3d0f6b1c5618fe9e9d",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 70,
-    "coverage_complete_count": 70,
+    "locator_entry_count": 71,
+    "coverage_complete_count": 71,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 122
+    "remaining_finding_count": 121
   },
   "entries": [
     {
@@ -11891,6 +11891,264 @@
         "VDV301-2 V1.0 exact-byte page 66 PNG SHA-256 98925a4af4b14ddd2b2bbb3c7feaf78f9a00f2aa78e3ee3bd3dc28ee6c33960d",
         "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_DR3012V20_005_V21_SCOPE_2026-10-07.md",
         "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_005_2026-10-07.md"
+      ]
+    },
+    {
+      "finding_id": "DR3012V20-006",
+      "service": "DeviceManagementService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "VDV 301-2 V1.0 German original",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "German original printed p55 Table6 operation inventory lists SubscribeDeviceInformation with generic SubscribeRequest/ResponseStructure, but p57 §7.1.2 GetDeviceInformation flows directly into orphan subscription sentence and §7.1.3 UnsubscribeDeviceInformation; missing own Subscribe heading. Separate official English V1.0 p64 §9.3.3 is NOT affected."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0 bilingual",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Bilingual Base V2.0 original p90 Table11 lists SubscribeDeviceInformation, but p92 after Table13 shows generic subscription prose with no heading before §7.1.3 UnsubscribeDeviceInformation. Official DMS V2.0 XSD service group does not individually declare SubscribeDeviceInformationRequest/Response; generic subscription presentation is not proof of conformance obligation."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "VDV 301-2 V1.0 German original",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_DE",
+              "document_title": "VDV-Schrift 301-2 V1.0 German original",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2sds-v1-0.pdfx",
+              "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+              "printed_pages": [
+                55
+              ],
+              "section": "7.1.1 Operationen DeviceManagementService",
+              "table": null,
+              "point_summary": "Original operation inventory starts p55 and names SubscribeDeviceInformation Req. SubscribeRequestStructure / Resp. SubscribeResponseStructure; inventory Table6 caption printed p56."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_DE",
+              "document_title": "VDV-Schrift 301-2 V1.0 German original",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2sds-v1-0.pdfx",
+              "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+              "printed_pages": [
+                56
+              ],
+              "section": "7.1.1 Operationen DeviceManagementService",
+              "table": "Tabelle 6 Beschreibung von Operationen des DeviceManagementService",
+              "point_summary": "Original Table6 inventory caption confirms operation listing; not a detail heading."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_DE",
+              "document_title": "VDV-Schrift 301-2 V1.0 German original",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2sds-v1-0.pdfx",
+              "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+              "printed_pages": [
+                57
+              ],
+              "section": "7.1.2 Datenstrukturen der Operation GetDeviceInformation / 7.1.3 Datenstrukturen der Operation UnsubscribeDeviceInformation",
+              "table": "Tabelle 7 DeviceManagementService.GetDeviceInformationResponse; Tabelle 8 DeviceManagementService.GetDeviceInformationResponseData",
+              "point_summary": "Between actual Tables7/8 and §7.1.3 is orphan generic subscription sentence. No intervening dedicated SubscribeDeviceInformation heading."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Affected German original first publication; no distinct operation support obligation synthesized from heading absence. Separate English V1.0 unaffected."
+        },
+        {
+          "version": "VDV 301-2 V1.0 English translation",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "historical_unaffected_language_control",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 V1.0 independent English translation",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                64
+              ],
+              "section": "9.3.2 Data Structure of Operation GetDeviceInformation / 9.3.3 Data Structure of Operation SubscribeDeviceInformation",
+              "table": "Table 30 Description of Operationen des DeviceManagementService; Table 31 GetDeviceInformationResponse; Table 32 GetDeviceInformationResponseData",
+              "point_summary": "English original p64 includes the actual visible §9.3.3 SubscribeDeviceInformation detail heading plus generic subscription paragraph, unlike German original."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Independently published V1.0 English unaffected; actual printed §9.3.3 must not be projected onto original German."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0 bilingual",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV-Schrift 301-2 bilingual Base Services V2.0",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                90
+              ],
+              "section": "7.1.1 Operationen DeviceManagementService",
+              "table": null,
+              "point_summary": "Bilingual Base V2.0 operation inventory lists SubscribeDeviceInformation as Req. SubscribeRequestStructure / Resp. SubscribeResponseStructure."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV-Schrift 301-2 bilingual Base Services V2.0",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                92
+              ],
+              "section": "7.1.1 Operationen DeviceManagementService / 7.1.2 Data Structure of Operation GetDeviceInformation / 7.1.3 Data Structure of OperationUnsubscribeDeviceInformation",
+              "table": "Tabelle 11 Beschreibung von Operationen des DeviceManagementService; Table 12 GetDeviceInformationResponse; Table 13 GetDeviceInformationResponseData",
+              "point_summary": "Actual Table11 caption above §7.1.2; after Table13 orphan generic subscription sentence precedes §7.1.3 UnsubscribeDeviceInformation without Subscribe heading."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.0.xsd",
+              "git_blob": "74189e0da65563eeb084ec2f3c400e9668d1ee1a",
+              "authority_detail": "Exact original upstream official VDVde/VDV301 release tag VDV-301-2.0; compared to its unchanged released bytes",
+              "component_kind": "group",
+              "component": "DeviceManagementServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']",
+              "point_summary": "Official DMS V2.0 group lacks individually declared SubscribeDeviceInformationRequest/Response, so missing PDF heading does not supply an independent XML validity rule.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "line_hint": "8"
+            }
+          ],
+          "coverage_note": "Affected bilingual V2.0; XSD v2.0 service group does not list separate subscribe op members. Document heading absence alone is info, not vendor FAIL."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1 bilingual",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "first_corrected_successor",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 bilingual Base Services V2.1",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                97
+              ],
+              "section": "7.1.3 Data Structure of Operation GetDeviceInformation / 7.1.4 Data Structure of Operation SubscribeDeviceInformation / 7.1.5 Data Structure of Operation UnsubscribeDeviceInformation",
+              "table": "Table 12 GetDeviceInformationResponse; Table 13 GetDeviceInformationResponseData",
+              "point_summary": "Visible V2.1 p97 explicitly includes §7.1.4 SubscribeDeviceInformation followed by §7.1.5 UnsubscribeDeviceInformation, first corrected Base successor."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+              "git_blob": "191b43e01cdaba14b247725689a913c244a67eed",
+              "authority_detail": "Exact original upstream official VDVde/VDV301 release tag VDV-301-2.1; compared to its unchanged released bytes",
+              "component_kind": "element",
+              "component": "DeviceManagementService.SubscribeDeviceInformationRequest",
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']/xs:sequence/xs:element[@name='DeviceManagementService.SubscribeDeviceInformationRequest']",
+              "point_summary": "Official DMS V2.1 group explicitly models generic subscribe request; matching response is line14, PDF heading restored.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "line_hint": "13",
+              "member": "DeviceManagementService.SubscribeDeviceInformationRequest",
+              "value": "type=\"SubscribeRequestStructure\""
+            }
+          ],
+          "coverage_note": "First corrected successor for both language tracks in bilingual Base; released V2.1 XSD also explicitly contains SubscribeDeviceInformationRequest/Response."
+        },
+        {
+          "version": "VDV 301-2-0 DMS V2.2",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "later_corrected_control",
+          "pdf_locators": [
+            {
+              "source_id": "DMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService V2.2",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sdes-v2-2-devicemanagementservice.pdfx",
+              "sha256": "72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e",
+              "printed_pages": [
+                18
+              ],
+              "section": "2.3 Data Structure of Operation SubscribeDeviceInformation",
+              "table": null,
+              "point_summary": "Actual visible §2.3 SubscribeDeviceInformation heading followed by generic subscription paragraph, §2.4 UnsubscribeDeviceInformation next."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+              "git_blob": "c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d",
+              "authority_detail": "Exact original upstream official VDVde/VDV301 release tag VDV-301-2.2; compared to its unchanged released bytes",
+              "component_kind": "element",
+              "component": "DeviceManagementService.SubscribeDeviceInformationRequest",
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']/xs:sequence/xs:element[@name='DeviceManagementService.SubscribeDeviceInformationRequest']",
+              "point_summary": "Official DMS V2.2 XSD contains generic SubscribeDeviceInformation request and response at lines13/14, PDF heading present.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "line_hint": "13",
+              "member": "DeviceManagementService.SubscribeDeviceInformationRequest",
+              "value": "type=\"SubscribeRequestStructure\""
+            }
+          ],
+          "coverage_note": "Independent later DMS V2.2 publication preserves corrected dedicated heading; exact official XSD V2.2 tag verified."
+        },
+        {
+          "version": "VDV 301-2-0 DMS V2.4",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "latest_checked_corrected_control",
+          "pdf_locators": [
+            {
+              "source_id": "DMS_V2.4",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService V2.4",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sde-v2.4-devicemanagementservice.pdfx",
+              "sha256": "347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd",
+              "printed_pages": [
+                17
+              ],
+              "section": "2.3 Data Structure of Operation SubscribeDeviceInformation",
+              "table": null,
+              "point_summary": "Actual visible §2.3 SubscribeDeviceInformation heading and generic subscription prose; followed by §2.4, corrected in official V2.4 DMS PDF."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Official PDF publication of DMS V2.4 checked, not a statement that a candidate/integration DMS V2.4 XSD is an official released tag. No official released DMS V2.4 XSD authority promoted by this locator."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_006_2026-10-10.md",
+        "VDV301-2_V1.0_DE run38042683113 artifact11666248483 original p55 SHA256 506b04b236373bdc25d0545af6b722514fbd6656c9378d9e8204e8da4d7bc4f9 p56 be3dacf306d0d359197be755d71171032dd719786912fc833db06bc389a96906 p57 c58ce817ac87cf344feb18c55a20676c3db03f86e34973b689b4afafe00797fb",
+        "VDV301-2_V1.0_EN run38042692039 artifact11665873927 p64 15340364b3cd739d266d24fc3ab7f70b91021cd8bae1a0d6d689fb3726a2e578",
+        "VDV301-2_BASE_V2.0 run38042731143 artifact11666358448 p90 042fb374f27bd754f6e55e12bd884e138fc7675c4811c218b3f36993798a3999 p92 05ed33fbde5e167ea5e480b3ac9d8a89594ecb50ba51bc4205452566cdd8e2ba",
+        "VDV301-2_BASE_V2.1 run38042738286 artifact11665864117 p97 4daca79147ffef4a7e5945d0ad0631f23d60e78368f391d6f623685a37972c18",
+        "DMS_V2.2 run38042908251 artifact11665394848 p18 947e51b4cfc795dcd9dcdd5ea92068075e6c9310fcfe8e653b8cad16a8b8aaa9",
+        "DMS_V2.4 run38042746163 artifact11666428423 p17 3845362f1563a109a6f9b396ed580d6114380b1dcd055538c3caf6fb7c30f018",
+        "VDVde/VDV301 exact official released DMS schemas tags VDV-301-1.0 blob602a963f91000d0d39e3c271bacb3c7aba73e6d4, VDV-301-2.0 blob74189e0da65563eeb084ec2f3c400e9668d1ee1a, VDV-301-2.1 blob191b43e01cdaba14b247725689a913c244a67eed, VDV-301-2.2 blob c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d"
       ]
     }
   ]
