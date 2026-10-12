@@ -2126,9 +2126,9 @@
     "version_scope_boundary_pending_count": 0
   },
   "next_actions": [
-    "DR3012GC22-002 gate_pending: observe exact-byte V2.3 render result pages 25,27,31,33.",
-    "Render V2.4 original pages 28,30,35,37, compare V2.0/2.1 clean predecessors, V2.2/2.3/2.4 affected, German and English independently.",
-    "After visual proof, synchronize semantic registry/source locators/boundary registry and CURRENT_STATE in a single recoverable commit, full gate then terminal handoff."
+    "DR3012GC22-002 gate_pending: observe V2.4 exact-byte PDF render request pages 28,30,35,37.",
+    "V2.3 body confirmed duplicate German 3.3.1 (p27) vs English 3.3.2 (p33); V2.0/V2.1 clean predecessors, V2.2 affected.",
+    "After V2.4 independent visual verification, synchronize canonical affected scope V2.2–V2.4, locator and boundary registry, then full gate + handoff."
   ],
   "source_locator_progress": {
     "locator_entry_count": 74,
@@ -2211,17 +2211,19 @@
     "latest_completed_full_gate_run_id": "38218654142",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38218654097",
-    "resume_instruction": "HEAD contains gate_pending V2.3 PDF render request for DR3012GC22-002; inspect exact branch Actions render artifact, then verify V2.4 original and complete version-scope expansion before terminal closure.",
+    "resume_instruction": "DR3012GC22-002 gate_pending; V2.3 confirmed visual from artifact11735744597. Next: V2.4 exact-byte render trigger from tools/pdf_render_request_v0.1.json, inspect workflow artifact, then canonical registry/scope correction, gate + terminal.",
     "pending_block": "DR3012GC22-002 full 2.2/2.3/2.4 edition boundary verification and structural source locator",
     "active_finding": "DR3012GC22-002",
-    "active_step": "Requested deterministic pinned visible PDF original rendering for General Conventions V2.3 pages 25,27,31,33; same-root editorial numbering persists according to official text source",
-    "next_step": "Observe V2.3 PDF visual fallback workflow, inspect visual exact-byte artifact and then request V2.4 pages 28,30,35,37; only afterward update canonical finding scope/locators, gate, final handoff",
+    "active_step": "V2.3 pinned original visual reviewed from GHA artifact 11735744597 (run 38224916667): German printed p27 shows TXT 3.3.1; English printed p33 shows TXT 3.3.2. Requested V2.4 pages 28,30,35,37.",
+    "next_step": "Observe V2.4 PDF fallback GHA run and download artifact; inspect visible body, then update finding scope + source locator and scope-boundary registry; full gate and terminal closure.",
     "evidence_refs": [
       "EV-132 artifact 9903986586 V2.2 p25/27/31/33",
       "VDV301-2_GC_V2.3 original SHA256 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
-      "tools/pdf_render_request_v0.1.json"
+      "tools/pdf_render_request_v0.1.json",
+      "V2.3 pinned visual artifact 11735744597 run38224916667 p25 0bd2e2b6fbf574f388fab30903459dbb90125fe29143e4d8842da5c886a23b91 p27 cb49ed9796eadd3c0428db878f5d83e9eba39c4b8d8e49b0d9bbfede363907f9; EN p33 b8a2f7c03e60f451701bafef299785f490124bb0141069e8cc000fbdbd0a6819",
+      "VDV301-2_GC_V2.4 pinned SHA256 048f805fe3ddc894556899a94e36ec1b8cdc5a88fac5ad87235e4d"
     ],
-    "recovery_instruction": "HEAD contains gate_pending V2.3 PDF render request for DR3012GC22-002; inspect exact branch Actions render artifact, then verify V2.4 original and complete version-scope expansion before terminal closure."
+    "recovery_instruction": "DR3012GC22-002 gate_pending; V2.3 confirmed visual from artifact11735744597. Next: V2.4 exact-byte render trigger from tools/pdf_render_request_v0.1.json, inspect workflow artifact, then canonical registry/scope correction, gate + terminal."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
