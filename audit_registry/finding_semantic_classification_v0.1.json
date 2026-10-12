@@ -6157,10 +6157,22 @@
       "service": "VDV 301-2 General Conventions / IP addressing",
       "version_scope": [
         {
+          "version": "General Conventions V2.2",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Original 2.2 German §2.1 p17 duplicates 2.1.1 for IP-Adressen and Subnetzmasken/Gateways; English p20 distinguishes 2.1.1 / 2.1.2. First affected after clean Basic V2.1."
+        },
+        {
+          "version": "General Conventions V2.3",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Original 2.3 German §2.1 p17 duplicates 2.1.1 for IP-Adressen and Subnetzmasken/Gateways; English p20 distinguishes 2.1.1 / 2.1.2. Persistence of same German-only navigation defect."
+        },
+        {
           "version": "General Conventions V2.4",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "German numbering duplicates 2.1.1 for IP addresses and subnet masks/gateways; English uses 2.1.1/2.1.2."
+          "note": "Original 2.4 German §2.1 p20 duplicates 2.1.1 for IP-Adressen and Subnetzmasken/Gateways; English p23 distinguishes 2.1.1 / 2.1.2. Latest checked publication; no corrected successor established."
         }
       ],
       "review_state": "manually_reviewed",
@@ -6181,21 +6193,29 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "German V2.4 duplicates 2.1.1; English distinguishes 2.1.1 and 2.1.2."
+          "note": "Original official GC V2.2 German p17, V2.3 German p17, V2.4 German p20 each visibly label IP-Adressen and Subnetzmasken/Gateways both §2.1.1, while English GC V2.2 p20, V2.3 p20, V2.4 p23 consistently labels 2.1.1/2.1.2."
+        },
+        {
+          "type": "historical_version_boundary",
+          "note": "Earliest official V1.0 DE p20, Base V2.0 bilingual p21, and last unaffected Basic Services V2.1 bilingual p22 visibly use 2.1.1/2.1.2 correctly. First affected GC2.2; persists through GC2.4, no corrected successor in checked publication inventory."
+        },
+        {
+          "type": "authority_boundary",
+          "note": "Only visible PDF body headings/cross-references are affected. No XML/XSD validation rule, enumeration, protocol behavior or provider conformance requirement changes. SDK no_runtime_diagnostic."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "General Conventions V2.4: doppelte deutsche Abschnittsnummer 2.1.1",
-          "short": "Zwei Netzwerk-Unterthemen tragen deutsch dieselbe Nummer.",
-          "long": "Die deutsche Struktur nummeriert IP-Adressen und Subnetzmasken/Gateways beide als 2.1.1. Englisch zeigt die beabsichtigte Folge 2.1.1/2.1.2. Der Fehler ist rein navigativ.",
-          "recommendation": "Als Dokumentationsnummerierungsfehler behandeln; keine technische Bedeutung ableiten."
+          "title": "General Conventions V2.2–V2.4: doppelte deutsche Abschnittsnummer 2.1.1",
+          "short": "In drei aufeinanderfolgenden deutschen Fassungen tragen IP-Adressen und Subnetzmasken/Gateways beide 2.1.1.",
+          "long": "In den offiziellen General Conventions V2.2 (S.17), V2.3 (S.17) und V2.4 (S.20) sind die beiden deutschen Unterkapitel unter 2.1 Adressierung fälschlich beide als 2.1.1 bezeichnet. Die jeweiligen englischen Originalseiten verwenden 2.1.1 für IP Addresses und 2.1.2 für Subnet Masks/Gateways. Die vorausgehenden Basic Services bis V2.1 sind korrekt. Der Fehler betrifft ausschließlich die Dokumentationsnavigation, nicht die XML-Validierung.",
+          "recommendation": "Als persistenten PDF-Nummerierungsfehler dokumentieren und eine redaktionelle Korrektur bei VDV melden; keinen Anbieterfehler, keine zusätzliche technische Regel und keinen SDK-Runtime-Matcher erzeugen."
         },
         "en": {
-          "title": "General Conventions V2.4: duplicate German section number 2.1.1",
-          "short": "Two network subtopics carry the same number in German.",
-          "long": "The German structure numbers IP addresses and subnet masks/gateways both as 2.1.1. English shows the intended 2.1.1/2.1.2 sequence. The defect is purely navigational.",
-          "recommendation": "Treat it as a documentation numbering defect; derive no technical meaning."
+          "title": "General Conventions V2.2–V2.4: duplicated German subsection 2.1.1",
+          "short": "Three German editions label both IP addresses and subnet masks/gateways as 2.1.1.",
+          "long": "The official GC V2.2 (p17), V2.3 (p17), and V2.4 (p20) repeat the German heading 2.1.1 for two different topics beneath 2.1 Addressing. The English originals in all three publications correctly use 2.1.1 and 2.1.2. Earlier Basic Services through V2.1 are correctly numbered. The error is editorial navigation only and has no executable XML conformance impact.",
+          "recommendation": "Record this as a persistent publication numbering defect for an upstream editorial correction; do not issue provider conformance failures, infer technical requirements, or create an SDK runtime matcher."
         }
       },
       "runtime_match": {
@@ -6217,8 +6237,14 @@
           "kind": "evidence",
           "reference": "EV-134 / evidence run 33843888080 / closure run 33844432985",
           "note": "Pinned evidence-gate revalidation for this subblock."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_002_2026-10-12.md",
+          "note": "2026-10-12 six byte-pinned official PDF versions, exact body page/bilingual verification, first affected GC2.2 last checked affected GC2.4, no corrected successor."
         }
-      ]
+      ],
+      "notes": "2026-10-12 original body+version boundary corrected: affected GC V2.2, V2.3, V2.4 rather than only V2.4; last nonaffected Basic Services V2.1 exact original printed p22, earlier V1.0 and Basic2.0 correct. English in all three affected editions correct. No successor beyond GC2.4 published in current pinned source inventory. No runtime or XSD effect."
     },
     {
       "finding_id": "DR3012GC24-003",
