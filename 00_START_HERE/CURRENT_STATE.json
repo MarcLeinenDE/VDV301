@@ -2126,9 +2126,9 @@
     "version_scope_boundary_pending_count": 0
   },
   "next_actions": [
-    "DR3012GC24-004 complete: 80/192 source locators and visible-body verification, 80/80 independent version-scope boundary checks, 112 remaining.",
-    "Substantive HEAD b1b86742 schema audit 38267335688 SUCCESS; handoff 38267335720 SUCCESS. After terminal closure commit verify final HEAD schema-audit and handoff-integrity SUCCESS.",
-    "Next DR3012GC24-005: General Conventions V2.4 stale 'Version 1.0 of IBIS-IP' wording, historical boundaries and exact no-umbrella-version authority."
+    "DR3012GC24-004 final HEAD d2d36f9d, schema audit38267573206 SUCCESS, handoff38267573357 SUCCESS; 80/192 complete.",
+    "DR3012GC24-005 source acquisition: official 2014 English V1.0 §3.6 and §4.5 pinned rendered original, compare V1.0 DE and all Basic/GC publications; no new locators counted until evidence complete.",
+    "After body/version checks update canonical semantic, locator, boundary, body and SDK stores then full gate, separate terminal_clean and final HEAD checks."
   ],
   "source_locator_progress": {
     "locator_entry_count": 80,
@@ -2206,12 +2206,23 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "38267335688",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38267335720",
-    "resume_instruction": "DR3012GC24-004 terminal_clean at 80/192 source locators/body and 80/80 verified boundaries; 112 remaining. English V1.0 (01/2014) §14 p122 PassengerCountigService, German V1.0 (07/2016) p78; Basic V2.0/2.1 and GC V2.2–2.4 persist. Three additional wrong service names in GC V2.2–2.4. V1.0 official enum omits even corrected PassengerCountingService; V2.3 official tag reuses V2.2 exact blob. V2.4 candidate not official. Report docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_004_2026-10-12.md. Substantive full gate 38267335688 SUCCESS, handoff 38267335720 SUCCESS. Verify final HEAD gates. Next DR3012GC24-005."
+    "resume_instruction": "DR3012GC24-005 V1.0 English historical boundary rendering requested; 80/192 completed unchanged. Previous DR3012GC24-004 terminal-clean verified final schema run38267573206 and handoff38267573357 SUCCESS. Do not add unsupported global-version XSD rule. Next DR3012V21-001 if current classification ordering confirms.",
+    "pending_block": "DR3012GC24-005",
+    "active_finding": "DR3012GC24-005",
+    "active_step": "Historical V1.0 EN boundary source acquisition: strict-byte-pinned PDF pages 19–23 requested, 80/192 canonical complete count unchanged.",
+    "next_step": "Inspect exact original English V1.0 §3.6 p21 and §4.5 p23 visual content; compare German V1.0 and bilingual Basic V2.0/2.1, GC V2.2/2.3/2.4; finish full original body scope and version boundaries.",
+    "evidence_refs": [
+      "tools/pdf_render_request_v0.1.json",
+      "audit_registry/pdf_source_registry_v0.1.json",
+      "audit_registry/pdf_source_pins_v0.1.json",
+      "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_GC24_2026-09-04.md"
+    ],
+    "recovery_instruction": "DR3012GC24-005 gate_pending research-only; 80/192 locators unchanged. Check exact-pinned V1.0 EN fallback renderer on workflow run from tools/pdf_render_request_v0.1.json, inspect pages 19–23, then complete semantic source, body and boundary in canonical order; full schema gate and terminal closure required."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
