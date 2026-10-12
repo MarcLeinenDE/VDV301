@@ -2126,9 +2126,9 @@
     "version_scope_boundary_pending_count": 0
   },
   "next_actions": [
-    "DR3012V20-007 terminally complete: full schema-audit 38216094865 SUCCESS; final terminal-HEAD handoff integrity must be confirmed before further work.",
-    "Next source locator DR3012V20-008, 72/192 complete, 120 remaining, with exact original-pdf body and independently checked version boundaries in same small terminal work cycle.",
-    "No automatic correction of historical official XSDs, no invented setter support in DMS V2.2, no provider FAIL merely because PDF wording says Get sets."
+    "DR3012V20-008: inspect original affected V1.0 EN p64, Base V2.0 p92 and Base V2.1 p97 response table descriptors; independently verified V1.0 DE p57 nonaffected.",
+    "Review original dedicated DMS V2.2/V2.4 GetDeviceInformation response tables, exact selected DMS official XSD 1.0/2.0/2.1/2.2, differentiate correct ResponseData description.",
+    "Commit same-block 008 source/body/boundary evidence, run complete gate, terminal-clean handoff and exact-final-HEAD checks."
   ],
   "source_locator_progress": {
     "locator_entry_count": 72,
@@ -2206,12 +2206,20 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "38216094865",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38216094891",
-    "resume_instruction": "DR3012V20-007 terminal_clean: visible original V1.0 DE correct; English V1.0, Base V2.0/V2.1, dedicated DMS V2.2/V2.4 contain false Get setter wording. Official XSD 1.0/2.0/2.1 separates Get and Set, released DMS2.2 has Get but NO SetDeviceConfiguration. No later corrected publication established; DMS2.4 is official PDF not automatically an official XSD tag. 72/192 source locators, 72/72 per-version boundaries complete, original-body verified, report docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_007_2026-10-12.md. Full schema audit 38216094865 SUCCESS, pending-HEAD handoff 38216094891 SUCCESS. Verify final HEAD handoff-integrity and resume next DR3012V20-008."
+    "resume_instruction": "DR3012V20-008 source render requests underway; 72/192 locators, 72/72 boundaries remain unchanged until substantive full evidence gate.",
+    "pending_block": "DR3012V20-008 source-locator/version boundary",
+    "active_finding": "DR3012V20-008",
+    "active_step": "Requesting strict original PDF render DMS_V2.2 15-18",
+    "next_step": "Inspect exact original DMS2.2 and DMS2.4 visible body table and descriptions; preserve affected and non-affected historical tracks then commit finding and evidence with same-current-state gate.",
+    "recovery_instruction": "DR3012V20-008 pending original PDF source renders. Check actions for DMS_V2.2 p15-18 and DMS_V2.4 p14-17, strict verified source pins and actual table body. Do not increment registry counts before semantic and XSD authority verification.",
+    "evidence_refs": [
+      "Render request DMS_V2.2 15-18"
+    ]
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
