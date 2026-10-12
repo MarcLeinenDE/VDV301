@@ -6028,16 +6028,46 @@
       "service": "VDV 301-2 General Conventions / DeviceClassEnumeration",
       "version_scope": [
         {
+          "version": "VDV 301-2 V1.0 German original",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Earliest byte-pinned available official German V1.0 07/2016 p17 §1.4 Gerätetabelle uses OnBordUnit, while selected official V1.0 DeviceClassEnumeration requires exact OnBoardUnit. No earlier public predecessor in the audited source registry; no English V1.0 PDF control asserted."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.0.xsd",
+          "note": "Original p16 German §1.4 Tabelle1 writes OnBordUnit; English p17 Device Classes writes OnBoardUnit; official exact V2.0 enum OnBoardUnit."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.1.xsd",
+          "note": "Original p17 German §1.4 Tabelle1 OnBordUnit; English p18 OnBoardUnit; official exact V2.1 enum OnBoardUnit."
+        },
+        {
+          "version": "General Conventions V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Original p10 German §1.3 Tabelle1 and p71 §8 glossary OnBordUnit, English p14 Table1 OnBoardUnit; official exact V2.2 enum OnBoardUnit."
+        },
+        {
+          "version": "General Conventions V2.3",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Original p10 German §1.3 Tabelle1 and p72 §8 glossary OnBordUnit; English p14 Table1 OnBoardUnit. No distinct official Enumerations_V2.3.xsd exists in canonical root authority inventory; do not invent a strict V2.3 enum route."
+        },
+        {
           "version": "General Conventions V2.4 official PDF",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "German text uses OnBordUnit while English uses OnBoardUnit."
+          "note": "Original p13 German Tabelle1 and p76 §8 glossary OnBordUnit, English p17 Table1 and p78 §8 glossary OnBoardUnit. No official released V2.4 root enumeration XSD established."
         },
         {
           "version": "V2.4 candidate/integration schema context",
           "authority": "candidate_integration",
-          "xsd_profile": "IBIS-IP_Enumerations.xsd (V2.4 candidate/integration)",
-          "note": "Selected candidate DeviceClassEnumeration contains OnBoardUnit; no official VDV-301-2.4 release XSD is established."
+          "xsd_profile": "IBIS-IP_Enumerations_V2.4.xsd (candidate/integration)",
+          "note": "Separate explicitly selectable candidate enumerations blob 2afed8cf23afa91db92b0f043cc5b4ad428b0f25 from PR VDVde/VDV301#31, DeviceClassEnumeration/OnBoardUnit line36, EV-134 positive/negative evidence; not an official V2.4 release."
         }
       ],
       "review_state": "manually_reviewed",
@@ -6060,29 +6090,33 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "German V2.4 prints OnBordUnit while English uses OnBoardUnit."
+          "note": "Exact original official VDV301-2 V1.0 DE p17, Basic V2.0 DE p16, Basic V2.1 DE p17, GC V2.2 DE p10, GC V2.3 DE p10, GC V2.4 DE p13 all display OnBordUnit in visible device-class classification, while independent English controls V2.0–V2.4 correctly display OnBoardUnit; GC V2.2/2.3/2.4 German glossaries repeat typo."
+        },
+        {
+          "type": "exact_xsd_authority",
+          "note": "Official Enumerations V1.0,V2.0,V2.1,V2.2 exact checked root blobs contain DeviceClassEnumeration enumeration OnBoardUnit (V1.0 line34, others line36) and not OnBordUnit; exact selected official XSD is normative and rejects typo forms. No official Enumerations V2.3/V2.4 strict lane inferred."
         },
         {
           "type": "candidate_integration_provenance",
-          "note": "The selected V2.4 Enumerations XSD is candidate/integration material from VDVde/VDV301#31, not official release authority."
+          "note": "Enumerations V2.4 exact blob 2afed8cf23afa91db92b0f043cc5b4ad428b0f25 is explicitly candidate/integration material from VDVde/VDV301#31, not an official V2.4 released root XSD."
         },
         {
           "type": "executable_validation",
-          "note": "EV-134 accepts OnBoardUnit and rejects OnBordUnit in the explicitly selected candidate profile."
+          "note": "EV-134 validates OnBoardUnit and rejects OnBordUnit in explicitly selected V2.4 candidate schema. This proof is restricted to that candidate; historical official XSD enum declarations separately inspected, not claimed retested in EV-134."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "General Conventions V2.4: OnBordUnit ist PDF-Tippfehler; XSD nur Candidate",
-          "short": "Deutsch schreibt OnBordUnit, Englisch und Candidate-XSD OnBoardUnit.",
-          "long": "Die offizielle PDF widerspricht sich sprachübergreifend. Candidate/Integration-Evidence bestätigt ausführbar OnBoardUnit, darf aber nicht als offizielles V2.4-Release-XSD ausgegeben werden. Der PDF-Tippfehler ist bestätigt, ein offizielles Striktprofil nicht.",
-          "recommendation": "OnBordUnit nicht als Alias erfinden; für offizielles V2.4-Striktprofil fail-closed bleiben und Candidate-Validierung nur als nicht-offizielles Analyseprofil nutzen."
+          "title": "VDV 301-2 V1.0–V2.4: OnBordUnit ist fortgeschriebener PDF-Schreibfehler",
+          "short": "Die deutsche Geräteklasse heißt im PDF OnBordUnit, im XSD und englisch OnBoardUnit.",
+          "long": "Schon die deutsche V1.0 von 2016 und die nachfolgenden Fassungen bis General Conventions V2.4 schreiben in der Gerätetabelle OnBordUnit. Die englischen Originaltabellen ab V2.0 verwenden OnBoardUnit. Die nachgewiesenen offiziellen Enumerations-XSDs V1.0 bis V2.2 verlangen exakt OnBoardUnit; ein XML-Wert OnBordUnit muss in diesen Profilen scheitern. Für V2.3 wird keine nicht belegte Schema-Route angenommen. Die V2.4-XSD ist nur Candidate/Integration, kein nachgewiesenes offizielles Release.",
+          "recommendation": "Geräteklasse in XML stets exakt nach ausgewählter XSD prüfen, niemals OnBordUnit still zu OnBoardUnit korrigieren. Historische offizielle XSD-Profile strikt verwenden; für V2.4 kein offizielles Striktprofil behaupten und Candidate-Validierung als nicht-offiziell kennzeichnen."
         },
         "en": {
-          "title": "General Conventions V2.4: OnBordUnit is a PDF typo; XSD is candidate only",
-          "short": "German uses OnBordUnit; English and candidate XSD use OnBoardUnit.",
-          "long": "The official PDF conflicts across language tracks. Candidate/integration evidence executably confirms OnBoardUnit but must not be presented as an official V2.4 release XSD. The PDF typo is confirmed while an official strict profile is not.",
-          "recommendation": "Do not invent an OnBordUnit alias; remain fail-closed for an official V2.4 strict profile and use candidate validation only as a non-official analysis profile."
+          "title": "VDV 301-2 V1.0–V2.4: OnBordUnit persists as German PDF typo",
+          "short": "German tables say OnBordUnit whereas English and exact available XSDs say OnBoardUnit.",
+          "long": "The earliest checked official German V1.0 PDF (2016) and every adjacent edition through General Conventions V2.4 print OnBordUnit in the German device-class table. Independent English pages from V2.0 onwards use OnBoardUnit. Exact official Enumerations XSDs V1.0–V2.2 require OnBoardUnit, so an XML OnBordUnit value fails those exact profiles. No undocumented V2.3 dependency route is inferred. The available V2.4 XSD is candidate/integration only, not a proven official release.",
+          "recommendation": "Validate the device class literally against the exactly selected XSD; never silently alias OnBordUnit to OnBoardUnit. Keep historical official schema authority strict and clearly mark V2.4 candidate validation as non-official."
         }
       },
       "runtime_match": {
@@ -6109,9 +6143,14 @@
           "kind": "evidence",
           "reference": "EV-134 / evidence run 33843888080 / closure run 33844432985",
           "note": "Pinned evidence-gate revalidation for this subblock."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_001_2026-10-12.md",
+          "note": "2026-10-12 corrected complete historical scope V1.0 DE through GC V2.4, six exact PDF sources/visible body page pins; earlier official enums + candidate 2.4 distinction."
         }
       ],
-      "notes": "Executable confirmation is candidate-profile evidence only; it does not establish official V2.4 release authority."
+      "notes": "2026-10-12 exact visible-body and historical boundary correction: original German typo dates back to first available official V1.0 (07/2016), persists V2.0, V2.1, GC V2.2, V2.3, V2.4; no corrected publication in audited range. Official enum XSD V1.0–V2.2 requires OnBoardUnit. Existing sdk_behavior unsupported_profile applies specifically to an official V2.4 strict-profile request, NOT to earlier official XSD profiles. For earlier official XSD profiles ordinary exact XSD FAIL still applies and explanatory known-issue metadata may contextualize it; this semantic entry has no runtime matcher. GC V2.3 has no distinct official enumerations V2.3 root in the inventory; no invented strict profile. V2.4 candidate EV-134 remains scoped nonofficial; no alias/waiver and no XSD mutation."
     },
     {
       "finding_id": "DR3012GC24-002",

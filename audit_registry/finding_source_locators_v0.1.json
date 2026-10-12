@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "0d4b9fe28eb66cc574f69473738dd9da3d0603d2",
+    "git_blob": "be1434b1149f71a4fa2a8dbf2aa25ba861d69eb2",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 76,
-    "coverage_complete_count": 76,
+    "locator_entry_count": 77,
+    "coverage_complete_count": 77,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 116
+    "remaining_finding_count": 115
   },
   "entries": [
     {
@@ -11725,6 +11725,422 @@
         "V2.2 exact-pinned original run38229436636 artifact11738251695 source 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051, printed p70 PNG 7e620ddd9d380fa99f68e57ddb4bd084840dde20a7f90b653bc942ce155591a5, p71 PNG d0b1a67e0a70929f285b3ec16109b8d0a093f3d903644f0fd0ec2eb8cce4d7ce",
         "V2.3 EV-133 run33842952649 artifact9925516670 source 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603, original printed p70 PNG da503ff771c2664991de5d3938c50556e5ed1344e64806c5a41a2b3cf9716d94, p71 PNG 97005280fa97521f2d8830dd60e11cc56512020a71a845fa33684cb0337827d7",
         "V2.4 EV-134 run33843888080 artifact9925822375 source 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d, corrected printed p75 PNG 7d771d06392c0d7af610ad3eee211e60013f3946d6dfabd48f15ece28dbd0d68"
+      ]
+    },
+    {
+      "finding_id": "DR3012GC24-001",
+      "service": "VDV 301-2 General Conventions / DeviceClassEnumeration",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "VDV 301-2 V1.0 German original",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Earliest byte-pinned available official German V1.0 07/2016 p17 §1.4 Gerätetabelle uses OnBordUnit, while selected official V1.0 DeviceClassEnumeration requires exact OnBoardUnit. No earlier public predecessor in the audited source registry; no English V1.0 PDF control asserted."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.0.xsd",
+          "note": "Original p16 German §1.4 Tabelle1 writes OnBordUnit; English p17 Device Classes writes OnBoardUnit; official exact V2.0 enum OnBoardUnit."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.1.xsd",
+          "note": "Original p17 German §1.4 Tabelle1 OnBordUnit; English p18 OnBoardUnit; official exact V2.1 enum OnBoardUnit."
+        },
+        {
+          "version": "General Conventions V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Original p10 German §1.3 Tabelle1 and p71 §8 glossary OnBordUnit, English p14 Table1 OnBoardUnit; official exact V2.2 enum OnBoardUnit."
+        },
+        {
+          "version": "General Conventions V2.3",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Original p10 German §1.3 Tabelle1 and p72 §8 glossary OnBordUnit; English p14 Table1 OnBoardUnit. No distinct official Enumerations_V2.3.xsd exists in canonical root authority inventory; do not invent a strict V2.3 enum route."
+        },
+        {
+          "version": "General Conventions V2.4 official PDF",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Original p13 German Tabelle1 and p76 §8 glossary OnBordUnit, English p17 Table1 and p78 §8 glossary OnBoardUnit. No official released V2.4 root enumeration XSD established."
+        },
+        {
+          "version": "V2.4 candidate/integration schema context",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.4.xsd (candidate/integration)",
+          "note": "Separate explicitly selectable candidate enumerations blob 2afed8cf23afa91db92b0f043cc5b4ad428b0f25 from PR VDVde/VDV301#31, DeviceClassEnumeration/OnBoardUnit line36, EV-134 positive/negative evidence; not an official V2.4 release."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "VDV 301-2 V1.0 German original",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "earliest_available_affected_no_prior_publication",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_DE",
+              "document_title": "VDV-Schrift 301-2 V1.0 DE (07/2016)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2sds-v1-0.pdfx",
+              "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+              "printed_pages": [
+                17
+              ],
+              "section": "1.4 Geräteklassen",
+              "table": "Geräteklasse / Gerät / Beschreibung, Geräteklassen-Klassifikation (sichtbare Tabelle)",
+              "point_summary": "Original visible de body 1.4 Geräteklassen, printed p17: first row/term OnBordUnit, German spelling conflicts with exact OnBoardUnit XSD value; pinned PNG SHA256 fdeb553db8bd544964cc8666473dbce777fdf732095e205617dcf03e8c7cb3ad."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Official historical enumeration root in sdk_manifest/root_schema_authority_v0.1.json, selected exact V1.0 schema; this is not latest-wins.",
+              "component_kind": "enumeration_value",
+              "component": "DeviceClassEnumeration",
+              "member": "OnBoardUnit",
+              "value": "OnBoardUnit",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='DeviceClassEnumeration']/xs:restriction/xs:enumeration[@value='OnBoardUnit']",
+              "line_hint": "32–34",
+              "point_summary": "Exact schema enum accepts literal OnBoardUnit; no enum OnBordUnit. Distinguish selected official_release provenance; schema validation forbids pdf typo in its own exact profile.",
+              "repository": "MarcLeinenDE/VDV301",
+              "ref": "dev/schema-integration"
+            }
+          ],
+          "coverage_note": "No preceding official publication in pinned source inventory; V1.0 only German, English counterpart not asserted. Byte-pinned source 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75, visible original body verified at p17 de; version-level PDF typo persisted."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "affected_persistent",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV-Schrift 301-2 Basic Services V2.0 (02/2018)",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                16
+              ],
+              "section": "1.4 Geräteklassen",
+              "table": "Tabelle 1 — IBIS-IP Geräteklassen Klassifikation",
+              "point_summary": "Original visible de body 1.4 Geräteklassen, printed p16: first row/term OnBordUnit, German spelling conflicts with exact OnBoardUnit XSD value; pinned PNG SHA256 12d9fea972bacd7358cfa4bed18e0a704bf33deec68dab805ebe3df7b1cc80c6."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV-Schrift 301-2 Basic Services V2.0 (02/2018)",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                17
+              ],
+              "section": "1.4 Geräteklassen / Device Classes",
+              "table": "Device class table (Tabelle 1)",
+              "point_summary": "Original visible en body 1.4 Geräteklassen / Device Classes, printed p17: first row/term OnBoardUnit, independent English correct token control; pinned PNG SHA256 4bf48aa208e9cba83557cb1f4cf3e203bc7d8d3f49ea0d8a2f9f179448b891cb."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.0.xsd",
+              "git_blob": "27e3c183b00381d959622d13c10543123af8eef6",
+              "authority_detail": "Official historical enumeration root in sdk_manifest/root_schema_authority_v0.1.json, selected exact V2.0 schema; this is not latest-wins.",
+              "component_kind": "enumeration_value",
+              "component": "DeviceClassEnumeration",
+              "member": "OnBoardUnit",
+              "value": "OnBoardUnit",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='DeviceClassEnumeration']/xs:restriction/xs:enumeration[@value='OnBoardUnit']",
+              "line_hint": "34–36",
+              "point_summary": "Exact schema enum accepts literal OnBoardUnit; no enum OnBordUnit. Distinguish selected official_release provenance; schema validation forbids pdf typo in its own exact profile.",
+              "repository": "MarcLeinenDE/VDV301",
+              "ref": "dev/schema-integration"
+            }
+          ],
+          "coverage_note": "Byte-pinned source fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37, visible original body verified at p16 de, p17 en; version-level PDF typo persisted."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "affected_persistent",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 Basic Services V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                17
+              ],
+              "section": "1.4 Geräteklassen",
+              "table": "Tabelle 1 — IBIS-IP Geräteklassen Klassifikation",
+              "point_summary": "Original visible de body 1.4 Geräteklassen, printed p17: first row/term OnBordUnit, German spelling conflicts with exact OnBoardUnit XSD value; pinned PNG SHA256 51365948d9ba8b55cf3a71bb37a91ce25e49bf404d32c1bdb2e4c2bfaa3526e7."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 Basic Services V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                18
+              ],
+              "section": "1.4 Geräteklassen / Device Classes",
+              "table": "Device class table (Tabelle 1)",
+              "point_summary": "Original visible en body 1.4 Geräteklassen / Device Classes, printed p18: first row/term OnBoardUnit, independent English correct token control; pinned PNG SHA256 60360aa77f89bf8cb2a7d0f93d83da0d7d0c99528d46f3879c6ce0b32dc3f2d6."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.1.xsd",
+              "git_blob": "311464690ad60749ed8d326217787e4b8ed0b718",
+              "authority_detail": "Official historical enumeration root in sdk_manifest/root_schema_authority_v0.1.json, selected exact V2.1 schema; this is not latest-wins.",
+              "component_kind": "enumeration_value",
+              "component": "DeviceClassEnumeration",
+              "member": "OnBoardUnit",
+              "value": "OnBoardUnit",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='DeviceClassEnumeration']/xs:restriction/xs:enumeration[@value='OnBoardUnit']",
+              "line_hint": "34–36",
+              "point_summary": "Exact schema enum accepts literal OnBoardUnit; no enum OnBordUnit. Distinguish selected official_release provenance; schema validation forbids pdf typo in its own exact profile.",
+              "repository": "MarcLeinenDE/VDV301",
+              "ref": "dev/schema-integration"
+            }
+          ],
+          "coverage_note": "Byte-pinned source 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a, visible original body verified at p17 de, p18 en; version-level PDF typo persisted."
+        },
+        {
+          "version": "General Conventions V2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "affected_persistent",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "VDV-Schrift 301-2 General Conventions V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                10
+              ],
+              "section": "1.3 Geräteklassen",
+              "table": "Tabelle 1 — IBIS-IP Geräteklassen Klassifikation",
+              "point_summary": "Original visible de body 1.3 Geräteklassen, printed p10: first row/term OnBordUnit, German spelling conflicts with exact OnBoardUnit XSD value; pinned PNG SHA256 673e89a2f50ff4ab65eccfd279db94c3d1ca14baf910bf1ac5aef879c47469f4."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "VDV-Schrift 301-2 General Conventions V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                14
+              ],
+              "section": "1.3 Device Classes",
+              "table": "Table 1: IBIS-IP device class classification",
+              "point_summary": "Original visible en body 1.3 Device Classes, printed p14: first row/term OnBoardUnit, independent English correct token control; pinned PNG SHA256 ad385a56cb3a7c1976ef31403bc6b6b30ba928e81fc0fab6cc905a95445a9bc4."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "VDV-Schrift 301-2 General Conventions V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                71
+              ],
+              "section": "8 Begriffe",
+              "table": "Begriffe / Abkürzung-Beschreibung (sichtbare Glossartabelle)",
+              "point_summary": "Original visible de body 8 Begriffe, printed p71: first row/term OnBordUnit, German spelling conflicts with exact OnBoardUnit XSD value; pinned PNG SHA256 d0b1a67e0a70929f285b3ec16109b8d0a093f3d903644f0fd0ec2eb8cce4d7ce."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "Official historical enumeration root in sdk_manifest/root_schema_authority_v0.1.json, selected exact V2.2 schema; this is not latest-wins.",
+              "component_kind": "enumeration_value",
+              "component": "DeviceClassEnumeration",
+              "member": "OnBoardUnit",
+              "value": "OnBoardUnit",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='DeviceClassEnumeration']/xs:restriction/xs:enumeration[@value='OnBoardUnit']",
+              "line_hint": "34–36",
+              "point_summary": "Exact schema enum accepts literal OnBoardUnit; no enum OnBordUnit. Distinguish selected official_release provenance; schema validation forbids pdf typo in its own exact profile.",
+              "repository": "MarcLeinenDE/VDV301",
+              "ref": "dev/schema-integration"
+            }
+          ],
+          "coverage_note": "Byte-pinned source 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051, visible original body verified at p10 de, p14 en, p71 de; version-level PDF typo persisted."
+        },
+        {
+          "version": "General Conventions V2.3",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "affected_persistent",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "VDV-Schrift 301-2 General Conventions V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                10
+              ],
+              "section": "1.3 Geräteklassen",
+              "table": "Tabelle 1 — IBIS-IP Geräteklassen Klassifikation",
+              "point_summary": "Original visible de body 1.3 Geräteklassen, printed p10: first row/term OnBordUnit, German spelling conflicts with exact OnBoardUnit XSD value; pinned PNG SHA256 94e0257d768c40b72e717f384c4c393fa07722b6ba36de1cc94b5d13479fc0f9."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "VDV-Schrift 301-2 General Conventions V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                14
+              ],
+              "section": "1.3 Device Classes",
+              "table": "Table 1: IBIS-IP device class classification",
+              "point_summary": "Original visible en body 1.3 Device Classes, printed p14: first row/term OnBoardUnit, independent English correct token control; pinned PNG SHA256 cfc7d66e14c87dac7910dba039dbef90f0e3ebfeb5e948129765c5af12cee17d."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "VDV-Schrift 301-2 General Conventions V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                72
+              ],
+              "section": "8 Begriffe",
+              "table": "Begriffe / Abkürzung-Beschreibung (sichtbare Glossartabelle)",
+              "point_summary": "Original visible de body 8 Begriffe, printed p72: first row/term OnBordUnit, German spelling conflicts with exact OnBoardUnit XSD value; pinned PNG SHA256 e5e187ed93f039d94a97f0f5ad9c3646d09eb3d5f1bb7cb3b0df67d9f2a0acc0."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "No separate official Enumerations V2.3 root schema tracked; do not invent authority. Byte-pinned source 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603, visible original body verified at p10 de, p14 en, p72 de; version-level PDF typo persisted."
+        },
+        {
+          "version": "General Conventions V2.4 official PDF",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "latest_checked_affected_no_corrected_successor",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV-Schrift 301-2 General Conventions V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                13
+              ],
+              "section": "1.3 Geräteklassen",
+              "table": "Tabelle 1 — IBIS-IP Geräteklassen Klassifikation",
+              "point_summary": "Original visible de body 1.3 Geräteklassen, printed p13: first row/term OnBordUnit, German spelling conflicts with exact OnBoardUnit XSD value; pinned PNG SHA256 78d8ce8dca310b2ea604bf7906effd6256cc0bd65ebe2b1b46fc8b8a01f75205."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV-Schrift 301-2 General Conventions V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                17
+              ],
+              "section": "1.3 Device Classes",
+              "table": "Table 1: IBIS-IP device class classification",
+              "point_summary": "Original visible en body 1.3 Device Classes, printed p17: first row/term OnBoardUnit, independent English correct token control; pinned PNG SHA256 c20443f3b1cee8be1a9cab07d432ddb14e842798844506992dda35ac84dae06d."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV-Schrift 301-2 General Conventions V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                76
+              ],
+              "section": "8 Begriffe",
+              "table": "Begriffe / Abkürzung-Beschreibung (sichtbare Glossartabelle)",
+              "point_summary": "Original visible de body 8 Begriffe, printed p76: first row/term OnBordUnit, German spelling conflicts with exact OnBoardUnit XSD value; pinned PNG SHA256 f243653cae2ef40e983331f803ca139d60fc49099a6fec83b62a2524acaf395f."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV-Schrift 301-2 General Conventions V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                78
+              ],
+              "section": "8 Terms",
+              "table": "Terms / Term-Description (visible glossary table)",
+              "point_summary": "Original visible en body 8 Terms, printed p78: first row/term OnBoardUnit, independent English correct token control; pinned PNG SHA256 f144faa99197bce4f361bb1694b1ac387e7b67b802c0022e1764ae405f76b9da."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Official PDF only; V2.4 candidate profile tracked separately. Byte-pinned source 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d, visible original body verified at p13 de, p17 en, p76 de, p78 en; version-level PDF typo persisted."
+        },
+        {
+          "version": "V2.4 candidate/integration schema context",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "candidate_executable_control_not_official",
+          "pdf_locators": [],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.4.xsd",
+              "git_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+              "authority_detail": "Candidate/integration enumerations from VDVde/VDV301#31; explicitly selected only, NOT an official V2.4 release schema.",
+              "component_kind": "enumeration_value",
+              "component": "DeviceClassEnumeration",
+              "member": "OnBoardUnit",
+              "value": "OnBoardUnit",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='DeviceClassEnumeration']/xs:restriction/xs:enumeration[@value='OnBoardUnit']",
+              "line_hint": "34–36",
+              "point_summary": "Exact schema enum accepts literal OnBoardUnit; no enum OnBordUnit. Distinguish selected candidate_integration provenance; schema validation forbids pdf typo in its own exact profile.",
+              "repository": "MarcLeinenDE/VDV301",
+              "ref": "dev/schema-integration"
+            }
+          ],
+          "coverage_note": "The V2.4 official publication above is separate from this candidate/integration executable source. EV-134 candidate positive OnBoardUnit valid, negative OnBordUnit invalid. Candidate never official, no silent alias."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_001_2026-10-12.md",
+        "VDV301-2 V1.0 DE run38235045280 artifact11740188048 original p17 1.4 German OnBordUnit SHA256 fdeb553db8bd544964cc8666473dbce777fdf732095e205617dcf03e8c7cb3ad",
+        "VDV301-2 Basic V2.0 run38234839369 artifact11740437015 original p16 German OnBordUnit and p17 English OnBoardUnit PNG 12d9fea972bacd7358cfa4bed18e0a704bf33deec68dab805ebe3df7b1cc80c6 / 4bf48aa208e9cba83557cb1f4cf3e203bc7d8d3f49ea0d8a2f9f179448b891cb",
+        "VDV301-2 Basic V2.1 run38234638744 artifact11740042524 original p17 German OnBordUnit and p18 English OnBoardUnit PNG 51365948d9ba8b55cf3a71bb37a91ce25e49bf404d32c1bdb2e4c2bfaa3526e7 / 60360aa77f89bf8cb2a7d0f93d83da0d7d0c99528d46f3879c6ce0b32dc3f2d6",
+        "GC V2.2 run38234229189 artifact11739273746 original p10 German OnBordUnit, p14 English OnBoardUnit, glossary p71 German typo PNG 673e89a2f50ff4ab65eccfd279db94c3d1ca14baf910bf1ac5aef879c47469f4 / ad385a56cb3a7c1976ef31403bc6b6b30ba928e81fc0fab6cc905a95445a9bc4 / d0b1a67e0a70929f285b3ec16109b8d0a093f3d903644f0fd0ec2eb8cce4d7ce",
+        "GC V2.3 run38234454263 artifact11739882271 original p10 German OnBordUnit, p14 English OnBoardUnit, glossary p72 German typo PNG 94e0257d768c40b72e717f384c4c393fa07722b6ba36de1cc94b5d13479fc0f9 / cfc7d66e14c87dac7910dba039dbef90f0e3ebfeb5e948129765c5af12cee17d / e5e187ed93f039d94a97f0f5ad9c3646d09eb3d5f1bb7cb3b0df67d9f2a0acc0",
+        "GC V2.4 EV-134 run33843888080 artifact9925822375 original p13 German OnBordUnit, p17 English OnBoardUnit, p76 German typo, p78 English correct PNG 78d8ce8dca310b2ea604bf7906effd6256cc0bd65ebe2b1b46fc8b8a01f75205 / c20443f3b1cee8be1a9cab07d432ddb14e842798844506992dda35ac84dae06d / f243653cae2ef40e983331f803ca139d60fc49099a6fec83b62a2524acaf395f / f144faa99197bce4f361bb1694b1ac387e7b67b802c0022e1764ae405f76b9da",
+        "EV-134 candidate validation positive DeviceClass_OnBoardUnit valid and negative OnBordUnit invalid; candidate enumerations blob 2afed8cf23afa91db92b0f043cc5b4ad428b0f25 VDVde/VDV301#31",
+        "Historical exact enum blob control official Enumerations V1.0 a9bea5bc73003ed91ded8519db06c32c4067831d, V2.0 27e3c183b00381d959622d13c10543123af8eef6, V2.1 311464690ad60749ed8d326217787e4b8ed0b718, V2.2 2a23b512379b18e8f122ac1272cef8229fb86283; no official V2.4 XSD established"
       ]
     },
     {
