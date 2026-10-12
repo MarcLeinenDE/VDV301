@@ -2126,9 +2126,9 @@
     "version_scope_boundary_pending_count": 0
   },
   "next_actions": [
-    "DR3012GC23-001 terminal after full gate 38230153744 SUCCESS; check the final exact HEAD schema-audit + handoff.",
-    "Next real structurally missing DR3012GC24-001, with 76/192 locators and body evidence, 76/76 verified boundaries and 116 outstanding.",
-    "Maintain original PDF body/byte pins, exact XSD authority and no XML fail for editorial-only defects."
+    "DR3012GC24-001 exact-byte GC V2.2 render queued; establish whether OnBordUnit predates official V2.4 and track both German/English source controls.",
+    "Then GC V2.3 and candidate/integration XSD DeviceClassEnumeration exact blob+component; use EV-134 positive/negative tests.",
+    "Update canonical finding and 77/192 locator/body/boundary then full gate and terminal-clean handoff only after all required evidence."
   ],
   "source_locator_progress": {
     "locator_entry_count": 76,
@@ -2206,12 +2206,21 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "38230153744",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38230153781",
-    "resume_instruction": "DR3012GC23-001 terminal_clean: locators and visible body 76/192, boundaries 76/76, 116 still missing. Only GC V2.3 PDF §7.2 affected German headings 7.1.3/7.1.4, English same p71 7.2.1/7.2.2. GC V2.2 p70/71 nonaffected predecessor; GC V2.4 p75 corrected and not in semantic affected scope. No provider FAIL or XSD change. Full schema gate 38230153744 SUCCESS and pre-closure handoff 38230153781 SUCCESS. Verify final HEAD gates then next DR3012GC24-001."
+    "resume_instruction": "Recover DR3012GC24-001 gate_pending original GC V2.2 render request, then V2.3 and update source/body/boundary registry.",
+    "pending_block": "DR3012GC24-001 official earlier versions + candidate XSD exact identification",
+    "active_finding": "DR3012GC24-001",
+    "active_step": "EV-134 original GC V2.4 visible German table 1 p13 OnBordUnit, English table 1 p17 OnBoardUnit, German glossary p76 OnBordUnit, English glossary p78 OnBoardUnit; candidate XSD Enumerations blob 2afed8cf... evidence accepts correct English only.",
+    "next_step": "Check V2.2 byte pinned rendered original DE/EN deviceclass table and glossary pages, then V2.3 original and predecessor Basic V2.1 as needed; update complete version boundary and XSD locator with exact blob.",
+    "evidence_refs": [
+      "EV-134 run33843888080 artifact9925822375 GC V2.4 PDF SHA256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+      "tools/pdf_render_request_v0.1.json GC V2.2 p9,10,13,14,15,71,72,73,74"
+    ],
+    "recovery_instruction": "DR3012GC24-001 gate_pending: first render V2.2 original p9,10,13,14,15,71-74 from last commit, then inspect V2.3 p10/14/glossary; confirm scope and candidate XSD blob. No inventory changes yet (76/192)."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
