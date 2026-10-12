@@ -2126,9 +2126,9 @@
     "version_scope_boundary_pending_count": 0
   },
   "next_actions": [
-    "DR3012GC24-001 closed after original official PDFs V1.0/V2.0/V2.1/GC2.2/GC2.3/GC2.4, 77/192 source+body and 77/77 verified boundaries.",
-    "Final-head handoff and schema-audit checks must both succeed after the terminal-clean status commit; previous full gate 38236328852 SUCCESS.",
-    "Next canonical structurally missing DR3012GC24-002; no silent OnBordUnit XML alias, no official V2.4 XSD claim."
+    "DR3012GC24-002 V2.2 original PDF current render job; decide German network heading numbering against V2.3/V2.4.",
+    "Basic V2.1 original p21–25 German/English as applicable; full adjacent-version boundary.",
+    "Update 78/192 canonical locator+body+boundary, full schema gate and handoff final; next DR3012GC24-003."
   ],
   "source_locator_progress": {
     "locator_entry_count": 77,
@@ -2206,12 +2206,23 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "38236328852",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38236328883",
-    "resume_instruction": "DR3012GC24-001 terminal_clean: 77/192 locator and visible PDF body, 77/77 verified scope boundaries, 115 missing. Original German DeviceClass OnBordUnit appears earliest V1.0 (2016), all adjacent official V2.0/V2.1/GC2.2/2.3/2.4 still affected; bilingual English V2.0–V2.4 OnBoardUnit. Official Enumerations V1.0–V2.2 exact OnBoardUnit; V2.4 candidate only, EV-134 candidate positive/negative, official 2.4 unsupported strict. Original PDFs hashes/locators in docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_001_2026-10-12.md. Full audit 38236328852 SUCCESS, handoff preclosure 38236328883 SUCCESS; verify final HEAD workflows. Next DR3012GC24-002."
+    "resume_instruction": "Recover DR3012GC24-002 GC V2.2 visual render request, next Basic V2.1 render; finish 78th locator and all gates.",
+    "pending_block": "DR3012GC24-002 version boundary+body verification",
+    "active_finding": "DR3012GC24-002",
+    "active_step": "V2.4 official GC p20 German duplicates 2.1.1, English p23 2.1.1/2.1.2 original body EV-134. V2.3 original GC p17 same German duplicated 2.1.1. V1.0 official DE p20 and Base V2.0 p21 visibly correct 2.1.1/2.1.2; GC V2.2 and Base V2.1 verification pending.",
+    "next_step": "Render and inspect GC V2.2 pages 16–21 (byte pinned); then Base V2.1 p21–25 if needed. Determine earliest affected/later corrected boundaries, update 78th locator+body+boundary atomically, full gate, terminal close.",
+    "evidence_refs": [
+      "EV-134 run33843888080 artifact9925822375 V2.4 p20 DE and p23 EN",
+      "V2.3 renderer run38234454263 artifact11739882271 original p17 German duplicate",
+      "Original V1.0 DE p20 from run38235045280 artifact11740188048 correct",
+      "Original Base V2.0 p21 from run38234839369 artifact11740437015 correct"
+    ],
+    "recovery_instruction": "DR3012GC24-002 gate_pending, source locator count 77 unchanged. Current pinned GC2.2 render request inspect p16–21, then Basic V2.1 p21–25 before setting affected version boundary; V1.0 DE and Base2.0 p20/p21 correct, V2.3/2.4 duplicated German 2.1.1. Update canonical source/body/scope registers and 78/192 then full gate and terminal-clean."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
