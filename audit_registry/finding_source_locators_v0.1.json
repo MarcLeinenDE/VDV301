@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "812816790b29bfb600fcbe53c25cd5a3573e33cd",
+    "git_blob": "7c6400351c9b18a25172d5620ed4ea6e4be39fd3",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 79,
-    "coverage_complete_count": 79,
+    "locator_entry_count": 80,
+    "coverage_complete_count": 80,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 113
+    "remaining_finding_count": 112
   },
   "entries": [
     {
@@ -12571,6 +12571,568 @@
         "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_003_2026-10-12.md",
         "GitHub Actions 33752224704 artifact 9892036202: original six PDF files with exact registry pin SHA/size; local 180dpi exact-byte page hashes in source review",
         "EV-134 run33843888080 artifact9925822375: original GC V2.4 English p18 duplicate digit 2 (historical finding evidence)"
+      ]
+    },
+    {
+      "finding_id": "DR3012GC24-004",
+      "service": "VDV 301-2 General Conventions / ServiceNameEnumeration",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "VDV 301-2 V1.0 English original (01/2014)",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Earliest independently published English V1.0 glossary §14 p122 says PassengerCountigService, main §9.8.1 p85 says PassengerCountingService. Exact released V1.0 ServiceNameEnumeration contains neither typo nor corrected PassengerCountingService; preserve explicit missing-enum boundary."
+        },
+        {
+          "version": "VDV 301-2 V1.0 German original (07/2016)",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Separate German V1.0 original glossary p78 says PassengerCountigService; selected V1.0 released ServiceNameEnumeration lacks both typo and corrected PassengerCountingService."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.0.xsd",
+          "note": "Official bilingual Basic Services V2.0 German glossary p107 and English p108 repeat PassengerCountigService; exact V2.0 enumeration permits PassengerCountingService, rejects typo."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.1.xsd",
+          "note": "Official bilingual Basic Services V2.1 German glossary p121 and English p122 repeat PassengerCountigService. Last prior publication before GC2.2 example typos; exact V2.1 enumeration allows corrected name."
+        },
+        {
+          "version": "General Conventions V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "First GC example typos: de p55/en p60 DeviceManagmenService, CustomumerInformationService and diagram DeviceManagmentServices. Both glossaries de p72/en p74 still PassengerCountigService. Exact released 2.2 ServiceNameEnumeration has corrected values only."
+        },
+        {
+          "version": "General Conventions V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.2.xsd (exact VDV-301-2.3 tag reuse)",
+          "note": "Original GC2.3 de p55/en p60 three example/diagram typos and de p73/en p75 glossary PassengerCountigService. Official VDV-301-2.3 tag retains exact IBIS-IP_Enumerations_V2.2.xsd blob 2a23b512..., not a fabricated Enumerations_V2.3.xsd."
+        },
+        {
+          "version": "General Conventions V2.4 official PDF",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Latest official GC PDF de p59/en p64 three example/diagram typos and glossary de p77/en p79 PassengerCountigService. No independently established official released V2.4 enumeration XSD."
+        },
+        {
+          "version": "V2.4 candidate/integration schema context",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.4.xsd (candidate/integration)",
+          "note": "Explicit candidate PR31 exact blob 2afed8cf23afa91db92b0f043cc5b4ad428b0f25 accepts corrected identifiers, rejects typo strings under EV-134; candidate XSD is not official V2.4 released schema."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "VDV 301-2 V1.0 English original (01/2014)",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "earliest_affected_independent_english",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 independent English original V1.0 (01/2014)",
+              "document_version": "1.0 EN",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                85
+              ],
+              "section": "9.8.1 Operations of the PassengerCountingService",
+              "table": "Table 95: Description of Operations of PassengerCountingService",
+              "point_summary": "Visible p85 names PassengerCountingService correctly as service and in Table95, contrasting glossary typo. Exact verified original pinned PDF PNG SHA256 95645c54194fb4252960f46f11a60caecdda70b2830578df8c964abe9df5913f (run38262374552 artifact11753610657)."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 independent English original V1.0 (01/2014)",
+              "document_version": "1.0 EN",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                122
+              ],
+              "section": "14 Begriffe / Terms",
+              "table": "Terms glossary continuation table",
+              "point_summary": "Visible English original p122 glossary row PassengerCountigService (omits n); follows from 2014 independent English publication; not a TOC locator. Exact verified original pinned PDF PNG SHA256 1a2dc2fa0cb5050ddc5daac2d1791ab14e2abd494c8ba5f7369f660758cc267b (run38262374552 artifact11753610657)."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "authority_detail": "Official exact released tag VDV-301-1.0 blob a9bea5bc73003ed91ded8519db06c32c4067831d; no latest-wins selection",
+              "component_kind": "simpleType",
+              "component": "ServiceNameEnumeration",
+              "member": "PassengerCountingService",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='ServiceNameEnumeration']/xs:restriction",
+              "line_hint": "207–224",
+              "point_summary": "Exact selected V1.0 ServiceNameEnumeration contains neither PassengerCountigService nor corrected PassengerCountingService; do NOT claim replacement is enum-valid. Other correct DMS/CIS are present."
+            }
+          ],
+          "coverage_note": "Original official VDV301-2_V1.0_EN source SHA e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7, 2 actual rendered body page(s). Exact released V1.0 enum omits even corrected PassengerCountingService."
+        },
+        {
+          "version": "VDV 301-2 V1.0 German original (07/2016)",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "persistent_independent_german",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_DE",
+              "document_title": "VDV 301-2 German original V1.0 (07/2016)",
+              "document_version": "1.0 DE",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2sds-v1-0.pdfx",
+              "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+              "printed_pages": [
+                78
+              ],
+              "section": "Begriffe / Abkürzung–Beschreibung",
+              "table": "Glossary abbreviation/description table",
+              "point_summary": "Visible German p78 glossary PassengerCountigService typo, independently from English V1.0 (01/2014). Exact verified original pinned PDF PNG SHA256 8de30767d45dc422122473c1a3488a424bcbc8ff02ed98fdc238935bf97b5b6d (144dpi local exact-byte render, source run33752224704 artifact9892036202)."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "authority_detail": "Official exact released tag VDV-301-1.0 blob a9bea5bc73003ed91ded8519db06c32c4067831d; no latest-wins selection",
+              "component_kind": "simpleType",
+              "component": "ServiceNameEnumeration",
+              "member": "PassengerCountingService",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='ServiceNameEnumeration']/xs:restriction",
+              "line_hint": "207–224",
+              "point_summary": "Exact selected V1.0 ServiceNameEnumeration contains neither PassengerCountigService nor corrected PassengerCountingService; do NOT claim replacement is enum-valid. Other correct DMS/CIS are present."
+            }
+          ],
+          "coverage_note": "Original official VDV301-2_V1.0_DE source SHA 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75, 1 actual rendered body page(s). Exact released V1.0 enum omits even corrected PassengerCountingService."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "persistent_glossary_before_example_typos",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV 301-2 Basic Services V2.0 (02/2018)",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                107
+              ],
+              "section": "Begriffe / Abkürzung–Beschreibung",
+              "table": "German glossary",
+              "point_summary": "Visible p107 PassengerCountigService instead of exact PassengerCountingService; no GC service-start triple typo. Exact verified original pinned PDF PNG SHA256 29133351a8dc6dcd02a4093a50d368131f264c7c4b155e42dd3d904f782e09fb (144dpi local exact-byte render, source run33752224704 artifact9892036202)."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV 301-2 Basic Services V2.0 (02/2018)",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                108
+              ],
+              "section": "Terms / Term–Description",
+              "table": "English glossary",
+              "point_summary": "Visible p108 PassengerCountigService, bilingual persistence of typo. Exact verified original pinned PDF PNG SHA256 8363f19823567f8113bcd81465df4c045ce5739cd3f4eb8743a92c0c6a0eae5f (144dpi local exact-byte render, source run33752224704 artifact9892036202)."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.0.xsd",
+              "git_blob": "27e3c183b00381d959622d13c10543123af8eef6",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "authority_detail": "Official exact released tag VDV-301-2.0 blob 27e3c183b00381d959622d13c10543123af8eef6; no latest-wins selection",
+              "component_kind": "simpleType",
+              "component": "ServiceNameEnumeration",
+              "member": "PassengerCountingService",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='ServiceNameEnumeration']/xs:restriction",
+              "line_hint": "217–241",
+              "point_summary": "Exact selected schema includes PassengerCountingService, DeviceManagementService and CustomerInformationService, but none of four malformed PDF strings. Only applies when a concrete runtime field is schema-bound."
+            }
+          ],
+          "coverage_note": "Original official VDV301-2_BASE_V2.0 source SHA fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37, 2 actual rendered body page(s). No typo aliases in the exact selected schema."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "last_pre_GC_example_affected_glossary",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV 301-2 Basic Services V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                121
+              ],
+              "section": "Begriffe / Abkürzung–Beschreibung",
+              "table": "German glossary",
+              "point_summary": "Visible German p121 PassengerCountigService persists in last Basic release before GC example misspellings. Exact verified original pinned PDF PNG SHA256 4498e6c7941a91b308acd439f0d29a513f5f2e4a662b8861de0170d50ae896ae (144dpi local exact-byte render, source run33752224704 artifact9892036202)."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV 301-2 Basic Services V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                122
+              ],
+              "section": "Terms / Term–Description",
+              "table": "English glossary",
+              "point_summary": "Visible English p122 PassengerCountigService persists; distinct original from 2014 English V1.0. Exact verified original pinned PDF PNG SHA256 5d78064a96cfd8d638cae101a3a43362f69cefd8b4b4f1ea812a0e91c497d7f1 (144dpi local exact-byte render, source run33752224704 artifact9892036202)."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.1.xsd",
+              "git_blob": "311464690ad60749ed8d326217787e4b8ed0b718",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "authority_detail": "Official exact released tag VDV-301-2.1 blob 311464690ad60749ed8d326217787e4b8ed0b718; no latest-wins selection",
+              "component_kind": "simpleType",
+              "component": "ServiceNameEnumeration",
+              "member": "PassengerCountingService",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='ServiceNameEnumeration']/xs:restriction",
+              "line_hint": "219–248",
+              "point_summary": "Exact selected schema includes PassengerCountingService, DeviceManagementService and CustomerInformationService, but none of four malformed PDF strings. Only applies when a concrete runtime field is schema-bound."
+            }
+          ],
+          "coverage_note": "Original official VDV301-2_BASE_V2.1 source SHA 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a, 2 actual rendered body page(s). No typo aliases in the exact selected schema."
+        },
+        {
+          "version": "General Conventions V2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "first_GC_example_typos_and_persistent_glossary",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "VDV 301-2 General Conventions V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                55
+              ],
+              "section": "5.2 Systemstart / Beispiel Suche nach Diensten (German)",
+              "table": "Service-start sequence diagram",
+              "point_summary": "Visible DE p55 prose DeviceManagmenService and CustomumerInformationService and diagram Service Information DeviceManagmentServices, plus nearby correct names. Exact verified original pinned PDF PNG SHA256 7c88e9b52ae20ed45eaa61382aeb282a8c9598d212870bf1ec641b3c8788e23d (144dpi local exact-byte render, source run33752224704 artifact9892036202)."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "VDV 301-2 General Conventions V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                60
+              ],
+              "section": "5.2 System Start / 3. search for services (English)",
+              "table": "Service-start sequence diagram",
+              "point_summary": "Visible EN p60 same three typo forms in original body prose and diagram. Exact verified original pinned PDF PNG SHA256 d58b4555a1a126ea48f80c1731bb4706f4b9da83fd4304445c553d9ad79cdd35 (144dpi local exact-byte render, source run33752224704 artifact9892036202)."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "VDV 301-2 General Conventions V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                72
+              ],
+              "section": "8 Begriffe",
+              "table": "German glossary",
+              "point_summary": "Visible German p72 PassengerCountigService persists. Exact verified original pinned PDF PNG SHA256 3bcf76b9e4bac9b9db7b1a2c1f8b73516837c22a39c4cd935a0fe5ef1a1a220d (144dpi local exact-byte render, source run33752224704 artifact9892036202)."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "VDV 301-2 General Conventions V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                74
+              ],
+              "section": "8 Terms",
+              "table": "English glossary",
+              "point_summary": "Visible English p74 PassengerCountigService persists. Exact verified original pinned PDF PNG SHA256 00442db2d1887718c8283aa4f52e29e59325b027abe440d42053669b871da02c (144dpi local exact-byte render, source run33752224704 artifact9892036202)."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "authority_detail": "Official exact released tag VDV-301-2.2 blob 2a23b512379b18e8f122ac1272cef8229fb86283; no latest-wins selection",
+              "component_kind": "simpleType",
+              "component": "ServiceNameEnumeration",
+              "member": "PassengerCountingService",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='ServiceNameEnumeration']/xs:restriction",
+              "line_hint": "221–251",
+              "point_summary": "Exact selected schema includes PassengerCountingService, DeviceManagementService and CustomerInformationService, but none of four malformed PDF strings. Only applies when a concrete runtime field is schema-bound."
+            }
+          ],
+          "coverage_note": "Original official VDV301-2_GC_V2.2 source SHA 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051, 4 actual rendered body page(s). No typo aliases in the exact selected schema."
+        },
+        {
+          "version": "General Conventions V2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "intermediate_affected",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "VDV 301-2 General Conventions V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                55
+              ],
+              "section": "5.2 Systemstart / Beispiel Suche nach Diensten (German)",
+              "table": "Service-start sequence diagram",
+              "point_summary": "Visible German p55 three same erroneous example/diagram tokens. Exact verified original pinned PDF PNG SHA256 f67daf6aa4fcc391d1773fc33885f665628420894f28c559f25a6c6c3f997952 (144dpi local exact-byte render, source run33752224704 artifact9892036202)."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "VDV 301-2 General Conventions V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                60
+              ],
+              "section": "5.2 System Start / 3. search for services (English)",
+              "table": "Service-start sequence diagram",
+              "point_summary": "Visible English p60 same three erroneous example/diagram tokens. Exact verified original pinned PDF PNG SHA256 7f0fe7d6d0fc850667ea2022f6313915f1c3b0308fb3e1c59a4f2101cda3a48b (144dpi local exact-byte render, source run33752224704 artifact9892036202)."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "VDV 301-2 General Conventions V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                73
+              ],
+              "section": "8 Begriffe",
+              "table": "German glossary",
+              "point_summary": "Visible p73 PassengerCountigService. Exact verified original pinned PDF PNG SHA256 0d56d5de00967f0f41c8f031aac1b50b3f6198de50a1dcc0eb2283f902d5ca2c (144dpi local exact-byte render, source run33752224704 artifact9892036202)."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "VDV 301-2 General Conventions V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                75
+              ],
+              "section": "8 Terms",
+              "table": "English glossary",
+              "point_summary": "Visible p75 PassengerCountigService. Exact verified original pinned PDF PNG SHA256 902950ce9ff64dd4227fa12ab52cb3574cf8cf539c6e2e56070238b21b8d2967 (144dpi local exact-byte render, source run33752224704 artifact9892036202)."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "authority_detail": "Official exact released tag VDV-301-2.3 blob 2a23b512379b18e8f122ac1272cef8229fb86283; upstream released 2.3 exact retained Enumerations_V2.2, no invented V2.3 file",
+              "component_kind": "simpleType",
+              "component": "ServiceNameEnumeration",
+              "member": "PassengerCountingService",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='ServiceNameEnumeration']/xs:restriction",
+              "line_hint": "221–251",
+              "point_summary": "Exact selected schema includes PassengerCountingService, DeviceManagementService and CustomerInformationService, but none of four malformed PDF strings. Only applies when a concrete runtime field is schema-bound."
+            }
+          ],
+          "coverage_note": "Original official VDV301-2_GC_V2.3 source SHA 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603, 4 actual rendered body page(s). Official release tag 2.3 reuses exact V2.2 enum blob."
+        },
+        {
+          "version": "General Conventions V2.4 official PDF",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "last_checked_affected_no_corrected_successor",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV 301-2 General Conventions V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                59
+              ],
+              "section": "5.2 Systemstart / Beispiel Suche nach Diensten (German)",
+              "table": "Service-start sequence diagram",
+              "point_summary": "Visible DE p59 three incorrect tokens; adjacent correctly named services under publication/search. Exact verified original pinned PDF PNG SHA256 8bf404f8e9eba39cd60dd29f5e8bc303813d110ea94c5ba7af8561ac3640ab6f (144dpi local exact-byte render, source run33752224704 artifact9892036202)."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV 301-2 General Conventions V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                64
+              ],
+              "section": "5.2 System Start / 3. search for services (English)",
+              "table": "Service-start sequence diagram",
+              "point_summary": "Visible EN p64 three incorrect example/diagram labels, plus correct service names nearby. Exact verified original pinned PDF PNG SHA256 0847ae7d4825594a930514fe3971e45259d4ab260085bd89c6cc01b81c4db576 (144dpi local exact-byte render, source run33752224704 artifact9892036202)."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV 301-2 General Conventions V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                77
+              ],
+              "section": "8 Begriffe",
+              "table": "German glossary",
+              "point_summary": "Visible German p77 PassengerCountigService. Exact verified original pinned PDF PNG SHA256 cd727680f411e21909e4d5868feba33d577d73c3177cedf2505ae93d2cd21b62 (144dpi local exact-byte render, source run33752224704 artifact9892036202)."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV 301-2 General Conventions V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                79
+              ],
+              "section": "8 Terms",
+              "table": "English glossary",
+              "point_summary": "Visible English p79 PassengerCountigService. Exact verified original pinned PDF PNG SHA256 d124c075869710222a4b24fccbc06bf4deb8c6e44654dad813d2c58ce635dee5 (144dpi local exact-byte render, source run33752224704 artifact9892036202)."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Original official VDV301-2_GC_V2.4 source SHA 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d, 4 actual rendered body page(s). Official V2.4 PDF only; no falsely promoted official V2.4 XSD."
+        },
+        {
+          "version": "V2.4 candidate/integration schema context",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "v24_candidate_executable_counterpart_not_official_release",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV 301-2 General Conventions V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                59
+              ],
+              "section": "5.2 Systemstart / Beispiel Suche nach Diensten (German)",
+              "table": "Service-start sequence diagram",
+              "point_summary": "Visible DE p59 three incorrect tokens; adjacent correctly named services under publication/search. Exact verified original pinned PDF PNG SHA256 8bf404f8e9eba39cd60dd29f5e8bc303813d110ea94c5ba7af8561ac3640ab6f (144dpi local exact-byte render, source run33752224704 artifact9892036202)."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV 301-2 General Conventions V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                64
+              ],
+              "section": "5.2 System Start / 3. search for services (English)",
+              "table": "Service-start sequence diagram",
+              "point_summary": "Visible EN p64 three incorrect example/diagram labels, plus correct service names nearby. Exact verified original pinned PDF PNG SHA256 0847ae7d4825594a930514fe3971e45259d4ab260085bd89c6cc01b81c4db576 (144dpi local exact-byte render, source run33752224704 artifact9892036202)."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV 301-2 General Conventions V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                77
+              ],
+              "section": "8 Begriffe",
+              "table": "German glossary",
+              "point_summary": "Visible German p77 PassengerCountigService. Exact verified original pinned PDF PNG SHA256 cd727680f411e21909e4d5868feba33d577d73c3177cedf2505ae93d2cd21b62 (144dpi local exact-byte render, source run33752224704 artifact9892036202)."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV 301-2 General Conventions V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                79
+              ],
+              "section": "8 Terms",
+              "table": "English glossary",
+              "point_summary": "Visible English p79 PassengerCountigService. Exact verified original pinned PDF PNG SHA256 d124c075869710222a4b24fccbc06bf4deb8c6e44654dad813d2c58ce635dee5 (144dpi local exact-byte render, source run33752224704 artifact9892036202)."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V2.4.xsd",
+              "git_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+              "authority_detail": "Candidate/integration source from VDVde/VDV301#31; explicitly selected non-official revision, EV-134; no official V2.4 root/tag inferred.",
+              "component_kind": "simpleType",
+              "component": "ServiceNameEnumeration",
+              "member": "PassengerCountingService",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='ServiceNameEnumeration']/xs:restriction",
+              "line_hint": "221–253",
+              "point_summary": "Candidate profile lists corrected PCS/DMS/CIS literal service names and excludes all four printed typo forms; EV-134 positive/negative evidence applies only to explicitly selected candidate."
+            }
+          ],
+          "coverage_note": "Official original 2.4 PDF body plus exact candidate schema with candidate provenance, not labelled as official released 2.4 XSD."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_004_2026-10-12.md",
+        "Official original six PDFs exact bytes: run33752224704 artifact9892036202 + local 144dpi visible page SHA in report",
+        "Independent EN V1.0 strict pinned renderer: run38262374552 artifact11753610657; official source SHA e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 p85 and p122 PNG SHA in report",
+        "Official VDVde/VDV301 tags VDV-301-1.0/2.0/2.1/2.2/2.3 enumerations exact Git blobs; V2.3 reuse verified",
+        "V2.4 candidate PR31 blob2afed8cf23afa91db92b0f043cc5b4ad428b0f25 EV-134 run33843888080"
       ]
     },
     {
