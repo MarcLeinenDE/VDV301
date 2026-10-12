@@ -1976,7 +1976,7 @@
     "source_locator_remaining_count": 112,
     "source_locator_latest_review_block": "DR3012GC24_004",
     "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_004_2026-10-12.md",
-    "source_locator_latest_gate_status": "pending_DR3012GC24_004",
+    "source_locator_latest_gate_status": "pending_DR3012GC24_004_version_locator_repair",
     "source_locator_latest_gate_note": "DR3012GC24-004 byte-pinned original V1.0 independent English/German, Base2.0/2.1 and GC2.2/2.3/2.4 service-name typos verified; 80/192 locators and bodies, 80/80 boundaries; awaiting full schema gate. Exact V1.0 enumeration omits even correctly spelled PassengerCountingService.",
     "unpublished_future_profile_boundary_rule": "Rules from unpublished or future profiles must not be inferred into supported profiles.",
     "source_locator_completeness_policy": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_COMPLETENESS_POLICY.md",
@@ -2101,7 +2101,7 @@
     "source_locator_latest_review_block": "DR3012GC24_004",
     "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_004_2026-10-12.md",
     "source_locator_latest_gate_run_id": "38261064799",
-    "source_locator_latest_gate_status": "pending_DR3012GC24_004",
+    "source_locator_latest_gate_status": "pending_DR3012GC24_004_version_locator_repair",
     "audit_diagnostic_reporting_model": "docs/pdf_xsd_semantic_audit/SDK_AUDIT_DIAGNOSTIC_REPORTING_MODEL.md",
     "audit_report_languages": [
       "de",
@@ -2126,9 +2126,9 @@
     "version_scope_boundary_pending_count": 0
   },
   "next_actions": [
-    "DR3012GC24-004 substantive 80/192 original body/source locators, 80/80 version boundaries, 112 remaining; source report docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_004_2026-10-12.md.",
-    "Run both CI gates for substantive canonical HEAD, inspect failures; only on schema-audit SUCCESS and handoff SUCCESS make separate terminal_clean closure, confirm final HEAD gates.",
-    "Next DR3012GC24-005; no XSD mutation, no typo alias, no candidate promotion; V1.0 ServiceNameEnumeration omission explicitly documented."
+    "DR3012GC24-004 80/192 locators and 80/80 body/boundaries, V1.0 printed PDF source-version mismatch corrected; 7 official original sources, 19 verified pages.",
+    "Full schema audit last run38267039652 failed V1.0 EN PDF version check; handoff run38267039675 SUCCESS. Recheck both on repair HEAD, close only after SUCCESS.",
+    "Next DR3012GC24-005."
   ],
   "source_locator_progress": {
     "locator_entry_count": 80,
@@ -2136,7 +2136,7 @@
     "coverage_partial_count": 0,
     "remaining_finding_count": 112,
     "latest_review_block": "DR3012GC24_004",
-    "latest_gate_status": "pending_DR3012GC24_004",
+    "latest_gate_status": "pending_DR3012GC24_004_version_locator_repair",
     "latest_gate_run_id": "38261064799",
     "body_verification_state": "complete",
     "body_verified_current_standard_count": 80,
@@ -2211,11 +2211,11 @@
     "latest_completed_full_gate_run_id": "38261064799",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38261064677",
-    "resume_instruction": "DR3012GC24-004 gate_pending, 80/192 source locators/body and 80/80 version boundaries; full schema gate outstanding. EN V1.0 glossary p122 earliest; DE V1.0 p78; Basic2.0/2.1 and GC2.2–2.4; GC2.2+ extra three example spelling defects. V1.0 enum lacks corrected PCS, exact XSD authority preserved; no runtime matcher. Next DR3012GC24-005 after terminal_clean.",
+    "resume_instruction": "DR3012GC24-004 gate_pending: 80/192 locator and visible-body, 80/80 boundary. Original V1.0 EN/DE PDF locator document_version normalized to registry 1.0 (without touching evidence language/provenance), complete CI outstanding. Next DR3012GC24-005.",
     "pending_block": "DR3012GC24-004",
     "active_finding": "DR3012GC24-004",
-    "active_step": "Original PDF source/body, DE/EN publication boundaries and official/candidate enum provenance completed and all canonical finding registers aligned at 80/192, 80/80 verified. Full schema-audit gate outstanding.",
-    "next_step": "Run full schema-audit-validation and handoff-integrity on resulting canonical substantive commit, inspect validation_status.csv, fix without guessing if failures; after SUCCESS make separate terminal_clean closure, confirm final HEAD gates.",
+    "active_step": "Full schema gate 38267039652 failed one source-locator registry version check: EN/DE V1.0 original source version must be exact '1.0', not '1.0 EN' or '1.0 DE'. Fixed three page locators; language remains disambiguated in source_id/title and scope.",
+    "next_step": "Verify complete schema-audit and handoff-integrity on canonical repair HEAD. On success terminal_close in separate state+SDK commit; verify its final HEAD gates.",
     "evidence_refs": [
       "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_004_2026-10-12.md",
       "audit_registry/finding_semantic_classification_v0.1.json",
@@ -2224,7 +2224,7 @@
       "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
       "GitHub Actions pinned EN V1.0 original render run 38262374552 artifact11753610657"
     ],
-    "recovery_instruction": "DR3012GC24-004 gate_pending; 80/192 locator+body verified, boundary80/80. 7 original publication sources/19 target pages pinned including EN V1.0 run38262374552, report docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_004_2026-10-12.md. Crucial V1.0 official enum lacks both typo and corrected PassengerCountingService; 2.0/2.1/2.2 and released 2.3 reused2.2 accept corrected, candidate2.4 explicit non-official. Full schema gate required before terminal closure."
+    "recovery_instruction": "DR3012GC24-004 80/192 gate_pending, prior run 38267039652 failed only V1.0 EN/DE PDF document_version mismatch; 3 locators corrected to canonical version '1.0'. Re-run full gate and inspect if any further errors. No schema changes. Next DR3012GC24-005 after terminal clean."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
