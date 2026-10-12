@@ -1976,7 +1976,7 @@
     "source_locator_remaining_count": 113,
     "source_locator_latest_review_block": "DR3012GC24_003",
     "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_003_2026-10-12.md",
-    "source_locator_latest_gate_status": "pending_DR3012GC24_003",
+    "source_locator_latest_gate_status": "pending_DR3012GC24_003_blob_pin_repair",
     "source_locator_latest_gate_note": "Original pinned GC V2.2–V2.4 English §1.5 duplicates digit 2; German correct; predecessors before explicit list. Docs only. Full gate pending.",
     "unpublished_future_profile_boundary_rule": "Rules from unpublished or future profiles must not be inferred into supported profiles.",
     "source_locator_completeness_policy": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_COMPLETENESS_POLICY.md",
@@ -2101,7 +2101,7 @@
     "source_locator_latest_review_block": "DR3012GC24_003",
     "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_003_2026-10-12.md",
     "source_locator_latest_gate_run_id": "38242022214",
-    "source_locator_latest_gate_status": "pending_DR3012GC24_003",
+    "source_locator_latest_gate_status": "pending_DR3012GC24_003_blob_pin_repair",
     "audit_diagnostic_reporting_model": "docs/pdf_xsd_semantic_audit/SDK_AUDIT_DIAGNOSTIC_REPORTING_MODEL.md",
     "audit_report_languages": [
       "de",
@@ -2126,9 +2126,9 @@
     "version_scope_boundary_pending_count": 0
   },
   "next_actions": [
-    "DR3012GC24-003 substantive state staged: 79/192 locator and visible body verified; 79/79 version-scope boundaries, 113 missing.",
-    "Pending full schema-audit gate on canonical substantive commit; after SUCCESS terminal status-only CURRENT_STATE + SDK summary commit and confirm final HEAD schema/handoff SUCCESS.",
-    "Next DR3012GC24-004; no XSD mutation or runtime diagnostic for this PDF-only editorial duplication."
+    "DR3012GC24-003: 79/192 locators and 79/79 boundary/body checks recorded. Two dependent semantic source blobs corrected to 812816790b29bfb600fcbe53c25cd5a3573e33cd.",
+    "Verify full schema-audit and handoff-integrity for actual canonical repair HEAD; do not claim success without confirmed run. On success create separate terminal status-only commit, verify final HEAD gates.",
+    "Then proceed DR3012GC24-004 (General Conventions V2.4 ServiceNameEnumeration PDF typos and candidate schema boundary)."
   ],
   "source_locator_progress": {
     "locator_entry_count": 79,
@@ -2136,7 +2136,7 @@
     "coverage_partial_count": 0,
     "remaining_finding_count": 113,
     "latest_review_block": "DR3012GC24_003",
-    "latest_gate_status": "pending_DR3012GC24_003",
+    "latest_gate_status": "pending_DR3012GC24_003_blob_pin_repair",
     "latest_gate_run_id": "38242022214",
     "body_verification_state": "complete",
     "body_verified_current_standard_count": 79,
@@ -2211,19 +2211,20 @@
     "latest_completed_full_gate_run_id": "38242022214",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38242022212",
-    "resume_instruction": "DR3012GC24-003 gate_pending, 79/192 locators, 79/79 body and version boundaries. EN §1.5 V2.2/2.3/2.4 duplicate digit 2, DE correct; report docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_003_2026-10-12.md. Run full gate then terminal closure. Next DR3012GC24-004.",
+    "resume_instruction": "DR3012GC24-003 pending gate repair; source locator and runtime mapping semantic git_blob updated from c6ebd6... to 812816790b29bfb600fcbe53c25cd5a3573e33cd; 79/192 locators, next DR3012GC24-004 after SUCCESS and terminal_clean.",
     "pending_block": "DR3012GC24-003",
     "active_finding": "DR3012GC24-003",
-    "active_step": "Complete byte-pinned PDF original source/visual-body/version boundaries and canonical registries staged; full schema gate outstanding.",
-    "next_step": "Run full schema-audit gate on canonical substantive commit, then terminal status-only handoff commit and final HEAD schema/handoff gates.",
+    "active_step": "Recovery repair: semantic classification changed but source locator/runtime mapping registries still pinned previous semantic Git blob. Both updated to canonical semantic blob 812816790b29bfb600fcbe53c25cd5a3573e33cd; awaiting full schema/handoff gate.",
+    "next_step": "Run/verify full schema-audit validation and handoff-integrity for final canonical repair HEAD; only then status-only terminal_clean closure. If gate fails, inspect validation_status.csv logs and repair.",
     "evidence_refs": [
       "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_003_2026-10-12.md",
       "audit_registry/finding_semantic_classification_v0.1.json",
       "audit_registry/finding_source_locators_v0.1.json",
       "audit_registry/pdf_locator_body_verification_v0.1.json",
-      "audit_registry/finding_version_scope_boundary_verification_v0.1.json"
+      "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
+      "sdk_manifest/known_issues_runtime_mapping_v0.1.json"
     ],
-    "recovery_instruction": "If interrupted, verify branch HEAD and five canonical registers for DR3012GC24-003, run complete schema gate, record SUCCESS run ID, and terminal-close separately; no XSD edits. Next DR3012GC24-004."
+    "recovery_instruction": "DR3012GC24-003 gate_pending (79/192) with semantic blob pin now synchronized across source locator/runtime mapping. Verify full schema-audit gate for repair HEAD; inspect failures before terminal closure. Do not start DR3012GC24-004 until terminal_clean."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
