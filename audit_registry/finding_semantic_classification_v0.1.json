@@ -5943,13 +5943,7 @@
           "version": "General Conventions V2.3",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "Under 7.2 Version 2.3, German subheadings remain 7.1.3/7.1.4 while English uses 7.2.1/7.2.2."
-        },
-        {
-          "version": "General Conventions V2.4",
-          "authority": "documentation_only",
-          "xsd_profile": null,
-          "note": "V2.4 visibly repairs the history numbering."
+          "note": "Only affected official PDF publication. German original body printed p71 under §7.2 Version 2.3 wrongly labels subheadings 7.1.3 and 7.1.4; English on same p71 correctly uses 7.2.1 and 7.2.2. V2.2 predecessor has no V2.3-history section; V2.4 officially corrects the same historical headings."
         }
       ],
       "review_state": "manually_reviewed",
@@ -5971,11 +5965,15 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "V2.3 places German 7.1.3/7.1.4 under 7.2 Version 2.3 while English uses 7.2.1/7.2.2."
+          "note": "Official V2.3 original p71 §7.2 Version 2.3 German headings read 7.1.3 Funktionale Erweiterungen and 7.1.4 Technische Ergänzungen/Korrekturen while English headings on the same page are 7.2.1 Functional Upgrade and 7.2.2 Technical Upgrade/Corrections."
+        },
+        {
+          "type": "version_history",
+          "note": "Exact original predecessor GC V2.2 p70 §7.1 correct 7.1.1 and 7.1.2 and p71 starts §8; successor GC V2.4 p75 §7.2 corrects both historic headings to 7.2.1/7.2.2."
         },
         {
           "type": "later_official_correction",
-          "note": "V2.4 visibly repairs the numbering."
+          "note": "GC V2.4 official publication visibly fixes German numbering; its candidate/integration XSD is not promoted to official authority by this publication."
         }
       ],
       "diagnostic": {
@@ -6016,8 +6014,14 @@
           "kind": "version_history",
           "reference": "General Conventions V2.4",
           "note": "Later publication visibly repairs the V2.3 history numbering."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC23_001_2026-10-12.md",
+          "note": "Full PDF source/body and affected-version boundary verification for existing GC23-001, corrected successor V2.4 nonaffected."
         }
-      ]
+      ],
+      "notes": "2026-10-12 verified affected semantic scope is V2.3 only; V2.4 is a nonaffected correction-control, not an affected SDK trigger; no XML-runtime effect."
     },
     {
       "finding_id": "DR3012GC24-001",

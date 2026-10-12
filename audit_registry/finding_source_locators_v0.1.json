@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "7ac6aceea7c8cfdd8c50864059bae2827526b527",
+    "git_blob": "0d4b9fe28eb66cc574f69473738dd9da3d0603d2",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 75,
-    "coverage_complete_count": 75,
+    "locator_entry_count": 76,
+    "coverage_complete_count": 76,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 117
+    "remaining_finding_count": 116
   },
   "entries": [
     {
@@ -11576,6 +11576,155 @@
         "[V2.2 EV-132](https://github.com/MarcLeinenDE/VDV301/actions/runs/33782124756), original SHA256 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051, artifact 9903986586, printed p25/27/31/33 rendered and manually rechecked, p27 120c46814cf8c1c3d91160e2fb43f59dc5a4e34552b6e4848b68f10fa8a31091",
         "[V2.3 fresh original](https://github.com/MarcLeinenDE/VDV301/actions/runs/38224916667), original SHA256 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603, artifact 11735744597, printed p25 0bd2e2b6fbf574f388fab30903459dbb90125fe29143e4d8842da5c886a23b91; p27 cb49ed9796eadd3c0428db878f5d83e9eba39c4b8d8e49b0d9bbfede363907f9; p31 5c7b101b1416e343a3646930d9086b8e8db8b78b732b3c6aeb6731e12758f489; p33 b8a2f7c03e60f451701bafef299785f490124bb0141069e8cc000fbdbd0a6819",
         "[V2.4 fresh original](https://github.com/MarcLeinenDE/VDV301/actions/runs/38225082730), original SHA256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d, artifact 11736490358, printed p28 2c3f9512a32d1dde6cf872127e9253a1e6c6d52827318af4da0c4a7f5054aa9f; p30 bee1cac337117b0fed9436be7b7878e4529fee0acf4157a13ccd09f62709e0be; p35 01d684a06b47b92e4ac7165062e86e4720e16ffcb356903ff90274aa74918bdd; p37 dd822a5b4e6fe0c764e23a173bd21626477a4f10c3f5fe2ccd57f47b43078fb6"
+      ]
+    },
+    {
+      "finding_id": "DR3012GC23-001",
+      "service": "VDV 301-2 General Conventions / Version History",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "General Conventions V2.3",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Only affected official PDF publication. German original body printed p71 under §7.2 Version 2.3 wrongly labels subheadings 7.1.3 and 7.1.4; English on same p71 correctly uses 7.2.1 and 7.2.2. V2.2 predecessor has no V2.3-history section; V2.4 officially corrects the same historical headings."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "General Conventions V2.2",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "nonaffected_predecessor",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "VDV-Schrift 301-2 Allgemeine Konventionen / General Conventions V2.2",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                70
+              ],
+              "section": "7 Versionshistorie / 7.1 Version 2.2 / 7.1.1 Funktionale Erweiterungen / 7.1.2 Technische Ergänzungen/Korrekturen",
+              "table": null,
+              "point_summary": "Actual preceding V2.2 visible body §7.1.1/§7.1.2 correct in German and English."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "VDV-Schrift 301-2 Allgemeine Konventionen / General Conventions V2.2",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                71
+              ],
+              "section": "8 Begriffe",
+              "table": null,
+              "point_summary": "Original V2.2 goes from §7.1 history to §8 glossary; no §7.2 Version 2.3 exists in predecessor."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Official V2.2 byte-verified renderer run38229436636, original body visually inspected; V2.3 future history is absent."
+        },
+        {
+          "version": "General Conventions V2.3",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "affected",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "VDV-Schrift 301-2 Allgemeine Konventionen / General Conventions V2.3",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                70
+              ],
+              "section": "7 Versionshistorie / 7.1 Version 2.2 / 7.1.1 Funktionale Erweiterungen / 7.1.2 Technische Ergänzungen/Korrekturen",
+              "table": null,
+              "point_summary": "Correct preceding German and English §7.1.1/7.1.2 in V2.3 original, confirms mistaken continuation in next subsection."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "VDV-Schrift 301-2 Allgemeine Konventionen / General Conventions V2.3",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                71
+              ],
+              "section": "7.2 Version 2.3 / 7.1.3 Funktionale Erweiterungen / 7.1.4 Technische Ergänzungen/Korrekturen",
+              "table": null,
+              "point_summary": "Affected German actual visible body headings §7.1.3 and §7.1.4 under §7.2, wrong numbering, not just TOC."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "VDV-Schrift 301-2 Allgemeine Konventionen / General Conventions V2.3",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                71
+              ],
+              "section": "7.2 Version 2.3 / 7.2.1 Functional Upgrade / 7.2.2 Technical Upgrade/Corrections",
+              "table": null,
+              "point_summary": "Independent English control on same page correctly numbers 7.2.1 and 7.2.2."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "V2.3 only affected. Original visible p71 clearly confirms German/English difference, no XML-validity effect."
+        },
+        {
+          "version": "General Conventions V2.4",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "nonaffected_corrected_successor",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV-Schrift 301-2 Allgemeine Konventionen / General Conventions V2.4",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                75
+              ],
+              "section": "7.2 Version 2.3 / 7.2.1 Funktionale Erweiterungen/Functional Upgrade / 7.2.2 Technische Ergänzungen/Korrekturen - Technical Upgrade/Corrections",
+              "table": null,
+              "point_summary": "V2.4 visible p75 corrects historic §7.2 headings to 7.2.1 and 7.2.2 in combined German/English labels."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV-Schrift 301-2 Allgemeine Konventionen / General Conventions V2.4",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                75
+              ],
+              "section": "7.3 Version 2.4 / 7.3.1 Funktionale Erweiterungen/Functional Upgrade / 7.3.2 Technische Ergänzungen/Korrekturen - Technical Upgrade/Corrections",
+              "table": null,
+              "point_summary": "The next §7.3 is also correctly numbered 7.3.1/7.3.2."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Official V2.4 publication p75 is confirmed corrected successor, not an affected semantic version or runtime trigger."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC23_001_2026-10-12.md",
+        "V2.2 exact-pinned original run38229436636 artifact11738251695 source 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051, printed p70 PNG 7e620ddd9d380fa99f68e57ddb4bd084840dde20a7f90b653bc942ce155591a5, p71 PNG d0b1a67e0a70929f285b3ec16109b8d0a093f3d903644f0fd0ec2eb8cce4d7ce",
+        "V2.3 EV-133 run33842952649 artifact9925516670 source 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603, original printed p70 PNG da503ff771c2664991de5d3938c50556e5ed1344e64806c5a41a2b3cf9716d94, p71 PNG 97005280fa97521f2d8830dd60e11cc56512020a71a845fa33684cb0337827d7",
+        "V2.4 EV-134 run33843888080 artifact9925822375 source 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d, corrected printed p75 PNG 7d771d06392c0d7af610ad3eee211e60013f3946d6dfabd48f15ece28dbd0d68"
       ]
     },
     {
