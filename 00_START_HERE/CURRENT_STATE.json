@@ -2126,9 +2126,9 @@
     "version_scope_boundary_pending_count": 0
   },
   "next_actions": [
-    "DR3012GC24-003 complete: 79/192 original source locator/body and 79/79 version boundary verified; 113 remaining.",
-    "Substantive full schema gate 38261064799 SUCCESS, handoff 38261064677 SUCCESS; verify final HEAD schema and handoff gates after terminal close.",
-    "Next DR3012GC24-004: GC V2.4 examples/glossary service identifier spelling; historical version boundaries and exact candidate XSD evidence required."
+    "DR3012GC24-003 final HEAD 65ea980d schema-audit 38261333630 SUCCESS, handoff 38261333641 SUCCESS; 79/192 complete.",
+    "DR3012GC24-004 evidence acquisition: await strict V1EN render for pages 84/85 and 120-123; identify historical PassengerCountigService in V1EN/German, corrected service name under exact XSD profile.",
+    "After all original pages and version boundary checks, atomically complete DR3012GC24-004 and run full gate; no provider false-positive or XSD mutation."
   ],
   "source_locator_progress": {
     "locator_entry_count": 79,
@@ -2206,12 +2206,23 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "38261064799",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38261064677",
-    "resume_instruction": "DR3012GC24-003 terminal_clean: 79/192 locators/visible body and 79/79 version boundaries verified, 113 missing; EN GC V2.2/V2.3/V2.4 §1.5 duplicate digit 2, German correct; no runtime/XML FAIL. Report docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_003_2026-10-12.md. Substantive HEAD 3b8bb30e full gate 38261064799 SUCCESS and handoff 38261064677 SUCCESS. Confirm final HEAD schema/handoff gates. Next DR3012GC24-004."
+    "resume_instruction": "DR3012GC24-004 evidence acquisition pending; prior DR3012GC24-003 79/192 terminal-clean complete with final schema run 38261333630 SUCCESS and handoff 38261333641 SUCCESS. V1EN original byte-pinned render requested for p84/85, p120-123. Do not count DR004 until verified; selected exact XSD and candidate provenance remain separate.",
+    "pending_block": "DR3012GC24-004",
+    "active_finding": "DR3012GC24-004",
+    "active_step": "Historical source evidence acquisition only: request byte-pinned original English V1.0 PDF pages 84,85,120-123; no locator counted or semantic mutation yet.",
+    "next_step": "Wait for pinned visual fallback run triggered by tools/pdf_render_request_v0.1.json; independently inspect p122 glossary typo and p84/85 correct main service; expand full historical PDF locators and official/candidate XSD boundaries only after visual evidence.",
+    "evidence_refs": [
+      "tools/pdf_render_request_v0.1.json",
+      "audit_registry/pdf_source_registry_v0.1.json",
+      "audit_registry/pdf_source_pins_v0.1.json",
+      "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_GC24_2026-09-04.md"
+    ],
+    "recovery_instruction": "DR3012GC24-004 gate_pending source acquisition, 79/192 complete (no new locator counted). Check GitHub Actions 'VDV PDF pinned visual fallback' for latest dev/schema-integration push; inspect rendered English V1.0 original p122 vs p84/85 and hash. If missing, repeat strict render, never mark visual complete by text alone. After all versions+XSD examined, one-finding substantive commit and full gate."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
