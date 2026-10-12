@@ -2126,9 +2126,9 @@
     "version_scope_boundary_pending_count": 0
   },
   "next_actions": [
-    "DR3012V20-006 terminally complete on fully gated audit evidence; exact original PDF report docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_006_2026-10-10.md; verify final HEAD handoff-integrity.",
-    "Next source locator DR3012V20-007 (71/192 complete, 121 remaining) with independent historical boundary and source/XSD byte pins in same small terminal cycle.",
-    "Keep selected XSD source and historical release profiles strictly normative; editorial issues may not infer extra mandatory service operations."
+    "DR3012V20-007: verify V1.0 German getter correct, independent V1.0 English getter falsely says set, Base V2.0 getter falsely says set, and adjacent later actual body.",
+    "Confirm first corrected successor only by actual original page; check exact DMS XSD profiles and avoid converting editorial error to provider XSD FAIL.",
+    "Commit synchronized semantic/source/body/boundary/state report, run full gate then separate terminal-clean handoff."
   ],
   "source_locator_progress": {
     "locator_entry_count": 71,
@@ -2206,12 +2206,20 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "38043187809",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38043187807",
-    "resume_instruction": "DR3012V20-006 terminal_clean: source locator and original PDF body evidence completed 71/192, independent DE V1.0 affected/EN V1.0 unaffected, Base V2.0 affected, Base V2.1 first corrected, separate DMS V2.2/2.4 corrected. Selected exact official DMS XSD V2.0 lacks explicit SubscribeDeviceInformation operation members, V2.1 adds them; no unsupported mandatory vendor FAIL. Full schema audit 38043187809 SUCCESS and pending-HEAD handoff 38043187807 SUCCESS. Verify final terminal-HEAD handoff and continue next locator DR3012V20-007."
+    "resume_instruction": "DR3012V20-007 work started, 71/192 locators unchanged, official XSD 1.0/2.0/2.1/2.2 checked, future original-body successor verification pending.",
+    "pending_block": "DR3012V20-007 original-body evidence",
+    "active_finding": "DR3012V20-007",
+    "active_step": "Requesting visible original Base V2.1 GetDeviceConfiguration vs SetDeviceConfiguration surrounding prose",
+    "next_step": "Check rendered V2.1 source-body and DMS V2.2/V2.4 successor, exact official XSD tag identities, update finding and per-release boundaries as one substantive commit, run full gate.",
+    "evidence_refs": [
+      "Existing pinned V1.0 DE p57/58 (artifact11666248483), V1.0 EN p65 (artifact11665873927), Base V2.0 p93 (artifact11666358448) original-body visual evidence"
+    ],
+    "recovery_instruction": "DR3012V20-007 is awaiting byte-pinned visual PDF renders V2.1 p98–100, DMS2.2 p19–22 and DMS2.4 p18–21; ensure source SHA and relevant exact visible heading/prose before any semantic scope promotion or locator completion."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
