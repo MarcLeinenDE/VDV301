@@ -1976,7 +1976,7 @@
     "source_locator_remaining_count": 113,
     "source_locator_latest_review_block": "DR3012GC24_003",
     "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_003_2026-10-12.md",
-    "source_locator_latest_gate_status": "pending_DR3012GC24_003_order_repair",
+    "source_locator_latest_gate_status": "pending_DR3012GC24_003_body_boundary_order_repair",
     "source_locator_latest_gate_note": "Original pinned GC V2.2–V2.4 English §1.5 duplicates digit 2; German correct; predecessors before explicit list. Docs only. Full gate pending.",
     "unpublished_future_profile_boundary_rule": "Rules from unpublished or future profiles must not be inferred into supported profiles.",
     "source_locator_completeness_policy": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_COMPLETENESS_POLICY.md",
@@ -2101,7 +2101,7 @@
     "source_locator_latest_review_block": "DR3012GC24_003",
     "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_003_2026-10-12.md",
     "source_locator_latest_gate_run_id": "38242022214",
-    "source_locator_latest_gate_status": "pending_DR3012GC24_003_order_repair",
+    "source_locator_latest_gate_status": "pending_DR3012GC24_003_body_boundary_order_repair",
     "audit_diagnostic_reporting_model": "docs/pdf_xsd_semantic_audit/SDK_AUDIT_DIAGNOSTIC_REPORTING_MODEL.md",
     "audit_report_languages": [
       "de",
@@ -2126,8 +2126,8 @@
     "version_scope_boundary_pending_count": 0
   },
   "next_actions": [
-    "DR3012GC24-003 recovery: 79/192 source locators; sort corrected after full audit run 38257898619 identified locator order-only failure. Last Handoff SUCCESS run 38257898560.",
-    "Check BOTH schema-audit-validation and handoff-integrity for latest repair HEAD; terminal-close only after SUCCESS; retain all pins and XSD unchanged.",
+    "DR3012GC24-003 79/192 original-page locators + body + boundary verified; repairing body and boundary entry order after full gate run 38260744246.",
+    "Verify new full gate and handoff SUCCESS on canonical HEAD, then terminal-close with separate state-only commit; final HEAD gates to confirm.",
     "Next DR3012GC24-004."
   ],
   "source_locator_progress": {
@@ -2136,7 +2136,7 @@
     "coverage_partial_count": 0,
     "remaining_finding_count": 113,
     "latest_review_block": "DR3012GC24_003",
-    "latest_gate_status": "pending_DR3012GC24_003_order_repair",
+    "latest_gate_status": "pending_DR3012GC24_003_body_boundary_order_repair",
     "latest_gate_run_id": "38242022214",
     "body_verification_state": "complete",
     "body_verified_current_standard_count": 79,
@@ -2211,11 +2211,11 @@
     "latest_completed_full_gate_run_id": "38242022214",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38242022212",
-    "resume_instruction": "DR3012GC24-003 gate_pending, 79/192 source locators. Semantic blob pin repaired (12e9e707) and locator semantic order fixed; full gate to be confirmed on latest HEAD; next DR3012GC24-004.",
+    "resume_instruction": "DR3012GC24-003 pending gate, 79/192 locators; semantic blob pins and locator/body/boundary canonical ordering corrected. Full CI needs SUCCESS. Next DR3012GC24-004.",
     "pending_block": "DR3012GC24-003",
     "active_finding": "DR3012GC24-003",
-    "active_step": "Full schema-audit run 38257898619 identified locator canonical order failure; DR3012GC24-003 reordered at semantic index 70 (1-based position 71), preserve 79 complete entries.",
-    "next_step": "Verify fresh schema-audit-validation and handoff-integrity workflow runs for canonical repair HEAD; if success, perform separate terminal_clean closure and verify final HEAD.",
+    "active_step": "Full gate run 38260744246: source locators passed canonical-order guard, but body verification and version-boundary registries still appended GC24-003; both reordered to exact canonical source finding sequence (index70).",
+    "next_step": "Verify full CI run for actual canonical HEAD and handoff integrity; only SUCCESS permits terminal closure.",
     "evidence_refs": [
       "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_003_2026-10-12.md",
       "audit_registry/finding_semantic_classification_v0.1.json",
@@ -2224,7 +2224,7 @@
       "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
       "sdk_manifest/known_issues_runtime_mapping_v0.1.json"
     ],
-    "recovery_instruction": "DR3012GC24-003 remains gate_pending, 79/192 complete. Run 38257898619 failed only locator sort; reorder repair places DR3012GC24-003 after GC24-002 and before V20-001. Re-evaluate full gate on current HEAD and close only on success."
+    "recovery_instruction": "DR3012GC24-003 gate_pending. CI run38260744246 identified body registry and boundary registry order mismatch only (all other tests passed). Body/boundary repaired to source order. Verify full gate on new HEAD; close only after SUCCESS."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
