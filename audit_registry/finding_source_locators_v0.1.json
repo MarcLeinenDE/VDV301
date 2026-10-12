@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "7c6400351c9b18a25172d5620ed4ea6e4be39fd3",
+    "git_blob": "20c823b754a4c50af07749fda7a0ef3a062d4471",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 80,
-    "coverage_complete_count": 80,
+    "locator_entry_count": 81,
+    "coverage_complete_count": 81,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 112
+    "remaining_finding_count": 111
   },
   "entries": [
     {
@@ -13133,6 +13133,401 @@
         "Independent EN V1.0 strict pinned renderer: run38262374552 artifact11753610657; official source SHA e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 p85 and p122 PNG SHA in report",
         "Official VDVde/VDV301 tags VDV-301-1.0/2.0/2.1/2.2/2.3 enumerations exact Git blobs; V2.3 reuse verified",
         "V2.4 candidate PR31 blob2afed8cf23afa91db92b0f043cc5b4ad428b0f25 EV-134 run33843888080"
+      ]
+    },
+    {
+      "finding_id": "DR3012GC24-005",
+      "service": "VDV 301-2 General Conventions / Version model",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "First contradiction in same official original: §1.6 p19 DE/EN says each service is independently versioned and no common version; §2.5 p25 DE/EN retains Version 1.0 von IBIS-IP/version 1.0 of IBIS-IP."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "DE/EN independent version/no common version §1.6 p20 conflicts in terminology with retained 'Version 1.0 von IBIS-IP' §2.5 p26."
+        },
+        {
+          "version": "General Conventions V2.2",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "DE §1.5 p11 vs §2.5 p19 and EN §1.5 p15 vs §2.5 p22, current no-common service version with legacy overall Version 1.0 wording."
+        },
+        {
+          "version": "General Conventions V2.3",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "DE §1.5 p11 vs §2.5 p19 and EN §1.5 p15 vs §2.5 p22, both original PDF bodies persist in semantic ambiguity."
+        },
+        {
+          "version": "General Conventions V2.4",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "DE §1.5 p14 vs §2.5 p22 and EN §1.5 p18 vs §2.5 p25, last checked affected official publication; no corrected successor established."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "VDV 301-2 V1.0 English original (01/2014)",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "historical_unaffected_control",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 V1.0 English original (01/2014)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                21
+              ],
+              "section": "3.6 IBIS-IP Version",
+              "table": null,
+              "point_summary": "Visible original p21, 3.6 IBIS-IP Version: V1.0 historical-release version context; no later explicit no-common-version assertion. 160dpi original page PNG SHA256 d524a49f288e265eb5b5fe5a25fa5ff30d16e3d3ec5397d8068851936b562995; strict byte-pinned GitHub render run38271427816 artifact11756578350. No XML conformance rule."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 V1.0 English original (01/2014)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                23
+              ],
+              "section": "4.5 Other Protocols",
+              "table": null,
+              "point_summary": "Visible original p23, 4.5 Other Protocols: V1.0 historical-release version context; no later explicit no-common-version assertion. 160dpi original page PNG SHA256 ceb0e04095e9576a40121435e29816c6229db9be8454193e96a66e072bf1c722; strict byte-pinned GitHub render run38271427816 artifact11756578350. No XML conformance rule."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Official original PDF SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 (2403598 bytes). Original body pages 21, 23 visually checked. V1.0 historical-release version context; no later explicit no-common-version assertion."
+        },
+        {
+          "version": "VDV 301-2 V1.0 German original (07/2016)",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "last_nonaffected_predecessor",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_DE",
+              "document_title": "VDV 301-2 V1.0 German original (07/2016)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2sds-v1-0.pdfx",
+              "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+              "printed_pages": [
+                19
+              ],
+              "section": "1.6 Version des IBIS-IP",
+              "table": null,
+              "point_summary": "Visible original p19, 1.6 Version des IBIS-IP: V1.0 historical-release version context; no later explicit no-common-version assertion. 160dpi original page PNG SHA256 8fa8b03d8a1d68fc5b253ac75dee616bc0666499df9acd4330800180751eaa05; local render of byte-pinned source run33752224704 artifact9892036202. No XML conformance rule."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_DE",
+              "document_title": "VDV 301-2 V1.0 German original (07/2016)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2sds-v1-0.pdfx",
+              "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+              "printed_pages": [
+                22
+              ],
+              "section": "2.5 Weitere Protokolle",
+              "table": null,
+              "point_summary": "Visible original p22, 2.5 Weitere Protokolle: V1.0 historical-release version context; no later explicit no-common-version assertion. 160dpi original page PNG SHA256 db8f9a8e77f5b044996b575b2ae3c5cdc44a34bb246ba54b92a28b8ce497863f; local render of byte-pinned source run33752224704 artifact9892036202. No XML conformance rule."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Official original PDF SHA256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75 (1790447 bytes). Original body pages 19, 22 visually checked. V1.0 historical-release version context; no later explicit no-common-version assertion."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "first_affected",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV 301-2 Base V2.0",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                19
+              ],
+              "section": "1.6 Versionierung in IBIS-IP / IBIS-IP-Version (DE/EN)",
+              "table": null,
+              "point_summary": "Visible original p19, 1.6 Versionierung in IBIS-IP / IBIS-IP-Version (DE/EN): Explicit no common version versus old version 1.0 wording in same bilingual document. 160dpi original page PNG SHA256 1517876dedb2696bd2077f344fd4e8401bda792c7b5c9290e0d5bd5a70d2463b; local render of byte-pinned source run33752224704 artifact9892036202. No XML conformance rule."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV 301-2 Base V2.0",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                25
+              ],
+              "section": "2.5 Weitere Protokolle / Other Protocols (DE/EN)",
+              "table": null,
+              "point_summary": "Visible original p25, 2.5 Weitere Protokolle / Other Protocols (DE/EN): Explicit no common version versus old version 1.0 wording in same bilingual document. 160dpi original page PNG SHA256 d4e13d1542bd8874adc3c6347e3129ba9565a62f8bb282929e4e1563cd0df1e3; local render of byte-pinned source run33752224704 artifact9892036202. No XML conformance rule."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Official original PDF SHA256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37 (2374295 bytes). Original body pages 19, 25 visually checked. Explicit no common version versus old version 1.0 wording in same bilingual document."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "intermediate_affected",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV 301-2 Base V2.1",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                20
+              ],
+              "section": "1.6 Versionierung in IBIS-IP / IBIS-IP-Version (DE/EN)",
+              "table": null,
+              "point_summary": "Visible original p20, 1.6 Versionierung in IBIS-IP / IBIS-IP-Version (DE/EN): Both opposed contextual wordings persist in bilingual original. 160dpi original page PNG SHA256 98c207c772e700539fbc49d36dd412b96c8a15571b3fd1dde359aa8c14995534; local render of byte-pinned source run33752224704 artifact9892036202. No XML conformance rule."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV 301-2 Base V2.1",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                26
+              ],
+              "section": "2.5 Weitere Protokolle / Other Protocols (DE/EN)",
+              "table": null,
+              "point_summary": "Visible original p26, 2.5 Weitere Protokolle / Other Protocols (DE/EN): Both opposed contextual wordings persist in bilingual original. 160dpi original page PNG SHA256 15fc91c1bd3c51c2056ff925e611f15ede31da6ac09c4f86a6294105031ebc87; local render of byte-pinned source run33752224704 artifact9892036202. No XML conformance rule."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Official original PDF SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a (2671005 bytes). Original body pages 20, 26 visually checked. Both opposed contextual wordings persist in bilingual original."
+        },
+        {
+          "version": "General Conventions V2.2",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "intermediate_affected",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "General Conventions V2.2",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                11
+              ],
+              "section": "1.5 Versionierung in IBIS-IP (DE)",
+              "table": null,
+              "point_summary": "Visible original p11, 1.5 Versionierung in IBIS-IP (DE): German and English actual body pair says no common service version yet unqualified historical 1.0. 160dpi original page PNG SHA256 48787d27a8a59aad6260537cb1654a91377074b68b1bdf97937d3a79cc0a1a64; local render of byte-pinned source run33752224704 artifact9892036202. No XML conformance rule."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "General Conventions V2.2",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                15
+              ],
+              "section": "1.5 IBIS-IP-Version (EN)",
+              "table": null,
+              "point_summary": "Visible original p15, 1.5 IBIS-IP-Version (EN): German and English actual body pair says no common service version yet unqualified historical 1.0. 160dpi original page PNG SHA256 ca6c1eb0c1634d57edc7e5c46ddc74803b7a763c8ab6f9aaa5c348e15777a763; local render of byte-pinned source run33752224704 artifact9892036202. No XML conformance rule."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "General Conventions V2.2",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                19
+              ],
+              "section": "2.5 Weitere Protokolle (DE)",
+              "table": null,
+              "point_summary": "Visible original p19, 2.5 Weitere Protokolle (DE): German and English actual body pair says no common service version yet unqualified historical 1.0. 160dpi original page PNG SHA256 b42ff8d751c6a24dd9efa92f469494cc4f0481c316be0140ef060800457f6f90; local render of byte-pinned source run33752224704 artifact9892036202. No XML conformance rule."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "General Conventions V2.2",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                22
+              ],
+              "section": "2.5 Other Protocols (EN)",
+              "table": null,
+              "point_summary": "Visible original p22, 2.5 Other Protocols (EN): German and English actual body pair says no common service version yet unqualified historical 1.0. 160dpi original page PNG SHA256 582ea7b15d72070a8a7f63f1a58ecc0ba6497e18ac3a84b2244d34339ece4ef1; local render of byte-pinned source run33752224704 artifact9892036202. No XML conformance rule."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Official original PDF SHA256 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051 (1562305 bytes). Original body pages 11, 15, 19, 22 visually checked. German and English actual body pair says no common service version yet unqualified historical 1.0."
+        },
+        {
+          "version": "General Conventions V2.3",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "intermediate_affected",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "General Conventions V2.3",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                11
+              ],
+              "section": "1.5 Versionierung in IBIS-IP (DE)",
+              "table": null,
+              "point_summary": "Visible original p11, 1.5 Versionierung in IBIS-IP (DE): German and English actual body wording persists. 160dpi original page PNG SHA256 d0235422a730ff3f23682cf8924194cc86f4ef3ab53133837dedab6d01429213; local render of byte-pinned source run33752224704 artifact9892036202. No XML conformance rule."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "General Conventions V2.3",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                15
+              ],
+              "section": "1.5 IBIS-IP-Version (EN)",
+              "table": null,
+              "point_summary": "Visible original p15, 1.5 IBIS-IP-Version (EN): German and English actual body wording persists. 160dpi original page PNG SHA256 bff7f8710f059e22fb63849ce8a45a1e6182d32963c7a303bba93ceb75e697a6; local render of byte-pinned source run33752224704 artifact9892036202. No XML conformance rule."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "General Conventions V2.3",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                19
+              ],
+              "section": "2.5 Weitere Protokolle (DE)",
+              "table": null,
+              "point_summary": "Visible original p19, 2.5 Weitere Protokolle (DE): German and English actual body wording persists. 160dpi original page PNG SHA256 7c10543198f362fc71be83d83a3cdef93426917e650b993f56a87049c3aae741; local render of byte-pinned source run33752224704 artifact9892036202. No XML conformance rule."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "General Conventions V2.3",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                22
+              ],
+              "section": "2.5 Other Protocols (EN)",
+              "table": null,
+              "point_summary": "Visible original p22, 2.5 Other Protocols (EN): German and English actual body wording persists. 160dpi original page PNG SHA256 2cbebcc04f7c8dccf46d28e7fd8a6f9b470bd5ec56f14e8847900b7017bbe089; local render of byte-pinned source run33752224704 artifact9892036202. No XML conformance rule."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Official original PDF SHA256 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603 (1057483 bytes). Original body pages 11, 15, 19, 22 visually checked. German and English actual body wording persists."
+        },
+        {
+          "version": "General Conventions V2.4",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "last_checked_affected_no_corrected_successor",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "General Conventions V2.4",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                14
+              ],
+              "section": "1.5 Versionierung in IBIS-IP (DE)",
+              "table": null,
+              "point_summary": "Visible original p14, 1.5 Versionierung in IBIS-IP (DE): Latest published original checked; semantic ambiguity persists with no confirmed corrected successor. 160dpi original page PNG SHA256 d9db14cec0de16ee365c14b088f2cf0b2d303affd9212446805b9f3bf08e053c; local render of byte-pinned source run33752224704 artifact9892036202. No XML conformance rule."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "General Conventions V2.4",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                18
+              ],
+              "section": "1.5 IBIS-IP-Version (EN)",
+              "table": null,
+              "point_summary": "Visible original p18, 1.5 IBIS-IP-Version (EN): Latest published original checked; semantic ambiguity persists with no confirmed corrected successor. 160dpi original page PNG SHA256 852193396df3b1c03193a66dd79a085fdbb465935866a33a579c31d79e248867; local render of byte-pinned source run33752224704 artifact9892036202. No XML conformance rule."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "General Conventions V2.4",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                22
+              ],
+              "section": "2.5 Weitere Protokolle (DE)",
+              "table": null,
+              "point_summary": "Visible original p22, 2.5 Weitere Protokolle (DE): Latest published original checked; semantic ambiguity persists with no confirmed corrected successor. 160dpi original page PNG SHA256 aa8394cf12cf6d1ba4c127771ad72b5da4292956c236b82cac721aee419e2424; local render of byte-pinned source run33752224704 artifact9892036202. No XML conformance rule."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "General Conventions V2.4",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                25
+              ],
+              "section": "2.5 Other Protocols (EN)",
+              "table": null,
+              "point_summary": "Visible original p25, 2.5 Other Protocols (EN): Latest published original checked; semantic ambiguity persists with no confirmed corrected successor. 160dpi original page PNG SHA256 f730712fbaac5f1c37692ef0982d71f3cb233305e3c4f53b915cac17deb02399; local render of byte-pinned source run33752224704 artifact9892036202. No XML conformance rule."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Official original PDF SHA256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d (1767094 bytes). Original body pages 14, 18, 22, 25 visually checked. Latest published original checked; semantic ambiguity persists with no confirmed corrected successor."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_005_2026-10-12.md",
+        "VDV301-2_V1.0_EN exact-pin GitHub fallback run38271427816 artifact11756578350, p21/23 original visual inspection",
+        "Six other original official PDFs byte-pinned in run33752224704 artifact9892036202; 160dpi local body inspection; all original pages and PNG SHA256 in report",
+        "V1.0 releases are historical controls, first paired no-common version vs stale 1.0 Basic2.0; documentary ambiguity, no provider FAIL"
       ]
     },
     {
