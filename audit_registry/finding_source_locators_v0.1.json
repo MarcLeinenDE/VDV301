@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "47e6d67a7fb50eded0b0bf3d0f6b1c5618fe9e9d",
+    "git_blob": "9d79fec9a37c9c56f214b727f3181f2cf73074d2",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 71,
-    "coverage_complete_count": 71,
+    "locator_entry_count": 72,
+    "coverage_complete_count": 72,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 121
+    "remaining_finding_count": 120
   },
   "entries": [
     {
@@ -12149,6 +12149,292 @@
         "DMS_V2.2 run38042908251 artifact11665394848 p18 947e51b4cfc795dcd9dcdd5ea92068075e6c9310fcfe8e653b8cad16a8b8aaa9",
         "DMS_V2.4 run38042746163 artifact11666428423 p17 3845362f1563a109a6f9b396ed580d6114380b1dcd055538c3caf6fb7c30f018",
         "VDVde/VDV301 exact official released DMS schemas tags VDV-301-1.0 blob602a963f91000d0d39e3c271bacb3c7aba73e6d4, VDV-301-2.0 blob74189e0da65563eeb084ec2f3c400e9668d1ee1a, VDV-301-2.1 blob191b43e01cdaba14b247725689a913c244a67eed, VDV-301-2.2 blob c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d"
+      ]
+    },
+    {
+      "finding_id": "DR3012V20-007",
+      "service": "DeviceManagementService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "VDV 301-2 V1.0 English translation",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V1.0.xsd",
+          "note": "Independently issued English V1.0 original p65 §9.3.5 says GetDeviceConfiguration 'enables to set' device-ID while adjacent Get response Table33/34 and SetDeviceConfiguration §9.3.6 Table35 separate read from write; original German V1.0 p57 §7.1.4 correctly says 'abzufragen' and is non-affected."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.0.xsd",
+          "note": "Bilingual Base V2.0 shared English DMS operations body printed p93 §7.1.4 mistakenly describes GetDeviceConfiguration as setting device-ID, while actual Table14/15 Get response and adjacent §7.1.5 Table16 Set request show different directions."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+          "note": "Bilingual Base V2.1 shared English operations body p97 §7.1.6 retains erroneous 'enables to set' paragraph; p98 Table14/15 Get response and §7.1.7 Table16 Set request establish getter vs setter. First later Base version is still affected, not a corrected successor."
+        },
+        {
+          "version": "VDV 301-2-0 DMS V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+          "note": "Original dedicated DMS V2.2 p18 §2.5 retains 'enables to set' GetDeviceConfiguration prose while Table4/5 show Get response; exact released DMS V2.2 XSD contains GetDeviceConfiguration but NO SetDeviceConfiguration operation, so do not recommend an unavailable setter in this profile."
+        },
+        {
+          "version": "VDV 301-2-0 DMS V2.4",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Original official dedicated DMS PDF V2.4 p17 §2.5 still calls GetDeviceConfiguration 'enables to set', whereas Table4/5 show Get response. Publication is official PDF; no upstream official released DMS V2.4 XSD tag established, so no official 2.4 executable schema authority inferred."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "VDV 301-2 V1.0 German original",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "historical_unaffected_language_control",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_DE",
+              "document_title": "VDV-Schrift 301-2 German original V1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2sds-v1-0.pdfx",
+              "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+              "printed_pages": [
+                57
+              ],
+              "section": "7.1.4 Datenstrukturen der Operation GetDeviceConfiguration",
+              "table": null,
+              "point_summary": "Actual German prose explicitly says 'Geräte-ID abzufragen', so GetDeviceConfiguration is correctly described as retrieval; p58 separate §7.1.5 describes setting."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_DE",
+              "document_title": "VDV-Schrift 301-2 German original V1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2sds-v1-0.pdfx",
+              "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+              "printed_pages": [
+                58
+              ],
+              "section": "7.1.4.2 Response / 7.1.5 Datenstrukturen der Operation SetDeviceConfiguration",
+              "table": "Tabelle 9 GetDeviceConfigurationResponse; Tabelle 10 GetDeviceConfigurationResponseData; Tabelle 11 SetDeviceConfigurationRequest",
+              "point_summary": "Visible separate Get response and Set request structures demonstrate unaffected German semantics and complete nearby context."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V1.0.xsd",
+              "git_blob": "602a963f91000d0d39e3c271bacb3c7aba73e6d4",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "authority_detail": "Exact released upstream official VDVde/VDV301 tag VDV-301-1.0, source Git blob independently verified",
+              "component_kind": "complexType",
+              "component": "DeviceManagementService.GetDeviceConfigurationResponseStructure",
+              "member": "GetDeviceConfigurationResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceManagementService.GetDeviceConfigurationResponseStructure']",
+              "line_hint": "20",
+              "point_summary": "Exact original V1 XSD declares getter response type, with a separate SetDeviceConfigurationRequestStructure line32."
+            }
+          ],
+          "coverage_note": "Independent German V1.0 non-affected predecessor/language control. Getter is explicitly 'abzufragen'; no typo replicated from later English source."
+        },
+        {
+          "version": "VDV 301-2 V1.0 English translation",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 independently published English V1.0 translation",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                65
+              ],
+              "section": "9.3.5 Data Structure of Operation GetDeviceConfiguration / 9.3.6 Data Structure of Operation SetDeviceConfiguration",
+              "table": "Table 33 GetDeviceConfigurationResponse; Table 34 GetDeviceConfigurationResponseData; Table 35 SetDeviceConfigurationRequest",
+              "point_summary": "Original English getter paragraph p65 erroneously says 'enables to set' device-ID, despite direct juxtaposition with setter p65 §9.3.6 and response data tables."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V1.0.xsd",
+              "git_blob": "602a963f91000d0d39e3c271bacb3c7aba73e6d4",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "authority_detail": "Exact released upstream official VDVde/VDV301 tag VDV-301-1.0, source Git blob independently verified",
+              "component_kind": "complexType",
+              "component": "DeviceManagementService.GetDeviceConfigurationResponseStructure",
+              "member": "GetDeviceConfigurationResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceManagementService.GetDeviceConfigurationResponseStructure']",
+              "line_hint": "20",
+              "point_summary": "Exact original V1 XSD declares getter response type, with a separate SetDeviceConfigurationRequestStructure line32."
+            }
+          ],
+          "coverage_note": "First independently affected English source, same executable V1.0 XSD as unaffected German publication."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV-Schrift 301-2 bilingual Base Services V2.0",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                93
+              ],
+              "section": "7.1.4 Data Structure of Operation GetDeviceConfiguration / 7.1.5 Data Structure of Operation SetDeviceConfiguration",
+              "table": "Table 14 GetDeviceConfigurationResponse; Table 15 GetDeviceConfigurationResponseData; Table 16 SetDeviceConfigurationRequest",
+              "point_summary": "Original bilingual Base V2.0 shared English operation detail p93 repeats 'GetDeviceConfiguration enables to set', adjacent response and setter request directions contradict prose."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.0.xsd",
+              "git_blob": "74189e0da65563eeb084ec2f3c400e9668d1ee1a",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "authority_detail": "Exact released upstream official VDVde/VDV301 tag VDV-301-2.0, source Git blob independently verified",
+              "component_kind": "complexType",
+              "component": "DeviceManagementService.GetDeviceConfigurationResponseStructure",
+              "member": "GetDeviceConfigurationResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceManagementService.GetDeviceConfigurationResponseStructure']",
+              "line_hint": "39",
+              "point_summary": "Exact official DMS V2.0 XSD declares GetDeviceConfiguration response line38/39 and separately SetDeviceConfiguration request line52/53."
+            }
+          ],
+          "coverage_note": "Confirmed affected Base V2.0 official bilingual publication. Single English DMS body text is present; no independently printed separate German setter prose claimed."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 bilingual Base Services V2.1",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                97
+              ],
+              "section": "7.1.6 Data Structure of Operation GetDeviceConfiguration",
+              "table": null,
+              "point_summary": "Actual p97 §7.1.6 getter paragraph still says 'enables to set', although adjacent §7.1.6.1 request text says Get has no request structure."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 bilingual Base Services V2.1",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                98
+              ],
+              "section": "7.1.6.2 Response / 7.1.7 Data Structure of Operation SetDeviceConfiguration",
+              "table": "Table 14 GetDeviceConfigurationResponse; Table 15 GetDeviceConfigurationResponseData; Table 16 SetDeviceConfigurationRequest",
+              "point_summary": "Original p98 getter response Table14/15 and separate setter request Table16 demonstrate wrong Get setter prose in preceding p97."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+              "git_blob": "191b43e01cdaba14b247725689a913c244a67eed",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "authority_detail": "Exact released upstream official VDVde/VDV301 tag VDV-301-2.1, source Git blob independently verified",
+              "component_kind": "complexType",
+              "component": "DeviceManagementService.GetDeviceConfigurationResponseStructure",
+              "member": "GetDeviceConfigurationResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceManagementService.GetDeviceConfigurationResponseStructure']",
+              "line_hint": "134",
+              "point_summary": "Official DMS V2.1 declares getter response line133/134 and separate setter request line147/148."
+            }
+          ],
+          "coverage_note": "Next bilingual Base V2.1 still affected; NOT first corrected successor. V2.1 exact official XSD separately models Get response and Set request."
+        },
+        {
+          "version": "VDV 301-2-0 DMS V2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "DMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-0 DMS V2.2",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sdes-v2-2-devicemanagementservice.pdfx",
+              "sha256": "72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e",
+              "printed_pages": [
+                18
+              ],
+              "section": "2.5 Data Structure of Operation GetDeviceConfiguration / 2.5.2 Response",
+              "table": "Table 4 GetDeviceConfigurationResponse; Table 5 GetDeviceConfigurationResponseData",
+              "point_summary": "Visible official dedicated DMS V2.2 p18 still says GetDeviceConfiguration 'enables to set' while body Tables4/5 and selected XSD show Get response; do not infer Set support because DMS2.2 XSD has none."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+              "git_blob": "c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "authority_detail": "Exact released upstream official VDVde/VDV301 tag VDV-301-2.2, source Git blob independently verified",
+              "component_kind": "complexType",
+              "component": "DeviceManagementService.GetDeviceConfigurationResponseStructure",
+              "member": "GetDeviceConfigurationResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceManagementService.GetDeviceConfigurationResponseStructure']",
+              "line_hint": "118",
+              "point_summary": "Official DMS V2.2 getter response defined; exhaustive released DMS V2.2 file has NO SetDeviceConfiguration operation, so no writer may be inferred for this profile."
+            }
+          ],
+          "coverage_note": "Still affected after Base V2.1. Official DMS V2.2 XSD contains Get operation but no SetDeviceConfiguration, a genuine profile distinction."
+        },
+        {
+          "version": "VDV 301-2-0 DMS V2.4",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "DMS_V2.4",
+              "document_title": "VDV-Schrift 301-2-0 DMS V2.4",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sde-v2.4-devicemanagementservice.pdfx",
+              "sha256": "347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd",
+              "printed_pages": [
+                17
+              ],
+              "section": "2.5 Data Structure of Operation GetDeviceConfiguration / 2.5.2 Response",
+              "table": "Table 4 GetDeviceConfigurationResponse; Table 5 GetDeviceConfigurationResponseData",
+              "point_summary": "Latest checked official DMS PDF V2.4 still states getter 'enables to set' while adjacent response tables describe retrieval; correction not shown."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Latest checked official dedicated DMS publication remains affected. No official release-tag DMS V2.4 XSD proven; do not promote candidate/integration bytes to official."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_007_2026-10-12.md",
+        "VDV301-2 V1.0 DE verified original p57/58: run38042683113 artifact11666248483, PDF SHA256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75, PNG p57 c58ce817ac87cf344feb18c55a20676c3db03f86e34973b689b4afafe00797fb",
+        "VDV301-2 V1.0 EN original p65: run38042692039 artifact11665873927 PDF SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 p65 PNG 3f77690df308ac9f620ef939436b6d9add39186bdd1ca3a89d74b94b319f1c7d",
+        "Base V2.0 original p93: run38042731143 artifact11666358448 PDF SHA256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37 PNG a5de00c35d44d495b6cc0b4f387aa69b2a968f3a020b0089a3b1514228408d5c",
+        "Base V2.1 original p97/98: run38042738286 artifact11665864117 p97 PNG 4daca79147ffef4a7e5945d0ad0631f23d60e78368f391d6f623685a37972c18 and run38215335218 artifact11731207208 p98 PNG 46ea3f8ac1a893f852de8134ae2cefcba97476c1c1753dc45e093a3c4093cf4b",
+        "DMS V2.2 original p18: run38042908251 artifact11665394848 PDF SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e PNG 947e51b4cfc795dcd9dcdd5ea92068075e6c9310fcfe8e653b8cad16a8b8aaa9; adjacent run38215376949 artifact11731267074",
+        "DMS V2.4 original p17: run38042746163 artifact11666428423 PDF SHA256 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd PNG 3845362f1563a109a6f9b396ed580d6114380b1dcd055538c3caf6fb7c30f018; adjacent run38215420783 artifact11732146645",
+        "Official VDVde/VDV301 released DMS XSD tags VDV-301-1.0 SHA602a963f91000d0d39e3c271bacb3c7aba73e6d4, VDV-301-2.0 SHA74189e0da65563eeb084ec2f3c400e9668d1ee1a, VDV-301-2.1 SHA191b43e01cdaba14b247725689a913c244a67eed, VDV-301-2.2 SHAc589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d"
       ]
     }
   ]
