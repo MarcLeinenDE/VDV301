@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 79,
-    "verified_current_standard": 79,
+    "tracked_findings": 80,
+    "verified_current_standard": 80,
     "pending_current_standard": 0
   },
   "entries": [
@@ -641,6 +641,17 @@
         "VDV301-2_GC_V2.4: DE §1.5 p14 correct; EN §1.5 p18 repeats 2, DE/shared PNG SHA256 ccc94a427e3f975e81d1aa963ec5214a74cee04fd4c853f85819e6f73e99100b, EN PNG SHA256 7c4e2c8f6aafcf8f0f4eb2f09c767670a31a00ccf62d0cb9959d11c3e604e9c8"
       ],
       "note": "All original bytes SHA256/size-pinned and visually examined: no explicit enumerated list in V1.0/Basic V2.0/V2.1; first English duplicated 2 GC2.2 and persists GC2.3/2.4, German GC lists correct. No XML/XSD runtime impact."
+    },
+    {
+      "finding_id": "DR3012GC24-004",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_004_2026-10-12.md",
+        "EN V1.0 strict SHA pinned original: run38262374552 artifact11753610657, original official SHA e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7, body printed p85 and p122 visually checked.",
+        "Remaining exact originals: run33752224704 artifact9892036202; 17 body pages rendered 144dpi from 6 SHA-pinned PDFs and visually checked; each PNG hash and original page heading documented in report.",
+        "Exact official upstream enum tag blobs 1.0 a9bea5bc; 2.0 27e3c183; 2.1 31146469; 2.2 2a23b512; released 2.3 reuses 2a23b512; candidate PR31 V2.4 2afed8cf, EV-134."
+      ],
+      "note": "All 19 target pages visibly rechecked against byte-pinned PDF bodies (not TOC/history); earliest English 2014 p122 and German 2016 p78; 2.0/2.1/2.2/2.3/2.4 bilingual pages. Scope and exact candidate/release XSD provenance documented in canonical review."
     },
     {
       "finding_id": "DR3012V20-001",
