@@ -2126,9 +2126,9 @@
     "version_scope_boundary_pending_count": 0
   },
   "next_actions": [
-    "DR3012GC22-002 terminal after full schema-audit-validation 38226458636 SUCCESS and pre-closure handoff 38226458640 SUCCESS. Confirm final closure HEAD gates.",
-    "Next canonical unlocated real finding DR3012GC23-001; structural locators 75/192, 117 remaining; version boundary and body verification 75/75.",
-    "XSD remains the executable validation authority; no provider FAIL, XSD edit or PR remediation for the GC22-002 publication-only duplicate numbering."
+    "DR3012GC23-001 gate_pending: inspect GC V2.2 p69-71 exact-original fallback artifact to prove predecessor V2.2 history is correctly 7.1 and does not contain V2.3 edition.",
+    "V2.3 V2.4 visual sources EV-133 p70/71 and EV-134 p75: V2.3 German 7.1.3/7.1.4 under 7.2, English 7.2.1/7.2.2, V2.4 corrected.",
+    "Then update 76/192 source locator and 76/76 scope-boundary/body canonical registries with no XML validity change, full gate, terminal handoff."
   ],
   "source_locator_progress": {
     "locator_entry_count": 75,
@@ -2206,12 +2206,22 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "38226458636",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38226458640",
-    "resume_instruction": "DR3012GC22-002 terminal_clean, locators/body 75/192, boundaries 75/75. Three official GC publications V2.2,V2.3,V2.4 all duplicate German SRV/TXT number 3.3.1; V2.1 predecessor and all English controls correct. PDF editorial only, no XML/runtime impact. Exact original visual review verified; full gate 38226458636 SUCCESS after stale derived SDK manifest and copy-truncated PDF SHA fix; handoff gate 38226458640 SUCCESS. Verify final HEAD integrity, then next missing DR3012GC23-001."
+    "resume_instruction": "DR3012GC23-001 gate_pending original V2.2 predecessor PDF render requested, find GitHub Actions VDV PDF pinned visual fallback for tools/pdf_render_request_v0.1.json, inspect p69/70/71; V2.3 V2.4 originals already inspected. Then register source/body/boundary, full gate, separate terminal handoff. Do not start another finding.",
+    "pending_block": "DR3012GC23-001 exact visible-body version-boundary verification and source locator review",
+    "active_finding": "DR3012GC23-001",
+    "active_step": "Original pinned V2.3 EV-133 p70/71 and V2.4 EV-134 p75 visually inspected; V2.3 DE 7.1.3/7.1.4 under 7.2, EN 7.2.1/7.2.2, later V2.4 corrects German; now request V2.2 predecessor render.",
+    "next_step": "Download/check requested pinned GC V2.2 p69-71 original render; verify predecessor history, then build semantic/source-body/boundary locator entry and full gate.",
+    "evidence_refs": [
+      "EV-133 exact pinned V2.3 official p70/71 run33842952649 artifact9925516670 sha256 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+      "EV-134 exact pinned V2.4 p75 run33843888080 artifact9925822375 sha256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+      "tools/pdf_render_request_v0.1.json V2.2 p69-71"
+    ],
+    "recovery_instruction": "DR3012GC23-001 gate_pending original V2.2 predecessor PDF render requested, find GitHub Actions VDV PDF pinned visual fallback for tools/pdf_render_request_v0.1.json, inspect p69/70/71; V2.3 V2.4 originals already inspected. Then register source/body/boundary, full gate, separate terminal handoff. Do not start another finding."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
