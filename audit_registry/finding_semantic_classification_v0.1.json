@@ -5761,7 +5761,13 @@
           "version": "General Conventions V2.2",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "Multiple unresolved Word-reference placeholders occur in independent contexts; history still states no technical corrections."
+          "note": "Five independent original visible-body contexts printed p13,52,62,64,66 contain 'Fehler! Verweisquelle konnte nicht gefunden werden.' including the real Table5 caption. First published edition where this specific placeholder finding is proven."
+        },
+        {
+          "version": "General Conventions V2.4",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "After independently corrected V2.3 control, official bilingual V2.4 reintroduces same literal Word failed-reference placeholder in device-class, system-start, XML-notation prose and real Table5 caption, printed p16,56,66,68,70. Same-root regression, never new finding identity."
         }
       ],
       "review_state": "manually_reviewed",
@@ -5782,25 +5788,33 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "Multiple independent V2.2 contexts contain unresolved Word-reference placeholder text."
+          "note": "Official VDV301-2 GC V2.2 SHA256 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051 original body p13,52,62,64 Table5,66 independently visually verified in EV-132 pinned PDF render artifact9903986586; five independent literal Word reference failure occurrences."
         },
         {
           "type": "version_history",
-          "note": "V2.2 history states no technical corrections, confirming editorial residue rather than a declared semantic change."
+          "note": "General Conventions V2.3 exact official PDF SHA256 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603 has no matching placeholder in historical full-text deep read; original printed p52 system start and p64 Table5 visibly clean in fresh strict render run38218016512 artifact11732671602."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Official General Conventions V2.4 SHA256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d original p16,56,66,68 Table5,70 visibly display reintroduced literal Word placeholder in same five contexts; EV-134 pinned original artifact9925822375."
+        },
+        {
+          "type": "version_history",
+          "note": "V2.2 release history printed p70 states technical corrections 'Keine'; these literal Word cross-reference errors are editorial navigational residue, not new XML/protocol definitions. V2.3 absence and V2.4 reintroduction must be treated as discontinuous affected-version lanes."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "General Conventions V2.2: mehrere ungelöste Word-Querverweise",
-          "short": "Mehrere Stellen enthalten nicht aufgelöste Verweisfehler.",
-          "long": "Die General Conventions V2.2 enthalten an mehreren unabhängigen Stellen Word-Platzhalter für fehlgeschlagene Querverweise. Diese Texte sind redaktionelle Artefakte ohne normative XML- oder Service-Bedeutung.",
-          "recommendation": "Nicht als normative Inhalte verarbeiten; als Dokumentationsfehler kennzeichnen oder ignorieren."
+          "title": "General Conventions V2.2 und V2.4: defekte Word-Querverweise (V2.3 zwischenzeitlich korrigiert)",
+          "short": "V2.2 enthält fünf beschädigte Kapitelverweise in mehreren Abschnitten; V2.3 bereinigt sie, V2.4 führt denselben Fehler erneut ein.",
+          "long": "Die offizielle zweisprachige General-Conventions-Ausgabe V2.2 druckt auf S.13, 52, 62, 64 (Beschriftung von Tabelle 5) und 66 den wörtlichen Word-Fehler „Fehler! Verweisquelle konnte nicht gefunden werden.“. Betroffen sind unter anderem Geräteklassen, Systemstart, die Beschreibung der XML-Tabellennotation und der tatsächliche Tabellenkörperverweis. In V2.3 wurden die betreffenden Querverweise laut unabhängigem vollständigen Textabgleich beseitigt; der visuelle Vergleich von S.52 und der korrigierten Beschriftung Tabelle 5 auf S.64 bestätigt dies. Die offizielle V2.4 enthält die Platzhalter wiederum auf S.16, 56, 66, 68 (Tabelle 5) und 70. Damit handelt es sich um einen wieder eingeführten redaktionellen Fehler mit Unterbrechung im Versionsverlauf, nicht um eine fortlaufend fehlerhafte V2.3 oder neue XML-/Dienstpflicht. Exakte XSD-Versionen bestimmen weiterhin alle XML-PASS/FAIL-Ergebnisse.",
+          "recommendation": "Kapitelverweise in V2.2 und V2.4 redaktionell reparieren, V2.3 als zwischenzeitlich korrigiert behandeln. Den Platzhalter weder als Kapitelidentifier noch als XML-Element oder Herstellerfehler interpretieren; keine XSD-Aliasse erzeugen."
         },
         "en": {
-          "title": "General Conventions V2.2: multiple unresolved Word cross-references",
-          "short": "Several locations contain unresolved reference errors.",
-          "long": "General Conventions V2.2 contain Word placeholders for failed cross-references in several independent locations. These strings are editorial artifacts with no normative XML or service meaning.",
-          "recommendation": "Do not process them as normative content; report or ignore them as documentation defects."
+          "title": "General Conventions V2.2 and V2.4: broken Word cross-references, fixed temporarily in V2.3",
+          "short": "Five independent V2.2 contexts contain an unresolved reference placeholder; V2.3 corrects it, but V2.4 reintroduces it.",
+          "long": "Official bilingual General Conventions V2.2 visibly prints the German literal Word error 'Fehler! Verweisquelle konnte nicht gefunden werden.' on p13, p52, p62, p64 (actual Table5 caption) and p66. The occurrences concern device classes, system start and XML/table notation in both language tracks. Independent full-text review of official V2.3 and visually inspected p52 system-start prose and corrected p64 Table5 caption show the error removed in that intermediate publication. Official V2.4 again visibly prints the same placeholders on p16, p56, p66, p68 (Table5 caption) and p70. This is a regression/reintroduction of the same editorial defect with a corrected intervening release, not an additional finding identity or an XML validity rule. The exact selected official XSD retains executable XML authority.",
+          "recommendation": "Correct the affected printed cross-references in V2.2 and V2.4, keep V2.3 marked nonaffected, and never derive service/element obligations or provider validation failures from broken document markers."
         }
       },
       "runtime_match": {
@@ -5822,8 +5836,14 @@
           "kind": "evidence",
           "reference": "EV-132 / evidence run 33782124756 / closure run 33782389010",
           "note": "Pinned evidence-gate revalidation for this subblock."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC22_001_2026-10-12.md",
+          "note": "Exact original V2.2 and V2.4 bilingual visible page proof, V2.3 corrected control, source SHA256 and page render hashes, no duplicate identity."
         }
-      ]
+      ],
+      "notes": " 2026-10-12 independent three-edition boundary: V2.2 affected on exact five original pages, V2.3 independent full-text-negative and visibly corrected control, V2.4 exact five original same-root reintroduced placeholders; no runtime effect. Phantom DR3012V20-009 is not a real frozen finding and must not be created."
     },
     {
       "finding_id": "DR3012GC22-002",
