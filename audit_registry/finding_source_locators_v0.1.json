@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "46b7d588293ba60b96e3a44d9f6d083142a77b63",
+    "git_blob": "7ac6aceea7c8cfdd8c50864059bae2827526b527",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 74,
-    "coverage_complete_count": 74,
+    "locator_entry_count": 75,
+    "coverage_complete_count": 75,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 118
+    "remaining_finding_count": 117
   },
   "entries": [
     {
@@ -11306,6 +11306,276 @@
         "EV-132 exact pinned V2.2 original run33782124756 artifact9903986586, PDF sha256 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051, p13/52/62/64/66 inspected, Table5 caption printed p64, image SHA256 {\"13\":\"0a2f4cd8e4b0c7fe99d9150c75f4f378ad32ab4c288cf6ddfea375230539aa60\",\"52\":\"3581e3491bbef20213e871afd3cd3ebcd217aeafc1c6cf8a97d6f32b1a768065\",\"62\":\"b68fbd74fa7a3e9b4adc4ff34424a87fd5ff31ef61953e3b6415c69852712405\",\"64\":\"60abf559d433662104701414006a64a99607cbc2ebea462b4d825d0551f6249a\",\"66\":\"694070732f82b074a385ca07eb5dc1656f1e22e78aa4351494b2349c330d2d4a\"}",
         "EV-133 V2.3 prior full source negative scan run33842952649 artifact9925516670, strict fresh original run38218016512 artifact11732671602 PDF sha256 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603, corrected p52 PNG 0da4d228c4fc228ea62000b753e3b3913531305d86c1e8f4807ee8f79fa8427f, p64 Table5 PNG a2b077ecb95b3862e967dfd866b70ec0138345c72c64e106e88b6e4c2e6316eb",
         "EV-134 exact pinned V2.4 original run33843888080 artifact9925822375 PDF sha256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d, p16/56/66/68/70 inspected, Table5 caption printed p68"
+      ]
+    },
+    {
+      "finding_id": "DR3012GC22-002",
+      "service": "VDV 301-2 General Conventions / DNS-SD",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "General Conventions V2.2",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "First affected dedicated GC edition. Exact original printed German p25 SRV=3.3.1, p27 TXT=3.3.1; English p31 SRV=3.3.1, p33 TXT=3.3.2. Prior Base V2.1 German SRV/TXT 3.3.1/3.3.2."
+        },
+        {
+          "version": "General Conventions V2.3",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Same German duplicate persists in exact official V2.3 printed p25 SRV=3.3.1 and p27 TXT=3.3.1; English p31 SRV=3.3.1, p33 TXT=3.3.2. Not a corrected edition."
+        },
+        {
+          "version": "General Conventions V2.4",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Same German duplicate still present in latest registered official GC publication: p28 SRV=3.3.1 and p30 TXT=3.3.1; English p35 SRV=3.3.1, p37 TXT=3.3.2. No later corrected publication currently established."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "VDV301-2 Basic Services V2.1",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "nonaffected_adjacent_predecessor",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 Basic Services V2.1",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                33
+              ],
+              "section": "3.3 Veröffentlichung via DNS-SD / 3.3.1 Nutzung des SRV-Records",
+              "table": null,
+              "point_summary": "Last preceding comprehensive 301-2 Basic Services original German p33: SRV is visibly 3.3.1, and introductory TXT reference explicitly points to chapter 3.3.2."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 Basic Services V2.1",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                36
+              ],
+              "section": "3.3.2 Nutzung des TXT-Records",
+              "table": null,
+              "point_summary": "Visibly nonaffected German original TXT section 3.3.2; distinct from SRV 3.3.1."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Exact pinned V2.1 original independently rendered via GHA run38225286619 artifact11735936030; predecessor is Basic Services publication rather than separate GC V2.1."
+        },
+        {
+          "version": "General Conventions V2.2",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "affected_editorial_numbering",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "VDV-Schrift 301-2 Allgemeine Konventionen / General Conventions V2.2",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                25
+              ],
+              "section": "3.3 Veröffentlichung via DNS-SD / 3.3.1 Nutzung des SRV-Records",
+              "table": null,
+              "point_summary": "German visible section SRV is 3.3.1; nearby German TXT cross-reference also says chapter 3.3.1 rather than 3.3.2. Edition V2.2."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "VDV-Schrift 301-2 Allgemeine Konventionen / General Conventions V2.2",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                27
+              ],
+              "section": "3.3.1 Nutzung des TXT-Records",
+              "table": null,
+              "point_summary": "German visible TXT subsection is incorrectly numbered 3.3.1, duplicating SRV in this edition V2.2."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "VDV-Schrift 301-2 Allgemeine Konventionen / General Conventions V2.2",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                31
+              ],
+              "section": "3.3 Publication via DNS-SD / 3.3.1 Use of SRV Records",
+              "table": null,
+              "point_summary": "English visibly numbers SRV subsection 3.3.1 and references TXT chapter 3.3.2, unaffected language control V2.2."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "VDV-Schrift 301-2 Allgemeine Konventionen / General Conventions V2.2",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                33
+              ],
+              "section": "3.3.2 Use of TXT Records",
+              "table": null,
+              "point_summary": "English visible TXT subsection correctly numbered 3.3.2, disproving intentional German duplicate numbering V2.2."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Exact-byte original official PDF V2.2, source pinned and both German+English visible body targets reviewed; editorial only, no XSD validity impact."
+        },
+        {
+          "version": "General Conventions V2.3",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "affected_editorial_numbering",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "VDV-Schrift 301-2 Allgemeine Konventionen / General Conventions V2.3",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                25
+              ],
+              "section": "3.3 Veröffentlichung via DNS-SD / 3.3.1 Nutzung des SRV-Records",
+              "table": null,
+              "point_summary": "German visible section SRV is 3.3.1; nearby German TXT cross-reference also says chapter 3.3.1 rather than 3.3.2. Edition V2.3."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "VDV-Schrift 301-2 Allgemeine Konventionen / General Conventions V2.3",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                27
+              ],
+              "section": "3.3.1 Nutzung des TXT-Records",
+              "table": null,
+              "point_summary": "German visible TXT subsection is incorrectly numbered 3.3.1, duplicating SRV in this edition V2.3."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "VDV-Schrift 301-2 Allgemeine Konventionen / General Conventions V2.3",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                31
+              ],
+              "section": "3.3 Publication via DNS-SD / 3.3.1 Use of SRV Records",
+              "table": null,
+              "point_summary": "English visibly numbers SRV subsection 3.3.1 and references TXT chapter 3.3.2, unaffected language control V2.3."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "VDV-Schrift 301-2 Allgemeine Konventionen / General Conventions V2.3",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                33
+              ],
+              "section": "3.3.2 Use of TXT Records",
+              "table": null,
+              "point_summary": "English visible TXT subsection correctly numbered 3.3.2, disproving intentional German duplicate numbering V2.3."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Exact-byte original official PDF V2.3, source pinned and both German+English visible body targets reviewed; editorial only, no XSD validity impact."
+        },
+        {
+          "version": "General Conventions V2.4",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "affected_editorial_numbering",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV-Schrift 301-2 Allgemeine Konventionen / General Conventions V2.4",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                28
+              ],
+              "section": "3.3 Veröffentlichung via DNS-SD / 3.3.1 Nutzung des SRV-Records",
+              "table": null,
+              "point_summary": "German visible section SRV is 3.3.1; nearby German TXT cross-reference also says chapter 3.3.1 rather than 3.3.2. Edition V2.4."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV-Schrift 301-2 Allgemeine Konventionen / General Conventions V2.4",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                30
+              ],
+              "section": "3.3.1 Nutzung des TXT-Records",
+              "table": null,
+              "point_summary": "German visible TXT subsection is incorrectly numbered 3.3.1, duplicating SRV in this edition V2.4."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV-Schrift 301-2 Allgemeine Konventionen / General Conventions V2.4",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                35
+              ],
+              "section": "3.3 Publication via DNS-SD / 3.3.1 Use of SRV Records",
+              "table": null,
+              "point_summary": "English visibly numbers SRV subsection 3.3.1 and references TXT chapter 3.3.2, unaffected language control V2.4."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "VDV-Schrift 301-2 Allgemeine Konventionen / General Conventions V2.4",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                37
+              ],
+              "section": "3.3.2 Use of TXT Records",
+              "table": null,
+              "point_summary": "English visible TXT subsection correctly numbered 3.3.2, disproving intentional German duplicate numbering V2.4."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Exact-byte original official PDF V2.4, source pinned and both German+English visible body targets reviewed; editorial only, no XSD validity impact."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC22_002_2026-10-12.md",
+        "[Last nonaffected Base V2.1](https://github.com/MarcLeinenDE/VDV301/actions/runs/38225286619), original SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a, artifact 11735936030, p33 9b4d9706702059c27abf9017546fb71ec130cbb96f16a2eec21ff06ded8c63a2 and p36 aa905a30a48f9a1ca70af4bfc9ec53713cfaec4469623fdb68fb554880fc5f64",
+        "[V2.2 EV-132](https://github.com/MarcLeinenDE/VDV301/actions/runs/33782124756), original SHA256 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051, artifact 9903986586, printed p25/27/31/33 rendered and manually rechecked, p27 120c46814cf8c1c3d91160e2fb43f59dc5a4e34552b6e4848b68f10fa8a31091",
+        "[V2.3 fresh original](https://github.com/MarcLeinenDE/VDV301/actions/runs/38224916667), original SHA256 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603, artifact 11735744597, printed p25 0bd2e2b6fbf574f388fab30903459dbb90125fe29143e4d8842da5c886a23b91; p27 cb49ed9796eadd3c0428db878f5d83e9eba39c4b8d8e49b0d9bbfede363907f9; p31 5c7b101b1416e343a3646930d9086b8e8db8b78b732b3c6aeb6731e12758f489; p33 b8a2f7c03e60f451701bafef299785f490124bb0141069e8cc000fbdbd0a6819",
+        "[V2.4 fresh original](https://github.com/MarcLeinenDE/VDV301/actions/runs/38225082730), original SHA256 048f805fe3ddc894556899a94e36ec1b8cdc5a88fac5ad87235e4d, artifact 11736490358, printed p28 2c3f9512a32d1dde6cf872127e9253a1e6c6d52827318af4da0c4a7f5054aa9f; p30 bee1cac337117b0fed9436be7b7878e4529fee0acf4157a13ccd09f62709e0be; p35 01d684a06b47b92e4ac7165062e86e4720e16ffcb356903ff90274aa74918bdd; p37 dd822a5b4e6fe0c764e23a173bd21626477a4f10c3f5fe2ccd57f47b43078fb6"
       ]
     },
     {

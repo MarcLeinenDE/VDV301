@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 74,
-    "verified": 74,
+    "tracked_findings": 75,
+    "verified": 75,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -3886,6 +3886,53 @@
           "version": "General Conventions V2.4",
           "role": "same_root_regression_last_checked_affected",
           "language_status": "de:p56/66/68 Table5;en:p16/70, visible Word placeholder reintroduced",
+          "source_ids": [
+            "VDV301-2_GC_V2.4"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DR3012GC22-002",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC22_002_2026-10-12.md",
+        "[Last nonaffected Base V2.1](https://github.com/MarcLeinenDE/VDV301/actions/runs/38225286619), original SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a, artifact 11735936030, p33 9b4d9706702059c27abf9017546fb71ec130cbb96f16a2eec21ff06ded8c63a2 and p36 aa905a30a48f9a1ca70af4bfc9ec53713cfaec4469623fdb68fb554880fc5f64",
+        "[V2.2 EV-132](https://github.com/MarcLeinenDE/VDV301/actions/runs/33782124756), original SHA256 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051, artifact 9903986586, printed p25/27/31/33 rendered and manually rechecked, p27 120c46814cf8c1c3d91160e2fb43f59dc5a4e34552b6e4848b68f10fa8a31091",
+        "[V2.3 fresh original](https://github.com/MarcLeinenDE/VDV301/actions/runs/38224916667), original SHA256 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603, artifact 11735744597, printed p25 0bd2e2b6fbf574f388fab30903459dbb90125fe29143e4d8842da5c886a23b91; p27 cb49ed9796eadd3c0428db878f5d83e9eba39c4b8d8e49b0d9bbfede363907f9; p31 5c7b101b1416e343a3646930d9086b8e8db8b78b732b3c6aeb6731e12758f489; p33 b8a2f7c03e60f451701bafef299785f490124bb0141069e8cc000fbdbd0a6819",
+        "[V2.4 fresh original](https://github.com/MarcLeinenDE/VDV301/actions/runs/38225082730), original SHA256 048f805fe3ddc894556899a94e36ec1b8cdc5a88fac5ad87235e4d, artifact 11736490358, printed p28 2c3f9512a32d1dde6cf872127e9253a1e6c6d52827318af4da0c4a7f5054aa9f; p30 bee1cac337117b0fed9436be7b7878e4529fee0acf4157a13ccd09f62709e0be; p35 01d684a06b47b92e4ac7165062e86e4720e16ffcb356903ff90274aa74918bdd; p37 dd822a5b4e6fe0c764e23a173bd21626477a4f10c3f5fe2ccd57f47b43078fb6"
+      ],
+      "note": "Scope corrected from V2.2-only to the three affected official General Conventions editions V2.2/2.3/2.4, with V2.1 adjacent Basic Services source positively clean; English is correct throughout. No XSD dependency affects the chapter-number defect.",
+      "scope_conclusion": "Last available relevant preceding 301-2 Basic Services V2.1 German correctly separates SRV 3.3.1 and TXT 3.3.2. First affected dedicated General Conventions V2.2 (2019), issue persists unchanged in V2.3 (2021) and latest checked V2.4 (2023). Every affected edition has original body German duplicate 3.3.1 and correct English 3.3.1/3.3.2. No later corrected GC edition established; documentation only.",
+      "boundary_checks": [
+        {
+          "version": "VDV301-2 Basic Services V2.1",
+          "role": "last_nonaffected_predecessor_non_dedicated_gc",
+          "language_status": "de visibly clean p33/p36, SRV=3.3.1 TXT=3.3.2; en not used as counterproof",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "General Conventions V2.2",
+          "role": "first_affected_dedicated_gc_edition",
+          "language_status": "de printed p25/p27 SRV=3.3.1 TXT=3.3.1; en p31/p33 SRV=3.3.1 TXT=3.3.2",
+          "source_ids": [
+            "VDV301-2_GC_V2.2"
+          ]
+        },
+        {
+          "version": "General Conventions V2.3",
+          "role": "intermediate_still_affected",
+          "language_status": "de printed p25/p27 SRV=3.3.1 TXT=3.3.1; en p31/p33 SRV=3.3.1 TXT=3.3.2",
+          "source_ids": [
+            "VDV301-2_GC_V2.3"
+          ]
+        },
+        {
+          "version": "General Conventions V2.4",
+          "role": "latest_checked_still_affected_no_corrected_successor",
+          "language_status": "de printed p28/p30 SRV=3.3.1 TXT=3.3.1; en p35/p37 SRV=3.3.1 TXT=3.3.2",
           "source_ids": [
             "VDV301-2_GC_V2.4"
           ]
