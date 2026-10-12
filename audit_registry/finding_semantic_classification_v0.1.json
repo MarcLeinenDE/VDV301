@@ -6251,10 +6251,22 @@
       "service": "VDV 301-2 General Conventions / Version syntax",
       "version_scope": [
         {
+          "version": "General Conventions V2.2",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Original German §1.5 p11 lists distinct 0–9 and dot; English §1.5 p15 repeats literal 2 in character list; first_affected. No executable XML/XSD impact."
+        },
+        {
+          "version": "General Conventions V2.3",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Original German §1.5 p11 lists distinct 0–9 and dot; English §1.5 p15 repeats literal 2 in character list; intermediate_affected. No executable XML/XSD impact."
+        },
+        {
           "version": "General Conventions V2.4",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "English allowed-version-character list visibly duplicates digit 2; this is editorial residue, not an extension of executable syntax."
+          "note": "Original German §1.5 p14 lists distinct 0–9 and dot; English §1.5 p18 repeats literal 2 in character list; last_checked_affected_no_corrected_successor. No executable XML/XSD impact."
         }
       ],
       "review_state": "manually_reviewed",
@@ -6275,24 +6287,28 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "The English V2.4 allowed-character list contains digit 2 twice."
+          "note": "Byte-pinned visible original General Conventions V2.2 p15, V2.3 p15, V2.4 p18: English allowed-character list repeats '2'; corresponding German p11/p11/p14 correct."
+        },
+        {
+          "type": "version_history",
+          "note": "Original V1.0 DE §1.6 p19 and Basic Services V2.0/V2.1 §1.6 p19/p20 do not yet contain an explicit allowed-character list; first observed affected GC V2.2; no corrected successor established."
         },
         {
           "type": "common_conventions",
-          "note": "Duplicating the same token does not add a character or alter executable version syntax."
+          "note": "Repeating identical character token 2 adds no character and changes no executable version syntax; no runtime diagnostic."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "General Conventions V2.4: Ziffer 2 in Versionszeichenliste doppelt",
-          "short": "Die englische Liste enthält die Ziffer 2 zweimal.",
-          "long": "Das ist redaktionelle Redundanz. Ein identisches Zeichen zweimal aufzulisten erweitert weder den Zeichenvorrat noch die ausführbare Syntax.",
+          "title": "General Conventions V2.2–V2.4: Ziffer 2 in englischer Versionszeichenliste doppelt",
+          "short": "Die englischen Fassungen V2.2, V2.3 und V2.4 enthalten die Ziffer 2 in §1.5 zweimal.",
+          "long": "Reiner PDF-Redaktionsfehler: Die Zeichenliste im englischen §1.5 von V2.2 bis V2.4 enthält die Ziffer 2 doppelt, die deutsche Liste ist korrekt. Daraus ergibt sich weder eine zusätzliche zulässige Zeichenart noch eine geänderte ausführbare Versionssyntax.",
           "recommendation": "Keine zusätzliche Parser- oder Validierungsregel daraus ableiten."
         },
         "en": {
-          "title": "General Conventions V2.4: digit 2 duplicated in the version-character list",
-          "short": "The English list contains digit 2 twice.",
-          "long": "This is editorial redundancy. Listing the same character twice neither expands the character set nor changes executable syntax.",
+          "title": "General Conventions V2.2–V2.4: digit 2 duplicated in the English version-character list",
+          "short": "The English §1.5 character lists in V2.2, V2.3 and V2.4 repeat the digit 2.",
+          "long": "PDF-only editorial redundancy: the English §1.5 character list repeats digit 2 in V2.2, V2.3 and V2.4 while the corresponding German list is correct. This adds no distinct allowed character and no executable version syntax requirement.",
           "recommendation": "Derive no additional parser or validation rule from it."
         }
       },
@@ -6315,6 +6331,11 @@
           "kind": "evidence",
           "reference": "EV-134 / evidence run 33843888080 / closure run 33844432985",
           "note": "Pinned evidence-gate revalidation for this subblock."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_003_2026-10-12.md",
+          "note": "Original byte-pinned PDF body and independent V1.0/Basic V2.0/V2.1 and GC V2.2/V2.3/V2.4 DE/EN version boundaries reviewed; source and rendered-page SHA256 documented."
         }
       ]
     },
