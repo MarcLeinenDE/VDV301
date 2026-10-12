@@ -1,0 +1,38 @@
+# DR3012V20-008 — GetDeviceInformation Response described as Request (2026-10-12)
+
+Status: **independent exact-byte original visible-body review and cross-release boundary complete; exact HEAD full schema gate pending**. Existing historical finding identity retained, no extra finding or XSD edit.
+
+## Exact original PDF, page/body/table locators and version boundary
+
+| Original publication | Body/table evidence and affected status | Original source and independently verified original PNG |
+| --- | --- | --- |
+| **V1.0 German original — NOT affected** | Printed **p57** §**7.1.2.2 Response**: **Tabelle 7** GetDeviceInformationResponse and **Tabelle 8** GetDeviceInformationResponseData both correctly say **Antwortstruktur**. | `2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75`; strict pinned render [run 38042683113](https://github.com/MarcLeinenDE/VDV301/actions/runs/38042683113), artifact11666248483; p57 PNG `c58ce817ac87cf344feb18c55a20676c3db03f86e34973b689b4afafe00797fb` |
+| **V1.0 separately issued English translation — affected** | Printed **p64** §**9.3.2.2 Response**, **Table 31** GetDeviceInformationResponse calls parent **Request structure with non configuration able device information** and child GetDeviceInformationResponseData **Detailed request structure**. Nearby **Table 32** ResponseData **correctly** says Detailed response structure. The preceding request section explicitly says no request structure for this operation. | `e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7`; [run 38042692039](https://github.com/MarcLeinenDE/VDV301/actions/runs/38042692039), artifact11665873927, p64 PNG `15340364b3cd739d266d24fc3ab7f70b91021cd8bae1a0d6d689fb3726a2e578` |
+| **Bilingual Base V2.0 — affected** | Printed **p92**, §**7.1.2.2 Response**, **Table 12** repeats same two wrong Request descriptions. **Table 13** separately correctly says Detailed response structure. | `fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37`; [run 38042731143](https://github.com/MarcLeinenDE/VDV301/actions/runs/38042731143), artifact11666358448, p92 PNG `05ed33fbde5e167ea5e480b3ac9d8a89594ecb50ba51bc4205452566cdd8e2ba` |
+| **Bilingual Base V2.1 — STILL affected** | Printed **p97**, §**7.1.3.2 Response**, **Table 12** still has both wrong Request descriptions. **Table 13** correctly describes response data. V2.1 is **not** a corrected successor. | `685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a`; [run 38042738286](https://github.com/MarcLeinenDE/VDV301/actions/runs/38042738286), artifact11665864117, p97 PNG `4daca79147ffef4a7e5945d0ad0631f23d60e78368f391d6f623685a37972c18` |
+| **Separate DMS V2.2 — STILL affected** | Printed **p17** §**2.2.2 Response**, **Table 2** still describes parent and child response as request. **Table 3** ResponseData is correct. | `72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e`; fresh exact-byte [run 38216592744](https://github.com/MarcLeinenDE/VDV301/actions/runs/38216592744), artifact11732003911, p17 PNG `ded421eec6579ca4a1635a54b9618c38d912eb260d94118b15b6ad8c8390172f` |
+| **Separate official DMS V2.4 — STILL affected, latest checked** | Printed **p16** §**2.2.2 Response**, **Table 2** retains both incorrect request descriptions. **p17 Table 3** still correctly describes ResponseData. | `347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd`; fresh exact-byte [run 38216605187](https://github.com/MarcLeinenDE/VDV301/actions/runs/38216605187), artifact11731153864, p16 PNG `f7b990046fc450d647e76ca58769cd7b6af730bd2c43dffbf7c87560db11fb28`, p17 PNG `3845362f1563a109a6f9b396ed580d6114380b1dcd055538c3caf6fb7c30f018` |
+
+All PDF sources above were checked with exact source SHA-256 and byte-size pins before rendering (existing GitHub pinned fallback). Every listed original printed body and actual table caption was visually inspected, not inferred from TOC/history or text extraction. The source PNG hashes match their render manifests. The independent V1.0 German and English editions are evaluated separately.
+
+## Exact official released XSD authority and active disproof
+
+| Released upstream tag | Exact selected XSD / Git blob | Executable response evidence |
+| --- | --- | --- |
+| `VDV-301-1.0` | `IBIS-IP_DeviceManagementService_V1.0.xsd`, blob `602a963f91000d0d39e3c271bacb3c7aba73e6d4` | `DeviceManagementService.GetDeviceInformationResponseStructure` line8, child GetDeviceInformationResponseData line10, `GetDeviceInformationResponseDataStructure` line14. No request interpretation of the response. |
+| `VDV-301-2.0` | `IBIS-IP_DeviceManagementService_V2.0.xsd`, blob `74189e0da65563eeb084ec2f3c400e9668d1ee1a` | Global GetDeviceInformationResponse line24, response type line25, child ResponseData line27, data type line31. |
+| `VDV-301-2.1` | `IBIS-IP_DeviceManagementService_V2.1.xsd`, blob `191b43e01cdaba14b247725689a913c244a67eed` | Explicit empty GetDeviceInformationRequest line11 and **separate** GetDeviceInformationResponse line12 / response type line100, child data line102. The presence of a Get request operation does not turn its response into a request. |
+| `VDV-301-2.2` | `IBIS-IP_DeviceManagementService_V2.2.xsd`, blob `c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d` | Get request line11 and Get response line12; response type line84 and child line86, response data structure line90. |
+| Official **DMS V2.4 PDF** | Publisher source pinned in table above | Original PDF confirms the editorial error persists; **no released official `VDV-301-2.4` XSD tag independently established**, candidate/integration schema authority must not be silently promoted. |
+
+**Counterhypothesis:** Could `Request structure` refer to a meaningful request wrapper or the separate GetDeviceInformationRequest in a later service XSD? The actual table is in §Response, declares `GetDeviceInformationResponse` and its ResponseData child, and the exact release XSD does not treat the child as a request. V1.0 English and Base V2.0 additionally explicitly state there is no request structure for the Get operation. The structurally adjacent independent ResponseData table is correctly worded in all affected editions. This isolates the typo to exactly **two description cells in the parent response table**, not the names/shapes of XML declarations and not the separate ResponseData table.
+
+First affected published language track: V1.0 **English**, while original V1.0 **German is nonaffected**. English Base V2.0/V2.1 and dedicated DMS V2.2/V2.4 remain affected. Last verified affected dedicated DMS edition is **V2.4**; no first corrected successor established. No separate DMS V2.3 PDF is asserted from its reuse of an XSD tag.
+
+## SDK, provider and handoff outcome
+
+`confirmed_pdf_defect`, `normative_authority=contextual_only`, `sdk_behavior=warning`, `runtime_match=not_applicable`: this error can mislead generated mapping, so explain it with version-aware diagnostic, but **no independent provider XSD FAIL**. Exact selected original released XSD and dependencies exclusively determine XML PASS/FAIL. Do not create aliases, normalize request ↔ response, change XSD, conflate two tables or infer a universal request obligation.
+
+Canonical progress after full gate: locator/body-visible proof **72/192 → 73/192**, scope boundaries **72/72 → 73/73**, semantic classification remains **192/192**, runtime matcher implementations remain zero. Next locator **DR3012V20-009**.
+
+This report and every affected canonical register plus CURRENT_STATE are written atomically as `gate_pending`; require exact-HEAD full schema-audit-validation SUCCESS and a separate `terminal_clean` handoff commit with final-HEAD handoff-integrity verification before continuing.

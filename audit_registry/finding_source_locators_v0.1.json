@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "9d79fec9a37c9c56f214b727f3181f2cf73074d2",
+    "git_blob": "4bda38a4ab4f4db91fc13eb6eeb7994acb972e63",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 72,
-    "coverage_complete_count": 72,
+    "locator_entry_count": 73,
+    "coverage_complete_count": 73,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 120
+    "remaining_finding_count": 119
   },
   "entries": [
     {
@@ -12435,6 +12435,273 @@
         "DMS V2.2 original p18: run38042908251 artifact11665394848 PDF SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e PNG 947e51b4cfc795dcd9dcdd5ea92068075e6c9310fcfe8e653b8cad16a8b8aaa9; adjacent run38215376949 artifact11731267074",
         "DMS V2.4 original p17: run38042746163 artifact11666428423 PDF SHA256 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd PNG 3845362f1563a109a6f9b396ed580d6114380b1dcd055538c3caf6fb7c30f018; adjacent run38215420783 artifact11732146645",
         "Official VDVde/VDV301 released DMS XSD tags VDV-301-1.0 SHA602a963f91000d0d39e3c271bacb3c7aba73e6d4, VDV-301-2.0 SHA74189e0da65563eeb084ec2f3c400e9668d1ee1a, VDV-301-2.1 SHA191b43e01cdaba14b247725689a913c244a67eed, VDV-301-2.2 SHAc589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d"
+      ]
+    },
+    {
+      "finding_id": "DR3012V20-008",
+      "service": "DeviceManagementService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "VDV 301-2 V1.0 English translation",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V1.0.xsd",
+          "note": "Independently issued English V1.0 p64 Table31 labels GetDeviceInformationResponse as 'Request structure' and branch GetDeviceInformationResponseData as 'Detailed request structure', despite §9.3.2.2 Response and correctly named Table32 ResponseData. Original German V1.0 p57 Tables7/8 are correct and non-affected."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.0.xsd",
+          "note": "Bilingual Base V2.0 English DMS detail original p92 Table12 twice describes GetDeviceInformationResponse / ResponseData branch as request; directly following Table13 ResponseData uses correct response wording."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+          "note": "Bilingual Base V2.1 English DMS detail original p97 Table12 still incorrectly uses Request structure and Detailed request structure, while Table13 correctly describes ResponseData."
+        },
+        {
+          "version": "VDV 301-2-0 DMS V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+          "note": "Dedicated official DMS V2.2 original p17 Table2 GetDeviceInformationResponse and choice response data branch still incorrectly say Request structure; p17 Table3 ResponseData correctly says response."
+        },
+        {
+          "version": "VDV 301-2-0 DMS V2.4",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official dedicated DMS V2.4 PDF p16 Table2 repeats wrong Request structure / Detailed request structure descriptions within GetDeviceInformationResponse; p17 Table3 ResponseData is correctly described. No official release-tag DMS V2.4 XSD proven."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "VDV 301-2 V1.0 German original",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "historical_unaffected_language_control",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_DE",
+              "document_title": "VDV-Schrift 301-2 V1.0 original German",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2sds-v1-0.pdfx",
+              "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+              "printed_pages": [
+                57
+              ],
+              "section": "7.1.2.2 Response",
+              "table": "Tabelle 7 DeviceManagementService.GetDeviceInformationResponse; Tabelle 8 DeviceManagementService.GetDeviceInformationResponseData",
+              "point_summary": "Visible original Table7 says Struktur für die Beantwortung einer Anfrage and Ausführliche Antwortstruktur; Table8 also response, hence original German V1.0 unaffected."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V1.0.xsd",
+              "git_blob": "602a963f91000d0d39e3c271bacb3c7aba73e6d4",
+              "authority_detail": "Exact upstream released tag VDV-301-1.0 in VDVde/VDV301, byte-pinned Git blob",
+              "component_kind": "complexType",
+              "component": "DeviceManagementService.GetDeviceInformationResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceManagementService.GetDeviceInformationResponseStructure']",
+              "line_hint": "8",
+              "point_summary": "Contains child GetDeviceInformationResponseData line10, separate ResponseDataStructure line14; all response, same schema for original DE and EN publications.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            }
+          ],
+          "coverage_note": "Independently issued original German V1.0 is nonaffected; exact official released XSD is identical to the separately issued English translation."
+        },
+        {
+          "version": "VDV 301-2 V1.0 English translation",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 V1.0 separately issued English translation",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                64
+              ],
+              "section": "9.3.2.2 Response",
+              "table": "Table 31 Description of DeviceManagementService.GetDeviceInformationResponse; Table 32 Description of DeviceManagementService.GetDeviceInformationResponseData",
+              "point_summary": "Table31 parent and response data branch wrong request prose; Table32 ResponseData itself correctly says Detailed response structure."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V1.0.xsd",
+              "git_blob": "602a963f91000d0d39e3c271bacb3c7aba73e6d4",
+              "authority_detail": "Exact upstream released tag VDV-301-1.0 in VDVde/VDV301, byte-pinned Git blob",
+              "component_kind": "complexType",
+              "component": "DeviceManagementService.GetDeviceInformationResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceManagementService.GetDeviceInformationResponseStructure']",
+              "line_hint": "8",
+              "point_summary": "Contains child GetDeviceInformationResponseData line10, separate ResponseDataStructure line14; all response, same schema for original DE and EN publications.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            }
+          ],
+          "coverage_note": "Earliest affected separate English V1.0; §9.3.2.1 says no request structure, reinforcing Table31 error."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV-Schrift 301-2 bilingual Base V2.0",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                92
+              ],
+              "section": "7.1.2.2 Response",
+              "table": "Table 12 Description of DeviceManagementService.GetDeviceInformationResponse; Table 13 Description of DeviceManagementService.GetDeviceInformationResponseData",
+              "point_summary": "Visible Table12 has wrong Request structure and Detailed request structure labels; adjacent Table13 correctly says Detailed response structure."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.0.xsd",
+              "git_blob": "74189e0da65563eeb084ec2f3c400e9668d1ee1a",
+              "authority_detail": "Exact upstream released tag VDV-301-2.0 in VDVde/VDV301, byte-pinned Git blob",
+              "component_kind": "complexType",
+              "component": "DeviceManagementService.GetDeviceInformationResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceManagementService.GetDeviceInformationResponseStructure']",
+              "line_hint": "25",
+              "point_summary": "Global GetDeviceInformationResponse line24 and response type line25 with child ResponseData line27, separate DataStructure line31; not request.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            }
+          ],
+          "coverage_note": "Bilingual Base V2.0 shared English DMS operation detail affected; distinct correctly named response-data table not erroneous."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 bilingual Base V2.1",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                97
+              ],
+              "section": "7.1.3.2 Response",
+              "table": "Table 12 Description of DeviceManagementService.GetDeviceInformationResponse; Table 13 Description of DeviceManagementService.GetDeviceInformationResponseData",
+              "point_summary": "Visible Table12 still wrongly says request twice; separate Table13 describes response data correctly, so Base V2.1 is not a corrected successor."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+              "git_blob": "191b43e01cdaba14b247725689a913c244a67eed",
+              "authority_detail": "Exact upstream released tag VDV-301-2.1 in VDVde/VDV301, byte-pinned Git blob",
+              "component_kind": "complexType",
+              "component": "DeviceManagementService.GetDeviceInformationResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceManagementService.GetDeviceInformationResponseStructure']",
+              "line_hint": "100",
+              "point_summary": "Released group separately declares GetDeviceInformationRequest line11 and Response line12, Get response type line100, child Data line102 and ResponseDataStructure line106.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            }
+          ],
+          "coverage_note": "Later Base V2.1 retains English table error despite newly separated empty Get request operation in XSD; exact Response remains Response."
+        },
+        {
+          "version": "VDV 301-2-0 DMS V2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "DMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService V2.2",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sdes-v2-2-devicemanagementservice.pdfx",
+              "sha256": "72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e",
+              "printed_pages": [
+                17
+              ],
+              "section": "2.2.2 Response",
+              "table": "Table 2 Description of DeviceManagementService.GetDeviceInformationResponse; Table 3 Description of DeviceManagementService.GetDeviceInformationResponseData",
+              "point_summary": "Visible p17 Table2 parent and child branch wrong request labels; Table3 ResponseData correctly marked Detailed response structure."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+              "git_blob": "c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d",
+              "authority_detail": "Exact upstream released tag VDV-301-2.2 in VDVde/VDV301, byte-pinned Git blob",
+              "component_kind": "complexType",
+              "component": "DeviceManagementService.GetDeviceInformationResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceManagementService.GetDeviceInformationResponseStructure']",
+              "line_hint": "84",
+              "point_summary": "Released group separates Get request line11 and response line12, response complexType line84 and ResponseData structure line90.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2"
+            }
+          ],
+          "coverage_note": "Dedicated DMS V2.2 carries same wrong Table2 while official DMS XSD V2.2 clearly declares response structures."
+        },
+        {
+          "version": "VDV 301-2-0 DMS V2.4",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "DMS_V2.4",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService V2.4",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sde-v2.4-devicemanagementservice.pdfx",
+              "sha256": "347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd",
+              "printed_pages": [
+                16
+              ],
+              "section": "2.2.2 Response",
+              "table": "Table 2 Description of DeviceManagementService.GetDeviceInformationResponse",
+              "point_summary": "Visible Table2 wrongly says Request structure in parent and Detailed request structure in response-data child despite §2.2.2 Response."
+            },
+            {
+              "source_id": "DMS_V2.4",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService V2.4",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sde-v2.4-devicemanagementservice.pdfx",
+              "sha256": "347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd",
+              "printed_pages": [
+                17
+              ],
+              "section": "2.2.2 Response (continued)",
+              "table": "Table 3 Description of DeviceManagementService.GetDeviceInformationResponseData",
+              "point_summary": "Correct separate ResponseData Table3 reads Detailed response structure; do not flag this table."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Official DMS V2.4 PDF confirms persistence. No released official V2.4 DMS XSD tag independently established; do not relabel candidate variant."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_008_2026-10-12.md",
+        "VDV301-2 V1.0 German original run38042683113 artifact11666248483, official PDF SHA256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75, printed p57 PNG SHA256 c58ce817ac87cf344feb18c55a20676c3db03f86e34973b689b4afafe00797fb",
+        "VDV301-2 V1.0 English run38042692039 artifact11665873927, official PDF SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7, printed p64 PNG SHA256 15340364b3cd739d266d24fc3ab7f70b91021cd8bae1a0d6d689fb3726a2e578",
+        "Base V2.0 original run38042731143 artifact11666358448, official PDF SHA256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37, printed p92 PNG SHA256 05ed33fbde5e167ea5e480b3ac9d8a89594ecb50ba51bc4205452566cdd8e2ba",
+        "Base V2.1 original run38042738286 artifact11665864117, official PDF SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a, printed p97 PNG SHA256 4daca79147ffef4a7e5945d0ad0631f23d60e78368f391d6f623685a37972c18",
+        "Dedicated DMS V2.2 strict pinned run38216592744 artifact11732003911, official PDF SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e, printed p17 PNG SHA256 ded421eec6579ca4a1635a54b9618c38d912eb260d94118b15b6ad8c8390172f",
+        "Dedicated DMS V2.4 strict pinned run38216605187 artifact11731153864, official PDF SHA256 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd, p16 PNG SHA256 f7b990046fc450d647e76ca58769cd7b6af730bd2c43dffbf7c87560db11fb28, p17 PNG SHA256 3845362f1563a109a6f9b396ed580d6114380b1dcd055538c3caf6fb7c30f018",
+        "Official VDVde/VDV301 exact DMS XSD tag blobs VDV-301-1.0 602a963f91000d0d39e3c271bacb3c7aba73e6d4; VDV-301-2.0 74189e0da65563eeb084ec2f3c400e9668d1ee1a; VDV-301-2.1 191b43e01cdaba14b247725689a913c244a67eed; VDV-301-2.2 c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d."
       ]
     }
   ]
