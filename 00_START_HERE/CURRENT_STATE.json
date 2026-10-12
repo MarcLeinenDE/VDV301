@@ -2126,9 +2126,9 @@
     "version_scope_boundary_pending_count": 0
   },
   "next_actions": [
-    "DR3012GC22-002: pending full schema-audit-validation after source locator 75/192 and verified corrected scope GC V2.2–V2.4.",
-    "After SUCCESS, separate terminal_clean status-only handoff commit and verify its handoff-integrity and schema-audit-validation.",
-    "Only then next source locator DR3012GC23-001; no XSD changes or vendor FAIL for editorial numbering."
+    "DR3012GC22-002 75/192 complete evidence; initial gate 38225909331 exposed stale SDK manifest 74; fixed now in gate_pending.",
+    "Observe corrected full schema-audit-validation and handoff integrity; if SUCCESS, terminal-clean closure in separate status/summary commit.",
+    "Next real unlocated finding DR3012GC23-001, after final success."
   ],
   "source_locator_progress": {
     "locator_entry_count": 75,
@@ -2211,11 +2211,11 @@
     "latest_completed_full_gate_run_id": "38218654142",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38218654097",
-    "resume_instruction": "DR3012GC22-002 full evidence and registry correction committed as gate_pending, structural/body locator count 75/192 and boundaries 75/75. Inspect schema-audit-validation run for exact HEAD. On success status-only terminal_clean handoff and final Actions gates. Next real missing ID DR3012GC23-001.",
+    "resume_instruction": "DR3012GC22-002 75/192 evidence complete; initial gate 38225909331 failed because sdk_manifest/manifest_v0.1.json still had old 74/118 counts. Corrected derived manifest now; observe newest gate and close terminal only after SUCCESS. Next DR3012GC23-001.",
     "pending_block": "DR3012GC22-002 source locator + three-edition scope correction (75/192)",
     "active_finding": "DR3012GC22-002",
-    "active_step": "Committed exact-byte visual evidence, revised semantic affected V2.2–V2.4, canonical source-locator/body/scope registries, SDK semantic registry ref and CURRENT_STATE counts",
-    "next_step": "Wait for full schema-audit-validation on this exact HEAD; repair if failed. If successful, issue status-only terminal_clean handoff commit and verify all-push handoff-integrity plus full schema gate on final HEAD.",
+    "active_step": "Repair SDK manifest derivative locator/scope counts (74->75), identified by initial failing full gate 38225909331 and handoff 38225909403; preserve prior evidence and gate_pending",
+    "next_step": "Verify full schema gate and handoff for this corrected HEAD; then terminal_clean status-only closure.",
     "evidence_refs": [
       "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC22_002_2026-10-12.md",
       "[Last nonaffected Base V2.1](https://github.com/MarcLeinenDE/VDV301/actions/runs/38225286619), original SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a, artifact 11735936030, p33 9b4d9706702059c27abf9017546fb71ec130cbb96f16a2eec21ff06ded8c63a2 and p36 aa905a30a48f9a1ca70af4bfc9ec53713cfaec4469623fdb68fb554880fc5f64",
@@ -2223,7 +2223,7 @@
       "[V2.3 fresh original](https://github.com/MarcLeinenDE/VDV301/actions/runs/38224916667), original SHA256 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603, artifact 11735744597, printed p25 0bd2e2b6fbf574f388fab30903459dbb90125fe29143e4d8842da5c886a23b91; p27 cb49ed9796eadd3c0428db878f5d83e9eba39c4b8d8e49b0d9bbfede363907f9; p31 5c7b101b1416e343a3646930d9086b8e8db8b78b732b3c6aeb6731e12758f489; p33 b8a2f7c03e60f451701bafef299785f490124bb0141069e8cc000fbdbd0a6819",
       "[V2.4 fresh original](https://github.com/MarcLeinenDE/VDV301/actions/runs/38225082730), original SHA256 048f805fe3ddc894556899a94e36ec1b8cdc5a88fac5ad87235e4d, artifact 11736490358, printed p28 2c3f9512a32d1dde6cf872127e9253a1e6c6d52827318af4da0c4a7f5054aa9f; p30 bee1cac337117b0fed9436be7b7878e4529fee0acf4157a13ccd09f62709e0be; p35 01d684a06b47b92e4ac7165062e86e4720e16ffcb356903ff90274aa74918bdd; p37 dd822a5b4e6fe0c764e23a173bd21626477a4f10c3f5fe2ccd57f47b43078fb6"
     ],
-    "recovery_instruction": "DR3012GC22-002 full evidence and registry correction committed as gate_pending, structural/body locator count 75/192 and boundaries 75/75. Inspect schema-audit-validation run for exact HEAD. On success status-only terminal_clean handoff and final Actions gates. Next real missing ID DR3012GC23-001."
+    "recovery_instruction": "DR3012GC22-002 75/192 evidence complete; initial gate 38225909331 failed because sdk_manifest/manifest_v0.1.json still had old 74/118 counts. Corrected derived manifest now; observe newest gate and close terminal only after SUCCESS. Next DR3012GC23-001."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
