@@ -628,6 +628,21 @@
       "note": "All target locators verified directly on visible original PDF bodies: V1.0 DE p20 correct, Base V2.0 p21 bilingual correct, Base V2.1 p22 bilingual correct; GC2.2 DE p17 duplicated and EN p20 correct, GC2.3 DE p17 duplicated and EN p20 correct, GC2.4 DE p20 duplicated and EN p23 correct. Exact pinned source and rendered PNG hashes logged."
     },
     {
+      "finding_id": "DR3012GC24-003",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_003_2026-10-12.md",
+        "GitHub Actions source artifact: run 33752224704, artifact 9892036202, exact original bytes SHA256/size checked; rendered at 180dpi",
+        "VDV301-2_V1.0_DE: p19 §1.6 no explicit list, DE/shared PNG SHA256 a8bceeefcbf6956105ddc6d7d6cdab830e9534acb73ab4f5837ea29a20d77770",
+        "VDV301-2_BASE_V2.0: p19 §1.6 no explicit list, DE/shared PNG SHA256 039c69c232e4bfd9a09c0ca0794cfee461a3758af397e34978132a57f1736338",
+        "VDV301-2_BASE_V2.1: p20 §1.6 no explicit list, DE/shared PNG SHA256 e26a34c9db55a58ac462da784b7ac0678a592a88f076a0af7a828d305b1a69a1",
+        "VDV301-2_GC_V2.2: DE §1.5 p11 correct; EN §1.5 p15 repeats 2, DE/shared PNG SHA256 d009d01315f5efacd9034cce96c2fc3bd33ea2894f95834d5ac5b0c75203edea, EN PNG SHA256 5fc5158191d3308010c7af3d634c40438b979a27c868319ca5263620003af947",
+        "VDV301-2_GC_V2.3: DE §1.5 p11 correct; EN §1.5 p15 repeats 2, DE/shared PNG SHA256 c6aebcd51c19dbedbde81f4eea77df569a50fadb88c9a68b49e7446edf165d22, EN PNG SHA256 4b675ffb5cd6d6f67ba3e17946018c30be0a39e8e59a50b4c1799e860eb0c2e0",
+        "VDV301-2_GC_V2.4: DE §1.5 p14 correct; EN §1.5 p18 repeats 2, DE/shared PNG SHA256 ccc94a427e3f975e81d1aa963ec5214a74cee04fd4c853f85819e6f73e99100b, EN PNG SHA256 7c4e2c8f6aafcf8f0f4eb2f09c767670a31a00ccf62d0cb9959d11c3e604e9c8"
+      ],
+      "note": "All original bytes SHA256/size-pinned and visually examined: no explicit enumerated list in V1.0/Basic V2.0/V2.1; first English duplicated 2 GC2.2 and persists GC2.3/2.4, German GC lists correct. No XML/XSD runtime impact."
+    },
+    {
       "finding_id": "DR3012V20-001",
       "state": "verified_current_standard",
       "evidence": [
@@ -715,21 +730,6 @@
         "Official VDVde/VDV301 exact DMS XSD tag blobs VDV-301-1.0 602a963f91000d0d39e3c271bacb3c7aba73e6d4; VDV-301-2.0 74189e0da65563eeb084ec2f3c400e9668d1ee1a; VDV-301-2.1 191b43e01cdaba14b247725689a913c244a67eed; VDV-301-2.2 c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d."
       ],
       "note": "Visually rechecked exact original DE V1.0 nonaffected/EN V1.0 affected, Base2.0/2.1, DMS2.2/2.4, actual Table31/12/2 wrong request parent/child cells versus correctly worded Table32/13/3. Pinned PNG SHA and released XSD identities in evidence report."
-    },
-    {
-      "finding_id": "DR3012GC24-003",
-      "state": "verified_current_standard",
-      "evidence": [
-        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_003_2026-10-12.md",
-        "GitHub Actions source artifact: run 33752224704, artifact 9892036202, exact original bytes SHA256/size checked; rendered at 180dpi",
-        "VDV301-2_V1.0_DE: p19 §1.6 no explicit list, DE/shared PNG SHA256 a8bceeefcbf6956105ddc6d7d6cdab830e9534acb73ab4f5837ea29a20d77770",
-        "VDV301-2_BASE_V2.0: p19 §1.6 no explicit list, DE/shared PNG SHA256 039c69c232e4bfd9a09c0ca0794cfee461a3758af397e34978132a57f1736338",
-        "VDV301-2_BASE_V2.1: p20 §1.6 no explicit list, DE/shared PNG SHA256 e26a34c9db55a58ac462da784b7ac0678a592a88f076a0af7a828d305b1a69a1",
-        "VDV301-2_GC_V2.2: DE §1.5 p11 correct; EN §1.5 p15 repeats 2, DE/shared PNG SHA256 d009d01315f5efacd9034cce96c2fc3bd33ea2894f95834d5ac5b0c75203edea, EN PNG SHA256 5fc5158191d3308010c7af3d634c40438b979a27c868319ca5263620003af947",
-        "VDV301-2_GC_V2.3: DE §1.5 p11 correct; EN §1.5 p15 repeats 2, DE/shared PNG SHA256 c6aebcd51c19dbedbde81f4eea77df569a50fadb88c9a68b49e7446edf165d22, EN PNG SHA256 4b675ffb5cd6d6f67ba3e17946018c30be0a39e8e59a50b4c1799e860eb0c2e0",
-        "VDV301-2_GC_V2.4: DE §1.5 p14 correct; EN §1.5 p18 repeats 2, DE/shared PNG SHA256 ccc94a427e3f975e81d1aa963ec5214a74cee04fd4c853f85819e6f73e99100b, EN PNG SHA256 7c4e2c8f6aafcf8f0f4eb2f09c767670a31a00ccf62d0cb9959d11c3e604e9c8"
-      ],
-      "note": "All original bytes SHA256/size-pinned and visually examined: no explicit enumerated list in V1.0/Basic V2.0/V2.1; first English duplicated 2 GC2.2 and persists GC2.3/2.4, German GC lists correct. No XML/XSD runtime impact."
     }
   ]
 }
