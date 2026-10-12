@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 80,
-    "verified": 80,
+    "tracked_findings": 81,
+    "verified": 81,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -4255,6 +4255,76 @@
           "version": "V2.4 candidate/integration schema context",
           "role": "v24_candidate_executable_counterpart_not_official_release",
           "language_status": "Official 2.4 PDF same targets plus PR31 non-official selected candidate exact enum blob 2afed8cf, EV-134 validates corrected and rejects malformed; not official release.",
+          "source_ids": [
+            "VDV301-2_GC_V2.4"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DR3012GC24-005",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_005_2026-10-12.md",
+        "Pinned official EN V1.0 original run38271427816 artifact11756578350 (p21/p23); byte SHA verified",
+        "Pinned original remaining six PDFs run33752224704 artifact9892036202, 160dpi render and page SHA256 in report",
+        "Exact 7 independent publication/version boundaries: 2 original V1.0 pre-contradiction controls; first conflicting assertions Basic2.0; persists Basic2.1, GC2.2, GC2.3, GC2.4."
+      ],
+      "note": "Historical first complete two-statement contradiction first occurs official bilingual Base V2.0; 2014 English / 2016 German 1.0 do not expressly deny common version while retaining earlier standard-release Version 1.0; Base2.1 and GC2.2/2.3/2.4 retain ambiguous wording; no corrected successor. No XML FAIL inferred.",
+      "scope_conclusion": "Independent EN V1.0 §3.6 p21 & §4.5 p23 plus German V1.0 §1.6 p19 & §2.5 p22 serve as last historical pre-contradiction controls. First conflicting pair of statements is Basic Services V2.0 bilingual §1.6 p19 vs §2.5 p25. It persists Basic Services V2.1 p20/p26; GC V2.2 and V2.3 DE §1.5 p11/§2.5 p19 and EN §1.5 p15/§2.5 p22; GC V2.4 DE §1.5 p14/§2.5 p22 and EN §1.5 p18/§2.5 p25. Language could refer historically to standard release V1.0, so do not infer normative umbrella service-version XML rule. Last checked GC2.4 affected, no corrected successor.",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-2 V1.0 English original (01/2014)",
+          "role": "historical_unaffected_control",
+          "language_status": "21: 3.6 IBIS-IP Version / 23: 4.5 Other Protocols — Official original PDF SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 (2403598 bytes). Original body pages 21, 23 visually checked. V1.0 historical-release version context; no later explicit no-common-version assertion.",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V1.0 German original (07/2016)",
+          "role": "last_nonaffected_predecessor",
+          "language_status": "19: 1.6 Version des IBIS-IP / 22: 2.5 Weitere Protokolle — Official original PDF SHA256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75 (1790447 bytes). Original body pages 19, 22 visually checked. V1.0 historical-release version context; no later explicit no-common-version assertion.",
+          "source_ids": [
+            "VDV301-2_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "role": "first_affected",
+          "language_status": "19: 1.6 Versionierung in IBIS-IP / IBIS-IP-Version (DE/EN) / 25: 2.5 Weitere Protokolle / Other Protocols (DE/EN) — Official original PDF SHA256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37 (2374295 bytes). Original body pages 19, 25 visually checked. Explicit no common version versus old version 1.0 wording in same bilingual document.",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "role": "intermediate_affected",
+          "language_status": "20: 1.6 Versionierung in IBIS-IP / IBIS-IP-Version (DE/EN) / 26: 2.5 Weitere Protokolle / Other Protocols (DE/EN) — Official original PDF SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a (2671005 bytes). Original body pages 20, 26 visually checked. Both opposed contextual wordings persist in bilingual original.",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "General Conventions V2.2",
+          "role": "intermediate_affected",
+          "language_status": "11: 1.5 Versionierung in IBIS-IP (DE) / 15: 1.5 IBIS-IP-Version (EN) / 19: 2.5 Weitere Protokolle (DE) / 22: 2.5 Other Protocols (EN) — Official original PDF SHA256 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051 (1562305 bytes). Original body pages 11, 15, 19, 22 visually checked. German and English actual body pair says no common service version yet unqualified historical 1.0.",
+          "source_ids": [
+            "VDV301-2_GC_V2.2"
+          ]
+        },
+        {
+          "version": "General Conventions V2.3",
+          "role": "intermediate_affected",
+          "language_status": "11: 1.5 Versionierung in IBIS-IP (DE) / 15: 1.5 IBIS-IP-Version (EN) / 19: 2.5 Weitere Protokolle (DE) / 22: 2.5 Other Protocols (EN) — Official original PDF SHA256 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603 (1057483 bytes). Original body pages 11, 15, 19, 22 visually checked. German and English actual body wording persists.",
+          "source_ids": [
+            "VDV301-2_GC_V2.3"
+          ]
+        },
+        {
+          "version": "General Conventions V2.4",
+          "role": "last_checked_affected_no_corrected_successor",
+          "language_status": "14: 1.5 Versionierung in IBIS-IP (DE) / 18: 1.5 IBIS-IP-Version (EN) / 22: 2.5 Weitere Protokolle (DE) / 25: 2.5 Other Protocols (EN) — Official original PDF SHA256 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d (1767094 bytes). Original body pages 14, 18, 22, 25 visually checked. Latest published original checked; semantic ambiguity persists with no confirmed corrected successor.",
           "source_ids": [
             "VDV301-2_GC_V2.4"
           ]
