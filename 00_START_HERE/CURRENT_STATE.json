@@ -2126,9 +2126,9 @@
     "version_scope_boundary_pending_count": 0
   },
   "next_actions": [
-    "DR3012GC24-001 77/192 source/body and boundaries 77/77; full gate pending after historical version-scope expansion.",
-    "After complete schema-audit gate SUCCESS close as terminal_clean in separate status-only commit; verify final HEAD schema/handoff.",
-    "Then next DR3012GC24-002 with explicit original PDF body and corrected scope boundaries."
+    "Inspect full schema-audit-validation for repaired local XSD locators and confirm official upstream version-tag blob provenance.",
+    "Repair any additional exact official-tag mismatch without changing authority or selected XSD; then terminal close.",
+    "Next DR3012GC24-002 after full audit and final HEAD handoff success."
   ],
   "source_locator_progress": {
     "locator_entry_count": 77,
@@ -2211,11 +2211,11 @@
     "latest_completed_full_gate_run_id": "38230153744",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38230153781",
-    "resume_instruction": "DR3012GC24-001 gate_pending historical source locator committed, full gate then terminal handoff, next DR3012GC24-002.",
+    "resume_instruction": "GC24-001 gate_pending, 77/192, first failed gate corrected local XSD external repository flag, check next full gate.",
     "pending_block": "DR3012GC24-001 77/192 source locator, original PDF historical scope+candidate XSD boundary",
     "active_finding": "DR3012GC24-001",
-    "active_step": "Original V1.0 DE, Basic 2.0/2.1, GC2.2/2.3/2.4 byte-pinned visible body and exact Enumerations official V1.0–V2.2/candidate V2.4 verified; affected scope corrected to earliest V1.0, 77/192 canonical locator/body/scope updated",
-    "next_step": "Check full schema-audit-validation and handoff-integrity for this exact HEAD; resolve any gate failure, then separate terminal_clean status-only commit and verify final HEAD.",
+    "active_step": "Full audit run 38235882046 failed ONLY locator_status=1 because new 5 local XSD locators accidentally carried repository=MarcLeinenDE/VDV301/ref. Validator treats these as external and requires VDVde/VDV301; removed erroneous external fields to enforce local blob and official upstream release-tag checks.",
+    "next_step": "Check full schema-audit-validation after local XSD locator correction. If failure identify exact next error, repair pending; then terminal_clean status-only close.",
     "evidence_refs": [
       "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_001_2026-10-12.md",
       "VDV301-2 V1.0 DE run38235045280 artifact11740188048 original p17 1.4 German OnBordUnit SHA256 fdeb553db8bd544964cc8666473dbce777fdf732095e205617dcf03e8c7cb3ad",
@@ -2227,7 +2227,7 @@
       "EV-134 candidate validation positive DeviceClass_OnBoardUnit valid and negative OnBordUnit invalid; candidate enumerations blob 2afed8cf23afa91db92b0f043cc5b4ad428b0f25 VDVde/VDV301#31",
       "Historical exact enum blob control official Enumerations V1.0 a9bea5bc73003ed91ded8519db06c32c4067831d, V2.0 27e3c183b00381d959622d13c10543123af8eef6, V2.1 311464690ad60749ed8d326217787e4b8ed0b718, V2.2 2a23b512379b18e8f122ac1272cef8229fb86283; no official V2.4 XSD established"
     ],
-    "recovery_instruction": "DR3012GC24-001 gate_pending, unique locators+body 77/192, boundary77/77. Historical V1.0 through GC2.4 German typo, all adjacent official versions visually checked. Official enum 1.0–2.2 and candidate2.4 exact OnBoardUnit. Full schema gate pending on latest commit, then status-only terminal closure; next DR3012GC24-002."
+    "recovery_instruction": "GC24-001 77/192 gate_pending, first full gate run38235882046 failed locator validator because local official/candidate XSD locator incorrectly had external repository. Current commit removes these fields for 5 local XSDs; inspect next full audit result, fix any tag/blob mismatches, terminal-close only when green."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
