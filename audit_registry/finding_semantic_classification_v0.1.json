@@ -6488,10 +6488,34 @@
       "service": "VDV 301-2 General Conventions / Version model",
       "version_scope": [
         {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "First contradiction in same official original: §1.6 p19 DE/EN says each service is independently versioned and no common version; §2.5 p25 DE/EN retains Version 1.0 von IBIS-IP/version 1.0 of IBIS-IP."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "DE/EN independent version/no common version §1.6 p20 conflicts in terminology with retained 'Version 1.0 von IBIS-IP' §2.5 p26."
+        },
+        {
+          "version": "General Conventions V2.2",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "DE §1.5 p11 vs §2.5 p19 and EN §1.5 p15 vs §2.5 p22, current no-common service version with legacy overall Version 1.0 wording."
+        },
+        {
+          "version": "General Conventions V2.3",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "DE §1.5 p11 vs §2.5 p19 and EN §1.5 p15 vs §2.5 p22, both original PDF bodies persist in semantic ambiguity."
+        },
+        {
           "version": "General Conventions V2.4",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "Document states there is no common IBIS-IP version, yet later uses stale wording 'Version 1.0 of IBIS-IP'."
+          "note": "DE §1.5 p14 vs §2.5 p22 and EN §1.5 p18 vs §2.5 p25, last checked affected official publication; no corrected successor established."
         }
       ],
       "review_state": "manually_reviewed",
@@ -6513,25 +6537,29 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "V2.4 both denies a common IBIS-IP version and later refers to 'Version 1.0 of IBIS-IP'."
+          "note": "Original body independently shows no common IBIS-IP version and later 'Version 1.0 of IBIS-IP' in Basic V2.0 (DE/EN p19 vs p25), Basic V2.1 (p20 vs p26), GC2.2/2.3 (DE p11/p19, EN p15/p22), GC2.4 (DE p14/p22, EN p18/p25)."
+        },
+        {
+          "type": "version_history",
+          "note": "Earlier independent V1.0 English original (Jan2014) §3.6 p21 introduces first specification 1.0 and §4.5 p23 version 1.0 prose, and German V1.0 (Jul2016) §1.6 p19/§2.5 p22 similarly. Neither contains later explicit no-common-version denial, so not same internal contradiction. First affected Basic V2.0, last checked affected GC2.4."
         },
         {
           "type": "common_conventions",
-          "note": "No umbrella schema version may be inferred from the stale phrase."
+          "note": "Plausible disproof: phrase 'version 1.0 of IBIS-IP' may designate the historical complete specification release, not an executable uniform service version. Later lack of qualification is editorially misleading but cannot establish new XSD or global version-routing key."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "General Conventions V2.4: widersprüchliche Aussage zu gemeinsamer IBIS-IP-Version",
-          "short": "Keine gemeinsame Version wird erklärt, später steht dennoch „Version 1.0 of IBIS-IP“.",
-          "long": "Die spätere Formulierung ist ein veralteter Dokumentationsrest und darf nicht als globale Versionsnummer oder Schema-Routing-Schlüssel interpretiert werden.",
-          "recommendation": "Keine gemeinsame IBIS-IP-Schemaversion daraus ableiten; versions- und servicespezifische Autorität verwenden."
+          "title": "VDV 301-2 V2.0–V2.4: uneinheitliche Aussage zur gemeinsamen IBIS-IP-Version",
+          "short": "Seit Basic Services V2.0 schließen die Schriften eine gemeinsame Dienstversion aus, nennen später jedoch weiterhin „Version 1.0 von IBIS-IP“.",
+          "long": "Ab Basic Services V2.0 bis General Conventions V2.4 wird jeder Dienst ausdrücklich unabhängig versioniert, eine gemeinsame IBIS-IP-Version wird ausgeschlossen. Im Abschnitt „Weitere Protokolle“ steht dagegen weiterhin unqualifiziert „Version 1.0 von IBIS-IP“. In den älteren V1.0-Schriften bezeichnet 1.0 den damaligen Stand der gesamten Schriftausgabe; auch in neueren Schriften kann der Satz diesen historischen Bezug meinen. Daraus darf keine globale ausführbare Versionsnummer und keine allgemeine XML-Schemaversion abgeleitet werden.",
+          "recommendation": "Protokoll- und Dienstversionen anhand der jeweils exakt ausgewählten offiziellen oder ausdrücklich als Candidate ausgewiesenen Quelle auswerten. Keine globale IBIS-IP-Schemaversion erzeugen; den alten Satz nur erläuternd kennzeichnen, niemals als Anbieter-FAIL."
         },
         "en": {
-          "title": "General Conventions V2.4: contradictory wording about a common IBIS-IP version",
-          "short": "The document denies a common version but later says 'Version 1.0 of IBIS-IP'.",
-          "long": "The later phrase is stale documentation residue and must not be interpreted as a global version number or schema-routing key.",
-          "recommendation": "Do not infer a common IBIS-IP schema version from it; use version- and service-specific authority."
+          "title": "VDV 301-2 V2.0–V2.4: inconsistent common IBIS-IP version terminology",
+          "short": "From Basic Services V2.0, the document denies a common service version but retains 'version 1.0 of IBIS-IP' in its other-protocols section.",
+          "long": "Basic Services V2.0/V2.1 and General Conventions V2.2/V2.3/V2.4 explicitly version each service independently and deny any common IBIS-IP service version, while the later Other Protocols clause continues to mention 'version 1.0 of IBIS-IP'. The V1.0 original English/German publications referred to their initial overall specification release, so the later phrase may still be historical shorthand. It must not be treated as a global executable version or uniform XSD schema routing key.",
+          "recommendation": "Use the exact selected official or explicitly labelled candidate authority for each service/profile version. Never infer a global schema version or provider failure from the retained historical phrasing."
         }
       },
       "runtime_match": {
@@ -6553,6 +6581,16 @@
           "kind": "evidence",
           "reference": "EV-134 / evidence run 33843888080 / closure run 33844432985",
           "note": "Pinned evidence-gate revalidation for this subblock."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_005_2026-10-12.md",
+          "note": "Historical DE/EN version-boundary and original visible body SHA evidence 2014–2023, explicit earliest contradiction Basic V2.0."
+        },
+        {
+          "kind": "evidence",
+          "reference": "GitHub Actions pinned English V1.0 render run 38271427816 artifact11756578350",
+          "note": "Original Jan2014 p21 and p23 physically inspected against precise official PDF source pin."
         }
       ]
     },
