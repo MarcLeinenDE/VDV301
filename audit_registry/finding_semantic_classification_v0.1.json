@@ -6344,16 +6344,52 @@
       "service": "VDV 301-2 General Conventions / ServiceNameEnumeration",
       "version_scope": [
         {
+          "version": "VDV 301-2 V1.0 English original (01/2014)",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Earliest independently published English V1.0 glossary §14 p122 says PassengerCountigService, main §9.8.1 p85 says PassengerCountingService. Exact released V1.0 ServiceNameEnumeration contains neither typo nor corrected PassengerCountingService; preserve explicit missing-enum boundary."
+        },
+        {
+          "version": "VDV 301-2 V1.0 German original (07/2016)",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Separate German V1.0 original glossary p78 says PassengerCountigService; selected V1.0 released ServiceNameEnumeration lacks both typo and corrected PassengerCountingService."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.0.xsd",
+          "note": "Official bilingual Basic Services V2.0 German glossary p107 and English p108 repeat PassengerCountigService; exact V2.0 enumeration permits PassengerCountingService, rejects typo."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.1.xsd",
+          "note": "Official bilingual Basic Services V2.1 German glossary p121 and English p122 repeat PassengerCountigService. Last prior publication before GC2.2 example typos; exact V2.1 enumeration allows corrected name."
+        },
+        {
+          "version": "General Conventions V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "First GC example typos: de p55/en p60 DeviceManagmenService, CustomumerInformationService and diagram DeviceManagmentServices. Both glossaries de p72/en p74 still PassengerCountigService. Exact released 2.2 ServiceNameEnumeration has corrected values only."
+        },
+        {
+          "version": "General Conventions V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.2.xsd (exact VDV-301-2.3 tag reuse)",
+          "note": "Original GC2.3 de p55/en p60 three example/diagram typos and de p73/en p75 glossary PassengerCountigService. Official VDV-301-2.3 tag retains exact IBIS-IP_Enumerations_V2.2.xsd blob 2a23b512..., not a fabricated Enumerations_V2.3.xsd."
+        },
+        {
           "version": "General Conventions V2.4 official PDF",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "Examples/glossary contain multiple typo-like service identifiers."
+          "note": "Latest official GC PDF de p59/en p64 three example/diagram typos and glossary de p77/en p79 PassengerCountigService. No independently established official released V2.4 enumeration XSD."
         },
         {
           "version": "V2.4 candidate/integration schema context",
           "authority": "candidate_integration",
-          "xsd_profile": "IBIS-IP_Enumerations.xsd (V2.4 candidate/integration)",
-          "note": "Selected candidate ServiceNameEnumeration contains corrected identifiers and rejects typo forms; profile is not official release authority."
+          "xsd_profile": "IBIS-IP_Enumerations_V2.4.xsd (candidate/integration)",
+          "note": "Explicit candidate PR31 exact blob 2afed8cf23afa91db92b0f043cc5b4ad428b0f25 accepts corrected identifiers, rejects typo strings under EV-134; candidate XSD is not official V2.4 released schema."
         }
       ],
       "review_state": "manually_reviewed",
@@ -6376,29 +6412,37 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "Multiple typo-like service identifiers are visible in examples/glossary."
+          "note": "Visually verified pinned original V1.0 English (2014) §14 p122 and German (2016) glossary p78; bilingual Basic2.0/2.1 and GC2.2–2.4 all preserve PassengerCountigService; GC2.2–2.4 additionally preserve DeviceManagmenService, CustomumerInformationService and diagram DeviceManagmentServices."
+        },
+        {
+          "type": "version_history",
+          "note": "Earliest affected English V1.0 p122; German V1.0 later p78. Other three typos first observed GC V2.2; last prior Basic V2.1 has glossary error but no identical GC system-start example typos. GC V2.3 and 2.4 persist, no corrected successor established."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Exact released ServiceNameEnumeration V1.0 omits even correct PassengerCountingService; official 2.0,2.1,2.2 do include that corrected value and reject all typo forms. Official tag VDV-301-2.3 reuses the exact V2.2 enum blob; no invented V2.3 file."
         },
         {
           "type": "candidate_integration_provenance",
-          "note": "Selected ServiceNameEnumeration is candidate/integration authority, not an official V2.4 release XSD."
+          "note": "V2.4 Enumerations blob 2afed8cf23afa91db92b0f043cc5b4ad428b0f25 is selectable PR31 candidate only, not official release."
         },
         {
           "type": "executable_validation",
-          "note": "EV-134 candidate-profile samples accept corrected identifiers and reject typo forms."
+          "note": "EV-134 candidate exact selected profile rejects typo forms and accepts corrected service names. Source-locator report contains scoped declaration checks for official historical tags; no runtime XML is inferred from document example labels alone."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "General Conventions V2.4: fehlerhafte Service-Identifier; XSD nur Candidate",
-          "short": "PDF-Bezeichnungen weichen von ServiceNameEnumeration ab; der ausführbare Gegenbeweis ist nicht-offiziell.",
-          "long": "Beispiele/Glossar enthalten mehrere serviceähnliche Tippfehler. Der Candidate/Integration-XSD-Kontext enthält die korrigierten Werte und EV-134 verwirft die Tippformen. Diese Evidence darf nicht zur offiziellen V2.4-Release-Autorität hochgestuft werden.",
-          "recommendation": "Keine Tippfehler-Aliasse erzeugen; Candidate-Enumeration nur als nicht-offizielles Analyseprofil verwenden und für offizielles V2.4-Striktprofil fail-closed bleiben."
+          "title": "VDV 301-2 V1.0–V2.4: Schreibfehler in Service-Identifikatoren",
+          "short": "Glossar ab V1.0 und Dienstbeispiele ab V2.2 enthalten falsche Servicebezeichnungen.",
+          "long": "Der Glossareintrag PassengerCountigService findet sich bereits in der englischen V1.0 (01/2014) sowie der deutschen V1.0 (07/2016) und bleibt bis GC V2.4 bestehen. GC V2.2–V2.4 enthalten zusätzlich DeviceManagmenService, CustomumerInformationService und DeviceManagmentServices im Dienstablauf/Diagramm. Für jedes XML-Ergebnis gilt ausschließlich die exakt gewählte XSD. Achtung: Die offizielle V1.0-ServiceNameEnumeration enthält auch den korrekt geschriebenen PassengerCountingService nicht; erst die späteren 2.x-Versionen erlauben ihn. Für V2.4 ist kein offizielles striktes Release-XSD nachgewiesen; die XSD-V2.4-Evidence ist Candidate.",
+          "recommendation": "Keine Tippfehler-Aliasse zulassen oder automatisch normalisieren. Historische XSD-Versionen exakt auswählen; die V1.0-Enumerationslücke nicht mit einem späteren Wert überschreiben. V2.4 Candidate nur mit ausdrücklich ausgewiesener nicht-offizieller Provenienz prüfen."
         },
         "en": {
-          "title": "General Conventions V2.4: malformed service identifiers; XSD is candidate only",
-          "short": "PDF names differ from ServiceNameEnumeration; the executable disproof is non-official.",
-          "long": "Examples/glossary contain several service-like typos. The candidate/integration XSD context contains corrected values and EV-134 rejects the typo forms. This evidence must not be promoted to official V2.4 release authority.",
-          "recommendation": "Do not create typo aliases; use the candidate enumeration only as a non-official analysis profile and remain fail-closed for an official V2.4 strict profile."
+          "title": "VDV 301-2 V1.0–V2.4: malformed service identifiers in examples and glossary",
+          "short": "Glossary spelling is wrong since V1.0; GC V2.2–V2.4 examples add three further malformed service names.",
+          "long": "PassengerCountigService appears in the independent English V1.0 (01/2014) and German V1.0 (07/2016) glossary, persisting through GC V2.4. GC V2.2–V2.4 add DeviceManagmenService, CustomumerInformationService, and diagram label DeviceManagmentServices. Only the precisely selected XSD controls executable XML validity. Importantly official V1.0 ServiceNameEnumeration omits even the correctly spelled PassengerCountingService; later 2.x enums include it. No official released V2.4 strict enum is established; V2.4 executable evidence is candidate only.",
+          "recommendation": "Do not normalize misspelled identifiers or add aliases. Respect exact historical XSD versions, including the missing V1.0 enum value. Use V2.4 candidate only with explicit non-official provenance."
         }
       },
       "runtime_match": {
@@ -6425,9 +6469,19 @@
           "kind": "evidence",
           "reference": "EV-134 / evidence run 33843888080 / closure run 33844432985",
           "note": "Pinned evidence-gate revalidation for this subblock."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_004_2026-10-12.md",
+          "note": "Visually verified seven official original PDF sources (incl independent V1.0 EN/DE), 19 target pages, official/candidate XSD blob provenance, historical scope boundary."
+        },
+        {
+          "kind": "evidence",
+          "reference": "GitHub Actions render run 38262374552 artifact 11753610657",
+          "note": "Pinned English V1.0 original p85 correctly names PassengerCountingService; glossary p122 prints PassengerCountigService, SHA256 verified."
         }
       ],
-      "notes": "Candidate-profile executable evidence is preserved without promoting it to official release authority."
+      "notes": "Retains no_strict_xsd_profile / unsupported_profile for official V2.4 strict lane only; historical released exact enum/profile verification remains authoritative and candidate V2.4 may be explicitly selected. Diagram text is not automatically a runtime XML token. V1.0 ServiceNameEnumeration omits corrected PCS name (document as separate not-yet-adjudicated structural observation, no invented official correction)."
     },
     {
       "finding_id": "DR3012GC24-005",
