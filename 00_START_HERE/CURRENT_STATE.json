@@ -2126,9 +2126,9 @@
     "version_scope_boundary_pending_count": 0
   },
   "next_actions": [
-    "DR3012V20-008 terminal complete; source review docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_008_2026-10-12.md, full schema audit 38217124310 SUCCESS. Verify final terminal-HEAD handoff-integrity.",
-    "Continue next source locator DR3012V20-009, 73/192 complete, 119 remaining, same-block verified original PDF and scope boundaries.",
-    "Do not reclassify correctly described separate ResponseData table; selected official XSD determines PASS/FAIL, PDF copy/paste error does not create provider FAIL."
+    "Registry-correct nonexistent DR3012V20-009; first missing is DR3012GC22-001 (do not add a fake finding).",
+    "GC22-001 original V2.2 five placeholder locations and V2.4 regression independently pinned; inspect V2.3 corrected original control then same-block version scope and locator/body registry.",
+    "Full gate plus separate terminal_clean handoff on exact committed HEAD, next missing GC22-002."
   ],
   "source_locator_progress": {
     "locator_entry_count": 73,
@@ -2206,12 +2206,22 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "38217124310",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38217124297",
-    "resume_instruction": "DR3012V20-008 terminal_clean: official V1.0 German original correctly says Antwortstruktur; independent EN V1.0 p64 Table31, Base2.0 p92 Table12, Base2.1 p97 Table12 and dedicated DMS2.2 p17 / DMS2.4 p16 Table2 wrongly call the response parent and child request. Separate ResponseData table is correctly worded in every affected edition. Exact official 1.0/2.0/2.1/2.2 XSD declares response structures, no official DMS2.4 XSD tag inferred from official PDF. 73/192 locators and visible body, 73/73 boundaries. Full schema gate 38217124310 SUCCESS, pending-HEAD handoff 38217124297 SUCCESS. Verify final clean HEAD handoff and then resume DR3012V20-009."
+    "resume_instruction": "DR3012GC22-001 in progress (corrects stale phantom 009 continuation). 73/192 locator and 73/73 boundaries still unchanged; strict GC2.3 control render requested.",
+    "pending_block": "DR3012GC22-001 source locator/version boundary evidence",
+    "active_finding": "DR3012GC22-001",
+    "active_step": "Corrected phantom DR3012V20-009 target by registry identity; GC22-001 previous official V2.2 and V2.4 positive exact-source EV-132/134 verified; V2.3 negative original controls requested",
+    "next_step": "Inspect V2.3 strict-pinned original PDF rendered pages and historical full-text negative search, complete V2.2-V2.3-V2.4 DE/EN version scope, then write canonical registries and run full gate.",
+    "evidence_refs": [
+      "EV-132 run 33782124756 artifact 9903986586 official V2.2 five independent placeholders",
+      "EV-133 run33842952649 artifact9925516670 V2.3 absence and release history",
+      "EV-134 run33843888080 artifact9925822375 official V2.4 five placeholders"
+    ],
+    "recovery_instruction": "Canonical semantic inventory has NO DR3012V20-009. Do not invent it. Next actual source-locator missing in semantic registry order is DR3012GC22-001. Current HEAD requested pinned GC V2.3 visual fallback pages13,52,62,64,66,70,71; inspect gate/artifact before promoting. V2.2 and V2.4 pinned artifact EV-132/134 already verified; update same historic finding V2.2 and V2.4 affected, V2.3 corrected control."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
