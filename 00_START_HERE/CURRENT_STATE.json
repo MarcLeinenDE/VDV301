@@ -1966,7 +1966,7 @@
     "latest_post_closure_correction_gate_run_id": "37601934452",
     "latest_source_locator_review": "DR3012V20_008",
     "latest_source_locator_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_008_2026-10-12.md",
-    "latest_source_locator_gate_run_id": "38216094865",
+    "latest_source_locator_gate_run_id": "38217124310",
     "version_and_finding_governance": "docs/pdf_xsd_semantic_audit/SDK_VERSION_AND_FINDING_GOVERNANCE.md",
     "historical_finding_rule": "Findings are immutable per exact profile/version. Later corrections are version-history evidence only and never retroactively alter older PASS/FAIL or remove an older finding.",
     "candidate_profile_rule": "Official and candidate/integration XSDs are both valid selectable executable validation authorities. PASS/FAIL follows the exact selected XSD. Every result must disclose the selected authority class (official or candidate/integration) and reference the exact XSD source/provenance; candidate/integration must never be relabelled as official.",
@@ -1976,8 +1976,8 @@
     "source_locator_remaining_count": 119,
     "source_locator_latest_review_block": "DR3012V20_008",
     "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_008_2026-10-12.md",
-    "source_locator_latest_gate_status": "gate_pending_DR3012V20_008",
-    "source_locator_latest_gate_note": "V1.0 German getter correct, independently issued English V1.0 getter prose wrong, bilingual Base V2.0/V2.1 and DMS V2.2/V2.4 still wrong, no corrected successor. Official DMS 2.2 XSD has no SetDeviceConfiguration operation; exact pinned source and release authority validated by full schema audit run 38216094865.",
+    "source_locator_latest_gate_status": "success_DR3012V20_008",
+    "source_locator_latest_gate_note": "GetDeviceInformation response table is mislabeled Request in original EN V1.0, Base V2.0/V2.1 and DMS V2.2/V2.4, while DE V1.0 and separate ResponseData tables are correct. Exact byte-pinned visual evidence and official 1.0/2.0/2.1/2.2 response XSDs passed full schema audit 38217124310.",
     "unpublished_future_profile_boundary_rule": "Rules from unpublished or future profiles must not be inferred into supported profiles.",
     "source_locator_completeness_policy": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_COMPLETENESS_POLICY.md",
     "source_locator_complete_requires_exact_pdf_page_section_table_when_applicable": true,
@@ -1995,8 +1995,8 @@
     "source_locator_body_rule": "Canonical PDF target locator uses the actual visible body heading/table/figure on the byte-pinned page. TOC/history cross-references/inferred sequence are not final locator authority.",
     "source_locator_body_correction_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVALIDATION_CORRECTION_VISIBLE_BODY_SCOPE_2026-09-30.md",
     "workflow_contract": "00_START_HERE/AUDIT_WORKFLOW_CONTRACT.md",
-    "source_locator_latest_gate_run_id": "38216094865",
-    "source_locator_body_latest_gate_run_id": "38216094865",
+    "source_locator_latest_gate_run_id": "38217124310",
+    "source_locator_body_latest_gate_run_id": "38217124310",
     "source_locator_body_latest_review_block": "DR3012V20_008",
     "source_locator_body_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_008_2026-10-12.md",
     "version_scope_boundary_policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2007,7 +2007,7 @@
     "version_scope_boundary_pending_count": 0,
     "version_scope_boundary_next_finding": null,
     "version_scope_boundary_latest_finding": "DR3012V20-008",
-    "version_scope_boundary_latest_gate_run_id": "38216094865",
+    "version_scope_boundary_latest_gate_run_id": "38217124310",
     "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_008_2026-10-12.md",
     "latest_scope_correction": "DR3012-004 independently expanded from V1 DE to V1 DE+EN and bilingual Base V2.0 unresolved Word reference, corrected Base V2.1."
   },
@@ -2126,9 +2126,9 @@
     "version_scope_boundary_pending_count": 0
   },
   "next_actions": [
-    "DR3012V20-008 committed as gate_pending 73/192 locators/body and 73/73 scope boundaries; check exact pending-HEAD full schema-audit-validation SUCCESS, repair any failure.",
-    "After full gate SUCCESS create separate terminal_clean handoff commit; inspect exact final-HEAD handoff-integrity and full schema gate.",
-    "Next structurally missing source locator DR3012V20-009; 119 remaining, no new runtime matcher or provider FAIL from PDF response table prose."
+    "DR3012V20-008 terminal complete; source review docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_008_2026-10-12.md, full schema audit 38217124310 SUCCESS. Verify final terminal-HEAD handoff-integrity.",
+    "Continue next source locator DR3012V20-009, 73/192 complete, 119 remaining, same-block verified original PDF and scope boundaries.",
+    "Do not reclassify correctly described separate ResponseData table; selected official XSD determines PASS/FAIL, PDF copy/paste error does not create provider FAIL."
   ],
   "source_locator_progress": {
     "locator_entry_count": 73,
@@ -2136,8 +2136,8 @@
     "coverage_partial_count": 0,
     "remaining_finding_count": 119,
     "latest_review_block": "DR3012V20_008",
-    "latest_gate_status": "gate_pending_DR3012V20_008",
-    "latest_gate_run_id": "38216094865",
+    "latest_gate_status": "success_DR3012V20_008",
+    "latest_gate_run_id": "38217124310",
     "body_verification_state": "complete",
     "body_verified_current_standard_count": 73,
     "body_pending_current_standard_count": 0,
@@ -2206,27 +2206,12 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "gate_pending",
-    "pending_gate": true,
-    "latest_completed_full_gate_run_id": "38216094865",
+    "work_cycle_state": "terminal_clean",
+    "pending_gate": false,
+    "latest_completed_full_gate_run_id": "38217124310",
     "latest_completed_full_gate_status": "success",
-    "latest_handoff_check_before_finalization_run_id": "38216094891",
-    "resume_instruction": "DR3012V20-008 evidence and registries committed, exact-HEAD full schema gate pending. Next after final terminal handoff: DR3012V20-009.",
-    "pending_block": "DR3012V20-008",
-    "active_finding": "DR3012V20-008",
-    "active_step": "Original independent DE/EN V1.0, Base V2.0/V2.1, dedicated DMS V2.2/V2.4 visible response tables, separate correct ResponseData, exact released XSD 1.0/2.0/2.1/2.2, all semantic/source/body/boundary/SDK/state synchronized atomically.",
-    "next_step": "Verify complete schema-audit-validation and handoff-integrity on actual pending HEAD. Repair any gate failure; if successful separate terminal_clean commit and verify final-HEAD handoff-integrity before starting DR3012V20-009.",
-    "recovery_instruction": "Current 008 HEAD has 73/192 source locators and body proof, 73/73 verified boundaries but is gate_pending. Inspect exact-HEAD full schema CI; fix if failed. Only after SUCCESS create separate terminal_clean handoff, check final-head handoff and schema. No further finding until final clean.",
-    "evidence_refs": [
-      "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_008_2026-10-12.md",
-      "VDV301-2 V1.0 German original run38042683113 artifact11666248483, official PDF SHA256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75, printed p57 PNG SHA256 c58ce817ac87cf344feb18c55a20676c3db03f86e34973b689b4afafe00797fb",
-      "VDV301-2 V1.0 English run38042692039 artifact11665873927, official PDF SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7, printed p64 PNG SHA256 15340364b3cd739d266d24fc3ab7f70b91021cd8bae1a0d6d689fb3726a2e578",
-      "Base V2.0 original run38042731143 artifact11666358448, official PDF SHA256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37, printed p92 PNG SHA256 05ed33fbde5e167ea5e480b3ac9d8a89594ecb50ba51bc4205452566cdd8e2ba",
-      "Base V2.1 original run38042738286 artifact11665864117, official PDF SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a, printed p97 PNG SHA256 4daca79147ffef4a7e5945d0ad0631f23d60e78368f391d6f623685a37972c18",
-      "Dedicated DMS V2.2 strict pinned run38216592744 artifact11732003911, official PDF SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e, printed p17 PNG SHA256 ded421eec6579ca4a1635a54b9618c38d912eb260d94118b15b6ad8c8390172f",
-      "Dedicated DMS V2.4 strict pinned run38216605187 artifact11731153864, official PDF SHA256 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd, p16 PNG SHA256 f7b990046fc450d647e76ca58769cd7b6af730bd2c43dffbf7c87560db11fb28, p17 PNG SHA256 3845362f1563a109a6f9b396ed580d6114380b1dcd055538c3caf6fb7c30f018",
-      "Official VDVde/VDV301 exact DMS XSD tag blobs VDV-301-1.0 602a963f91000d0d39e3c271bacb3c7aba73e6d4; VDV-301-2.0 74189e0da65563eeb084ec2f3c400e9668d1ee1a; VDV-301-2.1 191b43e01cdaba14b247725689a913c244a67eed; VDV-301-2.2 c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d."
-    ]
+    "latest_handoff_check_before_finalization_run_id": "38217124297",
+    "resume_instruction": "DR3012V20-008 terminal_clean: official V1.0 German original correctly says Antwortstruktur; independent EN V1.0 p64 Table31, Base2.0 p92 Table12, Base2.1 p97 Table12 and dedicated DMS2.2 p17 / DMS2.4 p16 Table2 wrongly call the response parent and child request. Separate ResponseData table is correctly worded in every affected edition. Exact official 1.0/2.0/2.1/2.2 XSD declares response structures, no official DMS2.4 XSD tag inferred from official PDF. 73/192 locators and visible body, 73/73 boundaries. Full schema gate 38217124310 SUCCESS, pending-HEAD handoff 38217124297 SUCCESS. Verify final clean HEAD handoff and then resume DR3012V20-009."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2242,7 +2227,7 @@
     "locator_expansion_frozen": false,
     "future_locator_completion_requires_verified_boundary_same_block": true,
     "latest_verified_finding": "DR3012V20-008",
-    "latest_gate_run_id": "38216094865",
+    "latest_gate_run_id": "38217124310",
     "latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V20_008_2026-10-12.md"
   },
   "boundary_revalidation_package_mode": {
