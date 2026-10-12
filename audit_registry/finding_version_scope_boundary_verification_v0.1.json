@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 79,
-    "verified": 79,
+    "tracked_findings": 80,
+    "verified": 80,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -4177,6 +4177,84 @@
           "version": "General Conventions V2.4",
           "role": "last_checked_affected_no_corrected_successor",
           "language_status": "DE §1.5 p14 correct; EN §1.5 p18 repeats 2",
+          "source_ids": [
+            "VDV301-2_GC_V2.4"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DR3012GC24-004",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_004_2026-10-12.md",
+        "EN V1.0 strict SHA pinned original: run38262374552 artifact11753610657, original official SHA e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7, body printed p85 and p122 visually checked.",
+        "Remaining exact originals: run33752224704 artifact9892036202; 17 body pages rendered 144dpi from 6 SHA-pinned PDFs and visually checked; each PNG hash and original page heading documented in report.",
+        "Exact official upstream enum tag blobs 1.0 a9bea5bc; 2.0 27e3c183; 2.1 31146469; 2.2 2a23b512; released 2.3 reuses 2a23b512; candidate PR31 V2.4 2afed8cf, EV-134."
+      ],
+      "note": "First affected independent English 2014 V1.0 glossary, later German V1.0, persists every checked document through GC2.4. Additional three example typos only GC2.2 onward; official 2.3 reuses enum2.2; V2.4 strict official unsupported.",
+      "scope_conclusion": "PassengerCountigService found in earliest original independent English V1.0 p122 (01/2014), German original V1.0 p78 (07/2016), Basic V2.0 p107/108 and V2.1 p121/122, GC V2.2 p72/74, V2.3 p73/75 and V2.4 p77/79. DeviceManagmenService, CustomumerInformationService and diagram DeviceManagmentServices first occur GC2.2 p55/60, persist GC2.3 p55/60 and GC2.4 p59/64. Basic2.1 is last prior publication without the triple example typo but is affected by the older glossary typo. Exact official V1.0 enum lacks even corrected PCS literal, official 2.0–2.2 (2.3 exact reuse) include correct token. V2.4 candidate selectable, official strict profile not established. No corrected successor.",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-2 V1.0 English original (01/2014)",
+          "role": "earliest_affected_independent_english",
+          "language_status": "Independent English V1.0 original p122 §14 glossary PassengerCountigService wrong; p85 §9.8.1 and Table95 PassengerCountingService correct. Exact official 1.0 enum omits BOTH wrong and corrected PCS literal.",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V1.0 German original (07/2016)",
+          "role": "persistent_independent_german",
+          "language_status": "German V1.0 independent original p78 glossary PassengerCountigService persists, 2016 publication distinct from earlier English 2014 original.",
+          "source_ids": [
+            "VDV301-2_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "role": "persistent_glossary_before_example_typos",
+          "language_status": "Bilingual Base2.0 p107 DE and p108 EN glossary PassengerCountigService; released exact 2.0 enum contains corrected PassengerCountingService but not typo.",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "role": "last_pre_GC_example_affected_glossary",
+          "language_status": "Last basic-services predecessor p121 DE p122 EN glossary PassengerCountigService; no three GC system-start example typo strings. Released 2.1 enum corrected literal present.",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "General Conventions V2.2",
+          "role": "first_GC_example_typos_and_persistent_glossary",
+          "language_status": "First three additional original example/diagram typos: DE p55/EN p60. Existing PassengerCountigService glossary DE p72 EN p74. Official 2.2 enum corrected values present.",
+          "source_ids": [
+            "VDV301-2_GC_V2.2"
+          ]
+        },
+        {
+          "version": "General Conventions V2.3",
+          "role": "intermediate_affected",
+          "language_status": "DE p55/EN p60 three example typos; DE p73/EN p75 glossary typo. Official 2.3 tag still exact Enumerations_V2.2 blob, no fictitious 2.3 file.",
+          "source_ids": [
+            "VDV301-2_GC_V2.3"
+          ]
+        },
+        {
+          "version": "General Conventions V2.4 official PDF",
+          "role": "last_checked_affected_no_corrected_successor",
+          "language_status": "Official German p59 English p64 three example/diagram typos, German p77 English p79 glossary typo. No verified corrected later publication; no official V2.4 released enum XSD.",
+          "source_ids": [
+            "VDV301-2_GC_V2.4"
+          ]
+        },
+        {
+          "version": "V2.4 candidate/integration schema context",
+          "role": "v24_candidate_executable_counterpart_not_official_release",
+          "language_status": "Official 2.4 PDF same targets plus PR31 non-official selected candidate exact enum blob 2afed8cf, EV-134 validates corrected and rejects malformed; not official release.",
           "source_ids": [
             "VDV301-2_GC_V2.4"
           ]
