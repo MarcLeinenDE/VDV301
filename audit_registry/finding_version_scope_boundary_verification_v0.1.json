@@ -4118,6 +4118,72 @@
       ]
     },
     {
+      "finding_id": "DR3012GC24-003",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_003_2026-10-12.md",
+        "GitHub Actions source artifact: run 33752224704, artifact 9892036202, exact original bytes SHA256/size checked; rendered at 180dpi",
+        "VDV301-2_V1.0_DE: p19 §1.6 no explicit list, DE/shared PNG SHA256 a8bceeefcbf6956105ddc6d7d6cdab830e9534acb73ab4f5837ea29a20d77770",
+        "VDV301-2_BASE_V2.0: p19 §1.6 no explicit list, DE/shared PNG SHA256 039c69c232e4bfd9a09c0ca0794cfee461a3758af397e34978132a57f1736338",
+        "VDV301-2_BASE_V2.1: p20 §1.6 no explicit list, DE/shared PNG SHA256 e26a34c9db55a58ac462da784b7ac0678a592a88f076a0af7a828d305b1a69a1",
+        "VDV301-2_GC_V2.2: DE §1.5 p11 correct; EN §1.5 p15 repeats 2, DE/shared PNG SHA256 d009d01315f5efacd9034cce96c2fc3bd33ea2894f95834d5ac5b0c75203edea, EN PNG SHA256 5fc5158191d3308010c7af3d634c40438b979a27c868319ca5263620003af947",
+        "VDV301-2_GC_V2.3: DE §1.5 p11 correct; EN §1.5 p15 repeats 2, DE/shared PNG SHA256 c6aebcd51c19dbedbde81f4eea77df569a50fadb88c9a68b49e7446edf165d22, EN PNG SHA256 4b675ffb5cd6d6f67ba3e17946018c30be0a39e8e59a50b4c1799e860eb0c2e0",
+        "VDV301-2_GC_V2.4: DE §1.5 p14 correct; EN §1.5 p18 repeats 2, DE/shared PNG SHA256 ccc94a427e3f975e81d1aa963ec5214a74cee04fd4c853f85819e6f73e99100b, EN PNG SHA256 7c4e2c8f6aafcf8f0f4eb2f09c767670a31a00ccf62d0cb9959d11c3e604e9c8"
+      ],
+      "note": "Exact official publication boundary established including DE/EN and pre-feature versions. No corrected GC successor.",
+      "scope_conclusion": "V1.0 DE p19 and Basic V2.0 p19/V2.1 p20 do not contain an enumerated permitted-character list; first affected original GC2.2 English p15 repeats '2', persists GC2.3 English p15 and GC2.4 English p18. German parallel sections p11/p11/p14 list each digit once. No corrected successor, no executable validation effect.",
+      "boundary_checks": [
+        {
+          "version": "VDV-Schrift 301-2 V1.0 DE",
+          "role": "historical_pre_character_list",
+          "language_status": "p19 §1.6 no explicit list",
+          "source_ids": [
+            "VDV301-2_V1.0_DE"
+          ]
+        },
+        {
+          "version": "Basic Services V2.0",
+          "role": "historical_pre_character_list",
+          "language_status": "p19 §1.6 no explicit list",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "Basic Services V2.1",
+          "role": "last_pre_character_list_predecessor",
+          "language_status": "p20 §1.6 no explicit list",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "General Conventions V2.2",
+          "role": "first_affected",
+          "language_status": "DE §1.5 p11 correct; EN §1.5 p15 repeats 2",
+          "source_ids": [
+            "VDV301-2_GC_V2.2"
+          ]
+        },
+        {
+          "version": "General Conventions V2.3",
+          "role": "intermediate_affected",
+          "language_status": "DE §1.5 p11 correct; EN §1.5 p15 repeats 2",
+          "source_ids": [
+            "VDV301-2_GC_V2.3"
+          ]
+        },
+        {
+          "version": "General Conventions V2.4",
+          "role": "last_checked_affected_no_corrected_successor",
+          "language_status": "DE §1.5 p14 correct; EN §1.5 p18 repeats 2",
+          "source_ids": [
+            "VDV301-2_GC_V2.4"
+          ]
+        }
+      ]
+    },
+    {
       "finding_id": "DR3012V20-001",
       "state": "verified",
       "evidence": [
@@ -4619,72 +4685,6 @@
           "language_status": "en:p16 Table2 wrong, p17 Table3 correct; no official 2.4 XSD ref/first corrected successor inferred",
           "source_ids": [
             "DMS_V2.4"
-          ]
-        }
-      ]
-    },
-    {
-      "finding_id": "DR3012GC24-003",
-      "state": "verified",
-      "evidence": [
-        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_003_2026-10-12.md",
-        "GitHub Actions source artifact: run 33752224704, artifact 9892036202, exact original bytes SHA256/size checked; rendered at 180dpi",
-        "VDV301-2_V1.0_DE: p19 §1.6 no explicit list, DE/shared PNG SHA256 a8bceeefcbf6956105ddc6d7d6cdab830e9534acb73ab4f5837ea29a20d77770",
-        "VDV301-2_BASE_V2.0: p19 §1.6 no explicit list, DE/shared PNG SHA256 039c69c232e4bfd9a09c0ca0794cfee461a3758af397e34978132a57f1736338",
-        "VDV301-2_BASE_V2.1: p20 §1.6 no explicit list, DE/shared PNG SHA256 e26a34c9db55a58ac462da784b7ac0678a592a88f076a0af7a828d305b1a69a1",
-        "VDV301-2_GC_V2.2: DE §1.5 p11 correct; EN §1.5 p15 repeats 2, DE/shared PNG SHA256 d009d01315f5efacd9034cce96c2fc3bd33ea2894f95834d5ac5b0c75203edea, EN PNG SHA256 5fc5158191d3308010c7af3d634c40438b979a27c868319ca5263620003af947",
-        "VDV301-2_GC_V2.3: DE §1.5 p11 correct; EN §1.5 p15 repeats 2, DE/shared PNG SHA256 c6aebcd51c19dbedbde81f4eea77df569a50fadb88c9a68b49e7446edf165d22, EN PNG SHA256 4b675ffb5cd6d6f67ba3e17946018c30be0a39e8e59a50b4c1799e860eb0c2e0",
-        "VDV301-2_GC_V2.4: DE §1.5 p14 correct; EN §1.5 p18 repeats 2, DE/shared PNG SHA256 ccc94a427e3f975e81d1aa963ec5214a74cee04fd4c853f85819e6f73e99100b, EN PNG SHA256 7c4e2c8f6aafcf8f0f4eb2f09c767670a31a00ccf62d0cb9959d11c3e604e9c8"
-      ],
-      "note": "Exact official publication boundary established including DE/EN and pre-feature versions. No corrected GC successor.",
-      "scope_conclusion": "V1.0 DE p19 and Basic V2.0 p19/V2.1 p20 do not contain an enumerated permitted-character list; first affected original GC2.2 English p15 repeats '2', persists GC2.3 English p15 and GC2.4 English p18. German parallel sections p11/p11/p14 list each digit once. No corrected successor, no executable validation effect.",
-      "boundary_checks": [
-        {
-          "version": "VDV-Schrift 301-2 V1.0 DE",
-          "role": "historical_pre_character_list",
-          "language_status": "p19 §1.6 no explicit list",
-          "source_ids": [
-            "VDV301-2_V1.0_DE"
-          ]
-        },
-        {
-          "version": "Basic Services V2.0",
-          "role": "historical_pre_character_list",
-          "language_status": "p19 §1.6 no explicit list",
-          "source_ids": [
-            "VDV301-2_BASE_V2.0"
-          ]
-        },
-        {
-          "version": "Basic Services V2.1",
-          "role": "last_pre_character_list_predecessor",
-          "language_status": "p20 §1.6 no explicit list",
-          "source_ids": [
-            "VDV301-2_BASE_V2.1"
-          ]
-        },
-        {
-          "version": "General Conventions V2.2",
-          "role": "first_affected",
-          "language_status": "DE §1.5 p11 correct; EN §1.5 p15 repeats 2",
-          "source_ids": [
-            "VDV301-2_GC_V2.2"
-          ]
-        },
-        {
-          "version": "General Conventions V2.3",
-          "role": "intermediate_affected",
-          "language_status": "DE §1.5 p11 correct; EN §1.5 p15 repeats 2",
-          "source_ids": [
-            "VDV301-2_GC_V2.3"
-          ]
-        },
-        {
-          "version": "General Conventions V2.4",
-          "role": "last_checked_affected_no_corrected_successor",
-          "language_status": "DE §1.5 p14 correct; EN §1.5 p18 repeats 2",
-          "source_ids": [
-            "VDV301-2_GC_V2.4"
           ]
         }
       ]
