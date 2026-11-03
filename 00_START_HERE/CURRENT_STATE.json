@@ -1976,8 +1976,8 @@
     "source_locator_remaining_count": 107,
     "source_locator_latest_review_block": "DRCOM10_001",
     "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_001_2026-11-03.md",
-    "source_locator_latest_gate_status": "gate_pending_DRCOM10_001",
-    "source_locator_latest_gate_note": "DRCOM10-001 official May2017 Common V1.0 PDF internally revised to Version1.1 vs exact official imported 2014 V1.0 Common/Enums XSD: DisplayContent, ExpectedDepatureTime, ScheduledDepartureTime, RouteDirection and enum mismatch. Official V2.0 Feb2018 corrected successor verified by exact PDF and tagged XSD. Crucial provenance nuance: V2.0 PDF p39 mentions historical XSD 1.1, though no exact V1.1 schema bytes found in audited public GitHub sources; semantic diagnostics corrected to not claim historical nonexistence. Full gate pending, 85/192; no XSD edits or matcher implemented. Initial gate run41627291989 detected PDF version field mismatch for five COMMON_V1.0 locators; all corrected to exact source-registry '1.0' in follow-up gate_pending commit, full gate rerun pending.",
+    "source_locator_latest_gate_status": "success_DRCOM10_001",
+    "source_locator_latest_gate_note": "DRCOM10-001 (85th finding) full schema audit 41627545793 SUCCESS, handoff 41627545786 SUCCESS after formal PDF document_version locator correction (initial schema run41627291989 FAILED, repaired five V1.0 source fields to exact registry 1.0). Official original May2017 Common PDF internal 1.1 revision vs 2014 official selected Common/Enums V1.0 XSD, exact official V2.0 first corrected successor Feb2018. V2.0 PDF p39 mentions XSD 1.1; actual file not verifiable in checked official snapshots, historical nonexistence not claimed. Semantic bilingual provenance and pin-matched runtime mapping updated, no XSD edits or implemented runtime matcher. Report docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_001_2026-11-03.md.",
     "unpublished_future_profile_boundary_rule": "Rules from unpublished or future profiles must not be inferred into supported profiles.",
     "source_locator_completeness_policy": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_COMPLETENESS_POLICY.md",
     "source_locator_complete_requires_exact_pdf_page_section_table_when_applicable": true,
@@ -1995,8 +1995,8 @@
     "source_locator_body_rule": "Canonical PDF target locator uses the actual visible body heading/table/figure on the byte-pinned page. TOC/history cross-references/inferred sequence are not final locator authority.",
     "source_locator_body_correction_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVALIDATION_CORRECTION_VISIBLE_BODY_SCOPE_2026-09-30.md",
     "workflow_contract": "00_START_HERE/AUDIT_WORKFLOW_CONTRACT.md",
-    "source_locator_latest_gate_run_id": "41622928396",
-    "source_locator_body_latest_gate_run_id": "41622928396",
+    "source_locator_latest_gate_run_id": "41627545793",
+    "source_locator_body_latest_gate_run_id": "41627545793",
     "source_locator_body_latest_review_block": "DRCOM10_001",
     "source_locator_body_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_001_2026-11-03.md",
     "version_scope_boundary_policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2007,7 +2007,7 @@
     "version_scope_boundary_pending_count": 0,
     "version_scope_boundary_next_finding": null,
     "version_scope_boundary_latest_finding": "DRCOM10-001",
-    "version_scope_boundary_latest_gate_run_id": "41622928396",
+    "version_scope_boundary_latest_gate_run_id": "41627545793",
     "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_001_2026-11-03.md",
     "latest_scope_correction": "DR3012-004 independently expanded from V1 DE to V1 DE+EN and bilingual Base V2.0 unresolved Word reference, corrected Base V2.1."
   },
@@ -2100,8 +2100,8 @@
     "source_locator_remaining_count": 107,
     "source_locator_latest_review_block": "DRCOM10_001",
     "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_001_2026-11-03.md",
-    "source_locator_latest_gate_run_id": "41622928396",
-    "source_locator_latest_gate_status": "gate_pending_DRCOM10_001",
+    "source_locator_latest_gate_run_id": "41627545793",
+    "source_locator_latest_gate_status": "success_DRCOM10_001",
     "audit_diagnostic_reporting_model": "docs/pdf_xsd_semantic_audit/SDK_AUDIT_DIAGNOSTIC_REPORTING_MODEL.md",
     "audit_report_languages": [
       "de",
@@ -2118,7 +2118,7 @@
     "source_locator_body_verification_state": "complete",
     "source_locator_body_verified_current_standard_count": 85,
     "source_locator_body_pending_current_standard_count": 0,
-    "source_locator_body_latest_gate_run_id": "41622928396",
+    "source_locator_body_latest_gate_run_id": "41627545793",
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "complete",
     "version_scope_boundary_tracked_count": 85,
@@ -2126,9 +2126,9 @@
     "version_scope_boundary_pending_count": 0
   },
   "next_actions": [
-    "DRCOM10-001 staged 85/192 source/body locators and 85/85 independently verified historical scope boundaries; 107 remain, full schema gate pending.",
-    "Original Common May2017 PDF and official V1.0 XSD proven, Feb2018 V2.0 first corrected successor for listed items. Official V2.0 PDF p39 mentions XSD V1.1 but exact schema unavailable from independently checked official repositories; do not claim historical nonexistence or synthesize profile.",
-    "Semantic and bilingual diagnostic historical provenance precision, runtime-map profile description and semantic Git pins updated; no XSD edit, matcher implementation or ce-005 duplication. After full gates terminal-clean and verify final HEAD, next DRCOM10-002."
+    "DRCOM10-001 terminal_clean: 85/192 source locators, 85/85 independently verified original-body and historical version boundaries. 107 remain.",
+    "Substantive full schema audit run41627545793 SUCCESS and handoff-integrity run41627545786 SUCCESS; final HEAD must independently pass both after terminal commit.",
+    "Official Common V1.0 selected exact XSD vs 05/2017 document-internal revision1.1; official V2.0 first corrected successor. Historic XSD 1.1 is mentioned by V2.0 PDF but no exact official file verified; no historic nonexistence or synthetic selection. Next DRCOM10-002."
   ],
   "source_locator_progress": {
     "locator_entry_count": 85,
@@ -2136,8 +2136,8 @@
     "coverage_partial_count": 0,
     "remaining_finding_count": 107,
     "latest_review_block": "DRCOM10_001",
-    "latest_gate_status": "gate_pending_DRCOM10_001",
-    "latest_gate_run_id": "41622928396",
+    "latest_gate_status": "success_DRCOM10_001",
+    "latest_gate_run_id": "41627545793",
     "body_verification_state": "complete",
     "body_verified_current_standard_count": 85,
     "body_pending_current_standard_count": 0,
@@ -2206,28 +2206,12 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "gate_pending",
-    "pending_gate": true,
-    "latest_completed_full_gate_run_id": "41622928396",
+    "work_cycle_state": "terminal_clean",
+    "pending_gate": false,
+    "latest_completed_full_gate_run_id": "41627545793",
     "latest_completed_full_gate_status": "success",
-    "latest_handoff_check_before_finalization_run_id": "41622928159",
-    "resume_instruction": "DRCOM10-001 gate_pending correction: source-locator field document_version now 1.0 exactly matching COMMON_V1.0 source registry, 1.1 remains only document-internal revision info; previously failed schema run41627291989 must be replaced by successful full gate. 85/192 staged, 107 remain, next DRCOM10-002 only after terminal final HEAD checks.",
-    "pending_block": "DRCOM10-001 V1.0 exact-source and V2.0 first-corrected-boundary evidence gate",
-    "active_finding": "DRCOM10-001",
-    "active_step": "Source-locator schema audit first substantive gate41627291989 failed only because five COMMON_V1.0 PDF locator document_version values were incorrectly composite '1.0 / doc revision 1.1' rather than exact registered source version '1.0'; canonical source registry requires exact match. Version 1.1 data-history stays in evidence/report/section labels, not in PDF version field. Corrected all five; retry full gate.",
-    "next_step": "Push canonical exact-PDF-version locator fix and same-commit CURRENT_STATE update, then check full schema-audit-validation.yml and handoff. Must both be success before terminal_clean.",
-    "evidence_refs": [
-      "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_001_2026-11-03.md",
-      "GitHub official source SHA pinned V1.0 run41625122454 artifact13225488128; V2.0 run41625549119 artifact13225656338",
-      "Exact historical upstream Common V1.0 blob194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c and Enum a9bea5bc73003ed91ded8519db06c32c4067831d",
-      "Exact official V2.0 tag Common blob8608e3dcd665c197c34da7f6ec6af5a3758da164 and Enum27e3c183b00381d959622d13c10543123af8eef6",
-      "audit_registry/finding_source_locators_v0.1.json",
-      "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
-      "audit_registry/pdf_locator_body_verification_v0.1.json",
-      "audit_registry/finding_semantic_classification_v0.1.json",
-      "sdk_manifest/known_issues_runtime_mapping_v0.1.json"
-    ],
-    "recovery_instruction": "DRCOM10-001 remains gate_pending 85/192. First full gate run41627291989 failed source-locator check only due document_version composite. All five V1.0 original PDF locators corrected to exact 1.0. Retry on new HEAD; note internal document 1.1 remains separate version_scope evidence and explicit V2.0 p39 archive ambiguity. No XSD or semantic change in repair."
+    "latest_handoff_check_before_finalization_run_id": "41627545786",
+    "resume_instruction": "DRCOM10-001 terminal_clean with 85/192 source locators and 85/85 byte-pinned original-body + independent version-scope boundary checks; 107 remaining. Official original Common V1.0 May2017 PDF (p9,21,27,28,30) declares internal data history Version1.1 conflicting with unchanged exact 2014 official imported Common/Enumerations V1.0 XSD (194f73a + a9bea5b), while protocol enum remains 1.0. Official V2.0 successor Feb2018 (p16,29,36,38,39) tagged schema (8608e3d + 27e3c18) fixes selected fields; other CE-005 remains independent. Official V2.0 PDF p39 explicitly mentions historical XSD Version1.1; no independently verifiable 1.1 exact files in checked official master/2.0 tag/project integration, so do not claim historical nonexistence or fabricate a V1.1 profile. Existing DRCOM10-001 semantic DE/EN long diagnostic and runtime mapping source pin updated, no XSD modifications/runtime matchers. First full schema gate41627291989 failed due 5 composite PDF version locator fields, fixed exactly to 1.0; rerun schema41627545793 SUCCESS + handoff41627545786 SUCCESS. Report docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_001_2026-11-03.md. Final HEAD runs must also pass. Next DRCOM10-002."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2243,7 +2227,7 @@
     "locator_expansion_frozen": false,
     "future_locator_completion_requires_verified_boundary_same_block": true,
     "latest_verified_finding": "DRCOM10-001",
-    "latest_gate_run_id": "41622928396",
+    "latest_gate_run_id": "41627545793",
     "latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_001_2026-11-03.md"
   },
   "boundary_revalidation_package_mode": {
