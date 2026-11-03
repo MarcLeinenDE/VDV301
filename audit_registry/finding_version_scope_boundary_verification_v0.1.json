@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 81,
-    "verified": 81,
+    "tracked_findings": 82,
+    "verified": 82,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -4833,6 +4833,78 @@
           "language_status": "en:p16 Table2 wrong, p17 Table3 correct; no official 2.4 XSD ref/first corrected successor inferred",
           "source_ids": [
             "DMS_V2.4"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DR3012V21-001",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V21_001_2026-11-03.md",
+        "English original V1.0 01/2014 exact PDF SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7, GitHub fallback run41617239025 artifact13221179508, printed p39 PNG SHA256 2ca5eb9ba16dad71eebb81051997b7686e89edb1350df1ab3e0d94574485129a",
+        "German original V1.0 and six original publication edition boundaries: GitHub pinned-source run33752224704 artifact9892036202, original SHA256 verified, 160dpi PNG hashes and printed original body-page locators in audit report",
+        "Basic V2.1 original EV-131 run33781385699 artifact9903719333 (printed pages 59/60/69/70/75/76), first revalidation 2026-09-03",
+        "VDV-Mitteilung 3002 10/2016 §3.4/3.6 printed page9, official 301-2-2 Beacon and 301-2-4 Distance; individual dedicated 07/2016 official publications",
+        "Official VDVde/VDV301 tags VDV-301-1.0, VDV-301-2.0, VDV-301-2.1, VDV-301-2.2, VDV-301-2.3 (byte-identical documented historical DMS/SysDoc route)"
+      ],
+      "note": "Independent 2014 English V1.0 pre-defect, 2016 German V1.0 first wrong reference, Basic2.0/2.1 both wrong numbers, General Conventions2.2–2.4 DMS reference persists. Independently dated 07/2016 separated parts and 10/2016 VDV 3002 anchor contemporaneous numbering. PDF only; no provider XML FAIL.",
+      "scope_conclusion": "First affected German V1.0 July 2016 p39 (plus p43/p44/p47); English independent V1.0 Jan2014 p39 unaffected (internal chapter 9.1/9.9). Bilingual BaseV2.0 p58/59/68/69/74/75 and BaseV2.1 p59/60/69/70/75/76 repeat wrong DMS and SystemDocumentation part references; GC2.2+2.3 p55/60 and GC2.4 p59/64 repeat DMS 301-2-2 only; no corrected successor established, no independent separate GC SysDoc claim. Runtime not applicable, selected XSD remains normatively decisive.",
+      "boundary_checks": [
+        {
+          "version": "VDV 301-2 V1.0 English original (01/2014)",
+          "role": "historical_unaffected_language_control",
+          "language_status": "EN p39 §7.1.1 cites internal 9.1 for DMS and 9.9 for SystemDocumentation, not the later erroneous 301-2-2/2-4 numbers.",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "VDV 301-2 V1.0 German original (07/2016)",
+          "role": "first_affected_german_original",
+          "language_status": "DE p39 §5.1.1 first wrong DMS 301-2-2 and SystemDocumentation 301-2-4; repeated p43,44,47. Dedicated 07/2016 split parts independently disprove these assignments.",
+          "source_ids": [
+            "VDV301-2_V1.0_DE"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "role": "intermediate_affected_bilingual",
+          "language_status": "Bilingual original DE p58/68/74 and EN p59/69/75 repeat both erroneous part-number cross-references. English p59 additional broken Word reference is not needed to establish core defect.",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "role": "intermediate_affected_bilingual",
+          "language_status": "Bilingual original DE p59/69/75 and EN p60/70/76 repeat the same two wrong document references (EV-131). Exact mixed official DMS2.1, SysDoc2.0, SystemManagement1.0 retained.",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "VDV 301-2 General Conventions V2.2",
+          "role": "intermediate_affected_dms_only",
+          "language_status": "Original DE §5.2.1 p55 and EN §5.2.1 p60 still assign DMS to 301-2-2. SysDoc wrong cross-reference is absent with separated Base context, not proved corrected.",
+          "source_ids": [
+            "VDV301-2_GC_V2.2"
+          ]
+        },
+        {
+          "version": "VDV 301-2 General Conventions V2.3",
+          "role": "intermediate_affected_dms_only",
+          "language_status": "Original DE §5.2.1 p55 / EN §5.2.1 p60 retains DMS 301-2-2; official upstream 2.3 tag reuses 2.2 DMS XSD.",
+          "source_ids": [
+            "VDV301-2_GC_V2.3"
+          ]
+        },
+        {
+          "version": "VDV 301-2 General Conventions V2.4",
+          "role": "last_checked_affected_no_corrected_successor",
+          "language_status": "Original DE §5.2.1 p59 / EN §5.2.1 p64 retains DMS 301-2-2, no later verified corrected source, no released official DMS V2.4 XSD asserted.",
+          "source_ids": [
+            "VDV301-2_GC_V2.4"
           ]
         }
       ]

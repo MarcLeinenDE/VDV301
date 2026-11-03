@@ -7495,10 +7495,40 @@
       "service": "VDV 301-2 Base / Service document routing",
       "version_scope": [
         {
+          "version": "VDV 301-2 V1.0 German original (07/2016)",
+          "authority": "official_release",
+          "xsd_profile": "historical official DMS V1.0; part-number references in German original PDF",
+          "note": "Original German §5.1.1 p39 already incorrectly assigns DMS 301-2-2 and SystemDocumentation 301-2-4; independent 2014 English original has correct internal chapter references."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "official_release",
+          "xsd_profile": "VDV-301-2.0 mixed release DMS V2.0 / SystemDocumentation V2.0 / SystemManagement V1.0",
+          "note": "Bilingual source p58/59,68/69,74/75 repeats wrong DMS and SystemDocumentation part numbers."
+        },
+        {
           "version": "VDV 301-2 Base V2.1",
           "authority": "official_release",
-          "xsd_profile": "mixed release route: DeviceManagement V2.1 / SystemDocumentation V2.0 / SystemManagement V1.0",
-          "note": "Base prose routes DMS to 301-2-2 and SystemDocumentation to 301-2-4; official document identity and VDV-301-2.1 release tag establish the actual route."
+          "xsd_profile": "VDV-301-2.1 mixed release DMS V2.1 / SystemDocumentation V2.0 / SystemManagement V1.0",
+          "note": "Bilingual source p59/60,69/70,75/76 repeats wrong DMS 301-2-2 and SystemDocumentation 301-2-4 references, EV-131."
+        },
+        {
+          "version": "VDV 301-2 General Conventions V2.2",
+          "authority": "official_release",
+          "xsd_profile": "Official VDV-301-2.2 reuses released DMS V2.2",
+          "note": "German §5.2.1 p55 / English §5.2.1 p60 still incorrectly refer to DMS as 301-2-2; SystemDocumentation reference not present."
+        },
+        {
+          "version": "VDV 301-2 General Conventions V2.3",
+          "authority": "official_release",
+          "xsd_profile": "Official VDV-301-2.3 retains released DMS V2.2",
+          "note": "German §5.2.1 p55 / English §5.2.1 p60 still incorrectly refer to DMS as 301-2-2."
+        },
+        {
+          "version": "VDV 301-2 General Conventions V2.4",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official GC PDF §5.2.1 p59 DE / p64 EN still incorrectly cites DMS as 301-2-2; no official tagged DMS V2.4 XSD asserted, no corrected successor proven."
         }
       ],
       "review_state": "manually_reviewed",
@@ -7519,25 +7549,29 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "V2.1 Base prose repeatedly assigns DMS to VDV 301-2-2 and SystemDocumentation to VDV 301-2-4."
+          "note": "Original German July2016 §5.1.1 p39 cites DMS 301-2-2 and SystemDocumentation 301-2-4; bilingual Base2.0/2.1 repeat both; GC2.2/2.3/2.4 §5.2.1 retains DMS 301-2-2 in German and English."
         },
         {
           "type": "official_release_provenance",
-          "note": "Official catalog identity assigns those part numbers to other services; VDV-301-2.1 supplies DMS V2.1, SystemDocumentation V2.0, and SystemManagement V1.0."
+          "note": "07/2016 separated BeaconLocationService is VDV 301-2-2 and DistanceLocationService VDV 301-2-4; official VDV-Mitteilung 3002 10/2016 confirms in §§3.4 and 3.6; DMS later has dedicated 301-2-0 title. VDV-301-2.0/2.1/2.2/2.3 tags independently confirm actual mixed DMS/SystemDocumentation version route."
+        },
+        {
+          "type": "version_history",
+          "note": "Independent official English V1.0 (01/2014) §7.1.1 p39 uses chapter 9.1 for DMS and chapter 9.9 for SystemDocumentation; these are not wrong 301-2-2/2-4 references. Earliest affected independently published original is German July2016 V1.0."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "Base V2.1: DMS/SystemDocumentation auf falsche Teildokumente geroutet",
-          "short": "Die Dokumentation nennt 301-2-2 bzw. 301-2-4, die offizielle Quellenzuordnung widerspricht dem.",
-          "long": "Die V2.1-Basisdokumentation verwendet wiederholt falsche Teildokumentnummern. Die offizielle Dokumentidentität und der VDV-301-2.1-Release-Tag liefern die tatsächliche gemischte Schemafamilie. Die falschen Nummern dürfen kein Schema-Routing steuern.",
-          "recommendation": "Service- und Schema-Routing aus der offiziellen versionsspezifischen Release-Provenienz ableiten, nicht aus den fehlerhaften Nummern im Fließtext."
+          "title": "VDV 301-2: falsche Teildokumentverweise für DMS und SystemDocumentation",
+          "short": "Seit deutscher V1.0/07-2016 werden DeviceManagement 301-2-2 und SystemDocumentation 301-2-4 falsch zugeordnet; später bleibt DMS 301-2-2 erhalten.",
+          "long": "Die deutsche V1.0/07-2016 verweist fälschlich auf VDV 301-2-2 für DeviceManagementService und 301-2-4 für SystemDocumentationService; die zweisprachigen Basic Services V2.0 und V2.1 wiederholen beides. General Conventions V2.2, V2.3 und V2.4 nennen weiterhin die falsche DMS-Teildokumentnummer. Die offiziell veröffentlichten Teildokumente 301-2-2 und 301-2-4 beschreiben BeaconLocationService beziehungsweise DistanceLocationService, während DMS als 301-2-0 veröffentlicht ist. Der eigenständige englische Originaltext V1.0/01-2014 verweist noch korrekt intern auf die Kapitel 9.1 und 9.9. Dies ist ein Dokumentations-/Provenienzbefund, kein XML-Validierungsfehler.",
+          "recommendation": "Dienste, Teildokumente und XSD-Profile aus offizieller Veröffentlichung und exakt versionsspezifischen Git-Tags zuordnen; fehlerhafte PDF-Querverweise niemals als Resolver- oder Ablehnungsregel übernehmen."
         },
         "en": {
-          "title": "Base V2.1: DMS/SystemDocumentation routed to wrong part documents",
-          "short": "The documentation names 301-2-2 and 301-2-4, conflicting with official source identity.",
-          "long": "The V2.1 base documentation repeatedly uses wrong part-document numbers. Official document identity and the VDV-301-2.1 release tag provide the actual mixed schema family. The wrong numbers must not control schema routing.",
-          "recommendation": "Derive service and schema routing from official version-specific release provenance, not from the incorrect prose numbers."
+          "title": "VDV 301-2: wrong DMS and SystemDocumentation part-document references",
+          "short": "German V1.0/July 2016 and later sources misroute DMS to 301-2-2 and SystemDocumentation to 301-2-4; DMS error persists through GC V2.4.",
+          "long": "The July 2016 German V1.0 incorrectly refers to VDV 301-2-2 for DeviceManagementService and 301-2-4 for SystemDocumentationService. Bilingual Base Services V2.0 and V2.1 repeat both; General Conventions V2.2–V2.4 still misidentify the DMS document. Official part 301-2-2 is BeaconLocationService and 301-2-4 is DistanceLocationService, while dedicated DMS is 301-2-0. The independently published January 2014 English V1.0 instead uses internal chapter references 9.1/9.9. This is documentary service routing/provenance only, not a payload validity error.",
+          "recommendation": "Resolve document and service identities using the official version-specific publication and the exact historical XSD/dependency route, never the stale prose references. No new XML failure or compatibility alias."
         }
       },
       "runtime_match": {
@@ -7564,6 +7598,11 @@
           "kind": "evidence",
           "reference": "EV-131 / evidence run 33781385699 / closure run 33781657200",
           "note": "Pinned evidence-gate revalidation for this subblock."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V21_001_2026-11-03.md",
+          "note": "All seven independent original source versions/editions, original-body render page SHA256, predecessor boundary, 10/2016 official VDV-3002 part identity, exact released XSD tag cross-check."
         }
       ]
     },
