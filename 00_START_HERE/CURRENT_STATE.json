@@ -2206,12 +2206,24 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "38273096059",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "38273096023",
-    "resume_instruction": "DR3012GC24-005 terminal_clean 81/192 source locators, visible original PDF bodies and 81/81 independently checked version boundaries, 111 remaining. Original English/German V1.0 are historical pre-contradiction controls; first affected Basic Services V2.0, persists Basic V2.1 and GC V2.2/2.3/2.4. Stale ambiguous Version 1.0 of IBIS-IP phrase is documentary only, no global XSD/version and no provider FAIL. Report docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012GC24_005_2026-10-12.md. Substantive schema-audit 38273096059 SUCCESS, handoff 38273096023 SUCCESS, final HEAD post-terminal checks required. Next DR3012V21-001."
+    "resume_instruction": "DR3012V21-001 gate_pending render requested, semantic existing 192 unchanged, source locators 81/192. First inspect pinned Github Actions rendered V1.0 EN pages 38-48, then source boundary and independent official release provenance. No XSD mutations.",
+    "pending_block": "DR3012V21-001",
+    "active_finding": "DR3012V21-001",
+    "active_step": "Requested pinned-byte visual render of independent English V1.0 original pages 38-48 to establish historical predecessor and compare DMS/SystemDocumentation part references. Other affected publication versions under source/boundary review; no finding completion claimed.",
+    "next_step": "Inspect GitHub pdf-render-fallback output for original V1.0 EN body, compare DE V1.0, Basic 2.0/2.1, GC 2.2/2.3/2.4 and official document catalogue; then update existing finding scope, source locator and boundary registry with same-commit CURRENT_STATE; full schema gate; separate terminal_close.",
+    "evidence_refs": [
+      "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_VDV3012_V21_2026-09-03.md",
+      "EV-131 run33781385699 artifact9903719333",
+      "original pinned PDFs run33752224704 artifact9892036202",
+      "tools/pdf_render_request_v0.1.json",
+      "audit_registry/pdf_source_pins_v0.1.json"
+    ],
+    "recovery_instruction": "For DR3012V21-001, inspect tools/pdf_render_request_v0.1.json and its push-triggered pinned PDF fallback workflow; read actual original V1.0 EN, then complete independent version/language boundary before registry update. Do not call complete or increase 81/192 until full gate succeeds."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
