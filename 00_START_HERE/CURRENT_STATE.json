@@ -2206,12 +2206,23 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "41621227041",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "41621227026",
-    "resume_instruction": "DRARA24-001 terminal_clean, 83/192 source locators and 83/83 original visible-body and independent version boundaries; 109 remaining. Official 301-2-19 AnalogRadioService V2.4 (01/2023) only known dedicated AnalogRadio publication; exact official SHA256 d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c, pinned Github render run41620405346 artifact13223143148, actual p13 §2.5.1 URI template includes http:// but concrete example omits. p10 and p14 visible context, same p13 XML example. Separate ARA-004 owns wrong SendFFSKTelegram operation name. Documentation-only, no XSD mutation, provider XML FAIL or new runtime matcher. Report docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRARA24_001_2026-11-03.md. Substantive gate 41621227041 SUCCESS, handoff 41621227026 SUCCESS; verify both terminal HEAD runs. Next DRARA24-002."
+    "resume_instruction": "DRARA24-002 gate_pending started; original AnalogRadioService V2.4 p8/p10/p12 spelling/editorial checks requested via pinned GitHub renderer; avoid false positives due invisible extracted-text errors. 83/192 remains pending until successful full finding closure.",
+    "pending_block": "DRARA24-002 exact-source editorial evidence review",
+    "active_finding": "DRARA24-002",
+    "active_step": "Verify the existing grouped editorial finding against visible original byte-pinned official AnalogRadioService V2.4 PDF printed pages 8/10/12; no automatic confirmation based on extracted text.",
+    "next_step": "Inspect GitHub exact-source renderer artifact for pages 8/10/12, visually distinguish actual typos from PDF extraction/line-wrap artifacts; independently verify publication scope and then update source/body/boundary registries with a full audit gate.",
+    "evidence_refs": [
+      "docs/pdf_xsd_semantic_audit/deep_read/ARA_V2.4.md",
+      "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARA_V24_2026-09-03.md",
+      "audit_registry/pdf_source_pins_v0.1.json",
+      "tools/pdf_render_request_v0.1.json"
+    ],
+    "recovery_instruction": "DRARA24-002 requires independent original visual PDF inspection of pages 8,10,12 from exact-pin GitHub renderer. No increase above 83/192 before original-body and version-boundary verified. Source SHA256 d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c. Refuse source mismatch."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
