@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 82,
-    "coverage_complete_count": 82,
+    "locator_entry_count": 83,
+    "coverage_complete_count": 83,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 110
+    "remaining_finding_count": 109
   },
   "entries": [
     {
@@ -15708,6 +15708,95 @@
         "English V1.0 original: GitHub pinned fallback run41617239025 artifact13221179508, p39 confirmed internal chapters 9.1/9.9.",
         "Basic V2.1 EV-131: original 6-page Github evidence run33781385699 artifact9903719333.",
         "Official DMS, SystemDocumentation and SystemManagement upstream tag blobs VDV-301-1.0/2.0/2.1/2.2/2.3 listed in audit report."
+      ]
+    },
+    {
+      "finding_id": "DRARA24-001",
+      "service": "AnalogRadioService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V2.4",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The official PDF URI template includes http://, while the concrete page-13 example omits the scheme."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V2.4",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "first_and_last_available_dedicated_analog_radio_publication",
+          "pdf_locators": [
+            {
+              "source_id": "ARA_V2.4",
+              "document_title": "VDV-Schrift 301-2-19 AnalogRadioService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-19-sde-v2.4-analogradioservice.pdfx",
+              "sha256": "d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c",
+              "printed_pages": [
+                10
+              ],
+              "section": "2 Functional service description / 2.1 Operations of the AnalogRadioService",
+              "table": null,
+              "point_summary": "Operation inventory says SendTelegram is the only operation; HTTP service; context to exclude ARA-004 operation-name typo. Actual original p10 SHA c72f87ce54809ab66d53e59b2d001ae842a785713cc60d09927fdcf88310f075."
+            },
+            {
+              "source_id": "ARA_V2.4",
+              "document_title": "VDV-Schrift 301-2-19 AnalogRadioService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-19-sde-v2.4-analogradioservice.pdfx",
+              "sha256": "d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c",
+              "printed_pages": [
+                13
+              ],
+              "section": "2.5 Examples / 2.5.1 URI for the Operation SendTelegram",
+              "table": null,
+              "point_summary": "The official visible URI template is http://Host:Port/ServiceName/Operation; immediately following example 192.168.1.2:8080/AnalogRadioService/SendFFSKTelegram omits http:// (separate ARA-004 operation-name issue); PNG p13 SHA256 23c581ef866494a56b9777c444f41405874a8349e972147e7ae4aeb66a1a72e8."
+            },
+            {
+              "source_id": "ARA_V2.4",
+              "document_title": "VDV-Schrift 301-2-19 AnalogRadioService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-19-sde-v2.4-analogradioservice.pdfx",
+              "sha256": "d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c",
+              "printed_pages": [
+                13
+              ],
+              "section": "2.5 Examples / 2.5.2 XML of a complete telegram",
+              "table": null,
+              "point_summary": "Adjacent XML example uses AnalogRadioService.SendTelegram operation root; context only, URI scheme omitted in example 2.5.1 is not an XML validation defect; p13 original PNG 23c581ef866494a56b9777c444f41405874a8349e972147e7ae4aeb66a1a72e8."
+            },
+            {
+              "source_id": "ARA_V2.4",
+              "document_title": "VDV-Schrift 301-2-19 AnalogRadioService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-19-sde-v2.4-analogradioservice.pdfx",
+              "sha256": "d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c",
+              "printed_pages": [
+                14
+              ],
+              "section": "Regelwerke – Normen und Empfehlungen / References",
+              "table": null,
+              "point_summary": "Original references General Conventions V2.3, but does not establish an AnalogRadioService V2.3 publication; historical scope control. p14 PNG SHA256 789b3d997149244c1a35a5225b576333c81ffcfa1e6a724de51bcc2a65fbe776."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Only checked official dedicated AnalogRadioService PDF publication V2.4 (01/2023), no separately issued predecessor or corrected successor in current official catalog. This finding is PDF URI-example-only; exact XSD profile not implicated and candidate XSD must not be promoted to official."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRARA24_001_2026-11-03.md",
+        "Byte-pinned official VDV 301-2-19 AnalogRadio V2.4 SHA256 d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c / 1009640 bytes, source pin run33269415752",
+        "GitHub Actions exact-source independent render run41620405346, artifact13223143148, 160dpi pages 10/13/14 and per-page PNG SHA fingerprints, manually visually inspected page 13",
+        "Original page 13 scheme template vs example inspected; source locator actual body §2.5.1, no TOC inference",
+        "Current official VDV IP-KOM-ÖV publications page lists AnalogRadioService dedicated V2.4 only; no separately issued predecessor or corrected successor established",
+        "Existing ARA-004 separately covers SendFFSKTelegram wrong operation name, do not duplicate"
       ]
     }
   ]

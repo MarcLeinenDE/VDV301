@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 82,
-    "verified": 82,
+    "tracked_findings": 83,
+    "verified": 83,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -4905,6 +4905,30 @@
           "language_status": "Original DE §5.2.1 p59 / EN §5.2.1 p64 retains DMS 301-2-2, no later verified corrected source, no released official DMS V2.4 XSD asserted.",
           "source_ids": [
             "VDV301-2_GC_V2.4"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRARA24-001",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRARA24_001_2026-11-03.md",
+        "Byte-pinned official VDV 301-2-19 AnalogRadio V2.4 SHA256 d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c / 1009640 bytes, source pin run33269415752",
+        "GitHub Actions exact-source independent render run41620405346, artifact13223143148, 160dpi pages 10/13/14 and per-page PNG SHA fingerprints, manually visually inspected page 13",
+        "Original page 13 scheme template vs example inspected; source locator actual body §2.5.1, no TOC inference",
+        "Current official VDV IP-KOM-ÖV publications page lists AnalogRadioService dedicated V2.4 only; no separately issued predecessor or corrected successor established",
+        "Existing ARA-004 separately covers SendFFSKTelegram wrong operation name, do not duplicate"
+      ],
+      "note": "Only known dedicated AnalogRadioService publication V2.4 (01/2023) documented in official VDV catalog; no earlier or later AnalogRadio service PDF independently established. Exact original page 13 direct template/example mismatch verified, no other versions extrapolated, no XML/XSD validity consequence.",
+      "scope_conclusion": "V2.4 official AnalogRadioService dedicated publication is first and last currently verified; original 2023 source p13 §2.5.1 contains http:// in URI template but omits it in concrete example. Official VDV publication catalog does not list earlier AnalogRadio service edition or later corrected successor as of 2026-11-03. p14 cites Common Conventions V2.3 (not an AnalogRadio 2.3 edition). PR #27 candidate XSD is not released official authority; no XML acceptance inference.",
+      "boundary_checks": [
+        {
+          "version": "AnalogRadioService dedicated V2.4 (01/2023)",
+          "role": "first_and_last_affected_known_official_publication",
+          "language_status": "Bilingual 2.4 document; English §2.5.1 printed p13 has inconsistent URI template/example. No separate AnalogRadioService V2.3 predecessor / later corrected publication shown in official catalog; historical limitation recorded.",
+          "source_ids": [
+            "ARA_V2.4"
           ]
         }
       ]
