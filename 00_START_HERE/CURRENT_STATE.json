@@ -2206,12 +2206,24 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "41619351315",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "41619351263",
-    "resume_instruction": "DR3012V21-001 terminal_clean. 82/192 source locators and 82/82 visible original source/body and version boundaries verified, 110 remaining. Independent EN V1.0 (01/2014) unaffected internal chapter references, German V1.0 (07/2016) first wrong DMS 301-2-2 / SystemDocumentation 301-2-4, persists Base V2.0/2.1, DMS 301-2-2 continues GC2.2/2.3/2.4. Official part 301-2-2 Beacon, 301-2-4 Distance; DMS dedicated 301-2-0. Documentation/provenance only, no provider XML FAIL or XSD changes. Report docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DR3012V21_001_2026-11-03.md. Substantive schema audit run41619351315 SUCCESS, handoff run41619351263 SUCCESS; final HEAD post-terminal gate verification required. Next DRARA24-001."
+    "resume_instruction": "DRARA24-001 gate_pending. Confirmed URI scheme omission in official AnalogRadio V2.4 PDF printed p13. Request exact-pinned GitHub renderer pages 10,13,14, do not overwrite 82/192 counts until fully checked; ARA-004 owns the separate SendFFSKTelegram operation-name issue.",
+    "pending_block": "DRARA24-001",
+    "active_finding": "DRARA24-001",
+    "active_step": "Original VDV 301-2-19 AnalogRadioService V2.4 visible p13 contradiction confirmed; request exact SHA256-pinned official PDF page 10,13,14 via GitHub renderer to independently verify the visible source and neighboring operation inventory.",
+    "next_step": "Inspect triggered GitHub renderer artifact and exact source hash, check ARA historical publication boundary, then write structural locator, original-body and version-scope registry evidence, update SDK state and run full schema gate.",
+    "evidence_refs": [
+      "docs/pdf_xsd_semantic_audit/deep_read/ARA_V2.4.md",
+      "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_ARA_V24_2026-09-03.md",
+      "audit_registry/pdf_source_pins_v0.1.json",
+      "tools/pdf_render_request_v0.1.json",
+      "Official VDV PDF p13 section 2.5.1 URI for the Operation SendTelegram"
+    ],
+    "recovery_instruction": "DRARA24-001 source visual reinspection via pinned GitHub renderer requested. Current source locator count stays 82/192 until full finding evidence+gate. Inspect PDF fallback push on this request commit, then source/body/boundary registry update and full gate. Do not claim terminal before final HEAD check."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
