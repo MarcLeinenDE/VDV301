@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 83,
-    "verified": 83,
+    "tracked_findings": 84,
+    "verified": 84,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -4927,6 +4927,32 @@
           "version": "AnalogRadioService dedicated V2.4 (01/2023)",
           "role": "first_and_last_affected_known_official_publication",
           "language_status": "Bilingual 2.4 document; English §2.5.1 printed p13 has inconsistent URI template/example. No separate AnalogRadioService V2.3 predecessor / later corrected publication shown in official catalog; historical limitation recorded.",
+          "source_ids": [
+            "ARA_V2.4"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRARA24-002",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRARA24_002_2026-11-03.md",
+        "Official SHA256-pinned PDF source ARA_V2.4 301-2-19 V2.4 01/2023 d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c, 1009640 original bytes, 16 pages",
+        "Fresh GitHub exact-source visual render workflow run41622197308 artifact13223594443, ZIP SHA256 4489db1d1573170e3d62b00e2ad97f97b7ce81c01f67413428773e308e43d770",
+        "Original visibly inspected printed p8 §1: pre-emtion, distinct from correctly line-wrapped pre- / emption in later paragraph; PNG sha d8a0b01c6c1f78d99c1f98d7cd69d7ac0bb967eef9379f0afe1e0dd22ef6c7e6",
+        "Original visibly inspected printed p10 §2.1 AnlogRadioService introduction, correct service name in adjacent headings and table; PNG sha c72f87ce54809ab66d53e59b2d001ae842a785713cc60d09927fdcf88310f075",
+        "Original visibly inspected printed p12 §2.3 contians, pre-amption and §2.4 BitrateEnumerationis (lack of whitespace), correct name in heading and enumeration table; PNG sha 508a09395c92d0d286663b60ce5cc5b91aa938ba4d9d1d070b62733ea5aff6dd",
+        "Official VDV IP-KOM-ÖV publication list + separate Schriften detail 301-2-19 lists V2.4 (01/2023) only; no separately documented predecessor or corrected successor. English body of pinned original independently checked",
+        "Source deep-read FR-ARA24-OBS-004/005 and revalidation DRARA24-002, one grouped non-executable documentation finding; no XSD/runtime/provider failure"
+      ],
+      "note": "VDV catalogue independently confirms only separately published service description AnalogRadioService V2.4 dated Jan2023; no predecessor or corrected successor publication established. Pinned 2.4 original English printed p8/p10/p12 visually checked; grouping is documentation-only, absent XML/XSD consequence.",
+      "scope_conclusion": "Dedicated AnalogRadioService V2.4 (01/2023) is first/last publication actually listed by official VDV IP-KOM-ÖV index and publication detail. No predecessor AnalogRadio-specific document or corrected successor is independently established as of 2026-11-03; no unsupported V2.3/V2.5 content claimed. Five visibly verified English body editorial strings p8/p10/p12 apply only to this exact official PDF. Source catalog lists German and English availability but no separate translation text inferred. PR #27 candidate XSD remains distinct from official PDF and nonauthority for English typos.",
+      "boundary_checks": [
+        {
+          "version": "AnalogRadioService dedicated V2.4 (01/2023)",
+          "role": "first_and_last_affected_known_official_publication",
+          "language_status": "Exact pinned original English body printed p8/10/12 contains five verified editorial spelling/spacing errors. Official catalogue lists D/E, but separate translated text is not inferred; no separately published predecessor or corrected successor is listed. Correct p8 line wrap excluded.",
           "source_ids": [
             "ARA_V2.4"
           ]

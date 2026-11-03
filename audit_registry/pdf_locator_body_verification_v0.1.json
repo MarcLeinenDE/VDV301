@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 83,
-    "verified_current_standard": 83,
+    "tracked_findings": 84,
+    "verified_current_standard": 84,
     "pending_current_standard": 0
   },
   "entries": [
@@ -778,6 +778,21 @@
         "Existing ARA-004 separately covers SendFFSKTelegram wrong operation name, do not duplicate"
       ],
       "note": "Visible original byte-pinned PDF p10, p13, p14 independently rendered 160dpi, manually inspected actual §2.1, §2.5.1/2.5.2 and reference page; full PDF original SHA256 and size verified GitHub run41620405346 artifact13223143148, per-PNG hashes in evidence report. No cache-miss-only inference."
+    },
+    {
+      "finding_id": "DRARA24-002",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRARA24_002_2026-11-03.md",
+        "Official SHA256-pinned PDF source ARA_V2.4 301-2-19 V2.4 01/2023 d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c, 1009640 original bytes, 16 pages",
+        "Fresh GitHub exact-source visual render workflow run41622197308 artifact13223594443, ZIP SHA256 4489db1d1573170e3d62b00e2ad97f97b7ce81c01f67413428773e308e43d770",
+        "Original visibly inspected printed p8 §1: pre-emtion, distinct from correctly line-wrapped pre- / emption in later paragraph; PNG sha d8a0b01c6c1f78d99c1f98d7cd69d7ac0bb967eef9379f0afe1e0dd22ef6c7e6",
+        "Original visibly inspected printed p10 §2.1 AnlogRadioService introduction, correct service name in adjacent headings and table; PNG sha c72f87ce54809ab66d53e59b2d001ae842a785713cc60d09927fdcf88310f075",
+        "Original visibly inspected printed p12 §2.3 contians, pre-amption and §2.4 BitrateEnumerationis (lack of whitespace), correct name in heading and enumeration table; PNG sha 508a09395c92d0d286663b60ce5cc5b91aa938ba4d9d1d070b62733ea5aff6dd",
+        "Official VDV IP-KOM-ÖV publication list + separate Schriften detail 301-2-19 lists V2.4 (01/2023) only; no separately documented predecessor or corrected successor. English body of pinned original independently checked",
+        "Source deep-read FR-ARA24-OBS-004/005 and revalidation DRARA24-002, one grouped non-executable documentation finding; no XSD/runtime/provider failure"
+      ],
+      "note": "Every claimed typo independently visually confirmed on official original p8/p10/p12 after SHA/size-checked source retrieval run41622197308 artifact13223594443. Actual visible body headings §1, §2.1, §2.3 and §2.4, tables and original print footers, all 160dpi. Correct line-wrapped pre- / emption actively rejected as false positive; no inference from text extraction only."
     }
   ]
 }

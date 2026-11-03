@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 83,
-    "coverage_complete_count": 83,
+    "locator_entry_count": 84,
+    "coverage_complete_count": 84,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 109
+    "remaining_finding_count": 108
   },
   "entries": [
     {
@@ -15797,6 +15797,97 @@
         "Original page 13 scheme template vs example inspected; source locator actual body §2.5.1, no TOC inference",
         "Current official VDV IP-KOM-ÖV publications page lists AnalogRadioService dedicated V2.4 only; no separately issued predecessor or corrected successor established",
         "Existing ARA-004 separately covers SendFFSKTelegram wrong operation name, do not duplicate"
+      ]
+    },
+    {
+      "finding_id": "DRARA24-002",
+      "service": "AnalogRadioService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V2.4",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Grouped visible English spelling/editorial residue in the pinned official PDF."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V2.4",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "first_and_last_available_dedicated_analog_radio_publication",
+          "pdf_locators": [
+            {
+              "source_id": "ARA_V2.4",
+              "document_title": "VDV-Schrift 301-2-19 AnalogRadioService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-19-sde-v2.4-analogradioservice.pdfx",
+              "sha256": "d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c",
+              "printed_pages": [
+                8
+              ],
+              "section": "1 Initial Situation and Overview",
+              "table": null,
+              "point_summary": "Visible original p8 first paragraph spells traffic light pre-emtion (missing p) while later paragraph correctly line-wraps pre- / emption. Original SHA-pinned PNG d8a0b01c6c1f78d99c1f98d7cd69d7ac0bb967eef9379f0afe1e0dd22ef6c7e6."
+            },
+            {
+              "source_id": "ARA_V2.4",
+              "document_title": "VDV-Schrift 301-2-19 AnalogRadioService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-19-sde-v2.4-analogradioservice.pdfx",
+              "sha256": "d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c",
+              "printed_pages": [
+                10
+              ],
+              "section": "2 Functional service description / 2.1 Operations of the AnalogRadioService",
+              "table": "SendTelegram operation inventory below introductory prose",
+              "point_summary": "Visible p10 sentence says The AnlogRadioService has only one operation; correctly spelled AnalogRadioService in immediately preceding functional paragraph and visible §2.1 heading. PNG c72f87ce54809ab66d53e59b2d001ae842a785713cc60d09927fdcf88310f075."
+            },
+            {
+              "source_id": "ARA_V2.4",
+              "document_title": "VDV-Schrift 301-2-19 AnalogRadioService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-19-sde-v2.4-analogradioservice.pdfx",
+              "sha256": "d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c",
+              "printed_pages": [
+                12
+              ],
+              "section": "2.3 DataStructure TransmitterStructure",
+              "table": "TransmitterStructure 0:1 LeadTime / HoldTime data structure table below prose",
+              "point_summary": "Visible p12 introduction spells contians and traffic light pre-amption; correctly spelled datatype TransmitterStructure in §2.3 heading and table. PNG 508a09395c92d0d286663b60ce5cc5b91aa938ba4d9d1d070b62733ea5aff6dd."
+            },
+            {
+              "source_id": "ARA_V2.4",
+              "document_title": "VDV-Schrift 301-2-19 AnalogRadioService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-19-sde-v2.4-analogradioservice.pdfx",
+              "sha256": "d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c",
+              "printed_pages": [
+                12
+              ],
+              "section": "2.4 Enumeration BitrateEnumeration",
+              "table": "Enumeration Name / Possible values / Description table with BitrateEnumeration and 1200/2400",
+              "point_summary": "Visible p12 opening prose says BitrateEnumerationis an enumeration (missing whitespace). §2.4 heading and table have correct standalone BitrateEnumeration, so not an XML identifier issue. PNG 508a09395c92d0d286663b60ce5cc5b91aa938ba4d9d1d070b62733ea5aff6dd."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Only separately published official AnalogRadioService dedicated V2.4 (01/2023) found in independent official VDV IP-KOM-ÖV list and Schriften catalogue. All five grouped English editorial defects visible on original printed p8/10/12. Do not infer other versions or promote PR #27 integration candidate XSD. This is no XML/runtime/identifier rule."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRARA24_002_2026-11-03.md",
+        "Official SHA256-pinned PDF source ARA_V2.4 301-2-19 V2.4 01/2023 d0c8d8a3b8719c13b09f43ec98349d2e9b22d07fec0c9267bceff0812cbbc34c, 1009640 original bytes, 16 pages",
+        "Fresh GitHub exact-source visual render workflow run41622197308 artifact13223594443, ZIP SHA256 4489db1d1573170e3d62b00e2ad97f97b7ce81c01f67413428773e308e43d770",
+        "Original visibly inspected printed p8 §1: pre-emtion, distinct from correctly line-wrapped pre- / emption in later paragraph; PNG sha d8a0b01c6c1f78d99c1f98d7cd69d7ac0bb967eef9379f0afe1e0dd22ef6c7e6",
+        "Original visibly inspected printed p10 §2.1 AnlogRadioService introduction, correct service name in adjacent headings and table; PNG sha c72f87ce54809ab66d53e59b2d001ae842a785713cc60d09927fdcf88310f075",
+        "Original visibly inspected printed p12 §2.3 contians, pre-amption and §2.4 BitrateEnumerationis (lack of whitespace), correct name in heading and enumeration table; PNG sha 508a09395c92d0d286663b60ce5cc5b91aa938ba4d9d1d070b62733ea5aff6dd",
+        "Official VDV IP-KOM-ÖV publication list + separate Schriften detail 301-2-19 lists V2.4 (01/2023) only; no separately documented predecessor or corrected successor. English body of pinned original independently checked",
+        "Source deep-read FR-ARA24-OBS-004/005 and revalidation DRARA24-002, one grouped non-executable documentation finding; no XSD/runtime/provider failure"
       ]
     }
   ]
