@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "b9f6b933ce859ed576383500acebda89052aeaff",
+    "git_blob": "50445d3861bb9d0715502bd87a2ac0ffdbafe9dd",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 84,
-    "coverage_complete_count": 84,
+    "locator_entry_count": 85,
+    "coverage_complete_count": 85,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 108
+    "remaining_finding_count": 107
   },
   "entries": [
     {
@@ -15888,6 +15888,329 @@
         "Original visibly inspected printed p12 §2.3 contians, pre-amption and §2.4 BitrateEnumerationis (lack of whitespace), correct name in heading and enumeration table; PNG sha 508a09395c92d0d286663b60ce5cc5b91aa938ba4d9d1d070b62733ea5aff6dd",
         "Official VDV IP-KOM-ÖV publication list + separate Schriften detail 301-2-19 lists V2.4 (01/2023) only; no separately documented predecessor or corrected successor. English body of pinned original independently checked",
         "Source deep-read FR-ARA24-OBS-004/005 and revalidation DRARA24-002, one grouped non-executable documentation finding; no XSD/runtime/provider failure"
+      ]
+    },
+    {
+      "finding_id": "DRCOM10-001",
+      "service": "Common / Enumerations",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "COMMON V1.0 XSD family",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact historical V1.0 schema family remains the executable authority."
+        },
+        {
+          "version": "05/2017 Common document revision 1.1",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The official May-2017 PDF records internal data/document Version 1.1 changes while IBIS-IP-VersionEnumeration stays at 1.0. A later official V2.0 PDF explicitly refers to an historical XSD 1.1, but no independently verifiable exact Common/Enumerations V1.1 schema files were found in the audited official GitHub master, official 2.0 release tag or integration branch. Historical nonexistence is not asserted and no synthetic V1.1 authority is inferred."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "COMMON V1.0 official historical XSD / 05-2017 PDF revision 1.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "first_last_verified_affected_v10_profile",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V1.0",
+              "document_title": "VDV 301-2-1 Gemeinsame Datenstrukturen und Aufzählungstypen 05/2017 (History Version 1.1)",
+              "document_version": "1.0 / doc revision 1.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds.pdfx",
+              "sha256": "a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf",
+              "printed_pages": [
+                9
+              ],
+              "section": "1.8 Connection",
+              "table": "Table 8 Description of Connection",
+              "point_summary": "Visible 05/2017 PDF: DisplayContent 0:1, ExpectedDepartureTime 0:1 and ScheduledDepartureTime 0:1, contrary to exact V1.0 XSD; pinned p9 SHA e6c7650f67345ea4fccc62d31ee02e7ab205ab22405eaf08da3ef3987e45003d"
+            },
+            {
+              "source_id": "COMMON_V1.0",
+              "document_title": "VDV 301-2-1 Gemeinsame Datenstrukturen und Aufzählungstypen 05/2017 (History Version 1.1)",
+              "document_version": "1.0 / doc revision 1.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds.pdfx",
+              "sha256": "a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf",
+              "printed_pages": [
+                21
+              ],
+              "section": "1.54 TripInformation",
+              "table": "Table 54 Description of TripInformation",
+              "point_summary": "Visible RouteDirection 0:1 and AdditionalTextMessage 0:* InternationalTextType; official V1.0 XSD lacks RouteDirection and has one optional IBIS-IP.string AdditionalTextMessage. Separate CE-005 retained; PNG b178e7bfe25f3375fa34cdb13c9acf333ad88eab1f224ca5968e1a694f88f427"
+            },
+            {
+              "source_id": "COMMON_V1.0",
+              "document_title": "VDV 301-2-1 Gemeinsame Datenstrukturen und Aufzählungstypen 05/2017 (History Version 1.1)",
+              "document_version": "1.0 / doc revision 1.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds.pdfx",
+              "sha256": "a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf",
+              "printed_pages": [
+                27
+              ],
+              "section": "2.14 IBIS-IP-VersionEnumeration",
+              "table": "Table 75 Description of IBIS-IP-VersionEnumeration",
+              "point_summary": "Visible protocol enumeration value 1.0; document internal history 1.1 is not protocol version or an automatically selectable 1.1 XSD. PNG 406c7c0f225de740ef0b269e04dceef370ae6ef9c4159e49047151147cdf17d6"
+            },
+            {
+              "source_id": "COMMON_V1.0",
+              "document_title": "VDV 301-2-1 Gemeinsame Datenstrukturen und Aufzählungstypen 05/2017 (History Version 1.1)",
+              "document_version": "1.0 / doc revision 1.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds.pdfx",
+              "sha256": "a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf",
+              "printed_pages": [
+                28
+              ],
+              "section": "2.19 RouteDirectionEnumeration",
+              "table": "Table 80 Description of RouteDirectionEnumeration",
+              "point_summary": "Visible values Forward/Backward/Clockwise/Counterclockwise/Other, whereas exact V1.0 enumeration XSD lacks RouteDirectionEnumeration. PNG b03493f622a524e4cba16b894b88eea05be60d727048b3c8a9b2a241473cbe2d"
+            },
+            {
+              "source_id": "COMMON_V1.0",
+              "document_title": "VDV 301-2-1 Gemeinsame Datenstrukturen und Aufzählungstypen 05/2017 (History Version 1.1)",
+              "document_version": "1.0 / doc revision 1.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds.pdfx",
+              "sha256": "a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf",
+              "printed_pages": [
+                30
+              ],
+              "section": "3 Versionshistorie / Version History → 3.1 Version 1.1",
+              "table": null,
+              "point_summary": "German and English bullets explicitly record scheduled departure, changed TripInformation text type, new RouteDirection and RouteDirectionEnumeration; these are document/data-model changes, not historical V1.0 XSD mutations. PNG 899edf6db888a5e6f51a9eb25b483f07c5f77d0ecd8c8abdab8f364ebccec6eb"
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official historic 2014 upstream imported V1.0 family; normative selected schema, not revised by May2017 PDF",
+              "component_kind": "element",
+              "component": "ConnectionStructure",
+              "member": "DisplayContent",
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:complexType[@name='ConnectionStructure']/xs:sequence/xs:element[@name='DisplayContent']",
+              "line_hint": "167",
+              "point_summary": "Exact V1.0 XSD DisplayContent has no minOccurs, hence required; PDF says 0:1."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official historic 2014 upstream imported V1.0 family; normative selected schema, not revised by May2017 PDF",
+              "component_kind": "element",
+              "component": "ConnectionStructure",
+              "member": "ExpectedDepatureTime",
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:complexType[@name='ConnectionStructure']/xs:sequence/xs:element[@name='ExpectedDepatureTime']",
+              "line_hint": "187",
+              "point_summary": "Exact V1.0 typo-like element name ExpectedDepatureTime must be honored; no ExpectedDepartureTime alias."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official historic 2014 upstream imported V1.0 family; normative selected schema, not revised by May2017 PDF",
+              "component_kind": "complexType",
+              "component": "ConnectionStructure",
+              "member": null,
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:complexType[@name='ConnectionStructure']",
+              "line_hint": "147-195",
+              "point_summary": "Full historical ConnectionStructure has no ScheduledDepartureTime member."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official historic 2014 upstream imported V1.0 family; normative selected schema, not revised by May2017 PDF",
+              "component_kind": "element",
+              "component": "TripInformationStructure",
+              "member": "AdditionalTextMessage",
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TripInformationStructure']/xs:sequence/xs:element[@name='AdditionalTextMessage']",
+              "line_hint": "631",
+              "point_summary": "Optional singleton IBIS-IP.string, contradicts 1.1 PDF type and multiplicity (separate CE-005)."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official historic 2014 upstream imported V1.0 family; normative selected schema, not revised by May2017 PDF",
+              "component_kind": "complexType",
+              "component": "TripInformationStructure",
+              "member": null,
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TripInformationStructure']",
+              "line_hint": "610-635",
+              "point_summary": "Exact V1.0 TripInformationStructure has no RouteDirection."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official historic 2014 upstream imported V1.0 family; normative selected schema, not revised by May2017 PDF",
+              "component_kind": "schema",
+              "component": "IBIS-IP_Enumerations_V1.0.xsd",
+              "member": null,
+              "value": null,
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1-270",
+              "point_summary": "Complete original enum XSD contains no RouteDirectionEnumeration."
+            }
+          ],
+          "coverage_note": "V1.0 official 2014 imported schema is exact normative authority, conflicting with revised May2017 PDF internal version 1.1. First and last published V1.0 PDF original currently pinned; no earlier separate original proven. Historical XSD V1.1 referenced by later PDF but exact file is unverified."
+        },
+        {
+          "version": "COMMON V2.0 official 02-2018 corrected successor",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "first_corrected_successor",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations V2.0, 02/2018",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v-2-0.pdfx",
+              "sha256": "23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088",
+              "printed_pages": [
+                16
+              ],
+              "section": "2.8 Connection",
+              "table": "Table 8 Description of Connection",
+              "point_summary": "Corrected V2.0 PDF and exact tagged schema agree DisplayContent 0:1, ExpectedDepartureTime 0:1, ScheduledDepartureTime 0:1. PNG 383647858a6bdb5c1826ced25954e5f0d9aa4ad9c3bc31eeb85bb8ad2daa4238"
+            },
+            {
+              "source_id": "COMMON_V2.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations V2.0, 02/2018",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v-2-0.pdfx",
+              "sha256": "23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088",
+              "printed_pages": [
+                29
+              ],
+              "section": "2.57 TripInformation",
+              "table": "Table 57 Description of TripInformation",
+              "point_summary": "V2.0 PDF and schema both include RouteDirection; PDF AdditionalTextMessage 0:* still conflicts with separate exact V2.0 XSD cardinality in CE-005. PNG b12ff4e77d8c364b23f301320a12431951086f42cec3d0eddea8ff235fcd31e3"
+            },
+            {
+              "source_id": "COMMON_V2.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations V2.0, 02/2018",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v-2-0.pdfx",
+              "sha256": "23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088",
+              "printed_pages": [
+                36
+              ],
+              "section": "3.20 RouteDirectionEnumeration",
+              "table": "Table 84 Description of RouteDirectionEnumeration",
+              "point_summary": "V2.0 PDF and official tagged Enumerations V2.0 both define RouteDirectionEnumeration. PNG 6d77711683f059cdbe5e3a8fdf322560b10e3ae056b79b547671bc45c9f58a16"
+            },
+            {
+              "source_id": "COMMON_V2.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations V2.0, 02/2018",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v-2-0.pdfx",
+              "sha256": "23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088",
+              "printed_pages": [
+                38
+              ],
+              "section": "4 Versionshistorie / Version History → 4.1 Version 1.1 and 4.2 Version 2.0",
+              "table": null,
+              "point_summary": "Historical Version 1.1 data-model additions recounted separately from 2.0 changes in German and English, not 1.1 schema proof. PNG dd54cd035fafaf1782c9c64403188fa7bfdf962e2bdfb90c09bbc799f19bc297"
+            },
+            {
+              "source_id": "COMMON_V2.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations V2.0, 02/2018",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v-2-0.pdfx",
+              "sha256": "23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088",
+              "printed_pages": [
+                39
+              ],
+              "section": "4.2 Version 2.0 → 4.2.3 Textliche Korrekturen / Textual Corrections",
+              "table": null,
+              "point_summary": "Official PDF explicitly mentions historical XSDs of versions 1.0 and 1.1 for typo ExpectedDepatureTime; audited official master/tag contain no verifiable V1.1 schema bytes; no historical nonexistence claim. PNG fdab713538450de4a185f0b9ab7bd01406d2744bf1003ca1e16fa7956d54c8cd"
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.0.xsd",
+              "git_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+              "authority_detail": "Exact official tag VDV-301-2.0; independently checked successor, never an automatic V1.0 replacement",
+              "component_kind": "element",
+              "component": "ConnectionStructure",
+              "member": "DisplayContent",
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:complexType[@name='ConnectionStructure']/xs:sequence/xs:element[@name='DisplayContent']",
+              "line_hint": "167",
+              "point_summary": "V2.0 minOccurs=0 corrected relative to required V1.0."
+            },
+            {
+              "file": "IBIS-IP_common_V2.0.xsd",
+              "git_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+              "authority_detail": "Exact official tag VDV-301-2.0; independently checked successor, never an automatic V1.0 replacement",
+              "component_kind": "element",
+              "component": "ConnectionStructure",
+              "member": "ExpectedDepartureTime",
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:complexType[@name='ConnectionStructure']/xs:sequence/xs:element[@name='ExpectedDepartureTime']",
+              "line_hint": "187",
+              "point_summary": "V2.0 corrected element name is normative only for selected V2.0 profile."
+            },
+            {
+              "file": "IBIS-IP_common_V2.0.xsd",
+              "git_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+              "authority_detail": "Exact official tag VDV-301-2.0; independently checked successor, never an automatic V1.0 replacement",
+              "component_kind": "element",
+              "component": "ConnectionStructure",
+              "member": "ScheduledDepartureTime",
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:complexType[@name='ConnectionStructure']/xs:sequence/xs:element[@name='ScheduledDepartureTime']",
+              "line_hint": "192",
+              "point_summary": "V2.0 released field optional and matches PDF."
+            },
+            {
+              "file": "IBIS-IP_common_V2.0.xsd",
+              "git_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+              "authority_detail": "Exact official tag VDV-301-2.0; independently checked successor, never an automatic V1.0 replacement",
+              "component_kind": "element",
+              "component": "TripInformationStructure",
+              "member": "RouteDirection",
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TripInformationStructure']/xs:sequence/xs:element[@name='RouteDirection']",
+              "line_hint": "643",
+              "point_summary": "V2.0 released field optional and matches PDF."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.0.xsd",
+              "git_blob": "27e3c183b00381d959622d13c10543123af8eef6",
+              "authority_detail": "Exact official tag VDV-301-2.0; independently checked successor, never an automatic V1.0 replacement",
+              "component_kind": "simpleType",
+              "component": "RouteDirectionEnumeration",
+              "member": null,
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='RouteDirectionEnumeration']",
+              "line_hint": "206",
+              "point_summary": "V2.0 released enum exists, matches §3.20."
+            }
+          ],
+          "coverage_note": "First verified separately selected official released V2.0 schema+PDF corrects targeted ScheduledDepartureTime, RouteDirection, RouteDirectionEnumeration, DisplayContent and ExpectedDepartureTime. Separate CE-005 mismatch continues; 2.0 does not repair V1.0 instances."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_001_2026-11-03.md",
+        "Pinned 05/2017 COMMON_V1.0 SHA256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf, 892769 bytes; independent original PDF 160dpi run41625122454 artifact13225488128 pages9,21,27,28,30",
+        "Pinned official 02/2018 COMMON_V2.0 SHA256 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088, 946088 bytes; independent 160dpi original run41625549119 artifact13225656338 pages16,29,36,38,39",
+        "Official exact historical V1.0 import commit604a5a5c7608977e483072f7e450d7381cc182e4; Common blob194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c and Enum blob a9bea5bc73003ed91ded8519db06c32c4067831d; exact official V2.0 tag Common blob8608e3dcd665c197c34da7f6ec6af5a3758da164 enum27e3c183b00381d959622d13c10543123af8eef6",
+        "Official V2.0 PDF p39 explicitly refers to historical XSD 1.1 although no exact V1.1 Common/Enums files in audited upstream master / official V2.0 tag / integration branch; no categorical historical nonexistence; no synthetic profile",
+        "EV-117 and EV-135 executable selected historical V1.0 evidence; CE-005 AdditionalTextMessage separate finding"
       ]
     }
   ]

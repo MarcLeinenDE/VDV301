@@ -4,7 +4,7 @@
   "state": "reviewed_inventory",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "b9f6b933ce859ed576383500acebda89052aeaff",
+    "git_blob": "50445d3861bb9d0715502bd87a2ac0ffdbafe9dd",
     "classification_state": "complete",
     "finding_count": 192
   },
@@ -1236,13 +1236,13 @@
           "version": "05/2017 Common document revision 1.1",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "The official PDF records internal Version 1.1 changes while IBIS-IP-VersionEnumeration remains 1.0; no Common V1.1 XSD exists and no synthetic V1.1 schema authority is inferred."
+          "note": "The official May-2017 PDF records internal data/document Version 1.1 changes while IBIS-IP-VersionEnumeration stays at 1.0. A later official V2.0 PDF explicitly refers to an historical XSD 1.1, but no independently verifiable exact Common/Enumerations V1.1 schema files were found in the audited official GitHub master, official 2.0 release tag or integration branch. Historical nonexistence is not asserted and no synthetic V1.1 authority is inferred."
         }
       ],
       "trigger_descriptions": [
         "selected strict profile is the official Common / Enumerations V1.0 XSD family",
         "XSD validation result is INVALID because the submitted Common V1.0 instance contains exact PDF revision-1.1-only element ScheduledDepartureTime or RouteDirection",
-        "selected V1.0 XSD family contains neither ScheduledDepartureTime nor TripInformation.RouteDirection and no official Common V1.1 XSD profile exists"
+        "selected official V1.0 XSD family contains neither ScheduledDepartureTime nor TripInformation.RouteDirection; no separately verifiable exact official V1.1 XSD profile was found in the audited authority pool"
       ],
       "diagnostic_source": {
         "registry": "audit_registry/finding_semantic_classification_v0.1.json",

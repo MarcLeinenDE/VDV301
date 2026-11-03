@@ -7773,7 +7773,7 @@
           "version": "05/2017 Common document revision 1.1",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "The official PDF records internal Version 1.1 changes while IBIS-IP-VersionEnumeration remains 1.0; no Common V1.1 XSD exists and no synthetic V1.1 schema authority is inferred."
+          "note": "The official May-2017 PDF records internal data/document Version 1.1 changes while IBIS-IP-VersionEnumeration stays at 1.0. A later official V2.0 PDF explicitly refers to an historical XSD 1.1, but no independently verifiable exact Common/Enumerations V1.1 schema files were found in the audited official GitHub master, official 2.0 release tag or integration branch. Historical nonexistence is not asserted and no synthetic V1.1 authority is inferred."
         }
       ],
       "review_state": "sdk_ready",
@@ -7804,7 +7804,7 @@
         },
         {
           "type": "official_release_provenance",
-          "note": "No Common V1.1 XSD exists in the official repository; document/data-definition revision 1.1 is not converted into a synthetic release profile."
+          "note": "May-2017 PDF Version 1.1 is a document/data-definition revision, not a safely selectable XSD by itself. The official V2.0 PDF printed p39 explicitly mentions XSD versions 1.0 and 1.1; independently checked current VDV GitHub master and 2.0 tag contain no Common/Enumerations V1.1 files, so no exact V1.1 bytes/authority could be pinned. Do not assert historical nonexistence; never synthesize a V1.1 profile."
         },
         {
           "type": "executable_validation",
@@ -7815,13 +7815,13 @@
         "de": {
           "title": "COMMON V1.0: Dokumentrevision 1.1 weicht von der historischen XSD-Familie ab",
           "short": "Die PDF dokumentiert Version-1.1-Änderungen, während die offizielle ausführbare XSD-Autorität unverändert V1.0 bleibt.",
-          "long": "Die 05/2017-PDF führt intern eine Dokument-/Datenmodellrevision 1.1 mit neuen oder geänderten Feldern auf. Die exakte offizielle Common-/Enumerations-V1.0-XSD-Familie stammt dagegen unverändert aus dem historischen Import und enthält diese Ergänzungen nicht beziehungsweise behält ältere Pflichtfelder und Schreibweisen. Da keine offizielle Common-V1.1-XSD existiert, darf aus der PDF-Historie kein künstliches V1.1-Schema abgeleitet werden.",
+          "long": "Die offizielle PDF von 05/2017 dokumentiert intern eine Datenmodellrevision 1.1 mit zusätzlichen oder geänderten Feldern. Die exakt ausgewählte offizielle Common-/Enumerations-V1.0-XSD stammt unverändert aus dem historischen Import und enthält diese Ergänzungen nicht beziehungsweise verwendet ältere Pflichtfelder und Schreibweisen. Die spätere V2.0-PDF erwähnt zwar ausdrücklich eine XSD-Version 1.1; ein solches Schema mit überprüfbaren offiziellen Originalbytes ist im geprüften GitHub-Bestand jedoch nicht nachgewiesen. Für die Prüfung bleibt deshalb die tatsächlich ausgewählte V1.0-XSD maßgeblich; keine vermutete V1.1-XSD oder stillschweigende Korrektur anwenden.",
           "recommendation": "Für ausführbare XML-Prüfung strikt die ausgewählte V1.0-XSD-Familie verwenden. Bei durch die PDF plausibel wirkenden, aber von V1.0 abgewiesenen V1.1-Feldern einen erklärenden Advisory ausgeben; keine Aliase oder synthetische V1.1-XSD erzeugen."
         },
         "en": {
           "title": "COMMON V1.0: document revision 1.1 diverges from the historical XSD family",
           "short": "The PDF documents Version-1.1 changes while the official executable XSD authority remains unchanged V1.0.",
-          "long": "The 05/2017 PDF internally records document/data-model revision 1.1 with new or changed fields. The exact official Common/Enumerations V1.0 XSD family remains the unchanged historical import and does not contain those additions, while retaining older required fields and spellings. Because no official Common V1.1 XSD exists, the PDF history must not be turned into a synthetic V1.1 schema profile.",
+          "long": "The official May-2017 PDF internally documents data-model revision 1.1 with added or changed fields. The exact selected official Common/Enumerations V1.0 XSD family remains the unchanged historic import and lacks these additions while retaining earlier required fields and spellings. The later official V2.0 PDF explicitly mentions an XSD version 1.1, but independently verifiable official bytes for that schema were not found in the audited GitHub snapshots. Therefore the actually selected V1.0 XSD remains normative; do not infer a V1.1 schema or apply silent corrections.",
           "recommendation": "Use the selected V1.0 XSD family strictly for executable XML validation. When V1.1-looking fields suggested by the PDF are rejected by V1.0, provide an explanatory advisory; do not create aliases or a synthetic V1.1 XSD."
         }
       },
@@ -7830,7 +7830,7 @@
         "candidate_triggers": [
           "selected strict profile is the official Common / Enumerations V1.0 XSD family",
           "XSD validation result is INVALID because the submitted Common V1.0 instance contains exact PDF revision-1.1-only element ScheduledDepartureTime or RouteDirection",
-          "selected V1.0 XSD family contains neither ScheduledDepartureTime nor TripInformation.RouteDirection and no official Common V1.1 XSD profile exists"
+          "selected official V1.0 XSD family contains neither ScheduledDepartureTime nor TripInformation.RouteDirection; no separately verifiable exact official V1.1 XSD profile was found in the audited authority pool"
         ]
       },
       "source_references": [
@@ -7860,9 +7860,14 @@
           "kind": "evidence",
           "reference": "EV-117 run 33279461529; EV-135 closure run 33850713729",
           "note": "Executable historical V1.0 boundary confirmation."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_001_2026-11-03.md",
+          "note": "Independent SHA-pinned original V1.0 May2017 p9/21/27/28/30 and V2.0 Feb2018 p16/29/36/38/39; exact source/official tag XSD historical scope; nuanced V1.1 archival uncertainty."
         }
       ],
-      "notes": "Does not duplicate CE-005 AdditionalTextMessage; that historical issue remains classified under its existing CE identity."
+      "notes": "Does not duplicate CE-005 AdditionalTextMessage. Important provenance boundary: official V2.0 PDF p39 mentions 1.1 XSDs; current upstream snapshots do not provide exact V1.1 file bytes, so historical nonexistence cannot be assumed. First verified corrected successor for the listed V1.0 XML fields is official Common/Enumerations V2.0, not a retroactive V1.0 override."
     },
     {
       "finding_id": "DRCOM10-002",

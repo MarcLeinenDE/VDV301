@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 84,
-    "verified": 84,
+    "tracked_findings": 85,
+    "verified": 85,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -4955,6 +4955,47 @@
           "language_status": "Exact pinned original English body printed p8/10/12 contains five verified editorial spelling/spacing errors. Official catalogue lists D/E, but separate translated text is not inferred; no separately published predecessor or corrected successor is listed. Correct p8 line wrap excluded.",
           "source_ids": [
             "ARA_V2.4"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRCOM10-001",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_001_2026-11-03.md",
+        "Official exact-pinned COMMON_V1.0 original SHA256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf size892769, GitHub render run41625122454 artifact13225488128 160dpi original printed p9,21,27,28,30",
+        "Official exact-pinned COMMON_V2.0 original SHA256 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088 size946088, GitHub render run41625549119 artifact13225656338 160dpi printed p16,29,36,38,39",
+        "Visible original section captions/table numbers verified: V1.0 §1.8 Table8, §1.54 Table54, §2.14 Table75, §2.19 Table80, §3.1 Version1.1; V2.0 §2.8 Table8, §2.57 Table57, §3.20 Table84, §4.1/4.2, §4.2.3",
+        "Exact upstream original XSD blobs V1.0 common194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c enums a9bea5bc73003ed91ded8519db06c32c4067831d (2014 import) and official V2.0 tag common8608e3dcd665c197c34da7f6ec6af5a3758da164 enums27e3c183b00381d959622d13c10543123af8eef6",
+        "V2.0 official PDF p39 explicitly names XSD 1.1 but no exact Common/Enumerations V1.1 file pinned from official master, official V2.0 tag, or integration branch; no historical nonexistence claimed or synthetic profile",
+        "Existing EV-117 33279461529 and EV-135 33850713729 executable selected V1.0 boundary; CE-005 independent AdditionalTextMessage scope"
+      ],
+      "note": "Selected 2014-imported official Common/Enums V1.0 XSD family first/last known affected exact profile vs revised official May2017 1.1 document contents. Official 2.0 release/tag and Feb2018 PDF are the independently verified first corrected successor for the specific listed differences. Separate historical XSD 1.1 mentioned in 2018 PDF p39 but exact file bytes not available in three checked official/integration GitHub snapshots; no unproved general nonexistence, no synthetic V1.1 profile.",
+      "scope_conclusion": "Verified scope is the exact 2014 official V1.0 Common/Enumerations XSD vs May2017 V1.0 PDF with internal data-document Revision 1.1 (German/English history). Printed p27 explicitly IBIS-IP-VersionEnumeration 1.0. Official released V2.0 first independently corrected successor for ScheduledDepartureTime, RouteDirection, RouteDirectionEnumeration, DisplayContent optionality, ExpectedDepartureTime spelling, with matched PDF pages16/29/36/38/39 and exact official tag. No earlier separate PDF source verified. Official V2.0 PDF acknowledges XSD 1.1, but no standalone exact officially pin-able XSD 1.1 blob exists in audited GitHub master, released V2.0 tag or project integration; historical existence remains unresolved, not declared false. Other V2.0 errors (CE-005) excluded.",
+      "boundary_checks": [
+        {
+          "version": "Official Common/Enumerations XSD V1.0 import 2014 + May2017 Common document-internal Version 1.1",
+          "role": "first_and_last_verified_affected_selected_v10_profile",
+          "language_status": "Original May2017 pinned PDF data tables in English p9/21/27/28 and bilingual German+English history p30; V1.0 exact XSD no documented additions. No independent earlier original V1.0 PDF asserted.",
+          "source_ids": [
+            "COMMON_V1.0"
+          ]
+        },
+        {
+          "version": "Historical referenced XSD Version 1.1 (not independently pinned)",
+          "role": "explicitly_unverified_historical_schema_authority_boundary",
+          "language_status": "Bilingual original successor V2.0 p39 expressly states XSD versions 1.0 and 1.1. No files IBIS-IP_common_V1.1.xsd / IBIS-IP_Enumerations_V1.1.xsd found at official master, official V2.0 tag or integration branch. Reference does not prove no historical release; no executable variant claimed.",
+          "source_ids": [
+            "COMMON_V2.0"
+          ]
+        },
+        {
+          "version": "Official VDV-301-2.0 Common/Enumerations + Feb2018 Common V2.0 PDF",
+          "role": "first_verified_corrected_official_successor",
+          "language_status": "Bilingual V2.0 original printed p16/29/36/38/39 and tagged exact Common/Enums XSD align on only the listed corrected model fields. Separate CE-005 AdditionalTextMessage discrepancy explicitly not covered.",
+          "source_ids": [
+            "COMMON_V2.0"
           ]
         }
       ]
