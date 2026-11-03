@@ -2126,9 +2126,8 @@
     "version_scope_boundary_pending_count": 0
   },
   "next_actions": [
-    "DRCOM10-002 terminal_clean: 86/192 source locators, 86/86 independently verified original PDF bodies and historical scope boundaries; 106 remain.",
-    "Substantive schema-audit-validation run41636382404 SUCCESS and handoff-integrity run41636382369 SUCCESS; separately verify BOTH final-HEAD workflows after terminal commit.",
-    "Existing DRCOM10-002 extended to every Common V1.0–2.4: PDF ungrouped DataAcceptedResponse 1:1 vs exact mandatory xs:choice, official XSD 1.0–2.3, candidate/integration only 2.4. Keep selected-XSD FAIL and explanatory advisory, no schema edits. Next DRCOM10-003."
+    "DRCOM10-003 gate_pending: official Common V1.0–V2.4 printed ServiceSpecificationWithStateList 1:* vs exact selected XSD minOccurs=0 all six; visually verify pinned original pages and historical scope; do not increment 86/192 until gate SUCCESS.",
+    "First exact-byte render request COMMON_V1.0 PDF pages17–19. After six page checks reconcile semantic/source/body/boundary/runtime + state; full schema audit and final HEAD handoff mandatory."
   ],
   "source_locator_progress": {
     "locator_entry_count": 86,
@@ -2206,12 +2205,24 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "41636382404",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "41636382369",
-    "resume_instruction": "DRCOM10-002 terminal_clean. Source/body/historical boundary 86/192, 86/86 independent verified, 106 remain. Single frozen finding expanded from Common V1.0-only to V1.0,2.0,2.1,2.2,2.3,2.4. Official 301-2-1 originals printed §1.9 Table9 p9 and §2.9 Table9 p16/17/18/18/20 present both response branches as ordinary 1:1 without choice marking; all exact Common XSDs instead mandatory exclusive xs:choice. Official released XSDs V1.0–V2.3, V2.4 candidate/integration only (open upstream PR31), include exact V2.3 Enum V2.2. Original pinned visual run41625122454,41625549119,41634518610,41634653508,33656579631,33658306978. No independently verified corrected successor, XSD unchanged, runtime matcher still reviewed_not_implemented. Updated bilingual semantic and runtime scope, source semantic git blob pins. Substantive full schema audit 41636382404 SUCCESS, handoff 41636382369 SUCCESS; both final-head workflows must be SUCCESS. Report docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_002_2026-11-03.md. Next DRCOM10-003."
+    "resume_instruction": "DRCOM10-003 in progress; 86/192 remain completed. Check pdf-render-fallback workflow for request tools/pdf_render_request_v0.1.json (COMMON_V1.0 pages17-19), inspect original visual body. No registries or XSD modified yet. Then render Common V2.0–V2.4 and finish full gate before terminal_clean.",
+    "pending_block": "DRCOM10-003: six-version Common list-minimum cardinality source locator and boundary review",
+    "active_finding": "DRCOM10-003",
+    "active_step": "Requested exact-byte GitHub visual fallback for official Common V1.0, printed page 18, body section 1.44/Table 44; selected XSD line465 checked.",
+    "next_step": "Inspect pinned GitHub render artifact, request Common V2.0–V2.4 pages, reconcile all body/table locators and exact schema authority, update canonical registries, run full validation, then terminal-close.",
+    "evidence_refs": [
+      "tools/pdf_render_request_v0.1.json",
+      "audit_registry/pdf_source_pins_v0.1.json",
+      "audit_registry/finding_semantic_classification_v0.1.json",
+      "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V1.0.md",
+      "official Common V1.0 XSD Git blob 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c"
+    ],
+    "recovery_instruction": "DRCOM10-003 in progress; 86/192 remain completed. Check pdf-render-fallback workflow for request tools/pdf_render_request_v0.1.json (COMMON_V1.0 pages17-19), inspect original visual body. No registries or XSD modified yet. Then render Common V2.0–V2.4 and finish full gate before terminal_clean."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
