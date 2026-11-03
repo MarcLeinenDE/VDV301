@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "50445d3861bb9d0715502bd87a2ac0ffdbafe9dd",
+    "git_blob": "7ccc1067b50de4da00311dff35638eb98c4532b8",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 85,
-    "coverage_complete_count": 85,
+    "locator_entry_count": 86,
+    "coverage_complete_count": 86,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 107
+    "remaining_finding_count": 106
   },
   "entries": [
     {
@@ -16211,6 +16211,282 @@
         "Official exact historical V1.0 import commit604a5a5c7608977e483072f7e450d7381cc182e4; Common blob194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c and Enum blob a9bea5bc73003ed91ded8519db06c32c4067831d; exact official V2.0 tag Common blob8608e3dcd665c197c34da7f6ec6af5a3758da164 enum27e3c183b00381d959622d13c10543123af8eef6",
         "Official V2.0 PDF p39 explicitly refers to historical XSD 1.1 although no exact V1.1 Common/Enums files in audited upstream master / official V2.0 tag / integration branch; no categorical historical nonexistence; no synthetic profile",
         "EV-117 and EV-135 executable selected historical V1.0 evidence; CE-005 AdditionalTextMessage separate finding"
+      ]
+    },
+    {
+      "finding_id": "DRCOM10-002",
+      "service": "Common",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "COMMON V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Official 1.0 Common PDF DataAcceptedResponse Table 9 prints both response branches as ungrouped 1:1 rows, but exact historical released Common V1.0 XSD defines mandatory exclusive xs:choice. Original PDF and XSD bytes independently verified."
+        },
+        {
+          "version": "COMMON V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.0.xsd + IBIS-IP_Enumerations_V2.0.xsd",
+          "note": "Official 2.0 Common PDF DataAcceptedResponse Table 9 prints both response branches as ungrouped 1:1 rows, but exact historical released Common V2.0 XSD defines mandatory exclusive xs:choice. Original PDF and XSD bytes independently verified."
+        },
+        {
+          "version": "COMMON V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.1.xsd + IBIS-IP_Enumerations_V2.1.xsd",
+          "note": "Official 2.1 Common PDF DataAcceptedResponse Table 9 prints both response branches as ungrouped 1:1 rows, but exact historical released Common V2.1 XSD defines mandatory exclusive xs:choice. Original PDF and XSD bytes independently verified."
+        },
+        {
+          "version": "COMMON V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official 2.2 Common PDF DataAcceptedResponse Table 9 prints both response branches as ungrouped 1:1 rows, but exact historical released Common V2.2 XSD defines mandatory exclusive xs:choice. Original PDF and XSD bytes independently verified."
+        },
+        {
+          "version": "COMMON V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.3.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official 2.3 Common PDF DataAcceptedResponse Table 9 prints both response branches as ungrouped 1:1 rows, but exact historical released Common V2.3 XSD defines mandatory exclusive xs:choice. Original PDF and XSD bytes independently verified."
+        },
+        {
+          "version": "COMMON V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd + IBIS-IP_Enumerations_V2.4.xsd",
+          "note": "Official 01/2023 PDF §2.9 Table 9 retains both rows as 1:1; exact selected Common V2.4 candidate/integration XSD defines exclusive mandatory xs:choice. Open upstream PR remains unmerged; no official V2.4 schema promotion."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "1.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "first_verified_affected_official",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V1.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds.pdfx",
+              "sha256": "a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf",
+              "printed_pages": [
+                9
+              ],
+              "section": "1.9 DataAcceptedResponse",
+              "table": "Table 9 — Description of DataAcceptedResponse",
+              "point_summary": "Visible original V1.0 (05/2017) 1.9 DataAcceptedResponse Table 9 prints both DataAcceptedResponseData 1:1 and OperationErrorMessage 1:1 as ordinary rows with no choice marking. The exact selected Common XSD instead has one mandatory xs:choice. Original page PNG hash e6c7650f67345ea4fccc62d31ee02e7ab205ab22405eaf08da3ef3987e45003d, original pinned render run41625122454 artifact13225488128. "
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact selected official/historical Common V1.0 XSD source under VDVde/VDV301 release provenance; no newer-version substitution.",
+              "component_kind": "complexType",
+              "component": "DataAcceptedResponseStructure",
+              "member": "xs:choice (DataAcceptedResponseData | OperationErrorMessage)",
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DataAcceptedResponseStructure']/xs:choice",
+              "line_hint": "882-886",
+              "point_summary": "Exact Common V1.0 XSD defines mandatory xs:choice of one DataAcceptedResponseData or one OperationErrorMessage, no minOccurs/maxOccurs overrides; includes IBIS-IP_Enumerations_V1.0.xsd. Both together or neither are invalid, independent of PDF ungrouped 1:1 rows."
+            }
+          ],
+          "coverage_note": "Independently reviewed byte-pinned official PDF original and official release XSD for V1.0; source publication is official but exact schema authority official. Original printed Table9 p9 and matching XSD compositor both verified. No fabricated alternative profile or PDF-based waiver."
+        },
+        {
+          "version": "2.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "intermediate_affected_official",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v-2-0.pdfx",
+              "sha256": "23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088",
+              "printed_pages": [
+                16
+              ],
+              "section": "2.9 DataAcceptedResponse",
+              "table": "Table 9 — Description of DataAcceptedResponse",
+              "point_summary": "Visible original V2.0 (02/2018) 2.9 DataAcceptedResponse Table 9 prints both DataAcceptedResponseData 1:1 and OperationErrorMessage 1:1 as ordinary rows with no choice marking. The exact selected Common XSD instead has one mandatory xs:choice. Original page PNG hash 383647858a6bdb5c1826ced25954e5f0d9aa4ad9c3bc31eeb85bb8ad2daa4238, original pinned render run41625549119 artifact13225656338. "
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.0.xsd",
+              "git_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+              "authority_detail": "Exact selected official/historical Common V2.0 XSD source under VDVde/VDV301 release provenance; no newer-version substitution.",
+              "component_kind": "complexType",
+              "component": "DataAcceptedResponseStructure",
+              "member": "xs:choice (DataAcceptedResponseData | OperationErrorMessage)",
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DataAcceptedResponseStructure']/xs:choice",
+              "line_hint": "893-897",
+              "point_summary": "Exact Common V2.0 XSD defines mandatory xs:choice of one DataAcceptedResponseData or one OperationErrorMessage, no minOccurs/maxOccurs overrides; includes IBIS-IP_Enumerations_V2.0.xsd. Both together or neither are invalid, independent of PDF ungrouped 1:1 rows."
+            }
+          ],
+          "coverage_note": "Independently reviewed byte-pinned official PDF original and official release XSD for V2.0; source publication is official but exact schema authority official. Original printed Table9 p16 and matching XSD compositor both verified. No fabricated alternative profile or PDF-based waiver."
+        },
+        {
+          "version": "2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "intermediate_affected_official",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.1",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v2-1-commonstructure-enums.pdfx",
+              "sha256": "a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32",
+              "printed_pages": [
+                17
+              ],
+              "section": "2.9 DataAcceptedResponse",
+              "table": "Table 9 — Description of DataAcceptedResponse",
+              "point_summary": "Visible original V2.1 (07/2018) 2.9 DataAcceptedResponse Table 9 prints both DataAcceptedResponseData 1:1 and OperationErrorMessage 1:1 as ordinary rows with no choice marking. The exact selected Common XSD instead has one mandatory xs:choice. Original page PNG hash 3cd593a94277ac98de653b9578eaf3fcdb6b57399fcacd3135fdccefb0948939, original pinned render run41634518610 artifact13230290899. "
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.1.xsd",
+              "git_blob": "05977c9f86c7c9dd0b48f36a4a4e9be32e94659e",
+              "authority_detail": "Exact selected official/historical Common V2.1 XSD source under VDVde/VDV301 release provenance; no newer-version substitution.",
+              "component_kind": "complexType",
+              "component": "DataAcceptedResponseStructure",
+              "member": "xs:choice (DataAcceptedResponseData | OperationErrorMessage)",
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DataAcceptedResponseStructure']/xs:choice",
+              "line_hint": "897-901",
+              "point_summary": "Exact Common V2.1 XSD defines mandatory xs:choice of one DataAcceptedResponseData or one OperationErrorMessage, no minOccurs/maxOccurs overrides; includes IBIS-IP_Enumerations_V2.1.xsd. Both together or neither are invalid, independent of PDF ungrouped 1:1 rows."
+            }
+          ],
+          "coverage_note": "Independently reviewed byte-pinned official PDF original and official release XSD for V2.1; source publication is official but exact schema authority official. Original printed Table9 p17 and matching XSD compositor both verified. No fabricated alternative profile or PDF-based waiver."
+        },
+        {
+          "version": "2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "intermediate_affected_official",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.2",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-2-commonstructure-enums.pdfx",
+              "sha256": "85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203",
+              "printed_pages": [
+                18
+              ],
+              "section": "2.9 DataAcceptedResponse",
+              "table": "Table 9 — Description of DataAcceptedResponse",
+              "point_summary": "Visible original V2.2 (08/2019) 2.9 DataAcceptedResponse Table 9 prints both DataAcceptedResponseData 1:1 and OperationErrorMessage 1:1 as ordinary rows with no choice marking. The exact selected Common XSD instead has one mandatory xs:choice. Original page PNG hash 41019a06443f4c8aff9cb289afeea0091d05c8ea1d3dc4ffd66d35d0e802d740, original pinned render run41634653508 artifact13229742759. "
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact selected official/historical Common V2.2 XSD source under VDVde/VDV301 release provenance; no newer-version substitution.",
+              "component_kind": "complexType",
+              "component": "DataAcceptedResponseStructure",
+              "member": "xs:choice (DataAcceptedResponseData | OperationErrorMessage)",
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DataAcceptedResponseStructure']/xs:choice",
+              "line_hint": "914-918",
+              "point_summary": "Exact Common V2.2 XSD defines mandatory xs:choice of one DataAcceptedResponseData or one OperationErrorMessage, no minOccurs/maxOccurs overrides; includes IBIS-IP_Enumerations_V2.2.xsd. Both together or neither are invalid, independent of PDF ungrouped 1:1 rows."
+            }
+          ],
+          "coverage_note": "Independently reviewed byte-pinned official PDF original and official release XSD for V2.2; source publication is official but exact schema authority official. Original printed Table9 p18 and matching XSD compositor both verified. No fabricated alternative profile or PDF-based waiver."
+        },
+        {
+          "version": "2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "intermediate_affected_official",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.3",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx",
+              "sha256": "d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b",
+              "printed_pages": [
+                18
+              ],
+              "section": "2.9 DataAcceptedResponse",
+              "table": "Table 9 — Description of DataAcceptedResponse",
+              "point_summary": "Visible original V2.3 (02/2021) 2.9 DataAcceptedResponse Table 9 prints both DataAcceptedResponseData 1:1 and OperationErrorMessage 1:1 as ordinary rows with no choice marking. The exact selected Common XSD instead has one mandatory xs:choice. Original page PNG hash edd9c76ba7c4157d838bc101dd9b80631833586bce3a045c71b019de66c3c8aa, original pinned render run33656579631 artifact9856965744. "
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.3.xsd",
+              "git_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+              "authority_detail": "Exact selected official/historical Common V2.3 XSD source under VDVde/VDV301 release provenance; no newer-version substitution.",
+              "component_kind": "complexType",
+              "component": "DataAcceptedResponseStructure",
+              "member": "xs:choice (DataAcceptedResponseData | OperationErrorMessage)",
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DataAcceptedResponseStructure']/xs:choice",
+              "line_hint": "994-998",
+              "point_summary": "Exact Common V2.3 XSD defines mandatory xs:choice of one DataAcceptedResponseData or one OperationErrorMessage, no minOccurs/maxOccurs overrides; includes IBIS-IP_Enumerations_V2.2.xsd. Both together or neither are invalid, independent of PDF ungrouped 1:1 rows."
+            }
+          ],
+          "coverage_note": "Independently reviewed byte-pinned official PDF original and official release XSD for V2.3; source publication is official but exact schema authority official. Original printed Table9 p18 and matching XSD compositor both verified. No fabricated alternative profile or PDF-based waiver."
+        },
+        {
+          "version": "2.4",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "last_verified_affected_candidate_integration",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.4",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sde-v2-4-commonstructure-enums.pdfx",
+              "sha256": "01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a",
+              "printed_pages": [
+                20
+              ],
+              "section": "2.9 DataAcceptedResponse",
+              "table": "Table 9 — Description of DataAcceptedResponse",
+              "point_summary": "Visible original V2.4 (01/2023) 2.9 DataAcceptedResponse Table 9 prints both DataAcceptedResponseData 1:1 and OperationErrorMessage 1:1 as ordinary rows with no choice marking. The exact selected Common XSD instead has one mandatory xs:choice. Original page PNG hash 76d7c5f840a721792ebc6404f38afdf10990aa87bdcaa5f11c555e2d80c5bbe5, original pinned render run33658306978 artifact9857652638. Official PDF with only candidate/integration schema authority."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.4.xsd",
+              "git_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+              "authority_detail": "Explicit selected candidate/integration Common V2.4 XSD authority; official PDF remains separate, V2.4 XSD is not official release",
+              "component_kind": "complexType",
+              "component": "DataAcceptedResponseStructure",
+              "member": "xs:choice (DataAcceptedResponseData | OperationErrorMessage)",
+              "value": null,
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DataAcceptedResponseStructure']/xs:choice",
+              "line_hint": "1046-1050",
+              "point_summary": "Exact Common V2.4 XSD defines mandatory xs:choice of one DataAcceptedResponseData or one OperationErrorMessage, no minOccurs/maxOccurs overrides; includes IBIS-IP_Enumerations_V2.4.xsd. Both together or neither are invalid, independent of PDF ungrouped 1:1 rows."
+            }
+          ],
+          "coverage_note": "Independently reviewed byte-pinned official PDF original and explicit candidate/integration XSD for V2.4; source publication is official but exact schema authority candidate/integration. Original printed Table9 p20 and matching XSD compositor both verified. No fabricated alternative profile or PDF-based waiver."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_002_2026-11-03.md",
+        "Six byte-pinned original VDV 301-2-1 PDF Table9 actual body original visual inspections: V1.0 printed p9, V2.0 p16, V2.1 p17, V2.2 p18, V2.3 p18, V2.4 p20; all six show both branches 1:1 without choice marker.",
+        "Fresh pinned GitHub renderer: V1.0 run41625122454 artifact13225488128; V2.0 run41625549119 artifact13225656338; V2.1 run41634518610 artifact13230290899; V2.2 run41634653508 artifact13229742759.",
+        "Reused byte-checked complete original source PDF/PNG artifact V2.3 run33656579631 artifact9856965744 and V2.4 run33658306978 artifact9857652638; original PDF SHA/size verified and original PNG SHA verified against archived page hashes.",
+        "Six exact Common XSD blob contents at official V1.0/V2.0/V2.1/V2.2/V2.3 and explicitly selected candidate/integration V2.4, all mandatory xs:choice with exactly two response alternatives. Selected V2.3 Common includes Enumerations V2.2; selected V2.4 candidate includes Enumerations V2.4.",
+        "Historical V1.0 EV-117 and EV-135 executable positive and negative response-branch tests; tests not falsely attributed to later versions.",
+        "Open unmerged upstream PR #31 for V2.4 Common candidate and no official master Common V2.4 XSD; no corrected successor independently verified in source inventory; no new finding IDs or XSD edits."
       ]
     }
   ]

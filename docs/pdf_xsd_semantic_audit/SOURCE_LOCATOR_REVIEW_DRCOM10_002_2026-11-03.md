@@ -1,0 +1,57 @@
+# DRCOM10-002 — DataAcceptedResponse: exclusive XSD compositor omitted from six official Common PDF tables
+
+**Date:** 2026-11-03. **Frozen finding identity:** `DRCOM10-002` (semantic inventory entry 86 of 192). **Scope correction:** previously classified only `COMMON V1.0`; independent original-source and exact-schema historical re-evaluation confirms the **same semantic inconsistency in every published Common PDF V1.0, 2.0, 2.1, 2.2, 2.3 and 2.4**. One finding, not six. No XSD or upstream PR changed.
+
+## Direct visual proof on byte-pinned official original PDFs
+
+All references below are to the **actual printed PDF page**, **visible body section heading** and **original Table 9, Description of DataAcceptedResponse**, not contents/history-derived page numbers. The six original Table 9 panels were visually inspected with their surrounding `Connection` and `DataAcceptedResponseData` tables. Both alternatives are printed as regular `1:1` rows, without a VDV choice indicator. Some labels are line-wrapped; a line break does not change the XML field names.
+
+| Publication | Exact source pin and independent render artifact | Original printed body and page fingerprint |
+|---|---|---|
+| **V1.0 (05/2017)**, source `COMMON_V1.0` | `https://www.vdv.de/301-2-1-sds.pdfx` SHA256 `a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf`, 892,769 bytes; [fresh pinned render run 41625122454](https://github.com/MarcLeinenDE/VDV301/actions/runs/41625122454), artifact **13225488128** | **p. 9 §1.9 DataAcceptedResponse, Table 9**; original 160-dpi PNG SHA256 `e6c7650f67345ea4fccc62d31ee02e7ab205ab22405eaf08da3ef3987e45003d` |
+| **V2.0 (02/2018)**, `COMMON_V2.0` | `https://www.vdv.de/301-2-1-sds-v-2-0.pdfx` SHA256 `23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088`, 946,088 bytes; [fresh pinned render run 41625549119](https://github.com/MarcLeinenDE/VDV301/actions/runs/41625549119), artifact **13225656338** | **p. 16 §2.9 DataAcceptedResponse, Table 9**; 160-dpi PNG `383647858a6bdb5c1826ced25954e5f0d9aa4ad9c3bc31eeb85bb8ad2daa4238` |
+| **V2.1 (07/2018)**, `COMMON_V2.1` | `https://www.vdv.de/301-2-1-sds-v2-1-commonstructure-enums.pdfx` SHA256 `a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32`, 1,274,051 bytes; [fresh pinned render run 41634518610](https://github.com/MarcLeinenDE/VDV301/actions/runs/41634518610), artifact **13230290899** | **p. 17 §2.9 DataAcceptedResponse, Table 9**; 160-dpi PNG `3cd593a94277ac98de653b9578eaf3fcdb6b57399fcacd3135fdccefb0948939` |
+| **V2.2 (08/2019)**, `COMMON_V2.2` | `https://www.vdv.de/301-2-1-sdes-v2-2-commonstructure-enums.pdfx` SHA256 `85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203`, 1,411,558 bytes; [fresh pinned render run 41634653508](https://github.com/MarcLeinenDE/VDV301/actions/runs/41634653508), artifact **13229742759** | **p. 18 §2.9 DataAcceptedResponse, Table 9**; 160-dpi PNG `41019a06443f4c8aff9cb289afeea0091d05c8ea1d3dc4ffd66d35d0e802d740` |
+| **V2.3 (02/2021)**, `COMMON_V2.3` | `https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx` SHA256 `d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b`, 793,521 bytes; [full original pinned render run 33656579631](https://github.com/MarcLeinenDE/VDV301/actions/runs/33656579631), artifact **9856965744**, ZIP digest `sha256:a3c0a59cf1a5e6ca8a98c7419c5f02e1445efa503b6986c62daa2f53171eb746` | **p. 18 §2.9 DataAcceptedResponse, Table 9**; independently extracted source-PDF bytes SHA/size verified, 120-dpi archived `pages/page-18.png` hash `edd9c76ba7c4157d838bc101dd9b80631833586bce3a045c71b019de66c3c8aa` verified against archived `page_hashes.sha256` |
+| **V2.4 (01/2023)**, `COMMON_V2.4` | `https://www.vdv.de/301-2-1-sde-v2-4-commonstructure-enums.pdfx` SHA256 `01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a`, 1,689,647 bytes; [full original pinned render run 33658306978](https://github.com/MarcLeinenDE/VDV301/actions/runs/33658306978), artifact **9857652638**, ZIP digest `sha256:be0ce46c03893d79b216c92e7af8cd2906b27524f9d24a954be5d7e1d57d934c` | **p. 20 §2.9 DataAcceptedResponse, Table 9**; original source-PDF SHA/size verified, archived `pages/page-20.png` hash `76d7c5f840a721792ebc6404f38afdf10990aa87bdcaa5f11c555e2d80c5bbe5` verified against archived `page_hashes.sha256` |
+
+All six official source PDFs were independently pinned and visually inspected; for V2.3/V2.4 the reusable original-byte archives themselves include the complete original PDFs and full page hash manifests. The V2.1/V2.2 old full-render artifacts had expired, so the mandatory byte-pinned GitHub fallback was run again for the exact missing original pages rather than inferring visual evidence from old text. No source PDFs or render PNGs are committed to the project repository.
+
+## Exact XSD comparison for every independently affected version
+
+In **every** exact selected Common XSD blob, `DataAcceptedResponseStructure` contains the same required `xs:choice` with two branches `DataAcceptedResponseData` and `OperationErrorMessage`. Neither the choice nor its member elements sets optional `minOccurs` or repeating `maxOccurs`, so XSD defaults require **exactly one** alternative. Both together fail and no alternative fails. Only the schema actually selected for that profile governs PASS/FAIL.
+
+| Common version | Correct exact Common XSD and original blob | `xs:choice` location | Includes exact Enumeration family / authority |
+|---|---|---|---|
+| 1.0 | `IBIS-IP_common_V1.0.xsd` `194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c` | **line 882** | `IBIS-IP_Enumerations_V1.0.xsd` `a9bea5bc73003ed91ded8519db06c32c4067831d` — official historical import 2014 |
+| 2.0 | `IBIS-IP_common_V2.0.xsd` `8608e3dcd665c197c34da7f6ec6af5a3758da164` | **line 893** | `IBIS-IP_Enumerations_V2.0.xsd` `27e3c183b00381d959622d13c10543123af8eef6` — official tag `VDV-301-2.0` |
+| 2.1 | `IBIS-IP_common_V2.1.xsd` `05977c9f86c7c9dd0b48f36a4a4e9be32e94659e` | **line 897** | `IBIS-IP_Enumerations_V2.1.xsd` `311464690ad60749ed8d326217787e4b8ed0b718` — official tag `VDV-301-2.1` |
+| 2.2 | `IBIS-IP_common_V2.2.xsd` `468fee6d177e7185dbcd5d3f90cfb114e29e01ae` | **line 914** | `IBIS-IP_Enumerations_V2.2.xsd` `2a23b512379b18e8f122ac1272cef8229fb86283` — official tag `VDV-301-2.2` |
+| 2.3 | `IBIS-IP_common_V2.3.xsd` `0d8926c4063c12de9a5e68b6f0addaab35a55dc1` | **line 994** | **also** `IBIS-IP_Enumerations_V2.2.xsd` `2a23b512379b18e8f122ac1272cef8229fb86283`, **not** V2.3 — official tag `VDV-301-2.3` |
+| 2.4 | `IBIS-IP_common_V2.4.xsd` `1946fd37e29ced605654f49ea3d98cd2fbbdc8e4` | **line 1046** | `IBIS-IP_Enumerations_V2.4.xsd` `2afed8cf23afa91db92b0f043cc5b4ad428b0f25` — **explicit candidate/integration only** |
+
+**Crucial source authority boundary:** Official **V2.4 PDF** is public VDV documentation. The selected **V2.4 XSD** is an integration/candidate from the open, unmerged [VDVde/VDV301 PR #31](https://github.com/VDVde/VDV301/pull/31). GitHub upstream `master` currently lacks `IBIS-IP_common_V2.4.xsd` and no official 2.4 release-tag/XSD profile was verified. An XSD version number matching an official PDF **does not promote it to official-release authority**. Earlier V1.0–V2.3 exact upstream released Common/Enumeration routes were inspected independently.
+
+## Historical boundary, falsification and deduplication
+
+- **First verified affected:** official Common V1.0 PDF printed p9 §1.9 Table9 and corresponding exact 2014-imported V1.0 XSD.
+- **Intermediate affected, not extrapolated:** V2.0, V2.1, V2.2 and V2.3 checked independently by actual original PDF body and actual exact officially released XSD. V2.3 includes **Enumerations V2.2**, not a guessed V2.3 dependency.
+- **Last verified affected publication and selectable selected candidate:** V2.4 official PDF p20 §2.9 Table9 and separately identified V2.4 candidate/integration XSD. **No corrected successor is verified in the pinned publication/schema inventory**. This does not claim no unpublished/newer revision can exist.
+- **Language/layout:** Original document tables use English element/section names and have German descriptions in the very same visible rows. The original body and relevant nearby descriptions were inspected for all published versions. No independent translation or page number was inferred from an alternate language publication.
+- **Alternative theory: the two `1:1` rows represent a clearly marked VDV choice.** Rejected. None of the six table bodies prints an `xs:choice` designation or a special choice marker for those rows. The PDF is misleading; it does not override normative XSD. Nearby tables and line-wrap/column boundaries were visually compared to exclude missing or hidden adjacent choice notation.
+- **Alternative theory: both should be required (or either optional) because rows are `1:1`.** Rejected by inspection of all six exact XSDs. An `xs:choice` with default `minOccurs=1 maxOccurs=1` and two single elements accepts exactly one; both and neither are invalid.
+- **Alternative theory: version 2.0 corrected this legacy typo.** Rejected by V2.0 original Table9 p16; it persists through every independently checked later publication.
+- **Potential duplicates:** Earlier `COMMON_V2.1` fresh read (FR-COM21-OBS-004), V2.2 (FR-COM22-005), V2.3 (FR-COM23-005), V2.4 (FR-COM24-005) all independently document this same compositor discrepancy; preserve **one `DRCOM10-002`** identity and expand version_scope. Do not create new findings or progress credit for each later version.
+- **Executable evidence:** Historical exact V1.0 **EV-117** and **EV-135** from [schema gate run 33850713729](https://github.com/MarcLeinenDE/VDV301/actions/runs/33850713729) confirmed one valid branch and two-branch rejection. The current block independently inspected exact xs:choice definitions for **all six versions**, but does not falsely claim fresh executable sample tests for every later version.
+
+## SDK/validator consequence and final classification
+
+- Finding remains `confirmed_pdf_defect`, `primary_issue_kind=structure_mismatch`, `normative_authority=selected_xsd`, `sdk_behavior=error_with_advisory`.
+- An instance with both branches, or no branch, must return **XSD FAIL** under the relevant exact selected XSD. The known issue may **decorate an existing invalid result with an explanatory advisory**. It must never replace the error, invent an alias, or treat the PDF table as superior to the schema.
+- The known-issues runtime matcher state remains **reviewed_not_implemented**; updating semantic diagnosis and runtime profile scope is not implementing a matcher.
+- No XSD bytes, code generation, release tags, PRs or provider-facing XML acceptance rules are modified. Historical V2.3 dependency on Enum V2.2 is preserved. Candidate V2.4 cannot silently become official.
+- After all synchronized semantic Git pins, source-locator/body/history registries, SDK manifest and both substantive + terminal HEAD validation workflows succeed: **86/192 complete**, **106 remain**. **Next canonical finding `DRCOM10-003`.**
+
+## Supporting frozen audit context
+
+`docs/pdf_xsd_semantic_audit/deep_read/COMMON_V1.0.md`, `COMMON_V2.0.md`, `COMMON_V2.1.md`, `COMMON_V2.2.md`, `COMMON_V2.3_FRESH_2026-09-02.md`, `COMMON_V2.4_FRESH_2026-09-03.md`, `FINDING_REVALIDATION_COMMON_V10_2026-09-04.md` and the exact source/byte pin registry. Archived original rendered page SHA digests and independently pinned selected schema blob IDs are recorded above.

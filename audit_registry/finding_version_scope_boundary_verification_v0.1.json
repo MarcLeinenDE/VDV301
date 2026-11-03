@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 85,
-    "verified": 85,
+    "tracked_findings": 86,
+    "verified": 86,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -4997,6 +4997,73 @@
           "source_ids": [
             "COMMON_V2.0"
           ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRCOM10-002",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_002_2026-11-03.md",
+        "Official Common V1.0 original PDF SHA a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf, visually inspected printed p9 §1.9 Table9, GitHub pinned renderer run41625122454 artifact13225488128, PNG SHA e6c7650f67345ea4fccc62d31ee02e7ab205ab22405eaf08da3ef3987e45003d",
+        "Official Common V2.0 original PDF SHA 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088 visually p16 §2.9 Table9 run41625549119 artifact13225656338 PNG 383647858a6bdb5c1826ced25954e5f0d9aa4ad9c3bc31eeb85bb8ad2daa4238",
+        "Official Common V2.1 original PDF SHA a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32 visually p17 §2.9 Table9 fresh pinned run41634518610 artifact13230290899 PNG 3cd593a94277ac98de653b9578eaf3fcdb6b57399fcacd3135fdccefb0948939",
+        "Official Common V2.2 original PDF SHA 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203 visually p18 §2.9 Table9 fresh pinned run41634653508 artifact13229742759 PNG 41019a06443f4c8aff9cb289afeea0091d05c8ea1d3dc4ffd66d35d0e802d740",
+        "Official Common V2.3 original PDF SHA d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b verified from archived source PDF and visually p18 §2.9 Table9 original 120dpi run33656579631 artifact9856965744 PNG edd9c76ba7c4157d838bc101dd9b80631833586bce3a045c71b019de66c3c8aa",
+        "Official Common V2.4 original PDF SHA 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a verified from archived source PDF and visually p20 §2.9 Table9 original 120dpi run33658306978 artifact9857652638 PNG 76d7c5f840a721792ebc6404f38afdf10990aa87bdcaa5f11c555e2d80c5bbe5",
+        "Six exact DataAcceptedResponseStructure Common XSD choice structures independently read at lines 882,893,897,914,994,1046; original V1.0-V2.3 official release blobs, V2.4 candidate integration only. Each includes its exact historical Enumerations file (notably V2.3 -> Enumerations V2.2).",
+        "V1.0 historical EV-117/EV-135 proves one-branch accepted and both-branch rejected; no claim of new executable sample runs for five later versions. No corrected successor in checked pinned source set."
+      ],
+      "scope_conclusion": "Previously incomplete V1.0-only finding scope extended with original byte-pinned/visually examined official Common PDF versions V1.0, V2.0, V2.1, V2.2, V2.3 and V2.4; exact independently checked released Common schemas 1.0–2.3 and candidate/integration 2.4 all show unchanged mandatory exclusive xs:choice. First verified affected 05/2017 V1.0 original PDF, each intermediate version verified independently, last verified affected official PDF 01/2023 V2.4. No first corrected successor independently established in frozen pinned source inventory; never assert none can exist. V2.4 public PDF distinct from open candidate XSD PR31. No one-language-only correction found: actual English identifiers/section captions and embedded German descriptions in every verified original table both retain same ungrouped rows. No fabricated separate translation or inferred page.",
+      "note": "Mandatory historical boundary revalidation identified persistence across six original public Common PDF versions. No duplicate finding identity, no XSD waivers or changes. Selected profile normative for each official/candidate schema, and existing exact V1.0 positive/negative probes support executable behavior while later five XSD compositor definitions inspected directly. No verified corrected successor.",
+      "boundary_checks": [
+        {
+          "version": "Official Common V1.0 05/2017 PDF + exact V1.0 XSD",
+          "role": "first_verified_affected",
+          "source_ids": [
+            "COMMON_V1.0"
+          ],
+          "language_status": "Original printed p9 §1.9 Table9: English identifiers with adjacent German explanatory text, both ordinary 1:1 rows; selected exact official historical V1.0 xs:choice."
+        },
+        {
+          "version": "Official Common V2.0 02/2018 PDF + exact V2.0 XSD",
+          "role": "intermediate_affected",
+          "source_ids": [
+            "COMMON_V2.0"
+          ],
+          "language_status": "Original printed p16 §2.9 Table9 persists; same English names and German prose, official 2.0 released XSD xs:choice."
+        },
+        {
+          "version": "Official Common V2.1 07/2018 PDF + exact V2.1 XSD",
+          "role": "intermediate_affected",
+          "source_ids": [
+            "COMMON_V2.1"
+          ],
+          "language_status": "Original printed p17 §2.9 Table9 persists in exact pinned official PDF, official 2.1 released XSD xs:choice."
+        },
+        {
+          "version": "Official Common V2.2 08/2019 PDF + exact V2.2 XSD",
+          "role": "intermediate_affected",
+          "source_ids": [
+            "COMMON_V2.2"
+          ],
+          "language_status": "Original printed p18 §2.9 Table9 persists, official 2.2 released Common/Enumerations XSD profile xs:choice."
+        },
+        {
+          "version": "Official Common V2.3 02/2021 PDF + exact V2.3 XSD",
+          "role": "intermediate_affected",
+          "source_ids": [
+            "COMMON_V2.3"
+          ],
+          "language_status": "Original printed p18 §2.9 Table9 persists, official 2.3 Common XSD xs:choice explicitly includes Enumerations V2.2, not a guessed V2.3 enum."
+        },
+        {
+          "version": "Official Common V2.4 01/2023 PDF + selected candidate Common V2.4 XSD",
+          "role": "last_verified_affected_no_verified_corrected_successor",
+          "source_ids": [
+            "COMMON_V2.4"
+          ],
+          "language_status": "Official PDF original printed p20 §2.9 Table9 persists. Selected V2.4 Common XSD xs:choice is candidate/integration (unmerged PR31) and must never be called official release; original has English names and German descriptions. No corrected later official PDF independently verified in pinned registry."
         }
       ]
     }

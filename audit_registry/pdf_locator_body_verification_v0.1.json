@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 85,
-    "verified_current_standard": 85,
+    "tracked_findings": 86,
+    "verified_current_standard": 86,
     "pending_current_standard": 0
   },
   "entries": [
@@ -807,6 +807,22 @@
         "Existing EV-117 33279461529 and EV-135 33850713729 executable selected V1.0 boundary; CE-005 independent AdditionalTextMessage scope"
       ],
       "note": "Visually independently inspected exact-byte-pinned May2017 original Common PDF printed pages9/21/27/28/30, and February2018 successor V2.0 printed pages16/29/36/38/39, actual body headings, table captions/rows and separate DE/EN history bullets. Verified 160dpi PNG source fingerprints in linked report. No body locator inferred from TOC/search or PDF text alone. Official XSD blobs checked byte-identically."
+    },
+    {
+      "finding_id": "DRCOM10-002",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_002_2026-11-03.md",
+        "Official Common V1.0 original PDF SHA a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf, visually inspected printed p9 §1.9 Table9, GitHub pinned renderer run41625122454 artifact13225488128, PNG SHA e6c7650f67345ea4fccc62d31ee02e7ab205ab22405eaf08da3ef3987e45003d",
+        "Official Common V2.0 original PDF SHA 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088 visually p16 §2.9 Table9 run41625549119 artifact13225656338 PNG 383647858a6bdb5c1826ced25954e5f0d9aa4ad9c3bc31eeb85bb8ad2daa4238",
+        "Official Common V2.1 original PDF SHA a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32 visually p17 §2.9 Table9 fresh pinned run41634518610 artifact13230290899 PNG 3cd593a94277ac98de653b9578eaf3fcdb6b57399fcacd3135fdccefb0948939",
+        "Official Common V2.2 original PDF SHA 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203 visually p18 §2.9 Table9 fresh pinned run41634653508 artifact13229742759 PNG 41019a06443f4c8aff9cb289afeea0091d05c8ea1d3dc4ffd66d35d0e802d740",
+        "Official Common V2.3 original PDF SHA d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b verified from archived source PDF and visually p18 §2.9 Table9 original 120dpi run33656579631 artifact9856965744 PNG edd9c76ba7c4157d838bc101dd9b80631833586bce3a045c71b019de66c3c8aa",
+        "Official Common V2.4 original PDF SHA 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a verified from archived source PDF and visually p20 §2.9 Table9 original 120dpi run33658306978 artifact9857652638 PNG 76d7c5f840a721792ebc6404f38afdf10990aa87bdcaa5f11c555e2d80c5bbe5",
+        "Six exact DataAcceptedResponseStructure Common XSD choice structures independently read at lines 882,893,897,914,994,1046; original V1.0-V2.3 official release blobs, V2.4 candidate integration only. Each includes its exact historical Enumerations file (notably V2.3 -> Enumerations V2.2).",
+        "V1.0 historical EV-117/EV-135 proves one-branch accepted and both-branch rejected; no claim of new executable sample runs for five later versions. No corrected successor in checked pinned source set."
+      ],
+      "note": "Independent visible original body inspection of six separate exact SHA/size-pinned Common official PDFs: original Table 9 actual body §1.9 p9 V1.0, §2.9 p16 V2.0, p17 V2.1, p18 V2.2, p18 V2.3 and p20 V2.4. All six tables display DataAcceptedResponseData 1:1 and OperationErrorMessage 1:1 as ordinary rows without choice notation. First/last source original images and entire source-PDF archived hashes checked, not derived from TOC/text extraction. Each selected Common XSD exact choice independently read. Distinct V2.4 candidate schema provenance maintained."
     }
   ]
 }
