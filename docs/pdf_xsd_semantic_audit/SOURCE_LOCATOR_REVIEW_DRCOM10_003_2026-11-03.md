@@ -1,6 +1,6 @@
 # SOURCE LOCATOR REVIEW — DRCOM10-003 — 2026-11-03
 
-Status: **source, visible-body and version scope evidence confirmed; gate_pending until full validation and terminal HEAD handoff are successful**.
+Status: **source/body/scope complete at 87/192; see canonical CURRENT_STATE for the current substantive/final gate result**.
 
 ## Finding identity and attribution
 

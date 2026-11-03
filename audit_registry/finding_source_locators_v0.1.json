@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 86,
-    "coverage_complete_count": 86,
+    "locator_entry_count": 87,
+    "coverage_complete_count": 87,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 106
+    "remaining_finding_count": 105
   },
   "entries": [
     {
@@ -16487,6 +16487,286 @@
         "Six exact Common XSD blob contents at official V1.0/V2.0/V2.1/V2.2/V2.3 and explicitly selected candidate/integration V2.4, all mandatory xs:choice with exactly two response alternatives. Selected V2.3 Common includes Enumerations V2.2; selected V2.4 candidate includes Enumerations V2.4.",
         "Historical V1.0 EV-117 and EV-135 executable positive and negative response-branch tests; tests not falsely attributed to later versions.",
         "Open unmerged upstream PR #31 for V2.4 Common candidate and no official master Common V2.4 XSD; no corrected successor independently verified in source inventory; no new finding IDs or XSD edits."
+      ]
+    },
+    {
+      "finding_id": "DRCOM10-003",
+      "service": "Common",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "COMMON V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Official Common V1.0 original PDF §1.44 Table44 visibly states ServiceSpecificationWithState 1:*; exact selected official_release Common XSD has minOccurs=0 maxOccurs=unbounded; present empty list is schema-valid."
+        },
+        {
+          "version": "COMMON V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.0.xsd + IBIS-IP_Enumerations_V2.0.xsd",
+          "note": "Official Common V2.0 original PDF §2.44 Table44 visibly states ServiceSpecificationWithState 1:*; exact selected official_release Common XSD has minOccurs=0 maxOccurs=unbounded; present empty list is schema-valid."
+        },
+        {
+          "version": "COMMON V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.1.xsd + IBIS-IP_Enumerations_V2.1.xsd",
+          "note": "Official Common V2.1 original PDF §2.44 Table44 visibly states ServiceSpecificationWithState 1:*; exact selected official_release Common XSD has minOccurs=0 maxOccurs=unbounded; present empty list is schema-valid."
+        },
+        {
+          "version": "COMMON V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official Common V2.2 original PDF §2.45 Table45 visibly states ServiceSpecificationWithState 1:*; exact selected official_release Common XSD has minOccurs=0 maxOccurs=unbounded; present empty list is schema-valid."
+        },
+        {
+          "version": "COMMON V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.3.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official Common V2.3 original PDF §2.45 Table45 visibly states ServiceSpecificationWithState 1:*; exact selected official_release Common XSD has minOccurs=0 maxOccurs=unbounded; present empty list is schema-valid."
+        },
+        {
+          "version": "COMMON V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd + IBIS-IP_Enumerations_V2.4.xsd",
+          "note": "Official Common V2.4 original PDF §2.44 Table44 visibly states ServiceSpecificationWithState 1:*; exact selected candidate_integration Common XSD has minOccurs=0 maxOccurs=unbounded; present empty list is schema-valid."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "1.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "first_verified_affected_official",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V1.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds.pdfx",
+              "sha256": "a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf",
+              "printed_pages": [
+                18
+              ],
+              "section": "1.44 ServiceSpecificationWithStateList",
+              "table": "Table 44 — Description of ServiceSpecificationWithStateList",
+              "point_summary": "Exact visible original printed page 18, §1.44 Table 44, unprefixed ServiceSpecificationWithState item row 1:*; byte-pinned PNG SHA256 1072f924d50e9797e9528cbe07732809e6bd856d51b5d7a7d074d67a7d30e848, GitHub visual fallback SUCCESS run41649308454 artifact13237115551. The selected Common XSD independently uses minOccurs=0 maxOccurs=unbounded. Adjacent ServiceStartList uses 1:* with default XSD minOccurs=1, excluding a notation-based optional-list interpretation."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact released/historical official Common V1.0 XSD; includes IBIS-IP_Enumerations_V1.0.xsd.",
+              "component_kind": "complexType",
+              "component": "ServiceSpecificationWithStateListStructure",
+              "member": "ServiceSpecificationWithState",
+              "value": "minOccurs=0 maxOccurs=unbounded",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='ServiceSpecificationWithStateListStructure']/xs:sequence/xs:element[@name='ServiceSpecificationWithState']",
+              "line_hint": "465-468",
+              "point_summary": "Exact Common V1.0 XSD sequence contains a ServiceSpecificationWithState element with minOccurs='0' and maxOccurs='unbounded'. A present empty ServiceSpecificationWithStateList validates, despite PDF 1:*; authority=official_release; no alias/rewrite."
+            }
+          ],
+          "coverage_note": "Visually verified original official PDF page 18 and table 44, verified byte pin and target PNG digest; exact selected Common V1.0 XSD blob and dependency independently checked. PDF source official, XSD official_release. No newer schema substituted or provider FAIL invented."
+        },
+        {
+          "version": "2.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "intermediate_affected_official",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v-2-0.pdfx",
+              "sha256": "23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088",
+              "printed_pages": [
+                25
+              ],
+              "section": "2.44 ServiceSpecificationWithStateList",
+              "table": "Table 44 — Description of ServiceSpecificationWithStateList",
+              "point_summary": "Exact visible original printed page 25, §2.44 Table 44, unprefixed ServiceSpecificationWithState item row 1:*; byte-pinned PNG SHA256 e4b8d430df720dcd02243f8ad3388ac51518a4a9b34d3b49dca76d16d20ce754, GitHub visual fallback SUCCESS run41649627068 artifact13236717262. The selected Common XSD independently uses minOccurs=0 maxOccurs=unbounded. Adjacent ServiceStartList uses 1:* with default XSD minOccurs=1, excluding a notation-based optional-list interpretation."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.0.xsd",
+              "git_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+              "authority_detail": "Exact released/historical official Common V2.0 XSD; includes IBIS-IP_Enumerations_V2.0.xsd.",
+              "component_kind": "complexType",
+              "component": "ServiceSpecificationWithStateListStructure",
+              "member": "ServiceSpecificationWithState",
+              "value": "minOccurs=0 maxOccurs=unbounded",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='ServiceSpecificationWithStateListStructure']/xs:sequence/xs:element[@name='ServiceSpecificationWithState']",
+              "line_hint": "471-474",
+              "point_summary": "Exact Common V2.0 XSD sequence contains a ServiceSpecificationWithState element with minOccurs='0' and maxOccurs='unbounded'. A present empty ServiceSpecificationWithStateList validates, despite PDF 1:*; authority=official_release; no alias/rewrite."
+            }
+          ],
+          "coverage_note": "Visually verified original official PDF page 25 and table 44, verified byte pin and target PNG digest; exact selected Common V2.0 XSD blob and dependency independently checked. PDF source official, XSD official_release. No newer schema substituted or provider FAIL invented."
+        },
+        {
+          "version": "2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "intermediate_affected_official",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.1",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v2-1-commonstructure-enums.pdfx",
+              "sha256": "a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32",
+              "printed_pages": [
+                27
+              ],
+              "section": "2.44 ServiceSpecificationWithStateList",
+              "table": "Table 44 — Description of ServiceSpecificationWithStateList",
+              "point_summary": "Exact visible original printed page 27, §2.44 Table 44, unprefixed ServiceSpecificationWithState item row 1:*; byte-pinned PNG SHA256 8351cb9e29d2090214b452e086dfc57442edd03f9752934eff6a379e0c0af1d5, GitHub visual fallback SUCCESS run41649658472 artifact13236253276. The selected Common XSD independently uses minOccurs=0 maxOccurs=unbounded. Adjacent ServiceStartList uses 1:* with default XSD minOccurs=1, excluding a notation-based optional-list interpretation."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.1.xsd",
+              "git_blob": "05977c9f86c7c9dd0b48f36a4a4e9be32e94659e",
+              "authority_detail": "Exact released/historical official Common V2.1 XSD; includes IBIS-IP_Enumerations_V2.1.xsd.",
+              "component_kind": "complexType",
+              "component": "ServiceSpecificationWithStateListStructure",
+              "member": "ServiceSpecificationWithState",
+              "value": "minOccurs=0 maxOccurs=unbounded",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='ServiceSpecificationWithStateListStructure']/xs:sequence/xs:element[@name='ServiceSpecificationWithState']",
+              "line_hint": "470-473",
+              "point_summary": "Exact Common V2.1 XSD sequence contains a ServiceSpecificationWithState element with minOccurs='0' and maxOccurs='unbounded'. A present empty ServiceSpecificationWithStateList validates, despite PDF 1:*; authority=official_release; no alias/rewrite."
+            }
+          ],
+          "coverage_note": "Visually verified original official PDF page 27 and table 44, verified byte pin and target PNG digest; exact selected Common V2.1 XSD blob and dependency independently checked. PDF source official, XSD official_release. No newer schema substituted or provider FAIL invented."
+        },
+        {
+          "version": "2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "intermediate_affected_official",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.2",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-2-commonstructure-enums.pdfx",
+              "sha256": "85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203",
+              "printed_pages": [
+                29
+              ],
+              "section": "2.45 ServiceSpecificationWithStateList",
+              "table": "Table 45 — Description of ServiceSpecificationWithStateList",
+              "point_summary": "Exact visible original printed page 29, §2.45 Table 45, unprefixed ServiceSpecificationWithState item row 1:*; byte-pinned PNG SHA256 248cfab843bb21903c9a462582f9262b150436fb6158c3c50746b15d486e9766, GitHub visual fallback SUCCESS run41649692297 artifact13237295692. The selected Common XSD independently uses minOccurs=0 maxOccurs=unbounded. Adjacent ServiceStartList uses 1:* with default XSD minOccurs=1, excluding a notation-based optional-list interpretation."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact released/historical official Common V2.2 XSD; includes IBIS-IP_Enumerations_V2.2.xsd.",
+              "component_kind": "complexType",
+              "component": "ServiceSpecificationWithStateListStructure",
+              "member": "ServiceSpecificationWithState",
+              "value": "minOccurs=0 maxOccurs=unbounded",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='ServiceSpecificationWithStateListStructure']/xs:sequence/xs:element[@name='ServiceSpecificationWithState']",
+              "line_hint": "479-482",
+              "point_summary": "Exact Common V2.2 XSD sequence contains a ServiceSpecificationWithState element with minOccurs='0' and maxOccurs='unbounded'. A present empty ServiceSpecificationWithStateList validates, despite PDF 1:*; authority=official_release; no alias/rewrite."
+            }
+          ],
+          "coverage_note": "Visually verified original official PDF page 29 and table 45, verified byte pin and target PNG digest; exact selected Common V2.2 XSD blob and dependency independently checked. PDF source official, XSD official_release. No newer schema substituted or provider FAIL invented."
+        },
+        {
+          "version": "2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "intermediate_affected_official",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.3",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx",
+              "sha256": "d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b",
+              "printed_pages": [
+                29
+              ],
+              "section": "2.45 ServiceSpecificationWithStateList",
+              "table": "Table 45 — Description of ServiceSpecificationWithStateList",
+              "point_summary": "Exact visible original printed page 29, §2.45 Table 45, unprefixed ServiceSpecificationWithState item row 1:*; byte-pinned PNG SHA256 75ec9b40024deb4000fbbcbe9f44b5bd615241c722facd354bc7134d216516ac, GitHub visual fallback SUCCESS run41649819541 artifact13235912787. The selected Common XSD independently uses minOccurs=0 maxOccurs=unbounded. Adjacent ServiceStartList uses 1:* with default XSD minOccurs=1, excluding a notation-based optional-list interpretation."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.3.xsd",
+              "git_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+              "authority_detail": "Exact released/historical official Common V2.3 XSD; includes IBIS-IP_Enumerations_V2.2.xsd.",
+              "component_kind": "complexType",
+              "component": "ServiceSpecificationWithStateListStructure",
+              "member": "ServiceSpecificationWithState",
+              "value": "minOccurs=0 maxOccurs=unbounded",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='ServiceSpecificationWithStateListStructure']/xs:sequence/xs:element[@name='ServiceSpecificationWithState']",
+              "line_hint": "529-532",
+              "point_summary": "Exact Common V2.3 XSD sequence contains a ServiceSpecificationWithState element with minOccurs='0' and maxOccurs='unbounded'. A present empty ServiceSpecificationWithStateList validates, despite PDF 1:*; authority=official_release; no alias/rewrite."
+            }
+          ],
+          "coverage_note": "Visually verified original official PDF page 29 and table 45, verified byte pin and target PNG digest; exact selected Common V2.3 XSD blob and dependency independently checked. PDF source official, XSD official_release. No newer schema substituted or provider FAIL invented."
+        },
+        {
+          "version": "2.4",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "last_verified_affected_candidate_integration",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.4",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sde-v2-4-commonstructure-enums.pdfx",
+              "sha256": "01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a",
+              "printed_pages": [
+                32
+              ],
+              "section": "2.44 ServiceSpecificationWithStateList",
+              "table": "Table 44 — Description of ServiceSpecificationWithStateList",
+              "point_summary": "Exact visible original printed page 32, §2.44 Table 44, unprefixed ServiceSpecificationWithState item row 1:*; byte-pinned PNG SHA256 b5906fb9c08b8c7cc8a249f4165974f8be64ba7d2be3ce1c6a398f1f180d03f0, GitHub visual fallback SUCCESS run41649868856 artifact13237122674. The selected Common XSD independently uses minOccurs=0 maxOccurs=unbounded. Adjacent ServiceStartList uses 1:* with default XSD minOccurs=1, excluding a notation-based optional-list interpretation."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.4.xsd",
+              "git_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+              "authority_detail": "Exact explicitly selected Common V2.4 candidate/integration XSD from open upstream PR #31, not an official released schema; includes IBIS-IP_Enumerations_V2.4.xsd.",
+              "component_kind": "complexType",
+              "component": "ServiceSpecificationWithStateListStructure",
+              "member": "ServiceSpecificationWithState",
+              "value": "minOccurs=0 maxOccurs=unbounded",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='ServiceSpecificationWithStateListStructure']/xs:sequence/xs:element[@name='ServiceSpecificationWithState']",
+              "line_hint": "544-547",
+              "point_summary": "Exact Common V2.4 XSD sequence contains a ServiceSpecificationWithState element with minOccurs='0' and maxOccurs='unbounded'. A present empty ServiceSpecificationWithStateList validates, despite PDF 1:*; authority=candidate_integration; no alias/rewrite."
+            }
+          ],
+          "coverage_note": "Visually verified original official PDF page 32 and table 44, verified byte pin and target PNG digest; exact selected Common V2.4 XSD blob and dependency independently checked. PDF source official, XSD candidate_integration. No newer schema substituted or provider FAIL invented."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_003_2026-11-03.md",
+        "Six exact-byte pinned official Common PDF original body screenshots, GitHub fallback runs 41649308454,41649627068,41649658472,41649692297,41649819541,41649868856 all SUCCESS; PNG SHA/manifest verification complete.",
+        "Original COMMON_V1.0 byte-pinned official PDF SHA a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf, actual visually inspected printed p18 §1.44 Table44, ServiceSpecificationWithState 1:*; GitHub fallback run41649308454 artifact13237115551, target PNG SHA 1072f924d50e9797e9528cbe07732809e6bd856d51b5d7a7d074d67a7d30e848; exact selected Common XSD blob 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c line465 minOccurs=0 maxOccurs=unbounded, authority=official_release, Enum V1.0.",
+        "Original COMMON_V2.0 byte-pinned official PDF SHA 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088, actual visually inspected printed p25 §2.44 Table44, ServiceSpecificationWithState 1:*; GitHub fallback run41649627068 artifact13236717262, target PNG SHA e4b8d430df720dcd02243f8ad3388ac51518a4a9b34d3b49dca76d16d20ce754; exact selected Common XSD blob 8608e3dcd665c197c34da7f6ec6af5a3758da164 line471 minOccurs=0 maxOccurs=unbounded, authority=official_release, Enum V2.0.",
+        "Original COMMON_V2.1 byte-pinned official PDF SHA a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32, actual visually inspected printed p27 §2.44 Table44, ServiceSpecificationWithState 1:*; GitHub fallback run41649658472 artifact13236253276, target PNG SHA 8351cb9e29d2090214b452e086dfc57442edd03f9752934eff6a379e0c0af1d5; exact selected Common XSD blob 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e line470 minOccurs=0 maxOccurs=unbounded, authority=official_release, Enum V2.1.",
+        "Original COMMON_V2.2 byte-pinned official PDF SHA 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203, actual visually inspected printed p29 §2.45 Table45, ServiceSpecificationWithState 1:*; GitHub fallback run41649692297 artifact13237295692, target PNG SHA 248cfab843bb21903c9a462582f9262b150436fb6158c3c50746b15d486e9766; exact selected Common XSD blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae line479 minOccurs=0 maxOccurs=unbounded, authority=official_release, Enum V2.2.",
+        "Original COMMON_V2.3 byte-pinned official PDF SHA d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b, actual visually inspected printed p29 §2.45 Table45, ServiceSpecificationWithState 1:*; GitHub fallback run41649819541 artifact13235912787, target PNG SHA 75ec9b40024deb4000fbbcbe9f44b5bd615241c722facd354bc7134d216516ac; exact selected Common XSD blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 line529 minOccurs=0 maxOccurs=unbounded, authority=official_release, Enum V2.2.",
+        "Original COMMON_V2.4 byte-pinned official PDF SHA 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, actual visually inspected printed p32 §2.44 Table44, ServiceSpecificationWithState 1:*; GitHub fallback run41649868856 artifact13237122674, target PNG SHA b5906fb9c08b8c7cc8a249f4165974f8be64ba7d2be3ce1c6a398f1f180d03f0; exact selected Common XSD blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 line544 minOccurs=0 maxOccurs=unbounded, authority=candidate_integration, Enum V2.4.",
+        "Historical EV-117/EV-135 and Common V2.0 EV-118 provide pre-existing empty-container executable evidence; current block verified all six static XSD definitions and did not run a new six-profile runtime test.",
+        "V2.3 Common includes Enum V2.2. V2.4 official PDF has selected candidate/integration Common/Enum V2.4 (open PR #31), not official. No independently verified corrected later release.",
+        "ServiceIdentificationWithStateList and DeviceSpecificationWithStateList are distinct existing CE findings; no duplicate identities or XSD changes."
       ]
     }
   ]

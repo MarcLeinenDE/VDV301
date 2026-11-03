@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 86,
-    "verified": 86,
+    "tracked_findings": 87,
+    "verified": 87,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -5064,6 +5064,71 @@
             "COMMON_V2.4"
           ],
           "language_status": "Official PDF original printed p20 §2.9 Table9 persists. Selected V2.4 Common XSD xs:choice is candidate/integration (unmerged PR31) and must never be called official release; original has English names and German descriptions. No corrected later official PDF independently verified in pinned registry."
+        }
+      ]
+    },
+    {
+      "finding_id": "DRCOM10-003",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_003_2026-11-03.md",
+        "Original COMMON_V1.0 byte-pinned official PDF SHA a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf, actual visually inspected printed p18 §1.44 Table44, ServiceSpecificationWithState 1:*; GitHub fallback run41649308454 artifact13237115551, target PNG SHA 1072f924d50e9797e9528cbe07732809e6bd856d51b5d7a7d074d67a7d30e848; exact selected Common XSD blob 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c line465 minOccurs=0 maxOccurs=unbounded, authority=official_release, Enum V1.0.",
+        "Original COMMON_V2.0 byte-pinned official PDF SHA 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088, actual visually inspected printed p25 §2.44 Table44, ServiceSpecificationWithState 1:*; GitHub fallback run41649627068 artifact13236717262, target PNG SHA e4b8d430df720dcd02243f8ad3388ac51518a4a9b34d3b49dca76d16d20ce754; exact selected Common XSD blob 8608e3dcd665c197c34da7f6ec6af5a3758da164 line471 minOccurs=0 maxOccurs=unbounded, authority=official_release, Enum V2.0.",
+        "Original COMMON_V2.1 byte-pinned official PDF SHA a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32, actual visually inspected printed p27 §2.44 Table44, ServiceSpecificationWithState 1:*; GitHub fallback run41649658472 artifact13236253276, target PNG SHA 8351cb9e29d2090214b452e086dfc57442edd03f9752934eff6a379e0c0af1d5; exact selected Common XSD blob 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e line470 minOccurs=0 maxOccurs=unbounded, authority=official_release, Enum V2.1.",
+        "Original COMMON_V2.2 byte-pinned official PDF SHA 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203, actual visually inspected printed p29 §2.45 Table45, ServiceSpecificationWithState 1:*; GitHub fallback run41649692297 artifact13237295692, target PNG SHA 248cfab843bb21903c9a462582f9262b150436fb6158c3c50746b15d486e9766; exact selected Common XSD blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae line479 minOccurs=0 maxOccurs=unbounded, authority=official_release, Enum V2.2.",
+        "Original COMMON_V2.3 byte-pinned official PDF SHA d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b, actual visually inspected printed p29 §2.45 Table45, ServiceSpecificationWithState 1:*; GitHub fallback run41649819541 artifact13235912787, target PNG SHA 75ec9b40024deb4000fbbcbe9f44b5bd615241c722facd354bc7134d216516ac; exact selected Common XSD blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 line529 minOccurs=0 maxOccurs=unbounded, authority=official_release, Enum V2.2.",
+        "Original COMMON_V2.4 byte-pinned official PDF SHA 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, actual visually inspected printed p32 §2.44 Table44, ServiceSpecificationWithState 1:*; GitHub fallback run41649868856 artifact13237122674, target PNG SHA b5906fb9c08b8c7cc8a249f4165974f8be64ba7d2be3ce1c6a398f1f180d03f0; exact selected Common XSD blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 line544 minOccurs=0 maxOccurs=unbounded, authority=candidate_integration, Enum V2.4."
+      ],
+      "scope_conclusion": "Existing unique DRCOM10-003 expanded from Common V1.0-only to all six byte-pinned original VDV 301-2-1 Common PDF versions 1.0–2.4; first checked affected V1.0 (05/2017), all intermediate official releases 2.0,2.1,2.2,2.3 independently checked, last checked official publication V2.4 (01/2023). Each original visibly prints list child 1:* and each exact selected corresponding Common XSD uses 0:*; released official schema authority V1.0–V2.3, selected candidate/integration V2.4. No earlier standalone Common 301-2-1 predecessor or corrected successor independently verified in six-version pinned inventory; the claim is bounded to audited releases. No second language publication inferred; mixed English identifiers and German descriptions verified on original source. No duplicate finding for related CE list types.",
+      "note": "Historical selected Common 2.3 includes Enum V2.2; 2.4 remains candidate/integration. XSD-valid present empty list stays PASS with at most a diagnostic advisory. No XSD modifications or runtime matcher implementation.",
+      "boundary_checks": [
+        {
+          "version": "Official Common V1.0 publication and exact selected V1.0 XSD (official_release)",
+          "role": "first_verified_affected",
+          "source_ids": [
+            "COMMON_V1.0"
+          ],
+          "language_status": "Original official printed p18 §1.44 Table44 visually shows English identifier ServiceSpecificationWithState and 1:* with German/English document context; exact Common XSD selected authority official_release declares minOccurs=0 maxOccurs=unbounded, Enum V1.0; render run 41649308454, PNG SHA 1072f924d50e9797e9528cbe07732809e6bd856d51b5d7a7d074d67a7d30e848."
+        },
+        {
+          "version": "Official Common V2.0 publication and exact selected V2.0 XSD (official_release)",
+          "role": "intermediate_affected",
+          "source_ids": [
+            "COMMON_V2.0"
+          ],
+          "language_status": "Original official printed p25 §2.44 Table44 visually shows English identifier ServiceSpecificationWithState and 1:* with German/English document context; exact Common XSD selected authority official_release declares minOccurs=0 maxOccurs=unbounded, Enum V2.0; render run 41649627068, PNG SHA e4b8d430df720dcd02243f8ad3388ac51518a4a9b34d3b49dca76d16d20ce754."
+        },
+        {
+          "version": "Official Common V2.1 publication and exact selected V2.1 XSD (official_release)",
+          "role": "intermediate_affected",
+          "source_ids": [
+            "COMMON_V2.1"
+          ],
+          "language_status": "Original official printed p27 §2.44 Table44 visually shows English identifier ServiceSpecificationWithState and 1:* with German/English document context; exact Common XSD selected authority official_release declares minOccurs=0 maxOccurs=unbounded, Enum V2.1; render run 41649658472, PNG SHA 8351cb9e29d2090214b452e086dfc57442edd03f9752934eff6a379e0c0af1d5."
+        },
+        {
+          "version": "Official Common V2.2 publication and exact selected V2.2 XSD (official_release)",
+          "role": "intermediate_affected",
+          "source_ids": [
+            "COMMON_V2.2"
+          ],
+          "language_status": "Original official printed p29 §2.45 Table45 visually shows English identifier ServiceSpecificationWithState and 1:* with German/English document context; exact Common XSD selected authority official_release declares minOccurs=0 maxOccurs=unbounded, Enum V2.2; render run 41649692297, PNG SHA 248cfab843bb21903c9a462582f9262b150436fb6158c3c50746b15d486e9766."
+        },
+        {
+          "version": "Official Common V2.3 publication and exact selected V2.3 XSD (official_release)",
+          "role": "intermediate_affected",
+          "source_ids": [
+            "COMMON_V2.3"
+          ],
+          "language_status": "Original official printed p29 §2.45 Table45 visually shows English identifier ServiceSpecificationWithState and 1:* with German/English document context; exact Common XSD selected authority official_release declares minOccurs=0 maxOccurs=unbounded, Enum V2.2; render run 41649819541, PNG SHA 75ec9b40024deb4000fbbcbe9f44b5bd615241c722facd354bc7134d216516ac."
+        },
+        {
+          "version": "Official Common V2.4 publication and exact selected V2.4 XSD (candidate_integration)",
+          "role": "last_verified_affected_no_verified_corrected_successor",
+          "source_ids": [
+            "COMMON_V2.4"
+          ],
+          "language_status": "Original official printed p32 §2.44 Table44 visually shows English identifier ServiceSpecificationWithState and 1:* with German/English document context; exact Common XSD selected authority candidate_integration declares minOccurs=0 maxOccurs=unbounded, Enum V2.4; render run 41649868856, PNG SHA b5906fb9c08b8c7cc8a249f4165974f8be64ba7d2be3ce1c6a398f1f180d03f0."
         }
       ]
     }
