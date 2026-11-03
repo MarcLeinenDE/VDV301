@@ -2206,12 +2206,25 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "41627545793",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "41627545786",
-    "resume_instruction": "DRCOM10-001 terminal_clean with 85/192 source locators and 85/85 byte-pinned original-body + independent version-scope boundary checks; 107 remaining. Official original Common V1.0 May2017 PDF (p9,21,27,28,30) declares internal data history Version1.1 conflicting with unchanged exact 2014 official imported Common/Enumerations V1.0 XSD (194f73a + a9bea5b), while protocol enum remains 1.0. Official V2.0 successor Feb2018 (p16,29,36,38,39) tagged schema (8608e3d + 27e3c18) fixes selected fields; other CE-005 remains independent. Official V2.0 PDF p39 explicitly mentions historical XSD Version1.1; no independently verifiable 1.1 exact files in checked official master/2.0 tag/project integration, so do not claim historical nonexistence or fabricate a V1.1 profile. Existing DRCOM10-001 semantic DE/EN long diagnostic and runtime mapping source pin updated, no XSD modifications/runtime matchers. First full schema gate41627291989 failed due 5 composite PDF version locator fields, fixed exactly to 1.0; rerun schema41627545793 SUCCESS + handoff41627545786 SUCCESS. Report docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_001_2026-11-03.md. Final HEAD runs must also pass. Next DRCOM10-002."
+    "resume_instruction": "DRCOM10-002 pending: Source-only multi-version boundary review started. Existing semantic V1.0 scope likely incomplete; PDF inconsistency persists through 2.4 and must be recorded under same ID, no new finding and no XSD changes. Next exact pinned PDF render COMMON_V2.1 16-18, then COMMON_V2.2 17-19. Current count 85/192.",
+    "pending_block": "DRCOM10-002 multi-version Common DataAcceptedResponse compositor evidence review",
+    "active_finding": "DRCOM10-002",
+    "active_step": "Original printed V1.0 §1.9 Table9 p9, V2.0 §2.9 Table9 p16, V2.3 §2.9 Table9 p18, V2.4 §2.9 Table9 p20 all show two mandatory 1:1 response rows against exact selected XSD xs:choice. Need independently visualize V2.1 and V2.2 originals before scope extension.",
+    "next_step": "Run GitHub exact-SHA-pinned PDF fallback for COMMON_V2.1 printed page17 (and adjacent 16/18); then for COMMON_V2.2 page18 (and adjacent 17/19), verify all exact XSD official/candidate paths and update all affected registries/bilingual diagnostics with full gates.",
+    "evidence_refs": [
+      "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V1.0.md",
+      "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.1.md",
+      "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3_FRESH_2026-09-02.md",
+      "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4_FRESH_2026-09-03.md",
+      "audit_registry/pdf_source_pins_v0.1.json",
+      "tools/pdf_render_request_v0.1.json"
+    ],
+    "recovery_instruction": "DRCOM10-002 gate_pending begun, no progress count changed (85/192). V1.0 2017 p9, V2.0 2018 p16, V2.3 2021 p18, V2.4 2023 p20 original visually confirm DataAcceptedResponse two 1:1 rows and XSD compositor xs:choice. V2.3 and V2.4 byte-pinned old-source artifacts fully available; check v2.1/v2.2 via new pinned fallback and all official vs candidate XSD versions before expanding semantic finding scope."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
