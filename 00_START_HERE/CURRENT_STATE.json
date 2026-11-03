@@ -2126,8 +2126,8 @@
     "version_scope_boundary_pending_count": 0
   },
   "next_actions": [
-    "DRCOM10-003 87/192 register completion gate_pending, corrected semantic provenance pin in source locators + runtime mapping to exact new blob 4ee65c9133b932e0e144fe3060d5fa52012b3d1f.",
-    "Verify both substantive gates and then final terminal_clean gates; next DRCOM10-004."
+    "DRCOM10-003 gate_pending: 87/192 fully synchronized; strict scope_claims mirror fixed using exact semantic version_scope, while official and candidate XSD provenance remains distinct.",
+    "Check both gates on current HEAD; terminal_clean after success. Next DRCOM10-004."
   ],
   "source_locator_progress": {
     "locator_entry_count": 87,
@@ -2210,11 +2210,11 @@
     "latest_completed_full_gate_run_id": "41636382404",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "41636382369",
-    "resume_instruction": "DRCOM10-003 87/192 all six PDF/XSD and semantic/runtime registers ready. The prior validator gate failed only because locator and SDK-mapping semantic registry pins referenced previous Git blob 7ccc1067; updated both to 4ee65c9. Check full schema/handoff gate on new HEAD, repair any further failures, then terminal_clean. Next finding DRCOM10-004.",
+    "resume_instruction": "DRCOM10-003 87/192 six-version source/body/boundary valid. First CI failure stale semantic blob pin fixed, second CI failure strict semantic-vs-locator scope_claims equality fixed by directly copying semantic version_scope into locator scope_claims. Confirm latest schema and handoff gates, then terminal_clean. Next DRCOM10-004.",
     "pending_block": "DRCOM10-003: six-version Common list-minimum cardinality source locator and boundary review",
     "active_finding": "DRCOM10-003",
-    "active_step": "DRCOM10-003 source/body/boundary 87/192 complete; corrected both stale semantic Git-blob provenance pins after first schema and handoff CI rejected the mismatch.",
-    "next_step": "Confirm both substantive schema-audit-validation and handoff-integrity SUCCESS on corrected HEAD, then terminal_clean handoff with final HEAD CI.",
+    "active_step": "Second substantive gate isolated DRCOM10-003 scope_claims note mismatch; canonical locator scope_claims copied exactly from semantic version_scope to satisfy strict equality.",
+    "next_step": "Rerun schema-audit-validation and handoff-integrity on corrected gate_pending HEAD, then terminal-close once both green.",
     "evidence_refs": [
       "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_003_2026-11-03.md",
       "audit_registry/finding_source_locators_v0.1.json",
@@ -2242,7 +2242,7 @@
       "XSD COMMON_V2.4 Git blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
       "Full schema gate run41651177391 pin mismatch; handoff run41651177367 same provenance pin failure; fixed to semantic registry 4ee65c9133b932e0e144fe3060d5fa52012b3d1f"
     ],
-    "recovery_instruction": "DRCOM10-003 87/192 all six PDF/XSD and semantic/runtime registers ready. The prior validator gate failed only because locator and SDK-mapping semantic registry pins referenced previous Git blob 7ccc1067; updated both to 4ee65c9. Check full schema/handoff gate on new HEAD, repair any further failures, then terminal_clean. Next finding DRCOM10-004."
+    "recovery_instruction": "DRCOM10-003 87/192 six-version source/body/boundary valid. First CI failure stale semantic blob pin fixed, second CI failure strict semantic-vs-locator scope_claims equality fixed by directly copying semantic version_scope into locator scope_claims. Confirm latest schema and handoff gates, then terminal_clean. Next DRCOM10-004."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
