@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "2971dd4775c821ef3bc6973b94a1891255ebb1d2",
+    "git_blob": "9194a19c2a4a7e533bd4cfbc7dbf29d39b517e10",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 88,
-    "coverage_complete_count": 88,
+    "locator_entry_count": 89,
+    "coverage_complete_count": 89,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 104
+    "remaining_finding_count": 103
   },
   "entries": [
     {
@@ -17046,6 +17046,273 @@
         "V1.0 archived EV-117/EV-135 executable one-occurrence valid and twice-repeated invalid probes; current all-six exact XSD static declarations inspected. No new test run claimed for later versions.",
         "As of 2026-11-11 VDV official document catalog ends Common PDF V2.4 and official VDVde/VDV301 release list V2.3; upstream PR31 open and unmerged; no verified corrected successor.",
         "Previous attribution confirmed_pdf_defect conservatively reclassified cross_artifact_mismatch since no independent author intent or authoritative correction proves which artifact is wrong."
+      ]
+    },
+    {
+      "finding_id": "DRCOM10-005",
+      "service": "Common",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "COMMON V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Official Common V1.0 PDF printed p18 §1.46 visible Table 46 repeats inner child name ShortTripStopList 1:* (PDF type StopPointTariffInformation); exact selected official released XSD declares child ShortTripStop of ShortTripStopStructure 1:*. PDF's StopPointTariffInformation type reference is different in name but equivalent in XML member shape."
+        },
+        {
+          "version": "COMMON V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.0.xsd + IBIS-IP_Enumerations_V2.0.xsd",
+          "note": "Official Common V2.0 PDF printed p26 §2.48 visible Table 48 repeats inner child name ShortTripStopList 1:* (PDF type ShortTripStop); exact selected official released XSD declares child ShortTripStop of ShortTripStopStructure 1:*."
+        },
+        {
+          "version": "COMMON V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.1.xsd + IBIS-IP_Enumerations_V2.1.xsd",
+          "note": "Official Common V2.1 PDF printed p28 §2.48 visible Table 48 repeats inner child name ShortTripStopList 1:* (PDF type ShortTripStop); exact selected official released XSD declares child ShortTripStop of ShortTripStopStructure 1:*."
+        },
+        {
+          "version": "COMMON V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official Common V2.2 PDF printed p29 §2.49 visible Table 49 repeats inner child name ShortTripStopList 1:* (PDF type ShortTripStop); exact selected official released XSD declares child ShortTripStop of ShortTripStopStructure 1:*."
+        },
+        {
+          "version": "COMMON V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.3.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official Common V2.3 PDF printed p30 §2.49 visible Table 49 repeats inner child name ShortTripStopList 1:* (PDF type ShortTripStop); exact selected official released XSD declares child ShortTripStop of ShortTripStopStructure 1:*."
+        },
+        {
+          "version": "COMMON V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd + IBIS-IP_Enumerations_V2.4.xsd",
+          "note": "Official Common V2.4 PDF printed p32 §2.48 visible Table 48 repeats inner child name ShortTripStopList 1:* (PDF type ShortTripStop); exact selected candidate/integration XSD declares child ShortTripStop of ShortTripStopStructure 1:*."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "1.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "first_verified_affected_official",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V1.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds.pdfx",
+              "sha256": "a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf",
+              "printed_pages": [
+                18
+              ],
+              "section": "1.46 ShortTripStopList",
+              "table": "Table 46 — Description of ShortTripStopList",
+              "point_summary": "Original visibly inspected printed p18 §1.46 Table 46 shows repeated inner child ShortTripStopList (1:*) of type StopPointTariffInformation; exact selected XSD instead declares child ShortTripStop of ShortTripStopStructure (1:*). Official original SHA256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf; verified target PNG SHA256 1072f924d50e9797e9528cbe07732809e6bd856d51b5d7a7d074d67a7d30e848; GitHub fallback run 43029589455, artifact 13860986360. PDF type StopPointTariffInformation is distinct by name but equivalent as XML instance shape."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301 release-tag VDV-301-1.0 Common XSD; includes Enumerations V1.0.",
+              "component_kind": "complexType",
+              "component": "ShortTripStopListStructure",
+              "member": "ShortTripStop",
+              "value": "name=ShortTripStop; type=ShortTripStopStructure; minOccurs=1 (default); maxOccurs=unbounded; nested JourneyStopInformation and FareZoneInformation each required",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='ShortTripStopListStructure']/xs:sequence/xs:element[@name='ShortTripStop']",
+              "line_hint": "ShortTripStopListStructure line 509; repeated ShortTripStop element line 511",
+              "point_summary": "Exact selected Common XSD blob 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c declares required repeatable ShortTripStop 1:* (not PDF inner ShortTripStopList). V1.0 ShortTripStopStructure 514–518 and StopPointTariffInformationStructure 592–596 have identical required two-member XML shapes. Strict XSD result remains normative."
+            }
+          ],
+          "coverage_note": "Byte/size-pinned official original PDF p18 §1.46 Table46 and corresponding PNG SHA-256 visually rechecked. Selected Common XSD pinned blob and exact Enum V1.0. Official release XSD; no XSD changes, no alias."
+        },
+        {
+          "version": "2.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "intermediate_affected_official",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v-2-0.pdfx",
+              "sha256": "23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088",
+              "printed_pages": [
+                26
+              ],
+              "section": "2.48 ShortTripStopList",
+              "table": "Table 48 — Description of ShortTripStopList",
+              "point_summary": "Original visibly inspected printed p26 §2.48 Table 48 shows repeated inner child ShortTripStopList (1:*) of type ShortTripStop; exact selected XSD instead declares child ShortTripStop of ShortTripStopStructure (1:*). Official original SHA256 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088; verified target PNG SHA256 1e2825a759ee9374d7d3957a991231a004139a22913ed2f9076f81556115cca1; GitHub fallback run 43029612445, artifact 13860711734. PDF type ShortTripStop matches XSD model identity."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.0.xsd",
+              "git_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+              "authority_detail": "Exact official VDVde/VDV301 release-tag VDV-301-2.0 Common XSD; includes Enumerations V2.0.",
+              "component_kind": "complexType",
+              "component": "ShortTripStopListStructure",
+              "member": "ShortTripStop",
+              "value": "name=ShortTripStop; type=ShortTripStopStructure; minOccurs=1 (default); maxOccurs=unbounded; nested JourneyStopInformation and FareZoneInformation each required",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='ShortTripStopListStructure']/xs:sequence/xs:element[@name='ShortTripStop']",
+              "line_hint": "ShortTripStopListStructure line 515; repeated ShortTripStop element line 517",
+              "point_summary": "Exact selected Common XSD blob 8608e3dcd665c197c34da7f6ec6af5a3758da164 declares required repeatable ShortTripStop 1:* (not PDF inner ShortTripStopList). Strict XSD result remains normative."
+            }
+          ],
+          "coverage_note": "Byte/size-pinned official original PDF p26 §2.48 Table48 and corresponding PNG SHA-256 visually rechecked. Selected Common XSD pinned blob and exact Enum V2.0. Official release XSD; no XSD changes, no alias."
+        },
+        {
+          "version": "2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "intermediate_affected_official",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.1",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v2-1-commonstructure-enums.pdfx",
+              "sha256": "a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32",
+              "printed_pages": [
+                28
+              ],
+              "section": "2.48 ShortTripStopList",
+              "table": "Table 48 — Description of ShortTripStopList",
+              "point_summary": "Original visibly inspected printed p28 §2.48 Table 48 shows repeated inner child ShortTripStopList (1:*) of type ShortTripStop; exact selected XSD instead declares child ShortTripStop of ShortTripStopStructure (1:*). Official original SHA256 a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32; verified target PNG SHA256 35196477a114a3364371b8d5daff78799eb1316531d04295804cadbe9551e321; GitHub fallback run 41649658472, artifact 13236253276. PDF type ShortTripStop matches XSD model identity."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.1.xsd",
+              "git_blob": "05977c9f86c7c9dd0b48f36a4a4e9be32e94659e",
+              "authority_detail": "Exact official VDVde/VDV301 release-tag VDV-301-2.1 Common XSD; includes Enumerations V2.1.",
+              "component_kind": "complexType",
+              "component": "ShortTripStopListStructure",
+              "member": "ShortTripStop",
+              "value": "name=ShortTripStop; type=ShortTripStopStructure; minOccurs=1 (default); maxOccurs=unbounded; nested JourneyStopInformation and FareZoneInformation each required",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='ShortTripStopListStructure']/xs:sequence/xs:element[@name='ShortTripStop']",
+              "line_hint": "ShortTripStopListStructure line 514; repeated ShortTripStop element line 516",
+              "point_summary": "Exact selected Common XSD blob 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e declares required repeatable ShortTripStop 1:* (not PDF inner ShortTripStopList). Strict XSD result remains normative."
+            }
+          ],
+          "coverage_note": "Byte/size-pinned official original PDF p28 §2.48 Table48 and corresponding PNG SHA-256 visually rechecked. Selected Common XSD pinned blob and exact Enum V2.1. Official release XSD; no XSD changes, no alias."
+        },
+        {
+          "version": "2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "intermediate_affected_official",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.2",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-2-commonstructure-enums.pdfx",
+              "sha256": "85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203",
+              "printed_pages": [
+                29
+              ],
+              "section": "2.49 ShortTripStopList",
+              "table": "Table 49 — Description of ShortTripStopList",
+              "point_summary": "Original visibly inspected printed p29 §2.49 Table 49 shows repeated inner child ShortTripStopList (1:*) of type ShortTripStop; exact selected XSD instead declares child ShortTripStop of ShortTripStopStructure (1:*). Official original SHA256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203; verified target PNG SHA256 248cfab843bb21903c9a462582f9262b150436fb6158c3c50746b15d486e9766; GitHub fallback run 43029726595, artifact 13860087462. PDF type ShortTripStop matches XSD model identity."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact official VDVde/VDV301 release-tag VDV-301-2.2 Common XSD; includes Enumerations V2.2.",
+              "component_kind": "complexType",
+              "component": "ShortTripStopListStructure",
+              "member": "ShortTripStop",
+              "value": "name=ShortTripStop; type=ShortTripStopStructure; minOccurs=1 (default); maxOccurs=unbounded; nested JourneyStopInformation and FareZoneInformation each required",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='ShortTripStopListStructure']/xs:sequence/xs:element[@name='ShortTripStop']",
+              "line_hint": "ShortTripStopListStructure line 523; repeated ShortTripStop element line 525",
+              "point_summary": "Exact selected Common XSD blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae declares required repeatable ShortTripStop 1:* (not PDF inner ShortTripStopList). Strict XSD result remains normative."
+            }
+          ],
+          "coverage_note": "Byte/size-pinned official original PDF p29 §2.49 Table49 and corresponding PNG SHA-256 visually rechecked. Selected Common XSD pinned blob and exact Enum V2.2. Official release XSD; no XSD changes, no alias."
+        },
+        {
+          "version": "2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "intermediate_affected_official",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.3",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx",
+              "sha256": "d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b",
+              "printed_pages": [
+                30
+              ],
+              "section": "2.49 ShortTripStopList",
+              "table": "Table 49 — Description of ShortTripStopList",
+              "point_summary": "Original visibly inspected printed p30 §2.49 Table 49 shows repeated inner child ShortTripStopList (1:*) of type ShortTripStop; exact selected XSD instead declares child ShortTripStop of ShortTripStopStructure (1:*). Official original SHA256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b; verified target PNG SHA256 6ec4140ae6d492af3e4cd05598613efb55ba228ad72977ea9fd4adf6b69c0429; GitHub fallback run 41649819541, artifact 13235912787. PDF type ShortTripStop matches XSD model identity."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.3.xsd",
+              "git_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+              "authority_detail": "Exact official VDVde/VDV301 release-tag VDV-301-2.3 Common XSD; includes Enumerations V2.2.",
+              "component_kind": "complexType",
+              "component": "ShortTripStopListStructure",
+              "member": "ShortTripStop",
+              "value": "name=ShortTripStop; type=ShortTripStopStructure; minOccurs=1 (default); maxOccurs=unbounded; nested JourneyStopInformation and FareZoneInformation each required",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='ShortTripStopListStructure']/xs:sequence/xs:element[@name='ShortTripStop']",
+              "line_hint": "ShortTripStopListStructure line 573; repeated ShortTripStop element line 575",
+              "point_summary": "Exact selected Common XSD blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 declares required repeatable ShortTripStop 1:* (not PDF inner ShortTripStopList). Strict XSD result remains normative."
+            }
+          ],
+          "coverage_note": "Byte/size-pinned official original PDF p30 §2.49 Table49 and corresponding PNG SHA-256 visually rechecked. Selected Common XSD pinned blob and exact Enum V2.2. Official release XSD; no XSD changes, no alias."
+        },
+        {
+          "version": "2.4",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "last_verified_affected_candidate_integration",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.4",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sde-v2-4-commonstructure-enums.pdfx",
+              "sha256": "01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a",
+              "printed_pages": [
+                32
+              ],
+              "section": "2.48 ShortTripStopList",
+              "table": "Table 48 — Description of ShortTripStopList",
+              "point_summary": "Original visibly inspected printed p32 §2.48 Table 48 shows repeated inner child ShortTripStopList (1:*) of type ShortTripStop; exact selected XSD instead declares child ShortTripStop of ShortTripStopStructure (1:*). Official original SHA256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a; verified target PNG SHA256 b5906fb9c08b8c7cc8a249f4165974f8be64ba7d2be3ce1c6a398f1f180d03f0; GitHub fallback run 43029777221, artifact 13860357046. PDF type ShortTripStop matches XSD model identity."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.4.xsd",
+              "git_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+              "authority_detail": "Exact candidate/integration (not officially released), upstream PR31 open Common XSD; includes Enumerations V2.4.",
+              "component_kind": "complexType",
+              "component": "ShortTripStopListStructure",
+              "member": "ShortTripStop",
+              "value": "name=ShortTripStop; type=ShortTripStopStructure; minOccurs=1 (default); maxOccurs=unbounded; nested JourneyStopInformation and FareZoneInformation each required",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='ShortTripStopListStructure']/xs:sequence/xs:element[@name='ShortTripStop']",
+              "line_hint": "ShortTripStopListStructure line 588; repeated ShortTripStop element line 590",
+              "point_summary": "Exact selected Common XSD blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 declares required repeatable ShortTripStop 1:* (not PDF inner ShortTripStopList). Strict XSD result remains normative."
+            }
+          ],
+          "coverage_note": "Byte/size-pinned official original PDF p32 §2.48 Table48 and corresponding PNG SHA-256 visually rechecked. Selected Common XSD pinned blob and exact Enum V2.4. V2.4 XSD only candidate/integration; no XSD changes, no alias."
+        }
       ]
     }
   ]

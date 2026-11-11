@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 88,
-    "verified_current_standard": 88,
+    "tracked_findings": 89,
+    "verified_current_standard": 89,
     "pending_current_standard": 0
   },
   "entries": [
@@ -852,6 +852,20 @@
         "COMMON_V2.4 original PDF SHA-256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, verified visible p27 §2.30 Table30: Announcement=0:* and FareZone=0:*, GitHub pinned render SUCCESS run43029777221 artifact13860357046 target PNG SHA-256 b1a79f174ca8e52b15defa7c1dc3d9850cacd73f47d4093ebf7f52f2d918569d; exact selected XSD blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4, Announcement line426, FareZone line436 each minOccurs=0/maxOccurs default1, selected authority candidate_integration, Enum V2.4."
       ],
       "note": "All six original Table30 body pages visually inspected against byte pins: 1.0 p15 §1.30, 2.0 p22 §2.30, 2.1 p24 §2.30, 2.2 p25 §2.30, 2.3 p25 §2.30, 2.4 p27 §2.30. Announcement and FareZone ordinary 0:* in PDF vs separate optional singleton XSD members. No TOC-derived locator, no latest-wins, no new runtime matcher."
+    },
+    {
+      "finding_id": "DRCOM10-005",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_005_2026-11-11.md",
+        "COMMON_V1.0 original PDF SHA256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf, visible printed p18 §1.46 Table46 inner ShortTripStopList/1:* typed StopPointTariffInformation; verified fallback render run43029589455 artifact13860986360, PNG SHA256 1072f924d50e9797e9528cbe07732809e6bd856d51b5d7a7d074d67a7d30e848; exact Common XSD blob 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c uses ShortTripStop/ShortTripStopStructure 1:*, Enum V1.0; official_release.",
+        "COMMON_V2.0 original PDF SHA256 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088, visible printed p26 §2.48 Table48 inner ShortTripStopList/1:* typed ShortTripStop; verified fallback render run43029612445 artifact13860711734, PNG SHA256 1e2825a759ee9374d7d3957a991231a004139a22913ed2f9076f81556115cca1; exact Common XSD blob 8608e3dcd665c197c34da7f6ec6af5a3758da164 uses ShortTripStop/ShortTripStopStructure 1:*, Enum V2.0; official_release.",
+        "COMMON_V2.1 original PDF SHA256 a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32, visible printed p28 §2.48 Table48 inner ShortTripStopList/1:* typed ShortTripStop; verified fallback render run41649658472 artifact13236253276, PNG SHA256 35196477a114a3364371b8d5daff78799eb1316531d04295804cadbe9551e321; exact Common XSD blob 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e uses ShortTripStop/ShortTripStopStructure 1:*, Enum V2.1; official_release.",
+        "COMMON_V2.2 original PDF SHA256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203, visible printed p29 §2.49 Table49 inner ShortTripStopList/1:* typed ShortTripStop; verified fallback render run43029726595 artifact13860087462, PNG SHA256 248cfab843bb21903c9a462582f9262b150436fb6158c3c50746b15d486e9766; exact Common XSD blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae uses ShortTripStop/ShortTripStopStructure 1:*, Enum V2.2; official_release.",
+        "COMMON_V2.3 original PDF SHA256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b, visible printed p30 §2.49 Table49 inner ShortTripStopList/1:* typed ShortTripStop; verified fallback render run41649819541 artifact13235912787, PNG SHA256 6ec4140ae6d492af3e4cd05598613efb55ba228ad72977ea9fd4adf6b69c0429; exact Common XSD blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 uses ShortTripStop/ShortTripStopStructure 1:*, Enum V2.2; official_release.",
+        "COMMON_V2.4 original PDF SHA256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, visible printed p32 §2.48 Table48 inner ShortTripStopList/1:* typed ShortTripStop; verified fallback render run43029777221 artifact13860357046, PNG SHA256 b5906fb9c08b8c7cc8a249f4165974f8be64ba7d2be3ce1c6a398f1f180d03f0; exact Common XSD blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 uses ShortTripStop/ShortTripStopStructure 1:*, Enum V2.4; candidate_integration."
+      ],
+      "note": "All six original visible ShortTripStopList body tables checked against exact PDF SHA/size pins and per-page PNG digests. V1.0 p18 §1.46 T46, V2.0 p26 §2.48 T48, V2.1 p28 §2.48 T48, V2.2 p29 §2.49 T49, V2.3 p30 §2.49 T49, V2.4 p32 §2.48 T48. No TOC-derived table number. Only V1.0 has alternate PDF type reference but XML instance-shape equivalent. V2.4 XSD remains candidate."
     }
   ]
 }

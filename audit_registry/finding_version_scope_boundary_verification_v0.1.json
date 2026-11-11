@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 88,
-    "verified": 88,
+    "tracked_findings": 89,
+    "verified": 89,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -5194,6 +5194,71 @@
             "COMMON_V2.4"
           ],
           "language_status": "Original visible printed p27 §2.30 Table30 has Announcement and FareZone 0:*, exact XSD declaration each 0:1; English XML identifiers present; no separate alternate-language artifact inferred. Selected authority candidate_integration, Enum V2.4, render run 43029777221 artifact 13860357046."
+        }
+      ]
+    },
+    {
+      "finding_id": "DRCOM10-005",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_005_2026-11-11.md",
+        "COMMON_V1.0 original PDF SHA256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf, visible printed p18 §1.46 Table46 inner ShortTripStopList/1:* typed StopPointTariffInformation; verified fallback render run43029589455 artifact13860986360, PNG SHA256 1072f924d50e9797e9528cbe07732809e6bd856d51b5d7a7d074d67a7d30e848; exact Common XSD blob 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c uses ShortTripStop/ShortTripStopStructure 1:*, Enum V1.0; official_release.",
+        "COMMON_V2.0 original PDF SHA256 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088, visible printed p26 §2.48 Table48 inner ShortTripStopList/1:* typed ShortTripStop; verified fallback render run43029612445 artifact13860711734, PNG SHA256 1e2825a759ee9374d7d3957a991231a004139a22913ed2f9076f81556115cca1; exact Common XSD blob 8608e3dcd665c197c34da7f6ec6af5a3758da164 uses ShortTripStop/ShortTripStopStructure 1:*, Enum V2.0; official_release.",
+        "COMMON_V2.1 original PDF SHA256 a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32, visible printed p28 §2.48 Table48 inner ShortTripStopList/1:* typed ShortTripStop; verified fallback render run41649658472 artifact13236253276, PNG SHA256 35196477a114a3364371b8d5daff78799eb1316531d04295804cadbe9551e321; exact Common XSD blob 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e uses ShortTripStop/ShortTripStopStructure 1:*, Enum V2.1; official_release.",
+        "COMMON_V2.2 original PDF SHA256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203, visible printed p29 §2.49 Table49 inner ShortTripStopList/1:* typed ShortTripStop; verified fallback render run43029726595 artifact13860087462, PNG SHA256 248cfab843bb21903c9a462582f9262b150436fb6158c3c50746b15d486e9766; exact Common XSD blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae uses ShortTripStop/ShortTripStopStructure 1:*, Enum V2.2; official_release.",
+        "COMMON_V2.3 original PDF SHA256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b, visible printed p30 §2.49 Table49 inner ShortTripStopList/1:* typed ShortTripStop; verified fallback render run41649819541 artifact13235912787, PNG SHA256 6ec4140ae6d492af3e4cd05598613efb55ba228ad72977ea9fd4adf6b69c0429; exact Common XSD blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 uses ShortTripStop/ShortTripStopStructure 1:*, Enum V2.2; official_release.",
+        "COMMON_V2.4 original PDF SHA256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, visible printed p32 §2.48 Table48 inner ShortTripStopList/1:* typed ShortTripStop; verified fallback render run43029777221 artifact13860357046, PNG SHA256 b5906fb9c08b8c7cc8a249f4165974f8be64ba7d2be3ce1c6a398f1f180d03f0; exact Common XSD blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 uses ShortTripStop/ShortTripStopStructure 1:*, Enum V2.4; candidate_integration."
+      ],
+      "scope_conclusion": "Original official Common V1.0 first affected, independently checked each adjacent V2.0, V2.1, V2.2, V2.3 and V2.4 last published official PDF (exact selected V2.4 XSD candidate/integration). Every visible original ShortTripStopList table uses repeated inner child ShortTripStopList 1:* instead of the XSD's ShortTripStop 1:*. Only V1.0 original PDF types it StopPointTariffInformation, an XML shape-equivalent but separately named structure; later PDFs correctly type ShortTripStop. No earlier available independently verified Common predecessor, nor later corrected Common successor in audited publication set. German/English contexts carry same English XML tokens; no independently distinct language-specific release assumed. Five released XSD upstream blobs verified, V2.4 PR31 still open.",
+      "note": "Single unique finding identity. Historical V1.0 EV-117/EV-135 executable proof of inner-name XML boundary, later versions static exact XSD declarations plus original PDF bodies. Strict FAIL, advisory only, no waiver, no runtime matcher implementation.",
+      "boundary_checks": [
+        {
+          "version": "Common V1.0 official PDF + exact selected official_release XSD",
+          "role": "first_verified_affected",
+          "source_ids": [
+            "COMMON_V1.0"
+          ],
+          "language_status": "Visible original printed p18 §1.46 Table46 repeats inner ShortTripStopList type StopPointTariffInformation 1:*, exact Common XSD child ShortTripStop 1:*; original image SHA256 1072f924d50e9797e9528cbe07732809e6bd856d51b5d7a7d074d67a7d30e848 on PDF source a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf, fallback run43029589455 artifact13860986360, official release XSD 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c with Enum V1.0; English XML names, no independent alternate language source inferred."
+        },
+        {
+          "version": "Common V2.0 official PDF + exact selected official_release XSD",
+          "role": "intermediate_affected",
+          "source_ids": [
+            "COMMON_V2.0"
+          ],
+          "language_status": "Visible original printed p26 §2.48 Table48 repeats inner ShortTripStopList type ShortTripStop 1:*, exact Common XSD child ShortTripStop 1:*; original image SHA256 1e2825a759ee9374d7d3957a991231a004139a22913ed2f9076f81556115cca1 on PDF source 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088, fallback run43029612445 artifact13860711734, official release XSD 8608e3dcd665c197c34da7f6ec6af5a3758da164 with Enum V2.0; English XML names, no independent alternate language source inferred."
+        },
+        {
+          "version": "Common V2.1 official PDF + exact selected official_release XSD",
+          "role": "intermediate_affected",
+          "source_ids": [
+            "COMMON_V2.1"
+          ],
+          "language_status": "Visible original printed p28 §2.48 Table48 repeats inner ShortTripStopList type ShortTripStop 1:*, exact Common XSD child ShortTripStop 1:*; original image SHA256 35196477a114a3364371b8d5daff78799eb1316531d04295804cadbe9551e321 on PDF source a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32, fallback run41649658472 artifact13236253276, official release XSD 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e with Enum V2.1; English XML names, no independent alternate language source inferred."
+        },
+        {
+          "version": "Common V2.2 official PDF + exact selected official_release XSD",
+          "role": "intermediate_affected",
+          "source_ids": [
+            "COMMON_V2.2"
+          ],
+          "language_status": "Visible original printed p29 §2.49 Table49 repeats inner ShortTripStopList type ShortTripStop 1:*, exact Common XSD child ShortTripStop 1:*; original image SHA256 248cfab843bb21903c9a462582f9262b150436fb6158c3c50746b15d486e9766 on PDF source 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203, fallback run43029726595 artifact13860087462, official release XSD 468fee6d177e7185dbcd5d3f90cfb114e29e01ae with Enum V2.2; English XML names, no independent alternate language source inferred."
+        },
+        {
+          "version": "Common V2.3 official PDF + exact selected official_release XSD",
+          "role": "intermediate_affected",
+          "source_ids": [
+            "COMMON_V2.3"
+          ],
+          "language_status": "Visible original printed p30 §2.49 Table49 repeats inner ShortTripStopList type ShortTripStop 1:*, exact Common XSD child ShortTripStop 1:*; original image SHA256 6ec4140ae6d492af3e4cd05598613efb55ba228ad72977ea9fd4adf6b69c0429 on PDF source d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b, fallback run41649819541 artifact13235912787, official release XSD 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 with Enum V2.2; English XML names, no independent alternate language source inferred."
+        },
+        {
+          "version": "Common V2.4 official PDF + exact selected candidate_integration XSD",
+          "role": "last_verified_affected_no_verified_corrected_successor",
+          "source_ids": [
+            "COMMON_V2.4"
+          ],
+          "language_status": "Visible original printed p32 §2.48 Table48 repeats inner ShortTripStopList type ShortTripStop 1:*, exact Common XSD child ShortTripStop 1:*; original image SHA256 b5906fb9c08b8c7cc8a249f4165974f8be64ba7d2be3ce1c6a398f1f180d03f0 on PDF source 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, fallback run43029777221 artifact13860357046, candidate/integration XSD 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 with Enum V2.4; English XML names, no independent alternate language source inferred."
         }
       ]
     }

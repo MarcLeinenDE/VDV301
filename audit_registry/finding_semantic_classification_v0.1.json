@@ -8350,20 +8350,51 @@
         {
           "version": "COMMON V1.0",
           "authority": "official_release",
-          "xsd_profile": "IBIS-IP_common_V1.0.xsd",
-          "note": "ShortTripStopListStructure repeats ShortTripStop of type ShortTripStopStructure in the exact XSD."
+          "xsd_profile": "IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Official Common V1.0 PDF printed p18 §1.46 visible Table 46 repeats inner child name ShortTripStopList 1:* (PDF type StopPointTariffInformation); exact selected official released XSD declares child ShortTripStop of ShortTripStopStructure 1:*. PDF's StopPointTariffInformation type reference is different in name but equivalent in XML member shape."
+        },
+        {
+          "version": "COMMON V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.0.xsd + IBIS-IP_Enumerations_V2.0.xsd",
+          "note": "Official Common V2.0 PDF printed p26 §2.48 visible Table 48 repeats inner child name ShortTripStopList 1:* (PDF type ShortTripStop); exact selected official released XSD declares child ShortTripStop of ShortTripStopStructure 1:*."
+        },
+        {
+          "version": "COMMON V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.1.xsd + IBIS-IP_Enumerations_V2.1.xsd",
+          "note": "Official Common V2.1 PDF printed p28 §2.48 visible Table 48 repeats inner child name ShortTripStopList 1:* (PDF type ShortTripStop); exact selected official released XSD declares child ShortTripStop of ShortTripStopStructure 1:*."
+        },
+        {
+          "version": "COMMON V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official Common V2.2 PDF printed p29 §2.49 visible Table 49 repeats inner child name ShortTripStopList 1:* (PDF type ShortTripStop); exact selected official released XSD declares child ShortTripStop of ShortTripStopStructure 1:*."
+        },
+        {
+          "version": "COMMON V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.3.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official Common V2.3 PDF printed p30 §2.49 visible Table 49 repeats inner child name ShortTripStopList 1:* (PDF type ShortTripStop); exact selected official released XSD declares child ShortTripStop of ShortTripStopStructure 1:*."
+        },
+        {
+          "version": "COMMON V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd + IBIS-IP_Enumerations_V2.4.xsd",
+          "note": "Official Common V2.4 PDF printed p32 §2.48 visible Table 48 repeats inner child name ShortTripStopList 1:* (PDF type ShortTripStop); exact selected candidate/integration XSD declares child ShortTripStop of ShortTripStopStructure 1:*."
         }
       ],
       "review_state": "sdk_ready",
       "normative_authority": "selected_xsd",
       "primary_surface": "cross_artifact",
-      "primary_issue_kind": "wrong_structure_reference",
+      "primary_issue_kind": "structure_mismatch",
       "secondary_issue_kinds": [
         "child_identifier_mismatch",
-        "type_reference_mismatch",
-        "instance_shape_equivalent_type_alternatives"
+        "v1_pdf_wrong_structure_reference",
+        "instance_shape_equivalent_type_alternatives",
+        "pdf_same_name_for_container_and_repeated_child"
       ],
-      "defect_assessment": "confirmed_pdf_defect",
+      "defect_assessment": "cross_artifact_mismatch",
       "confidence": "confirmed",
       "validation_effect": [
         "xsd_rejects_pdf_documented_form",
@@ -8374,37 +8405,45 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "PDF page 18 shows a repeating inner ShortTripStopList member typed as StopPointTariffInformation."
+          "note": "Six distinct byte/size-pinned official Common 301-2-1 PDF original body tables V1.0 through V2.4 were visually checked; each names the repeating child ShortTripStopList 1:* under outer ShortTripStopList. V1.0 Table46 uniquely types this child as StopPointTariffInformation, while V2.0–V2.4 type it as ShortTripStop."
         },
         {
           "type": "official_xsd_explicit",
-          "note": "The exact XSD defines child ShortTripStop of type ShortTripStopStructure."
+          "note": "Five exact official release-tag Git blobs V1.0–V2.3 and candidate/integration V2.4 Common blob each define ShortTripStopListStructure child ShortTripStop of ShortTripStopStructure, maxOccurs=unbounded (minOccurs default1), including V2.3's exact Enumerations V2.2 dependency."
         },
         {
           "type": "executable_validation",
-          "note": "The child-name boundary is executable-confirmed. The two referenced structures are instance-shape equivalent, so no separate executable type-shape distinction is claimed."
+          "note": "Preserved V1.0 EV-117/EV-135 positive and negative XML/XSD probes demonstrate the competing child-name boundary; no fresh six-version executable XML instance run in this block. Exact declarations for other versions independently reviewed."
+        },
+        {
+          "type": "xml_schema_semantics",
+          "note": "XML element names are exact and the inner ShortTripStopList is not an alias for ShortTripStop. Type-name annotations do not create an alternate child name or validation waiver."
+        },
+        {
+          "type": "technical_inference",
+          "note": "V1.0 ShortTripStopStructure and StopPointTariffInformationStructure contain exactly JourneyStopInformation followed by FareZoneInformation, same required element types, so no independent instance-shape error from PDF's V1.0 type reference. Attribution as cross-artifact mismatch is conservative without independent publisher correction."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "COMMON V1.0: ShortTripStopList verwendet in der PDF falschen Kindnamen und Strukturverweis",
-          "short": "Die PDF zeigt inneres ShortTripStopList/StopPointTariffInformation; die XSD verwendet ShortTripStop/ShortTripStopStructure.",
-          "long": "Auf Seite 18 bezeichnet die PDF das wiederholte Listenelement erneut als ShortTripStopList und verweist typseitig auf StopPointTariffInformation. Die exakte V1.0-XSD verwendet dagegen ShortTripStop mit ShortTripStopStructure. Der Kindname ist ausführbar relevant; die beiden Strukturtypen haben für Instanzen dieselbe Form, weshalb daraus keine zusätzliche Typ-Validierungsdifferenz konstruiert wird.",
-          "recommendation": "Für XML und Codegenerierung ShortTripStop aus der ausgewählten XSD verwenden. Den PDF-Namen nicht als Alias akzeptieren; den Typverweis als Dokumentationsfehler erklären, ohne eine nicht nachweisbare Instanzform-Differenz zu behaupten."
+          "title": "Common V1.0–V2.4: falscher innerer Elementname bei ShortTripStopList",
+          "short": "Die PDFs nennen den wiederholten Eintrag ShortTripStopList; alle ausgewählten Common-XSDs erwarten ShortTripStop.",
+          "long": "In allen sechs geprüften Common-PDFs V1.0 bis V2.4 heißt das wiederholte Kind innerhalb von ShortTripStopList erneut ShortTripStopList (1:*). Die exakt ausgewählten XSDs verlangen dagegen ShortTripStop mit ShortTripStopStructure (1:*). Der aus der PDF abgeleitete innere Name verletzt damit die jeweilige XSD; der äußere Listenname bleibt korrekt. Nur in V1.0 verweist die PDF zusätzlich auf StopPointTariffInformation statt ShortTripStop. Diese unterschiedlich benannten Strukturen haben denselben XML-Inhaltsaufbau und erzeugen keine eigenständige Instanzformabweichung. Für V1.0–V2.3 gilt die offizielle Release-XSD; V2.4 ist eine separat auszuwählende Candidate-/Integrations-XSD. Welche Quelle ursprünglich korrigiert werden sollte, ist nicht unabhängig belegt.",
+          "recommendation": "Bei XML-Validierung und Codegenerierung den inneren Namen ShortTripStop aus der jeweils exakt ausgewählten XSD verwenden; falsch benanntes Kind als XSD-FAIL behandeln und optional die widersprechende PDF dokumentieren. Keinen Alias, keine automatische Umbenennung und keine zusätzliche ungerechtfertigte Typform-Differenz einführen."
         },
         "en": {
-          "title": "COMMON V1.0: ShortTripStopList uses the wrong child name and structure reference in the PDF",
-          "short": "The PDF shows inner ShortTripStopList/StopPointTariffInformation; the XSD uses ShortTripStop/ShortTripStopStructure.",
-          "long": "Page 18 names the repeating list child ShortTripStopList again and points its type to StopPointTariffInformation. The exact V1.0 XSD instead uses ShortTripStop with ShortTripStopStructure. The child name is executable-relevant; the two structure types have equivalent instance shape, so no additional type-validation distinction is invented.",
-          "recommendation": "Use ShortTripStop from the selected XSD for XML and code generation. Do not accept the PDF name as an alias; explain the type reference as a documentation error without claiming an unsupported instance-shape difference."
+          "title": "Common V1.0–V2.4: wrong repeated child name in ShortTripStopList PDFs",
+          "short": "The PDFs name the repeating item ShortTripStopList, but all selected Common XSDs require ShortTripStop.",
+          "long": "In all six checked official Common PDFs V1.0–V2.4, the repeated child within ShortTripStopList is named ShortTripStopList again (1:*). Each exact selected Common XSD instead requires ShortTripStop of ShortTripStopStructure (1:*). XML using the inner PDF-derived name therefore fails the selected XSD, whereas the outer list name remains correct. Only the V1.0 PDF additionally refers to type StopPointTariffInformation rather than ShortTripStop, but both structures have an equivalent XML instance shape, so that reference does not establish an extra validation failure. V1.0–V2.3 use released official XSDs; V2.4 uses a separately selected candidate/integration schema. The mismatch does not independently prove which publisher artifact was intended to be corrected.",
+          "recommendation": "Use the inner ShortTripStop element as declared by the exact selected XSD for XML and generated code. Keep schema INVALID for the PDF-derived repeated child name and optionally explain the discrepancy; add no alias, silent repair or unsupported type-shape difference."
         }
       },
       "runtime_match": {
         "state": "reviewed",
         "candidate_triggers": [
-          "selected strict profile is official Common V1.0",
-          "XSD validation result is INVALID because ShortTripStopListStructure contains the exact PDF-derived child name ShortTripStopList instead of ShortTripStop",
-          "selected Common V1.0 XSD declares ShortTripStop of type ShortTripStopStructure; the PDF-referenced StopPointTariffInformationStructure is instance-shape equivalent and is not treated as a separate runtime mismatch"
+          "strict selected Common XSD is official released V1.0–V2.3 or explicitly selected candidate/integration V2.4",
+          "XSD validator returns INVALID because an inner ShortTripStopList occurs where ShortTripStopListStructure expects repeated ShortTripStop; do not confuse outer list wrapper with wrong inner child",
+          "selected Common XSD requires child ShortTripStop/ShortTripStopStructure 1:*; V1.0 PDF additionally cites StopPointTariffInformation but type structures are instance-shape equivalent; decorate existing INVALID only"
         ]
       },
       "source_references": [
@@ -8414,22 +8453,62 @@
           "note": "Terminal state executable_confirmed."
         },
         {
-          "kind": "other",
-          "reference": "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V1.0.md",
-          "note": "FR-COM10-007."
-        },
-        {
-          "kind": "pdf",
-          "reference": "Official Common V1.0 PDF SHA-256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf; pages 18-19"
-        },
-        {
-          "kind": "xsd",
-          "reference": "IBIS-IP_common_V1.0.xsd blob 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c"
-        },
-        {
           "kind": "evidence",
           "reference": "EV-135 / preserved EV-117",
           "note": "Child-name boundary executable-confirmed."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_005_2026-11-11.md",
+          "note": "Six-version original-body and exact XSD blob evidence, source attribution, scope, disproof, runtime mapping."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official Common V1.0 original SHA256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf, printed p18 §1.46 visible Table46, PDF inner child ShortTripStopList 1:* type StopPointTariffInformation; SHA-verified PNG 1072f924d50e9797e9528cbe07732809e6bd856d51b5d7a7d074d67a7d30e848; renderer run 43029589455, artifact 13860986360."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official Common V2.0 original SHA256 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088, printed p26 §2.48 visible Table48, PDF inner child ShortTripStopList 1:* type ShortTripStop; SHA-verified PNG 1e2825a759ee9374d7d3957a991231a004139a22913ed2f9076f81556115cca1; renderer run 43029612445, artifact 13860711734."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official Common V2.1 original SHA256 a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32, printed p28 §2.48 visible Table48, PDF inner child ShortTripStopList 1:* type ShortTripStop; SHA-verified PNG 35196477a114a3364371b8d5daff78799eb1316531d04295804cadbe9551e321; renderer run 41649658472, artifact 13236253276."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official Common V2.2 original SHA256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203, printed p29 §2.49 visible Table49, PDF inner child ShortTripStopList 1:* type ShortTripStop; SHA-verified PNG 248cfab843bb21903c9a462582f9262b150436fb6158c3c50746b15d486e9766; renderer run 43029726595, artifact 13860087462."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official Common V2.3 original SHA256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b, printed p30 §2.49 visible Table49, PDF inner child ShortTripStopList 1:* type ShortTripStop; SHA-verified PNG 6ec4140ae6d492af3e4cd05598613efb55ba228ad72977ea9fd4adf6b69c0429; renderer run 41649819541, artifact 13235912787."
+        },
+        {
+          "kind": "pdf",
+          "reference": "Official Common V2.4 original SHA256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, printed p32 §2.48 visible Table48, PDF inner child ShortTripStopList 1:* type ShortTripStop; SHA-verified PNG b5906fb9c08b8c7cc8a249f4165974f8be64ba7d2be3ce1c6a398f1f180d03f0; renderer run 43029777221, artifact 13860357046."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_common_V1.0.xsd exact blob 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c, ShortTripStopListStructure + ShortTripStop child and ShortTripStopStructure lines 509/511; 514–518; 592–596; Enumerations V1.0; official_release."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_common_V2.0.xsd exact blob 8608e3dcd665c197c34da7f6ec6af5a3758da164, ShortTripStopListStructure + ShortTripStop child and ShortTripStopStructure lines 515/517; 520–524; 598–602; Enumerations V2.0; official_release."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_common_V2.1.xsd exact blob 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e, ShortTripStopListStructure + ShortTripStop child and ShortTripStopStructure lines 514/516; 519–523; 597–601; Enumerations V2.1; official_release."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_common_V2.2.xsd exact blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae, ShortTripStopListStructure + ShortTripStop child and ShortTripStopStructure lines 523/525; 528–532; 606–610; Enumerations V2.2; official_release."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_common_V2.3.xsd exact blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1, ShortTripStopListStructure + ShortTripStop child and ShortTripStopStructure lines 573/575; 578–582; 662–666; Enumerations V2.2; official_release."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS-IP_common_V2.4.xsd exact blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4, ShortTripStopListStructure + ShortTripStop child and ShortTripStopStructure lines 588/590; 593–597; 704–708; Enumerations V2.4; candidate_integration."
         }
       ]
     },
