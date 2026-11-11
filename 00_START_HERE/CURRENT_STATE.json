@@ -2127,8 +2127,8 @@
     "version_scope_boundary_latest_gate_run_id": "41651945251"
   },
   "next_actions": [
-    "DRCOM10-003 terminal_clean: 87/192 source locators and 87/87 original body and historical boundary checks complete. V1.0–V2.4 PDF 1:* versus exact selected Common XSD 0:*, release/candidate distinction retained, no XSD or matcher changes.",
-    "Substantive schema audit run41651945251 SUCCESS and handoff run41651945340 SUCCESS. Final terminal HEAD requires its own schema and handoff checks; next canonical work item DRCOM10-004."
+    "DRCOM10-004 gate_pending source visual review, latest byte-verified original render request COMMON_V1.0 pages 12-18; prior terminal count 87/192.",
+    "Subsequently reconcile six source versions and exact schema authorities; update all machine registers under one finding then complete full gate and terminal HEAD CI."
   ],
   "source_locator_progress": {
     "locator_entry_count": 87,
@@ -2206,12 +2206,22 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "41651945251",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "41651945340",
-    "resume_instruction": "DRCOM10-003 completed: exact byte-pinned original Common PDF V1.0–V2.4 tables ServiceSpecificationWithStateList 1:* contradict selected XSD minOccurs=0. Unique locator count 87/192, all 87 body verified and boundary verified, remaining 105. Official released XSD V1.0–V2.3, candidate V2.4. Schema full gate 41651945251 and handoff 41651945340 successful on substantive HEAD; verify both final HEAD workflows of terminal commit. Next unique finding DRCOM10-004."
+    "resume_instruction": "DRCOM10-004 gate_pending, progress 87/192 unchanged. Current PDF render request COMMON_V1.0 pages 12-18. Collect run artifact, inspect original body for JourneyStopInformation Announcement/FareZone 0:*; selected official V1.0–V2.3 or candidate 2.4 XSD each 0:1. Source/body/boundary semantic registries not yet changed. Finish and gate before terminal.",
+    "pending_block": "DRCOM10-004 Common JourneyStopInformation Announcement and FareZone cardinality cross-version review",
+    "active_finding": "DRCOM10-004",
+    "active_step": "Exact-byte fallback request queued for COMMON_V1.0 pages 12-18; all six exact selected Common XSDs independently checked: Announcement and FareZone each minOccurs=0 and default maxOccurs=1.",
+    "next_step": "Read renderer artifacts and actual visible table locator for all six Common original PDFs, establish affected scope and exact XSD pins, update semantic/runtime/source/body/boundary/state, run full CI and final-HEAD handoff.",
+    "evidence_refs": [
+      "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V10_2026-09-04.md",
+      "tools/pdf_render_request_v0.1.json COMMON_V1.0 pages 12-18",
+      "Pinned source SHA256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf"
+    ],
+    "recovery_instruction": "DRCOM10-004 gate_pending, progress 87/192 unchanged. Current PDF render request COMMON_V1.0 pages 12-18. Collect run artifact, inspect original body for JourneyStopInformation Announcement/FareZone 0:*; selected official V1.0–V2.3 or candidate 2.4 XSD each 0:1. Source/body/boundary semantic registries not yet changed. Finish and gate before terminal."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
