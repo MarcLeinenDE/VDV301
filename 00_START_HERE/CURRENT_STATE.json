@@ -2127,8 +2127,8 @@
     "version_scope_boundary_latest_gate_run_id": "43101210594"
   },
   "next_actions": [
-    "DRCOM10-005 terminal_clean at 89/192: all six original Common body tables and exact XSD blobs checked; Strict XSD invalid for PDF inner ShortTripStopList name. No runtime matcher/alias. Substantive gate 43101210594 SUCCESS and handoff 43101210573 SUCCESS.",
-    "Next canonical unique finding: DRCOM10-006. First verify final-head schema-audit-validation and handoff-integrity on this terminal commit."
+    "DRCOM10-006 gate_pending PDF source render for COMMON_V2.2 printed page 37. Existing 89/192 unique source-locators remain complete; no new progress credited yet.",
+    "Read resulting exact-byte render artifact, confirm visual original table/values, then complete DRCOM10-006 with independent V1.0–V2.4 version boundary and full GitHub validation + final-head handoff."
   ],
   "source_locator_progress": {
     "locator_entry_count": 89,
@@ -2206,12 +2206,25 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "43101210594",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "43101210573",
-    "resume_instruction": "DRCOM10-005 terminal_clean: 89/192 source locators, 89/89 visible original PDF body and scope boundaries verified, 103 findings remain. All six published Common V1.0–V2.4 PDF ShortTripStopList tables visibly repeat inner name ShortTripStopList 1:* whereas exact selected XSD has ShortTripStop 1:*. V1.0 PDF additionally points to StopPointTariffInformation but its XML instance shape is equivalent to XSD ShortTripStopStructure; V2.0–V2.4 type reference aligned. Official XSDs V1.0–V2.3, candidate/integration V2.4. Strict XSD INVALID on wrong inner name, explanatory advisory only, no matcher/XSD edits. Substantive full schema run 43101210594 SUCCESS, handoff run 43101210573 SUCCESS. Verify final-HEAD workflows on terminal commit; next unique finding DRCOM10-006."
+    "resume_instruction": "DRCOM10-006 gate_pending, counts remain 89/192/103. COMMON_V2.2 printed page 37 pinned-render requested in tools/pdf_render_request_v0.1.json. Retrieve fallback artifact/visible §3.7 body, compare original Common V1.0–V2.4 vs exact Enumerations XSD, extend existing finding scope where independently confirmed, synchronize all registries/state and full gate before terminal.",
+    "pending_block": "DRCOM10-006 DoorCountingObjectClassEnumeration cross-version source locator completion",
+    "active_finding": "DRCOM10-006",
+    "active_step": "Exact-byte PDF visible-render fallback requested for COMMON_V2.2 printed page 37; 89/192 previously complete, no finding registry expansion yet.",
+    "next_step": "Retrieve GitHub renderer artifact from push workflow, verify pinned source SHA/bytes and page PNG hash, visually confirm page 37 body §3.7/table/lexemes; reconcile V1.0–V2.4 exact PDF/XSD scope, update all canonical semantic/runtime/source/body/boundary registries and CURRENT_STATE, run full gate, finalize terminal_clean and final-head handoff.",
+    "evidence_refs": [
+      "tools/pdf_render_request_v0.1.json COMMON_V2.2 page 37",
+      "audit_registry/pdf_source_pins_v0.1.json COMMON_V2.2 sha256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203",
+      "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.2.md",
+      "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3_FRESH_2026-09-02.md",
+      "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V10_2026-09-04.md",
+      "audit_registry/finding_semantic_classification_v0.1.json DRCOM10-006"
+    ],
+    "recovery_instruction": "Retrieve GitHub renderer artifact from push workflow, verify pinned source SHA/bytes and page PNG hash, visually confirm page 37 body §3.7/table/lexemes; reconcile V1.0–V2.4 exact PDF/XSD scope, update all canonical semantic/runtime/source/body/boundary registries and CURRENT_STATE, run full gate, finalize terminal_clean and final-head handoff."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
