@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 87,
-    "verified": 87,
+    "tracked_findings": 88,
+    "verified": 88,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -5129,6 +5129,71 @@
             "COMMON_V2.4"
           ],
           "language_status": "Original official printed p32 §2.44 Table44 visually shows English identifier ServiceSpecificationWithState and 1:* with German/English document context; exact Common XSD selected authority candidate_integration declares minOccurs=0 maxOccurs=unbounded, Enum V2.4; render run 41649868856, PNG SHA b5906fb9c08b8c7cc8a249f4165974f8be64ba7d2be3ce1c6a398f1f180d03f0."
+        }
+      ]
+    },
+    {
+      "finding_id": "DRCOM10-004",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_004_2026-11-11.md",
+        "COMMON_V1.0 original PDF SHA-256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf, verified visible p15 §1.30 Table30: Announcement=0:* and FareZone=0:*, GitHub pinned render SUCCESS run43029589455 artifact13860986360 target PNG SHA-256 c3b1a0dd568d237aa96a07ec2888b21b2c3ea005a157cbd5ab811cf06bc1efd8; exact selected XSD blob 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c, Announcement line367, FareZone line377 each minOccurs=0/maxOccurs default1, selected authority official_release, Enum V1.0.",
+        "COMMON_V2.0 original PDF SHA-256 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088, verified visible p22 §2.30 Table30: Announcement=0:* and FareZone=0:*, GitHub pinned render SUCCESS run43029612445 artifact13860711734 target PNG SHA-256 7a4a8c44c8f4ee279c67bd4eecc6c9b0b19359224ecb421037b676a4baa60dbc; exact selected XSD blob 8608e3dcd665c197c34da7f6ec6af5a3758da164, Announcement line373, FareZone line383 each minOccurs=0/maxOccurs default1, selected authority official_release, Enum V2.0.",
+        "COMMON_V2.1 original PDF SHA-256 a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32, verified visible p24 §2.30 Table30: Announcement=0:* and FareZone=0:*, GitHub pinned render SUCCESS run43029633452 artifact13861146672 target PNG SHA-256 d1647155d5a5207786eb91f9aa3cab6ae0c2791b8f58be45b183a513e6bfdc87; exact selected XSD blob 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e, Announcement line372, FareZone line382 each minOccurs=0/maxOccurs default1, selected authority official_release, Enum V2.1.",
+        "COMMON_V2.2 original PDF SHA-256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203, verified visible p25 §2.30 Table30: Announcement=0:* and FareZone=0:*, GitHub pinned render SUCCESS run43029726595 artifact13860087462 target PNG SHA-256 2ebf0c6f83c5c86acb9ce7875d36967d61d006476b7bb044479972f30ef9cf03; exact selected XSD blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae, Announcement line376, FareZone line386 each minOccurs=0/maxOccurs default1, selected authority official_release, Enum V2.2.",
+        "COMMON_V2.3 original PDF SHA-256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b, verified visible p25 §2.30 Table30: Announcement=0:* and FareZone=0:*, GitHub pinned render SUCCESS run43029753257 artifact13861042204 target PNG SHA-256 61a57d7bd6194de20519348928b77733dfc5f4cdcb7dd8ab53fd38fa4528742c; exact selected XSD blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1, Announcement line426, FareZone line436 each minOccurs=0/maxOccurs default1, selected authority official_release, Enum V2.2.",
+        "COMMON_V2.4 original PDF SHA-256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, verified visible p27 §2.30 Table30: Announcement=0:* and FareZone=0:*, GitHub pinned render SUCCESS run43029777221 artifact13860357046 target PNG SHA-256 b1a79f174ca8e52b15defa7c1dc3d9850cacd73f47d4093ebf7f52f2d918569d; exact selected XSD blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4, Announcement line426, FareZone line436 each minOccurs=0/maxOccurs default1, selected authority candidate_integration, Enum V2.4."
+      ],
+      "scope_conclusion": "Existing DRCOM10-004 expanded from Common V1.0-only to V1.0–V2.4, after independently inspecting actual body Table30 of all six byte-verified public Common PDFs and exact XSD/dependency profile for each. First checked affected V1.0 (05/2017); every adjacent V2.0, V2.1, V2.2, V2.3 affected; last checked V2.4 PDF (01/2023) official but XSD candidate/integration PR31. No earlier independently verified separate Common 301-2-1 predecessor or later corrected successor; catalogue/release status rechecked on 2026-11-11. Original bilingual context yields no separate German/English correction. Exact selected XSD 0:1 while PDF shows 0:*; provider XML FAIL on repetitions. Reclassified attribution to cross_artifact_mismatch until editor intent independently proven.",
+      "note": "One unique identity, not six. V2.3 Common depends on Enum V2.2. V2.4 candidate/integration not official release. Strict XSD FAIL with explanatory advisory; no waiver or schema mutation.",
+      "boundary_checks": [
+        {
+          "version": "Common V1.0 official PDF + exact selected official_release XSD",
+          "role": "first_verified_affected",
+          "source_ids": [
+            "COMMON_V1.0"
+          ],
+          "language_status": "Original visible printed p15 §1.30 Table30 has Announcement and FareZone 0:*, exact XSD declaration each 0:1; English XML identifiers present; no separate alternate-language artifact inferred. Selected authority official_release, Enum V1.0, render run 43029589455 artifact 13860986360."
+        },
+        {
+          "version": "Common V2.0 official PDF + exact selected official_release XSD",
+          "role": "intermediate_affected",
+          "source_ids": [
+            "COMMON_V2.0"
+          ],
+          "language_status": "Original visible printed p22 §2.30 Table30 has Announcement and FareZone 0:*, exact XSD declaration each 0:1; English XML identifiers present; no separate alternate-language artifact inferred. Selected authority official_release, Enum V2.0, render run 43029612445 artifact 13860711734."
+        },
+        {
+          "version": "Common V2.1 official PDF + exact selected official_release XSD",
+          "role": "intermediate_affected",
+          "source_ids": [
+            "COMMON_V2.1"
+          ],
+          "language_status": "Original visible printed p24 §2.30 Table30 has Announcement and FareZone 0:*, exact XSD declaration each 0:1; English XML identifiers present; no separate alternate-language artifact inferred. Selected authority official_release, Enum V2.1, render run 43029633452 artifact 13861146672."
+        },
+        {
+          "version": "Common V2.2 official PDF + exact selected official_release XSD",
+          "role": "intermediate_affected",
+          "source_ids": [
+            "COMMON_V2.2"
+          ],
+          "language_status": "Original visible printed p25 §2.30 Table30 has Announcement and FareZone 0:*, exact XSD declaration each 0:1; English XML identifiers present; no separate alternate-language artifact inferred. Selected authority official_release, Enum V2.2, render run 43029726595 artifact 13860087462."
+        },
+        {
+          "version": "Common V2.3 official PDF + exact selected official_release XSD",
+          "role": "intermediate_affected",
+          "source_ids": [
+            "COMMON_V2.3"
+          ],
+          "language_status": "Original visible printed p25 §2.30 Table30 has Announcement and FareZone 0:*, exact XSD declaration each 0:1; English XML identifiers present; no separate alternate-language artifact inferred. Selected authority official_release, Enum V2.2, render run 43029753257 artifact 13861042204."
+        },
+        {
+          "version": "Common V2.4 official PDF + exact selected candidate_integration XSD",
+          "role": "last_verified_affected_no_verified_corrected_successor",
+          "source_ids": [
+            "COMMON_V2.4"
+          ],
+          "language_status": "Original visible printed p27 §2.30 Table30 has Announcement and FareZone 0:*, exact XSD declaration each 0:1; English XML identifiers present; no separate alternate-language artifact inferred. Selected authority candidate_integration, Enum V2.4, render run 43029777221 artifact 13860357046."
         }
       ]
     }

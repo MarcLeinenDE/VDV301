@@ -4,7 +4,7 @@
   "state": "reviewed_inventory",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "4ee65c9133b932e0e144fe3060d5fa52012b3d1f",
+    "git_blob": "2971dd4775c821ef3bc6973b94a1891255ebb1d2",
     "classification_state": "complete",
     "finding_count": 192
   },
@@ -1379,14 +1379,44 @@
         {
           "version": "COMMON V1.0",
           "authority": "official_release",
-          "xsd_profile": "IBIS-IP_common_V1.0.xsd",
-          "note": "JourneyStopInformation Announcement and FareZone are optional singletons in the exact XSD."
+          "xsd_profile": "IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Official Common V1.0 PDF §1.30 Table 30 shows both JourneyStopInformation.Announcement and FareZone 0:*; exact selected released Common XSD defines each with minOccurs=0 and implicit maxOccurs=1, rejecting repeats."
+        },
+        {
+          "version": "COMMON V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.0.xsd + IBIS-IP_Enumerations_V2.0.xsd",
+          "note": "Official Common V2.0 PDF §2.30 Table 30 shows both JourneyStopInformation.Announcement and FareZone 0:*; exact selected released Common XSD defines each with minOccurs=0 and implicit maxOccurs=1, rejecting repeats."
+        },
+        {
+          "version": "COMMON V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.1.xsd + IBIS-IP_Enumerations_V2.1.xsd",
+          "note": "Official Common V2.1 PDF §2.30 Table 30 shows both JourneyStopInformation.Announcement and FareZone 0:*; exact selected released Common XSD defines each with minOccurs=0 and implicit maxOccurs=1, rejecting repeats."
+        },
+        {
+          "version": "COMMON V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official Common V2.2 PDF §2.30 Table 30 shows both JourneyStopInformation.Announcement and FareZone 0:*; exact selected released Common XSD defines each with minOccurs=0 and implicit maxOccurs=1, rejecting repeats."
+        },
+        {
+          "version": "COMMON V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.3.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official Common V2.3 PDF §2.30 Table 30 shows both JourneyStopInformation.Announcement and FareZone 0:*; exact selected released Common XSD defines each with minOccurs=0 and implicit maxOccurs=1, rejecting repeats."
+        },
+        {
+          "version": "COMMON V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd + IBIS-IP_Enumerations_V2.4.xsd",
+          "note": "Official Common V2.4 PDF §2.30 Table 30 shows both JourneyStopInformation.Announcement and FareZone 0:*; exact selected candidate/integration Common XSD defines each with minOccurs=0 and implicit maxOccurs=1, rejecting repeats."
         }
       ],
       "trigger_descriptions": [
-        "selected strict profile is official Common V1.0",
-        "XSD validation result is INVALID because JourneyStopInformation contains a second Announcement or a second FareZone",
-        "selected Common V1.0 XSD declares Announcement and FareZone as optional singletons with maxOccurs=1"
+        "selected strict Common XSD is exact released official V1.0/V2.0/V2.1/V2.2/V2.3 or explicitly selected candidate/integration V2.4",
+        "XSD result is INVALID in JourneyStopInformationStructure due to a second Announcement or FareZone, not an arbitrary XML repetition elsewhere",
+        "each selected exact Common XSD defines Announcement and FareZone minOccurs=0 and implicit maxOccurs=1; decorate existing invalid result without changing it"
       ],
       "diagnostic_source": {
         "registry": "audit_registry/finding_semantic_classification_v0.1.json",
