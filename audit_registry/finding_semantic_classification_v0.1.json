@@ -8665,7 +8665,37 @@
           "version": "COMMON V1.0",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "Grouped visible editorial spelling/naming residue in the official PDF."
+          "note": "Official Common V1.0 original printed p26 §2.8 Table69 repeats 'dorr operation', p26 §2.11 Table72 table body/caption has plural GNSSCoordinateSystemsEnumeration although section heading and selected exact XSD have singular GNSSCoordinateSystemEnumeration, p27 §2.12 Table73 has 'Infromation'. No XML instance-validation effect from these editorial strings."
+        },
+        {
+          "version": "COMMON V2.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official Common V2.0 original printed p34 §3.10 Table74 repeats 'dorr operation', p34 §3.13 Table77 table body/caption has plural GNSSCoordinateSystemsEnumeration although section heading and selected exact XSD have singular GNSSCoordinateSystemEnumeration, p35 §3.14 Table78 has 'Infromation'. No XML instance-validation effect from these editorial strings."
+        },
+        {
+          "version": "COMMON V2.1",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official Common V2.1 original printed p36 §3.10 Table74 repeats 'dorr operation', p36 §3.13 Table77 table body/caption has plural GNSSCoordinateSystemsEnumeration although section heading and selected exact XSD have singular GNSSCoordinateSystemEnumeration, p37 §3.14 Table78 has 'Infromation'. No XML instance-validation effect from these editorial strings."
+        },
+        {
+          "version": "COMMON V2.2",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official Common V2.2 original printed p38 §3.10 Table75 repeats 'dorr operation', p38 §3.13 Table78 table body/caption has plural GNSSCoordinateSystemsEnumeration although section heading and selected exact XSD have singular GNSSCoordinateSystemEnumeration, p39 §3.14 Table79 has 'Infromation'. No XML instance-validation effect from these editorial strings."
+        },
+        {
+          "version": "COMMON V2.3",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official Common V2.3 original printed p39 §3.10 Table75 repeats 'dorr operation', p39 §3.13 Table78 table body/caption has plural GNSSCoordinateSystemsEnumeration although section heading and selected exact XSD have singular GNSSCoordinateSystemEnumeration, p40 §3.14 Table79 has 'Infromation'. No XML instance-validation effect from these editorial strings. Selected Common V2.3 uses exact Enumerations V2.2 dependency."
+        },
+        {
+          "version": "COMMON V2.4",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official Common V2.4 original printed p42 §3.10 Table74 repeats 'dorr operation', p42 §3.13 Table77 table body/caption has plural GNSSCoordinateSystemsEnumeration although section heading and selected exact XSD have singular GNSSCoordinateSystemEnumeration, p43 §3.14 Table78 has 'Infromation'. No XML instance-validation effect from these editorial strings. Selected V2.4 XSD for contextual confirmation remains candidate_integration, never official release."
         }
       ],
       "review_state": "manually_reviewed",
@@ -8687,21 +8717,33 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "Visible grouped residue includes GNSSCoordinateSystem(s) naming inconsistency, Common enummerations, dorr operation, Infromation, broken cf. 0 references and German words retained in English history text."
+          "note": "All six separately pinned official original Common PDF body pages V1.0–V2.4 were independently re-opened with exact SHA/page-PNG manifests. Each directly shows GNSSCoordinateSystemEnumeration (singular) section heading but plural GNSSCoordinateSystemsEnumeration table name/caption, plus 'dorr operation' on the same page and 'Infromation' GNSS quality on the following page."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "V1.0-specific additional editorial examples independently rechecked: 'Common enummerations' printed p24 (section 2 introduction); 'cf. 0' ServiceSpecification.ServiceName at printed p18 §1.42 Table42; mixed German terms in explicitly English Version 1.1 history bullets at printed p30 §3.1. Later editions use bilingual history sections, and their intentional German history entries are not automatically classified as this V1.0 English-lane issue."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "The selected exact Enumerations XSD simpleType is consistently named GNSSCoordinateSystemEnumeration (singular), without plural schema type, in official V1.0/V2.0/V2.1/V2.2 and Common V2.3's exact Enumerations V2.2 dependency. The selected V2.4 candidate/integration XSD also has singular simpleType, without promotion to official XSD authority. These XSD facts corroborate the heading, not a new XML validation effect."
+        },
+        {
+          "type": "technical_inference",
+          "note": "Case/naming differences in prose, table captions and descriptions are editorial/navigation residue; do not create new XML QName/enum lexeme aliases, independent runtime diagnostics or changes to exact selected XSD validation."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "COMMON V1.0: gruppierte redaktionelle Dokumentationsreste",
-          "short": "Die PDF enthält mehrere sichtbare Schreib-, Benennungs- und Querverweisfehler ohne XML-Wirkung.",
-          "long": "Die Common-V1.0-PDF enthält mehrere redaktionelle Reste, darunter inkonsistente GNSSCoordinateSystem(s)-Benennung, Schreibfehler, fehlerhafte „cf. 0“-Querverweise und einzelne deutsche Wörter im englischen Versionsverlauf. Diese Punkte werden bewusst als ein Dokumentationsbefund gebündelt und nicht in technische Alias- oder Validierungsregeln umgewandelt.",
-          "recommendation": "Nur als redaktionellen Hinweis führen; keine XML-, XSD-, Enum- oder Runtime-Regel daraus ableiten."
+          "title": "Common V1.0–V2.4: fortbestehende redaktionelle PDF-Reste",
+          "short": "Alle sechs Common-PDF-Fassungen enthalten redaktionelle Benennungs- und Schreibfehler; zusätzliche Beispiele sind versionsabhängig.",
+          "long": "In allen sechs unabhängig geprüften offiziellen Common-PDFs V1.0 bis V2.4 bezeichnet die Überschrift die GNSS-Aufzählung als GNSSCoordinateSystemEnumeration, die Tabelle und ihre Bildunterschrift aber als GNSSCoordinateSystemsEnumeration. Daneben stehen weiterhin 'dorr operation' und 'Infromation' in benachbarten Tabellen. Die exakten XSDs definieren nur den Singular; bei V2.3 ist die tatsächliche Enumerations-Abhängigkeit V2.2, bei V2.4 die separat ausgewählte XSD ausdrücklich nur Candidate/Integration. Weitere redaktionelle Auffälligkeiten sind versionsspezifisch: V1.0 enthält 'Common enummerations', 'cf. 0' und deutsche Wörter im ausdrücklich englischen Versionshistorienteil. Ab V2.0 sind deutsche Einträge in regulär zweisprachigen Versionshistorien nicht per se ein Fehler. Dieser dokumentationsbezogene Sammelbefund verändert keine XML-Gültigkeit.",
+          "recommendation": "Als redaktionellen Sammelbefund mit exakten PDF-Seiten/Tabelle und Versionsgrenzen dokumentieren. Nicht aus der falschen Tabellenbeschriftung einen zusätzlichen XSD-Typ, Elementnamen, Alias, Enum-Wert oder eine neue SDK-Laufzeitdiagnose ableiten."
         },
         "en": {
-          "title": "COMMON V1.0: grouped editorial documentation residue",
-          "short": "The PDF contains several visible spelling, naming and cross-reference errors without XML effect.",
-          "long": "The Common V1.0 PDF contains several pieces of editorial residue, including inconsistent GNSSCoordinateSystem(s) naming, spelling errors, broken “cf. 0” cross-references and German words retained in the English version history. These points are intentionally grouped as one documentation finding and are not converted into technical aliases or validation rules.",
-          "recommendation": "Keep this as an editorial note only; derive no XML, XSD, enumeration or runtime rule from it."
+          "title": "Common V1.0–V2.4: persistent editorial PDF residue",
+          "short": "All six Common PDFs retain editorial naming and spelling errors; some other instances are version-specific.",
+          "long": "Every independently checked official Common PDF V1.0 through V2.4 heads the GNSS enum section GNSSCoordinateSystemEnumeration (singular) but labels its table and caption GNSSCoordinateSystemsEnumeration (plural). Neighboring enum tables retain the prose typos 'dorr operation' and 'Infromation'. The selected exact XSDs use only the singular simpleType; Common V2.3 actually depends on Enumerations V2.2, and the separately selected V2.4 XSD remains explicitly candidate/integration. Additional examples vary by version: the V1.0 PDF contains 'Common enummerations', a 'cf. 0' reference and German words in the explicitly English version-history part. German entries in the correctly bilingual histories of later editions must not automatically be treated as that same V1.0 English-language error. This grouped editorial finding has no XML-validation effect.",
+          "recommendation": "Retain one editorial documentation finding with exact original PDF table/section/page locators and independent version-boundary evidence. Derive no extra XSD type, element, alias, enum lexeme, repair or runtime diagnostic from erroneous table labels."
         }
       },
       "runtime_match": {
@@ -8727,9 +8769,14 @@
           "kind": "evidence",
           "reference": "EV-135 visual/evidence artifact run 33850418941; artifact 9928121371",
           "note": "Visible editorial residue confirmed."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_007_2026-11-11.md",
+          "note": "Independent six original Common PDF body page pairs (visible captions/PNG SHA) establish expanded V1.0–V2.4 documentation-only scope; V1.0 subexamples kept separate."
         }
       ],
-      "notes": "No executable aliases are derived from editorial text."
+      "notes": "2026-11-11 current-standard source/body/boundary revalidation: V1.0-only scope was incomplete for persistent GNSS table-label and wording residue, now six Common official PDF versions V1.0–V2.4 independently pinned/visually checked. V1.0-specific mixed-language issue is NOT extrapolated to later deliberate bilingual history pages. No XML/runtime effect, no XSD alias or schema edits. Original V1.0-only audit history remains preserved in Git and deep reads."
     },
     {
       "finding_id": "DRCOM20-001",
