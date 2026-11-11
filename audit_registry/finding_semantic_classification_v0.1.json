@@ -8520,7 +8520,31 @@
           "version": "COMMON / Enumerations V1.0",
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_Enumerations_V1.0.xsd",
-          "note": "DoorCountingObjectClassEnumeration lexical values are case- and spelling-sensitive in the exact XSD."
+          "note": "Original Common V1.0 PDF p25 §2.5 Table 66 names Wheelchair/Others; exact selected official IBIS-IP_Enumerations_V1.0.xsd declares WheelChair/Other, enum lexical values are case-sensitive."
+        },
+        {
+          "version": "COMMON / Enumerations V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.0.xsd",
+          "note": "Original Common V2.0 PDF p33 §3.7 Table 71 names Wheelchair/Others; exact selected official IBIS-IP_Enumerations_V2.0.xsd declares WheelChair/Other, enum lexical values are case-sensitive."
+        },
+        {
+          "version": "COMMON / Enumerations V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.1.xsd",
+          "note": "Original Common V2.1 PDF p35 §3.7 Table 71 names Wheelchair/Others; exact selected official IBIS-IP_Enumerations_V2.1.xsd declares WheelChair/Other, enum lexical values are case-sensitive."
+        },
+        {
+          "version": "COMMON / Enumerations V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Original Common V2.2 PDF p37 §3.7 Table 72 names Wheelchair/Others; exact selected official IBIS-IP_Enumerations_V2.2.xsd declares WheelChair/Other, enum lexical values are case-sensitive."
+        },
+        {
+          "version": "COMMON / Enumerations V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.3.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Original Common V2.3 PDF p38 §3.7 Table 72 names Wheelchair/Others; exact selected official IBIS-IP_Enumerations_V2.2.xsd declares WheelChair/Other, enum lexical values are case-sensitive. Common V2.3 explicitly includes the released Enumerations V2.2 dependency; no synthetic Enumerations V2.3."
         }
       ],
       "review_state": "sdk_ready",
@@ -8545,53 +8569,50 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "The V1.0 PDF lists DoorCountingObjectClassEnumeration values Wheelchair and Others."
+          "note": "All five distinct official Common original PDF body tables V1.0, V2.0, V2.1, V2.2 and V2.3 were re-opened/visually inspected on exact byte-pinned sources, and each visibly lists DoorCountingObjectClassEnumeration Wheelchair and Others. Corrected official V2.4 PDF visibly lists Wheelchair and Other."
         },
         {
           "type": "official_xsd_explicit",
-          "note": "The exact official Enumerations V1.0 XSD defines the executable lexemes WheelChair and Other."
+          "note": "Exact selected official Enumerations XSDs V1.0, V2.0, V2.1, V2.2, and the V2.3 Common->Enumerations V2.2 dependency route declare WheelChair and Other. Selected V2.4 candidate/integration XSD instead declares Wheelchair and Other; its candidate status cannot be promoted by the official PDF."
         },
         {
           "type": "xsd_internal_consistency",
-          "note": "Within the V1.0 schema family, related enumeration families use singular Other; DoorCountingQualityEnumeration also uses Other, supporting Other rather than PDF Others."
+          "note": "Other singular is also used in related enumeration families; supports a historical PDF pluralization error Others independently of the WheelChair spelling facet."
         },
         {
           "type": "technical_inference",
-          "note": "Wheelchair is the standard English compound spelling. This supports a typo hypothesis for historical XSD WheelChair but is supporting attribution evidence only, not normative authority."
+          "note": "Wheelchair is the ordinary English compound spelling; V2.4's corrected official PDF and separately selected candidate XSD support a historical XSD typo WheelChair, but do not change exact historical XML validity."
         },
         {
-          "type": "candidate_integration_provenance",
-          "note": "The selected V2.4 candidate/integration Enumerations XSD uses Wheelchair and Other. It is supporting later-history evidence and is not relabelled as an official V2.4 schema release."
-        },
-        {
-          "type": "later_official_correction",
-          "note": "The official V2.4 Common/Enumerations documentation uses Wheelchair and Other; the deep-read closure records the older DoorCounting mismatch as fixed in V2.4."
+          "type": "xml_schema_semantics",
+          "note": "Enumeration lexical value comparison is case-sensitive; neither PDF lexeme establishes an XML alias."
         },
         {
           "type": "executable_validation",
-          "note": "Positive/negative V1.0 enum probes confirm that historical validation still accepts only WheelChair and Other and rejects the PDF forms."
+          "note": "Preserved V1.0 EV-117/EV-135 positive and negative probes and historical V2.0/V2.1/V2.2/V2.3 deep-read EV-118/119/120/121 support this boundary; this locator pass added no new six-version executable XML instance tests."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "COMMON V1.0: DoorCounting-Lexeme haben gemischte Fehlerquellen",
-          "short": "V1.0-PDF und XSD weichen bei Wheelchair/WheelChair und Others/Other ab; die beiden Abweichungen zeigen nicht auf dieselbe Fehlerquelle.",
-          "long": "Die V1.0-PDF nennt Wheelchair und Others, die offizielle historische XSD akzeptiert WheelChair und Other. Die Abweichung ist ausführbar bestätigt, aber die Quellenzuordnung ist gemischt: Für Wheelchair sprechen korrekte englische Schreibung sowie die spätere offizielle V2.4-Dokumentation und der ausdrücklich nur als Candidate/Integration geführte V2.4-XSD-Stand dafür, dass WheelChair sehr wahrscheinlich ein historischer XSD-Tippfehler ist. Für Other sprechen die V1.0-XSD, parallele Enum-Familien und der spätere V2.4-Stand dafür, dass Others sehr wahrscheinlich der PDF-Fehler ist. Diese Attribution ändert die historische V1.0-Validierung nicht.",
-          "recommendation": "Bei V1.0 weiterhin strikt WheelChair und Other nach XSD akzeptieren. Im Advisory die zwei Teilabweichungen getrennt erklären; weder Wheelchair noch Others als stillen Kompatibilitätsalias einführen. Für Remediation oder externe Meldungen die gemischte Quellenzuordnung beibehalten."
+          "title": "Common V1.0–V2.3: DoorCounting-Lexeme mit gemischter Fehlerursache",
+          "short": "Die Common-PDFs V1.0–V2.3 nennen Wheelchair und Others, die exakt ausgewählten XSDs dagegen WheelChair und Other.",
+          "long": "In den originalen Common-PDFs V1.0 bis V2.3 ist die DoorCountingObjectClassEnumeration mit Wheelchair und Others dokumentiert. Die exakten offiziellen XSD-Enumerationen akzeptieren dagegen WheelChair und Other; Common V2.3 bindet ausdrücklich die Enumerations-XSD V2.2 ein. Beide Abweichungen bleiben nach strikter XSD-Validierung Fehler, haben aber wahrscheinlich verschiedene Quellen: WheelChair ist aufgrund üblicher englischer Schreibweise und späterer Dokumentationskorrektur wahrscheinlich ein historischer XSD-Tippfehler, während Others gegenüber konsistentem Other wahrscheinlich ein PDF-Fehler ist. Die offizielle Common-V2.4-PDF enthält Wheelchair und Other, und die gewählte V2.4-XSD (Candidate/Integration) passt dazu. V2.4 ist eine geprüfte Korrekturgrenze, kein Teil des betroffenen Runtime-Scopes. Die Quellzuschreibung ist keine Erlaubnis, historische XSD-Lexeme umzuschreiben.",
+          "recommendation": "Bei V1.0–V2.3 strikt WheelChair und Other nach der exakt ausgewählten XSD validieren. PDF-Werte Wheelchair oder Others bleiben XSD-INVALID; den konkreten versionsabhängigen Widerspruch optional erläutern. Keine stillen Aliasse, Fallnormalisierung oder Änderungen historischer XSDs."
         },
         "en": {
-          "title": "COMMON V1.0: DoorCounting lexemes have mixed source attribution",
-          "short": "The V1.0 PDF and XSD differ for Wheelchair/WheelChair and Others/Other, but the two discrepancies do not point to the same source defect.",
-          "long": "The V1.0 PDF lists Wheelchair and Others, while the official historical XSD accepts WheelChair and Other. The executable mismatch is confirmed, but source attribution is mixed. For Wheelchair, normal English spelling plus the later official V2.4 documentation and the explicitly candidate/integration V2.4 XSD support the conclusion that WheelChair is very likely a historical XSD typo. For Other, the V1.0 XSD, parallel enumeration families and the later V2.4 state support the conclusion that Others is very likely the PDF typo. This attribution does not change historical V1.0 validation.",
-          "recommendation": "For V1.0 continue to accept only WheelChair and Other exactly as declared by the XSD. Explain the two facets separately in diagnostics; do not introduce Wheelchair or Others as silent compatibility aliases. Preserve the mixed attribution for remediation or external reporting."
+          "title": "Common V1.0–V2.3: DoorCounting lexemes have mixed source attribution",
+          "short": "Common PDFs V1.0–V2.3 list Wheelchair and Others, but exact selected XSDs require WheelChair and Other.",
+          "long": "The original Common PDF body tables V1.0 through V2.3 document DoorCountingObjectClassEnumeration as Wheelchair and Others, while the exact official selected XSDs accept WheelChair and Other. Common V2.3 expressly includes the Enumerations V2.2 XSD. The two lexical mismatches are both strict XSD failures but likely have different origins: WheelChair is likely a historical XSD typo given ordinary English spelling and the later documentation correction; Others is likely a PDF pluralization typo because Other is consistent across schema families. The official Common V2.4 PDF lists Wheelchair and Other, and the separately selected V2.4 candidate/integration XSD agrees. V2.4 is the independently checked correction boundary, not an affected runtime trigger lane. Mixed attribution does not permit any changes to historical XSD validity.",
+          "recommendation": "For V1.0–V2.3 accept only WheelChair and Other as declared by the exact selected XSD. Treat PDF lexemes Wheelchair or Others as schema INVALID and optionally explain the versioned conflict; add no silent aliases, normalization or historical schema edits."
         }
       },
       "runtime_match": {
         "state": "reviewed",
         "candidate_triggers": [
-          "selected strict profile is official Common / Enumerations V1.0",
-          "XSD validation result is INVALID because DoorCountingObjectClassEnumeration contains exact PDF lexeme Wheelchair where selected XSD declares WheelChair",
-          "XSD validation result is INVALID because DoorCountingObjectClassEnumeration contains exact PDF lexeme Others where selected XSD declares Other"
+          "Exact selected historical Common/Enumerations V1.0, V2.0, V2.1, V2.2 or Common V2.3 -> Enumerations V2.2 official_release profile; V2.4 is excluded (corrected).",
+          "XSD result INVALID for DoorCountingObjectClassEnumeration literal Wheelchair whereas selected historical XSD defines WheelChair.",
+          "XSD result INVALID for DoorCountingObjectClassEnumeration literal Others whereas selected historical XSD defines Other.",
+          "Decorate existing XSD INVALID only; no independent matcher implementation or lexeme alias."
         ]
       },
       "source_references": [
@@ -8627,9 +8648,14 @@
           "kind": "xsd",
           "reference": "IBIS-IP_Enumerations_V2.4.xsd blob 2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
           "note": "Candidate/integration V2.4 evidence only; not an official release authority."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_006_2026-11-11.md",
+          "note": "Independent six-version original visible-body/byte+PNG SHA and exact XSD boundary evidence; V2.4 nonaffected correction."
         }
       ],
-      "notes": "Source attribution refined 2026-09-17 under the orthography/local-naming evidence gate. The frozen finding remains one ID, but its two lexical facets have different likely error sources: WheelChair likely historical XSD typo; Others likely PDF typo. Historical V1.0 validation remains exact-XSD and no aliases are introduced."
+      "notes": "2026-11-11 original-body boundary review expands original V1.0-only affected scope to official V1.0–V2.3 (V2.3 exact Enumerations V2.2 dependency); V2.4 official PDF + candidate XSD checked nonaffected. Mixed source attribution retained (WheelChair probably XSD typo; Others probably PDF typo). Historical prior scope is preserved in Git and deep-read reports, not silently erased. Strict selected-XSD invalid, no aliases and runtime matcher remains not implemented."
     },
     {
       "finding_id": "DRCOM10-007",

@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 89,
-    "verified_current_standard": 89,
+    "tracked_findings": 90,
+    "verified_current_standard": 90,
     "pending_current_standard": 0
   },
   "entries": [
@@ -866,6 +866,20 @@
         "COMMON_V2.4 original PDF SHA256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, visible printed p32 §2.48 Table48 inner ShortTripStopList/1:* typed ShortTripStop; verified fallback render run43029777221 artifact13860357046, PNG SHA256 b5906fb9c08b8c7cc8a249f4165974f8be64ba7d2be3ce1c6a398f1f180d03f0; exact Common XSD blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 uses ShortTripStop/ShortTripStopStructure 1:*, Enum V2.4; candidate_integration."
       ],
       "note": "All six original visible ShortTripStopList body tables checked against exact PDF SHA/size pins and per-page PNG digests. V1.0 p18 §1.46 T46, V2.0 p26 §2.48 T48, V2.1 p28 §2.48 T48, V2.2 p29 §2.49 T49, V2.3 p30 §2.49 T49, V2.4 p32 §2.48 T48. No TOC-derived table number. Only V1.0 has alternate PDF type reference but XML instance-shape equivalent. V2.4 XSD remains candidate."
+    },
+    {
+      "finding_id": "DRCOM10-006",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_006_2026-11-11.md",
+        "COMMON_V1.0 original PDF SHA256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf, 892769 bytes; visible printed p25 §2.5 Table66 DoorCountingObjectClassEnumeration PDF Wheelchair/Others; matching PNG SHA256 9f04ac5752593244ed64c2dea63cc3b6cb178a16e42e30317e21661977759d6f, GitHub run 33275626001 artifact 9721397514; exact selected Enum XSD blob a9bea5bc73003ed91ded8519db06c32c4067831d, WheelChair/Other; official_release affected.",
+        "COMMON_V2.0 original PDF SHA256 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088, 946088 bytes; visible printed p33 §3.7 Table71 DoorCountingObjectClassEnumeration PDF Wheelchair/Others; matching PNG SHA256 e46eca6795d0937297f467873606c5a0a04b68abfc41eb94878c41c8a373cced, GitHub run 33279811315 artifact 9722644456; exact selected Enum XSD blob 27e3c183b00381d959622d13c10543123af8eef6, WheelChair/Other; official_release affected.",
+        "COMMON_V2.1 original PDF SHA256 a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32, 1274051 bytes; visible printed p35 §3.7 Table71 DoorCountingObjectClassEnumeration PDF Wheelchair/Others; matching PNG SHA256 6b24840923db24358dcc608ddc375049b1674820caf856144ed754343f71aa1a, GitHub run 33393002497 artifact 9758203545; exact selected Enum XSD blob 311464690ad60749ed8d326217787e4b8ed0b718, WheelChair/Other; official_release affected.",
+        "COMMON_V2.2 original PDF SHA256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203, 1411558 bytes; visible printed p37 §3.7 Table72 DoorCountingObjectClassEnumeration PDF Wheelchair/Others; matching PNG SHA256 f32eff839640963aeae32439e28610c500520141980aa784937bf82542e24215, GitHub run 43105456014 artifact 13894152180; exact selected Enum XSD blob 2a23b512379b18e8f122ac1272cef8229fb86283, WheelChair/Other; official_release affected.",
+        "COMMON_V2.3 original PDF SHA256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b, 793521 bytes; visible printed p38 §3.7 Table72 DoorCountingObjectClassEnumeration PDF Wheelchair/Others; matching PNG SHA256 dbf014908cc54fcc23cbb4812eb1934c0631a90023608fc7d7e756f69debe4a5, GitHub run 33656579631 artifact 9856965744; exact selected Enum XSD blob 2a23b512379b18e8f122ac1272cef8229fb86283, WheelChair/Other; official_release affected.",
+        "COMMON_V2.4 original PDF SHA256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, 1689647 bytes; visible printed p41 §3.7 Table71 DoorCountingObjectClassEnumeration PDF Wheelchair/Other; matching PNG SHA256 191d2b0b4421a8f3c923933291f334ff111f48f2e0a247399aef0ea91ba172db, GitHub run 33658306978 artifact 9857652638; exact selected Enum XSD blob 2afed8cf23afa91db92b0f043cc5b4ad428b0f25, Wheelchair/Other; candidate_integration non-affected boundary."
+      ],
+      "note": "All six printed original body pages §2.5/§3.7 Table66/71/71/72/72/71 visually checked with exact PDF SHA/size and page PNG SHA verification. V2.4 corrected/nonaffected. Text extraction and table indexes not used as final authority."
     }
   ]
 }
