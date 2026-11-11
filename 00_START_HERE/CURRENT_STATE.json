@@ -1976,7 +1976,7 @@
     "source_locator_remaining_count": 104,
     "source_locator_latest_review_block": "DRCOM10_004",
     "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_004_2026-11-11.md",
-    "source_locator_latest_gate_status": "gate_pending_DRCOM10_004",
+    "source_locator_latest_gate_status": "success_DRCOM10_004",
     "source_locator_latest_gate_note": "DRCOM10-004 six original Common Table30 p15/22/24/25/25/27 visually checked and byte-pinned: Announcement and FareZone PDF 0:* vs all six selected XSD optional singleton 0:1; cross-artifact source attribution not independently established. 88/192 synchronized, full gate pending, V2.4 candidate only, no schema/matcher changes.",
     "unpublished_future_profile_boundary_rule": "Rules from unpublished or future profiles must not be inferred into supported profiles.",
     "source_locator_completeness_policy": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_COMPLETENESS_POLICY.md",
@@ -1995,8 +1995,8 @@
     "source_locator_body_rule": "Canonical PDF target locator uses the actual visible body heading/table/figure on the byte-pinned page. TOC/history cross-references/inferred sequence are not final locator authority.",
     "source_locator_body_correction_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVALIDATION_CORRECTION_VISIBLE_BODY_SCOPE_2026-09-30.md",
     "workflow_contract": "00_START_HERE/AUDIT_WORKFLOW_CONTRACT.md",
-    "source_locator_latest_gate_run_id": "41651945251",
-    "source_locator_body_latest_gate_run_id": "41651945251",
+    "source_locator_latest_gate_run_id": "43031407001",
+    "source_locator_body_latest_gate_run_id": "43031407001",
     "source_locator_body_latest_review_block": "DRCOM10_004",
     "source_locator_body_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_004_2026-11-11.md",
     "version_scope_boundary_policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2007,7 +2007,7 @@
     "version_scope_boundary_pending_count": 0,
     "version_scope_boundary_next_finding": null,
     "version_scope_boundary_latest_finding": "DRCOM10-004",
-    "version_scope_boundary_latest_gate_run_id": "41651945251",
+    "version_scope_boundary_latest_gate_run_id": "43031407001",
     "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_004_2026-11-11.md",
     "latest_scope_correction": "DR3012-004 independently expanded from V1 DE to V1 DE+EN and bilingual Base V2.0 unresolved Word reference, corrected Base V2.1."
   },
@@ -2100,8 +2100,8 @@
     "source_locator_remaining_count": 104,
     "source_locator_latest_review_block": "DRCOM10_004",
     "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_004_2026-11-11.md",
-    "source_locator_latest_gate_run_id": "41651945251",
-    "source_locator_latest_gate_status": "gate_pending_DRCOM10_004",
+    "source_locator_latest_gate_run_id": "43031407001",
+    "source_locator_latest_gate_status": "success_DRCOM10_004",
     "audit_diagnostic_reporting_model": "docs/pdf_xsd_semantic_audit/SDK_AUDIT_DIAGNOSTIC_REPORTING_MODEL.md",
     "audit_report_languages": [
       "de",
@@ -2118,17 +2118,17 @@
     "source_locator_body_verification_state": "complete",
     "source_locator_body_verified_current_standard_count": 88,
     "source_locator_body_pending_current_standard_count": 0,
-    "source_locator_body_latest_gate_run_id": "41651945251",
+    "source_locator_body_latest_gate_run_id": "43031407001",
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "complete",
     "version_scope_boundary_tracked_count": 88,
     "version_scope_boundary_verified_count": 88,
     "version_scope_boundary_pending_count": 0,
-    "version_scope_boundary_latest_gate_run_id": "41651945251"
+    "version_scope_boundary_latest_gate_run_id": "43031407001"
   },
   "next_actions": [
-    "DRCOM10-004 gate_pending: 88/192 locator/body/boundary registered. Six original PDF Table30 pages and XSD blobs independently verified, Common V2.4 candidate only; runtime matcher not implemented, no XSD edits.",
-    "Run/verify full schema-audit-validation + handoff-integrity, terminal-close only after SUCCESS, then final-HEAD CI; next DRCOM10-005."
+    "DRCOM10-004 terminal_clean at 88/192. Common V1.0–V2.4 PDF Table30 Announcement/FareZone 0:* versus selected exact XSD singleton 0:1, official 1.0–2.3 and candidate/integration 2.4. Reclassified source attribution to cross_artifact_mismatch, no XSD or runtime matcher edits.",
+    "Substantive full schema audit run43031407001 SUCCESS and handoff run43031407047 SUCCESS. Verify both final-HEAD workflow results after terminal handoff. Next unique finding DRCOM10-005."
   ],
   "source_locator_progress": {
     "locator_entry_count": 88,
@@ -2136,8 +2136,8 @@
     "coverage_partial_count": 0,
     "remaining_finding_count": 104,
     "latest_review_block": "DRCOM10_004",
-    "latest_gate_status": "gate_pending_DRCOM10_004",
-    "latest_gate_run_id": "41651945251",
+    "latest_gate_status": "success_DRCOM10_004",
+    "latest_gate_run_id": "43031407001",
     "body_verification_state": "complete",
     "body_verified_current_standard_count": 88,
     "body_pending_current_standard_count": 0,
@@ -2206,31 +2206,12 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "gate_pending",
-    "pending_gate": true,
-    "latest_completed_full_gate_run_id": "41651945251",
+    "work_cycle_state": "terminal_clean",
+    "pending_gate": false,
+    "latest_completed_full_gate_run_id": "43031407001",
     "latest_completed_full_gate_status": "success",
-    "latest_handoff_check_before_finalization_run_id": "41651945340",
-    "resume_instruction": "DRCOM10-004 gate_pending on dev/schema-integration. 88/192 source locators, 88/88 original body and version boundaries; six versions and selected exact XSD provenance in SOURCE_LOCATOR_REVIEW_DRCOM10_004_2026-11-11.md; dual PDF 0:* vs XSD 0:1 cardinality, strict XML FAIL, candidate V2.4. Canonical registry counts mirrored and source semantic blob pinned. Run full validation and handoff CI on actual HEAD; resolve failures then terminal_clean and verify final HEAD. Next DRCOM10-005.",
-    "pending_block": "DRCOM10-004 six-version JourneyStopInformation Announcement/FareZone cardinality audit",
-    "active_finding": "DRCOM10-004",
-    "active_step": "All six original PDF bodies, exact XSDs and historical version boundaries verified. Semantic diagnostics, runtime mapping, source/body/boundary and SDK summary registers synchronized at 88/192; full gate pending.",
-    "next_step": "Observe full schema-audit-validation and handoff-integrity checks of the current substantive HEAD; correct any failures, then separate terminal_clean commit and verify both final HEAD checks.",
-    "evidence_refs": [
-      "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_004_2026-11-11.md",
-      "audit_registry/finding_semantic_classification_v0.1.json",
-      "audit_registry/finding_source_locators_v0.1.json",
-      "audit_registry/pdf_locator_body_verification_v0.1.json",
-      "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
-      "sdk_manifest/known_issues_runtime_mapping_v0.1.json",
-      "COMMON_V1.0 pinned render run43029589455 artifact13860986360 PDF a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf PNG c3b1a0dd568d237aa96a07ec2888b21b2c3ea005a157cbd5ab811cf06bc1efd8",
-      "COMMON_V2.0 pinned render run43029612445 artifact13860711734 PDF 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088 PNG 7a4a8c44c8f4ee279c67bd4eecc6c9b0b19359224ecb421037b676a4baa60dbc",
-      "COMMON_V2.1 pinned render run43029633452 artifact13861146672 PDF a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32 PNG d1647155d5a5207786eb91f9aa3cab6ae0c2791b8f58be45b183a513e6bfdc87",
-      "COMMON_V2.2 pinned render run43029726595 artifact13860087462 PDF 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203 PNG 2ebf0c6f83c5c86acb9ce7875d36967d61d006476b7bb044479972f30ef9cf03",
-      "COMMON_V2.3 pinned render run43029753257 artifact13861042204 PDF d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b PNG 61a57d7bd6194de20519348928b77733dfc5f4cdcb7dd8ab53fd38fa4528742c",
-      "COMMON_V2.4 pinned render run43029777221 artifact13860357046 PDF 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a PNG b1a79f174ca8e52b15defa7c1dc3d9850cacd73f47d4093ebf7f52f2d918569d"
-    ],
-    "recovery_instruction": "DRCOM10-004 gate_pending on dev/schema-integration. 88/192 source locators, 88/88 original body and version boundaries; six versions and selected exact XSD provenance in SOURCE_LOCATOR_REVIEW_DRCOM10_004_2026-11-11.md; dual PDF 0:* vs XSD 0:1 cardinality, strict XML FAIL, candidate V2.4. Canonical registry counts mirrored and source semantic blob pinned. Run full validation and handoff CI on actual HEAD; resolve failures then terminal_clean and verify final HEAD. Next DRCOM10-005."
+    "latest_handoff_check_before_finalization_run_id": "43031407047",
+    "resume_instruction": "DRCOM10-004 terminal_clean: 88/192 source locators, 88/88 original body and historical scope boundaries complete; 104 findings remain. All six original Common V1.0–V2.4 PDF Table30 Announcement/FareZone show 0:* vs exact selected XSD 0:1; official XSD 1.0–2.3, candidate/integration 2.4. Attribution cross_artifact_mismatch. Strict XSD FAIL on repeated elements, explanatory advisory; no XSD or runtime matcher changes. Substantive schema run 43031407001 SUCCESS, handoff 43031407047 SUCCESS. Verify final-head workflows on terminal commit. Next DRCOM10-005."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2246,7 +2227,7 @@
     "locator_expansion_frozen": false,
     "future_locator_completion_requires_verified_boundary_same_block": true,
     "latest_verified_finding": "DRCOM10-004",
-    "latest_gate_run_id": "41651945251",
+    "latest_gate_run_id": "43031407001",
     "latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_004_2026-11-11.md"
   },
   "boundary_revalidation_package_mode": {
