@@ -2127,8 +2127,8 @@
     "version_scope_boundary_latest_gate_run_id": "43031407001"
   },
   "next_actions": [
-    "DRCOM10-004 terminal_clean at 88/192. Common V1.0–V2.4 PDF Table30 Announcement/FareZone 0:* versus selected exact XSD singleton 0:1, official 1.0–2.3 and candidate/integration 2.4. Reclassified source attribution to cross_artifact_mismatch, no XSD or runtime matcher edits.",
-    "Substantive full schema audit run43031407001 SUCCESS and handoff run43031407047 SUCCESS. Verify both final-HEAD workflow results after terminal handoff. Next unique finding DRCOM10-005."
+    "DRCOM10-005 gate_pending: first pinned PDF render for V2.1 p28. Previously completed 88/192.",
+    "Collect V2.1, request V2.3 p30, then finish complete historical scope and canonical gates."
   ],
   "source_locator_progress": {
     "locator_entry_count": 88,
@@ -2206,12 +2206,22 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "43031407001",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "43031407047",
-    "resume_instruction": "DRCOM10-004 terminal_clean: 88/192 source locators, 88/88 original body and historical scope boundaries complete; 104 findings remain. All six original Common V1.0–V2.4 PDF Table30 Announcement/FareZone show 0:* vs exact selected XSD 0:1; official XSD 1.0–2.3, candidate/integration 2.4. Attribution cross_artifact_mismatch. Strict XSD FAIL on repeated elements, explanatory advisory; no XSD or runtime matcher changes. Substantive schema run 43031407001 SUCCESS, handoff 43031407047 SUCCESS. Verify final-head workflows on terminal commit. Next DRCOM10-005."
+    "resume_instruction": "DRCOM10-005 gate_pending. Original Common V1.0/V2.0/V2.2/V2.4 PDF renders reusable from earlier exact pinned artifact; newly requested V2.1 p28, still need V2.3 p30. All exact six XSDs say child ShortTripStop not ShortTripStopList. V1.0 PDF additionally cites StopPointTariffInformation, structurally instance-equivalent. Do not claim new progress until exact source/body/boundary and full gate.",
+    "pending_block": "DRCOM10-005 ShortTripStopList historical and cross-version XML child naming audit",
+    "active_finding": "DRCOM10-005",
+    "active_step": "Rendering pinned COMMON_V2.1 printed page 28 for ShortTripStopList. Prior verified DRCOM10-004 artifacts already contain V1.0 p18, V2.0 p26, V2.2 p29 and V2.4 p32.",
+    "next_step": "Obtain V2.1 p28 and V2.3 p30 original PDF image evidence; reconcile all six exact XSDs/PDFs, scope and SDK, update registers then gates.",
+    "evidence_refs": [
+      "Official original COMMON_V2.1 source SHA256 a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32",
+      "tools/pdf_render_request_v0.1.json COMMON_V2.1 page 28",
+      "DRCOM10-004 prior original pinned PDF renders for four other versions"
+    ],
+    "recovery_instruction": "DRCOM10-005 gate_pending. Original Common V1.0/V2.0/V2.2/V2.4 PDF renders reusable from earlier exact pinned artifact; newly requested V2.1 p28, still need V2.3 p30. All exact six XSDs say child ShortTripStop not ShortTripStopList. V1.0 PDF additionally cites StopPointTariffInformation, structurally instance-equivalent. Do not claim new progress until exact source/body/boundary and full gate."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
