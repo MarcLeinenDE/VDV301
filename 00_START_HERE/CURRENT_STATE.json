@@ -2127,8 +2127,8 @@
     "version_scope_boundary_latest_gate_run_id": "43107136224"
   },
   "next_actions": [
-    "DRCOM10-006 terminal_clean at 90/192: original six Common body tables and exact Enum XSD checked, affected V1.0–V2.3, V2.4 corrected nonaffected boundary, strict selected XSD invalid for PDF Wheelchair/Others; no alias or runtime matcher.",
-    "Substantive full schema-audit-validation run43107136224 SUCCESS, handoff-integrity run43107136241 SUCCESS. Verify both final-HEAD workflows on terminal commit, then proceed to DRCOM10-007."
+    "DRCOM10-007 gate_pending source visual review, latest request COMMON_V2.2 p38-42; prior terminal progress 90/192, 102 open.",
+    "Verify each affected original PDF body section and its actual table/caption, compare adjacent official V1.0–V2.4 editions; documentation-only finding, no XSD/runtime changes. After evidence, add one complete locator entry and full GitHub gates + separate terminal_clean."
   ],
   "source_locator_progress": {
     "locator_entry_count": 90,
@@ -2206,12 +2206,26 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "43107136224",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "43107136241",
-    "resume_instruction": "DRCOM10-006 terminal_clean: 90/192 unique source locators, 90/90 byte-pinned visible original PDF body reviews, 90/90 verified version boundaries, 102 remaining. Original Common V1.0–V2.3 DoorCountingObjectClassEnumeration PDF Wheelchair/Others differs from exact official selected Enum XSD WheelChair/Other (Common V2.3 depends on Enumerations V2.2). V2.4 official PDF corrected Wheelchair/Other; selected V2.4 XSD remains candidate/integration and is nonaffected correction boundary, never a runtime trigger. Strict XSD-INVALID for historical PDF values, error_with_advisory only reviewed_not_implemented; no aliases/XSD changes. Report docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_006_2026-11-11.md. Substantive schema gate 43107136224 SUCCESS and handoff 43107136241 SUCCESS on commit ed404b9b25cdd07b8878a0b2332304a163434ce8. Verify final-HEAD schema and handoff workflows on this terminal commit. Next unique finding DRCOM10-007."
+    "resume_instruction": "DRCOM10-007 gate_pending on original PDF render request COMMON_V2.2 pages38-42. Source locator count still 90/192, 102 open, no new finding registered yet. Existing V1.0-only scope probably too narrow: V1.0/V2.0/V2.1/V2.3/V2.4 historical source body shows GNSSCoordinateSystem(s) name mismatch, dorr operation, and Infromation (the latter on following printed page). Do not mark any new locator complete before V2.2 visual and all exact body evidence; documentary only, no XSD or SDK behavior changes.",
+    "pending_block": "DRCOM10-007 multi-version grouped PDF editorial residue",
+    "active_finding": "DRCOM10-007",
+    "active_step": "Five original Common PDF versions V1.0/2.0/2.1/2.3/2.4 visibly rechecked for GNSSCoordinateSystem(s) naming and dorr operation; all source/page PNG hashes checked; V2.2 original visible body rendering pending.",
+    "next_step": "Retrieve exact-byte COMMON_V2.2 printed p38–42 render artifacts and inspect actual §3.10–3.14 body/table numbers and text, then finish original five PDF source evidence and additional V1.0-only history; extend existing unique DRCOM10-007 version_scope to every independently confirmed affected official publication, sync semantic/source/body/boundary/SDK/current state, run full schema+handoff gates and terminal closure.",
+    "recovery_instruction": "Retrieve exact-byte COMMON_V2.2 printed p38–42 render artifacts and inspect actual §3.10–3.14 body/table numbers and text, then finish original five PDF source evidence and additional V1.0-only history; extend existing unique DRCOM10-007 version_scope to every independently confirmed affected official publication, sync semantic/source/body/boundary/SDK/current state, run full schema+handoff gates and terminal closure.",
+    "evidence_refs": [
+      "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V1.0.md FR-COM10-009",
+      "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.0.md FR-COM20-009",
+      "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.1.md FR-COM21-OBS-019/020",
+      "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.2.md FR-COM22-014",
+      "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3_FRESH_2026-09-02.md FR-COM23-016",
+      "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4.md FR-COM24-014/015",
+      "tools/pdf_render_request_v0.1.json COMMON_V2.2 pages38-42"
+    ]
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
