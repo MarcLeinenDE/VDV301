@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 93,
-    "verified": 93,
+    "tracked_findings": 94,
+    "verified": 94,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -5534,6 +5534,70 @@
         }
       ],
       "note": "Earlier V2.1-only scope historically preserved. Conservative cross_artifact_mismatch attribution (original PDF-vs-XSD author blame unknown), strict selected XSD VALID unchanged and SDK trigger only reviewed_not_implemented. 93/192 canonical locator/body/boundary after gate; 99 remaining."
+    },
+    {
+      "finding_id": "DRCOM22-001",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM22_001_2026-11-12.md",
+        "Exact pinned official Common original V1.0/V2.0/V2.1 PDF source SHA256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf / 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088 / a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32 full original texts contain no NetexMode, corresponding exact XSD types absent; NetexMode added with V2.2 (history §4.4.1).",
+        "COMMON_V2.2 official PDF pinned SHA256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203 p15 §1.18 Table20 PNG SHA256 bdf9073a1e82458c76e7c727aa5f093da9b36eaee20596332af42a669470081a, run33857241506 artifact9930671790; historical official V2.2 XSD blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae lines961/965 both choices 0.",
+        "COMMON_V2.3 official PDF pinned SHA256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b p15 §1.18 Table20 PNG SHA256 f5a33a1cc837192d4c999432fd4747134f2a53158e0f5cdf786773c502958af6, run33656579631 artifact9856965744; official V2.3 XSD blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 lines1041/1045 both choices 0.",
+        "COMMON_V2.4 official PDF pinned SHA256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a p17 §1.18 Table20 PNG SHA256 f830bd02a7e707ab536e486fb476ce74f5905e66f39af3a82a588adf14228094, run33658306978 artifact9857652638; selected V2.4 candidate/integration XSD blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 lines1093/1097 both choices 0.",
+        "Historical EV-120 V2.2 exact XSD empty-NetexMode VALID executable, EV-121 V2.3 and EV-122 V2.4 candidate contain same exact-profile empty-valid probes; no new test runs in this locator block. CE-023 V2.2/V2.3 duplicate NetexMode table is separate."
+      ],
+      "scope_conclusion": "Common V1.0, V2.0 and V2.1 original PDF and exact selected XSD lack NetexMode; V2.2 version history explicitly identifies new NetexMode type. First verified PDF/XSD mismatch appears in exact historical official Common V2.2, persists in official Common V2.3, and in officially published Common V2.4 PDF paired with explicitly selected candidate/integration V2.4 XSD. No later corrected successor is verified; no independent German/English release track with different group cardinalities observed. Distinct CE-023 duplicate NetexMode table issue is not conflated. Exact XSD remains normative.",
+      "boundary_checks": [
+        {
+          "version": "Common V1.0",
+          "role": "nonaffected_predecessor_type_absent",
+          "source_ids": [
+            "COMMON_V1.0"
+          ],
+          "language_status": "Official Common V1.0 original source PDF SHA256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf, full extracted text SHA256 fdfdf62a88f78dd7a59b341157662d3e5708b2f9c56d2cf1df13a7d4eb0cfa0a searched and NetexMode not present; exact selected official XSD Git blob 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c also no NetexMode type.  No affected language subversion inferred."
+        },
+        {
+          "version": "Common V2.0",
+          "role": "nonaffected_predecessor_type_absent",
+          "source_ids": [
+            "COMMON_V2.0"
+          ],
+          "language_status": "Official Common V2.0 original source PDF SHA256 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088, full extracted text SHA256 05e8a7e1788318bf5ac83ffdd61125622e28ce30f4fc5f388467a41ed46f5a3f searched and NetexMode not present; exact selected official XSD Git blob 8608e3dcd665c197c34da7f6ec6af5a3758da164 also no NetexMode type.  No affected language subversion inferred."
+        },
+        {
+          "version": "Common V2.1",
+          "role": "last_nonaffected_predecessor_type_absent",
+          "source_ids": [
+            "COMMON_V2.1"
+          ],
+          "language_status": "Official Common V2.1 original source PDF SHA256 a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32, full extracted text SHA256 5dce4c8ecc770574bdce8d5961fefbc01f88b1547e3957855013d9b077fc24b0 searched and NetexMode not present; exact selected official XSD Git blob 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e also no NetexMode type. Latest published nonaffected predecessor; V2.2 history explicitly introduces NetexMode. No affected language subversion inferred."
+        },
+        {
+          "version": "Common V2.2",
+          "role": "first_verified_affected_official_release",
+          "source_ids": [
+            "COMMON_V2.2"
+          ],
+          "language_status": "Original Common V2.2 official published bilingual PDF SHA256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203, visible body §1.18 Table20 on printed p15 shows two mandatory –1:1 choice groups; original PNG SHA256 bdf9073a1e82458c76e7c727aa5f093da9b36eaee20596332af42a669470081a. Exact official historical Common XSD blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae declares two xs:choice minOccurs=0. No language-specific corrected issue found; V2.4 schema is candidate only."
+        },
+        {
+          "version": "Common V2.3",
+          "role": "last_verified_affected_official_release",
+          "source_ids": [
+            "COMMON_V2.3"
+          ],
+          "language_status": "Original Common V2.3 official published bilingual PDF SHA256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b, visible body §1.18 Table20 on printed p15 shows two mandatory –1:1 choice groups; original PNG SHA256 f5a33a1cc837192d4c999432fd4747134f2a53158e0f5cdf786773c502958af6. Exact official historical Common XSD blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 declares two xs:choice minOccurs=0. No language-specific corrected issue found; V2.4 schema is candidate only."
+        },
+        {
+          "version": "Common V2.4",
+          "role": "last_checked_affected_candidate_integration_no_successor",
+          "source_ids": [
+            "COMMON_V2.4"
+          ],
+          "language_status": "Original Common V2.4 official published bilingual PDF SHA256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, visible body §1.18 Table20 on printed p17 shows two mandatory –1:1 choice groups; original PNG SHA256 f830bd02a7e707ab536e486fb476ce74f5905e66f39af3a82a588adf14228094. Exact candidate/integration Common XSD blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 declares two xs:choice minOccurs=0. No language-specific corrected issue found; V2.4 schema is candidate only."
+        }
+      ],
+      "note": "Existing single DRCOM22-001 extended from V2.2-only through V2.3 and selected candidate V2.4; V1.0–V2.1 excluded. Conservative source attribution cross_artifact_mismatch; source intent unresolved, reviewed_not_implemented valid advisory only; historical EV-120/121/122 harnesses preserved; no new XML tests, XSD/SDK changes or new finding identity."
     }
   ]
 }

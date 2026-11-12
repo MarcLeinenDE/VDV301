@@ -9042,7 +9042,19 @@
           "version": "Common V2.2",
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_common_V2.2.xsd",
-          "note": "No VDV-301-2.2 tag is invented; authority is the exact historical upstream V2.2 file lineage. The PDF presents both NetexMode choice groups as mandatory one-of, while the exact V2.2 XSD gives both top-level xs:choice compositors minOccurs=0."
+          "note": "Exact official Common V2.2 PDF actual body printed p15 §1.18 Table20 marks both NetexMode choice groups –1:1 (VDV mandatory one-of notation). Selected official_release XSD Git blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae has two top-level xs:choice minOccurs=0, lines 961,965."
+        },
+        {
+          "version": "Common V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.3.xsd",
+          "note": "Exact official Common V2.3 PDF actual body printed p15 §1.18 Table20 marks both NetexMode choice groups –1:1 (VDV mandatory one-of notation). Selected official_release XSD Git blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 has two top-level xs:choice minOccurs=0, lines 1041,1045."
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd",
+          "note": "Exact official Common V2.4 PDF actual body printed p17 §1.18 Table20 marks both NetexMode choice groups –1:1 (VDV mandatory one-of notation). Selected candidate_integration XSD Git blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 has two top-level xs:choice minOccurs=0, lines 1093,1097. Official publication PDF, XSD is only selected candidate/integration, not official."
         }
       ],
       "review_state": "sdk_ready",
@@ -9053,7 +9065,7 @@
         "choice_compositor_optionality",
         "pdf_one_of_vs_optional_choice"
       ],
-      "defect_assessment": "confirmed_pdf_defect",
+      "defect_assessment": "cross_artifact_mismatch",
       "confidence": "confirmed",
       "validation_effect": [
         "xsd_accepts_semantically_questionable_form",
@@ -9063,41 +9075,45 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "Pinned Common V2.2 page 15 visibly marks both NetexMode choice groups as -1:1 using VDV choice notation."
+          "note": "Official original byte/size-pinned Common PDFs V2.2 (p15), V2.3 (p15), V2.4 (p17), each actual visible body §1.18 Table20 NetexMode, independently show two choice blocks –1:1. All original per-page PNG SHA-256 matched GitHub archived render manifests, including V2.2 EV-138 page15 evidence. The dash denotes a VDV choice, not a negative quantity."
         },
         {
           "type": "official_xsd_explicit",
-          "note": "Exact historical-upstream Common V2.2 XSD defines both top-level NetexMode xs:choice compositors with minOccurs=0."
-        },
-        {
-          "type": "official_release_provenance",
-          "note": "V2.2 authority is pinned through exact upstream file lineage rather than an invented release tag."
+          "note": "Exact selected Common V2.2 blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae lines961/965, official V2.3 blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 lines1041/1045 and selected V2.4 candidate/integration blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 lines1093/1097 each declare two outer xs:choice minOccurs=0. V2.3 includes exact Enumerations V2.2; no invented V2.2 release tag."
         },
         {
           "type": "executable_validation",
-          "note": "EV-120 validates an empty NetexMode instance, proving that neither choice group is mandatory in the selected XSD."
+          "note": "Preserved EV-120 explicitly tests empty <TestNetexMode/> VALID for exact Common V2.2. Historical EV-121/V2.3 and EV-122/V2.4 test harnesses also assert empty <N/> VALID and populated NetexMode VALID using exact selected profiles; their existing source programs have been inspected, not re-executed in this source-locator cycle."
+        },
+        {
+          "type": "technical_inference",
+          "note": "Pinned original Common V1.0, V2.0 and V2.1 complete extracted text searched with no NetexMode, corresponding exact Common XSD source has no NetexMode type; published Common V2.2 section 4.4.1 explicitly identifies NetexMode as a newly added type. No affected PDF/XSD discrepancy before V2.2. No post-V2.4 source checked as an official corrected successor."
+        },
+        {
+          "type": "xml_schema_semantics",
+          "note": "Stronger counterhypothesis: perhaps –1:1 is optional choice notation, or the XSD intentionally allows an incomplete template. VDV project choice-legend and aligned PointType distinguish –1:1 as mandatory one-of; two optional exact xs:choice compositors plus executable empty type acceptance prove a real semantic mismatch. Source blame between too-strict PDF and too-permissive XSD remains unresolved. The exact selected XSD controls VALID/INVALID."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "COMMON V2.2: NetexMode-Wahlgruppen sind in der XSD optional",
-          "short": "Die PDF stellt beide NetexMode-Wahlgruppen als verpflichtend dar; die ausgewählte V2.2-XSD erlaubt, beide Gruppen wegzulassen.",
-          "long": "Die offizielle Common-V2.2-PDF zeigt für NetexMode sowohl die Hauptmodus- als auch die Submodus-Wahlgruppe als verpflichtende 1-aus-n-Auswahl. Die exakt gepinnte historische Upstream-V2.2-XSD definiert beide xs:choice-Kompositoren dagegen mit minOccurs=0. EV-120 bestätigt ausführbar, dass eine leere NetexMode-Struktur gültig ist. Die PDF-Pflicht darf daher nicht als zusätzliches Validierungslimit verwendet werden.",
-          "recommendation": "Eine XSD-gültige leere NetexMode-Struktur nicht ablehnen. Die PDF/XSD-Abweichung als Advisory melden und die exakt ausgewählte V2.2-XSD-Autorität beibehalten."
+          "title": "Common V2.2–V2.4: NetexMode-Wahlgruppen in der XSD optional",
+          "short": "Die Common-PDFs V2.2–V2.4 verlangen zwei NetexMode-Wahlgruppen; die ausgewählten XSDs lassen beide weg.",
+          "long": "In den offiziellen Common-PDFs V2.2, V2.3 und V2.4 sind die zwei NetexMode-Wahlgruppen in §1.18 Tabelle20 jeweils mit der VDV-Choice-Notation –1:1 dargestellt. Die zugehörigen exakt ausgewählten Common-XSDs deklarieren dagegen beide äußeren xs:choice-Kompositoren mit minOccurs=0, wodurch selbst eine leere NetexMode-Struktur gültig ist. Das bestehende EV-120 bestätigt dies ausführbar für V2.2; EV-121 und EV-122 enthalten dieselbe positive Prüfsituation für V2.3 und die ausgewählte V2.4-Candidate-/Integrations-XSD. V1.0–V2.1 enthalten NetexMode noch nicht. Ob die PDF zu streng oder die XSD bewusst oder versehentlich zu großzügig modelliert ist, ist nicht abschließend zugeordnet.",
+          "recommendation": "Die XSD-Validität nach exakt ausgewähltem Profil unverändert lassen; eine leere, XSD-gültige NetexMode-Struktur nicht wegen der PDF-Tabelle als INVALID melden. Bei passendem Profil nur ein optionales, noch nicht implementiertes Advisory vorsehen. V2.4-XSD stets als Candidate/Integration kennzeichnen und keine XSD- oder Runtime-Korrektur ohne gesonderten Auftrag durchführen."
         },
         "en": {
-          "title": "COMMON V2.2: NetexMode choice groups are optional in the XSD",
-          "short": "The PDF presents both NetexMode choice groups as mandatory, while the selected V2.2 XSD permits both groups to be absent.",
-          "long": "The official Common V2.2 PDF presents both the main-mode and submode NetexMode groups as mandatory one-of choices. The exact pinned historical-upstream V2.2 XSD instead defines both xs:choice compositors with minOccurs=0. EV-120 executable evidence confirms that an empty NetexMode structure is valid. The PDF requirement must therefore not become an additional validation limit.",
-          "recommendation": "Do not reject an XSD-valid empty NetexMode structure. Report the PDF/XSD discrepancy as an advisory and retain the exact selected V2.2 XSD authority."
+          "title": "Common V2.2–V2.4: NetexMode choice groups optional in selected XSDs",
+          "short": "The Common V2.2–V2.4 PDFs require two NetexMode one-of groups; selected exact XSDs allow both groups to be absent.",
+          "long": "Official Common V2.2, V2.3 and V2.4 PDF §1.18 Table20 each mark both NetexMode choice groups as –1:1 under VDV choice notation. The matching exact selected Common XSD instead assigns minOccurs=0 to both top-level xs:choice compositors, so an empty NetexMode instance can remain valid. Preserved EV-120 demonstrates this executably in V2.2; the historical EV-121 and EV-122 harnesses also probe empty valid NetexMode against exact V2.3 and selected V2.4 candidate/integration profiles. V1.0–V2.1 predate the type. Without independent publisher confirmation the source causing the discrepancy cannot be attributed with confidence.",
+          "recommendation": "Keep strict selected-XSD conformance normative; do not reject an empty but XSD-valid NetexMode solely because the PDF specifies two mandatory choice groups. A profile-specific advisory is reviewed but not implemented. Disclose the V2.4 candidate/integration status; do not modify schema or runtime from this audit."
         }
       },
       "runtime_match": {
         "state": "reviewed",
         "candidate_triggers": [
-          "selected strict profile is the exact historical-upstream Common V2.2 XSD family",
-          "XSD validation result is VALID for an empty NetexMode with neither main-mode nor submode choice populated",
-          "selected Common V2.2 XSD defines both top-level NetexMode xs:choice compositors with minOccurs=0"
+          "Selected official historical Common V2.2 or V2.3, or explicitly selected Common V2.4 candidate_integration XSD, reports VALID for a NetexMode with both main-mode and submode groups absent.",
+          "Exact NetexMode type contains two top-level xs:choice with minOccurs=0 in that selected schema; no XML conformance override from PDF –1:1.",
+          "Only decorate an already XSD-VALID result; runtime matcher reviewed_not_implemented. V1.0–V2.1 not applicable. CE-023 corrupt duplicate NetexMode table is a separate documentation finding."
         ]
       },
       "source_references": [
@@ -9124,9 +9140,14 @@
           "kind": "evidence",
           "reference": "EV-120; EV-138 closure run 33857443446",
           "note": "Empty-NetexMode executable boundary and current-gate closure."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM22_001_2026-11-12.md",
+          "note": "V1.0–V2.4 original-source boundary recheck, V2.2–V2.4 printed §1.18 Table20 images with verified PNG hashes, exact XSD blobs/optional group declarations, EV-120/121/122 preserved and source-attribution correction."
         }
       ],
-      "notes": "The leading - in -1:1 is treated as VDV choice notation, not as a negative cardinality. This finding is distinct from CE-023's corrupt duplicate NetexMode table."
+      "notes": "2026-11-12: original historical V2.2-only finding scope proven to continue into official Common V2.3 and official Common V2.4 PDF with selected candidate/integration schema. V1.0–V2.1 original PDFs and XSDs have no NetexMode; V2.2 first appearance. The five XSD/PDF versions are not interchangeable. Reclassify prior confirmed_pdf_defect attribution conservatively to cross_artifact_mismatch (cause undetermined); runtime advisory is reviewed_not_implemented and can decorate VALID only. Existing EV-120/EV-121/EV-122 are preserved, not newly executed. CE-023 duplicate-table issue remains separate; do not change XSDs or productive SDK."
     },
     {
       "finding_id": "DRCOM23-001",

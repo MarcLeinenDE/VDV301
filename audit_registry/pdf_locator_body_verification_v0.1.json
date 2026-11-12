@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 93,
-    "verified_current_standard": 93,
+    "tracked_findings": 94,
+    "verified_current_standard": 94,
     "pending_current_standard": 0
   },
   "entries": [
@@ -921,6 +921,18 @@
         "V2.4 official source SHA256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, 1689647 bytes; original p34 §2.51 table begins with StopName 0:1, continued p35 actual Table51 caption; PNG SHA256 p34 d3d1f03a989ae3f18349b747643307567ff3e873862014e7c642b46bedd54a16 and p35 9a333351c0ef89a63067595482fdff7f26b59808c40f693ba2d1e32bf6fb24bd; run33658306978 artifact9857652638; selected Common XSD blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 line611 0:*, candidate_integration only."
       ],
       "note": "All five original official V2.0–V2.4 visible PDF body target headings, request StopName rows and actual Table captions checked (V2.4 split p34/35). Original byte/size pins and page PNG sha256 matched render manifests; V2.2 fresh pinned fallback. V1.0 original p19-20 confirms no comparable request member table. Never used TOC/history as final locator. Runtime matcher not implemented; no new multi-version XML test claimed."
+    },
+    {
+      "finding_id": "DRCOM22-001",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM22_001_2026-11-12.md",
+        "COMMON_V2.2 official PDF sha256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203, 1411558 bytes, actual visible printed p15 §1.18 Table20 NetexMode both choice groups –1:1. Original archived EV-138 rendered PNG sha256 bdf9073a1e82458c76e7c727aa5f093da9b36eaee20596332af42a669470081a (GitHub run33857241506 artifact9930671790); exact historical Common V2.2 XSD blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae lines961/965 two xs:choice minOccurs=0; official historical file lineage.",
+        "COMMON_V2.3 official PDF sha256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b, 793521 bytes; actual visible printed p15 §1.18 Table20 NetexMode both choice groups –1:1; original PNG sha256 f5a33a1cc837192d4c999432fd4747134f2a53158e0f5cdf786773c502958af6 (run33656579631 artifact9856965744); exact official XSD blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 lines1041/1045 two xs:choice minOccurs=0, historical Enumerations V2.2 dependency.",
+        "COMMON_V2.4 official PDF sha256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, 1689647 bytes; actual visible printed p17 §1.18 Table20 NetexMode both choice groups –1:1; original PNG sha256 f830bd02a7e707ab536e486fb476ce74f5905e66f39af3a82a588adf14228094 (run33658306978 artifact9857652638); exact selected candidate/integration XSD blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 lines1093/1097 two xs:choice minOccurs=0; candidate is not official XSD release.",
+        "Predecessor official Common V1.0/V2.0/V2.1 source SHA256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf / 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088 / a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32. Full archived original text searched for NetexMode absent and exact XSD blobs 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c / 8608e3dcd665c197c34da7f6ec6af5a3758da164 / 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e have no NetexMode. No invented visible table locator for absent type."
+      ],
+      "note": "Three exact byte-pinned original V2.2/V2.3/V2.4 visible body §1.18 Table20 pages 15/15/17 independently inspected; each row displays two –1:1 groups, VDV choice marker not negative occurrence. Original page PNG SHA matches archived manifest, full original PDFs V2.3/V2.4 SHA verified. Predecessor V1.0–V2.1 absence grounded in full source text and exact XSD; no nonexistent PDF locator invented. Prior EV-120/121/122 harness code inspected; no fresh XML tests executed. CE-023 corrupt duplicate V2.2/V2.3 section 2.34 remains distinct."
     }
   ]
 }
