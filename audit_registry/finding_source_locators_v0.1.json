@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "7e2af1a4071b12de0139f4a9547910159ac54321",
+    "git_blob": "a3d6594573b576a6d3f376e225a1e0d3944ec80d",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 91,
-    "coverage_complete_count": 91,
+    "locator_entry_count": 92,
+    "coverage_complete_count": 92,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 101
+    "remaining_finding_count": 100
   },
   "entries": [
     {
@@ -18072,6 +18072,363 @@
         "Common V2.3 official original SHA256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b, 793521 bytes; p39 §3.10 Table75 'dorr operation', §3.13 Table78 singular GNSSCoordinateSystemEnumeration heading vs plural GNSSCoordinateSystemsEnumeration row/caption, PNG sha256 072e30327edc317fb78b5709258a41b78585438f7f973dc24e202761a522a6e0; p40 §3.14 Table79 'Infromation' GNSS quality, PNG sha256 fbb2a0356b179911943597058401264cdf86cc43918796a3844263afa459884a; GitHub render run33656579631 artifact9856965744; selected contextual Enum XSD blob 2a23b512379b18e8f122ac1272cef8229fb86283 singular simpleType.",
         "Common V2.4 official original SHA256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, 1689647 bytes; p42 §3.10 Table74 'dorr operation', §3.13 Table77 singular GNSSCoordinateSystemEnumeration heading vs plural GNSSCoordinateSystemsEnumeration row/caption, PNG sha256 006d387354fd9f2aa0d949d79daecd5b8025ca1c885a934f432a4ba50eb982f9; p43 §3.14 Table78 'Infromation' GNSS quality, PNG sha256 25a04aa83e6480434f8b1118440123e1179cc35ba736efe10e030f298d708185; GitHub render run33658306978 artifact9857652638; selected contextual Enum XSD blob 2afed8cf23afa91db92b0f043cc5b4ad428b0f25 singular simpleType.",
         "V1.0 official original extra editorial evidence p18 §1.42 Table42, p24 section2 and p30 §3.1 separately visually checked; image digests in canonical PDF locators; later bilingual histories not treated as defect."
+      ]
+    },
+    {
+      "finding_id": "DRCOM20-001",
+      "service": "Common / InternationalTextType",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "Common V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.0.xsd",
+          "note": "Original Common V2.0 PDF p13 §1.17 Table17 types Value/Language as IBIS-IP.string/IBIS-IP.language complex wrappers, while exact selected XSD blob 8608e3dcd665c197c34da7f6ec6af5a3758da164 declares direct xs:string/xs:language; official_release."
+        },
+        {
+          "version": "Common V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.1.xsd",
+          "note": "Original Common V2.1 PDF p12 §1.17 Table17 types Value/Language as IBIS-IP.string/IBIS-IP.language complex wrappers, while exact selected XSD blob 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e declares direct xs:string/xs:language; official_release."
+        },
+        {
+          "version": "Common V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.2.xsd",
+          "note": "Original Common V2.2 PDF p12 §1.17 Table17 types Value/Language as IBIS-IP.string/IBIS-IP.language complex wrappers, while exact selected XSD blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae declares direct xs:string/xs:language; official_release."
+        },
+        {
+          "version": "Common V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.3.xsd",
+          "note": "Original Common V2.3 PDF p12 §1.17 Table17 types Value/Language as IBIS-IP.string/IBIS-IP.language complex wrappers, while exact selected XSD blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 declares direct xs:string/xs:language; official_release. CE-020's PR30 authority collision is a distinct finding."
+        },
+        {
+          "version": "Common V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd",
+          "note": "Original Common V2.4 PDF p14 §1.17 Table17 types Value/Language as IBIS-IP.string/IBIS-IP.language complex wrappers, while exact selected XSD blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 declares direct xs:string/xs:language; candidate_integration. Official PDF, selected XSD only candidate/integration, upstream PR31 unmerged."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "1.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "predecessor_no_comparable_pdf_type_table",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V1.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds.pdfx",
+              "sha256": "a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf",
+              "printed_pages": [
+                7
+              ],
+              "section": "1.1 AdditionalAnnouncement",
+              "table": "Table 1 — Description of AdditionalAnnouncement",
+              "point_summary": "Actual V1.0 original p7 §1.1 Table1 references +InternationalTextType for AnnouncementText, but no member type table; PNG SHA256 28ff536a697d9e49a0e3a02deb92e6823ffa8b99aad8f056a3ef1d819edc5e32, run33275626001 artifact9721397514."
+            },
+            {
+              "source_id": "COMMON_V1.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds.pdfx",
+              "sha256": "a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf",
+              "printed_pages": [
+                11
+              ],
+              "section": "1.17 DeviceSpecificationWithState",
+              "table": "Table 17 — Description of DeviceSpecificationWithState",
+              "point_summary": "The actual V1.0 original p11 §1.17 Table17 documents DeviceSpecificationWithState, not InternationalTextType; PNG SHA256 8d14a022ee3f3669661d5ed2eb2a6cb79a7479178b3732c57bccf5323a7f34df, 36-page original full contents/body checked. No comparable InternationalTextType member type table in this PDF."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official historical V1.0 Common XSD Git blob; CE-020 PR30 candidate overlay not substituted.",
+              "component_kind": "element",
+              "component": "InternationalTextType",
+              "member": "Value",
+              "value": "type=xs:string; required 1:1; direct primitive content",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='InternationalTextType']/xs:sequence/xs:element[@name='Value']",
+              "line_hint": "708",
+              "point_summary": "Git blob 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c line708 declares InternationalTextType.Value xs:string directly. Separate wrappers IBIS-IP.string / IBIS-IP.language are complex types at lines 831/807 with nested Value and optional ErrorCode; PDF reference is not interchangeable."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official historical V1.0 Common XSD Git blob; CE-020 PR30 candidate overlay not substituted.",
+              "component_kind": "element",
+              "component": "InternationalTextType",
+              "member": "Language",
+              "value": "type=xs:language; required 1:1; direct primitive content",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='InternationalTextType']/xs:sequence/xs:element[@name='Language']",
+              "line_hint": "709",
+              "point_summary": "Git blob 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c line709 declares InternationalTextType.Language xs:language directly. Separate wrappers IBIS-IP.string / IBIS-IP.language are complex types at lines 831/807 with nested Value and optional ErrorCode; PDF reference is not interchangeable."
+            }
+          ],
+          "coverage_note": "V1.0 exact original PDF has no separately comparable InternationalTextType member-type table despite references elsewhere; full original text/TOC + visible p7/p11 checked. Exact official V1.0 XSD already uses direct xs:string/xs:language. Predecessor is not evidence of a corrected PDF or an affected runtime lane."
+        },
+        {
+          "version": "2.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "first_verified_affected_official",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v-2-0.pdfx",
+              "sha256": "23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088",
+              "printed_pages": [
+                13
+              ],
+              "section": "1.17 InternationalTextType",
+              "table": "Tabelle 17 — Beschreibung von InternationalTextType",
+              "point_summary": "Original visible p13 Table17: Value 1:1 IBIS-IP.string and Language 1:1 IBIS-IP.language. Source SHA256 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088 (946088 bytes), verified PNG SHA256 1151012f58615b9bba2f93639e5b642ffa0ffb10f9967953a2d845d9e73b4e2c, GitHub run33279811315 artifact9722644456; exact selected XSD declares direct xs:string/xs:language; official_release."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.0.xsd",
+              "git_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+              "authority_detail": "Exact official historical V2.0 Common XSD Git blob; CE-020 PR30 candidate overlay not substituted.",
+              "component_kind": "element",
+              "component": "InternationalTextType",
+              "member": "Value",
+              "value": "type=xs:string; required 1:1; direct primitive content",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='InternationalTextType']/xs:sequence/xs:element[@name='Value']",
+              "line_hint": "719",
+              "point_summary": "Git blob 8608e3dcd665c197c34da7f6ec6af5a3758da164 line719 declares InternationalTextType.Value xs:string directly. Separate wrappers IBIS-IP.string / IBIS-IP.language are complex types at lines 842/818 with nested Value and optional ErrorCode; PDF reference is not interchangeable."
+            },
+            {
+              "file": "IBIS-IP_common_V2.0.xsd",
+              "git_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+              "authority_detail": "Exact official historical V2.0 Common XSD Git blob; CE-020 PR30 candidate overlay not substituted.",
+              "component_kind": "element",
+              "component": "InternationalTextType",
+              "member": "Language",
+              "value": "type=xs:language; required 1:1; direct primitive content",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='InternationalTextType']/xs:sequence/xs:element[@name='Language']",
+              "line_hint": "720",
+              "point_summary": "Git blob 8608e3dcd665c197c34da7f6ec6af5a3758da164 line720 declares InternationalTextType.Language xs:language directly. Separate wrappers IBIS-IP.string / IBIS-IP.language are complex types at lines 842/818 with nested Value and optional ErrorCode; PDF reference is not interchangeable."
+            }
+          ],
+          "coverage_note": "Original official Common V2.0 PDF visible §1.17 Table17/body verified against pinned PDF SHA/size and page PNG digest. Exact selected official_release Common XSD blob 8608e3dcd665c197c34da7f6ec6af5a3758da164 has direct primitive members, distinct separately declared wrapper complexTypes. Strict XSD-invalid on PDF-style extra nesting, advisory only; no aliases."
+        },
+        {
+          "version": "2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "intermediate_affected_official",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.1",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v2-1-commonstructure-enums.pdfx",
+              "sha256": "a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32",
+              "printed_pages": [
+                12
+              ],
+              "section": "1.17 InternationalTextType",
+              "table": "Table 17 — Description of InternationalTextType",
+              "point_summary": "Original visible p12 Table17: Value 1:1 IBIS-IP.string and Language 1:1 IBIS-IP.language. Source SHA256 a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32 (1274051 bytes), verified PNG SHA256 a9bfcc2456e4f8be6833c30bfba6ab0e252c7f19d2ec605ca05c828dea67f561, GitHub run33393002497 artifact9758203545; exact selected XSD declares direct xs:string/xs:language; official_release."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.1.xsd",
+              "git_blob": "05977c9f86c7c9dd0b48f36a4a4e9be32e94659e",
+              "authority_detail": "Exact official historical V2.1 Common XSD Git blob; CE-020 PR30 candidate overlay not substituted.",
+              "component_kind": "element",
+              "component": "InternationalTextType",
+              "member": "Value",
+              "value": "type=xs:string; required 1:1; direct primitive content",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='InternationalTextType']/xs:sequence/xs:element[@name='Value']",
+              "line_hint": "718",
+              "point_summary": "Git blob 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e line718 declares InternationalTextType.Value xs:string directly. Separate wrappers IBIS-IP.string / IBIS-IP.language are complex types at lines 841/817 with nested Value and optional ErrorCode; PDF reference is not interchangeable."
+            },
+            {
+              "file": "IBIS-IP_common_V2.1.xsd",
+              "git_blob": "05977c9f86c7c9dd0b48f36a4a4e9be32e94659e",
+              "authority_detail": "Exact official historical V2.1 Common XSD Git blob; CE-020 PR30 candidate overlay not substituted.",
+              "component_kind": "element",
+              "component": "InternationalTextType",
+              "member": "Language",
+              "value": "type=xs:language; required 1:1; direct primitive content",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='InternationalTextType']/xs:sequence/xs:element[@name='Language']",
+              "line_hint": "719",
+              "point_summary": "Git blob 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e line719 declares InternationalTextType.Language xs:language directly. Separate wrappers IBIS-IP.string / IBIS-IP.language are complex types at lines 841/817 with nested Value and optional ErrorCode; PDF reference is not interchangeable."
+            }
+          ],
+          "coverage_note": "Original official Common V2.1 PDF visible §1.17 Table17/body verified against pinned PDF SHA/size and page PNG digest. Exact selected official_release Common XSD blob 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e has direct primitive members, distinct separately declared wrapper complexTypes. Strict XSD-invalid on PDF-style extra nesting, advisory only; no aliases."
+        },
+        {
+          "version": "2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "intermediate_affected_official",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.2",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-2-commonstructure-enums.pdfx",
+              "sha256": "85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203",
+              "printed_pages": [
+                12
+              ],
+              "section": "1.17 InternationalTextType",
+              "table": "Table 17 — Description of InternationalTextType",
+              "point_summary": "Original visible p12 Table17: Value 1:1 IBIS-IP.string and Language 1:1 IBIS-IP.language. Source SHA256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203 (1411558 bytes), verified PNG SHA256 975b0c2c7d0ea38d05329a49cb7dd8469545190887598c760f230683d531e26b, GitHub run43160761440 artifact13918320243; exact selected XSD declares direct xs:string/xs:language; official_release."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact official historical V2.2 Common XSD Git blob; CE-020 PR30 candidate overlay not substituted.",
+              "component_kind": "element",
+              "component": "InternationalTextType",
+              "member": "Value",
+              "value": "type=xs:string; required 1:1; direct primitive content",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='InternationalTextType']/xs:sequence/xs:element[@name='Value']",
+              "line_hint": "727",
+              "point_summary": "Git blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae line727 declares InternationalTextType.Value xs:string directly. Separate wrappers IBIS-IP.string / IBIS-IP.language are complex types at lines 850/826 with nested Value and optional ErrorCode; PDF reference is not interchangeable."
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact official historical V2.2 Common XSD Git blob; CE-020 PR30 candidate overlay not substituted.",
+              "component_kind": "element",
+              "component": "InternationalTextType",
+              "member": "Language",
+              "value": "type=xs:language; required 1:1; direct primitive content",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='InternationalTextType']/xs:sequence/xs:element[@name='Language']",
+              "line_hint": "728",
+              "point_summary": "Git blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae line728 declares InternationalTextType.Language xs:language directly. Separate wrappers IBIS-IP.string / IBIS-IP.language are complex types at lines 850/826 with nested Value and optional ErrorCode; PDF reference is not interchangeable."
+            }
+          ],
+          "coverage_note": "Original official Common V2.2 PDF visible §1.17 Table17/body verified against pinned PDF SHA/size and page PNG digest. Exact selected official_release Common XSD blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae has direct primitive members, distinct separately declared wrapper complexTypes. Strict XSD-invalid on PDF-style extra nesting, advisory only; no aliases."
+        },
+        {
+          "version": "2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "last_verified_affected_official",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.3",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx",
+              "sha256": "d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b",
+              "printed_pages": [
+                12
+              ],
+              "section": "1.17 InternationalTextType",
+              "table": "Table 17 — Description of InternationalTextType",
+              "point_summary": "Original visible p12 Table17: Value 1:1 IBIS-IP.string and Language 1:1 IBIS-IP.language. Source SHA256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b (793521 bytes), verified PNG SHA256 c39c28106931c5a6af5acf7879e190c99a6c7f2bd7cd2867bc586bfb132204f4, GitHub run33656579631 artifact9856965744; exact selected XSD declares direct xs:string/xs:language; official_release."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.3.xsd",
+              "git_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+              "authority_detail": "Exact official historical V2.3 Common XSD Git blob; CE-020 PR30 candidate overlay not substituted.",
+              "component_kind": "element",
+              "component": "InternationalTextType",
+              "member": "Value",
+              "value": "type=xs:string; required 1:1; direct primitive content",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='InternationalTextType']/xs:sequence/xs:element[@name='Value']",
+              "line_hint": "807",
+              "point_summary": "Git blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 line807 declares InternationalTextType.Value xs:string directly. Separate wrappers IBIS-IP.string / IBIS-IP.language are complex types at lines 930/906 with nested Value and optional ErrorCode; PDF reference is not interchangeable."
+            },
+            {
+              "file": "IBIS-IP_common_V2.3.xsd",
+              "git_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+              "authority_detail": "Exact official historical V2.3 Common XSD Git blob; CE-020 PR30 candidate overlay not substituted.",
+              "component_kind": "element",
+              "component": "InternationalTextType",
+              "member": "Language",
+              "value": "type=xs:language; required 1:1; direct primitive content",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='InternationalTextType']/xs:sequence/xs:element[@name='Language']",
+              "line_hint": "808",
+              "point_summary": "Git blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 line808 declares InternationalTextType.Language xs:language directly. Separate wrappers IBIS-IP.string / IBIS-IP.language are complex types at lines 930/906 with nested Value and optional ErrorCode; PDF reference is not interchangeable."
+            }
+          ],
+          "coverage_note": "Original official Common V2.3 PDF visible §1.17 Table17/body verified against pinned PDF SHA/size and page PNG digest. Exact selected official_release Common XSD blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 has direct primitive members, distinct separately declared wrapper complexTypes. Strict XSD-invalid on PDF-style extra nesting, advisory only; no aliases."
+        },
+        {
+          "version": "2.4",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "last_verified_affected_candidate_integration_no_corrected_successor",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.4",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sde-v2-4-commonstructure-enums.pdfx",
+              "sha256": "01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a",
+              "printed_pages": [
+                14
+              ],
+              "section": "1.17 InternationalTextType",
+              "table": "Table 17 — Description of InternationalTextType",
+              "point_summary": "Original visible p14 Table17: Value 1:1 IBIS-IP.string and Language 1:1 IBIS-IP.language. Source SHA256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a (1689647 bytes), verified PNG SHA256 f647f3af34ee57c5ad31cc52f2513f1efacbf380182e2bee7a1bd2fa43ccaae7, GitHub run33658306978 artifact9857652638; exact selected XSD declares direct xs:string/xs:language; candidate_integration."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.4.xsd",
+              "git_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+              "authority_detail": "Selected V2.4 candidate/integration Common XSD, not an official released schema; open upstream PR31.",
+              "component_kind": "element",
+              "component": "InternationalTextType",
+              "member": "Value",
+              "value": "type=xs:string; required 1:1; direct primitive content",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='InternationalTextType']/xs:sequence/xs:element[@name='Value']",
+              "line_hint": "859",
+              "point_summary": "Git blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 line859 declares InternationalTextType.Value xs:string directly. Separate wrappers IBIS-IP.string / IBIS-IP.language are complex types at lines 982/958 with nested Value and optional ErrorCode; PDF reference is not interchangeable."
+            },
+            {
+              "file": "IBIS-IP_common_V2.4.xsd",
+              "git_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+              "authority_detail": "Selected V2.4 candidate/integration Common XSD, not an official released schema; open upstream PR31.",
+              "component_kind": "element",
+              "component": "InternationalTextType",
+              "member": "Language",
+              "value": "type=xs:language; required 1:1; direct primitive content",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='InternationalTextType']/xs:sequence/xs:element[@name='Language']",
+              "line_hint": "860",
+              "point_summary": "Git blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 line860 declares InternationalTextType.Language xs:language directly. Separate wrappers IBIS-IP.string / IBIS-IP.language are complex types at lines 982/958 with nested Value and optional ErrorCode; PDF reference is not interchangeable."
+            }
+          ],
+          "coverage_note": "Original official Common V2.4 PDF visible §1.17 Table17/body verified against pinned PDF SHA/size and page PNG digest. Exact selected candidate_integration Common XSD blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 has direct primitive members, distinct separately declared wrapper complexTypes. Strict XSD-invalid on PDF-style extra nesting, advisory only; no aliases."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM20_001_2026-11-12.md",
+        "COMMON_V2.0 official PDF sha256 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088, size 946088, original visible printed p13 §1.17 Table17: Value IBIS-IP.string 1:1, Language IBIS-IP.language 1:1; PNG sha256 1151012f58615b9bba2f93639e5b642ffa0ffb10f9967953a2d845d9e73b4e2c, GitHub Actions run 33279811315 artifact 9722644456. Exact selected Common XSD blob 8608e3dcd665c197c34da7f6ec6af5a3758da164 InternationalTextType.Value xs:string line 719, Language xs:language line 720; independent IBIS-IP.string and IBIS-IP.language complex wrappers lines 842 / 818; official_release.",
+        "COMMON_V2.1 official PDF sha256 a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32, size 1274051, original visible printed p12 §1.17 Table17: Value IBIS-IP.string 1:1, Language IBIS-IP.language 1:1; PNG sha256 a9bfcc2456e4f8be6833c30bfba6ab0e252c7f19d2ec605ca05c828dea67f561, GitHub Actions run 33393002497 artifact 9758203545. Exact selected Common XSD blob 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e InternationalTextType.Value xs:string line 718, Language xs:language line 719; independent IBIS-IP.string and IBIS-IP.language complex wrappers lines 841 / 817; official_release.",
+        "COMMON_V2.2 official PDF sha256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203, size 1411558, original visible printed p12 §1.17 Table17: Value IBIS-IP.string 1:1, Language IBIS-IP.language 1:1; PNG sha256 975b0c2c7d0ea38d05329a49cb7dd8469545190887598c760f230683d531e26b, GitHub Actions run 43160761440 artifact 13918320243. Exact selected Common XSD blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae InternationalTextType.Value xs:string line 727, Language xs:language line 728; independent IBIS-IP.string and IBIS-IP.language complex wrappers lines 850 / 826; official_release.",
+        "COMMON_V2.3 official PDF sha256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b, size 793521, original visible printed p12 §1.17 Table17: Value IBIS-IP.string 1:1, Language IBIS-IP.language 1:1; PNG sha256 c39c28106931c5a6af5acf7879e190c99a6c7f2bd7cd2867bc586bfb132204f4, GitHub Actions run 33656579631 artifact 9856965744. Exact selected Common XSD blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 InternationalTextType.Value xs:string line 807, Language xs:language line 808; independent IBIS-IP.string and IBIS-IP.language complex wrappers lines 930 / 906; official_release.",
+        "COMMON_V2.4 official PDF sha256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, size 1689647, original visible printed p14 §1.17 Table17: Value IBIS-IP.string 1:1, Language IBIS-IP.language 1:1; PNG sha256 f647f3af34ee57c5ad31cc52f2513f1efacbf380182e2bee7a1bd2fa43ccaae7, GitHub Actions run 33658306978 artifact 9857652638. Exact selected Common XSD blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 InternationalTextType.Value xs:string line 859, Language xs:language line 860; independent IBIS-IP.string and IBIS-IP.language complex wrappers lines 982 / 958; candidate_integration.",
+        "Common V1.0 full 36-page original PDF sha256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf, 892769 bytes, p7 Table1 PNG 28ff536a697d9e49a0e3a02deb92e6823ffa8b99aad8f056a3ef1d819edc5e32, p11 Table17 PNG 8d14a022ee3f3669661d5ed2eb2a6cb79a7479178b3732c57bccf5323a7f34df (run33275626001/artifact9721397514); no stand-alone InternationalTextType type table; selected XSD V1.0 primitive lines708/709.",
+        "Preserved EV-118/EV-119/EV-120/EV-121/EV-122 prior executable sources; no fresh five XML probe execution here. CE-020 PR30 collision not included."
       ]
     }
   ]

@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 91,
-    "verified_current_standard": 91,
+    "tracked_findings": 92,
+    "verified_current_standard": 92,
     "pending_current_standard": 0
   },
   "entries": [
@@ -894,6 +894,19 @@
         "Common V2.4 official original SHA256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, 1689647 bytes; p42 §3.10 Table74 'dorr operation', §3.13 Table77 singular GNSSCoordinateSystemEnumeration heading vs plural GNSSCoordinateSystemsEnumeration row/caption, PNG sha256 006d387354fd9f2aa0d949d79daecd5b8025ca1c885a934f432a4ba50eb982f9; p43 §3.14 Table78 'Infromation' GNSS quality, PNG sha256 25a04aa83e6480434f8b1118440123e1179cc35ba736efe10e030f298d708185; GitHub render run33658306978 artifact9857652638; selected contextual Enum XSD blob 2afed8cf23afa91db92b0f043cc5b4ad428b0f25 singular simpleType."
       ],
       "note": "For each of six official Common V1.0–V2.4 publications, original PDF SHA/byte pin and two specific PNG page SHA hashes rechecked against manifest, printed visible §/table title and body actually inspected. V1.0-only additional p18/24/30 anchors checked separately. Never use inferred TOC/table order as final locator; no XSD validity or SDK runtime behavior inferred."
+    },
+    {
+      "finding_id": "DRCOM20-001",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM20_001_2026-11-12.md",
+        "COMMON_V2.0 official PDF sha256 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088, size 946088, original visible printed p13 §1.17 Table17: Value IBIS-IP.string 1:1, Language IBIS-IP.language 1:1; PNG sha256 1151012f58615b9bba2f93639e5b642ffa0ffb10f9967953a2d845d9e73b4e2c, GitHub Actions run 33279811315 artifact 9722644456. Exact selected Common XSD blob 8608e3dcd665c197c34da7f6ec6af5a3758da164 InternationalTextType.Value xs:string line 719, Language xs:language line 720; independent IBIS-IP.string and IBIS-IP.language complex wrappers lines 842 / 818; official_release.",
+        "COMMON_V2.1 official PDF sha256 a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32, size 1274051, original visible printed p12 §1.17 Table17: Value IBIS-IP.string 1:1, Language IBIS-IP.language 1:1; PNG sha256 a9bfcc2456e4f8be6833c30bfba6ab0e252c7f19d2ec605ca05c828dea67f561, GitHub Actions run 33393002497 artifact 9758203545. Exact selected Common XSD blob 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e InternationalTextType.Value xs:string line 718, Language xs:language line 719; independent IBIS-IP.string and IBIS-IP.language complex wrappers lines 841 / 817; official_release.",
+        "COMMON_V2.2 official PDF sha256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203, size 1411558, original visible printed p12 §1.17 Table17: Value IBIS-IP.string 1:1, Language IBIS-IP.language 1:1; PNG sha256 975b0c2c7d0ea38d05329a49cb7dd8469545190887598c760f230683d531e26b, GitHub Actions run 43160761440 artifact 13918320243. Exact selected Common XSD blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae InternationalTextType.Value xs:string line 727, Language xs:language line 728; independent IBIS-IP.string and IBIS-IP.language complex wrappers lines 850 / 826; official_release.",
+        "COMMON_V2.3 official PDF sha256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b, size 793521, original visible printed p12 §1.17 Table17: Value IBIS-IP.string 1:1, Language IBIS-IP.language 1:1; PNG sha256 c39c28106931c5a6af5acf7879e190c99a6c7f2bd7cd2867bc586bfb132204f4, GitHub Actions run 33656579631 artifact 9856965744. Exact selected Common XSD blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 InternationalTextType.Value xs:string line 807, Language xs:language line 808; independent IBIS-IP.string and IBIS-IP.language complex wrappers lines 930 / 906; official_release.",
+        "COMMON_V2.4 official PDF sha256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, size 1689647, original visible printed p14 §1.17 Table17: Value IBIS-IP.string 1:1, Language IBIS-IP.language 1:1; PNG sha256 f647f3af34ee57c5ad31cc52f2513f1efacbf380182e2bee7a1bd2fa43ccaae7, GitHub Actions run 33658306978 artifact 9857652638. Exact selected Common XSD blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 InternationalTextType.Value xs:string line 859, Language xs:language line 860; independent IBIS-IP.string and IBIS-IP.language complex wrappers lines 982 / 958; candidate_integration."
+      ],
+      "note": "Five actual original Common V2.0–V2.4 §1.17 Table17 body images and title/member rows visibly inspected, exact SHA-pinned PDF bytes and per-page PNG digest matched original artifacts, new V2.2 render run43160761440 checked. V1.0 p7/p11 original body separately inspected as noncomparable predecessor. No TOC-inferred table as final target."
     }
   ]
 }
