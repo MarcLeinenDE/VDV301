@@ -1,6 +1,6 @@
 {
   "state_schema_version": "0.1",
-  "date": "2026-11-11",
+  "date": "2026-11-12",
   "canonical_branch": "dev/schema-integration",
   "workflow_mode": "full_gate_on_canonical_changes_plus_handoff_check_on_every_push",
   "project_phase": "source_locator_structural_completion",
@@ -2127,8 +2127,8 @@
     "version_scope_boundary_latest_gate_run_id": "43162188397"
   },
   "next_actions": [
-    "DRCOM20-001 terminal_clean: five independently verified original Common PDF V2.0–V2.4 InternationalTextType member wrapper-type mismatches versus selected XSD primitives; V1.0 predecessor has no comparable table, CE-020 authority collision distinct. 92/192 locators/body/scope verified, 100 open.",
-    "Substantive schema gate43162188397 SUCCESS and handoff gate43162188395 SUCCESS; verify both final-head gates on terminal commit, then ai-mem PR, next DRCOM21-001."
+    "DRCOM21-001 pending pinned PDF V2.2 §2.52 Table52 visual review on exact sha; other V2.0/V2.1/V2.3/V2.4 visible pages checked from archived pinned render artifacts; V1.0 original PDF has no comparable StopInformationRequest member table.",
+    "Maintain 92/192 until scope verified V1.0–V2.4, canonical semantic+runtime+locator+body+boundary updates, schema CI and terminal handoff; no aliases and no schema changes."
   ],
   "source_locator_progress": {
     "locator_entry_count": 92,
@@ -2206,12 +2206,24 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "43162188397",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "43162188395",
-    "resume_instruction": "DRCOM20-001 terminal_clean: 92/192 unique source locators, 92/92 original PDF visible-body verifications and 92/92 version-scope boundaries; 100 open. Common official PDF V2.0–V2.4 §1.17 Table17 cites IBIS-IP.string/language complex wrappers for InternationalTextType.Value/Language, exact selected XSD direct xs:string/xs:language (historical official V2.0–V2.3; candidate/integration V2.4). V1.0 official PDF has no independently comparable InternationalTextType definition table though official XSD already primitive. Exact original PDF/PNG SHA and XSD Git blobs in docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM20_001_2026-11-12.md. Distinct CE-020 V2.3 PR30 authority collision preserved. Strict selected XSD INVALID remains invalid, no aliases and reviewed runtime matcher still unimplemented. Substantive schema run43162188397 SUCCESS, handoff run43162188395 SUCCESS on eb7d29b3a22319e0c0e31e89ad97e579f00a9b6c. Verify both final-HEAD CI on terminal commit before starting next DRCOM21-001."
+    "resume_instruction": "DRCOM21-001 gate_pending: V2.2 Common original page31 render requested. Collect exact pinned artifact and visual confirmation; source-locators remain 92/192 (100 open) pending complete five-version version scope review, semantic/runtime/locator/body/boundary registry sync, full schema-audit-validation gate, terminal_clean and final Handoff Integrity. Earlier DRCOM20-001 remains closed, no XSD/production SDK edits.",
+    "pending_block": "DRCOM21-001",
+    "active_finding": "DRCOM21-001",
+    "active_step": "Exact-byte original PDF body verification; request V2.2 page31 via pinned GitHub fallback",
+    "next_step": "Observe pdf-render-fallback GitHub action on this commit; verify source sha+size, page PNG sha, visible §2.52 Table52 StopName 0:1; then reconcile V1.0–V2.4 XSD/PDF scope, semantic/runtime mapping, locator/body/boundary registries and run full gate.",
+    "evidence_refs": [
+      "audit_registry/pdf_source_pins_v0.1.json:COMMON_V2.2",
+      "tools/pdf_render_request_v0.1.json",
+      "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V21_2026-09-04.md",
+      "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.2.md",
+      "GitHub archived Common V1.0/V2.0/V2.1/V2.3/V2.4 pinned-render artifacts"
+    ],
+    "recovery_instruction": "On dev/schema-integration read this CURRENT_STATE.json and latest HEAD; inspect vdv-pdf-render-fallback artifact from the push changing tools/pdf_render_request_v0.1.json; verify exact source SHA and visible page31 before modifying canonical finding DRCOM21-001. If action failed, retry according to rendering fallback policy. Do not increment 92/192 yet."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
