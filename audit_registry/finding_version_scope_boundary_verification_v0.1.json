@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 92,
-    "verified": 92,
+    "tracked_findings": 93,
+    "verified": 93,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -5472,6 +5472,68 @@
           "language_status": "Original PDF body p14 §1.17 Table17 visible Value/Language wrapper names; PDF sha256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, PNG f647f3af34ee57c5ad31cc52f2513f1efacbf380182e2bee7a1bd2fa43ccaae7, XSD 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 direct xs:string/xs:language, candidate_integration; no separate language-specific artifact assumed."
         }
       ]
+    },
+    {
+      "finding_id": "DRCOM21-001",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM21_001_2026-11-12.md",
+        "Original V1.0 body printed p19 §1.48 Table48/p20 §1.50 Table50; no request table, historical exact Common XSD V1.0 already StopName 0:*",
+        "Original visible official Common V2.0–V2.4 request table StopName 0:1 on printed pages 27,29,31,32,34–35; hash-verified original render PNGs in archived GitHub Actions; V2.2 new pinned fallback run43216104609 artifact13944345486.",
+        "Exact selected XSD Common V2.0–V2.4 all independently show minOccurs=0 maxOccurs=unbounded, with V2.4 candidate/integration only; EV-119 executable V2.1 two StopName accepted; no new multi-version XML instances."
+      ],
+      "scope_conclusion": "The official V1.0 PDF has no separate StopInformationRequest table despite the XSD declaring the type; non-comparable predecessor, not a corrected affected release. Earliest confirmed conflicting original PDF/XSD pair is official V2.0; verified independently through official V2.1, V2.2, V2.3 and the published V2.4 PDF with explicitly selected candidate/integration XSD. No later verified corrected publication or promoted official V2.4 schema. No separate language-specific release line. Same preexisting finding DRCOM21-001, not a new ID; DRCOM23-001 expected-time placement stays distinct.",
+      "boundary_checks": [
+        {
+          "version": "Common V1.0",
+          "role": "predecessor_no_comparable_pdf_request_table",
+          "source_ids": [
+            "COMMON_V1.0"
+          ],
+          "language_status": "Exact official German V1.0 original PDF SHA256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf, visibly printed p19–20 §1.48 Table48 StopInformation (no request table); exact selected XSD Git blob 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c, official_release. No corresponding StopInformationRequest PDF member table; XSD already defines StopName 0:*; non-comparable predecessor. No separate German/English released artifact inferred."
+        },
+        {
+          "version": "Common V2.0",
+          "role": "first_verified_affected_official_release",
+          "source_ids": [
+            "COMMON_V2.0"
+          ],
+          "language_status": "Exact official bilingual V2.0 original PDF SHA256 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088, visibly printed p27 §2.51 Table51 StopInformationRequest; exact selected XSD Git blob 8608e3dcd665c197c34da7f6ec6af5a3758da164, official_release. PDF StopInformationRequest.StopName 0:1, exact selected XSD 0:*. No separate German/English released artifact inferred."
+        },
+        {
+          "version": "Common V2.1",
+          "role": "intermediate_affected_official_release",
+          "source_ids": [
+            "COMMON_V2.1"
+          ],
+          "language_status": "Exact official bilingual V2.1 original PDF SHA256 a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32, visibly printed p29 §2.51 Table51 StopInformationRequest; exact selected XSD Git blob 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e, official_release. PDF StopInformationRequest.StopName 0:1, exact selected XSD 0:*. No separate German/English released artifact inferred."
+        },
+        {
+          "version": "Common V2.2",
+          "role": "intermediate_affected_official_release",
+          "source_ids": [
+            "COMMON_V2.2"
+          ],
+          "language_status": "Exact official bilingual V2.2 original PDF SHA256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203, visibly printed p31 §2.52 Table52 StopInformationRequest; exact selected XSD Git blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae, official_release. PDF StopInformationRequest.StopName 0:1, exact selected XSD 0:*. No separate German/English released artifact inferred."
+        },
+        {
+          "version": "Common V2.3",
+          "role": "last_verified_affected_official_release",
+          "source_ids": [
+            "COMMON_V2.3"
+          ],
+          "language_status": "Exact official bilingual V2.3 original PDF SHA256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b, visibly printed p32 §2.52 Table52 StopInformationRequest; exact selected XSD Git blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1, official_release. PDF StopInformationRequest.StopName 0:1, exact selected XSD 0:*. No separate German/English released artifact inferred."
+        },
+        {
+          "version": "Common V2.4",
+          "role": "last_verified_affected_candidate_integration_no_corrected_successor",
+          "source_ids": [
+            "COMMON_V2.4"
+          ],
+          "language_status": "Exact official bilingual V2.4 original PDF SHA256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, visibly printed p34–35 §2.51 Table51 StopInformationRequest (caption p35); exact selected XSD Git blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4, candidate_integration. PDF StopInformationRequest.StopName 0:1, exact selected XSD 0:*. No separate German/English released artifact inferred."
+        }
+      ],
+      "note": "Earlier V2.1-only scope historically preserved. Conservative cross_artifact_mismatch attribution (original PDF-vs-XSD author blame unknown), strict selected XSD VALID unchanged and SDK trigger only reviewed_not_implemented. 93/192 canonical locator/body/boundary after gate; 99 remaining."
     }
   ]
 }

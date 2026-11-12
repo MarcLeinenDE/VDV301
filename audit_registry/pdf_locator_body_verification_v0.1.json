@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 92,
-    "verified_current_standard": 92,
+    "tracked_findings": 93,
+    "verified_current_standard": 93,
     "pending_current_standard": 0
   },
   "entries": [
@@ -907,6 +907,20 @@
         "COMMON_V2.4 official PDF sha256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, size 1689647, original visible printed p14 §1.17 Table17: Value IBIS-IP.string 1:1, Language IBIS-IP.language 1:1; PNG sha256 f647f3af34ee57c5ad31cc52f2513f1efacbf380182e2bee7a1bd2fa43ccaae7, GitHub Actions run 33658306978 artifact 9857652638. Exact selected Common XSD blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 InternationalTextType.Value xs:string line 859, Language xs:language line 860; independent IBIS-IP.string and IBIS-IP.language complex wrappers lines 982 / 958; candidate_integration."
       ],
       "note": "Five actual original Common V2.0–V2.4 §1.17 Table17 body images and title/member rows visibly inspected, exact SHA-pinned PDF bytes and per-page PNG digest matched original artifacts, new V2.2 render run43160761440 checked. V1.0 p7/p11 original body separately inspected as noncomparable predecessor. No TOC-inferred table as final target."
+    },
+    {
+      "finding_id": "DRCOM21-001",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM21_001_2026-11-12.md",
+        "V1.0 official source SHA256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf, 892769 bytes: visible body p19 §1.48 Table48 StopInformation and p20 §1.50 Table50 StopSequence; p19/p20 PNGs sha256 48c89183aeb69a335687da8321990e4dc79b4ab0062181ee1ea160edbf922346 / 74c8f525df2d2b14e63fdbb5b2eec2e51bd2bbb28c3110aa967fff6bdb661282; run33275626001 artifact9721397514. No corresponding request member table; XSD blob 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c line532 request StopName 0:*.",
+        "V2.0 official source SHA256 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088, 946088 bytes; visible original p27 §2.51 Table51 StopInformationRequest StopName 0:1; PNG SHA256 71d3999b383690495891ee390ef3836fddc87503d2d92874e4ad2e5ecd5d536f run33279811315 artifact9722644456; exact Common XSD blob 8608e3dcd665c197c34da7f6ec6af5a3758da164 line538 StopName 0:*, official.",
+        "V2.1 official source SHA256 a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32, 1274051 bytes; visible original p29 §2.51 Table51 StopInformationRequest StopName 0:1; PNG SHA256 2493af2ea41abe8c72e1d351762acf54412b7f05cdd04f25cce7736843a1fde5 run33393002497 artifact9758203545; exact Common XSD blob 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e line537 0:*, official.",
+        "V2.2 official source SHA256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203, 1411558 bytes; visible original p31 §2.52 Table52 StopInformationRequest StopName 0:1; freshly pinned 160dpi GitHub fallback run43216104609 artifact13944345486 PNG SHA256 a072381c3477de238461a0ca5a69882fbc0cc1da5b20ec417f01dbd51504aaba; exact Common XSD blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae line546 0:*, official.",
+        "V2.3 official source SHA256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b, 793521 bytes; visible original p32 §2.52 Table52 StopInformationRequest StopName 0:1; PNG SHA256 b9f7576dd7654b3976fd7d05e7d2d653e07a2c912ab60c7fa2d8514dcdd1b904 run33656579631 artifact9856965744; exact Common XSD blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 line596 0:*, official.",
+        "V2.4 official source SHA256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, 1689647 bytes; original p34 §2.51 table begins with StopName 0:1, continued p35 actual Table51 caption; PNG SHA256 p34 d3d1f03a989ae3f18349b747643307567ff3e873862014e7c642b46bedd54a16 and p35 9a333351c0ef89a63067595482fdff7f26b59808c40f693ba2d1e32bf6fb24bd; run33658306978 artifact9857652638; selected Common XSD blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 line611 0:*, candidate_integration only."
+      ],
+      "note": "All five original official V2.0–V2.4 visible PDF body target headings, request StopName rows and actual Table captions checked (V2.4 split p34/35). Original byte/size pins and page PNG sha256 matched render manifests; V2.2 fresh pinned fallback. V1.0 original p19-20 confirms no comparable request member table. Never used TOC/history as final locator. Runtime matcher not implemented; no new multi-version XML test claimed."
     }
   ]
 }
