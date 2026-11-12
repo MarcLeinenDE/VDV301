@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 95,
-    "verified_current_standard": 95,
+    "tracked_findings": 96,
+    "verified_current_standard": 96,
     "pending_current_standard": 0
   },
   "entries": [
@@ -948,6 +948,23 @@
         "Prior EV-121 official V2.3 request fields INVALID vs StopInformation fields VALID; EV-139 closure 33857906408; V2.4 candidate EV-122 Request fields VALID. No new exact-six-version XML test runs."
       ],
       "note": "V1.0 official p19/20 has no PDF Request table but exact XSD request type exists; V2.0 p27 Table51, V2.1 p29 Table51, V2.2 p31 Table52 exclude expected request fields; V2.3 p32 §2.52 Table52 includes both request Expected fields but official XSD omits; V2.4 official published p34/p35 §2.51 Table51 includes both, selected candidate XSD adds both. Actual visible body pages and caption checked against original pinned SHA/PNG, not TOC/history. Independent field identity, DRCOM21-001 StopName separate."
+    },
+    {
+      "finding_id": "DRCOM24-001",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM24_001_2026-11-12.md",
+        "Common V1.0: original official PDF source SHA256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf, actual visible body printed p15 1.31 LineInformation, Table 31 — Description of LineInformation; original verified PNG hash(es) ee04c205a5ea2631b56dab16e1e429ccfe046da7353e69bad50af087320f5f13 f; exact selected official_release XSD Git blob 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c lines 383 / 384; both InternationalTextType minOccurs=0 maxOccurs=unbounded (0:*); Original official PDF and exact selected historical official XSD agree on both LineInformation names InternationalTextType 0:*; last matching predecessor is V2.3.",
+        "Common V2.0: original official PDF source SHA256 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088, actual visible body printed p22 2.31 LineInformation, Table 31 — Description of LineInformation; original verified PNG hash(es) 591644194d2f5edbf085bd589ee2c7ef9e2199a2c500696ee75046d183fa5a08 f; exact selected official_release XSD Git blob 8608e3dcd665c197c34da7f6ec6af5a3758da164 lines 389 / 390; both InternationalTextType minOccurs=0 maxOccurs=unbounded (0:*); Original official PDF and exact selected historical official XSD agree on both LineInformation names InternationalTextType 0:*; last matching predecessor is V2.3.",
+        "Common V2.1: original official PDF source SHA256 a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32, actual visible body printed p24 2.31 LineInformation, Table 31 — Description of LineInformation; original verified PNG hash(es) 709c501675f7393b8ff2d0dd25326a954da823a4906bc9f44443d1018d63d121 f; exact selected official_release XSD Git blob 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e lines 388 / 389; both InternationalTextType minOccurs=0 maxOccurs=unbounded (0:*); Original official PDF and exact selected historical official XSD agree on both LineInformation names InternationalTextType 0:*; last matching predecessor is V2.3.",
+        "Common V2.2: original official PDF source SHA256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203, actual visible body printed p25 2.31 LineInformation, Table 31 — Description of LineInformation; original verified PNG hash(es) 2ebf0c6f83c5c86acb9ce7875d36967d61d006476b7bb044479972f30ef9cf03 f; exact selected official_release XSD Git blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae lines 392 / 393; both InternationalTextType minOccurs=0 maxOccurs=unbounded (0:*); Original official PDF and exact selected historical official XSD agree on both LineInformation names InternationalTextType 0:*; last matching predecessor is V2.3.",
+        "Common V2.3: original official PDF source SHA256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b, actual visible body printed p26 2.31 LineInformation, Table 31 — Description of LineInformation; original verified PNG hash(es) d177fad7b44a43305467991ce985551f38fffa28ad3b880410ac9104551d7ca2 f; exact selected official_release XSD Git blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 lines 442 / 443; both InternationalTextType minOccurs=0 maxOccurs=unbounded (0:*); Original official PDF and exact selected historical official XSD agree on both LineInformation names InternationalTextType 0:*; last matching predecessor is V2.3.",
+        "Common V2.4: original official PDF source SHA256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, actual visible body printed p28/29 2.31 LineInformation (rows p28, actual caption p29), Table 31 — Description of LineInformation (printed caption on page 29); original verified PNG hash(es) 034a35e383793d622dec45d6a3d71d965e6cf5f6ec343d0711f298da8ad2c814 / 697bda69bc5aedc769583b116b24a01761ba87d812c2ea6655cd7b64dafdf8d6 f; exact selected candidate_integration XSD Git blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 lines 442 / 443; both InternationalTextType minOccurs=0 maxOccurs=unbounded (0:*); Official V2.4 PDF p28 body and p29 actual caption, type and cardinality disagree with explicit non-official V2.4 candidate XSD. No strict official V2.4 executable authority, SDK unsupported_profile, no runtime mapper.",
+        "V2.2 official original PDF visual fallback run43267750888 artifact13966458352 source SHA256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203 and 1411558 bytes; p25 actual §2.31 Table31 PNG SHA256 2ebf0c6f83c5c86acb9ce7875d36967d61d006476b7bb044479972f30ef9cf03.",
+        "V2.4 original official PDF p28 §2.31 member rows 0:1 IBIS-IP.string but actual Table31 caption first appears p29: both original PNGs 034a35e383793d622dec45d6a3d71d965e6cf5f6ec343d0711f298da8ad2c814 / 697bda69bc5aedc769583b116b24a01761ba87d812c2ea6655cd7b64dafdf8d6 independently checked.",
+        "Existing EV-122 candidate-specific exact-profile test probes InternationalTextType-shaped/repeated LineName and LineShortName VALID and simple PDF IBIS-IP.string shapes INVALID; no new version-wide execution in this locator cycle."
+      ],
+      "note": "All six original Common PDF LineInformation actual body pages V1.0 p15, V2.0 p22, V2.1 p24, V2.2 p25, V2.3 p26, V2.4 p28/p29 inspected, including table caption on p29, source and original render hashes. V1.0–V2.3 PDF/XSD agree 0:* InternationalTextType. V2.4 published PDF 0:1 IBIS-IP.string differs from selected candidate-only XSD 0:* InternationalTextType; no official V2.4 release strict profile or runtime matcher. Do not infer Table31 from sequence or TOC."
     }
   ]
 }

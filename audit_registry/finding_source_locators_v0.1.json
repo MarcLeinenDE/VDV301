@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "96cc6424842b326bb8de7afb892104b830a3ae4a",
+    "git_blob": "0e0cab4487a3965e7e2e79d7cdb3a43d3ebeb78a",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 95,
-    "coverage_complete_count": 95,
+    "locator_entry_count": 96,
+    "coverage_complete_count": 96,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 97
+    "remaining_finding_count": 96
   },
   "entries": [
     {
@@ -19156,6 +19156,258 @@
         "Historical EV-121 official Common V2.3 Request with ArrivalExpected/DepartureExpected INVALID, StopInformation with both VALID; EV-139 run33857906408",
         "Candidate V2.4 EV-122 positive request member test; not an official released XSD correction",
         "DRCOM21-001 StopName facet deliberately separate"
+      ]
+    },
+    {
+      "finding_id": "DRCOM24-001",
+      "service": "Common Data Structures / LineInformation",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "Common V2.4 official documentation",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Exact original official V2.4 PDF SHA256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a visibly documents LineInformation.LineName and LineShortName as IBIS-IP.string 0:1 in §2.31 table body printed p28, Table31 actual caption printed p29. Historical official V1.0–V2.3 PDF tables all show 0:* +InternationalTextType, matching exact selected XSDs. No official V2.4 XSD/tag established."
+        },
+        {
+          "version": "Common V2.4 candidate/integration",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd",
+          "note": "Exact selected candidate Common blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 lines442/443 LineName and LineShortName InternationalTextType minOccurs=0 maxOccurs=unbounded; Enumerations blob 2afed8cf23afa91db92b0f043cc5b4ad428b0f25. Upstream VDVde/VDV301 PR #31 open and unmerged, no VDV-301-2.4 official release tag. EV-122 candidate only, strict official V2.4 unsupported."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "1.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "historical_matching_predecessor",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V1.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds.pdfx",
+              "sha256": "a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf",
+              "printed_pages": [
+                15
+              ],
+              "section": "1.31 LineInformation",
+              "table": "Table 31 — Description of LineInformation",
+              "point_summary": "Original official published Common V1.0 visible §1.31 LineInformation Table 31 — Description of LineInformation printed p15, LineInformation.LineName and LineShortName each 0:* +InternationalTextType (selected historical XSD matches). PDF source SHA256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf, 892769 bytes; pinned original page PNG SHA256 ee04c205a5ea2631b56dab16e1e429ccfe046da7353e69bad50af087320f5f13 from GitHub run33275626001, artifact9721397514. The displayed actual Table31 caption is on the same visible page."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact selected historical official Common V1.0 XSD profile.",
+              "component_kind": "element",
+              "component": "LineInformationStructure",
+              "member": "LineName / LineShortName",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='LineInformationStructure']/xs:sequence/xs:element[@name='LineName' or @name='LineShortName']",
+              "value": "both InternationalTextType minOccurs=0 maxOccurs=unbounded (0:*)",
+              "line_hint": "383 / 384",
+              "point_summary": "Exact selected Common V1.0 XSD blob 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c lines 383/384 defines both names InternationalTextType 0:*. Agrees with corresponding original published PDF table."
+            }
+          ],
+          "coverage_note": "Original official PDF and exact selected historical official XSD agree on both LineInformation names InternationalTextType 0:*; last matching predecessor is V2.3."
+        },
+        {
+          "version": "2.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "historical_matching_predecessor",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v-2-0.pdfx",
+              "sha256": "23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088",
+              "printed_pages": [
+                22
+              ],
+              "section": "2.31 LineInformation",
+              "table": "Table 31 — Description of LineInformation",
+              "point_summary": "Original official published Common V2.0 visible §2.31 LineInformation Table 31 — Description of LineInformation printed p22, LineInformation.LineName and LineShortName each 0:* +InternationalTextType (selected historical XSD matches). PDF source SHA256 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088, 946088 bytes; pinned original page PNG SHA256 591644194d2f5edbf085bd589ee2c7ef9e2199a2c500696ee75046d183fa5a08 from GitHub run33279811315, artifact9722644456. The displayed actual Table31 caption is on the same visible page."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.0.xsd",
+              "git_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+              "authority_detail": "Exact selected historical official Common V2.0 XSD profile.",
+              "component_kind": "element",
+              "component": "LineInformationStructure",
+              "member": "LineName / LineShortName",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='LineInformationStructure']/xs:sequence/xs:element[@name='LineName' or @name='LineShortName']",
+              "value": "both InternationalTextType minOccurs=0 maxOccurs=unbounded (0:*)",
+              "line_hint": "389 / 390",
+              "point_summary": "Exact selected Common V2.0 XSD blob 8608e3dcd665c197c34da7f6ec6af5a3758da164 lines 389/390 defines both names InternationalTextType 0:*. Agrees with corresponding original published PDF table."
+            }
+          ],
+          "coverage_note": "Original official PDF and exact selected historical official XSD agree on both LineInformation names InternationalTextType 0:*; last matching predecessor is V2.3."
+        },
+        {
+          "version": "2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "historical_matching_predecessor",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.1",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v2-1-commonstructure-enums.pdfx",
+              "sha256": "a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32",
+              "printed_pages": [
+                24
+              ],
+              "section": "2.31 LineInformation",
+              "table": "Table 31 — Description of LineInformation",
+              "point_summary": "Original official published Common V2.1 visible §2.31 LineInformation Table 31 — Description of LineInformation printed p24, LineInformation.LineName and LineShortName each 0:* +InternationalTextType (selected historical XSD matches). PDF source SHA256 a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32, 1274051 bytes; pinned original page PNG SHA256 709c501675f7393b8ff2d0dd25326a954da823a4906bc9f44443d1018d63d121 from GitHub run33393002497, artifact9758203545. The displayed actual Table31 caption is on the same visible page."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.1.xsd",
+              "git_blob": "05977c9f86c7c9dd0b48f36a4a4e9be32e94659e",
+              "authority_detail": "Exact selected historical official Common V2.1 XSD profile.",
+              "component_kind": "element",
+              "component": "LineInformationStructure",
+              "member": "LineName / LineShortName",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='LineInformationStructure']/xs:sequence/xs:element[@name='LineName' or @name='LineShortName']",
+              "value": "both InternationalTextType minOccurs=0 maxOccurs=unbounded (0:*)",
+              "line_hint": "388 / 389",
+              "point_summary": "Exact selected Common V2.1 XSD blob 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e lines 388/389 defines both names InternationalTextType 0:*. Agrees with corresponding original published PDF table."
+            }
+          ],
+          "coverage_note": "Original official PDF and exact selected historical official XSD agree on both LineInformation names InternationalTextType 0:*; last matching predecessor is V2.3."
+        },
+        {
+          "version": "2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "historical_matching_predecessor_new_pinned_fallback",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.2",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-2-commonstructure-enums.pdfx",
+              "sha256": "85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203",
+              "printed_pages": [
+                25
+              ],
+              "section": "2.31 LineInformation",
+              "table": "Table 31 — Description of LineInformation",
+              "point_summary": "Original official published Common V2.2 visible §2.31 LineInformation Table 31 — Description of LineInformation printed p25, LineInformation.LineName and LineShortName each 0:* +InternationalTextType (selected historical XSD matches). PDF source SHA256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203, 1411558 bytes; pinned original page PNG SHA256 2ebf0c6f83c5c86acb9ce7875d36967d61d006476b7bb044479972f30ef9cf03 from GitHub run43267750888, artifact13966458352. The displayed actual Table31 caption is on the same visible page."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact historical upstream Common V2.2 file lineage, no invented VDV-301-2.2 tag.",
+              "component_kind": "element",
+              "component": "LineInformationStructure",
+              "member": "LineName / LineShortName",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='LineInformationStructure']/xs:sequence/xs:element[@name='LineName' or @name='LineShortName']",
+              "value": "both InternationalTextType minOccurs=0 maxOccurs=unbounded (0:*)",
+              "line_hint": "392 / 393",
+              "point_summary": "Exact selected Common V2.2 XSD blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae lines 392/393 defines both names InternationalTextType 0:*. Agrees with corresponding original published PDF table."
+            }
+          ],
+          "coverage_note": "Original official PDF and exact selected historical official XSD agree on both LineInformation names InternationalTextType 0:*; last matching predecessor is V2.3."
+        },
+        {
+          "version": "2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "last_matching_official_predecessor",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.3",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx",
+              "sha256": "d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b",
+              "printed_pages": [
+                26
+              ],
+              "section": "2.31 LineInformation",
+              "table": "Table 31 — Description of LineInformation",
+              "point_summary": "Original official published Common V2.3 visible §2.31 LineInformation Table 31 — Description of LineInformation printed p26, LineInformation.LineName and LineShortName each 0:* +InternationalTextType (selected historical XSD matches). PDF source SHA256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b, 793521 bytes; pinned original page PNG SHA256 d177fad7b44a43305467991ce985551f38fffa28ad3b880410ac9104551d7ca2 from GitHub run33656579631, artifact9856965744. The displayed actual Table31 caption is on the same visible page."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.3.xsd",
+              "git_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+              "authority_detail": "Exact selected historical official Common V2.3 XSD profile.",
+              "component_kind": "element",
+              "component": "LineInformationStructure",
+              "member": "LineName / LineShortName",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='LineInformationStructure']/xs:sequence/xs:element[@name='LineName' or @name='LineShortName']",
+              "value": "both InternationalTextType minOccurs=0 maxOccurs=unbounded (0:*)",
+              "line_hint": "442 / 443",
+              "point_summary": "Exact selected Common V2.3 XSD blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 lines 442/443 defines both names InternationalTextType 0:*. Agrees with corresponding original published PDF table."
+            }
+          ],
+          "coverage_note": "Original official PDF and exact selected historical official XSD agree on both LineInformation names InternationalTextType 0:*; last matching predecessor is V2.3."
+        },
+        {
+          "version": "2.4",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "only_documentation_vs_selected_candidate_mismatch_no_official_strict_profile",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.4",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sde-v2-4-commonstructure-enums.pdfx",
+              "sha256": "01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a",
+              "printed_pages": [
+                28,
+                29
+              ],
+              "section": "2.31 LineInformation (rows p28, actual caption p29)",
+              "table": "Table 31 — Description of LineInformation (printed caption on page 29)",
+              "point_summary": "Original official published Common V2.4 visible §2.31 LineInformation (rows p28, actual caption p29) Table 31 — Description of LineInformation (printed caption on page 29) printed p28/29, LineInformation.LineName and LineShortName each 0:1 IBIS-IP.string (candidate XSD differs). PDF source SHA256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, 1689647 bytes; pinned original page PNG SHA256 034a35e383793d622dec45d6a3d71d965e6cf5f6ec343d0711f298da8ad2c814 / 697bda69bc5aedc769583b116b24a01761ba87d812c2ea6655cd7b64dafdf8d6 from GitHub run33658306978, artifact9857652638. Actual Table31 caption on p29, not p28."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.4.xsd",
+              "git_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+              "authority_detail": "Selected candidate/integration Common V2.4 XSD only, official V2.4 PDF is not official released XSD. VDVde/VDV301 PR31 open; no official VDV-301-2.4 tag.",
+              "component_kind": "element",
+              "component": "LineInformationStructure",
+              "member": "LineName / LineShortName",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='LineInformationStructure']/xs:sequence/xs:element[@name='LineName' or @name='LineShortName']",
+              "value": "both InternationalTextType minOccurs=0 maxOccurs=unbounded (0:*)",
+              "line_hint": "442 / 443",
+              "point_summary": "Exact selected Common V2.4 XSD blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 lines 442/443 defines both names InternationalTextType 0:*. V2.4 official PDF contradicts this candidate only; EV-122 supports candidate XML form, no official strict profile."
+            }
+          ],
+          "coverage_note": "Official V2.4 PDF p28 body and p29 actual caption, type and cardinality disagree with explicit non-official V2.4 candidate XSD. No strict official V2.4 executable authority, SDK unsupported_profile, no runtime mapper."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM24_001_2026-11-12.md",
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V24_2026-09-04.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4_FRESH_2026-09-03.md",
+        "Original Common V2.2 §2.31 Table31 pinned original render fallback GitHub run43267750888 artifact13966458352 page25",
+        "EV-122 candidate exact-profile positive/repeated values for both names and negative PDF simple shapes; EV-140 closure 33973935324",
+        "Upstream VDVde/VDV301 PR #31 open, official VDV-301-2.4 Git tag not found; no official strict SDK profile"
       ]
     }
   ]
