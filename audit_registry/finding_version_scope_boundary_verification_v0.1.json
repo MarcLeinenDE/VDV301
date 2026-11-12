@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 94,
-    "verified": 94,
+    "tracked_findings": 95,
+    "verified": 95,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -5598,6 +5598,72 @@
         }
       ],
       "note": "Existing single DRCOM22-001 extended from V2.2-only through V2.3 and selected candidate V2.4; V1.0–V2.1 excluded. Conservative source attribution cross_artifact_mismatch; source intent unresolved, reviewed_not_implemented valid advisory only; historical EV-120/121/122 harnesses preserved; no new XML tests, XSD/SDK changes or new finding identity."
+    },
+    {
+      "finding_id": "DRCOM23-001",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM23_001_2026-11-12.md",
+        "Common V1.0 scope noncomparable_pdf_predecessor_request_type_in_xsd, actual original PDF body printed p19/20 1.48 StopInformation; no separate Request table Table 48 — Description of StopInformation; Table 50 — StopSequence; official source SHA256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf, original PNG hash evidence in point summary: Original visible body p19/20 1.48 StopInformation; no separate Request table, Table 48 — Description of StopInformation; Table 50 — StopSequence. Official V1.0 has no comparable Request member table; exact historical XSD does define request type, but no ArrivalExpected/DepartureExpected members. Source SHA256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf (892769 bytes), verified PNG SHA256 48c89183aeb69a335687da8321990e4dc79b4ab0062181ee1ea160edbf922346 / 74c8f525df2d2b14e63fdbb5b2eec2e51bd2bbb28c3110aa967fff6bdb661282, GitHub run 33275626001 artifact 9721397514.. Selected exact official_release XSD IBIS-IP_common_V1.0.xsd blob 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c lines 520–554; both expected-time members absent in Request.",
+        "Common V2.0 scope nonaffected_predecessor_request_fields_absent, actual original PDF body printed p27 2.51 StopInformationRequest Table 51 — Description of StopInformationRequest; official source SHA256 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088, original PNG hash evidence in point summary: Original visible body p27 2.51 StopInformationRequest, Table 51 — Description of StopInformationRequest. Neither request Expected field exists in original PDF body or exact selected Request XSD. Source SHA256 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088 (946088 bytes), verified PNG SHA256 71d3999b383690495891ee390ef3836fddc87503d2d92874e4ad2e5ecd5d536f, GitHub run 33279811315 artifact 9722644456.. Selected exact official_release XSD IBIS-IP_common_V2.0.xsd blob 8608e3dcd665c197c34da7f6ec6af5a3758da164 lines 526–560; both expected-time members absent in Request.",
+        "Common V2.1 scope nonaffected_predecessor_request_fields_absent, actual original PDF body printed p29 2.51 StopInformationRequest Table 51 — Description of StopInformationRequest; official source SHA256 a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32, original PNG hash evidence in point summary: Original visible body p29 2.51 StopInformationRequest, Table 51 — Description of StopInformationRequest. Neither request Expected field exists in original PDF body or exact selected Request XSD. Source SHA256 a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32 (1274051 bytes), verified PNG SHA256 2493af2ea41abe8c72e1d351762acf54412b7f05cdd04f25cce7736843a1fde5, GitHub run 33393002497 artifact 9758203545.. Selected exact official_release XSD IBIS-IP_common_V2.1.xsd blob 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e lines 525–559; both expected-time members absent in Request.",
+        "Common V2.2 scope last_nonaffected_predecessor_request_fields_absent, actual original PDF body printed p31 2.52 StopInformationRequest Table 52 — Description of StopInformationRequest; official source SHA256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203, original PNG hash evidence in point summary: Original visible body p31 2.52 StopInformationRequest, Table 52 — Description of StopInformationRequest. Neither request Expected field exists in original PDF body or exact selected Request XSD. Source SHA256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203 (1411558 bytes), verified PNG SHA256 a072381c3477de238461a0ca5a69882fbc0cc1da5b20ec417f01dbd51504aaba, GitHub run 43216104609 artifact 13944345486.. Selected exact official_release XSD IBIS-IP_common_V2.2.xsd blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae lines 534–568; both expected-time members absent in Request.",
+        "Common V2.3 scope only_verified_affected_official_release, actual original PDF body printed p32 2.52 StopInformationRequest Table 52 — Description of StopInformationRequest; official source SHA256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b, original PNG hash evidence in point summary: Original visible body p32 2.52 StopInformationRequest, Table 52 — Description of StopInformationRequest. Both ArrivalExpected and DepartureExpected explicitly 0:1 in Request, but exact official V2.3 Request type omits both; distinct StopInformation type contains them. Source SHA256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b (793521 bytes), verified PNG SHA256 b9f7576dd7654b3976fd7d05e7d2d653e07a2c912ab60c7fa2d8514dcdd1b904, GitHub run 33656579631 artifact 9856965744.. Selected exact official_release XSD IBIS-IP_common_V2.3.xsd blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 lines 584–618 (Request absent), 637/643 (StopInformation present); both element declarations absent in Request; present only in StopInformationStructure.",
+        "Common V2.4 scope candidate_only_correction_boundary_not_affected, actual original PDF body printed p34/35 2.51 StopInformationRequest (starts p34, continues p35) Table 51 — Description of StopInformationRequest (actual caption p35); official source SHA256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, original PNG hash evidence in point summary: Original visible body p34/35 2.51 StopInformationRequest (starts p34, continues p35), Table 51 — Description of StopInformationRequest (actual caption p35). Published V2.4 PDF has both ArrivalExpected and DepartureExpected 0:1 in Request; selected only candidate/integration V2.4 XSD also declares both, so correction boundary is not an affected official strict XSD profile. Source SHA256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a (1689647 bytes), verified PNG SHA256 d3d1f03a989ae3f18349b747643307567ff3e873862014e7c642b46bedd54a16 / 9a333351c0ef89a63067595482fdff7f26b59808c40f693ba2d1e32bf6fb24bd, GitHub run 33658306978 artifact 9857652638.. Selected exact candidate_integration XSD IBIS-IP_common_V2.4.xsd blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 lines 599–635 (Request present), 615/617 (Expected members); both xs:element present with minOccurs=0 (candidate-only corrective modeling).",
+        "EV-121 official V2.3 XSD rejected ArrivalExpected/DepartureExpected within StopInformationRequestStructure and accepted both in StopInformationStructure; V2.4 candidate EV-122 permits Request fields. V2.4 is NOT an official correction release."
+      ],
+      "scope_conclusion": "V1.0 PDF has no comparable Request member table despite XSD type. Official Common V2.0/V2.1/V2.2 PDF+XSD both omit Request Expected fields; last nonaffected predecessor V2.2. One affected historical official release Common V2.3: PDF §2.52 Table52 lists ArrivalExpected/DepartureExpected 0:1 in Request, official VDV-301-2.3 XSD lacks those Request fields and supports them only in StopInformation. Published V2.4 PDF still lists both and only the explicit selected candidate/integration V2.4 XSD declares them as Request fields; candidate correction boundary is excluded from affected official scope, no official released successor proven. Same existing DRCOM23-001, DRCOM21-001 StopName separate; no language-specific corrected release established.",
+      "boundary_checks": [
+        {
+          "version": "Common V1.0",
+          "role": "noncomparable_pdf_predecessor_request_type_in_xsd",
+          "source_ids": [
+            "COMMON_V1.0"
+          ],
+          "language_status": "Published official Common German PDF original source SHA256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf, actual body p19/20 1.48 StopInformation; no separate Request table Table 48 — Description of StopInformation; Table 50 — StopSequence; selected XSD 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c authority official_release; Noncomparable predecessor: V1.0 PDF lacks request table, but XSD request type exists; no falsely inferred affected scope. No separate DE and EN correction or promotion asserted."
+        },
+        {
+          "version": "Common V2.0",
+          "role": "nonaffected_predecessor_request_fields_absent",
+          "source_ids": [
+            "COMMON_V2.0"
+          ],
+          "language_status": "Published official Common bilingual DE/EN PDF original source SHA256 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088, actual body p27 2.51 StopInformationRequest Table 51 — Description of StopInformationRequest; selected XSD 8608e3dcd665c197c34da7f6ec6af5a3758da164 authority official_release; Exact original PDF and historical official XSD both omit request expected-time fields; last nonaffected predecessor is V2.2. No separate DE and EN correction or promotion asserted."
+        },
+        {
+          "version": "Common V2.1",
+          "role": "nonaffected_predecessor_request_fields_absent",
+          "source_ids": [
+            "COMMON_V2.1"
+          ],
+          "language_status": "Published official Common bilingual DE/EN PDF original source SHA256 a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32, actual body p29 2.51 StopInformationRequest Table 51 — Description of StopInformationRequest; selected XSD 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e authority official_release; Exact original PDF and historical official XSD both omit request expected-time fields; last nonaffected predecessor is V2.2. No separate DE and EN correction or promotion asserted."
+        },
+        {
+          "version": "Common V2.2",
+          "role": "last_nonaffected_predecessor_request_fields_absent",
+          "source_ids": [
+            "COMMON_V2.2"
+          ],
+          "language_status": "Published official Common bilingual DE/EN PDF original source SHA256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203, actual body p31 2.52 StopInformationRequest Table 52 — Description of StopInformationRequest; selected XSD 468fee6d177e7185dbcd5d3f90cfb114e29e01ae authority official_release; Exact original PDF and historical official XSD both omit request expected-time fields; last nonaffected predecessor is V2.2. No separate DE and EN correction or promotion asserted."
+        },
+        {
+          "version": "Common V2.3",
+          "role": "only_verified_affected_official_release",
+          "source_ids": [
+            "COMMON_V2.3"
+          ],
+          "language_status": "Published official Common bilingual DE/EN PDF original source SHA256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b, actual body p32 2.52 StopInformationRequest Table 52 — Description of StopInformationRequest; selected XSD 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 authority official_release; Only affected official V2.3 release: original Request PDF 0:1 for both but selected official XSD disallows both; advisory only on existing XSD INVALID. No separate DE and EN correction or promotion asserted."
+        },
+        {
+          "version": "Common V2.4",
+          "role": "candidate_only_correction_boundary_not_affected",
+          "source_ids": [
+            "COMMON_V2.4"
+          ],
+          "language_status": "Published official Common bilingual DE/EN PDF original source SHA256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a, actual body p34/35 2.51 StopInformationRequest (starts p34, continues p35) Table 51 — Description of StopInformationRequest (actual caption p35); selected XSD 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 authority candidate_integration; Correction boundary only: official V2.4 PDF still lists fields, selected candidate V2.4 XSD agrees and can accept both; no official-release XSD correction established. No separate DE and EN correction or promotion asserted."
+        }
+      ],
+      "note": "Confirmed contradiction vs executable official V2.3 XSD; source blame conservatively cross_artifact_mismatch, not independently proven one-sided PDF error. Historical V2.3-only finding ID and EV121 preserved. 95/192 unique locators after full gate, 97 remaining. V2.4 selected schema candidate only, neither official fix nor affected trigger."
     }
   ]
 }

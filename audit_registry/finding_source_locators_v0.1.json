@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "c8ab3c1f5039d0f12d2fde7b2f0330c9b323d9c4",
+    "git_blob": "96cc6424842b326bb8de7afb892104b830a3ae4a",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 94,
-    "coverage_complete_count": 94,
+    "locator_entry_count": 95,
+    "coverage_complete_count": 95,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 98
+    "remaining_finding_count": 97
   },
   "entries": [
     {
@@ -18909,6 +18909,253 @@
         "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4_FRESH_2026-09-03.md",
         "EV-120 exact V2.2 harness tests empty NetexMode VALID; EV-121 official V2.3 and EV-122 candidate V2.4 test harnesses check empty NetexMode VALID",
         "CE-023 separate V2.2/V2.3 corrupt duplicate NetexMode table, not merged into DRCOM22-001"
+      ]
+    },
+    {
+      "finding_id": "DRCOM23-001",
+      "service": "Common / StopInformationRequest",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "Common V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.3.xsd",
+          "note": "Original official Common V2.3 PDF printed p32 §2.52 Table 52 StopInformationRequest has ArrivalExpected 0:1 and DepartureExpected 0:1. Exact VDV-301-2.3 Common XSD blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 omits both under StopInformationRequestStructure (lines584-618) but permits both under StopInformationStructure (lines637/643). V2.2 predecessor PDF/XSD agree on absence; published V2.4 PDF still lists both but selected V2.4 candidate/integration XSD now includes them, candidate only; no official fixed successor established."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "1.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "noncomparable_pdf_predecessor_request_type_in_xsd",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V1.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds.pdfx",
+              "sha256": "a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf",
+              "printed_pages": [
+                19,
+                20
+              ],
+              "section": "1.48 StopInformation; no separate Request table",
+              "table": "Table 48 — Description of StopInformation; Table 50 — StopSequence",
+              "point_summary": "Original visible body p19/20 1.48 StopInformation; no separate Request table, Table 48 — Description of StopInformation; Table 50 — StopSequence. Official V1.0 has no comparable Request member table; exact historical XSD does define request type, but no ArrivalExpected/DepartureExpected members. Source SHA256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf (892769 bytes), verified PNG SHA256 48c89183aeb69a335687da8321990e4dc79b4ab0062181ee1ea160edbf922346 / 74c8f525df2d2b14e63fdbb5b2eec2e51bd2bbb28c3110aa967fff6bdb661282, GitHub run 33275626001 artifact 9721397514."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact historical selected Common V1.0 profile.",
+              "component_kind": "complexType",
+              "component": "StopInformationRequestStructure",
+              "member": "ArrivalExpected / DepartureExpected",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='StopInformationRequestStructure']/xs:sequence",
+              "value": "both expected-time members absent in Request",
+              "line_hint": "520–554",
+              "point_summary": "Exact Common V1.0 Git blob 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c request lines 520–554. Matches the original PDF omission, or the V1.0 noncomparable PDF predecessor."
+            }
+          ],
+          "coverage_note": "Noncomparable predecessor: V1.0 PDF lacks request table, but XSD request type exists; no falsely inferred affected scope."
+        },
+        {
+          "version": "2.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "nonaffected_predecessor_request_fields_absent",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.0",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v-2-0.pdfx",
+              "sha256": "23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088",
+              "printed_pages": [
+                27
+              ],
+              "section": "2.51 StopInformationRequest",
+              "table": "Table 51 — Description of StopInformationRequest",
+              "point_summary": "Original visible body p27 2.51 StopInformationRequest, Table 51 — Description of StopInformationRequest. Neither request Expected field exists in original PDF body or exact selected Request XSD. Source SHA256 23806f025d0412c1b5f9c2ac98ee3cd0c1c08cc97aba4f0dd2eb88c485182088 (946088 bytes), verified PNG SHA256 71d3999b383690495891ee390ef3836fddc87503d2d92874e4ad2e5ecd5d536f, GitHub run 33279811315 artifact 9722644456."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.0.xsd",
+              "git_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+              "authority_detail": "Exact historical selected Common V2.0 profile.",
+              "component_kind": "complexType",
+              "component": "StopInformationRequestStructure",
+              "member": "ArrivalExpected / DepartureExpected",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='StopInformationRequestStructure']/xs:sequence",
+              "value": "both expected-time members absent in Request",
+              "line_hint": "526–560",
+              "point_summary": "Exact Common V2.0 Git blob 8608e3dcd665c197c34da7f6ec6af5a3758da164 request lines 526–560. Matches the original PDF omission, or the V1.0 noncomparable PDF predecessor."
+            }
+          ],
+          "coverage_note": "Exact original PDF and historical official XSD both omit request expected-time fields; last nonaffected predecessor is V2.2."
+        },
+        {
+          "version": "2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "nonaffected_predecessor_request_fields_absent",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.1",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sds-v2-1-commonstructure-enums.pdfx",
+              "sha256": "a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32",
+              "printed_pages": [
+                29
+              ],
+              "section": "2.51 StopInformationRequest",
+              "table": "Table 51 — Description of StopInformationRequest",
+              "point_summary": "Original visible body p29 2.51 StopInformationRequest, Table 51 — Description of StopInformationRequest. Neither request Expected field exists in original PDF body or exact selected Request XSD. Source SHA256 a6a22ce5670df81302ed2c54e661abc87e1314449f9bc22d41eae437839aed32 (1274051 bytes), verified PNG SHA256 2493af2ea41abe8c72e1d351762acf54412b7f05cdd04f25cce7736843a1fde5, GitHub run 33393002497 artifact 9758203545."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.1.xsd",
+              "git_blob": "05977c9f86c7c9dd0b48f36a4a4e9be32e94659e",
+              "authority_detail": "Exact historical selected Common V2.1 profile.",
+              "component_kind": "complexType",
+              "component": "StopInformationRequestStructure",
+              "member": "ArrivalExpected / DepartureExpected",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='StopInformationRequestStructure']/xs:sequence",
+              "value": "both expected-time members absent in Request",
+              "line_hint": "525–559",
+              "point_summary": "Exact Common V2.1 Git blob 05977c9f86c7c9dd0b48f36a4a4e9be32e94659e request lines 525–559. Matches the original PDF omission, or the V1.0 noncomparable PDF predecessor."
+            }
+          ],
+          "coverage_note": "Exact original PDF and historical official XSD both omit request expected-time fields; last nonaffected predecessor is V2.2."
+        },
+        {
+          "version": "2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "last_nonaffected_predecessor_request_fields_absent",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.2",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-2-commonstructure-enums.pdfx",
+              "sha256": "85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203",
+              "printed_pages": [
+                31
+              ],
+              "section": "2.52 StopInformationRequest",
+              "table": "Table 52 — Description of StopInformationRequest",
+              "point_summary": "Original visible body p31 2.52 StopInformationRequest, Table 52 — Description of StopInformationRequest. Neither request Expected field exists in original PDF body or exact selected Request XSD. Source SHA256 85168c2012e81a9a2186c98859f04f959d783b5e33b631104a1b90b29fceb203 (1411558 bytes), verified PNG SHA256 a072381c3477de238461a0ca5a69882fbc0cc1da5b20ec417f01dbd51504aaba, GitHub run 43216104609 artifact 13944345486."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact official historical upstream Common V2.2 file lineage; no invented tag VDV-301-2.2.",
+              "component_kind": "complexType",
+              "component": "StopInformationRequestStructure",
+              "member": "ArrivalExpected / DepartureExpected",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='StopInformationRequestStructure']/xs:sequence",
+              "value": "both expected-time members absent in Request",
+              "line_hint": "534–568",
+              "point_summary": "Exact Common V2.2 Git blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae request lines 534–568. Matches the original PDF omission, or the V1.0 noncomparable PDF predecessor."
+            }
+          ],
+          "coverage_note": "Exact original PDF and historical official XSD both omit request expected-time fields; last nonaffected predecessor is V2.2."
+        },
+        {
+          "version": "2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "only_verified_affected_official_release",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.3",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sdes-v2-3-commonstructure-enums.pdfx",
+              "sha256": "d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b",
+              "printed_pages": [
+                32
+              ],
+              "section": "2.52 StopInformationRequest",
+              "table": "Table 52 — Description of StopInformationRequest",
+              "point_summary": "Original visible body p32 2.52 StopInformationRequest, Table 52 — Description of StopInformationRequest. Both ArrivalExpected and DepartureExpected explicitly 0:1 in Request, but exact official V2.3 Request type omits both; distinct StopInformation type contains them. Source SHA256 d59620b22e7f6d3e47ad0dabdac5ce4b6e8ec5d2965fb68a95003ded8dd4986b (793521 bytes), verified PNG SHA256 b9f7576dd7654b3976fd7d05e7d2d653e07a2c912ab60c7fa2d8514dcdd1b904, GitHub run 33656579631 artifact 9856965744."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.3.xsd",
+              "git_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+              "authority_detail": "Official tag VDV-301-2.3 Common XSD exact blob, includes historical Enumerations V2.2.",
+              "component_kind": "complexType",
+              "component": "StopInformationRequestStructure",
+              "member": "ArrivalExpected / DepartureExpected",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='StopInformationRequestStructure']/xs:sequence",
+              "value": "both element declarations absent in Request; present only in StopInformationStructure",
+              "line_hint": "584–618 (Request absent), 637/643 (StopInformation present)",
+              "point_summary": "Exact Common V2.3 Git blob 0d8926c4063c12de9a5e68b6f0addaab35a55dc1 request lines 584–618 (Request absent), 637/643 (StopInformation present). Executable EV-121 rejects both Expected fields in Request while accepting both in StopInformation."
+            }
+          ],
+          "coverage_note": "Only affected official V2.3 release: original Request PDF 0:1 for both but selected official XSD disallows both; advisory only on existing XSD INVALID."
+        },
+        {
+          "version": "2.4",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "candidate_only_correction_boundary_not_affected",
+          "pdf_locators": [
+            {
+              "source_id": "COMMON_V2.4",
+              "document_title": "VDV 301-2-1 Common Data Structures and Enumerations",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-1-sde-v2-4-commonstructure-enums.pdfx",
+              "sha256": "01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a",
+              "printed_pages": [
+                34,
+                35
+              ],
+              "section": "2.51 StopInformationRequest (starts p34, continues p35)",
+              "table": "Table 51 — Description of StopInformationRequest (actual caption p35)",
+              "point_summary": "Original visible body p34/35 2.51 StopInformationRequest (starts p34, continues p35), Table 51 — Description of StopInformationRequest (actual caption p35). Published V2.4 PDF has both ArrivalExpected and DepartureExpected 0:1 in Request; selected only candidate/integration V2.4 XSD also declares both, so correction boundary is not an affected official strict XSD profile. Source SHA256 01c233239d6d488dd814e3c9fc2a21841913298ef25442a21ab9208c4120452a (1689647 bytes), verified PNG SHA256 d3d1f03a989ae3f18349b747643307567ff3e873862014e7c642b46bedd54a16 / 9a333351c0ef89a63067595482fdff7f26b59808c40f693ba2d1e32bf6fb24bd, GitHub run 33658306978 artifact 9857652638."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.4.xsd",
+              "git_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+              "authority_detail": "Published official V2.4 PDF, but selected Common V2.4 XSD only candidate/integration; no official V2.4 release authority or schema promotion.",
+              "component_kind": "complexType",
+              "component": "StopInformationRequestStructure",
+              "member": "ArrivalExpected / DepartureExpected",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='StopInformationRequestStructure']/xs:sequence",
+              "value": "both xs:element present with minOccurs=0 (candidate-only corrective modeling)",
+              "line_hint": "599–635 (Request present), 615/617 (Expected members)",
+              "point_summary": "Exact Common V2.4 Git blob 1946fd37e29ced605654f49ea3d98cd2fbbdc8e4 request lines 599–635 (Request present), 615/617 (Expected members). Candidate EV-122 accepts both in Request; not an official fixed successor."
+            }
+          ],
+          "coverage_note": "Correction boundary only: official V2.4 PDF still lists fields, selected candidate V2.4 XSD agrees and can accept both; no official-release XSD correction established."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM23_001_2026-11-12.md",
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V23_2026-09-04.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3_FRESH_2026-09-02.md",
+        "Historical EV-121 official Common V2.3 Request with ArrivalExpected/DepartureExpected INVALID, StopInformation with both VALID; EV-139 run33857906408",
+        "Candidate V2.4 EV-122 positive request member test; not an official released XSD correction",
+        "DRCOM21-001 StopName facet deliberately separate"
       ]
     }
   ]
