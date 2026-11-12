@@ -2127,8 +2127,8 @@
     "version_scope_boundary_latest_gate_run_id": "43266853430"
   },
   "next_actions": [
-    "DRCOM23-001 terminal_clean after full substantive gate 43266853430 SUCCESS and final handoff verification; 95/192, 95/95 PDF body/scope, 97 remain. User requests two sequential cycles: DRCOM24-001 is next, start only after final HEAD integrity and schema gates green.",
-    "After DRCOM24-001 separate terminal closure and gates, publish reviewed ai-mem PR with both durable findings/checkpoints, retaining historic snapshots."
+    "DRCOM24-001 pinned exact-byte Common V2.2 p23–26 render requested via deterministic fallback at 95/192; first sequential finding DRCOM23-001 terminal clean and full final gates. Observe fallback before updating PDF locator; then complete second full mini-cycle.",
+    "After second terminal_clean and final HEAD gates, reviewed ai-mem PR consolidating both durable findings, preserving history; cleanup temporary memory branch under policy."
   ],
   "source_locator_progress": {
     "locator_entry_count": 95,
@@ -2206,12 +2206,23 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "43266853430",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "43266853483",
-    "resume_instruction": "DRCOM23-001 terminal_clean, 95/192 unique source-locators, 95/95 visible original PDF body, 95/95 independent version-scope boundaries, 97 remaining. Official Common V2.3 PDF p32 §2.52 Table52 includes ArrivalExpected/DepartureExpected as Request fields; exact selected official VDV-301-2.3 XSD rejects both there and allows both in StopInformation; EV-121 prior executable. Common V1.0 no comparable Request table, V2.0–V2.2 neither field in request, V2.4 official PDF p34/35 and candidate XSD both list the fields (not an official released correction). Cross_artifact_mismatch attribution unproven; strict official XSD INVALID unchanged, runtime advisory reviewed_not_implemented. No historical XSD or productive SDK edits. Full schema audit run43266853430 SUCCESS and handoff run43266853483 SUCCESS on substantive e944302bfe6045c3678e5ab6041fd2a49d34b906. Check final terminal HEAD handoff integrity; next unique finding DRCOM24-001; user requested two sequential findings, so start DRCOM24-001 only after green final HEAD."
+    "resume_instruction": "DRCOM23-001 closed at 95/192; DRCOM24-001 second sequential audit gate_pending. Exact Common V2.2 p23-26 pinned render requested. Collect artifact/visible body and prove V1.0–V2.4 LineInformation.LineName/LineShortName PDF vs selected XSD scope; preserve official V2.4 PDF / candidate XSD split, SDK unsupported_profile/no official strict V2.4. Commit complete 96/192 only with full evidence/registry mirrors and gates. No ai-mem PR until both findings completed.",
+    "pending_block": "DRCOM24-001 pinned body render",
+    "active_finding": "DRCOM24-001",
+    "active_step": "Exact official Common V2.2 original PDF body p23-26 deterministic fallback render requested, 95/192 progress unchanged; first sequential DRCOM23-001 closed at 95/192 on terminal 66a5af9fe0e11015c7778cba396ddd671bae6135 with both gates successful.",
+    "next_step": "Observe pdf-render-fallback for this exact request commit. Verify official PDF SHA256 and size, original printed LineInformation table page and PNG hashes; then independently reconcile Common V1.0–V2.4 selected XSD+PDF scope, classification, runtime, locator/body/boundary. Submit 96/192 substantive atomic gate_pending commit, full schema gate, terminal_clean, final-head Handoff Integrity.",
+    "evidence_refs": [
+      "tools/pdf_render_request_v0.1.json",
+      "audit_registry/pdf_source_pins_v0.1.json:COMMON_V2.2",
+      "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V24_2026-09-04.md",
+      "Original pinned Common V1.0/V2.0/V2.1/V2.3/V2.4 render artifacts, candidate V2.4 exact Common XSD"
+    ],
+    "recovery_instruction": "Find DRCOM24-001 gate_pending on dev/schema-integration. Inspect pdf-render-fallback GitHub run triggered by changing tools/pdf_render_request_v0.1.json to COMMON_V2.2 pages23-26; verify exact PDF pin SHA and printed LineInformation Table31. Progress remains 95/192, next intended 96/192 after complete source/body/version proof. Do not skip full schema gate, terminal_clean final Handoff Integrity; do not modify XSD or runtime."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
