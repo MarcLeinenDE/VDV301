@@ -2127,8 +2127,8 @@
     "version_scope_boundary_latest_gate_run_id": "43113112697"
   },
   "next_actions": [
-    "DRCOM10-007 terminal_clean with 91/192 unique source-locators, 91/91 original PDF visible bodies and version-boundary audits, 101 remaining. All six Common editions have confirmed documentation-only grouped editorial residue; XSD untouched and SDK no-runtime-diagnostic unchanged.",
-    "Substantive full schema gate43113112697 SUCCESS, handoff gate43113112677 SUCCESS; verify both final-HEAD CI on this terminal commit, then next DRCOM20-001."
+    "DRCOM20-001 gate_pending original pinned PDF V2.2 page 12 fallback render; completed progress remains 91/192, 101 open.",
+    "Revalidate exact original InternationalTextType Table17 and all historical adjacent versions V1.0–V2.4, preserve distinct CE-020 authority collision; then one locator/body/boundary + sync semantic/runtime and GitHub terminal full-gate cycle."
   ],
   "source_locator_progress": {
     "locator_entry_count": 91,
@@ -2206,12 +2206,27 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "43113112697",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "43113112677",
-    "resume_instruction": "DRCOM10-007 terminal_clean: 91/192 unique source locators, 91/91 original PDF visible body reviews and 91/91 version boundaries, 101 remaining. All six official Common V1.0–V2.4 PDFs contain persistent grouped documentation-only GNSSCoordinateSystem(s) table/heading misnaming and dorr/Infromation typos; unique V1.0 additional history/cf0/enummerations examples are not generalized. All original PDF SHA/PNG hashes and selected exact XSD singular GNSS type recorded in docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRCOM10_007_2026-11-11.md. No XSD, parser, alias, enum or SDK runtime diagnostic changes; no runtime mapper. Substantive schema gate 43113112697 SUCCESS, handoff gate 43113112677 SUCCESS on d009e9561a9694e0ef61d6750ec5cb6ac73c2335. Verify final-HEAD schema/handoff gates on separate status-only terminal commit before starting DRCOM20-001."
+    "resume_instruction": "DRCOM20-001 gate_pending: prior 91/192 complete, 101 open, no new credit. tools/pdf_render_request_v0.1.json asks COMMON_V2.2 p12 for original §1.17 Table17 InternationalTextType. V2.0 p13, V2.1 p12, V2.3 p12, V2.4 p14 original archived PNGs visually verified; exact selected XSD direct xs:string/xs:language for all V1.0–V2.4; V1.0 PDF no InternationalTextType table. Retrieve new V2.2 page SHA, preserve CE-020 distinct PR30 issue, then canonical registry/scope + CI terminal.",
+    "pending_block": "DRCOM20-001 InternationalTextType literal PDF wrapper vs exact XSD primitive source-locator/version-scope audit",
+    "active_finding": "DRCOM20-001",
+    "active_step": "Original V2.0/V2.1/V2.3/V2.4 PDF §1.17 Table17 pages verified from pinned archive and exact common XSD blobs V1.0–V2.4 compared; requesting missing COMMON_V2.2 original printed p12 visual. 91/192 counts unchanged.",
+    "next_step": "Retrieve V2.2 exact-byte original page12 workflow artifact, inspect visibly Table17 and PNG+PDF SHA, cross-check V1.0 predecessor has no InternationalTextType PDF table, and distinguish CE-020 V2.3 PR30 authority collision. Extend existing DRCOM20-001 affected scope V2.0–V2.4 (candidate 2.4 separately), sync semantic/runtime/locator/body/boundary/sdk/state, full GitHub gate, terminal_clean final-head CI.",
+    "recovery_instruction": "Retrieve V2.2 exact-byte original page12 workflow artifact, inspect visibly Table17 and PNG+PDF SHA, cross-check V1.0 predecessor has no InternationalTextType PDF table, and distinguish CE-020 V2.3 PR30 authority collision. Extend existing DRCOM20-001 affected scope V2.0–V2.4 (candidate 2.4 separately), sync semantic/runtime/locator/body/boundary/sdk/state, full GitHub gate, terminal_clean final-head CI.",
+    "evidence_refs": [
+      "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_COMMON_V20_2026-09-04.md",
+      "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.0.md",
+      "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.1.md",
+      "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.2.md",
+      "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.3_FRESH_2026-09-02.md",
+      "docs/pdf_xsd_semantic_audit/deep_read/COMMON_V2.4.md",
+      "docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_COMMON_V24_INTERNATIONALTEXT_AUTHORITY_2026-09-03.md",
+      "tools/pdf_render_request_v0.1.json COMMON_V2.2 p12"
+    ]
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
