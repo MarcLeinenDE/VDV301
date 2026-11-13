@@ -2127,9 +2127,9 @@
     "version_scope_boundary_latest_gate_run_id": "43269459270"
   },
   "next_actions": [
-    "DRDMS22-001 gate_pending: pinned DMS_V2.2 pages22-26 original-body render requested. Inspect artifact, verify SHA, printed Table19/23/27 and actual section; independently establish DMS V2.4 successor and prior service lineage.",
-    "Complete DRDMS22-001 only after full PDF/XSD/scope checks, cross-registry updates, full schema CI and terminal_clean final HEAD Handoff Integrity. Current progress remains 96/192.",
-    "After green terminal closure, publish only verified durable DRDMS22-001 finding/checkpoint to ai-mem through reviewed PR and confirm merge; no XSD changes."
+    "Observe DMS_V2.4 original official pinned PDF render pages21-25; independently verify correction Table23 -> Table19.",
+    "Complete DRDMS22-001 as one existing finding with corrected first-affected V2.1, affected V2.2, V2.3 no official DMS PDF, corrected published V2.4. Integrate semantic/locator/body/boundary/state evidence; full CI and terminal_clean required.",
+    "After confirmed final HEAD gates, publish verified durable findings to ai-mem via reviewed PR+merge; no XSD or runtime code changes."
   ],
   "source_locator_progress": {
     "locator_entry_count": 96,
@@ -2212,19 +2212,21 @@
     "latest_completed_full_gate_run_id": "43269459270",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "43269459161",
-    "resume_instruction": "DRDMS22-001 in-progress, first atomic pending commit only requests deterministic visual render. Progress remains 96/192; no canonical finding update yet. Verify original PDF and cross-version authority then append locator/body/boundary and run the full GitHub gate. Finalize terminal_clean separately and only then sync durable result to ai-mem by reviewed PR.",
+    "resume_instruction": "DRDMS22-001 remains gate_pending at 96/192. The V2.1 original PDF printed p106 Table37 also says cf.table27 despite true Table33; V2.2 printed p24 Table23 says cf.table27 despite true Table19. Await V2.4 original corrected successor render. Preserve history and selected XSD authority; no SDK runtime diagnostics.",
     "pending_block": "DRDMS22-001 exact-byte DMS V2.2 original PDF visual fallback",
     "active_finding": "DRDMS22-001",
-    "active_step": "Requested pinned official DMS V2.2 PDF body pages 22-26 via tools/pdf_render_request_v0.1.json; no finding count/semantic/XSD/runtime change; prior 96/192 terminal checkpoint intact.",
-    "next_step": "Observe pdf-render-fallback run for DMS_V2.2 pages22-26, download artifact and visually inspect actual printed §2.25 Table 23 reference plus Table 19 and Table 27; independently check published DMS V2.4 correction, official-XSD lineage and non-affected predecessors. Then consolidate all canonical registers in a recoverable second gate_pending commit, run full schema and handoff gates, finalize terminal_clean and verify final HEAD before ai-mem.",
+    "active_step": "DMS V2.2 PDF exact pin verified; original visible printed p23 Table 19, p24 §2.25 Table 23 wrong cf.table27, p26 Table27 InstallUpdate. Independently verified original official V2.1 printed p103 Table27 RestartService, p105 Table33 DeviceStatusInformation, p106 Table37 wrong cf.table27 (archived pinned run37897714010/artifact11600767562; PNG hashes inspected). Requesting official DMS V2.4 last-successor visual pages21-25 via deterministic fallback; progress 96/192 unchanged.",
+    "next_step": "Observe V2.4 render job, verify pinned SHA and original printed p24 Table 23 corrected cf.Table19 and actual p23 Table19, classify V2.1+V2.2 affected, V2.4 corrected published successor, V1.0/V2.0 absence and V2.3 PDF-unavailable; reconcile existing semantic record as ONE finding; update all locator/body/boundary/semantic/state register counts, full gates.",
     "evidence_refs": [
       "tools/pdf_render_request_v0.1.json:DMS_V2.2 pages22-26",
       "audit_registry/pdf_source_pins_v0.1.json:DMS_V2.2 SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e",
       "docs/pdf_xsd_semantic_audit/deep_read/DMS_V2.2.md",
       "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_V22_2026-09-05.md",
-      "VDV official DMS V2.4 PDF published successor; needs exact pinned visual check"
+      "VDV official DMS V2.4 PDF published successor; needs exact pinned visual check",
+      "DMS V2.2 verified run43424551144 artifact14035527166 printed pages23,24,26",
+      "VDV301-2_BASE_V2.1 pinned run37897714010 artifact11600767562 printed pages103,105,106"
     ],
-    "recovery_instruction": "On dev/schema-integration find DRDMS22-001 gate_pending at 96/192. Inspect render job caused by tools/pdf_render_request_v0.1.json source DMS_V2.2 pages22-26; byte pin must match. Visually establish Table19/23/27 and scope before changes to semantic/locator/body/boundary registers; no source count credit until a full gate. Do not edit XSD or production SDK."
+    "recovery_instruction": "DRDMS22-001 gate_pending 96/192, exact V2.2 and historical V2.1 body pages visually checked; the same wrong ref to Table27 is already present in V2.1 (actual intended Table33). New render request for official DMS V2.4 pages21-25; after SHA-pinned corrected successor review, update existing finding scopes to V2.1+V2.2 (not duplicate ID), all 3 verification registries and state, full gate then terminal_clean. No XSD changes."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
