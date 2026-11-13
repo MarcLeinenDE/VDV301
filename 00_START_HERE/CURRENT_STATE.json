@@ -1,6 +1,6 @@
 {
   "state_schema_version": "0.1",
-  "date": "2026-11-12",
+  "date": "2026-11-13",
   "canonical_branch": "dev/schema-integration",
   "workflow_mode": "full_gate_on_canonical_changes_plus_handoff_check_on_every_push",
   "project_phase": "source_locator_structural_completion",
@@ -2127,9 +2127,9 @@
     "version_scope_boundary_latest_gate_run_id": "43269459270"
   },
   "next_actions": [
-    "Two user-requested sequential mini-cycles completed: DRCOM23-001 (95/192) and DRCOM24-001 (96/192). Final DRCOM24-001 terminal_clean state, require final HEAD green Handoff Integrity and schema full gate.",
-    "After exact final HEAD gates SUCCESS, update private ai-mem with both durable findings/checkpoints via single reviewed PR+merge; preserve historical 95 and earlier snapshots, mark temporary source branch for cleanup if no safe delete.",
-    "Next unique source locator DRDMS22-001 remains 96 open, not started by this two-finding request."
+    "DRDMS22-001 gate_pending: pinned DMS_V2.2 pages22-26 original-body render requested. Inspect artifact, verify SHA, printed Table19/23/27 and actual section; independently establish DMS V2.4 successor and prior service lineage.",
+    "Complete DRDMS22-001 only after full PDF/XSD/scope checks, cross-registry updates, full schema CI and terminal_clean final HEAD Handoff Integrity. Current progress remains 96/192.",
+    "After green terminal closure, publish only verified durable DRDMS22-001 finding/checkpoint to ai-mem through reviewed PR and confirm merge; no XSD changes."
   ],
   "source_locator_progress": {
     "locator_entry_count": 96,
@@ -2207,12 +2207,24 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "43269459270",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "43269459161",
-    "resume_instruction": "Both requested sequential audit mini-cycles completed: DRCOM23-001 terminal_clean first at 95/192 with exact-final HEAD 66a5af9fe0e11015c7778cba396ddd671bae6135 and full gates SUCCESS (43267123626,43267122698); second DRCOM24-001 terminal_clean at 96/192 unique source locators, 96/96 original PDF-visible body verifications and 96/96 independently checked version boundaries, 96 remaining. For DRCOM24-001 official V2.4 published PDF §2.31 LineInformation p28 fields LineName/LineShortName 0:1 IBIS-IP.string and ACTUAL Table31 caption on p29; selected V2.4 XSD only candidate/integration uses InternationalTextType 0:*; official V1.0–V2.3 PDF/XSD agree InternationalTextType 0:* (V2.2 original p25 freshly rendered via SHA-pinned run43267750888). Upstream PR31 open, no official 2.4 tag; SDK no_strict_xsd_profile/unsupported_profile, matcher not applicable; EV122 candidate-only historical; no new XML tests, XSD or production SDK changes. Substantive second schema-audit-validation run43269459270 SUCCESS and handoff-integrity run43269459161 SUCCESS on 1a4496238a810cebd7eda918837b5e13c33d9c3e. Final terminal HEAD needs green handoff integrity. Next unique source locator DRDMS22-001, NOT started; after green, publish reviewed ai-mem PR for two completed findings."
+    "resume_instruction": "DRDMS22-001 in-progress, first atomic pending commit only requests deterministic visual render. Progress remains 96/192; no canonical finding update yet. Verify original PDF and cross-version authority then append locator/body/boundary and run the full GitHub gate. Finalize terminal_clean separately and only then sync durable result to ai-mem by reviewed PR.",
+    "pending_block": "DRDMS22-001 exact-byte DMS V2.2 original PDF visual fallback",
+    "active_finding": "DRDMS22-001",
+    "active_step": "Requested pinned official DMS V2.2 PDF body pages 22-26 via tools/pdf_render_request_v0.1.json; no finding count/semantic/XSD/runtime change; prior 96/192 terminal checkpoint intact.",
+    "next_step": "Observe pdf-render-fallback run for DMS_V2.2 pages22-26, download artifact and visually inspect actual printed §2.25 Table 23 reference plus Table 19 and Table 27; independently check published DMS V2.4 correction, official-XSD lineage and non-affected predecessors. Then consolidate all canonical registers in a recoverable second gate_pending commit, run full schema and handoff gates, finalize terminal_clean and verify final HEAD before ai-mem.",
+    "evidence_refs": [
+      "tools/pdf_render_request_v0.1.json:DMS_V2.2 pages22-26",
+      "audit_registry/pdf_source_pins_v0.1.json:DMS_V2.2 SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e",
+      "docs/pdf_xsd_semantic_audit/deep_read/DMS_V2.2.md",
+      "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_V22_2026-09-05.md",
+      "VDV official DMS V2.4 PDF published successor; needs exact pinned visual check"
+    ],
+    "recovery_instruction": "On dev/schema-integration find DRDMS22-001 gate_pending at 96/192. Inspect render job caused by tools/pdf_render_request_v0.1.json source DMS_V2.2 pages22-26; byte pin must match. Visually establish Table19/23/27 and scope before changes to semantic/locator/body/boundary registers; no source count credit until a full gate. Do not edit XSD or production SDK."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
