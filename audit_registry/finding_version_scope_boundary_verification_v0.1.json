@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 98,
-    "verified": 98,
+    "tracked_findings": 99,
+    "verified": 99,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -5855,6 +5855,72 @@
           "version": "V2.4",
           "role": "first_corrected_official_publication",
           "language_status": "Official dedicated bilingual DMS V2.4 PDF original TOC p6/p7 and body p28/p29 all 2.33–2.35 and six subsections match; selected XSD candidate only",
+          "source_ids": [
+            "DMS_V2.4"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRDMS22-003",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDMS22_003_2026-11-13.md",
+        "Original official V2.1 Base SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a exact printed p109 Table47 valid enum PNG 44637d69d3c32c0e3c7068fb4b465288134dab77737128f0cfc62286cdc95180 and p110 Table50 wrong prose PNG 71590d242ddb6c73c5d73467c3a26c25b64475a65624a1e87270448dd7ab8704 GitHub run43430528486 artifact14039261564",
+        "Original official DMS V2.2 SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e p28 Table33 valid enum PNG dd5803bb8f26a72cfe1546bfd366675fe3f59f6bc71ff0ce8f8d5c464ba9e8a1 and p29 Table36 wrong prose PNG b74925c5220df036e53b76c12be1dd6aecffca17a0cac4cfab48664873976617 GitHub run43430200687 artifact14039321817",
+        "Original published DMS V2.4 SHA256 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd p27 Table33 valid enum PNG ebfd3def444f86ba03103b749d694c495fd94c7cae6fd587528c1fc9c193a089 and p28 Table36 CORRECTED prose PNG 75d481b4dc8d300560950a1a3a77b4f3d23f01a6aab04531d8255e3cda22c95e GitHub run43430886725 artifact14039251920",
+        "Exact upstream official-release XSD blobs V1.0 602a963f91000d0d39e3c271bacb3c7aba73e6d4, V2.0 74189e0da65563eeb084ec2f3c400e9668d1ee1a, V2.1 191b43e01cdaba14b247725689a913c244a67eed, V2.2 c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d and candidate/integration V2.3 5fe444cf6d10462cc23fd159eb963abbec42248f / V2.4 d222dfd98b2be3777576388da7ace8f333d24c3f.",
+        "New actual instance EV-127 run43449270144 job131966842952 SUCCESS: exact V2.1/V2.2 official and nonofficial V2.3/V2.4 control accept InstallationSuccessful and reject InstallationSuccessfull, only xs:documentation remains wrong."
+      ],
+      "note": "Corrects earlier V2.2-only finding scope to official V2.1–V2.2. Canonical visible published V2.4 PDF p28 Table36 is corrected. Historical 2026-08-28 deep read claims persistence in V2.4 prose, but independently verified original screenshot refutes this; candidate/integration V2.4 XSD annotation still has typo. Historical report preserved, contradiction explicitly documented. No XSD or SDK matcher change.",
+      "scope_conclusion": "V1.0 separate DE/EN and V2.0 official XSD have no UpdateStatusEnumeration/UpdateHistoryEntry. First affected original official PDF and XSD annotation V2.1, last affected official PDF V2.2. V2.3 integration-only no official standalone DMS PDF verified, source annotation typo persists but no public PDF claim. First corrected published official PDF V2.4, its separately selected candidate XSD annotation still typo; no strict official V2.4 XSD. Runtime invalid-value advisory only on official V2.1/V2.2 exactly and not implemented. Exact XSD enum remains normative.",
+      "boundary_checks": [
+        {
+          "version": "V1.0",
+          "role": "nonapplicable_predecessor",
+          "language_status": "Separate official published V1.0 DE and EN tracks registered, neither later UpdateStatusEnumeration in selected official release XSD; no made-up German duplicate enum table.",
+          "source_ids": [
+            "VDV301-2_V1.0_DE",
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "V2.0",
+          "role": "last_nonapplicable_predecessor",
+          "language_status": "Official bilingual Basic Services V2.0 selected DMS XSD lacks later UpdateHistoryEntryStructure and UpdateStatusEnumeration.",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "V2.1",
+          "role": "first_affected",
+          "language_status": "Official bilingual V2.1 Base has one English technical enum/member table; visible p109 Table47 valid, p110 Table50 wrong prose; exact official XSD wrong annotation, valid enum.",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "V2.2",
+          "role": "last_affected",
+          "language_status": "Official bilingual DMS V2.2 original p28 Table33 valid enum and p29 Table36 wrong prose; same official XSD annotation typo. Independently visually checked.",
+          "source_ids": [
+            "DMS_V2.2"
+          ]
+        },
+        {
+          "version": "V2.3",
+          "role": "unverified_official_pdf_candidate_annotation_only",
+          "language_status": "No registered official standalone DMS V2.3 PDF; selected integration-only XSD has wrong annotation and correct executable enum. No invented publisher/language PDF.",
+          "source_ids": [
+            "DMS_V2.2",
+            "DMS_V2.4"
+          ]
+        },
+        {
+          "version": "V2.4",
+          "role": "first_corrected_published_pdf",
+          "language_status": "Official bilingual DMS V2.4 PDF visible p27 Table33 valid and p28 Table36 corrected prose; selected candidate XSD still typo annotation. Do not promote to official XSD.",
           "source_ids": [
             "DMS_V2.4"
           ]

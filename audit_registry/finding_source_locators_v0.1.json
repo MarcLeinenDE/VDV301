@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "b2f95075ec8d98e583e3e02c3b3ddddea98bf014",
+    "git_blob": "2847c34c53c608e7ca941bcdadb0900693b47eea",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 98,
-    "coverage_complete_count": 98,
+    "locator_entry_count": 99,
+    "coverage_complete_count": 99,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 94
+    "remaining_finding_count": 93
   },
   "entries": [
     {
@@ -20000,6 +20000,305 @@
         "Official standalone DMS V2.2 SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e render run 43430200687 / artifact 14039321817 p7 7ba7a0d7a676b099c5572e7eecfa44f2a0f25e49f16f991dbdca8976a23f14fc p8 67a272779832689f83a690b77b6be500719c38434b89ead4f5fabc39d947e1c1 p29 b74925c5220df036e53b76c12be1dd6aecffca17a0cac4cfab48664873976617 p30 4e3b5f36e5c1895f4738ab7c4150b6476f525f442e6ec2231ff40785d64b9b39",
         "Official corrected DMS V2.4 SHA256 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd render run 43430886725 / artifact 14039251920 p6 b10e637ffc60fecf715e14e02d4bf6d44beffe8684a048e21a14065d6de3834d p7 fb1d73419fe8294adb00455117f32d45da9c42e82fc04d5fd6b786441b985ab3 p28 75d481b4dc8d300560950a1a3a77b4f3d23f01a6aab04531d8255e3cda22c95e p29 815a6dc2f176b33b9b2a7fe5a131e528311e207f3260ce04408db2d2238e1f37",
         "Upstream exact DMS V1.0/V2.0/V2.1/V2.2 release-tag blobs checked, V2.3 only integration, V2.4 candidate. EV-141 prior visual context (not newly executed XML tests)."
+      ]
+    },
+    {
+      "finding_id": "DRDMS22-003",
+      "service": "DeviceManagementService / UpdateStatusEnumeration",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+          "note": "First verified affected official V2.1 Basic Services PDF p110 §7.1.42.2 Table50 UpdateHistoryEntryStructure.UpdateStatus prose wrongly says InstallationSuccessfull; actual enum Table47 p109 and exact official XSD UpdateStatusEnumeration line431 say InstallationSuccessful, while official XSD xs:documentation line372 repeats extra-l typo. Exact release-tag XSD blob 191b43e01cdaba14b247725689a913c244a67eed, new EV-127 actual positive/negative instance evidence run43449270144 SUCCESS; no alias."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+          "note": "Last verified affected official V2.2 DMS PDF p29 §2.33.2 Table36 UpdateHistoryEntryStructure.UpdateStatus prose wrongly says InstallationSuccessfull, but official PDF Table33 p28 and exact official XSD UpdateStatusEnumeration line382 say InstallationSuccessful. Official XSD xs:documentation line323 contains extra-l typo; exact release-tag blob c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d. V2.4 published PDF Table36 p28 corrected, despite selected candidate XSD annotation still wrong. EV-127 run43449270144 PASS/FAIL validation confirmed."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V1.0",
+          "authority": "official_release",
+          "scope_role": "nonapplicable_predecessor",
+          "coverage_status": "complete",
+          "pdf_locators": [],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V1.0.xsd",
+              "git_blob": "602a963f91000d0d39e3c271bacb3c7aba73e6d4",
+              "authority_detail": "Exact historical official-release XSD, checked byte-identical against VDVde/VDV301 tag VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "DeviceManagementService schema — UpdateStatusEnumeration absent",
+              "member": null,
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "value": "UpdateStatusEnumeration/UpdateHistoryEntryStructure not defined",
+              "point_summary": "Official XSD V1.0 lacks enum and UpdateHistoryEntryStructure. Separate German and English official published tracks individually recorded in PDF pins; do not synthesize a nonexistent enum."
+            }
+          ],
+          "coverage_note": "Non-applicable predecessor, independently separate V1.0 DE/EN publications and exact upstream XSD."
+        },
+        {
+          "version": "V2.0",
+          "authority": "official_release",
+          "scope_role": "last_nonapplicable_predecessor",
+          "coverage_status": "complete",
+          "pdf_locators": [],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.0.xsd",
+              "git_blob": "74189e0da65563eeb084ec2f3c400e9668d1ee1a",
+              "authority_detail": "Exact historical official-release XSD, checked byte-identical against VDVde/VDV301 tag VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "DeviceManagementService schema — UpdateStatusEnumeration absent",
+              "member": null,
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "value": "UpdateStatusEnumeration/UpdateHistoryEntryStructure not defined",
+              "point_summary": "Official V2.0 XSD does not yet contain matching UpdateStatusEnumeration or UpdateHistoryEntryStructure."
+            }
+          ],
+          "coverage_note": "Last non-applicable selected historical official DMS version, no comparable enum/prose."
+        },
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "scope_role": "first_affected_official",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 Basic Services V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                109
+              ],
+              "section": "7.1.41 Data Structures of Operation RetrieveUpdateState / 7.1.41.2 Response",
+              "table": "Table 47 — Description of UpdateStatusEnumeration",
+              "point_summary": "Actual original enum Defined Values row contains correctly spelled InstallationSuccessful and sibling InstallationFailed. Direct original page image SHA256 44637d69d3c32c0e3c7068fb4b465288134dab77737128f0cfc62286cdc95180; source bytes pinned, GitHub run 43430528486 artifact 14039261564; body row/heading/caption visually inspected."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 Basic Services V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                110
+              ],
+              "section": "7.1.42 Data Structures of Operation GetUpdateHistory / 7.1.42.2 Response",
+              "table": "Table 50 — Description of DeviceManagementService.UpdateHistoryEntryStructure",
+              "point_summary": "Actual row UpdateStatus 1:1 uses UpdateStatusEnumeration but prose says 'Typically final status (InstallationSuccessfull or InstallationFailed)' with extra l. Direct original page image SHA256 71590d242ddb6c73c5d73467c3a26c25b64475a65624a1e87270448dd7ab8704; source bytes pinned, GitHub run 43430528486 artifact 14039261564; body row/heading/caption visually inspected."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+              "git_blob": "191b43e01cdaba14b247725689a913c244a67eed",
+              "authority_detail": "Exact historical official-release XSD, checked byte-identical against VDVde/VDV301 tag VDV-301-2.1",
+              "component_kind": "enumeration_value",
+              "component": "UpdateStatusEnumeration",
+              "member": "InstallationSuccessful",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='UpdateStatusEnumeration']/xs:restriction/xs:enumeration[@value='InstallationSuccessful']",
+              "line_hint": "431",
+              "value": "InstallationSuccessful only; InstallationSuccessfull absent",
+              "point_summary": "Exact released XSD enum declaration only InstallationSuccessful, never InstallationSuccessfull."
+            },
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+              "git_blob": "191b43e01cdaba14b247725689a913c244a67eed",
+              "authority_detail": "Exact historical official-release XSD, checked byte-identical against VDVde/VDV301 tag VDV-301-2.1",
+              "component_kind": "element",
+              "component": "DeviceManagementService.UpdateHistoryEntryStructure",
+              "member": "UpdateStatus",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceManagementService.UpdateHistoryEntryStructure']/xs:sequence/xs:element[@name='UpdateStatus']/xs:annotation/xs:documentation",
+              "line_hint": "372",
+              "value": "xs:documentation contains InstallationSuccessfull (non-executable)",
+              "point_summary": "Official release XSD UpdateHistoryEntryStructure.UpdateStatus xs:documentation repeats extra-l typo but is non-executable."
+            }
+          ],
+          "coverage_note": "First verified affected official PDF and XSD annotation; valid one-l enumeration. Actual positive/negative EV-127 run43449270144 official V2.1 PASS/FAIL."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "scope_role": "last_affected_official",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "DMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sdes-v2-2-devicemanagementservice.pdfx",
+              "sha256": "72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e",
+              "printed_pages": [
+                28
+              ],
+              "section": "2.32 Data Structures of Operation RetrieveUpdateState / 2.32.2 Response",
+              "table": "Table 33 — Description of UpdateStatusEnumeration",
+              "point_summary": "Actual original enum Defined Values column contains InstallationSuccessful only, with InstallationFailed as sibling. Direct original page image SHA256 dd5803bb8f26a72cfe1546bfd366675fe3f59f6bc71ff0ce8f8d5c464ba9e8a1; source bytes pinned, GitHub run 43430200687 artifact 14039321817; body row/heading/caption visually inspected."
+            },
+            {
+              "source_id": "DMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sdes-v2-2-devicemanagementservice.pdfx",
+              "sha256": "72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e",
+              "printed_pages": [
+                29
+              ],
+              "section": "2.33 Data Structures of Operation GetUpdateHistory / 2.33.2 Response",
+              "table": "Table 36 — Description of DeviceManagementService.UpdateHistoryEntryStructure",
+              "point_summary": "Actual original row UpdateStatus 1:1 lists valid type UpdateStatusEnumeration but prose spells InstallationSuccessfull (extra l). Direct original page image SHA256 b74925c5220df036e53b76c12be1dd6aecffca17a0cac4cfab48664873976617; source bytes pinned, GitHub run 43430200687 artifact 14039321817; body row/heading/caption visually inspected."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+              "git_blob": "c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d",
+              "authority_detail": "Exact historical official-release XSD, checked byte-identical against VDVde/VDV301 tag VDV-301-2.2",
+              "component_kind": "enumeration_value",
+              "component": "UpdateStatusEnumeration",
+              "member": "InstallationSuccessful",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='UpdateStatusEnumeration']/xs:restriction/xs:enumeration[@value='InstallationSuccessful']",
+              "line_hint": "382",
+              "value": "InstallationSuccessful only; InstallationSuccessfull absent",
+              "point_summary": "Exact VDV-301-2.2 released DMS XSD declares only InstallationSuccessful."
+            },
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+              "git_blob": "c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d",
+              "authority_detail": "Exact historical official-release XSD, checked byte-identical against VDVde/VDV301 tag VDV-301-2.2",
+              "component_kind": "element",
+              "component": "DeviceManagementService.UpdateHistoryEntryStructure",
+              "member": "UpdateStatus",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceManagementService.UpdateHistoryEntryStructure']/xs:sequence/xs:element[@name='UpdateStatus']/xs:annotation/xs:documentation",
+              "line_hint": "323",
+              "value": "xs:documentation contains InstallationSuccessfull (non-executable)",
+              "point_summary": "UpdateHistoryEntryStructure.UpdateStatus xs:documentation also wrongly spells InstallationSuccessfull; annotation is non-executable."
+            }
+          ],
+          "coverage_note": "Last affected published official PDF; correction boundary is official published V2.4, not integration XSD. EV-127 V2.2 positive one-l valid, negative two-l invalid."
+        },
+        {
+          "version": "V2.3 integration-only",
+          "authority": "candidate_integration",
+          "scope_role": "unverified_published_pdf_candidate_annotation_only",
+          "coverage_status": "complete",
+          "pdf_locators": [],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.3.xsd",
+              "git_blob": "5fe444cf6d10462cc23fd159eb963abbec42248f",
+              "authority_detail": "Selected integration XSD control only; no official standalone V2.3 DMS PDF publication proven",
+              "component_kind": "enumeration_value",
+              "component": "UpdateStatusEnumeration",
+              "member": "InstallationSuccessful",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='UpdateStatusEnumeration']/xs:restriction/xs:enumeration[@value='InstallationSuccessful']",
+              "line_hint": "382",
+              "value": "InstallationSuccessful only; InstallationSuccessfull absent",
+              "point_summary": "Integration XSD still declares executable enum InstallationSuccessful only."
+            },
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.3.xsd",
+              "git_blob": "5fe444cf6d10462cc23fd159eb963abbec42248f",
+              "authority_detail": "Selected integration XSD control only; no official standalone V2.3 DMS PDF publication proven",
+              "component_kind": "element",
+              "component": "DeviceManagementService.UpdateHistoryEntryStructure",
+              "member": "UpdateStatus",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceManagementService.UpdateHistoryEntryStructure']/xs:sequence/xs:element[@name='UpdateStatus']/xs:annotation/xs:documentation",
+              "line_hint": "323",
+              "value": "xs:documentation contains InstallationSuccessfull (non-executable)",
+              "point_summary": "Integration XSD annotation still says InstallationSuccessfull (typo). No pinned official DMS V2.3 PDF; cannot assert PDF error status."
+            }
+          ],
+          "coverage_note": "Separate candidate/integration XSD context only, no official PDF. Not a strict official runtime trigger lane."
+        },
+        {
+          "version": "V2.4 published PDF / candidate XSD",
+          "authority": "candidate_integration",
+          "scope_role": "first_corrected_official_pdf_candidate_annotation_unfixed",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "DMS_V2.4",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sde-v2.4-devicemanagementservice.pdfx",
+              "sha256": "347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd",
+              "printed_pages": [
+                27
+              ],
+              "section": "2.32 Data Structures of Operation RetrieveUpdateState / 2.32.2 Response",
+              "table": "Table 33 — Description of UpdateStatusEnumeration",
+              "point_summary": "Original official V2.4 PDF enum correctly contains InstallationSuccessful. Direct original page image SHA256 ebfd3def444f86ba03103b749d694c495fd94c7cae6fd587528c1fc9c193a089; source bytes pinned, GitHub run 43430886725 artifact 14039251920; body row/heading/caption visually inspected."
+            },
+            {
+              "source_id": "DMS_V2.4",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sde-v2.4-devicemanagementservice.pdfx",
+              "sha256": "347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd",
+              "printed_pages": [
+                28
+              ],
+              "section": "2.33 Data Structures of Operation GetUpdateHistory / 2.33.2 Response",
+              "table": "Table 36 — Description of DeviceManagementService.UpdateHistoryEntryStructure",
+              "point_summary": "Original published V2.4 PDF row UpdateStatus prose now reads correctly 'Typically final status (InstallationSuccessful or InstallationFailed)'. CORRECTED PDF, contrary historical Deep Read. Direct original page image SHA256 75d481b4dc8d300560950a1a3a77b4f3d23f01a6aab04531d8255e3cda22c95e; source bytes pinned, GitHub run 43430886725 artifact 14039251920; body row/heading/caption visually inspected."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.4.xsd",
+              "git_blob": "d222dfd98b2be3777576388da7ace8f333d24c3f",
+              "authority_detail": "Selected V2.4 candidate/integration XSD only, explicitly NOT official strict released; official V2.4 PDF is a separate authority",
+              "component_kind": "enumeration_value",
+              "component": "UpdateStatusEnumeration",
+              "member": "InstallationSuccessful",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='UpdateStatusEnumeration']/xs:restriction/xs:enumeration[@value='InstallationSuccessful']",
+              "line_hint": "382",
+              "value": "InstallationSuccessful only; InstallationSuccessfull absent",
+              "point_summary": "V2.4 candidate/integration XSD executable enum remains correct InstallationSuccessful."
+            },
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.4.xsd",
+              "git_blob": "d222dfd98b2be3777576388da7ace8f333d24c3f",
+              "authority_detail": "Selected V2.4 candidate/integration XSD only, explicitly NOT official strict released; official V2.4 PDF is a separate authority",
+              "component_kind": "element",
+              "component": "DeviceManagementService.UpdateHistoryEntryStructure",
+              "member": "UpdateStatus",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceManagementService.UpdateHistoryEntryStructure']/xs:sequence/xs:element[@name='UpdateStatus']/xs:annotation/xs:documentation",
+              "line_hint": "323",
+              "value": "xs:documentation contains InstallationSuccessfull (non-executable)",
+              "point_summary": "V2.4 candidate/integration xs:documentation remains misspelled InstallationSuccessfull even though published official PDF is corrected; do not conflate authorities."
+            }
+          ],
+          "coverage_note": "Correction boundary. Published official V2.4 PDF no longer contains prose typo; selected V2.4 XSD is nonofficial candidate and retains annotation typo. This lane is evidence-only and not semantic affected/runtime."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDMS22_003_2026-11-13.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/DMS_V2.2.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/DMS_V2.4.md (historical persists claim explicitly disproved for official PDF, true only for candidate XSD annotation)",
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_V22_2026-09-05.md",
+        "docs/pdf_xsd_semantic_audit/RUNTIME_MAPPING_REVIEW_DMS_V22_DRDMS22_003_2026-09-21.md (historical V2.2-only reviewed mapping; version scope expanded now)",
+        "EV-127 new actual XML instances: tools/validate_dms_instance_boundaries_ev127.py::test_drdms22_003 run43449270144 at commit60ee4310b9c8b2f02cb1b03a8fbb2b6a39419691 job131966842952 SUCCESS; exact official V2.1 and V2.2 one-l positive PASS extra-l negative FAIL, V2.3/V2.4 integration candidate controls same boundary.",
+        "Official pinned V2.1 Base PDF SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a visible p109 enum PNG 44637d69d3c32c0e3c7068fb4b465288134dab77737128f0cfc62286cdc95180 p110 update prose PNG 71590d242ddb6c73c5d73467c3a26c25b64475a65624a1e87270448dd7ab8704 fallback run 43430528486",
+        "Official pinned DMS V2.2 PDF SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e visible p28 enum PNG dd5803bb8f26a72cfe1546bfd366675fe3f59f6bc71ff0ce8f8d5c464ba9e8a1 p29 update prose PNG b74925c5220df036e53b76c12be1dd6aecffca17a0cac4cfab48664873976617 fallback run 43430200687",
+        "Official pinned DMS V2.4 PDF SHA256 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd visible p27 enum PNG ebfd3def444f86ba03103b749d694c495fd94c7cae6fd587528c1fc9c193a089 p28 corrected update prose PNG 75d481b4dc8d300560950a1a3a77b4f3d23f01a6aab04531d8255e3cda22c95e fallback run 43430886725"
       ]
     }
   ]

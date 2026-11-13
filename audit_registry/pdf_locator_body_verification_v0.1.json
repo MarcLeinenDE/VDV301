@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 98,
-    "verified_current_standard": 98,
+    "tracked_findings": 99,
+    "verified_current_standard": 99,
     "pending_current_standard": 0
   },
   "entries": [
@@ -987,6 +987,18 @@
         "Original DMS V2.4 p6/p7 correct TOC, p28/p29 matching body; pinned GitHub 43430886725 / artifact 14039251920, PNGs b10e637ffc60fecf715e14e02d4bf6d44beffe8684a048e21a14065d6de3834d,fb1d73419fe8294adb00455117f32d45da9c42e82fc04d5fd6b786441b985ab3,75d481b4dc8d300560950a1a3a77b4f3d23f01a6aab04531d8255e3cda22c95e,815a6dc2f176b33b9b2a7fe5a131e528311e207f3260ce04408db2d2238e1f37"
       ],
       "note": "Visible original-published PDF body and offending TOC independently inspected with exact pinned original source SHA/size; no TOC-derived fake body locator and no V2.3 publication inferred."
+    },
+    {
+      "finding_id": "DRDMS22-003",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDMS22_003_2026-11-13.md",
+        "Pinned original V2.1 Basic Services p109 Table47 and p110 Table50, exact PNG SHA256 44637d69d3c32c0e3c7068fb4b465288134dab77737128f0cfc62286cdc95180,71590d242ddb6c73c5d73467c3a26c25b64475a65624a1e87270448dd7ab8704 run43430528486 artifact14039261564",
+        "Pinned original DMS V2.2 p28 Table33 and p29 Table36, exact PNG SHA256 dd5803bb8f26a72cfe1546bfd366675fe3f59f6bc71ff0ce8f8d5c464ba9e8a1,b74925c5220df036e53b76c12be1dd6aecffca17a0cac4cfab48664873976617 run43430200687 artifact14039321817",
+        "Pinned original official DMS V2.4 p27 Table33 and corrected p28 Table36, exact PNG SHA256 ebfd3def444f86ba03103b749d694c495fd94c7cae6fd587528c1fc9c193a089,75d481b4dc8d300560950a1a3a77b4f3d23f01a6aab04531d8255e3cda22c95e run43430886725 artifact14039251920",
+        "New EV-127 actual schema-instance positive and negative cases run43449270144 SUCCESS"
+      ],
+      "note": "Actual visible original PDF body headings, captions, and rows independently inspected: official V2.1 & V2.2 prose typo but enum correct; official V2.4 PDF PROSE corrected contrary old deep read. Distinguish continuing typo in V2.4 candidate XSD annotation; no OCR/TOC substitution."
     }
   ]
 }

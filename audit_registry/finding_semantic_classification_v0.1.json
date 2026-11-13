@@ -9570,10 +9570,16 @@
       "service": "DeviceManagementService / UpdateStatusEnumeration",
       "version_scope": [
         {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+          "note": "First verified affected official V2.1 Basic Services PDF p110 §7.1.42.2 Table50 UpdateHistoryEntryStructure.UpdateStatus prose wrongly says InstallationSuccessfull; actual enum Table47 p109 and exact official XSD UpdateStatusEnumeration line431 say InstallationSuccessful, while official XSD xs:documentation line372 repeats extra-l typo. Exact release-tag XSD blob 191b43e01cdaba14b247725689a913c244a67eed, new EV-127 actual positive/negative instance evidence run43449270144 SUCCESS; no alias."
+        },
+        {
           "version": "V2.2",
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_DeviceManagementService_V2.2.xsd",
-          "note": "The executable V2.2 enum value is InstallationSuccessful. PDF/update-history prose and an xs:documentation annotation contain the non-executable spelling InstallationSuccessfull."
+          "note": "Last verified affected official V2.2 DMS PDF p29 §2.33.2 Table36 UpdateHistoryEntryStructure.UpdateStatus prose wrongly says InstallationSuccessfull, but official PDF Table33 p28 and exact official XSD UpdateStatusEnumeration line382 say InstallationSuccessful. Official XSD xs:documentation line323 contains extra-l typo; exact release-tag blob c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d. V2.4 published PDF Table36 p28 corrected, despite selected candidate XSD annotation still wrong. EV-127 run43449270144 PASS/FAIL validation confirmed."
         }
       ],
       "review_state": "sdk_ready",
@@ -9584,7 +9590,11 @@
         "non_executable_annotation_typo",
         "pdf_prose_typo",
         "enum_lexeme_mismatch",
-        "InstallationSuccessfull_vs_InstallationSuccessful"
+        "InstallationSuccessfull_vs_InstallationSuccessful",
+        "earliest_official_v2_1",
+        "first_corrected_official_pdf_v2_4",
+        "candidate_xsd_v2_4_annotation_still_typo",
+        "historical_deep_read_correction"
       ],
       "defect_assessment": "cross_artifact_mismatch",
       "confidence": "confirmed",
@@ -9596,45 +9606,53 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "The V2.2 enumeration table visibly uses InstallationSuccessful, while update-history prose uses InstallationSuccessfull."
+          "note": "Official exact-pinned original Base V2.1 printed p109 Table47 enum lists InstallationSuccessful, while p110 Table50 UpdateHistoryEntryStructure.UpdateStatus prose says InstallationSuccessfull. Same bilingual technical table only. PDF SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a (2671005 B), original fallback run43430528486 artifact14039261564, verified PNG p109 44637d69d3c32c0e3c7068fb4b465288134dab77737128f0cfc62286cdc95180, p110 71590d242ddb6c73c5d73467c3a26c25b64475a65624a1e87270448dd7ab8704. First official affected PDF."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Official exact-pinned original DMS V2.2 printed p28 Table33 enum lists InstallationSuccessful; p29 Table36 UpdateHistoryEntryStructure.UpdateStatus description uses InstallationSuccessfull (extra l). PDF SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e (1173719 B), original run43430200687 artifact14039321817, PNG p28 dd5803bb8f26a72cfe1546bfd366675fe3f59f6bc71ff0ce8f8d5c464ba9e8a1, p29 b74925c5220df036e53b76c12be1dd6aecffca17a0cac4cfab48664873976617."
         },
         {
           "type": "official_xsd_explicit",
-          "note": "The exact official V2.2 XSD declares executable UpdateStatusEnumeration value InstallationSuccessful; an xs:documentation annotation separately contains the typo InstallationSuccessfull."
+          "note": "Exact official VDV release-tag DMS V2.1 blob 191b43e01cdaba14b247725689a913c244a67eed has valid xs:enumeration value InstallationSuccessful line431 and invalid spelling only in UpdateHistoryEntryStructure.UpdateStatus xs:documentation line372; V2.2 official blob c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d has valid xs:enumeration value InstallationSuccessful line382 and extra-l spelling only in xs:documentation line323. Historical V1.0 and V2.0 DMS exact XSD blobs 602a963f91000d0d39e3c271bacb3c7aba73e6d4 and 74189e0da65563eeb084ec2f3c400e9668d1ee1a have no UpdateStatusEnumeration/history member. Separate V1.0 DE/EN official PDFs distinct."
         },
         {
-          "type": "xsd_internal_consistency",
-          "note": "The executable enum family uses compound status lexemes such as InstallationFailed and InstallationSuccessful; the typo occurs only in non-executable prose/annotation."
+          "type": "later_official_correction",
+          "note": "First later corrected official published DMS V2.4 PDF p27 Table33 valid enum and p28 Table36 UpdateHistoryEntry.UpdateStatus prose now says InstallationSuccessful (one l). Official original PDF SHA256 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd (1298127 B), pinned run43430886725 artifact14039251920, PNG p27 ebfd3def444f86ba03103b749d694c495fd94c7cae6fd587528c1fc9c193a089, p28 75d481b4dc8d300560950a1a3a77b4f3d23f01a6aab04531d8255e3cda22c95e. V2.3 integration XSD alone is not an official DMS V2.3 PDF. Selected V2.4 candidate/integration XSD blob d222dfd98b2be3777576388da7ace8f333d24c3f still contains incorrect xs:documentation line323 while executable enum line382 correct. Keep these surfaces separate."
+        },
+        {
+          "type": "candidate_integration_provenance",
+          "note": "Selected local V2.3 integration blob 5fe444cf6d10462cc23fd159eb963abbec42248f and V2.4 candidate/integration blob d222dfd98b2be3777576388da7ace8f333d24c3f still have extra-l in non-executable UpdateHistoryEntryStructure xs:documentation while their executable enum is InstallationSuccessful; neither may be relabelled official strict schema merely because official V2.4 PDF is published."
         },
         {
           "type": "technical_inference",
-          "note": "Successful is the standard English spelling; this is supporting source-attribution evidence and does not override the selected XSD."
+          "note": "Disproof: extra-l is not a second type/member or permitted lexical value, a section/table alias, deliberate enum choice, or a typo in executable declaration. Actual enum tables use one-l; both official and candidate XSD enum values one-l. Linguistically proper English 'Successful' and sibling 'InstallationFailed' support, but do not replace, exact-XSD normativity. The 2026-08-28 DMS V2.4 deep-read claim that wrong spelling persists in V2.4 PDF prose is contradicted by original V2.4 visible p28; only candidate XSD annotation persists. Historical note preserved and corrected in docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDMS22_003_2026-11-13.md."
         },
         {
           "type": "executable_validation",
-          "note": "EV-107 confirms InstallationSuccessful is accepted as the enum value and InstallationSuccessfull is rejected."
+          "note": "NEW actual positive/negative XML instance tests in tools/validate_dms_instance_boundaries_ev127.py::test_drdms22_003, GitHub job 131966842952 run43449270144 SUCCESS at commit60ee4310b9c8b2f02cb1b03a8fbb2b6a39419691: exact include wrapper of official V2.1 and V2.2 selected XSD UpdateStatusEnumeration accepts InstallationSuccessful and rejects InstallationSuccessfull. V2.3 integration/V2.4 candidate control yields same lexical boundary; annotations additionally asserted. Test root EV127UpdateStatus is a temporary type-validation adapter, not a production DMS operation. Historical EV-107 static declaration evidence and EV-141 context retained separately."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "DMS V2.2: InstallationSuccessfull ist ein nicht-ausführbarer Dokumentationstippfehler",
-          "short": "Der gültige Enum-Wert lautet InstallationSuccessful; InstallationSuccessfull erscheint nur in Prosa beziehungsweise einer XSD-Dokumentationsannotation.",
-          "long": "Die offizielle V2.2-PDF nennt in der Enumerationstabelle InstallationSuccessful, verwendet aber in Update-History-Prosa die Schreibweise InstallationSuccessfull. Die exakte V2.2-XSD deklariert ebenfalls InstallationSuccessful als ausführbaren Enum-Wert; nur eine nicht-ausführbare xs:documentation-Annotation enthält InstallationSuccessfull. Korrekte englische Schreibweise, lokale Enum-Konsistenz und EV-107 weisen daher gemeinsam auf einen Dokumentations-/Annotationstippfehler und nicht auf einen alternativen Enum-Wert hin.",
-          "recommendation": "Ausschließlich InstallationSuccessful als V2.2-Enum akzeptieren. InstallationSuccessfull nicht normalisieren und nicht als Alias zulassen; bei diesem ungültigen Wert einen Hinweis auf den bekannten Prosa-/Annotationstippfehler ausgeben."
+          "title": "DMS V2.1–V2.2: InstallationSuccessfull ist nur ein Dokumentationstippfehler",
+          "short": "Gültig ist ausschließlich InstallationSuccessful. V2.1 und V2.2 verwenden InstallationSuccessfull fälschlich in Prosa und einer nicht-ausführbaren XSD-Annotation.",
+          "long": "Die offiziellen V2.1- und V2.2-PDFs verwenden in ihrer UpdateHistoryEntry.UpdateStatus-Beschreibung InstallationSuccessfull mit einem zusätzlichen l. Die jeweiligen Enumerationstabellen und die exakt ausgewählten offiziellen XSDs deklarieren dagegen ausschließlich InstallationSuccessful. Die XSD-Annotationen enthalten ebenfalls den Tippfehler, definieren aber keine weiteren Enum-Werte. In der veröffentlichten V2.4-PDF ist die Beschreibung korrigiert; eine separat vorhandene, nicht offiziell veröffentlichte V2.4-Candidate-XSD enthält den Annotationstippfehler weiterhin. Der falsche Wert ist XSD-ungültig.",
+          "recommendation": "Nur InstallationSuccessful akzeptieren. InstallationSuccessfull weder als Alias noch durch Normalisierung zulassen. Einen Hinweis auf den historischen Prosa-/Annotationstippfehler nur bei tatsächlich durch die exakte offizielle V2.1- bzw. V2.2-XSD abgelehntem Enum-Wert ergänzen; das XSD-INVALID bleibt unverändert."
         },
         "en": {
-          "title": "DMS V2.2: InstallationSuccessfull is a non-executable documentation typo",
-          "short": "The valid enum value is InstallationSuccessful; InstallationSuccessfull appears only in prose or an XSD documentation annotation.",
-          "long": "The official V2.2 PDF uses InstallationSuccessful in the enumeration table but spells it InstallationSuccessfull in update-history prose. The exact V2.2 XSD likewise declares InstallationSuccessful as the executable enumeration value; only a non-executable xs:documentation annotation contains InstallationSuccessfull. Standard English spelling, local enum consistency and EV-107 therefore jointly support a documentation/annotation typo rather than an alternative enum value.",
-          "recommendation": "Accept only InstallationSuccessful as the V2.2 enum value. Do not normalize or alias InstallationSuccessfull; when that invalid value is encountered, explain the known prose/annotation typo."
+          "title": "DMS V2.1–V2.2: InstallationSuccessfull is a documentation-only typo",
+          "short": "Only InstallationSuccessful is valid. Official V2.1/V2.2 prose and non-executable XSD annotations incorrectly use InstallationSuccessfull.",
+          "long": "The official V2.1 and V2.2 PDFs use InstallationSuccessfull with an extra l in UpdateHistoryEntry.UpdateStatus prose, while their actual enumeration tables and exact official XSDs declare only InstallationSuccessful. The XSD annotations also contain the typo but define no extra enum value. The published V2.4 PDF corrects the prose, whereas a separately selected nonofficial V2.4 candidate XSD still has the typo in its documentation annotation. The wrong spelling is invalid against the selected historical XSD.",
+          "recommendation": "Accept only InstallationSuccessful. Never alias or normalize InstallationSuccessfull. An explanatory advisory about the historical prose/annotation typo is eligible only on an actual strict official V2.1 or V2.2 XSD INVALID result caused by this exact rejected enum value; preserve the INVALID result."
         }
       },
       "runtime_match": {
         "state": "reviewed",
         "candidate_triggers": [
-          "selected strict profile is official DeviceManagementService V2.2",
-          "XSD validation result is INVALID because UpdateStatusEnumeration contains exact non-executable documentation spelling InstallationSuccessfull",
-          "selected V2.2 XSD declares executable enum value InstallationSuccessful and does not declare InstallationSuccessfull"
+          "selected strict exact official-release profile is DeviceManagementService V2.1 or V2.2 (not an integration/candidate profile)",
+          "selected exact V2.1/V2.2 XSD result is already INVALID specifically for UpdateStatusEnumeration with literal non-executable InstallationSuccessfull",
+          "selected exact version XSD enumerates InstallationSuccessful and not InstallationSuccessfull; preserve INVALID and never auto-correct, alias or generalize spelling normalization"
         ]
       },
       "source_references": [
@@ -9661,9 +9679,19 @@
           "kind": "evidence",
           "reference": "EV-107 run 33181833930; EV-141 closure run 33974702338",
           "note": "Exact enum boundary plus current-gate visual closure."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDMS22_003_2026-11-13.md",
+          "note": "2026-11-13 independent exact-byte visible-body cross-version proof corrects V2.1 first-affected and V2.4 official PDF corrected; candidate XSD annotation still typo; new EV-127 actual XML positive/negative."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-127 run 43449270144 / job 131966842952 / commit 60ee4310b9c8b2f02cb1b03a8fbb2b6a39419691",
+          "note": "New actually executed positive and negative XML instances against exact selected official V2.1 and V2.2 enum; V2.3/V2.4 integration controls clearly nonofficial."
         }
       ],
-      "notes": "Source attribution follows the 2026-09-17 orthography/local-naming evidence rule. The typo is on non-executable documentation surfaces (PDF prose and xs:documentation), not in the executable enumeration declaration."
+      "notes": "Corrected official published-PDF affected scope now V2.1–V2.2, not only V2.2. Original V2.4 published PDF p28 Table36 is CORRECTED; contrary old DMS V2.4 deep read 'persists' claim is superseded on the PDF-prose point, preserved as historic error. Candidate V2.3/2.4 XSD annotation remains misspelled even though executable enums accept only one-l spelling. Runtime advisory scoped exclusively official V2.1/V2.2 after XSD INVALID; matcher reviewed_not_implemented. No original XSD, SDK runtime code, or acceptance rule changed."
     },
     {
       "finding_id": "DRDMS22-004",
