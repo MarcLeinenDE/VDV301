@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 97,
-    "verified_current_standard": 97,
+    "tracked_findings": 98,
+    "verified_current_standard": 98,
     "pending_current_standard": 0
   },
   "entries": [
@@ -976,6 +976,17 @@
         "V2.4 actual original p22 Table19, p24 Table23 corrected: pinned run 43425060754 / artifact14036545472; p24 png SHA256 a5a561d6a8987049ea9636af6b158f03a7ccf087f30889d4731dc97f834f16fe"
       ],
       "note": "Actual visibly checked byte-pinned original PDF body table captions and member rows; new first affected V2.1, persists V2.2, corrected published V2.4; no TOC/sequence inference."
+    },
+    {
+      "finding_id": "DRDMS22-002",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDMS22_002_2026-11-13.md",
+        "Original V2.1 Base p12 TOC and p110/111 actual body, pinned GitHub 43430528486 / artifact 14039261564, PNGs 77ca3ccaea9ca5dd6a92cfe6a63e682d0b4ea113c63ce51c4e665bb8abe40f8f,71590d242ddb6c73c5d73467c3a26c25b64475a65624a1e87270448dd7ab8704,e6b0f8eec39f12b244b676a1ed74ca92a641ce551a9596b570799cfba7a31426",
+        "Original DMS V2.2 p7 wrong TOC, p8 neighboring top-level 2, p29/30 correct headings; pinned GitHub 43430200687 / artifact 14039321817, PNGs 7ba7a0d7a676b099c5572e7eecfa44f2a0f25e49f16f991dbdca8976a23f14fc,67a272779832689f83a690b77b6be500719c38434b89ead4f5fabc39d947e1c1,b74925c5220df036e53b76c12be1dd6aecffca17a0cac4cfab48664873976617,4e3b5f36e5c1895f4738ab7c4150b6476f525f442e6ec2231ff40785d64b9b39",
+        "Original DMS V2.4 p6/p7 correct TOC, p28/p29 matching body; pinned GitHub 43430886725 / artifact 14039251920, PNGs b10e637ffc60fecf715e14e02d4bf6d44beffe8684a048e21a14065d6de3834d,fb1d73419fe8294adb00455117f32d45da9c42e82fc04d5fd6b786441b985ab3,75d481b4dc8d300560950a1a3a77b4f3d23f01a6aab04531d8255e3cda22c95e,815a6dc2f176b33b9b2a7fe5a131e528311e207f3260ce04408db2d2238e1f37"
+      ],
+      "note": "Visible original-published PDF body and offending TOC independently inspected with exact pinned original source SHA/size; no TOC-derived fake body locator and no V2.3 publication inferred."
     }
   ]
 }

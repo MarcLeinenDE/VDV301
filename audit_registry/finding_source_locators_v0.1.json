@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "68e57e8229abe1c27dd3bf18346d85e61e78705c",
+    "git_blob": "b2f95075ec8d98e583e3e02c3b3ddddea98bf014",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 97,
-    "coverage_complete_count": 97,
+    "locator_entry_count": 98,
+    "coverage_complete_count": 98,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 95
+    "remaining_finding_count": 94
   },
   "entries": [
     {
@@ -19686,6 +19686,320 @@
         "Pinned V2.2 original PDF SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e, exact visual run 43424551144 / artifact14035527166 pages23,24,26.",
         "Pinned V2.4 original PDF SHA256 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd, exact visual run 43425060754 / artifact14036545472 pages22,24.",
         "Previously confirmed contextual EV-141 closure run33974702338; no new XML-instance validation test needed for navigation-only error."
+      ]
+    },
+    {
+      "finding_id": "DRDMS22-002",
+      "service": "DeviceManagementService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V2.2",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official DMS V2.2 original TOC printed p7 wrongly has 1.33 GetUpdateHistory, 1.34 FinalizeUpdate, 1.35 FinalizeAllPendingUpdates and all six Request/Response 1.xx subsections; actual body p29/p30 correctly has 2.33/2.34/2.35 and subsections. Original V2.1 Basic Services has correct TOC/body 7.1.42–7.1.44; standalone published DMS V2.4 has correct 2.33–2.35 TOC/body. No published standalone DMS V2.3 PDF established. Document-navigation only, exact selected XSD operation declarations unchanged."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V1.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "historical_nonapplicable_predecessor",
+          "pdf_locators": [],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V1.0.xsd",
+              "git_blob": "602a963f91000d0d39e3c271bacb3c7aba73e6d4",
+              "authority_detail": "Exact historical official-release VDVde/VDV301 DMS XSD blob validated against tag VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "DeviceManagementService service XSD lacks later update-history/finalization operations",
+              "member": null,
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "value": "Three operation families absent",
+              "point_summary": "Separate official V1.0 German and English publications are independently pinned. V1.0 DMS selected official XSD does not yet contain GetUpdateHistory, FinalizeUpdate, FinalizeAllPendingUpdates operations."
+            }
+          ],
+          "coverage_note": "Earlier V1.0 distinct DE/EN publications registered and pinned; no later update-history/finalization operation family in selected official schema, no speculative TOC claim."
+        },
+        {
+          "version": "V2.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "last_nonapplicable_predecessor",
+          "pdf_locators": [],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.0.xsd",
+              "git_blob": "74189e0da65563eeb084ec2f3c400e9668d1ee1a",
+              "authority_detail": "Exact historical official-release VDVde/VDV301 DMS XSD blob validated against tag VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "DeviceManagementService service XSD lacks later update-history/finalization operations",
+              "member": null,
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "value": "Three operation families absent",
+              "point_summary": "Official bilingual V2.0 selected DMS service XSD does not declare GetUpdateHistory, FinalizeUpdate or FinalizeAllPendingUpdates."
+            }
+          ],
+          "coverage_note": "Last predecessor without same operation family. Distinguish absence from a corrected section number."
+        },
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "last_nonaffected_operation_bearing_predecessor",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 Basic Services / DeviceManagementService",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                12
+              ],
+              "section": "Inhaltsverzeichnis — DeviceManagementService 7.1.42/7.1.43/7.1.44 (continuation)",
+              "table": null,
+              "point_summary": "Actual visible TOC correct 7.1.42 GetUpdateHistory, 7.1.43 FinalizeUpdate, 7.1.44 FinalizeAllPendingUpdates, with 7.1.42.1/.2, 7.1.43.1/.2, 7.1.44.1/.2. Original exact-source rendered PNG SHA256 77ca3ccaea9ca5dd6a92cfe6a63e682d0b4ea113c63ce51c4e665bb8abe40f8f, GitHub 43430528486 / artifact 14039261564; visually confirmed visible heading/body rather than TOC inference."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 Basic Services / DeviceManagementService",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                110
+              ],
+              "section": "7.1.42 Data Structures of Operation GetUpdateHistory; 7.1.42.1 Request / 7.1.42.2 Response",
+              "table": null,
+              "point_summary": "Original V2.1 visible body p110 exact 7.1.42 title and Request/Response subsections match TOC p12. Original exact-source rendered PNG SHA256 71590d242ddb6c73c5d73467c3a26c25b64475a65624a1e87270448dd7ab8704, GitHub 43430528486 / artifact 14039261564; visually confirmed visible heading/body rather than TOC inference."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 Basic Services / DeviceManagementService",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                111
+              ],
+              "section": "7.1.43 Data Structures of Operation FinalizeUpdate; 7.1.44 Data Structures of Operation FinalizeAllPendingUpdates",
+              "table": null,
+              "point_summary": "Original V2.1 visible body p111 7.1.43/.1/.2 and 7.1.44/.1/.2 match TOC p12. Original exact-source rendered PNG SHA256 e6b0f8eec39f12b244b676a1ed74ca92a641ce551a9596b570799cfba7a31426, GitHub 43430528486 / artifact 14039261564; visually confirmed visible heading/body rather than TOC inference."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+              "git_blob": "191b43e01cdaba14b247725689a913c244a67eed",
+              "authority_detail": "Exact historical official-release VDVde/VDV301 DMS XSD blob validated against tag VDV-301-2.1",
+              "component_kind": "element",
+              "component": "DeviceManagementServiceGroup",
+              "member": "GetUpdateHistoryRequest/Response; FinalizeUpdateRequest/Response; FinalizeAllPendingUpdatesRequest/Response",
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']/xs:sequence/xs:element",
+              "line_hint": "89–94",
+              "value": "Three correctly named request/response operation pairs, no section numbers",
+              "point_summary": "Official V2.1 DMS group lines89–94 exposes three operation request/response pairs. Section numbers exist only in documentation, not schema."
+            }
+          ],
+          "coverage_note": "V2.1 original published bilingual Basic Services PDF correctly aligns TOC p12 with actual body p110–111; last nonaffected operation-bearing predecessor."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "first_and_last_verified_affected_publication",
+          "pdf_locators": [
+            {
+              "source_id": "DMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sdes-v2-2-devicemanagementservice.pdfx",
+              "sha256": "72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e",
+              "printed_pages": [
+                7
+              ],
+              "section": "Inhaltsverzeichnis / Content — continued TOC GetUpdateHistory/FinalizeUpdate/FinalizeAllPendingUpdates",
+              "table": null,
+              "point_summary": "Offending original p7 TOC clearly shows wrong 1.33/1.34/1.35 and six 1.33.x–1.35.x Request/Response entries, even though preceding RetrieveUpdateState remains 2.32. Original exact-source rendered PNG SHA256 7ba7a0d7a676b099c5572e7eecfa44f2a0f25e49f16f991dbdca8976a23f14fc, GitHub 43430200687 / artifact 14039321817; visually confirmed visible heading/body rather than TOC inference."
+            },
+            {
+              "source_id": "DMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sdes-v2-2-devicemanagementservice.pdfx",
+              "sha256": "72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e",
+              "printed_pages": [
+                8
+              ],
+              "section": "Inhaltsverzeichnis / Content — continuation top-level Versionshistorie",
+              "table": null,
+              "point_summary": "Original TOC p8 immediately proceeds to top-level 2 Versionshistorie/Version History, falsifying intentional 1.x subchapter. Original exact-source rendered PNG SHA256 67a272779832689f83a690b77b6be500719c38434b89ead4f5fabc39d947e1c1, GitHub 43430200687 / artifact 14039321817; visually confirmed visible heading/body rather than TOC inference."
+            },
+            {
+              "source_id": "DMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sdes-v2-2-devicemanagementservice.pdfx",
+              "sha256": "72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e",
+              "printed_pages": [
+                29
+              ],
+              "section": "2.33 Data Structures of Operation GetUpdateHistory; 2.33.1 Request / 2.33.2 Response",
+              "table": null,
+              "point_summary": "Actual original body p29 has correct operation section 2.33 and two 2.33.x subsections, plus response structure Tables34/35. Original exact-source rendered PNG SHA256 b74925c5220df036e53b76c12be1dd6aecffca17a0cac4cfab48664873976617, GitHub 43430200687 / artifact 14039321817; visually confirmed visible heading/body rather than TOC inference."
+            },
+            {
+              "source_id": "DMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sdes-v2-2-devicemanagementservice.pdfx",
+              "sha256": "72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e",
+              "printed_pages": [
+                30
+              ],
+              "section": "2.34 Data Structures of Operation FinalizeUpdate; 2.35 Data Structures of Operation FinalizeAllPendingUpdates",
+              "table": null,
+              "point_summary": "Actual original body p30 has correct sections 2.34/2.35 and each .1/.2 request/response subsection; FinalizeUpdate Tables37/38. Original exact-source rendered PNG SHA256 4e3b5f36e5c1895f4738ab7c4150b6476f525f442e6ec2231ff40785d64b9b39, GitHub 43430200687 / artifact 14039321817; visually confirmed visible heading/body rather than TOC inference."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+              "git_blob": "c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d",
+              "authority_detail": "Exact historical official-release VDVde/VDV301 DMS XSD blob validated against tag VDV-301-2.2",
+              "component_kind": "element",
+              "component": "DeviceManagementServiceGroup",
+              "member": "GetUpdateHistoryRequest/Response; FinalizeUpdateRequest/Response; FinalizeAllPendingUpdatesRequest/Response",
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']/xs:sequence/xs:element",
+              "line_hint": "73–78",
+              "value": "Three correctly named request/response operation pairs, no section numbers",
+              "point_summary": "Official VDVde/VDV301 release V2.2 exact DMS XSD group lines73–78 has the three named operation Request/Response pairs. No 1.33 or 2.33 schema mapping."
+            }
+          ],
+          "coverage_note": "The only verified affected original published DMS edition, original TOC vs actual visible body contradict; documentation/navigation only."
+        },
+        {
+          "version": "V2.3 integration only",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "unknown_intermediate_no_official_pdf",
+          "pdf_locators": [],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.3.xsd",
+              "git_blob": "5fe444cf6d10462cc23fd159eb963abbec42248f",
+              "authority_detail": "V2.3 integration-only XSD; no original published standalone DMS V2.3 PDF",
+              "component_kind": "element",
+              "component": "DeviceManagementServiceGroup",
+              "member": "GetUpdateHistoryRequest/Response; FinalizeUpdateRequest/Response; FinalizeAllPendingUpdatesRequest/Response",
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']/xs:sequence/xs:element",
+              "line_hint": "73–78",
+              "value": "Three correctly named request/response operation pairs, no section numbers",
+              "point_summary": "V2.3 integration-only service XSD declares all three correctly named operation pairs; no official standalone DMS V2.3 document to attest TOC numbering."
+            }
+          ],
+          "coverage_note": "No pinned official standalone V2.3 DMS PDF in canonical registry; cannot infer TOC error or correction from integration XSD."
+        },
+        {
+          "version": "V2.4 official PDF / candidate XSD",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "correction_boundary_not_affected",
+          "pdf_locators": [
+            {
+              "source_id": "DMS_V2.4",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sde-v2.4-devicemanagementservice.pdfx",
+              "sha256": "347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd",
+              "printed_pages": [
+                6
+              ],
+              "section": "Inhaltsverzeichnis / Content — continued TOC GetUpdateHistory/FinalizeUpdate/FinalizeAllPendingUpdates",
+              "table": null,
+              "point_summary": "Original V2.4 published PDF TOC p6 correctly uses 2.33,2.34,2.35 plus .1/.2 subsections (2.35.2 continues on p7). Original exact-source rendered PNG SHA256 b10e637ffc60fecf715e14e02d4bf6d44beffe8684a048e21a14065d6de3834d, GitHub 43430886725 / artifact 14039251920; visually confirmed visible heading/body rather than TOC inference."
+            },
+            {
+              "source_id": "DMS_V2.4",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sde-v2.4-devicemanagementservice.pdfx",
+              "sha256": "347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd",
+              "printed_pages": [
+                7
+              ],
+              "section": "Inhaltsverzeichnis / Content — continuation 2.35.2 and 2 Versionshistorie",
+              "table": null,
+              "point_summary": "Actual TOC p7 starts 2.35.2 Response then 2 Versionshistorie; the corrected numbering does not drift. Original exact-source rendered PNG SHA256 fb1d73419fe8294adb00455117f32d45da9c42e82fc04d5fd6b786441b985ab3, GitHub 43430886725 / artifact 14039251920; visually confirmed visible heading/body rather than TOC inference."
+            },
+            {
+              "source_id": "DMS_V2.4",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sde-v2.4-devicemanagementservice.pdfx",
+              "sha256": "347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd",
+              "printed_pages": [
+                28
+              ],
+              "section": "2.33 Data Structures of Operation GetUpdateHistory; 2.33.1 Request / 2.33.2 Response",
+              "table": null,
+              "point_summary": "Original V2.4 body p28 section 2.33 and its Request/Response subsections agree with TOC p6. Original exact-source rendered PNG SHA256 75d481b4dc8d300560950a1a3a77b4f3d23f01a6aab04531d8255e3cda22c95e, GitHub 43430886725 / artifact 14039251920; visually confirmed visible heading/body rather than TOC inference."
+            },
+            {
+              "source_id": "DMS_V2.4",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sde-v2.4-devicemanagementservice.pdfx",
+              "sha256": "347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd",
+              "printed_pages": [
+                29
+              ],
+              "section": "2.34 Data Structures of Operation FinalizeUpdate; 2.35 Data Structures of Operation FinalizeAllPendingUpdates",
+              "table": null,
+              "point_summary": "Original V2.4 body p29 sections 2.34 and 2.35 plus Request/Response subsections match corrected TOC. Original exact-source rendered PNG SHA256 815a6dc2f176b33b9b2a7fe5a131e528311e207f3260ce04408db2d2238e1f37, GitHub 43430886725 / artifact 14039251920; visually confirmed visible heading/body rather than TOC inference."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.4.xsd",
+              "git_blob": "d222dfd98b2be3777576388da7ace8f333d24c3f",
+              "authority_detail": "Explicitly selected V2.4 candidate/integration XSD; official V2.4 PDF does not promote it to strict official",
+              "component_kind": "element",
+              "component": "DeviceManagementServiceGroup",
+              "member": "GetUpdateHistoryRequest/Response; FinalizeUpdateRequest/Response; FinalizeAllPendingUpdatesRequest/Response",
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']/xs:sequence/xs:element",
+              "line_hint": "73–78",
+              "value": "Three correctly named request/response operation pairs, no section numbers",
+              "point_summary": "Selected V2.4 candidate/integration DMS XSD blob d222dfd98b2be3777576388da7ace8f333d24c3f lines73–78 correctly names the same operation pairs, not official strict XSD."
+            }
+          ],
+          "coverage_note": "First confirmed corrected later official V2.4 PDF. Evidence-only lane excluded from V2.2 affected semantic scope, candidate XSD stays nonofficial."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDMS22_002_2026-11-13.md",
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_V22_2026-09-05.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/DMS_V2.2.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/DMS_V2.4.md",
+        "Original pinned official Base V2.1 SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a render run 43430528486 / artifact 14039261564 page-image SHA256 TOC p12 77ca3ccaea9ca5dd6a92cfe6a63e682d0b4ea113c63ce51c4e665bb8abe40f8f body p110 71590d242ddb6c73c5d73467c3a26c25b64475a65624a1e87270448dd7ab8704 p111 e6b0f8eec39f12b244b676a1ed74ca92a641ce551a9596b570799cfba7a31426",
+        "Official standalone DMS V2.2 SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e render run 43430200687 / artifact 14039321817 p7 7ba7a0d7a676b099c5572e7eecfa44f2a0f25e49f16f991dbdca8976a23f14fc p8 67a272779832689f83a690b77b6be500719c38434b89ead4f5fabc39d947e1c1 p29 b74925c5220df036e53b76c12be1dd6aecffca17a0cac4cfab48664873976617 p30 4e3b5f36e5c1895f4738ab7c4150b6476f525f442e6ec2231ff40785d64b9b39",
+        "Official corrected DMS V2.4 SHA256 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd render run 43430886725 / artifact 14039251920 p6 b10e637ffc60fecf715e14e02d4bf6d44beffe8684a048e21a14065d6de3834d p7 fb1d73419fe8294adb00455117f32d45da9c42e82fc04d5fd6b786441b985ab3 p28 75d481b4dc8d300560950a1a3a77b4f3d23f01a6aab04531d8255e3cda22c95e p29 815a6dc2f176b33b9b2a7fe5a131e528311e207f3260ce04408db2d2238e1f37",
+        "Upstream exact DMS V1.0/V2.0/V2.1/V2.2 release-tag blobs checked, V2.3 only integration, V2.4 candidate. EV-141 prior visual context (not newly executed XML tests)."
       ]
     }
   ]

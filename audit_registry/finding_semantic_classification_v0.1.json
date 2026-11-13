@@ -9479,7 +9479,7 @@
           "version": "V2.2",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "The table of contents visibly numbers GetUpdateHistory/FinalizeUpdate/FinalizeAllPendingUpdates as 1.33/1.34/1.35, while the body uses 2.33/2.34/2.35."
+          "note": "Official DMS V2.2 original TOC printed p7 wrongly has 1.33 GetUpdateHistory, 1.34 FinalizeUpdate, 1.35 FinalizeAllPendingUpdates and all six Request/Response 1.xx subsections; actual body p29/p30 correctly has 2.33/2.34/2.35 and subsections. Original V2.1 Basic Services has correct TOC/body 7.1.42–7.1.44; standalone published DMS V2.4 has correct 2.33–2.35 TOC/body. No published standalone DMS V2.3 PDF established. Document-navigation only, exact selected XSD operation declarations unchanged."
         }
       ],
       "review_state": "manually_reviewed",
@@ -9500,11 +9500,23 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "The pinned V2.2 table of contents visibly uses 1.33/1.34/1.35, while the corresponding body sections visibly use 2.33/2.34/2.35."
+          "note": "V2.2 official original pinned PDF SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e printed TOC p7 has 1.33/1.34/1.35 plus 1.33.1/.2,1.34.1/.2,1.35.1/.2, despite preceding 2.32 and p8 top-level 2 Version History. Visible body p29 2.33 GetUpdateHistory and p30 2.34 FinalizeUpdate/2.35 FinalizeAllPendingUpdates plus 2.x Request/Response. SHA-pinned GitHub run43430200687 artifact14039321817 PNG p7 7ba7a0d7a676b099c5572e7eecfa44f2a0f25e49f16f991dbdca8976a23f14fc; p8 67a272779832689f83a690b77b6be500719c38434b89ead4f5fabc39d947e1c1; p29 b74925c5220df036e53b76c12be1dd6aecffca17a0cac4cfab48664873976617; p30 4e3b5f36e5c1895f4738ab7c4150b6476f525f442e6ec2231ff40785d64b9b39."
         },
         {
-          "type": "xsd_internal_consistency",
-          "note": "No executable operation-name or XML-shape difference is involved; the affected operation family remains separately defined in the exact V2.2 XSD."
+          "type": "version_history",
+          "note": "V1.0 German and English official source tracks separately registered/pinned; selected exact official DMS V1.0 blob 602a963f91000d0d39e3c271bacb3c7aba73e6d4 and V2.0 blob 74189e0da65563eeb084ec2f3c400e9668d1ee1a do not yet declare these three operations. Official V2.1 Basic Services original PDF SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a TOC p12 and actual body p110–111 match 7.1.42/43/44: last non-affected operation-bearing predecessor. SHA-pinned render run43430528486 artifact14039261564 TOC p12 PNG77ca3ccaea9ca5dd6a92cfe6a63e682d0b4ea113c63ce51c4e665bb8abe40f8f, body p110 PNG71590d242ddb6c73c5d73467c3a26c25b64475a65624a1e87270448dd7ab8704, p111 PNGe6b0f8eec39f12b244b676a1ed74ca92a641ce551a9596b570799cfba7a31426."
+        },
+        {
+          "type": "later_official_correction",
+          "note": "V2.4 official published PDF SHA256 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd TOC p6/p7 and actual body p28/p29 agree on 2.33/2.34/2.35 and their six correctly numbered subsections. SHA-pinned run43430886725 artifact14039251920 original PNG p6 b10e637ffc60fecf715e14e02d4bf6d44beffe8684a048e21a14065d6de3834d, p7 fb1d73419fe8294adb00455117f32d45da9c42e82fc04d5fd6b786441b985ab3, p28 75d481b4dc8d300560950a1a3a77b4f3d23f01a6aab04531d8255e3cda22c95e, p29 815a6dc2f176b33b9b2a7fe5a131e528311e207f3260ce04408db2d2238e1f37. The selected V2.4 DMS XSD is candidate/integration only; official public PDF correction never promotes schema. V2.3 local integration XSD exists without a separately pinned official DMS V2.3 PDF."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Exact official VDVde/VDV301 release-tag DMS V2.1 blob 191b43e01cdaba14b247725689a913c244a67eed line89–94 and V2.2 blob c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d lines73–78 both declare GetUpdateHistoryRequest/Response, FinalizeUpdateRequest/Response and FinalizeAllPendingUpdatesRequest/Response, matching operation names in their actual PDF bodies; no schema member named by a TOC section number. No new XML instance tests are applicable to a TOC numbering defect."
+        },
+        {
+          "type": "technical_inference",
+          "note": "Strongest counterexplanation, that 1.33–1.35 intentionally start another hierarchy, is falsified by the adjacent TOC 2.32, ensuing top-level 2 Version History, actual body 2.33–2.35, and corrected V2.4. Visible image inspection rules out extracted text/OCR noise; no XML element alias or code-generation input should derive from the wrong TOC numbering."
         }
       ],
       "diagnostic": {
@@ -9544,9 +9556,14 @@
           "kind": "evidence",
           "reference": "EV-141 closure run 33974702338",
           "note": "Pinned visible-page revalidation."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDMS22_002_2026-11-13.md",
+          "note": "Independent exact-byte visible-body review of V2.1 unaffected, V2.2 TOC error and corrected official V2.4 PDF with XSD boundaries; gate pending until full validation."
         }
       ],
-      "notes": "Pure document-navigation defect; no runtime diagnostic."
+      "notes": "Same established V2.2 documentation-navigation finding, now independent original-body/boundary proof: official V2.1 p12 TOC matches p110/111 body (7.1.42–44), V2.2 p7 1.33–1.35 differs from p29/30 2.33–2.35, official V2.4 p6/p7 TOC matches p28/29 body (2.33–35). V1.0/2.0 operations absent, V2.3 no verified official standalone DMS PDF. No runtime diagnostic, XSD or XML validation change."
     },
     {
       "finding_id": "DRDMS22-003",

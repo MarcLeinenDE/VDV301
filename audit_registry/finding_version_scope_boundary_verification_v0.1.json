@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 97,
-    "verified": 97,
+    "tracked_findings": 98,
+    "verified": 98,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -5790,6 +5790,71 @@
           "version": "V2.4",
           "role": "first_corrected_published_successor",
           "language_status": "Official DMS V2.4 bilingual technical Table23 p24 corrected to Table19 p22, distinct non-official XSD candidate",
+          "source_ids": [
+            "DMS_V2.4"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRDMS22-002",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDMS22_002_2026-11-13.md",
+        "Pinned V2.1 official Base SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a original GitHub run 43430528486 / artifact 14039261564 p12 TOC 7.1.42/43/44 PNG 77ca3ccaea9ca5dd6a92cfe6a63e682d0b4ea113c63ce51c4e665bb8abe40f8f p110 body 71590d242ddb6c73c5d73467c3a26c25b64475a65624a1e87270448dd7ab8704 p111 body e6b0f8eec39f12b244b676a1ed74ca92a641ce551a9596b570799cfba7a31426",
+        "Pinned V2.2 official SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e original GitHub run 43430200687 / artifact 14039321817 p7 wrong TOC 1.33/34/35 PNG 7ba7a0d7a676b099c5572e7eecfa44f2a0f25e49f16f991dbdca8976a23f14fc p8 top-level version history PNG 67a272779832689f83a690b77b6be500719c38434b89ead4f5fabc39d947e1c1 p29 body 2.33 PNG b74925c5220df036e53b76c12be1dd6aecffca17a0cac4cfab48664873976617 p30 body2.34/2.35 PNG 4e3b5f36e5c1895f4738ab7c4150b6476f525f442e6ec2231ff40785d64b9b39",
+        "Pinned V2.4 published official PDF SHA256 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd original GitHub run 43430886725 / artifact 14039251920 p6/p7 TOC2.33/34/35 PNGs b10e637ffc60fecf715e14e02d4bf6d44beffe8684a048e21a14065d6de3834d,fb1d73419fe8294adb00455117f32d45da9c42e82fc04d5fd6b786441b985ab3 p28/29 body PNGs 75d481b4dc8d300560950a1a3a77b4f3d23f01a6aab04531d8255e3cda22c95e,815a6dc2f176b33b9b2a7fe5a131e528311e207f3260ce04408db2d2238e1f37",
+        "Official selected DMS V1.0/V2.0/V2.1/V2.2 release tags exact blobs 602a963f91000d0d39e3c271bacb3c7aba73e6d4,74189e0da65563eeb084ec2f3c400e9668d1ee1a,191b43e01cdaba14b247725689a913c244a67eed,c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d; V2.3 integration and V2.4 candidate XSDs explicitly nonofficial"
+      ],
+      "note": "Original TOC is the offending source, original page body is canonical correct target. V1.0 distinct DE/EN and V2.0 don't expose the operations, V2.1 proper 7.1.42–7.1.44, V2.2 TOC-only wrong 1.33–1.35 vs proper 2.33–2.35, no official V2.3 standalone PDF, V2.4 correct 2.33–2.35. No XSD/runtime diagnostic change, same existing finding.",
+      "scope_conclusion": "Document-only 1.33/1.34/1.35 TOC typo confirmed in official standalone DMS V2.2 only. V2.1 last directly comparable nonaffected predecessor (7.1.42/43/44 correct), V1.0 DE+EN / V2.0 operations not present, V2.3 PDF unverified (integration XSD only), V2.4 first corrected published successor. Exactly one existing DRDMS22-002; no executable XSD or SDK runtime impact.",
+      "boundary_checks": [
+        {
+          "version": "V1.0",
+          "role": "nonapplicable_predecessor",
+          "language_status": "Separate official German and English V1.0 publications independently pinned; exact official service XSD lacks later update/finalize operation family",
+          "source_ids": [
+            "VDV301-2_V1.0_DE",
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "V2.0",
+          "role": "last_nonapplicable_predecessor",
+          "language_status": "Bilingual official Base V2.0, no comparable operation family in selected release-tag DMS XSD; no invented English/German table claim",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "V2.1",
+          "role": "last_nonaffected_comparable_predecessor",
+          "language_status": "Bilingual Base V2.1 original TOC p12 English DMS technical operation list; original body p110/111 7.1.42/43/44 consistent; no separately repeated German table asserted",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "V2.2",
+          "role": "first_and_last_verified_affected",
+          "language_status": "Bilingual dedicated DMS V2.2 technical English TOC p7 (wrong 1.33/34/35) vs original body p29/p30 (correct 2.33/34/35), all six subsections checked",
+          "source_ids": [
+            "DMS_V2.2"
+          ]
+        },
+        {
+          "version": "V2.3",
+          "role": "unknown_document_no_official_pdf",
+          "language_status": "No official standalone DMS V2.3 PDF in canonically pinned source registry; integration-only local V2.3 XSD cannot assert published TOC behavior",
+          "source_ids": [
+            "DMS_V2.2",
+            "DMS_V2.4"
+          ]
+        },
+        {
+          "version": "V2.4",
+          "role": "first_corrected_official_publication",
+          "language_status": "Official dedicated bilingual DMS V2.4 PDF original TOC p6/p7 and body p28/p29 all 2.33–2.35 and six subsections match; selected XSD candidate only",
           "source_ids": [
             "DMS_V2.4"
           ]
