@@ -2127,8 +2127,9 @@
     "version_scope_boundary_latest_gate_run_id": "43427021317"
   },
   "next_actions": [
-    "DRDMS22-001 fully audited and terminally closed at 97/192 with exact official PDF original-body and version-boundary evidence; after verifying the final terminal_clean HEAD schema and handoff gates, the one next unique source-locator audit finding is DRDMS22-002 (not started).",
-    "After final HEAD SUCCESS, synchronize the durable V2.1/V2.2 first-affected correction and V2.4 corrected PDF boundary to private ai-mem through a reviewed PR and merge; preserve older 96/192 historical snapshots, no XSD/prod SDK mutation."
+    "DRDMS22-002 gate_pending: verify original SHA-pinned DMS V2.2 TOC and body §2.33–2.35 images, then actual V2.1 predecessor, corrected V2.4 successor (and V1/2.0 nonapplicability).",
+    "Only after visual evidence and version authority, update one semantic finding plus locator/body/boundary/register/state mirrors to 98/192; full schema and handoff gates required; XSD unchanged.",
+    "After terminal_clean green final-head gates, reviewed durable ai-mem PR and branch cleanup."
   ],
   "source_locator_progress": {
     "locator_entry_count": 97,
@@ -2206,12 +2207,23 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "43427021317",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "43427021411",
-    "resume_instruction": "DRDMS22-001 complete: exact substantive audit commit c83b5c5c7473a5fd51161c19f0a9f1af91e7eb87 gated by full schema-audit-validation run43427021317 SUCCESS and handoff-integrity run43427021411 SUCCESS. Final terminal_clean HEAD is the current branch head; verify its own schema and handoff checks before claims. 97/192 unique source locators, 97/97 visually verified actual pinned PDF-body targets and 97/97 independent version boundaries, 95 remaining. Official V2.1 Base p106 Table37 incorrectly cites table27 vs Table33; official DMS V2.2 p24 Table23 incorrectly cites table27 vs Table19, first corrected official DMS V2.4 p24 Table23 cites correct Table19. V2.3 no pinned official DMS PDF. Same existing finding DRDMS22-001, pure doc-navigation issue, runtime no diagnostic, no XSD or production SDK changes. Canonical report docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDMS22_001_2026-11-13.md. Next unique locator DRDMS22-002, not started. After final HEAD green gates, reviewed ai-mem PR/merge for checked durable finding."
+    "resume_instruction": "DRDMS22-002 started in one crash-safe pending commit, locator progress remains 97/192. Visual source requests in tools/pdf_render_request_v0.1.json. Continue exact pinned source verification, version boundary, synchronized canonical registries, full CI and final terminal_clean; ai-mem only after green final-head gates.",
+    "pending_block": "DRDMS22-002 source-verified original DMS V2.2 TOC/body render",
+    "active_finding": "DRDMS22-002",
+    "active_step": "Started exactly one new unique finding (still 97/192). Requested exact byte-pinned official DMS_V2.2 PDF visual rendering pages5–9, 27–34 for TOC 1.33–1.35 vs actual 2.33–2.35 body. No registry counts or XSD changes yet.",
+    "next_step": "Inspect the pinned PDF rendered original pages and images, verify actual printed TOC and body location, use upstream and historical exact XSD source to check operation names. Request V2.1 Base predecessor and V2.4 published successor original PDF renders separately; avoid inferring section numbers.",
+    "evidence_refs": [
+      "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_V22_2026-09-05.md",
+      "docs/pdf_xsd_semantic_audit/deep_read/DMS_V2.2.md",
+      "tools/pdf_render_request_v0.1.json:DMS_V2.2 pages5-9,27-34",
+      "audit_registry/pdf_source_pins_v0.1.json:DMS_V2.2 hash72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e"
+    ],
+    "recovery_instruction": "If interrupted: DRDMS22-002 is gate_pending at 97/192. Wait for GitHub PDF fallback job triggered by tools/pdf_render_request_v0.1.json DMS_V2.2 pages5-9,27-34. Download artifact and visually verify actual printed page/section/TOC vs headings. Then V2.1 predecessor and V2.4 corrected successor similarly. No canonical registry changes yet; don't skip full gates or XSD freeze."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
