@@ -2127,8 +2127,9 @@
     "version_scope_boundary_latest_gate_run_id": "43432130186"
   },
   "next_actions": [
-    "DRDMS22-002 terminally completed at 98/192 after substantive full schema gate and handoff integrity success, then distinct terminal_clean. Verify final HEAD both green workflow runs before declaring project close. Next unique source locator DRDMS22-003 (not started).",
-    "Once final HEAD checks passed, synchronize only independently confirmed DMS V2.2 TOC error and static 98/192 milestone by reviewed PR to private ai-mem; preserve older snapshots and do not treat memory as authoritative live state."
+    "DRDMS22-003: observe dms003-version-boundary workflow of newly extended EV-127 actual positive and negative instances for exact historical official XSDs; if FAIL repair while gate_pending.",
+    "Then independently classify scope: PDF prose issue official V2.1+V2.2; published V2.4 PDF prose corrected; candidate/integration XSD annotation persists; earlier V1.0/2.0 no enum. Update runtime reviewed mapping scope to official V2.1+V2.2 only, no code/alias. Canonical registers to 99/192 after full evidence.",
+    "Full schema audit and handoff gate on substantive commit, separate terminal_clean and verify both final-head gates; afterwards reviewed ai-mem PR+merge, cleanup queue as needed."
   ],
   "source_locator_progress": {
     "locator_entry_count": 98,
@@ -2206,12 +2207,25 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "43432130186",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "43432130327",
-    "resume_instruction": "DRDMS22-002 independent audit completed: substantive HEAD 4ac08ea8daa90acf6e76fdbeb0199a9a3c5259d0 full schema-audit-validation run43432130186 SUCCESS + handoff-integrity run43432130327 SUCCESS. Current HEAD terminal_clean requires final-head gate verification. 98/192 unique source locators, 98/98 exact-pinned visible-body checks and 98/98 independent version boundaries, 94 remaining. V2.2 official p7 TOC wrong 1.33–1.35 and six 1.xx subsections; actual body p29/p30 2.33–2.35. V2.1 Basic Services original TOC p12/body p110–111 correct 7.1.42–44, V2.4 official PDF TOC p6/p7/body p28/p29 correct 2.33–35; V1.0/2.0 not applicable, no published official DMS V2.3 PDF. Same original DRDMS22-002 finding, documentation-only, no SDK runtime matcher, no XSD changes. Report docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDMS22_002_2026-11-13.md. Next unique DRDMS22-003, not started. After final green gates reviewed ai-mem PR."
+    "resume_instruction": "DRDMS22-003 independent audit started under gate_pending; 98/192 remain. Exact historical official PDF V2.1 and V2.2 contain prose extra-l typo but enum tables correct; official V2.4 PDF corrects prose even though its selected candidate XSD annotation still has typo. EV-127 instance tests added and pending GitHub run. Source documents and citation of deep-read contradiction preserved. Continue current HEAD workflow, update all canonical registries, full gate and terminal clean before ai-mem.",
+    "pending_block": "DRDMS22-003 exact official V2.1/V2.2 enum-instance boundary and original PDF review",
+    "active_finding": "DRDMS22-003",
+    "active_step": "New positive/negative XML Schema test added to existing EV-127 script for official DMS V2.1 and V2.2 selected XSD enum type (plus candidate/integration V2.3/V2.4 controls), no XSD changes. Verified prior byte-pinned original visual artifact PDFs: V2.1 p109 Table47 valid InstallationSuccessful and p110 Table50 typo InstallationSuccessfull; V2.2 p28 Table33 valid and p29 Table36 typo; official published V2.4 p27 Table33 valid and p28 Table36 prose corrected. Historical DMS V2.4 deep-read says 'persists' but original PDF contradicts it. Source locator counts remain 98/192 until gates.",
+    "next_step": "Observe exact-HEAD dms003-version-boundary CI run for newly added EV-127 instance checks; review logs and prove positive/negative validity. Then separately consolidate semantic affected scope V2.1+V2.2, preserve V2.3/2.4 candidate annotation lane, V2.4 official corrected PDF, extend reviewed-not-implemented runtime mapping only to official V2.1+2.2, source locator/body/scope and current state to 99/192; run full schema gate; separate terminal_clean and check final HEAD.",
+    "evidence_refs": [
+      "tools/validate_dms_instance_boundaries_ev127.py:test_drdms22_003()",
+      "Original V2.1 pinned 43430528486 artifact14039261564 p109 Table47/p110 Table50",
+      "Original V2.2 pinned 43430200687 artifact14039321817 p28 Table33/p29 Table36",
+      "Official V2.4 pinned 43430886725 artifact14039251920 p27 Table33/p28 Table36",
+      "Official exact DMS blobs V2.1 191b43e01cdaba14b247725689a913c244a67eed / V2.2 c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d",
+      "Historical docs/pdf_xsd_semantic_audit/deep_read/DMS_V2.4.md says persists; needs explicit contradicted-correction record"
+    ],
+    "recovery_instruction": "DRDMS22-003 gate_pending 98/192: EV-127 executable checker extended under tools/validate_dms_instance_boundaries_ev127.py on same commit as CURRENT_STATE. Observe dms003-version-boundary GitHub run for positive official V2.1/V2.2 and negative InstallationSuccessfull, candidate controls. Verify actual pinned source PNGs V2.1 p109/110 V2.2 p28/29 V2.4 p27/28 and difference from old Deep Read. Update semantic+locator+body+boundary+runtime review registries atomically after gate; no XSD changes; then full schema CI, terminal_clean, final gates, reviewed ai-mem PR. If tests fail do not promote."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",

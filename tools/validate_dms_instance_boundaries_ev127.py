@@ -263,6 +263,48 @@ def test_dms007() -> None:
         print(f"INSTANCE_OK DMS-007 {version}: correct operations present; GetUpdateStates alias absent")
 
 
+def test_drdms22_003() -> None:
+    """Instance-level proof: never turn a prose/annotation spelling into an enum alias.
+
+    V2.1/V2.2 are official historical XSDs. V2.3/V2.4 are selected
+    integration/candidate XSD controls, NOT official strict DMS releases.
+    The official V2.4 PDF corrects its prose, while the candidate XSD
+    annotation retains the historical typo; validation remains unchanged.
+    """
+    for version in ("v21", "v22", "v23", "v24"):
+        schema = wrapper_schema(
+            DMS[version], "EV127UpdateStatus", "UpdateStatusEnumeration"
+        )
+        good = "<EV127UpdateStatus>InstallationSuccessful</EV127UpdateStatus>"
+        wrong = "<EV127UpdateStatus>InstallationSuccessfull</EV127UpdateStatus>"
+        require_valid(schema, good, f"DRDMS22-003 {version} official executable spelling")
+        require_invalid(schema, wrong, f"DRDMS22-003 {version} documentation-only extra-l spelling")
+        root = etree.parse(str(DMS[version])).getroot()
+        declared = root.xpath(
+            "./xs:simpleType[@name='UpdateStatusEnumeration']"
+            "/xs:restriction/xs:enumeration/@value", namespaces=NS
+        )
+        require(
+            "InstallationSuccessful" in declared and "InstallationSuccessfull" not in declared,
+            f"DRDMS22-003 {version} exact source enum tokens"
+        )
+        annotation = root.xpath(
+            "./xs:complexType[@name='DeviceManagementService.UpdateHistoryEntryStructure']"
+            "/xs:sequence/xs:element[@name='UpdateStatus']"
+            "/xs:annotation/xs:documentation/text()", namespaces=NS
+        )
+        require(
+            len(annotation) == 1 and "InstallationSuccessfull" in annotation[0],
+            f"DRDMS22-003 {version} historical XSD documentation typo"
+        )
+        lane = "official_release" if version in ("v21", "v22") else "candidate_integration"
+        print(
+            f"INSTANCE_OK DRDMS22-003 {version} ({lane}): "
+            "InstallationSuccessful=accept InstallationSuccessfull=reject; "
+            "typo remains non-executable xs:documentation"
+        )
+
+
 def main() -> int:
     for path in (*DMS.values(), *ENUM.values()):
         require(path.is_file(), f"missing selected authority file {path}")
@@ -271,6 +313,7 @@ def main() -> int:
     test_dms006()
     test_dms005()
     test_dms007()
+    test_drdms22_003()
     print("PASSED: EV-127 supplemental DMS positive/negative XML instance boundaries")
     return 0
 
