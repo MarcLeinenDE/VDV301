@@ -2212,17 +2212,18 @@
     "latest_completed_full_gate_run_id": "43427021317",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "43427021411",
-    "resume_instruction": "DRDMS22-002 pending 97/192; exact V2.2 TOC/body fully visually proven in run43430200687. Await original V2.1 Base render requested in tools/pdf_render_request_v0.1.json pages6-13,107-114, then corrected V2.4 successor. No XSD/SDK code changes or progress credit yet.",
+    "resume_instruction": "DRDMS22-002 gate_pending 97/192; original V2.2 TOC/body proof run43430200687; official V2.1 predecessor original TOC p12 and body p110/111 match 7.1.42–44, proven run43430528486; next requested DMS V2.4 original pages5-9,26-32. Need version-boundary proof then registries, gate, terminal_clean, memory.",
     "pending_block": "DRDMS22-002 source-verified original DMS V2.2 TOC/body render",
     "active_finding": "DRDMS22-002",
-    "active_step": "V2.2 original SHA-pinned official PDF rendered and visually checked: TOC actual printed p7 has 1.33/1.34/1.35 and 1.33.1 etc, TOC p8 top-level 2 Version History; body p29 2.33 and p30 2.34/2.35 correctly named. Exact run43430200687 artifact14039321817 SUCCESS; source and original PNG hashes in render manifest. Now requested V2.1 Base original predecessor pages6–13,107–114.",
-    "next_step": "Inspect official original V2.1 rendered TOC and body, exact page headings, operation family; check whether same TOC 1.X typo exists and if not establish non-affected predecessor. Then request official DMS V2.4 corrected successor original page render. Keep 97/192 until full boundary proof.",
+    "active_step": "DMS_V2.2 original official pinned TOC p7 (wrong 1.33–1.35, 1.33.x etc) vs body p29 2.33/p30 2.34,2.35 confirmed. Official Basic Services V2.1 exact pin verified and original rendered TOC p12 correctly 7.1.42–7.1.44 and actual bodies p110–111 match; V2.1 last nonaffected predecessor. GitHub visual fallback run43430528486 artifact14039261564 SUCCESS. Now requesting DMS_V2.4 corrected published successor.",
+    "next_step": "Review original official DMS V2.4 TOC and actual 2.33/2.34/2.35 body from SHA-pinned pages5-9,26-32; ensure no wrong 1.X numbering and no inferred page headings. Also inspect V1.0 DE/EN + V2.0 exact XSD context (operations not yet available) and no standalone DMS V2.3 official PDF. Then update existing DRDMS22-002 semantic scope as verified V2.2 only, add locator/body/boundary and count mirrors 98/192 with full CI.",
     "evidence_refs": [
       "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_V22_2026-09-05.md",
       "docs/pdf_xsd_semantic_audit/deep_read/DMS_V2.2.md",
       "tools/pdf_render_request_v0.1.json:DMS_V2.2 pages5-9,27-34",
       "audit_registry/pdf_source_pins_v0.1.json:DMS_V2.2 hash72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e",
-      "Original DMS V2.2 official PDF visual run43430200687 artifact14039321817, p7 wrong 1.33-1.35; p29/p30 correct 2.33-2.35"
+      "Original DMS V2.2 official PDF visual run43430200687 artifact14039321817, p7 wrong 1.33-1.35; p29/p30 correct 2.33-2.35",
+      "Original V2.1 official Base PDF SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a render run43430528486 artifact14039261564 TOC p12 7.1.42–7.1.44, body p110–111 matching"
     ],
     "recovery_instruction": "If interrupted: DRDMS22-002 is gate_pending at 97/192. Wait for GitHub PDF fallback job triggered by tools/pdf_render_request_v0.1.json DMS_V2.2 pages5-9,27-34. Download artifact and visually verify actual printed page/section/TOC vs headings. Then V2.1 predecessor and V2.4 corrected successor similarly. No canonical registry changes yet; don't skip full gates or XSD freeze."
   },
