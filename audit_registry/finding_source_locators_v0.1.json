@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "0e0cab4487a3965e7e2e79d7cdb3a43d3ebeb78a",
+    "git_blob": "68e57e8229abe1c27dd3bf18346d85e61e78705c",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 96,
-    "coverage_complete_count": 96,
+    "locator_entry_count": 97,
+    "coverage_complete_count": 97,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 96
+    "remaining_finding_count": 95
   },
   "entries": [
     {
@@ -19408,6 +19408,284 @@
         "Original Common V2.2 §2.31 Table31 pinned original render fallback GitHub run43267750888 artifact13966458352 page25",
         "EV-122 candidate exact-profile positive/repeated values for both names and negative PDF simple shapes; EV-140 closure 33973935324",
         "Upstream VDVde/VDV301 PR #31 open, official VDV-301-2.4 Git tag not found; no official strict SDK profile"
+      ]
+    },
+    {
+      "finding_id": "DRDMS22-001",
+      "service": "DeviceManagementService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "DMS V2.1 official Base documentation",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official bilingual VDV 301-2 Basic Services V2.1 printed p106 §7.1.34.2 continuation, Table37 SubdeviceStatusInformationStructure.DeviceStatusInformation wrongly references Table27 (RestartServiceRequestStructure, p103), whereas the real DeviceStatusInformationStructure appears in Table33 p105. Official DMS V2.1 XSD blob 191b43e01cdaba14b247725689a913c244a67eed line480 correctly types DeviceStatusInformationStructure. First affected publication independently visually verified from pinned original PDF."
+        },
+        {
+          "version": "DMS V2.2 official document",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official DMS V2.2 p24 Table23 SubdeviceStatusInformationStructure.DeviceStatusInformation wrongly references Table27 (InstallUpdateRequestStructure p26), whereas real DeviceStatusInformationStructure appears in Table19 p23. Official V2.2 XSD blob c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d line433 correctly types member. Published DMS V2.4 PDF corrects to Table19; no pinned official DMS V2.3 PDF."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V1.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "predecessor_not_applicable",
+          "pdf_locators": [],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V1.0.xsd",
+              "git_blob": "602a963f91000d0d39e3c271bacb3c7aba73e6d4",
+              "authority_detail": "Exact selected official release XSD for historical V1.0",
+              "component_kind": "schema",
+              "component": "DeviceManagementService schema (no later subdevice status structure)",
+              "member": null,
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "value": "No comparable SubdeviceStatusInformationStructure",
+              "point_summary": "Original separate official German and English V1.0 publication tracks have no comparable SubdeviceStatusInformationStructure in exact selected service XSD."
+            }
+          ],
+          "coverage_note": "Non-applicable earlier version. Distinct V1.0 DE/EN originals registered/pinned; no later member in exact selected XSD, do not attribute a new table-number error."
+        },
+        {
+          "version": "V2.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "last_nonapplicable_predecessor",
+          "pdf_locators": [],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.0.xsd",
+              "git_blob": "74189e0da65563eeb084ec2f3c400e9668d1ee1a",
+              "authority_detail": "Exact selected official release XSD for historical V2.0",
+              "component_kind": "schema",
+              "component": "DeviceManagementService schema (no later subdevice status structure)",
+              "member": null,
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "value": "No comparable SubdeviceStatusInformationStructure",
+              "point_summary": "Official bilingual V2.0 selected DMS XSD lacks the later SubdeviceStatusInformationStructure. The specific table reference predicate is not present."
+            }
+          ],
+          "coverage_note": "Last predecessor without later subdevice status member/structure, so cannot assert error in V2.0."
+        },
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "first_verified_affected_official_release",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 Basic Services / DeviceManagementService",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                103
+              ],
+              "section": "7.1.27 Data Structure of Operation RestartService / 7.1.27.1 Request",
+              "table": "Table 27 — Description of DeviceManagementService.RestartServiceRequestStructure",
+              "point_summary": "Actual Table27 is RestartServiceRequestStructure, not DeviceStatusInformationStructure. Original visually checked PDF page 103 PNG SHA256 af75f882cc630d8cbeeb60d68aed2e3fbb47675fc50e38624ddc3b86c99f801a; exact-pinned render run/artifact 37897714010 / artifact11600767562."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 Basic Services / DeviceManagementService",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                105
+              ],
+              "section": "Continuation of 7.1.31.2 Response — actual visible table caption",
+              "table": "Table 33 — Description of DeviceManagementService.DeviceStatusInformationStructure",
+              "point_summary": "Actual correct target Table33 contains DeviceStatusInformationStructure. Original visually checked PDF page 105 PNG SHA256 410fef8472cabb9ac343ada24dba932bc0a61dbb2c0378e10472fcab9ad43e23; exact-pinned render run/artifact 37897714010 / artifact11600767562."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 Basic Services / DeviceManagementService",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                106
+              ],
+              "section": "Continuation of 7.1.34.2 Response; immediately before 7.1.35",
+              "table": "Table 37 — Description of DeviceManagementService.SubdeviceStatusInformationStructure",
+              "point_summary": "Actual member DeviceStatusInformation row wrongly cites 'Detailed device status (cf. table 27)' rather than Table33. Original visually checked PDF page 106 PNG SHA256 c68f3267cc1253928e1e615b73878883b812ec936b5854f2ce921ca06da7bea2; exact-pinned render run/artifact 37897714010 / artifact11600767562."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+              "git_blob": "191b43e01cdaba14b247725689a913c244a67eed",
+              "authority_detail": "Exact selected official release XSD for historical V2.1",
+              "component_kind": "element",
+              "component": "SubdeviceStatusInformationStructure",
+              "member": "DeviceStatusInformation",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SubdeviceStatusInformationStructure']/xs:sequence/xs:element[@name='DeviceStatusInformation']",
+              "line_hint": "470-480",
+              "value": "type=DeviceStatusInformationStructure",
+              "point_summary": "Official DMS V2.1 exact blob lines470–480 directly types DeviceStatusInformation to DeviceStatusInformationStructure. No table number is an XML element."
+            }
+          ],
+          "coverage_note": "New first-affected original official V2.1 body, printed p106 Table37 wrong cf.Table27 vs correct Table33 p105, Table27 p103 unrelated."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "last_verified_affected_official_release",
+          "pdf_locators": [
+            {
+              "source_id": "DMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sdes-v2-2-devicemanagementservice.pdfx",
+              "sha256": "72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e",
+              "printed_pages": [
+                23
+              ],
+              "section": "2.22.2 Response — actual visible detailed status target",
+              "table": "Table 19 — Description of DeviceManagementService.DeviceStatusInformationStructure",
+              "point_summary": "Actual correct target Table19. Original visually checked PDF page 23 PNG SHA256 ef50b73d735c34d386d2c257c5f6c6ead7b63729ecf43518b24cdb2ea53d385f; exact-pinned render run/artifact 43424551144 / artifact14035527166."
+            },
+            {
+              "source_id": "DMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sdes-v2-2-devicemanagementservice.pdfx",
+              "sha256": "72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e",
+              "printed_pages": [
+                24
+              ],
+              "section": "Continuation of 2.25.2 Response — SubdeviceStatusInformation",
+              "table": "Table 23 — Description of DeviceManagementService.SubdeviceStatusInformationStructure",
+              "point_summary": "Actual row DeviceStatusInformation wrongly cites 'Detailed device status (cf. table 27)' instead of Table19. Original visually checked PDF page 24 PNG SHA256 99fb907c3eb9f27f1770d13ff916daac055ffef90f75d4831935b7202130b492; exact-pinned render run/artifact 43424551144 / artifact14035527166."
+            },
+            {
+              "source_id": "DMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sdes-v2-2-devicemanagementservice.pdfx",
+              "sha256": "72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e",
+              "printed_pages": [
+                26
+              ],
+              "section": "2.31 Data Structures of Operation InstallUpdate / 2.31.1 Request",
+              "table": "Table 27 — Description of DeviceManagementService.InstallUpdateRequestStructure",
+              "point_summary": "Actual Table27 is unrelated InstallUpdateRequestStructure. Original visually checked PDF page 26 PNG SHA256 b74ec0ed88e51ba1f32d363d2facc0366a9c51389079516e1dd377fec3030576; exact-pinned render run/artifact 43424551144 / artifact14035527166."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+              "git_blob": "c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d",
+              "authority_detail": "Exact selected official release XSD for historical V2.2",
+              "component_kind": "element",
+              "component": "SubdeviceStatusInformationStructure",
+              "member": "DeviceStatusInformation",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SubdeviceStatusInformationStructure']/xs:sequence/xs:element[@name='DeviceStatusInformation']",
+              "line_hint": "423-433",
+              "value": "type=DeviceStatusInformationStructure",
+              "point_summary": "Official DMS V2.2 exact blob lines423–433 directly types the member to DeviceStatusInformationStructure, unaffected by editorial table reference."
+            }
+          ],
+          "coverage_note": "Second and last verified affected original official DMS V2.2 PDF; Table23 points to unrelated Table27 instead of actual Table19."
+        },
+        {
+          "version": "V2.3 integration only",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "intermediate_no_published_pdf",
+          "pdf_locators": [],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.3.xsd",
+              "git_blob": "5fe444cf6d10462cc23fd159eb963abbec42248f",
+              "authority_detail": "Integration comparison XSD only; no published standalone DMS V2.3 PDF",
+              "component_kind": "element",
+              "component": "SubdeviceStatusInformationStructure",
+              "member": "DeviceStatusInformation",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SubdeviceStatusInformationStructure']/xs:sequence/xs:element[@name='DeviceStatusInformation']",
+              "line_hint": "423-433",
+              "value": "type=DeviceStatusInformationStructure",
+              "point_summary": "Exact selected local DMS V2.3 integration XSD maintains correct member type but does not establish any published V2.3 documentation."
+            }
+          ],
+          "coverage_note": "No official standalone DMS V2.3 PDF in canonical source registry; never invent V2.3 PDF typo/correction."
+        },
+        {
+          "version": "V2.4 official PDF / candidate XSD",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "correction_boundary_not_affected",
+          "pdf_locators": [
+            {
+              "source_id": "DMS_V2.4",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sde-v2.4-devicemanagementservice.pdfx",
+              "sha256": "347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd",
+              "printed_pages": [
+                22
+              ],
+              "section": "2.22.2 Response — actual visible target table",
+              "table": "Table 19 — Description of DeviceManagementService.DeviceStatusInformationStructure",
+              "point_summary": "Correct original Table19 target is visible on printed p22, not p23. Original visually checked PDF page 22 PNG SHA256 77219201fdc9eb877abd97181516eb38bf2580693f4a4df0af5f3e8222b555bd; exact-pinned render run/artifact 43425060754 / artifact14036545472."
+            },
+            {
+              "source_id": "DMS_V2.4",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sde-v2.4-devicemanagementservice.pdfx",
+              "sha256": "347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd",
+              "printed_pages": [
+                24
+              ],
+              "section": "Continuation of 2.25.2 Response — SubdeviceStatusInformation",
+              "table": "Table 23 — Description of DeviceManagementService.SubdeviceStatusInformationStructure",
+              "point_summary": "Corrected member DeviceStatusInformation explicitly says 'Detailed device status (cf. Table 19)' instead of historical wrong Table27. Original visually checked PDF page 24 PNG SHA256 a5a561d6a8987049ea9636af6b158f03a7ccf087f30889d4731dc97f834f16fe; exact-pinned render run/artifact 43425060754 / artifact14036545472."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.4.xsd",
+              "git_blob": "d222dfd98b2be3777576388da7ace8f333d24c3f",
+              "authority_detail": "Candidate/integration XSD only; official V2.4 published PDF does not imply released strict XSD",
+              "component_kind": "element",
+              "component": "SubdeviceStatusInformationStructure",
+              "member": "DeviceStatusInformation",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SubdeviceStatusInformationStructure']/xs:sequence/xs:element[@name='DeviceStatusInformation']",
+              "line_hint": "423-433",
+              "value": "type=DeviceStatusInformationStructure",
+              "point_summary": "Exact selected DMS V2.4 candidate/integration blob lines423–433 has type DeviceStatusInformationStructure. No official released XSD established."
+            }
+          ],
+          "coverage_note": "First later corrected published PDF, excluded from semantic affected and runtime scopes; candidate V2.4 XSD remains nonofficial."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDMS22_001_2026-11-13.md",
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_V22_2026-09-05.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/DMS_V2.2.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/DMS_V2.4.md",
+        "Pinned V2.1 Base original PDF SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a, exact visual run 37897714010 / artifact11600767562 pages103,105,106.",
+        "Pinned V2.2 original PDF SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e, exact visual run 43424551144 / artifact14035527166 pages23,24,26.",
+        "Pinned V2.4 original PDF SHA256 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd, exact visual run 43425060754 / artifact14036545472 pages22,24.",
+        "Previously confirmed contextual EV-141 closure run33974702338; no new XML-instance validation test needed for navigation-only error."
       ]
     }
   ]

@@ -9372,10 +9372,16 @@
       "service": "DeviceManagementService",
       "version_scope": [
         {
-          "version": "V2.2",
+          "version": "DMS V2.1 official Base documentation",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "Official DMS V2.2 PDF table 23 points DeviceStatusInformation to table 27; table 19/table index identify DeviceStatusInformationStructure, while table 27 is InstallUpdateRequestStructure."
+          "note": "Official bilingual VDV 301-2 Basic Services V2.1 printed p106 §7.1.34.2 continuation, Table37 SubdeviceStatusInformationStructure.DeviceStatusInformation wrongly references Table27 (RestartServiceRequestStructure, p103), whereas the real DeviceStatusInformationStructure appears in Table33 p105. Official DMS V2.1 XSD blob 191b43e01cdaba14b247725689a913c244a67eed line480 correctly types DeviceStatusInformationStructure. First affected publication independently visually verified from pinned original PDF."
+        },
+        {
+          "version": "DMS V2.2 official document",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official DMS V2.2 p24 Table23 SubdeviceStatusInformationStructure.DeviceStatusInformation wrongly references Table27 (InstallUpdateRequestStructure p26), whereas real DeviceStatusInformationStructure appears in Table19 p23. Official V2.2 XSD blob c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d line433 correctly types member. Published DMS V2.4 PDF corrects to Table19; no pinned official DMS V2.3 PDF."
         }
       ],
       "review_state": "manually_reviewed",
@@ -9385,7 +9391,10 @@
       "secondary_issue_kinds": [
         "wrong_table_reference",
         "documentation_navigation_error",
-        "table_23_reference_27_vs_19"
+        "table_23_reference_27_vs_19",
+        "table_37_reference_27_vs_33",
+        "first_affected_v2_1",
+        "corrected_published_pdf_v2_4"
       ],
       "defect_assessment": "confirmed_pdf_defect",
       "confidence": "confirmed",
@@ -9397,25 +9406,37 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "The pinned V2.2 document visibly links DeviceStatusInformation in table 23 to table 27."
+          "note": "Official bilingual V2.1 Base PDF SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a (2671005 bytes), independently inspected body p106 Table37 wrong cf.Table27, p105 Table33 actual DeviceStatusInformationStructure, p103 Table27 actually RestartServiceRequestStructure. Original PNG SHA256 p103 af75f882cc630d8cbeeb60d68aed2e3fbb47675fc50e38624ddc3b86c99f801a; p105 410fef8472cabb9ac343ada24dba932bc0a61dbb2c0378e10472fcab9ad43e23; p106 c68f3267cc1253928e1e615b73878883b812ec936b5854f2ce921ca06da7bea2; pinned run37897714010 artifact11600767562."
         },
         {
-          "type": "parallel_structure_pattern",
-          "note": "The same document's table 19 and table index identify DeviceStatusInformationStructure, while table 27 is InstallUpdateRequestStructure."
+          "type": "official_pdf_explicit",
+          "note": "Official DMS V2.2 PDF SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e (1173719 bytes) original p24 Table23 wrong cf.Table27, actual target p23 Table19 DeviceStatusInformationStructure and p26 Table27 is InstallUpdateRequestStructure. New SHA-pinned render run43424551144 artifact14035527166, PNG p23 ef50b73d735c34d386d2c257c5f6c6ead7b63729ecf43518b24cdb2ea53d385f, p24 99fb907c3eb9f27f1770d13ff916daac055ffef90f75d4831935b7202130b492, p26 b74ec0ed88e51ba1f32d363d2facc0366a9c51389079516e1dd377fec3030576."
+        },
+        {
+          "type": "version_history",
+          "note": "V1.0 (independent DE and EN published language tracks) and V2.0 selected official DMS XSDs do not define later SubdeviceStatusInformationStructure; no comparable defect before V2.1. V2.1 is first, V2.2 last independently affected PDF; V2.3 only integration XSD and no official pinned DMS PDF. First corrected later official DMS V2.4 PDF SHA256 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd (1298127 bytes), p24 Table23 explicitly references actual p22 Table19. Original PNG SHA256 p22 77219201fdc9eb877abd97181516eb38bf2580693f4a4df0af5f3e8222b555bd and p24 a5a561d6a8987049ea9636af6b158f03a7ccf087f30889d4731dc97f834f16fe, SHA-pinned run43425060754 artifact14036545472. V2.4 selected XSD d222dfd98b2be3777576388da7ace8f333d24c3f is candidate_integration, not official released."
+        },
+        {
+          "type": "xsd_internal_consistency",
+          "note": "Exact official DMS V2.1 XSD blob 191b43e01cdaba14b247725689a913c244a67eed member line480 and official V2.2 blob c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d member line433 directly declare DeviceStatusInformationStructure as type. XML validity unaffected; original EV-141 historical evidence run33974702338 corroborates prior documentation finding, not a newly executed XML matrix."
+        },
+        {
+          "type": "technical_inference",
+          "note": "Visible Table27 describes RestartServiceRequestStructure in V2.1 and InstallUpdateRequestStructure in V2.2; not an alternative DeviceStatusInformationStructure, choice/notation, translation, or an XML alias. The corrected V2.4 official publication itself says cf.Table19. Correct target is Table33 in V2.1, Table19 in V2.2."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "DMS V2.2: falscher Tabellenverweis bei DeviceStatusInformation",
-          "short": "Tabelle 23 verweist auf Tabelle 27, obwohl DeviceStatusInformationStructure in Tabelle 19 beschrieben wird.",
-          "long": "Im offiziellen DMS-V2.2-Dokument verweist die Zeile DeviceStatusInformation in Tabelle 23 auf Tabelle 27. Tabelle 19 und der Tabellenindex identifizieren jedoch DeviceStatusInformationStructure; Tabelle 27 beschreibt InstallUpdateRequestStructure. Das ist ein bestätigter Navigationsfehler der Dokumentation ohne XML- oder XSD-Auswirkung.",
-          "recommendation": "Den Tabellenverweis nicht für XML-Modellierung oder Resolverlogik verwenden. Für die Struktur den ausgewählten XSD-Kontext beziehungsweise die tatsächliche DeviceStatusInformationStructure heranziehen."
+          "title": "DMS V2.1–V2.2: falscher Tabellenverweis bei DeviceStatusInformation",
+          "short": "V2.1 Tabelle 37 verweist irrtümlich auf Tabelle 27 statt 33; V2.2 Tabelle 23 auf Tabelle 27 statt 19.",
+          "long": "In der offiziellen V2.1-Basisschrift verweist DeviceStatusInformation in Tabelle 37 auf Tabelle 27 (dort RestartServiceRequestStructure) statt auf die richtige Tabelle 33. In der offiziellen DMS-V2.2-Schrift verweist die entsprechende Zeile der Tabelle 23 auf Tabelle 27 (dort InstallUpdateRequestStructure) statt auf die tatsächliche DeviceStatusInformationStructure in Tabelle 19. Die V2.4-PDF korrigiert dies zu Tabelle 19. Die Abweichung ist rein redaktionell und hat keine Auswirkungen auf XML- oder XSD-Validität.",
+          "recommendation": "Nicht die fehlerhaften Tabellenverweise als technische Struktur- oder Resolverdefinition übernehmen. Maßgeblich sind die exakt versionsgebundene XSD und die sichtbaren Tabellen 33 (V2.1) beziehungsweise 19 (V2.2). V2.4-PDF nicht mit einer offiziellen V2.4-XSD gleichsetzen."
         },
         "en": {
-          "title": "DMS V2.2: wrong table reference for DeviceStatusInformation",
-          "short": "Table 23 points to table 27 although DeviceStatusInformationStructure is described in table 19.",
-          "long": "In the official DMS V2.2 document, the DeviceStatusInformation row in table 23 refers to table 27. Table 19 and the table index identify DeviceStatusInformationStructure, while table 27 describes InstallUpdateRequestStructure. This is a confirmed documentation-navigation defect without XML or XSD impact.",
-          "recommendation": "Do not use the table reference for XML modelling or resolver logic. Use the selected XSD context or the actual DeviceStatusInformationStructure."
+          "title": "DMS V2.1–V2.2: incorrect DeviceStatusInformation table reference",
+          "short": "V2.1 Table37 wrongly cites Table27 rather than 33, and V2.2 Table23 wrongly cites Table27 rather than 19.",
+          "long": "In the official V2.1 Basic Services publication, the DeviceStatusInformation row in Table37 points to Table27 (RestartServiceRequestStructure) rather than the real DeviceStatusInformationStructure in Table33. In the official DMS V2.2 publication, the corresponding Table23 row points to Table27 (InstallUpdateRequestStructure) rather than the correct Table19. The published V2.4 PDF corrects the reference to Table19. This is a documentation-navigation defect only and has no XML/XSD validation effect.",
+          "recommendation": "Never use the erroneous table numbers as structural or resolver identifiers. Use the exact version-selected XSD and the visibly correct Table33 (V2.1) or Table19 (V2.2). The official V2.4 PDF does not imply an official V2.4 XSD."
         }
       },
       "runtime_match": {
@@ -9441,9 +9462,14 @@
           "kind": "evidence",
           "reference": "EV-141 closure run 33974702338",
           "note": "Pinned visible-page revalidation under the current evidence gate."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDMS22_001_2026-11-13.md",
+          "note": "Independent original PDF body evidence, corrected version boundary V2.1–V2.2, first corrected V2.4 publication."
         }
       ],
-      "notes": "Documentation navigation only. No SDK runtime rule or XML alias is warranted."
+      "notes": "One existing historic editorial finding (not a new ID). First verified affected V2.1, affected V2.2, first later corrected official PDF V2.4, V2.3 integration-only XSD no published DMS PDF; no SDK runtime diagnostic, XSD changes, or new validation behavior."
     },
     {
       "finding_id": "DRDMS22-002",

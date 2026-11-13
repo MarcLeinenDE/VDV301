@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1",
-  "date": "2026-10-06",
+  "date": "2026-11-13",
   "state": "complete",
   "purpose": "Track standardized visible-body revalidation of all source-locator-complete findings. This is separate from structural locator completeness.",
   "rule_document": "00_START_HERE/AUDIT_WORKFLOW_CONTRACT.md",
@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 96,
-    "verified_current_standard": 96,
+    "tracked_findings": 97,
+    "verified_current_standard": 97,
     "pending_current_standard": 0
   },
   "entries": [
@@ -965,6 +965,17 @@
         "Existing EV-122 candidate-specific exact-profile test probes InternationalTextType-shaped/repeated LineName and LineShortName VALID and simple PDF IBIS-IP.string shapes INVALID; no new version-wide execution in this locator cycle."
       ],
       "note": "All six original Common PDF LineInformation actual body pages V1.0 p15, V2.0 p22, V2.1 p24, V2.2 p25, V2.3 p26, V2.4 p28/p29 inspected, including table caption on p29, source and original render hashes. V1.0–V2.3 PDF/XSD agree 0:* InternationalTextType. V2.4 published PDF 0:1 IBIS-IP.string differs from selected candidate-only XSD 0:* InternationalTextType; no official V2.4 release strict profile or runtime matcher. Do not infer Table31 from sequence or TOC."
+    },
+    {
+      "finding_id": "DRDMS22-001",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDMS22_001_2026-11-13.md",
+        "V2.1 actual original p103 Table27, p105 Table33, p106 Table37: pinned run 37897714010 / artifact11600767562; p106 png SHA256 c68f3267cc1253928e1e615b73878883b812ec936b5854f2ce921ca06da7bea2",
+        "V2.2 actual original p23 Table19, p24 Table23, p26 Table27: pinned run 43424551144 / artifact14035527166; p24 png SHA256 99fb907c3eb9f27f1770d13ff916daac055ffef90f75d4831935b7202130b492",
+        "V2.4 actual original p22 Table19, p24 Table23 corrected: pinned run 43425060754 / artifact14036545472; p24 png SHA256 a5a561d6a8987049ea9636af6b158f03a7ccf087f30889d4731dc97f834f16fe"
+      ],
+      "note": "Actual visibly checked byte-pinned original PDF body table captions and member rows; new first affected V2.1, persists V2.2, corrected published V2.4; no TOC/sequence inference."
     }
   ]
 }

@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 96,
-    "verified": 96,
+    "tracked_findings": 97,
+    "verified": 97,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -5730,6 +5730,71 @@
         }
       ],
       "note": "Maintains earlier confirmed candidate-only DRCOM24-001 classification and historical EV122/EV140. New hard-locator correction: V2.4 rows p28, real Table31 caption p29, not p28; p28-only prior frozen evidence still historical. Exact V2.2 pinned fallback page25. One additional locator credit 96/192, 96/96 body+scope, 96 remaining; no XSD or production SDK changes."
+    },
+    {
+      "finding_id": "DRDMS22-001",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDMS22_001_2026-11-13.md",
+        "V2.1 official pinned original PDF sha 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a, 37897714010 / artifact11600767562, p103 Table27 PNG af75f882cc630d8cbeeb60d68aed2e3fbb47675fc50e38624ddc3b86c99f801a, p105 Table33 PNG 410fef8472cabb9ac343ada24dba932bc0a61dbb2c0378e10472fcab9ad43e23, p106 Table37 wrong reference PNG c68f3267cc1253928e1e615b73878883b812ec936b5854f2ce921ca06da7bea2",
+        "V2.2 original sha 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e, 43424551144 / artifact14035527166, p23 Table19 PNG ef50b73d735c34d386d2c257c5f6c6ead7b63729ecf43518b24cdb2ea53d385f, p24 Table23 wrong reference PNG 99fb907c3eb9f27f1770d13ff916daac055ffef90f75d4831935b7202130b492, p26 Table27 PNG b74ec0ed88e51ba1f32d363d2facc0366a9c51389079516e1dd377fec3030576",
+        "V2.4 original sha 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd, 43425060754 / artifact14036545472, p22 Table19 PNG 77219201fdc9eb877abd97181516eb38bf2580693f4a4df0af5f3e8222b555bd, p24 Table23 corrected reference PNG a5a561d6a8987049ea9636af6b158f03a7ccf087f30889d4731dc97f834f16fe",
+        "Exact DMS XSD official blobs V1.0 602a963f91000d0d39e3c271bacb3c7aba73e6d4, V2.0 74189e0da65563eeb084ec2f3c400e9668d1ee1a, V2.1 191b43e01cdaba14b247725689a913c244a67eed, V2.2 c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d; DMS V2.3 local integration blob 5fe444cf6d10462cc23fd159eb963abbec42248f and V2.4 candidate d222dfd98b2be3777576388da7ace8f333d24c3f"
+      ],
+      "note": "Same historical DRDMS22-001 finding but first affected earlier in official bilingual V2.1 Base. V2.2 persistent. Official published V2.4 PDF corrected. V1 DE/EN and V2.0 no applicable schema structure; V2.3 integration-only schema no official PDF. No new runtime or XSD rule.",
+      "scope_conclusion": "Affected published V2.1 and V2.2 documentation; V1.0 separate DE/EN and V2.0 not applicable, V2.3 no official DMS PDF, V2.4 first verified corrected published PDF. V2.4 candidate XSD not official; navigation-only no XML validity change.",
+      "boundary_checks": [
+        {
+          "version": "V1.0",
+          "role": "not_applicable_predecessor",
+          "language_status": "Independent original DE and EN tracks, no comparable later SubdeviceStatusInformationStructure in selected official DMS XSD",
+          "source_ids": [
+            "VDV301-2_V1.0_DE",
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "V2.0",
+          "role": "last_not_applicable_predecessor",
+          "language_status": "Official bilingual Base with one English technical table track, selected DMS XSD does not define later subdevice status member",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "V2.1",
+          "role": "first_affected",
+          "language_status": "Official bilingual Base technical English Table37 p106, independent visible original PDF evidence; no invented parallel German table",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "V2.2",
+          "role": "last_affected",
+          "language_status": "Official dedicated bilingual V2.2 technical Table23 p24 wrong source reference; Table19 p23 correct target, exact PNG checked",
+          "source_ids": [
+            "DMS_V2.2"
+          ]
+        },
+        {
+          "version": "V2.3",
+          "role": "no_official_published_intermediate",
+          "language_status": "No pinned original DMS V2.3 standalone publication exists, integration XSD only; adjacent V2.2/V2.4 original source endpoints preserve unknown",
+          "source_ids": [
+            "DMS_V2.2",
+            "DMS_V2.4"
+          ]
+        },
+        {
+          "version": "V2.4",
+          "role": "first_corrected_published_successor",
+          "language_status": "Official DMS V2.4 bilingual technical Table23 p24 corrected to Table19 p22, distinct non-official XSD candidate",
+          "source_ids": [
+            "DMS_V2.4"
+          ]
+        }
+      ]
     }
   ]
 }
