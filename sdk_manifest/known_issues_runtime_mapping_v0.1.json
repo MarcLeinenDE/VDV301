@@ -4,7 +4,7 @@
   "state": "reviewed_inventory",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "2847c34c53c608e7ca941bcdadb0900693b47eea",
+    "git_blob": "dad9697f98ef21555fd9c09ab1364fded5268346",
     "classification_state": "complete",
     "finding_count": 192
   },
@@ -1753,16 +1753,40 @@
       "authority_guard": "selected_xsd_result_remains_normative",
       "profile_scope": [
         {
+          "version": "V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V1.0.xsd",
+          "note": "German published PDF p59 §7.1.11.1 Request uses singular; independent V1.0 English p66 §9.3.12.1 generic Get prose is NOT affected. Exact selected XSD blob 602a963f91000d0d39e3c271bacb3c7aba73e6d4 uses plural GetDeviceErrorMessages only; no singular alias."
+        },
+        {
+          "version": "V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.0.xsd",
+          "note": "Official bilingual V2.0 PDF p94 §7.1.11.1 Request singular, plural §7.1.11 heading. Exact selected XSD blob 74189e0da65563eeb084ec2f3c400e9668d1ee1a uses plural GetDeviceErrorMessages only; no singular alias."
+        },
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+          "note": "Official bilingual V2.1 PDF p99 §7.1.13.1 Request singular, plural §7.1.13 heading. Exact selected XSD blob 191b43e01cdaba14b247725689a913c244a67eed uses plural GetDeviceErrorMessages only; no singular alias."
+        },
+        {
           "version": "V2.2",
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_DeviceManagementService_V2.2.xsd",
-          "note": "Section title and exact service group use plural GetDeviceErrorMessages; request prose uses singular GetDeviceErrorMessage."
+          "note": "Official DMS V2.2 PDF p19 §2.9.1 Request singular, plural §2.9 heading. Exact selected XSD blob c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d uses plural GetDeviceErrorMessages only; no singular alias."
+        },
+        {
+          "version": "V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.4.xsd",
+          "note": "Official published DMS V2.4 PDF p18 §2.9.1 STILL singular; selected XSD V2.4 is candidate/integration, not official. Exact selected XSD blob d222dfd98b2be3777576388da7ace8f333d24c3f uses plural GetDeviceErrorMessages only; no singular alias."
         }
       ],
       "trigger_descriptions": [
-        "selected profile is official DeviceManagementService V2.2",
-        "documentation-derived operation inventory or resolver input contains the exact singular operation name GetDeviceErrorMessage",
-        "selected DeviceManagementServiceGroup exposes GetDeviceErrorMessagesRequest/Response and no singular operation alias"
+        "selected documentation source is original German V1.0 or published official V2.0/V2.1/V2.2/V2.4 DMS PDF; original English V1.0 unaffected, no verified published standalone DMS V2.3 PDF",
+        "documentation-derived operation inventory or resolver input contains exact singular prose GetDeviceErrorMessage",
+        "selected exact schema exposes plural GetDeviceErrorMessages response/group and no singular operation alias"
       ],
       "diagnostic_source": {
         "registry": "audit_registry/finding_semantic_classification_v0.1.json",

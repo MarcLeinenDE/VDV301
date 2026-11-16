@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 99,
-    "verified": 99,
+    "tracked_findings": 100,
+    "verified": 100,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -5921,6 +5921,81 @@
           "version": "V2.4",
           "role": "first_corrected_published_pdf",
           "language_status": "Official bilingual DMS V2.4 PDF visible p27 Table33 valid and p28 Table36 corrected prose; selected candidate XSD still typo annotation. Do not promote to official XSD.",
+          "source_ids": [
+            "DMS_V2.4"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRDMS22-004",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDMS22_004_2026-11-16.md",
+        "SHA-256 pinned visible original VDV301-2_V1.0_DE printed p59 §7.1.11.1 PDF 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75, PNG ef708c1d8853bb9330b3145744aba3e23aace4edbc95b44bb4f03668778a658d, GitHub render run 43868258506/artifact 14225993110; original visible body checked, not TOC/OCR.",
+        "SHA-256 pinned visible original VDV301-2_V1.0_EN printed p66 §9.3.12.1 PDF e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7, PNG 48d490502d9bab10a7e75e5d48ae536176e594cd4c462e0a5c76590c2549215b, GitHub render run 43868660266/artifact 14225968623; original visible body checked, not TOC/OCR.",
+        "SHA-256 pinned visible original VDV301-2_BASE_V2.0 printed p94 §7.1.11.1 PDF fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37, PNG bfeaf84c5ef07d0b57ff64790c3e689adf4192613d6300e602f53f0865a9654f, GitHub render run 43868683696/artifact 14226753033; original visible body checked, not TOC/OCR.",
+        "SHA-256 pinned visible original VDV301-2_BASE_V2.1 printed p99 §7.1.13.1 PDF 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a, PNG 7a719650d552ea42a7fc0ef29f8b0d66cd7639ca10c98245ac676f2b36ecf6dd, GitHub render run 43868712810/artifact 14226268352; original visible body checked, not TOC/OCR.",
+        "SHA-256 pinned visible original DMS_V2.2 printed p19 §2.9.1 PDF 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e, PNG e8b80be432f161601d1349bf36d18fa1240b2fe406eae8d7cd766af2177b327f, GitHub render run 43868851957/artifact 14226014590; original visible body checked, not TOC/OCR.",
+        "SHA-256 pinned visible original DMS_V2.4 printed p18 §2.9.1 PDF 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd, PNG df7a2f470db3e4b20a9c582ebade9f9c87ae755be850ce36488cb7fa5128ab5a, GitHub render run 43868875443/artifact 14226468630; original visible body checked, not TOC/OCR.",
+        "Exact selected DMS V1.0 602a963f91000d0d39e3c271bacb3c7aba73e6d4, V2.0 74189e0da65563eeb084ec2f3c400e9668d1ee1a, V2.1 191b43e01cdaba14b247725689a913c244a67eed, V2.2 c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d official release-tag blobs; V2.3 5fe444cf6d10462cc23fd159eb963abbec42248f integration only and V2.4 d222dfd98b2be3777576388da7ace8f333d24c3f candidate only."
+      ],
+      "note": "Earlier V2.2-only finding insufficient; first affected official V1.0 German independently verified, parallel published V1.0 English NOT affected, original V2.0/V2.1/V2.2/V2.4 official PDFs persistent. No standalone official V2.3 DMS PDF verified. V2.4 PDF official but selected XSD candidate. Historical report preserved; no XML change.",
+      "scope_conclusion": "Affected original DMS prose in V1.0 German p59, V2.0 p94, V2.1 p99, V2.2 p19, V2.4 p18 published official PDF. Original English V1.0 p66 uses generic Get-operation prose, unaffected, same XSD version but independent document language track. V2.3 official standalone PDF is not evidenced, cannot claim persistence/correction; selected XSD is integration only. V2.4 selected schema candidate despite official published PDF. Selected XSDs plural. Historical finding identity DRDMS22-004 retained; documentation error only, reviewed informational SDK mapping unimplemented.",
+      "boundary_checks": [
+        {
+          "version": "V1.0 DE",
+          "role": "first_verified_affected_official_publication",
+          "language_status": "Separate published German original p59 §7.1.11.1 Request singular, plural section header and response; visibly verified; independent English counterpart differs.",
+          "source_ids": [
+            "VDV301-2_V1.0_DE"
+          ]
+        },
+        {
+          "version": "V1.0 EN",
+          "role": "parallel_language_unaffected",
+          "language_status": "Separate published English original p66 §9.3.12.1 generic Get-operation prose and plural title, not singular error. No false all-languages V1.0 claim.",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "V2.0",
+          "role": "subsequent_affected_official_publication",
+          "language_status": "Published bilingual Basic Services p94 §7.1.11.1 request singular; plural heading and official selected XSD.",
+          "source_ids": [
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "V2.1",
+          "role": "subsequent_affected_official_publication",
+          "language_status": "Published bilingual Basic Services p99 §7.1.13.1 request singular; plural heading and official selected XSD.",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "V2.2",
+          "role": "last_strict_official_xsd_affected",
+          "language_status": "Published standalone DMS p19 §2.9.1 request singular; plural heading and official selected XSD.",
+          "source_ids": [
+            "DMS_V2.2"
+          ]
+        },
+        {
+          "version": "V2.3",
+          "role": "published_document_unverified",
+          "language_status": "No canonical official standalone DMS V2.3 PDF pinned; integration-only XSD plural not publication evidence.",
+          "source_ids": [
+            "DMS_V2.2",
+            "DMS_V2.4"
+          ]
+        },
+        {
+          "version": "V2.4",
+          "role": "latest_published_official_pdf_still_affected",
+          "language_status": "Published official standalone DMS p18 §2.9.1 request singular, plural heading and response table; selected V2.4 XSD candidate/integration only, not official.",
           "source_ids": [
             "DMS_V2.4"
           ]

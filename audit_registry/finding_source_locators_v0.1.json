@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "2847c34c53c608e7ca941bcdadb0900693b47eea",
+    "git_blob": "dad9697f98ef21555fd9c09ab1364fded5268346",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 99,
-    "coverage_complete_count": 99,
+    "locator_entry_count": 100,
+    "coverage_complete_count": 100,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 93
+    "remaining_finding_count": 92
   },
   "entries": [
     {
@@ -20299,6 +20299,302 @@
         "Official pinned V2.1 Base PDF SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a visible p109 enum PNG 44637d69d3c32c0e3c7068fb4b465288134dab77737128f0cfc62286cdc95180 p110 update prose PNG 71590d242ddb6c73c5d73467c3a26c25b64475a65624a1e87270448dd7ab8704 fallback run 43430528486",
         "Official pinned DMS V2.2 PDF SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e visible p28 enum PNG dd5803bb8f26a72cfe1546bfd366675fe3f59f6bc71ff0ce8f8d5c464ba9e8a1 p29 update prose PNG b74925c5220df036e53b76c12be1dd6aecffca17a0cac4cfab48664873976617 fallback run 43430200687",
         "Official pinned DMS V2.4 PDF SHA256 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd visible p27 enum PNG ebfd3def444f86ba03103b749d694c495fd94c7cae6fd587528c1fc9c193a089 p28 corrected update prose PNG 75d481b4dc8d300560950a1a3a77b4f3d23f01a6aab04531d8255e3cda22c95e fallback run 43430886725"
+      ]
+    },
+    {
+      "finding_id": "DRDMS22-004",
+      "service": "DeviceManagementService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V1.0.xsd",
+          "note": "German published PDF p59 §7.1.11.1 Request uses singular; independent V1.0 English p66 §9.3.12.1 generic Get prose is NOT affected. Exact selected XSD blob 602a963f91000d0d39e3c271bacb3c7aba73e6d4 uses plural GetDeviceErrorMessages only; no singular alias."
+        },
+        {
+          "version": "V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.0.xsd",
+          "note": "Official bilingual V2.0 PDF p94 §7.1.11.1 Request singular, plural §7.1.11 heading. Exact selected XSD blob 74189e0da65563eeb084ec2f3c400e9668d1ee1a uses plural GetDeviceErrorMessages only; no singular alias."
+        },
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+          "note": "Official bilingual V2.1 PDF p99 §7.1.13.1 Request singular, plural §7.1.13 heading. Exact selected XSD blob 191b43e01cdaba14b247725689a913c244a67eed uses plural GetDeviceErrorMessages only; no singular alias."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+          "note": "Official DMS V2.2 PDF p19 §2.9.1 Request singular, plural §2.9 heading. Exact selected XSD blob c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d uses plural GetDeviceErrorMessages only; no singular alias."
+        },
+        {
+          "version": "V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.4.xsd",
+          "note": "Official published DMS V2.4 PDF p18 §2.9.1 STILL singular; selected XSD V2.4 is candidate/integration, not official. Exact selected XSD blob d222dfd98b2be3777576388da7ace8f333d24c3f uses plural GetDeviceErrorMessages only; no singular alias."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V1.0 DE",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "first_affected_official_german_publication",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_DE",
+              "document_title": "VDV-Schrift 301-2 German original",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2sds-v1-0.pdfx",
+              "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+              "printed_pages": [
+                59
+              ],
+              "section": "7.1.11 Data Structures of Operation GetDeviceErrorMessages / 7.1.11.1 Request",
+              "table": null,
+              "point_summary": "Original visible printed p59 7.1.11 Data Structures of Operation GetDeviceErrorMessages / 7.1.11.1 Request; request prose uses wrong singular GetDeviceErrorMessage while actual section heading plural. Actual corresponding plural response Table 14 printed p60. Render run 43868258506 artifact 14225993110, exact SHA-matched PNG p59 ef708c1d8853bb9330b3145744aba3e23aace4edbc95b44bb4f03668778a658d."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V1.0.xsd",
+              "git_blob": "602a963f91000d0d39e3c271bacb3c7aba73e6d4",
+              "authority_detail": "Exact selected historical official release-tag XSD",
+              "component_kind": "complexType",
+              "component": "DeviceManagementService.GetDeviceErrorMessagesResponseStructure",
+              "member": "GetDeviceErrorMessages",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceManagementService.GetDeviceErrorMessagesResponseStructure']",
+              "line_hint": "49–57",
+              "value": "Plural GetDeviceErrorMessages, no singular alias",
+              "point_summary": "Exact 1.0 selected XSD blob 602a963f91000d0d39e3c271bacb3c7aba73e6d4 has plural service/response name; historical V1.0 has response declaration only (no invented request root)."
+            }
+          ],
+          "coverage_note": "Original published PDF inspected independently by exact-byte render; PDF singular typo confirmed; matching selected schema plural."
+        },
+        {
+          "version": "V1.0 EN",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "unaffected_english_v1_0_parallel_language",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV-Schrift 301-2 English original",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                66
+              ],
+              "section": "9.3.12 Data Structure of Operation GetDeviceErrorMessages / 9.3.12.1 Request",
+              "table": null,
+              "point_summary": "Original visible printed p66 9.3.12 Data Structure of Operation GetDeviceErrorMessages / 9.3.12.1 Request; request prose only says generic Get operation, so unaffected; section heading plural. Actual corresponding plural response Table 38 printed p66. Render run 43868660266 artifact 14225968623, exact SHA-matched PNG p66 48d490502d9bab10a7e75e5d48ae536176e594cd4c462e0a5c76590c2549215b."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V1.0.xsd",
+              "git_blob": "602a963f91000d0d39e3c271bacb3c7aba73e6d4",
+              "authority_detail": "Exact selected historical official release-tag XSD",
+              "component_kind": "complexType",
+              "component": "DeviceManagementService.GetDeviceErrorMessagesResponseStructure",
+              "member": "GetDeviceErrorMessages",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceManagementService.GetDeviceErrorMessagesResponseStructure']",
+              "line_hint": "49–57",
+              "value": "Plural GetDeviceErrorMessages, no singular alias",
+              "point_summary": "Exact 1.0 selected XSD blob 602a963f91000d0d39e3c271bacb3c7aba73e6d4 has plural service/response name; historical V1.0 has response declaration only (no invented request root)."
+            }
+          ],
+          "coverage_note": "Original published PDF inspected independently by exact-byte render; unaffected independent English V1.0; matching selected schema plural."
+        },
+        {
+          "version": "V2.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "continuing_affected_official_release",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV-Schrift 301-2 Basic Services",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                94
+              ],
+              "section": "7.1.11 Data Structure of Operation GetDeviceErrorMessages / 7.1.11.1 Request",
+              "table": null,
+              "point_summary": "Original visible printed p94 7.1.11 Data Structure of Operation GetDeviceErrorMessages / 7.1.11.1 Request; request prose uses wrong singular GetDeviceErrorMessage while actual section heading plural. Actual corresponding plural response Table 19 printed p95. Render run 43868683696 artifact 14226753033, exact SHA-matched PNG p94 bfeaf84c5ef07d0b57ff64790c3e689adf4192613d6300e602f53f0865a9654f."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.0.xsd",
+              "git_blob": "74189e0da65563eeb084ec2f3c400e9668d1ee1a",
+              "authority_detail": "Exact selected historical official release-tag XSD",
+              "component_kind": "group",
+              "component": "DeviceManagementServiceGroup",
+              "member": "GetDeviceErrorMessages",
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']",
+              "line_hint": "14, 73–81",
+              "value": "Plural GetDeviceErrorMessages, no singular alias",
+              "point_summary": "Exact 2.0 selected XSD blob 74189e0da65563eeb084ec2f3c400e9668d1ee1a has plural service/response name; historical V1.0 has response declaration only (no invented request root)."
+            }
+          ],
+          "coverage_note": "Original published PDF inspected independently by exact-byte render; PDF singular typo confirmed; matching selected schema plural."
+        },
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "continuing_affected_official_release",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV-Schrift 301-2 Basic Services",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                99
+              ],
+              "section": "7.1.13 Data Structure of Operation GetDeviceErrorMessages / 7.1.13.1 Request",
+              "table": null,
+              "point_summary": "Original visible printed p99 7.1.13 Data Structure of Operation GetDeviceErrorMessages / 7.1.13.1 Request; request prose uses wrong singular GetDeviceErrorMessage while actual section heading plural. Actual corresponding plural response Table 19 printed p100. Render run 43868712810 artifact 14226268352, exact SHA-matched PNG p99 7a719650d552ea42a7fc0ef29f8b0d66cd7639ca10c98245ac676f2b36ecf6dd."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+              "git_blob": "191b43e01cdaba14b247725689a913c244a67eed",
+              "authority_detail": "Exact selected historical official release-tag XSD",
+              "component_kind": "group",
+              "component": "DeviceManagementServiceGroup",
+              "member": "GetDeviceErrorMessages",
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']",
+              "line_hint": "49–54, 202–210",
+              "value": "Plural GetDeviceErrorMessages, no singular alias",
+              "point_summary": "Exact 2.1 selected XSD blob 191b43e01cdaba14b247725689a913c244a67eed has plural service/response name; historical V1.0 has response declaration only (no invented request root)."
+            }
+          ],
+          "coverage_note": "Original published PDF inspected independently by exact-byte render; PDF singular typo confirmed; matching selected schema plural."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "last_affected_official_xsd_release",
+          "pdf_locators": [
+            {
+              "source_id": "DMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sdes-v2-2-devicemanagementservice.pdfx",
+              "sha256": "72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e",
+              "printed_pages": [
+                19
+              ],
+              "section": "2.9 Data Structure of Operation GetDeviceErrorMessages / 2.9.1 Request",
+              "table": null,
+              "point_summary": "Original visible printed p19 2.9 Data Structure of Operation GetDeviceErrorMessages / 2.9.1 Request; request prose uses wrong singular GetDeviceErrorMessage while actual section heading plural. Actual corresponding plural response Table 8 printed p20. Render run 43868851957 artifact 14226014590, exact SHA-matched PNG p19 e8b80be432f161601d1349bf36d18fa1240b2fe406eae8d7cd766af2177b327f."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+              "git_blob": "c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d",
+              "authority_detail": "Exact selected historical official release-tag XSD",
+              "component_kind": "group",
+              "component": "DeviceManagementServiceGroup",
+              "member": "GetDeviceErrorMessages",
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']",
+              "line_hint": "43–48, 178–186",
+              "value": "Plural GetDeviceErrorMessages, no singular alias",
+              "point_summary": "Exact 2.2 selected XSD blob c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d has plural service/response name; historical V1.0 has response declaration only (no invented request root)."
+            }
+          ],
+          "coverage_note": "Original published PDF inspected independently by exact-byte render; PDF singular typo confirmed; matching selected schema plural."
+        },
+        {
+          "version": "V2.3 integration only",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "official_pdf_not_established_integration_schema_only",
+          "pdf_locators": [],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.3.xsd",
+              "git_blob": "5fe444cf6d10462cc23fd159eb963abbec42248f",
+              "authority_detail": "Integration-only local comparison XSD; no separately pinned official published DMS V2.3 PDF",
+              "component_kind": "group",
+              "component": "DeviceManagementServiceGroup",
+              "member": "GetDeviceErrorMessages",
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']",
+              "line_hint": "43–48",
+              "value": "GetDeviceErrorMessages plural",
+              "point_summary": "V2.3 integration XSD uses plural but cannot prove any independently published V2.3 PDF."
+            }
+          ],
+          "coverage_note": "Do not infer published standalone V2.3 DMS prose typo or correction from unmerged integration XSD."
+        },
+        {
+          "version": "V2.4",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "latest_affected_official_pdf_nonofficial_xsd_candidate",
+          "pdf_locators": [
+            {
+              "source_id": "DMS_V2.4",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sde-v2.4-devicemanagementservice.pdfx",
+              "sha256": "347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd",
+              "printed_pages": [
+                18
+              ],
+              "section": "2.9 Data Structure of Operation GetDeviceErrorMessages / 2.9.1 Request",
+              "table": null,
+              "point_summary": "Original visible printed p18 2.9 Data Structure of Operation GetDeviceErrorMessages / 2.9.1 Request; request prose uses wrong singular GetDeviceErrorMessage while actual section heading plural. Actual corresponding plural response Table 8 printed p19. Render run 43868875443 artifact 14226468630, exact SHA-matched PNG p18 df7a2f470db3e4b20a9c582ebade9f9c87ae755be850ce36488cb7fa5128ab5a."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.4.xsd",
+              "git_blob": "d222dfd98b2be3777576388da7ace8f333d24c3f",
+              "authority_detail": "Selected NONOFFICIAL candidate/integration XSD; official PDF is separate",
+              "component_kind": "group",
+              "component": "DeviceManagementServiceGroup",
+              "member": "GetDeviceErrorMessages",
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']",
+              "line_hint": "43–48, 178–186",
+              "value": "Plural GetDeviceErrorMessages, no singular alias",
+              "point_summary": "Exact 2.4 selected XSD blob d222dfd98b2be3777576388da7ace8f333d24c3f has plural service/response name; historical V1.0 has response declaration only (no invented request root)."
+            }
+          ],
+          "coverage_note": "Original published PDF inspected independently by exact-byte render; PDF singular typo confirmed; matching selected schema plural."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDMS22_004_2026-11-16.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/DMS_V2.2.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/DMS_V2.4.md",
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_V22_2026-09-05.md",
+        "VDV301-2_V1.0_DE official original PDF SHA256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75, visibly verified printed p59 PNG SHA256 ef708c1d8853bb9330b3145744aba3e23aace4edbc95b44bb4f03668778a658d, GitHub render run 43868258506 artifact 14225993110",
+        "VDV301-2_V1.0_EN official original PDF SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7, visibly verified printed p66 PNG SHA256 48d490502d9bab10a7e75e5d48ae536176e594cd4c462e0a5c76590c2549215b, GitHub render run 43868660266 artifact 14225968623",
+        "VDV301-2_BASE_V2.0 official original PDF SHA256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37, visibly verified printed p94 PNG SHA256 bfeaf84c5ef07d0b57ff64790c3e689adf4192613d6300e602f53f0865a9654f, GitHub render run 43868683696 artifact 14226753033",
+        "VDV301-2_BASE_V2.1 official original PDF SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a, visibly verified printed p99 PNG SHA256 7a719650d552ea42a7fc0ef29f8b0d66cd7639ca10c98245ac676f2b36ecf6dd, GitHub render run 43868712810 artifact 14226268352",
+        "DMS_V2.2 official original PDF SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e, visibly verified printed p19 PNG SHA256 e8b80be432f161601d1349bf36d18fa1240b2fe406eae8d7cd766af2177b327f, GitHub render run 43868851957 artifact 14226014590",
+        "DMS_V2.4 official original PDF SHA256 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd, visibly verified printed p18 PNG SHA256 df7a2f470db3e4b20a9c582ebade9f9c87ae755be850ce36488cb7fa5128ab5a, GitHub render run 43868875443 artifact 14226468630",
+        "Exact XSD selected historical blobs V1.0 602a963f91000d0d39e3c271bacb3c7aba73e6d4, V2.0 74189e0da65563eeb084ec2f3c400e9668d1ee1a, V2.1 191b43e01cdaba14b247725689a913c244a67eed, V2.2 c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d; V2.3 integration and V2.4 candidate separate. No XML instance tests due documentation-only error."
       ]
     }
   ]

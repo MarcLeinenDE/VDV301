@@ -9698,10 +9698,34 @@
       "service": "DeviceManagementService",
       "version_scope": [
         {
+          "version": "V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V1.0.xsd",
+          "note": "German published PDF p59 §7.1.11.1 Request uses singular; independent V1.0 English p66 §9.3.12.1 generic Get prose is NOT affected. Exact selected XSD blob 602a963f91000d0d39e3c271bacb3c7aba73e6d4 uses plural GetDeviceErrorMessages only; no singular alias."
+        },
+        {
+          "version": "V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.0.xsd",
+          "note": "Official bilingual V2.0 PDF p94 §7.1.11.1 Request singular, plural §7.1.11 heading. Exact selected XSD blob 74189e0da65563eeb084ec2f3c400e9668d1ee1a uses plural GetDeviceErrorMessages only; no singular alias."
+        },
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+          "note": "Official bilingual V2.1 PDF p99 §7.1.13.1 Request singular, plural §7.1.13 heading. Exact selected XSD blob 191b43e01cdaba14b247725689a913c244a67eed uses plural GetDeviceErrorMessages only; no singular alias."
+        },
+        {
           "version": "V2.2",
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_DeviceManagementService_V2.2.xsd",
-          "note": "Section title and exact service group use plural GetDeviceErrorMessages; request prose uses singular GetDeviceErrorMessage."
+          "note": "Official DMS V2.2 PDF p19 §2.9.1 Request singular, plural §2.9 heading. Exact selected XSD blob c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d uses plural GetDeviceErrorMessages only; no singular alias."
+        },
+        {
+          "version": "V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.4.xsd",
+          "note": "Official published DMS V2.4 PDF p18 §2.9.1 STILL singular; selected XSD V2.4 is candidate/integration, not official. Exact selected XSD blob d222dfd98b2be3777576388da7ace8f333d24c3f uses plural GetDeviceErrorMessages only; no singular alias."
         }
       ],
       "review_state": "manually_reviewed",
@@ -9711,7 +9735,13 @@
       "secondary_issue_kinds": [
         "singular_plural_mismatch",
         "operation_family_naming",
-        "pdf_prose_typo"
+        "pdf_prose_typo",
+        "v1_0_german_only",
+        "v1_0_english_nonaffected",
+        "v2_0_v2_1_v2_2",
+        "official_v2_4_pdf_persists",
+        "v2_3_no_official_pdf",
+        "v2_4_candidate_schema"
       ],
       "defect_assessment": "confirmed_pdf_defect",
       "confidence": "confirmed",
@@ -9724,41 +9754,57 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "Section 2.9 is titled GetDeviceErrorMessages, but its request prose uses singular GetDeviceErrorMessage."
+          "note": "Original byte-pinned VDV301-2_V1.0_DE printed p59, visible body §7.1.11.1, singular prose GetDeviceErrorMessage against plural heading GetDeviceErrorMessages; PDF SHA256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75; visually checked PNG SHA256 ef708c1d8853bb9330b3145744aba3e23aace4edbc95b44bb4f03668778a658d, GitHub run43868258506 artifact14225993110. No TOC, OCR or inference used."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Original byte-pinned VDV301-2_V1.0_EN printed p66, visible body §9.3.12.1, generic Get-operation prose, no singular mismatch; PDF SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7; visually checked PNG SHA256 48d490502d9bab10a7e75e5d48ae536176e594cd4c462e0a5c76590c2549215b, GitHub run43868660266 artifact14225968623. No TOC, OCR or inference used."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Original byte-pinned VDV301-2_BASE_V2.0 printed p94, visible body §7.1.11.1, singular prose GetDeviceErrorMessage against plural heading GetDeviceErrorMessages; PDF SHA256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37; visually checked PNG SHA256 bfeaf84c5ef07d0b57ff64790c3e689adf4192613d6300e602f53f0865a9654f, GitHub run43868683696 artifact14226753033. No TOC, OCR or inference used."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Original byte-pinned VDV301-2_BASE_V2.1 printed p99, visible body §7.1.13.1, singular prose GetDeviceErrorMessage against plural heading GetDeviceErrorMessages; PDF SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a; visually checked PNG SHA256 7a719650d552ea42a7fc0ef29f8b0d66cd7639ca10c98245ac676f2b36ecf6dd, GitHub run43868712810 artifact14226268352. No TOC, OCR or inference used."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Original byte-pinned DMS_V2.2 printed p19, visible body §2.9.1, singular prose GetDeviceErrorMessage against plural heading GetDeviceErrorMessages; PDF SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e; visually checked PNG SHA256 e8b80be432f161601d1349bf36d18fa1240b2fe406eae8d7cd766af2177b327f, GitHub run43868851957 artifact14226014590. No TOC, OCR or inference used."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Original byte-pinned DMS_V2.4 printed p18, visible body §2.9.1, singular prose GetDeviceErrorMessage against plural heading GetDeviceErrorMessages; PDF SHA256 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd; visually checked PNG SHA256 df7a2f470db3e4b20a9c582ebade9f9c87ae755be850ce36488cb7fa5128ab5a, GitHub run43868875443 artifact14226468630. No TOC, OCR or inference used."
         },
         {
           "type": "official_xsd_explicit",
-          "note": "The exact V2.2 DeviceManagementServiceGroup contains GetDeviceErrorMessagesRequest/Response and no singular GetDeviceErrorMessage operation."
+          "note": "Exact historically selected release DMS V1.0–V2.2 XSDs and V2.3 integration/V2.4 candidate XSDs all use plural GetDeviceErrorMessages, never singular. V1.0 has the plural response structure but no request-root inferred. Exact Git blobs: V1.0 602a963f91000d0d39e3c271bacb3c7aba73e6d4, V2.0 74189e0da65563eeb084ec2f3c400e9668d1ee1a, V2.1 191b43e01cdaba14b247725689a913c244a67eed, V2.2 c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d, V2.3 integration 5fe444cf6d10462cc23fd159eb963abbec42248f, V2.4 candidate d222dfd98b2be3777576388da7ace8f333d24c3f."
         },
         {
-          "type": "parallel_operation_pattern",
-          "note": "The matching request/response and Subscribe/Unsubscribe DeviceErrorMessages operation family consistently uses the plural Messages form."
-        },
-        {
-          "type": "xsd_internal_consistency",
-          "note": "The service-group operation inventory consistently models the DeviceErrorMessages family in plural form."
+          "type": "active_disproof",
+          "note": "Not a separate valid singular operation: all visible section titles, response tables and exact selected XSD tokens are plural. V1.0 German is affected but V1.0 English is a genuine independently verified counterexample, using generic Get prose. The published official V2.4 PDF is still affected; the selected V2.4 XSD is nonofficial candidate/integration. No independently established official standalone DMS V2.3 PDF, so no PDF claim for V2.3. Documentation-only, no XML alias or validation outcome effect."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "DMS V2.2: GetDeviceErrorMessage im Request-Text ist singular statt plural",
-          "short": "Abschnittstitel, Operationsfamilie und XSD verwenden GetDeviceErrorMessages; nur der Request-Prosa-Text verwendet GetDeviceErrorMessage.",
-          "long": "In Abschnitt 2.9 der offiziellen V2.2-Dokumentation lautet der Operationstitel GetDeviceErrorMessages, während der Request-Beschreibungstext einmal GetDeviceErrorMessage im Singular verwendet. Die exakte V2.2-XSD enthält GetDeviceErrorMessagesRequest/Response sowie die dazugehörige Subscribe/Unsubscribe-Familie und keinen singulären Operationsalias. Die lokale Operationsfamilie stützt deshalb klar die Einordnung als PDF-Prosaabweichung.",
-          "recommendation": "GetDeviceErrorMessages gemäß ausgewählter XSD und Operationsfamilie verwenden. Keinen singulären GetDeviceErrorMessage-Alias erzeugen; dokumentationsbasierte Discovery darf die singuläre Prosaform nicht als zusätzliche Operation aufnehmen."
+          "title": "DMS V1.0 DE sowie V2.0–V2.4: GetDeviceErrorMessage im Request-Text singular",
+          "short": "In der Request-Prosa steht GetDeviceErrorMessage statt GetDeviceErrorMessages; V1.0 Englisch ist nicht betroffen.",
+          "long": "Die Original-PDFs enthalten den Singularfehler in der deutschen V1.0 p59 §7.1.11.1, V2.0 p94, V2.1 p99, DMS V2.2 p19 und weiterhin in der offiziellen DMS-V2.4-PDF p18. Die separat veröffentlichte englische V1.0 p66 verwendet nur generische Get-Prosa und ist nicht betroffen. Die exakten historischen XSDs verwenden ausschließlich den Plural; die V2.4-XSD bleibt ein nichtoffizieller Kandidat. Für V2.3 wurde keine eigene offizielle DMS-PDF belegt. Reiner Dokumentationsfehler ohne XML-Alias oder geändertes PASS/FAIL.",
+          "recommendation": "Für jedes exakt gewählte Profil die pluralen XSD-Namen verwenden. Die singuläre Prosa nicht in zusätzliche Operationen/Aliasse umsetzen; V1.0 Deutsch und Englisch getrennt beurteilen."
         },
         "en": {
-          "title": "DMS V2.2: GetDeviceErrorMessage in request prose is singular instead of plural",
-          "short": "The section title, operation family and XSD use GetDeviceErrorMessages; only the request prose uses GetDeviceErrorMessage.",
-          "long": "Section 2.9 of the official V2.2 documentation is titled GetDeviceErrorMessages, while the request description once uses singular GetDeviceErrorMessage. The exact V2.2 XSD contains GetDeviceErrorMessagesRequest/Response and the corresponding Subscribe/Unsubscribe family, with no singular operation alias. The local operation family therefore clearly supports a PDF prose defect.",
-          "recommendation": "Use GetDeviceErrorMessages according to the selected XSD and operation family. Do not create a singular GetDeviceErrorMessage alias, and do not let documentation-derived discovery add the prose-only singular form as an operation."
+          "title": "DMS V1.0 German and V2.0–V2.4: singular GetDeviceErrorMessage request prose",
+          "short": "Request prose uses singular GetDeviceErrorMessage instead of GetDeviceErrorMessages; published V1.0 English is unaffected.",
+          "long": "Visible original PDFs have the singular wording in German V1.0 p59 §7.1.11.1, V2.0 p94, V2.1 p99, DMS V2.2 p19, and still in published official DMS V2.4 p18. Independently published English V1.0 p66 uses generic Get prose and is unaffected. Exact selected historical XSDs only use the plural; the V2.4 schema is still nonofficial candidate material. No independent published standalone DMS V2.3 PDF was established. Documentation-only, no alias or XML PASS/FAIL change.",
+          "recommendation": "Use plural names from the selected exact XSD. Do not infer a singular operation alias from prose, and distinguish V1.0 German from English."
         }
       },
       "runtime_match": {
         "state": "reviewed",
         "candidate_triggers": [
-          "selected profile is official DeviceManagementService V2.2",
-          "documentation-derived operation inventory or resolver input contains the exact singular operation name GetDeviceErrorMessage",
-          "selected DeviceManagementServiceGroup exposes GetDeviceErrorMessagesRequest/Response and no singular operation alias"
+          "selected original documentation source is affected V1.0 German or V2.0/V2.1/V2.2/V2.4 official PDF; V1.0 English unaffected, no published V2.3 DMS PDF established",
+          "documentation-derived operation inventory or resolver context contains singular prose token GetDeviceErrorMessage",
+          "the selected exact DMS XSD uses plural GetDeviceErrorMessages and no singular alias"
         ]
       },
       "source_references": [
@@ -9785,9 +9831,14 @@
           "kind": "evidence",
           "reference": "EV-141 closure run 33974702338",
           "note": "Pinned visual/current-gate closure; singular form is not promoted as an alias."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDMS22_004_2026-11-16.md",
+          "note": "Full byte-pinned, visually verified version/language and exact schema authority correction."
         }
       ],
-      "notes": "Operation-family consistency is independent corroboration; this attribution is not based on grammar or singular/plural preference alone."
+      "notes": "DRDMS22-004 historical V2.2-only finding retained as original subset; exact byte-pinned 2026-11-16 visible original publications show German V1.0 and V2.0, V2.1, V2.2, V2.4 PDF affected, English V1.0 unaffected, V2.3 published PDF unverified; candidate schema V2.4 distinct. Informational-only matcher reviewed_not_implemented; no XML validation change."
     },
     {
       "finding_id": "DRDMS24-001",
