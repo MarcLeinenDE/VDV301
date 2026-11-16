@@ -1,6 +1,6 @@
 {
   "state_schema_version": "0.1",
-  "date": "2026-11-13",
+  "date": "2026-11-16",
   "canonical_branch": "dev/schema-integration",
   "workflow_mode": "full_gate_on_canonical_changes_plus_handoff_check_on_every_push",
   "project_phase": "source_locator_structural_completion",
@@ -2127,8 +2127,8 @@
     "version_scope_boundary_latest_gate_run_id": "43450736894"
   },
   "next_actions": [
-    "DRDMS22-003 verified and terminally closed at 99/192 after full schema gate + handoff; on final terminal_clean HEAD verify both workflows SUCCESS. Next unique source locator DRDMS22-004 (not started).",
-    "After final HEAD green, reviewed ai-mem PR to persist only durable V2.1/V2.2 typo finding, explicit historical V2.4-PDF contradiction and V2.4 candidate annotation boundary, datestamped 99/192 milestone; older snapshots and source references retained."
+    "DRDMS22-004 gate_pending: new cross-version source audit. Original V1.0 DE request prose already uses singular GetDeviceErrorMessage against plural GetDeviceErrorMessages operation; V1.0 EN has generic Get wording. Independently visually inspect all exact byte-pinned official publications V1.0 DE/EN, V2.0, V2.1, V2.2 and V2.4, exact XSDs and version scope; current canonical count remains 99/192.",
+    "First pending source render: VDV301-2_V1.0_DE pages59-60. Reuse the official SHA-pinned source; after render, progressively request remaining sources, then update every canonical finding, locator, body verification and boundary register, full gate, terminal_clean and reviewed ai-mem PR. No XSD, aliases or productive SDK matcher changes."
   ],
   "source_locator_progress": {
     "locator_entry_count": 99,
@@ -2206,12 +2206,24 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": "43450736894",
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": "43450736874",
-    "resume_instruction": "DRDMS22-003 exact original PDF/source and NEW actual positive/negative enum instance tests complete. Substantive HEAD a7bf25813550b91cf26f4cadb9e449bd6d8687a3 full schema-audit-validation run43450736894 SUCCESS and handoff-integrity run43450736874 SUCCESS. Current terminal_clean HEAD must pass its own final-head schema and handoff checks before declaring closure. 99/192 unique source locators, 99/99 original visible PDF body and 99/99 independently checked version boundaries, 93 remaining. Official V2.1 p109 Table47 enum correct/p110 Table50 prose extra-l, official V2.2 p28 Table33 correct/p29 Table36 prose extra-l. Original official V2.4 p27 Table33 and p28 Table36 CORRECT one-l, refutes earlier V2.4 PDF deep-read persists wording, while selected nonofficial V2.4 candidate XSD annotation remains wrong. Official V2.1/V2.2 XSD lexical boundary verified by EV-127 run43449270144; no XSD or runtime matcher implementation. Existing reviewed-only invalid-XSD advisory exact official profile_scope V2.1+V2.2; report docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDMS22_003_2026-11-13.md. Next unique DRDMS22-004 not started. After final HEAD green ai-mem reviewed PR and branch cleanup."
+    "resume_instruction": "DRDMS22-004 in progress at 99/192, PDF visual request first of six. Earlier V2.2-only scope must be independently revalidated across V1.0 DE/EN, V2.0, V2.1, V2.2, V2.4 before closure. Previous DRDMS22-003 terminal complete. No XSD or runtime implementation changed.",
+    "pending_block": "DRDMS22-004: original VDV PDF & exact-XSD cross-version source-locator audit",
+    "active_finding": "DRDMS22-004",
+    "active_step": "Requested official SHA-pinned VDV301-2_V1.0_DE PDF pages59-60 via render request; 99/192 unchanged, no finding/SDK/XSD changes.",
+    "next_step": "Verify pdf-render-fallback artifact for V1.0 DE pages59-60 and its SHA manifest; then request V1.0 EN pages65-67, BASE V2.0 p94-95, BASE V2.1 p99-100, DMS V2.2 p19-20, DMS V2.4 p18-19; cross-check exact selected XSDs before writing canonical registers.",
+    "evidence_refs": [
+      "audit_registry/pdf_source_pins_v0.1.json:VDV301-2_V1.0_DE SHA256 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+      "audit_registry/pdf_source_registry_v0.1.json",
+      "docs/pdf_xsd_semantic_audit/deep_read/DMS_V2.2.md",
+      "docs/pdf_xsd_semantic_audit/deep_read/DMS_V2.4.md",
+      "sdk_manifest/known_issues_runtime_mapping_v0.1.json:DRDMS22-004"
+    ],
+    "recovery_instruction": "On dev/schema-integration recover DRDMS22-004 gate_pending at 99/192. Inspect exact render artifact for source_id VDV301-2_V1.0_DE pages59-60 (source SHA256 pinned). Continue published edition visual checks including V1.0 EN separate language track; then exact XSD authority, disproof, registries, full CI and terminal_clean. Do not count progress before gate."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
