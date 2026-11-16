@@ -9877,32 +9877,36 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "Pinned pages 1 and 3 establish the publication as DeviceManagementService V2.4; page 4 visibly states in German and English that the document describes HtmlDisplayService, and the English paragraph additionally describes HTML/web-server display purpose."
+          "note": "Official exact-pinned DMS V2.4 PDF SHA256 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd (1298127 bytes). Original printed p1 and p3 identify VDV 301-2-0 DeviceManagementService V2.4 (PNG SHA256 b742db69fc76c75c9fc3421d1ed6cc9e467af001abe17df1b36fc997d342a8af and bc21986d91a5b1b8e2a45ceaafaab16ac735a53bdc413f27b9c70bc20d9f17a8); actual printed p4 Vorwort and Foreword explicitly say HtmlDisplayService instead (PNG SHA256 e12f3bc4cc75af35620cfddd81d0cb33f3a402e95f84ee0ef441d0e13e88ab18). Existing EV-142 pinned run33976298388 artifact9972412891 hash manifest revalidated. Both German/English affected, English web-server/HTML URL purpose wrong in DMS."
+        },
+        {
+          "type": "version_history",
+          "note": "Last separately published comparable DMS V2.2 official PDF original SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e, 1173719 bytes, actual printed p4 bilingual Vorwort/Foreword correctly describes Gerätemanagement-Dienst/device management service and operations, not HtmlDisplayService; original PNG SHA256 8c01cfda694c0dc2a1d71557120a09b5ce8b181d295ec9174f7758ab21a69b85, GitHub pinned render run43881373231 artifact14232761500. V1.0, V2.0, V2.1 Basic services are not dedicated standalone DMS forewords; V2.3 official standalone DMS PDF unverified, integration XSD not documentary evidence; no later official standalone DMS PDF verified."
         },
         {
           "type": "cross_service_pattern",
-          "note": "The copied HtmlDisplayService identity and HTML/web-server purpose are incompatible with the DMS document identity, DMS operation inventory and the remainder of the DeviceManagementService publication."
+          "note": "Published official HtmlDisplayService V2.2a (VDV301-2-17, 02/2021), official PDF SHA256 f3da1994e719572ba1689aea2448b9533faf9e8fbe42720b9e737b98edd8b0f8 431875 bytes, printed p4 Vorwort/Foreword legitimately names HtmlDisplayService and contains identical English HTML URL/web server multifunction-display purpose sentences. Original PNG SHA256 7bf6d445ce8810ba25eadf438ae30f49dd4a005df39b1188a8bf5e63871b34b0; render run43881561732 artifact14232831054. Its additional v2.2a-specific note is absent from DMS; close matching identity/purpose paragraphs strongly support source-text reuse but not a claim of observed editorial actions."
         },
         {
           "type": "candidate_integration_provenance",
-          "note": "The repository DMS V2.4 XSD family is explicitly candidate/integration only. EV-108 corroborates DMS structure identity but is not promoted to official-release authority and does not define this documentation-only defect."
+          "note": "DMS V2.2 selected official XSD Git blob c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d, V2.3 local integration-only blob 5fe444cf6d10462cc23fd159eb963abbec42248f, V2.4 candidate/integration-only blob d222dfd98b2be3777576388da7ace8f333d24c3f. Each exact local DMS schema has DeviceManagementServiceGroup at line9 and no HtmlDisplayService token; V2.4 candidate XSD not official and no new XML-instance tests are required for foreword identity prose."
         },
         {
           "type": "technical_inference",
-          "note": "The strongest alternative explanation—that HtmlDisplayService is merely a related-service reference—is rejected because the foreword says the document describes that service and reproduces its service-purpose prose."
+          "note": "Strongest counter-explanation that HtmlDisplayService is referenced merely as a related service is contradicted by categorical foreword document-identity statement in both languages plus the copied HTML display purpose; actual DMS p1/p3 and §1/§2 are incompatible. No HTML-display route, XML alias, XSD validity change, SDK runtime rule or developer-facing extra operation follows from this prose."
         }
       ],
       "diagnostic": {
         "de": {
           "title": "DMS V2.4: Vorwort beschreibt fälschlich den HtmlDisplayService",
           "short": "Die offizielle DMS-V2.4-PDF enthält im Vorwort kopierten HtmlDisplayService-Identitäts- und Zwecktext.",
-          "long": "Die Seiten 1 und 3 der gepinnten Veröffentlichung identifizieren das Dokument eindeutig als DeviceManagementService V2.4. Im Vorwort auf Seite 4 steht jedoch in beiden Sprachfassungen, dass das Dokument den HtmlDisplayService beschreibt; der englische Absatz übernimmt zusätzlich dessen HTML-/Webserver-Zweck. Der alternative Erklärungsversuch einer bloßen Querverweisung passt nicht zu dieser Formulierung und dem kopierten Zwecktext. Es handelt sich daher um einen bestätigten Copy/Paste-Dokumentationsfehler ohne XML-Validierungswirkung.",
+          "long": "Die offiziellen Originalseiten 1 und 3 identifizieren VDV-Schrift 301-2-0 eindeutig als DeviceManagementService V2.4. Auf der tatsächlich sichtbaren Seite 4 behauptet dagegen das deutsche Vorwort, die Schrift beschreibe den HtmlDisplayService; der englische Foreword-Text nennt denselben falschen Dienst und übernimmt dessen URL-/Webserver-/HTML-Zweck für Multifunktionsdisplays. Der separat veröffentlichte HtmlDisplayService V2.2a enthält diese Textbausteine tatsächlich korrekt auf Seite 4. Die vorherige offizielle DMS V2.2 beschreibt den Gerätemanagement-Dienst dort korrekt. Keine eigenständige offizielle DMS-V2.3-PDF wurde nachgewiesen. Die ausgewählte V2.4-XSD ist nur Candidate/Integration. Bestätigter zweisprachiger Vorwort-Copy/Paste-Dokumentationsfehler ohne XML-Validierungswirkung.",
           "recommendation": "Aus dem Vorwort keine HtmlDisplay-Routen, Operationen oder XML-Aliase für DMS ableiten. Für SDK-Laufzeitvalidierung keinen eigenen Fehler erzeugen; den Befund nur als Dokumentations-/Providerhinweis und für spätere externe Korrekturtriage führen."
         },
         "en": {
           "title": "DMS V2.4: foreword incorrectly describes HtmlDisplayService",
           "short": "The official DMS V2.4 PDF contains copied HtmlDisplayService identity and purpose text in its foreword.",
-          "long": "Pages 1 and 3 of the pinned publication unambiguously identify the document as DeviceManagementService V2.4. Page 4 nevertheless states in both language sections that the document describes HtmlDisplayService, and the English paragraph additionally carries its HTML/web-server purpose. The alternative explanation of a mere related-service reference does not fit that identity statement and copied purpose text. This is therefore a confirmed copy/paste documentation defect with no XML-validation effect.",
+          "long": "The official published VDV 301-2-0 original pages 1 and 3 explicitly identify DeviceManagementService V2.4. The actual visible page 4 German and English foreword incorrectly states that the document describes HtmlDisplayService; the English section additionally repeats HTML display URL/web-server purpose text. The separate published HtmlDisplayService V2.2a foreword p4 genuinely contains those paragraphs, while the preceding official DMS V2.2 p4 correctly describes device management. No separate official DMS V2.3 publication was established, and the selected V2.4 XSD remains candidate/integration only. This is a bilingual documentation copy/paste error, with no XML-validation effect.",
           "recommendation": "Do not derive HtmlDisplay routes, operations or XML aliases for DMS from the foreword. Do not emit a dedicated SDK runtime validation error; retain the finding as documentation/provider context and for later external-correction triage."
         }
       },
@@ -9935,9 +9939,14 @@
           "kind": "evidence",
           "reference": "EV-108 run 33182963733",
           "note": "Candidate/integration DMS V2.4 schema corroboration only; not official-release authority."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDMS24_001_2026-11-16.md",
+          "note": "Independent exact original published PDF V2.2/V2.4/HDS V2.2a visible-body source attribution, language and version boundary; validated 2026-11-16."
         }
       ],
-      "notes": "Documentation-only copy/paste identity defect. No SDK runtime diagnostic, no HtmlDisplay compatibility alias, and no external report is authorized solely by this classification; later reporting must pass the External-reporting gate."
+      "notes": "DRDMS24-001 original EV-142 revalidation retained. New verified exact-original visual boundary: official DMS V2.2 predecessor p4 correct in both languages, official DMS V2.4 p4 bad in both, official HDS V2.2a p4 valid matching source text. V2.3 official standalone PDF unknown, V2.4 XSD candidate only. No XSD, productive SDK or XML validity changes. Wrong prior next pointer DRDMS22-005 absent from semantic inventory; machine handoff corrected and next-pointer guard added."
     },
     {
       "finding_id": "DRDOOR21-001",

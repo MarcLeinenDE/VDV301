@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "dad9697f98ef21555fd9c09ab1364fded5268346",
+    "git_blob": "1992371bcc2602f887038f24b03fdeb1e4390514",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 100,
-    "coverage_complete_count": 100,
+    "locator_entry_count": 101,
+    "coverage_complete_count": 101,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 92
+    "remaining_finding_count": 91
   },
   "entries": [
     {
@@ -20595,6 +20595,271 @@
         "DMS_V2.2 official original PDF SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e, visibly verified printed p19 PNG SHA256 e8b80be432f161601d1349bf36d18fa1240b2fe406eae8d7cd766af2177b327f, GitHub render run 43868851957 artifact 14226014590",
         "DMS_V2.4 official original PDF SHA256 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd, visibly verified printed p18 PNG SHA256 df7a2f470db3e4b20a9c582ebade9f9c87ae755be850ce36488cb7fa5128ab5a, GitHub render run 43868875443 artifact 14226468630",
         "Exact XSD selected historical blobs V1.0 602a963f91000d0d39e3c271bacb3c7aba73e6d4, V2.0 74189e0da65563eeb084ec2f3c400e9668d1ee1a, V2.1 191b43e01cdaba14b247725689a913c244a67eed, V2.2 c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d; V2.3 integration and V2.4 candidate separate. No XML instance tests due documentation-only error."
+      ]
+    },
+    {
+      "finding_id": "DRDMS24-001",
+      "service": "DeviceManagementService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "DMS V2.4 official documentation",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "The official public DeviceManagementService V2.4 PDF identifies the publication as DMS but its foreword contains copied HtmlDisplayService identity and purpose text."
+        },
+        {
+          "version": "DMS V2.4 candidate/integration schema context",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_DeviceManagementService_V2.4.xsd",
+          "note": "Candidate/integration XSD context is used only as corroborating service-identity context. It is not an official V2.4 release authority and does not make the foreword defect executable."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "earlier_combined_basic_services_no_standalone_dms_foreword",
+          "pdf_locators": [],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+              "git_blob": "191b43e01cdaba14b247725689a913c244a67eed",
+              "authority_detail": "Exact selected historical official V2.1 release-tag XSD",
+              "component_kind": "group",
+              "component": "DeviceManagementServiceGroup",
+              "member": null,
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']",
+              "line_hint": "9–55",
+              "value": "DeviceManagementService group; no HtmlDisplayService operation",
+              "point_summary": "Earlier integrated Basic Services V2.1 is not standalone VDV 301-2-0 DMS publication; DMS service XSD only contextual."
+            }
+          ],
+          "coverage_note": "V1.0–V2.1 published DMS content as combined Basic Services, not a separate standalone DMS foreword comparable to V2.2/V2.4. No error inferred in earlier publications."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "last_comparable_nonaffected_predecessor",
+          "pdf_locators": [
+            {
+              "source_id": "DMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService V2.2",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sdes-v2-2-devicemanagementservice.pdfx",
+              "sha256": "72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e",
+              "printed_pages": [
+                1
+              ],
+              "section": "Cover — DeviceManagementService V2.2",
+              "table": null,
+              "point_summary": "Printed p1 clearly identifies standalone official DMS V2.2. Exact source run43881373231 artifact14232761500 p1 PNG SHA256 2ccf329ed933a9b5b2577749673213071d6629ea4caa758b2ec3f208a636d577. Original body visually checked against byte-pinned render, not TOC/OCR."
+            },
+            {
+              "source_id": "DMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService V2.2",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sdes-v2-2-devicemanagementservice.pdfx",
+              "sha256": "72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e",
+              "printed_pages": [
+                3
+              ],
+              "section": "Document identity — DeviceManagementService V2.2",
+              "table": null,
+              "point_summary": "Printed p3 repeats DMS identity. Exact source run43881373231 artifact14232761500 p3 PNG SHA256 68fdf61caef9a2001555a3d5b4c71f1bfc4263d42cd4fc0f6eea4d239d48c062. Original body visually checked against byte-pinned render, not TOC/OCR."
+            },
+            {
+              "source_id": "DMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService V2.2",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sdes-v2-2-devicemanagementservice.pdfx",
+              "sha256": "72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e",
+              "printed_pages": [
+                4
+              ],
+              "section": "Vorwort / Foreword",
+              "table": null,
+              "point_summary": "Printed p4 correctly describes Gerätemanagement-Dienst / device management service and its operations in German and English; no HtmlDisplayService. Exact source run43881373231 artifact14232761500 p4 PNG SHA256 8c01cfda694c0dc2a1d71557120a09b5ce8b181d295ec9174f7758ab21a69b85. Original body visually checked against byte-pinned render, not TOC/OCR."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+              "git_blob": "c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d",
+              "authority_detail": "Exact selected official historical DMS V2.2 release-tag XSD",
+              "component_kind": "group",
+              "component": "DeviceManagementServiceGroup",
+              "member": null,
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']",
+              "line_hint": "9–55",
+              "value": "DeviceManagementService group; no HtmlDisplayService operation",
+              "point_summary": "DMS group at line9, no HtmlDisplay reference. Context corroboration only."
+            }
+          ],
+          "coverage_note": "Last comparable official standalone DMS foreword p4 correct in both languages."
+        },
+        {
+          "version": "V2.3 integration only",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "intermediate_no_verified_published_standalone_dms_pdf",
+          "pdf_locators": [],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.3.xsd",
+              "git_blob": "5fe444cf6d10462cc23fd159eb963abbec42248f",
+              "authority_detail": "Selected DMS V2.3 integration-only comparison XSD, NOT official",
+              "component_kind": "group",
+              "component": "DeviceManagementServiceGroup",
+              "member": null,
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']",
+              "line_hint": "9–55",
+              "value": "DeviceManagementService group; no HtmlDisplayService operation",
+              "point_summary": "V2.3 integration group DMS-only; cannot infer PDF foreword content."
+            }
+          ],
+          "coverage_note": "No separately verified official published standalone DMS V2.3 PDF; documentation state unknown."
+        },
+        {
+          "version": "DMS V2.4 official documentation",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "first_verified_affected_official_publication",
+          "pdf_locators": [
+            {
+              "source_id": "DMS_V2.4",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService V2.4",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sde-v2.4-devicemanagementservice.pdfx",
+              "sha256": "347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd",
+              "printed_pages": [
+                1
+              ],
+              "section": "Cover — DeviceManagementService V2.4",
+              "table": null,
+              "point_summary": "Printed original p1 names DMS V2.4. Exact source run33976298388 artifact9972412891 p1 PNG SHA256 b742db69fc76c75c9fc3421d1ed6cc9e467af001abe17df1b36fc997d342a8af. Original body visually checked against byte-pinned render, not TOC/OCR."
+            },
+            {
+              "source_id": "DMS_V2.4",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService V2.4",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sde-v2.4-devicemanagementservice.pdfx",
+              "sha256": "347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd",
+              "printed_pages": [
+                3
+              ],
+              "section": "Document identity — DeviceManagementService V2.4",
+              "table": null,
+              "point_summary": "Printed original p3 repeats DMS identity. Exact source run33976298388 artifact9972412891 p3 PNG SHA256 bc21986d91a5b1b8e2a45ceaafaab16ac735a53bdc413f27b9c70bc20d9f17a8. Original body visually checked against byte-pinned render, not TOC/OCR."
+            },
+            {
+              "source_id": "DMS_V2.4",
+              "document_title": "VDV-Schrift 301-2-0 DeviceManagementService V2.4",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sde-v2.4-devicemanagementservice.pdfx",
+              "sha256": "347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd",
+              "printed_pages": [
+                4
+              ],
+              "section": "Vorwort / Foreword",
+              "table": null,
+              "point_summary": "Visible original p4 both German and English incorrectly say this is HtmlDisplayService; English copies HTML/URL/web-server multifunction display purpose. Exact source run33976298388 artifact9972412891 p4 PNG SHA256 e12f3bc4cc75af35620cfddd81d0cb33f3a402e95f84ee0ef441d0e13e88ab18. Original body visually checked against byte-pinned render, not TOC/OCR."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "First and latest verified affected official DMS standalone PDF, both language tracks; no official XSD release claim."
+        },
+        {
+          "version": "DMS V2.4 candidate/integration schema context",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "candidate_schema_support_only_pdf_defect_nonexecutable",
+          "pdf_locators": [],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.4.xsd",
+              "git_blob": "d222dfd98b2be3777576388da7ace8f333d24c3f",
+              "authority_detail": "Selected exact DMS V2.4 candidate/integration XSD, NOT official release",
+              "component_kind": "group",
+              "component": "DeviceManagementServiceGroup",
+              "member": null,
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']",
+              "line_hint": "9–55",
+              "value": "DeviceManagementService group; no HtmlDisplayService operation",
+              "point_summary": "DMS group and members DMS-only, no HtmlDisplayService declaration; document copy error not XML validation rule."
+            }
+          ],
+          "coverage_note": "Selected XSD is nonofficial candidate/integration even though V2.4 PDF official."
+        },
+        {
+          "version": "HDS V2.2a related source",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "cross_service_correct_source_not_affected",
+          "pdf_locators": [
+            {
+              "source_id": "HDS_V2.2a",
+              "document_title": "VDV-Schrift 301-2-17 HtmlDisplayService V2.2a",
+              "document_version": "2.2a",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-17-sdes-v2-2a-htmldisplayservice.pdfx",
+              "sha256": "f3da1994e719572ba1689aea2448b9533faf9e8fbe42720b9e737b98edd8b0f8",
+              "printed_pages": [
+                1
+              ],
+              "section": "Cover — HtmlDisplayService V2.2a",
+              "table": null,
+              "point_summary": "Correct official HDS original cover. Exact source run43881561732 artifact14232831054 p1 PNG SHA256 259ec5d15dc3cc42f7082df118a755208db27d8738305740af0aee8f31786e6c. Original body visually checked against byte-pinned render, not TOC/OCR."
+            },
+            {
+              "source_id": "HDS_V2.2a",
+              "document_title": "VDV-Schrift 301-2-17 HtmlDisplayService V2.2a",
+              "document_version": "2.2a",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-17-sdes-v2-2a-htmldisplayservice.pdfx",
+              "sha256": "f3da1994e719572ba1689aea2448b9533faf9e8fbe42720b9e737b98edd8b0f8",
+              "printed_pages": [
+                3
+              ],
+              "section": "Document identity — HtmlDisplayService V2.2a",
+              "table": null,
+              "point_summary": "Correct official HDS p3 identity. Exact source run43881561732 artifact14232831054 p3 PNG SHA256 50da37c545964bca8d79f458816113b656a06f604bf140c3e39356a7adf1552c. Original body visually checked against byte-pinned render, not TOC/OCR."
+            },
+            {
+              "source_id": "HDS_V2.2a",
+              "document_title": "VDV-Schrift 301-2-17 HtmlDisplayService V2.2a",
+              "document_version": "2.2a",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-17-sdes-v2-2a-htmldisplayservice.pdfx",
+              "sha256": "f3da1994e719572ba1689aea2448b9533faf9e8fbe42720b9e737b98edd8b0f8",
+              "printed_pages": [
+                4
+              ],
+              "section": "Vorwort / Foreword — HtmlDisplayService",
+              "table": null,
+              "point_summary": "Correct original HDS p4 uses the HtmlDisplayService identity and English URL/web-server/HTML display sentences, matching those incorrectly copied into DMS V2.4; HDS version-specific note not copied. Exact source run43881561732 artifact14232831054 p4 PNG SHA256 7bf6d445ce8810ba25eadf438ae30f49dd4a005df39b1188a8bf5e63871b34b0. Original body visually checked against byte-pinned render, not TOC/OCR."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Distinct correct HDS V2.2a publication corroborates source text; not an affected DMS version."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDMS24_001_2026-11-16.md",
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DMS_V24_2026-09-05.md",
+        "docs/pdf_xsd_semantic_audit/deep_read/DMS_V2.4.md",
+        "DMS_V2.2 last unaffected standalone predecessor, official SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e, exact original p1/3/4 render run43881373231 artifact14232761500, p4 PNG SHA256 8c01cfda694c0dc2a1d71557120a09b5ce8b181d295ec9174f7758ab21a69b85",
+        "DMS_V2.4 affected official DMS PDF, official SHA256 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd, exact original p1/3/4 render run33976298388 artifact9972412891, p4 PNG SHA256 e12f3bc4cc75af35620cfddd81d0cb33f3a402e95f84ee0ef441d0e13e88ab18",
+        "HDS_V2.2a correct related HDS original, official SHA256 f3da1994e719572ba1689aea2448b9533faf9e8fbe42720b9e737b98edd8b0f8, exact original p1/3/4 render run43881561732 artifact14232831054, p4 PNG SHA256 7bf6d445ce8810ba25eadf438ae30f49dd4a005df39b1188a8bf5e63871b34b0",
+        "Candidate-only selected DMS V2.4 schema blob d222dfd98b2be3777576388da7ace8f333d24c3f; no XML instance test or productive runtime rule."
       ]
     }
   ]

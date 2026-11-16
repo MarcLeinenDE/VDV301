@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 100,
-    "verified": 100,
+    "tracked_findings": 101,
+    "verified": 101,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -5998,6 +5998,63 @@
           "language_status": "Published official standalone DMS p18 §2.9.1 request singular, plural heading and response table; selected V2.4 XSD candidate/integration only, not official.",
           "source_ids": [
             "DMS_V2.4"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRDMS24-001",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDMS24_001_2026-11-16.md",
+        "DMS_V2.2 official PDF original SHA256 72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e 1173719B; printed p1 PNG SHA256 2ccf329ed933a9b5b2577749673213071d6629ea4caa758b2ec3f208a636d577, p3 68fdf61caef9a2001555a3d5b4c71f1bfc4263d42cd4fc0f6eea4d239d48c062, p4 8c01cfda694c0dc2a1d71557120a09b5ce8b181d295ec9174f7758ab21a69b85; run43881373231 artifact14232761500",
+        "DMS_V2.4 official PDF original SHA256 347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd 1298127B; printed p1 PNG SHA256 b742db69fc76c75c9fc3421d1ed6cc9e467af001abe17df1b36fc997d342a8af, p3 bc21986d91a5b1b8e2a45ceaafaab16ac735a53bdc413f27b9c70bc20d9f17a8, p4 e12f3bc4cc75af35620cfddd81d0cb33f3a402e95f84ee0ef441d0e13e88ab18; run33976298388 artifact9972412891",
+        "HDS_V2.2a official PDF original SHA256 f3da1994e719572ba1689aea2448b9533faf9e8fbe42720b9e737b98edd8b0f8 431875B; printed p1 PNG SHA256 259ec5d15dc3cc42f7082df118a755208db27d8738305740af0aee8f31786e6c, p3 50da37c545964bca8d79f458816113b656a06f604bf140c3e39356a7adf1552c, p4 7bf6d445ce8810ba25eadf438ae30f49dd4a005df39b1188a8bf5e63871b34b0; run43881561732 artifact14232831054",
+        "Prior EV-142 frozen official V2.4 original-source confirmation run33976613628 and pinned run33976298388, reused with byte-verified PNG manifest.",
+        "Exact official historical DMS V2.2 XSD blob c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d; local integration DMS V2.3 blob 5fe444cf6d10462cc23fd159eb963abbec42248f; selected DMS V2.4 CANDIDATE/INTEGRATION-only blob d222dfd98b2be3777576388da7ace8f333d24c3f. All declare DeviceManagementServiceGroup at line9 with no HtmlDisplayService element."
+      ],
+      "note": "V2.2 original last directly comparable official DMS preface correct. Official DMS V2.4 original p4 bilingual wrong service identity and web/HTML purpose; HDS V2.2a real foreword p4 matches. No standalone DMS V2.3 original published PDF established; V2.4 XSD candidate only; no later corrected official standalone DMS publication verified. Historic 101/192 frozen revalidation count not credited until new locator full gate.",
+      "scope_conclusion": "First verified affected original standalone official DeviceManagementService V2.4 publication p4 in both German/English, contradiction to same publication p1/p3 and DMS operation inventory. Last directly comparable nonaffected original standalone DMS V2.2 p4 correct in both languages. V2.3 original standalone PDF unavailable/unverified and local XSD integration-only, so no false V2.3 document claim; no subsequent official DMS PDF correction established. Correct HDS V2.2a original p4 matches the copied paragraphs. V2.4 XSD candidate, no XML/runtime effect.",
+      "boundary_checks": [
+        {
+          "version": "V1.0–V2.1",
+          "role": "earlier_combined_publications_not_directly_comparable",
+          "language_status": "DMS content in earlier integrated Basic Services, no separately published VDV301-2-0 standalone DMS foreword. No invented comparable service-preface claim.",
+          "source_ids": [
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "V2.2",
+          "role": "last_nonaffected_comparable_predecessor",
+          "language_status": "Official standalone DMS V2.2 p1/p3 DMS identity; p4 Vorwort and Foreword correctly name and describe Gerätemanagement-/device-management service, not HtmlDisplayService.",
+          "source_ids": [
+            "DMS_V2.2"
+          ]
+        },
+        {
+          "version": "V2.3",
+          "role": "no_verified_standalone_official_document",
+          "language_status": "No published standalone DMS V2.3 PDF established; integration-only DMS V2.3 XSD cannot infer foreword.",
+          "source_ids": [
+            "DMS_V2.2",
+            "DMS_V2.4"
+          ]
+        },
+        {
+          "version": "V2.4",
+          "role": "first_and_last_verified_affected_official_document",
+          "language_status": "Official public standalone DMS V2.4 p4 both German/English wrong HtmlDisplayService foreword and English HTML/URL/web-server purpose; actual p1/p3 DMS; selected DMS V2.4 XSD candidate/integration only.",
+          "source_ids": [
+            "DMS_V2.4"
+          ]
+        },
+        {
+          "version": "HDS V2.2a",
+          "role": "unaffected_cross_service_text_provenance",
+          "language_status": "Distinct published HtmlDisplayService service original p4 validly contains the same HtmlDisplay identity and English web-server HTML display purpose; p1/p3 HDS cover identity.",
+          "source_ids": [
+            "HDS_V2.2a"
           ]
         }
       ]

@@ -149,6 +149,36 @@ def main() -> int:
         "locator entries follow semantic finding order",
     )
 
+    # Regression after 2026-11-16: the prior handoff invented DRDMS22-005
+    # although the frozen semantic inventory's next ID was DRDMS24-001.
+    # A structurally complete locator set is a contiguous prefix. Derive
+    # the next target from the frozen semantic order, never guess its suffix.
+    required_prefix = [e["finding_id"] for e in sem["entries"][:len(ids)]]
+    require(
+        ids == required_prefix,
+        "source locator entries form a contiguous canonical semantic prefix",
+    )
+    next_unique_finding = (
+        sem["entries"][len(ids)]["finding_id"]
+        if len(ids) < len(sem["entries"])
+        else None
+    )
+    require(
+        current_state["source_locator_progress"].get(
+            "next_structurally_missing_finding_after_body_backlog"
+        ) == next_unique_finding,
+        f"CURRENT_STATE first structurally missing finding equals frozen semantic next ID: {next_unique_finding}",
+    )
+    if (
+        next_unique_finding is not None
+        and current_state["handoff_integrity"]["work_cycle_state"] == "terminal_clean"
+    ):
+        require(
+            next_unique_finding
+            in current_state["handoff_integrity"].get("resume_instruction", ""),
+            f"terminal handoff resume instruction names actual next semantic finding: {next_unique_finding}",
+        )
+
     # Visible-body verification is deliberately tracked separately from
     # structural locator completeness. Until the existing complete set has
     # been revalidated under the explicit body-locator rule, freeze structural
