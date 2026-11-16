@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 101,
-    "verified_current_standard": 101,
+    "tracked_findings": 102,
+    "verified_current_standard": 102,
     "pending_current_standard": 0
   },
   "entries": [
@@ -1025,6 +1025,18 @@
         "Prior EV-142 frozen official V2.4 original-source confirmation run33976613628 and pinned run33976298388, reused with byte-verified PNG manifest."
       ],
       "note": "Actually visible byte-pinned original official printed p1/p3/p4: V2.2 DMS p4 correct German and English DMS foreword, V2.4 DMS p4 both-language wrong HtmlDisplayService identity and English HTML/Webserver URL text despite DMS identity p1/p3. Correct HDS V2.2a p4 contains matching text. Original PNGs independently opened and rehashed; no TOC/OCR substitution, no XML/XSD changes."
+    },
+    {
+      "finding_id": "DRDOOR21-001",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDOOR21_001_2026-11-16.md",
+        "Exact official DOOR_V2.1 851513 bytes SHA256 7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8 and fresh GitHub pinned original run43888781452 artifact14234584210 p1 PNG SHA256 bc059e744a0d8fbab47e94b2c20595bc66f1099f5bfeed4e308542563267f8a3 (cover), p9 0aa5447c81474719a89816d6128f0e371e708f58d4c0be82fef327a3df58c9f6 (§2/Table1), p11 6655c4c27c55acf2dfd35f8a3f2ceb8aafb1f764a4e1e96a30f17a39f669fdb6 (§2.7.1/Table8), p12 4e9ab26220257e6d191fc3aa104b67b1cd2c5c3b062622955118ed2c1416f14b (§2.7.2 Table9, §2.8.1 Table10, §2.8.2 Table11).",
+        "Historical EV-143 pinned source run33976777554 artifact9972544125 p11 SHA256 96ef34798f2041af47ff943a36e37523e0acae45b866775b91f8523e2a73c570 and p12 e90660e9ec8ec21bb955f761aff0b73de01576f80f1c81555f6f446d927fcb5f, manifest SHA256 verified; historical omission of Table11's shortened response description corrected in current records.",
+        "Exact selected official VDVde/VDV301@VDV-301-2.1 DoorStateService service blob abff0f3960e2ec7a9caaa9ddeb6efff8f4183805, Common V1.0 blob194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c, Enumerations V1.0 blob a9bea5bc73003ed91ded8519db06c32c4067831d; independently fetched all three from release tag and matched working blobs.",
+        "Official VDV publication index https://www.vdv.de/ip-kom-oev.aspx (checked 2026-11-16), only DoorStateService 301-2-15 V2.1 publication listed; no separately evidenced earlier standalone or later corrected DoorStateService PDF."
+      ],
+      "note": "Visible original official DoorStateService 301-2-15 V2.1 p1 identity, p9 §2/Table1 names RetrieveSpecificDoorOpenState and RetrieveSpecificDoorOperationState correctly, p11 §2.7.1/Table8 wrong prose RetrieveDoorOpenState, p12 §2.7.2/Table9 same wrong prose, §2.8.1/Table10 wrong RetrieveDoorOpereationState and §2.8.2/Table11 third distinct wrong form RetrieveDoorOperationState (newly recovered historical omission). Actual visible body and printed table numbers verified by SHA-pinned PNGs, not TOC or inference. No alias/validation effect, mixed V1.0 dependencies preserved."
     }
   ]
 }
