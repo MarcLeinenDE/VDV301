@@ -1,0 +1,30 @@
+# DRDOOR21-002 — SHA-geprüfter Original-PDF-Body, XSD-Semantik und Versionsgrenze (2026-11-17)
+
+**Bereits vorhandene Finding-ID:** DRDOOR21-002, keine neue Identität. **Klassifikation:** `confirmed_pdf_defect`, `semantic_contradiction`, redaktioneller Copy/Paste-Fehler in einer Beschreibung; `no_runtime_diagnostic`, `not_applicable`, keine XML- oder SDK-Laufzeitwirkung.
+
+## Sichtbare Originalquelle und SHA-Pins
+
+- Offizielle VDV-Schrift **301-2-15 DoorStateService V2.1, 07/2018**, `DOOR_V2.1`, https://www.vdv.de/301-2-15-sd-v2-1-doorstateservice.pdfx, SHA-256 **`7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8`**, 851513 Bytes, 16 PDF-Seiten. Quelle bereits im kanonischen Pin-Register geprüft (Source-Pin-Run 33241913638).
+- Der interaktive PDF-Screenshot lieferte einen Cache-Miss. Gemäß `PDF_VISUAL_RENDER_FALLBACK.md` wurde der bestehende deterministic fallback **run 43888781452, artifact 14234584210** (`vdv-pdf-render-fallback`) frisch heruntergeladen. `render_manifest.json` belegt die identische PDF-SHA und Dateigröße. Alle vier Originalseiten-PNGs wurden am 17.11.2026 unabhängig SHA-256-geprüft: p1 `bc059e744a0d8fbab47e94b2c20595bc66f1099f5bfeed4e308542563267f8a3`, p9 `0aa5447c81474719a89816d6128f0e371e708f58c9f6`, p11 `6655c4c27c55acf2dfd35f8a3f2ceb8aafb1f764a4e1e96a30f17a39f669fdb6`, p12 `4e9ab26220257e6d191fc3aa104b67b1cd2c5c3b062622955118ed2c1416f14b`. Alle stimmen mit dem Render-Manifest überein. Die PDF-Rohbytes wurden in dieser Sitzung nicht separat heruntergeladen oder neu gehasht; die PDF-Byte-Autorität beruht auf dem belegten GitHub-Pin und Render-Run.
+- **Gedruckte S.1:** offizieller Umschlag und Editionsidentität.
+- **Gedruckte S.9, §2 Tabelle 1:** getrennte offizielle Operationen `RetrieveSpecificDoorOpenState` und `RetrieveSpecificDoorOperationState`.
+- **Gedruckte S.11, §2.7:** `RetrieveSpecificDoorOpenState` fragt laut sichtbarer Originalprosa ausdrücklich den *current door open state* ab. **Tabelle 7** auf derselben Seite beschreibt dagegen den separaten *door operation state*.
+- **Gedruckte S.12, §2.7.2 Response, Tabelle 9** `Description of DoorStateService.RetrieveSpecificDoorOpenStateResponse`: Erfolgsalternative **`a DoorOpenState`**, Modell **`DoorStateService.SpecificDoorOpenState`**, aber Beschreibung wörtlich **“Current door operation state of door with identifier DoorID, cf. Table 4”**. Die Beschreibung widerspricht also dem Element und dem gemeinten Öffnungszustand.
+- **Gedruckte S.12, §2.8.2 Response, Tabelle 11:** Die Erfolgsalternative **`a DoorOperationState`** trägt genau die korrekte *operation state*-Semantik, verweist jedoch passend auf **Tabelle 7**. Das ist der direkte sichtbare Vergleich und Gegenbeweis. Sichtbarer Seitenkörper, nicht TOC oder Tabellennummern-Inferenz, ist Locator-Autorität.
+- **Transparente Grenze:** Die in Tabelle 9 zitierte Tabelle 4 liegt auf gedruckter S.10; diese Seite war nicht Teil des erneut verifizierten PNG-Artefakts und wird nicht als erneut visuell geprüft ausgegeben. Die genaue OpenState-Struktur ist stattdessen zusätzlich aus dem offiziellen XSD und der sichtbaren §2.7-Prosa verifiziert.
+
+## Exakte XSD-Autorität und Gegenbeweise
+
+Das echte offizielle Upstream-Tag `VDVde/VDV301@VDV-301-2.1` und der Arbeitsbranch enthalten denselben Service-Blob `abff0f3960e2ec7a9caaa9ddeb6efff8f4183805` (`IBIS-IP_DoorStateService_V2.1.xsd`). Die XSD deklariert `DoorStateService.RetrieveSpecificDoorOpenStateResponseStructure` mit `DoorOpenState` vom Typ `DoorStateService.SpecificDoorOpenStateStructure`; darin steht `OpenState`. Die separate `DoorStateService.RetrieveSpecificDoorOperationStateResponseStructure` verwendet `DoorOperationState` und `DoorStateService.SpecificDoorOperationStateStructure` mit `OperationState`. Lokale Operationsgruppen-Member dürfen nicht als frei erfundene globale Dokumentroots behandelt werden.
+
+Die **absichtlich historischen** direkten Abhängigkeiten sind `IBIS-IP_common_V1.0.xsd` Blob `194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c` und `IBIS-IP_Enumerations_V1.0.xsd` Blob `a9bea5bc73003ed91ded8519db06c32c4067831d`, beide gegen das offizielle Tag abgeglichen. Kein `latest wins`.
+
+**Aktive Widerlegung:** Ein möglicherweise generischer englischer Begriff *operation state* wird durch das explizit getrennte, sichtbare Dokumentmodell (§2.7 und §2.8, Tabelle 9 und 11) und die exakte XSD widerlegt. `-1:1` mit `a/b` bezeichnet VDV-Choice-Notation und keinen negativen Kardinalitätswert. Die fehlerhaft verkürzte Operationsreferenz derselben Tabelle gehört zum bereits abgeschlossenen **DRDOOR21-001**, der `OperationErrorMessage`-/`ErrorMessage`-Unterschied zum separaten **DRS-002**. Keine Zusammenlegung und keine doppelte Zählung. Für diesen reinen Prosa-Fehler ist ein neuer XML-Instanz-PASS/FAIL-Test nicht einschlägig und wurde nicht ausgeführt.
+
+## Unabhängige Release- und Sprachgrenze
+
+Die offizielle VDV-Publikationsliste https://www.vdv.de/ip-kom-oev.aspx wurde am 17.11.2026 erneut eingesehen und führt **nur DoorStateService 301-2-15 V2.1** als eigenständige Ausgabe. Die alten VDV-301-2 V1.0-DE/EN- und V2.0-Basisdienst-Dokumente sind keine Revisionen dieser §2.7.2/Tabelle-9-Publikation. Keine belegte vorherige betroffene eigenständige Ausgabe, keine spätere eigenständige Ausgabe und keine belegte korrigierte Nachfolgeedition. Der technische Dienstteil der bilingualen V2.1-PDF ist englisch; die Sprachtracks werden nicht als zusätzliche Releases gezählt.
+
+## Abschlussbedingungen
+
+Die bestehende semantische Klassifikation mit vollständigen DE/EN-Diagnosen bleibt fachlich unverändert; der neue präzise Originalnachweis ergänzt die kanonischen Source-Locators, PDF-Body- und Versionsgrenzen-Register. Unique-Finding-Zähler nach dem neuen einzelnen Source-Locator: **103/192**, Body **103/103**, Versionsgrenze **103/103**, **89 offen**. Keine XSD-Korrektur, kein SDK-Trigger, keine automatische Alias-/Feldreparatur. Zuerst GitHub `gate_pending` und vollumfängliche CI, danach **separater `terminal_clean`-Commit und beide GitHub-Gates auf dem exakten finalen HEAD**. Nächstes Finding: **DRNET20-001**, erst nach terminalem Abschluss.

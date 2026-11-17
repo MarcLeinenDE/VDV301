@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 102,
-    "coverage_complete_count": 102,
+    "locator_entry_count": 103,
+    "coverage_complete_count": 103,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 90
+    "remaining_finding_count": 89
   },
   "entries": [
     {
@@ -21038,6 +21038,175 @@
         "Historical source EV-143 run33976777554 artifact9972544125 p11/p12 original matched manifest.sha256; previously missed Table11 cell added to same finding.",
         "Exact upstream official VDVde/VDV301@VDV-301-2.1 selected XSD service Git blob abff0f3960e2ec7a9caaa9ddeb6efff8f4183805, Common V1.0 blob 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c and Enumerations V1.0 blob a9bea5bc73003ed91ded8519db06c32c4067831d: three independently fetched upstream tag matches.",
         "SDK advisory informational reviewed_not_implemented, no new positive/negative XML instance tests for prose-only name mismatch; no XSD or runtime mutation."
+      ]
+    },
+    {
+      "finding_id": "DRDOOR21-002",
+      "service": "DoorStateService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DoorStateService_V2.1.xsd",
+          "note": "Only verified standalone DoorStateService 301-2-15 V2.1 official publication, exact official XSD with intentionally older Common & Enumerations V1.0 includes."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "first_last_only_verified_standalone_301_2_15_doorstate_publication",
+          "pdf_locators": [
+            {
+              "source_id": "DOOR_V2.1",
+              "document_title": "VDV-Schrift 301-2-15 DoorStateService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-15-sd-v2-1-doorstateservice.pdfx",
+              "sha256": "7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8",
+              "printed_pages": [
+                1
+              ],
+              "section": "Cover: official VDV 301-2-15 DoorStateService V2.1 07/2018",
+              "table": null,
+              "point_summary": "Original visible printed p1 PNG SHA256 bc059e744a0d8fbab47e94b2c20595bc66f1099f5bfeed4e308542563267f8a3, hash checked 2026-11-17 against byte-pinned render run43888781452 artifact14234584210. Publication identity."
+            },
+            {
+              "source_id": "DOOR_V2.1",
+              "document_title": "VDV-Schrift 301-2-15 DoorStateService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-15-sd-v2-1-doorstateservice.pdfx",
+              "sha256": "7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8",
+              "printed_pages": [
+                9
+              ],
+              "section": "§2 Operations of the DoorStateService",
+              "table": "Table 1",
+              "point_summary": "Original visible printed p9 PNG SHA256 0aa5447c81474719a89816d6128f0e371e708f58c9f6, hash checked 2026-11-17 against byte-pinned render run43888781452 artifact14234584210. Distinct RetrieveSpecificDoorOpenState and RetrieveSpecificDoorOperationState operations."
+            },
+            {
+              "source_id": "DOOR_V2.1",
+              "document_title": "VDV-Schrift 301-2-15 DoorStateService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-15-sd-v2-1-doorstateservice.pdfx",
+              "sha256": "7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8",
+              "printed_pages": [
+                11
+              ],
+              "section": "§2.7 Data Structures of Operation RetrieveSpecificDoorOpenState",
+              "table": null,
+              "point_summary": "Original visible printed p11 PNG SHA256 6655c4c27c55acf2dfd35f8a3f2ceb8aafb1f764a4e1e96a30f17a39f669fdb6, hash checked 2026-11-17 against byte-pinned render run43888781452 artifact14234584210. Explanatory prose explicitly requests current door open state; separate Table7 on same page describes operation state."
+            },
+            {
+              "source_id": "DOOR_V2.1",
+              "document_title": "VDV-Schrift 301-2-15 DoorStateService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-15-sd-v2-1-doorstateservice.pdfx",
+              "sha256": "7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8",
+              "printed_pages": [
+                12
+              ],
+              "section": "§2.7.2 Response",
+              "table": "Table 9",
+              "point_summary": "Original visible printed p12 PNG SHA256 4e9ab26220257e6d191fc3aa104b67b1cd2c5c3b062622955118ed2c1416f14b, hash checked 2026-11-17 against byte-pinned render run43888781452 artifact14234584210. a DoorOpenState success member of type SpecificDoorOpenState wrongly described as 'Current door operation state of door with identifier DoorID, cf. Table 4'; confirmed copy/paste cell."
+            },
+            {
+              "source_id": "DOOR_V2.1",
+              "document_title": "VDV-Schrift 301-2-15 DoorStateService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-15-sd-v2-1-doorstateservice.pdfx",
+              "sha256": "7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8",
+              "printed_pages": [
+                12
+              ],
+              "section": "§2.8.2 Response",
+              "table": "Table 11",
+              "point_summary": "Original visible printed p12 PNG SHA256 4e9ab26220257e6d191fc3aa104b67b1cd2c5c3b062622955118ed2c1416f14b, hash checked 2026-11-17 against byte-pinned render run43888781452 artifact14234584210. a DoorOperationState success member correctly described as current door operation state, referencing Table7, proving distinct intended semantics."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DoorStateService_V2.1.xsd",
+              "git_blob": "abff0f3960e2ec7a9caaa9ddeb6efff8f4183805",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1 release-tag blob, identical to dev/schema-integration; historical Common/Enums V1.0 includes preserved",
+              "component_kind": "complexType",
+              "component": "DoorStateService.RetrieveSpecificDoorOpenStateResponseStructure",
+              "member": "DoorOpenState -> DoorStateService.SpecificDoorOpenStateStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DoorStateService.RetrieveSpecificDoorOpenStateResponseStructure']",
+              "line_hint": "60–69",
+              "point_summary": "Official open-state success choice member."
+            },
+            {
+              "file": "IBIS-IP_DoorStateService_V2.1.xsd",
+              "git_blob": "abff0f3960e2ec7a9caaa9ddeb6efff8f4183805",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1 release-tag blob, identical to dev/schema-integration; historical Common/Enums V1.0 includes preserved",
+              "component_kind": "complexType",
+              "component": "DoorStateService.SpecificDoorOpenStateStructure",
+              "member": "OpenState -> DoorOpenStateStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DoorStateService.SpecificDoorOpenStateStructure']",
+              "line_hint": "105–114",
+              "point_summary": "Open-state payload has OpenState, not OperationState."
+            },
+            {
+              "file": "IBIS-IP_DoorStateService_V2.1.xsd",
+              "git_blob": "abff0f3960e2ec7a9caaa9ddeb6efff8f4183805",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1 release-tag blob, identical to dev/schema-integration; historical Common/Enums V1.0 includes preserved",
+              "component_kind": "complexType",
+              "component": "DoorStateService.RetrieveSpecificDoorOperationStateResponseStructure",
+              "member": "DoorOperationState -> DoorStateService.SpecificDoorOperationStateStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DoorStateService.RetrieveSpecificDoorOperationStateResponseStructure']",
+              "line_hint": "78–87",
+              "point_summary": "Independent operation-state success choice member."
+            },
+            {
+              "file": "IBIS-IP_DoorStateService_V2.1.xsd",
+              "git_blob": "abff0f3960e2ec7a9caaa9ddeb6efff8f4183805",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1 release-tag blob, identical to dev/schema-integration; historical Common/Enums V1.0 includes preserved",
+              "component_kind": "complexType",
+              "component": "DoorStateService.SpecificDoorOperationStateStructure",
+              "member": "OperationState -> DoorOperationStateStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DoorStateService.SpecificDoorOperationStateStructure']",
+              "line_hint": "114–123",
+              "point_summary": "Operation-state payload has OperationState, not OpenState."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1 release-tag blob, identical to dev/schema-integration; historical Common/Enums V1.0 includes preserved",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "Direct historical include of DoorStateService V2.1",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Official selected Common V1.0 dependency."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1 release-tag blob, identical to dev/schema-integration; historical Common/Enums V1.0 includes preserved",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "Direct historical include of DoorStateService V2.1",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Official selected Enumerations V1.0 dependency."
+            }
+          ],
+          "coverage_note": "Only official standalone V2.1 DoorStateService publication verified; no standalone predecessor or corrected successor. Visible p12 Table9 copy/paste semantics contradicted by p11 §2.7 and p12 Table11 and exact XSD. P10 Table4 referenced but not separately inspected as image. Documentation only, no executable or SDK impact."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDOOR21_002_2026-11-17.md",
+        "Original DOOR_V2.1 PDF pin SHA256 7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8 851513B 16 pages and GitHub SHA-checked deterministic render run43888781452 artifact14234584210 p1/p9/p11/p12 (p12 PNG SHA256 4e9ab26220257e6d191fc3aa104b67b1cd2c5c3b062622955118ed2c1416f14b), verified 2026-11-17.",
+        "Official VDVde/VDV301@VDV-301-2.1 XSD blobs DoorState abff0f3960e2ec7a9caaa9ddeb6efff8f4183805, Common V1.0 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c, Enumerations V1.0 a9bea5bc73003ed91ded8519db06c32c4067831d match current branch.",
+        "Official VDV publication index https://www.vdv.de/ip-kom-oev.aspx accessed 2026-11-17 lists only standalone DoorStateService V2.1; older basic-service publications are distinct.",
+        "Independent publication boundary and active disproof in source report; old DRDOOR21-001 and DRS-002 remain separate IDs; no new executable XML instance test for prose-only error."
       ]
     }
   ]

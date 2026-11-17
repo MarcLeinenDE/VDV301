@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 102,
-    "verified": 102,
+    "tracked_findings": 103,
+    "verified": 103,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -6094,6 +6094,46 @@
           "version": "Post-V2.1",
           "role": "later_official_release_or_correction_not_verified",
           "language_status": "VDV current official IP-KOM-ÖV public list (2026-11-16) has 301-2-15 DoorStateService V2.1, but no other newer DoorStateService publication proven, so do not assume a corrected successor or broader affected scope.",
+          "source_ids": [
+            "DOOR_V2.1"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRDOOR21-002",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDOOR21_002_2026-11-17.md",
+        "Original DOOR_V2.1 PDF pin SHA256 7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8 851513B 16 pages and GitHub SHA-checked deterministic render run43888781452 artifact14234584210 p1/p9/p11/p12 (p12 PNG SHA256 4e9ab26220257e6d191fc3aa104b67b1cd2c5c3b062622955118ed2c1416f14b), verified 2026-11-17.",
+        "Official VDVde/VDV301@VDV-301-2.1 XSD blobs DoorState abff0f3960e2ec7a9caaa9ddeb6efff8f4183805, Common V1.0 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c, Enumerations V1.0 a9bea5bc73003ed91ded8519db06c32c4067831d match current branch.",
+        "Official VDV publication index https://www.vdv.de/ip-kom-oev.aspx accessed 2026-11-17 lists only standalone DoorStateService V2.1; older basic-service publications are distinct."
+      ],
+      "note": "Independent exact publication and version-scope recheck for DRDOOR21-002 PDF prose semantic defect (not inherited solely from DRDOOR21-001). 301-2-15 V2.1 only official standalone edition evidenced; exact DoorState V2.1 includes Common/Enums V1.0. No predecessor/successor standalone or correction proven.",
+      "scope_conclusion": "Only confirmed official standalone VDV-Schrift 301-2-15 DoorStateService V2.1 (07/2018), printed p12 §2.7.2 Table9 door open state success row described with door operation state semantics. Official XSD and p11/p12 adjacent section refute shared meaning. No earlier affected standalone document or later corrected standalone edition independently verified.",
+      "boundary_checks": [
+        {
+          "version": "V1.0 DE/EN and BASE V2.0",
+          "role": "distinct_earlier_publications_not_standalone_doorstateservice",
+          "language_status": "Old VDV301-2 basic service German/English and V2.0 base-service editions are different publications and do not establish prior 301-2-15 §2.7.2/Table9 wording.",
+          "source_ids": [
+            "VDV301-2_V1.0_DE",
+            "VDV301-2_V1.0_EN",
+            "VDV301-2_BASE_V2.0"
+          ]
+        },
+        {
+          "version": "V2.1 DoorStateService",
+          "role": "first_last_only_verified_affected_standalone_edition",
+          "language_status": "Official standalone English technical service body: p12 Table9 contradicts p11 §2.7 and exact XSD, p12 Table11 correctly describes operation state. Exact V2.1 service with Common/Enumerations V1.0.",
+          "source_ids": [
+            "DOOR_V2.1"
+          ]
+        },
+        {
+          "version": "Post-V2.1",
+          "role": "later_publication_or_correction_not_verified",
+          "language_status": "Accessible current official index 2026-11-17 lists only DoorStateService V2.1; no newer standalone or corrected successor established.",
           "source_ids": [
             "DOOR_V2.1"
           ]
