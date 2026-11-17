@@ -1976,8 +1976,8 @@
     "source_locator_remaining_count": 89,
     "source_locator_latest_review_block": "DRDOOR21_002",
     "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDOOR21_002_2026-11-17.md",
-    "source_locator_latest_gate_status": "gate_pending_DRDOOR21_002",
-    "source_locator_latest_gate_note": "DRDOOR21-002 103/192: first full run44055450818 failed only Source-Locator strict scope_claims equality; all other validators passed, handoff run44055450800 successful. Repair commits exact scope_claims from frozen semantic DRDOOR21-002 version_scope without changing factual scope, XSD, report, or counts. Full schema gate repeat required for new substantive HEAD; no terminal closure yet.",
+    "source_locator_latest_gate_status": "success_DRDOOR21_002",
+    "source_locator_latest_gate_note": "DRDOOR21-002 terminal audit 103/192, body 103/103, boundary 103/103, remaining 89. Byte-pinned original DoorState V2.1 p12 §2.7.2 Table9 DoorOpenState success description incorrectly says 'current door operation state', p11 §2.7 and p12 §2.8.2 Table11 disproof. Original PNG SHA checked run43888781452 artifact14234584210; official XSD blob abff0f... with Common/Enums V1.0 exact historical deps. Distinct prior DRDOOR21-001 and DRS-002 unchanged, no runtime/XSD changes. Substantive repaired HEAD 4a365aff09064e757f8825278a1a42a8ac293c0f full schema gate44055680900 SUCCESS and handoff gate44055680907 SUCCESS. This separate terminal_clean HEAD must independently receive both final green checks.",
     "unpublished_future_profile_boundary_rule": "Rules from unpublished or future profiles must not be inferred into supported profiles.",
     "source_locator_completeness_policy": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_COMPLETENESS_POLICY.md",
     "source_locator_complete_requires_exact_pdf_page_section_table_when_applicable": true,
@@ -1995,8 +1995,8 @@
     "source_locator_body_rule": "Canonical PDF target locator uses the actual visible body heading/table/figure on the byte-pinned page. TOC/history cross-references/inferred sequence are not final locator authority.",
     "source_locator_body_correction_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVALIDATION_CORRECTION_VISIBLE_BODY_SCOPE_2026-09-30.md",
     "workflow_contract": "00_START_HERE/AUDIT_WORKFLOW_CONTRACT.md",
-    "source_locator_latest_gate_run_id": "43890328809",
-    "source_locator_body_latest_gate_run_id": "43890328809",
+    "source_locator_latest_gate_run_id": "44055680900",
+    "source_locator_body_latest_gate_run_id": "44055680900",
     "source_locator_body_latest_review_block": "DRDOOR21_002",
     "source_locator_body_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDOOR21_002_2026-11-17.md",
     "version_scope_boundary_policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2007,7 +2007,7 @@
     "version_scope_boundary_pending_count": 0,
     "version_scope_boundary_next_finding": null,
     "version_scope_boundary_latest_finding": "DRDOOR21-002",
-    "version_scope_boundary_latest_gate_run_id": "43890328809",
+    "version_scope_boundary_latest_gate_run_id": "44055680900",
     "version_scope_boundary_latest_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDOOR21_002_2026-11-17.md",
     "latest_scope_correction": "DR3012-004 independently expanded from V1 DE to V1 DE+EN and bilingual Base V2.0 unresolved Word reference, corrected Base V2.1."
   },
@@ -2100,8 +2100,8 @@
     "source_locator_remaining_count": 89,
     "source_locator_latest_review_block": "DRDOOR21_002",
     "source_locator_latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDOOR21_002_2026-11-17.md",
-    "source_locator_latest_gate_run_id": "43890328809",
-    "source_locator_latest_gate_status": "gate_pending_DRDOOR21_002",
+    "source_locator_latest_gate_run_id": "44055680900",
+    "source_locator_latest_gate_status": "success_DRDOOR21_002",
     "audit_diagnostic_reporting_model": "docs/pdf_xsd_semantic_audit/SDK_AUDIT_DIAGNOSTIC_REPORTING_MODEL.md",
     "audit_report_languages": [
       "de",
@@ -2118,17 +2118,17 @@
     "source_locator_body_verification_state": "complete",
     "source_locator_body_verified_current_standard_count": 103,
     "source_locator_body_pending_current_standard_count": 0,
-    "source_locator_body_latest_gate_run_id": "43890328809",
+    "source_locator_body_latest_gate_run_id": "44055680900",
     "version_scope_boundary_registry": "audit_registry/finding_version_scope_boundary_verification_v0.1.json",
     "version_scope_boundary_state": "complete",
     "version_scope_boundary_tracked_count": 103,
     "version_scope_boundary_verified_count": 103,
     "version_scope_boundary_pending_count": 0,
-    "version_scope_boundary_latest_gate_run_id": "43890328809"
+    "version_scope_boundary_latest_gate_run_id": "44055680900"
   },
   "next_actions": [
-    "DRDOOR21-002 exact original PDF semantic copy/paste source-locator, visible-body and version boundary work written at 103/192; run/check full schema-audit-validation plus handoff-integrity on substantive HEAD, then separate terminal_clean state/SDK-manifest-only commit and BOTH checks on final HEAD.",
-    "After green final HEAD publish only stable finding facts by reviewed ai-mem PR. Next unique DRNET20-001 NOT STARTED."
+    "DRDOOR21-002 terminal_clean at 103/192 (103/103 byte-pinned original visible PDF body and independent version boundaries, 89 remaining); substantive full schema CI run44055680900 SUCCESS and handoff run44055680907 SUCCESS on 4a365aff09064e757f8825278a1a42a8ac293c0f. Independently verify BOTH GitHub Actions on exact final terminal-clean HEAD before reporting completion.",
+    "After final HEAD gates green, reviewed ai-mem PR for verified DoorOpenState/OperationState copy-paste discrepancy, exact official selected XSD historical Common/Enums V1.0 and 103/192 checkpoint. Next frozen unique finding DRNET20-001 not started."
   ],
   "source_locator_progress": {
     "locator_entry_count": 103,
@@ -2136,8 +2136,8 @@
     "coverage_partial_count": 0,
     "remaining_finding_count": 89,
     "latest_review_block": "DRDOOR21_002",
-    "latest_gate_status": "gate_pending_DRDOOR21_002",
-    "latest_gate_run_id": "43890328809",
+    "latest_gate_status": "success_DRDOOR21_002",
+    "latest_gate_run_id": "44055680900",
     "body_verification_state": "complete",
     "body_verified_current_standard_count": 103,
     "body_pending_current_standard_count": 0,
@@ -2206,23 +2206,12 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "gate_pending",
-    "pending_gate": true,
-    "latest_completed_full_gate_run_id": "43890328809",
+    "work_cycle_state": "terminal_clean",
+    "pending_gate": false,
+    "latest_completed_full_gate_run_id": "44055680900",
     "latest_completed_full_gate_status": "success",
-    "latest_handoff_check_before_finalization_run_id": "43890328740",
-    "resume_instruction": "DRDOOR21-002 103/192, gate_pending on dev/schema-integration. Prior run44055450818 failed only locator scope_claims semantic version_scope exact match; repaired with verbatim semantic version_scope on this HEAD. Check fresh full schema CI and handoff. After successes separately terminal_clean + both final HEAD gates, ai-mem reviewed PR. Next DRNET20-001.",
-    "pending_block": "DRDOOR21-002 source locator 103/192 original DoorOpenState Table9 prose, full schema gate",
-    "active_finding": "DRDOOR21-002",
-    "active_step": "Full CI run44055450818 exposed sole source-locator scope_claims exact-string mismatch vs frozen semantic DRDOOR21-002. Correcting this field from canonical semantic.version_scope in same recoverable state commit, 103/192 unchanged; repeat full CI required.",
-    "next_step": "Require new full schema-audit-validation and handoff-integrity SUCCESS on this repair HEAD before terminal_clean; then separate status/manifest-only finalization and both final-HEAD workflows. Next DRNET20-001 not started.",
-    "evidence_refs": [
-      "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDOOR21_002_2026-11-17.md",
-      "Original DOOR_V2.1 PDF pin SHA256 7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8 851513B 16 pages and GitHub SHA-checked deterministic render run43888781452 artifact14234584210 p1/p9/p11/p12 (p12 PNG SHA256 4e9ab26220257e6d191fc3aa104b67b1cd2c5c3b062622955118ed2c1416f14b), verified 2026-11-17.",
-      "Official VDVde/VDV301@VDV-301-2.1 XSD blobs DoorState abff0f3960e2ec7a9caaa9ddeb6efff8f4183805, Common V1.0 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c, Enumerations V1.0 a9bea5bc73003ed91ded8519db06c32c4067831d match current branch.",
-      "Official VDV publication index https://www.vdv.de/ip-kom-oev.aspx accessed 2026-11-17 lists only standalone DoorStateService V2.1; older basic-service publications are distinct."
-    ],
-    "recovery_instruction": "DRDOOR21-002 103/192, gate_pending on dev/schema-integration. Prior run44055450818 failed only locator scope_claims semantic version_scope exact match; repaired with verbatim semantic version_scope on this HEAD. Check fresh full schema CI and handoff. After successes separately terminal_clean + both final HEAD gates, ai-mem reviewed PR. Next DRNET20-001."
+    "latest_handoff_check_before_finalization_run_id": "44055680907",
+    "resume_instruction": "DRDOOR21-002 terminally clean on dev/schema-integration: 103/192 unique source locators, 103/103 original byte-pinned visible PDF body and independent version boundaries, 89 remaining. Exact official 301-2-15 DoorStateService V2.1 (07/2018) p12 §2.7.2 Table9 DoorOpenState success-row description wrongly uses 'current door operation state', contrary to p11 §2.7 and p12 §2.8.2 Table11 and official tag VDV-301-2.1 DoorState xsd abff0f3960e2ec7a9caaa9ddeb6efff8f4183805 with intentional Common V1.0 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c and Enumerations V1.0 a9bea5bc73003ed91ded8519db06c32c4067831d dependencies. Original screenshot cache-miss recovered using pinned run43888781452 artifact14234584210 p1/9/11/12 SHA-verified PNGs. Exact substantive repaired HEAD 4a365aff09064e757f8825278a1a42a8ac293c0f schema run44055680900 SUCCESS and handoff run44055680907 SUCCESS. This final terminal HEAD requires BOTH own GitHub Actions green. Evidence docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDOOR21_002_2026-11-17.md. Finding documentation-only, no XML or runtime matcher modification. Next unique DRNET20-001 NOT STARTED. After final CI green, reviewed ai-mem PR, safe branch cleanup."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
@@ -2238,7 +2227,7 @@
     "locator_expansion_frozen": false,
     "future_locator_completion_requires_verified_boundary_same_block": true,
     "latest_verified_finding": "DRDOOR21-002",
-    "latest_gate_run_id": "43890328809",
+    "latest_gate_run_id": "44055680900",
     "latest_review_report": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRDOOR21_002_2026-11-17.md"
   },
   "boundary_revalidation_package_mode": {
