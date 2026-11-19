@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1",
-  "date": "2026-11-17",
+  "date": "2026-11-19",
   "state": "complete",
   "purpose": "Track standardized visible-body revalidation of all source-locator-complete findings. This is separate from structural locator completeness.",
   "rule_document": "00_START_HERE/AUDIT_WORKFLOW_CONTRACT.md",
@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 103,
-    "verified_current_standard": 103,
+    "tracked_findings": 104,
+    "verified_current_standard": 104,
     "pending_current_standard": 0
   },
   "entries": [
@@ -1048,6 +1048,18 @@
         "Official VDV publication index https://www.vdv.de/ip-kom-oev.aspx accessed 2026-11-17 lists only standalone DoorStateService V2.1; older basic-service publications are distinct."
       ],
       "note": "Original p12 §2.7.2 Table9 DoorOpenState success description wrongly operation state, visible p11 §2.7 and p12 §2.8.2 Table11 distinguish the semantics. Exact official XSD confirms OpenState vs OperationState. p10 Table4 not visually reviewed in this cycle. Renderer source SHA manifest verified, PNG hashes independently recalculated."
+    },
+    {
+      "finding_id": "DRNET20-001",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRNET20_001_2026-11-19.md",
+        "Official VDV 301-3 original PDF source edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99 size 558005B 37 pages, source pin run33270251357; fresh downloaded and independently SHA-verified pinned zip artifacts EV-144 run34025645375 artifact9986959255 digest 7d135ae12aab3a9ff8f307390545c177afea9f4dde25eafb63e44ea2310b5af4 and original run33270251357 artifact9719880284 digest 2cc403407a354af07c2dfc1cc78666e0f16fc753af6eebfaf090b0300214d930.",
+        "Original visual rendered printed p10 SHA 639e098d0dcebb255dbdecb6cc09fe9f7e0a93620e2b567933bb0296bea206c5 and p17 SHA 966851329fc222cb173ce443b44efecc61cad176fb81807c4d429685b36a9a7e verified 2026-11-19 against EV-144 manifest; both 180dpi pages visually inspected; duplicate 120dpi source pinned p10/p17 PNG also independently verified.",
+        "VDV publication index https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-19 lists 301-3 only 02/2020; German and English within same bilingual publication, no verified dedicated predecessor/corrected successor.",
+        "IEEE context only: https://www.ieee802.org/3/publication/index.html Clause40 1000BASE-T, https://www.ieee802.org/3/minutes/jul00/A7_0700_StdMatrix.pdf separates 1000BASE-X PCS/PMA family and 1000BASE-T."
+      ],
+      "note": "Official bilingual original 301-3 02/2020 printed p10 §2.2.3 Leitungen auf Kupferbasis and p17 §2.2.3 Copper-based cables both visually read in source-pinned, independently SHA-checked 180dpi PNG. Both have unnumbered adjacent tables specifying 1 GBase-T / CAT5e versus 1000Base-X prose. PDF bytes previously pinned, not freshly rehashed. No XSD lane; no invented table number or inferred TOC locator."
     }
   ]
 }

@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 103,
-    "verified": 103,
+    "tracked_findings": 104,
+    "verified": 104,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -6136,6 +6136,45 @@
           "language_status": "Accessible current official index 2026-11-17 lists only DoorStateService V2.1; no newer standalone or corrected successor established.",
           "source_ids": [
             "DOOR_V2.1"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRNET20-001",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRNET20_001_2026-11-19.md",
+        "Official VDV 301-3 original PDF source edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99 size 558005B 37 pages, source pin run33270251357; fresh downloaded and independently SHA-verified pinned zip artifacts EV-144 run34025645375 artifact9986959255 digest 7d135ae12aab3a9ff8f307390545c177afea9f4dde25eafb63e44ea2310b5af4 and original run33270251357 artifact9719880284 digest 2cc403407a354af07c2dfc1cc78666e0f16fc753af6eebfaf090b0300214d930.",
+        "Original visual rendered printed p10 SHA 639e098d0dcebb255dbdecb6cc09fe9f7e0a93620e2b567933bb0296bea206c5 and p17 SHA 966851329fc222cb173ce443b44efecc61cad176fb81807c4d429685b36a9a7e verified 2026-11-19 against EV-144 manifest; both 180dpi pages visually inspected; duplicate 120dpi source pinned p10/p17 PNG also independently verified.",
+        "VDV publication index https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-19 lists 301-3 only 02/2020; German and English within same bilingual publication, no verified dedicated predecessor/corrected successor.",
+        "IEEE context only: https://www.ieee802.org/3/publication/index.html Clause40 1000BASE-T, https://www.ieee802.org/3/minutes/jul00/A7_0700_StdMatrix.pdf separates 1000BASE-X PCS/PMA family and 1000BASE-T."
+      ],
+      "note": "Independent 301-3 network infrastructure release and DE/EN boundary verified from original p10/p17 and official publication index, not borrowed from prior NET readings. VDV 301-3 02/2020 is only dedicated edition positively evidenced; both bilingual halves affected, no distinct German/English releases. No selected XSD exists by design.",
+      "scope_conclusion": "First/last/only verified affected official bilingual VDV 301-3 Netzwerkinfrastruktur / Network Infrastructure 02/2020 publication. German p10 and English p17 both say 1000Base-X in copper-cabling prose adjacent to 1 GBase-T/CAT5e table. External IEEE confirms PHY nomenclature difference without overriding exact VDV text. No independent predecessor or corrected successor in official dedicated 301-3 publication inventory; cannot claim a later fix.",
+      "boundary_checks": [
+        {
+          "version": "Before 02/2020",
+          "role": "dedicated_predecessor_not_independently_verified",
+          "language_status": "No earlier standalone official VDV 301-3 Network Infrastructure edition independently sourced. Other 301-1/301-2 editions are separate publication families, not DE/EN corrections for 301-3.",
+          "source_ids": [
+            "VDV301-3_02-2020"
+          ]
+        },
+        {
+          "version": "VDV 301-3 02/2020",
+          "role": "first_last_only_verified_affected_dedicated_publication",
+          "language_status": "One official bilingual publication, DE printed p10 and EN printed p17 both affected. No XSD authority intended. Body §2.2.3 in each language, no numbered table caption; p10/p17 PNG SHA-verified.",
+          "source_ids": [
+            "VDV301-3_02-2020"
+          ]
+        },
+        {
+          "version": "After 02/2020",
+          "role": "corrected_successor_not_independently_verified",
+          "language_status": "Official VDV current IP-KOM-ÖV list checked 2026-11-19 shows only dedicated 301-3 02/2020; no later released/corrected dedicated publication verified.",
+          "source_ids": [
+            "VDV301-3_02-2020"
           ]
         }
       ]

@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 103,
-    "coverage_complete_count": 103,
+    "locator_entry_count": 104,
+    "coverage_complete_count": 104,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 89
+    "remaining_finding_count": 88
   },
   "entries": [
     {
@@ -21207,6 +21207,66 @@
         "Official VDVde/VDV301@VDV-301-2.1 XSD blobs DoorState abff0f3960e2ec7a9caaa9ddeb6efff8f4183805, Common V1.0 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c, Enumerations V1.0 a9bea5bc73003ed91ded8519db06c32c4067831d match current branch.",
         "Official VDV publication index https://www.vdv.de/ip-kom-oev.aspx accessed 2026-11-17 lists only standalone DoorStateService V2.1; older basic-service publications are distinct.",
         "Independent publication boundary and active disproof in source report; old DRDOOR21-001 and DRS-002 remain separate IDs; no new executable XML instance test for prose-only error."
+      ]
+    },
+    {
+      "finding_id": "DRNET20-001",
+      "service": "NetworkInfrastructure",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "VDV 301-3 02/2020",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official VDV 301-3 Network Infrastructure publication. This profile intentionally has no XSD lane; absence of an XSD is not a schema-authority gap."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "VDV 301-3 02/2020",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "first_last_only_verified_dedicated_301_3_edition_both_languages",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-3_02-2020",
+              "document_title": "VDV-Schrift 301-3 Netzwerkinfrastruktur / Network Infrastructure (02/2020)",
+              "document_version": "02/2020",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-3-sdes-network-infrastructure.pdfx",
+              "sha256": "edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99",
+              "printed_pages": [
+                10
+              ],
+              "section": "§2.2.3 Leitungen auf Kupferbasis",
+              "table": null,
+              "point_summary": "Visible German 180dpi original p10 PNG SHA256 639e098d0dcebb255dbdecb6cc09fe9f7e0a93620e2b567933bb0296bea206c5 (run34025645375 artifact9986959255). Text says 1000Base-X for CCTV/IP mirror in copper cable context while immediately adjacent unnumbered 'Netzwerk / Kabel Kategorie' table says 1 GBase-T / CAT5e. No invented Table number."
+            },
+            {
+              "source_id": "VDV301-3_02-2020",
+              "document_title": "VDV-Schrift 301-3 Netzwerkinfrastruktur / Network Infrastructure (02/2020)",
+              "document_version": "02/2020",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-3-sdes-network-infrastructure.pdfx",
+              "sha256": "edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99",
+              "printed_pages": [
+                17
+              ],
+              "section": "§2.2.3 Copper-based cables",
+              "table": null,
+              "point_summary": "Visible English 180dpi original p17 PNG SHA256 966851329fc222cb173ce443b44efecc61cad176fb81807c4d429685b36a9a7e (run34025645375 artifact9986959255). Prose says 1000Base-X while immediately adjacent unnumbered 'Network / Cable Category' table says 1 GBase-T / CAT5e. Same contradiction in independently verified English track."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Network physical/protocol document deliberately has no XSD profile. Internal DE+EN prose vs CAT5e table conflict confirmed visually; IEEE standards only interpretation context, and 1000BASE-X includes CX copper (not a simplistic optical-only claim). Only 301-3 02/2020 dedicated publication evidenced; no predecessor/successor independently verified. No automatic normalization or executable XML conformance effect."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRNET20_001_2026-11-19.md",
+        "Official VDV 301-3 original PDF source edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99 size 558005B 37 pages, source pin run33270251357; fresh downloaded and independently SHA-verified pinned zip artifacts EV-144 run34025645375 artifact9986959255 digest 7d135ae12aab3a9ff8f307390545c177afea9f4dde25eafb63e44ea2310b5af4 and original run33270251357 artifact9719880284 digest 2cc403407a354af07c2dfc1cc78666e0f16fc753af6eebfaf090b0300214d930.",
+        "Original visual rendered printed p10 SHA 639e098d0dcebb255dbdecb6cc09fe9f7e0a93620e2b567933bb0296bea206c5 and p17 SHA 966851329fc222cb173ce443b44efecc61cad176fb81807c4d429685b36a9a7e verified 2026-11-19 against EV-144 manifest; both 180dpi pages visually inspected; duplicate 120dpi source pinned p10/p17 PNG also independently verified.",
+        "VDV publication index https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-19 lists 301-3 only 02/2020; German and English within same bilingual publication, no verified dedicated predecessor/corrected successor.",
+        "IEEE context only: https://www.ieee802.org/3/publication/index.html Clause40 1000BASE-T, https://www.ieee802.org/3/minutes/jul00/A7_0700_StdMatrix.pdf separates 1000BASE-X PCS/PMA family and 1000BASE-T."
       ]
     }
   ]
