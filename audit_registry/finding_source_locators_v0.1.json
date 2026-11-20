@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 104,
-    "coverage_complete_count": 104,
+    "locator_entry_count": 105,
+    "coverage_complete_count": 105,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 88
+    "remaining_finding_count": 87
   },
   "entries": [
     {
@@ -21267,6 +21267,66 @@
         "Original visual rendered printed p10 SHA 639e098d0dcebb255dbdecb6cc09fe9f7e0a93620e2b567933bb0296bea206c5 and p17 SHA 966851329fc222cb173ce443b44efecc61cad176fb81807c4d429685b36a9a7e verified 2026-11-19 against EV-144 manifest; both 180dpi pages visually inspected; duplicate 120dpi source pinned p10/p17 PNG also independently verified.",
         "VDV publication index https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-19 lists 301-3 only 02/2020; German and English within same bilingual publication, no verified dedicated predecessor/corrected successor.",
         "IEEE context only: https://www.ieee802.org/3/publication/index.html Clause40 1000BASE-T, https://www.ieee802.org/3/minutes/jul00/A7_0700_StdMatrix.pdf separates 1000BASE-X PCS/PMA family and 1000BASE-T."
+      ]
+    },
+    {
+      "finding_id": "DRNET20-002",
+      "service": "NetworkInfrastructure",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "VDV 301-3 02/2020",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official VDV 301-3 Network Infrastructure publication. This profile intentionally has no XSD lane; absence of an XSD is not a schema-authority gap."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "VDV 301-3 02/2020",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "single_bilingual_edition_English_Figure1_caption_affected_German_Abbildung1_unaffected",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-3_02-2020",
+              "document_title": "VDV-Schrift 301-3 Netzwerkinfrastruktur / Network Infrastructure (02/2020)",
+              "document_version": "02-2020",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-3-sdes-network-infrastructure.pdfx",
+              "sha256": "edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99",
+              "printed_pages": [
+                7
+              ],
+              "section": "1 Anwendungsbereich",
+              "table": "Abbildung 1",
+              "point_summary": "Original visible German p7 caption 'Darstellung der Verknüpfung von getrennten sicherheitsrelevanten und nicht sicherheitsrelevanten Netzwerken', correct functional-safety context (Datendiode / funktionalen Sicherheitsanforderungen), same-edition unaffected control. Independent PNG sha180 be9c6c96cab9989dd79c6e5a58b62f170fcbe62450444c87707b186a68706e1e, sha120 8882304d205cf2f95724b66e27d6040fd2c7fc7f17bfb8594420d108e6a810c7."
+            },
+            {
+              "source_id": "VDV301-3_02-2020",
+              "document_title": "VDV-Schrift 301-3 Netzwerkinfrastruktur / Network Infrastructure (02/2020)",
+              "document_version": "02-2020",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-3-sdes-network-infrastructure.pdfx",
+              "sha256": "edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99",
+              "printed_pages": [
+                8
+              ],
+              "section": "1 Scope",
+              "table": "Figure 1",
+              "point_summary": "English visible original p8 Figure1 caption 'Representation of the linking of separate security-relevant and non-safety-relevant networks': security-relevant contradicts diagram's 'safety relevant' labels and surrounding English 'safety-relevant / functional safety requirements'. Isolated affected English caption. Independent sha180 1a50ca1b7db00fe9f7e2f8eb97e197c627ce99fd9dc429, sha120 8fd035d994af68f5d3894a0e750e2769898a86dabf3d6fe699f91ac49a6fa93e."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "One 301-3 02/2020 bilingual physical-network publication, EN p8 Figure1 caption affected; DE p7 Abbildung1 correct control. No official dedicated predecessor or corrected successor independently verified. Intentionally no XSD profile; no runtime diagnostic, XML rule or safety-compliance test."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRNET20_002_2026-11-20.md",
+        "Official byte-pinned source VDV301-3_02-2020 PDF SHA256 edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99, 558005 bytes, 37 pages. Source pin run33270251357; re-verified full original all-page archive artifact9719880284 SHA256 2cc403407a354af07c2dfc1cc78666e0f16fc753af6eebfaf090b0300214d930 and EV-144 artifact9986959255 SHA256 7d135ae12aab3a9ff8f307390545c177afea9f4dde25eafb63e44ea2310b5af4 on 2026-11-20.",
+        "Actual visually inspected original p7 German Abbildung1 PNG 180dpi SHA256 be9c6c96cab9989dd79c6e5a58b62f170fcbe62450444c87707b186a68706e1e, p8 English Figure1 PNG 180dpi SHA256 1a50ca1b7db00fe9f7e2f8eb97e197c627ce99fd9dc429; both EV-144 180dpi images independently hashed and matched. Same pages p7 8882304d205cf2f95724b66e27d6040fd2c7fc7f17bfb8594420d108e6a810c7 and p8 8fd035d994af68f5d3894a0e750e2769898a86dabf3d6fe699f91ac49a6fa93e 120dpi archive-manifest SHA values independently matched. Web PDF screenshot cache miss recovered via pinned render.",
+        "Official index https://www.vdv.de/ip-kom-oev.aspx revisited 2026-11-20: only dedicated 301-3 02/2020 edition positively found, one bilingual publication; German caption correctly says sicherheitsrelevant (functional safety), English caption wrongly says security-relevant but its own diagram/prose says safety. No dedicated predecessor or corrected successor independently verified.",
+        "Existing EV-144 run34025645375 / closure34025824480 and independent deep read FR-NET20-OBS-004; NET-001 VDV303-3 typo and DRNET20-001/DRNET20-003 distinct historical identities."
       ]
     }
   ]

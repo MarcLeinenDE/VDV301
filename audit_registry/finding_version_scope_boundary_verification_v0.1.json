@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 104,
-    "verified": 104,
+    "tracked_findings": 105,
+    "verified": 105,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -6173,6 +6173,53 @@
           "version": "After 02/2020",
           "role": "corrected_successor_not_independently_verified",
           "language_status": "Official VDV current IP-KOM-ÖV list checked 2026-11-19 shows only dedicated 301-3 02/2020; no later released/corrected dedicated publication verified.",
+          "source_ids": [
+            "VDV301-3_02-2020"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRNET20-002",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRNET20_002_2026-11-20.md",
+        "Official byte-pinned source VDV301-3_02-2020 PDF SHA256 edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99, 558005 bytes, 37 pages. Source pin run33270251357; re-verified full original all-page archive artifact9719880284 SHA256 2cc403407a354af07c2dfc1cc78666e0f16fc753af6eebfaf090b0300214d930 and EV-144 artifact9986959255 SHA256 7d135ae12aab3a9ff8f307390545c177afea9f4dde25eafb63e44ea2310b5af4 on 2026-11-20.",
+        "Actual visually inspected original p7 German Abbildung1 PNG 180dpi SHA256 be9c6c96cab9989dd79c6e5a58b62f170fcbe62450444c87707b186a68706e1e, p8 English Figure1 PNG 180dpi SHA256 1a50ca1b7db00fe9f7e2f8eb97e197c627ce99fd9dc429; both EV-144 180dpi images independently hashed and matched. Same pages p7 8882304d205cf2f95724b66e27d6040fd2c7fc7f17bfb8594420d108e6a810c7 and p8 8fd035d994af68f5d3894a0e750e2769898a86dabf3d6fe699f91ac49a6fa93e 120dpi archive-manifest SHA values independently matched. Web PDF screenshot cache miss recovered via pinned render.",
+        "Official index https://www.vdv.de/ip-kom-oev.aspx revisited 2026-11-20: only dedicated 301-3 02/2020 edition positively found, one bilingual publication; German caption correctly says sicherheitsrelevant (functional safety), English caption wrongly says security-relevant but its own diagram/prose says safety. No dedicated predecessor or corrected successor independently verified.",
+        "Existing EV-144 run34025645375 / closure34025824480 and independent deep read FR-NET20-OBS-004; NET-001 VDV303-3 typo and DRNET20-001/DRNET20-003 distinct historical identities."
+      ],
+      "note": "Original official bilingual 301-3 02/2020 German p7 Figure1 correct, English p8 Figure1 caption affected; same one physical document, two separately visually checked language surfaces. Current official public VDV listing revisited 2026-11-20 offers only this dedicated 301-3 edition. Earlier dedicated standalone or later corrected standalone editions unverified, not assumed. Intentionally no XSD lane.",
+      "scope_conclusion": "Only independently verified standalone official VDV 301-3 Netzwerkinfrastruktur / Network Infrastructure 02/2020 bilingual 37-page release. Its English printed p8 1 Scope / Figure1 caption alone says security-relevant where its own figure/body and German original printed p7 1 Anwendungsbereich / Abbildung1 establish functional safety. DE same-edition unaffected, EN same-edition affected. No standalone predecessor or corrected successor has been independently verified, do not fabricate a correction/version. No XSD applicability.",
+      "boundary_checks": [
+        {
+          "version": "Before 02/2020 standalone 301-3",
+          "role": "dedicated_predecessor_not_independently_verified",
+          "language_status": "No earlier dedicated standalone VDV301-3 edition established; VDV 301-1/2 are not the same publication/version family.",
+          "source_ids": [
+            "VDV301-3_02-2020"
+          ]
+        },
+        {
+          "version": "301-3 02/2020 German p7",
+          "role": "same_bilingual_edition_german_unaffected_control",
+          "language_status": "Actual printed p7 Abbildung1 uses sicherheitsrelevant / nicht sicherheitsrelevant, matching functional-safety narrative, unaffected German language surface.",
+          "source_ids": [
+            "VDV301-3_02-2020"
+          ]
+        },
+        {
+          "version": "301-3 02/2020 English p8",
+          "role": "same_bilingual_edition_english_affected",
+          "language_status": "Actual printed p8 Figure1 caption incorrectly says security-relevant; same diagram and prose use safety/functional safety. English caption is affected only; no separate EN publication.",
+          "source_ids": [
+            "VDV301-3_02-2020"
+          ]
+        },
+        {
+          "version": "After 02/2020 standalone 301-3",
+          "role": "corrected_successor_not_independently_verified",
+          "language_status": "As of 2026-11-20 the live official index lists only 02-2020 for dedicated VDV301-3, no independently evidenced corrected successor.",
           "source_ids": [
             "VDV301-3_02-2020"
           ]
