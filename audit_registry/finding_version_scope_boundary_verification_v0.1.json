@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 105,
-    "verified": 105,
+    "tracked_findings": 106,
+    "verified": 106,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -6220,6 +6220,54 @@
           "version": "After 02/2020 standalone 301-3",
           "role": "corrected_successor_not_independently_verified",
           "language_status": "As of 2026-11-20 the live official index lists only 02-2020 for dedicated VDV301-3, no independently evidenced corrected successor.",
+          "source_ids": [
+            "VDV301-3_02-2020"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRNET20-003",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRNET20_003_2026-11-20.md",
+        "Exact official VDV301-3 02/2020 PDF pin SHA-256 edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99, 558005 bytes, 37 pages in canonical source registry, pinned source run33270251357. Historical full 37-page render ZIP artifact9719880284 SHA-256 2cc403407a354af07c2dfc1cc78666e0f16fc753af6eebfaf090b0300214d930 (4,431,133 bytes), EV-144 run34025645375 artifact9986959255 SHA-256 7d135ae12aab3a9ff8f307390545c177afea9f4dde25eafb63e44ea2310b5af4 (1,793,437 bytes), both independently recalculated and verified on 2026-11-20.",
+        "Original visually inspected English p18 2.3.1 Connection methodes PNG SHA 180dpi 4f88120a8720f5f41de4d3a1d80b155f80784b0e0df46fc3fd871bf7ee284743/120dpi 9d676b43d4da26a9e7c5cee3ac7479b0eeedbe47685c0e478f29fe914311879a; p19 2.3.2 Table1 EN13149-8 Not describede row PNG fb27d1c65056d7fb7dbbbc038e2eeae8f48bb287430dd6825387e4a6fa7e27b1/30958f0e276fbc75c3f85372fe17c13e5fd03579d9d4f24cb3f3ef2de569d4d7; German p29 §5 PoE 'in de IEEE 802.3af/at/bt' PNG 2d29469bf5e5a5ba63e92f9cc8461200d703d46a9f11e710ca356cd09283ecd2/74c6ed20c4b7672121d65ba31b8cef62ab22d5b45285afb36d8eeebd071d8b7f. Both resolutions matched authoritative per-page manifests.",
+        "Historical separate NET-003 exclusion corroborated by original German p11 §2.2.4 'IEE 802.3', 120dpi PNG 0a5e0b6c5a89422a940567e8686f7183d3b430b831aa18b686ea8825a5b4107f, independently matched full original manifest; NET-003 is not a new DRNET20-003 locator/credit.",
+        "Live official VDV publication index https://www.vdv.de/ip-kom-oev.aspx rechecked 2026-11-20: only dedicated VDV301-3 02/2020 edition independently evidenced, bilingual English p18/p19 and German p29, no independent predecessor/corrected successor.",
+        "EV-144 context_verified successful run34025645375 and closure34025824480; archived deep read docs/pdf_xsd_semantic_audit/deep_read/VDV301-3_02-2020.md. No XSD lane and no new XML or runtime test."
+      ],
+      "note": "Independently checked current official VDV dedicated document publication index plus original English p18/p19 and German p29 (same one bilingual 02/2020 edition). No separate DE/EN edition or evidence of an earlier standalone dedicated 301-3 or corrected later 301-3. Historical NET-003 German p11 and other NET findings excluded; no XSD lane.",
+      "scope_conclusion": "First/last/only independently verified standalone VDV 301-3 Netzwerkinfrastruktur / Network Infrastructure 02/2020 bilingual 37-page edition; affected English p18 §2.3.1 heading Connection methodes, English p19 §2.3.2 Table1 EN13149-8 Not describede, German p29 §5 in de IEEE 802.3af/at/bt. Same edition correct p19 Not described and p29 English IEEE text controls; separately previously classified German p11 IEE 802.3 belongs NET-003 and is not re-counted. No earlier or later standalone dedicated release independently verified; no XSD authority applicable.",
+      "boundary_checks": [
+        {
+          "version": "Before dedicated VDV301-3 02/2020",
+          "role": "dedicated_predecessor_not_independently_verified",
+          "language_status": "No earlier standalone official VDV301-3 edition evidenced. VDV301-1 and 301-2 are separate publication families, not predecessor revisions.",
+          "source_ids": [
+            "VDV301-3_02-2020"
+          ]
+        },
+        {
+          "version": "VDV301-3 02/2020 English p18/p19",
+          "role": "same_bilingual_edition_english_editorial_residue_affected",
+          "language_status": "English p18 visible §2.3.1 Connection methodes, English p19 visible §2.3.2 Table1 EN13149-8 Not describede. Same edition, not second standalone English release.",
+          "source_ids": [
+            "VDV301-3_02-2020"
+          ]
+        },
+        {
+          "version": "VDV301-3 02/2020 German p29",
+          "role": "same_bilingual_edition_german_editorial_residue_affected_English_control_unaffected",
+          "language_status": "German original p29 §5 PoE in de IEEE 802.3af/at/bt, English parallel PoE paragraph on same page correctly reproduces IEEE identifier. German p11 'IEE 802.3' separately belongs NET-003 and is excluded.",
+          "source_ids": [
+            "VDV301-3_02-2020"
+          ]
+        },
+        {
+          "version": "After dedicated VDV301-3 02/2020",
+          "role": "corrected_successor_not_independently_verified",
+          "language_status": "Live official VDV release list 2026-11-20 lists only 301-3 02/2020, no independently verified later corrected dedicated 301-3 publication. Do not assume a fix.",
           "source_ids": [
             "VDV301-3_02-2020"
           ]

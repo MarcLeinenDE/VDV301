@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 105,
-    "verified_current_standard": 105,
+    "tracked_findings": 106,
+    "verified_current_standard": 106,
     "pending_current_standard": 0
   },
   "entries": [
@@ -1072,6 +1072,19 @@
         "Existing EV-144 run34025645375 / closure34025824480 and independent deep read FR-NET20-OBS-004; NET-001 VDV303-3 typo and DRNET20-001/DRNET20-003 distinct historical identities."
       ],
       "note": "Visible original p7 DE '1 Anwendungsbereich / Abbildung1' correct safety control and p8 EN '1 Scope / Figure1' caption wrongly says security-relevant while English page diagram and body say functional safety. Original EV144 180dpi pages visually read with SHA rechecked; original full-run 120dpi images and archive also rehashed; no TOC locators or new XSD lane."
+    },
+    {
+      "finding_id": "DRNET20-003",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRNET20_003_2026-11-20.md",
+        "Exact official VDV301-3 02/2020 PDF pin SHA-256 edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99, 558005 bytes, 37 pages in canonical source registry, pinned source run33270251357. Historical full 37-page render ZIP artifact9719880284 SHA-256 2cc403407a354af07c2dfc1cc78666e0f16fc753af6eebfaf090b0300214d930 (4,431,133 bytes), EV-144 run34025645375 artifact9986959255 SHA-256 7d135ae12aab3a9ff8f307390545c177afea9f4dde25eafb63e44ea2310b5af4 (1,793,437 bytes), both independently recalculated and verified on 2026-11-20.",
+        "Original visually inspected English p18 2.3.1 Connection methodes PNG SHA 180dpi 4f88120a8720f5f41de4d3a1d80b155f80784b0e0df46fc3fd871bf7ee284743/120dpi 9d676b43d4da26a9e7c5cee3ac7479b0eeedbe47685c0e478f29fe914311879a; p19 2.3.2 Table1 EN13149-8 Not describede row PNG fb27d1c65056d7fb7dbbbc038e2eeae8f48bb287430dd6825387e4a6fa7e27b1/30958f0e276fbc75c3f85372fe17c13e5fd03579d9d4f24cb3f3ef2de569d4d7; German p29 §5 PoE 'in de IEEE 802.3af/at/bt' PNG 2d29469bf5e5a5ba63e92f9cc8461200d703d46a9f11e710ca356cd09283ecd2/74c6ed20c4b7672121d65ba31b8cef62ab22d5b45285afb36d8eeebd071d8b7f. Both resolutions matched authoritative per-page manifests.",
+        "Historical separate NET-003 exclusion corroborated by original German p11 §2.2.4 'IEE 802.3', 120dpi PNG 0a5e0b6c5a89422a940567e8686f7183d3b430b831aa18b686ea8825a5b4107f, independently matched full original manifest; NET-003 is not a new DRNET20-003 locator/credit.",
+        "Live official VDV publication index https://www.vdv.de/ip-kom-oev.aspx rechecked 2026-11-20: only dedicated VDV301-3 02/2020 edition independently evidenced, bilingual English p18/p19 and German p29, no independent predecessor/corrected successor.",
+        "EV-144 context_verified successful run34025645375 and closure34025824480; archived deep read docs/pdf_xsd_semantic_audit/deep_read/VDV301-3_02-2020.md. No XSD lane and no new XML or runtime test."
+      ],
+      "note": "Fresh actual visible PDF-body original SHA-verified EV144 180dpi images (and full-run 120dpi) p18 English §2.3.1 heading Connection methodes, p19 §2.3.2 actual Table1 column EN13149-8 cell Not describede vs nearby Not described, p29 German §5 PoE in de IEEE 802.3af/at/bt, plus source-pinned p11 original separate IEE 802.3 NET-003 exclusion only. Original bytes inherited from pinned render, not newly downloaded. No XSD lane."
     }
   ]
 }
