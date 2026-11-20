@@ -21403,6 +21403,130 @@
         "Live official VDV publication index https://www.vdv.de/ip-kom-oev.aspx rechecked 2026-11-20: only dedicated VDV301-3 02/2020 edition independently evidenced, bilingual English p18/p19 and German p29, no independent predecessor/corrected successor.",
         "EV-144 context_verified successful run34025645375 and closure34025824480; archived deep read docs/pdf_xsd_semantic_audit/deep_read/VDV301-3_02-2020.md. No XSD lane and no new XML or runtime test."
       ]
+    },
+    {
+      "finding_id": "DRS-001",
+      "service": "DoorStateService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DoorStateService_V2.1.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact official VDV-301-2.1 service release with intentionally historical V1.0 Common/Enumerations dependencies; single official standalone DoorStateService V2.1 publication verified."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "first_last_only_verified_dedicated_doorstate_edition_English_operation_table",
+          "pdf_locators": [
+            {
+              "source_id": "DOOR_V2.1",
+              "document_title": "VDV-Schrift 301-2-15 DoorStateService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-15-sd-v2-1-doorstateservice.pdfx",
+              "sha256": "7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8",
+              "printed_pages": [
+                1
+              ],
+              "section": "Cover: VDV-Schrift 301-2-15 DoorStateService V2.1 07/2018",
+              "table": null,
+              "point_summary": "Visually verified exact pinned 160dpi original printed p1, PNG SHA256 bc059e744a0d8fbab47e94b2c20595bc66f1099f5bfeed4e308542563267f8a3, GitHub render run43888781452 artifact14234584210 (ZIP digest 55af6a28af906e127df216116a080000677f25f24eb640190f339caa78e78da2). Official publication identity (one bilingual release)."
+            },
+            {
+              "source_id": "DOOR_V2.1",
+              "document_title": "VDV-Schrift 301-2-15 DoorStateService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-15-sd-v2-1-doorstateservice.pdfx",
+              "sha256": "7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8",
+              "printed_pages": [
+                9
+              ],
+              "section": "§2 Operations of the DoorStateService",
+              "table": "Table 1 Description of Operations of DoorStateService",
+              "point_summary": "Visually verified exact pinned 160dpi original printed p9, PNG SHA256 0aa5447c81474719a89816d6128f0e371e708f58d4c0be82fef327a3df58c9f6, GitHub render run43888781452 artifact14234584210 (ZIP digest 55af6a28af906e127df216116a080000677f25f24eb640190f339caa78e78da2). After GetDoorOperationStates, the operation column wrongly repeats SubscribeDoorOpenStates/UnsubscribeDoorOpenStates rather than OperationStates variants; adjacent correct earlier OpenStates operation rows establish a copy/paste pair."
+            },
+            {
+              "source_id": "DOOR_V2.1",
+              "document_title": "VDV-Schrift 301-2-15 DoorStateService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-15-sd-v2-1-doorstateservice.pdfx",
+              "sha256": "7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8",
+              "printed_pages": [
+                11
+              ],
+              "section": "§2.5 Data Structures of Operation SubscribeDoorOperationStates; §2.6 Data Structures of Operation UnsubscribeDoorOperationStates",
+              "table": null,
+              "point_summary": "Visually verified exact pinned 160dpi original printed p11, PNG SHA256 6655c4c27c55acf2dfd35f8a3f2ceb8aafb1f764a4e1e96a30f17a39f669fdb6, GitHub render run43888781452 artifact14234584210 (ZIP digest 55af6a28af906e127df216116a080000677f25f24eb640190f339caa78e78da2). Visible operation headings explicitly distinguish intended SubscribeDoorOperationStates and UnsubscribeDoorOperationStates; both reuse generic subscription request/response STRUCTURE TYPES, not a single operation identity."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DoorStateService_V2.1.xsd",
+              "git_blob": "abff0f3960e2ec7a9caaa9ddeb6efff8f4183805",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1 release-tag blob, byte-identical to dev/schema-integration; historical direct Common/Enums V1.0 includes preserved",
+              "component_kind": "group",
+              "component": "DoorStateServiceGroup",
+              "member": "DoorStateService.SubscribeDoorOpenStatesRequest/Response; DoorStateService.UnsubscribeDoorOpenStatesRequest/Response",
+              "xpath_hint": "/xs:schema/xs:group[@name='DoorStateServiceGroup']",
+              "line_hint": "10, 14–17",
+              "value": "Official dedicated OpenStates request/response operation-group members, not shared OperationStates aliases.",
+              "point_summary": "Official dedicated OpenStates request/response operation-group members, not shared OperationStates aliases."
+            },
+            {
+              "file": "IBIS-IP_DoorStateService_V2.1.xsd",
+              "git_blob": "abff0f3960e2ec7a9caaa9ddeb6efff8f4183805",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1 release-tag blob, byte-identical to dev/schema-integration; historical direct Common/Enums V1.0 includes preserved",
+              "component_kind": "group",
+              "component": "DoorStateServiceGroup",
+              "member": "DoorStateService.SubscribeDoorOperationStatesRequest/Response; DoorStateService.UnsubscribeDoorOperationStatesRequest/Response",
+              "xpath_hint": "/xs:schema/xs:group[@name='DoorStateServiceGroup']",
+              "line_hint": "10, 20–23",
+              "value": "Official dedicated OperationStates request/response operation-group members, no global request-root assertion.",
+              "point_summary": "Official dedicated OperationStates request/response operation-group members, no global request-root assertion."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1 release-tag blob, byte-identical to dev/schema-integration; historical direct Common/Enums V1.0 includes preserved",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "direct xs:include dependency of DoorStateService V2.1",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "value": "Historical official Common V1.0 dependency, not substituted by newer versions.",
+              "point_summary": "Historical official Common V1.0 dependency, not substituted by newer versions."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1 release-tag blob, byte-identical to dev/schema-integration; historical direct Common/Enums V1.0 includes preserved",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "direct xs:include dependency of DoorStateService V2.1",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "value": "Historical official Enumerations V1.0 dependency, not substituted by newer versions.",
+              "point_summary": "Historical official Enumerations V1.0 dependency, not substituted by newer versions."
+            }
+          ],
+          "coverage_note": "Affected V2.1 dedicated English operation overview p9 Table1, contradicted by the same edition p11 §§2.5/2.6 and official V2.1 XSD. Bilingual publication but developer-facing operation text English only. No separate dedicated predecessor/corrected successor independently evidenced. Documentation only, no XSD/runtime correction."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRS_001_2026-11-20.md",
+        "Official DOOR_V2.1 PDF original pin SHA256 7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8, 851513B/16 pages; source pin run33241913638. Re-downloaded official pinned render artifact14234584210 run43888781452, SHA256 ZIP 55af6a28af906e127df216116a080000677f25f24eb640190f339caa78e78da2, manifest identical source SHA/size.",
+        "Actually visually inspected original p1 cover PNG bc059e744a0d8fbab47e94b2c20595bc66f1099f5bfeed4e308542563267f8a3, p9 §2 Table1 duplicated OpenStates subscription names after GetDoorOperationStates PNG 0aa5447c81474719a89816d6128f0e371e708f58d4c0be82fef327a3df58c9f6, p11 §2.5/§2.6 correct OperationStates subscription headings PNG 6655c4c27c55acf2dfd35f8a3f2ceb8aafb1f764a4e1e96a30f17a39f669fdb6. Each PNG SHA256 independently verified against GitHub render manifest 2026-11-20; source raw PDF not re-fetched.",
+        "Exact selected upstream VDVde/VDV301@VDV-301-2.1 blobs: Door abff0f3960e2ec7a9caaa9ddeb6efff8f4183805, Common V1.0 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c, Enum V1.0 a9bea5bc73003ed91ded8519db06c32c4067831d, each reverified against current dev/schema-integration.",
+        "Official VDV publication index https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-20: only standalone 301-2-15 V2.1 available; bilingual publication with technical operations in English; no independent earlier or corrected later dedicated edition verified.",
+        "Historical EV-145 run34026409256 closure34026674927 and DOOR_V2.1 deep read; no new XML instance test for doc-only copied operation names, no runtime action; DRDOOR21-001/002 and DRS-002 remain distinct."
+      ]
     }
   ]
 }

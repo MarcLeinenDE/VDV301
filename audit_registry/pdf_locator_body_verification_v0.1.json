@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 106,
-    "verified_current_standard": 106,
+    "tracked_findings": 107,
+    "verified_current_standard": 107,
     "pending_current_standard": 0
   },
   "entries": [
@@ -1085,6 +1085,19 @@
         "EV-144 context_verified successful run34025645375 and closure34025824480; archived deep read docs/pdf_xsd_semantic_audit/deep_read/VDV301-3_02-2020.md. No XSD lane and no new XML or runtime test."
       ],
       "note": "Fresh actual visible PDF-body original SHA-verified EV144 180dpi images (and full-run 120dpi) p18 English §2.3.1 heading Connection methodes, p19 §2.3.2 actual Table1 column EN13149-8 cell Not describede vs nearby Not described, p29 German §5 PoE in de IEEE 802.3af/at/bt, plus source-pinned p11 original separate IEE 802.3 NET-003 exclusion only. Original bytes inherited from pinned render, not newly downloaded. No XSD lane."
+    },
+    {
+      "finding_id": "DRS-001",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRS_001_2026-11-20.md",
+        "Official DOOR_V2.1 PDF original pin SHA256 7413c99f2910f125947213561658ae9c808952d5b57700d155b939c899de26e8, 851513B/16 pages; source pin run33241913638. Re-downloaded official pinned render artifact14234584210 run43888781452, SHA256 ZIP 55af6a28af906e127df216116a080000677f25f24eb640190f339caa78e78da2, manifest identical source SHA/size.",
+        "Actually visually inspected original p1 cover PNG bc059e744a0d8fbab47e94b2c20595bc66f1099f5bfeed4e308542563267f8a3, p9 §2 Table1 duplicated OpenStates subscription names after GetDoorOperationStates PNG 0aa5447c81474719a89816d6128f0e371e708f58d4c0be82fef327a3df58c9f6, p11 §2.5/§2.6 correct OperationStates subscription headings PNG 6655c4c27c55acf2dfd35f8a3f2ceb8aafb1f764a4e1e96a30f17a39f669fdb6. Each PNG SHA256 independently verified against GitHub render manifest 2026-11-20; source raw PDF not re-fetched.",
+        "Exact selected upstream VDVde/VDV301@VDV-301-2.1 blobs: Door abff0f3960e2ec7a9caaa9ddeb6efff8f4183805, Common V1.0 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c, Enum V1.0 a9bea5bc73003ed91ded8519db06c32c4067831d, each reverified against current dev/schema-integration.",
+        "Official VDV publication index https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-20: only standalone 301-2-15 V2.1 available; bilingual publication with technical operations in English; no independent earlier or corrected later dedicated edition verified.",
+        "Historical EV-145 run34026409256 closure34026674927 and DOOR_V2.1 deep read; no new XML instance test for doc-only copied operation names, no runtime action; DRDOOR21-001/002 and DRS-002 remain distinct."
+      ],
+      "note": "Exact byte-pinned official DoorState V2.1 render re-downloaded, ZIP/page PNG SHA independently verified 2026-11-20; visible p9 §2 Table1 wrong repeated OpenStates names and p11 §§2.5/2.6 correct OperationStates names plus p1 cover. Source raw PDF bytes not separately reacquired; documented honestly. No TOC-only locator."
     }
   ]
 }
