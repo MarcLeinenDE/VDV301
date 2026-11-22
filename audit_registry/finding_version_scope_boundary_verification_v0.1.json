@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 110,
-    "verified": 110,
+    "tracked_findings": 111,
+    "verified": 111,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -6487,6 +6487,53 @@
           "language_status": "No independently established later official dedicated DoorStateService release or corrected official service-XSD successor in VDV release list checked 2026-11-20; do not extrapolate master/candidate changes as official correction.",
           "source_ids": [
             "DOOR_V2.1"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRSMS22-001",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRSMS22_001_2026-11-22.md",
+        "Official VDV catalog https://www.vdv.de/ip-kom-oev.aspx independently checked 2026-11-22: only dedicated 301-2-18 SystemMonitoringService V2.2 is currently listed; no independently verified preceding or corrected later standalone publication.",
+        "Official byte-pinned original SMS_V2.2 PDF sha256 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4 847416B; EV146 run34026822637 artifact9987318510 ZIP 181ff01b16dae43ec2826299e6f14717aef1668d66491b6051ae07661ee607f6 and p5 render PNG 39091e889381a592ce7c294161af36c1bbd3c804b9becd786630aefd3b1b781a rehashed 2026-11-22, original p5 actually visibly inspected.",
+        "Official tag VDVde/VDV301@VDV-301-2.2 SystemMonitoringService blob d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c, Common V2.2 468fee6d177e7185dbcd5d3f90cfb114e29e01ae, Enumerations V2.2 2a23b512379b18e8f122ac1272cef8229fb86283 each checked identical to selected dev/schema-integration sources.",
+        "Existing EV-146 SUCCESS run34026822637 and closure SUCCESS run34026992744; bilingual original PDF, English-only technical operations; no separate German/English release asserted."
+      ],
+      "scope_conclusion": "Only independently verified standalone VDV 301-2-18 SystemMonitoringService edition is official V2.2 (08/2019). Its original printed p5 Contents/figures-list row has broken bookmark text. No dedicated predecessor/successor edition independently listed on current official VDV catalog (2026-11-22). One bilingual publication with technical operation text English-only, not parallel independently versioned German and English publications. Exact official service + Common + Enum V2.2 tag family checked; no XML/XSD/runtime effect.",
+      "note": "Explicit absence-of-evidence boundary: only V2.2 confirmed. No speculative previous/corrected version, no latest-wins or alternative language-branch assumption.",
+      "boundary_checks": [
+        {
+          "version": "Before dedicated SMS V2.2",
+          "role": "standalone_predecessor_not_independently_verified",
+          "language_status": "No earlier standalone 301-2-18 SMS publication in official index; general historical base services not silently treated as SMS version.",
+          "source_ids": [
+            "SMS_V2.2"
+          ]
+        },
+        {
+          "version": "Official SystemMonitoringService V2.2 08/2019",
+          "role": "first_last_only_verified_affected_publication",
+          "language_status": "One bilingual publication (German/English foreword, English-only technical operation descriptions); printed p5 broken bookmark in visible original.",
+          "source_ids": [
+            "SMS_V2.2"
+          ]
+        },
+        {
+          "version": "Official VDVde/VDV301@VDV-301-2.2 selected XSD family",
+          "role": "exact_official_dependency_profile_verified",
+          "language_status": "Same V2.2 selected service/Common/Enum blobs; documentation-only defect is external to executable XSD.",
+          "source_ids": [
+            "SMS_V2.2"
+          ]
+        },
+        {
+          "version": "After dedicated SMS V2.2",
+          "role": "corrected_successor_not_independently_verified",
+          "language_status": "No later official standalone 301-2-18 SMS publication in VDV index; no silent assumption of fix in general/candidate versions.",
+          "source_ids": [
+            "SMS_V2.2"
           ]
         }
       ]

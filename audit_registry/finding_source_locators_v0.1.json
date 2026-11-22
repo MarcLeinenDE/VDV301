@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 110,
-    "coverage_complete_count": 110,
+    "locator_entry_count": 111,
+    "coverage_complete_count": 111,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 82
+    "remaining_finding_count": 81
   },
   "entries": [
     {
@@ -21947,6 +21947,87 @@
         "Official VDV catalogue https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-20: one independently supported standalone 301-2-15 DoorStateService V2.1 edition, bilingual foreword but technical operation text English-only; no directly comparable standalone predecessor or later official corrected successor evidenced.",
         "Existing original EV145 run34026409256 job101468048441 and closure34026674927 both SUCCESS independently checked 2026-11-20; annotation-only defect does not require new executable positive/negative XML tests, no fresh XML test run claimed.",
         "Independent disproof: offending spellings not used in any executable @name/@type declarations, corresponding types/elements correctly spelled; PDF Table10 descriptor typo is distinct DRDOOR21-001, not duplicated."
+      ]
+    },
+    {
+      "finding_id": "DRSMS22-001",
+      "service": "SystemMonitoringService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemMonitoringService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Exact official VDV-301-2.2 SystemMonitoringService family. PDF-generated bookmark defect only, no executable schema impact."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "only_independently_verified_standalone_systemmonitoringservice_edition",
+          "pdf_locators": [
+            {
+              "source_id": "SMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-18 SystemMonitoringService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx",
+              "sha256": "996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4",
+              "printed_pages": [
+                5
+              ],
+              "section": "Inhaltsverzeichnis / Content — Abbildungsverzeichnis / List of figures",
+              "table": null,
+              "point_summary": "The actual original printed p5 line for 'Abbildungsverzeichnis / List of figures' visibly ends with 'Fehler! Textmarke nicht definiert.'. The defective TOC entry itself is the target (not a TOC-derived locator to another section); original EV-146 page5 PNG hash 39091e889381a592ce7c294161af36c1bbd3c804b9becd786630aefd3b1b781a freshly rechecked and image visually inspected 2026-11-22."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_SystemMonitoringService_V2.2.xsd",
+              "git_blob": "d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c",
+              "authority_detail": "Exact official upstream VDVde/VDV301@VDV-301-2.2 release-tag blob, locally identical; historical V2.2 profile not latest-wins",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "service group; direct V2.2 Common and Enumerations includes",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "4–11",
+              "point_summary": "Selected official schema authority and dependency context; printed PDF bookmark does not declare an XML or runtime rule."
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact official upstream VDVde/VDV301@VDV-301-2.2 release-tag blob, locally identical; historical V2.2 profile not latest-wins",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "direct official Common V2.2 dependency",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "4–5",
+              "point_summary": "Selected official schema authority and dependency context; printed PDF bookmark does not declare an XML or runtime rule."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "Exact official upstream VDVde/VDV301@VDV-301-2.2 release-tag blob, locally identical; historical V2.2 profile not latest-wins",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "direct official Enumerations V2.2 dependency",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "5–6",
+              "point_summary": "Selected official schema authority and dependency context; printed PDF bookmark does not declare an XML or runtime rule."
+            }
+          ],
+          "coverage_note": "Documentation-generation error only. Single 301-2-18 SMS V2.2 bilingual publication in current official VDV index, technical operations English-only. No independently evidenced dedicated predecessor or corrected successor; no table number because error is in visible Contents/figures-list entry."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRSMS22_001_2026-11-22.md",
+        "Pinned official SMS_V2.2 source SHA256 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4, 847416 bytes; raw PDF not re-downloaded.",
+        "EV-146 run34026822637 SUCCESS, artifact9987318510 ZIP SHA256 181ff01b16dae43ec2826299e6f14717aef1668d66491b6051ae07661ee607f6, original rendered p5 PNG SHA256 39091e889381a592ce7c294161af36c1bbd3c804b9becd786630aefd3b1b781a: both hashes recomputed and p5 visibly inspected 2026-11-22.",
+        "Official VDV catalog https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-22: dedicated SystemMonitoringService only V2.2; one bilingual publication.",
+        "Official tag VDV-301-2.2 service/common/enums XSD blobs match dev/schema-integration.",
+        "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRSMS22_2026-09-06.md; EV-146 closure run34026992744 SUCCESS; no executable effect."
       ]
     }
   ]

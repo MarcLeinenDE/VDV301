@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1",
-  "date": "2026-11-20",
+  "date": "2026-11-22",
   "state": "complete",
   "purpose": "Track standardized visible-body revalidation of all source-locator-complete findings. This is separate from structural locator completeness.",
   "rule_document": "00_START_HERE/AUDIT_WORKFLOW_CONTRACT.md",
@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 110,
-    "verified_current_standard": 110,
+    "tracked_findings": 111,
+    "verified_current_standard": 111,
     "pending_current_standard": 0
   },
   "entries": [
@@ -1138,6 +1138,20 @@
         "Independent disproof: offending spellings not used in any executable @name/@type declarations, corresponding types/elements correctly spelled; PDF Table10 descriptor typo is distinct DRDOOR21-001, not duplicated."
       ],
       "note": "Primary defect exclusively xs:documentation; visible PDF is context control only, not a claim of PDF typo. Original printed p10 §2.4/Table5 and p12 §2.8/Table10/Table11 directly viewed via hash-verified source-pinned EV145 render, PDF raw bytes not re-downloaded. All 4 typo occurrences in original official XSD at lines44/72/80 verified annotation-only; no executable name/type affected."
+    },
+    {
+      "finding_id": "DRSMS22-001",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRSMS22_001_2026-11-22.md",
+        "Official SMS_V2.2 PDF source pin SHA256 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4 847416 bytes. Historical EV-146 run34026822637 artifact9987318510 ZIP SHA256 181ff01b16dae43ec2826299e6f14717aef1668d66491b6051ae07661ee607f6 independently recalculated 2026-11-22; original rendered p5 PNG independently rehashed SHA256 39091e889381a592ce7c294161af36c1bbd3c804b9becd786630aefd3b1b781a and actually visually inspected.",
+        "Printed original p5 heading 'Inhaltsverzeichnis / Content' and actual 'Abbildungsverzeichnis / List of figures' entry containing 'Fehler! Textmarke nicht definiert.'; the defective TOC row is itself the visibly verified target; no table and no inferred target elsewhere. Original p5 layout/raw text extracted in EV146 independently confirms.",
+        "Live web-PDF screenshot cache miss, so existing byte-pinned original EV146 deterministic render used and verified by ZIP and page PNG SHA256. Original PDF raw bytes were not re-downloaded and rehashed in this cycle.",
+        "Exact selected official VDVde/VDV301@VDV-301-2.2 SMS, Common V2.2, Enumerations V2.2 Git blobs matched branch; service d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c, Common 468fee6d177e7185dbcd5d3f90cfb114e29e01ae, Enum 2a23b512379b18e8f122ac1272cef8229fb86283.",
+        "Official VDV catalog https://www.vdv.de/ip-kom-oev.aspx inspected 2026-11-22 only standalone SMS V2.2; bilingual publication with English technical operations; no verified standalone predecessor or corrected successor.",
+        "EV-146 and closure run34026992744 both SUCCESS verified; PDF-only Word bookmark error no new executable XML test or runtime change."
+      ],
+      "note": "SHA-verified original historical EV146 render visibly re-inspected. Printed broken bookmark is inside the visible table of contents itself, not TOC-derived section inference. No raw PDF re-download claimed."
     }
   ]
 }
