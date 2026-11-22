@@ -2127,8 +2127,8 @@
     "version_scope_boundary_latest_gate_run_id": 44727587459
   },
   "next_actions": [
-    "DRSMS22-001 gate_pending 111/192 original PDF body+scope evidence committed. Verify complete Schema-Audit-Validation and Handoff-Integrity on pending HEAD and repair failures.",
-    "After two substantive SUCCESS gates, commit only status+SDK summary terminal_clean, then verify both final HEAD workflows. After reviewed ai-mem PR, next distinct frozen finding DRSMS22-002 NOT STARTED."
+    "DRSMS22-001 gate_pending repair: exact semantic scope_claims and actionable pending_block corrected after initial CI failures. Verify full schema-audit and handoff success on this HEAD; do not start next finding.",
+    "On success separately commit terminal_clean and verify both final HEAD workflow runs; DRSMS22-002 NOT STARTED."
   ],
   "source_locator_progress": {
     "locator_entry_count": 111,
@@ -2211,18 +2211,18 @@
     "latest_completed_full_gate_run_id": 44727587459,
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": 44727587383,
-    "resume_instruction": "DRSMS22-001 gate_pending 111/192; full schema and handoff CI pending, terminal_clean and both final HEAD gates required; DRSMS22-002 NOT STARTED.",
-    "pending_block": "DRSMS22-001",
+    "resume_instruction": "Resume DRSMS22-001 gate_pending after CI repair, verify two substantive Gates on actual HEAD, terminal_clean in separate status-only commit, verify both final HEAD Gates.",
+    "pending_block": "DRSMS22-001 source-locator/body/version-boundary audit",
     "active_finding": "DRSMS22-001",
-    "active_step": "DRSMS22-001 source locator + visible PDF body + version boundaries and SDK/state mirrors prepared as one substantive recoverable commit.",
-    "next_step": "Observe full schema-audit and handoff gates on pending commit, fix failures, finalize terminal_clean status-only commit, verify both final HEAD gates.",
+    "active_step": "DRSMS22-001 evidence and registers committed; Handoff guard pending_block minimum length and semantic scope_claims exactness repaired, rerun full CI.",
+    "next_step": "Verify both GitHub substantive workflows after this repair, resolve further failures, finalize terminal_clean in separate commit and verify both final HEAD gates.",
     "evidence_refs": [
       "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRSMS22_001_2026-11-22.md",
       "EV146 run34026822637 artifact9987318510 p5 hash verified",
       "SMS_V2.2 official original PDF pin 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4",
       "VDVde/VDV301@VDV-301-2.2 blobs checked"
     ],
-    "recovery_instruction": "Recovery: check actual dev/schema-integration HEAD and DRSMS22-001 gate_pending with 111/192 source locators, 111/111 visible original body, 111/111 independently verified boundaries; run/observe both workflows and repair, terminal_clean only after SUCCESS; DRSMS22-002 not begun."
+    "recovery_instruction": "DRSMS22-001 gate_pending repair: verify actual HEAD and full schema-audit/handoff workflow results, including exact semantic scope and pending-block length, then terminal_clean separately; DRSMS22-002 not started."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
