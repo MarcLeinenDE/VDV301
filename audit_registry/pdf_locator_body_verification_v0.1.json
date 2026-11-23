@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 112,
-    "verified_current_standard": 112,
+    "tracked_findings": 113,
+    "verified_current_standard": 113,
     "pending_current_standard": 0
   },
   "entries": [
@@ -1168,6 +1168,21 @@
         "Existing EV-146 and closure34026992744 and EV-116 run33269006407 SUCCESS checked, no new XML test. Misnamed p10 §2.5 GetSystemStatus heading belongs distinct SMS-002 frozen ID, not duplicated."
       ],
       "note": "Original printed p9 Table1, p10 Table4 and p11 Table5 actually visually inspected via SHA-verified original 180dpi EV146 artifact; actual body location not inferred from TOC, three exact description cells recognized. Copy/paste PDF prose only, ServiceState model unaffected; no new XML/runtime rule."
+    },
+    {
+      "finding_id": "DRSMS22-003",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRSMS22_003_2026-11-23.md",
+        "Exact original SMS_V2.2 PDF pinned SHA256 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4, 847416 bytes, source PDF raw bytes NOT re-downloaded/rehashed on 2026-11-23.",
+        "Already-pinned EV146 original artifact9987318510 run34026822637 ZIP SHA256 181ff01b16dae43ec2826299e6f14717aef1668d66491b6051ae07661ee607f6 independently recomputed 2026-11-23; original printed p12 180dpi PNG SHA256 41515d4afc0455e0628128f47eecba3d88364858882c5551b2616af72528addf, p13 PNG SHA256 d323b92c7b84c67bb4eeb5fcb2559b8d5fb94dd19635e210c4ed9106791b2ba2 independently recomputed against artifact EV146 manifest and directly visually inspected.",
+        "Original printed p12 §3 Versionshistorie / Version History, §3.1.1 Funktionale Erweiterungen / Functional Upgrade: first bullet contains 'SystemManagmentService' in German AND English sentences, precisely two spelling occurrences in ONE bilingual publication. Original printed p13 Regelwerke – Normen und Empfehlungen / References, item (3) VDV 301-2-0 correctly lists 'SystemManagementService' among Base Services V2.0. Actual visible body of each page inspected; no TOC/history inference.",
+        "Original live PDF screenshot cache missed; already source-pin-verified EV146 deterministic renderer fallback is used. p12/p13 layout-text files secondary only; visual authority is each printed PNG.",
+        "Official current VDV publication catalog https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-23 lists only dedicated SMS V2.2; separate historic VDV301-2 Base Services V2.0 correctly labels SystemManagementService but is not an earlier standalone SMS 301-2-18 edition. One bilingual SMS V2.2 source, no speculative corrected successor.",
+        "Three selected official upstream tag VDVde/VDV301@VDV-301-2.2 SMS blob d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c, Common 468fee6d177e7185dbcd5d3f90cfb114e29e01ae, Enum 2a23b512379b18e8f122ac1272cef8229fb86283 matched current branch. PDF spelling is not an XML alias, no executable impact.",
+        "EV-146 run34026822637 and historical closure34026992744 and EV-116 run33269006407 all SUCCESS checked; no fresh XML instance test. Independent p12 '302-2' number inconsistency FR-SMS22-OBS-005 excluded from this ID."
+      ],
+      "note": "Actually visible original printed body p12 §3.1.1 and p13 references entry (3) used, not history-derived TOC locator; source-pinned EV146 original render ZIP and both PNG hash rechecked; editorial PDF-only misspelling two occurrences in one bilingual document, no runtime diagnostic."
     }
   ]
 }

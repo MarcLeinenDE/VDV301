@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 112,
-    "verified": 112,
+    "tracked_findings": 113,
+    "verified": 113,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -6580,6 +6580,62 @@
           "version": "After dedicated SystemMonitoringService V2.2",
           "role": "corrected_successor_not_independently_verified",
           "language_status": "No separately published later official SMS 301-2-18 edition in current VDV catalog, so no speculative correction boundary or later-language fix.",
+          "source_ids": [
+            "SMS_V2.2"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRSMS22-003",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRSMS22_003_2026-11-23.md",
+        "VDV official publication index https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-23: only one dedicated VDV 301-2-18 SMS V2.2 publication (08/2019); no earlier/later separate SMS 301-2-18 edition independently verified. Earlier VDV301-2 Base Services V2.0 is separate publication/version lane and correctly names the historical SystemManagementService.",
+        "Official byte-pinned SMS_V2.2 PDF source SHA256 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4 (847416 bytes), actual original printed p12 §3.1.1 and p13 references item(3) visibly checked through EV-146 pinned 180dpi render artifact9987318510 ZIP sha256 181ff01b16dae43ec2826299e6f14717aef1668d66491b6051ae07661ee607f6; p12 PNG 41515d4afc0455e0628128f47eecba3d88364858882c5551b2616af72528addf and p13 PNG d323b92c7b84c67bb4eeb5fcb2559b8d5fb94dd19635e210c4ed9106791b2ba2 freshly rehashed and actually visibly reviewed on 2026-11-23.",
+        "VDVde/VDV301@VDV-301-2.2 service XSD d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c, Common V2.2 468fee6d177e7185dbcd5d3f90cfb114e29e01ae, Enumerations V2.2 2a23b512379b18e8f122ac1272cef8229fb86283 exact upstream Git blobs separately checked identical with selected work branch. These are selected SMS schema context, not a claim that SystemManagementService is declared therein.",
+        "SMS V2.2 official foreword p4 explicitly one bilingual publication with technical operations only in English; wrong historical reference occurs in two language sentences on same p12, not separate published editions.",
+        "Historical EV146 run34026822637 and closure run34026992744 SUCCESS, EV-116 run33269006407 SUCCESS. Other p12 number anomaly FR-SMS22-OBS-005 kept distinct."
+      ],
+      "scope_conclusion": "The original official VDV-Schrift 301-2-18 SystemMonitoringService V2.2 (08/2019) prints 'SystemManagmentService' twice on original p12 §3.1.1 (German and English) but names 'SystemManagementService' correctly on original p13 reference(3) to historical VDV 301-2-0 Base Services V2.0. The current official publication catalog independently lists only standalone SMS V2.2, so no earlier standalone SMS version or corrected later standalone edition proven. Distinct Base Services V2.0 references show correct older service name but are not another affected SMS publication or proof of a corrected SMS version. One bilingual SMS V2.2 document with English-only technical operation descriptions, not separate German/English editions. Selected official tag VDV-301-2.2 service/Common/Enum blobs identical to branch; typo affects PDF history prose only, no executable name or runtime result.",
+      "note": "Scope V2.2 publication only; predecessor/correction unknown. Bilingual p12 double occurrence counted within ONE edition, p13 correct Base Services reference is same PDF disproof; no misclassification as standalone SMS V2.0, no latest-wins or XML alias.",
+      "boundary_checks": [
+        {
+          "version": "Before standalone VDV 301-2-18 SMS V2.2",
+          "role": "no_prior_dedicated_sms_edition_independently_verified",
+          "language_status": "VDV 301-2 Base Services V2.0 with correctly named SystemManagementService exists but is not earlier standalone SystemMonitoringService 301-2-18; no separate German/English SMS predecessors established.",
+          "source_ids": [
+            "SMS_V2.2"
+          ]
+        },
+        {
+          "version": "VDV 301-2-18 SMS V2.2 (08/2019), printed p12 §3.1.1",
+          "role": "first_last_only_verified_affected_publication",
+          "language_status": "Single bilingual official PDF, wrong 'SystemManagmentService' appears twice in German and English version-history sentences; technical operations described in English.",
+          "source_ids": [
+            "SMS_V2.2"
+          ]
+        },
+        {
+          "version": "VDV 301-2-18 SMS V2.2, printed p13 References (3)",
+          "role": "same_official_edition_correct_spelling_counterexample",
+          "language_status": "Same exact bilingual PDF correctly cites historic VDV 301-2-0 Base Services V2.0 with 'SystemManagementService'; not independent fixed successor.",
+          "source_ids": [
+            "SMS_V2.2"
+          ]
+        },
+        {
+          "version": "VDVde/VDV301@VDV-301-2.2 official SMS XSD profile",
+          "role": "exact_selected_schema_provenance_only",
+          "language_status": "Exact SMS/Common/Enumerations V2.2 blobs identical upstream/branch; printed historical base-service typo has no executable XML alias.",
+          "source_ids": [
+            "SMS_V2.2"
+          ]
+        },
+        {
+          "version": "After standalone SMS V2.2",
+          "role": "no_corrected_official_successor_independently_verified",
+          "language_status": "Official VDV catalog contains no later standalone SMS 301-2-18 publication; no unsupported assumption that a candidate, base-service, or language successor fixed PDF prose.",
           "source_ids": [
             "SMS_V2.2"
           ]
