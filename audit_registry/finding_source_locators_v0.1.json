@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "a88f7c466a261499631957397f4b45b014d48a2e",
+    "git_blob": "bfc32e3181909dff3c4456c3db2961a7f29c580c",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 115,
-    "coverage_complete_count": 115,
+    "locator_entry_count": 116,
+    "coverage_complete_count": 116,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 77
+    "remaining_finding_count": 76
   },
   "entries": [
     {
@@ -22433,6 +22433,54 @@
         "Official PDF public extract rechecked 2026-11-23 https://www.vdv.de/301-2-10sds-v-1-01.pdfx: physical page4 Vorwort/Foreword; page8 references Common. Live screenshot cache-missed; exact-byte render not newly downloaded/re-inspected.",
         "VDV public index https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-23: one dedicated TimeService V1.0; VDV 301-2-1 Common Data Structures, VDV 301-2-11 VideoLiveService. Separate historical DR3012-006 not conflated.",
         "Historical source audit_registry/drtime10_revalidation_evidence_2026-09-06.json, docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTIME10_2026-09-06.md, deep_read/TIME_V1.0.md; TimeService SNTP RFC4330, DNS-SD discovery; no new XML instance test applicable."
+      ]
+    },
+    {
+      "finding_id": "DRTIME10-002",
+      "service": "TimeService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official byte-pinned VDV 301-2-10 TimeService V1.0 publication on the PDF/API/prose authority lane. TimeService intentionally has no XSD semantic authority in this audit."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "first_last_only_dedicated_v1_0_bilingual_english_omission",
+          "pdf_locators": [
+            {
+              "source_id": "TIME_V1.0",
+              "document_title": "VDV-Schrift 301-2-10 TimeService V1.0 (02/2018)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-10sds-v-1-01.pdfx",
+              "sha256": "d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3",
+              "printed_pages": [
+                6
+              ],
+              "section": "§1 Dienst TimeService / Service TimeService (original printed p6; PDF index5)",
+              "table": null,
+              "point_summary": "Directly visible official PDF original printed p6 on 2026-11-23: German §1 after SNTP synchronization says 'Ein zyklisches Versenden der aktuellen Uhrzeit ist darüber hinaus nicht vorgesehen.' Immediately adjacent English Service TimeService text goes from 'The actual form of time synchronization is then processed using the SNTP protocol.' straight to timezone TXT context, omitting no-cyclic-time sentence. Same original source was historically byte-pinned and visually checked in EV147 original 180dpi page6 PNG SHA256 099a2198df048ef805ea37ac559fc1adec24e9b622fd2e7b421ac31d8bbb0cfd, 402182 bytes; current web screenshot succeeded but no fresh raw PDF/PNG byte hash was obtained."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "One official bilingual dedicated TimeService V1.0, DE explicit no cyclic time transmission, EN omitted; no dedicated predecessor/corrected successor in VDV public index 2026-11-23. General base-service editions are not TimeService versions. SNTP RFC4330 and DNS-SD for discovery; no service XML/XSD. Existing RV003 tests no-cyclic guard, but no DRTIME10-002-specific runtime matcher."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTIME10_002_2026-11-23.md",
+        "docs/pdf_xsd_semantic_audit/CORRECTION_RV003_HISTORICAL_EVIDENCE_DRTIME10_002_2026-11-23.md",
+        "Official VDV p6 visible screenshot inspected 2026-11-23, https://www.vdv.de/301-2-10sds-v-1-01.pdfx, raw bytes not re-downloaded or rehashed.",
+        "Historical official PDF pin SHA256 d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3, 515920 bytes, pin run33196758957.",
+        "Historical original EV147 run34028395412 artifact9987794844 p6 PNG 180dpi SHA256 099a2198df048ef805ea37ac559fc1adec24e9b622fd2e7b421ac31d8bbb0cfd, 402182B, originally visually checked 2026-09-06; artifact digest metadata sha256:2fbb9272c55ebbe704ae4736f488af5758bc0cbbbc8902e77d1a46e19b1ffc92.",
+        "Official VDV index https://www.vdv.de/ip-kom-oev.aspx single standalone TimeService V1.0, no earlier/later dedicated edition proven.",
+        "EV147 evidence HEAD 686ce92e has RV003 checker blob ff6e3fcd and runtime_time_profile blob acd28ca0 with no-cyclic predicate; full schema CI #45170321287 executed RV003 PASS; historical nonexistence assertion wrong."
       ]
     }
   ]

@@ -1,0 +1,11 @@
+# RV-003 — Korrektur des historischen EV-147-Fehlhinweises
+
+**Nachgewiesen 2026-11-23; ursprüngliche historischen Belegdateien bleiben unverändert.** In `docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTIME10_2026-09-06.md` und `audit_registry/drtime10_revalidation_evidence_2026-09-06.json` wurde behauptet, am EV-147-Auditstand existierten kein RV-003-Checker und keine `cyclic_time_broadcast_expected`-Implementierung. Diese Aussage ist **falsch**, obwohl der damalige PDF-Befund selbst richtig ist.
+
+Der exakte damalige EV-147-Commit [686ce92ede0f1391e04a4260bc7adf98b6ae3103](https://github.com/MarcLeinenDE/VDV301/commit/686ce92ede0f1391e04a4260bc7adf98b6ae3103) enthält nach unabhängigem GitHub-Rohdateizugriff:
+- [`tools/validate_time_runtime_rv003.py`](https://github.com/MarcLeinenDE/VDV301/blob/686ce92ede0f1391e04a4260bc7adf98b6ae3103/tools/validate_time_runtime_rv003.py), Git-Blob **ff6e3fcd35d4c2f6bff760b3e86f5adb0e72156c**, bereits mit `not cyclic_time_broadcast_expected()`;
+- [`tools/runtime_time_profile.py`](https://github.com/MarcLeinenDE/VDV301/blob/686ce92ede0f1391e04a4260bc7adf98b6ae3103/tools/runtime_time_profile.py), Git-Blob **acd28ca0bd6ac1917b3d2db29745555b7e17d8dd**, bereits mit `def cyclic_time_broadcast_expected(): return False`.
+
+Git-Historie: RV-003-Prüfer eingeführt **2026-08-27**, Commit `a37bc74ef2eb221806dc63c865f1d28edd7c72a6`; No-Cyclic-Regression am **2026-08-28**, Commit `2de143a79644f34d11b0d03c1fae0f07a8dd953e`, nachweislich **Vorfahr** des EV147-HEADs. Aktuell tatsächliche Ausführung im [Schema-Audit-Gate #45170321287](https://github.com/MarcLeinenDE/VDV301/actions/runs/45170321287), Job `137677844387`, Log `rv_003_time_sntp.log`: `OK TimeService does not expect cyclic transmission of current time` und `PASSED: RV-003 deterministic TimeService / RFC 4330 SNTP classifier behavior confirmed`.
+
+**Abgrenzung:** Der allgemeine TimeService-/SNTP-Deterministikchecker existiert, aber es besteht **kein** `DRTIME10-002`-spezifischer SDK-Finding-Matcher. Darum bleibt `no_runtime_diagnostic` für die PDF-Auslassung fachlich richtig. Kein neuer Hardware-, Live- oder XML-Instanztest behauptet, keine XSD-/Runtime-Codeänderung. Statt stillem Umschreiben alter Berichte wird der heutige semantische Notes-Eintrag korrigiert und der neue semantische Git-Blob-Pin in Source-Locator-/Runtime-Registern fortgeschrieben.

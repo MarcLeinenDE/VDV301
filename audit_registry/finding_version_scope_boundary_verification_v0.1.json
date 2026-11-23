@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 115,
-    "verified": 115,
+    "tracked_findings": 116,
+    "verified": 116,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -6723,6 +6723,44 @@
           "version": "After standalone TimeService V1.0 301-2-10",
           "role": "no_dedicated_successor_publication_verified",
           "language_status": "de/en:no later corrected dedicated TimeService publication listed 2026-11-23, no inference of correction boundary",
+          "source_ids": [
+            "TIME_V1.0"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRTIME10-002",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTIME10_002_2026-11-23.md",
+        "Official VDV publication index https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-23: only dedicated TimeService 301-2-10 V1.0; no independent dedicated predecessor or corrected successor.",
+        "VDV TimeService V1.0 same visible original printed p6 German and English texts independently compared, live screenshot 2026-11-23, historical original source pin and original EV147 PNG p6.",
+        "Generic VDV 301-2 baseline and Common later editions are not separate 301-2-10 TimeService releases."
+      ],
+      "note": "One bilingual TimeService V1.0 p6; DE correct explicit no-cyclic statement, EN alone omits. No independent predecessor or successor edition verified.",
+      "scope_conclusion": "Only dedicated TimeService V1.0 (02/2018) known; same p6 German section explicitly excludes additional cyclic time sending and adjacent English text omits the sentence but does not expressly contradict. No earlier standalone or corrected later TimeService issue in VDV index checked 2026-11-23, no invented boundary. Existing SNTP/DNS-SD profile unaffected.",
+      "boundary_checks": [
+        {
+          "version": "Prior to dedicated TimeService V1.0",
+          "role": "no_dedicated_predecessor_found",
+          "language_status": "de/en:early generic base service documents are not separate TimeService releases",
+          "source_ids": [
+            "TIME_V1.0"
+          ]
+        },
+        {
+          "version": "TimeService V1.0 02/2018",
+          "role": "first_last_english_omission",
+          "language_status": "de:explicit no cyclic time transmission on printed p6; en:parallel same-page text omits statement without affirmative contradiction",
+          "source_ids": [
+            "TIME_V1.0"
+          ]
+        },
+        {
+          "version": "After dedicated TimeService V1.0",
+          "role": "no_corrected_successor_found",
+          "language_status": "de/en:VDV catalog contains no later dedicated TimeService issue as checked 2026-11-23",
           "source_ids": [
             "TIME_V1.0"
           ]
