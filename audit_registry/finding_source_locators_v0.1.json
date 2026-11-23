@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 114,
-    "coverage_complete_count": 114,
+    "locator_entry_count": 115,
+    "coverage_complete_count": 115,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 78
+    "remaining_finding_count": 77
   },
   "entries": [
     {
@@ -22374,6 +22374,65 @@
         "Exact upstream official VDVde/VDV301@VDV-301-2.2 SMS/Common/Enumerations blobs d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c/468fee6d177e7185dbcd5d3f90cfb114e29e01ae/2a23b512379b18e8f122ac1272cef8229fb86283 checked independently tag+work branch.",
         "Historical EV-146 run34026822637 closure34026992744, and EV-116 run33269006407 successful. No fresh XML instance tests (PDF layout only); no runtime matcher.",
         "Historical original finding revalidation docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRSMS22_2026-09-06.md and deep_read/SMS_V2.2.md FR-SMS22-OBS-007; no scope expansion to title errors or a/b -1:1 XML Choice notation."
+      ]
+    },
+    {
+      "finding_id": "DRTIME10-001",
+      "service": "TimeService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official VDV-Schrift 301-2-10 TimeService V1.0, 02/2018; original bilingual foreword reference mismatch. TimeService is an SNTP/DNS-SD protocol_discovery_profile with NO TimeService XSD semantic authority. German and English track share one byte-pinned publication; only English reference is wrong."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "first_and_last_only_standalone_TimeService_V1.0_publication_no_dedicated_predecessor_or_successor",
+          "pdf_locators": [
+            {
+              "source_id": "TIME_V1.0",
+              "document_title": "VDV-Schrift 301-2-10 TimeService V1.0 (02/2018)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-10sds-v-1-01.pdfx",
+              "sha256": "d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3",
+              "printed_pages": [
+                4
+              ],
+              "section": "Vorwort / Foreword (same visible original printed page 4)",
+              "point_summary": "The German foreword states VDV-Schrift 301-2-10 describes TimeService; the adjacent English Foreword mistakenly states VDV 301-2-1 describes TimeService. Original printed page 4 is evidenced by historical exact-byte 180-DPI EV-147 page-4 PNG SHA256 1614a270b77c37cd2abb51bbfb84f3626554ff7b60b385c45b3b02ee29d2ac06, visually reviewed in original EV-147 on 2026-09-06. This audit cycle independently rechecked the official document text and artifact provenance, but live screenshot cache-missed and no new PDF/PNG bytes were downloaded or visually rendered."
+            },
+            {
+              "source_id": "TIME_V1.0",
+              "document_title": "VDV-Schrift 301-2-10 TimeService V1.0 (02/2018)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-10sds-v-1-01.pdfx",
+              "sha256": "d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3",
+              "printed_pages": [
+                8
+              ],
+              "section": "Regelwerke – Normen und Empfehlungen",
+              "point_summary": "Original printed page 8 references VDV 301-2-1 as Common Data Structures and Enumerations rather than the TimeService. This provides independent same-publication disproof of the English foreword's wrong service identity, supported by extracted official document text; no new visible screenshot is claimed for page 8."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Single dedicated TimeService V1.0 issue in official VDV IP-KOM-ÖV publication index checked 2026-11-23; no separate older or corrected successor standalone TimeService edition established. On the same bilingual printed p4 the German identifier is 301-2-10 (correct) but English is 301-2-1 (wrong). Page8 sources 301-2-1 to Common. Historical base VDV 301-2 07/2016 points to 301-2-11, a DIFFERENT already-tracked finding DR3012-006; not a predecessor of the standalone p4 foreword defect. No XML root, no TimeService XSD authority, no new SNTP requirements, no runtime diagnostic. Original EV147 180dpi p4 visual record is reused, not freshly re-rendered."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTIME10_001_2026-11-23.md",
+        "Historical official TIME_V1.0 PDF pin SHA256 d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3 / 515920 bytes, original pin run 33196758957; no fresh binary download or raw hash in this cycle.",
+        "EV-147 run 34028395412 (PASS), artifact 9987794844 (drtime10-ev147) available/not expired on 2026-11-23, reported zip digest sha256:2fbb9272c55ebbe704ae4736f488af5758bc0cbbbc8902e77d1a46e19b1ffc92; 180dpi original page4 PNG 1614a270b77c37cd2abb51bbfb84f3626554ff7b60b385c45b3b02ee29d2ac06 / 131551 bytes HISTORICAL visual verification (2026-09-06).",
+        "Official PDF public extract rechecked 2026-11-23 https://www.vdv.de/301-2-10sds-v-1-01.pdfx: physical page4 Vorwort/Foreword; page8 references Common. Live screenshot cache-missed; exact-byte render not newly downloaded/re-inspected.",
+        "VDV public index https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-23: one dedicated TimeService V1.0; VDV 301-2-1 Common Data Structures, VDV 301-2-11 VideoLiveService. Separate historical DR3012-006 not conflated.",
+        "Historical source audit_registry/drtime10_revalidation_evidence_2026-09-06.json, docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRTIME10_2026-09-06.md, deep_read/TIME_V1.0.md; TimeService SNTP RFC4330, DNS-SD discovery; no new XML instance test applicable."
       ]
     }
   ]

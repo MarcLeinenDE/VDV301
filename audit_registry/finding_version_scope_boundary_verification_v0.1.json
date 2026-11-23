@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 114,
-    "verified": 114,
+    "tracked_findings": 115,
+    "verified": 115,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -6686,6 +6686,45 @@
           "language_status": "Official VDV index lists no later dedicated SMS edition; generic Common V2.3/V2.4, other service revisions and candidate profiles cannot be treated as SMS correction without exact published evidence.",
           "source_ids": [
             "SMS_V2.2"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRTIME10-001",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTIME10_001_2026-11-23.md",
+        "Official public VDV index https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-23: dedicated TimeService 301-2-10 only V1.0, no independent predecessor/successor standalone TimeService versions.",
+        "Official TIME_V1.0 same-page physical p4 German vs English compared against historical byte-pinned EV147 visible source and current public PDF text; printed p8 cites VDV 301-2-1 as Common. PDF SHA256 d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3; original EV147 p4 render SHA 1614a270b77c37cd2abb51bbfb84f3626554ff7b60b385c45b3b02ee29d2ac06.",
+        "Earlier VDV 301-2 V1.0 07/2016 wrong 301-2-11 reference is distinct existing DR3012-006 (historically checked against VDV-Mitteilung 3002 10/2016 and 301-2-11 VideoLiveService); not treated as edition of standalone TimeService.",
+        "No TimeService XSD; protocol_discovery_profile, source VDV TimeService V1.0 and selected RFC 4330; existing semantic classification and SDK no_runtime_diagnostic unchanged."
+      ],
+      "scope_conclusion": "First and last independently verified dedicated TimeService publication is V1.0 (02/2018). One bilingual PDF with German foreword correct 301-2-10, English foreword wrong 301-2-1. No earlier standalone or corrected later TimeService PDF in VDV public index checked 2026-11-23, so no inferred corrected successor. VDV 301-2-1 is Common, not TimeService. Historical 2016 base reference to 301-2-11 is the separate finding DR3012-006. This finding is documentation/resolver-only with no XSD/runtime change.",
+      "note": "German/English separately evaluated inside one TIME_V1.0 publication; English alone contains incorrect identity, German is matching control. Version boundary is one standalone V1.0 issue with no evidenced predecessor/corrected successor.",
+      "boundary_checks": [
+        {
+          "version": "Before standalone TimeService V1.0 301-2-10",
+          "role": "no_dedicated_predecessor_publication_verified",
+          "language_status": "de/en:public VDV catalog contains no earlier dedicated TimeService edition; 2016 VDV 301-2 base contains different 301-2-11 issue DR3012-006, not equivalent foreword",
+          "source_ids": [
+            "TIME_V1.0"
+          ]
+        },
+        {
+          "version": "TimeService V1.0 301-2-10 (02/2018)",
+          "role": "first_last_affected_english_foreword",
+          "language_status": "de:Vorwort correct 301-2-10; en:Foreword incorrect 301-2-1; one bilingual official issue, original p4",
+          "source_ids": [
+            "TIME_V1.0"
+          ]
+        },
+        {
+          "version": "After standalone TimeService V1.0 301-2-10",
+          "role": "no_dedicated_successor_publication_verified",
+          "language_status": "de/en:no later corrected dedicated TimeService publication listed 2026-11-23, no inference of correction boundary",
+          "source_ids": [
+            "TIME_V1.0"
           ]
         }
       ]
