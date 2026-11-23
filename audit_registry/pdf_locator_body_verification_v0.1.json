@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 113,
-    "verified_current_standard": 113,
+    "tracked_findings": 114,
+    "verified_current_standard": 114,
     "pending_current_standard": 0
   },
   "entries": [
@@ -1183,6 +1183,21 @@
         "EV-146 run34026822637 and historical closure34026992744 and EV-116 run33269006407 all SUCCESS checked; no fresh XML instance test. Independent p12 '302-2' number inconsistency FR-SMS22-OBS-005 excluded from this ID."
       ],
       "note": "Actually visible original printed body p12 §3.1.1 and p13 references entry (3) used, not history-derived TOC locator; source-pinned EV146 original render ZIP and both PNG hash rechecked; editorial PDF-only misspelling two occurrences in one bilingual document, no runtime diagnostic."
+    },
+    {
+      "finding_id": "DRSMS22-004",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRSMS22_004_2026-11-23.md",
+        "Official original SMS_V2.2 PDF byte pin SHA256 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4 / 847416B; PDF raw not freshly re-downloaded or hashed in this cycle.",
+        "Original EV146 run34026822637 artifact9987318510 ZIP SHA256 181ff01b16dae43ec2826299e6f14717aef1668d66491b6051ae07661ee607f6 / 994106B freshly computed 2026-11-23 against EV146 results; visible original printed p9 180dpi PNG SHA256 6f813ae55fd3acc28e99f055978c504b9759e03b1cfb52a133adaf696a2f3b79 / 166033B directly visually inspected.",
+        "Actual original printed p9 §2 Operations of SystemMonitoringService, §2.1 Operationen SystemMonitoringService, Tabelle1 Beschreibung von Operationen des SystemMonitoringService / Description of Operations at the SystemMonitoringService. In UnsubscribeServiceStatus last block BOTH generic types UnsubscribeRequestStructure (top row) and UnsubscribeResponseStructure (bottom row) are visibly printed in right column, but BOTH middle-column Request/Response cells are BLANK instead of Req./Resp.; adjacent SubscribeServiceStatus and UnsubscribeDeviceStatus rows contain Req./Resp. labels. No type/operation omission.",
+        "Original EV146 page_text/page-09-layout.txt SHA256 39ebc38e197d3813612a87d01260359f2418ac021d2438ea96e7f4179206479c and unsubscribe_service_status_segment.txt SHA256 d96f260bea04867fedae83ab993dac7ca84fe7dd34fd5a65537475e35e42f5d0 secondary text only, not visible-body locator authority. Web live PDF screenshot cache-missed; exact byte-pin EV146 original render fallback used.",
+        "Actual visually inspected original printed p11 §2.7 Data Structure of Operation UnsubscribeSystemStatus explicitly refers to VDV 301-2-1 generic subscription structures, page11 EV146 180dpi original PNG SHA256 02b26dddd0fa57785ee5e35757a03dc6f1b1a595ae006cdb5ffe66481b4a2b7f. Different SystemStatus section wording is a separate issue and does not create an alias.",
+        "Selected original VDVde/VDV301@VDV-301-2.2 official SMS XSD blob d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c directly includes official Common V2.2 468fee6d177e7185dbcd5d3f90cfb114e29e01ae and Enums 2a23b512379b18e8f122ac1272cef8229fb86283, byte-identical in dev/schema-integration. Common lines 898-905 defines UnsubscribeRequestStructure with Client-IP-Address, optional ReplyPort and ReplyPath; lines906-912 defines UnsubscribeResponseStructure with Active and optional OperationErrorMessage. Both generic structures present, no missing executable operation asserted.",
+        "VDV official index https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-23 one dedicated SMS V2.2 bilingual edition, technical operations English; no dedicated independently verified prior or corrected successor. EV146 and closure34026992744 and EV116 run33269006407 historical SUCCESS; no fresh XML validation run for documentation-only table label."
+      ],
+      "note": "Visually verified actual printed p9 §2.1 Table1 two empty Req./Resp. LABEL cells beside present generic UnsubscribeRequestStructure and UnsubscribeResponseStructure, and original p11 VDV 301-2-1 generic reference. Hash-verified original EV146 180dpi render, PDF raw historical pin only. Exact official Common V2.2 contains both types; no runtime diagnostic or schema change."
     }
   ]
 }

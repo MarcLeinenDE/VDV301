@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 113,
-    "verified": 113,
+    "tracked_findings": 114,
+    "verified": 114,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -6636,6 +6636,54 @@
           "version": "After standalone SMS V2.2",
           "role": "no_corrected_official_successor_independently_verified",
           "language_status": "Official VDV catalog contains no later standalone SMS 301-2-18 publication; no unsupported assumption that a candidate, base-service, or language successor fixed PDF prose.",
+          "source_ids": [
+            "SMS_V2.2"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRSMS22-004",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRSMS22_004_2026-11-23.md",
+        "VDV current official publication index https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-23: dedicated official 301-2-18 SystemMonitoringService V2.2 only, no independently verified dedicated SMS predecessor or later corrected dedicated SMS edition. Neighbor general Common V2.1/V2.3/V2.4 publications do not constitute separately released SMS editions.",
+        "Official pinned SMS_V2.2 PDF sha256 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4 / 847416 bytes, historical original pin; EV146 run34026822637 artifact9987318510 ZIP hash 181ff01b16dae43ec2826299e6f14717aef1668d66491b6051ae07661ee607f6 freshly rehashed 2026-11-23; exact source pinned original printed p9 §2.1 Table1 EV146 PNG 6f813ae55fd3acc28e99f055978c504b9759e03b1cfb52a133adaf696a2f3b79 and original p11 §2.7 PNG 02b26dddd0fa57785ee5e35757a03dc6f1b1a595ae006cdb5ffe66481b4a2b7f independently visually examined. Printed p9 UnsubscribeServiceStatus both generic types present, two missing Req/Resp cells, neighbor cells filled.",
+        "Official selected upstream VDVde/VDV301@VDV-301-2.2 exact service blob d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c, Common 468fee6d177e7185dbcd5d3f90cfb114e29e01ae, Enums 2a23b512379b18e8f122ac1272cef8229fb86283 separately fetched and matched branch bytes. Exact Common V2.2 898–912 declares generic UnsubscribeRequest/UnsubscribeResponse elements and complex types.",
+        "Bilingual original SMS V2.2 foreword p4 explicitly states technical operations in English only; one PDF not separate DE/EN technical editions. No speculative predecessor/corrected successor or latest-wins substitution.",
+        "Existing EV146 original run34026822637 and closure34026992744, EV116 run33269006407 historical SUCCESS/PASS; current block adds visual/body/version evidence only, no new XML instance tests."
+      ],
+      "scope_conclusion": "The exact official VDV-Schrift 301-2-18 SystemMonitoringService V2.2 (08/2019) contains on original printed p9 §2.1 Table1 two missing Req./Resp. labels in the UnsubscribeServiceStatus rows; UnsubscribeRequestStructure and UnsubscribeResponseStructure are both actually printed and present in exact official Common V2.2. Official catalog 2026-11-23 has one dedicated SMS 301-2-18 V2.2 and no independently verified earlier standalone SMS or later corrected standalone SMS release. Neighboring generic Common releases do not create separate SMS publication lanes. One bilingual document with English technical operations and one defective table, not separately affected DE/EN editions. Exact selected service/Common/Enums official VDV-301-2.2 blobs match integration branch; no schema/runtime effect, no imagined missing operation.",
+      "note": "First and last only verified dedicated SMS edition V2.2. Distinct p11 §2.7 UnsubscribeSystemStatus section title kept independent from missing labels in p9 Table1. No later fixed edition proved, no alternate version inferred.",
+      "boundary_checks": [
+        {
+          "version": "Prior to dedicated SMS V2.2 301-2-18",
+          "role": "dedicated_predecessor_not_independently_verified",
+          "language_status": "No earlier standalone SMS 301-2-18 publication in official VDV index checked 2026-11-23. Other base services or Common editions do not count as same SMS service release or separate language lanes.",
+          "source_ids": [
+            "SMS_V2.2"
+          ]
+        },
+        {
+          "version": "Dedicated VDV 301-2-18 SystemMonitoringService V2.2 (08/2019)",
+          "role": "first_last_only_independently_verified_affected_publication",
+          "language_status": "One bilingual official PDF, technical operations only English; original p9 §2.1 Table1 visible UnsubscribeServiceStatus request/response structure rows both present with two missing Req./Resp. middle-column labels.",
+          "source_ids": [
+            "SMS_V2.2"
+          ]
+        },
+        {
+          "version": "Official VDVde/VDV301@VDV-301-2.2 SMS/Common/Enums selected dependency profile",
+          "role": "official_exact_executable_authority_verified",
+          "language_status": "Source-pin official SMS Service XSD includes exact Common V2.2 with generic UnsubscribeRequestStructure and UnsubscribeResponseStructure, plus exact Enums V2.2. XML behavior unaffected by bilingual PDF table labels.",
+          "source_ids": [
+            "SMS_V2.2"
+          ]
+        },
+        {
+          "version": "Subsequent to standalone SMS V2.2 301-2-18",
+          "role": "corrected_successor_not_independently_verified",
+          "language_status": "Official VDV index lists no later dedicated SMS edition; generic Common V2.3/V2.4, other service revisions and candidate profiles cannot be treated as SMS correction without exact published evidence.",
           "source_ids": [
             "SMS_V2.2"
           ]
