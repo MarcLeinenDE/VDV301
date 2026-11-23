@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1",
-  "date": "2026-11-22",
+  "date": "2026-11-23",
   "state": "complete",
   "purpose": "Track standardized visible-body revalidation of all source-locator-complete findings. This is separate from structural locator completeness.",
   "rule_document": "00_START_HERE/AUDIT_WORKFLOW_CONTRACT.md",
@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 111,
-    "verified_current_standard": 111,
+    "tracked_findings": 112,
+    "verified_current_standard": 112,
     "pending_current_standard": 0
   },
   "entries": [
@@ -1152,6 +1152,22 @@
         "EV-146 and closure run34026992744 both SUCCESS verified; PDF-only Word bookmark error no new executable XML test or runtime change."
       ],
       "note": "SHA-verified original historical EV146 render visibly re-inspected. Printed broken bookmark is inside the visible table of contents itself, not TOC-derived section inference. No raw PDF re-download claimed."
+    },
+    {
+      "finding_id": "DRSMS22-002",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRSMS22_002_2026-11-23.md",
+        "Official SMS_V2.2 pinned original PDF sha256 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4 / 847416B. Historical original EV-146 run34026822637 artifact9987318510 ZIP sha256 181ff01b16dae43ec2826299e6f14717aef1668d66491b6051ae07661ee607f6 freshly recalculated 2026-11-23. No fresh original raw PDF download claimed.",
+        "Visible p10 original §2.5.2 Response / Table4 SystemMonitoringService.GetServiceStatusResponse: header falsely 'service state of all devices', data row falsely 'device state of all services'. Page10 PNG sha256 97bf0974fa9a1ef98fed84d6c7c844afa804a7091d29061affbe5359205cc563 rehashed and independently visually inspected.",
+        "Visible original p11 continuing §2.5.2 Response / Table5 SystemMonitoringService.GetServiceStatusResponseData top says 'device state of all services', while the same visible table correctly lists ServiceIdentificationWithStateList. Page11 PNG sha256 02b26dddd0fa57785ee5e35757a03dc6f1b1a595ae006cdb5ffe66481b4a2b7f rehashed and visually inspected.",
+        "Visible original p9 §2.1 Table1 distinguishes GetDeviceStatus and GetServiceStatus, PNG sha256 6f813ae55fd3acc28e99f055978c504b9759e03b1cfb52a133adaf696a2f3b79 rehashed and visually inspected. On p10 §2.2.2 Tables2/3 device-status wording fits DeviceStatus operation; establishes copy/paste context.",
+        "Web PDF screenshot cache miss, so eligible already-hash-pinned EV146 original 180dpi render fallback used; original PDF raw not redownloaded. Extracted layout/raw text secondary only, target pages actually visibly viewed.",
+        "Exact official VDVde/VDV301@VDV-301-2.2 SMS XSD blob d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c (GetServiceStatusData member ServiceIdentificationWithStateList at line40), Common V2.2 blob 468fee6d177e7185dbcd5d3f90cfb114e29e01ae (ServiceIdentification+ServiceState 490–499; device member in different structure 267–275), Enum V2.2 blob 2a23b512379b18e8f122ac1272cef8229fb86283; checked identical upstream release tag and work branch.",
+        "VDV official catalog https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-23 only dedicated SMS V2.2 publication, one bilingual issue with English-only technical operations; no separate predecessors or corrected successors verified.",
+        "Existing EV-146 and closure34026992744 and EV-116 run33269006407 SUCCESS checked, no new XML test. Misnamed p10 §2.5 GetSystemStatus heading belongs distinct SMS-002 frozen ID, not duplicated."
+      ],
+      "note": "Original printed p9 Table1, p10 Table4 and p11 Table5 actually visually inspected via SHA-verified original 180dpi EV146 artifact; actual body location not inferred from TOC, three exact description cells recognized. Copy/paste PDF prose only, ServiceState model unaffected; no new XML/runtime rule."
     }
   ]
 }

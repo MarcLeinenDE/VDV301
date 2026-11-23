@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 111,
-    "coverage_complete_count": 111,
+    "locator_entry_count": 112,
+    "coverage_complete_count": 112,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 81
+    "remaining_finding_count": 80
   },
   "entries": [
     {
@@ -22028,6 +22028,149 @@
         "Official VDV catalog https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-22: dedicated SystemMonitoringService only V2.2; one bilingual publication.",
         "Official tag VDV-301-2.2 service/common/enums XSD blobs match dev/schema-integration.",
         "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRSMS22_2026-09-06.md; EV-146 closure run34026992744 SUCCESS; no executable effect."
+      ]
+    },
+    {
+      "finding_id": "DRSMS22-002",
+      "service": "SystemMonitoringService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemMonitoringService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Exact official VDV-301-2.2 SystemMonitoringService schema family. Common V2.2 supplies the authoritative ServiceIdentificationWithState/ServiceState structure used to falsify the device-wording interpretation."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "first_last_only_verified_standalone_301_2_18_sms_edition",
+          "pdf_locators": [
+            {
+              "source_id": "SMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-18 SystemMonitoringService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx",
+              "sha256": "996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4",
+              "printed_pages": [
+                9
+              ],
+              "section": "§2 Operations of the SystemMonitoringService / §2.1 Operationen SystemMonitoringService",
+              "table": "Tabelle 1",
+              "point_summary": "Visible p9 Table1 separates GetDeviceStatus/response from GetServiceStatus/response; exact printed original PNG SHA256 6f813ae55fd3acc28e99f055978c504b9759e03b1cfb52a133adaf696a2f3b79; supporting operation-context and alias disproof."
+            },
+            {
+              "source_id": "SMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-18 SystemMonitoringService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx",
+              "sha256": "996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4",
+              "printed_pages": [
+                10
+              ],
+              "section": "§2.5 Data Structure of Operation GetSystemStatus / §2.5.2 Response",
+              "table": "Table 4",
+              "point_summary": "Visible original p10 Table4 SystemMonitoringService.GetServiceStatusResponse header incorrectly says 'service state of all devices in the system'; member a GetServiceStatusResponseData wrongly says 'device state of all services in the system'. The misnamed §2.5 title GetSystemStatus is separate SMS-002, not a new DRSMS22-002 claim. Same-page Tables2–3 correctly describe actual device status. Page PNG SHA256 97bf0974fa9a1ef98fed84d6c7c844afa804a7091d29061affbe5359205cc563."
+            },
+            {
+              "source_id": "SMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-18 SystemMonitoringService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx",
+              "sha256": "996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4",
+              "printed_pages": [
+                11
+              ],
+              "section": "§2.5.2 Response (continuation from original printed p10)",
+              "table": "Table 5",
+              "point_summary": "Visible original printed p11 Table5 SystemMonitoringService.GetServiceStatusResponseData describes 'device state of all services in the system' instead of service state. Actual member ServiceIdentificationWithStateList in same table is correctly named. Page PNG SHA256 02b26dddd0fa57785ee5e35757a03dc6f1b1a595ae006cdb5ffe66481b4a2b7f."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_SystemMonitoringService_V2.2.xsd",
+              "git_blob": "d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-2.2 official release-tag blob, byte-identical to dev/schema-integration, historical dependency route preserved",
+              "component_kind": "complexType",
+              "component": "SystemMonitoringService.GetServiceStatusResponseDataStructure",
+              "member": "ServiceIdentificationWithStateList -> ServiceIdentificationWithStateListStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SystemMonitoringService.GetServiceStatusResponseDataStructure']",
+              "line_hint": "37–42",
+              "point_summary": "Official GetServiceStatus data includes TimeStamp and ServiceIdentificationWithStateList, not DeviceSpecificationWithStateList; explicit direct Common/Enums V2.2 includes lines5–6."
+            },
+            {
+              "file": "IBIS-IP_SystemMonitoringService_V2.2.xsd",
+              "git_blob": "d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-2.2 official release-tag blob, byte-identical to dev/schema-integration, historical dependency route preserved",
+              "component_kind": "complexType",
+              "component": "SystemMonitoringService.GetDeviceStatusResponseDataStructure",
+              "member": "DeviceSpecificationWithStateList -> DeviceSpecificationWithStateListStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SystemMonitoringService.GetDeviceStatusResponseDataStructure']",
+              "line_hint": "23–28",
+              "point_summary": "Device-status operation has separate device-list member, demonstrating service/device split within exact official SMS XSD."
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-2.2 official release-tag blob, byte-identical to dev/schema-integration, historical dependency route preserved",
+              "component_kind": "complexType",
+              "component": "ServiceIdentificationWithStateStructure",
+              "member": "ServiceIdentification; ServiceState",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='ServiceIdentificationWithStateStructure']",
+              "line_hint": "490–495",
+              "point_summary": "Official Common service-state structure contains ServiceIdentification plus ServiceState; no DeviceState member."
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-2.2 official release-tag blob, byte-identical to dev/schema-integration, historical dependency route preserved",
+              "component_kind": "complexType",
+              "component": "ServiceIdentificationWithStateListStructure",
+              "member": "ServiceIdentificationWithState",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='ServiceIdentificationWithStateListStructure']",
+              "line_hint": "496–500",
+              "point_summary": "Exact ServiceIdentifications list carries ServiceIdentificationWithState elements, no device-state switch."
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-2.2 official release-tag blob, byte-identical to dev/schema-integration, historical dependency route preserved",
+              "component_kind": "complexType",
+              "component": "DeviceSpecificationWithStateStructure",
+              "member": "DeviceSpecification; DeviceState",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DeviceSpecificationWithStateStructure']",
+              "line_hint": "267–272",
+              "point_summary": "Independent legitimate device-state type in same exact Common V2.2 confirms the PDF device terms were copied into the wrong ServiceStatus descriptions."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-2.2 official release-tag blob, byte-identical to dev/schema-integration, historical dependency route preserved",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "Exact direct V2.2 enumerations include",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "5",
+              "point_summary": "Exact selected direct Enumerations V2.2 dependency kept; no latest-wins and no new enum or runtime rule from PDF prose."
+            }
+          ],
+          "coverage_note": "The only current official standalone VDV 301-2-18 SystemMonitoringService publication is V2.2 (one bilingual document, technical operations English only). PDF p10 Table4 has TWO distinct mismatched description cells and p11 Table5 has one; real visible target pages/tables verified. Original p9 Table1 and p10 Device tables disprove alternate device semantics. No standalone prior/revised successor independently evidenced. GetSystemStatus section-title typo tracked separately as SMS-002."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRSMS22_002_2026-11-23.md",
+        "Exact official SMS_V2.2 source pin PDF sha256 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4 / 847416 bytes; PDF raw not freshly redownloaded or rehashed.",
+        "EV-146 original official source-pinned 180dpi render run34026822637 SUCCESS artifact9987318510 ZIP sha256 181ff01b16dae43ec2826299e6f14717aef1668d66491b6051ae07661ee607f6 freshly rehashed 2026-11-23; visually reviewed PNGs p9 6f813ae55fd3acc28e99f055978c504b9759e03b1cfb52a133adaf696a2f3b79 / p10 97bf0974fa9a1ef98fed84d6c7c844afa804a7091d29061affbe5359205cc563 / p11 02b26dddd0fa57785ee5e35757a03dc6f1b1a595ae006cdb5ffe66481b4a2b7f; hashes verified vs EV146 manifest.",
+        "VDV current official publication index https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-23 lists only standalone 301-2-18 SMS V2.2, single bilingual PDF with technical operations English only.",
+        "Exact official VDVde/VDV301@VDV-301-2.2 selected SMS/Common/Enumerations three Git blobs independently fetched and matched working branch; no latest-wins.",
+        "Existing EV-146 run34026822637 and closure34026992744 SUCCESS; EV-116 run33269006407 SUCCESS; no new executable XML tests for documentation-only service/device mix-up.",
+        "Prior frozen report docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_DRSMS22_2026-09-06.md and deep_read/SMS_V2.2.md; §2.5 GetSystemStatus heading is existing SMS-002, not double-counted."
       ]
     }
   ]

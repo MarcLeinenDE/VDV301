@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 111,
-    "verified": 111,
+    "tracked_findings": 112,
+    "verified": 112,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -6532,6 +6532,54 @@
           "version": "After dedicated SMS V2.2",
           "role": "corrected_successor_not_independently_verified",
           "language_status": "No later official standalone 301-2-18 SMS publication in VDV index; no silent assumption of fix in general/candidate versions.",
+          "source_ids": [
+            "SMS_V2.2"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRSMS22-002",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRSMS22_002_2026-11-23.md",
+        "Official VDV catalog https://www.vdv.de/ip-kom-oev.aspx inspected 2026-11-23: only one dedicated 301-2-18 SystemMonitoringService V2.2 (08/2019) listed; no independently verified earlier standalone SMS or later corrected standalone SMS PDF.",
+        "Exact original SMS_V2.2 PDF pinned sha256 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4 / 847416B, printed p9 Table1 and p10 §2.5.2 Table4 and p11 §2.5.2 Table5 visibly checked in existing EV-146 original render; ZIP sha256 181ff01b16dae43ec2826299e6f14717aef1668d66491b6051ae07661ee607f6 and p9/p10/p11 PNG hashes freshly rechecked 2026-11-23.",
+        "VDVde/VDV301 tag VDV-301-2.2 SMS service d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c, exact Common V2.2 468fee6d177e7185dbcd5d3f90cfb114e29e01ae, Enumerations V2.2 2a23b512379b18e8f122ac1272cef8229fb86283 upstream tags each Git blob matched selected branch files; service data member line40 and Common ServiceIdentificationWithStateStructure lines490-499 confirm service state vs device state.",
+        "Official SMS V2.2 foreword describes one bilingual German/English document, technical operation descriptions English-only; no separately versioned language publication found.",
+        "Historical EV-146 run34026822637 SUCCESS, closure run34026992744 SUCCESS, EV-116 run33269006407 SUCCESS. No raw PDF reread/download or new XML instance behavior tests claimed."
+      ],
+      "scope_conclusion": "Finding exists in the dedicated official VDV-Schrift 301-2-18 SystemMonitoringService V2.2 (08/2019), on visible printed p10 §2.5.2/Table4 and p11 continuation/Table5: three prose device/service misattributions. Only standalone SMS V2.2 is currently published in official VDV index (checked 2026-11-23); neither prior separate SMS publication nor corrected successor independently verified, no inferred historical or later affected release. One bilingual publication with English technical operations, not separate German and English technical PDF editions. Exact official VDV-301-2.2 Service/Common/Enum XSD dependency route confirms ServiceState and no XML impact; later/neighbor candidate editions do not alter historical authority.",
+      "note": "Explicit start/end evidence and language status; no latest-XSD-wins. Do not widen to distinct PDF operation-name mistake SMS-002 (GetSystemStatus heading) or unrelated DRSMS22 findings.",
+      "boundary_checks": [
+        {
+          "version": "Before dedicated SystemMonitoringService V2.2",
+          "role": "standalone_predecessor_not_independently_verified",
+          "language_status": "Current official VDV catalog has no earlier standalone 301-2-18 SMS publication. General earlier base services are not exact SMS edition predecessors; no unsupported DE/EN version assertion.",
+          "source_ids": [
+            "SMS_V2.2"
+          ]
+        },
+        {
+          "version": "VDV-Schrift 301-2-18 SystemMonitoringService V2.2 (08/2019)",
+          "role": "first_last_only_verified_affected_publication",
+          "language_status": "One bilingual official release, technical operations in English; printed p10 Table4 and p11 Table5 contain device-vs-service wording even though ServiceIdentificationWithStateList element is correct.",
+          "source_ids": [
+            "SMS_V2.2"
+          ]
+        },
+        {
+          "version": "Official VDVde/VDV301@VDV-301-2.2 selected service/Common/Enum XSD",
+          "role": "verified_historical_executable_dependency_context",
+          "language_status": "Official SMS service XSD and Common/Enumerations V2.2 blobs independently identical to branch; single schema semantics ServiceIdentification+ServiceState, not DeviceState in the ServiceStatus list.",
+          "source_ids": [
+            "SMS_V2.2"
+          ]
+        },
+        {
+          "version": "After dedicated SystemMonitoringService V2.2",
+          "role": "corrected_successor_not_independently_verified",
+          "language_status": "No separately published later official SMS 301-2-18 edition in current VDV catalog, so no speculative correction boundary or later-language fix.",
           "source_ids": [
             "SMS_V2.2"
           ]
