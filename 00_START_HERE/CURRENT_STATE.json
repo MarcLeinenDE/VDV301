@@ -2127,8 +2127,8 @@
     "version_scope_boundary_latest_gate_run_id": 45381853952
   },
   "next_actions": [
-    "Verify existing pdf-render-fallback run for TRAINSET_V2.1 original pages 42,45, retrieve and visually inspect SHA-pinned artifact; then separately render TRAINSET_V2.2 real body pages 44,47. Reconcile historical frozen duplicate IDs without loss and with exact current version scope; only then complete DRTRAINSET21-001.",
-    "No terminal completion until actual source-pinned printed §10 pages visually verified, cross-version duplicate explicitly reconciled, and full gates plus separate final terminal_clean HEAD succeed."
+    "Await V2.2 pinned pdf-render-fallback for pages 44,47; verify rendered zip and live original SHA, visually inspect actual §9.1 and §10 body; then reconcile frozen duplicate IDs and update canonical audit registers with full gates.",
+    "Next frozen DRTRAINSET21-001 remains active gate_pending, counter 117/192; DRTRAINSET22-001 legacy duplicate must be reconciled before count increase."
   ],
   "source_locator_progress": {
     "locator_entry_count": 117,
@@ -2211,19 +2211,21 @@
     "latest_completed_full_gate_run_id": 45381853952,
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": 45381854129,
-    "resume_instruction": "Verify existing pdf-render-fallback run for TRAINSET_V2.1 original pages 42,45, retrieve and visually inspect SHA-pinned artifact; then separately render TRAINSET_V2.2 real body pages 44,47. Reconcile historical frozen duplicate IDs without loss and with exact current version scope; only then complete DRTRAINSET21-001. Current canonical branch dev/schema-integration should remain gate_pending. Historical original V2.1 05/2018 PDF pin 8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e /1708401B, V2.2 08/2019 pin c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e /1744296B. DRTRAINSET22-001 already separately frozen as exact same error; do not invent new ID or silently delete history.",
+    "resume_instruction": "Await V2.2 pinned pdf-render-fallback for pages 44,47; verify rendered zip and live original SHA, visually inspect actual §9.1 and §10 body; then reconcile frozen duplicate IDs and update canonical audit registers with full gates. V2.1 render artifact #14915538304 SHA fadf50916447af0f62a950f382f0b02ad788cdf1726178f746adef3d0b007e73 PNG p42 c02cc4a26a337081fb8f50c13fe2f5166c96501a9294bef89207bc0d3919f45d p45 f726e78d81ffce9641c7de330dca1b42f9976606be29c2615a32b9abcb80390d. No credit, no distinct duplicate identity creation.",
     "pending_block": "DRTRAINSET21-001",
     "active_finding": "DRTRAINSET21-001",
-    "active_step": "Started frozen DRTRAINSET21-001, detected confirmed V2.1/V2.2 same bilingual 9.1 pointer and legacy duplicate DRTRAINSET22-001; exact original EV148 and EV149 ZIP/source-bound original p6/p9/p10 image hashes independently reverified. Requesting pinned PDF original V2.1 real body §9.1 p42 and §10 p45 via repository-mandated renderer; no progress credits yet (117/192).",
-    "next_step": "Verify existing pdf-render-fallback run for TRAINSET_V2.1 original pages 42,45, retrieve and visually inspect SHA-pinned artifact; then separately render TRAINSET_V2.2 real body pages 44,47. Reconcile historical frozen duplicate IDs without loss and with exact current version scope; only then complete DRTRAINSET21-001.",
+    "active_step": "Exact V2.1 official raw PDF hash re-verified by pinned renderer #45385075482 source_sha 8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e, original p42 §9.1 and p45 §10 visual PNGs freshly hash-verified and manually inspected. Now request exact V2.2 p44 §9.1 / p47 §10 separate official source proof, with legacy duplicate DRTRAINSET22-001 still open for reconciliation. No source-locator completion credited yet.",
+    "next_step": "Await V2.2 pinned pdf-render-fallback for pages 44,47; verify rendered zip and live original SHA, visually inspect actual §9.1 and §10 body; then reconcile frozen duplicate IDs and update canonical audit registers with full gates.",
     "evidence_refs": [
       "audit_registry/drtrainset21_revalidation_evidence_2026-09-06.json",
       "audit_registry/drtrainset22_revalidation_evidence_2026-09-06.json",
       "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
       "https://www.vdv.de/vdv-301-2-14-v2-1-sds-trainsetservices.pdfx",
-      "https://www.vdv.de/301-2-14-sdes-v2-2-trainsetservices.pdfx"
+      "https://www.vdv.de/301-2-14-sdes-v2-2-trainsetservices.pdfx",
+      "https://github.com/MarcLeinenDE/VDV301/actions/runs/45385075482",
+      "artifact:14915538304"
     ],
-    "recovery_instruction": "Verify existing pdf-render-fallback run for TRAINSET_V2.1 original pages 42,45, retrieve and visually inspect SHA-pinned artifact; then separately render TRAINSET_V2.2 real body pages 44,47. Reconcile historical frozen duplicate IDs without loss and with exact current version scope; only then complete DRTRAINSET21-001. Current canonical branch dev/schema-integration should remain gate_pending. Historical original V2.1 05/2018 PDF pin 8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e /1708401B, V2.2 08/2019 pin c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e /1744296B. DRTRAINSET22-001 already separately frozen as exact same error; do not invent new ID or silently delete history."
+    "recovery_instruction": "Await V2.2 pinned pdf-render-fallback for pages 44,47; verify rendered zip and live original SHA, visually inspect actual §9.1 and §10 body; then reconcile frozen duplicate IDs and update canonical audit registers with full gates. V2.1 render artifact #14915538304 SHA fadf50916447af0f62a950f382f0b02ad788cdf1726178f746adef3d0b007e73 PNG p42 c02cc4a26a337081fb8f50c13fe2f5166c96501a9294bef89207bc0d3919f45d p45 f726e78d81ffce9641c7de330dca1b42f9976606be29c2615a32b9abcb80390d. No credit, no distinct duplicate identity creation."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
