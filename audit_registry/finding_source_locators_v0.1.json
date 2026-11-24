@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "cf114c4c37a6c12ca6c6f12d7ef62931c6a3abf4",
+    "git_blob": "1bfef64820bd19d4a029690a11876db60652bc09",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 118,
-    "coverage_complete_count": 118,
+    "locator_entry_count": 119,
+    "coverage_complete_count": 119,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 74
+    "remaining_finding_count": 73
   },
   "entries": [
     {
@@ -22773,6 +22773,193 @@
         "Official V2.2 byte-pinned PDF source https://www.vdv.de/301-2-14-sdes-v2-2-trainsetservices.pdfx SHA c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e 1744296 bytes; original historic EV ZIP run 34029942365 artifact 9988263849 SHA 3bdc68e04a41da03d6d8b84bcc42cf846f58c49ef79a1266741bfa904f08e04e freshly downloaded; new exact source binary verified runner 45385413997 artifact 14916695301 archive SHA 10fa5e41b734228f81e9f1045d92338ed38b7c3a0a8a7639dc9e431339324b46; real §9.1 and §10 visibly examined with SHA image hashes.",
         "Official VDVde/VDV301 release tags VDV-301-2.1/VDV-301-2.2 six exact TrainSet service XSD blobs matched current work file blobs; no XML runtime rule.",
         "Frozen inventory 192 provenance IDs retained; DRTRAINSET22-001 is legacy duplicate of canonical DRTRAINSET21-001 logical defect (not a new semantic issue)."
+      ]
+    },
+    {
+      "finding_id": "DRTRAINSET21-002",
+      "service": "TrainSetServices",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TrainSetInformationService_V2.1.xsd + IBIS-IP_TrainSetManagementService_V2.1.xsd + IBIS-IP_TrainSetDataService_V2.1.xsd",
+          "note": "Exact official VDV-301-2.1 TrainSet service family. Exact operation inventories are used to falsify the PDF's TrainSetDataService attribution."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TrainSetInformationService_V2.2.xsd + IBIS-IP_TrainSetManagementService_V2.2.xsd + IBIS-IP_TrainSetDataService_V2.2.xsd",
+          "note": "Official V2.2 retains the identical service-attribution error in §9.1.4 p46. Exact service XSD inventories disprove the attribution; same logical defect, no new ID."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "first_affected_official_version",
+          "pdf_locators": [
+            {
+              "source_id": "TRAINSET_V2.1",
+              "document_title": "VDV-Schrift 301-2-14 TrainSetServices V2.1 (05/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/vdv-301-2-14-v2-1-sds-trainsetservices.pdfx",
+              "sha256": "8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e",
+              "printed_pages": [
+                44
+              ],
+              "section": "§9.1.4 Possible implementation for non-OBU devices in the coach IP network",
+              "table": null,
+              "point_summary": "Wrong TrainSetDataService attribution; original EV148 PNG SHA ac44110da51217c7e2c9dbee4a30c8ad8eb49964722495a7a4f3c144570ed7fc."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TrainSetInformationService_V2.1.xsd",
+              "git_blob": "897f373e31b76aa23d8bc206854b042524e4c102",
+              "authority_detail": "Exact official VDVde/VDV301 tag VDV-301-2.1; work file blob identical on 2026-11-24.",
+              "component_kind": "element",
+              "component": "TrainSetInformationService.GetTrainSetCompositionResponse",
+              "member": null,
+              "xpath_hint": "/xs:schema/xs:element[@name='TrainSetInformationService.GetTrainSetCompositionResponse']",
+              "line_hint": "36",
+              "point_summary": "Global composition response uses TrainSetInformationService.GetTrainSetCompositionResponseStructure."
+            },
+            {
+              "file": "IBIS-IP_TrainSetManagementService_V2.1.xsd",
+              "git_blob": "add9d1cb37e5759ff7a77855b239108d38373206",
+              "authority_detail": "Exact official VDVde/VDV301 tag VDV-301-2.1; work file blob identical on 2026-11-24.",
+              "component_kind": "element",
+              "component": "TrainSetManagementService.GetTrainSetComposition",
+              "member": null,
+              "xpath_hint": "/xs:schema/xs:element[@name='TrainSetManagementService.GetTrainSetComposition']",
+              "line_hint": "44",
+              "point_summary": "Global composition response uses the same TSI structure. Historical root/group naming differences are separately tracked."
+            },
+            {
+              "file": "IBIS-IP_TrainSetDataService_V2.1.xsd",
+              "git_blob": "c2cdb73fcae265a2e4e0349ac6072e3548e36d8b",
+              "authority_detail": "Exact official VDVde/VDV301 tag VDV-301-2.1; work file blob identical on 2026-11-24.",
+              "component_kind": "group",
+              "component": "TrainSetDataServiceOperations",
+              "member": null,
+              "xpath_hint": "/xs:schema/xs:group[@name='TrainSetDataServiceOperations']",
+              "line_hint": "8-27; globals 34-69",
+              "point_summary": "TripRef and TripInformation only; no TrainSetComposition operation. Generic subscription context is not a local Composition alias."
+            }
+          ],
+          "coverage_note": "EV-148 run 34029363792 artifact 9988086415 ZIP sha256 c4e963de40e4684a9625644f9df2fc8f63ebedc8b2bba38736e83723d1c8dfea, p44 PNG ac44110da51217c7e2c9dbee4a30c8ad8eb49964722495a7a4f3c144570ed7fc; rehashed and visually inspected. Raw source pin historical EV148, also raw PDF SHA reverified earlier today in run 45385075482. Exact official service XSD inventory counter-context; no change to executable XML."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "last_available_affected_official_version",
+          "pdf_locators": [
+            {
+              "source_id": "TRAINSET_V2.2",
+              "document_title": "VDV-Schrift 301-2-14 TrainSetServices V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-14-sdes-v2-2-trainsetservices.pdfx",
+              "sha256": "c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e",
+              "printed_pages": [
+                46
+              ],
+              "section": "§9.1.4 Possible implementation for non-OBU devices in the coach IP network",
+              "table": null,
+              "point_summary": "Wrong TrainSetDataService attribution; visible original PNG SHA 2723da34cbce712dfabc1b3c234a3706607da79ae70476c809c6780f0bbe509b."
+            },
+            {
+              "source_id": "TRAINSET_V2.2",
+              "document_title": "VDV-Schrift 301-2-14 TrainSetServices V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-14-sdes-v2-2-trainsetservices.pdfx",
+              "sha256": "c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e",
+              "printed_pages": [
+                31
+              ],
+              "section": "§5.5.3 GetTrainSetComposition / §5.5.3.2 Response",
+              "table": null,
+              "point_summary": "ManagementService explicitly uses identical InformationService composition data structure; PNG SHA f943094a9017c9ff85c96fad24bcd84080c9be52ac4a11e18365037e0a9ebce7."
+            },
+            {
+              "source_id": "TRAINSET_V2.2",
+              "document_title": "VDV-Schrift 301-2-14 TrainSetServices V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-14-sdes-v2-2-trainsetservices.pdfx",
+              "sha256": "c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e",
+              "printed_pages": [
+                24
+              ],
+              "section": "§4.5 Operations of the TrainSetInformationService",
+              "table": null,
+              "point_summary": "Unnumbered operation table: Get/Subscribe/UnsubscribeTrainSetComposition; PNG SHA f819a26753e9184af5e3aef00b19eed7fb8f55de8ae4dcb940f8ded4c9c08a18."
+            },
+            {
+              "source_id": "TRAINSET_V2.2",
+              "document_title": "VDV-Schrift 301-2-14 TrainSetServices V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-14-sdes-v2-2-trainsetservices.pdfx",
+              "sha256": "c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e",
+              "printed_pages": [
+                34,
+                35
+              ],
+              "section": "§6.5 Operations of the TrainSetDataService",
+              "table": null,
+              "point_summary": "Unnumbered operation table continued on p35: only TripRef/TripInformation Retrieve/Subscribe/Unsubscribe; PNG SHA c36a63531665f7402b6e30a89d47dd68c953c75609570bcde426e0eaa2d182e8 and 1ebf2110417f00967a005d30f1a06b395a2dfddbe2942c13662e02dc62d7e3c0."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TrainSetInformationService_V2.2.xsd",
+              "git_blob": "7ab1f8f892bfcea2a8b8a055f07de92c143356f9",
+              "authority_detail": "Exact official VDVde/VDV301 tag VDV-301-2.2; work file blob identical on 2026-11-24.",
+              "component_kind": "element",
+              "component": "TrainSetInformationService.GetTrainSetCompositionResponse",
+              "member": null,
+              "xpath_hint": "/xs:schema/xs:element[@name='TrainSetInformationService.GetTrainSetCompositionResponse']",
+              "line_hint": "36",
+              "point_summary": "Global composition response uses TrainSetInformationService.GetTrainSetCompositionResponseStructure."
+            },
+            {
+              "file": "IBIS-IP_TrainSetManagementService_V2.2.xsd",
+              "git_blob": "da9465d6683e3f7d54a546ab4a13739fb3c3e902",
+              "authority_detail": "Exact official VDVde/VDV301 tag VDV-301-2.2; work file blob identical on 2026-11-24.",
+              "component_kind": "element",
+              "component": "TrainSetManagementService.GetTrainSetCompositionResponse",
+              "member": null,
+              "xpath_hint": "/xs:schema/xs:element[@name='TrainSetManagementService.GetTrainSetCompositionResponse']",
+              "line_hint": "44",
+              "point_summary": "Global composition response uses the same TSI structure. Historical root/group naming differences are separately tracked."
+            },
+            {
+              "file": "IBIS-IP_TrainSetDataService_V2.2.xsd",
+              "git_blob": "7a132894c281d613e16514a6fa1bcbffe713d066",
+              "authority_detail": "Exact official VDVde/VDV301 tag VDV-301-2.2; work file blob identical on 2026-11-24.",
+              "component_kind": "group",
+              "component": "TrainSetDataServiceOperations",
+              "member": null,
+              "xpath_hint": "/xs:schema/xs:group[@name='TrainSetDataServiceOperations']",
+              "line_hint": "8-45; globals 52-98",
+              "point_summary": "TripRef and TripInformation only; no TrainSetComposition operation. Generic subscription context is not a local Composition alias."
+            }
+          ],
+          "coverage_note": "Run 45402521643 artifact 14922903550 ZIP SHA256 6e9fa8bbde483cb23c3548541c1a29ee4c012248980e547204d1610a6a37cf1f; exact raw PDF SHA c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e size 1744296; all nine PNG hashes/sizes verified; p24,31,34,35,46 visually inspected. Exact official service XSD inventory counter-context; no change to executable XML."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTRAINSET21_002_2026-11-24.md",
+        "EV-148 run 34029363792 artifact 9988086415 ZIP sha256 c4e963de40e4684a9625644f9df2fc8f63ebedc8b2bba38736e83723d1c8dfea, p44 PNG ac44110da51217c7e2c9dbee4a30c8ad8eb49964722495a7a4f3c144570ed7fc; rehashed and visually inspected. Raw source pin historical EV148, also raw PDF SHA reverified earlier today in run 45385075482.",
+        "Run 45402521643 artifact 14922903550 ZIP SHA256 6e9fa8bbde483cb23c3548541c1a29ee4c012248980e547204d1610a6a37cf1f; exact raw PDF SHA c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e size 1744296; all nine PNG hashes/sizes verified; p24,31,34,35,46 visually inspected.",
+        "Official VDV index https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-24 lists dedicated V2.1 and V2.2 only; no earlier or later dedicated edition found. §9.1.4 is the English technical body shared by the bilingual publication; no separate German §9.1.4 track.",
+        "All six official upstream exact service blobs checked 2026-11-24; same bytes in work branch."
       ]
     }
   ]

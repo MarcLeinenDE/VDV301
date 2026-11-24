@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 118,
-    "verified": 118,
+    "tracked_findings": 119,
+    "verified": 119,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -6849,6 +6849,53 @@
           "version": "After dedicated TrainSet V2.2",
           "role": "no_verified_corrected_successor",
           "language_status": "de/en: no later dedicated TrainSet 301-2-14 publication listed in official VDV catalogue as of 2026-11-24; no invented corrected boundary",
+          "source_ids": [
+            "TRAINSET_V2.2"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRTRAINSET21-002",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTRAINSET21_002_2026-11-24.md",
+        "EV-148 run 34029363792 artifact 9988086415 ZIP sha256 c4e963de40e4684a9625644f9df2fc8f63ebedc8b2bba38736e83723d1c8dfea, p44 PNG ac44110da51217c7e2c9dbee4a30c8ad8eb49964722495a7a4f3c144570ed7fc; rehashed and visually inspected. Raw source pin historical EV148, also raw PDF SHA reverified earlier today in run 45385075482.",
+        "Run 45402521643 artifact 14922903550 ZIP SHA256 6e9fa8bbde483cb23c3548541c1a29ee4c012248980e547204d1610a6a37cf1f; exact raw PDF SHA c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e size 1744296; all nine PNG hashes/sizes verified; p24,31,34,35,46 visually inspected.",
+        "Official VDV index https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-24 lists dedicated V2.1 and V2.2 only; no earlier or later dedicated edition found. §9.1.4 is the English technical body shared by the bilingual publication; no separate German §9.1.4 track.",
+        "All six official upstream exact service blobs checked 2026-11-24; same bytes in work branch."
+      ],
+      "note": "Independent full dedicated publication lineage verified; shared English technical body in bilingual editions; no separate German target section.",
+      "scope_conclusion": "V2.1 first and V2.2 last available affected edition. Same service attribution, one finding. No earlier/later dedicated publication established. Exact service XSDs disprove attribution; ManagementService likely intended.",
+      "boundary_checks": [
+        {
+          "version": "Before dedicated V2.1",
+          "role": "no_published_standalone_predecessor",
+          "language_status": "Official catalogue has no earlier dedicated edition.",
+          "source_ids": [
+            "TRAINSET_V2.1"
+          ]
+        },
+        {
+          "version": "V2.1",
+          "role": "first_affected_official",
+          "language_status": "Shared English technical §9.1.4 p44 verified; no separate German section.",
+          "source_ids": [
+            "TRAINSET_V2.1"
+          ]
+        },
+        {
+          "version": "V2.2",
+          "role": "last_available_affected_official",
+          "language_status": "Shared English technical §9.1.4 p46 verified; no separate German section.",
+          "source_ids": [
+            "TRAINSET_V2.2"
+          ]
+        },
+        {
+          "version": "After dedicated V2.2",
+          "role": "no_verified_corrected_successor",
+          "language_status": "No later dedicated edition listed.",
           "source_ids": [
             "TRAINSET_V2.2"
           ]

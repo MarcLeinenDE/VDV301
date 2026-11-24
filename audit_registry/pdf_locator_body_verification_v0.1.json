@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 118,
-    "verified_current_standard": 118,
+    "tracked_findings": 119,
+    "verified_current_standard": 119,
     "pending_current_standard": 0
   },
   "entries": [
@@ -1240,6 +1240,18 @@
         "Official V2.2 raw PDF SHA256 c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e size1744296, newly re-fetched and verified in runner 45385413997; original PDF §1 p9 DE PNG 136f14e5a5c653dd2a4d14c939fb8b7b8f704ddd50f6a2cdfc4fbf1c012ec7b3, §1 p10 EN PNG b0f432f0f36a6548d6409432babe9e135d2c4dae63c04f71eb54b0430e5b4d3b from archived exact source EV34029942365 verified and visibly reviewed; current original real §9.1 p44 PNG 8cbca3b18d79d27553e8bb48c85c94197f4eefba768b16ecf9ddd920db2ac976 and §10 p47 PNG 00053bbdc56a0bcc8784a39d63f74b0a361bd5e7e547ed3abe03b2568e35b004 from live exact-pinned fallback artifact 14916695301 SHA 10fa5e41b734228f81e9f1045d92338ed38b7c3a0a8a7639dc9e431339324b46, both images SHA-checked and visibly inspected 2026-11-24."
       ],
       "note": "Both official V2.1/V2.2 original visible German and English §1 overview item5 p9/p10 point incorrectly to 9.1; actual source-pinned §9.1 and §10 bodies separately visually confirmed through exact raw-PDF SHA-gated render. Historical duplicate ${mirror} linked, no second logical defect."
+    },
+    {
+      "finding_id": "DRTRAINSET21-002",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTRAINSET21_002_2026-11-24.md",
+        "EV-148 run 34029363792 artifact 9988086415 ZIP sha256 c4e963de40e4684a9625644f9df2fc8f63ebedc8b2bba38736e83723d1c8dfea, p44 PNG ac44110da51217c7e2c9dbee4a30c8ad8eb49964722495a7a4f3c144570ed7fc; rehashed and visually inspected. Raw source pin historical EV148, also raw PDF SHA reverified earlier today in run 45385075482.",
+        "Run 45402521643 artifact 14922903550 ZIP SHA256 6e9fa8bbde483cb23c3548541c1a29ee4c012248980e547204d1610a6a37cf1f; exact raw PDF SHA c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e size 1744296; all nine PNG hashes/sizes verified; p24,31,34,35,46 visually inspected.",
+        "Official VDV index https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-24 lists dedicated V2.1 and V2.2 only; no earlier or later dedicated edition found. §9.1.4 is the English technical body shared by the bilingual publication; no separate German §9.1.4 track.",
+        "All six official upstream exact service blobs checked 2026-11-24; same bytes in work branch."
+      ],
+      "note": "Original p44 V2.1 and p46 V2.2 visually inspected, V2.2 p24/p31/p34/p35 positive and negative controls visually inspected. Exact PNG hashes verified."
     }
   ]
 }

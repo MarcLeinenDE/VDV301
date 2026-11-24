@@ -11485,6 +11485,12 @@
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_TrainSetInformationService_V2.1.xsd + IBIS-IP_TrainSetManagementService_V2.1.xsd + IBIS-IP_TrainSetDataService_V2.1.xsd",
           "note": "Exact official VDV-301-2.1 TrainSet service family. Exact operation inventories are used to falsify the PDF's TrainSetDataService attribution."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TrainSetInformationService_V2.2.xsd + IBIS-IP_TrainSetManagementService_V2.2.xsd + IBIS-IP_TrainSetDataService_V2.2.xsd",
+          "note": "Official V2.2 retains the identical service-attribution error in §9.1.4 p46. Exact service XSD inventories disprove the attribution; same logical defect, no new ID."
         }
       ],
       "review_state": "manually_reviewed",
@@ -11517,20 +11523,28 @@
         {
           "type": "technical_inference",
           "note": "TrainSetManagementService is retained only as the likely intended reference. That inference is not used to rewrite schemas or synthesize TrainSetDataService composition aliases."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Official V2.2 printed p46 §9.1.4 repeats V2.1 p44's incorrect TrainSetDataService attribution. V2.2 p31 §5.5.3 explicitly identifies the shared composition structure of TrainSetManagementService and TrainSetInformationService; p24 §4.5 and p34–35 §6.5 show the operation inventories."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Exact V2.2 TrainSetDataService roots and operation group are confined to TripRef/TripInformation, including their subscriptions. TrainSetManagementService composition global response uses the TrainSetInformationService response structure; the V2.2 group retains the older name, separately tracked by TSM-002."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "TrainSet Services V2.1: falscher Service bei der Composition-Gegenüberstellung",
-          "short": "Die PDF schreibt gleichnamige TrainSetComposition-Operationen dem TrainSetDataService zu, obwohl dessen exakte V2.1-XSD solche Operationen nicht enthält.",
-          "long": "Auf Seite 44 behauptet die PDF, die Composition-Operationen des TrainSetInformationService lieferten dieselben Informationen wie gleichnamige Operationen des TrainSetDataService. Die exakte offizielle TrainSetDataService-V2.1-XSD enthält jedoch ausschließlich TripRef-/TripInformation-Operationen und keine TrainSetComposition-Operation. TrainSetManagementService besitzt im selben V2.1-Familienstand Composition-Kontext und ist daher die wahrscheinliche gemeinte Referenz; diese Einordnung wird aber nicht als Schema-Umschreibung verwendet.",
-          "recommendation": "Die TrainSetDataService-Zuordnung als PDF-Copy/Paste-Fehler behandeln. Keine TrainSetComposition-Operationen oder Aliase für TrainSetDataService erzeugen; für XML-Verhalten ausschließlich die exakten V2.1-XSD-Inventare verwenden."
+          "title": "TrainSet Services V2.1/V2.2: falscher Service bei der Composition-Gegenüberstellung",
+          "short": "In beiden Ausgaben ordnet §9.1.4 gleichnamige Composition-Operationen fälschlich dem TrainSetDataService zu.",
+          "long": "V2.1 S.44 und V2.2 S.46 schreiben dem TrainSetDataService Composition-Operationen zu. In beiden exakten offiziellen XSDs enthält dieser Dienst ausschließlich TripRef-/TripInformation-Operationen (V2.2 einschließlich Subscription-Operationen). V2.2 §5.5.3 S.31 bestätigt ausdrücklich die gemeinsame Composition-Datenstruktur von TrainSetManagementService und TrainSetInformationService. ManagementService ist damit die fachlich begründete wahrscheinliche Referenz, nicht eine autorisierte Änderung der Schrift. Der separate historische Response-Root-/Gruppen-Namenskonflikt bleibt unverändert.",
+          "recommendation": "Dokumentationsfehler in V2.1 und V2.2 behandeln; keine Composition-Operation oder Aliase für TrainSetDataService erzeugen. Exakte ausgewählte XSDs und generische Subscription-Regeln beachten."
         },
         "en": {
-          "title": "TrainSet Services V2.1: wrong service in the composition comparison",
-          "short": "The PDF attributes equally named TrainSetComposition operations to TrainSetDataService although its exact V2.1 XSD contains no such operations.",
-          "long": "Page 44 states that the TrainSetInformationService composition operations provide the same information as equally named operations of TrainSetDataService. The exact official TrainSetDataService V2.1 XSD exposes only TripRef/TripInformation operations and no TrainSetComposition operation. TrainSetManagementService has composition context in the same V2.1 family and is therefore the likely intended reference, but that inference is not used as a schema rewrite.",
-          "recommendation": "Treat the TrainSetDataService attribution as a PDF copy/paste defect. Do not create TrainSetComposition operations or aliases for TrainSetDataService; use only the exact V2.1 XSD inventories for XML behaviour."
+          "title": "TrainSet Services V2.1/V2.2: wrong service in the composition comparison",
+          "short": "Section 9.1.4 in both editions incorrectly attributes equally named composition operations to TrainSetDataService.",
+          "long": "V2.1 p44 and V2.2 p46 attribute composition operations to TrainSetDataService. Both exact official service schemas contain TripRef/TripInformation operations only (including subscription operations in V2.2). V2.2 §5.5.3 p31 explicitly establishes the shared composition data structure of TrainSetManagementService and TrainSetInformationService. ManagementService is the evidence-supported likely intended reference, not an authorised rewrite of the publication. Separate historical response-root and group-name issues remain unchanged.",
+          "recommendation": "Treat this as a documentation defect in V2.1 and V2.2. Do not create TrainSetDataService composition operations or aliases. Follow the exact selected schemas and generic subscription rules."
         }
       },
       "runtime_match": {
@@ -11567,9 +11581,23 @@
           "kind": "evidence",
           "reference": "EV-109 / run 33228250613 / tools/validate_trainset_v21_ev109.py",
           "note": "Current-safe exact-version executable counter-context; not used to turn this documentation finding into an XML defect."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TRAINSET_V2.2 / sha256 c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e / printed p24,31,34,35,46",
+          "note": "Original visible §9.1.4 affected occurrence and operation/structure controls."
+        },
+        {
+          "kind": "xsd",
+          "reference": "VDV-301-2.2 / TSI 7ab1f8f892bfcea2a8b8a055f07de92c143356f9 / TSM da9465d6683e3f7d54a546ab4a13739fb3c3e902 / TSD 7a132894c281d613e16514a6fa1bcbffe713d066"
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTRAINSET21_002_2026-11-24.md",
+          "note": "Independent exact-source boundary and body review 2026-11-24; renderer 45402521643."
         }
       ],
-      "notes": "Confirmed PDF service-attribution defect. TrainSetManagementService is only a likely intended reference; no schema rewrite or compatibility alias is created."
+      "notes": "Confirmed PDF service-attribution defect persists across V2.1/V2.2. Shared composition type and V2.2 §5.5.3 support ManagementService as likely intended reference, not official erratum. No runtime diagnostic, schema rewrite or compatibility alias. Adjacent spelling error DRTRAINSET21-003 remains a separate finding."
     },
     {
       "finding_id": "DRTRAINSET21-003",
