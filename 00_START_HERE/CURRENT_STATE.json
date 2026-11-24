@@ -2127,8 +2127,7 @@
     "version_scope_boundary_latest_gate_run_id": 45386863702
   },
   "next_actions": [
-    "DRTRAINSET21-001 terminal_clean at 118/192, preceding substantive Schema #45386863702 and Handoff #45386863758 SUCCESS; MUST verify both final new HEAD CI gates on this separate terminal_clean commit.",
-    "After both final HEAD gates SUCCESS, reviewed private ai-mem PR for V2.1/V2.2 cross-version same defect and DRTRAINSET22-001 historical mirror (not independent). NEXT DRTRAINSET21-002 not started."
+    "DRTRAINSET21-002: original V2.1 EV148 ZIP and page 44 PNG hashes verified and visually inspected; official live V2.2 extracted text p46 §9.1.4 repeats wrong TrainSetDataService attribution; web screenshot cache miss. Six official V2.1/V2.2 service XSD blobs match work repo; TSD has no composition operation, TSM and TSI share composition type. Request exact pinned V2.2 visual pages 24-26,30-31,34-35,45-46; verify manifest, original p46 and relevant service body controls; independently verify catalog boundary, reconcile scope, then canonical registers and both gates. DRTRAINSET21-003 adjacent spelling issue remains separate. No progress credit yet."
   ],
   "source_locator_progress": {
     "locator_entry_count": 118,
@@ -2206,12 +2205,22 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": 45386863702,
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": 45386863758,
-    "resume_instruction": "DRTRAINSET21-001 terminal_clean on dev/schema-integration: source-locator frozen ID entries 118/192, 118/118 exact original visible PDF bodies, 118/118 independent version boundaries, 74 remaining. NEXT DRTRAINSET21-002 NOT STARTED. Canonical one logical cross-version error DRTRAINSET21-001 covers V2.1+V2.2 (DE p9 and EN p10 item5 point examples to section9.1, actual §9.1 driving direction reinitialisation V2.1 p42 V2.2 p44, actual §10 Examples V2.1 p45 V2.2 p47). Exact official PDF raw SHA/size reverified in pinned GitHub render runs #45385075482 V2.1 / #45385413997 V2.2, original p9/p10 and real §9.1/§10 PNG images SHA-checked and visually inspected 2026-11-24. Six selected TrainSet service XSD blobs verified identical between official VDVde VDV-301-2.1/VDV-301-2.2 tags and work repo; documentation-only no XML/runtime impact. Historical frozen DRTRAINSET22-001 is legacy duplicate/mirror of same logical defect, not second independent error. Historical 192 means record IDs, not necessarily distinct logical causes; no history deleted. Main review docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTRAINSET21_001_2026-11-24.md; identity reconciliation docs/pdf_xsd_semantic_audit/IDENTITY_RECONCILIATION_DRTRAINSET21_001_DRTRAINSET22_001_2026-11-24.md. Substantive full Schema #45386863702 and Handoff #45386863758 success on 067a11a1825065bf8f0c7f40577cff7dde1c72b7. VERIFY BOTH FINAL terminal_clean HEAD CI gates before memory PR."
+    "resume_instruction": "DRTRAINSET21-002: original V2.1 EV148 ZIP and page 44 PNG hashes verified and visually inspected; official live V2.2 extracted text p46 §9.1.4 repeats wrong TrainSetDataService attribution; web screenshot cache miss. Six official V2.1/V2.2 service XSD blobs match work repo; TSD has no composition operation, TSM and TSI share composition type. Request exact pinned V2.2 visual pages 24-26,30-31,34-35,45-46; verify manifest, original p46 and relevant service body controls; independently verify catalog boundary, reconcile scope, then canonical registers and both gates. DRTRAINSET21-003 adjacent spelling issue remains separate. No progress credit yet.",
+    "pending_block": "DRTRAINSET21-002",
+    "active_finding": "DRTRAINSET21-002",
+    "active_step": "V2.1 original p44 visually verified, V2.2 text comparison and exact official six TrainSet service XSD blobs checked; requested V2.2 exact pinned render fallback",
+    "next_step": "DRTRAINSET21-002: original V2.1 EV148 ZIP and page 44 PNG hashes verified and visually inspected; official live V2.2 extracted text p46 §9.1.4 repeats wrong TrainSetDataService attribution; web screenshot cache miss. Six official V2.1/V2.2 service XSD blobs match work repo; TSD has no composition operation, TSM and TSI share composition type. Request exact pinned V2.2 visual pages 24-26,30-31,34-35,45-46; verify manifest, original p46 and relevant service body controls; independently verify catalog boundary, reconcile scope, then canonical registers and both gates. DRTRAINSET21-003 adjacent spelling issue remains separate. No progress credit yet.",
+    "evidence_refs": [
+      "audit_registry/drtrainset21_revalidation_evidence_2026-09-06.json",
+      "EV-148 run 34029363792 artifact 9988086415 ZIP sha256 c4e963de40e4684a9625644f9df2fc8f63ebedc8b2bba38736e83723d1c8dfea p44 PNG ac44110da51217c7e2c9dbee4a30c8ad8eb49964722495a7a4f3c144570ed7fc",
+      "tools/pdf_render_request_v0.1.json"
+    ],
+    "recovery_instruction": "DRTRAINSET21-002: original V2.1 EV148 ZIP and page 44 PNG hashes verified and visually inspected; official live V2.2 extracted text p46 §9.1.4 repeats wrong TrainSetDataService attribution; web screenshot cache miss. Six official V2.1/V2.2 service XSD blobs match work repo; TSD has no composition operation, TSM and TSI share composition type. Request exact pinned V2.2 visual pages 24-26,30-31,34-35,45-46; verify manifest, original p46 and relevant service body controls; independently verify catalog boundary, reconcile scope, then canonical registers and both gates. DRTRAINSET21-003 adjacent spelling issue remains separate. No progress credit yet."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
