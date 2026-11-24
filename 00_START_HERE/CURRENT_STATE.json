@@ -2127,8 +2127,8 @@
     "version_scope_boundary_latest_gate_run_id": 45381853952
   },
   "next_actions": [
-    "DRTIME10-003 terminal_clean 117/192. Substantive Schema #45381853952 and Handoff #45381854129 SUCCESS on 307d5041cabed13cea98e532d0aefcd09fcd0be5. MUST independently verify BOTH new FINAL terminal_clean HEAD workflow runs SUCCESS before declaring complete.",
-    "After both final HEAD workflow SUCCESS, reviewed private ai-mem PR for TimeService p7 PDF-only editorial issue and historical 117/192 milestone. NEXT frozen unique DRTRAINSET21-001 NOT STARTED."
+    "Verify existing pdf-render-fallback run for TRAINSET_V2.1 original pages 42,45, retrieve and visually inspect SHA-pinned artifact; then separately render TRAINSET_V2.2 real body pages 44,47. Reconcile historical frozen duplicate IDs without loss and with exact current version scope; only then complete DRTRAINSET21-001.",
+    "No terminal completion until actual source-pinned printed §10 pages visually verified, cross-version duplicate explicitly reconciled, and full gates plus separate final terminal_clean HEAD succeed."
   ],
   "source_locator_progress": {
     "locator_entry_count": 117,
@@ -2206,12 +2206,24 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": 45381853952,
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": 45381854129,
-    "resume_instruction": "DRTIME10-003 terminal_clean: dev/schema-integration 117/192 unique complete Source Locators, 117/117 exact visible PDF Body checks, 117/117 independently verified version boundaries, 75 remain. NEXT frozen unique DRTRAINSET21-001 NOT STARTED. Official TimeService V1.0 02/2018 original printed p7 §2.1.2 German `(vgl. 1)` vs English `(cd. 1)` visibly confirmed; original actual printed p6 §1 discovery description checked, same `_ibisip_udp._udp` token both languages, no XSD/runtime rule or invented exact textual replacement. EV147 run34028395412 artifact9987794844 downloaded 2026-11-24 ZIP SHA256 2fbb9272c55ebbe704ae4736f488af5758bc0cbbbc8902e77d1a46e19b1ffc92 size579380, original p7 PNG SHA256 daf92ecdb9370957c772a73e46a016835a1d8e7e171915deea88288f53d395fd and p6 PNG 099a2198df048ef805ea37ac559fc1adec24e9b622fd2e7b421ac31d8bbb0cfd independently freshly rehashed/visually inspected, original PDF raw SHA d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3/515920 bytes historical only. Official catalogue VDV only one standalone TimeService V1.0, no prior/corrected successor. Primary review docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTIME10_003_2026-11-24.md. Substantive schema #45381853952 and handoff #45381854129 SUCCESS on 307d5041cabed13cea98e532d0aefcd09fcd0be5. MUST verify BOTH final terminal_clean HEAD gates independently before memory PR, no automatic sync."
+    "resume_instruction": "Verify existing pdf-render-fallback run for TRAINSET_V2.1 original pages 42,45, retrieve and visually inspect SHA-pinned artifact; then separately render TRAINSET_V2.2 real body pages 44,47. Reconcile historical frozen duplicate IDs without loss and with exact current version scope; only then complete DRTRAINSET21-001. Current canonical branch dev/schema-integration should remain gate_pending. Historical original V2.1 05/2018 PDF pin 8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e /1708401B, V2.2 08/2019 pin c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e /1744296B. DRTRAINSET22-001 already separately frozen as exact same error; do not invent new ID or silently delete history.",
+    "pending_block": "DRTRAINSET21-001",
+    "active_finding": "DRTRAINSET21-001",
+    "active_step": "Started frozen DRTRAINSET21-001, detected confirmed V2.1/V2.2 same bilingual 9.1 pointer and legacy duplicate DRTRAINSET22-001; exact original EV148 and EV149 ZIP/source-bound original p6/p9/p10 image hashes independently reverified. Requesting pinned PDF original V2.1 real body §9.1 p42 and §10 p45 via repository-mandated renderer; no progress credits yet (117/192).",
+    "next_step": "Verify existing pdf-render-fallback run for TRAINSET_V2.1 original pages 42,45, retrieve and visually inspect SHA-pinned artifact; then separately render TRAINSET_V2.2 real body pages 44,47. Reconcile historical frozen duplicate IDs without loss and with exact current version scope; only then complete DRTRAINSET21-001.",
+    "evidence_refs": [
+      "audit_registry/drtrainset21_revalidation_evidence_2026-09-06.json",
+      "audit_registry/drtrainset22_revalidation_evidence_2026-09-06.json",
+      "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
+      "https://www.vdv.de/vdv-301-2-14-v2-1-sds-trainsetservices.pdfx",
+      "https://www.vdv.de/301-2-14-sdes-v2-2-trainsetservices.pdfx"
+    ],
+    "recovery_instruction": "Verify existing pdf-render-fallback run for TRAINSET_V2.1 original pages 42,45, retrieve and visually inspect SHA-pinned artifact; then separately render TRAINSET_V2.2 real body pages 44,47. Reconcile historical frozen duplicate IDs without loss and with exact current version scope; only then complete DRTRAINSET21-001. Current canonical branch dev/schema-integration should remain gate_pending. Historical original V2.1 05/2018 PDF pin 8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e /1708401B, V2.2 08/2019 pin c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e /1744296B. DRTRAINSET22-001 already separately frozen as exact same error; do not invent new ID or silently delete history."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
