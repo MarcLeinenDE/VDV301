@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 120,
-    "verified_current_standard": 120,
+    "tracked_findings": 121,
+    "verified_current_standard": 121,
     "pending_current_standard": 0
   },
   "entries": [
@@ -1266,6 +1266,19 @@
         "Both exact TSI upstream blobs verified against official VDV-301-2.1/-2.2 tags: 897f373e31b76aa23d8bc206854b042524e4c102 and 7ab1f8f892bfcea2a8b8a055f07de92c143356f9."
       ],
       "note": "Original V2.1 p24/44 and V2.2 p24/46 physically visible body, actual section headings and operation table inspected. Both raw source pins verified by renderer; selected PNG hashes/sizes rechecked."
+    },
+    {
+      "finding_id": "DRTRAINSET22-001",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTRAINSET22_001_2026-11-24.md",
+        "docs/pdf_xsd_semantic_audit/IDENTITY_RECONCILIATION_DRTRAINSET21_001_DRTRAINSET22_001_2026-11-24.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTRAINSET21_001_2026-11-24.md",
+        "EV149 run 34029942365 artifact 9988263849: ZIP 1739681 bytes SHA256 3bdc68e04a41da03d6d8b84bcc42cf846f58c49ef79a1266741bfa904f08e04e; p9 228792 bytes SHA256 136f14e5a5c653dd2a4d14c939fb8b7b8f704ddd50f6a2cdfc4fbf1c012ec7b3 and p10 199829 bytes SHA256 b0f432f0f36a6548d6409432babe9e135d2c4dae63c04f71eb54b0430e5b4d3b re-downloaded, rehashed and visually read on 2026-11-24.",
+        "Pinned renderer 45385413997 artifact 14916695301: ZIP 412103 bytes SHA256 10fa5e41b734228f81e9f1045d92338ed38b7c3a0a8a7639dc9e431339324b46, manifest official raw PDF SHA256 c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e size 1744296; original p44 PNG 226707 bytes SHA256 8cbca3b18d79d27553e8bb48c85c94197f4eefba768b16ecf9ddd920db2ac976, p47 PNG 218769 bytes SHA256 00053bbdc56a0bcc8784a39d63f74b0a361bd5e7e547ed3abe03b2568e35b004 rehashed and visually read on 2026-11-24. Raw PDF pin checked in original renderer run, not freshly fetched in this mirror block.",
+        "Previously independently verified canonical V2.1+V2.2 boundary and official VDV catalogue on 2026-11-24; reuse that verified comparison rather than invent a V2.2-only logical issue. Current block rechecked V2.2 originals, not a second V2.1 rendering or catalogue retrieval."
+      ],
+      "note": "Original V2.2 p9/p10 DE/EN overview item5 and actual p44 §9.1 and p47 §10 directly inspected after independent SHA recheck. Historical locator mirror of canonical DRTRAINSET21-001; no new logical issue."
     }
   ]
 }

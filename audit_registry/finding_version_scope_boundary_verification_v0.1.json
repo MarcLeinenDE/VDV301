@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 120,
-    "verified": 120,
+    "tracked_findings": 121,
+    "verified": 121,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -6945,6 +6945,54 @@
           "version": "After dedicated V2.2",
           "role": "no_verified_corrected_successor",
           "language_status": "No later dedicated edition established in official catalogue.",
+          "source_ids": [
+            "TRAINSET_V2.2"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRTRAINSET22-001",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTRAINSET22_001_2026-11-24.md",
+        "docs/pdf_xsd_semantic_audit/IDENTITY_RECONCILIATION_DRTRAINSET21_001_DRTRAINSET22_001_2026-11-24.md",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTRAINSET21_001_2026-11-24.md",
+        "EV149 run 34029942365 artifact 9988263849: ZIP 1739681 bytes SHA256 3bdc68e04a41da03d6d8b84bcc42cf846f58c49ef79a1266741bfa904f08e04e; p9 228792 bytes SHA256 136f14e5a5c653dd2a4d14c939fb8b7b8f704ddd50f6a2cdfc4fbf1c012ec7b3 and p10 199829 bytes SHA256 b0f432f0f36a6548d6409432babe9e135d2c4dae63c04f71eb54b0430e5b4d3b re-downloaded, rehashed and visually read on 2026-11-24.",
+        "Pinned renderer 45385413997 artifact 14916695301: ZIP 412103 bytes SHA256 10fa5e41b734228f81e9f1045d92338ed38b7c3a0a8a7639dc9e431339324b46, manifest official raw PDF SHA256 c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e size 1744296; original p44 PNG 226707 bytes SHA256 8cbca3b18d79d27553e8bb48c85c94197f4eefba768b16ecf9ddd920db2ac976, p47 PNG 218769 bytes SHA256 00053bbdc56a0bcc8784a39d63f74b0a361bd5e7e547ed3abe03b2568e35b004 rehashed and visually read on 2026-11-24. Raw PDF pin checked in original renderer run, not freshly fetched in this mirror block.",
+        "Previously independently verified canonical V2.1+V2.2 boundary and official VDV catalogue on 2026-11-24; reuse that verified comparison rather than invent a V2.2-only logical issue. Current block rechecked V2.2 originals, not a second V2.1 rendering or catalogue retrieval."
+      ],
+      "note": "Historical V2.2 occurrence scope only; canonical logical boundary independently verified in DRTRAINSET21-001. Current V2.2 original pages re-inspected, prior V2.1/catalogue evidence explicitly reused.",
+      "scope_conclusion": "DRTRAINSET22-001 is the historical V2.2 mirror of DRTRAINSET21-001 (first affected V2.1, last available affected V2.2, both DE/EN). Its frozen V2.2 provenance scope is retained; no independent new defect or runtime rule.",
+      "boundary_checks": [
+        {
+          "version": "Before dedicated TrainSet V2.1",
+          "role": "no_published_standalone_predecessor",
+          "language_status": "de/en: VDV official index lists no earlier standalone 301-2-14 TrainSet edition; general VDV301-2 baseline is not an independent TrainSet service publication",
+          "source_ids": [
+            "TRAINSET_V2.1"
+          ]
+        },
+        {
+          "version": "V2.1 05/2018",
+          "role": "first_affected_official_DE_EN",
+          "language_status": "de p9+en p10 §1 item5 wrong 9.1 pointer; actual §9.1 on p42 re-initialisation and actual §10 on p45 Examples, visually source-pinned",
+          "source_ids": [
+            "TRAINSET_V2.1"
+          ]
+        },
+        {
+          "version": "V2.2 08/2019",
+          "role": "last_available_affected_official_DE_EN",
+          "language_status": "de p9+en p10 §1 item5 still wrong 9.1 pointer; actual §9.1 p44 re-initialisation and actual §10 p47 Examples; DRTRAINSET22-001 historical occurrence mirror; original V2.2 p9/10/44/47 rechecked",
+          "source_ids": [
+            "TRAINSET_V2.2"
+          ]
+        },
+        {
+          "version": "After dedicated TrainSet V2.2",
+          "role": "no_verified_corrected_successor",
+          "language_status": "de/en: no later dedicated TrainSet 301-2-14 publication listed in official VDV catalogue as of 2026-11-24; no invented corrected boundary",
           "source_ids": [
             "TRAINSET_V2.2"
           ]

@@ -11752,20 +11752,24 @@
         {
           "type": "technical_inference",
           "note": "The intentional-9.1 hypothesis was tested because section 9.1 contains an example-style re-initialisation scenario. It is rejected because overview item 4 already assigns re-initialisation to sections 7 and 9 while item 5 separately introduces service-interaction examples and the same document has a dedicated section 10 Examples."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Original V2.2 p9/p10 item5 and actual p44 §9.1/p47 §10 directly re-inspected and SHA-verified. Both languages duplicate the canonical DRTRAINSET21-001 V2.1/V2.2 defect, not an independent V2.2 cause."
         }
       ],
       "diagnostic": {
         "de": {
           "title": "TrainSet Services V2.2: veralteter Abschnittsverweis auf 9.1",
           "short": "Die Übersicht verweist für Beispiele zur Service-Interaktion auf Abschnitt 9.1, obwohl das dedizierte Beispielkapitel Abschnitt 10 ist.",
-          "long": "Auf den geprüften Seiten 9 und 10 verweisen die deutsche und englische Übersicht für Beispiele zur Interaktion der verschiedenen Services auf Abschnitt 9.1. Das Inhaltsverzeichnis auf Seite 6 weist 9.1 jedoch dem Thema Re-Initialisierung der Fahrtrichtung zu und führt Abschnitt 10 ausdrücklich als Examples. Der mögliche Einwand, 9.1 enthalte selbst ein beispielartiges Szenario, wurde geprüft; dennoch trennt die Übersicht Re-Initialisierung und allgemeine Service-Interaktionsbeispiele klar voneinander. Der Verweis auf 9.1 bleibt daher ein bestätigter Navigationsfehler.",
-          "recommendation": "Den Verweis als Dokumentationsfehler behandeln und für die allgemeinen Service-Interaktionsbeispiele Abschnitt 10 heranziehen. Daraus keine XML-, XSD- oder Runtime-Regel erzeugen."
+          "long": "Die deutsche und englische Übersicht in V2.2 (S.9/10, Punkt 5) verweisen für allgemeine Service-Interaktionsbeispiele auf 9.1. Die tatsächlichen Originalabschnitte §9.1 auf S.44 und §10 auf S.47 belegen Reinitialisierung bei Fahrtrichtungswechsel bzw. Examples. Punkt 4 ordnet die Reinitialisierung bereits Kapitel 7 und 9 zu. Dieser historische V2.2-Befund ist ein Provenienzspiegel des kanonischen DRTRAINSET21-001 (V2.1 und V2.2), keine zweite logische Abweichung.",
+          "recommendation": "Für allgemeine Beispiele Kapitel 10 nutzen; als historischen Locator-Spiegel von DRTRAINSET21-001 erhalten. Keine zusätzliche SDK-Diagnose, XML-, XSD- oder Runtime-Regel."
         },
         "en": {
           "title": "TrainSet Services V2.2: stale section reference to 9.1",
           "short": "The overview points service-interaction examples to section 9.1 although the dedicated Examples chapter is section 10.",
-          "long": "On reviewed pages 9 and 10, both German and English overview text point examples of interaction between the different services to section 9.1. The table of contents on page 6 assigns 9.1 to driving-direction re-initialisation and explicitly labels section 10 as Examples. The counter-hypothesis that 9.1 was intentional because it contains an example-style scenario was checked, but the overview separately assigns re-initialisation and general service-interaction examples. The 9.1 pointer is therefore a confirmed navigation defect.",
-          "recommendation": "Treat the pointer as a documentation defect and use section 10 for the general service-interaction examples. Do not derive XML, XSD, or runtime rules from it."
+          "long": "V2.2 German and English overview item 5 on p9/10 points general cross-service examples to 9.1. Original visible §9.1 p44 concerns driving-direction re-initialisation, already covered by item 4, while actual §10 p47 is Examples. This historical V2.2 occurrence mirrors canonical DRTRAINSET21-001 spanning V2.1 and V2.2, not a second logical defect.",
+          "recommendation": "Use chapter 10 for general examples; retain this historical locator mirror of DRTRAINSET21-001 without a second SDK diagnostic or XML/XSD/runtime rule."
         }
       },
       "runtime_match": {
@@ -11797,9 +11801,14 @@
           "kind": "other",
           "reference": "docs/pdf_xsd_semantic_audit/IDENTITY_RECONCILIATION_DRTRAINSET21_001_DRTRAINSET22_001_2026-11-24.md",
           "note": "2026-11-24 canonical cross-version identity reconciliation: DRTRAINSET21-001 spans V2.1 and V2.2; DRTRAINSET22-001 is an existing legacy V2.2 occurrence/mirror, not independent semantic error. Historical frozen IDs retained."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTRAINSET22_001_2026-11-24.md",
+          "note": "Archival V2.2 locator slot closed by direct source-page reinspection and canonical identity/boundary cross-check."
         }
       ],
-      "notes": "LEGACY_DUPLICATE_OF_DRTRAINSET21-001. This pre-existing frozen DRTRAINSET22-001 is the V2.2 provenance/occurrence mirror of the identical V2.1+V2.2 cross-service overview wrong 9.1 pointer, established by independently verified original TrainSet V2.2 PDF pages 9,10,44,47 and corresponding V2.1 pages 9,10,42,45 on 2026-11-24. Primary canonical semantic identity is DRTRAINSET21-001 scoped to V2.1 and V2.2. Preserve frozen historical V2.2 ID and EV149, do not silently delete/rename; not an independent new semantic error, no duplicate SDK matcher or invented correction. Its own historical source-locator record remains pending. See docs/pdf_xsd_semantic_audit/IDENTITY_RECONCILIATION_DRTRAINSET21_001_DRTRAINSET22_001_2026-11-24.md"
+      "notes": "LEGACY_DUPLICATE_OF_DRTRAINSET21-001. This pre-existing frozen DRTRAINSET22-001 is the V2.2 provenance/occurrence mirror of the identical V2.1+V2.2 cross-service overview wrong 9.1 pointer, established by independently verified original TrainSet V2.2 PDF pages 9,10,44,47 and corresponding V2.1 pages 9,10,42,45 on 2026-11-24. Primary canonical semantic identity is DRTRAINSET21-001 scoped to V2.1 and V2.2. Preserve frozen historical V2.2 ID and EV149, do not silently delete/rename; not an independent new semantic error, no duplicate SDK matcher or invented correction. Its historical source-locator, visible body and boundary records are now verified as an archival V2.2 slot, subject to final gates; no second logical defect. See docs/pdf_xsd_semantic_audit/IDENTITY_RECONCILIATION_DRTRAINSET21_001_DRTRAINSET22_001_2026-11-24.md"
     },
     {
       "finding_id": "DRTRAINSET22-002",
