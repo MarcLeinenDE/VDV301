@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 117,
-    "verified_current_standard": 117,
+    "tracked_findings": 118,
+    "verified_current_standard": 118,
     "pending_current_standard": 0
   },
   "entries": [
@@ -1229,6 +1229,17 @@
         "Live official VDV PDF p7 screenshot 2026-11-24 cache-missed; exact byte-pinned EV147 original render used as contract fallback; the raw original PDF was not freshly downloaded/rehashed. Actual p7 heading §2.1.2 and actual p6 §1 visually checked; no TOC inference."
       ],
       "note": "Printed p7 actual §2.1.2 bilingual technical-corrections line visibly says German (vgl. 1), English (cd. 1), with same `_ibisip_udp._udp`; actual referenced §1 visually checked printed p6. Original source-pinned p7/p6 PNG SHA files and EV147 ZIP freshly rehashed 2026-11-24. No inferred intended exact English correction."
+    },
+    {
+      "finding_id": "DRTRAINSET21-001",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTRAINSET21_001_2026-11-24.md",
+        "docs/pdf_xsd_semantic_audit/IDENTITY_RECONCILIATION_DRTRAINSET21_001_DRTRAINSET22_001_2026-11-24.md",
+        "Official V2.1 raw PDF SHA256 8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e size1708401, newly re-fetched and verified in runner 45385075482; original PDF §1 p9 DE PNG 1887dff1f50a690cf5e1c0f7d7fcce3a6cd842fe628b1dcec471d2bc51f430fd, §1 p10 EN PNG 359e20a7722059c8c1b626ac0777be1ec298df1e50ed3fd851373c58f7ace616 from archived exact source EV34029363792 verified and visibly reviewed; current original real §9.1 p42 PNG c02cc4a26a337081fb8f50c13fe2f5166c96501a9294bef89207bc0d3919f45d and §10 p45 PNG f726e78d81ffce9641c7de330dca1b42f9976606be29c2615a32b9abcb80390d from live exact-pinned fallback artifact 14915538304 SHA fadf50916447af0f62a950f382f0b02ad788cdf1726178f746adef3d0b007e73, both images SHA-checked and visibly inspected 2026-11-24.",
+        "Official V2.2 raw PDF SHA256 c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e size1744296, newly re-fetched and verified in runner 45385413997; original PDF §1 p9 DE PNG 136f14e5a5c653dd2a4d14c939fb8b7b8f704ddd50f6a2cdfc4fbf1c012ec7b3, §1 p10 EN PNG b0f432f0f36a6548d6409432babe9e135d2c4dae63c04f71eb54b0430e5b4d3b from archived exact source EV34029942365 verified and visibly reviewed; current original real §9.1 p44 PNG 8cbca3b18d79d27553e8bb48c85c94197f4eefba768b16ecf9ddd920db2ac976 and §10 p47 PNG 00053bbdc56a0bcc8784a39d63f74b0a361bd5e7e547ed3abe03b2568e35b004 from live exact-pinned fallback artifact 14916695301 SHA 10fa5e41b734228f81e9f1045d92338ed38b7c3a0a8a7639dc9e431339324b46, both images SHA-checked and visibly inspected 2026-11-24."
+      ],
+      "note": "Both official V2.1/V2.2 original visible German and English §1 overview item5 p9/p10 point incorrectly to 9.1; actual source-pinned §9.1 and §10 bodies separately visually confirmed through exact raw-PDF SHA-gated render. Historical duplicate ${mirror} linked, no second logical defect."
     }
   ]
 }

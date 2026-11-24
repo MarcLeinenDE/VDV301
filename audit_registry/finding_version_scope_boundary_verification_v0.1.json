@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 117,
-    "verified": 117,
+    "tracked_findings": 118,
+    "verified": 118,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -6802,6 +6802,55 @@
           "language_status": "de/en:no later independent TimeService 301-2-10 publication verified in official catalogue as of 2026-11-24; no extrapolated correction boundary",
           "source_ids": [
             "TIME_V1.0"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRTRAINSET21-001",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTRAINSET21_001_2026-11-24.md",
+        "docs/pdf_xsd_semantic_audit/IDENTITY_RECONCILIATION_DRTRAINSET21_001_DRTRAINSET22_001_2026-11-24.md",
+        "Official VDV catalogue https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-24: dedicated V2.1 first standalone and V2.2 last available TrainSet issue, no verified prior standalone or later corrected dedicated version.",
+        "Official bilingual V2.1 raw original SHA 8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e, actual p9 DE & p10 EN §1 pointer, actual §9.1 p42, actual §10 p45 verified by source-pinned render 45385075482 and EV original 34029363792.",
+        "Official bilingual V2.2 raw original SHA c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e, actual p9 DE & p10 EN §1 pointer, actual §9.1 p44, actual §10 p47 verified by source-pinned render 45385413997 and EV original 34029942365.",
+        "Six exact official upstream tag XSD TrainSet blobs checked for 2.1 and 2.2; XSDs not affected, only documentation page numbering.",
+        "Legacy duplicate ${mirror} remains frozen as 2.2 occurrence ID, but canonical logical affected-version scope now DRTRAINSET21-001 V2.1 + V2.2."
+      ],
+      "note": "Independently verified entire available dedicated TrainSet publication lineage 2.1→2.2 and DE/EN tracks; same error persists into V2.2, no official corrected successor. No separate V2.2 semantic defect, only legacy frozen occurrence ID.",
+      "scope_conclusion": "Single canonical logical DRTRAINSET21-001 navigation error first observed official bilingual TrainSet V2.1 (05/2018), remains in last available official V2.2 (08/2019), both DE p9/EN p10 wrongly citing 9.1 for general cross-service examples. Actual §9.1 p42/p44 is driving-direction re-initialisation, actual §10 p45/p47 dedicated Examples, all visible source-pinned. No earlier dedicated TrainSet or corrected later edition. DRTRAINSET22-001 legacy V2.2 mirror retained historically, not independently new semantic defect. Official selected XSD validation unaffected.",
+      "boundary_checks": [
+        {
+          "version": "Before dedicated TrainSet V2.1",
+          "role": "no_published_standalone_predecessor",
+          "language_status": "de/en: VDV official index lists no earlier standalone 301-2-14 TrainSet edition; general VDV301-2 baseline is not an independent TrainSet service publication",
+          "source_ids": [
+            "TRAINSET_V2.1"
+          ]
+        },
+        {
+          "version": "V2.1 05/2018",
+          "role": "first_affected_official_DE_EN",
+          "language_status": "de p9+en p10 §1 item5 wrong 9.1 pointer; actual §9.1 on p42 re-initialisation and actual §10 on p45 Examples, visually source-pinned",
+          "source_ids": [
+            "TRAINSET_V2.1"
+          ]
+        },
+        {
+          "version": "V2.2 08/2019",
+          "role": "last_available_affected_official_DE_EN",
+          "language_status": "de p9+en p10 §1 item5 still wrong 9.1 pointer; actual §9.1 p44 re-initialisation and actual §10 p47 Examples; DRTRAINSET22-001 historical alias",
+          "source_ids": [
+            "TRAINSET_V2.2"
+          ]
+        },
+        {
+          "version": "After dedicated TrainSet V2.2",
+          "role": "no_verified_corrected_successor",
+          "language_status": "de/en: no later dedicated TrainSet 301-2-14 publication listed in official VDV catalogue as of 2026-11-24; no invented corrected boundary",
+          "source_ids": [
+            "TRAINSET_V2.2"
           ]
         }
       ]

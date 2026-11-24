@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "bfc32e3181909dff3c4456c3db2961a7f29c580c",
+    "git_blob": "cf114c4c37a6c12ca6c6f12d7ef62931c6a3abf4",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 117,
-    "coverage_complete_count": 117,
+    "locator_entry_count": 118,
+    "coverage_complete_count": 118,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 75
+    "remaining_finding_count": 74
   },
   "entries": [
     {
@@ -22543,6 +22543,236 @@
         "Official VDV IP-KOM-ÖV catalogue https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-24: only standalone TimeService V1.0, no dedicated predecessor/successor; cannot equate VDV301-2 baseline or unrelated Common service versions to TimeService releases.",
         "Historical EV147 run34028395412 PASS, closure run34028583953; audit_registry/drtime10_revalidation_evidence_2026-09-06.json documents original render source pins and leaves DRTIME10-003 intended replacement null; no XSD/executable testcase applicable.",
         "Selected DNS-SD discovery string `_ibisip_udp._udp` confirmed in both version history and real §1 on pinned p6. SDK semantic classification already confirmed_pdf_defect, no_runtime_diagnostic; intentionally unchanged."
+      ]
+    },
+    {
+      "finding_id": "DRTRAINSET21-001",
+      "service": "TrainSetServices",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TrainSetInformationService_V2.1.xsd + IBIS-IP_TrainSetManagementService_V2.1.xsd + IBIS-IP_TrainSetDataService_V2.1.xsd",
+          "note": "Exact official VDV-301-2.1 TrainSet service family. The finding itself concerns PDF navigation/section numbering; XSDs are only exact-version counter-context."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TrainSetInformationService_V2.2.xsd + IBIS-IP_TrainSetManagementService_V2.2.xsd + IBIS-IP_TrainSetDataService_V2.2.xsd",
+          "note": "Official TrainSet V2.2 (08/2019) has the SAME §1 item5 DE/EN wrong section-9.1 pointer as V2.1 despite actually dedicating section 10 to cross-service examples. This is affected persistence of canonical DRTRAINSET21-001, not a new independent error; DRTRAINSET22-001 is the already frozen historical V2.2 mirror. Selected official V2.2 XSDs are exact-version counter-context only."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "first_affected_official_version_de_en_bilingual",
+          "pdf_locators": [
+            {
+              "source_id": "TRAINSET_V2.1",
+              "document_title": "VDV-Schrift 301-2-14 TrainSetServices V2.1 (05/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/vdv-301-2-14-v2-1-sds-trainsetservices.pdfx",
+              "sha256": "8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e",
+              "printed_pages": [
+                9
+              ],
+              "section": "§1 Ausgangslage und Übersicht, Punkt 5 (DE)",
+              "table": null,
+              "point_summary": "Visible source-pinned original PDF p9 DE overview item5 says examples explaining interaction of different services are in 'Abschnitt 9.1', although item4 already separately assigns re-initialisation to sections 7 and 9. Original 180dpi EV PNG SHA256 1887dff1f50a690cf5e1c0f7d7fcce3a6cd842fe628b1dcec471d2bc51f430fd freshly rehashed and visually checked 2026-11-24."
+            },
+            {
+              "source_id": "TRAINSET_V2.1",
+              "document_title": "VDV-Schrift 301-2-14 TrainSetServices V2.1 (05/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/vdv-301-2-14-v2-1-sds-trainsetservices.pdfx",
+              "sha256": "8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e",
+              "printed_pages": [
+                10
+              ],
+              "section": "§1 Initial Situation and Overview, item 5 (EN)",
+              "table": null,
+              "point_summary": "Visible source-pinned original PDF p10 EN overview item5 says cross-service examples in 'section 9.1'. Original 180dpi EV PNG SHA256 359e20a7722059c8c1b626ac0777be1ec298df1e50ed3fd851373c58f7ace616 freshly rehashed and visually checked 2026-11-24."
+            },
+            {
+              "source_id": "TRAINSET_V2.1",
+              "document_title": "VDV-Schrift 301-2-14 TrainSetServices V2.1 (05/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/vdv-301-2-14-v2-1-sds-trainsetservices.pdfx",
+              "sha256": "8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e",
+              "printed_pages": [
+                42
+              ],
+              "section": "§9 Re-Initialisation of valid Services / §9.1 Re-initialisation of Service Communication when a Trainset changes the Driving Direction",
+              "table": null,
+              "point_summary": "Actual visible body from freshly retrieved exact source PDF in existing GitHub PDF renderer 45385075482 p42, 160dpi original PNG SHA256 c02cc4a26a337081fb8f50c13fe2f5166c96501a9294bef89207bc0d3919f45d; this is an example-based direction-reinitialisation subsection, NOT the general examples chapter. Not inferred from TOC."
+            },
+            {
+              "source_id": "TRAINSET_V2.1",
+              "document_title": "VDV-Schrift 301-2-14 TrainSetServices V2.1 (05/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/vdv-301-2-14-v2-1-sds-trainsetservices.pdfx",
+              "sha256": "8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e",
+              "printed_pages": [
+                45
+              ],
+              "section": "§10 Examples / §10.1 The master OBU requests the Status of Devices in a Slave Coach",
+              "table": null,
+              "point_summary": "Actual visible body from freshly retrieved exact source PDF in existing GitHub PDF renderer 45385075482 p45, 160dpi original PNG SHA256 f726e78d81ffce9641c7de330dca1b42f9976606be29c2615a32b9abcb80390d; real dedicated service interaction Examples chapter. Not TOC/history inference."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TrainSetInformationService_V2.1.xsd",
+              "git_blob": "897f373e31b76aa23d8bc206854b042524e4c102",
+              "authority_detail": "Exact V2.1 official service XSD verified 2026-11-24 byte-identical between dev/schema-integration and upstream VDVde/VDV301 tag VDV-301-2.1. Counter-context ONLY for PDF navigation, not XML defect.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "selected TrainSetInformationService V2.1 schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Official byte-pinned exact selected version service XSD; wrong 9.1 PDF reference does not change any XSD validation or SDK routing."
+            },
+            {
+              "file": "IBIS-IP_TrainSetManagementService_V2.1.xsd",
+              "git_blob": "add9d1cb37e5759ff7a77855b239108d38373206",
+              "authority_detail": "Exact V2.1 official service XSD verified 2026-11-24 byte-identical between dev/schema-integration and upstream VDVde/VDV301 tag VDV-301-2.1. Counter-context ONLY for PDF navigation, not XML defect.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "selected TrainSetManagementService V2.1 schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Official byte-pinned exact selected version service XSD; wrong 9.1 PDF reference does not change any XSD validation or SDK routing."
+            },
+            {
+              "file": "IBIS-IP_TrainSetDataService_V2.1.xsd",
+              "git_blob": "c2cdb73fcae265a2e4e0349ac6072e3548e36d8b",
+              "authority_detail": "Exact V2.1 official service XSD verified 2026-11-24 byte-identical between dev/schema-integration and upstream VDVde/VDV301 tag VDV-301-2.1. Counter-context ONLY for PDF navigation, not XML defect.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "selected TrainSetDataService V2.1 schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Official byte-pinned exact selected version service XSD; wrong 9.1 PDF reference does not change any XSD validation or SDK routing."
+            }
+          ],
+          "coverage_note": "Same actual wrong p9(DE)/p10(EN) section-9.1 cross-service example pointer in official V2.1, with actual p42 §9.1 reinitialisation and p45 §10 Examples observed directly. Source PDF sha256 8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e and size 1708401 newly checked by pinned renderer run 45385075482, artifact 14915538304, ZIP SHA fadf50916447af0f62a950f382f0b02ad788cdf1726178f746adef3d0b007e73; original archived EV 34029363792 artifact 9988086415 ZIP c4e963de40e4684a9625644f9df2fc8f63ebedc8b2bba38736e83723d1c8dfea freshly downloaded and original p9/p10 images inspected. Three official V2.1 XSD blobs also matched 2026-11-24 against exact upstream tag and work branch; selected XSD is counter-context only. Pre-existing frozen DRTRAINSET22-001 is a historical V2.2 mirror, not a separate logical issue."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "last_available_affected_official_version_de_en_legacy_mirror",
+          "pdf_locators": [
+            {
+              "source_id": "TRAINSET_V2.2",
+              "document_title": "VDV-Schrift 301-2-14 TrainSetServices V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-14-sdes-v2-2-trainsetservices.pdfx",
+              "sha256": "c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e",
+              "printed_pages": [
+                9
+              ],
+              "section": "§1 Ausgangslage und Übersicht, Punkt 5 (DE)",
+              "table": null,
+              "point_summary": "Visible source-pinned original PDF p9 DE overview item5 says examples explaining interaction of different services are in 'Abschnitt 9.1', although item4 already separately assigns re-initialisation to sections 7 and 9. Original 180dpi EV PNG SHA256 136f14e5a5c653dd2a4d14c939fb8b7b8f704ddd50f6a2cdfc4fbf1c012ec7b3 freshly rehashed and visually checked 2026-11-24."
+            },
+            {
+              "source_id": "TRAINSET_V2.2",
+              "document_title": "VDV-Schrift 301-2-14 TrainSetServices V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-14-sdes-v2-2-trainsetservices.pdfx",
+              "sha256": "c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e",
+              "printed_pages": [
+                10
+              ],
+              "section": "§1 Initial Situation and Overview, item 5 (EN)",
+              "table": null,
+              "point_summary": "Visible source-pinned original PDF p10 EN overview item5 says cross-service examples in 'section 9.1'. Original 180dpi EV PNG SHA256 b0f432f0f36a6548d6409432babe9e135d2c4dae63c04f71eb54b0430e5b4d3b freshly rehashed and visually checked 2026-11-24."
+            },
+            {
+              "source_id": "TRAINSET_V2.2",
+              "document_title": "VDV-Schrift 301-2-14 TrainSetServices V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-14-sdes-v2-2-trainsetservices.pdfx",
+              "sha256": "c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e",
+              "printed_pages": [
+                44
+              ],
+              "section": "§9 Re-Initialisation of valid Services / §9.1 Re-initialisation of Service Communication when a Trainset changes the Driving Direction",
+              "table": null,
+              "point_summary": "Actual visible body from freshly retrieved exact source PDF in existing GitHub PDF renderer 45385413997 p44, 160dpi original PNG SHA256 8cbca3b18d79d27553e8bb48c85c94197f4eefba768b16ecf9ddd920db2ac976; this is an example-based direction-reinitialisation subsection, NOT the general examples chapter. Not inferred from TOC."
+            },
+            {
+              "source_id": "TRAINSET_V2.2",
+              "document_title": "VDV-Schrift 301-2-14 TrainSetServices V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-14-sdes-v2-2-trainsetservices.pdfx",
+              "sha256": "c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e",
+              "printed_pages": [
+                47
+              ],
+              "section": "§10 Examples / §10.1 The master OBU requests the Status of Devices in a Slave Coach",
+              "table": null,
+              "point_summary": "Actual visible body from freshly retrieved exact source PDF in existing GitHub PDF renderer 45385413997 p47, 160dpi original PNG SHA256 00053bbdc56a0bcc8784a39d63f74b0a361bd5e7e547ed3abe03b2568e35b004; real dedicated service interaction Examples chapter. Not TOC/history inference."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TrainSetInformationService_V2.2.xsd",
+              "git_blob": "7ab1f8f892bfcea2a8b8a055f07de92c143356f9",
+              "authority_detail": "Exact V2.2 official service XSD verified 2026-11-24 byte-identical between dev/schema-integration and upstream VDVde/VDV301 tag VDV-301-2.2. Counter-context ONLY for PDF navigation, not XML defect.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "selected TrainSetInformationService V2.2 schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Official byte-pinned exact selected version service XSD; wrong 9.1 PDF reference does not change any XSD validation or SDK routing."
+            },
+            {
+              "file": "IBIS-IP_TrainSetManagementService_V2.2.xsd",
+              "git_blob": "da9465d6683e3f7d54a546ab4a13739fb3c3e902",
+              "authority_detail": "Exact V2.2 official service XSD verified 2026-11-24 byte-identical between dev/schema-integration and upstream VDVde/VDV301 tag VDV-301-2.2. Counter-context ONLY for PDF navigation, not XML defect.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "selected TrainSetManagementService V2.2 schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Official byte-pinned exact selected version service XSD; wrong 9.1 PDF reference does not change any XSD validation or SDK routing."
+            },
+            {
+              "file": "IBIS-IP_TrainSetDataService_V2.2.xsd",
+              "git_blob": "7a132894c281d613e16514a6fa1bcbffe713d066",
+              "authority_detail": "Exact V2.2 official service XSD verified 2026-11-24 byte-identical between dev/schema-integration and upstream VDVde/VDV301 tag VDV-301-2.2. Counter-context ONLY for PDF navigation, not XML defect.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "selected TrainSetDataService V2.2 schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Official byte-pinned exact selected version service XSD; wrong 9.1 PDF reference does not change any XSD validation or SDK routing."
+            }
+          ],
+          "coverage_note": "Same actual wrong p9(DE)/p10(EN) section-9.1 cross-service example pointer in official V2.2, with actual p44 §9.1 reinitialisation and p47 §10 Examples observed directly. Source PDF sha256 c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e and size 1744296 newly checked by pinned renderer run 45385413997, artifact 14916695301, ZIP SHA 10fa5e41b734228f81e9f1045d92338ed38b7c3a0a8a7639dc9e431339324b46; original archived EV 34029942365 artifact 9988263849 ZIP 3bdc68e04a41da03d6d8b84bcc42cf846f58c49ef79a1266741bfa904f08e04e freshly downloaded and original p9/p10 images inspected. Three official V2.2 XSD blobs also matched 2026-11-24 against exact upstream tag and work branch; selected XSD is counter-context only. Pre-existing frozen DRTRAINSET22-001 is a historical V2.2 mirror, not a separate logical issue."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTRAINSET21_001_2026-11-24.md",
+        "docs/pdf_xsd_semantic_audit/IDENTITY_RECONCILIATION_DRTRAINSET21_001_DRTRAINSET22_001_2026-11-24.md",
+        "Official VDV index https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-24 contains standalone TrainSet 301-2-14 V2.1 and V2.2, no earlier or corrected later dedicated release; both editions bilingual, DE+EN affected.",
+        "Official V2.1 byte-pinned PDF source https://www.vdv.de/vdv-301-2-14-v2-1-sds-trainsetservices.pdfx SHA 8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e 1708401 bytes; original historic EV ZIP run 34029363792 artifact 9988086415 SHA c4e963de40e4684a9625644f9df2fc8f63ebedc8b2bba38736e83723d1c8dfea freshly downloaded; new exact source binary verified runner 45385075482 artifact 14915538304 archive SHA fadf50916447af0f62a950f382f0b02ad788cdf1726178f746adef3d0b007e73; real §9.1 and §10 visibly examined with SHA image hashes.",
+        "Official V2.2 byte-pinned PDF source https://www.vdv.de/301-2-14-sdes-v2-2-trainsetservices.pdfx SHA c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e 1744296 bytes; original historic EV ZIP run 34029942365 artifact 9988263849 SHA 3bdc68e04a41da03d6d8b84bcc42cf846f58c49ef79a1266741bfa904f08e04e freshly downloaded; new exact source binary verified runner 45385413997 artifact 14916695301 archive SHA 10fa5e41b734228f81e9f1045d92338ed38b7c3a0a8a7639dc9e431339324b46; real §9.1 and §10 visibly examined with SHA image hashes.",
+        "Official VDVde/VDV301 release tags VDV-301-2.1/VDV-301-2.2 six exact TrainSet service XSD blobs matched current work file blobs; no XML runtime rule.",
+        "Frozen inventory 192 provenance IDs retained; DRTRAINSET22-001 is legacy duplicate of canonical DRTRAINSET21-001 logical defect (not a new semantic issue)."
       ]
     }
   ]
