@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 119,
-    "verified": 119,
+    "tracked_findings": 120,
+    "verified": 120,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -6896,6 +6896,55 @@
           "version": "After dedicated V2.2",
           "role": "no_verified_corrected_successor",
           "language_status": "No later dedicated edition listed.",
+          "source_ids": [
+            "TRAINSET_V2.2"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRTRAINSET21-003",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTRAINSET21_003_2026-11-24.md",
+        "Run 45404894020 artifact 14924434625 ZIP SHA256 28ba00df6dfaafde327182233499bcbcba3435e8113719cb7fd8871e697fa727 (347322 bytes); raw PDF SHA256 8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e (1708401 bytes), both manifest PNG hashes/sizes rechecked: p24 5dcc5a96b9b5305d20283e84f708893fa8e4e47b72658f2239cf30712bc782a8 (162227 bytes); p44 0829d150beb4992122fbe2fb63375c73205acb3c2f6425d0a6b7b6f68b5b69d4 (218768 bytes). Both visibly inspected.",
+        "Run 45402521643 artifact 14922903550 ZIP SHA256 6e9fa8bbde483cb23c3548541c1a29ee4c012248980e547204d1610a6a37cf1f (1711202 bytes); raw PDF SHA256 c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e (1744296 bytes), p24 PNG f819a26753e9184af5e3aef00b19eed7fb8f55de8ae4dcb940f8ded4c9c08a18 (143094 bytes), p46 PNG 2723da34cbce712dfabc1b3c234a3706607da79ae70476c809c6780f0bbe509b (218814 bytes), both hashes/sizes rechecked and pages visibly inspected.",
+        "EV148 run 34029363792 artifact 9988086415 ZIP SHA256 c4e963de40e4684a9625644f9df2fc8f63ebedc8b2bba38736e83723d1c8dfea; original p44 180dpi PNG SHA256 ac44110da51217c7e2c9dbee4a30c8ad8eb49964722495a7a4f3c144570ed7fc; historical evidence preserved.",
+        "Official VDV index https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-24: V2.1 and V2.2 only, no earlier or later standalone edition established. Both bilingual publications contain one shared English §9.1.4 technical section, not separate DE/EN occurrences.",
+        "IBIS-IP_common_V2.0.xsd 8608e3dcd665c197c34da7f6ec6af5a3758da164; IBIS-IP_Enumerations_V2.0.xsd 27e3c183b00381d959622d13c10543123af8eef6; IBIS-IP_common_V2.2.xsd 468fee6d177e7185dbcd5d3f90cfb114e29e01ae; IBIS-IP_Enumerations_V2.2.xsd 2a23b512379b18e8f122ac1272cef8229fb86283. All four exact transitive dependency blobs identical to corresponding upstream release tag; entire file text contains no Compositon token.",
+        "Both exact TSI upstream blobs verified against official VDV-301-2.1/-2.2 tags: 897f373e31b76aa23d8bc206854b042524e4c102 and 7ab1f8f892bfcea2a8b8a055f07de92c143356f9."
+      ],
+      "note": "Entire available standalone TrainSet publication lineage; shared English technical body in both bilingual editions; no separate German target.",
+      "scope_conclusion": "V2.1 first and V2.2 last available affected edition. Same typo on p44 and p46; correct operation and response spelling both p24. No earlier/later dedicated release verified; no alias, one frozen ID.",
+      "boundary_checks": [
+        {
+          "version": "Before dedicated V2.1",
+          "role": "no_published_standalone_predecessor",
+          "language_status": "No earlier dedicated edition in official catalogue.",
+          "source_ids": [
+            "TRAINSET_V2.1"
+          ]
+        },
+        {
+          "version": "V2.1",
+          "role": "first_affected_official",
+          "language_status": "Shared English technical §9.1.4 p44 typo; correct p24 §4.5 and §4.5.1.1.",
+          "source_ids": [
+            "TRAINSET_V2.1"
+          ]
+        },
+        {
+          "version": "V2.2",
+          "role": "last_available_affected_official",
+          "language_status": "Shared English technical §9.1.4 p46 same typo; correct p24 §4.5 and §4.5.1.1.",
+          "source_ids": [
+            "TRAINSET_V2.2"
+          ]
+        },
+        {
+          "version": "After dedicated V2.2",
+          "role": "no_verified_corrected_successor",
+          "language_status": "No later dedicated edition established in official catalogue.",
           "source_ids": [
             "TRAINSET_V2.2"
           ]

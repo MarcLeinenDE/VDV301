@@ -11608,6 +11608,12 @@
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_TrainSetInformationService_V2.1.xsd",
           "note": "Exact official VDV-301-2.1 TrainSetInformationService schema. The PDF typo is checked against the executable operation spelling but does not alter XML validation behaviour."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TrainSetInformationService_V2.2.xsd",
+          "note": "Same typo persists in official V2.2 printed p46 §9.1.4. Positive spelling control p24 §4.5/4.5.1/4.5.1.1 and exact selected XSD with includes. Same logical error; no new ID."
         }
       ],
       "review_state": "manually_reviewed",
@@ -11639,20 +11645,28 @@
         {
           "type": "xsd_internal_consistency",
           "note": "The executable XSD spelling and the rest of the publication operation inventory consistently use Composition, rejecting an alternate-spelling hypothesis."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "V2.2 p46 §9.1.4 visibly repeats the misspelled operation. Both V2.1 and V2.2 p24 §4.5 operation table and §4.5.1 heading/§4.5.1.1 request use GetTrainSetComposition. The request transfers no structure. Both typo pages also correctly spell the response name above §9.1.4."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Both official TSI schemas contain the correctly spelled response global element, operation-group member and complex type, at lines 29,36,37 respectively. No Compositon token in either TSI schema or its exact transitive Common/Enumerations includes; all six blobs match exact official tags."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "TrainSetInformationService V2.1: Tippfehler 'GetTrainSetCompositon' in der PDF",
-          "short": "Die PDF schreibt auf Seite 44 GetTrainSetCompositon; die offizielle V2.1-XSD und die übrige Publikation verwenden GetTrainSetComposition.",
-          "long": "Auf der geprüften Seite 44 steht sichtbar GetTrainSetCompositon. Die exakte offizielle TrainSetInformationService-V2.1-XSD verwendet dagegen GetTrainSetCompositionResponse, und auch das übrige Operationsinventar der Publikation nutzt die Schreibweise Composition. Es gibt keine Compositon-Deklaration und keinen Alias. Der Befund ist damit ein bestätigter Dokumentationstippfehler ohne Änderung des XML-Verhaltens.",
-          "recommendation": "Die korrekte Schreibweise Composition aus der exakten V2.1-Autorität verwenden. GetTrainSetCompositon nicht als Alias oder zusätzliche Operation erzeugen und daraus keine Runtime-Regel ableiten."
+          "title": "TrainSetInformationService V2.1/V2.2: Tippfehler GetTrainSetCompositon in der PDF",
+          "short": "Beide Ausgaben schreiben in §9.1.4 GetTrainSetCompositon; §4.5 und §4.5.1 verwenden korrekt GetTrainSetComposition.",
+          "long": "V2.1 S.44 und V2.2 S.46 enthalten denselben Tippfehler. In beiden Ausgaben nennt die Operationstabelle auf S.24 unter §4.5 sowie §4.5.1/§4.5.1.1 die korrekte Operation GetTrainSetComposition. Der Request überträgt laut §4.5.1.1 keine Struktur. Die exakten XSDs deklarieren TrainSetInformationService.GetTrainSetCompositionResponse und den entsprechend benannten Strukturtyp; weder sie noch ihre Common-/Enumerations-Includes enthalten Compositon. Der Operationsname ist nicht mit einem XML-Request-Root gleichzusetzen. Der Befund ist dokumentationsbezogen, unabhängig von der falschen Dienstzuordnung DRTRAINSET21-002.",
+          "recommendation": "In beiden Versionen die korrekte Schreibweise verwenden. Kein Alias, kein zusätzlicher XML-Request-Root, keine Runtime-Regel und keine XSD-Änderung."
         },
         "en": {
-          "title": "TrainSetInformationService V2.1: 'GetTrainSetCompositon' typo in the PDF",
-          "short": "Page 44 prints GetTrainSetCompositon while the official V2.1 XSD and the rest of the publication use GetTrainSetComposition.",
-          "long": "Reviewed page 44 visibly prints GetTrainSetCompositon. The exact official TrainSetInformationService V2.1 XSD instead uses GetTrainSetCompositionResponse, and the publication's operation inventory consistently uses the Composition spelling. There is no Compositon declaration or alias. The finding is therefore a confirmed documentation typo with no change to XML behaviour.",
-          "recommendation": "Use the correct Composition spelling from the exact V2.1 authority. Do not create GetTrainSetCompositon as an alias or additional operation and do not derive a runtime rule from it."
+          "title": "TrainSetInformationService V2.1/V2.2: GetTrainSetCompositon typo in the PDF",
+          "short": "Both editions print GetTrainSetCompositon in §9.1.4; §4.5 and §4.5.1 correctly name GetTrainSetComposition.",
+          "long": "V2.1 p44 and V2.2 p46 contain the same typo. In both editions, p24 §4.5 operation table and §4.5.1/§4.5.1.1 name GetTrainSetComposition correctly. The request transfers no structure per §4.5.1.1. Exact schemas declare TrainSetInformationService.GetTrainSetCompositionResponse and the correctly named structure type; neither TSI schema nor its Common/Enumerations includes contains Compositon. The operation name is not an XML request root. This documentation defect remains separate from wrong service attribution DRTRAINSET21-002.",
+          "recommendation": "Use the correct spelling in both versions. Do not synthesize an alias, XML request root, runtime rule or XSD modification."
         }
       },
       "runtime_match": {
@@ -11684,9 +11698,23 @@
           "kind": "evidence",
           "reference": "EV-148 / run 34029363792 / closure run 34029618883 / audit_registry/drtrainset21_revalidation_evidence_2026-09-06.json",
           "note": "Persisted visual and exact-XSD counter-context evidence."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TRAINSET_V2.2 / sha256 c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e / printed p24,46",
+          "note": "Visible operation table and affected §9.1.4."
+        },
+        {
+          "kind": "xsd",
+          "reference": "VDV-301-2.2 / IBIS-IP_TrainSetInformationService_V2.2.xsd blob 7ab1f8f892bfcea2a8b8a055f07de92c143356f9"
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTRAINSET21_003_2026-11-24.md",
+          "note": "Independent cross-version review, exact raw source pins and positive controls from render runs 45404894020 and 45402521643."
         }
       ],
-      "notes": "Confirmed PDF identifier typo only. No compatibility alias or runtime diagnostic is created."
+      "notes": "Confirmed documentation identifier typo persists in V2.1 and V2.2. Correct operation name and response XML root must be distinguished. No compatibility alias or runtime diagnostic; separate from DRTRAINSET21-002."
     },
     {
       "finding_id": "DRTRAINSET22-001",
