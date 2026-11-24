@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 116,
-    "verified": 116,
+    "tracked_findings": 117,
+    "verified": 117,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -6761,6 +6761,45 @@
           "version": "After dedicated TimeService V1.0",
           "role": "no_corrected_successor_found",
           "language_status": "de/en:VDV catalog contains no later dedicated TimeService issue as checked 2026-11-23",
+          "source_ids": [
+            "TIME_V1.0"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRTIME10-003",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTIME10_003_2026-11-24.md",
+        "VDV official public publication index https://www.vdv.de/ip-kom-oev.aspx independently inspected 2026-11-24: only standalone TimeService 301-2-10 V1.0, issued 02/2018; no predecessor or fixed successor standalone TimeService edition listed.",
+        "Original TIME_V1.0 bilingual p7 §2.1.2 direct visible comparison: German (vgl. 1), English (cd. 1). Original source-pinned p7 EV147 PNG freshly SHA checked and visually inspected 2026-11-24; related actual §1 p6 source-pinned PNG independently visible and hashed.",
+        "Earlier VDV 301-2 general base writing and later unrelated Common 301-2-1 editions not independent 301-2-10 TimeService publication versions. No later editorial correction source found; exact intended replacement not asserted.",
+        "Original official TimeService V1.0 PDF historically pinned sha256 d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3 and size 515920 bytes, source ID TIME_V1.0; raw PDF not freshly downloaded."
+      ],
+      "scope_conclusion": "Standalone VDV-Schrift 301-2-10 TimeService V1.0 (02/2018) is first/last independently published dedicated edition in current official index (2026-11-24). Single bilingual original publication, printed p7 §2.1.2 German correct chapter-reference `(vgl. 1)`, parallel English erroneous `(cd. 1)`; actual referenced target is printed p6 §1. Neither separate DE/EN publication tracks nor earlier/later standalone TimeService variants evidenced. Treat only English V1.0 editorial residue as affected; no changes to normative `_ibisip_udp._udp` discovery profile, SNTP RFC4330 or any XML/XSD/SDK result. Exact intended English correction remains unresolved.",
+      "note": "Independent version and language controls in one standalone original bilingual TimeService V1.0 publication. No inferred corrected successor or guessed `cd.` replacement; German correct reference not independently defective.",
+      "boundary_checks": [
+        {
+          "version": "Before dedicated TimeService 301-2-10 V1.0",
+          "role": "no_standalone_predecessor_publication_verified",
+          "language_status": "de/en:official catalogue lists no earlier standalone 301-2-10 TimeService edition; generic 301-2 v1 baseline not a separate TimeService service-description release",
+          "source_ids": [
+            "TIME_V1.0"
+          ]
+        },
+        {
+          "version": "TimeService 301-2-10 V1.0 (02/2018)",
+          "role": "first_last_affected_english_version_history_reference",
+          "language_status": "de:printed p7 §2.1.2 `(vgl. 1)` correctly points to printed p6 §1; en:parallel p7 history line prints `(cd. 1)` as unverified editorial residue; no affirmative technical variation, one bilingual issue",
+          "source_ids": [
+            "TIME_V1.0"
+          ]
+        },
+        {
+          "version": "After dedicated TimeService 301-2-10 V1.0",
+          "role": "no_corrected_successor_publication_verified",
+          "language_status": "de/en:no later independent TimeService 301-2-10 publication verified in official catalogue as of 2026-11-24; no extrapolated correction boundary",
           "source_ids": [
             "TIME_V1.0"
           ]

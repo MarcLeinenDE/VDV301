@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 116,
-    "coverage_complete_count": 116,
+    "locator_entry_count": 117,
+    "coverage_complete_count": 117,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 76
+    "remaining_finding_count": 75
   },
   "entries": [
     {
@@ -22481,6 +22481,68 @@
         "Historical original EV147 run34028395412 artifact9987794844 p6 PNG 180dpi SHA256 099a2198df048ef805ea37ac559fc1adec24e9b622fd2e7b421ac31d8bbb0cfd, 402182B, originally visually checked 2026-09-06; artifact digest metadata sha256:2fbb9272c55ebbe704ae4736f488af5758bc0cbbbc8902e77d1a46e19b1ffc92.",
         "Official VDV index https://www.vdv.de/ip-kom-oev.aspx single standalone TimeService V1.0, no earlier/later dedicated edition proven.",
         "EV147 evidence HEAD 686ce92e has RV003 checker blob ff6e3fcd and runtime_time_profile blob acd28ca0 with no-cyclic predicate; full schema CI #45170321287 executed RV003 PASS; historical nonexistence assertion wrong."
+      ]
+    },
+    {
+      "finding_id": "DRTIME10-003",
+      "service": "TimeService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official byte-pinned VDV 301-2-10 TimeService V1.0 publication on the PDF/API/prose authority lane. TimeService intentionally has no XSD semantic authority in this audit."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V1.0",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "first_and_last_only_independently_verified_dedicated_TimeService_V1_0_bilingual_version_history",
+          "pdf_locators": [
+            {
+              "source_id": "TIME_V1.0",
+              "document_title": "VDV-Schrift 301-2-10 TimeService V1.0 (02/2018)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-10sds-v-1-01.pdfx",
+              "sha256": "d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3",
+              "printed_pages": [
+                7
+              ],
+              "section": "§2 Versionshistorie / §2.1 Version 1.0 / §2.1.2 Technische Ergänzungen/Korrekturen / Technical Upgrade/Corrections",
+              "table": null,
+              "point_summary": "Actual original visible printed page 7 §2.1.2 shows directly adjacent German 'Typ für Service-Discovery definiert:_ibisip_udp._udp (vgl. 1)' and English 'define Type for Service-Discovery: _ibisip_udp._udp (cd. 1)'. Exact byte-pinned EV147 180dpi original p7 PNG renders/page-07.png SHA256 daf92ecdb9370957c772a73e46a016835a1d8e7e171915deea88288f53d395fd (88405B) freshly extracted, SHA checked and directly visually inspected 2026-11-24 from original artifact ZIP also freshly SHA checked. Not a text extraction artifact. Likely editorial reference residue; intended exact English replacement not authoritatively established."
+            },
+            {
+              "source_id": "TIME_V1.0",
+              "document_title": "VDV-Schrift 301-2-10 TimeService V1.0 (02/2018)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-10sds-v-1-01.pdfx",
+              "sha256": "d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3",
+              "printed_pages": [
+                6
+              ],
+              "section": "§1 Dienst TimeService / Service TimeService",
+              "table": null,
+              "point_summary": "Independently inspected actual referenced target printed page 6 §1, showing DNS-SD discovery `_ibisip_udp._udp` in the body of TimeService, which is the substantive referent of German `(vgl. 1)`. Existing exact-source EV147 original p6 180dpi PNG SHA256 099a2198df048ef805ea37ac559fc1adec24e9b622fd2e7b421ac31d8bbb0cfd (402182B) freshly rehashed and visually inspected 2026-11-24. Printed §1 is an actual section, not an inferred TOC/history target."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Official standalone TimeService 301-2-10 V1.0 (02/2018), a single bilingual PDF: German §2.1.2 p7 uses (vgl. 1), English parallel line visibly uses (cd. 1); actual referenced target §1 on original p6 independently verified and describes the DNS-SD Service-Discovery type `_ibisip_udp._udp`. 2026-11-24 official VDV catalogue contains only dedicated TimeService V1.0; no independent earlier or corrected successor dedicated TimeService edition. Earlier general VDV 301-2 baseline is not an independent TimeService edition. This is documentation-only editorial residue, not a new DNS-SD type or technical rule, no TimeService XSD authority, no SDK/runtime matcher; exact intended English replacement unresolved."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTIME10_003_2026-11-24.md",
+        "Official original TIME_V1.0 raw PDF historically byte pinned SHA256 d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3 / 515920B, pin run33196758957. Original PDF itself not freshly downloaded or SHA computed in this cycle.",
+        "2026-11-24 directly downloaded GitHub EV147 artifact id 9987794844 zip sha256 2fbb9272c55ebbe704ae4736f488af5758bc0cbbbc8902e77d1a46e19b1ffc92 / 579380B, matched historical EV147 registry SHA, extracted original page-07.png SHA256 daf92ecdb9370957c772a73e46a016835a1d8e7e171915deea88288f53d395fd / 88405B and original page-06.png SHA256 099a2198df048ef805ea37ac559fc1adec24e9b622fd2e7b421ac31d8bbb0cfd / 402182B, both rehashed and directly visibly inspected.",
+        "Original official PDF web page p7 screenshot attempted 2026-11-24; renderer returned Cache miss; fallback used verified original source-pinned GitHub EV147 artifact p7/p6 exact render images. No fresh raw-PDF identity asserted.",
+        "Official VDV IP-KOM-ÖV catalogue https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-24: only standalone TimeService V1.0, no dedicated predecessor/successor; cannot equate VDV301-2 baseline or unrelated Common service versions to TimeService releases.",
+        "Historical EV147 run34028395412 PASS, closure run34028583953; audit_registry/drtime10_revalidation_evidence_2026-09-06.json documents original render source pins and leaves DRTIME10-003 intended replacement null; no XSD/executable testcase applicable.",
+        "Selected DNS-SD discovery string `_ibisip_udp._udp` confirmed in both version history and real §1 on pinned p6. SDK semantic classification already confirmed_pdf_defect, no_runtime_diagnostic; intentionally unchanged."
       ]
     }
   ]
