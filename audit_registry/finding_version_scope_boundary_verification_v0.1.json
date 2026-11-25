@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 127,
-    "verified": 127,
+    "tracked_findings": 128,
+    "verified": 128,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -7356,6 +7356,56 @@
           "language_status": "Future label deletion only announced, not an enacted later profile.",
           "source_ids": [
             "HDS_V2.2a"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "JIS-001",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_JIS_001_2026-11-25.md",
+        "Historical WIP checkpoint docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_JIS_001_WIP_2026-11-25.md; preserve as historical evidence.",
+        "EV-152 run 34113437268 SUCCESS; artifact 10015273758 ZIP sha256 338e3fb679a8375c98fba359a3478d4cf7ba0968f3e97c08209ce52c0d23dc65 independently verified. Visible printed p9 eb4274fd531510109c62ebb9d1c293ab8e440981edad130f517d3efec5cc655c, p11 698a4c1099476acb970382172af6e8c7f3f0dcc42036babdd1b5d498ec31e741, p12 a030e788fd63f9089778abda6ed4e9d3c466bdd2c389973d698e34698e0dd1e9, p13 a5bfe1f0fabb40acfdb4f4475f2cb8f4f273c94e80bdf7010a6085490d5c823a actually read; hashes match EV-152.",
+        "JIS_V1.0 pin 424181b4932e18b6ac059843fa3978fdcc07a9c6acb553f9fbe8b71ef583da73, 772125 bytes, original pin run 34103529949 artifact 10011459459, ZIP ee5383e391c2c2e79b229a56094f0a77edc96836516dffa464fc710450647a6a; registered in 3ee744d from verified historical evidence, not a new raw-PDF fetch.",
+        "VDV301-2_V1.0_EN pin e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7, 2403598 bytes; fresh exact pinned render run 45625180374 SUCCESS, artifact 15026289022 ZIP 5d147d3241d23da58f1b29b37214ca4dc13201899b8093f56ec31b4e54a42559. All 4 PNG size/hash checks pass; visually read p71 e39484197bacd5004c04fb3435dce0ddf2efc09d7b6dd6cd95743006ac1968a7, p73 1701b40312c76df09212e679774700d54b688984a46f8c33323ed7a261551a9d, p74 f91cbffd43e541bcd1f8ebe593731a84e12e0fd125919bbfa1da51d689c5b2ab. p72 verified but not needed for this claim.",
+        "Exact upstream VDV-301-1.0 JIS 1ee4d7aeb15f3269c5335313be9e214bdb519d2e (type-only) + IBIS_IP_V1.0.xsd 41289eaed2674a169fdf77a10a2eff293c76d5c4 (global roots/group) vs VDV-301-2.0/2.1/2.2 JIS 8c303db5a9c0548d66b90174d9c329d33092ad24: normalized 44/44 complex types identical, 31/31 root-name/type pairs identical, group identical. Common 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c and Enum a9bea5bc73003ed91ded8519db06c32c4067831d identical across tags. No fresh XML instance test, not a claim of whole aggregate equivalence.",
+        "docs/pdf_xsd_semantic_audit/SUPERBRANCH_V1_0_DEDUP_POLICY.md explicitly selects later official self-contained JIS V1.0 packaging; strict archival reconstruction uses original tag. No SDK routing gap or payload constraint change established.",
+        "Official VDV index https://www.vdv.de/ip-kom-oev.aspx accessed 2026-11-25 (cached crawl): only standalone JIS V1.0 listed. No independently established earlier standalone or later standalone version; EN 2014 aggregate is predecessor documentation, not additional standalone version. No independent DE 2014 aggregate or EN 2016 standalone verified."
+      ],
+      "note": "JIS V1.0 shared generic subscriptions intentional in earliest independently verified 2014 EN aggregate and 2016 DE standalone; no different standalone version or corrected successor verified. Distinct official packaging, same 44 payload complex types and 31 root mappings/group, same Common/Enum blobs. No XSD defect or runtime diagnostic.",
+      "scope_conclusion": "JIS V1.0 shared generic subscriptions intentional in earliest independently verified 2014 EN aggregate and 2016 DE standalone; no different standalone version or corrected successor verified. Distinct official packaging, same 44 payload complex types and 31 root mappings/group, same Common/Enum blobs. No XSD defect or runtime diagnostic.",
+      "boundary_checks": [
+        {
+          "version": "Before January 2014 V1.0",
+          "role": "no_independently_established_predecessor",
+          "language_status": "No earlier JIS publication independently established.",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "January 2014 VDV 301-2 V1.0 EN aggregate",
+          "role": "earliest_verified_historical_context",
+          "language_status": "EN p71/73 Table 49 and p74 §§9.6.3/4/6/7 explicitly shared types; separate DE 2014 aggregate not independently established.",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "July 2016 VDV 301-2-6 V1.0 DE standalone",
+          "role": "first_last_verified_standalone",
+          "language_status": "DE p9/11 Table 1 and p12/13 §§1.4/1.5/1.7/1.8 explicit shared types; no separate EN standalone independently established.",
+          "source_ids": [
+            "JIS_V1.0"
+          ]
+        },
+        {
+          "version": "After standalone V1.0",
+          "role": "no_independently_established_successor",
+          "language_status": "Official catalog retrieved 2026-11-25 lists only standalone V1.0; no later edition verified.",
+          "source_ids": [
+            "JIS_V1.0"
           ]
         }
       ]
