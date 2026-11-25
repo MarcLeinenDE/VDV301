@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "577725286feb0858e4ce31281140eff555c1b5cc",
+    "git_blob": "6ec46acedab9c78441e1ea7330f47ec2c7a738bc",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 123,
-    "coverage_complete_count": 123,
+    "locator_entry_count": 124,
+    "coverage_complete_count": 124,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 69
+    "remaining_finding_count": 68
   },
   "entries": [
     {
@@ -23968,6 +23968,546 @@
         "VDV publication catalogue https://www.vdv.de/ip-kom-oev.aspx indexed representation inspected 2026-11-25: TVS V2.1, V2.2, V2.3 and V2.4; no earlier/later dedicated edition established. Direct web fetch returned HTTP error; indexed official catalogue and exact pinned publications used. Shared technical English body in bilingual documents; no fabricated parallel German occurrence.",
         "EV112 (EV150 rerun 34087850644), EV113 run 33257767942, EV114 run 33264437557 and EV115 run 33265239836 all verified completed SUCCESS; current exact file blobs and checker expected blobs match. Historical type-case compile evidence reused, not a new execution asserted. EV114 verifies official V2.2-named route and distinct V2.3 candidate; negative compile case inherited only because exact official route matches EV113.",
         "V2.1 exact official mixed route TVS V2.1 -> Common V1.0/Enums V1.0; V2.2 official aligned route and V2.3 official documentation route both use identical three V2.2 files, checked individually at their respective official tags; distinct V2.3-named candidate b17591c5b067254dd3e2260f3ef2acd2e18394a9 uses same V2.2 includes and exact CurrentTripRef declaration, no official V2.3-named file in tag. V2.4 upstream master service 291f41518fd48cd9dcc9f285cf9b5fec7dd72159 also verified at immutable commit 14880bb33beec5c5dffe96315b730bd6c094a585; includes absent Common V2.4 and Enums V2.2; VDV-301-2.4 tag lookup 404. Complete work V2.4 candidate route independently verified; no official V2.4 compile claim."
+      ]
+    },
+    {
+      "finding_id": "DRTVS21-002",
+      "service": "TicketValidationService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.1.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact official VDV-301-2.1 TicketValidationService route. The finding is limited to the missing service-name separator in a PDF display label; omission of the Structure suffix follows surrounding PDF display conventions and is not classified as a defect."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official VDV-301-2.2 exact family; EV113 declaration support. Missing separator only, not omitted Structure."
+        },
+        {
+          "version": "V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official VDV-301-2.3 uses unchanged V2.2-named service and dependency blobs; EV114; distinct V2.3-named candidate is not the official route."
+        },
+        {
+          "version": "V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.4.xsd + IBIS-IP_common_V2.4.xsd + IBIS-IP_Enumerations_V2.4.xsd",
+          "note": "Official V2.4 PDF, executable candidate/integration family only; EV115 declaration support. Incomplete upstream service corroborates; no official V2.4 release conformance."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "first_available_affected_official_version",
+          "pdf_locators": [
+            {
+              "source_id": "TVS_V2.1",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sds-v2-1-ticketvalidation.pdfx",
+              "sha256": "676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.7 GetCurrentLine / §3.7.2 Response",
+              "table": "Table 5 Description of TicketValidationService.GetCurrentLineResponse",
+              "point_summary": "CurrentLineData member displays +TicketValidationServiceCurrentLineData, line-wrapped before Data; dot missing."
+            },
+            {
+              "source_id": "TVS_V2.1",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sds-v2-1-ticketvalidation.pdfx",
+              "sha256": "676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.7 GetCurrentLine / §3.7.2 Response",
+              "table": "Table 6 Description of TicketValidationService.CurrentLineData",
+              "point_summary": "Direct same-page positive control: table caption dotted, heading has dot plus space, Structure suffix omitted."
+            },
+            {
+              "source_id": "TVS_V2.1",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sds-v2-1-ticketvalidation.pdfx",
+              "sha256": "676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.4.2 Response",
+              "table": "Table 3 Description of TicketValidationService.GetRazziaResponse",
+              "point_summary": "RazziaData uses dotted shortened +TicketValidationService.RazziaResponseData; supports display convention."
+            },
+            {
+              "source_id": "TVS_V2.1",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sds-v2-1-ticketvalidation.pdfx",
+              "sha256": "676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.4.2 Response",
+              "table": "Table 4 Description of GetrazziaResponsetData",
+              "point_summary": "Structure header TicketValidationService.RazziaResponseData retains dot and omits Structure. Caption typo separate DRTVS21-004."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.1.xsd",
+              "git_blob": "f6497e6469b82ee19b185c4de749d13a7ca60bed",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.1.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.GetCurrentLineResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.GetCurrentLineResponseStructure']/xs:choice/xs:element[@name='CurrentLineData']",
+              "line_hint": "56",
+              "point_summary": "CurrentLineData choice member uses exact TicketValidationService.CurrentLineDataStructure.",
+              "member": "CurrentLineData"
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.1.xsd",
+              "git_blob": "f6497e6469b82ee19b185c4de749d13a7ca60bed",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.1.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.CurrentLineDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.CurrentLineDataStructure']",
+              "line_hint": "60",
+              "point_summary": "Exact dotted type; concatenated PDF display is absent from service types."
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.1.xsd",
+              "git_blob": "f6497e6469b82ee19b185c4de749d13a7ca60bed",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.1.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.RazziaResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.RazziaResponseDataStructure']",
+              "line_hint": "47",
+              "point_summary": "Control: same Structure suffix convention as CurrentLineData; PDF Table 3 uses a dotted shortened label."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.1.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Exact transitive dependency pinned and verified in preceding same-session review; unchanged tree blob."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.1.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Exact transitive dependency pinned and verified in preceding same-session review; unchanged tree blob."
+            }
+          ],
+          "coverage_note": "Exact official route and same-page PDF control."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "affected_official_version",
+          "pdf_locators": [
+            {
+              "source_id": "TVS_V2.2",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-2-ticketvalidation.pdfx",
+              "sha256": "1915a1b12c24386e9a8ab5638fd88af6a442b5e42586b7b2d48f03e9a4205083",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.7 GetCurrentLine / §3.7.2 Response",
+              "table": "Table 5 Description of TicketValidationService.GetCurrentLineResponse",
+              "point_summary": "CurrentLineData member displays +TicketValidationServiceCurrentLineData, line-wrapped before Data; dot missing."
+            },
+            {
+              "source_id": "TVS_V2.2",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-2-ticketvalidation.pdfx",
+              "sha256": "1915a1b12c24386e9a8ab5638fd88af6a442b5e42586b7b2d48f03e9a4205083",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.7 GetCurrentLine / §3.7.2 Response",
+              "table": "Table 6 Description of TicketValidationService.CurrentLineData",
+              "point_summary": "Direct same-page positive control: table caption dotted, heading has dot plus space, Structure suffix omitted."
+            },
+            {
+              "source_id": "TVS_V2.2",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-2-ticketvalidation.pdfx",
+              "sha256": "1915a1b12c24386e9a8ab5638fd88af6a442b5e42586b7b2d48f03e9a4205083",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.4.2 Response",
+              "table": "Table 3 Description of TicketValidationService.GetRazziaResponse",
+              "point_summary": "RazziaData uses dotted shortened +TicketValidationService.RazziaResponseData; supports display convention."
+            },
+            {
+              "source_id": "TVS_V2.2",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-2-ticketvalidation.pdfx",
+              "sha256": "1915a1b12c24386e9a8ab5638fd88af6a442b5e42586b7b2d48f03e9a4205083",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.4.2 Response",
+              "table": "Table 4 Description of GetrazziaResponsetData",
+              "point_summary": "Structure header TicketValidationService.RazziaResponseData retains dot and omits Structure. Caption typo separate DRTVS21-004."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.2.xsd",
+              "git_blob": "5a4be2b2ba66860f035777ec0458dba0790880e1",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.2.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.GetCurrentLineResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.GetCurrentLineResponseStructure']/xs:choice/xs:element[@name='CurrentLineData']",
+              "line_hint": "56",
+              "point_summary": "CurrentLineData choice member uses exact TicketValidationService.CurrentLineDataStructure.",
+              "member": "CurrentLineData"
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.2.xsd",
+              "git_blob": "5a4be2b2ba66860f035777ec0458dba0790880e1",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.2.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.CurrentLineDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.CurrentLineDataStructure']",
+              "line_hint": "60",
+              "point_summary": "Exact dotted type; concatenated PDF display is absent from service types."
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.2.xsd",
+              "git_blob": "5a4be2b2ba66860f035777ec0458dba0790880e1",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.2.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.RazziaResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.RazziaResponseDataStructure']",
+              "line_hint": "47",
+              "point_summary": "Control: same Structure suffix convention as CurrentLineData; PDF Table 3 uses a dotted shortened label."
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.2.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Exact transitive dependency pinned and verified in preceding same-session review; unchanged tree blob."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.2.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Exact transitive dependency pinned and verified in preceding same-session review; unchanged tree blob."
+            }
+          ],
+          "coverage_note": "Exact official route and same-page PDF control."
+        },
+        {
+          "version": "V2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "affected_official_version",
+          "pdf_locators": [
+            {
+              "source_id": "TVS_V2.3",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-3-ticketvalidation.pdfx",
+              "sha256": "74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.7 GetCurrentLine / §3.7.2 Response",
+              "table": "Table 5 Description of TicketValidationService.GetCurrentLineResponse",
+              "point_summary": "CurrentLineData member displays +TicketValidationServiceCurrentLineData, line-wrapped before Data; dot missing."
+            },
+            {
+              "source_id": "TVS_V2.3",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-3-ticketvalidation.pdfx",
+              "sha256": "74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.7 GetCurrentLine / §3.7.2 Response",
+              "table": "Table 6 Description of TicketValidationService.CurrentLineData",
+              "point_summary": "Direct same-page positive control: table caption dotted, heading has dot plus space, Structure suffix omitted."
+            },
+            {
+              "source_id": "TVS_V2.3",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-3-ticketvalidation.pdfx",
+              "sha256": "74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.4.2 Response",
+              "table": "Table 3 Description of TicketValidationService.GetRazziaResponse",
+              "point_summary": "RazziaData uses dotted shortened +TicketValidationService.RazziaResponseData; supports display convention."
+            },
+            {
+              "source_id": "TVS_V2.3",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-3-ticketvalidation.pdfx",
+              "sha256": "74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.4.2 Response",
+              "table": "Table 4 Description of GetrazziaResponsetData",
+              "point_summary": "Structure header TicketValidationService.RazziaResponseData retains dot and omits Structure. Caption typo separate DRTVS21-004."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.2.xsd",
+              "git_blob": "5a4be2b2ba66860f035777ec0458dba0790880e1",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.3.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.GetCurrentLineResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.GetCurrentLineResponseStructure']/xs:choice/xs:element[@name='CurrentLineData']",
+              "line_hint": "56",
+              "point_summary": "CurrentLineData choice member uses exact TicketValidationService.CurrentLineDataStructure.",
+              "member": "CurrentLineData"
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.2.xsd",
+              "git_blob": "5a4be2b2ba66860f035777ec0458dba0790880e1",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.3.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.CurrentLineDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.CurrentLineDataStructure']",
+              "line_hint": "60",
+              "point_summary": "Exact dotted type; concatenated PDF display is absent from service types."
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.2.xsd",
+              "git_blob": "5a4be2b2ba66860f035777ec0458dba0790880e1",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.3.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.RazziaResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.RazziaResponseDataStructure']",
+              "line_hint": "47",
+              "point_summary": "Control: same Structure suffix convention as CurrentLineData; PDF Table 3 uses a dotted shortened label."
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.3.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Exact transitive dependency pinned and verified in preceding same-session review; unchanged tree blob."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.3.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Exact transitive dependency pinned and verified in preceding same-session review; unchanged tree blob."
+            }
+          ],
+          "coverage_note": "Official V2.3 uses V2.2-named exact route; distinct candidate not used."
+        },
+        {
+          "version": "V2.4",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "last_available_affected_official_pdf_candidate_schema_context",
+          "pdf_locators": [
+            {
+              "source_id": "TVS_V2.4",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sde-v2.4-ticketvalidationservice.pdfx",
+              "sha256": "e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.7 GetCurrentLine / §3.7.2 Response",
+              "table": "Table 5 Description of TicketValidationService.GetCurrentLineResponse",
+              "point_summary": "CurrentLineData member displays +TicketValidationServiceCurrentLineData, line-wrapped before Data; dot missing."
+            },
+            {
+              "source_id": "TVS_V2.4",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sde-v2.4-ticketvalidationservice.pdfx",
+              "sha256": "e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.7 GetCurrentLine / §3.7.2 Response",
+              "table": "Table 6 Description of TicketValidationService.CurrentLineData",
+              "point_summary": "Direct same-page positive control: table caption dotted, heading has dot plus space, Structure suffix omitted."
+            },
+            {
+              "source_id": "TVS_V2.4",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sde-v2.4-ticketvalidationservice.pdfx",
+              "sha256": "e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.4.2 Response",
+              "table": "Table 3 Description of TicketValidationService.GetRazziaResponse",
+              "point_summary": "RazziaData uses dotted shortened +TicketValidationService.RazziaResponseData; supports display convention."
+            },
+            {
+              "source_id": "TVS_V2.4",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sde-v2.4-ticketvalidationservice.pdfx",
+              "sha256": "e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.4.2 Response",
+              "table": "Table 4 Description of GetrazziaResponsetData",
+              "point_summary": "Structure header TicketValidationService.RazziaResponseData retains dot and omits Structure. Caption typo separate DRTVS21-004."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.4.xsd",
+              "git_blob": "34b18b8c874e325dd923b366a72bb0ebee32e59e",
+              "authority_detail": "Exact complete work-branch candidate/integration family; not official V2.4 release.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.GetCurrentLineResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.GetCurrentLineResponseStructure']/xs:choice/xs:element[@name='CurrentLineData']",
+              "line_hint": "71",
+              "point_summary": "CurrentLineData choice member uses exact TicketValidationService.CurrentLineDataStructure.",
+              "member": "CurrentLineData"
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.4.xsd",
+              "git_blob": "34b18b8c874e325dd923b366a72bb0ebee32e59e",
+              "authority_detail": "Exact complete work-branch candidate/integration family; not official V2.4 release.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.CurrentLineDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.CurrentLineDataStructure']",
+              "line_hint": "75",
+              "point_summary": "Exact dotted type; concatenated PDF display is absent from service types."
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.4.xsd",
+              "git_blob": "34b18b8c874e325dd923b366a72bb0ebee32e59e",
+              "authority_detail": "Exact complete work-branch candidate/integration family; not official V2.4 release.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.RazziaResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.RazziaResponseDataStructure']",
+              "line_hint": "62",
+              "point_summary": "Control: same Structure suffix convention as CurrentLineData; PDF Table 3 uses a dotted shortened label."
+            },
+            {
+              "file": "IBIS-IP_common_V2.4.xsd",
+              "git_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+              "authority_detail": "Exact complete work-branch candidate/integration family; not official V2.4 release.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Exact transitive dependency pinned and verified in preceding same-session review; unchanged tree blob."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.4.xsd",
+              "git_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+              "authority_detail": "Exact complete work-branch candidate/integration family; not official V2.4 release.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Exact transitive dependency pinned and verified in preceding same-session review; unchanged tree blob."
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.4.xsd",
+              "git_blob": "291f41518fd48cd9dcc9f285cf9b5fec7dd72159",
+              "authority_detail": "Exact upstream master historical commit; incomplete dependencies, not official-release authority.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.GetCurrentLineResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.GetCurrentLineResponseStructure']/xs:choice/xs:element[@name='CurrentLineData']",
+              "line_hint": "71",
+              "point_summary": "Upstream incomplete service corroborates exact member type; no official executable release.",
+              "member": "CurrentLineData",
+              "repository": "VDVde/VDV301",
+              "ref": "14880bb33beec5c5dffe96315b730bd6c094a585"
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.4.xsd",
+              "git_blob": "291f41518fd48cd9dcc9f285cf9b5fec7dd72159",
+              "authority_detail": "Exact upstream master historical commit; incomplete dependencies, not official-release authority.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.CurrentLineDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.CurrentLineDataStructure']",
+              "line_hint": "75",
+              "point_summary": "Upstream exact dotted type declaration; not official release authority.",
+              "repository": "VDVde/VDV301",
+              "ref": "14880bb33beec5c5dffe96315b730bd6c094a585"
+            }
+          ],
+          "coverage_note": "Official PDF, complete selected candidate and incomplete upstream declaration evidence separately labelled."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTVS21_002_2026-11-25.md",
+        "V2.1 source-pinned render run 34087850644 artifact 10005814043; ZIP SHA256 8540e52a7866f8e034f2b5ed1496f2048173d183df58f7d9db42953c5ada579a (1517127 bytes), all 7 manifest PNG hash/size pairs rechecked 2026-11-25; original p15 SHA256 a79fbb0fe541fb9af0131d64d13d9c1fc2f34a74aebdb513c9daae93bcd988c9 (219670 bytes) visually inspected. Source PDF pin from render manifest and canonical registry, see docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTVS21_001_2026-11-25.md.",
+        "V2.2 source-pinned render run 33255450850 artifact 9715657871; ZIP SHA256 f6c313f94fe89ad14f6ed6114a0402efc543c31d4d2353a60dde05ea7f7d6e93 (1349951 bytes), all 9 manifest PNG hash/size pairs rechecked 2026-11-25; original p15 SHA256 349285137e542cc00d6cbcc2981647f87d33c62c7271342e2f6e05a328d9b2a6 (192483 bytes) visually inspected. Source PDF pin from render manifest and canonical registry, see docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTVS21_001_2026-11-25.md.",
+        "V2.3 source-pinned render run 33258612417 artifact 9716575205; ZIP SHA256 0cba4a211c323be415e26120eecda08c1453cce0df18e4ec373a108e22b56c74 (1487345 bytes), all 10 manifest PNG hash/size pairs rechecked 2026-11-25; original p15 SHA256 7c2fd834cfe818549cb4cdc424f64ad2d8cd16e73db714585996a9e5a666046a (197291 bytes) visually inspected. Source PDF pin from render manifest and canonical registry, see docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTVS21_001_2026-11-25.md.",
+        "V2.4 source-pinned render run 33265061000 artifact 9718391355; ZIP SHA256 03a308e9ac1f792ec074020a633e83ab58973c90573e982b58e4731466f72781 (1824395 bytes), all 11 manifest PNG hash/size pairs rechecked 2026-11-25; original p15 SHA256 6ad831b6b2ff9c516cc096c1482eb7c6fe9c2c88e8219b41a03c0b89a81e16ee (192940 bytes) visually inspected. Source PDF pin from render manifest and canonical registry, see docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTVS21_001_2026-11-25.md.",
+        "Four p15 bodies independently show §3.7/§3.7.2 Table 5 concatenated +TicketValidationServiceCurrentLineData (line wrap before Data); Table 6 caption TicketValidationService.CurrentLineData and header with dot plus space; Table 3 dotted RazziaResponseData and Table 4 same shortened convention. The missing dot alone is the defect; no literal QName or missing Structure suffix inferred.",
+        "Dependency closure and official catalogue scope from independently verified same-session DRTVS21-001 report docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTVS21_001_2026-11-25.md at parent 2b8aa6fa996e3fd4fac2c12aba7d037c991ac874; current tree confirms all six Common/Enums dependency blobs unchanged; selected service blobs freshly re-read against exact release tags and immutable upstream master commit. No fresh catalogue or raw PDF download claimed.",
+        "Historical EV112 (EV150 rerun 34087850644), EV113 33257767942, EV114 33264437557, EV115 33265239836 previously verified SUCCESS on exact routes. Checker source re-read: EV112/113/115 assert actual member type and absence of concatenated service complex type; EV114 verifies exact official V2.3 route and distinct candidate signature. No new targeted test execution or negative compile probe specifically for this label asserted."
       ]
     }
   ]

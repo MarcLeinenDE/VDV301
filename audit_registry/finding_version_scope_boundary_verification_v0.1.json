@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 123,
-    "verified": 123,
+    "tracked_findings": 124,
+    "verified": 124,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -7100,6 +7100,72 @@
           "version": "After V2.4",
           "role": "no_verified_corrected_successor",
           "language_status": "No later dedicated edition identified from official indexed catalogue.",
+          "source_ids": [
+            "TVS_V2.4"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRTVS21-002",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTVS21_002_2026-11-25.md",
+        "V2.1 source-pinned render run 34087850644 artifact 10005814043; ZIP SHA256 8540e52a7866f8e034f2b5ed1496f2048173d183df58f7d9db42953c5ada579a (1517127 bytes), all 7 manifest PNG hash/size pairs rechecked 2026-11-25; original p15 SHA256 a79fbb0fe541fb9af0131d64d13d9c1fc2f34a74aebdb513c9daae93bcd988c9 (219670 bytes) visually inspected. Source PDF pin from render manifest and canonical registry, see docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTVS21_001_2026-11-25.md.",
+        "V2.2 source-pinned render run 33255450850 artifact 9715657871; ZIP SHA256 f6c313f94fe89ad14f6ed6114a0402efc543c31d4d2353a60dde05ea7f7d6e93 (1349951 bytes), all 9 manifest PNG hash/size pairs rechecked 2026-11-25; original p15 SHA256 349285137e542cc00d6cbcc2981647f87d33c62c7271342e2f6e05a328d9b2a6 (192483 bytes) visually inspected. Source PDF pin from render manifest and canonical registry, see docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTVS21_001_2026-11-25.md.",
+        "V2.3 source-pinned render run 33258612417 artifact 9716575205; ZIP SHA256 0cba4a211c323be415e26120eecda08c1453cce0df18e4ec373a108e22b56c74 (1487345 bytes), all 10 manifest PNG hash/size pairs rechecked 2026-11-25; original p15 SHA256 7c2fd834cfe818549cb4cdc424f64ad2d8cd16e73db714585996a9e5a666046a (197291 bytes) visually inspected. Source PDF pin from render manifest and canonical registry, see docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTVS21_001_2026-11-25.md.",
+        "V2.4 source-pinned render run 33265061000 artifact 9718391355; ZIP SHA256 03a308e9ac1f792ec074020a633e83ab58973c90573e982b58e4731466f72781 (1824395 bytes), all 11 manifest PNG hash/size pairs rechecked 2026-11-25; original p15 SHA256 6ad831b6b2ff9c516cc096c1482eb7c6fe9c2c88e8219b41a03c0b89a81e16ee (192940 bytes) visually inspected. Source PDF pin from render manifest and canonical registry, see docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTVS21_001_2026-11-25.md.",
+        "Four p15 bodies independently show §3.7/§3.7.2 Table 5 concatenated +TicketValidationServiceCurrentLineData (line wrap before Data); Table 6 caption TicketValidationService.CurrentLineData and header with dot plus space; Table 3 dotted RazziaResponseData and Table 4 same shortened convention. The missing dot alone is the defect; no literal QName or missing Structure suffix inferred.",
+        "Dependency closure and official catalogue scope from independently verified same-session DRTVS21-001 report docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTVS21_001_2026-11-25.md at parent 2b8aa6fa996e3fd4fac2c12aba7d037c991ac874; current tree confirms all six Common/Enums dependency blobs unchanged; selected service blobs freshly re-read against exact release tags and immutable upstream master commit. No fresh catalogue or raw PDF download claimed.",
+        "Historical EV112 (EV150 rerun 34087850644), EV113 33257767942, EV114 33264437557, EV115 33265239836 previously verified SUCCESS on exact routes. Checker source re-read: EV112/113/115 assert actual member type and absence of concatenated service complex type; EV114 verifies exact official V2.3 route and distinct candidate signature. No new targeted test execution or negative compile probe specifically for this label asserted."
+      ],
+      "note": "Four editions independently inspected; same shared English technical body; candidate-only V2.4 schema. Previously verified catalogue scope reused explicitly.",
+      "scope_conclusion": "V2.1 first available affected PDF; V2.2, V2.3 persist; V2.4 last available affected official PDF with candidate-only complete executable authority. No earlier dedicated edition or corrected successor established. One ID.",
+      "boundary_checks": [
+        {
+          "version": "Before V2.1",
+          "role": "no_published_standalone_predecessor",
+          "language_status": "Prior same-session official catalogue evidence reused.",
+          "source_ids": [
+            "TVS_V2.1"
+          ]
+        },
+        {
+          "version": "V2.1",
+          "role": "first_affected_official",
+          "language_status": "Shared English p15 §3.7.2 Table 5 missing dot; Table 6 correct dotted display.",
+          "source_ids": [
+            "TVS_V2.1"
+          ]
+        },
+        {
+          "version": "V2.2",
+          "role": "affected_official",
+          "language_status": "Shared English p15 §3.7.2 Table 5 missing dot; Table 6 correct dotted display.",
+          "source_ids": [
+            "TVS_V2.2"
+          ]
+        },
+        {
+          "version": "V2.3",
+          "role": "affected_official",
+          "language_status": "Shared English p15 §3.7.2 Table 5 missing dot; Table 6 correct dotted display.",
+          "source_ids": [
+            "TVS_V2.3"
+          ]
+        },
+        {
+          "version": "V2.4",
+          "role": "last_available_affected_official_pdf_candidate_schema_only",
+          "language_status": "Shared English p15 §3.7.2 Table 5 missing dot; Table 6 correct dotted display.",
+          "source_ids": [
+            "TVS_V2.4"
+          ]
+        },
+        {
+          "version": "After V2.4",
+          "role": "no_verified_corrected_successor",
+          "language_status": "No later dedicated edition established in preceding same-session catalogue evidence.",
           "source_ids": [
             "TVS_V2.4"
           ]
