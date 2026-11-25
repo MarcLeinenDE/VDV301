@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 121,
-    "verified": 121,
+    "tracked_findings": 122,
+    "verified": 122,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -6993,6 +6993,46 @@
           "version": "After dedicated TrainSet V2.2",
           "role": "no_verified_corrected_successor",
           "language_status": "de/en: no later dedicated TrainSet 301-2-14 publication listed in official VDV catalogue as of 2026-11-24; no invented corrected boundary",
+          "source_ids": [
+            "TRAINSET_V2.2"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "DRTRAINSET22-002",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTRAINSET22_002_2026-11-25.md",
+        "EV149 run 34029942365 artifact 9988263849 ZIP SHA256 3bdc68e04a41da03d6d8b84bcc42cf846f58c49ef79a1266741bfa904f08e04e; p35 475e5f139f9bac6385d0745c8414f487afa8ac89d703fd659106269016fdc0db, p36 ae2fe4ed2ee554f1fce7f2e13a33c6599477c8b3bae206d281bf872220be7d0a, p38 bdcd77a7fc6ec92f39d56d490355d77ae74c2b6366e373d0f1b7b0fc3c93032f, p40 00d596be82efb33a978780a58de1d2ee3bc14b6ed9eb54ffda784535708a6512. Original four pages rehashed and visually inspected in prior gate_pending commit 3335a1ef8fc60dccabf5d00fc9e50f0dea54df41.",
+        "V2.1 pinned renderer run 45543429794 artifact 14989798879 ZIP SHA256 fdb6955b08b2d2b70c93a4d8e66deb770d8f024b43c62696dced756e39a14cab (1044969 bytes), source PDF 8eb53f2e960d125382e22d9c58dff8685c041001cf39a87ed4d12bb266bbe12e (1708401 bytes); all six p33–38 PNG hashes/sizes rechecked; visible p34 929ef61c562088ed1065d5dd5f791ef4d611e47042fd81a0628b7ba581671d19 (242127 bytes), p36 8b9b96c79f0ebd180a42b1a0adab1d4caeb5d1dd4f5e313768da743c6a44d14d (179021 bytes), p38 0c6ada261a10aa62d732cfeebc06c8329f8bd0f84ca5484e01d4cae0dbcbb971 (91403 bytes) inspected.",
+        "V2.2 pinned renderer run 33239787579 artifact 9710997705 ZIP SHA256 02eb39ce96df29be51e85eba703520bed910eb1b80d4a7dde86588663fa7ee26 (2094702 bytes), source PDF c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e (1744296 bytes); all ten manifest PNG hashes/sizes rechecked; p51 e1ee632943de8c2fcf1ee08be8b5c3f6e64387b4392ecc17419be237e88e8cad (293474 bytes) and p38 cdec19c48e8f24bde62a8e27ffcc9e39b8a3f49c4b69abafae4fd38c11e46ae8 visibly inspected. Existing archive reused, no fresh V2.2 raw PDF download asserted.",
+        "Official catalogue https://www.vdv.de/ip-kom-oev.aspx retrieved via indexed web representation on 2026-11-25, lists dedicated TrainSet V2.1 and V2.2 only; earlier 2026-11-24 catalogue evidence corroborates. No corrected successor established. English §6.5 technical body is shared in bilingual publications; bilingual history p51.",
+        "Complete exact XSD dependency closures: V2.1 TSD c2cdb73fcae265a2e4e0349ac6072e3548e36d8b, Common V2.0 8608e3dcd665c197c34da7f6ec6af5a3758da164, Enumerations V2.0 27e3c183b00381d959622d13c10543123af8eef6, CIS V2.0 fa8f0a51ad5f612660c9532c8557ad1ca473a908; V2.2 TSD 7a132894c281d613e16514a6fa1bcbffe713d066, Common V2.2 468fee6d177e7185dbcd5d3f90cfb114e29e01ae, Enumerations V2.2 2a23b512379b18e8f122ac1272cef8229fb86283. All seven selected files individually verified against corresponding upstream tags VDV-301-2.1 and VDV-301-2.2; includes inspected recursively."
+      ],
+      "note": "V2.1 nonaffected for these three pointers; V2.2 first and last known affected edition. Shared English technical text; DE/EN history.",
+      "scope_conclusion": "V2.1 last nonaffected predecessor; V2.2 first and last available affected official publication; no corrected successor established. Only V2.2 is semantic affected scope.",
+      "boundary_checks": [
+        {
+          "version": "V2.1",
+          "role": "last_nonaffected_predecessor",
+          "language_status": "Shared English §6.5 p34/36/38 correct earlier pointers; no separate DE technical body.",
+          "source_ids": [
+            "TRAINSET_V2.1"
+          ]
+        },
+        {
+          "version": "V2.2",
+          "role": "first_and_last_available_affected_official",
+          "language_status": "Shared English §6.5 p35/36/38/40 three wrong pointers; DE/EN §11.1.2 p51 records additions.",
+          "source_ids": [
+            "TRAINSET_V2.2"
+          ]
+        },
+        {
+          "version": "After V2.2",
+          "role": "no_verified_corrected_successor",
+          "language_status": "No later standalone TrainSet 301-2-14 publication established from catalogue.",
           "source_ids": [
             "TRAINSET_V2.2"
           ]
