@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "bacd52b5d687a5edb6ed52cb6d89b67c665ca83b",
+    "git_blob": "ea7504d7dc07a4e2fa985aefae5d6ec0ba0a56f1",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 125,
-    "coverage_complete_count": 125,
+    "locator_entry_count": 126,
+    "coverage_complete_count": 126,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 67
+    "remaining_finding_count": 66
   },
   "entries": [
     {
@@ -25142,6 +25142,408 @@
         "V2.2/2.3/2.4 p18 §4.1.2 explains CurrentStopPoint has different meaning in CIS vs TVS, renamed CurrentTariffStop because value changes when next bus stop reached; V2.3 §4.2.1 addresses §3.1.2 only, not §2.3. V2.4 §4.3.2 corrects document (2) references, not the flow name. Stale overview names from V2.2 are TVS-003, not a new DRTVS21-003 duplicate.",
         "Exact selected service files re-read against official tags VDV-301-2.1, -2.2, -2.3 (unchanged V2.2-named file) and V2.4 candidate plus upstream immutable commit 14880bb33beec5c5dffe96315b730bd6c094a585. No SubscribeCurrentStop, SubscribeCurrentStopPoint or SubscribeCurrentTariffStop in local service XSD source/group/global roots, including incomplete upstream V2.4. Common V1.0/V2.2/V2.4 generic SubscribeRequestStructure and SubscribeResponseStructure inspected at exact unchanged blobs. Negative service inventory only; no inference about HTTP operation availability or XSD defect. Historical EV150 correction remains authoritative.",
         "Dependency identities, official catalogue boundary and candidate separation reused explicitly from recent audited DRTVS21-001 docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTVS21_001_2026-11-25.md; not a new catalogue or raw PDF download. EV150 success and correction trail docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_DRTVS21_003_V21_XSD_SUPPORT_2026-09-07.md retained; no new finding-specific executable tests needed for PDF-only naming mismatch."
+      ]
+    },
+    {
+      "finding_id": "DRTVS21-004",
+      "service": "TicketValidationService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.1.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Official PDF V2.1 and exact mixed-version XSD family; all four displayed errors are prose/caption-only."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official PDF V2.2; the same four editorial residues persist, with the exact official V2.2 XSD family unchanged by captions."
+        },
+        {
+          "version": "V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official PDF V2.3; same editorial residues, officially routed to the V2.2-named XSD family, not a V2.3 candidate."
+        },
+        {
+          "version": "V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.4.xsd + IBIS-IP_common_V2.4.xsd + IBIS-IP_Enumerations_V2.4.xsd",
+          "note": "Official PDF V2.4; same residues, complete selected XSD family candidate/integration only, no release-tagged V2.4 executable claim."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "first_available_affected_official_version",
+          "pdf_locators": [
+            {
+              "source_id": "TVS_V2.1",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sds-v2-1-ticketvalidation.pdfx",
+              "sha256": "676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d",
+              "printed_pages": [
+                10
+              ],
+              "section": "§2.2 Funktionen und Aufgaben des Dienstes",
+              "table": null,
+              "point_summary": "DE descriptions of UnsubscribeCurrentLine and UnsubscribeVehicleData say Unscubscribe and Unscubscibe; the operation names themselves are correct."
+            },
+            {
+              "source_id": "TVS_V2.1",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sds-v2-1-ticketvalidation.pdfx",
+              "sha256": "676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d",
+              "printed_pages": [
+                12
+              ],
+              "section": "§2.2 Description of Ticket Validation Service",
+              "table": null,
+              "point_summary": "Independent EN track control: English operations overview uses unsubscribe terminology, not these German-description spelling errors."
+            },
+            {
+              "source_id": "TVS_V2.1",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sds-v2-1-ticketvalidation.pdfx",
+              "sha256": "676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.4.2 Response",
+              "table": "Table 4",
+              "point_summary": "Caption 'Description of GetrazziaResponsetData' is an editorial typo. The table's own type header correctly reads TicketValidationService.RazziaResponseData."
+            },
+            {
+              "source_id": "TVS_V2.1",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sds-v2-1-ticketvalidation.pdfx",
+              "sha256": "676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.7.2 Response",
+              "table": "Table 5",
+              "point_summary": "OperationErrorMessage description 'Error Respone' is a typo; same-page Table 3 has 'Error response' correctly."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.1.xsd",
+              "git_blob": "f6497e6469b82ee19b185c4de749d13a7ca60bed",
+              "authority_detail": "Exact historically selected official tag route; V2.3 uses the unchanged V2.2-named service file.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.RazziaResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.RazziaResponseDataStructure']",
+              "line_hint": "47",
+              "point_summary": "Correct executable type name; Table 4's misspelled English caption is not an XML identifier."
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.1.xsd",
+              "git_blob": "f6497e6469b82ee19b185c4de749d13a7ca60bed",
+              "authority_detail": "Exact historically selected official tag route; V2.3 retains the V2.2 file.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.GetCurrentLineResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.GetCurrentLineResponseStructure']",
+              "line_hint": "54",
+              "point_summary": "OperationErrorMessage is the actual XML member and uses IBIS-IP.string; 'Error Respone' is merely table-description prose."
+            }
+          ],
+          "coverage_note": "PDF-only editorial residue, DE p10 descriptions and English p15 caption/description; exact XSD provenance pinned as non-affected control."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "affected_official_version",
+          "pdf_locators": [
+            {
+              "source_id": "TVS_V2.2",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-2-ticketvalidation.pdfx",
+              "sha256": "1915a1b12c24386e9a8ab5638fd88af6a442b5e42586b7b2d48f03e9a4205083",
+              "printed_pages": [
+                10
+              ],
+              "section": "§2.2 Funktionen und Aufgaben des Dienstes",
+              "table": null,
+              "point_summary": "DE descriptions of UnsubscribeCurrentLine and UnsubscribeVehicleData say Unscubscribe and Unscubscibe; the operation names themselves are correct."
+            },
+            {
+              "source_id": "TVS_V2.2",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-2-ticketvalidation.pdfx",
+              "sha256": "1915a1b12c24386e9a8ab5638fd88af6a442b5e42586b7b2d48f03e9a4205083",
+              "printed_pages": [
+                12
+              ],
+              "section": "§2.2 Description of Ticket Validation Service",
+              "table": null,
+              "point_summary": "Independent EN track control: English operations overview uses unsubscribe terminology, not these German-description spelling errors."
+            },
+            {
+              "source_id": "TVS_V2.2",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-2-ticketvalidation.pdfx",
+              "sha256": "1915a1b12c24386e9a8ab5638fd88af6a442b5e42586b7b2d48f03e9a4205083",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.4.2 Response",
+              "table": "Table 4",
+              "point_summary": "Caption 'Description of GetrazziaResponsetData' is an editorial typo. The table's own type header correctly reads TicketValidationService.RazziaResponseData."
+            },
+            {
+              "source_id": "TVS_V2.2",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-2-ticketvalidation.pdfx",
+              "sha256": "1915a1b12c24386e9a8ab5638fd88af6a442b5e42586b7b2d48f03e9a4205083",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.7.2 Response",
+              "table": "Table 5",
+              "point_summary": "OperationErrorMessage description 'Error Respone' is a typo; same-page Table 3 has 'Error response' correctly."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.2.xsd",
+              "git_blob": "5a4be2b2ba66860f035777ec0458dba0790880e1",
+              "authority_detail": "Exact historically selected official tag route; V2.3 uses the unchanged V2.2-named service file.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.RazziaResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.RazziaResponseDataStructure']",
+              "line_hint": "47",
+              "point_summary": "Correct executable type name; Table 4's misspelled English caption is not an XML identifier."
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.2.xsd",
+              "git_blob": "5a4be2b2ba66860f035777ec0458dba0790880e1",
+              "authority_detail": "Exact historically selected official tag route; V2.3 retains the V2.2 file.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.GetCurrentLineResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.GetCurrentLineResponseStructure']",
+              "line_hint": "54",
+              "point_summary": "OperationErrorMessage is the actual XML member and uses IBIS-IP.string; 'Error Respone' is merely table-description prose."
+            }
+          ],
+          "coverage_note": "PDF-only editorial residue, DE p10 descriptions and English p15 caption/description; exact XSD provenance pinned as non-affected control."
+        },
+        {
+          "version": "V2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "affected_official_version",
+          "pdf_locators": [
+            {
+              "source_id": "TVS_V2.3",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-3-ticketvalidation.pdfx",
+              "sha256": "74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4",
+              "printed_pages": [
+                10
+              ],
+              "section": "§2.2 Funktionen und Aufgaben des Dienstes",
+              "table": null,
+              "point_summary": "DE descriptions of UnsubscribeCurrentLine and UnsubscribeVehicleData say Unscubscribe and Unscubscibe; the operation names themselves are correct."
+            },
+            {
+              "source_id": "TVS_V2.3",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-3-ticketvalidation.pdfx",
+              "sha256": "74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4",
+              "printed_pages": [
+                12
+              ],
+              "section": "§2.2 Description of Ticket Validation Service",
+              "table": null,
+              "point_summary": "Independent EN track control: English operations overview uses unsubscribe terminology, not these German-description spelling errors."
+            },
+            {
+              "source_id": "TVS_V2.3",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-3-ticketvalidation.pdfx",
+              "sha256": "74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.4.2 Response",
+              "table": "Table 4",
+              "point_summary": "Caption 'Description of GetrazziaResponsetData' is an editorial typo. The table's own type header correctly reads TicketValidationService.RazziaResponseData."
+            },
+            {
+              "source_id": "TVS_V2.3",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-3-ticketvalidation.pdfx",
+              "sha256": "74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.7.2 Response",
+              "table": "Table 5",
+              "point_summary": "OperationErrorMessage description 'Error Respone' is a typo; same-page Table 3 has 'Error response' correctly."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.2.xsd",
+              "git_blob": "5a4be2b2ba66860f035777ec0458dba0790880e1",
+              "authority_detail": "Exact historically selected official tag route; V2.3 uses the unchanged V2.2-named service file.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.RazziaResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.RazziaResponseDataStructure']",
+              "line_hint": "47",
+              "point_summary": "Correct executable type name; Table 4's misspelled English caption is not an XML identifier."
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.2.xsd",
+              "git_blob": "5a4be2b2ba66860f035777ec0458dba0790880e1",
+              "authority_detail": "Exact historically selected official tag route; V2.3 retains the V2.2 file.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.GetCurrentLineResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.GetCurrentLineResponseStructure']",
+              "line_hint": "54",
+              "point_summary": "OperationErrorMessage is the actual XML member and uses IBIS-IP.string; 'Error Respone' is merely table-description prose."
+            }
+          ],
+          "coverage_note": "PDF-only editorial residue, DE p10 descriptions and English p15 caption/description; exact XSD provenance pinned as non-affected control."
+        },
+        {
+          "version": "V2.4",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "last_available_affected_official_pdf_candidate_schema_context",
+          "pdf_locators": [
+            {
+              "source_id": "TVS_V2.4",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sde-v2.4-ticketvalidationservice.pdfx",
+              "sha256": "e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51",
+              "printed_pages": [
+                10
+              ],
+              "section": "§2.2 Funktionen und Aufgaben des Dienstes",
+              "table": null,
+              "point_summary": "DE descriptions of UnsubscribeCurrentLine and UnsubscribeVehicleData say Unscubscribe and Unscubscibe; the operation names themselves are correct."
+            },
+            {
+              "source_id": "TVS_V2.4",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sde-v2.4-ticketvalidationservice.pdfx",
+              "sha256": "e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51",
+              "printed_pages": [
+                12
+              ],
+              "section": "§2.2 Description of Ticket Validation Service",
+              "table": null,
+              "point_summary": "Independent EN track control: English operations overview uses unsubscribe terminology, not these German-description spelling errors."
+            },
+            {
+              "source_id": "TVS_V2.4",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sde-v2.4-ticketvalidationservice.pdfx",
+              "sha256": "e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.4.2 Response",
+              "table": "Table 4",
+              "point_summary": "Caption 'Description of GetrazziaResponsetData' is an editorial typo. The table's own type header correctly reads TicketValidationService.RazziaResponseData."
+            },
+            {
+              "source_id": "TVS_V2.4",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sde-v2.4-ticketvalidationservice.pdfx",
+              "sha256": "e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51",
+              "printed_pages": [
+                15
+              ],
+              "section": "§3.7.2 Response",
+              "table": "Table 5",
+              "point_summary": "OperationErrorMessage description 'Error Respone' is a typo; same-page Table 3 has 'Error response' correctly."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.4.xsd",
+              "git_blob": "34b18b8c874e325dd923b366a72bb0ebee32e59e",
+              "authority_detail": "Selected complete V2.4 candidate/integration family only; not official release.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.RazziaResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.RazziaResponseDataStructure']",
+              "line_hint": "62",
+              "point_summary": "Correct executable type name; Table 4's misspelled English caption is not an XML identifier."
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.4.xsd",
+              "git_blob": "34b18b8c874e325dd923b366a72bb0ebee32e59e",
+              "authority_detail": "Selected complete V2.4 candidate/integration family only; not official release.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.GetCurrentLineResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.GetCurrentLineResponseStructure']",
+              "line_hint": "69",
+              "point_summary": "OperationErrorMessage is the actual XML member and uses IBIS-IP.string; 'Error Respone' is merely table-description prose."
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.4.xsd",
+              "git_blob": "291f41518fd48cd9dcc9f285cf9b5fec7dd72159",
+              "authority_detail": "Upstream master service at immutable commit 14880bb33beec5c5dffe96315b730bd6c094a585; incomplete dependency family, declaration corroboration only.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.RazziaResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.RazziaResponseDataStructure']",
+              "line_hint": "62",
+              "point_summary": "Correct executable type name; Table 4's misspelled English caption is not an XML identifier.",
+              "repository": "VDVde/VDV301",
+              "ref": "14880bb33beec5c5dffe96315b730bd6c094a585"
+            }
+          ],
+          "coverage_note": "PDF-only editorial residue, DE p10 descriptions and English p15 caption/description; exact XSD provenance pinned as non-affected control."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTVS21_004_2026-11-25.md",
+        "V2.1 historical pinned render 34087850644, artifact 10005814043, ZIP sha256 8540e52a7866f8e034f2b5ed1496f2048173d183df58f7d9db42953c5ada579a; independently verified ZIP and p10/p15 PNGs: p10=2feebfb04a4751a9c881c65825ca2116502f9e5d3cef2e7bb2510eefcbc6479c, p15=a79fbb0fe541fb9af0131d64d13d9c1fc2f34a74aebdb513c9daae93bcd988c9; visually read original printed p10 §2.2 and p15 §3.4.2 Table 4/§3.7.2 Table 5. Exact PDF pin 676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d.",
+        "V2.2 historical pinned render 33255450850, artifact 9715657871, ZIP sha256 f6c313f94fe89ad14f6ed6114a0402efc543c31d4d2353a60dde05ea7f7d6e93; independently verified ZIP and p10/p15 PNGs: p10=3bd17dd87b8f5a9551a75c6354ccedd5e9d4fb6ea3b1775772c73c065ad3ee06, p15=349285137e542cc00d6cbcc2981647f87d33c62c7271342e2f6e05a328d9b2a6; visually read original printed p10 §2.2 and p15 §3.4.2 Table 4/§3.7.2 Table 5. Exact PDF pin 1915a1b12c24386e9a8ab5638fd88af6a442b5e42586b7b2d48f03e9a4205083.",
+        "V2.3 historical pinned render 33258612417, artifact 9716575205, ZIP sha256 0cba4a211c323be415e26120eecda08c1453cce0df18e4ec373a108e22b56c74; independently verified ZIP and p10/p15 PNGs: p10=7e283aa0c680ad38febff4fe1d0e4bdb9dd92d5400749d6aada367391dec4fba, p15=7c2fd834cfe818549cb4cdc424f64ad2d8cd16e73db714585996a9e5a666046a; visually read original printed p10 §2.2 and p15 §3.4.2 Table 4/§3.7.2 Table 5. Exact PDF pin 74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4.",
+        "V2.4 historical pinned render 33265061000, artifact 9718391355, ZIP sha256 03a308e9ac1f792ec074020a633e83ab58973e982b58e4731466f72781; independently verified ZIP and p10/p15 PNGs: p10=368eac4abc49840cb1ff04646b7cb2bbf6dd7d7fd109917a3fd9858b63824e6f, p15=6ad831b6b2ff9c516cc096c1482eb7c6fe9c2c88e8219b41a03c0b89a81e16ee; visually read original printed p10 §2.2 and p15 §3.4.2 Table 4/§3.7.2 Table 5. Exact PDF pin e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51.",
+        "Visible DE p10 §2.2 has Unscubscribe/Unscubscibe in descriptions while operation names are correct. Shared EN p15 §3.4.2 Table 4 caption has GetrazziaResponsetData, and p15 §3.7.2 Table 5 has Error Respone while adjacent Table 3 says Error response. Four editions; 16 occurrences; no new XML identifier.",
+        "Official catalogue boundaries and schema-version routing reused from DRTVS21-001/003 completed source reviews. No raw PDF re-download and no new targeted executable validation."
       ]
     }
   ]
