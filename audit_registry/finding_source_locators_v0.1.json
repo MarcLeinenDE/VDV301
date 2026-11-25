@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "6ec46acedab9c78441e1ea7330f47ec2c7a738bc",
+    "git_blob": "bacd52b5d687a5edb6ed52cb6d89b67c665ca83b",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 124,
-    "coverage_complete_count": 124,
+    "locator_entry_count": 125,
+    "coverage_complete_count": 125,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 68
+    "remaining_finding_count": 67
   },
   "entries": [
     {
@@ -24508,6 +24508,640 @@
         "Four p15 bodies independently show §3.7/§3.7.2 Table 5 concatenated +TicketValidationServiceCurrentLineData (line wrap before Data); Table 6 caption TicketValidationService.CurrentLineData and header with dot plus space; Table 3 dotted RazziaResponseData and Table 4 same shortened convention. The missing dot alone is the defect; no literal QName or missing Structure suffix inferred.",
         "Dependency closure and official catalogue scope from independently verified same-session DRTVS21-001 report docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTVS21_001_2026-11-25.md at parent 2b8aa6fa996e3fd4fac2c12aba7d037c991ac874; current tree confirms all six Common/Enums dependency blobs unchanged; selected service blobs freshly re-read against exact release tags and immutable upstream master commit. No fresh catalogue or raw PDF download claimed.",
         "Historical EV112 (EV150 rerun 34087850644), EV113 33257767942, EV114 33264437557, EV115 33265239836 previously verified SUCCESS on exact routes. Checker source re-read: EV112/113/115 assert actual member type and absence of concatenated service complex type; EV114 verifies exact official V2.3 route and distinct candidate signature. No new targeted test execution or negative compile probe specifically for this label asserted."
+      ]
+    },
+    {
+      "finding_id": "DRTVS21-003",
+      "service": "TicketValidationService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.1.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Official V2.1 release context is pinned, but the finding is established only by same-document PDF evidence. The exact selected service XSD contains neither SubscribeCurrentStopPoint nor SubscribeCurrentStop and is not positive support for either spelling."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official V2.2 context; same-document flow mismatch versus new detail name SubscribeCurrentTariffStop; local service XSD declares none of the three Subscribe names."
+        },
+        {
+          "version": "V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official V2.3 routes to unchanged V2.2 files; same PDF mismatch; not positive XSD support."
+        },
+        {
+          "version": "V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.4.xsd + IBIS-IP_common_V2.4.xsd + IBIS-IP_Enumerations_V2.4.xsd",
+          "note": "Official V2.4 PDF; full selected candidate/integration schema only, local inventory negative boundary, incomplete upstream corroboration. No official V2.4 release claim."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "first_available_affected_official_version",
+          "pdf_locators": [
+            {
+              "source_id": "TVS_V2.1",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sds-v2-1-ticketvalidation.pdfx",
+              "sha256": "676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d",
+              "printed_pages": [
+                10
+              ],
+              "section": "§2.2 Funktionen und Aufgaben des Dienstes",
+              "table": null,
+              "point_summary": "DE formal overview uses SubscribeCurrentStopPoint."
+            },
+            {
+              "source_id": "TVS_V2.1",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sds-v2-1-ticketvalidation.pdfx",
+              "sha256": "676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d",
+              "printed_pages": [
+                11
+              ],
+              "section": "§2.3 Funktionaler Ablauf",
+              "table": null,
+              "point_summary": "DE flow uses SubscribeCurrentStop; affected."
+            },
+            {
+              "source_id": "TVS_V2.1",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sds-v2-1-ticketvalidation.pdfx",
+              "sha256": "676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d",
+              "printed_pages": [
+                12
+              ],
+              "section": "§2.2 Description of Ticket Validation Service",
+              "table": null,
+              "point_summary": "EN formal overview uses SubscribeCurrentStopPoint."
+            },
+            {
+              "source_id": "TVS_V2.1",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sds-v2-1-ticketvalidation.pdfx",
+              "sha256": "676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d",
+              "printed_pages": [
+                13
+              ],
+              "section": "§2.3 Functional sequence",
+              "table": null,
+              "point_summary": "EN flow uses SubscribeCurrentStop; affected."
+            },
+            {
+              "source_id": "TVS_V2.1",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sds-v2-1-ticketvalidation.pdfx",
+              "sha256": "676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d",
+              "printed_pages": [
+                14
+              ],
+              "section": "§3.2 SubscribeCurrentStopPoint",
+              "table": null,
+              "point_summary": "Version-specific formal name; generic subscription structure reference document (2) §2.54. Adjacent §3.3 uses matching Unsubscribe name."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.1.xsd",
+              "git_blob": "f6497e6469b82ee19b185c4de749d13a7ca60bed",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.1.",
+              "component_kind": "group",
+              "component": "TicketValidationServiceOperations",
+              "xpath_hint": "/xs:schema/xs:group[@name='TicketValidationServiceOperations']",
+              "line_hint": "14",
+              "point_summary": "Negative context only: none of the three Subscribe variants in operation group; not positive support for PDF name."
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.1.xsd",
+              "git_blob": "f6497e6469b82ee19b185c4de749d13a7ca60bed",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.1.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Global service inventory also contains none of three Subscribe variants; exact service source inspected."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.1.",
+              "component_kind": "complexType",
+              "component": "SubscribeRequestStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SubscribeRequestStructure']",
+              "line_hint": "856",
+              "point_summary": "Generic subscription request structure, not a TVS-specific operation or alias."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.1.",
+              "component_kind": "complexType",
+              "component": "SubscribeResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SubscribeResponseStructure']",
+              "line_hint": "863",
+              "point_summary": "Generic subscription response structure, not a TVS-specific operation or alias."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.1.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Exact unchanged enumeration dependency."
+            }
+          ],
+          "coverage_note": "Same-document PDF proof only; EV150 XSD positive support withdrawn."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "affected_official_version",
+          "pdf_locators": [
+            {
+              "source_id": "TVS_V2.2",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-2-ticketvalidation.pdfx",
+              "sha256": "1915a1b12c24386e9a8ab5638fd88af6a442b5e42586b7b2d48f03e9a4205083",
+              "printed_pages": [
+                10
+              ],
+              "section": "§2.2 Funktionen und Aufgaben des Dienstes",
+              "table": null,
+              "point_summary": "DE formal overview uses SubscribeCurrentStopPoint; stale overview after rename separate TVS-003."
+            },
+            {
+              "source_id": "TVS_V2.2",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-2-ticketvalidation.pdfx",
+              "sha256": "1915a1b12c24386e9a8ab5638fd88af6a442b5e42586b7b2d48f03e9a4205083",
+              "printed_pages": [
+                11
+              ],
+              "section": "§2.3 Funktionaler Ablauf",
+              "table": null,
+              "point_summary": "DE flow uses SubscribeCurrentStop; affected."
+            },
+            {
+              "source_id": "TVS_V2.2",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-2-ticketvalidation.pdfx",
+              "sha256": "1915a1b12c24386e9a8ab5638fd88af6a442b5e42586b7b2d48f03e9a4205083",
+              "printed_pages": [
+                12
+              ],
+              "section": "§2.2 Description of Ticket Validation Service",
+              "table": null,
+              "point_summary": "EN formal overview uses SubscribeCurrentStopPoint; stale after rename separate TVS-003."
+            },
+            {
+              "source_id": "TVS_V2.2",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-2-ticketvalidation.pdfx",
+              "sha256": "1915a1b12c24386e9a8ab5638fd88af6a442b5e42586b7b2d48f03e9a4205083",
+              "printed_pages": [
+                13
+              ],
+              "section": "§2.3 Functional sequence",
+              "table": null,
+              "point_summary": "EN flow uses SubscribeCurrentStop; affected."
+            },
+            {
+              "source_id": "TVS_V2.2",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-2-ticketvalidation.pdfx",
+              "sha256": "1915a1b12c24386e9a8ab5638fd88af6a442b5e42586b7b2d48f03e9a4205083",
+              "printed_pages": [
+                14
+              ],
+              "section": "§3.2 SubscribeCurrentTariffStop",
+              "table": null,
+              "point_summary": "Version-specific formal name; generic subscription structure reference document (2) §2.54. Adjacent §3.3 uses matching Unsubscribe name."
+            },
+            {
+              "source_id": "TVS_V2.2",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-2-ticketvalidation.pdfx",
+              "sha256": "1915a1b12c24386e9a8ab5638fd88af6a442b5e42586b7b2d48f03e9a4205083",
+              "printed_pages": [
+                18
+              ],
+              "section": "§4.1.2 Technische Ergänzungen/Korrekturen / Technical Upgrade/Corrections",
+              "table": null,
+              "point_summary": "V2.2 actual rename to CurrentTariffStop due to distinct CIS/TVS meaning; no correction of §2.3 flow."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.2.xsd",
+              "git_blob": "5a4be2b2ba66860f035777ec0458dba0790880e1",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.2.",
+              "component_kind": "group",
+              "component": "TicketValidationServiceOperations",
+              "xpath_hint": "/xs:schema/xs:group[@name='TicketValidationServiceOperations']",
+              "line_hint": "14",
+              "point_summary": "Negative context only: none of the three Subscribe variants in operation group; not positive support for PDF name."
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.2.xsd",
+              "git_blob": "5a4be2b2ba66860f035777ec0458dba0790880e1",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.2.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Global service inventory also contains none of three Subscribe variants; exact service source inspected."
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.2.",
+              "component_kind": "complexType",
+              "component": "SubscribeRequestStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SubscribeRequestStructure']",
+              "line_hint": "876",
+              "point_summary": "Generic subscription request structure, not a TVS-specific operation or alias."
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.2.",
+              "component_kind": "complexType",
+              "component": "SubscribeResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SubscribeResponseStructure']",
+              "line_hint": "884",
+              "point_summary": "Generic subscription response structure, not a TVS-specific operation or alias."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.2.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Exact unchanged enumeration dependency."
+            }
+          ],
+          "coverage_note": "Same-document mismatch and history, exact official route; local XSD negative boundary only."
+        },
+        {
+          "version": "V2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "affected_official_version",
+          "pdf_locators": [
+            {
+              "source_id": "TVS_V2.3",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-3-ticketvalidation.pdfx",
+              "sha256": "74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4",
+              "printed_pages": [
+                10
+              ],
+              "section": "§2.2 Funktionen und Aufgaben des Dienstes",
+              "table": null,
+              "point_summary": "DE formal overview uses SubscribeCurrentStopPoint; stale overview after rename separate TVS-003."
+            },
+            {
+              "source_id": "TVS_V2.3",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-3-ticketvalidation.pdfx",
+              "sha256": "74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4",
+              "printed_pages": [
+                11
+              ],
+              "section": "§2.3 Funktionaler Ablauf",
+              "table": null,
+              "point_summary": "DE flow uses SubscribeCurrentStop; affected."
+            },
+            {
+              "source_id": "TVS_V2.3",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-3-ticketvalidation.pdfx",
+              "sha256": "74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4",
+              "printed_pages": [
+                12
+              ],
+              "section": "§2.2 Description of Ticket Validation Service",
+              "table": null,
+              "point_summary": "EN formal overview uses SubscribeCurrentStopPoint; stale after rename separate TVS-003."
+            },
+            {
+              "source_id": "TVS_V2.3",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-3-ticketvalidation.pdfx",
+              "sha256": "74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4",
+              "printed_pages": [
+                13
+              ],
+              "section": "§2.3 Functional sequence",
+              "table": null,
+              "point_summary": "EN flow uses SubscribeCurrentStop; affected."
+            },
+            {
+              "source_id": "TVS_V2.3",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-3-ticketvalidation.pdfx",
+              "sha256": "74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4",
+              "printed_pages": [
+                14
+              ],
+              "section": "§3.2 SubscribeCurrentTariffStop",
+              "table": null,
+              "point_summary": "Version-specific formal name; generic subscription structure reference document (2) §2.54. Adjacent §3.3 uses matching Unsubscribe name."
+            },
+            {
+              "source_id": "TVS_V2.3",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-3-ticketvalidation.pdfx",
+              "sha256": "74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4",
+              "printed_pages": [
+                18
+              ],
+              "section": "§4.1.2 Technische Ergänzungen/Korrekturen / Technical Upgrade/Corrections",
+              "table": null,
+              "point_summary": "V2.2 actual rename to CurrentTariffStop due to distinct CIS/TVS meaning; no correction of §2.3 flow."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.2.xsd",
+              "git_blob": "5a4be2b2ba66860f035777ec0458dba0790880e1",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.3.",
+              "component_kind": "group",
+              "component": "TicketValidationServiceOperations",
+              "xpath_hint": "/xs:schema/xs:group[@name='TicketValidationServiceOperations']",
+              "line_hint": "14",
+              "point_summary": "Negative context only: none of the three Subscribe variants in operation group; not positive support for PDF name."
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.2.xsd",
+              "git_blob": "5a4be2b2ba66860f035777ec0458dba0790880e1",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.3.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Global service inventory also contains none of three Subscribe variants; exact service source inspected."
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.3.",
+              "component_kind": "complexType",
+              "component": "SubscribeRequestStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SubscribeRequestStructure']",
+              "line_hint": "876",
+              "point_summary": "Generic subscription request structure, not a TVS-specific operation or alias."
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.3.",
+              "component_kind": "complexType",
+              "component": "SubscribeResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SubscribeResponseStructure']",
+              "line_hint": "884",
+              "point_summary": "Generic subscription response structure, not a TVS-specific operation or alias."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.3.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Exact unchanged enumeration dependency."
+            }
+          ],
+          "coverage_note": "Same-document mismatch and history, exact official route; local XSD negative boundary only."
+        },
+        {
+          "version": "V2.4",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "last_available_affected_official_pdf_candidate_schema_context",
+          "pdf_locators": [
+            {
+              "source_id": "TVS_V2.4",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sde-v2.4-ticketvalidationservice.pdfx",
+              "sha256": "e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51",
+              "printed_pages": [
+                10
+              ],
+              "section": "§2.2 Funktionen und Aufgaben des Dienstes",
+              "table": null,
+              "point_summary": "DE formal overview uses SubscribeCurrentStopPoint; stale overview after rename separate TVS-003."
+            },
+            {
+              "source_id": "TVS_V2.4",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sde-v2.4-ticketvalidationservice.pdfx",
+              "sha256": "e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51",
+              "printed_pages": [
+                11
+              ],
+              "section": "§2.3 Funktionaler Ablauf",
+              "table": null,
+              "point_summary": "DE flow uses SubscribeCurrentStop; affected."
+            },
+            {
+              "source_id": "TVS_V2.4",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sde-v2.4-ticketvalidationservice.pdfx",
+              "sha256": "e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51",
+              "printed_pages": [
+                12
+              ],
+              "section": "§2.2 Description of Ticket Validation Service",
+              "table": null,
+              "point_summary": "EN formal overview uses SubscribeCurrentStopPoint; stale after rename separate TVS-003."
+            },
+            {
+              "source_id": "TVS_V2.4",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sde-v2.4-ticketvalidationservice.pdfx",
+              "sha256": "e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51",
+              "printed_pages": [
+                13
+              ],
+              "section": "§2.3 Functional sequence",
+              "table": null,
+              "point_summary": "EN flow uses SubscribeCurrentStop; affected."
+            },
+            {
+              "source_id": "TVS_V2.4",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sde-v2.4-ticketvalidationservice.pdfx",
+              "sha256": "e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51",
+              "printed_pages": [
+                14
+              ],
+              "section": "§3.2 SubscribeCurrentTariffStop",
+              "table": null,
+              "point_summary": "Version-specific formal name; generic subscription structure reference document (2) §2.55. Adjacent §3.3 uses matching Unsubscribe name."
+            },
+            {
+              "source_id": "TVS_V2.4",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sde-v2.4-ticketvalidationservice.pdfx",
+              "sha256": "e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51",
+              "printed_pages": [
+                18
+              ],
+              "section": "§4.1.2 Technische Ergänzungen/Korrekturen / Technical Upgrade/Corrections",
+              "table": null,
+              "point_summary": "V2.2 actual rename to CurrentTariffStop due to distinct CIS/TVS meaning; no correction of §2.3 flow."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.4.xsd",
+              "git_blob": "34b18b8c874e325dd923b366a72bb0ebee32e59e",
+              "authority_detail": "Exact complete work-branch candidate/integration family; not official V2.4 release.",
+              "component_kind": "group",
+              "component": "TicketValidationServiceOperations",
+              "xpath_hint": "/xs:schema/xs:group[@name='TicketValidationServiceOperations']",
+              "line_hint": "15",
+              "point_summary": "Negative context only: none of the three Subscribe variants in operation group; not positive support for PDF name."
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.4.xsd",
+              "git_blob": "34b18b8c874e325dd923b366a72bb0ebee32e59e",
+              "authority_detail": "Exact complete work-branch candidate/integration family; not official V2.4 release.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Global service inventory also contains none of three Subscribe variants; exact service source inspected."
+            },
+            {
+              "file": "IBIS-IP_common_V2.4.xsd",
+              "git_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+              "authority_detail": "Exact complete work-branch candidate/integration family; not official V2.4 release.",
+              "component_kind": "complexType",
+              "component": "SubscribeRequestStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SubscribeRequestStructure']",
+              "line_hint": "1008",
+              "point_summary": "Generic subscription request structure, not a TVS-specific operation or alias."
+            },
+            {
+              "file": "IBIS-IP_common_V2.4.xsd",
+              "git_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+              "authority_detail": "Exact complete work-branch candidate/integration family; not official V2.4 release.",
+              "component_kind": "complexType",
+              "component": "SubscribeResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SubscribeResponseStructure']",
+              "line_hint": "1016",
+              "point_summary": "Generic subscription response structure, not a TVS-specific operation or alias."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.4.xsd",
+              "git_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+              "authority_detail": "Exact complete work-branch candidate/integration family; not official V2.4 release.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Exact unchanged enumeration dependency."
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.4.xsd",
+              "git_blob": "291f41518fd48cd9dcc9f285cf9b5fec7dd72159",
+              "authority_detail": "Exact upstream master historical commit; incomplete dependencies, not official-release authority.",
+              "component_kind": "group",
+              "component": "TicketValidationServiceOperations",
+              "xpath_hint": "/xs:schema/xs:group[@name='TicketValidationServiceOperations']",
+              "line_hint": "15",
+              "point_summary": "Negative inventory corroboration in incomplete upstream service; no official executable claim.",
+              "repository": "VDVde/VDV301",
+              "ref": "14880bb33beec5c5dffe96315b730bd6c094a585"
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.4.xsd",
+              "git_blob": "291f41518fd48cd9dcc9f285cf9b5fec7dd72159",
+              "authority_detail": "Exact upstream master historical commit; incomplete dependencies, not official-release authority.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "No local Subscribe variants; incomplete upstream context only.",
+              "repository": "VDVde/VDV301",
+              "ref": "14880bb33beec5c5dffe96315b730bd6c094a585"
+            }
+          ],
+          "coverage_note": "Same-document mismatch and history; complete candidate and incomplete upstream negative inventory separately labelled."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTVS21_003_2026-11-25.md",
+        "V2.1 historical pinned render run 34087850644, artifact 10005814043, ZIP SHA256 8540e52a7866f8e034f2b5ed1496f2048173d183df58f7d9db42953c5ada579a; locally recomputed archive hash and PNG hash/size manifest; visually inspected body p10–14. PNG SHA256 by page: 10=2feebfb04a4751a9c881c65825ca2116502f9e5d3cef2e7bb2510eefcbc6479c; 11=e1c67aa0431621fa519e7161035e335b673327396c3f63461bea1cde883bbec9; 12=692e0c51c78a75b9e7a9762ac1c6bebd50bac5b765da98a169da55589af10ac4; 13=0b122a076e74c71a2b96ed44e011a606211e7d6cc7829b35a51a3edb3b41003d; 14=3189de2947c4b1f36920de81a52ccb3c299b11e617ef30851f94e013786eba66.",
+        "V2.2 historical pinned render run 33255450850, artifact 9715657871, ZIP SHA256 f6c313f94fe89ad14f6ed6114a0402efc543c31d4d2353a60dde05ea7f7d6e93; locally recomputed archive hash and PNG hash/size manifest; visually inspected body p10–14 and history p18. PNG SHA256 by page: 10=3bd17dd87b8f5a9551a75c6354ccedd5e9d4fb6ea3b1775772c73c065ad3ee06; 11=13d455d6428cd7bbdf3c09456287694617770338a33690e6ed518313e3aa32fd; 12=c2d2d2da3a3182da5f798853c925f7be35fbc81f28dc2ffdca9d4e292aaf7c48; 13=2d92ac98c0c7136bcaab0a21d33f5f62d71be06e12737a6d2ccf38294a3d0740; 14=666e5bc5e52c4f9252f6c0419d769c14cf5e982a914fec7efb75f9c75916a688; 18=5c162bdcbcf2d1a01fac1d661044f4f091c156c9fbfbcf98e94183e4a729f37e.",
+        "V2.3 historical pinned render run 33258612417, artifact 9716575205, ZIP SHA256 0cba4a211c323be415e26120eecda08c1453cce0df18e4ec373a108e22b56c74; locally recomputed archive hash and PNG hash/size manifest; visually inspected body p10–14 and history p18. PNG SHA256 by page: 10=7e283aa0c680ad38febff4fe1d0e4bdb9dd92d5400749d6aada367391dec4fba; 11=30b6dce69f393a1af128e7475d1246bb3a4b4f0b0697452e6ff24ac0de72cda5; 12=1eff63c4423a5fa63551ae36a0ea1dd6ad76dc095e5ff9896672ef90497e6fb5; 13=89d168380b5154db3e8881dcee9826bf0cd01f352c0e2d0121dfd9b4203ed696; 14=efce35271866d7774d1578a3b6c01c013155e361dce1589a6d8dfac8e7fbe8ab; 18=4710bc2b07de1362fbcda7fa83a536e1d2d77547771bea351ded5f5fa3f1efbd.",
+        "V2.4 historical pinned render run 33265061000, artifact 9718391355, ZIP SHA256 03a308e9ac1f792ec074020a633e83ab58973e982b58e4731466f72781; locally recomputed archive hash and PNG hash/size manifest; visually inspected body p10–14 and history p18. PNG SHA256 by page: 10=368eac4abc49840cb1ff04646b7cb2bbf6dd7d7fd109917a3fd9858b63824e6f; 11=88ce6eef602d6756b329dc18921690246bc132e611073bbd5500df25e47ab0d3; 12=c07a27a4d6f5d775fae4bd657319fb19590021296da6506d6f3eaf0bbc49254e; 13=8bce779bb5b649c76a2c38e4c2e323295977ec944865120b4ce730cfdab10523; 14=dce3dcf00f0abaf8e885536a9b7c19393dc9b487694e17cf57e5c8b87a85b16d; 18=77bf011a1858ee0f91261f297312f58b380798516eb52fc2f16dbca72ecff939.",
+        "Same-document DE p10 §2.2 and EN p12 §2.2 overview use SubscribeCurrentStopPoint in all four; DE p11 §2.3 and EN p13 §2.3 flow use SubscribeCurrentStop in all four; shared p14 §3.2 detail uses SubscribeCurrentStopPoint in V2.1 and SubscribeCurrentTariffStop from V2.2. §3.3 Unsubscribe pair provides same-document control; §3.2 refers to generic data structure in document (2) §2.54 through V2.3 and §2.55 in V2.4.",
+        "V2.2/2.3/2.4 p18 §4.1.2 explains CurrentStopPoint has different meaning in CIS vs TVS, renamed CurrentTariffStop because value changes when next bus stop reached; V2.3 §4.2.1 addresses §3.1.2 only, not §2.3. V2.4 §4.3.2 corrects document (2) references, not the flow name. Stale overview names from V2.2 are TVS-003, not a new DRTVS21-003 duplicate.",
+        "Exact selected service files re-read against official tags VDV-301-2.1, -2.2, -2.3 (unchanged V2.2-named file) and V2.4 candidate plus upstream immutable commit 14880bb33beec5c5dffe96315b730bd6c094a585. No SubscribeCurrentStop, SubscribeCurrentStopPoint or SubscribeCurrentTariffStop in local service XSD source/group/global roots, including incomplete upstream V2.4. Common V1.0/V2.2/V2.4 generic SubscribeRequestStructure and SubscribeResponseStructure inspected at exact unchanged blobs. Negative service inventory only; no inference about HTTP operation availability or XSD defect. Historical EV150 correction remains authoritative.",
+        "Dependency identities, official catalogue boundary and candidate separation reused explicitly from recent audited DRTVS21-001 docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTVS21_001_2026-11-25.md; not a new catalogue or raw PDF download. EV150 success and correction trail docs/pdf_xsd_semantic_audit/AUDIT_CORRECTION_DELTA_DRTVS21_003_V21_XSD_SUPPORT_2026-09-07.md retained; no new finding-specific executable tests needed for PDF-only naming mismatch."
       ]
     }
   ]

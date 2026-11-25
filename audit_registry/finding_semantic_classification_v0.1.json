@@ -12224,6 +12224,24 @@
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_TicketValidationService_V2.1.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
           "note": "Official V2.1 release context is pinned, but the finding is established only by same-document PDF evidence. The exact selected service XSD contains neither SubscribeCurrentStopPoint nor SubscribeCurrentStop and is not positive support for either spelling."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official V2.2 context; same-document flow mismatch versus new detail name SubscribeCurrentTariffStop; local service XSD declares none of the three Subscribe names."
+        },
+        {
+          "version": "V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official V2.3 routes to unchanged V2.2 files; same PDF mismatch; not positive XSD support."
+        },
+        {
+          "version": "V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.4.xsd + IBIS-IP_common_V2.4.xsd + IBIS-IP_Enumerations_V2.4.xsd",
+          "note": "Official V2.4 PDF; full selected candidate/integration schema only, local inventory negative boundary, incomplete upstream corroboration. No official V2.4 release claim."
         }
       ],
       "review_state": "manually_reviewed",
@@ -12252,20 +12270,36 @@
         {
           "type": "technical_inference",
           "note": "The hypothesis that SubscribeCurrentStop is a second or legacy formal operation name is rejected by the publication's repeated formal naming. EV-150 additionally corrected the historical Deep Read: the exact V2.1 XSD contains neither Subscribe spelling and therefore cannot positively support this finding."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Four original editions p11 DE and p13 EN §2.3 use SubscribeCurrentStop; p14 §3.2 formal name SubscribeCurrentStopPoint in V2.1, SubscribeCurrentTariffStop in V2.2–V2.4. p10/p12 §2.2 overview retains StopPoint, stale from V2.2 (separate TVS-003). §3.3 paired Unsubscribe is control."
+        },
+        {
+          "type": "version_history",
+          "note": "V2.2–V2.4 p18 §4.1.2 expressly documents StopPoint to TariffStop because TVS and CIS differ in meaning. V2.3 §4.2.1 pertains to §3.1.2, not flow; V2.4 §4.3.2 corrects document (2) links, not this name."
+        },
+        {
+          "type": "technical_inference",
+          "note": "Exact local TVS global and Operations group inventories in all selected routes contain none of three Subscribe names. Generic Common SubscribeRequestStructure/SubscribeResponseStructure exist; no positive local XSD operation support, no invented XML roots or inference about protocol endpoints. Historical EV150 correction preserved."
+        },
+        {
+          "type": "candidate_integration_provenance",
+          "note": "V2.4 complete candidate only; upstream incomplete service confirms negative inventory, not official executable release."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "TicketValidationService V2.1: inkonsistenter SubscribeCurrentStop-Operationsname in der PDF",
-          "short": "Die formalen PDF-Abschnitte verwenden SubscribeCurrentStopPoint, während der deutsche und englische Ablauftext SubscribeCurrentStop nennt.",
-          "long": "Die offizielle V2.1-PDF bezeichnet die Operation im Inhaltsverzeichnis, in beiden formalen Operationsübersichten und im Detailabschnitt als SubscribeCurrentStopPoint. Der deutsche und englische Ablauftext verwendet dagegen SubscribeCurrentStop. Die Gegenhypothese einer zweiten oder älteren formalen Operation wird durch die wiederholte formale Benennung im selben Dokument nicht gestützt. Wichtig ist die EV-150-Korrektur: Die exakte V2.1-TicketValidationService-XSD enthält weder SubscribeCurrentStopPoint noch SubscribeCurrentStop als lokale Serviceoperation oder globales Element. Der Befund ist deshalb ausschließlich ein PDF-interner redaktioneller Widerspruch.",
-          "recommendation": "Den Ablauftext als PDF-Dokumentationsfehler behandeln und bei der Interpretation des Dokuments die wiederholte formale Bezeichnung SubscribeCurrentStopPoint heranziehen. Aus diesem Befund keinerlei ausführbare V2.1-XSD-Operation und keinen Alias erfinden."
+          "title": "TicketValidationService V2.1–V2.4: inkonsistenter SubscribeCurrentStop-Operationsname in der PDF",
+          "short": "Der deutsche und englische Ablauftext nennt in allen vier Versionen SubscribeCurrentStop; §3.2 verwendet V2.1 SubscribeCurrentStopPoint, ab V2.2 SubscribeCurrentTariffStop.",
+          "long": "S.11 (DE) und S.13 (EN), §2.3, verwenden in V2.1–V2.4 SubscribeCurrentStop. S.14 §3.2 nennt in V2.1 SubscribeCurrentStopPoint und ab V2.2 SubscribeCurrentTariffStop. S.10/12 §2.2 behält StopPoint bei; ab V2.2 ist diese veraltete Übersicht Teil des getrennten Findings TVS-003. Die Versionshistorie S.18 §4.1.2 dokumentiert die echte Umbenennung, nicht eine zweite SubscribeCurrentStop-Operation. Die historische EV150-Korrektur gilt weiterhin: Keine der drei Schreibweisen ist in den geprüften lokalen Service-XSD-Globalen oder Operations-Gruppen deklariert. Common stellt generische Subscribe-Strukturen bereit; der PDF-Befund beweist weder eine neue lokale XML-Operation noch deren Fehlen auf Protokollebene. V2.4 ist nur vollständig als Kandidaten-/Integrationsroute belegt.",
+          "recommendation": "Ablauftext anhand des jeweiligen formalen §3.2 interpretieren. Keine XML-Roots, Aliase oder neuen Laufzeitregeln aus dem PDF-Namen ableiten; veraltete Übersichten ab V2.2 getrennt unter TVS-003 behandeln."
         },
         "en": {
-          "title": "TicketValidationService V2.1: inconsistent SubscribeCurrentStop operation name in the PDF",
-          "short": "Formal PDF sections use SubscribeCurrentStopPoint while the German and English flow text uses SubscribeCurrentStop.",
-          "long": "The official V2.1 PDF names the operation SubscribeCurrentStopPoint in the table of contents, both formal operation overviews, and the detailed operation section. The German and English flow text instead use SubscribeCurrentStop. The alternative hypothesis of a second or legacy formal operation is not supported by the repeated formal naming in the same document. Crucially, the EV-150 correction establishes that the exact V2.1 TicketValidationService XSD contains neither SubscribeCurrentStopPoint nor SubscribeCurrentStop as a local service operation or global element. The finding is therefore solely a PDF-internal editorial inconsistency.",
-          "recommendation": "Treat the flow-text spelling as a PDF documentation defect and use the repeatedly formal SubscribeCurrentStopPoint name when interpreting the document. Do not invent an executable V2.1 XSD operation or alias from this finding."
+          "title": "TicketValidationService V2.1–V2.4: inconsistent SubscribeCurrentStop operation name in the PDF",
+          "short": "German and English flow text uses SubscribeCurrentStop in all four editions; §3.2 uses SubscribeCurrentStopPoint in V2.1 and SubscribeCurrentTariffStop from V2.2.",
+          "long": "P11 (DE) and p13 (EN), §2.3, use SubscribeCurrentStop in V2.1–V2.4. P14 §3.2 uses SubscribeCurrentStopPoint in V2.1 and SubscribeCurrentTariffStop from V2.2. P10/12 §2.2 retains StopPoint; the stale overview from V2.2 belongs to separate TVS-003. P18 §4.1.2 documents the actual rename, not a second SubscribeCurrentStop operation. Historical EV150 correction remains valid: none of the three spellings is declared in the reviewed local service XSD globals or Operations groups. Common provides generic Subscribe structures; the PDF finding neither proves a new local XML operation nor its absence at protocol level. V2.4 has only a complete candidate/integration route.",
+          "recommendation": "Interpret the flow text using the version-specific formal §3.2. Do not derive XML roots, aliases or runtime rules from PDF naming; handle stale overviews from V2.2 separately under TVS-003."
         }
       },
       "runtime_match": {
@@ -12302,9 +12336,34 @@
           "kind": "xsd",
           "reference": "IBIS-IP_TicketValidationService_V2.1.xsd @ f6497e6469b82ee19b185c4de749d13a7ca60bed",
           "note": "Negative boundary only: neither Subscribe spelling occurs as the claimed local service operation/global element; this source is not positive support for the PDF naming."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTVS21_003_2026-11-25.md",
+          "note": "Original-body review and independent version boundary; historical correction preserved."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TVS_V2.2 / sha256 1915a1b12c24386e9a8ab5638fd88af6a442b5e42586b7b2d48f03e9a4205083 / p10–14,18",
+          "note": "Bilingual flow mismatch, detail rename and version history."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TVS_V2.3 / sha256 74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4 / p10–14,18",
+          "note": "Bilingual flow mismatch, detail rename and version history."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TVS_V2.4 / sha256 e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51 / p10–14,18",
+          "note": "Bilingual flow mismatch, detail rename and version history."
+        },
+        {
+          "kind": "version_history",
+          "reference": "TVS V2.2–V2.4 p18 §4.1.2",
+          "note": "Actual StopPoint to TariffStop rename; not correction of truncated flow name."
         }
       ],
-      "notes": "Confirmed same-document PDF editorial mismatch. Historical XSD-positive-support sentence is explicitly withdrawn; no executable alias is created."
+      "notes": "Confirmed PDF-internal editorial mismatch in all four editions, eight DE/EN flow occurrences. Version-specific formal detail name; stale overview after rename kept distinct as TVS-003. Historical XSD-positive-support withdrawal preserved and extended: no local Subscribe variant declared, generic Common structures are not local service operations. Contextual only; no runtime matcher."
     },
     {
       "finding_id": "DRTVS21-004",
