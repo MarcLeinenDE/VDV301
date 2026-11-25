@@ -24,3 +24,7 @@ The apparent missing XSD is disproved by the web-server/browser architecture, th
 ## Closure
 
 127/192 locators, body and scope verified pending full CI. Next JIS-001 only after terminal gate and memory review.
+
+## CI mirror repair (2026-11-25)
+
+Initial schema run 45618895283 failed only the source-locator SDK state mirror and handoff assertions; all other component statuses including discovery RV-002 and scope-boundary validation were zero. Handoff run 45618895176 failed the minimum length of the pending block description. Commit eefdb837 corrected all duplicated SDK state counters and the pending description; handoff run 45619627970 succeeded. No evidence classification or validator changes. State-only push does not trigger schema CI; this SDK summary status update triggers the full gate. Independent local ZIP SHA-256 recheck and all 20 PNG manifest hash/size checks confirmed (4/4, 8/8, 8/8).
