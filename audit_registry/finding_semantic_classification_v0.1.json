@@ -11904,6 +11904,24 @@
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_TicketValidationService_V2.1.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
           "note": "Exact official VDV-301-2.1 TicketValidationService route. Common V1.0 and Enumerations V1.0 are intentional dependencies and must not be replaced by later files."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Exact official VDV-301-2.2 family; EV113 case probe."
+        },
+        {
+          "version": "V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official V2.3 PDF routes to exact unchanged V2.2-named service/dependency blobs in VDV-301-2.3 tag; EV114 and EV113. V2.3-named candidate is distinct."
+        },
+        {
+          "version": "V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.4.xsd + IBIS-IP_common_V2.4.xsd + IBIS-IP_Enumerations_V2.4.xsd",
+          "note": "Official V2.4 PDF affected twice; complete candidate/integration family only, EV115. Upstream master service declarations corroborate; missing Common V2.4 and no release tag."
         }
       ],
       "review_state": "manually_reviewed",
@@ -11936,20 +11954,40 @@
         {
           "type": "executable_validation",
           "note": "EV-112 confirms IBIS-IP.NMTOKEN exists, IBIS-IP.NMToken does not exist, and a probe schema using the PDF spelling fails to compile."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Original p14 Table 2 §3.1.2 in V2.1, V2.2, V2.3, V2.4 each prints IBIS-IP.NMToken for optional CurrentTripRef; V2.4 p17 Table 13 §3.14.2 repeats it. Same p17 Table 9 correctly uses IBIS-IP.NMTOKEN for TripRef."
+        },
+        {
+          "type": "version_history",
+          "note": "V2.3 p18 §4.2.1 and V2.4 p18 repeat the stated §3.1.2 correction, but original p14 still prints the wrong type case; not corrected. V2.4 §4.3.1 adds ShortHaul operation with second occurrence."
+        },
+        {
+          "type": "official_release_provenance",
+          "note": "Exact V2.1, V2.2 and official V2.3 routes checked at release tags; official V2.3 uses identical V2.2 blobs, not separate V2.3-named candidate."
+        },
+        {
+          "type": "candidate_integration_provenance",
+          "note": "V2.4 upstream master service declares both CurrentTripRef fields as NMTOKEN, but lacks required Common V2.4 and official release tag. Exact candidate integration route uses Common/Enums V2.4."
+        },
+        {
+          "type": "executable_validation",
+          "note": "Historical EV112/113/115 prove exact NMTOKEN type and negative mixed-case compile probe; EV114 verifies official V2.3 route and identical official V2.2 blobs plus separate candidate. Historical exact blob evidence confirmed, no new runtime matcher."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "TicketValidationService V2.1: falsche Groß-/Kleinschreibung bei NMTOKEN",
-          "short": "Die PDF nennt für CurrentTripRef den Typ IBIS-IP.NMToken; die maßgebliche V2.1-XSD verwendet ausschließlich IBIS-IP.NMTOKEN.",
-          "long": "Auf der geprüften PDF-Seite 14 wird der Typ von CurrentTripRef als IBIS-IP.NMToken dargestellt. Die exakte offizielle V2.1-Schemaroute verwendet dagegen IBIS-IP.NMTOKEN aus Common V1.0. EV-112 bestätigt ausführbar, dass IBIS-IP.NMTOKEN existiert, die gemischte Schreibweise IBIS-IP.NMToken nicht existiert und ein Schema-Probeverweis auf die PDF-Schreibweise nicht kompiliert. Die XSD bleibt für die XML-Validierung maßgeblich; aus dem PDF-Fehler darf kein case-insensitiver Typalias abgeleitet werden.",
-          "recommendation": "Bei Implementierung und Codegenerierung die exakte XSD-Schreibweise IBIS-IP.NMTOKEN verwenden. Die PDF-Schreibweise nur als Dokumentationsfehler behandeln und weder normalisieren noch als Alias zulassen."
+          "title": "TicketValidationService V2.1–V2.4: falsche Groß-/Kleinschreibung bei NMTOKEN",
+          "short": "Die PDF nennt für CurrentTripRef in allen vier Versionen IBIS-IP.NMToken; die jeweils ausgewählte XSD verwendet IBIS-IP.NMTOKEN.",
+          "long": "In V2.1, V2.2, V2.3 und V2.4 steht auf S.14 §3.1.2 Tabelle 2 der optionale CurrentTripRef mit Typ IBIS-IP.NMToken. V2.4 S.17 §3.14.2 Tabelle 13 wiederholt den Fehler, während Tabelle 9 TripRef korrekt als IBIS-IP.NMTOKEN beschreibt. Die exakten offiziellen V2.1- und V2.2-Routen sowie V2.3 mit unveränderten V2.2-Blobs verwenden IBIS-IP.NMTOKEN. V2.4 ist nur als vollständige Kandidaten-/Integrationsroute ausführbar bestätigt; der Upstream-Service deklariert beide Felder ebenfalls korrekt, aber seine Abhängigkeiten sind unvollständig. EV112/113/115 belegen die fehlende gemischte Typ-Schreibweise und negative Schema-Kompilierung; EV114 bestätigt die exakte offizielle V2.3-Route. Die in V2.3 genannte Korrektur von §3.1.2 beseitigte diesen Fehler nicht. Kein Fehler eines XML-Instanzwerts und kein zusätzlicher Runtime-Matcher.",
+          "recommendation": "Bei Implementierung und Codegenerierung den exakten Typ IBIS-IP.NMTOKEN der ausgewählten XSD verwenden. Dokumentationsfehler nicht durch case-insensitive Aliase, Normalisierung oder neue XML-Validierungsregeln ausgleichen. V2.4-Kandidatenautorität nicht als offizielles Release ausgeben."
         },
         "en": {
-          "title": "TicketValidationService V2.1: incorrect NMTOKEN identifier case",
-          "short": "The PDF names the CurrentTripRef type as IBIS-IP.NMToken; the authoritative V2.1 XSD uses only IBIS-IP.NMTOKEN.",
-          "long": "On reviewed PDF page 14, the CurrentTripRef type is displayed as IBIS-IP.NMToken. The exact official V2.1 schema route instead uses IBIS-IP.NMTOKEN from Common V1.0. EV-112 executable evidence confirms that IBIS-IP.NMTOKEN exists, the mixed-case IBIS-IP.NMToken spelling does not, and a probe schema referencing the PDF spelling does not compile. The XSD remains authoritative for XML validation; no case-insensitive type alias may be derived from the PDF defect.",
-          "recommendation": "Use the exact XSD spelling IBIS-IP.NMTOKEN for implementation and code generation. Treat the PDF spelling as documentation-only and do not normalize or accept it as an alias."
+          "title": "TicketValidationService V2.1–V2.4: incorrect NMTOKEN identifier case",
+          "short": "All four PDF editions name CurrentTripRef as IBIS-IP.NMToken; the selected schema uses IBIS-IP.NMTOKEN.",
+          "long": "V2.1, V2.2, V2.3 and V2.4 p14 §3.1.2 Table 2 display optional CurrentTripRef with type IBIS-IP.NMToken. V2.4 p17 §3.14.2 Table 13 repeats the typo, while Table 9 correctly uses IBIS-IP.NMTOKEN for TripRef. Exact official V2.1 and V2.2 routes and official V2.3 using unchanged V2.2 blobs use IBIS-IP.NMTOKEN. V2.4 is executable-confirmed only as the complete candidate/integration route; upstream service declares both fields correctly but dependencies are incomplete. EV112/113/115 prove the mixed-case type is absent and a schema probe fails compilation; EV114 verifies the exact official V2.3 route. The stated V2.3 correction of §3.1.2 did not fix this typo. Not an XML instance-value defect and no additional runtime matcher.",
+          "recommendation": "Use exact IBIS-IP.NMTOKEN from the selected schema in implementation/code generation. Do not introduce case-insensitive aliases, normalization or additional XML validation rules. Do not label V2.4 candidate authority an official release."
         }
       },
       "runtime_match": {
@@ -11986,9 +12024,34 @@
           "kind": "evidence",
           "reference": "EV-112 / tools/validate_tvs_v21_ev112.py @ ac95c53ac1ca1900f51df0b06fe3f0ed623700f5",
           "note": "Current-safe executable confirmation of the exact type spelling and negative mixed-case probe."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTVS21_001_2026-11-25.md",
+          "note": "2026-11-25 original-body/independent version boundary; existing identity extended to all four document versions."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TVS_V2.2 / sha256 1915a1b12c24386e9a8ab5638fd88af6a442b5e42586b7b2d48f03e9a4205083 / physical p14",
+          "note": "Verified original body; exact visible section/table locators in source registry."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TVS_V2.3 / sha256 74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4 / physical p14,18",
+          "note": "Verified original body; exact visible section/table locators in source registry."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TVS_V2.4 / sha256 e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51 / physical p14,17,18",
+          "note": "Verified original body; exact visible section/table locators in source registry."
+        },
+        {
+          "kind": "evidence",
+          "reference": "EV-113 run 33257767942; EV-114 run 33264437557; EV-115 run 33265239836",
+          "note": "Historical successful exact route evidence, rechecked file identity, candidate/official split retained."
         }
       ],
-      "notes": "Confirmed PDF type-identifier case defect. No runtime instance alias or normalization rule is created."
+      "notes": "Confirmed PDF type-identifier case defect persists V2.1–V2.4. V2.4 second occurrence in ShortHaul. Only V2.4 candidate/integration executable authority; upstream structural corroboration not official-release validation. Existing historical V2.1-only semantic scope corrected using four exact pinned documents, not a new identity. No runtime instance alias or normalization rule."
     },
     {
       "finding_id": "DRTVS21-002",

@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "30fe3219b63264bd70de868b0d340773b1938cfd",
+    "git_blob": "577725286feb0858e4ce31281140eff555c1b5cc",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 122,
-    "coverage_complete_count": 122,
+    "locator_entry_count": 123,
+    "coverage_complete_count": 123,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 70
+    "remaining_finding_count": 69
   },
   "entries": [
     {
@@ -23593,6 +23593,381 @@
         "V2.2 pinned renderer run 33239787579 artifact 9710997705 ZIP SHA256 02eb39ce96df29be51e85eba703520bed910eb1b80d4a7dde86588663fa7ee26 (2094702 bytes), source PDF c1946694a1809933a9a4a23adff1c551effdb0a2fbc6a7f7f68faec0b0c7bd6e (1744296 bytes); all ten manifest PNG hashes/sizes rechecked; p51 e1ee632943de8c2fcf1ee08be8b5c3f6e64387b4392ecc17419be237e88e8cad (293474 bytes) and p38 cdec19c48e8f24bde62a8e27ffcc9e39b8a3f49c4b69abafae4fd38c11e46ae8 visibly inspected. Existing archive reused, no fresh V2.2 raw PDF download asserted.",
         "Official catalogue https://www.vdv.de/ip-kom-oev.aspx retrieved via indexed web representation on 2026-11-25, lists dedicated TrainSet V2.1 and V2.2 only; earlier 2026-11-24 catalogue evidence corroborates. No corrected successor established. English §6.5 technical body is shared in bilingual publications; bilingual history p51.",
         "Complete exact XSD dependency closures: V2.1 TSD c2cdb73fcae265a2e4e0349ac6072e3548e36d8b, Common V2.0 8608e3dcd665c197c34da7f6ec6af5a3758da164, Enumerations V2.0 27e3c183b00381d959622d13c10543123af8eef6, CIS V2.0 fa8f0a51ad5f612660c9532c8557ad1ca473a908; V2.2 TSD 7a132894c281d613e16514a6fa1bcbffe713d066, Common V2.2 468fee6d177e7185dbcd5d3f90cfb114e29e01ae, Enumerations V2.2 2a23b512379b18e8f122ac1272cef8229fb86283. All seven selected files individually verified against corresponding upstream tags VDV-301-2.1 and VDV-301-2.2; includes inspected recursively."
+      ]
+    },
+    {
+      "finding_id": "DRTVS21-001",
+      "service": "TicketValidationService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.1.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact official VDV-301-2.1 TicketValidationService route. Common V1.0 and Enumerations V1.0 are intentional dependencies and must not be replaced by later files."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Exact official VDV-301-2.2 family; EV113 case probe."
+        },
+        {
+          "version": "V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official V2.3 PDF routes to exact unchanged V2.2-named service/dependency blobs in VDV-301-2.3 tag; EV114 and EV113. V2.3-named candidate is distinct."
+        },
+        {
+          "version": "V2.4",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_TicketValidationService_V2.4.xsd + IBIS-IP_common_V2.4.xsd + IBIS-IP_Enumerations_V2.4.xsd",
+          "note": "Official V2.4 PDF affected twice; complete candidate/integration family only, EV115. Upstream master service declarations corroborate; missing Common V2.4 and no release tag."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "first_available_affected_official_version",
+          "pdf_locators": [
+            {
+              "source_id": "TVS_V2.1",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sds-v2-1-ticketvalidation.pdfx",
+              "sha256": "676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d",
+              "printed_pages": [
+                14
+              ],
+              "section": "§3.1 GetCurrentStopPoint / §3.1.2 Response",
+              "table": "Table 2 Description of TicketValidationService.CurrentStopPointData",
+              "point_summary": "Actual Table 2 CurrentTripRef row 0:1 type IBIS-IP.NMToken; CurrentStopPointData heading."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.1.xsd",
+              "git_blob": "f6497e6469b82ee19b185c4de749d13a7ca60bed",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.1.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.CurrentStopPointDataStructure",
+              "member": "CurrentTripRef",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.CurrentStopPointDataStructure']/xs:sequence/xs:element[@name='CurrentTripRef']",
+              "line_hint": "36",
+              "point_summary": "CurrentTripRef optional minOccurs=0; declared IBIS-IP.NMTOKEN."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.1.",
+              "component_kind": "complexType",
+              "component": "IBIS-IP.NMTOKEN",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='IBIS-IP.NMTOKEN']",
+              "line_hint": "813",
+              "point_summary": "Exact case-sensitive common type; mixed-case name absent in compiled tested route."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.1.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Exact enumeration dependency; no further include/import."
+            }
+          ],
+          "coverage_note": "Exact official release schema and original body, historical case-probe evidence verified."
+        },
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "affected_official_version",
+          "pdf_locators": [
+            {
+              "source_id": "TVS_V2.2",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-2-ticketvalidation.pdfx",
+              "sha256": "1915a1b12c24386e9a8ab5638fd88af6a442b5e42586b7b2d48f03e9a4205083",
+              "printed_pages": [
+                14
+              ],
+              "section": "§3.1 GetCurrentTariffStop / §3.1.2 Response",
+              "table": "Table 2 Description of TicketValidationService.CurrentStopPointData",
+              "point_summary": "Actual Table 2 CurrentTripRef row 0:1 type IBIS-IP.NMToken; CurrentStopPointData table heading is historical while row CurrentTariffStop and operation heading use new name."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.2.xsd",
+              "git_blob": "5a4be2b2ba66860f035777ec0458dba0790880e1",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.2.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.CurrentTariffStopDataStructure",
+              "member": "CurrentTripRef",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.CurrentTariffStopDataStructure']/xs:sequence/xs:element[@name='CurrentTripRef']",
+              "line_hint": "36",
+              "point_summary": "CurrentTripRef optional minOccurs=0; declared IBIS-IP.NMTOKEN."
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.2.",
+              "component_kind": "complexType",
+              "component": "IBIS-IP.NMTOKEN",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='IBIS-IP.NMTOKEN']",
+              "line_hint": "832",
+              "point_summary": "Exact case-sensitive common type; mixed-case name absent in compiled tested route."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.2.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Exact enumeration dependency; no further include/import."
+            }
+          ],
+          "coverage_note": "Exact official release schema and original body, historical case-probe evidence verified."
+        },
+        {
+          "version": "V2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "affected_official_version",
+          "pdf_locators": [
+            {
+              "source_id": "TVS_V2.3",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-3-ticketvalidation.pdfx",
+              "sha256": "74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4",
+              "printed_pages": [
+                14
+              ],
+              "section": "§3.1 GetCurrentTariffStop / §3.1.2 Response",
+              "table": "Table 2 Description of TicketValidationService.CurrentStopPointData",
+              "point_summary": "Actual Table 2 CurrentTripRef row 0:1 type IBIS-IP.NMToken; CurrentTariffStopData structure heading; stale caption CurrentStopPointData is separate TVS-003."
+            },
+            {
+              "source_id": "TVS_V2.3",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.3 (02/2021)",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sdes-v2-3-ticketvalidation.pdfx",
+              "sha256": "74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4",
+              "printed_pages": [
+                18
+              ],
+              "section": "§4.2 Version 2.3 / §4.2.1 Technische Ergänzungen/Korrekturen / Technical Upgrade/Corrections",
+              "table": null,
+              "point_summary": "Claims §3.1.2 aligned to XSD; p14 visible type-case defect persists, so not a correction boundary."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.2.xsd",
+              "git_blob": "5a4be2b2ba66860f035777ec0458dba0790880e1",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.3.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.CurrentTariffStopDataStructure",
+              "member": "CurrentTripRef",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.CurrentTariffStopDataStructure']/xs:sequence/xs:element[@name='CurrentTripRef']",
+              "line_hint": "36",
+              "point_summary": "CurrentTripRef optional minOccurs=0; declared IBIS-IP.NMTOKEN."
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.3.",
+              "component_kind": "complexType",
+              "component": "IBIS-IP.NMTOKEN",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='IBIS-IP.NMTOKEN']",
+              "line_hint": "832",
+              "point_summary": "Exact case-sensitive common type; mixed-case name absent in compiled tested route."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "Exact work blob independently verified at official VDVde/VDV301 tag VDV-301-2.3.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Exact enumeration dependency; no further include/import."
+            }
+          ],
+          "coverage_note": "Official tag exact V2.2-named files, not distinct V2.3-named candidate; EV114 plus same blob EV113 type-case negative probe. History claim not a correction."
+        },
+        {
+          "version": "V2.4",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "last_available_affected_official_pdf_candidate_schema_context",
+          "pdf_locators": [
+            {
+              "source_id": "TVS_V2.4",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sde-v2.4-ticketvalidationservice.pdfx",
+              "sha256": "e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51",
+              "printed_pages": [
+                14
+              ],
+              "section": "§3.1 GetCurrentTariffStop / §3.1.2 Response",
+              "table": "Table 2 Description of TicketValidationService.CurrentStopPointData",
+              "point_summary": "Actual Table 2 CurrentTripRef row 0:1 type IBIS-IP.NMToken; CurrentTariffStopData structure heading; stale caption CurrentStopPointData is separate TVS-003."
+            },
+            {
+              "source_id": "TVS_V2.4",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sde-v2.4-ticketvalidationservice.pdfx",
+              "sha256": "e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51",
+              "printed_pages": [
+                17
+              ],
+              "section": "§3.14 GetCurrentShortHaulStops / §3.14.2 Response",
+              "table": "Table 13 Description of TicketValidationService.CurrentShortHaulStopsData",
+              "point_summary": "Second optional CurrentTripRef 0:1 printed as IBIS-IP.NMToken."
+            },
+            {
+              "source_id": "TVS_V2.4",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sde-v2.4-ticketvalidationservice.pdfx",
+              "sha256": "e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51",
+              "printed_pages": [
+                17
+              ],
+              "section": "§3.13 RetrieveTripData / §3.13.1 Request",
+              "table": "Table 9 Description of TicketValidationService.RetrieveTripDataRequest",
+              "point_summary": "Positive counter-control: TripRef 1:1 correctly uses IBIS-IP.NMTOKEN on same page."
+            },
+            {
+              "source_id": "TVS_V2.4",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sde-v2.4-ticketvalidationservice.pdfx",
+              "sha256": "e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51",
+              "printed_pages": [
+                16
+              ],
+              "section": "§3.10 GetVehicleData / §3.10.2 Response",
+              "table": "Table 8 Description of TicketValidationService.VehicleData",
+              "point_summary": "Positive counter-control VehicleRef uses IBIS-IP.NMTOKEN; unrelated RouteDeviation issue unchanged."
+            },
+            {
+              "source_id": "TVS_V2.4",
+              "document_title": "VDV-Schrift 301-2-16 TicketValidationService V2.4 (01/2023)",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-16-sde-v2.4-ticketvalidationservice.pdfx",
+              "sha256": "e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51",
+              "printed_pages": [
+                18
+              ],
+              "section": "§4 Versionshistorie/Version history / §4.2.1 and §4.3.1",
+              "table": null,
+              "point_summary": "History repeats V2.3 correction claim; V2.4 ShortHaul functional extension. Actual bodies override blanket history claim."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.4.xsd",
+              "git_blob": "34b18b8c874e325dd923b366a72bb0ebee32e59e",
+              "authority_detail": "Exact complete work-branch candidate/integration family; not official V2.4 release.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.CurrentTariffStopDataStructure",
+              "member": "CurrentTripRef",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.CurrentTariffStopDataStructure']/xs:sequence/xs:element[@name='CurrentTripRef']",
+              "line_hint": "51",
+              "point_summary": "CurrentTripRef optional minOccurs=0; declared IBIS-IP.NMTOKEN."
+            },
+            {
+              "file": "IBIS-IP_common_V2.4.xsd",
+              "git_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+              "authority_detail": "Exact complete work-branch candidate/integration family; not official V2.4 release.",
+              "component_kind": "complexType",
+              "component": "IBIS-IP.NMTOKEN",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='IBIS-IP.NMTOKEN']",
+              "line_hint": "964",
+              "point_summary": "Exact case-sensitive common type; mixed-case name absent in compiled tested route."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.4.xsd",
+              "git_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+              "authority_detail": "Exact complete work-branch candidate/integration family; not official V2.4 release.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "1",
+              "point_summary": "Exact enumeration dependency; no further include/import."
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.4.xsd",
+              "git_blob": "34b18b8c874e325dd923b366a72bb0ebee32e59e",
+              "authority_detail": "Exact complete work-branch candidate/integration family; not official V2.4 release.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.CurrentShortHaulStopsDataStructure",
+              "member": "CurrentTripRef",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.CurrentShortHaulStopsDataStructure']/xs:sequence/xs:element[@name='CurrentTripRef']",
+              "line_hint": "37",
+              "point_summary": "Second CurrentTripRef uses IBIS-IP.NMTOKEN, optional."
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.4.xsd",
+              "git_blob": "291f41518fd48cd9dcc9f285cf9b5fec7dd72159",
+              "authority_detail": "Exact upstream master historical commit; incomplete dependencies, not official-release authority.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.CurrentTariffStopDataStructure",
+              "member": "CurrentTripRef",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.CurrentTariffStopDataStructure']/xs:sequence/xs:element[@name='CurrentTripRef']",
+              "line_hint": "51",
+              "point_summary": "Upstream service declaration corroborates exact type; missing Common V2.4 means no official complete executable route.",
+              "repository": "VDVde/VDV301",
+              "ref": "14880bb33beec5c5dffe96315b730bd6c094a585"
+            },
+            {
+              "file": "IBIS-IP_TicketValidationService_V2.4.xsd",
+              "git_blob": "291f41518fd48cd9dcc9f285cf9b5fec7dd72159",
+              "authority_detail": "Exact upstream master historical commit; incomplete dependencies, not official-release authority.",
+              "component_kind": "complexType",
+              "component": "TicketValidationService.CurrentShortHaulStopsDataStructure",
+              "member": "CurrentTripRef",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketValidationService.CurrentShortHaulStopsDataStructure']/xs:sequence/xs:element[@name='CurrentTripRef']",
+              "line_hint": "37",
+              "point_summary": "Upstream service declaration corroborates exact type; missing Common V2.4 means no official complete executable route.",
+              "repository": "VDVde/VDV301",
+              "ref": "14880bb33beec5c5dffe96315b730bd6c094a585"
+            }
+          ],
+          "coverage_note": "Official PDF body affected twice; complete selected candidate/integration XSD and incomplete upstream service corroboration kept separate. EV115 historical executable evidence. No official release claim."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_DRTVS21_001_2026-11-25.md",
+        "EV150 run 34087850644 artifact 10005814043 ZIP SHA256 8540e52a7866f8e034f2b5ed1496f2048173d183df58f7d9db42953c5ada579a (1517127 bytes); source TVS_V2.1 SHA256 676c05d7615f2f2ce95ec4eb085428cb0c970a4226809566e8968200df69988d (752652 bytes); all 7 manifest render hashes/sizes rechecked; p14 PNG 3189de2947c4b1f36920de81a52ccb3c299b11e617ef30851f94e013786eba66 (220903 bytes) visibly inspected 2026-11-25. EV150 PASS contains EV112 rerun.",
+        "V2.2 pinned render 33255450850 artifact 9715657871 ZIP SHA256 f6c313f94fe89ad14f6ed6114a0402efc543c31d4d2353a60dde05ea7f7d6e93 (1349951 bytes); source SHA256 1915a1b12c24386e9a8ab5638fd88af6a442b5e42586b7b2d48f03e9a4205083 (785931 bytes); all 9 PNG hashes/sizes verified; p14 666e5bc5e52c4f9252f6c0419d769c14cf5e982a914fec7efb75f9c75916a688 (191711 bytes) visually checked.",
+        "V2.3 pinned render 33258612417 artifact 9716575205 ZIP SHA256 0cba4a211c323be415e26120eecda08c1453cce0df18e4ec373a108e22b56c74 (1487345 bytes); source SHA256 74d9fd279e13f2661be24319c414ef9128b61c8fc6f30ea62b63f92f94ddbff4 (404383 bytes); all 10 PNG hashes/sizes verified; p14 efce35271866d7774d1578a3b6c01c013155e361dce1589a6d8dfac8e7fbe8ab (193258 bytes) and p18 4710bc2b07de1362fbcda7fa83a536e1d2d77547771bea351ded5f5fa3f1efbd (102561 bytes) visually checked.",
+        "V2.4 pinned render 33265061000 artifact 9718391355 ZIP SHA256 03a308e9ac1f792ec074020a633e83ab58973c90573e982b58e4731466f72781 (1824395 bytes); source SHA256 e7caca3de444b3eca15d539572cd4b896e56e5bb608b4827211b51be0ad56c51 (864860 bytes); all 11 PNG hashes/sizes verified; p14 dce3dcf00f0abaf8e885536a9b7c19393dc9b487694e17cf57e5c8b87a85b16d (190369 bytes), p16 ca49020be18f45044276d47edce8fff995eec459f3a471beb2b444e41a8ffabe (198537 bytes), p17 4a0f7406ada162d475e12a875e38fdf8bef13bcfedff10f8d73216bda4ecdc10 (225395 bytes), p18 77bf011a1858ee0f91261f297312f58b380798516eb52fc2f16dbca72ecff939 (192354 bytes) and p19 109327a34b268d6ed9427aa9ec6a453c183d8cb18cdf1b72819af885b1817cb1 (137012 bytes) visually checked; p19 TOC only, not locator authority.",
+        "All four official source pins verified by historical render manifests; archive ZIP and all 37 contained PNG hashes/sizes independently recalculated 2026-11-25. Relevant original visible body pages checked, not all 37 visually read. No fresh raw PDF download claimed.",
+        "VDV publication catalogue https://www.vdv.de/ip-kom-oev.aspx indexed representation inspected 2026-11-25: TVS V2.1, V2.2, V2.3 and V2.4; no earlier/later dedicated edition established. Direct web fetch returned HTTP error; indexed official catalogue and exact pinned publications used. Shared technical English body in bilingual documents; no fabricated parallel German occurrence.",
+        "EV112 (EV150 rerun 34087850644), EV113 run 33257767942, EV114 run 33264437557 and EV115 run 33265239836 all verified completed SUCCESS; current exact file blobs and checker expected blobs match. Historical type-case compile evidence reused, not a new execution asserted. EV114 verifies official V2.2-named route and distinct V2.3 candidate; negative compile case inherited only because exact official route matches EV113.",
+        "V2.1 exact official mixed route TVS V2.1 -> Common V1.0/Enums V1.0; V2.2 official aligned route and V2.3 official documentation route both use identical three V2.2 files, checked individually at their respective official tags; distinct V2.3-named candidate b17591c5b067254dd3e2260f3ef2acd2e18394a9 uses same V2.2 includes and exact CurrentTripRef declaration, no official V2.3-named file in tag. V2.4 upstream master service 291f41518fd48cd9dcc9f285cf9b5fec7dd72159 also verified at immutable commit 14880bb33beec5c5dffe96315b730bd6c094a585; includes absent Common V2.4 and Enums V2.2; VDV-301-2.4 tag lookup 404. Complete work V2.4 candidate route independently verified; no official V2.4 compile claim."
       ]
     }
   ]
