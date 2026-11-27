@@ -2127,7 +2127,7 @@
     "version_scope_boundary_latest_gate_run_id": 45995755521
   },
   "next_actions": [
-    "JIS-004 terminal_clean: RetrieveAllRoutesPerLine request header/caption incorrectly uses SetBlockNumberRequest in EN January 2014 p82 Table 86 and DE July 2016 p22 Table 38. Both operation overviews and exact historical/selected XSDs distinguish required LineRef from BlockRef. Confirmed PDF-only defect; no semantic, XSD or runtime changes. 131/192 locators, 131 body and boundary verified, 61 remaining. Substantive schema #45995755521 and handoff #45995755617 SUCCESS on 3a266ae2c323a1ed10af5b7cb88d1cd152639fac. Verify final HEAD gates, then reviewed private ai-mem PR. NEXT JIS-005 NOT STARTED."
+    "JIS-005 active: DE p17 Tables 21-22 visually verified against EV-152 archive, positive/negative samples and result verified. EN p78 Tables 69-70 located in text; live screenshot cache miss. Pinned EN original render requested. 131/192 unchanged. Inspect EN body and exact XSD declarations, then register updates and full gates."
   ],
   "source_locator_progress": {
     "locator_entry_count": 131,
@@ -2205,12 +2205,22 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": 45995755521,
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": 45995755617,
-    "resume_instruction": "JIS-004 terminal_clean: RetrieveAllRoutesPerLine request header/caption incorrectly uses SetBlockNumberRequest in EN January 2014 p82 Table 86 and DE July 2016 p22 Table 38. Both operation overviews and exact historical/selected XSDs distinguish required LineRef from BlockRef. Confirmed PDF-only defect; no semantic, XSD or runtime changes. 131/192 locators, 131 body and boundary verified, 61 remaining. Substantive schema #45995755521 and handoff #45995755617 SUCCESS on 3a266ae2c323a1ed10af5b7cb88d1cd152639fac. Verify final HEAD gates, then reviewed private ai-mem PR. NEXT JIS-005 NOT STARTED."
+    "resume_instruction": "JIS-005 active: DE p17 Tables 21-22 visually verified against EV-152 archive, positive/negative samples and result verified. EN p78 Tables 69-70 located in text; live screenshot cache miss. Pinned EN original render requested. 131/192 unchanged. Inspect EN body and exact XSD declarations, then register updates and full gates.",
+    "pending_block": "JIS-005 original-body and version-boundary review",
+    "active_finding": "JIS-005",
+    "active_step": "DE p17 original render hash and EV-152 archive checked; EN p78 fallback requested.",
+    "next_step": "Inspect EN fallback artifact and exact historical/selected XSD declarations; check neighboring choice context and runtime mapping. Persist locator/body/boundary evidence and run full gates.",
+    "evidence_refs": [
+      "EV-152 run 34113437268 artifact 10015273758 ZIP SHA256 338e3fb679a8375c98fba359a3478d4cf7ba0968f3e97c08209ce52c0d23dc65; DE p17 SHA256 05e250698030a3d2af1b569d918c82e47c2b14092a8510030b261d206368b6ef size 346188 visually checked; positive/negative archived XMLs and result JSON inspected.",
+      "tools/pdf_render_request_v0.1.json",
+      "EN p78 Tables 69-70 located by text; VDV301-2_V1.0_EN SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 size 2403598; visual pending."
+    ],
+    "recovery_instruction": "JIS-005 active: DE p17 Tables 21-22 visually verified against EV-152 archive, positive/negative samples and result verified. EN p78 Tables 69-70 located in text; live screenshot cache miss. Pinned EN original render requested. 131/192 unchanged. Inspect EN body and exact XSD declarations, then register updates and full gates."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
