@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 129,
-    "verified_current_standard": 129,
+    "tracked_findings": 130,
+    "verified_current_standard": 130,
     "pending_current_standard": 0
   },
   "entries": [
@@ -1395,6 +1395,19 @@
         "Canonical semantic entry non_defect/no_runtime_diagnostic and no entry in runtime mapping; historical EV-152 confirms shared response model by structural assertions (not a dedicated positive/negative JIS-002 XML test)."
       ],
       "note": "Visually inspected DE p11/22 and EN p72/73 exact pinned original renders, including split row and actual table captions. Archive and page hashes verified."
+    },
+    {
+      "finding_id": "JIS-003",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_JIS_003_2026-11-27.md",
+        "EV-152 run 34113437268 SUCCESS rechecked, artifact 10015273758 ZIP SHA256 338e3fb679a8375c98fba359a3478d4cf7ba0968f3e97c08209ce52c0d23dc65 independently verified; DE page 19 PNG SHA256 e011920ad88ddb14bef706c77f24993838a4748ef8c45c1e63653504f5c237cf (280952 bytes) visually read. PDF JIS_V1.0 SHA256 424181b4932e18b6ac059843fa3978fdcc07a9c6acb553f9fbe8b71ef583da73 size 772125; pin run 34103529949, artifact 10011459459. No fresh DE raw PDF download.",
+        "EN exact-source fallback run 45954025437, artifact 15178500096 ZIP SHA256 a3bbea84c8a4b07d75a606424152d9b2211bbeacf2fea099bfb3099a85708ff8 verified; source SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 size 2403598; EN p79 PNG c290c08882023b58cae3ea2f49b5b3921f5e7475b1ed7221fd9e0476919dba5d (259498 bytes), p80 6cd3d88ce250f80b8839bd2a320b4d6c9f38f7375f57a4f0e622f8ec946b3530 (247793 bytes), both verified against manifest and visually read.",
+        "Exact upstream VDV-301-1.0 JIS type-only blob 1ee4d7aeb15f3269c5335313be9e214bdb519d2e lines 175-180 and aggregate 41289eaed2674a169fdf77a10a2eff293c76d5c4 lines 4-7,58,91; selected VDV-301-2.0 JIS 8c303db5a9c0548d66b90174d9c329d33092ad24 lines 223-235; upstream 2.1/2.2/2.3/master same JIS blob rechecked. Common 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c and Enum a9bea5bc73003ed91ded8519db06c32c4067831d identical in historical and selected routes. Common LineInformationStructure lines 380-387 has required singular LineRef and optional repeatable text fields, not a list of lines.",
+        "EV-152 archived sample and JSON independently checked: one line PASS, two lines FAIL (unexpected LineInformation); positive XML SHA256 87d40e3dc94234fe125d82dde97a78ad8cc6bbcd18d4ee9d49eaec8ddd65e7aa, negative e13cccaf1db69b0b7c77621824aa2ed3ee964aa9fdac182fb9eebbd579271b64. Existing selected-route execution, no fresh dedicated test or historical aggregate compilation claimed.",
+        "Reuse JIS-001 catalog boundary dated 2026-11-25; no separately established DE aggregate 2014, EN standalone 2016 or earlier/later standalone publication. Both original body tables directly checked, not extrapolated. No fresh catalog lookup."
+      ],
+      "note": "Actual DE p19 §1.17.2 Table 29 and EN p80 §9.6.16.2 Table 77 plus EN p79 operation context visually checked. Pinned-source render hashes verified."
     }
   ]
 }
