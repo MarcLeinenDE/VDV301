@@ -2127,7 +2127,7 @@
     "version_scope_boundary_latest_gate_run_id": 45999982844
   },
   "next_actions": [
-    "LS-002 terminal_clean: Distance PDF EN January 2014 p70 Table 47 and DE July 2016 p7 Table 1 print exact Odometer-Pulses, optional 0:1 IBIS-IP.int; historical combined and selected standalone XSD agree. Identical Distance root/type after whitespace normalization; archived EV-153 exact-name PASS and normalized alias FAIL verified. Non-defect and no runtime diagnostic unchanged; no XSD or runtime changes. Historical DLS source pin registered. 134/192 locators, 134 body and boundary verified, 58 remaining. Substantive schema #45999982844 and handoff #45999982730 SUCCESS on aad14be365ed066463de3dd901b1d16c96a1f2e0. Verify final HEAD gates, then reviewed private ai-mem PR. NEXT LS-003 NOT STARTED."
+    "LS-003 in progress: four standalone V1.0 service roots and Common/Enums identities checked against official tags 2.0–2.3/master. Historical VDV-301-1.0 combined LocationService blob 2a653ba7d35a6e91b5fd691eb5c606160192ab9e has Distance/GNSS global roots and Beacon types; aggregate IBIS_IP_V1.0.xsd blob 41289eaed2674a169fdf77a10a2eff293c76d5c4 line 123 supplies exact Beacon global root. Historical NLS blob identical. EV-153 archived artifacts 10057222866 and 10056787340 checksums verified; routing tests own-schema PASS and paired cross-schema rejection. EN live render cache miss; request exact pinned EN pages 52–53, 69–70, 84 via existing fallback. Verify artifact source and page hashes and visually inspect originals, DE archived pages and service scope, then complete LS-003 source locators, boundary and mirrored counts, full gates and terminal handoff. No new credit: 134/192; no XSD/runtime change. Do not start NET-001 until LS-003 closed and memory reviewed."
   ],
   "source_locator_progress": {
     "locator_entry_count": 134,
@@ -2205,12 +2205,23 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": 45999982844,
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": 45999982730,
-    "resume_instruction": "LS-002 terminal_clean: Distance PDF EN January 2014 p70 Table 47 and DE July 2016 p7 Table 1 print exact Odometer-Pulses, optional 0:1 IBIS-IP.int; historical combined and selected standalone XSD agree. Identical Distance root/type after whitespace normalization; archived EV-153 exact-name PASS and normalized alias FAIL verified. Non-defect and no runtime diagnostic unchanged; no XSD or runtime changes. Historical DLS source pin registered. 134/192 locators, 134 body and boundary verified, 58 remaining. Substantive schema #45999982844 and handoff #45999982730 SUCCESS on aad14be365ed066463de3dd901b1d16c96a1f2e0. Verify final HEAD gates, then reviewed private ai-mem PR. NEXT LS-003 NOT STARTED."
+    "resume_instruction": "LS-003 in progress: four standalone V1.0 service roots and Common/Enums identities checked against official tags 2.0–2.3/master. Historical VDV-301-1.0 combined LocationService blob 2a653ba7d35a6e91b5fd691eb5c606160192ab9e has Distance/GNSS global roots and Beacon types; aggregate IBIS_IP_V1.0.xsd blob 41289eaed2674a169fdf77a10a2eff293c76d5c4 line 123 supplies exact Beacon global root. Historical NLS blob identical. EV-153 archived artifacts 10057222866 and 10056787340 checksums verified; routing tests own-schema PASS and paired cross-schema rejection. EN live render cache miss; request exact pinned EN pages 52–53, 69–70, 84 via existing fallback. Verify artifact source and page hashes and visually inspect originals, DE archived pages and service scope, then complete LS-003 source locators, boundary and mirrored counts, full gates and terminal handoff. No new credit: 134/192; no XSD/runtime change. Do not start NET-001 until LS-003 closed and memory reviewed.",
+    "pending_block": "LS-003",
+    "active_finding": "LS-003",
+    "active_step": "Exact historical aggregate root inspected; pinned EN visual fallback requested; no locator credit yet.",
+    "next_step": "Verify pinned fallback render artifact for EN pages 52-53,69-70,84; inspect DE archived original pages and finalize evidence/registries, then run full gates.",
+    "evidence_refs": [
+      "tools/pdf_render_request_v0.1.json",
+      "audit_registry/location_services_revalidation_evidence_2026-09-08.json",
+      "docs/pdf_xsd_semantic_audit/SUPERBRANCH_V1_0_DEDUP_POLICY.md",
+      "EV-153 artifacts 10057222866 and 10056787340"
+    ],
+    "recovery_instruction": "LS-003 in progress: four standalone V1.0 service roots and Common/Enums identities checked against official tags 2.0–2.3/master. Historical VDV-301-1.0 combined LocationService blob 2a653ba7d35a6e91b5fd691eb5c606160192ab9e has Distance/GNSS global roots and Beacon types; aggregate IBIS_IP_V1.0.xsd blob 41289eaed2674a169fdf77a10a2eff293c76d5c4 line 123 supplies exact Beacon global root. Historical NLS blob identical. EV-153 archived artifacts 10057222866 and 10056787340 checksums verified; routing tests own-schema PASS and paired cross-schema rejection. EN live render cache miss; request exact pinned EN pages 52–53, 69–70, 84 via existing fallback. Verify artifact source and page hashes and visually inspect originals, DE archived pages and service scope, then complete LS-003 source locators, boundary and mirrored counts, full gates and terminal handoff. No new credit: 134/192; no XSD/runtime change. Do not start NET-001 until LS-003 closed and memory reviewed."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
