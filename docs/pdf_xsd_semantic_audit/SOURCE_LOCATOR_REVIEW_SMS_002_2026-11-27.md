@@ -1,0 +1,27 @@
+# Source locator review — SMS-002
+
+Date: 2026-11-27. Existing confirmed_pdf_defect, selected_xsd, error_with_advisory, xsd_invalid_advisory unchanged. Existing reviewed_not_implemented runtime inventory retained.
+
+## Visible original
+| Literal wrong heading | Correct p9 Table 1 operation | Other visible evidence |
+| --- | --- | --- |
+| p10 §2.5 GetSystemStatus | GetServiceStatus | p10 §2.5.1 names GetServiceStatus; §2.5.2 Table 4 and p11 continued Table 5 name GetServiceStatus response/data |
+| p11 §2.6 SubscribeSystemStatus | SubscribeServiceStatus | p11 prose delegates to VDV 301-2-1, no independent qualified root or explicit correct operation name in prose |
+| p11 §2.7 UnsubscribeSystemStatus | UnsubscribeServiceStatus | p11 prose delegates to VDV 301-2-1, no independent qualified root or explicit correct operation name in prose |
+
+p5 contents visibly repeats all three incorrect headings. Body evidence is primary. Table 5 is a continuation of response section; no repeated §2.5.2 heading on p11. Do not treat a/b choice notation as negative cardinality. DRSMS22-002 and DRSMS22-004 remain distinct.
+
+## Authority and disproof
+Exact official VDVde/VDV301@VDV-301-2.2 service d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c, Common 468fee6d177e7185dbcd5d3f90cfb114e29e01ae, Enums 2a23b512379b18e8f122ac1272cef8229fb86283; tag 2.2/2.3/master trees rechecked, same exact blobs. Service lines 5–6 include Common/Enum, group 8–13 two Get response names, global 29 GetServiceStatusResponse, type 30–35 choice service-specific data/OperationErrorMessage, type 36–41 TimeStamp and ServiceIdentificationWithStateList. No GetSystemStatusResponse declaration. Generic Common subscription roots at 875,883,898,906; do not infer service-qualified subscription roots from operation names. Same exact family as SMS-001.
+
+Falsification: p9 table has six operation names, only ServiceStatus for second triplet. p10 §2.5.1 and Tables 4–5 directly contradict GetSystemStatus heading; p11 §2.6/2.7 prose does not name alternate operations, only common structures. No XSD basis for alternative Get root or additional service-qualified subscriptions. SMS-001 generic root behavior, DRSMS22-002 device/service prose mix-up, DRSMS22-004 missing table labels, DR3012-005 historical line remain distinct. PDF heading is wrong operation reference, not a normative alternate XML root. Known-issues SMS-002 mapping unchanged xsd_invalid_advisory / reviewed_not_implemented / selected_xsd_result_remains_normative; exact rejected GetSystemStatusResponse root only, not all invalid subscription XML or HTTP operations. Semantic evidence/DE-EN diagnostics narrowed to exact observed text (subscription names in inventory, not prose); no scope, classification, or runtime changes.
+
+## Version boundary
+Historical same terminology defect already tracked as DR3012-005: visible original DE V1.0 p67 Table31 vs p69 §§7.3.6/7.3.7, EN V1.0 p90 Table110 vs p91 §§9.10.5–7, Base V2.0 p103 Table36 vs p104 §§7.3.5–7, Base V2.1 p116 Table61 vs p117 §§7.3.5–7. Prior independent body/boundary report docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_005_2026-10-10.md and source locator review 2026-10-07 re-read; earlier images not freshly re-opened. Historical SystemManagementService V1.0 distinct profile and existing frozen identity, no duplicate new ID or extension of SMS-002 runtime scope. VDV official catalog verified earlier same day in SMS-001: sole dedicated 301-2-18 V2.2; no separately verified earlier/later standalone publication. Official 2.2/2.3/master exact same SMS/dep files. One bilingual publication with English technical sections. No independent German technical edition established.
+
+## Evidence
+- EV-146 run 34026822637 artifact 9987318510 ZIP SHA256 181ff01b16dae43ec2826299e6f14717aef1668d66491b6051ae07661ee607f6 size 994106 downloaded again, rehashed, ZIP integrity PASS. Six PNG hashes/sizes match ev146_results.json. Original pin SMS_V2.2 SHA256 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4 size 847416, 15 pages. No fresh raw PDF retrieval/hash. Original 180dpi images visually checked this cycle p5 39091e889381a592ce7c294161af36c1bbd3c804b9becd786630aefd3b1b781a (206206), p9 6f813ae55fd3acc28e99f055978c504b9759e03b1cfb52a133adaf696a2f3b79 (166033), p10 97bf0974fa9a1ef98fed84d6c7c844afa804a7091d29061affbe5359205cc563 (289934), p11 02b26dddd0fa57785ee5e35757a03dc6f1b1a595ae006cdb5ffe66481b4a2b7f (120616). Exact pinned render reuse; p5 contents is corroboration, not authority for target headings.
+- Historical EV-156 run 34460160697 job 102815828711 SUCCESS, logs freshly re-read: correct GetServiceStatusResponse valid, invented GetSystemStatusResponse invalid. EV-156 artifact 10145182333 unavailable as documented in SMS-001; no fresh rehash or new EV-156 run. EV-116 script unchanged Git blob bac849f6c33e6084e899794564f99f0c6cbd338a, already called by permanent SMS-001 regression in schema-audit-validation. Final prior gate run 46036853673 job 140634323127 on f4186486f07cd5218c0d9853bbb96d4c6eff9f64 re-read: correct GetServiceStatusResponse with OperationErrorMessage PASS, same payload in invented GetSystemStatusResponse FAIL with SCHEMAV_CVC_ELT_1 no matching global declaration; GetDeviceStatusResponse PASS control. Exact official bytes checked. Current block reruns existing gate, no new validator code needed.
+
+## Closure
+142/192 locator/body/boundary entries prepared; full schema and handoff gates pending. Next SMS-003 only after terminal closure and reviewed memory PR.

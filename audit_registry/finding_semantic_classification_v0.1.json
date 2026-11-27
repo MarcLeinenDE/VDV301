@@ -13929,7 +13929,7 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "The official PDF operation overview and section body use GetServiceStatus / SubscribeServiceStatus / UnsubscribeServiceStatus, while headings 2.5-2.7 use GetSystemStatus / SubscribeSystemStatus / UnsubscribeSystemStatus."
+          "note": "Visible original p9 Table 1 lists GetServiceStatus / SubscribeServiceStatus / UnsubscribeServiceStatus; p10 §2.5.1 explicitly names GetServiceStatus and Tables 4–5 on pp10–11 name its response structures. The actual headings §§2.5–2.7 and the p5 contents instead use GetSystemStatus / SubscribeSystemStatus / UnsubscribeSystemStatus. The prose of §§2.6–2.7 only refers to generic VDV 301-2-1 structures; it does not explicitly repeat the correct subscription operation names."
         },
         {
           "type": "official_xsd_explicit",
@@ -13947,14 +13947,14 @@
       "diagnostic": {
         "de": {
           "title": "SystemMonitoringService V2.2: Überschriften nennen SystemStatus statt ServiceStatus",
-          "short": "Die Überschriften 2.5-2.7 verwenden SystemStatus; Operationstabelle, Fließtext und XSD verwenden dagegen ServiceStatus.",
-          "long": "SMS-002 ist ein bestätigter PDF-Namensfehler. In der offiziellen SMS-V2.2-PDF heißen die Überschriften der Abschnitte 2.5 bis 2.7 GetSystemStatus, SubscribeSystemStatus und UnsubscribeSystemStatus. Die Operationstabelle sowie der Inhalt der Abschnitte verwenden jedoch GetServiceStatus, SubscribeServiceStatus und UnsubscribeServiceStatus. Die exakte V2.2-XSD bestätigt diese ausführbare Benennung: SystemMonitoringService.GetServiceStatusResponse ist gültig, ein erfundener Root SystemMonitoringService.GetSystemStatusResponse wird zurückgewiesen.",
+          "short": "Die Überschriften 2.5–2.7 verwenden SystemStatus; Operationstabelle, GetServiceStatus-Text und die zugehörigen XSD-Response-Namen verwenden dagegen ServiceStatus.",
+          "long": "SMS-002 ist ein bestätigter PDF-Namensfehler. In der offiziellen SMS-V2.2-PDF heißen die Überschriften 2.5 bis 2.7 GetSystemStatus, SubscribeSystemStatus und UnsubscribeSystemStatus; das Inhaltsverzeichnis wiederholt sie. Tabelle 1 nennt dagegen GetServiceStatus, SubscribeServiceStatus und UnsubscribeServiceStatus. §2.5.1 und Tabellen 4–5 bestätigen GetServiceStatus; die Texte in §§2.6–2.7 verweisen lediglich auf die generischen Strukturen aus VDV 301-2-1. Die exakte V2.2-XSD bestätigt den ausführbaren Get-Response-Namen: SystemMonitoringService.GetServiceStatusResponse kann gültig sein, der erfundene Root SystemMonitoringService.GetSystemStatusResponse wird zurückgewiesen. Die Subscription-Operationsnamen sind durch die PDF-Operationstabelle belegt, nicht durch eigene dienstspezifische Subscription-Roots.",
           "recommendation": "Für die ausführbare Schnittstelle ausschließlich ServiceStatus gemäß der ausgewählten V2.2-XSD verwenden. Wenn die XSD exakt einen GetSystemStatusResponse-Root in diesem Profil verwirft, den Fehler beibehalten und ergänzend auf den dokumentierten Überschriftenfehler der PDF hinweisen."
         },
         "en": {
           "title": "SystemMonitoringService V2.2: headings say SystemStatus instead of ServiceStatus",
-          "short": "Headings 2.5-2.7 use SystemStatus, while the operation table, body text and XSD use ServiceStatus.",
-          "long": "SMS-002 is a confirmed PDF naming defect. In the official SMS V2.2 PDF, the headings for sections 2.5 through 2.7 say GetSystemStatus, SubscribeSystemStatus and UnsubscribeSystemStatus. The operation table and section body instead use GetServiceStatus, SubscribeServiceStatus and UnsubscribeServiceStatus. The exact V2.2 XSD confirms the executable naming: SystemMonitoringService.GetServiceStatusResponse is valid, while an invented SystemMonitoringService.GetSystemStatusResponse root is rejected.",
+          "short": "Headings 2.5–2.7 use SystemStatus, while the operation table, GetServiceStatus request prose and corresponding XSD response names use ServiceStatus.",
+          "long": "SMS-002 is a confirmed PDF naming defect. The official SMS V2.2 headings 2.5–2.7 say GetSystemStatus, SubscribeSystemStatus and UnsubscribeSystemStatus; the contents repeat them. Table 1 instead lists GetServiceStatus, SubscribeServiceStatus and UnsubscribeServiceStatus. Section 2.5.1 and Tables 4–5 confirm GetServiceStatus; the prose in sections 2.6–2.7 merely refers to generic VDV 301-2-1 structures. The exact V2.2 XSD confirms the executable Get response name: SystemMonitoringService.GetServiceStatusResponse can validate, while the invented root SystemMonitoringService.GetSystemStatusResponse is rejected. Subscription operation names are supported by the PDF inventory, not by separate service-specific subscription roots.",
           "recommendation": "Use only the ServiceStatus naming defined by the selected V2.2 XSD for the executable interface. If that profile rejects exactly a GetSystemStatusResponse root, preserve the XSD error and add an advisory explaining the documented PDF heading defect."
         }
       },
@@ -13985,7 +13985,7 @@
         {
           "kind": "pdf",
           "reference": "SMS V2.2 / sha256 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4 / physical pages 9-11",
-          "note": "Operation overview/body use ServiceStatus while headings use SystemStatus."
+          "note": "Visible p9 Table 1, p10 §§2.5/2.5.1/2.5.2 Table 4, p11 continued §2.5.2 Table 5 and §§2.6–2.7; p5 contents repeats headings. Only the Get prose explicitly names ServiceStatus; subscription prose delegates to Common."
         },
         {
           "kind": "xsd",
@@ -13998,7 +13998,7 @@
           "note": "Deterministic executable validator for the ServiceStatus/SystemStatus root boundary and generic subscription structures."
         }
       ],
-      "notes": "Confirmed PDF operation-name defect. The XSD result remains normative; only the exact invalid SystemStatus-root case is a candidate for a Known-Issues advisory."
+      "notes": "Confirmed PDF operation-name defect; prior historical SystemManagementService heading defect DR3012-005 retained independently, no duplicate ID or runtime scope extension. Precise evidence attribution: correct subscription names from Table 1, not §2.6/2.7 prose. Selected XSD normative; only exact invalid SystemMonitoringService.GetSystemStatusResponse global root in official SMS V2.2 is a reviewed, not implemented Known-Issues advisory trigger."
     },
     {
       "finding_id": "SMS-003",
