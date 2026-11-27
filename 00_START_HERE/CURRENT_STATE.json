@@ -2127,7 +2127,7 @@
     "version_scope_boundary_latest_gate_run_id": 45954261132
   },
   "next_actions": [
-    "JIS-003 terminal_clean: LineInformation 1:* in EN January 2014 p80 Table 77 and DE July 2016 p19 Table 29; exact historical and selected official JIS XSDs default maxOccurs=1. EV-152 archived positive/negative evidence verified; selected XSD FAIL remains normative; no semantic, XSD or runtime changes. 130/192 locators, 130 body and boundary verified, 62 remaining. Substantive schema #45954261132 and handoff #45954261065 SUCCESS on 8fed4997a255859a6b5a9ee9ec7cbc2d66a12ba0. Verify final HEAD gates, then reviewed private ai-mem PR. NEXT JIS-004 NOT STARTED."
+    "JIS-004 active: DE p22 Table 38 visibly verified against EV-152 archive and EN p82 Table 86 located by text, both show wrong SetBlockNumberRequest label. Live screenshots cache-miss; pinned EN visual fallback requested. 130/192 unchanged; verify EN body and exact historical/selected XSD declarations before registry updates, then full and final gates."
   ],
   "source_locator_progress": {
     "locator_entry_count": 130,
@@ -2205,12 +2205,22 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": 45954261132,
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": 45954261065,
-    "resume_instruction": "JIS-003 terminal_clean: LineInformation 1:* in EN January 2014 p80 Table 77 and DE July 2016 p19 Table 29; exact historical and selected official JIS XSDs default maxOccurs=1. EV-152 archived positive/negative evidence verified; selected XSD FAIL remains normative; no semantic, XSD or runtime changes. 130/192 locators, 130 body and boundary verified, 62 remaining. Substantive schema #45954261132 and handoff #45954261065 SUCCESS on 8fed4997a255859a6b5a9ee9ec7cbc2d66a12ba0. Verify final HEAD gates, then reviewed private ai-mem PR. NEXT JIS-004 NOT STARTED."
+    "resume_instruction": "JIS-004 active: DE p22 Table 38 visibly verified against EV-152 archive and EN p82 Table 86 located by text, both show wrong SetBlockNumberRequest label. Live screenshots cache-miss; pinned EN visual fallback requested. 130/192 unchanged; verify EN body and exact historical/selected XSD declarations before registry updates, then full and final gates.",
+    "pending_block": "JIS-004 original-body and version-boundary review",
+    "active_finding": "JIS-004",
+    "active_step": "DE p22 archived original-body render hash and EV-152 ZIP verified; EN p82 fallback requested.",
+    "next_step": "Inspect EN fallback artifact and exact XSD declarations; verify correct overview and duplicate label context. Persist locator/body/boundary evidence and run full gates.",
+    "evidence_refs": [
+      "EV-152 run 34113437268 artifact 10015273758 ZIP SHA256 338e3fb679a8375c98fba359a3478d4cf7ba0968f3e97c08209ce52c0d23dc65; DE p22 SHA256 edbf46ad4beca13d4f6099c1f5e3556707b041ea1bc5c0cae0ab2258f183857b size 270426 visually checked.",
+      "tools/pdf_render_request_v0.1.json",
+      "EN p82 Table 86 from extracted text; pinned source VDV301-2_V1.0_EN SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 size 2403598; visual pending."
+    ],
+    "recovery_instruction": "JIS-004 active: DE p22 Table 38 visibly verified against EV-152 archive and EN p82 Table 86 located by text, both show wrong SetBlockNumberRequest label. Live screenshots cache-miss; pinned EN visual fallback requested. 130/192 unchanged; verify EN body and exact historical/selected XSD declarations before registry updates, then full and final gates."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
