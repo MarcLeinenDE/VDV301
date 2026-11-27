@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 138,
-    "verified": 138,
+    "tracked_findings": 139,
+    "verified": 139,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -7900,6 +7900,54 @@
           "language_status": "Official catalog checked 2026-11-27 only dedicated 02/2020; no corrected successor established.",
           "source_ids": [
             "VDV301-3_02-2020"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "PCS-001",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_PCS_001_2026-11-27.md",
+        "EV-155 run 34447583426 SUCCESS on cdb34155a8c1b344a528ecbedd08744d5a4451cc, artifact 10140238171 ZIP SHA256 48e3f7ad728660a342124d42976f8a1c88670c06b5ba3a63f7475b462653f633; exact raw PCS V1.0 SHA256 372be7a5d39c72e4bf405e3058f5af3d809eb611ac3548b70c526788d364c402 size 918762 and V2.1 SHA256 572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043 size 1084925 rehashed; historical pins centrally registered. V2.1 archived original p16 9b6ccf01171bfe7defd9aa697602181d63d9c413cafa12abf8e5969e5fae6412 and p17 fb3cdd45d3dccf3923a995f82097c020bd8bbd45885c654b6e075483a7dc2d40 visibly inspected. Five occurrences only, no new raw PCS PDF retrieval.",
+        "Exact repository fallback renderer blob 2ff8963a9880a4c8d0db6dc90af49427936dcde7 locally verified, PyMuPDF 1.26.7 150dpi on verified archive raw PDFs; V1.0 p9 SHA256 370c9ac8c6bfcb49f4c63c9b8ffca3b8c93845de59c324025599433f68381927, V2.1 p10 58e9627aacb24f9f779844a570d32496cc0ef60f1099cc0f85c008932d9e7754 and p18 e9f39309000a98a29b01457bae978a6820d72f2804715c9d075d2920f33ff60e visually inspected. V1.0 Table 1 five original operations; V2.1 Table 1 five additional optional operations; §2.1.1 p18 confirms addition. Technical operations English only; bilingual explanatory sections, not distinct technical DE/EN editions.",
+        "Earlier EN Jan 2014 exact source fallback run 46014266727 SUCCESS on 27705f18d3e336030eb456807e9efcaa825dfccd, artifact 15205211510 ZIP SHA256 9abb4f636999f6f9331311f7f0ebc96477b49642705571a5303b4af5b779e392 size 765148 verified; source SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 size 2403598; all 3 PNG hashes/sizes match manifest. p85 SHA256 95645c54194fb4252960f46f11a60caecdda70b2830578df8c964abe9df5913f (252847) and p86 aed7ed1880d8a7f1f82fc839c051f39dcd027288c7c761b1e9c8de7d31f956c2 (278491) visibly inspected: §9.8.1 Table 95 only original five operations, p86 §9.8.6.2 SetCounterData ends PCS before §9.9. No independent DE 2014 aggregate, 2016 DE base not a complete PCS service publication.",
+        "Exact upstream VDV-301-1.0 PCS V1.0 type-only blob 600a3ee6290c630a4435fb06ca9803dabaceb788 and umbrella 41289eaed2674a169fdf77a10a2eff293c76d5c4 lines 14,178-187, VDV-301-2.0 self-contained PCS V1.0 4161872be76740abfdd1cddf96f8a736333fc8be, no optional operation names in either service/umbrella. VDV-301-2.1, 2.2, 2.3 and master PCS V2.1 59ef2ddb09b92db0d492974e38bad5b6be03865e includes Common V1.0 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c and Enum V1.0 a9bea5bc73003ed91ded8519db06c32c4067831d; all same exact blobs. V2.1 enum 311464690ad60749ed8d326217787e4b8ed0b718 separate control only. VDV-301-2.4 tag 404; official catalog checked 2026-11-27 lists V1.0 and V2.1 only; no corrected newer PCS publication established.",
+        "Historical EV-155 exact-route compiled, DataNotValid accepted, OperationNotSupported rejected at ErrorCode enum facet, separate Enums V2.1 control accepted. Current extended validator tests all five response structures via synthetic type harnesses, including freetext Value controls, new CI result pending. Existing cross_artifact_mismatch, error_with_advisory, reviewed_not_implemented unchanged; exact selected XSD authoritative; no alias, dependency substitution or XSD changes."
+      ],
+      "note": "PCS-001 five visible V2.1 optional-operation enum statements on pp16-17, Table 1 p10 and history p18; exact selected Common/Enums V1.0 reject enum value, V2.1 control separate; free-text Value not enum. Original V1.0 p9 and EN aggregate p85/86 not affected. No corrected dedicated successor established, exact later published tags/master unchanged. Existing classification and runtime scope unchanged.",
+      "scope_conclusion": "PCS-001 five visible V2.1 optional-operation enum statements on pp16-17, Table 1 p10 and history p18; exact selected Common/Enums V1.0 reject enum value, V2.1 control separate; free-text Value not enum. Original V1.0 p9 and EN aggregate p85/86 not affected. No corrected dedicated successor established, exact later published tags/master unchanged. Existing classification and runtime scope unchanged.",
+      "boundary_checks": [
+        {
+          "version": "V1.0 EN 01/2014 aggregate",
+          "role": "earlier_nonaffected_predecessor",
+          "language_status": "EN p85 Table 95 and p86 closing PCS response; historical official tag 1.0 lacks optional operations.",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "V1.0 03/2017",
+          "role": "last_nonaffected_predecessor",
+          "language_status": "Bilingual foreword; EN-only operation table p9 no new optional operations; official tag 2.0 PCS V1.0.",
+          "source_ids": [
+            "PCS_V1.0"
+          ]
+        },
+        {
+          "version": "V2.1 07/2018",
+          "role": "first_last_verified_affected",
+          "language_status": "Bilingual descriptive sections, EN-only technical p16/17 five statements; p10 Table 1, p18 bilingual history. Exact official release 2.1 selects Enum V1.0.",
+          "source_ids": [
+            "PCS_V2.1"
+          ]
+        },
+        {
+          "version": "After V2.1",
+          "role": "no_verified_corrected_successor",
+          "language_status": "Catalog only V1.0/V2.1; later release tags 2.2/2.3 and master retain same exact service/dependency blobs; no official 2.4 tag established. No separate later PCS PDF.",
+          "source_ids": [
+            "PCS_V2.1"
           ]
         }
       ]

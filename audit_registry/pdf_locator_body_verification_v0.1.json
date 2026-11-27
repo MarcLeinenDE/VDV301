@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 138,
-    "verified_current_standard": 138,
+    "tracked_findings": 139,
+    "verified_current_standard": 139,
     "pending_current_standard": 0
   },
   "entries": [
@@ -1519,6 +1519,19 @@
         "Cross-finding scan: all 192 semantic entries, all 137 existing locator/body/boundary entries and all runtime mappings searched for IEE 802.3 or NET-003 references. Only NET-003 and DRNET20-003 semantic entries and latter existing locator/body/boundary entries match; no runtime matcher. Clarify DRNET20-003 exclusion of both DE/EN occurrences, preserve actual p18/19/29 targets and prior evidence; p29 NET-003 positive spelling control only. Regression guard requires both affected NET-003 body locators, unchanged DRNET20-003 target pages, no runtime mapping, no XSD lane. Scope correction creates no new identity or extra progress credit; historical EV-144/EV-154 records untouched."
       ],
       "note": "Visible byte-pinned DE p11 and EN p17 §2.2.4 both affected; correct IEEE controls pp7/8/10/17/29 and reference pp32/33 inspected; p31 history inspected. Reconciled historical German-only target description."
+    },
+    {
+      "finding_id": "PCS-001",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_PCS_001_2026-11-27.md",
+        "EV-155 run 34447583426 SUCCESS on cdb34155a8c1b344a528ecbedd08744d5a4451cc, artifact 10140238171 ZIP SHA256 48e3f7ad728660a342124d42976f8a1c88670c06b5ba3a63f7475b462653f633; exact raw PCS V1.0 SHA256 372be7a5d39c72e4bf405e3058f5af3d809eb611ac3548b70c526788d364c402 size 918762 and V2.1 SHA256 572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043 size 1084925 rehashed; historical pins centrally registered. V2.1 archived original p16 9b6ccf01171bfe7defd9aa697602181d63d9c413cafa12abf8e5969e5fae6412 and p17 fb3cdd45d3dccf3923a995f82097c020bd8bbd45885c654b6e075483a7dc2d40 visibly inspected. Five occurrences only, no new raw PCS PDF retrieval.",
+        "Exact repository fallback renderer blob 2ff8963a9880a4c8d0db6dc90af49427936dcde7 locally verified, PyMuPDF 1.26.7 150dpi on verified archive raw PDFs; V1.0 p9 SHA256 370c9ac8c6bfcb49f4c63c9b8ffca3b8c93845de59c324025599433f68381927, V2.1 p10 58e9627aacb24f9f779844a570d32496cc0ef60f1099cc0f85c008932d9e7754 and p18 e9f39309000a98a29b01457bae978a6820d72f2804715c9d075d2920f33ff60e visually inspected. V1.0 Table 1 five original operations; V2.1 Table 1 five additional optional operations; §2.1.1 p18 confirms addition. Technical operations English only; bilingual explanatory sections, not distinct technical DE/EN editions.",
+        "Earlier EN Jan 2014 exact source fallback run 46014266727 SUCCESS on 27705f18d3e336030eb456807e9efcaa825dfccd, artifact 15205211510 ZIP SHA256 9abb4f636999f6f9331311f7f0ebc96477b49642705571a5303b4af5b779e392 size 765148 verified; source SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 size 2403598; all 3 PNG hashes/sizes match manifest. p85 SHA256 95645c54194fb4252960f46f11a60caecdda70b2830578df8c964abe9df5913f (252847) and p86 aed7ed1880d8a7f1f82fc839c051f39dcd027288c7c761b1e9c8de7d31f956c2 (278491) visibly inspected: §9.8.1 Table 95 only original five operations, p86 §9.8.6.2 SetCounterData ends PCS before §9.9. No independent DE 2014 aggregate, 2016 DE base not a complete PCS service publication.",
+        "Exact upstream VDV-301-1.0 PCS V1.0 type-only blob 600a3ee6290c630a4435fb06ca9803dabaceb788 and umbrella 41289eaed2674a169fdf77a10a2eff293c76d5c4 lines 14,178-187, VDV-301-2.0 self-contained PCS V1.0 4161872be76740abfdd1cddf96f8a736333fc8be, no optional operation names in either service/umbrella. VDV-301-2.1, 2.2, 2.3 and master PCS V2.1 59ef2ddb09b92db0d492974e38bad5b6be03865e includes Common V1.0 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c and Enum V1.0 a9bea5bc73003ed91ded8519db06c32c4067831d; all same exact blobs. V2.1 enum 311464690ad60749ed8d326217787e4b8ed0b718 separate control only. VDV-301-2.4 tag 404; official catalog checked 2026-11-27 lists V1.0 and V2.1 only; no corrected newer PCS publication established.",
+        "Historical EV-155 exact-route compiled, DataNotValid accepted, OperationNotSupported rejected at ErrorCode enum facet, separate Enums V2.1 control accepted. Current extended validator tests all five response structures via synthetic type harnesses, including freetext Value controls, new CI result pending. Existing cross_artifact_mismatch, error_with_advisory, reviewed_not_implemented unchanged; exact selected XSD authoritative; no alias, dependency substitution or XSD changes."
+      ],
+      "note": "PCS-001 five visible V2.1 optional-operation enum statements on pp16-17, Table 1 p10 and history p18; exact selected Common/Enums V1.0 reject enum value, V2.1 control separate; free-text Value not enum. Original V1.0 p9 and EN aggregate p85/86 not affected. No corrected dedicated successor established, exact later published tags/master unchanged. Existing classification and runtime scope unchanged."
     }
   ]
 }

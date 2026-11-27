@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 138,
-    "coverage_complete_count": 138,
+    "locator_entry_count": 139,
+    "coverage_complete_count": 139,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 54
+    "remaining_finding_count": 53
   },
   "entries": [
     {
@@ -27600,6 +27600,370 @@
         "Visible same-document controls: p7 §1 Anwendungsbereich 180dpi be9c6c96cab9989dd79c6e5a58b62f170fcbe62450444c87707b186a68706e1e; p8 §1 Scope 180dpi 1a50ca1b7db00fe9f7e2f8eb97e197c627ce99fd9dc429; p10 §2.2.3 Leitungen auf Kupferbasis 120dpi 51cb3352eec2597e9f94401fcdfaec5882f909bbb21f9e8b7efb5ee9cf29b9c6; p29 both §5 PoE 180dpi 2d29469bf5e5a5ba63e92f9cc8461200d703d46a9f11e710ca356cd09283ecd2; p32 actual heading Regelwerke – Normen und Empfehlungen / References 120dpi 08e3849e873bf312a370c44f455487a44781183602dfb25d5be35aa33865d812 and continuing p33 item (12) IEEE 802.3 IEEE Standard for Ethernet 120dpi f985e4e2481667f90a740eaf9606ff15b4579d5f8a4be69e2d2cc7b9f68742a7; p31 empty §7 history 120dpi 7eb51a5a8daac0ecbea9c8404ca7997220297a35832991abb7400c53bb630029. No specific dated IEEE standard edition inferred.",
         "Official VDV catalog https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-27: dedicated 301-3 only 02/2020 listed; same-day NET-001 annual-report evidence reused. One bilingual publication; both affected tracks; no independently established separate earlier or corrected later edition. Prior reports and frozen finding/provenance baseline preserved.",
         "Cross-finding scan: all 192 semantic entries, all 137 existing locator/body/boundary entries and all runtime mappings searched for IEE 802.3 or NET-003 references. Only NET-003 and DRNET20-003 semantic entries and latter existing locator/body/boundary entries match; no runtime matcher. Clarify DRNET20-003 exclusion of both DE/EN occurrences, preserve actual p18/19/29 targets and prior evidence; p29 NET-003 positive spelling control only. Regression guard requires both affected NET-003 body locators, unchanged DRNET20-003 target pages, no runtime mapping, no XSD lane. Scope correction creates no new identity or extra progress credit; historical EV-144/EV-154 records untouched."
+      ]
+    },
+    {
+      "finding_id": "PCS-001",
+      "service": "PassengerCountingService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_PassengerCountingService_V2.1.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact official PCS V2.1 route. The service XSD explicitly selects Common V1.0 and Enumerations V1.0; Enumerations V2.1 is explanatory control only and must not be substituted into the production route."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V1.0 (01/2014 EN aggregate)",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "predecessor_not_affected",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                85
+              ],
+              "section": "9.8.1 Operations of the PassengerCountingService",
+              "table": "Table 95: Description of Operations of PassengerCountingService",
+              "point_summary": "Five original operations only."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                86
+              ],
+              "section": "9.8.6 Data Structure of Operation SetCounterData / 9.8.6.2 Response",
+              "table": null,
+              "point_summary": "Generic DataAcceptedResponseStructure; next visible §9.9 SystemDocumentationService, no intervening optional PCS operation."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "600a3ee6290c630a4435fb06ca9803dabaceb788",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "PCS V1.0 historical type file",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "5-6,16-52",
+              "point_summary": "Type-only historical service, no new optional operation names.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "IBIS_IP_V1.0 umbrella",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "14,178-187",
+              "point_summary": "Includes historical PCS and declares original service elements; no new optional operation names.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            }
+          ],
+          "coverage_note": "Earlier official aggregate EN 2014 and matching historical schema packaging predate optional operations; no separate DE 2014 aggregate independently established."
+        },
+        {
+          "version": "V1.0 (03/2017 standalone)",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "predecessor_not_affected",
+          "pdf_locators": [
+            {
+              "source_id": "PCS_V1.0",
+              "document_title": "VDV-Schrift 301-2-8 Dienst PassengerCountingService (03/2017)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sd-2017-03.pdfx",
+              "sha256": "372be7a5d39c72e4bf405e3058f5af3d809eb611ac3548b70c526788d364c402",
+              "printed_pages": [
+                9
+              ],
+              "section": "1.2 Operations of the PassengerCountingService",
+              "table": "Table 1: Description of Operations of PassengerCountingService",
+              "point_summary": "Only GetAllData, SubscribeAllData, UnsubscribeAllData, RetrieveSpecificDoorData, SetCounterData. No added optional operations or OperationNotSupported requirement."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "4161872be76740abfdd1cddf96f8a736333fc8be",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "PCS V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "5-14,19-67",
+              "point_summary": "Later official standalone V1.0 selects Common/Enum V1.0 and original operation/type declarations only.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "simpleType",
+              "component": "ErrorCodeEnumeration",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='ErrorCodeEnumeration']",
+              "line_hint": "100-110",
+              "point_summary": "Same enum pool but no PCS V2.1 optional-operation claim.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            }
+          ],
+          "coverage_note": "Last available dedicated predecessor not affected by this specific claim: optional operations not yet introduced. Historical packaging remains separate PCS-002."
+        },
+        {
+          "version": "V2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "first_and_last_verified_affected_publication",
+          "pdf_locators": [
+            {
+              "source_id": "PCS_V2.1",
+              "document_title": "VDV-Schrift 301-2-8 Service PassengerCountingService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sds-v2-1-passengercounting.pdfx",
+              "sha256": "572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043",
+              "printed_pages": [
+                10
+              ],
+              "section": "1.2 Operations of the PassengerCountingService",
+              "table": "Table 1: Description of Operations of PassengerCountingService",
+              "point_summary": "Five new optional operations and their request/response structures explicitly listed."
+            },
+            {
+              "source_id": "PCS_V2.1",
+              "document_title": "VDV-Schrift 301-2-8 Service PassengerCountingService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sds-v2-1-passengercounting.pdfx",
+              "sha256": "572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043",
+              "printed_pages": [
+                16
+              ],
+              "section": "1.10 Data Structures of Optional Operation StartCounting / 1.10.2 Response",
+              "table": null,
+              "point_summary": "Response prose names DataAcceptedResponseStructure and enum addition OperationNotSupported; request tables 8–10 are not the response locator."
+            },
+            {
+              "source_id": "PCS_V2.1",
+              "document_title": "VDV-Schrift 301-2-8 Service PassengerCountingService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sds-v2-1-passengercounting.pdfx",
+              "sha256": "572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043",
+              "printed_pages": [
+                16
+              ],
+              "section": "1.11 Data Structures of Optional Operation StopCounting / 1.11.2 Response",
+              "table": null,
+              "point_summary": "Response prose names DataAcceptedResponseStructure and enum addition OperationNotSupported; Table 11 is request only."
+            },
+            {
+              "source_id": "PCS_V2.1",
+              "document_title": "VDV-Schrift 301-2-8 Service PassengerCountingService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sds-v2-1-passengercounting.pdfx",
+              "sha256": "572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043",
+              "printed_pages": [
+                17
+              ],
+              "section": "1.12.2 Response",
+              "table": "Table 12: Description of PassengerCountingService.GetCountingStateResponse",
+              "point_summary": "Prose declares enum addition; response choice Data / ErrorMessage of IBIS-IP.string. Free-text Value distinct from optional ErrorCode."
+            },
+            {
+              "source_id": "PCS_V2.1",
+              "document_title": "VDV-Schrift 301-2-8 Service PassengerCountingService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sds-v2-1-passengercounting.pdfx",
+              "sha256": "572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043",
+              "printed_pages": [
+                17
+              ],
+              "section": "1.13 Data Structures of Optional Operation SubscribeCountingState",
+              "table": null,
+              "point_summary": "Common SubscribeRequest/SubscribeResponse and explicit OperationNotSupported enum extension."
+            },
+            {
+              "source_id": "PCS_V2.1",
+              "document_title": "VDV-Schrift 301-2-8 Service PassengerCountingService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sds-v2-1-passengercounting.pdfx",
+              "sha256": "572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043",
+              "printed_pages": [
+                17
+              ],
+              "section": "1.14 Data Structures of Optional Operation UnsubscribeCountingState",
+              "table": null,
+              "point_summary": "Common UnsubscribeRequest/UnsubscribeResponse and explicit OperationNotSupported enum extension."
+            },
+            {
+              "source_id": "PCS_V2.1",
+              "document_title": "VDV-Schrift 301-2-8 Service PassengerCountingService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sds-v2-1-passengercounting.pdfx",
+              "sha256": "572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043",
+              "printed_pages": [
+                18
+              ],
+              "section": "2 Versionshistorie / Version History / 2.1 Version 2.1 / 2.1.1 Funktionale Erweiterungen / Functional Upgrade",
+              "table": null,
+              "point_summary": "Bilingual history explicitly states optional operations added."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_PassengerCountingService_V2.1.xsd",
+              "git_blob": "59ef2ddb09b92db0d492974e38bad5b6be03865e",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1",
+              "component_kind": "schema",
+              "component": "PCS V2.1 includes",
+              "xpath_hint": "/xs:schema/xs:include",
+              "line_hint": "5-6",
+              "point_summary": "Exact Common V1.0 and Enumerations V1.0 dependencies; not V2.1.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V2.1.xsd",
+              "git_blob": "59ef2ddb09b92db0d492974e38bad5b6be03865e",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1",
+              "component_kind": "group",
+              "component": "PassengerCountingServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='PassengerCountingServiceGroup']/xs:sequence",
+              "line_hint": "21-30",
+              "point_summary": "Start/Stop DataAcceptedResponseStructure, GetCountingState local response type, Subscribe/Unsubscribe shared response types.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V2.1.xsd",
+              "git_blob": "59ef2ddb09b92db0d492974e38bad5b6be03865e",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1",
+              "component_kind": "complexType",
+              "component": "PassengerCountingService.GetCountingStateResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='PassengerCountingService.GetCountingStateResponseStructure']/xs:choice",
+              "line_hint": "165-173",
+              "point_summary": "Data vs ErrorMessage type IBIS-IP.string, not direct enum element.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1",
+              "component_kind": "complexType",
+              "component": "DataAcceptedResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DataAcceptedResponseDataStructure']/xs:sequence/xs:element[@name='ErrorCode']",
+              "line_hint": "888-895",
+              "point_summary": "Optional ErrorCodeEnumeration; common DataAcceptedResponseStructure at 882-887 selects data or OperationErrorMessage.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1",
+              "component_kind": "complexType",
+              "component": "IBIS-IP.string",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='IBIS-IP.string']/xs:sequence",
+              "line_hint": "831-835",
+              "point_summary": "Required Value xs:string, optional ErrorCodeEnumeration. Free text is not an enum lexeme.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1",
+              "component_kind": "complexType",
+              "component": "IBIS-IP.boolean",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='IBIS-IP.boolean']/xs:sequence",
+              "line_hint": "765-770",
+              "point_summary": "Required boolean Value, optional ErrorCodeEnumeration (subscription Active branch).",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1",
+              "component_kind": "complexType",
+              "component": "SubscribeResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SubscribeResponseStructure']/xs:choice",
+              "line_hint": "863-868",
+              "point_summary": "Active IBIS-IP.boolean or OperationErrorMessage IBIS-IP.string.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1",
+              "component_kind": "complexType",
+              "component": "UnsubscribeResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='UnsubscribeResponseStructure']/xs:choice",
+              "line_hint": "876-881",
+              "point_summary": "Active IBIS-IP.boolean or OperationErrorMessage IBIS-IP.string.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1",
+              "component_kind": "simpleType",
+              "component": "ErrorCodeEnumeration",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='ErrorCodeEnumeration']/xs:restriction",
+              "line_hint": "100-110",
+              "point_summary": "Selected value set lacks OperationNotSupported; includes DataNotValid.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.1.xsd",
+              "git_blob": "311464690ad60749ed8d326217787e4b8ed0b718",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1",
+              "component_kind": "enumeration_value",
+              "component": "ErrorCodeEnumeration",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='ErrorCodeEnumeration']/xs:restriction/xs:enumeration[@value='OperationNotSupported']",
+              "line_hint": "113",
+              "point_summary": "Separate explanatory enum-only control; explicitly NOT selected PCS production dependency.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            }
+          ],
+          "coverage_note": "Only affected published PCS version V2.1; original five enum statements, exact older dependency route. Code rejection at enum-typed ErrorCode, not free-text Value. Later tags 2.2/2.3/master preserve exact service and dependencies; no newer dedicated service publication established. No runtime rule or XSD change."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_PCS_001_2026-11-27.md",
+        "EV-155 run 34447583426 SUCCESS on cdb34155a8c1b344a528ecbedd08744d5a4451cc, artifact 10140238171 ZIP SHA256 48e3f7ad728660a342124d42976f8a1c88670c06b5ba3a63f7475b462653f633; exact raw PCS V1.0 SHA256 372be7a5d39c72e4bf405e3058f5af3d809eb611ac3548b70c526788d364c402 size 918762 and V2.1 SHA256 572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043 size 1084925 rehashed; historical pins centrally registered. V2.1 archived original p16 9b6ccf01171bfe7defd9aa697602181d63d9c413cafa12abf8e5969e5fae6412 and p17 fb3cdd45d3dccf3923a995f82097c020bd8bbd45885c654b6e075483a7dc2d40 visibly inspected. Five occurrences only, no new raw PCS PDF retrieval.",
+        "Exact repository fallback renderer blob 2ff8963a9880a4c8d0db6dc90af49427936dcde7 locally verified, PyMuPDF 1.26.7 150dpi on verified archive raw PDFs; V1.0 p9 SHA256 370c9ac8c6bfcb49f4c63c9b8ffca3b8c93845de59c324025599433f68381927, V2.1 p10 58e9627aacb24f9f779844a570d32496cc0ef60f1099cc0f85c008932d9e7754 and p18 e9f39309000a98a29b01457bae978a6820d72f2804715c9d075d2920f33ff60e visually inspected. V1.0 Table 1 five original operations; V2.1 Table 1 five additional optional operations; §2.1.1 p18 confirms addition. Technical operations English only; bilingual explanatory sections, not distinct technical DE/EN editions.",
+        "Earlier EN Jan 2014 exact source fallback run 46014266727 SUCCESS on 27705f18d3e336030eb456807e9efcaa825dfccd, artifact 15205211510 ZIP SHA256 9abb4f636999f6f9331311f7f0ebc96477b49642705571a5303b4af5b779e392 size 765148 verified; source SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 size 2403598; all 3 PNG hashes/sizes match manifest. p85 SHA256 95645c54194fb4252960f46f11a60caecdda70b2830578df8c964abe9df5913f (252847) and p86 aed7ed1880d8a7f1f82fc839c051f39dcd027288c7c761b1e9c8de7d31f956c2 (278491) visibly inspected: §9.8.1 Table 95 only original five operations, p86 §9.8.6.2 SetCounterData ends PCS before §9.9. No independent DE 2014 aggregate, 2016 DE base not a complete PCS service publication.",
+        "Exact upstream VDV-301-1.0 PCS V1.0 type-only blob 600a3ee6290c630a4435fb06ca9803dabaceb788 and umbrella 41289eaed2674a169fdf77a10a2eff293c76d5c4 lines 14,178-187, VDV-301-2.0 self-contained PCS V1.0 4161872be76740abfdd1cddf96f8a736333fc8be, no optional operation names in either service/umbrella. VDV-301-2.1, 2.2, 2.3 and master PCS V2.1 59ef2ddb09b92db0d492974e38bad5b6be03865e includes Common V1.0 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c and Enum V1.0 a9bea5bc73003ed91ded8519db06c32c4067831d; all same exact blobs. V2.1 enum 311464690ad60749ed8d326217787e4b8ed0b718 separate control only. VDV-301-2.4 tag 404; official catalog checked 2026-11-27 lists V1.0 and V2.1 only; no corrected newer PCS publication established.",
+        "Historical EV-155 exact-route compiled, DataNotValid accepted, OperationNotSupported rejected at ErrorCode enum facet, separate Enums V2.1 control accepted. Current extended validator tests all five response structures via synthetic type harnesses, including freetext Value controls, new CI result pending. Existing cross_artifact_mismatch, error_with_advisory, reviewed_not_implemented unchanged; exact selected XSD authoritative; no alias, dependency substitution or XSD changes."
       ]
     }
   ]
