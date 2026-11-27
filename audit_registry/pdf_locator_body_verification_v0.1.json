@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 135,
-    "verified_current_standard": 135,
+    "tracked_findings": 136,
+    "verified_current_standard": 136,
     "pending_current_standard": 0
   },
   "entries": [
@@ -1478,6 +1478,19 @@
         "VDV official catalog https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-27 lists four standalone V1.0 German publications and EN aggregate January 2014; no earlier publication, newer standalone version or separate DE 2014 full aggregate / EN 2016 standalone independently established. EN and DE independently show HTTP Beacon and UDP other services. Active disproof of missing historical root resolved by umbrella declaration; no generic root pattern, no new diagnostic. LS-001 spelling conflict remains separate; LS-002 exact hyphen remains separate."
       ],
       "note": "EN printed 52–53, 69–70, 84 and DE BLS 7–8/DLS-GNSS-NLS 7 visually verified; captions and transport/choice context checked on exact source renders."
+    },
+    {
+      "finding_id": "NET-001",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_NET_001_2026-11-27.md",
+        "Exact registered source VDV301-3_02-2020 SHA256 edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99 size 558005, 37 physical pages. Original pin run 33270251357 SUCCESS; fresh pin run 34232022618 SUCCESS on ce24df3f6e637734dadf3643b3d6f8f689be001c. Fresh archive 10058187809 ZIP SHA256 5f978eccdddf1d20cd6b62b4798bceae12b11438a4cbf59d9d5a98611a17421a size 1816277; all 26 manifest entries independently rehashed after archive-prefix removal; pin-result.json records matching historical PDF SHA and size, retrieved 2026-09-08T13:27:14Z. PDF raw bytes not newly retrieved in this review.",
+        "EV-154 run 34232483234 SUCCESS on 3645ddfeb32effd0b17432672ab91476e1accdf8, artifact 10058380451 ZIP SHA256 dcb266cad68054375d65818fda20d7ec53c59843a48525d60b3ade62f5c38396 size 1797394, ev154-result.json SHA256 43f22a890a20322499a4d1cf1fab3a9f4bb63593ead23c4f896371e1b98b89ad. All seven render hashes/sizes rechecked and byte-identical to fresh pin archive. Actual p7 PNG SHA256 be9c6c96cab9989dd79c6e5a58b62f170fcbe62450444c87707b186a68706e1e size 323271 and p8 1a50ca1b7db00fe9f7e2f8eb97e197c627ce99fd9acff602da4fe921bd9dc429 size 262659 visually inspected. EV-154 reports alternate document identity rejected; no new EV-154 execution.",
+        "Historical run 33270251357 artifact 9719880284 ZIP SHA256 2cc403407a354af07c2dfc1cc78666e0f16fc753af6eebfaf090b0300214d930 size 4431133; fulltext SHA256 dd6ecfa0d78f0a00b86557aa2e3694883431fc6a7a1d5a92b4663981996a3276 and all 37 120-dpi PNGs verified against manifest. Cover physical p1 PNG 604e23b80819aa9158d28b167c72e52d50bc2011a6e835f794757d0bf973ea35, bilingual foreword printed p4 47326e71643c758e0fc6bea6b2b39a69bf80c0948eec0a2aef9adee30b5c4f92, empty version history printed p31 7eb51a5a8daac0ecbea9c8404ca7997220297a35832991abb7400c53bb630029 visually inspected. Both archived complete text extracts contain exactly one 303-3 occurrence. Live screenshot cache miss resolved using verified existing original renders.",
+        "Official VDV catalog https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-27 lists only dedicated 301-3 02/2020. VDV annual report 2020/2021 https://www.vdv.de/html/epaper/vdv-jahresbericht-2020-2021/index.html lists 301-3 2/2020 among 2020 new publications. Empty §7 Version History p31 visually confirmed; no independently established separate earlier or corrected later publication. DE and EN are same bilingual publication, DE unaffected control, EN affected only at p8 first paragraph.",
+        "Active disproof: title, bilingual foreword, corresponding German scope, English same-page footer and surrounding scope content establish local self-reference, not alternative external authority. DRNET20-002 on same page concerns Figure 1 translation, not this paragraph. No XSD lane for this physical/network/protocol document, no runtime mapping, no hardware or executable validation claim; full XSD gate regression only. Existing semantic/diagnostic and source-pin records unchanged."
+      ],
+      "note": "Exact original p7 §1 Anwendungsbereich and p8 §1 Scope first paragraphs, same-page footer, cover, p4 bilingual foreword and p31 history visually inspected; all source render and archive hashes verified."
     }
   ]
 }
