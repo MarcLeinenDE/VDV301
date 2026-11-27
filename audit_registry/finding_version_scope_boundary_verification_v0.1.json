@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 128,
-    "verified": 128,
+    "tracked_findings": 129,
+    "verified": 129,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -7404,6 +7404,55 @@
           "version": "After standalone V1.0",
           "role": "no_independently_established_successor",
           "language_status": "Official catalog retrieved 2026-11-25 lists only standalone V1.0; no later edition verified.",
+          "source_ids": [
+            "JIS_V1.0"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "JIS-002",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_JIS_002_2026-11-27.md",
+        "EV-152 run 34113437268 SUCCESS rechecked, artifact 10015273758 ZIP SHA256 338e3fb679a8375c98fba359a3478d4cf7ba0968f3e97c08209ce52c0d23dc65 independently rechecked. DE original p11 SHA256 698a4c1099476acb970382172af6e8c7f3f0dcc42036babdd1b5d498ec31e741 (207400 bytes), p22 edbf46ad4beca13d4f6099c1f5e3556707b041ea1bc5c0cae0ab2258f183857b (270426 bytes), match EV-152 evidence and actually visually inspected 2026-11-27. No new EV-152 run.",
+        "JIS_V1.0 PDF SHA256 424181b4932e18b6ac059843fa3978fdcc07a9c6acb553f9fbe8b71ef583da73 size 772125; historical pin run 34103529949, artifact 10011459459, central pin registered in 3ee744d. No fresh raw PDF download.",
+        "VDV301-2_V1.0_EN SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 size 2403598; exact-source renderer run 45625180374 artifact 15026289022 ZIP SHA256 5d147d3241d23da58f1b29b37214ca4dc13201899b8093f56ec31b4e54a42559 rechecked; all four manifest PNG sizes and hashes verified. EN p72 SHA256 78eeea46be7aca63ebaca8fc68835cc20766f5b6e532e9895cecb36b5b3ec213, p73 1701b40312c76df09212e679774700d54b688984a46f8c33323ed7a261551a9d, both actually visually read. SetTripRef row split across pages; Table 49 caption p73.",
+        "Exact VDVde/VDV301 tag VDV-301-2.0 JIS 8c303db5a9c0548d66b90174d9c329d33092ad24 group lines 33-39 and globals/types 301-349, Common 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c types lines 882-895, Enum a9bea5bc73003ed91ded8519db06c32c4067831d. Tag VDV-301-1.0 JIS type-only 1ee4d7aeb15f3269c5335313be9e214bdb519d2e and aggregate 41289eaed2674a169fdf77a10a2eff293c76d5c4 lines 65-71,98-104,210; same Common/Enum. Both upstream trees rechecked 2026-11-27; JIS local group/globals only seven Set request declarations, no Set response aliases; historical aggregate declares generic DataAcceptedResponse. Existing JIS-001 structural equivalence and SUPERBRANCH_V1_0_DEDUP_POLICY.md retained.",
+        "JIS-001 boundary audit 2026-11-25 verified historical EN aggregate and DE standalone; VDV catalog checked then, no later standalone identified; no separate DE 2014 aggregate or EN 2016 standalone independently established. Rechecked actual JIS-002 response rows in each source, not extrapolated. No fresh catalog lookup in this pass.",
+        "Canonical semantic entry non_defect/no_runtime_diagnostic and no entry in runtime mapping; historical EV-152 confirms shared response model by structural assertions (not a dedicated positive/negative JIS-002 XML test)."
+      ],
+      "note": "JIS V1.0 seven Set requests intentionally share DataAcceptedResponseStructure in January 2014 EN aggregate and July 2016 DE standalone; no distinct earlier or later standalone release established in JIS-001 boundary audit. Same Common/Enum exact blobs and historical vs selected official packaging. No XSD defect or runtime diagnostic.",
+      "scope_conclusion": "JIS V1.0 seven Set requests intentionally share DataAcceptedResponseStructure in January 2014 EN aggregate and July 2016 DE standalone; no distinct earlier or later standalone release established in JIS-001 boundary audit. Same Common/Enum exact blobs and historical vs selected official packaging. No XSD defect or runtime diagnostic.",
+      "boundary_checks": [
+        {
+          "version": "Before January 2014 V1.0",
+          "role": "no_independently_established_predecessor",
+          "language_status": "No earlier JIS publication independently established in JIS-001 catalog/history audit.",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "January 2014 VDV 301-2 V1.0 EN aggregate",
+          "role": "earliest_verified_historical_context",
+          "language_status": "EN p72-73 Table 49 explicitly lists all seven shared responses; separate DE 2014 aggregate not independently established.",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "July 2016 VDV 301-2-6 V1.0 DE standalone",
+          "role": "first_last_verified_standalone",
+          "language_status": "DE p11 Table 1 all seven responses, p22 §§1.23.2/1.24.2 explicit delegation; no separate EN standalone independently established.",
+          "source_ids": [
+            "JIS_V1.0"
+          ]
+        },
+        {
+          "version": "After standalone V1.0",
+          "role": "no_independently_established_successor",
+          "language_status": "VDV catalog checked 2026-11-25 in JIS-001 lists only standalone V1.0; no later edition verified.",
           "source_ids": [
             "JIS_V1.0"
           ]

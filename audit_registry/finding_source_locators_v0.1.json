@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 128,
-    "coverage_complete_count": 128,
+    "locator_entry_count": 129,
+    "coverage_complete_count": 129,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 64
+    "remaining_finding_count": 63
   },
   "entries": [
     {
@@ -26016,6 +26016,131 @@
         "Exact upstream VDV-301-1.0 JIS 1ee4d7aeb15f3269c5335313be9e214bdb519d2e (type-only) + IBIS_IP_V1.0.xsd 41289eaed2674a169fdf77a10a2eff293c76d5c4 (global roots/group) vs VDV-301-2.0/2.1/2.2 JIS 8c303db5a9c0548d66b90174d9c329d33092ad24: normalized 44/44 complex types identical, 31/31 root-name/type pairs identical, group identical. Common 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c and Enum a9bea5bc73003ed91ded8519db06c32c4067831d identical across tags. No fresh XML instance test, not a claim of whole aggregate equivalence.",
         "docs/pdf_xsd_semantic_audit/SUPERBRANCH_V1_0_DEDUP_POLICY.md explicitly selects later official self-contained JIS V1.0 packaging; strict archival reconstruction uses original tag. No SDK routing gap or payload constraint change established.",
         "Official VDV index https://www.vdv.de/ip-kom-oev.aspx accessed 2026-11-25 (cached crawl): only standalone JIS V1.0 listed. No independently established earlier standalone or later standalone version; EN 2014 aggregate is predecessor documentation, not additional standalone version. No independent DE 2014 aggregate or EN 2016 standalone verified."
+      ]
+    },
+    {
+      "finding_id": "JIS-002",
+      "service": "JourneyInformationService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_JourneyInformationService_V1.0.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact official JourneyInformationService V1.0 route. The seven Set* operations have JIS-local request structures while successful responses intentionally use the shared Common V1.0 DataAcceptedResponseStructure."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "1.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "JIS_V1.0",
+              "document_title": "VDV-Schrift 301-2-6 Dienst JourneyInformationService",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-6sds-v1-0.pdfx",
+              "sha256": "424181b4932e18b6ac059843fa3978fdcc07a9c6acb553f9fbe8b71ef583da73",
+              "printed_pages": [
+                11
+              ],
+              "section": "1.2 Operationen des JourneyInformationService",
+              "table": "Tabelle 1 – Beschreibung von Operationen des JourneyInformationService",
+              "point_summary": "All seven Set operations explicitly pair local request types with generic DataAcceptedResponseStructure, including both alternatives of the shared response type as defined by Common."
+            },
+            {
+              "source_id": "JIS_V1.0",
+              "document_title": "VDV-Schrift 301-2-6 Dienst JourneyInformationService",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-6sds-v1-0.pdfx",
+              "sha256": "424181b4932e18b6ac059843fa3978fdcc07a9c6acb553f9fbe8b71ef583da73",
+              "printed_pages": [
+                22
+              ],
+              "section": "1.23.2 Response / 1.24.2 Response",
+              "table": null,
+              "point_summary": "SetBlockNumber and SetTripRef detail responses explicitly refer to the general response structure in VDV 301-2-1; no local response type."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                72,
+                73
+              ],
+              "section": "9.6.1 Operations of JourneyInformationService",
+              "table": "Table 49 – Description of Operationen des JourneyInformationService",
+              "point_summary": "All seven Set operations use DataAcceptedResponseStructure; SetBlockNumber and SetTripRef request on p72, SetTripRef response at top p73, remaining five complete on p73, visible caption p73."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_JourneyInformationService_V1.0.xsd",
+              "git_blob": "8c303db5a9c0548d66b90174d9c329d33092ad24",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "group",
+              "component": "JourneyInformationServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='JourneyInformationServiceGroup']",
+              "line_hint": "33-39",
+              "point_summary": "Seven JIS-specific Set request entries, no corresponding Set response entries; same seven global roots and types at 301-349. Includes Common/Enum V1.0.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "DataAcceptedResponseStructure / DataAcceptedResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DataAcceptedResponseStructure' or @name='DataAcceptedResponseDataStructure']",
+              "line_hint": "882-895",
+              "point_summary": "Shared choice of DataAcceptedResponseData or OperationErrorMessage; data sequence TimeStamp and DataAccepted required, ErrorCode and ErrorInformation optional. Type is not a JIS-local root.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "group",
+              "component": "JourneyInformationServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='JourneyInformationServiceGroup']",
+              "line_hint": "98-104",
+              "point_summary": "Historical aggregate has same seven Set requests, no JIS-local response aliases; global request elements lines 65-71.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "element",
+              "component": "DataAcceptedResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='DataAcceptedResponse']",
+              "line_hint": "210",
+              "point_summary": "Historical generic global root explicitly typed DataAcceptedResponseStructure, distinct from the type name.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            }
+          ],
+          "coverage_note": "Intentional shared Common acknowledgement; same model independently visible in historical EN aggregate and DE standalone. The structure can carry an operation error or DataAccepted boolean; the type name does not imply unconditional success. Existing operational dedup route retained. No JIS-local response alias inferred."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_JIS_002_2026-11-27.md",
+        "EV-152 run 34113437268 SUCCESS rechecked, artifact 10015273758 ZIP SHA256 338e3fb679a8375c98fba359a3478d4cf7ba0968f3e97c08209ce52c0d23dc65 independently rechecked. DE original p11 SHA256 698a4c1099476acb970382172af6e8c7f3f0dcc42036babdd1b5d498ec31e741 (207400 bytes), p22 edbf46ad4beca13d4f6099c1f5e3556707b041ea1bc5c0cae0ab2258f183857b (270426 bytes), match EV-152 evidence and actually visually inspected 2026-11-27. No new EV-152 run.",
+        "JIS_V1.0 PDF SHA256 424181b4932e18b6ac059843fa3978fdcc07a9c6acb553f9fbe8b71ef583da73 size 772125; historical pin run 34103529949, artifact 10011459459, central pin registered in 3ee744d. No fresh raw PDF download.",
+        "VDV301-2_V1.0_EN SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 size 2403598; exact-source renderer run 45625180374 artifact 15026289022 ZIP SHA256 5d147d3241d23da58f1b29b37214ca4dc13201899b8093f56ec31b4e54a42559 rechecked; all four manifest PNG sizes and hashes verified. EN p72 SHA256 78eeea46be7aca63ebaca8fc68835cc20766f5b6e532e9895cecb36b5b3ec213, p73 1701b40312c76df09212e679774700d54b688984a46f8c33323ed7a261551a9d, both actually visually read. SetTripRef row split across pages; Table 49 caption p73.",
+        "Exact VDVde/VDV301 tag VDV-301-2.0 JIS 8c303db5a9c0548d66b90174d9c329d33092ad24 group lines 33-39 and globals/types 301-349, Common 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c types lines 882-895, Enum a9bea5bc73003ed91ded8519db06c32c4067831d. Tag VDV-301-1.0 JIS type-only 1ee4d7aeb15f3269c5335313be9e214bdb519d2e and aggregate 41289eaed2674a169fdf77a10a2eff293c76d5c4 lines 65-71,98-104,210; same Common/Enum. Both upstream trees rechecked 2026-11-27; JIS local group/globals only seven Set request declarations, no Set response aliases; historical aggregate declares generic DataAcceptedResponse. Existing JIS-001 structural equivalence and SUPERBRANCH_V1_0_DEDUP_POLICY.md retained.",
+        "JIS-001 boundary audit 2026-11-25 verified historical EN aggregate and DE standalone; VDV catalog checked then, no later standalone identified; no separate DE 2014 aggregate or EN 2016 standalone independently established. Rechecked actual JIS-002 response rows in each source, not extrapolated. No fresh catalog lookup in this pass.",
+        "Canonical semantic entry non_defect/no_runtime_diagnostic and no entry in runtime mapping; historical EV-152 confirms shared response model by structural assertions (not a dedicated positive/negative JIS-002 XML test)."
       ]
     }
   ]
