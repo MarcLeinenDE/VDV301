@@ -2127,7 +2127,7 @@
     "version_scope_boundary_latest_gate_run_id": 45997590764
   },
   "next_actions": [
-    "JIS-005 terminal_clean: GNSS choice name SpecificGNSSPointInformationData in EN January 2014 p78 Table 69 and DE July 2016 p17 Table 21 differs from exact historical/selected XSD element SpecificGNSSPointInformation, whose type retains Data suffix. EV-152 archived positive/negative evidence verified; selected XSD FAIL remains normative; no semantic, XSD or runtime changes. All five JIS findings structurally complete. 132/192 locators, 132 body and boundary verified, 60 remaining. Substantive schema #45997590764 and handoff #45997590777 SUCCESS on 23ca8281f65a78aa6e4737dcf9acce093894188f. Verify final HEAD gates, then reviewed private ai-mem PR. NEXT LS-001 NOT STARTED."
+    "LS-001 active: DE p7 Table 1 actual pinned EV-153 render visually verified, archived positive/negative samples and result verified. EN p70 Table 48 located in text; live screenshot cache miss. Pinned EN original render requested. Historical combined LocationService XSD contains same typo; 132/192 unchanged. Inspect EN body and exact historical/selected XSD scope, then registers and gates."
   ],
   "source_locator_progress": {
     "locator_entry_count": 132,
@@ -2205,12 +2205,23 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": 45997590764,
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": 45997590777,
-    "resume_instruction": "JIS-005 terminal_clean: GNSS choice name SpecificGNSSPointInformationData in EN January 2014 p78 Table 69 and DE July 2016 p17 Table 21 differs from exact historical/selected XSD element SpecificGNSSPointInformation, whose type retains Data suffix. EV-152 archived positive/negative evidence verified; selected XSD FAIL remains normative; no semantic, XSD or runtime changes. All five JIS findings structurally complete. 132/192 locators, 132 body and boundary verified, 60 remaining. Substantive schema #45997590764 and handoff #45997590777 SUCCESS on 23ca8281f65a78aa6e4737dcf9acce093894188f. Verify final HEAD gates, then reviewed private ai-mem PR. NEXT LS-001 NOT STARTED."
+    "resume_instruction": "LS-001 active: DE p7 Table 1 actual pinned EV-153 render visually verified, archived positive/negative samples and result verified. EN p70 Table 48 located in text; live screenshot cache miss. Pinned EN original render requested. Historical combined LocationService XSD contains same typo; 132/192 unchanged. Inspect EN body and exact historical/selected XSD scope, then registers and gates.",
+    "pending_block": "LS-001 original-body and version-boundary review",
+    "active_finding": "LS-001",
+    "active_step": "DE p7 original render hash and EV-153 archive checked; EN p70 fallback requested.",
+    "next_step": "Inspect EN fallback artifact and compare historical combined versus selected standalone GNSS declarations; persist locator/body/boundary evidence and run full gates.",
+    "evidence_refs": [
+      "EV-153 run 34229647400 artifact 10057222866 ZIP SHA256 914a1b126e8c06145fe0ccc896f4e2a85db5204a7562ad7dada21ad660fecff7; DE p7 SHA256 400ca6d9488609131a9fcab6ff024b7e8d310d972f48174d96cd7b429e5bce8e size 341322 visually checked.",
+      "tools/pdf_render_request_v0.1.json",
+      "EN p70 Table 48 located by text; VDV301-2_V1.0_EN SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 size 2403598; visual pending.",
+      "Historical combined LocationService blob 2a653ba7d35a6e91b5fd691eb5c606160192ab9e, GNSS root line 8 and typo line 20; selected GNSS blob a74a22079af25cdd028a3e519019d9b3326d9971 line 19."
+    ],
+    "recovery_instruction": "LS-001 active: DE p7 Table 1 actual pinned EV-153 render visually verified, archived positive/negative samples and result verified. EN p70 Table 48 located in text; live screenshot cache miss. Pinned EN original render requested. Historical combined LocationService XSD contains same typo; 132/192 unchanged. Inspect EN body and exact historical/selected XSD scope, then registers and gates."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
