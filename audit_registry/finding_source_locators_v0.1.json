@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 133,
-    "coverage_complete_count": 133,
+    "locator_entry_count": 134,
+    "coverage_complete_count": 134,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 59
+    "remaining_finding_count": 58
   },
   "entries": [
     {
@@ -26689,6 +26689,117 @@
         "EV-153 archived result SHA256 d0e25558f3b99390ae6742473e5b00d7de43de2c466d97aa8a5e16302fcea72e, positive sample fecf00bc529c4a0cdc60486cd14740525ce9010a95d3c3f3c15d2156889d9f67 size 369 and negative 781a02377aa78a458bab916e26780d33f94894425abcf377bbd13ef1c76a2822 size 367 verified. Only start/end name differs, result positive valid and negative rejected. Historical initial failed run 34229230088 caused by line-wrap text extraction, repaired without classification change. No new instance run or historical combined-schema compilation.",
         "Fresh VDV public catalog check 2026-11-27 https://www.vdv.de/ip-kom-oev.aspx lists GNSS 301-2-5 V1.0 only, January 2014 EN aggregate and DE base service link; no independently established separate DE 2014 aggregate or EN 2016 standalone, earlier/later standalone publication. DE p6 history records spelling corrections 11.03.2016 without identifying the affected field; cannot infer an authoritative correction to this XSD. No independent erratum confirming source attribution; conventional spelling supports likely XSD typo but classification remains cross_artifact_mismatch.",
         "Runtime mapping exact official GNSS V1.0 xsd_invalid_advisory, xsd_result_invalid, decorate_existing_invalid, reviewed_not_implemented. Optional HDOP absent does not trigger finding. Preserve invalid result, no normalization."
+      ]
+    },
+    {
+      "finding_id": "LS-002",
+      "service": "DistanceLocationService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DistanceLocationService_V1.0.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact official DistanceLocationService V1.0 route. Both PDF and XSD use the exact XML element name Odometer-Pulses."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "1.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "DLS_V1.0",
+              "document_title": "VDV-Schrift 301-2-4 Dienst DistanceLocationService",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-4sds-v1-0.pdfx",
+              "sha256": "bdcbb3b2188f109944d687e6511209c5f049f25e1770bb3f4df596542d5009c4",
+              "printed_pages": [
+                7
+              ],
+              "section": "1.2 Datenstrukturen",
+              "table": "Tabelle 1 Beschreibung von DistanceLocationService.Data",
+              "point_summary": "Odometer-Pulses on one line, optional 0:1 IBIS-IP.int; Distance 1:1 IBIS-IP.double. Heading and caption visually verified."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                70
+              ],
+              "section": "9.4 DistanceLocationService",
+              "table": "Table 47: Description of DistanceLocationService.Data",
+              "point_summary": "Odometer-Pulses on one line, optional 0:1 IBIS-IP.int; Distance 1:1 IBIS-IP.double. Table heading, body and caption visually verified on p70; section heading on p69 located by text."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DistanceLocationService_V1.0.xsd",
+              "git_blob": "e6fdc418b6ddaba75d3fbe8f048d1c6d70e023b6",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "element",
+              "component": "Odometer-Pulses",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DistanceLocationService.DataStructure']/xs:sequence/xs:element[@name='Odometer-Pulses']",
+              "line_hint": "16",
+              "point_summary": "Optional 0:1 IBIS-IP.int; no OdometerPulses alias.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_DistanceLocationService_V1.0.xsd",
+              "git_blob": "e6fdc418b6ddaba75d3fbe8f048d1c6d70e023b6",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "element",
+              "component": "DistanceLocationService.Data",
+              "xpath_hint": "/xs:schema/xs:element[@name='DistanceLocationService.Data']",
+              "line_hint": "7",
+              "point_summary": "Global root typed DistanceLocationService.DataStructure lines 9-18.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_LocationService_V1.0.xsd",
+              "git_blob": "2a653ba7d35a6e91b5fd691eb5c606160192ab9e",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "element",
+              "component": "Odometer-Pulses",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DistanceLocationService.DataStructure']/xs:sequence/xs:element[@name='Odometer-Pulses']",
+              "line_hint": "39",
+              "point_summary": "Same literal hyphen in historical combined schema; type lines 32-41.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS-IP_LocationService_V1.0.xsd",
+              "git_blob": "2a653ba7d35a6e91b5fd691eb5c606160192ab9e",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "element",
+              "component": "DistanceLocationService.Data",
+              "xpath_hint": "/xs:schema/xs:element[@name='DistanceLocationService.Data']",
+              "line_hint": "7",
+              "point_summary": "Identical Distance root/type; historical combined schema also contains GNSS and Beacon declarations.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            }
+          ],
+          "coverage_note": "DistanceLocationService V1.0 PDF EN January 2014 p70 Table 47 (§9.4) and DE July 2016 p7 Table 1 (§1.2) both print Odometer-Pulses, optional 0:1 IBIS-IP.int; historical combined LocationService and selected standalone Distance XSD declare identical exact name/type/cardinality. EV-153 confirms hyphenated name PASS, normalized OdometerPulses FAIL. Preserve XML identifier literally; non_defect, selected_xsd, no_runtime_diagnostic unchanged; no alias, XSD or runtime change. Historical split is packaging-only for Distance root/type. Catalog contains only standalone V1.0. No new EV-153 instance execution."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_LS_002_2026-11-27.md",
+        "EV-153 run 34229647400 SUCCESS on 45eeed958b3f7f1081f19d6858e54a27824c682f, artifact 10057222866 ZIP SHA256 914a1b126e8c06145fe0ccc896f4e2a85db5204a7562ad7dada21ad660fecff7 size 1077575; all 25 manifest entries independently rechecked. DE original p7 PNG SHA256 5ba0c63b9343c55e108b8741e5ee7eadeb1ae036b97045e335992ca4f195af7d size 130087 visually inspected.",
+        "Historical DLS_V1.0 pin run 34228583786 job 102068710920 artifact 10056787340 ZIP SHA256 ddbcc1774639c3d57a5cdf8efbc5f213a107f804d303cf11af520f5b1d66fe8e; all 21 manifest entries reverified after removing archive path prefix; pin-results and pdfs.sha256 agree on source SHA256 bdcbb3b2188f109944d687e6511209c5f049f25e1770bb3f4df596542d5009c4 size 441422 retrieved 2026-09-08T12:52:56Z. DLS p7 PNG byte-identical between archives. Historical pin added centrally; no new DE raw PDF download.",
+        "Reused LS-001 EN exact-source render run 45998400696 SUCCESS artifact 15196079487 ZIP SHA256 4f155f21baf073d7ca647d6fa252c0bb02abd1a98a178b106d0f946e51925b6e; source VDV301-2_V1.0_EN SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 size 2403598; p70 PNG a53bb9ed4e53bd4dcfd5cfeee8859a57841c2efc30dd1aadde57ff66ea2ba161 size 313736 rechecked against manifest and visually inspected specifically at Table 47. Both live PDF screenshot requests cache-miss; archived exact originals used.",
+        "Exact official VDV-301-1.0 historical combined IBIS-IP_LocationService_V1.0.xsd blob 2a653ba7d35a6e91b5fd691eb5c606160192ab9e root line 7, type lines 32-41, Odometer-Pulses line 39; selected VDV-301-2.0 standalone IBIS-IP_DistanceLocationService_V1.0.xsd blob e6fdc418b6ddaba75d3fbe8f048d1c6d70e023b6 root line 7, type lines 9-18, Odometer-Pulses line 16. Actual selected branch blob identical. Root declaration and complete two-field type including annotation identical after whitespace/line-ending normalization. Prior LS-001 upstream tree checks confirm tags 2.1/2.2/2.3/master same Distance and Common/Enum blobs; no new tag inspection. Common 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c and Enum a9bea5bc73003ed91ded8519db06c32c4067831d. No claim of whole combined-schema equivalence.",
+        "EV-153 archived result SHA256 d0e25558f3b99390ae6742473e5b00d7de43de2c466d97aa8a5e16302fcea72e, positive sample eff4890c820958bf6dd7fc6c7c9e81a56153bb20f36b0ce6d327f1a45efcd2f5 size 154, negative d78cfe545df24418680ead36f339e9c09fff626d4d7b6b6c4104c478e8c6d4f3 size 152. Diff confirms only start/end tag spelling differs, same Distance=12.5 and pulse Value=42; positive valid, normalized alias rejected; archived error expected Odometer-Pulses. No new instance run or historical combined-schema compilation.",
+        "VDV catalog https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-27: Distance 301-2-4 standalone V1.0 only, January 2014 EN aggregate and DE base service link; no independently established separate DE 2014 full aggregate or EN 2016 standalone, earlier/later standalone publication. DE p4 foreword identifies separation from January 2014; p6 version history empty by text. No official successor or spelling correction established.",
+        "Active disproof: both PDF rows carry literal hyphen on one line, exact historical and selected XSDs agree. Not a wrap artifact or inconsistent translation. Optional field may be absent; no invented normalized alias or new advisory. Language-specific identifiers may differ from XML names only with explicit mapping. Runtime semantic entry is not_applicable, no_runtime_diagnostic; no matching runtime activation exists."
       ]
     }
   ]
