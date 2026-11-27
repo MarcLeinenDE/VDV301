@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 136,
-    "verified_current_standard": 136,
+    "tracked_findings": 137,
+    "verified_current_standard": 137,
     "pending_current_standard": 0
   },
   "entries": [
@@ -1491,6 +1491,19 @@
         "Active disproof: title, bilingual foreword, corresponding German scope, English same-page footer and surrounding scope content establish local self-reference, not alternative external authority. DRNET20-002 on same page concerns Figure 1 translation, not this paragraph. No XSD lane for this physical/network/protocol document, no runtime mapping, no hardware or executable validation claim; full XSD gate regression only. Existing semantic/diagnostic and source-pin records unchanged."
       ],
       "note": "Exact original p7 §1 Anwendungsbereich and p8 §1 Scope first paragraphs, same-page footer, cover, p4 bilingual foreword and p31 history visually inspected; all source render and archive hashes verified."
+    },
+    {
+      "finding_id": "NET-002",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_NET_002_2026-11-27.md",
+        "Source pin VDV301-3_02-2020 SHA256 edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99 size 558005, 37 pages; reused local archives from NET-001, independently rehashed this review. Historical run 33270251357 artifact 9719880284 ZIP SHA256 2cc403407a354af07c2dfc1cc78666e0f16fc753af6eebfaf090b0300214d930, all 37 PNG hashes and fulltext SHA256 dd6ecfa0d78f0a00b86557aa2e3694883431fc6a7a1d5a92b4663981996a3276 match manifest. Fresh pin run 34232022618 artifact 10058187809 ZIP SHA256 5f978eccdddf1d20cd6b62b4798bceae12b11438a4cbf59d9d5a98611a17421a; all 26 manifest entries verified. No new raw PDF retrieval.",
+        "EV-154 run 34232483234, artifact 10058380451 ZIP SHA256 dcb266cad68054375d65818fda20d7ec53c59843a48525d60b3ade62f5c38396. All seven render hashes/sizes match result and are byte-identical to fresh pin archive. Visually inspected original p6 180dpi SHA256 f48e04a4663ce0e3d6175176074e971948630d223564f2b8c7e2636c4cb0a98e (230957 bytes), p14 709480cd89494e6da2c9ea590c7826d8c17ec6ce5be1360ce89a54ce70c90a77 (311919), p20 30b8f5d5139833ada803a58c9cff112c1f0273f1ff892363380963897edf1b16 (285445). No new EV-154 execution.",
+        "Historical 120dpi visual controls: p5 TOC 25b64a568cb3419f0cb4f07323e2c7de1e2d128be577287eaaba40b1dcf6da1a; p13 prior DE heading 0becf52b6a86c677e22132bd85ee711493e2c3fe5fb51fc8aa6c411d2ffc721b; p19 prior EN heading 30958f0e276fbc75c3f85372fe17c13e5fd03579d9d4f24cb3f3ef2de569d4d7; p15 DE Figure4 27d423c2edeec8251b69cdaebeb3f44b2f7930c6376a920549cb6462f2e78ae4; p21 EN Figure4 d1b56e39cde5e240004924683ba195fc03d7bb08f2fa647995998da3d4ca52a8; p31 empty version history 7eb51a5a8daac0ecbea9c8404ca7997220297a35832991abb7400c53bb630029. Each actually visually inspected. Live official PDF screenshot p14 successful, p20 cache miss; exact pinned archived images decisive.",
+        "Both independent archived fulltext extracts contain two occurrences each of 2.3.4 and 2.3.5 (TOC + corresponding body). Both preceding subsections §2.3.3 and subsequent Figure4 correspond; DE and EN paragraph content and five diagram examples/marks match. No inference of omitted technical requirements or technical equivalence of entire bilingual publication. The paragraph recommendations are not upgraded into normative hardware rules.",
+        "Official VDV catalog https://www.vdv.de/ip-kom-oev.aspx checked again 2026-11-27 lists only dedicated 301-3 02/2020. Prior NET-001 same-day annual-report evidence (2020/2021 report identifies 02/2020 as new publication) reused, no new annual report retrieval. p31 history empty visually confirmed. DE unaffected numbering control and EN affected in same publication; no separate earlier or corrected later edition independently established. No XSD lane, no runtime matching or hardware validation, full gate regression only."
+      ],
+      "note": "Actual p14/20 headings and paragraph content, pp5/6 TOC, pp13/19 preceding headings and pp15/21 Figure4 directly visually checked; p31 history checked."
     }
   ]
 }
