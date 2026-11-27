@@ -1165,6 +1165,46 @@ def main() -> int:
                 f"{fid} retains exactly one V2.4 non-affected correction boundary",
             )
 
+    # NET-003 bilingual scope correction, 2026-11-27. Historical
+    # EV-154 subset did not include EN p17; retain both verified bodies.
+    net003 = loc_by.get("NET-003")
+    if net003:
+        require(
+            len(net003["coverage"]) == 1
+            and net003["coverage"][0]["authority"] == "documentation_only"
+            and not net003["coverage"][0]["xsd_locators"],
+            "NET-003 retains one bilingual documentation-only edition without XSD lane",
+        )
+        expected_bodies = {
+            (11, "2.2.4 Lichtwellenleiter LWL"),
+            (17, "2.2.4 Fibre optic cable LWL"),
+        }
+        actual_bodies = {
+            (page, p["section"])
+            for p in net003["coverage"][0]["pdf_locators"]
+            if p["source_id"] == "VDV301-3_02-2020"
+            for page in p["printed_pages"]
+        }
+        require(
+            expected_bodies <= actual_bodies,
+            "NET-003 retains both visibly verified affected DE and EN fibre paragraphs",
+        )
+        require(
+            "NET-003" not in runtime_by and "DRNET20-003" not in runtime_by,
+            "NET-003 and DRNET20-003 have no runtime matcher",
+        )
+        residue = loc_by.get("DRNET20-003")
+        require(
+            residue is not None
+            and {
+                page
+                for c in residue["coverage"]
+                for p in c["pdf_locators"]
+                for page in p["printed_pages"]
+            } == {18, 19, 29},
+            "DRNET20-003 retains exactly its three residue target pages, excluding NET-003",
+        )
+
     counts = m["counts"]
     require(
         counts["locator_entry_count"] == len(m["entries"]),

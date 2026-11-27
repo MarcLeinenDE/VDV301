@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 137,
-    "verified_current_standard": 137,
+    "tracked_findings": 138,
+    "verified_current_standard": 138,
     "pending_current_standard": 0
   },
   "entries": [
@@ -1082,7 +1082,8 @@
         "Original visually inspected English p18 2.3.1 Connection methodes PNG SHA 180dpi 4f88120a8720f5f41de4d3a1d80b155f80784b0e0df46fc3fd871bf7ee284743/120dpi 9d676b43d4da26a9e7c5cee3ac7479b0eeedbe47685c0e478f29fe914311879a; p19 2.3.2 Table1 EN13149-8 Not describede row PNG fb27d1c65056d7fb7dbbbc038e2eeae8f48bb287430dd6825387e4a6fa7e27b1/30958f0e276fbc75c3f85372fe17c13e5fd03579d9d4f24cb3f3ef2de569d4d7; German p29 §5 PoE 'in de IEEE 802.3af/at/bt' PNG 2d29469bf5e5a5ba63e92f9cc8461200d703d46a9f11e710ca356cd09283ecd2/74c6ed20c4b7672121d65ba31b8cef62ab22d5b45285afb36d8eeebd071d8b7f. Both resolutions matched authoritative per-page manifests.",
         "Historical separate NET-003 exclusion corroborated by original German p11 §2.2.4 'IEE 802.3', 120dpi PNG 0a5e0b6c5a89422a940567e8686f7183d3b430b831aa18b686ea8825a5b4107f, independently matched full original manifest; NET-003 is not a new DRNET20-003 locator/credit.",
         "Live official VDV publication index https://www.vdv.de/ip-kom-oev.aspx rechecked 2026-11-20: only dedicated VDV301-3 02/2020 edition independently evidenced, bilingual English p18/p19 and German p29, no independent predecessor/corrected successor.",
-        "EV-144 context_verified successful run34025645375 and closure34025824480; archived deep read docs/pdf_xsd_semantic_audit/deep_read/VDV301-3_02-2020.md. No XSD lane and no new XML or runtime test."
+        "EV-144 context_verified successful run34025645375 and closure34025824480; archived deep read docs/pdf_xsd_semantic_audit/deep_read/VDV301-3_02-2020.md. No XSD lane and no new XML or runtime test.",
+        "2026-11-27 NET-003 correction: both DE p11 and EN p17 §2.2.4 IEE 802.3 belong to NET-003, not DRNET20-003. Latter remains exactly three residue targets pp18/19/29; prior p11-only exclusion remains historical evidence. See docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_NET_003_2026-11-27.md."
       ],
       "note": "Fresh actual visible PDF-body original SHA-verified EV144 180dpi images (and full-run 120dpi) p18 English §2.3.1 heading Connection methodes, p19 §2.3.2 actual Table1 column EN13149-8 cell Not describede vs nearby Not described, p29 German §5 PoE in de IEEE 802.3af/at/bt, plus source-pinned p11 original separate IEE 802.3 NET-003 exclusion only. Original bytes inherited from pinned render, not newly downloaded. No XSD lane."
     },
@@ -1504,6 +1505,20 @@
         "Official VDV catalog https://www.vdv.de/ip-kom-oev.aspx checked again 2026-11-27 lists only dedicated 301-3 02/2020. Prior NET-001 same-day annual-report evidence (2020/2021 report identifies 02/2020 as new publication) reused, no new annual report retrieval. p31 history empty visually confirmed. DE unaffected numbering control and EN affected in same publication; no separate earlier or corrected later edition independently established. No XSD lane, no runtime matching or hardware validation, full gate regression only."
       ],
       "note": "Actual p14/20 headings and paragraph content, pp5/6 TOC, pp13/19 preceding headings and pp15/21 Figure4 directly visually checked; p31 history checked."
+    },
+    {
+      "finding_id": "NET-003",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_NET_003_2026-11-27.md",
+        "Source VDV301-3_02-2020 SHA256 edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99 size 558005, 37 pages; reused local archives, independently rehashed. Historical run 33270251357 SUCCESS artifact 9719880284 ZIP SHA256 2cc403407a354af07c2dfc1cc78666e0f16fc753af6eebfaf090b0300214d930 size 4431133; fulltext SHA256 dd6ecfa0d78f0a00b86557aa2e3694883431fc6a7a1d5a92b4663981996a3276 and 37 PNG hashes verified. Fresh pin run 34232022618 SUCCESS artifact 10058187809 ZIP SHA256 5f978eccdddf1d20cd6b62b4798bceae12b11438a4cbf59d9d5a98611a17421a size 1816277; 26 manifest entries verified, full-text.txt SHA256 37441c55979a7676c033aed6c7fdc4469589ed3091eab3acb10ef8ec00d50b1b. Both fulltexts contain two exact word-boundary IEE 802.3 matches (DE p11 and EN p17), eleven IEEE 802.3 matches including suffixed references. No new raw PDF retrieval.",
+        "EV-154 run 34232483234 SUCCESS on 3645ddfeb32effd0b17432672ab91476e1accdf8 artifact 10058380451 ZIP SHA256 dcb266cad68054375d65818fda20d7ec53c59843a48525d60b3ade62f5c38396 size 1797394; ev154-result.json SHA256 43f22a890a20322499a4d1cf1fab3a9f4bb63593ead23c4f896371e1b98b89ad. All seven render hashes/sizes match archived result and fresh pin archive. Historical NET-003 result inspected p7/8/11/29, did not render p17; remains valid for narrower observation. No new EV-154 execution. EN evidence is historical full-page archive, not EV-154 subset.",
+        "Actual visible affected DE p11 §2.2.4 180dpi SHA256 91bfa3416a4193d1ec2aadce859aec85708fb8d113f0e2167728c7886c3ccb2f size 356200; EN p17 §2.2.4 120dpi SHA256 c2272f6b9fa56869cda4a00195e6320ed32b6b87ce9f23c27e97d49fd8d00680, verified against historical manifest. Both second paragraphs contain IEE 802.3; preceding EN §2.2.3 correctly uses IEEE 802.3. Live screenshots p11 and p17 cache miss; reused exact pinned original renders.",
+        "Visible same-document controls: p7 §1 Anwendungsbereich 180dpi be9c6c96cab9989dd79c6e5a58b62f170fcbe62450444c87707b186a68706e1e; p8 §1 Scope 180dpi 1a50ca1b7db00fe9f7e2f8eb97e197c627ce99fd9dc429; p10 §2.2.3 Leitungen auf Kupferbasis 120dpi 51cb3352eec2597e9f94401fcdfaec5882f909bbb21f9e8b7efb5ee9cf29b9c6; p29 both §5 PoE 180dpi 2d29469bf5e5a5ba63e92f9cc8461200d703d46a9f11e710ca356cd09283ecd2; p32 actual heading Regelwerke – Normen und Empfehlungen / References 120dpi 08e3849e873bf312a370c44f455487a44781183602dfb25d5be35aa33865d812 and continuing p33 item (12) IEEE 802.3 IEEE Standard for Ethernet 120dpi f985e4e2481667f90a740eaf9606ff15b4579d5f8a4be69e2d2cc7b9f68742a7; p31 empty §7 history 120dpi 7eb51a5a8daac0ecbea9c8404ca7997220297a35832991abb7400c53bb630029. No specific dated IEEE standard edition inferred.",
+        "Official VDV catalog https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-27: dedicated 301-3 only 02/2020 listed; same-day NET-001 annual-report evidence reused. One bilingual publication; both affected tracks; no independently established separate earlier or corrected later edition. Prior reports and frozen finding/provenance baseline preserved.",
+        "Cross-finding scan: all 192 semantic entries, all 137 existing locator/body/boundary entries and all runtime mappings searched for IEE 802.3 or NET-003 references. Only NET-003 and DRNET20-003 semantic entries and latter existing locator/body/boundary entries match; no runtime matcher. Clarify DRNET20-003 exclusion of both DE/EN occurrences, preserve actual p18/19/29 targets and prior evidence; p29 NET-003 positive spelling control only. Regression guard requires both affected NET-003 body locators, unchanged DRNET20-003 target pages, no runtime mapping, no XSD lane. Scope correction creates no new identity or extra progress credit; historical EV-144/EV-154 records untouched."
+      ],
+      "note": "Visible byte-pinned DE p11 and EN p17 §2.2.4 both affected; correct IEEE controls pp7/8/10/17/29 and reference pp32/33 inspected; p31 history inspected. Reconciled historical German-only target description."
     }
   ]
 }

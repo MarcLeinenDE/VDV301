@@ -10352,20 +10352,20 @@
         },
         {
           "type": "technical_inference",
-          "note": "These are editorial/spelling defects without a credible executable semantic effect. The separate page-11 'IEE 802.3' item remains historical NET-003 and is deliberately excluded from this grouped finding."
+          "note": "These editorial/spelling defects have no credible executable semantic effect. Both corresponding DE p11 and EN p17 IEE 802.3 occurrences belong to historical NET-003 and are deliberately excluded from this grouped finding."
         }
       ],
       "diagnostic": {
         "de": {
           "title": "VDV 301-3 02/2020: gruppierte redaktionelle Restfehler",
           "short": "Die Publikation enthält mehrere bestätigte Schreib- und Redaktionsfehler ohne ausführbare Auswirkung.",
-          "long": "Auf den geprüften Seiten 18, 19 und 29 verbleiben unter anderem die Formulierungen 'Connection methodes', 'Not describede' und 'in de IEEE 802.3af/at/bt'. Diese Fehler werden bewusst als ein redaktioneller Restblock geführt. Der separate Fehler 'IEE 802.3' auf Seite 11 gehört weiterhin zum historischen Finding NET-003 und wird hier nicht doppelt klassifiziert.",
+          "long": "Auf den geprüften Seiten 18, 19 und 29 verbleiben unter anderem die Formulierungen 'Connection methodes', 'Not describede' und 'in de IEEE 802.3af/at/bt'. Diese Fehler werden bewusst als ein redaktioneller Restblock geführt. Die beiden entsprechenden Fehler 'IEE 802.3' auf Seite 11 (DE) und 17 (EN) gehören weiterhin zum historischen Finding NET-003 und werden hier nicht doppelt klassifiziert.",
           "recommendation": "Nur als Dokumentationshinweis führen und die Abgrenzung zu NET-003 beibehalten. Keine Runtime- oder XSD-Diagnostik erzeugen."
         },
         "en": {
           "title": "VDV 301-3 02/2020: grouped residual editorial errors",
           "short": "The publication contains several confirmed spelling/editorial errors with no executable effect.",
-          "long": "The checked pages 18, 19, and 29 retain wording including 'Connection methodes', 'Not describede', and 'in de IEEE 802.3af/at/bt'. These are intentionally kept as one grouped editorial-residue finding. The separate page-11 'IEE 802.3' item remains historical finding NET-003 and is not classified twice here.",
+          "long": "The checked pages 18, 19, and 29 retain wording including 'Connection methodes', 'Not describede', and 'in de IEEE 802.3af/at/bt'. These are intentionally kept as one grouped editorial-residue finding. Both corresponding 'IEE 802.3' occurrences on pages 11 (DE) and 17 (EN) belong to historical finding NET-003 and are not classified twice here.",
           "recommendation": "Keep this as documentation guidance only and preserve the deduplication boundary to NET-003. Do not create runtime or XSD diagnostics."
         }
       },
@@ -10393,9 +10393,14 @@
           "kind": "evidence",
           "reference": "EV-144 / run 34025645375 / closure run 34025824480 / audit_registry/network_v20_revalidation_evidence_2026-09-06.json",
           "note": "Persisted Network V2.0 revalidation evidence; historical NET-003 remains separate."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_NET_003_2026-11-27.md",
+          "note": "NET-003 bilingual scope correction clarifies exclusion of both fibre-section occurrences; three residue targets unchanged."
         }
       ],
-      "notes": "Grouped documentation-only residue. No executable effect is claimed, and the historical NET-003 finding is deliberately not duplicated."
+      "notes": "Grouped documentation-only residue. No executable effect is claimed; both corresponding DE p11 / EN p17 NET-003 occurrences deliberately not duplicated."
     },
     {
       "finding_id": "DRS-001",
@@ -13514,7 +13519,7 @@
           "version": "VDV 301-3 02/2020",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "Official VDV 301-3 Network Infrastructure publication. This profile intentionally has no XSD lane; the finding is a local standard-name spelling error in documentation."
+          "note": "Official bilingual VDV 301-3 Network Infrastructure 02/2020 publication. Both German p11 and English p17 §2.2.4 contain the same local standard-name spelling error. Intentionally no XSD lane."
         }
       ],
       "review_state": "manually_reviewed",
@@ -13537,25 +13542,25 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "German page 11 visibly prints IEE 802.3, while the same exact official publication uses IEEE 802.3 correctly elsewhere, including pages 7/8 and the IEEE 802.3af/at/bt PoE reference on page 29."
+          "note": "German p11 and English p17 §2.2.4 visibly print IEE 802.3. The same byte-pinned publication correctly uses IEEE 802.3 on pp7/8/10 and preceding §2.2.3 on the same English p17, IEEE 802.3af/at/bt on p29 and reference (12) on p33. Both archived fulltexts contain two IEE 802.3 occurrences."
         },
         {
           "type": "technical_inference",
-          "note": "The same-document correct spellings actively disprove an intentional alternate abbreviation. The page-11 form is therefore a local editorial typo with no executable semantic effect."
+          "note": "Correct same-document spellings, especially adjacent English §2.2.3, actively disprove intentional alternate abbreviation. Two corresponding bilingual occurrences are one editorial defect with no executable semantic effect. Earlier EV-154 covered the German occurrence; English occurrence additionally visually verified in historical full-page render."
         }
       ],
       "diagnostic": {
         "de": {
           "title": "VDV 301-3 02/2020: IEE 802.3 statt IEEE 802.3",
-          "short": "Auf Seite 11 steht einmal IEE 802.3; dieselbe Veröffentlichung verwendet IEEE 802.3 an anderen Stellen korrekt.",
-          "long": "NET-003 ist ein bestätigter lokaler Schreibfehler der Dokumentation. Auf der deutschen Seite 11 steht sichtbar IEE 802.3. Dieselbe byte-gepinnte Veröffentlichung verwendet an anderen Stellen korrekt IEEE 802.3, darunter im allgemeinen Kontext auf den Seiten 7/8 sowie als IEEE 802.3af/at/bt in der PoE-Passage auf Seite 29. Eine absichtliche alternative Abkürzung ist damit aktiv widerlegt.",
-          "recommendation": "Die Stelle als IEEE 802.3 interpretieren und den Fehler nur als Dokumentationshinweis führen. Daraus keine technische Aliasregel, keine XSD-Regel und keine Runtime-Diagnostik erzeugen."
+          "short": "Auf Seite 11 (DE) und 17 (EN) steht jeweils IEE 802.3; dieselbe Veröffentlichung verwendet IEEE 802.3 an anderen Stellen korrekt.",
+          "long": "NET-003 ist ein bestätigter Schreibfehler in beiden Sprachfassungen. Im deutschen und englischen §2.2.4 (S. 11 bzw. 17) steht sichtbar IEE 802.3. Dieselbe byte-gepinnte Veröffentlichung verwendet IEEE 802.3 korrekt auf S. 7/8 und 10 sowie im unmittelbar vorhergehenden englischen §2.2.3 auf S. 17; S. 29 nennt IEEE 802.3af/at/bt, der Normenverweis (12) auf S. 33 IEEE 802.3. Eine absichtliche alternative Abkürzung ist damit widerlegt; beide Stellen gehören zum selben Finding.",
+          "recommendation": "Beide Stellen als IEEE 802.3 interpretieren und den Fehler nur als Dokumentationshinweis führen. Daraus keine technische Aliasregel, keine XSD-Regel und keine Runtime-Diagnostik erzeugen."
         },
         "en": {
           "title": "VDV 301-3 02/2020: IEE 802.3 instead of IEEE 802.3",
-          "short": "Page 11 contains IEE 802.3 once; the same publication correctly uses IEEE 802.3 elsewhere.",
-          "long": "NET-003 is a confirmed local documentation spelling error. German page 11 visibly prints IEE 802.3. The same byte-pinned publication correctly uses IEEE 802.3 elsewhere, including the general context on pages 7/8 and the IEEE 802.3af/at/bt PoE reference on page 29. An intentional alternate abbreviation is therefore actively disproved.",
-          "recommendation": "Interpret the reference as IEEE 802.3 and retain the issue as documentation guidance only. Do not create a technical alias rule, XSD rule, or runtime diagnostic from this finding."
+          "short": "Pages 11 (DE) and 17 (EN) each contain IEE 802.3; the same publication correctly uses IEEE 802.3 elsewhere.",
+          "long": "NET-003 is a confirmed documentation spelling error in both languages. German and English §2.2.4 (pp11 and 17) visibly print IEE 802.3. The same byte-pinned publication correctly uses IEEE 802.3 on pp7/8/10 and preceding English §2.2.3 on p17, IEEE 802.3af/at/bt on p29 and IEEE 802.3 in reference (12) on p33. Intentional alternate abbreviation is disproved; both occurrences belong to the same finding.",
+          "recommendation": "Interpret both references as IEEE 802.3 and retain the issue as documentation guidance only. Do not create a technical alias rule, XSD rule, or runtime diagnostic from this finding."
         }
       },
       "runtime_match": {
@@ -13577,9 +13582,14 @@
           "kind": "pdf",
           "reference": "VDV301-3_02-2020 / sha256 edfedf36eeb18075b45bf5224f0da6500cdd489438091f18bada42f9668c2a99 / physical pages 7,8,11,29",
           "note": "Exact publication bytes showing the page-11 typo and correct IEEE spellings elsewhere."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_NET_003_2026-11-27.md",
+          "note": "2026-11-27 correction: both bilingual affected body locations independently visually verified; historical EV-154 narrower target scope preserved."
         }
       ],
-      "notes": "Documentation-only local spelling typo. No XSD lane exists for VDV 301-3 and no executable diagnostic is warranted."
+      "notes": "Documentation-only local spelling defect repeated in corresponding DE/EN fibre paragraphs of one edition. Historical German-only description was incomplete; corrected language coverage, no classification or runtime change. No XSD lane."
     },
     {
       "finding_id": "PCS-001",
