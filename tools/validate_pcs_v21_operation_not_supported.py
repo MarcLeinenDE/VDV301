@@ -63,6 +63,10 @@ def main() -> int:
            attributeFormDefault="unqualified">
   <xs:include schemaLocation="IBIS-IP_PassengerCountingService_V2.1.xsd"/>
   <xs:element name="TestStartCountingResponse" type="DataAcceptedResponseStructure"/>
+  <xs:element name="TestStopCountingResponse" type="DataAcceptedResponseStructure"/>
+  <xs:element name="TestGetCountingStateResponse" type="PassengerCountingService.GetCountingStateResponseStructure"/>
+  <xs:element name="TestSubscribeCountingStateResponse" type="SubscribeResponseStructure"/>
+  <xs:element name="TestUnsubscribeCountingStateResponse" type="UnsubscribeResponseStructure"/>
 </xs:schema>
 '''
 
@@ -120,6 +124,49 @@ def main() -> int:
             print("ERR exact route unexpectedly accepts OperationNotSupported")
             errors += 1
 
+        # Operation-specific synthetic roots: the selected service declares
+        # operation members locally, not five independent global roots.
+        # Compare actual enum fields, not free-text Value content.
+        response_contexts = {
+            "StopCounting": (
+                "<DataAcceptedResponseData><TimeStamp><Value>2026-01-01T00:00:00Z</Value></TimeStamp>"
+                "<DataAccepted><Value>false</Value></DataAccepted>"
+                "<ErrorCode>{code}</ErrorCode></DataAcceptedResponseData>"
+            ),
+            "GetCountingState": "<ErrorMessage><Value>Unavailable</Value><ErrorCode>{code}</ErrorCode></ErrorMessage>",
+            "SubscribeCountingState": "<OperationErrorMessage><Value>Unavailable</Value><ErrorCode>{code}</ErrorCode></OperationErrorMessage>",
+            "UnsubscribeCountingState": "<OperationErrorMessage><Value>Unavailable</Value><ErrorCode>{code}</ErrorCode></OperationErrorMessage>",
+        }
+        for operation, body in response_contexts.items():
+            root = f"Test{operation}Response"
+            for value, expected in (("DataNotValid", True), ("OperationNotSupported", False)):
+                xml = f"<{root}>" + body.format(code=value) + f"</{root}>"
+                ok, msg = validate(exact_schema, xml)
+                # Prove targeted enum rejection, not an unrelated shape failure.
+                if ok != expected or (not expected and (
+                    "SCHEMAV_CVC_ENUMERATION_VALID" not in msg or value not in msg
+                )):
+                    print(f"ERR {operation} {value}: {msg}")
+                    errors += 1
+                else:
+                    print(f"OK  {operation} {value}: expected {expected}")
+        # A literal in the Value of IBIS-IP.string is not an enum lexeme.
+        for operation, field in (
+            ("StartCounting", "OperationErrorMessage"),
+            ("StopCounting", "OperationErrorMessage"),
+            ("GetCountingState", "ErrorMessage"),
+            ("SubscribeCountingState", "OperationErrorMessage"),
+            ("UnsubscribeCountingState", "OperationErrorMessage"),
+        ):
+            root = f"Test{operation}Response"
+            xml = f"<{root}><{field}><Value>OperationNotSupported</Value></{field}></{root}>"
+            ok, msg = validate(exact_schema, xml)
+            if not ok:
+                print(f"ERR {operation} free-text Value: {msg}")
+                errors += 1
+            else:
+                print(f"OK  {operation} free-text Value is not the enum")
+ 
         control_path = tmpdir / "_enum_v21_control.xsd"
         control_path.write_text(control_harness, encoding="utf-8")
         control_schema = etree.XMLSchema(etree.parse(str(control_path)))
