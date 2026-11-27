@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 140,
-    "coverage_complete_count": 140,
+    "locator_entry_count": 141,
+    "coverage_complete_count": 141,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 52
+    "remaining_finding_count": 51
   },
   "entries": [
     {
@@ -28879,6 +28879,281 @@
         "PCS V2.1 07/2018 successor context only: exact raw PDF SHA256 572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043 size 1084925, 22 pages, EV-155 archive rehashed; re-rendered with same exact renderer at 150dpi, visually inspected p10 58e9627aacb24f9f779844a570d32496cc0ef60f1099cc0f85c008932d9e7754 (157874), p11 324173e11cf43bad92a611ba0fbf7f7203f1e6cffce94893d7b9561900901d7b (151512), p12 e78a09a80e93810f8a39a32c5351ab48d2ab00fb4b94e324b1fdd17b86af7f71 (196512). Table 1 adds five optional operations; original response choices remain correct in Tables 2/5, separate PCS-001 retained. Exact official PCS V2.1 has same four global roots, group expands to 20 local members. No claim that V2.1 has all 20 global roots or whole V1.0 and V2.1 payload contracts are equal. 2.1/2.2/2.3/master trees rechecked: only V2.1 PCS service filename, identical 59ef2ddb09b92db0d492974e38bad5b6be03865e and exact Common/Enums V1.0; 2.4 tag previously 404 on same day. Catalog reviewed in same-day PCS-001: only V1.0 and V2.1 standalone, earlier EN 2014 aggregate, no independently established separate DE 2014 aggregate or later standalone. Technical sections EN in bilingual standalone PDFs; no separate language equivalence claim.",
         "Exact upstream VDV-301-1.0 service blob 600a3ee6290c630a4435fb06ca9803dabaceb788 lines 5–6, 10–64 (six named PCS payload types, no global PCS roots/group); umbrella 41289eaed2674a169fdf77a10a2eff293c76d5c4 line 14 includes service, lines 178–181 four global roots and 182–189 group; lines 207–210 generic roots. VDV-301-2.0 same service version self-contained blob 4161872be76740abfdd1cddf96f8a736333fc8be group lines 9–16, roots 19,36,49,66. Operational branch exact blob matches. All six full named type bodies including annotations compare equal after whitespace/line-ending normalization, four global root/name-type pairs and group equal, identical Common V1.0 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c and Enumerations V1.0 a9bea5bc73003ed91ded8519db06c32c4067831d in both official tags. This is scoped PCS equivalence, not byte equivalence of complete aggregate and standalone or proof of arbitrary global root acceptance. SUPERBRANCH_V1_0_DEDUP_POLICY.md remains unchanged.",
         "Separate unadjudicated historical PDF observation, not PCS-002 scope: EN 2014 p85 §9.8.2.2 Table 96 prints Data and ErrorMessage instead of XSD AllData and OperationErrorMessage; p86 §9.8.5.2 Table 99 prints Data typed PassengerCountingService.AllData while adjacent Table 100 describes SpecificDoorData and XSD choice uses SpecificDoorData / SpecificDoorDataStructure. V1.0 03/2017 Tables 2/5 and V2.1 07/2018 Tables 2/5 visibly have corrected labels/type references; exact original and later V1.0 XSDs unchanged in those types. Checked all 192 semantic entries for PCS/GetAllDataResponse/SpecificDoorData; only PCS-001/002 relate directly, neither identity covers these historical PDF differences. Record as candidate_observation for separate post-frozen-inventory adjudication, including notation/label semantics, attribution and executable competing-form tests; no new finding ID, progress credit, runtime diagnostic, alias or definitive new defect claim. Does not invalidate packaging-equivalence result."
+      ]
+    },
+    {
+      "finding_id": "SMS-001",
+      "service": "SystemMonitoringService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemMonitoringService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Exact official VDV-301-2.2 route. The service schema includes Common V2.2 and Enumerations V2.2; generic Subscribe/Unsubscribe request/response structures are defined in Common V2.2 and are intentionally reused by the SMS subscription operations."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "first_last_only_verified_dedicated_sms_v2_2",
+          "pdf_locators": [
+            {
+              "source_id": "SMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-18 SystemMonitoringService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx",
+              "sha256": "996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4",
+              "printed_pages": [
+                9
+              ],
+              "section": "2 Operations of the SystemMonitoringService / 2.1 Operationen SystemMonitoringService",
+              "table": "Tabelle 1 Beschreibung von Operationen des SystemMonitoringService / Description of Operations at the SystemMonitoringService",
+              "point_summary": "All four subscription operations explicitly use shared SubscribeRequestStructure/SubscribeResponseStructure or UnsubscribeRequestStructure/UnsubscribeResponseStructure. Last operation's Req./Resp. labels absent only, DRSMS22-004."
+            },
+            {
+              "source_id": "SMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-18 SystemMonitoringService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx",
+              "sha256": "996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4",
+              "printed_pages": [
+                10
+              ],
+              "section": "2.3 Data Structure of Operation SubscribeDeviceStatus",
+              "table": null,
+              "point_summary": "Explicit VDV 301-2-1 shared data structures."
+            },
+            {
+              "source_id": "SMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-18 SystemMonitoringService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx",
+              "sha256": "996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4",
+              "printed_pages": [
+                10
+              ],
+              "section": "2.4 Data Structure of Operation UnsubscribeDeviceStatus",
+              "table": null,
+              "point_summary": "Explicit VDV 301-2-1 structures for subscription termination."
+            },
+            {
+              "source_id": "SMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-18 SystemMonitoringService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx",
+              "sha256": "996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4",
+              "printed_pages": [
+                11
+              ],
+              "section": "2.6 Data Structure of Operation SubscribeSystemStatus",
+              "table": null,
+              "point_summary": "Explicit VDV 301-2-1 reference. Literal heading SystemStatus differs from Table 1 ServiceStatus; SMS-002 distinct."
+            },
+            {
+              "source_id": "SMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-18 SystemMonitoringService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx",
+              "sha256": "996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4",
+              "printed_pages": [
+                11
+              ],
+              "section": "2.7 Data Structure of Operation UnsubscribeSystemStatus",
+              "table": null,
+              "point_summary": "Explicit VDV 301-2-1 reference. Literal heading SystemStatus differs from Table 1 ServiceStatus; SMS-002 distinct."
+            },
+            {
+              "source_id": "SMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-18 SystemMonitoringService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx",
+              "sha256": "996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4",
+              "printed_pages": [
+                12
+              ],
+              "section": "3 Versionshistorie / Version History / 3.1 Version 2.2 / 3.1.1 Funktionale Erweiterungen / Functional Upgrade",
+              "table": null,
+              "point_summary": "Bilingual history describes extraction from earlier base services; incorrect document number and spelling separate findings. Not a separate older standalone SMS publication."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_SystemMonitoringService_V2.2.xsd",
+              "git_blob": "d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2",
+              "component_kind": "schema",
+              "component": "selected SMS dependencies",
+              "xpath_hint": "/xs:schema/xs:include",
+              "line_hint": "5–6",
+              "point_summary": "Exact Common V2.2 and Enums V2.2.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2"
+            },
+            {
+              "file": "IBIS-IP_SystemMonitoringService_V2.2.xsd",
+              "git_blob": "d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2",
+              "component_kind": "group",
+              "component": "SystemMonitoringServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='SystemMonitoringServiceGroup']/xs:sequence",
+              "line_hint": "8–13",
+              "point_summary": "Only two service-specific Get response members; no subscription roots here.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2"
+            },
+            {
+              "file": "IBIS-IP_SystemMonitoringService_V2.2.xsd",
+              "git_blob": "d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2",
+              "component_kind": "element",
+              "component": "SystemMonitoringService.GetDeviceStatusResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='SystemMonitoringService.GetDeviceStatusResponse']",
+              "line_hint": "16",
+              "point_summary": "Service-specific Get response global.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2"
+            },
+            {
+              "file": "IBIS-IP_SystemMonitoringService_V2.2.xsd",
+              "git_blob": "d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2",
+              "component_kind": "element",
+              "component": "SystemMonitoringService.GetServiceStatusResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='SystemMonitoringService.GetServiceStatusResponse']",
+              "line_hint": "29",
+              "point_summary": "Service-specific Get response global.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2"
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2",
+              "component_kind": "element",
+              "component": "SubscribeRequest",
+              "xpath_hint": "/xs:schema/xs:element[@name='SubscribeRequest']",
+              "line_hint": "875",
+              "point_summary": "Generic global root of type SubscribeRequestStructure through exact Common include.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2"
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2",
+              "component_kind": "complexType",
+              "component": "SubscribeRequestStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SubscribeRequestStructure']",
+              "line_hint": "876–882",
+              "point_summary": "Required Client-IP-Address; optional ReplyPort/ReplyPath.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2"
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2",
+              "component_kind": "element",
+              "component": "SubscribeResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='SubscribeResponse']",
+              "line_hint": "883",
+              "point_summary": "Generic global root of type SubscribeResponseStructure through exact Common include.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2"
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2",
+              "component_kind": "complexType",
+              "component": "SubscribeResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='SubscribeResponseStructure']",
+              "line_hint": "884–897",
+              "point_summary": "Sequence of optional Active, Heartbeat and OperationErrorMessage.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2"
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2",
+              "component_kind": "element",
+              "component": "UnsubscribeRequest",
+              "xpath_hint": "/xs:schema/xs:element[@name='UnsubscribeRequest']",
+              "line_hint": "898",
+              "point_summary": "Generic global root of type UnsubscribeRequestStructure through exact Common include.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2"
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2",
+              "component_kind": "complexType",
+              "component": "UnsubscribeRequestStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='UnsubscribeRequestStructure']",
+              "line_hint": "899–905",
+              "point_summary": "Required Client-IP-Address; optional ReplyPort/ReplyPath.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2"
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2",
+              "component_kind": "element",
+              "component": "UnsubscribeResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='UnsubscribeResponse']",
+              "line_hint": "906",
+              "point_summary": "Generic global root of type UnsubscribeResponseStructure through exact Common include.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2"
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2",
+              "component_kind": "complexType",
+              "component": "UnsubscribeResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='UnsubscribeResponseStructure']",
+              "line_hint": "907–912",
+              "point_summary": "Required Active, optional OperationErrorMessage.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2"
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2",
+              "component_kind": "schema",
+              "component": "Enumerations V2.2",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact dependency, no later enum substitution.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2"
+            }
+          ],
+          "coverage_note": "p9 Table 1 specifies ServiceStatus operation names, p10 §2.3/2.4 DeviceStatus generic references, p11 §2.6/2.7 headings literally SubscribeSystemStatus/UnsubscribeSystemStatus and explicit VDV 301-2-1 references. Naming discrepancy SMS-002 and missing Req./Resp. labels DRSMS22-004 remain distinct. No service-qualified alias, no change to semantic/runtime register. Four generic roots are present via includes; operation discovery must be dependency-aware but a generic XML root is not an HTTP endpoint. Exact selected XSD authoritative; no independent endpoint/transport validation claim. Sole established standalone version V2.2; historical SystemManagementService separately routed."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_SMS_001_2026-11-27.md",
+        "EV-146 run 34026822637 artifact 9987318510 ZIP SHA256 181ff01b16dae43ec2826299e6f14717aef1668d66491b6051ae07661ee607f6 size 994106 re-downloaded and rehashed, ZIP integrity PASS, all six PNG hashes and sizes match ev146_results.json. Exact historical PDF pin SMS_V2.2 SHA256 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4 size 847416, 15 pages. No fresh PDF raw retrieval/hash. Original 180dpi pages visibly inspected this cycle: p9 6f813ae55fd3acc28e99f055978c504b9759e03b1cfb52a133adaf696a2f3b79 (166033), p10 97bf0974fa9a1ef98fed84d6c7c844afa804a7091d29061affbe5359205cc563 (289934), p11 02b26dddd0fa57785ee5e35757a03dc6f1b1a595ae006cdb5ffe66481b4a2b7f (120616), p12 41515d4afc0455e0628128f47eecba3d88364858882c5551b2616af72528addf (114166). Exact pinned render reuse; no new renderer run.",
+        "Historical EV-156 run 34460160697 job 102815828711 SUCCESS, EV-116 run 33269006407 job 99144006184 SUCCESS, both live archived job logs re-read: exact SMS schema compilation and all four generic Common complex types verified. EV-156 confirms explicit four PDF references. EV-156 artifact 10145182333 now returns 404; older full-render artifact listings for runs 33268591224 and EV-116 empty. No claim of rehashing unavailable artifacts. EV-146 includes ev116_rerun.log. Historical results preserved.",
+        "Exact official VDVde/VDV301@VDV-301-2.2 service d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c, Common 468fee6d177e7185dbcd5d3f90cfb114e29e01ae, Enums 2a23b512379b18e8f122ac1272cef8229fb86283; exact tag tree and selected service/Common verified this cycle; full test pins all three actual stored bytes. SMS lines 5–6 include Common/Enum, lines 8–13 group has two Get responses, globals at 16/29. Common lines 875–882 SubscribeRequest, 883–897 SubscribeResponse, 898–905 UnsubscribeRequest, 906–912 UnsubscribeResponse: four actual global root/type pairs. SubscribeResponse is sequence of optional Active/Heartbeat/OperationErrorMessage, UnsubscribeResponse requires Active, requests require Client-IP-Address and optionally ReplyPort/ReplyPath. Exact XSD only; not a new Common PDF adjudication. CE-024/CE-025 and SUB findings remain separate.",
+        "Official VDV catalog https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-27 (web catalog snapshot, not fresh raw PDF download), lists sole standalone 301-2-18 V2.2. Upstream tags 1.0/2.0/2.1 contain SystemManagementService V1.0 (historical 85390f99d6c19c88923ed9a5fc8a5706137708af; later 2d32630a0f1981e980e6a466e3f6a69136410f24), not SystemMonitoringService; 2.2/2.3/master exact same SMS and dependencies. Earlier Base Service publications documented independently in DR3012-005 (DE 2014 pp67/69, EN 2014 pp90/91, Base 2.0 pp103/104, Base 2.1 pp116/117); reuse earlier verified context, not re-read those images in this cycle. SMS p12 history describes extraction, with 302-2 and SystemManagmentService residues already separate SMS-004/DRSMS22-003. SystemManagementService is historical functional predecessor, not another same-name SMS release. No independently established earlier or later standalone SMS edition. One bilingual publication with English technical sections; no two independent technical tracks.",
+        "p9 Table 1 specifies ServiceStatus operation names, p10 §2.3/2.4 DeviceStatus generic references, p11 §2.6/2.7 headings literally SubscribeSystemStatus/UnsubscribeSystemStatus and explicit VDV 301-2-1 references. Naming discrepancy SMS-002 and missing Req./Resp. labels DRSMS22-004 remain distinct. No service-qualified alias, no change to semantic/runtime register. Four generic roots are present via includes; operation discovery must be dependency-aware but a generic XML root is not an HTTP endpoint. Exact selected XSD authoritative; no independent endpoint/transport validation claim.",
+        "New gate regression tools/validate_sms_001_generic_subscription_roots.py checks exact official bytes, four generic global root/type pairs, four positive minimal instances and eight negative invented service-qualified DeviceStatus/ServiceStatus roots using same payload; negatives must be missing global declaration, not shape rejection. Also reruns unmodified EV-116 in same script. New CI pending; no fresh EV-156 run. No runtime matcher implementation, XSD correction or resolver change."
       ]
     }
   ]
