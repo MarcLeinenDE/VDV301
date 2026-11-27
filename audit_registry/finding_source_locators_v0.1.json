@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 139,
-    "coverage_complete_count": 139,
+    "locator_entry_count": 140,
+    "coverage_complete_count": 140,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 53
+    "remaining_finding_count": 52
   },
   "entries": [
     {
@@ -27964,6 +27964,921 @@
         "Earlier EN Jan 2014 exact source fallback run 46014266727 SUCCESS on 27705f18d3e336030eb456807e9efcaa825dfccd, artifact 15205211510 ZIP SHA256 9abb4f636999f6f9331311f7f0ebc96477b49642705571a5303b4af5b779e392 size 765148 verified; source SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 size 2403598; all 3 PNG hashes/sizes match manifest. p85 SHA256 95645c54194fb4252960f46f11a60caecdda70b2830578df8c964abe9df5913f (252847) and p86 aed7ed1880d8a7f1f82fc839c051f39dcd027288c7c761b1e9c8de7d31f956c2 (278491) visibly inspected: §9.8.1 Table 95 only original five operations, p86 §9.8.6.2 SetCounterData ends PCS before §9.9. No independent DE 2014 aggregate, 2016 DE base not a complete PCS service publication.",
         "Exact upstream VDV-301-1.0 PCS V1.0 type-only blob 600a3ee6290c630a4435fb06ca9803dabaceb788 and umbrella 41289eaed2674a169fdf77a10a2eff293c76d5c4 lines 14,178-187, VDV-301-2.0 self-contained PCS V1.0 4161872be76740abfdd1cddf96f8a736333fc8be, no optional operation names in either service/umbrella. VDV-301-2.1, 2.2, 2.3 and master PCS V2.1 59ef2ddb09b92db0d492974e38bad5b6be03865e includes Common V1.0 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c and Enum V1.0 a9bea5bc73003ed91ded8519db06c32c4067831d; all same exact blobs. V2.1 enum 311464690ad60749ed8d326217787e4b8ed0b718 separate control only. VDV-301-2.4 tag 404; official catalog checked 2026-11-27 lists V1.0 and V2.1 only; no corrected newer PCS publication established.",
         "Historical EV-155 exact-route compiled, DataNotValid accepted, OperationNotSupported rejected at ErrorCode enum facet, separate Enums V2.1 control accepted. Current extended validator tests all five response structures via synthetic type harnesses, including freetext Value controls, new CI result pending. Existing cross_artifact_mismatch, error_with_advisory, reviewed_not_implemented unchanged; exact selected XSD authoritative; no alias, dependency substitution or XSD changes."
+      ]
+    },
+    {
+      "finding_id": "PCS-002",
+      "service": "PassengerCountingService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V1.0 original VDV-301-1.0 packaging",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_PassengerCountingService_V1.0.xsd + IBIS_IP_V1.0.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Original official V1.0 packaging: service file contains PCS payload structures, while the aggregate IBIS_IP_V1.0.xsd supplies PCS operation roots and PassengerCountingServiceGroup."
+        },
+        {
+          "version": "V1.0 later VDV-301-2.0 self-contained packaging",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_PassengerCountingService_V1.0.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Later official release republishes the same service version V1.0 as a self-contained service schema containing the PCS operation roots/group. This is the operational superbranch selection."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V1.0 original VDV-301-1.0 packaging",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "historical_aggregate_packaging",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                85
+              ],
+              "section": "9.8.1 Operations of the PassengerCountingService",
+              "table": "Table 95: Description of Operations of PassengerCountingService",
+              "point_summary": "Five operations, four service-specific request/response structures, Get has no request structure; subscriptions and Set response shared."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                85
+              ],
+              "section": "9.8.2.2 Response",
+              "table": "Table 96: Description of PassengerCountingService.GetAllDataResponse",
+              "point_summary": "Visible response structure heading corresponds to PCS GetAllDataResponse. Historical child labels Data/ErrorMessage differ from actual XSD; separate candidate observation, not packaging change."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                85
+              ],
+              "section": "9.8.2.2 Response",
+              "table": "Table 97: Description of PassengerCountingService.AllData",
+              "point_summary": "TimeStamp 1:1, CountingData 0:*; matches payload constraints."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                85
+              ],
+              "section": "9.8.3 Data Structure of Operation SubscribeAllData",
+              "table": null,
+              "point_summary": "Shared subscription structures referenced; no PCS-specific global subscription root inferred."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                86
+              ],
+              "section": "9.8.4 Data Structure of Operation UnsubscribeAllData",
+              "table": null,
+              "point_summary": "Shared unsubscribe structures referenced."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                86
+              ],
+              "section": "9.8.5.1 Request",
+              "table": "Table 98: Description of PassengerCountingService.RetrieveSpecificDoorDataRequest",
+              "point_summary": "DoorID 1:1 IBIS-IP.NMTOKEN."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                86
+              ],
+              "section": "9.8.5.2 Response",
+              "table": "Table 99: Description of PassengerCountingService.RetrieveSpecificDoorDataResponse",
+              "point_summary": "Response header matches actual root; historical choice Data with AllData type differs from XSD SpecificDoorData, recorded separately."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                86
+              ],
+              "section": "9.8.5.2 Response",
+              "table": "Table 100: Description of PassengerCountingService.SpecificDoorData",
+              "point_summary": "TimeStamp and CountingData both 1:1; adjacent specific-door payload table."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                86
+              ],
+              "section": "9.8.6.1 Request",
+              "table": "Table 101: Description of PassengerCountingService.SetCounterDataRequest",
+              "point_summary": "DoorSetList 1:*; SetCounterDataResponse is generic per following §9.8.6.2."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                86
+              ],
+              "section": "9.8.6.2 Response",
+              "table": null,
+              "point_summary": "DataAcceptedResponseStructure, not PCS-local root; following §9.9 begins SystemDocumentationService."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "600a3ee6290c630a4435fb06ca9803dabaceb788",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "PCS V1.0 type-only service",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "5–6, 10–64",
+              "point_summary": "Selects Common and Enumerations V1.0; six named payload types; no global PCS operation elements or group.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "IBIS_IP_V1.0 PCS include",
+              "xpath_hint": "/xs:schema/xs:include[@schemaLocation='IBIS-IP_PassengerCountingService_V1.0.xsd']",
+              "line_hint": "14",
+              "point_summary": "Full official release aggregate supplies operation declarations.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "element",
+              "component": "PassengerCountingService.GetAllDataResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='PassengerCountingService.GetAllDataResponse']",
+              "line_hint": "178",
+              "point_summary": "Global root typed PassengerCountingService.GetAllDataResponseStructure; identical in historical aggregate and later V1.0 service.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "element",
+              "component": "PassengerCountingService.RetrieveSpecificDoorDataRequest",
+              "xpath_hint": "/xs:schema/xs:element[@name='PassengerCountingService.RetrieveSpecificDoorDataRequest']",
+              "line_hint": "179",
+              "point_summary": "Global root typed PassengerCountingService.RetrieveSpecificDoorDataRequestStructure; identical in historical aggregate and later V1.0 service.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "element",
+              "component": "PassengerCountingService.RetrieveSpecificDoorDataResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='PassengerCountingService.RetrieveSpecificDoorDataResponse']",
+              "line_hint": "180",
+              "point_summary": "Global root typed PassengerCountingService.RetrieveSpecificDoorDataResponseStructure; identical in historical aggregate and later V1.0 service.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "element",
+              "component": "PassengerCountingService.SetCounterDataRequest",
+              "xpath_hint": "/xs:schema/xs:element[@name='PassengerCountingService.SetCounterDataRequest']",
+              "line_hint": "181",
+              "point_summary": "Global root typed PassengerCountingService.SetCounterDataRequestStructure; identical in historical aggregate and later V1.0 service.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "group",
+              "component": "PassengerCountingServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='PassengerCountingServiceGroup']/xs:sequence",
+              "line_hint": "182–189",
+              "point_summary": "Four local members in same order and type as later standalone group.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "600a3ee6290c630a4435fb06ca9803dabaceb788",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "PassengerCountingService.AllDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='PassengerCountingService.AllDataStructure']",
+              "line_hint": "10–15",
+              "point_summary": "Entire named type including ordered fields, constraints and annotations equal after whitespace normalization in both official V1.0 packaging revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "600a3ee6290c630a4435fb06ca9803dabaceb788",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "PassengerCountingService.GetAllDataResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='PassengerCountingService.GetAllDataResponseStructure']",
+              "line_hint": "16–24",
+              "point_summary": "Entire named type including ordered fields, constraints and annotations equal after whitespace normalization in both official V1.0 packaging revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "600a3ee6290c630a4435fb06ca9803dabaceb788",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "PassengerCountingService.RetrieveSpecificDoorDataRequestStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='PassengerCountingService.RetrieveSpecificDoorDataRequestStructure']",
+              "line_hint": "25–36",
+              "point_summary": "Entire named type including ordered fields, constraints and annotations equal after whitespace normalization in both official V1.0 packaging revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "600a3ee6290c630a4435fb06ca9803dabaceb788",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "PassengerCountingService.RetrieveSpecificDoorDataResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='PassengerCountingService.RetrieveSpecificDoorDataResponseStructure']",
+              "line_hint": "37–45",
+              "point_summary": "Entire named type including ordered fields, constraints and annotations equal after whitespace normalization in both official V1.0 packaging revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "600a3ee6290c630a4435fb06ca9803dabaceb788",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "PassengerCountingService.SpecificDoorDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='PassengerCountingService.SpecificDoorDataStructure']",
+              "line_hint": "46–51",
+              "point_summary": "Entire named type including ordered fields, constraints and annotations equal after whitespace normalization in both official V1.0 packaging revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "600a3ee6290c630a4435fb06ca9803dabaceb788",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "PassengerCountingService.SetCounterDataRequestStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='PassengerCountingService.SetCounterDataRequestStructure']",
+              "line_hint": "52–64",
+              "point_summary": "Entire named type including ordered fields, constraints and annotations equal after whitespace normalization in both official V1.0 packaging revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "Common V1.0",
+              "xpath_hint": "/xs:schema/xs:include",
+              "line_hint": "4",
+              "point_summary": "Same official Common blob selects Enumerations V1.0.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "Enumerations V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact dependency identical in both historical release contexts.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            }
+          ],
+          "coverage_note": "Historical service alone not full root family. Exact aggregate supplies four PCS roots/group. Original EN operation list supports operation/type mapping, not claim that every PDF member label matched XSD; separate candidate observations retained."
+        },
+        {
+          "version": "V1.0 later VDV-301-2.0 self-contained packaging",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "later_official_self_contained_same_service_version",
+          "pdf_locators": [
+            {
+              "source_id": "PCS_V1.0",
+              "document_title": "VDV-Schrift 301-2-8 Dienst PassengerCountingService (03/2017)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sd-2017-03.pdfx",
+              "sha256": "372be7a5d39c72e4bf405e3058f5af3d809eb611ac3548b70c526788d364c402",
+              "printed_pages": [
+                9
+              ],
+              "section": "1.2 Operations of the PassengerCountingService",
+              "table": "Table 1: Description of Operations of PassengerCountingService",
+              "point_summary": "Original five operations, no Get request body; shared subscription and Set response structures."
+            },
+            {
+              "source_id": "PCS_V1.0",
+              "document_title": "VDV-Schrift 301-2-8 Dienst PassengerCountingService (03/2017)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sd-2017-03.pdfx",
+              "sha256": "372be7a5d39c72e4bf405e3058f5af3d809eb611ac3548b70c526788d364c402",
+              "printed_pages": [
+                10
+              ],
+              "section": "1.3.2 Response",
+              "table": "Table 2: Description of PassengerCountingService.GetAllDataResponse",
+              "point_summary": "Actual AllData / OperationErrorMessage choice, consistent with XSD."
+            },
+            {
+              "source_id": "PCS_V1.0",
+              "document_title": "VDV-Schrift 301-2-8 Dienst PassengerCountingService (03/2017)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sd-2017-03.pdfx",
+              "sha256": "372be7a5d39c72e4bf405e3058f5af3d809eb611ac3548b70c526788d364c402",
+              "printed_pages": [
+                10
+              ],
+              "section": "1.3.2 Response",
+              "table": "Table 3: Description of PassengerCountingService.AllData",
+              "point_summary": "TimeStamp 1:1, CountingData 0:*."
+            },
+            {
+              "source_id": "PCS_V1.0",
+              "document_title": "VDV-Schrift 301-2-8 Dienst PassengerCountingService (03/2017)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sd-2017-03.pdfx",
+              "sha256": "372be7a5d39c72e4bf405e3058f5af3d809eb611ac3548b70c526788d364c402",
+              "printed_pages": [
+                10
+              ],
+              "section": "1.4 Data Structures of Operation SubscribeAllData",
+              "table": null,
+              "point_summary": "Uses base-service subscription structures."
+            },
+            {
+              "source_id": "PCS_V1.0",
+              "document_title": "VDV-Schrift 301-2-8 Dienst PassengerCountingService (03/2017)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sd-2017-03.pdfx",
+              "sha256": "372be7a5d39c72e4bf405e3058f5af3d809eb611ac3548b70c526788d364c402",
+              "printed_pages": [
+                10
+              ],
+              "section": "1.5 Data Structures of Operation UnsubscribeAllData",
+              "table": null,
+              "point_summary": "Uses base-service unsubscribe structures."
+            },
+            {
+              "source_id": "PCS_V1.0",
+              "document_title": "VDV-Schrift 301-2-8 Dienst PassengerCountingService (03/2017)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sd-2017-03.pdfx",
+              "sha256": "372be7a5d39c72e4bf405e3058f5af3d809eb611ac3548b70c526788d364c402",
+              "printed_pages": [
+                11
+              ],
+              "section": "1.6.1 Request",
+              "table": "Table 4: Description of PassengerCountingService.RetrieveSpecificDoorDataRequest",
+              "point_summary": "DoorID 1:1 IBIS-IP.NMTOKEN."
+            },
+            {
+              "source_id": "PCS_V1.0",
+              "document_title": "VDV-Schrift 301-2-8 Dienst PassengerCountingService (03/2017)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sd-2017-03.pdfx",
+              "sha256": "372be7a5d39c72e4bf405e3058f5af3d809eb611ac3548b70c526788d364c402",
+              "printed_pages": [
+                11
+              ],
+              "section": "1.6.2 Response",
+              "table": "Table 5: Description of PassengerCountingService.RetrieveSpecificDoorDataResponse",
+              "point_summary": "SpecificDoorData / OperationErrorMessage choice with specific-door type."
+            },
+            {
+              "source_id": "PCS_V1.0",
+              "document_title": "VDV-Schrift 301-2-8 Dienst PassengerCountingService (03/2017)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sd-2017-03.pdfx",
+              "sha256": "372be7a5d39c72e4bf405e3058f5af3d809eb611ac3548b70c526788d364c402",
+              "printed_pages": [
+                11
+              ],
+              "section": "1.6.2 Response",
+              "table": "Table 6: Description of PassengerCountingService.SpecificDoorData",
+              "point_summary": "TimeStamp and CountingData 1:1."
+            },
+            {
+              "source_id": "PCS_V1.0",
+              "document_title": "VDV-Schrift 301-2-8 Dienst PassengerCountingService (03/2017)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sd-2017-03.pdfx",
+              "sha256": "372be7a5d39c72e4bf405e3058f5af3d809eb611ac3548b70c526788d364c402",
+              "printed_pages": [
+                11
+              ],
+              "section": "1.7.1 Request",
+              "table": "Table 7: Description of PassengerCountingService.SetCounterDataRequest",
+              "point_summary": "DoorSetList 1:*."
+            },
+            {
+              "source_id": "PCS_V1.0",
+              "document_title": "VDV-Schrift 301-2-8 Dienst PassengerCountingService (03/2017)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sd-2017-03.pdfx",
+              "sha256": "372be7a5d39c72e4bf405e3058f5af3d809eb611ac3548b70c526788d364c402",
+              "printed_pages": [
+                11
+              ],
+              "section": "1.7.2 Response",
+              "table": null,
+              "point_summary": "Shared DataAcceptedResponseStructure."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "4161872be76740abfdd1cddf96f8a736333fc8be",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "PCS V1.0 standalone service",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "5–6",
+              "point_summary": "Same dependencies, local file now has four global roots/group; exact operational superbranch blob.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "4161872be76740abfdd1cddf96f8a736333fc8be",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "element",
+              "component": "PassengerCountingService.GetAllDataResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='PassengerCountingService.GetAllDataResponse']",
+              "line_hint": "19",
+              "point_summary": "Global root typed PassengerCountingService.GetAllDataResponseStructure; identical in historical aggregate and later V1.0 service.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "4161872be76740abfdd1cddf96f8a736333fc8be",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "element",
+              "component": "PassengerCountingService.RetrieveSpecificDoorDataRequest",
+              "xpath_hint": "/xs:schema/xs:element[@name='PassengerCountingService.RetrieveSpecificDoorDataRequest']",
+              "line_hint": "36",
+              "point_summary": "Global root typed PassengerCountingService.RetrieveSpecificDoorDataRequestStructure; identical in historical aggregate and later V1.0 service.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "4161872be76740abfdd1cddf96f8a736333fc8be",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "element",
+              "component": "PassengerCountingService.RetrieveSpecificDoorDataResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='PassengerCountingService.RetrieveSpecificDoorDataResponse']",
+              "line_hint": "49",
+              "point_summary": "Global root typed PassengerCountingService.RetrieveSpecificDoorDataResponseStructure; identical in historical aggregate and later V1.0 service.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "4161872be76740abfdd1cddf96f8a736333fc8be",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "element",
+              "component": "PassengerCountingService.SetCounterDataRequest",
+              "xpath_hint": "/xs:schema/xs:element[@name='PassengerCountingService.SetCounterDataRequest']",
+              "line_hint": "66",
+              "point_summary": "Global root typed PassengerCountingService.SetCounterDataRequestStructure; identical in historical aggregate and later V1.0 service.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "4161872be76740abfdd1cddf96f8a736333fc8be",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "group",
+              "component": "PassengerCountingServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='PassengerCountingServiceGroup']/xs:sequence",
+              "line_hint": "9–16",
+              "point_summary": "Same four group members as original aggregate.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "4161872be76740abfdd1cddf96f8a736333fc8be",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "PassengerCountingService.AllDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='PassengerCountingService.AllDataStructure']",
+              "line_hint": "29–34",
+              "point_summary": "Entire named type including ordered fields, constraints and annotations equal after whitespace normalization in both official V1.0 packaging revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "4161872be76740abfdd1cddf96f8a736333fc8be",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "PassengerCountingService.GetAllDataResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='PassengerCountingService.GetAllDataResponseStructure']",
+              "line_hint": "20–28",
+              "point_summary": "Entire named type including ordered fields, constraints and annotations equal after whitespace normalization in both official V1.0 packaging revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "4161872be76740abfdd1cddf96f8a736333fc8be",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "PassengerCountingService.RetrieveSpecificDoorDataRequestStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='PassengerCountingService.RetrieveSpecificDoorDataRequestStructure']",
+              "line_hint": "37–48",
+              "point_summary": "Entire named type including ordered fields, constraints and annotations equal after whitespace normalization in both official V1.0 packaging revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "4161872be76740abfdd1cddf96f8a736333fc8be",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "PassengerCountingService.RetrieveSpecificDoorDataResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='PassengerCountingService.RetrieveSpecificDoorDataResponseStructure']",
+              "line_hint": "50–58",
+              "point_summary": "Entire named type including ordered fields, constraints and annotations equal after whitespace normalization in both official V1.0 packaging revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "4161872be76740abfdd1cddf96f8a736333fc8be",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "PassengerCountingService.SpecificDoorDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='PassengerCountingService.SpecificDoorDataStructure']",
+              "line_hint": "59–64",
+              "point_summary": "Entire named type including ordered fields, constraints and annotations equal after whitespace normalization in both official V1.0 packaging revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V1.0.xsd",
+              "git_blob": "4161872be76740abfdd1cddf96f8a736333fc8be",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "PassengerCountingService.SetCounterDataRequestStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='PassengerCountingService.SetCounterDataRequestStructure']",
+              "line_hint": "67–79",
+              "point_summary": "Entire named type including ordered fields, constraints and annotations equal after whitespace normalization in both official V1.0 packaging revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "Common V1.0",
+              "xpath_hint": "/xs:schema/xs:include",
+              "line_hint": "4",
+              "point_summary": "Same official Common blob selects Enumerations V1.0.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "Enumerations V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact dependency identical in both historical release contexts.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            }
+          ],
+          "coverage_note": "Same service version with later self-contained packaging. Four global root pairs, group and all six type bodies unchanged; generic response types are not additional PCS global roots. Existing dedup rule preserved; no runtime diagnostic."
+        },
+        {
+          "version": "V2.1 successor service-version context",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "successor_distinct_service_version_not_affected",
+          "pdf_locators": [
+            {
+              "source_id": "PCS_V2.1",
+              "document_title": "VDV-Schrift 301-2-8 Service PassengerCountingService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sds-v2-1-passengercounting.pdfx",
+              "sha256": "572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043",
+              "printed_pages": [
+                10
+              ],
+              "section": "1.2 Operations of the PassengerCountingService",
+              "table": "Table 1: Description of Operations of PassengerCountingService",
+              "point_summary": "Five original plus five optional operations; original four service-specific root/type pairs remain."
+            },
+            {
+              "source_id": "PCS_V2.1",
+              "document_title": "VDV-Schrift 301-2-8 Service PassengerCountingService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sds-v2-1-passengercounting.pdfx",
+              "sha256": "572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043",
+              "printed_pages": [
+                11
+              ],
+              "section": "1.3.2 Response",
+              "table": "Table 2: Description of PassengerCountingService.GetAllDataResponse",
+              "point_summary": "Actual AllData / OperationErrorMessage choice, consistent with XSD."
+            },
+            {
+              "source_id": "PCS_V2.1",
+              "document_title": "VDV-Schrift 301-2-8 Service PassengerCountingService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sds-v2-1-passengercounting.pdfx",
+              "sha256": "572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043",
+              "printed_pages": [
+                11
+              ],
+              "section": "1.3.2 Response",
+              "table": "Table 3: Description of PassengerCountingService.AllData",
+              "point_summary": "TimeStamp 1:1, CountingData 0:*."
+            },
+            {
+              "source_id": "PCS_V2.1",
+              "document_title": "VDV-Schrift 301-2-8 Service PassengerCountingService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sds-v2-1-passengercounting.pdfx",
+              "sha256": "572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043",
+              "printed_pages": [
+                11
+              ],
+              "section": "1.4 Data Structures of Operation SubscribeAllData",
+              "table": null,
+              "point_summary": "Uses base-service subscription structures."
+            },
+            {
+              "source_id": "PCS_V2.1",
+              "document_title": "VDV-Schrift 301-2-8 Service PassengerCountingService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sds-v2-1-passengercounting.pdfx",
+              "sha256": "572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043",
+              "printed_pages": [
+                11
+              ],
+              "section": "1.5 Data Structures of Operation UnsubscribeAllData",
+              "table": null,
+              "point_summary": "Uses base-service unsubscribe structures."
+            },
+            {
+              "source_id": "PCS_V2.1",
+              "document_title": "VDV-Schrift 301-2-8 Service PassengerCountingService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sds-v2-1-passengercounting.pdfx",
+              "sha256": "572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043",
+              "printed_pages": [
+                12
+              ],
+              "section": "1.6.1 Request",
+              "table": "Table 4: Description of PassengerCountingService.RetrieveSpecificDoorDataRequest",
+              "point_summary": "DoorID 1:1 IBIS-IP.NMTOKEN."
+            },
+            {
+              "source_id": "PCS_V2.1",
+              "document_title": "VDV-Schrift 301-2-8 Service PassengerCountingService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sds-v2-1-passengercounting.pdfx",
+              "sha256": "572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043",
+              "printed_pages": [
+                12
+              ],
+              "section": "1.6.2 Response",
+              "table": "Table 5: Description of PassengerCountingService.RetrieveSpecificDoorDataResponse",
+              "point_summary": "SpecificDoorData / OperationErrorMessage choice with specific-door type."
+            },
+            {
+              "source_id": "PCS_V2.1",
+              "document_title": "VDV-Schrift 301-2-8 Service PassengerCountingService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sds-v2-1-passengercounting.pdfx",
+              "sha256": "572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043",
+              "printed_pages": [
+                12
+              ],
+              "section": "1.6.2 Response",
+              "table": "Table 6: Description of PassengerCountingService.SpecificDoorData",
+              "point_summary": "TimeStamp and CountingData 1:1."
+            },
+            {
+              "source_id": "PCS_V2.1",
+              "document_title": "VDV-Schrift 301-2-8 Service PassengerCountingService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sds-v2-1-passengercounting.pdfx",
+              "sha256": "572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043",
+              "printed_pages": [
+                12
+              ],
+              "section": "1.7.1 Request",
+              "table": "Table 7: Description of PassengerCountingService.SetCounterDataRequest",
+              "point_summary": "DoorSetList 1:*."
+            },
+            {
+              "source_id": "PCS_V2.1",
+              "document_title": "VDV-Schrift 301-2-8 Service PassengerCountingService V2.1 (07/2018)",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-8-sds-v2-1-passengercounting.pdfx",
+              "sha256": "572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043",
+              "printed_pages": [
+                12
+              ],
+              "section": "1.7.2 Response",
+              "table": null,
+              "point_summary": "Shared DataAcceptedResponseStructure."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_PassengerCountingService_V2.1.xsd",
+              "git_blob": "59ef2ddb09b92db0d492974e38bad5b6be03865e",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1",
+              "component_kind": "group",
+              "component": "PassengerCountingServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='PassengerCountingServiceGroup']/xs:sequence",
+              "line_hint": "9–32",
+              "point_summary": "Expanded group has 20 local members for ten operations; not 20 global roots.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V2.1.xsd",
+              "git_blob": "59ef2ddb09b92db0d492974e38bad5b6be03865e",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1",
+              "component_kind": "element",
+              "component": "PassengerCountingService.GetAllDataResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='PassengerCountingService.GetAllDataResponse']",
+              "line_hint": "35",
+              "point_summary": "Global root typed PassengerCountingService.GetAllDataResponseStructure; identical in historical aggregate and later V1.0 service.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V2.1.xsd",
+              "git_blob": "59ef2ddb09b92db0d492974e38bad5b6be03865e",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1",
+              "component_kind": "element",
+              "component": "PassengerCountingService.RetrieveSpecificDoorDataRequest",
+              "xpath_hint": "/xs:schema/xs:element[@name='PassengerCountingService.RetrieveSpecificDoorDataRequest']",
+              "line_hint": "52",
+              "point_summary": "Global root typed PassengerCountingService.RetrieveSpecificDoorDataRequestStructure; identical in historical aggregate and later V1.0 service.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V2.1.xsd",
+              "git_blob": "59ef2ddb09b92db0d492974e38bad5b6be03865e",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1",
+              "component_kind": "element",
+              "component": "PassengerCountingService.RetrieveSpecificDoorDataResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='PassengerCountingService.RetrieveSpecificDoorDataResponse']",
+              "line_hint": "65",
+              "point_summary": "Global root typed PassengerCountingService.RetrieveSpecificDoorDataResponseStructure; identical in historical aggregate and later V1.0 service.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            },
+            {
+              "file": "IBIS-IP_PassengerCountingService_V2.1.xsd",
+              "git_blob": "59ef2ddb09b92db0d492974e38bad5b6be03865e",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1",
+              "component_kind": "element",
+              "component": "PassengerCountingService.SetCounterDataRequest",
+              "xpath_hint": "/xs:schema/xs:element[@name='PassengerCountingService.SetCounterDataRequest']",
+              "line_hint": "82",
+              "point_summary": "Global root typed PassengerCountingService.SetCounterDataRequestStructure; identical in historical aggregate and later V1.0 service.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1",
+              "component_kind": "schema",
+              "component": "Common V1.0",
+              "xpath_hint": "/xs:schema/xs:include",
+              "line_hint": "4",
+              "point_summary": "Same official Common blob selects Enumerations V1.0.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1",
+              "component_kind": "schema",
+              "component": "Enumerations V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact dependency identical in both historical release contexts.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1"
+            }
+          ],
+          "coverage_note": "Successor distinct service version, not additional PCS-002 historical packaging lane. Retains the four original globals and adds optional operation group members. V2.1 is not interchangeable with V1.0. PCS-001 remains separate."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_PCS_002_2026-11-27.md",
+        "EV-155 run 34447583426 SUCCESS on cdb34155a8c1b344a528ecbedd08744d5a4451cc, job 102775681488, artifact 10140238171 ZIP SHA256 48e3f7ad728660a342124d42976f8a1c88670c06b5ba3a63f7475b462653f633 (2794459 bytes) independently rehashed and ZIP integrity checked. ev155_result.json SHA256 3abb9bd9279c995b5a7cb91fd9f45111e28393c9f76f9268146221d1bb5ebe00 reports PASS, same operation-root payload old service alone FAIL, original aggregate PASS, later self-contained PASS; six checked signatures unchanged. Archived result does not specify the XML sample bytes/name; no all-four-root instance matrix or fresh EV-155 run claimed. Historical run log EV155_PASS rechecked. Local fresh upstream git retrieval blocked by DNS; static exact blobs independently fetched through GitHub connector instead.",
+        "EN Jan 2014 exact source fallback run 46014266727 SUCCESS on 27705f18d3e336030eb456807e9efcaa825dfccd, artifact 15205211510 ZIP SHA256 9abb4f636999f6f9331311f7f0ebc96477b49642705571a5303b4af5b779e392 (765148 bytes), all three PNG hashes/sizes match manifest, archive integrity checked. Source SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 size 2403598; p85 95645c54194fb4252960f46f11a60caecdda70b2830578df8c964abe9df5913f (252847 bytes), p86 aed7ed1880d8a7f1f82fc839c051f39dcd027288c7c761b1e9c8de7d31f956c2 (278491), both actually visually rechecked: p85 §§9.8.1/9.8.2/9.8.3 Tables 95–97; p86 §§9.8.4/9.8.5/9.8.6 Tables 98–101 and generic Set response. Five operations, four PCS-specific request/response structures, no Get request body; generic Subscribe/Unsubscribe/DataAccepted structures separate.",
+        "Exact raw PCS V1.0 PDF SHA256 372be7a5d39c72e4bf405e3058f5af3d809eb611ac3548b70c526788d364c402 size 918762, 18 pages, EV-155 archived raw bytes rehashed; existing local exact-source renderer blob 2ff8963a9880a4c8d0db6dc90af49427936dcde7, PyMuPDF 1.26.7 150dpi manifest all six PNG hashes and sizes verified. Visually inspected p9 370c9ac8c6bfcb49f4c63c9b8ffca3b8c93845de59c324025599433f68381927 (105543 bytes) Table 1, p10 bce030a5e1ea7e76a8708c5ea1e6cf10d3409b37452d6b986c7733ca2227dcc6 (150143) §§1.3–1.5 Tables 2–3, p11 1230b4163223148a9963718a7ffe38c756bd243be8f5cbe890a542ac5741c210 (196878) §§1.6–1.7 Tables 4–7. Actual V1.0 03/2017 publication has the same five operations and correct AllData/OperationErrorMessage, SpecificDoorData/OperationErrorMessage choices.",
+        "PCS V2.1 07/2018 successor context only: exact raw PDF SHA256 572f07adbb6999463433a3e764e47f29c8157a4e63aa88ea7c927393da7ec043 size 1084925, 22 pages, EV-155 archive rehashed; re-rendered with same exact renderer at 150dpi, visually inspected p10 58e9627aacb24f9f779844a570d32496cc0ef60f1099cc0f85c008932d9e7754 (157874), p11 324173e11cf43bad92a611ba0fbf7f7203f1e6cffce94893d7b9561900901d7b (151512), p12 e78a09a80e93810f8a39a32c5351ab48d2ab00fb4b94e324b1fdd17b86af7f71 (196512). Table 1 adds five optional operations; original response choices remain correct in Tables 2/5, separate PCS-001 retained. Exact official PCS V2.1 has same four global roots, group expands to 20 local members. No claim that V2.1 has all 20 global roots or whole V1.0 and V2.1 payload contracts are equal. 2.1/2.2/2.3/master trees rechecked: only V2.1 PCS service filename, identical 59ef2ddb09b92db0d492974e38bad5b6be03865e and exact Common/Enums V1.0; 2.4 tag previously 404 on same day. Catalog reviewed in same-day PCS-001: only V1.0 and V2.1 standalone, earlier EN 2014 aggregate, no independently established separate DE 2014 aggregate or later standalone. Technical sections EN in bilingual standalone PDFs; no separate language equivalence claim.",
+        "Exact upstream VDV-301-1.0 service blob 600a3ee6290c630a4435fb06ca9803dabaceb788 lines 5–6, 10–64 (six named PCS payload types, no global PCS roots/group); umbrella 41289eaed2674a169fdf77a10a2eff293c76d5c4 line 14 includes service, lines 178–181 four global roots and 182–189 group; lines 207–210 generic roots. VDV-301-2.0 same service version self-contained blob 4161872be76740abfdd1cddf96f8a736333fc8be group lines 9–16, roots 19,36,49,66. Operational branch exact blob matches. All six full named type bodies including annotations compare equal after whitespace/line-ending normalization, four global root/name-type pairs and group equal, identical Common V1.0 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c and Enumerations V1.0 a9bea5bc73003ed91ded8519db06c32c4067831d in both official tags. This is scoped PCS equivalence, not byte equivalence of complete aggregate and standalone or proof of arbitrary global root acceptance. SUPERBRANCH_V1_0_DEDUP_POLICY.md remains unchanged.",
+        "Separate unadjudicated historical PDF observation, not PCS-002 scope: EN 2014 p85 §9.8.2.2 Table 96 prints Data and ErrorMessage instead of XSD AllData and OperationErrorMessage; p86 §9.8.5.2 Table 99 prints Data typed PassengerCountingService.AllData while adjacent Table 100 describes SpecificDoorData and XSD choice uses SpecificDoorData / SpecificDoorDataStructure. V1.0 03/2017 Tables 2/5 and V2.1 07/2018 Tables 2/5 visibly have corrected labels/type references; exact original and later V1.0 XSDs unchanged in those types. Checked all 192 semantic entries for PCS/GetAllDataResponse/SpecificDoorData; only PCS-001/002 relate directly, neither identity covers these historical PDF differences. Record as candidate_observation for separate post-frozen-inventory adjudication, including notation/label semantics, attribution and executable competing-form tests; no new finding ID, progress credit, runtime diagnostic, alias or definitive new defect claim. Does not invalidate packaging-equivalence result."
       ]
     }
   ]
