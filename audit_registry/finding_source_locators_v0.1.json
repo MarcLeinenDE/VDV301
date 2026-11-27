@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 130,
-    "coverage_complete_count": 130,
+    "locator_entry_count": 131,
+    "coverage_complete_count": 131,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 62
+    "remaining_finding_count": 61
   },
   "entries": [
     {
@@ -26250,6 +26250,172 @@
         "Exact upstream VDV-301-1.0 JIS type-only blob 1ee4d7aeb15f3269c5335313be9e214bdb519d2e lines 175-180 and aggregate 41289eaed2674a169fdf77a10a2eff293c76d5c4 lines 4-7,58,91; selected VDV-301-2.0 JIS 8c303db5a9c0548d66b90174d9c329d33092ad24 lines 223-235; upstream 2.1/2.2/2.3/master same JIS blob rechecked. Common 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c and Enum a9bea5bc73003ed91ded8519db06c32c4067831d identical in historical and selected routes. Common LineInformationStructure lines 380-387 has required singular LineRef and optional repeatable text fields, not a list of lines.",
         "EV-152 archived sample and JSON independently checked: one line PASS, two lines FAIL (unexpected LineInformation); positive XML SHA256 87d40e3dc94234fe125d82dde97a78ad8cc6bbcd18d4ee9d49eaec8ddd65e7aa, negative e13cccaf1db69b0b7c77621824aa2ed3ee964aa9fdac182fb9eebbd579271b64. Existing selected-route execution, no fresh dedicated test or historical aggregate compilation claimed.",
         "Reuse JIS-001 catalog boundary dated 2026-11-25; no separately established DE aggregate 2014, EN standalone 2016 or earlier/later standalone publication. Both original body tables directly checked, not extrapolated. No fresh catalog lookup."
+      ]
+    },
+    {
+      "finding_id": "JIS-004",
+      "service": "JourneyInformationService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_JourneyInformationService_V1.0.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact official JIS V1.0 route. The finding is limited to the wrong request/table label in the PDF; the XSD operation remains RetrieveAllRoutesPerLineRequest with LineRef."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "1.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "JIS_V1.0",
+              "document_title": "VDV-Schrift 301-2-6 Dienst JourneyInformationService",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-6sds-v1-0.pdfx",
+              "sha256": "424181b4932e18b6ac059843fa3978fdcc07a9c6acb553f9fbe8b71ef583da73",
+              "printed_pages": [
+                22
+              ],
+              "section": "1.22.1 Request (1.22 Datenstruktur der Operation RetrieveAllRoutesPerLine)",
+              "table": "Tabelle 38 – Beschreibung von JourneyInformationService.SetBlockNumberRequest",
+              "point_summary": "Header and caption wrongly label SetBlockNumberRequest, but LineRef 1:1 IBIS-IP.NMTOKEN and prose describe retrieving all routes per line."
+            },
+            {
+              "source_id": "JIS_V1.0",
+              "document_title": "VDV-Schrift 301-2-6 Dienst JourneyInformationService",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-6sds-v1-0.pdfx",
+              "sha256": "424181b4932e18b6ac059843fa3978fdcc07a9c6acb553f9fbe8b71ef583da73",
+              "printed_pages": [
+                22
+              ],
+              "section": "1.23.1 Request (1.23 Datenstruktur der Operation SetBlockNumber)",
+              "table": "Tabelle 39 – Beschreibung von JourneyInformationService.SetBlockNumberRequest",
+              "point_summary": "Actual SetBlockNumber request uses BlockRef 1:1 IBIS-IP.NMTOKEN, correctly named; response common acknowledgement."
+            },
+            {
+              "source_id": "JIS_V1.0",
+              "document_title": "VDV-Schrift 301-2-6 Dienst JourneyInformationService",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-6sds-v1-0.pdfx",
+              "sha256": "424181b4932e18b6ac059843fa3978fdcc07a9c6acb553f9fbe8b71ef583da73",
+              "printed_pages": [
+                11
+              ],
+              "section": "1.2 Operationen des JourneyInformationService",
+              "table": "Tabelle 1 – Beschreibung von Operationen des JourneyInformationService",
+              "point_summary": "Correct distinct request types and response pairings in overview."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                82
+              ],
+              "section": "9.6.21.1 Request (9.6.21 Data Structure of Operation RetrieveAllRoutesPerLine)",
+              "table": "Table 86 – Description of JourneyInformationService.SetBlockNumberRequest",
+              "point_summary": "Header and caption both wrong; LineRef 1:1, correct retrieval semantics. Response refers to §9.6.20.2."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                82
+              ],
+              "section": "9.6.22.1 Request (9.6.22 Data Structure of Operation SetBlockNumber)",
+              "table": "Table 87 – Description of JourneyInformationService.SetBlockNumberRequest",
+              "point_summary": "Actual SetBlockNumber uses BlockRef 1:1, correctly named."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                72,
+                73
+              ],
+              "section": "9.6.1 Operations of JourneyInformationService",
+              "table": "Table 49 – Description of Operationen des JourneyInformationService",
+              "point_summary": "Correct distinct request types and response pairings on p72; caption p73 verified in JIS-002."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_JourneyInformationService_V1.0.xsd",
+              "git_blob": "8c303db5a9c0548d66b90174d9c329d33092ad24",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "element",
+              "component": "JourneyInformationService.RetrieveAllRoutesPerLineRequest / JourneyInformationService.SetBlockNumberRequest",
+              "xpath_hint": "/xs:schema/xs:element[@name='JourneyInformationService.RetrieveAllRoutesPerLineRequest' or @name='JourneyInformationService.SetBlockNumberRequest']",
+              "line_hint": "293-306",
+              "point_summary": "Distinct global roots and types; Retrieve response line 299 shares ListAllRoutesResponseStructure.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_JourneyInformationService_V1.0.xsd",
+              "git_blob": "8c303db5a9c0548d66b90174d9c329d33092ad24",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "JourneyInformationService.RetrieveAllRoutesPerLineRequestStructure / JourneyInformationService.SetBlockNumberRequestStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='JourneyInformationService.RetrieveAllRoutesPerLineRequestStructure' or @name='JourneyInformationService.SetBlockNumberRequestStructure']",
+              "line_hint": "294-306",
+              "point_summary": "Required LineRef line 296 versus required BlockRef line 304; both IBIS-IP.NMTOKEN.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_JourneyInformationService_V1.0.xsd",
+              "git_blob": "1ee4d7aeb15f3269c5335313be9e214bdb519d2e",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "JourneyInformationService.RetrieveAllRoutesPerLineRequestStructure / JourneyInformationService.SetBlockNumberRequestStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='JourneyInformationService.RetrieveAllRoutesPerLineRequestStructure' or @name='JourneyInformationService.SetBlockNumberRequestStructure']",
+              "line_hint": "234-244",
+              "point_summary": "Historical type-only JIS uses same distinct types; LineRef 236 and BlockRef 243.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "element",
+              "component": "JourneyInformationService.RetrieveAllRoutesPerLineRequest / JourneyInformationService.SetBlockNumberRequest",
+              "xpath_hint": "/xs:schema/xs:element[@name='JourneyInformationService.RetrieveAllRoutesPerLineRequest' or @name='JourneyInformationService.SetBlockNumberRequest']",
+              "line_hint": "63-65",
+              "point_summary": "Distinct historical aggregate globals; group lines 96-98; correct shared retrieval response type.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            }
+          ],
+          "coverage_note": "JIS V1.0 RetrieveAllRoutesPerLine request table header and caption incorrectly name SetBlockNumberRequest in EN January 2014 p82 Table 86 and DE July 2016 p22 Table 38. Both operation overviews and both exact official XSD routes correctly distinguish required LineRef from BlockRef. Confirmed PDF-only label defect; no semantic, XSD or runtime change. JIS-001 prior catalog boundary reused, no new catalog lookup. No new EV-152 instance test warranted for editorial finding."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_JIS_004_2026-11-27.md",
+        "EV-152 run 34113437268 SUCCESS previously rechecked; archived ZIP 10015273758 SHA256 338e3fb679a8375c98fba359a3478d4cf7ba0968f3e97c08209ce52c0d23dc65 independently rechecked. DE original p22 SHA256 edbf46ad4beca13d4f6099c1f5e3556707b041ea1bc5c0cae0ab2258f183857b size 270426 and p11 698a4c1099476acb970382172af6e8c7f3f0dcc42036babdd1b5d498ec31e741 size 207400 verified and visually inspected. JIS_V1.0 PDF SHA256 424181b4932e18b6ac059843fa3978fdcc07a9c6acb553f9fbe8b71ef583da73 size 772125, pin 34103529949. No new DE raw download.",
+        "EN exact-source fallback run 45995480791 SUCCESS artifact 15196055861 ZIP SHA256 4328dc888410dbf6a5327874c6289434f702d0f35ac5939d317c1e12af5845df; VDV301-2_V1.0_EN source SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 size 2403598; p82 PNG 420a767ac2158a0fc1536f143a5ba5889ef2317d61daa2a02cdf1a9ce922b9a7 size 264785 verified against manifest and visually inspected.",
+        "EN operation overview p72 re-used artifact 15026289022 from run 45625180374 ZIP SHA256 5d147d3241d23da58f1b29b37214ca4dc13201899b8093f56ec31b4e54a42559; p72 SHA256 78eeea46be7aca63ebaca8fc68835cc20766f5b6e532e9895cecb36b5b3ec213 size 200135 rechecked and visually inspected. Table 49 caption on p73 verified previously in JIS-002.",
+        "Historical official VDV-301-1.0 JIS type-only blob 1ee4d7aeb15f3269c5335313be9e214bdb519d2e lines 234-244 and aggregate 41289eaed2674a169fdf77a10a2eff293c76d5c4 globals 63-65 and group 96-98; selected VDV-301-2.0 JIS 8c303db5a9c0548d66b90174d9c329d33092ad24 lines 31-33,293-306; actual selected branch blob identical. Prior JIS-003 upstream 2.1/2.2/2.3/master identical blob check retained; exact historical and selected declarations directly rechecked. Common/Enum exact V1.0 route unchanged.",
+        "JIS-001 catalog boundary dated 2026-11-25 reused: no independently established separate DE 2014 aggregate, EN 2016 standalone, earlier/later standalone publication. No fresh catalog lookup; both language body tables directly checked. EV-152 historical context evidence reviewed; no new instance test because this is documentation-only, not a validation behavior difference."
       ]
     }
   ]
