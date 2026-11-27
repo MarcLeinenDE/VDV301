@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 134,
-    "coverage_complete_count": 134,
+    "locator_entry_count": 135,
+    "coverage_complete_count": 135,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 58
+    "remaining_finding_count": 57
   },
   "entries": [
     {
@@ -26800,6 +26800,424 @@
         "EV-153 archived result SHA256 d0e25558f3b99390ae6742473e5b00d7de43de2c466d97aa8a5e16302fcea72e, positive sample eff4890c820958bf6dd7fc6c7c9e81a56153bb20f36b0ce6d327f1a45efcd2f5 size 154, negative d78cfe545df24418680ead36f339e9c09fff626d4d7b6b6c4104c478e8c6d4f3 size 152. Diff confirms only start/end tag spelling differs, same Distance=12.5 and pulse Value=42; positive valid, normalized alias rejected; archived error expected Odometer-Pulses. No new instance run or historical combined-schema compilation.",
         "VDV catalog https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-27: Distance 301-2-4 standalone V1.0 only, January 2014 EN aggregate and DE base service link; no independently established separate DE 2014 full aggregate or EN 2016 standalone, earlier/later standalone publication. DE p4 foreword identifies separation from January 2014; p6 version history empty by text. No official successor or spelling correction established.",
         "Active disproof: both PDF rows carry literal hyphen on one line, exact historical and selected XSDs agree. Not a wrap artifact or inconsistent translation. Optional field may be absent; no invented normalized alias or new advisory. Language-specific identifiers may differ from XML names only with explicit mapping. Runtime semantic entry is not_applicable, no_runtime_diagnostic; no matching runtime activation exists."
+      ]
+    },
+    {
+      "finding_id": "LS-003",
+      "service": "Location Services",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "BeaconLocationService V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_BeaconLocationService_V1.0.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact Beacon V1.0 route. The only top-level service root is BeaconLocationService.GetDataResponse, containing the Data / OperationErrorMessage choice."
+        },
+        {
+          "version": "DistanceLocationService V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_DistanceLocationService_V1.0.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact Distance V1.0 route. The top-level service root is DistanceLocationService.Data."
+        },
+        {
+          "version": "GNSSLocationService V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_GNSSLocationService_V1.0.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact GNSS V1.0 route. The top-level service root is GNSSLocationService.Data."
+        },
+        {
+          "version": "NetworkLocationService V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_NetworkLocationService_V1.0.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact Network V1.0 route. The top-level service root is NetworkLocationService.Data."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "BeaconLocationService V1.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "BLS_V1.0",
+              "document_title": "VDV-Schrift 301-2-2 Dienst BeaconLocationService",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-2sds-v1-0.pdfx",
+              "sha256": "1756dd8f373defd15988c222bea566a3841af376d987c0b0369f8701f2bc711d",
+              "printed_pages": [
+                8
+              ],
+              "section": "1.3.2 Response",
+              "table": "Tabelle 2 Beschreibung von BeaconLocationService.GetDataResponse",
+              "point_summary": "HTTP GetData response wrapper; mandatory choice Data (BeaconLocationService.DataContent) or OperationErrorMessage (IBIS-IP.string). DataContent is a type, not an independent global root."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                53
+              ],
+              "section": "9.1.2.2 Response",
+              "table": "Table 8: Description of BeaconLocationService.GetDataResponse",
+              "point_summary": "HTTP GetData response wrapper; mandatory choice Data (BeaconLocationService.DataContent) or OperationErrorMessage (IBIS-IP.string). DataContent is a type, not an independent global root."
+            },
+            {
+              "source_id": "BLS_V1.0",
+              "document_title": "VDV-Schrift 301-2-2 Dienst BeaconLocationService",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-2sds-v1-0.pdfx",
+              "sha256": "1756dd8f373defd15988c222bea566a3841af376d987c0b0369f8701f2bc711d",
+              "printed_pages": [
+                7
+              ],
+              "section": "1.1 Einleitung; 1.2 Operationen des BeaconLocationService",
+              "table": "Tabelle 1 Operationen des BeaconLocationService",
+              "point_summary": "HTTP rather than UDP multicast for reliable beacon events; GetData response type and generic subscribe/unsubscribe structures."
+            },
+            {
+              "source_id": "BLS_V1.0",
+              "document_title": "VDV-Schrift 301-2-2 Dienst BeaconLocationService",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-2sds-v1-0.pdfx",
+              "sha256": "1756dd8f373defd15988c222bea566a3841af376d987c0b0369f8701f2bc711d",
+              "printed_pages": [
+                8
+              ],
+              "section": "1.3.2 Response",
+              "table": "Tabelle 3 Beschreibung von BeaconLocationService.DataContent",
+              "point_summary": "Four data members in nested DataContent."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                52
+              ],
+              "section": "9.1 BeaconLocationService; 9.1.1 Operations of BeaconLocationService",
+              "table": "Table 7: Operations of BeaconLocationService",
+              "point_summary": "HTTP rather than UDP, reliable beacon events; explicit GetData response type."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                53
+              ],
+              "section": "9.1.2.2 Response",
+              "table": "Table 9: Description of BeaconLocationService.DataContent",
+              "point_summary": "Four data members in nested DataContent."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_BeaconLocationService_V1.0.xsd",
+              "git_blob": "791e2889f2baa4779ab66ae9e77038ff1b4be915",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "element",
+              "component": "BeaconLocationService.GetDataResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='BeaconLocationService.GetDataResponse']",
+              "line_hint": "7",
+              "point_summary": "Exact service-specific global root typed BeaconLocationService.GetDataResponseStructure.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_BeaconLocationService_V1.0.xsd",
+              "git_blob": "791e2889f2baa4779ab66ae9e77038ff1b4be915",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "BeaconLocationService.GetDataResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='BeaconLocationService.GetDataResponseStructure']",
+              "line_hint": "8-13",
+              "point_summary": "Exactly one choice between Data and OperationErrorMessage.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_BeaconLocationService_V1.0.xsd",
+              "git_blob": "791e2889f2baa4779ab66ae9e77038ff1b4be915",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "BeaconLocationService.DataContent",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='BeaconLocationService.DataContent']",
+              "line_hint": "14-33",
+              "point_summary": "Nested DataContent not a global root.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "element",
+              "component": "BeaconLocationService.GetDataResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='BeaconLocationService.GetDataResponse']",
+              "line_hint": "123",
+              "point_summary": "Historical umbrella schema declares identical global root and includes combined LocationService at line 9.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS-IP_LocationService_V1.0.xsd",
+              "git_blob": "2a653ba7d35a6e91b5fd691eb5c606160192ab9e",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "BeaconLocationService.GetDataResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='BeaconLocationService.GetDataResponseStructure']",
+              "line_hint": "42-47",
+              "point_summary": "Historical type identical; root supplied by umbrella schema, not missing from complete release.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS-IP_LocationService_V1.0.xsd",
+              "git_blob": "2a653ba7d35a6e91b5fd691eb5c606160192ab9e",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "BeaconLocationService.DataContent",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='BeaconLocationService.DataContent']",
+              "line_hint": "48-67",
+              "point_summary": "Identical historical nested type after whitespace normalization.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            }
+          ],
+          "coverage_note": "HTTP GetData response wrapper; mandatory choice Data (BeaconLocationService.DataContent) or OperationErrorMessage (IBIS-IP.string). DataContent is a type, not an independent global root. EN 2014 and DE 2016 body inspected; exact V1.0 official historical and selected service declarations agree in their complete dependency context. EV-153 own-schema positive and specified paired cross-schema rejection confirmed from archive; no new execution."
+        },
+        {
+          "version": "DistanceLocationService V1.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "DLS_V1.0",
+              "document_title": "VDV-Schrift 301-2-4 Dienst DistanceLocationService",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-4sds-v1-0.pdfx",
+              "sha256": "bdcbb3b2188f109944d687e6511209c5f049f25e1770bb3f4df596542d5009c4",
+              "printed_pages": [
+                7
+              ],
+              "section": "1.2 Datenstrukturen",
+              "table": "Tabelle 1 Beschreibung von DistanceLocationService.Data",
+              "point_summary": "UDP direct data structure; Distance required, Odometer-Pulses optional. No GetDataResponse wrapper."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                69,
+                70
+              ],
+              "section": "9.4 DistanceLocationService",
+              "table": "Table 47: Description of DistanceLocationService.Data",
+              "point_summary": "UDP direct data structure; Distance required, Odometer-Pulses optional. No GetDataResponse wrapper."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DistanceLocationService_V1.0.xsd",
+              "git_blob": "e6fdc418b6ddaba75d3fbe8f048d1c6d70e023b6",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "element",
+              "component": "DistanceLocationService.Data",
+              "xpath_hint": "/xs:schema/xs:element[@name='DistanceLocationService.Data']",
+              "line_hint": "7",
+              "point_summary": "Exact service-specific global root typed DistanceLocationService.DataStructure.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_LocationService_V1.0.xsd",
+              "git_blob": "2a653ba7d35a6e91b5fd691eb5c606160192ab9e",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "element",
+              "component": "DistanceLocationService.Data",
+              "xpath_hint": "/xs:schema/xs:element[@name='DistanceLocationService.Data']",
+              "line_hint": "7",
+              "point_summary": "Identical global root in historical combined schema.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS-IP_LocationService_V1.0.xsd",
+              "git_blob": "2a653ba7d35a6e91b5fd691eb5c606160192ab9e",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "DistanceLocationService.DataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='DistanceLocationService.DataStructure']",
+              "line_hint": "32-41",
+              "point_summary": "Entire type identical after formatting normalization.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            }
+          ],
+          "coverage_note": "UDP direct data structure; Distance required, Odometer-Pulses optional. No GetDataResponse wrapper. EN 2014 and DE 2016 body inspected; exact V1.0 official historical and selected service declarations agree in their complete dependency context. EV-153 own-schema positive and specified paired cross-schema rejection confirmed from archive; no new execution."
+        },
+        {
+          "version": "GNSSLocationService V1.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "GNSS_V1.0",
+              "document_title": "VDV-Schrift 301-2-5 Dienst GNSSLocationService",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-5sds-v1-0.pdfx",
+              "sha256": "e6a19a333a6c149a2d4b726a189acf16a9891d85dd28a7c5b008cdf254b631f5",
+              "printed_pages": [
+                7
+              ],
+              "section": "1.2 Datenstrukturen",
+              "table": "Tabelle 1 Beschreibung von GNSSLocationService.Data",
+              "point_summary": "UDP direct data structure; no GetDataResponse wrapper. HDOP spelling conflict remains separately tracked as LS-001."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                70
+              ],
+              "section": "9.5 Dienst GNSSLocationService",
+              "table": "Table 48: Description of GNSSLocationService.Data",
+              "point_summary": "UDP direct data structure; no GetDataResponse wrapper. HDOP spelling conflict remains separately tracked as LS-001."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_GNSSLocationService_V1.0.xsd",
+              "git_blob": "a74a22079af25cdd028a3e519019d9b3326d9971",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "element",
+              "component": "GNSSLocationService.Data",
+              "xpath_hint": "/xs:schema/xs:element[@name='GNSSLocationService.Data']",
+              "line_hint": "7",
+              "point_summary": "Exact service-specific global root typed GNSSLocationService.DataStructure.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_LocationService_V1.0.xsd",
+              "git_blob": "2a653ba7d35a6e91b5fd691eb5c606160192ab9e",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "element",
+              "component": "GNSSLocationService.Data",
+              "xpath_hint": "/xs:schema/xs:element[@name='GNSSLocationService.Data']",
+              "line_hint": "8",
+              "point_summary": "Identical global root in historical combined schema.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS-IP_LocationService_V1.0.xsd",
+              "git_blob": "2a653ba7d35a6e91b5fd691eb5c606160192ab9e",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "GNSSLocationService.DataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='GNSSLocationService.DataStructure']",
+              "line_hint": "10-31",
+              "point_summary": "Entire type identical after formatting normalization.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            }
+          ],
+          "coverage_note": "UDP direct data structure; no GetDataResponse wrapper. HDOP spelling conflict remains separately tracked as LS-001. EN 2014 and DE 2016 body inspected; exact V1.0 official historical and selected service declarations agree in their complete dependency context. EV-153 own-schema positive and specified paired cross-schema rejection confirmed from archive; no new execution."
+        },
+        {
+          "version": "NetworkLocationService V1.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "NLS_V1.0",
+              "document_title": "VDV-Schrift 301-2-7 Dienst NetworkLocationService",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-7sds-v1-0.pdfx",
+              "sha256": "fa45c9ef69635ab8615e4cf7dbd5c0417f8ea154a817ea1c54a73a141c7f4697",
+              "printed_pages": [
+                7
+              ],
+              "section": "1.2 Datenstrukturen",
+              "table": "Tabelle 1 Beschreibung von NetworkLocationService.Data",
+              "point_summary": "UDP direct data structure with route/next point references and distances; no GetDataResponse wrapper."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                84
+              ],
+              "section": "9.7 NetworkLocationService",
+              "table": "Table 94: Description of NetworkLocationService.Data",
+              "point_summary": "UDP direct data structure with route/next point references and distances; no GetDataResponse wrapper."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_NetworkLocationService_V1.0.xsd",
+              "git_blob": "bd1f83df2dfa83f36666a3ab3df4457242b387e9",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "element",
+              "component": "NetworkLocationService.Data",
+              "xpath_hint": "/xs:schema/xs:element[@name='NetworkLocationService.Data']",
+              "line_hint": "7",
+              "point_summary": "Exact service-specific global root typed NetworkLocationService.DataStructure.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_NetworkLocationService_V1.0.xsd",
+              "git_blob": "bd1f83df2dfa83f36666a3ab3df4457242b387e9",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "element",
+              "component": "NetworkLocationService.Data",
+              "xpath_hint": "/xs:schema/xs:element[@name='NetworkLocationService.Data']",
+              "line_hint": "7",
+              "point_summary": "Byte-identical historical standalone Network schema.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            }
+          ],
+          "coverage_note": "UDP direct data structure with route/next point references and distances; no GetDataResponse wrapper. EN 2014 and DE 2016 body inspected; exact V1.0 official historical and selected service declarations agree in their complete dependency context. EV-153 own-schema positive and specified paired cross-schema rejection confirmed from archive; no new execution."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_LS_003_2026-11-27.md",
+        "EN pinned render run 46001420624 SUCCESS at 6d7d228fc1077785c982dbcc188f7ff6e91af511, artifact 15197719169 ZIP SHA256 412306ca04310ca0278fa9d855c84a5f2bea17542f9058be50be86f096498833 size 1261946; registered EN source SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 size 2403598. All five PNG hashes/sizes verified against manifest and pages visually inspected: p52 a97fb7fb5adf570420a714452d0604c563b1aef8a02ad07e85c417b99430c667 (237441); p53 455980c0eb2779eae91cd8d102350958462ee3cae456df988588ea7b62dff1e7 (240675); p69 0a883b0bec59fb3d3cf1ef13bb49a85b0dc27802d11f3b1c9afa4cb19f3c1c21 (280137); p70 a53bb9ed4e53bd4dcfd5cfeee8859a57841c2efc30dd1aadde57ff66ea2ba161 (313736); p84 b197046c8c22242217f7c5c0b434246e7158fc2363dff399c6eb7404053078b0 (298626). Live screenshot cache miss, deterministic fallback succeeded.",
+        "Historical DE source pin archive 10056787340, run 34228583786, ZIP SHA256 ddbcc1774639c3d57a5cdf8efbc5f213a107f804d303cf11af520f5b1d66fe8e; all 21 manifest entries verified after removing archive path prefix. EV-153 archive 10057222866 ZIP SHA256 914a1b126e8c06145fe0ccc896f4e2a85db5204a7562ad7dada21ad660fecff7, all 25 manifest entries verified. DE original pages visually inspected: BLS p7 40df64802d52da1e3984ba25a3664fc2caef6b8a4eb839029905c8e7c7b7fc07 (208600), p8 698b315983a5c8ee7fa5205c885c9b37b983007650a6f65077063cae8518f709 (207741), DLS p7 5ba0c63b9343c55e108b8741e5ee7eadeb1ae036b97045e335992ca4f195af7d (130087), GNSS p7 400ca6d9488609131a9fcab6ff024b7e8d310d972f48174d96cd7b429e5bce8e (341322), NLS p7 0d2ef56f421381ca4f18b9ff7978bcef9b8c8bc4fafa342d0d702d4061fc53de (268778). BLS/NLS historical pins registered centrally, no new DE raw PDF retrieval.",
+        "EV-153 run 34229647400 SUCCESS on 45eeed958b3f7f1081f19d6858e54a27824c682f, result and four archived positives verified. BLS ac2ce833f26ce88a1662455d2c70b1e2af4058f5d0b957fad3201b0b7c702bf9 own valid, rejected by DLS; DLS eff4890c820958bf6dd7fc6c7c9e81a56153bb20f36b0ce6d327f1a45efcd2f5 own valid, rejected by BLS; GNSS fecf00bc529c4a0cdc60486cd14740525ce9010a95d3c3f3c15d2156889d9f67 own valid, rejected by NLS; NLS a7e2610697fde18aa00c743f589f981809b5277d6ed9ab42f3ab042e070fed6b own valid, rejected by GNSS. Four tested cross-pairs, not exhaustive 12-pair matrix. No fresh instance execution or historical aggregate compilation.",
+        "Exact VDVde/VDV301 VDV-301-1.0 IBIS_IP_V1.0.xsd umbrella blob 41289eaed2674a169fdf77a10a2eff293c76d5c4 line 123 defines Beacon root, line 9 includes combined LocationService blob 2a653ba7d35a6e91b5fd691eb5c606160192ab9e. Combined lines 7/8 define DLS/GNSS roots; Beacon types at lines 42 and 48. All four historical complex types (Beacon response/content, Distance, GNSS) equal standalone definitions after whitespace normalization. Network original standalone identical. Selected BLS 791e2889f2baa4779ab66ae9e77038ff1b4be915; DLS e6fdc418b6ddaba75d3fbe8f048d1c6d70e023b6; GNSS a74a22079af25cdd028a3e519019d9b3326d9971; NLS bd1f83df2dfa83f36666a3ab3df4457242b387e9; Common 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c; Enum a9bea5bc73003ed91ded8519db06c32c4067831d. Same six blobs on official 2.0, 2.1, 2.2, 2.3 and master; selected branch matches. Complete historical release is not equivalent to a single standalone schema; preserve existing deduplication policy.",
+        "VDV official catalog https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-27 lists four standalone V1.0 German publications and EN aggregate January 2014; no earlier publication, newer standalone version or separate DE 2014 full aggregate / EN 2016 standalone independently established. EN and DE independently show HTTP Beacon and UDP other services. Active disproof of missing historical root resolved by umbrella declaration; no generic root pattern, no new diagnostic. LS-001 spelling conflict remains separate; LS-002 exact hyphen remains separate."
       ]
     }
   ]
