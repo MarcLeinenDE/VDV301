@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 132,
-    "coverage_complete_count": 132,
+    "locator_entry_count": 133,
+    "coverage_complete_count": 133,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 60
+    "remaining_finding_count": 59
   },
   "entries": [
     {
@@ -26578,6 +26578,117 @@
         "EV-152 archived result JSON SHA256 cd219d84e018a5f9809799334c364e1a87ab71b1d90fef757d9da0f27e5cb7c8; positive sample 5c11ea4f8b07e796f1c281d13c27ed71ed47e5293c9c1d67b6fcdb84492019a6 size 519; negative sample 65f6ea8d74989c8f6fad201dc241a554936e88427094781d515417cc462cb61c size 527. Inspected same payload with only choice start/end tag renamed; archived positive true, negative false, expected SpecificGNSSPointInformation or OperationErrorMessage. No new instance run or historical aggregate compilation.",
         "Neighboring EN p77 Tables 63/66 and p79 Table 72 show Data-suffixed TSP, Timing and Beacon choice rows matching historical and selected XSDs (selected lines 138,158,198); Stop line 118 also uses Data. GNSS is an exception in these declarations; naming pattern is not executable authority. The matching type and fields TimeStamp/GNSSPoint remain unchanged. Runtime mapping reviewed_not_implemented, exact official scope, xsd_invalid_advisory with xsd_result_invalid and decorate_existing_invalid; no normalization.",
         "JIS-001 catalog boundary dated 2026-11-25 reused: no independently established separate DE 2014 aggregate, EN 2016 standalone, earlier/later standalone publication. No fresh catalog lookup; both language body tables directly checked."
+      ]
+    },
+    {
+      "finding_id": "LS-001",
+      "service": "GNSSLocationService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V1.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_GNSSLocationService_V1.0.xsd + IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "Exact official GNSSLocationService V1.0 route. PDF page 7 uses HorizontalDilutionOfPrecision while the selected XSD requires HoriziontalDilutionOfPrecision."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "1.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "pdf_locators": [
+            {
+              "source_id": "GNSS_V1.0",
+              "document_title": "VDV-Schrift 301-2-5 Dienst GNSSLocationService",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-5sds-v1-0.pdfx",
+              "sha256": "e6a19a333a6c149a2d4b726a189acf16a9891d85dd28a7c5b008cdf254b631f5",
+              "printed_pages": [
+                7
+              ],
+              "section": "1.2 Datenstrukturen",
+              "table": "Tabelle 1 Beschreibung von GNSSLocationService.Data",
+              "point_summary": "HorizontalDilutionOfPrec / ision line wrap, optional 0:1 IBIS-IP.double; adjacent VerticalDilutionOfPrecision. Heading and caption visually verified."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification v1.0",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                70
+              ],
+              "section": "9.5 Dienst GNSSLocationService",
+              "table": "Table 48: Description of GNSSLocationService.Data",
+              "point_summary": "HorizontalDilutionOfPre- / cision line wrap, optional 0:1 IBIS-IP.double; vertical DOP row adjacent. Heading and caption visually verified."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_GNSSLocationService_V1.0.xsd",
+              "git_blob": "a74a22079af25cdd028a3e519019d9b3326d9971",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "element",
+              "component": "HoriziontalDilutionOfPrecision",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='GNSSLocationService.DataStructure']/xs:sequence/xs:element[@name='HoriziontalDilutionOfPrecision']",
+              "line_hint": "19",
+              "point_summary": "Optional 0:1 IBIS-IP.double; correct PDF spelling not declared; vertical row at 20.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_GNSSLocationService_V1.0.xsd",
+              "git_blob": "a74a22079af25cdd028a3e519019d9b3326d9971",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0",
+              "component_kind": "element",
+              "component": "GNSSLocationService.Data",
+              "xpath_hint": "/xs:schema/xs:element[@name='GNSSLocationService.Data']",
+              "line_hint": "7",
+              "point_summary": "Global root typed GNSSLocationService.DataStructure (lines 9-30).",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0"
+            },
+            {
+              "file": "IBIS-IP_LocationService_V1.0.xsd",
+              "git_blob": "2a653ba7d35a6e91b5fd691eb5c606160192ab9e",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "element",
+              "component": "HoriziontalDilutionOfPrecision",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='GNSSLocationService.DataStructure']/xs:sequence/xs:element[@name='HoriziontalDilutionOfPrecision']",
+              "line_hint": "20",
+              "point_summary": "Same misspelling in historical combined schema; type lines 10-31.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            },
+            {
+              "file": "IBIS-IP_LocationService_V1.0.xsd",
+              "git_blob": "2a653ba7d35a6e91b5fd691eb5c606160192ab9e",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0",
+              "component_kind": "element",
+              "component": "GNSSLocationService.Data",
+              "xpath_hint": "/xs:schema/xs:element[@name='GNSSLocationService.Data']",
+              "line_hint": "8",
+              "point_summary": "Identical GNSS root/type; combined schema includes additional Distance and Beacon declarations, not full-file equivalent.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0"
+            }
+          ],
+          "coverage_note": "GNSSLocationService V1.0 PDF EN January 2014 p70 Table 48 and DE July 2016 p7 Table 1 both print HorizontalDilutionOfPrecision, optional 0:1 IBIS-IP.double; historical combined LocationService and selected standalone GNSS XSD declare HoriziontalDilutionOfPrecision, optional minOccurs=0/default maxOccurs=1, same type. EV-153 confirms selected XSD spelling PASS and PDF spelling FAIL. Retain cross_artifact_mismatch, selected_xsd, error_with_advisory; no alias, XSD or runtime change. Historical split is packaging-only for GNSS root/type. Catalog contains only standalone V1.0. No new EV-153 instance execution."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_LS_001_2026-11-27.md",
+        "EV-153 run 34229647400 SUCCESS rechecked on 45eeed958b3f7f1081f19d6858e54a27824c682f, artifact 10057222866 ZIP SHA256 914a1b126e8c06145fe0ccc896f4e2a85db5204a7562ad7dada21ad660fecff7 size 1077575; all 25 manifest entries verified. DE original p7 PNG SHA256 400ca6d9488609131a9fcab6ff024b7e8d310d972f48174d96cd7b429e5bce8e size 341322 visually inspected.",
+        "Historical GNSS_V1.0 pin run 34228583786 job 102068710920 artifact 10056787340 ZIP SHA256 ddbcc1774639c3d57a5cdf8efbc5f213a107f804d303cf11af520f5b1d66fe8e; all 21 manifest entries verified after removal of archive path prefix; pin-results and pdfs.sha256 agree on source SHA256 e6a19a333a6c149a2d4b726a189acf16a9891d85dd28a7c5b008cdf254b631f5 size 449287 retrieved 2026-09-08T12:52:58Z. Same p7 PNG hash as EV-153. Historical pin added centrally; no new DE raw PDF download.",
+        "EN exact-source fallback run 45998400696 SUCCESS artifact 15196079487 ZIP SHA256 4f155f21baf073d7ca647d6fa252c0bb02abd1a98a178b106d0f946e51925b6e size 288968; VDV301-2_V1.0_EN source SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 size 2403598; p70 PNG a53bb9ed4e53bd4dcfd5cfeee8859a57841c2efc30dd1aadde57ff66ea2ba161 size 313736 verified against manifest and visually inspected. Printed EN wraps as HorizontalDilutionOfPre- / cision, DE HorizontalDilutionOfPrec / ision. Both rows optional 0:1; vertical neighbor same type and correct spelling.",
+        "Exact upstream VDV-301-1.0 historical combined IBIS-IP_LocationService_V1.0.xsd blob 2a653ba7d35a6e91b5fd691eb5c606160192ab9e root line 8, type lines 10-31, spelling line 20; selected VDV-301-2.0 standalone IBIS-IP_GNSSLocationService_V1.0.xsd blob a74a22079af25cdd028a3e519019d9b3326d9971 root line 7, type lines 9-30, spelling line 19. Actual selected branch blob identical. Root declaration and entire GNSS type (14 ordered fields incl. annotation) identical after whitespace/line-ending normalization. Same Common 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c and Enum a9bea5bc73003ed91ded8519db06c32c4067831d in both routes; 2.1/2.2/2.3/master same standalone blob and dependencies. Requested VDV-301-2.4 tag not found; no equivalence claim for a missing tag. SUPERBRANCH_V1_0_DEDUP_POLICY.md existing split retained; no full combined-schema equivalence asserted.",
+        "EV-153 archived result SHA256 d0e25558f3b99390ae6742473e5b00d7de43de2c466d97aa8a5e16302fcea72e, positive sample fecf00bc529c4a0cdc60486cd14740525ce9010a95d3c3f3c15d2156889d9f67 size 369 and negative 781a02377aa78a458bab916e26780d33f94894425abcf377bbd13ef1c76a2822 size 367 verified. Only start/end name differs, result positive valid and negative rejected. Historical initial failed run 34229230088 caused by line-wrap text extraction, repaired without classification change. No new instance run or historical combined-schema compilation.",
+        "Fresh VDV public catalog check 2026-11-27 https://www.vdv.de/ip-kom-oev.aspx lists GNSS 301-2-5 V1.0 only, January 2014 EN aggregate and DE base service link; no independently established separate DE 2014 aggregate or EN 2016 standalone, earlier/later standalone publication. DE p6 history records spelling corrections 11.03.2016 without identifying the affected field; cannot infer an authoritative correction to this XSD. No independent erratum confirming source attribution; conventional spelling supports likely XSD typo but classification remains cross_artifact_mismatch.",
+        "Runtime mapping exact official GNSS V1.0 xsd_invalid_advisory, xsd_result_invalid, decorate_existing_invalid, reviewed_not_implemented. Optional HDOP absent does not trigger finding. Preserve invalid result, no normalization."
       ]
     }
   ]
