@@ -2127,7 +2127,7 @@
     "version_scope_boundary_latest_gate_run_id": 46086593669
   },
   "next_actions": [
-    "SMS-003 confirmed_pdf_defect, contextual_only, editorial_residue, no_runtime_diagnostic, runtime_match not_applicable. SMS p4 English Foreword contains HDS paragraph, German Vorwort omits it; p7/8 §1.1 confirm SMS device/service information scope. HDS p4 lines 19–20 same wording and HDS p7/9 §1.1 confirm service-specific URL/browser role. Likely editorial copy/paste, direction/authoring history not proven. Only official standalone SMS V2.2 affected, English foreword only; predecessor aggregate and HDS comparison not affected. No new XML rule or targeted executable test warranted; existing full gate still required. Semantic and runtime mapping unchanged. 143/192 locator/body/boundary entries complete, 49 missing. Substantive schema 46086593669 and handoff 46086593675 SUCCESS. Terminal closure; verify final HEAD gates and reviewed memory PR before starting SMS-004 (NOT STARTED)."
+    "SMS-004: SMS original pinned run 46086066109 artifact 15239216306 ZIP and all five PNG hashes/size rechecked; pp12/13 and p7 visibly re-inspected. Both language lines p12 §3.1.1 cite 302-2; p13 reference (3) identifies 301-2-0 Base Services V2.0 02/2018. Historical Base V2.0 artifact 11664756069 ZIP and three PNG hashes checked; p103 Table36 and footer 301-2 02/2018 visibly reviewed. Official web text and VDV catalog confirm historical original title 301-2 (not 301-2-0). Live screenshots cache miss. Need exact pinned historical cover and §7.3 for bibliographic precision; request existing renderer. No progress credit yet. Inspect fallback run on actual HEAD; rehash ZIP and source pin/PNG manifest, visibly inspect historical V2.0 cover and service section. Check closest V2.1 and upstream XSD context; record actual source title versus retrospective reference, retain independent DRSMS22-003; update registers and gates, terminal closure and reviewed memory PR."
   ],
   "source_locator_progress": {
     "locator_entry_count": 143,
@@ -2205,12 +2205,24 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": 46086593669,
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": 46086593675,
-    "resume_instruction": "SMS-003 confirmed_pdf_defect, contextual_only, editorial_residue, no_runtime_diagnostic, runtime_match not_applicable. SMS p4 English Foreword contains HDS paragraph, German Vorwort omits it; p7/8 §1.1 confirm SMS device/service information scope. HDS p4 lines 19–20 same wording and HDS p7/9 §1.1 confirm service-specific URL/browser role. Likely editorial copy/paste, direction/authoring history not proven. Only official standalone SMS V2.2 affected, English foreword only; predecessor aggregate and HDS comparison not affected. No new XML rule or targeted executable test warranted; existing full gate still required. Semantic and runtime mapping unchanged. 143/192 locator/body/boundary entries complete, 49 missing. Substantive schema 46086593669 and handoff 46086593675 SUCCESS. Terminal closure; verify final HEAD gates and reviewed memory PR before starting SMS-004 (NOT STARTED)."
+    "resume_instruction": "SMS-004: SMS original pinned run 46086066109 artifact 15239216306 ZIP and all five PNG hashes/size rechecked; pp12/13 and p7 visibly re-inspected. Both language lines p12 §3.1.1 cite 302-2; p13 reference (3) identifies 301-2-0 Base Services V2.0 02/2018. Historical Base V2.0 artifact 11664756069 ZIP and three PNG hashes checked; p103 Table36 and footer 301-2 02/2018 visibly reviewed. Official web text and VDV catalog confirm historical original title 301-2 (not 301-2-0). Live screenshots cache miss. Need exact pinned historical cover and §7.3 for bibliographic precision; request existing renderer. No progress credit yet. Inspect fallback run on actual HEAD; rehash ZIP and source pin/PNG manifest, visibly inspect historical V2.0 cover and service section. Check closest V2.1 and upstream XSD context; record actual source title versus retrospective reference, retain independent DRSMS22-003; update registers and gates, terminal closure and reviewed memory PR.",
+    "pending_block": "SMS-004 source-reference and version-boundary verification",
+    "active_finding": "SMS-004",
+    "active_step": "SMS-004: SMS original pinned run 46086066109 artifact 15239216306 ZIP and all five PNG hashes/size rechecked; pp12/13 and p7 visibly re-inspected. Both language lines p12 §3.1.1 cite 302-2; p13 reference (3) identifies 301-2-0 Base Services V2.0 02/2018. Historical Base V2.0 artifact 11664756069 ZIP and three PNG hashes checked; p103 Table36 and footer 301-2 02/2018 visibly reviewed. Official web text and VDV catalog confirm historical original title 301-2 (not 301-2-0). Live screenshots cache miss. Need exact pinned historical cover and §7.3 for bibliographic precision; request existing renderer. No progress credit yet.",
+    "next_step": "Inspect fallback run on actual HEAD; rehash ZIP and source pin/PNG manifest, visibly inspect historical V2.0 cover and service section. Check closest V2.1 and upstream XSD context; record actual source title versus retrospective reference, retain independent DRSMS22-003; update registers and gates, terminal closure and reviewed memory PR.",
+    "recovery_instruction": "Inspect fallback run on actual HEAD; rehash ZIP and source pin/PNG manifest, visibly inspect historical V2.0 cover and service section. Check closest V2.1 and upstream XSD context; record actual source title versus retrospective reference, retain independent DRSMS22-003; update registers and gates, terminal closure and reviewed memory PR.",
+    "evidence_refs": [
+      "tools/pdf_render_request_v0.1.json",
+      "SMS pinned render run 46086066109 artifact 15239216306",
+      "Base V2.0 render run 38038078632 artifact 11664756069",
+      "https://www.vdv.de/ip-kom-oev.aspx",
+      "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_SMS_003_2026-11-28.md"
+    ]
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
