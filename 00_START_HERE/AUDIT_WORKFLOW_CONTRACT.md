@@ -31,6 +31,7 @@ Every finding — new, historical or revalidated — follows the same path.
 - Never create a second identity for the same issue.
 - Check semantic registry, source-locator registry, runtime mapping, evidence and correction overlays before changing anything.
 - A revalidation of an already complete finding does **not** create new progress credit.
+- If two already-frozen IDs assert the same source/version/language locus, same semantic error and same SDK effect, treat this as an identity collision, not independent progress. Preserve both historical records and their evidence; do not silently delete, renumber, add locator credit or change the frozen denominator. Document the collision, record the recoverable next step in CURRENT_STATE.json and resolve duplicate disposition and progress accounting against the canonical registries/gates before advancing. Different evidence runs or issue-kind labels alone do not establish distinct identity.
 
 ### Step 2 — establish version scope independently
 
