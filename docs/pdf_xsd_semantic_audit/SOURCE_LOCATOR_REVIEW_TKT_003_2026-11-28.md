@@ -1,0 +1,48 @@
+# TKT-003 source locator and response type identity review — 2026-11-28
+
+Status: original-source evidence and permanent response-type regression complete; full canonical registry gate pending at substantive commit creation. Final gate evidence in CURRENT_STATE.
+
+## Classification and boundary
+
+TKT-003 confirmed_pdf_defect, selected_xsd, wrong_type_reference, no_runtime_diagnostic retained; validation effect refined to distinguish equal child content from distinct explicit named type. Both original EN and standalone DE affected. Exact original aggregate vs later isolated schema/test-only wrapper distinguished. Common 05/2017 definition context is not a later corrected Ticketing edition; no earlier publication or corrected later service edition established. Ordinary XSD errors remain normative; no synthetic roots or alias.
+
+EN V1.0 01/2014 pp91–92 §9.11.1 Table 115 misassigns SubscribeResponseStructure to UnsubscribeValidationResult; p95 §9.11.10 correctly refers to §§10.57/10.58 (p109 Tables 181/182); p108 §10.52 Table 176 proves the Subscribe counterpart. Original aggregate supplies distinct generic root/type declarations. Identical child choice, but sibling types are not interchangeable as explicit xsi:type.
+
+DE standalone V1.0 07/2016 pp7–8 §1.2 Tabelle 1 repeats the wrong type; p12 §1.11 points to VDV 301-2-1. Standalone Common 05/2017 pp20/22 §§1.52/1.57/1.58 Tables 52/57/58 corroborate distinct roles and identical choice; its document revision 1.1 is not an XSD version. All verified official tags 2.0–2.3 retain exact later service and Common/Enums V1.0; isolated later Ticketing schema has types but not generic global roots. Test-only wrapper is not production authority; master is comparison only. No earlier or corrected later Ticketing publication established.
+
+## Visible original locators
+
+| Source | Printed pages | Actual section/table | Finding context |
+| --- | --- | --- | --- |
+| VDV301-2_V1.0_EN | 91, 92 | 9.11.1 Operations of the TicketingService; Table 115: Operation of the TicketingService | UnsubscribeValidationResult response wrongly names SubscribeResponseStructure; SubscribeValidationResult and UnsubscribeCurrentTariffInformation are contrasting correct rows. |
+| VDV301-2_V1.0_EN | 95 | 9.11.10 Data Structure of Operation UnsubscribeValidationResult | Correctly points to chapters 10.57 and 10.58; neighboring §9.11.9 points to Subscribe structures. |
+| VDV301-2_V1.0_EN | 108 | 10.52 SubscribeResponse; Table 176: Description of SubscribeResponse | Required one-of Active or OperationErrorMessage; subscription acknowledgement role. |
+| VDV301-2_V1.0_EN | 109 | 10.57 UnsubscribeRequest; Table 181: Description of UnsubscribeRequest | Actual visible target of the unsubscribe detail cross-reference. |
+| VDV301-2_V1.0_EN | 109 | 10.58 UnsubscribeResponse; Table 182: Description of UnsubscribeResponse | Required one-of Active or OperationErrorMessage; termination role. |
+| TICKETING_V1.0 | 7, 8 | 1.2 Operationen des TicketingService; Tabelle 1 Operationen des TicketingServices | p8 repeats wrong SubscribeResponseStructure for UnsubscribeValidationResult; p7 contains correct parallel subscribe and tariff unsubscribe. |
+| TICKETING_V1.0 | 12 | 1.11 Datenstruktur der Operation UnsubscribeValidationResult | Refers to common VDV 301-2-1 termination structures; §1.10 separately describes subscription establishment. |
+| COMMON_V1.0 | 20 | 1.52 SubscribeResponse; Table 52 Description of SubscribeResponse | Required one-of Active or OperationErrorMessage, subscription acknowledgement. |
+| COMMON_V1.0 | 22 | 1.57 UnsubscribeRequest; Table 57 Description of UnsubscribeRequest | Shared termination request; context only, no request spelling finding here. |
+| COMMON_V1.0 | 22 | 1.58 UnsubscribeResponse; Table 58 Description of UnsubscribeResponse | Shared termination response, identical choice, distinct role. |
+
+## Executable authority and falsification
+
+The exact Common V1.0 declarations (lines 863–868 and 876–881) contain the same mandatory xs:choice between Active (IBIS-IP.boolean) and OperationErrorMessage (IBIS-IP.string). The named complex types are independent, not derived from one another. The original aggregate declares the two generic roots on lines 207–208. The later isolated Ticketing service has no generic global response roots: test-only inclusion wrapper exercises its named types without creating production declarations. Separate packaging remains TKT-001. The strongest counterargument is that the table could intentionally name an equivalent shared shape. The same document's correct tariff unsubscribe row and explicit detail cross-reference to the termination response falsify intentional substitution. Identical child content does not authorize sibling xsi:type substitution, a change of root, or an alias.
+
+The prior EV-158 comparison checked choice names statically. The new permanent regression confirms 16 positive and 18 targeted negative instances: 8 sibling-type, 8 empty/both-choice, 2 missing-root. Correct ordinary payload content remains equivalent. Wrong explicit xsi:type fails SCHEMAV_CVC_ELT_4_3, not unresolved type. No runtime diagnostic mapping because generic XML and XSD error alone cannot identify the affected operation; the PDF does not explicitly mandate xsi:type. Normal selected-XSD FAIL remains normative. No runtime mapping entry changes, no resolver or XSD changes.
+
+## Reproduction and evidence
+
+- Reused EV-158 artifact 10336185560 ZIP SHA256 ba5ee246787f58d4cf690421fda683fb1dd072106d5c4e7eb6376c218b717870 integrity PASS; raw DE PDF SHA256 96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43 (627099 bytes), archived p7 1e3d45fcbf975045fb0d97948dfc3f7148fc43516b28f604e94d3cc844ec357c (185769), p8 191ea4b3948ea2953b0a345996b7651a3f56d689e37515553572a5f7ad4e3246 (190801), p12 5f6574a3a2f73731d4219b0009f417a0dce6d61c9bf93a715d37a38f6e8f07ff (189100), actual images inspected.
+- Reused EN fallback artifact 15254386230 ZIP SHA256 6ff41b34a5eb259ee674e6a321ef2620d3d9f422b673c625f56e3dddbff944e3 integrity PASS; p91 5dad76930429c141c66a00d7d2b22d8019e16317f9b0b645f7c99fb815fa68dc (269589), p92 a78ef4241a53ac5818d655d9d694f6466fa4d612b384ceac7487f467e523c4fe (217236), both actual images inspected.
+- New EN render 46135487398 artifact 15259980153 ZIP SHA256 fd1f0b0df80de41da39f1b8f04c549d7323375ae4fa34f173f0ea11369f6f252; source SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 (2403598); p95 663b5018e28f32c6faf90dd75d9e8c1055256f4413dbc07afd08cca743128cc9 (289688), manifest/pin/ZIP/PNG verified, visible detail inspected.
+- New EN Common target render 46135658545 artifact 15259631732 ZIP SHA256 321229d5afa5519f3049d8622d732d759e656b8c9987a9514b02229bc16eb696; same EN source pin; p108 b8f346681c2bdd6e473e3c6f6454308c20b0ce926cd9e5015f9f0027db66a62f (247544), p109 576d76bf65412c7b170fb76afb92d7fea1e3129f40a50e087e8fd7c63547dd93 (200120), manifest/pin/ZIP/PNG verified, both visible bodies inspected.
+- New standalone Common render 46135697874 artifact 15259911773 ZIP SHA256 6165f6c9fe23af8f2ce3d6c71945cd5fc928a0b55132e6fdbd7067ea2c10f834; source SHA256 a4d53163e5e3b2690887ac5e060d982c1135e1e5c2d6e753c9a151441167a0cf (892769); p20 7bfa01dfb7a860f9e37311d3b212383dd91fbac74541980be69d88bbea86ee2b (166616), p22 de535fb351244e7bf9b08ee48ab5effd71863707ffa70270688fa86bd2105c74 (201670), manifest/pin/ZIP/PNG verified, both visible bodies inspected.
+- Exact upstream tag files rechecked: original service 017ca64666e25d757fc0cde1f1be817f06a743fc, original aggregate 41289eaed2674a169fdf77a10a2eff293c76d5c4, later service 3fda66d872ab0d1c511247f13e715cf3ad56afe7 identical at all official tags 2.0–2.3 and master; Common 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c / Enums a9bea5bc73003ed91ded8519db06c32c4067831d unchanged across all those tags and 1.0. No later official standalone TicketingService edition or V2.4 release established per prior catalog check; Common 05/2017 is definition context, not a corrected TicketingService edition.
+- Permanent checker tools/validate_tkt_001_release_context.py expanded in 8b6735064aeb974fc94ee1a6a02233826f3dacfd; schema gate 46135552267 and handoff 46135552250 SUCCESS. Artifact 15258844907 SHA256 76a123532079456cc19f21dd64b85509d65c0c45cb41cbeca080d98f498dffb2 downloaded and verified, all 24 status files exit 0. TKT-003 16 positive (implicit/exact explicit type), 8 sibling xsi:type negatives SCHEMAV_CVC_ELT_4_3, 8 empty/both-choice negatives SCHEMAV_ELEMENT_CONTENT, 2 isolated later missing-root negatives SCHEMAV_CVC_ELT_1. Original aggregate real roots vs later test-only type wrapper; no production roots synthesized.
+- Historical EV-158 checker only compared choice member names for TKT-003, not explicit sibling type instance behavior. Its prior no XML-shape delta is retained as child-content-model equivalence only; distinct type identity now executable-confirmed. Ordinary XSD error suffices; no finding-specific runtime mapping without reliable operation context; PDF does not expressly prescribe xsi:type. No XSD/Resolver/Runtime mapping entry changes.
+- Live renderer cache misses; EN p95 and definition targets and standalone Common rendered by exact-byte fallback. Initial handoff 46135487395 failed due to pending_block minimum length; fixed in 8b673506; handoff 46135552250, 46135658678, 46135697856 SUCCESS. No history rewrite; no premature terminal credit.
+
+## Handoff
+
+149/192 locator/body/boundary entries prepared; 43 remain. Full registry gate and final handoff checks required before terminal closure and reviewed memory PR. TKT-004 is next, not started.
