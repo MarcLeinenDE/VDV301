@@ -559,6 +559,134 @@ def validate_tkt_008_card_application_spelling(folder, later, aggregate_schema, 
     print("PASSED TKT-008: 4 positives, 2 exact PDF spelling negatives, 12 context controls, 2 isolated historical controls")
 
 
+def validate_tkt_009_service_spelling(folder, later, aggregate_schema, later_schema, old_schema):
+    """Distinguish literal PDF child and type typos from invented roots and unrelated errors."""
+    xsi = "{http://www.w3.org/2001/XMLSchema-instance}type"
+    data = "TicketingService.GetTariffInformationResponseData"
+    inner = data + "Structure"
+    wrong = data.replace("TicketingService.", "TicketingSevice.", 1)
+    validation_data = "TicketingService.ValidationResponseData"
+    validation_type = "TicketingService.ValidateTicketResponseDataStructure"
+    tariff_roots = ("TicketingService.GetTariffInformationResponse",
+                    "TicketingService.RetrieveTariffInformationResponse")
+    validation_root = "TicketingService.ValidateTicketResponse"
+    for path in [folder / filename for filename in OLD] + [
+            later, ROOT / "IBIS-IP_common_V1.0.xsd", ROOT / "IBIS-IP_Enumerations_V1.0.xsd"]:
+        names = parse(path).xpath("/xs:schema//@name", namespaces=NS)
+        require(not any("TicketingSevice" in name for name in names),
+                f"TKT-009 no misspelled declaration in {path.name}")
+    for path in (folder / AGG, later):
+        doc = parse(path)
+        for root in tariff_roots:
+            require(roots(doc).get(root) == "TicketingService.GetTariffInformationResponseStructure",
+                    "TKT-009 exact shared tariff root/type")
+        require(roots(doc).get(validation_root) == "TicketingService.ValidateTicketResponseStructure",
+                "TKT-009 exact validation root/type")
+    for path in (folder / FILE, later):
+        doc = parse(path)
+        for outer, child, typ in (
+                ("TicketingService.GetTariffInformationResponseStructure", data, inner),
+                ("TicketingService.ValidateTicketResponseStructure", validation_data, validation_type)):
+            choice = doc.xpath("/xs:schema/xs:complexType[@name=$outer]/xs:choice", namespaces=NS, outer=outer)
+            require(len(choice) == 1 and not choice[0].attrib and
+                    [dict(e.attrib) for e in choice[0]] == [
+                        {"name": child, "type": typ},
+                        {"name": "OperationErrorMessage", "type": "IBIS-IP.string"}],
+                    "TKT-009 exact outer choice and nested type")
+    tariff = ("<DefaultLanguage><Value>de</Value></DefaultLanguage>"
+              "<TimeStamp><Value>2026-11-28T12:00:00Z</Value></TimeStamp>"
+              "<TripRef><Value>T1</Value></TripRef>"
+              "<Line><LineRef><Value>L1</Value></LineRef></Line>"
+              "<StopPointTariffInformation><JourneyStopInformation>"
+              "<StopRef><Value>S1</Value></StopRef>"
+              "<StopName><Value>Stop</Value><Language>de</Language></StopName>"
+              "<DisplayContent><LineInformation><LineRef><Value>L1</Value></LineRef></LineInformation>"
+              "<Destination><DestinationRef><Value>D1</Value></DestinationRef></Destination>"
+              "</DisplayContent></JourneyStopInformation>"
+              "<FareZoneInformation><FareZoneID><Value>Z1</Value></FareZoneID></FareZoneInformation>"
+              "</StopPointTariffInformation>")
+    validation = ("<TimeStamp><Value>2026-11-28T15:00:00Z</Value></TimeStamp>"
+                  "<GlobalCardStatus><GlobalCardStausID><Value>0</Value></GlobalCardStausID></GlobalCardStatus>"
+                  "<CardType><CardSerialNumber><Value>S1</Value></CardSerialNumber>"
+                  "<CardTypeID><Value>T1</Value></CardTypeID></CardType>"
+                  "<CardValidationCode><Value>0</Value></CardValidationCode>"
+                  "<CardTicketData><CardTicketDataID><Value>1</Value></CardTicketDataID>"
+                  "<CardTicketDataLength><Value>1</Value></CardTicketDataLength>"
+                  "<CardTicketData><Value>1</Value></CardTicketData></CardTicketData>")
+    error = "<OperationErrorMessage><Value>test</Value></OperationErrorMessage>"
+    def payload(root, child, content):
+        return etree.fromstring(f"<{root}><{child}>{content}</{child}></{root}>".encode())
+    def error_payload(root):
+        return etree.fromstring(f"<{root}>{error}</{root}>".encode())
+    positive = spelling = type_typo = controls = isolated = 0
+    cases = [(root, data, inner, tariff) for root in tariff_roots] + [
+        (validation_root, validation_data, validation_type, validation)]
+    for profile, schema in (("original aggregate", aggregate_schema), ("later service", later_schema)):
+        for root, child, typ, content in cases:
+            node = payload(root, child, content)
+            require(schema.validate(node), f"TKT-009 {profile} {root} implicit type PASS")
+            node[0].set(xsi, typ)
+            require(schema.validate(node), f"TKT-009 {profile} {root} exact explicit type PASS")
+            require(schema.validate(error_payload(root)), f"TKT-009 {profile} {root} error choice PASS")
+            positive += 3
+            badtype = typ.replace("TicketingService.", "TicketingSevice.", 1)
+            node[0].set(xsi, badtype)
+            require(not schema.validate(node), f"TKT-009 {profile} {root} literal PDF type rejected")
+            errors = list(schema.error_log)
+            require(len(errors) == 1 and errors[0].type_name == "SCHEMAV_CVC_ELT_4_2"
+                    and badtype in errors[0].message and errors[0].path == f"/{root}/{child}",
+                    "TKT-009 exact unresolved PDF QName at correct child")
+            type_typo += 1
+            if root in tariff_roots:
+                node = payload(root, wrong, content)
+                require(not schema.validate(node), f"TKT-009 {profile} {root} literal PDF child rejected")
+                errors = list(schema.error_log)
+                require(len(errors) == 1 and errors[0].type_name == "SCHEMAV_ELEMENT_CONTENT"
+                        and f"Element '{wrong}'" in errors[0].message
+                        and f"Expected is one of ( {data}, OperationErrorMessage )" in errors[0].message
+                        and errors[0].path == f"/{root}/{wrong}", "TKT-009 exact child-name advisory boundary")
+                spelling += 1
+                node = error_payload(root)
+                node.append(payload(root, wrong, content)[0])
+                require(not schema.validate(node) and len(schema.error_log) == 1
+                        and "Expected is one of" not in schema.error_log[0].message,
+                        "TKT-009 wrong name after completed choice is not expected-child boundary")
+                controls += 1
+            # Invented misspelled root not printed in these tables.
+            node = payload(root, child, content)
+            node.tag = root.replace("TicketingService.", "TicketingSevice.", 1)
+            require(not schema.validate(node) and bool(schema.error_log)
+                    and all(e.type_name == "SCHEMAV_CVC_ELT_1" for e in schema.error_log),
+                    "TKT-009 invented root is not the literal PDF child/type")
+            controls += 1
+            # Unrelated child failure must not activate a spelling advisory.
+            node = payload(root, "UnrelatedData", content)
+            require(not schema.validate(node) and len(schema.error_log) == 1
+                    and schema.error_log[0].type_name == "SCHEMAV_ELEMENT_CONTENT"
+                    and "Element 'UnrelatedData'" in schema.error_log[0].message,
+                    "TKT-009 expected canonical child alone is insufficient")
+            controls += 1
+            node = payload(root, child, content)
+            node[0].set(xsi, "UnrelatedType")
+            require(not schema.validate(node) and len(schema.error_log) == 1
+                    and schema.error_log[0].type_name == "SCHEMAV_CVC_ELT_4_2"
+                    and "UnrelatedType" in schema.error_log[0].message,
+                    "TKT-009 unresolved type alone is insufficient")
+            controls += 1
+    for root, child, typ, content in cases:
+        for actual in (child, wrong if root in tariff_roots else child):
+            node = payload(root, actual, content)
+            if root == validation_root and isolated % 2:
+                node[0].set(xsi, typ.replace("TicketingService.", "TicketingSevice.", 1))
+            require(not old_schema.validate(node) and bool(old_schema.error_log)
+                    and all(e.type_name == "SCHEMAV_CVC_ELT_1" for e in old_schema.error_log),
+                    "TKT-009 isolated original missing global declaration is separate")
+            isolated += 1
+    require((positive, spelling, type_typo, controls, isolated) == (18, 4, 6, 22, 6),
+            "TKT-009 exact regression counts")
+    print("PASSED TKT-009: 18 positives, 4 exact PDF child negatives, 6 exact PDF type negatives, 22 context controls, 6 isolated historical controls")
+
+
 def main():
     later = ROOT / FILE
     require(blob(later) == LATER, "selected later service blob")
@@ -610,6 +738,7 @@ def main():
         validate_tkt_006_tariff_sequence(folder, later, aggregate_schema, later_schema, old_schema)
         validate_tkt_007_inner_field_ownership(folder, later, aggregate_schema, later_schema, old_schema)
         validate_tkt_008_card_application_spelling(folder, later, aggregate_schema, later_schema, old_schema)
+        validate_tkt_009_service_spelling(folder, later, aggregate_schema, later_schema, old_schema)
     return 0
 
 
