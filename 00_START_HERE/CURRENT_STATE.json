@@ -1,6 +1,6 @@
 {
   "state_schema_version": "0.1",
-  "date": "2026-11-23",
+  "date": "2026-11-28",
   "canonical_branch": "dev/schema-integration",
   "workflow_mode": "full_gate_on_canonical_changes_plus_handoff_check_on_every_push",
   "project_phase": "source_locator_structural_completion",
@@ -2127,7 +2127,7 @@
     "version_scope_boundary_latest_gate_run_id": 46088908464
   },
   "next_actions": [
-    "SUB-001 confirmed_pdf_defect, selected_xsd, wrong_structure_reference, no_runtime_diagnostic, runtime_match not_applicable. Seven exact official PDFs EN1.0 01/2014 through GC2.4 01/2023, 23 PNGs hash verified and visually inspected. Actual operation tables contradict wrong TerminateSubscribe* example; GC2.4 explicitly prioritizes XSD. Official Common1.0–2.3 distinct from candidate2.4 PR31, no official V2.4 Common tag. Permanent exact type-reference regression 12 positive and 12 targeted negative PASS, SCHEMAP_SRC_RESOLVE. No production-root/HTTP claim. Semantic scope/evidence and both provenance pins synchronized, 77 runtime entries and XSDs unchanged. Intermediate render-only handoff failures repaired b8befa36, handoff 46088261838 SUCCESS. First substantive gates 46088786281/46088786258 SUCCESS, evidence wording updated, latest substantive schema 46088908464 and handoff 46088908451 SUCCESS. 145/192 locator/body/boundary entries complete, 47 missing. Terminal closure; verify final HEAD gates and reviewed memory PR before starting SUB-002 (NOT STARTED)."
+    "SUB-002 in progress: recover pinned renders and verify version scope, then complete canonical registers and gates before next finding."
   ],
   "source_locator_progress": {
     "locator_entry_count": 145,
@@ -2205,12 +2205,23 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": 46088908464,
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": 46088908451,
-    "resume_instruction": "SUB-001 confirmed_pdf_defect, selected_xsd, wrong_structure_reference, no_runtime_diagnostic, runtime_match not_applicable. Seven exact official PDFs EN1.0 01/2014 through GC2.4 01/2023, 23 PNGs hash verified and visually inspected. Actual operation tables contradict wrong TerminateSubscribe* example; GC2.4 explicitly prioritizes XSD. Official Common1.0–2.3 distinct from candidate2.4 PR31, no official V2.4 Common tag. Permanent exact type-reference regression 12 positive and 12 targeted negative PASS, SCHEMAP_SRC_RESOLVE. No production-root/HTTP claim. Semantic scope/evidence and both provenance pins synchronized, 77 runtime entries and XSDs unchanged. Intermediate render-only handoff failures repaired b8befa36, handoff 46088261838 SUCCESS. First substantive gates 46088786281/46088786258 SUCCESS, evidence wording updated, latest substantive schema 46088908464 and handoff 46088908451 SUCCESS. 145/192 locator/body/boundary entries complete, 47 missing. Terminal closure; verify final HEAD gates and reviewed memory PR before starting SUB-002 (NOT STARTED)."
+    "resume_instruction": "SUB-002 in progress: recover pinned renders and verify version scope, then complete canonical registers and gates before next finding.",
+    "pending_block": "SUB-002",
+    "active_finding": "SUB-002",
+    "active_step": "Requested pinned VDV301-2_V1.0_EN pages 62-64,87,89-90; preserved SUB-001 terminal evidence and unchanged 145/192 counts.",
+    "next_step": "Complete remaining pinned render requests; obtain artifacts and independently verify original body, exact upstream XSD dependency profiles and service-version boundaries; then add permanent regression and synchronize registries, run full gate, finalize terminal handoff and memory PR.",
+    "evidence_refs": [
+      "Historical EV-157 job 102906852658 PASS; original artifacts 10156457016 and 10155848626 unavailable (404).",
+      "Reusable SUB-001 archive 15239797181 (Base V2.0 p99) and 15239259853 (Base V2.1 p112); ZIP digests matched locally; visual/page-hash check required.",
+      "Current semantic register SUB-002 non_defect; source locator and boundary entry absent. V1.0 EN/DE predecessor text shows subscriptions; exact V1.0 SDS has no local group, SMS has sparse group; DMS V2.0 sparse, V2.1 explicit. Scope correction not yet made.",
+      "VDV301-2_V1.0_EN pages 62-64,87,89-90 render request (commit is recoverable; retrieve matching workflow artifact by commit and verify SHA256)."
+    ],
+    "recovery_instruction": "Resume SUB-002 only. Inspect actual HEAD and all SUB-002 render-request commits/runs. Verify archived or freshly rendered PNG hashes, visible headings/tables and source pins. Recheck V1.0 through Base V2.1 and later DMS comparisons; no scope promotion or new locator credit until complete evidence. Historical EV-157 checker remains unchanged."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
