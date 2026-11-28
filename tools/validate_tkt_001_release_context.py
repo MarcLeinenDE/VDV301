@@ -330,6 +330,83 @@ def validate_tkt_005_response_type(folder, later, aggregate_schema, later_schema
     print("PASSED TKT-005: 8 positives, 4 absent-type negatives, 4 inner-type substitution controls, 4 isolated historical controls")
 
 
+
+def validate_tkt_006_tariff_sequence(folder, later, aggregate_schema, later_schema, old_schema):
+    """Complete data payload, not just prefix; both shared response roots and exact profiles."""
+    roots_to_check = ("TicketingService.GetTariffInformationResponse",
+                      "TicketingService.RetrieveTariffInformationResponse")
+    outer = "TicketingService.GetTariffInformationResponseStructure"
+    inner = "TicketingService.GetTariffInformationResponseDataStructure"
+    data = "TicketingService.GetTariffInformationResponseData"
+    for path in (folder / AGG, later):
+        doc = parse(path)
+        for root in roots_to_check:
+            require(doc.xpath("/xs:schema/xs:element[@name=$name]/@type",
+                              namespaces=NS, name=root) == [outer],
+                    "TKT-006 both roots share the exact outer type")
+    for path in (folder / FILE, later):
+        doc = parse(path)
+        seq = doc.xpath("/xs:schema/xs:complexType[@name=$name]/xs:sequence", namespaces=NS, name=inner)
+        require(len(seq) == 1 and not seq[0].attrib and
+                [dict(e.attrib) for e in seq[0]] == [
+                    {"name": "DefaultLanguage", "type": "IBIS-IP.language"},
+                    {"name": "TimeStamp", "type": "IBIS-IP.dateTime"},
+                    {"ref": "TariffInformationGroup"}], "TKT-006 mandatory exact sequence")
+        choice = doc.xpath("/xs:schema/xs:complexType[@name=$name]/xs:choice", namespaces=NS, name=outer)
+        require(len(choice) == 1 and not choice[0].attrib and
+                [dict(e.attrib) for e in choice[0]] == [
+                    {"name": data, "type": inner},
+                    {"name": "OperationErrorMessage", "type": "IBIS-IP.string"}],
+                "TKT-006 exact outer choice")
+    language = "<DefaultLanguage><Value>de</Value></DefaultLanguage>"
+    timestamp = "<TimeStamp><Value>2026-11-28T12:00:00Z</Value></TimeStamp>"
+    tail = ("<TripRef><Value>T1</Value></TripRef>"
+            "<Line><LineRef><Value>L1</Value></LineRef></Line>"
+            "<StopPointTariffInformation><JourneyStopInformation>"
+            "<StopRef><Value>S1</Value></StopRef>"
+            "<StopName><Value>Stop</Value><Language>de</Language></StopName>"
+            "<DisplayContent><LineInformation><LineRef><Value>L1</Value></LineRef></LineInformation>"
+            "<Destination><DestinationRef><Value>D1</Value></DestinationRef></Destination>"
+            "</DisplayContent></JourneyStopInformation>"
+            "<FareZoneInformation><FareZoneID><Value>Z1</Value></FareZoneID></FareZoneInformation>"
+            "</StopPointTariffInformation>")
+    def payload(root, prefix):
+        return etree.fromstring(f"<{root}><{data}>{prefix}{tail}</{data}></{root}>".encode())
+    positive = pdf_order = missing = isolated = 0
+    for profile, schema in (("original aggregate", aggregate_schema), ("later service", later_schema)):
+        for root in roots_to_check:
+            require(schema.validate(payload(root, language + timestamp)),
+                    f"TKT-006 {profile} {root} complete XSD-order payload PASS")
+            positive += 1
+            err = etree.fromstring(f"<{root}><OperationErrorMessage><Value>test</Value></OperationErrorMessage></{root}>".encode())
+            require(schema.validate(err), f"TKT-006 {profile} {root} error choice unaffected")
+            positive += 1
+            for prefix, actual, expected, is_pdf in (
+                    (timestamp + language, "TimeStamp", "DefaultLanguage", True),
+                    (timestamp, "TimeStamp", "DefaultLanguage", False),
+                    (language, "TripRef", "TimeStamp", False)):
+                require(not schema.validate(payload(root, prefix)),
+                        f"TKT-006 {profile} {root} targeted invalid sequence")
+                errors = list(schema.error_log)
+                require(len(errors) == 1 and errors[0].type_name == "SCHEMAV_ELEMENT_CONTENT"
+                        and f"Element '{actual}'" in errors[0].message
+                        and f"Expected is ( {expected} )" in errors[0].message,
+                        f"TKT-006 {profile} {root} exact sequence error: {errors}")
+                if is_pdf:
+                    pdf_order += 1
+                else:
+                    missing += 1
+    for root in roots_to_check:
+        for prefix in (language + timestamp, timestamp + language):
+            require(not old_schema.validate(payload(root, prefix)) and bool(old_schema.error_log)
+                    and all(e.type_name == "SCHEMAV_CVC_ELT_1" for e in old_schema.error_log),
+                    "TKT-006 isolated original missing global declaration, not order defect")
+            isolated += 1
+    require((positive, pdf_order, missing, isolated) == (8, 4, 8, 4),
+            "TKT-006 expected counts")
+    print("PASSED TKT-006: 8 positives, 4 PDF-order negatives, 8 omission controls, 4 isolated historical controls")
+
+
 def main():
     later = ROOT / FILE
     require(blob(later) == LATER, "selected later service blob")
@@ -378,6 +455,7 @@ def main():
         validate_tkt_003_response_types(folder, later, aggregate_schema, later_schema)
         validate_tkt_004_pdf_heading(folder, later, aggregate_schema, later_schema, old_schema)
         validate_tkt_005_response_type(folder, later, aggregate_schema, later_schema, old_schema)
+        validate_tkt_006_tariff_sequence(folder, later, aggregate_schema, later_schema, old_schema)
     return 0
 
 
