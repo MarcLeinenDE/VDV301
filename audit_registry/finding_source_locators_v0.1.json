@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "dcf0cf893ad92cd6b48b3f0fc42d097353fe370e",
+    "git_blob": "2f60b82ff89925742b136b599f40842d65b460ac",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 145,
-    "coverage_complete_count": 145,
+    "locator_entry_count": 146,
+    "coverage_complete_count": 146,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 47
+    "remaining_finding_count": 46
   },
   "entries": [
     {
@@ -30402,6 +30402,959 @@
         "Live screenshot cache miss except DE p51; seven newly requested pinned original downloads and renders in CI, local ZIP/PNG hashes verified, all 23 pages actually inspected. Old EV-157 archive 10156457016 and acquisition 10155848626 unavailable 404; historical EV-157 job 102906852658 logs re-read and PASS confirmed for V1.0/2.0/2.1 inventory. Historical checker pins old prestate, not rerun or altered. Six intermediate handoff checks failed because render-only commits lacked same-commit CURRENT_STATE updates (46088134061,46088141395,46088148911,46088155476,46088178098,46088186289); confirmed error job 140802462244. Repair b8befa365bfa4191f43b1a856b56deb66ec698c9 handoff 46088261838 SUCCESS; no history rewrite or locator progress credited during repair.",
         "tools/validate_sub_001_unsubscribe_type_names.py",
         "SUB-001 confirmed_pdf_defect, selected_xsd, wrong_structure_reference, no_runtime_diagnostic, runtime_match not_applicable. Earliest independently verified EN V1.0 January 2014, later DE V1.0 July 2016, Base V2.0/V2.1 and GC V2.2/V2.3/V2.4 all affected. No earlier nonaffected or corrected later publication established. Scope refined by independent language and authority lanes; V2.4 official PDF is documentation_only and explicit candidate is candidate_integration. No new ID, no runtime mapping, no XSD/Resolver changes. Permanent type resolution regression required in full gate."
+      ]
+    },
+    {
+      "finding_id": "SUB-002",
+      "service": "Generic Subscription Layer",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "VDV 301-2 V1.0 English (01/2014)",
+          "authority": "official_release",
+          "xsd_profile": "VDV-301-1.0 original service files + IBIS_IP_V1.0.xsd aggregate + Common/Enumerations V1.0",
+          "note": "Original service files lack local groups; aggregate contains sparse 5/2/10-member groups and generic global subscription roots. Published operations explicitly include subscriptions. Not an XSD defect."
+        },
+        {
+          "version": "VDV 301-2 V1.0 German (07/2016)",
+          "authority": "official_release",
+          "xsd_profile": "VDV-301-1.0 original service files + IBIS_IP_V1.0.xsd aggregate + Common/Enumerations V1.0",
+          "note": "Original service files lack local groups; aggregate contains sparse 5/2/10-member groups and generic global subscription roots. Published operations explicitly include subscriptions. Not an XSD defect."
+        },
+        {
+          "version": "VDV 301-2 Basic Services V2.0",
+          "authority": "official_release",
+          "xsd_profile": "SDS V2.0 + SystemManagement V1.0 later revision + DMS V2.0; exact Common/Enum routes",
+          "note": "SDS and SystemManagement remain sparse (5/2); DMS V2.0 has 10 members including 0 subscription members. Same-file SystemManagement revision 2d32630... is exact in this release, not original V1.0 85390f9...."
+        },
+        {
+          "version": "VDV 301-2 Basic Services V2.1",
+          "authority": "official_release",
+          "xsd_profile": "SDS V2.0 + SystemManagement V1.0 later revision + DMS V2.1; exact Common/Enum routes",
+          "note": "SDS and SystemManagement remain sparse (5/2); DMS V2.1 has 84 members including 40 subscription members. Same-file SystemManagement revision 2d32630... is exact in this release, not original V1.0 85390f9...."
+        },
+        {
+          "version": "DMS V2.2 official",
+          "authority": "official_release",
+          "xsd_profile": "DMS V2.2 + Common/Enums V2.2",
+          "note": "V2.2 official DMS changes operation inventory but retains explicit generic subscription group members (68 total/36 subscription). No universal operation support inference."
+        },
+        {
+          "version": "SystemMonitoringService V2.2 functional successor",
+          "authority": "official_release",
+          "xsd_profile": "SystemMonitoringService V2.2 + Common/Enums V2.2",
+          "note": "Distinct identity; sparse two Get-response members coexist with four documented generic subscription operations. History explicitly states extraction and that predecessor SystemManagement/SystemDocumentation no longer required for configuration; not proof of universal prohibition. Earlier SMS-001–004 findings unchanged."
+        },
+        {
+          "version": "DMS V2.3 integration comparison",
+          "authority": "candidate_integration",
+          "xsd_profile": "DMS V2.3 integration + official Common V2.3/Enum V2.2",
+          "note": "No independently established official DMS V2.3 PDF or release-tag service XSD; work-branch comparison only (68/36)."
+        },
+        {
+          "version": "DMS V2.4 official PDF",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official published V2.4 table retains nine generic subscription families and optional control notes; not official V2.4 schema authority."
+        },
+        {
+          "version": "DMS V2.4 candidate/integration comparison",
+          "authority": "candidate_integration",
+          "xsd_profile": "DMS V2.4 + Common/Enums V2.4 candidate/integration",
+          "note": "Exact selectable candidate/integration schema (68/36); not an official release; no later comparable publication in pinned catalog."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "VDV 301-2 V1.0 English (01/2014)",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "earliest_verified_english",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 VDV301-2_V1.0_EN",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                87
+              ],
+              "section": "9.9.1 Operations of SystemDocumentationService",
+              "table": "Table 102",
+              "point_summary": "SubscribeSystemConfiguration / UnsubscribeSystemConfiguration explicitly use generic Common request/response types although group contains five service-specific members only."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 VDV301-2_V1.0_EN",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                89,
+                90
+              ],
+              "section": "9.10.1 Operations of SystemManagementService",
+              "table": "Table 110: Description of Operations at the SystemManagementService",
+              "point_summary": "SubscribeDeviceStatus / UnsubscribeDeviceStatus and SubscribeServiceStatus / UnsubscribeServiceStatus explicitly use generic Common types; group contains two Get responses only."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 VDV301-2_V1.0_EN",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                62,
+                63,
+                64
+              ],
+              "section": "9.3.1 Operations of DeviceManagementService",
+              "table": "Table 30: Description of Operationen des DeviceManagementService",
+              "point_summary": "Six subscription data families explicitly reuse generic structures; local service group absent or sparse."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_SystemDocumentationService_v1.0.xsd",
+              "git_blob": "8995c4a230bf81d5e47b9313ee7725ff3cd4b7b5",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "SystemDocumentationServiceGroup absent in service file",
+              "xpath_hint": "/xs:schema/xs:group[@name='SystemDocumentationServiceGroup']",
+              "line_hint": null,
+              "point_summary": "No service-local group; official V1.0 aggregate supplies group."
+            },
+            {
+              "file": "IBIS-IP_SystemManagementService_V1.0.xsd",
+              "git_blob": "85390f99d6c19c88923ed9a5fc8a5706137708af",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "SystemManagementServiceGroup absent in service file",
+              "xpath_hint": "/xs:schema/xs:group[@name='SystemManagementServiceGroup']",
+              "line_hint": null,
+              "point_summary": "No service-local group; official V1.0 aggregate supplies group."
+            },
+            {
+              "file": "IBIS-IP_DeviceManagementService_V1.0.xsd",
+              "git_blob": "602a963f91000d0d39e3c271bacb3c7aba73e6d4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "DeviceManagementServiceGroup absent in service file",
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']",
+              "line_hint": null,
+              "point_summary": "No service-local group; official V1.0 aggregate supplies group."
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "group",
+              "component": "SystemDocumentationServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='SystemDocumentationServiceGroup']/xs:sequence/xs:element",
+              "line_hint": null,
+              "point_summary": "5 named members, 0 service-qualified subscription request/response members; not HTTP operation count."
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "group",
+              "component": "SystemManagementServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='SystemManagementServiceGroup']/xs:sequence/xs:element",
+              "line_hint": null,
+              "point_summary": "2 named members, 0 service-qualified subscription request/response members; not HTTP operation count."
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "group",
+              "component": "DeviceManagementServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']/xs:sequence/xs:element",
+              "line_hint": null,
+              "point_summary": "10 named members, 0 service-qualified subscription request/response members; not HTTP operation count."
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "Generic global Subscribe/Unsubscribe roots",
+              "xpath_hint": "/xs:schema/xs:element",
+              "line_hint": null,
+              "point_summary": "SubscribeRequest, SubscribeResponse, UnsubscribeRequest, UnsubscribeResponse are actual generic aggregate roots; not service-qualified aliases."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "Common generic subscription types",
+              "xpath_hint": "/xs:schema/xs:complexType",
+              "line_hint": null,
+              "point_summary": "Shared SubscribeRequestStructure / SubscribeResponseStructure / UnsubscribeRequestStructure / UnsubscribeResponseStructure; exact selected dependency."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "Exact Enumerations dependency",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact selected transitive dependency."
+            }
+          ],
+          "coverage_note": "Original service files lack local groups; aggregate contains sparse 5/2/10-member groups and generic global subscription roots. Published operations explicitly include subscriptions. Not an XSD defect."
+        },
+        {
+          "version": "VDV 301-2 V1.0 German (07/2016)",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "independent_german_track",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_DE",
+              "document_title": "VDV 301-2 VDV301-2_V1.0_DE",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2sds-v1-0.pdfx",
+              "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+              "printed_pages": [
+                64
+              ],
+              "section": "7.2.1 Operationen SystemDocumentationService",
+              "table": "Tabelle 23",
+              "point_summary": "SubscribeSystemConfiguration / UnsubscribeSystemConfiguration explicitly use generic Common request/response types although group contains five service-specific members only."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_DE",
+              "document_title": "VDV 301-2 VDV301-2_V1.0_DE",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2sds-v1-0.pdfx",
+              "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+              "printed_pages": [
+                67
+              ],
+              "section": "7.3.1 Operationen SystemManagementService",
+              "table": "Tabelle 31",
+              "point_summary": "SubscribeDeviceStatus / UnsubscribeDeviceStatus and SubscribeServiceStatus / UnsubscribeServiceStatus explicitly use generic Common types; group contains two Get responses only."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_DE",
+              "document_title": "VDV 301-2 VDV301-2_V1.0_DE",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2sds-v1-0.pdfx",
+              "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+              "printed_pages": [
+                55,
+                56
+              ],
+              "section": "Visible DeviceManagementService operations table continuation; caption on p56",
+              "table": "Tabelle 6 Beschreibung von Operationen des DeviceManagementService",
+              "point_summary": "Six subscription data families explicitly reuse generic structures; local service group absent or sparse."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_SystemDocumentationService_v1.0.xsd",
+              "git_blob": "8995c4a230bf81d5e47b9313ee7725ff3cd4b7b5",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "SystemDocumentationServiceGroup absent in service file",
+              "xpath_hint": "/xs:schema/xs:group[@name='SystemDocumentationServiceGroup']",
+              "line_hint": null,
+              "point_summary": "No service-local group; official V1.0 aggregate supplies group."
+            },
+            {
+              "file": "IBIS-IP_SystemManagementService_V1.0.xsd",
+              "git_blob": "85390f99d6c19c88923ed9a5fc8a5706137708af",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "SystemManagementServiceGroup absent in service file",
+              "xpath_hint": "/xs:schema/xs:group[@name='SystemManagementServiceGroup']",
+              "line_hint": null,
+              "point_summary": "No service-local group; official V1.0 aggregate supplies group."
+            },
+            {
+              "file": "IBIS-IP_DeviceManagementService_V1.0.xsd",
+              "git_blob": "602a963f91000d0d39e3c271bacb3c7aba73e6d4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "DeviceManagementServiceGroup absent in service file",
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']",
+              "line_hint": null,
+              "point_summary": "No service-local group; official V1.0 aggregate supplies group."
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "group",
+              "component": "SystemDocumentationServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='SystemDocumentationServiceGroup']/xs:sequence/xs:element",
+              "line_hint": null,
+              "point_summary": "5 named members, 0 service-qualified subscription request/response members; not HTTP operation count."
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "group",
+              "component": "SystemManagementServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='SystemManagementServiceGroup']/xs:sequence/xs:element",
+              "line_hint": null,
+              "point_summary": "2 named members, 0 service-qualified subscription request/response members; not HTTP operation count."
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "group",
+              "component": "DeviceManagementServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']/xs:sequence/xs:element",
+              "line_hint": null,
+              "point_summary": "10 named members, 0 service-qualified subscription request/response members; not HTTP operation count."
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "Generic global Subscribe/Unsubscribe roots",
+              "xpath_hint": "/xs:schema/xs:element",
+              "line_hint": null,
+              "point_summary": "SubscribeRequest, SubscribeResponse, UnsubscribeRequest, UnsubscribeResponse are actual generic aggregate roots; not service-qualified aliases."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "Common generic subscription types",
+              "xpath_hint": "/xs:schema/xs:complexType",
+              "line_hint": null,
+              "point_summary": "Shared SubscribeRequestStructure / SubscribeResponseStructure / UnsubscribeRequestStructure / UnsubscribeResponseStructure; exact selected dependency."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "Exact Enumerations dependency",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact selected transitive dependency."
+            }
+          ],
+          "coverage_note": "Original service files lack local groups; aggregate contains sparse 5/2/10-member groups and generic global subscription roots. Published operations explicitly include subscriptions. Not an XSD defect."
+        },
+        {
+          "version": "VDV 301-2 Basic Services V2.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "persistent_bilingual",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV 301-2 VDV301-2_BASE_V2.0",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                99
+              ],
+              "section": "7.2.1 Operationen SystemDocumentationService",
+              "table": "Table 28: Description of Operations at the SystemDocumentationService",
+              "point_summary": "SubscribeSystemConfiguration / UnsubscribeSystemConfiguration explicitly use generic Common request/response types although group contains five service-specific members only."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV 301-2 VDV301-2_BASE_V2.0",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                103
+              ],
+              "section": "7.3.1 Operationen SystemManagementService",
+              "table": "Table 36: Description of Operations at the SystemManagementService",
+              "point_summary": "SubscribeDeviceStatus / UnsubscribeDeviceStatus and SubscribeServiceStatus / UnsubscribeServiceStatus explicitly use generic Common types; group contains two Get responses only."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV 301-2 VDV301-2_BASE_V2.0",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                89,
+                90,
+                91,
+                92
+              ],
+              "section": "7.1.1 Operationen des DeviceManagementService / Operations of DeviceManagementService",
+              "table": "Tabelle 11 Beschreibung von Operationen des DeviceManagementService / Description of Operationen des DeviceManagementService",
+              "point_summary": "Six subscription data families explicitly reuse generic structures; local service group absent or sparse."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_SystemDocumentationService_V2.0.xsd",
+              "git_blob": "ab959dddbfa2b8ca420af1b079501f94cff38051",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "group",
+              "component": "SystemDocumentationServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='SystemDocumentationServiceGroup']/xs:sequence/xs:element",
+              "line_hint": null,
+              "point_summary": "5 named members, 0 service-qualified subscription request/response members; not HTTP operation count."
+            },
+            {
+              "file": "IBIS-IP_SystemManagementService_V1.0.xsd",
+              "git_blob": "2d32630a0f1981e980e6a466e3f6a69136410f24",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "group",
+              "component": "SystemManagementServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='SystemManagementServiceGroup']/xs:sequence/xs:element",
+              "line_hint": null,
+              "point_summary": "2 named members, 0 service-qualified subscription request/response members; not HTTP operation count."
+            },
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.0.xsd",
+              "git_blob": "74189e0da65563eeb084ec2f3c400e9668d1ee1a",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "group",
+              "component": "DeviceManagementServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']/xs:sequence/xs:element",
+              "line_hint": null,
+              "point_summary": "10 named members, 0 service-qualified subscription request/response members; not HTTP operation count."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "Common generic subscription types",
+              "xpath_hint": "/xs:schema/xs:complexType",
+              "line_hint": null,
+              "point_summary": "Shared SubscribeRequestStructure / SubscribeResponseStructure / UnsubscribeRequestStructure / UnsubscribeResponseStructure; exact selected dependency."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "Exact Enumerations dependency",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact selected transitive dependency."
+            },
+            {
+              "file": "IBIS-IP_common_V2.0.xsd",
+              "git_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "Common generic subscription types",
+              "xpath_hint": "/xs:schema/xs:complexType",
+              "line_hint": null,
+              "point_summary": "Shared SubscribeRequestStructure / SubscribeResponseStructure / UnsubscribeRequestStructure / UnsubscribeResponseStructure; exact selected dependency."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.0.xsd",
+              "git_blob": "27e3c183b00381d959622d13c10543123af8eef6",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "Exact Enumerations dependency",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact selected transitive dependency."
+            }
+          ],
+          "coverage_note": "SDS and SystemManagement remain sparse (5/2); DMS V2.0 has 10 members including 0 subscription members. Same-file SystemManagement revision 2d32630... is exact in this release, not original V1.0 85390f9...."
+        },
+        {
+          "version": "VDV 301-2 Basic Services V2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "persistent_bilingual",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV 301-2 VDV301-2_BASE_V2.1",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                112
+              ],
+              "section": "7.2.1 Operationen SystemDocumentationService",
+              "table": "Table 53: Description of Operations at the SystemDocumentationService",
+              "point_summary": "SubscribeSystemConfiguration / UnsubscribeSystemConfiguration explicitly use generic Common request/response types although group contains five service-specific members only."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV 301-2 VDV301-2_BASE_V2.1",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                116
+              ],
+              "section": "7.3.1 Operationen SystemManagementService",
+              "table": "Table 61: Description of Operations at the SystemManagementService",
+              "point_summary": "SubscribeDeviceStatus / UnsubscribeDeviceStatus and SubscribeServiceStatus / UnsubscribeServiceStatus explicitly use generic Common types; group contains two Get responses only."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV 301-2 VDV301-2_BASE_V2.1",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                90,
+                91,
+                92,
+                93,
+                94
+              ],
+              "section": "7.1.1 Operationen des DeviceManagementService / Operations of DeviceManagementService",
+              "table": "Tabelle 11 Beschreibung von Operationen des DeviceManagementService / Description of Operationen des DeviceManagementService",
+              "point_summary": "Generic subscription types explicitly associated with service-qualified request/response entries in DMS V2.1 group, including additional subdevice subscriptions."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_SystemDocumentationService_V2.0.xsd",
+              "git_blob": "ab959dddbfa2b8ca420af1b079501f94cff38051",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "group",
+              "component": "SystemDocumentationServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='SystemDocumentationServiceGroup']/xs:sequence/xs:element",
+              "line_hint": null,
+              "point_summary": "5 named members, 0 service-qualified subscription request/response members; not HTTP operation count."
+            },
+            {
+              "file": "IBIS-IP_SystemManagementService_V1.0.xsd",
+              "git_blob": "2d32630a0f1981e980e6a466e3f6a69136410f24",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "group",
+              "component": "SystemManagementServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='SystemManagementServiceGroup']/xs:sequence/xs:element",
+              "line_hint": null,
+              "point_summary": "2 named members, 0 service-qualified subscription request/response members; not HTTP operation count."
+            },
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.1.xsd",
+              "git_blob": "191b43e01cdaba14b247725689a913c244a67eed",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "group",
+              "component": "DeviceManagementServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']/xs:sequence/xs:element",
+              "line_hint": null,
+              "point_summary": "84 named members, 40 service-qualified subscription request/response members; not HTTP operation count."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "Common generic subscription types",
+              "xpath_hint": "/xs:schema/xs:complexType",
+              "line_hint": null,
+              "point_summary": "Shared SubscribeRequestStructure / SubscribeResponseStructure / UnsubscribeRequestStructure / UnsubscribeResponseStructure; exact selected dependency."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "Exact Enumerations dependency",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact selected transitive dependency."
+            },
+            {
+              "file": "IBIS-IP_common_V2.0.xsd",
+              "git_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "Common generic subscription types",
+              "xpath_hint": "/xs:schema/xs:complexType",
+              "line_hint": null,
+              "point_summary": "Shared SubscribeRequestStructure / SubscribeResponseStructure / UnsubscribeRequestStructure / UnsubscribeResponseStructure; exact selected dependency."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.0.xsd",
+              "git_blob": "27e3c183b00381d959622d13c10543123af8eef6",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "Exact Enumerations dependency",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact selected transitive dependency."
+            },
+            {
+              "file": "IBIS-IP_common_V2.1.xsd",
+              "git_blob": "05977c9f86c7c9dd0b48f36a4a4e9be32e94659e",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "schema",
+              "component": "Common generic subscription types",
+              "xpath_hint": "/xs:schema/xs:complexType",
+              "line_hint": null,
+              "point_summary": "Shared SubscribeRequestStructure / SubscribeResponseStructure / UnsubscribeRequestStructure / UnsubscribeResponseStructure; exact selected dependency."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.1.xsd",
+              "git_blob": "311464690ad60749ed8d326217787e4b8ed0b718",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "schema",
+              "component": "Exact Enumerations dependency",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact selected transitive dependency."
+            }
+          ],
+          "coverage_note": "SDS and SystemManagement remain sparse (5/2); DMS V2.1 has 84 members including 40 subscription members. Same-file SystemManagement revision 2d32630... is exact in this release, not original V1.0 85390f9...."
+        },
+        {
+          "version": "DMS V2.2 official",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "later_explicit_control",
+          "pdf_locators": [
+            {
+              "source_id": "DMS_V2.2",
+              "document_title": "VDV 301-2 DMS_V2.2",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sdes-v2-2-devicemanagementservice.pdfx",
+              "sha256": "72cef70072e5f586ba57e7886657b1808a87ec7a6c4f39a519263105eb83f97e",
+              "printed_pages": [
+                14,
+                15,
+                16
+              ],
+              "section": "2 Operations of DeviceManagementService",
+              "table": "Tabelle/Table 1 Beschreibung von Operationen des DeviceManagementService / Description of Operationen des DeviceManagementService",
+              "point_summary": "Nine subscription families use shared request/response types; DeviceConfiguration has Get but no Subscribe/Unsubscribe. Optional operation footnote precludes treating group inventory as proof of mandatory endpoint support."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.2.xsd",
+              "git_blob": "c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "group",
+              "component": "DeviceManagementServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']/xs:sequence/xs:element",
+              "line_hint": null,
+              "point_summary": "68 named members, 36 service-qualified subscription request/response members; not HTTP operation count."
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "schema",
+              "component": "Common generic subscription types",
+              "xpath_hint": "/xs:schema/xs:complexType",
+              "line_hint": null,
+              "point_summary": "Shared SubscribeRequestStructure / SubscribeResponseStructure / UnsubscribeRequestStructure / UnsubscribeResponseStructure; exact selected dependency."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "schema",
+              "component": "Exact Enumerations dependency",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact selected transitive dependency."
+            }
+          ],
+          "coverage_note": "V2.2 official DMS changes operation inventory but retains explicit generic subscription group members (68 total/36 subscription). No universal operation support inference."
+        },
+        {
+          "version": "SystemMonitoringService V2.2 functional successor",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "functional_successor_not_same_service_version",
+          "pdf_locators": [
+            {
+              "source_id": "SMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-18 SystemMonitoringService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx",
+              "sha256": "996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4",
+              "printed_pages": [
+                9
+              ],
+              "section": "2 Operations of the SystemMonitoringService / 2.1 Operationen SystemMonitoringService",
+              "table": "Tabelle 1 Beschreibung von Operationen des SystemMonitoringService / Description of Operations at the SystemMonitoringService",
+              "point_summary": "All four subscription operations explicitly use shared SubscribeRequestStructure/SubscribeResponseStructure or UnsubscribeRequestStructure/UnsubscribeResponseStructure. Last operation's Req./Resp. labels absent only, DRSMS22-004."
+            },
+            {
+              "source_id": "SMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-18 SystemMonitoringService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx",
+              "sha256": "996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4",
+              "printed_pages": [
+                12
+              ],
+              "section": "3 Versionshistorie / Version History / 3.1 Version 2.2 / 3.1.1 Funktionale Erweiterungen / Functional Upgrade",
+              "table": null,
+              "point_summary": "Bilingual history describes extraction from earlier base services; incorrect document number and spelling separate findings. Not a separate older standalone SMS publication."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_SystemMonitoringService_V2.2.xsd",
+              "git_blob": "d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "group",
+              "component": "SystemMonitoringServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='SystemMonitoringServiceGroup']/xs:sequence/xs:element",
+              "line_hint": null,
+              "point_summary": "2 named members, 0 service-qualified subscription request/response members; not HTTP operation count."
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "schema",
+              "component": "Common generic subscription types",
+              "xpath_hint": "/xs:schema/xs:complexType",
+              "line_hint": null,
+              "point_summary": "Shared SubscribeRequestStructure / SubscribeResponseStructure / UnsubscribeRequestStructure / UnsubscribeResponseStructure; exact selected dependency."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "schema",
+              "component": "Exact Enumerations dependency",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact selected transitive dependency."
+            }
+          ],
+          "coverage_note": "Distinct identity; sparse two Get-response members coexist with four documented generic subscription operations. History explicitly states extraction and that predecessor SystemManagement/SystemDocumentation no longer required for configuration; not proof of universal prohibition. Earlier SMS-001–004 findings unchanged."
+        },
+        {
+          "version": "DMS V2.3 integration comparison",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "intermediate_integration_only",
+          "pdf_locators": [],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.3.xsd",
+              "git_blob": "5fe444cf6d10462cc23fd159eb963abbec42248f",
+              "authority_detail": "Exact selected work-branch integration/candidate blob; not an official release.",
+              "component_kind": "group",
+              "component": "DeviceManagementServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']/xs:sequence/xs:element",
+              "line_hint": null,
+              "point_summary": "68 named members, 36 service-qualified subscription request/response members; not HTTP operation count."
+            },
+            {
+              "file": "IBIS-IP_common_V2.3.xsd",
+              "git_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "schema",
+              "component": "Common generic subscription types",
+              "xpath_hint": "/xs:schema/xs:complexType",
+              "line_hint": null,
+              "point_summary": "Shared SubscribeRequestStructure / SubscribeResponseStructure / UnsubscribeRequestStructure / UnsubscribeResponseStructure; exact selected dependency."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2 source; byte identity distinguished from same-filename revisions.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "schema",
+              "component": "Exact Enumerations dependency",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact selected transitive dependency."
+            }
+          ],
+          "coverage_note": "No independently established official DMS V2.3 PDF or release-tag service XSD; work-branch comparison only (68/36)."
+        },
+        {
+          "version": "DMS V2.4 official PDF",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "latest_verified_document_control",
+          "pdf_locators": [
+            {
+              "source_id": "DMS_V2.4",
+              "document_title": "VDV 301-2 DMS_V2.4",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-0-sde-v2.4-devicemanagementservice.pdfx",
+              "sha256": "347b9d5684b653d241370884a0163b0154c3028df23ad9cc61318275de1b17fd",
+              "printed_pages": [
+                13,
+                14,
+                15
+              ],
+              "section": "2 Operations of DeviceManagementService",
+              "table": "Tabelle/Table 1 Beschreibung von Operationen des DeviceManagementService / Description of Operationen des DeviceManagementService",
+              "point_summary": "Nine subscription families use shared request/response types; DeviceConfiguration has Get but no Subscribe/Unsubscribe. Optional operation footnote precludes treating group inventory as proof of mandatory endpoint support."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "Official published V2.4 table retains nine generic subscription families and optional control notes; not official V2.4 schema authority."
+        },
+        {
+          "version": "DMS V2.4 candidate/integration comparison",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "latest_selected_candidate_control",
+          "pdf_locators": [],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_DeviceManagementService_V2.4.xsd",
+              "git_blob": "d222dfd98b2be3777576388da7ace8f333d24c3f",
+              "authority_detail": "Exact selected work-branch integration/candidate blob; not an official release.",
+              "component_kind": "group",
+              "component": "DeviceManagementServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='DeviceManagementServiceGroup']/xs:sequence/xs:element",
+              "line_hint": null,
+              "point_summary": "68 named members, 36 service-qualified subscription request/response members; not HTTP operation count."
+            },
+            {
+              "file": "IBIS-IP_common_V2.4.xsd",
+              "git_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+              "authority_detail": "Exact selected work-branch integration/candidate blob; not an official release.",
+              "component_kind": "schema",
+              "component": "Common generic subscription types",
+              "xpath_hint": "/xs:schema/xs:complexType",
+              "line_hint": null,
+              "point_summary": "Shared SubscribeRequestStructure / SubscribeResponseStructure / UnsubscribeRequestStructure / UnsubscribeResponseStructure; exact selected dependency."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.4.xsd",
+              "git_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+              "authority_detail": "Exact selected work-branch integration/candidate blob; not an official release.",
+              "component_kind": "schema",
+              "component": "Exact Enumerations dependency",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact selected transitive dependency."
+            }
+          ],
+          "coverage_note": "Exact selectable candidate/integration schema (68/36); not an official release; no later comparable publication in pinned catalog."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_SUB_002_2026-11-28.md",
+        "Historical EV-157 34487918692 job 102906852658 PASS; original archives 10156457016/10155848626 unavailable; checker preserved. Permanent regression full gate 46120977971 SUCCESS, handoff 46120978579 SUCCESS, artifact 15253417163 SHA256 56ee7866dfe478e193dd4de869501381ce5079a0ffd3c4e90d1ab320464abb8d; eight service compilations + static aggregate inventory; expanded regression to be verified by full gate.",
+        "Exact V1.0 EN/DE, Base V2.0/V2.1 pinned render archives and page hashes recorded in interim and final reports; six ZIPs verified, nine SDS/SystemManagement pages visually inspected. New DMS comparison: V1.0 EN pp62–64 Table 30; DE pp55–56 Table 6; Base2.0 pp89–92 Table 11; Base2.1 pp90–94 Table 11. All actually viewed.",
+        "DMS V2.2 run 46121065904 artifact 15253357429 ZIP SHA256 433e894d8b472b55af0f508c3c9704ffac8600afac6f5530e03d8c5e179f6f49; p14 6fdf988a18c58934a978e1939f86c6d70237501d37e99fdb63e7448962b25d06, p15 1f7ae1ef5f20ac89dc5b937ba0f36f91aa8cd3e11981bff4647981ca80b3fac4, p16 24c4f47483f7fe52fb8c01c39954e0815f6cb78ee71726f02ec064c2f8694e01; ZIP and all PNG hashes/bytes verified, visually inspected.",
+        "DMS V2.4 run 46121074759 artifact 15254220265 ZIP SHA256 a4ba6ee1bf30e01a24d27cbe6af1cae4002be90a5855424295e2b00e017aabb9; p13 6147837e494d3f8adc70676a0352f43a44b8e7e0ff4b28b650028242b2e564da, p14 3a3415df763be21c689781819b5b5a459367bf0939efcb3965c3a244b3d8c0f4, p15 594621f21afa436407dfc9b84898057334fb1c566b8ae8dab007630185848a6e; ZIP and all PNG hashes/bytes verified, visually inspected.",
+        "SMS functional successor: EV-146 artifact 9987318510 ZIP SHA256 181ff01b16dae43ec2826299e6f14717aef1668d66491b6051ae07661ee607f6; all six PNG hashes and byte counts checked; p9 6f813ae55fd3acc28e99f055978c504b9759e03b1cfb52a133adaf696a2f3b79 and p12 41515d4afc0455e0628128f47eecba3d88364858882c5551b2616af72528addf visually checked. Pinned prior PDF bytes, no new raw acquisition. Official tags 2.2/2.3 contain same SMS V2.2 blob, no SDS or SystemManagement historical file at tested paths; history confirms functional transition. SMS-001 and SMS-004 remain distinct.",
+        "Exact original SystemManagement V1.0 85390f99... vs later 2d32630...; official aggregate 41289eae... has 5/2/10 sparse groups and generic roots. Worktree V1.0 service files cannot substitute for exact historical aggregate. No new production root/HTTP support assertion. No XSD or resolver remediation; separate historical route consideration for future capability matrix.",
+        "Four intermediate handoff failures from too-short pending_block repaired 017b2793, handoff 46120764702 SUCCESS; subsequent handoff gates SUCCESS. No history rewrite.",
+        "tools/validate_sub_002_service_group_inventory.py"
       ]
     }
   ]

@@ -19,6 +19,10 @@ CASES = (
     ("IBIS-IP_DeviceManagementService_V2.0.xsd", "74189e0da65563eeb084ec2f3c400e9668d1ee1a", "2.0", "DeviceManagementServiceGroup", 1, 10, 0),
     ("IBIS-IP_DeviceManagementService_V2.1.xsd", "191b43e01cdaba14b247725689a913c244a67eed", "2.1", "DeviceManagementServiceGroup", 1, 84, 40),
     ("IBIS-IP_DeviceManagementService_V2.2.xsd", "c589e9f9d9b9a0f60309a275ec36b76b8c5d1f1d", "2.2", "DeviceManagementServiceGroup", 1, 68, 36),
+    ("IBIS-IP_SystemMonitoringService_V2.2.xsd", "d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c", "2.2", "SystemMonitoringServiceGroup", 1, 2, 0),
+    # Explicit comparison lanes; do not promote these to official release.
+    ("IBIS-IP_DeviceManagementService_V2.3.xsd", "5fe444cf6d10462cc23fd159eb963abbec42248f", "2.3", "DeviceManagementServiceGroup", 1, 68, 36),
+    ("IBIS-IP_DeviceManagementService_V2.4.xsd", "d222dfd98b2be3777576388da7ace8f333d24c3f", "2.4", "DeviceManagementServiceGroup", 1, 68, 36),
 )
 OLD_SMS = "85390f99d6c19c88923ed9a5fc8a5706137708af"
 AGGREGATE = "41289eaed2674a169fdf77a10a2eff293c76d5c4"
@@ -81,12 +85,13 @@ def main():
         agg = etree.parse(str(aggregate))
         inspect(agg,"SystemDocumentationServiceGroup",(1,5,0))
         inspect(agg,"SystemManagementServiceGroup",(1,2,0))
+        inspect(agg,"DeviceManagementServiceGroup",(1,10,0))
         # Static aggregate evidence only; do not pretend to compile a complete
         # historical aggregate from the incomplete deduplicated worktree.
         roots = set(agg.xpath("/xs:schema/xs:element/@name", namespaces=NS))
         require({"SubscribeRequest","SubscribeResponse","UnsubscribeRequest","UnsubscribeResponse"} <= roots,"historical aggregate generic roots missing")
         print("PASS VDV-301-1.0 aggregate: exact blob, sparse service groups, generic global roots (static)")
-    print("PASSED: SUB-002 eight service schema compilations plus historical aggregate inventory")
+    print("PASSED: SUB-002 eleven service schema compilations plus historical aggregate inventory")
     return 0
 
 

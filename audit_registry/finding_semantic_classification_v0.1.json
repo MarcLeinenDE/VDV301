@@ -14320,10 +14320,58 @@
       "service": "Generic Subscription Layer",
       "version_scope": [
         {
-          "version": "Base Services V2.0 / V2.1 service families",
+          "version": "VDV 301-2 V1.0 English (01/2014)",
           "authority": "official_release",
-          "xsd_profile": "SystemDocumentationService V2.0 + SystemManagementService V1.0 + DeviceManagementService V2.1 with their selected Common/Enumerations dependencies",
-          "note": "Official documents describe generic subscription operations even where local service operation groups are sparse; DMS V2.1 separately demonstrates a more explicit group modelling style. Group completeness is therefore service/version dependent."
+          "xsd_profile": "VDV-301-1.0 original service files + IBIS_IP_V1.0.xsd aggregate + Common/Enumerations V1.0",
+          "note": "Original service files lack local groups; aggregate contains sparse 5/2/10-member groups and generic global subscription roots. Published operations explicitly include subscriptions. Not an XSD defect."
+        },
+        {
+          "version": "VDV 301-2 V1.0 German (07/2016)",
+          "authority": "official_release",
+          "xsd_profile": "VDV-301-1.0 original service files + IBIS_IP_V1.0.xsd aggregate + Common/Enumerations V1.0",
+          "note": "Original service files lack local groups; aggregate contains sparse 5/2/10-member groups and generic global subscription roots. Published operations explicitly include subscriptions. Not an XSD defect."
+        },
+        {
+          "version": "VDV 301-2 Basic Services V2.0",
+          "authority": "official_release",
+          "xsd_profile": "SDS V2.0 + SystemManagement V1.0 later revision + DMS V2.0; exact Common/Enum routes",
+          "note": "SDS and SystemManagement remain sparse (5/2); DMS V2.0 has 10 members including 0 subscription members. Same-file SystemManagement revision 2d32630... is exact in this release, not original V1.0 85390f9...."
+        },
+        {
+          "version": "VDV 301-2 Basic Services V2.1",
+          "authority": "official_release",
+          "xsd_profile": "SDS V2.0 + SystemManagement V1.0 later revision + DMS V2.1; exact Common/Enum routes",
+          "note": "SDS and SystemManagement remain sparse (5/2); DMS V2.1 has 84 members including 40 subscription members. Same-file SystemManagement revision 2d32630... is exact in this release, not original V1.0 85390f9...."
+        },
+        {
+          "version": "DMS V2.2 official",
+          "authority": "official_release",
+          "xsd_profile": "DMS V2.2 + Common/Enums V2.2",
+          "note": "V2.2 official DMS changes operation inventory but retains explicit generic subscription group members (68 total/36 subscription). No universal operation support inference."
+        },
+        {
+          "version": "SystemMonitoringService V2.2 functional successor",
+          "authority": "official_release",
+          "xsd_profile": "SystemMonitoringService V2.2 + Common/Enums V2.2",
+          "note": "Distinct identity; sparse two Get-response members coexist with four documented generic subscription operations. History explicitly states extraction and that predecessor SystemManagement/SystemDocumentation no longer required for configuration; not proof of universal prohibition. Earlier SMS-001–004 findings unchanged."
+        },
+        {
+          "version": "DMS V2.3 integration comparison",
+          "authority": "candidate_integration",
+          "xsd_profile": "DMS V2.3 integration + official Common V2.3/Enum V2.2",
+          "note": "No independently established official DMS V2.3 PDF or release-tag service XSD; work-branch comparison only (68/36)."
+        },
+        {
+          "version": "DMS V2.4 official PDF",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "Official published V2.4 table retains nine generic subscription families and optional control notes; not official V2.4 schema authority."
+        },
+        {
+          "version": "DMS V2.4 candidate/integration comparison",
+          "authority": "candidate_integration",
+          "xsd_profile": "DMS V2.4 + Common/Enums V2.4 candidate/integration",
+          "note": "Exact selectable candidate/integration schema (68/36); not an official release; no later comparable publication in pinned catalog."
         }
       ],
       "review_state": "manually_reviewed",
@@ -14360,19 +14408,27 @@
         {
           "type": "technical_inference",
           "note": "Local group membership cannot be promoted to a universal supported-operation inventory. Operation discovery must combine the selected service/version contract with generic operation conventions and exact schema routing."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "Independent original V1.0 EN and DE, Base V2.0/V2.1 and later DMS V2.2/V2.4 operation tables confirm version-specific subscription modelling; functional successor SystemMonitoring V2.2 still uses generic subscriptions with sparse group."
+        },
+        {
+          "type": "official_xsd_explicit",
+          "note": "Exact V1.0 historical service files lack local group; official aggregate provides sparse groups with generic roots. SystemManagement V1.0 same filename differs by official tag: original 85390f99... vs later 2d32630.... DMS 2.1/2.2 explicit group controls; V2.3 and V2.4 comparison only."
         }
       ],
       "diagnostic": {
         "de": {
           "title": "Generische Subscription: lokale Service-Gruppen sind keine vollständige Operationsliste",
           "short": "Dokumentierte Subscribe/Unsubscribe-Operationen können fehlen, obwohl die lokale Service-XSD-Gruppe sie nicht als eigene servicepräfixierte Einträge aufführt.",
-          "long": "SUB-002 ist kein Defekt. Die offiziellen Base-Services-Dokumente beschreiben generische Subscribe-/Unsubscribe-Operationen für SystemDocumentation und SystemManagement, obwohl deren lokale Service-Gruppen in den exakten XSDs vergleichsweise sparsam modelliert sind. DeviceManagementService V2.1 zeigt dagegen eine deutlich explizitere Gruppenmodellierung mit generischen Subscription- und Control-Einträgen. EV-157 bestätigt diese Unterschiede ausführbar. Daraus folgt, dass die Mitgliedschaft in einer lokalen Service-Gruppe allein keine vollständige Aussage über alle unterstützten generischen Operationen liefert.",
+          "long": "SUB-002 ist kein Defekt. Bereits V1.0 EN/DE und Basisdienste V2.0/V2.1 dokumentieren generische Subscribe-/Unsubscribe-Operationen bei SystemDocumentation/SystemManagement. Ursprüngliche V1.0-Service-XSDs enthalten keine lokalen Gruppen; das offizielle Aggregatschema enthält sparsame Gruppen und generische globale Roots. Ab V2.1 führt DMS die generischen Subscription-Strukturen zusätzlich explizit in lokalen servicepräfixierten Gruppeneinträgen. Der eigenständige SystemMonitoringService V2.2 zeigt wiederum eine sparsame Gruppe. Eine lokale xs:group ist daher keine vollständige Operations- oder HTTP-Endpunktliste.",
           "recommendation": "Supported Operations nicht ausschließlich aus der lokalen xs:group ableiten. Bei Discovery und Codegenerierung immer den konkreten Service-/Versionsvertrag, die generischen Subscription-Konventionen und die vollständige ausgewählte XSD-Familie gemeinsam auswerten. Fehlende lokale Gruppeneinträge nicht als Schema- oder Runtime-Defekt melden."
         },
         "en": {
           "title": "Generic subscription: local service groups are not a complete operation inventory",
           "short": "Documented Subscribe/Unsubscribe operations may be supported even when the local service XSD group does not list equivalent service-prefixed entries.",
-          "long": "SUB-002 is not a defect. The official Base Services documents describe generic Subscribe/Unsubscribe operations for SystemDocumentation and SystemManagement even though their exact XSD local service groups are comparatively sparse. DeviceManagementService V2.1, by contrast, uses a much more explicit group model including generic subscription and control entries. EV-157 confirms these differences executably. Local service-group membership therefore cannot by itself provide a complete statement of all supported generic operations.",
+          "long": "SUB-002 is not a defect. V1.0 English/German and Base Services V2.0/V2.1 document generic Subscribe/Unsubscribe operations for SystemDocumentation/SystemManagement. Original V1.0 service schemas lack local groups; the official aggregate supplies sparse groups and generic global roots. DMS V2.1 onward explicitly models service-qualified group members using generic structures. The distinct SystemMonitoringService V2.2 again uses a sparse group. Local xs:group membership therefore is not a complete operation or HTTP endpoint inventory.",
           "recommendation": "Do not derive supported operations solely from the local xs:group. For discovery and code generation, evaluate the concrete service/version contract, generic subscription conventions and the complete selected XSD family together. Do not report missing local group entries as schema or runtime defects."
         }
       },
@@ -14400,9 +14456,14 @@
           "kind": "xsd",
           "reference": "IBIS-IP_SystemDocumentationService_V2.0.xsd @ ab959dddbfa2b8ca420af1b079501f94cff38051; IBIS-IP_SystemManagementService_V1.0.xsd @ 2d32630a0f1981e980e6a466e3f6a69136410f24; IBIS-IP_DeviceManagementService_V2.1.xsd @ 191b43e01cdaba14b247725689a913c244a67eed",
           "note": "Exact executable authorities used by EV-157 to prove differing local group styles."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_SUB_002_2026-11-28.md",
+          "note": "Exact original visual pages, independent historical blob provenance and permanent regression."
         }
       ],
-      "notes": "Confirmed non-defect and discovery/resolver rule. Service-local xs:group membership is not a universal supported-operation authority."
+      "notes": "SUB-002 remains confirmed non_defect, intentional_design_misread, selected_xsd, no_runtime_diagnostic, runtime_match not_applicable. Earliest verified EN V1.0 and independent DE V1.0; sparse groups through Base V2.0/V2.1, explicit DMS contrast from V2.1, retained in V2.2 and candidate/integration V2.3/V2.4. Distinct SMS V2.2 functional successor confirms sparse group pattern. Official V2.4 PDF distinct from candidate XSD. No earlier or later comparable release in pinned catalog; no defect correction boundary because this is contextual design, not defect. No endpoint, HTTP acknowledgement, mandatory provider availability or production-root alias inference."
     },
     {
       "finding_id": "TKT-001",
