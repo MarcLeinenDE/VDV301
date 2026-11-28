@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 156,
-    "verified": 156,
+    "tracked_findings": 157,
+    "verified": 157,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -6699,10 +6699,16 @@
         "Official public VDV index https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-23: dedicated TimeService 301-2-10 only V1.0, no independent predecessor/successor standalone TimeService versions.",
         "Official TIME_V1.0 same-page physical p4 German vs English compared against historical byte-pinned EV147 visible source and current public PDF text; printed p8 cites VDV 301-2-1 as Common. PDF SHA256 d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3; original EV147 p4 render SHA 1614a270b77c37cd2abb51bbfb84f3626554ff7b60b385c45b3b02ee29d2ac06.",
         "Earlier VDV 301-2 V1.0 07/2016 wrong 301-2-11 reference is distinct existing DR3012-006 (historically checked against VDV-Mitteilung 3002 10/2016 and 301-2-11 VideoLiveService); not treated as edition of standalone TimeService.",
-        "No TimeService XSD; protocol_discovery_profile, source VDV TimeService V1.0 and selected RFC 4330; existing semantic classification and SDK no_runtime_diagnostic unchanged."
+        "No TimeService XSD; protocol_discovery_profile, source VDV TimeService V1.0 and selected RFC 4330; existing semantic classification and SDK no_runtime_diagnostic unchanged.",
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_TS_002_2026-11-28.md",
+        "docs/pdf_xsd_semantic_audit/CORRECTION_TS_002_DRTIME10_001_IDENTITY_2026-11-28.md",
+        "docs/pdf_xsd_semantic_audit/IDENTITY_RECONCILIATION_DRTRAINSET21_001_DRTRAINSET22_001_2026-11-24.md",
+        "EV159 artifact 10336194085 ZIP SHA256 4d5c36f36c468b92e1a3ca962eb1e76b8670f6460f2ecf667bd1cdc2c2e2d010 rehashed integrity PASS; actual p4 131551B PNG SHA256 1614a270b77c37cd2abb51bbfb84f3626554ff7b60b385c45b3b02ee29d2ac06 rehashed and visually reviewed, identical EV147 render.",
+        "Artifact 10336172299 ZIP SHA256 c24cfc7d8b80652a5caaeafa4d131f31c32fcbe85e45cfb4a6bb5edb2f789c94 rehashed integrity PASS; recovered exact TIME_V1.0 PDF SHA256 d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3 / 515920B / 10 pages; actual p8 local 180dpi Poppler PNG SHA256 e8389e14de78058e4cc73febabf0c984667eebe0c9b0739d2b7f41e9a1ea40ea independently visually inspected entry (5) 301-2-1 Common. No new raw URL acquisition or GitHub renderer p8 claim.",
+        "VDV official catalog accessed 2026-11-28; only dedicated V1.0; DE correct, EN affected; no dedicated predecessor or corrected successor verified. DR3012-006 distinct. Confirmed TS-002 legacy duplicate of DRTIME10-001, same exact bilingual source/p4; one additional archival locator slot, zero new logical defects. Preserve 192 historical IDs; no XSD/SDK runtime change."
       ],
       "scope_conclusion": "First and last independently verified dedicated TimeService publication is V1.0 (02/2018). One bilingual PDF with German foreword correct 301-2-10, English foreword wrong 301-2-1. No earlier standalone or corrected later TimeService PDF in VDV public index checked 2026-11-23, so no inferred corrected successor. VDV 301-2-1 is Common, not TimeService. Historical 2016 base reference to 301-2-11 is the separate finding DR3012-006. This finding is documentation/resolver-only with no XSD/runtime change.",
-      "note": "German/English separately evaluated inside one TIME_V1.0 publication; English alone contains incorrect identity, German is matching control. Version boundary is one standalone V1.0 issue with no evidenced predecessor/corrected successor.",
+      "note": "German/English separately evaluated inside one TIME_V1.0 publication; English alone contains incorrect identity, German is matching control. Version boundary is one standalone V1.0 issue with no evidenced predecessor/corrected successor. 2026-11-28 TS-002 identical historical mirror; fresh exact-source inspection, no scope change.",
       "boundary_checks": [
         {
           "version": "Before standalone TimeService V1.0 301-2-10",
@@ -8700,6 +8706,46 @@
           "language_status": "Earliest EN combined original p96 explicit non-XML and no periodic publishing; sole standalone bilingual DE/EN p6 independently read; DE no-cyclic explicit and EN omitted; exact official tags 1.0–2.3 no dedicated XSD. No predecessor or successor standalone verified.",
           "source_ids": [
             "VDV301-2_V1.0_EN",
+            "TIME_V1.0"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "TS-002",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_TS_002_2026-11-28.md",
+        "docs/pdf_xsd_semantic_audit/CORRECTION_TS_002_DRTIME10_001_IDENTITY_2026-11-28.md",
+        "docs/pdf_xsd_semantic_audit/IDENTITY_RECONCILIATION_DRTRAINSET21_001_DRTRAINSET22_001_2026-11-24.md",
+        "EV159 artifact 10336194085 ZIP SHA256 4d5c36f36c468b92e1a3ca962eb1e76b8670f6460f2ecf667bd1cdc2c2e2d010 rehashed integrity PASS; actual p4 131551B PNG SHA256 1614a270b77c37cd2abb51bbfb84f3626554ff7b60b385c45b3b02ee29d2ac06 rehashed and visually reviewed, identical EV147 render.",
+        "Artifact 10336172299 ZIP SHA256 c24cfc7d8b80652a5caaeafa4d131f31c32fcbe85e45cfb4a6bb5edb2f789c94 rehashed integrity PASS; recovered exact TIME_V1.0 PDF SHA256 d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3 / 515920B / 10 pages; actual p8 local 180dpi Poppler PNG SHA256 e8389e14de78058e4cc73febabf0c984667eebe0c9b0739d2b7f41e9a1ea40ea independently visually inspected entry (5) 301-2-1 Common. No new raw URL acquisition or GitHub renderer p8 claim.",
+        "VDV official catalog accessed 2026-11-28; only dedicated V1.0; DE correct, EN affected; no dedicated predecessor or corrected successor verified. DR3012-006 distinct. Confirmed TS-002 legacy duplicate of DRTIME10-001, same exact bilingual source/p4; one additional archival locator slot, zero new logical defects. Preserve 192 historical IDs; no XSD/SDK runtime change."
+      ],
+      "scope_conclusion": "TS-002 is an archival same-occurrence mirror of DRTIME10-001: sole standalone bilingual TIME_V1.0 02/2018, English p4 wrong 301-2-1, DE correct 301-2-10. No dedicated predecessor/corrected successor established; distinct DR3012-006. No independent new defect.",
+      "note": "Confirmed TS-002 legacy duplicate of DRTIME10-001, same exact bilingual source/p4; one additional archival locator slot, zero new logical defects. Preserve 192 historical IDs; no XSD/SDK runtime change.",
+      "boundary_checks": [
+        {
+          "version": "Before standalone TimeService V1.0 301-2-10",
+          "role": "no_dedicated_predecessor_publication_verified",
+          "language_status": "de/en:public VDV catalog contains no earlier dedicated TimeService edition; 2016 VDV 301-2 base contains different 301-2-11 issue DR3012-006, not equivalent foreword",
+          "source_ids": [
+            "TIME_V1.0"
+          ]
+        },
+        {
+          "version": "TimeService V1.0 301-2-10 (02/2018)",
+          "role": "first_last_affected_english_foreword",
+          "language_status": "de:Vorwort correct 301-2-10; en:Foreword incorrect 301-2-1; one bilingual official issue, original p4",
+          "source_ids": [
+            "TIME_V1.0"
+          ]
+        },
+        {
+          "version": "After standalone TimeService V1.0 301-2-10",
+          "role": "no_dedicated_successor_publication_verified",
+          "language_status": "de/en:no later corrected dedicated TimeService publication listed 2026-11-23, no inference of correction boundary",
+          "source_ids": [
             "TIME_V1.0"
           ]
         }

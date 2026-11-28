@@ -11200,9 +11200,19 @@
           "kind": "evidence",
           "reference": "EV-147 / run 34028395412 / closure run 34028583953 / audit_registry/drtime10_revalidation_evidence_2026-09-06.json",
           "note": "Persisted TimeService V1.0 visual revalidation evidence."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/CORRECTION_TS_002_DRTIME10_001_IDENTITY_2026-11-28.md",
+          "note": "Exact-source identity reconciliation, TS-002 historical mirror; no second independent defect."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_TS_002_2026-11-28.md",
+          "note": "Fresh source-body verification and historical mirror coverage."
         }
       ],
-      "notes": "Confirmed documentation/resolver defect only. No TimeService XSD semantic authority is manufactured."
+      "notes": "Confirmed documentation/resolver defect only. No TimeService XSD semantic authority is manufactured.\n2026-11-28: canonical logical identity for the same-page English foreword error; TS-002 is an already frozen historical duplicate, not a second issue. Fresh EV159 p4 PNG rehash/visual review and exact archived PDF p8 control corroborate EV147. See docs/pdf_xsd_semantic_audit/CORRECTION_TS_002_DRTIME10_001_IDENTITY_2026-11-28.md and docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_TS_002_2026-11-28.md."
     },
     {
       "finding_id": "DRTIME10-002",
@@ -15676,7 +15686,7 @@
           "version": "V1.0",
           "authority": "documentation_only",
           "xsd_profile": null,
-          "note": "The exact official TimeService V1.0 writing is VDV 301-2-10. On physical page 4 the German foreword identifies VDV 301-2-10 while the adjacent English foreword incorrectly says VDV 301-2-1."
+          "note": "The exact official TimeService V1.0 writing is VDV 301-2-10. On physical page 4 the German foreword identifies VDV 301-2-10 while the adjacent English foreword incorrectly says VDV 301-2-1. Historical occurrence mirror of canonical DRTIME10-001; same bilingual publication and exact physical p4, English only; no independent new defect."
         }
       ],
       "review_state": "manually_reviewed",
@@ -15714,14 +15724,14 @@
         "de": {
           "title": "TimeService V1.0: englisches Vorwort nennt VDV 301-2-1 statt VDV 301-2-10",
           "short": "Das deutsche Vorwort nennt korrekt VDV 301-2-10; das englische Vorwort derselben Seite verweist fälschlich auf VDV 301-2-1.",
-          "long": "TS-002 ist ein bestätigter Dokumentnummernfehler. Auf der physischen Seite 4 der byte-gepinnten offiziellen TimeService-V1.0-Schrift identifiziert der deutsche Vorworttext VDV 301-2-10, während der direkt benachbarte englische Text VDV 301-2-1 nennt. Die Veröffentlichung selbst ist VDV 301-2-10; der englische Verweis ist daher kein alternativer Normpfad, sondern ein redaktioneller Fehler.",
-          "recommendation": "Den englischen Verweis als VDV 301-2-10 interpretieren und den Fehler nur als Dokumentationshinweis führen. Keine XSD-, Resolver- oder Runtime-Regel daraus ableiten."
+          "long": "TS-002 ist ein bestätigter Dokumentnummernfehler. Auf der physischen Seite 4 der byte-gepinnten offiziellen TimeService-V1.0-Schrift identifiziert der deutsche Vorworttext VDV 301-2-10, während der direkt benachbarte englische Text VDV 301-2-1 nennt. Die Veröffentlichung selbst ist VDV 301-2-10; der englische Verweis ist daher kein alternativer Normpfad, sondern ein redaktioneller Fehler. Historischer Archiveintrag desselben bereits unter DRTIME10-001 geführten Fehlers; keine zweite eigenständige Fehlerursache.",
+          "recommendation": "Den englischen Verweis als VDV 301-2-10 interpretieren und den Fehler nur als Dokumentationshinweis führen. Keine XSD-, Resolver- oder Runtime-Regel daraus ableiten. Bei fachlicher Auswertung mit DRTIME10-001 zusammenführen; TS-002 ausschließlich als historischen Nachweis erhalten."
         },
         "en": {
           "title": "TimeService V1.0: English foreword cites VDV 301-2-1 instead of VDV 301-2-10",
           "short": "The German foreword correctly identifies VDV 301-2-10; the English foreword on the same page incorrectly cites VDV 301-2-1.",
-          "long": "TS-002 is a confirmed document-number error. On physical page 4 of the byte-pinned official TimeService V1.0 publication, the German foreword identifies VDV 301-2-10 while the immediately adjacent English text says VDV 301-2-1. The publication itself is VDV 301-2-10, so the English reference is not an alternate authority path but a local editorial error.",
-          "recommendation": "Interpret the English reference as VDV 301-2-10 and retain the issue as documentation guidance only. Do not derive an XSD, resolver, or runtime rule from it."
+          "long": "TS-002 is a confirmed document-number error. On physical page 4 of the byte-pinned official TimeService V1.0 publication, the German foreword identifies VDV 301-2-10 while the immediately adjacent English text says VDV 301-2-1. The publication itself is VDV 301-2-10, so the English reference is not an alternate authority path but a local editorial error. Historical archive record of the same error already tracked by DRTIME10-001; not a second independent defect.",
+          "recommendation": "Interpret the English reference as VDV 301-2-10 and retain the issue as documentation guidance only. Do not derive an XSD, resolver, or runtime rule from it. Consolidate the logical issue under DRTIME10-001 and retain TS-002 solely as historical provenance."
         }
       },
       "runtime_match": {
@@ -15743,9 +15753,19 @@
           "kind": "pdf",
           "reference": "TimeService V1.0 / sha256 d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3 / physical page 4",
           "note": "German VDV 301-2-10 versus English VDV 301-2-1."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/CORRECTION_TS_002_DRTIME10_001_IDENTITY_2026-11-28.md",
+          "note": "Identity collision and non-destructive reconciliation under existing TrainSet precedent."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_TS_002_2026-11-28.md",
+          "note": "Fresh exact source/body/language/version evidence; archival locator only."
         }
       ],
-      "notes": "Confirmed documentation-only reference-number typo; no executable effect."
+      "notes": "LEGACY_DUPLICATE_OF_DRTIME10-001. Confirmed documentation-only reference-number typo; no executable effect. Existing frozen TS-002 is the historical EV159 provenance mirror of the identical already-complete DRTIME10-001 (EV147). Same exact TIME_V1.0 PDF and p4 PNG SHA256 1614a270b77c37cd2abb51bbfb84f3626554ff7b60b385c45b3b02ee29d2ac06. Preserve both historical records; no second logical issue, no duplicate diagnostic, no runtime matcher. See docs/pdf_xsd_semantic_audit/CORRECTION_TS_002_DRTIME10_001_IDENTITY_2026-11-28.md and docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_TS_002_2026-11-28.md."
     },
     {
       "finding_id": "TSD-001",
