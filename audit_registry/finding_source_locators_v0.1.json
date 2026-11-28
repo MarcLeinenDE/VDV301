@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "06975d583393a78785d30b9ed6b48d466710180b",
+    "git_blob": "5cbe4253f366be5aa3df1f6bf1cf86eef674fa48",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 153,
-    "coverage_complete_count": 153,
+    "locator_entry_count": 154,
+    "coverage_complete_count": 154,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 39
+    "remaining_finding_count": 38
   },
   "entries": [
     {
@@ -34356,6 +34356,502 @@
         "Permanent checker tools/validate_tkt_001_release_context.py expanded at 19e32fbec47cddcc169ed3e61649e72b49ce3c40; schema gate 46145064106 and handoff 46145064090 SUCCESS. Artifact 15262414462 SHA256 0c433ee5bc6d26fee8fbeff82064c57de4b3a6e1ff90274480ede8b49175f7d4 downloaded/rehashed, 24/24 status files exit 0. TKT-007: 6 positive (data/error branch and explicit inner type in both complete profiles), 2 flattened field negatives SCHEMAV_ELEMENT_CONTENT, 2 wrong-inner xsi:type negatives SCHEMAV_CVC_ELT_4_3, 10 mandatory choice/sequence controls, 2 isolated original controls SCHEMAV_CVC_ELT_1. TKT-001..006 retained. Independent local later-profile probes also confirm flattening, wrong inner type and omission/order errors.",
         "Active disproof: header could be a description of an outer response rather than a type name, or intentional choice flattening; both tables use +Structure notation, explicit inner type reference and table number, and actual required sequence under inner type, while outer choice has completely different children. Header and caption repeat exact existing outer type on inner table; distinct from TKT-005 absent overview type. Choice minus notation does not flatten nested types. No historical alias or alternative global root inferred. Correctly nested instances unaffected, wrong shape/type ordinary XSD-INVALID; no dedicated advisory.",
         "Adjacent observation (not a new finding or scope expansion): DE Tabelle 9 outer response description refers to tariff information instead of ticket validation, unlike EN Table 123. Preserve for separate identity/context review; TKT-007 concerns only inner table label and field ownership. TKT-008 and TKT-009 remain pending independently."
+      ]
+    },
+    {
+      "finding_id": "TKT-008",
+      "service": "TicketingService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "TicketingService V1.0 in complete VDV-301-1.0 original aggregate",
+          "authority": "official_release",
+          "xsd_profile": "IBIS_IP_V1.0.xsd @ 41289eaed2674a169fdf77a10a2eff293c76d5c4 + IBIS-IP_TicketInformationService_V1.0.xsd @ 017ca64666e25d757fc0cde1f1be817f06a743fc + exact complete historical 12-file family @ f5b53785f703e898632603eec3bfa3555a79fdba",
+          "note": "EN V1.0 01/2014 pp94–95 §9.11.7.2 Tables 121/122: inner response table 122 prints CardApplicationInformation in Card-Application-Validation, not the exact XSD element CardApplikationInformation. Exact original service group is optional as a whole; both ordered members are mandatory when present. Complete original VDV-301-1.0 aggregate supplies response root; isolated original service lacks root and is excluded from advisory scope. EN row cardinality cell for application information is blank; do not infer unconditional obligation."
+        },
+        {
+          "version": "TicketingService V1.0 later official self-contained revision in VDV-301-2.0 through VDV-301-2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7 + Common/Enumerations V1.0 @ 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c/a9bea5bc73003ed91ded8519db06c32c4067831d",
+          "note": "DE standalone V1.0 07/2016 pp10–11 §1.8.2 Tabellen 7/8 repeats CardApplicationInformation with 1:1 row cardinality. Exact later identical official service and Common/Enums V1.0 at tags 2.0–2.3 enforce CardApplikationInformation after CardApplStatusCode, with optional group. Request CardApplInformation is different and legitimate. Master comparison only, not a release; no earlier publication or corrected later edition established per TKT-001 catalog review. Publication dates do not imply release-tag dates."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "TicketingService V1.0 in complete VDV-301-1.0 original aggregate",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "earliest_affected_english_complete_original_aggregate",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 Interface Specification V1.0 (EN, 01/2014)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                94
+              ],
+              "section": "9.11.7 Data Structure of Operation ValidateTicket / 9.11.7.1 Request",
+              "table": "Table 120: Description of the TicketInformationService.Validation.GetDataRequest",
+              "point_summary": "Distinct request identifier CardApplInformation 0:1; not the response spelling defect."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 Interface Specification V1.0 (EN, 01/2014)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                94
+              ],
+              "section": "9.11.7 Data Structure of Operation ValidateTicket / 9.11.7.2 Response",
+              "table": "Table 121: Description of the TicketingService.ValidateTicketResponse",
+              "point_summary": "Outer response references TicketingService.ValidationResponseData and detailed table."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 Interface Specification V1.0 (EN, 01/2014)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                95
+              ],
+              "section": "9.11.7 Data Structure of Operation ValidateTicket / 9.11.7.2 Response",
+              "table": "Table 122: Description of the TicketingService.ValidateTicketResponseDataStructure",
+              "point_summary": "CardApplicationInformation printed after CardApplStatusCode in application-validation group; type CardApplInformations. EN cardinality blank; DE 1:1. XSD group optional as a whole."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "element",
+              "component": "TicketingService.ValidateTicketResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.ValidateTicketResponse']",
+              "line_hint": "130",
+              "point_summary": "Global response root mapped to exact outer type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "017ca64666e25d757fc0cde1f1be817f06a743fc",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidateTicketResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketResponseStructure']/xs:choice",
+              "line_hint": "93–98",
+              "point_summary": "Outer choice contains TicketingService.ValidationResponseData typed exact inner type or OperationErrorMessage."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "017ca64666e25d757fc0cde1f1be817f06a743fc",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidateTicketResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketResponseDataStructure']/xs:sequence/xs:group[@ref='CardApplikationValidation']",
+              "line_hint": "99–107",
+              "point_summary": "Optional group ref minOccurs=0, ordered before mandatory CardDataValidation."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "017ca64666e25d757fc0cde1f1be817f06a743fc",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "group",
+              "component": "CardApplikationValidation",
+              "xpath_hint": "/xs:schema/xs:group[@name='CardApplikationValidation']/xs:sequence/xs:element[@name='CardApplikationInformation']",
+              "line_hint": "7–16",
+              "point_summary": "CardApplStatusCode then CardApplikationInformation typed CardApplInformations, mandatory within group; no c-spelling alias."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "CardApplInformations",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='CardApplInformations']",
+              "line_hint": "111–124",
+              "point_summary": "Exact mandatory length and byte-array data children."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "Enumerations V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact pinned dependency."
+            }
+          ],
+          "coverage_note": "EN V1.0 01/2014 pp94–95 §9.11.7.2 Tables 121/122: inner response table 122 prints CardApplicationInformation in Card-Application-Validation, not the exact XSD element CardApplikationInformation. Exact original service group is optional as a whole; both ordered members are mandatory when present. Complete original VDV-301-1.0 aggregate supplies response root; isolated original service lacks root and is excluded from advisory scope. EN row cardinality cell for application information is blank; do not infer unconditional obligation."
+        },
+        {
+          "version": "TicketingService V1.0 later official self-contained revision in VDV-301-2.0 through VDV-301-2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "independent_german_persistent_official_release_context",
+          "pdf_locators": [
+            {
+              "source_id": "TICKETING_V1.0",
+              "document_title": "VDV-Schrift 301-2-9 TicketingService V1.0 (DE, 07/2016)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-9sds-v1-0.pdfx",
+              "sha256": "96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43",
+              "printed_pages": [
+                10
+              ],
+              "section": "1.8 Datenstruktur der Operation ValidateTicket / 1.8.1 Request",
+              "table": "Tabelle 6 Beschreibung der TicketInformationService.Validation.GetDataRequest",
+              "point_summary": "Distinct request identifier CardApplInformation 0:1; not the response spelling defect."
+            },
+            {
+              "source_id": "TICKETING_V1.0",
+              "document_title": "VDV-Schrift 301-2-9 TicketingService V1.0 (DE, 07/2016)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-9sds-v1-0.pdfx",
+              "sha256": "96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43",
+              "printed_pages": [
+                11
+              ],
+              "section": "1.8 Datenstruktur der Operation ValidateTicket / 1.8.2 Response",
+              "table": "Tabelle 7 Beschreibung der TicketingService.ValidateTicketResponse",
+              "point_summary": "Outer response references TicketingService.ValidationResponseData and detailed table."
+            },
+            {
+              "source_id": "TICKETING_V1.0",
+              "document_title": "VDV-Schrift 301-2-9 TicketingService V1.0 (DE, 07/2016)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-9sds-v1-0.pdfx",
+              "sha256": "96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43",
+              "printed_pages": [
+                11
+              ],
+              "section": "1.8 Datenstruktur der Operation ValidateTicket / 1.8.2 Response",
+              "table": "Tabelle 8 Beschreibung der TicketingService.ValidateTicketResponseDataStructure",
+              "point_summary": "CardApplicationInformation printed after CardApplStatusCode in application-validation group; type CardApplInformations. EN cardinality blank; DE 1:1. XSD group optional as a whole."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "element",
+              "component": "TicketingService.ValidateTicketResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.ValidateTicketResponse']",
+              "line_hint": "60",
+              "point_summary": "Global response root mapped to exact outer type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidateTicketResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketResponseStructure']/xs:choice",
+              "line_hint": "61–66",
+              "point_summary": "Outer choice contains TicketingService.ValidationResponseData typed exact inner type or OperationErrorMessage."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidateTicketResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketResponseDataStructure']/xs:sequence/xs:group[@ref='CardApplikationValidation']",
+              "line_hint": "67–75",
+              "point_summary": "Optional group ref minOccurs=0, ordered before mandatory CardDataValidation."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "group",
+              "component": "CardApplikationValidation",
+              "xpath_hint": "/xs:schema/xs:group[@name='CardApplikationValidation']/xs:sequence/xs:element[@name='CardApplikationInformation']",
+              "line_hint": "91–100",
+              "point_summary": "CardApplStatusCode then CardApplikationInformation typed CardApplInformations, mandatory within group; no c-spelling alias."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "CardApplInformations",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='CardApplInformations']",
+              "line_hint": "111–124",
+              "point_summary": "Exact mandatory length and byte-array data children."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "Enumerations V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact pinned dependency."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "element",
+              "component": "TicketingService.ValidateTicketResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.ValidateTicketResponse']",
+              "line_hint": "60",
+              "point_summary": "Global response root mapped to exact outer type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidateTicketResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketResponseStructure']/xs:choice",
+              "line_hint": "61–66",
+              "point_summary": "Outer choice contains TicketingService.ValidationResponseData typed exact inner type or OperationErrorMessage."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidateTicketResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketResponseDataStructure']/xs:sequence/xs:group[@ref='CardApplikationValidation']",
+              "line_hint": "67–75",
+              "point_summary": "Optional group ref minOccurs=0, ordered before mandatory CardDataValidation."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "group",
+              "component": "CardApplikationValidation",
+              "xpath_hint": "/xs:schema/xs:group[@name='CardApplikationValidation']/xs:sequence/xs:element[@name='CardApplikationInformation']",
+              "line_hint": "91–100",
+              "point_summary": "CardApplStatusCode then CardApplikationInformation typed CardApplInformations, mandatory within group; no c-spelling alias."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "complexType",
+              "component": "CardApplInformations",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='CardApplInformations']",
+              "line_hint": "111–124",
+              "point_summary": "Exact mandatory length and byte-array data children."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "schema",
+              "component": "Enumerations V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact pinned dependency."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "element",
+              "component": "TicketingService.ValidateTicketResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.ValidateTicketResponse']",
+              "line_hint": "60",
+              "point_summary": "Global response root mapped to exact outer type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidateTicketResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketResponseStructure']/xs:choice",
+              "line_hint": "61–66",
+              "point_summary": "Outer choice contains TicketingService.ValidationResponseData typed exact inner type or OperationErrorMessage."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidateTicketResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketResponseDataStructure']/xs:sequence/xs:group[@ref='CardApplikationValidation']",
+              "line_hint": "67–75",
+              "point_summary": "Optional group ref minOccurs=0, ordered before mandatory CardDataValidation."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "group",
+              "component": "CardApplikationValidation",
+              "xpath_hint": "/xs:schema/xs:group[@name='CardApplikationValidation']/xs:sequence/xs:element[@name='CardApplikationInformation']",
+              "line_hint": "91–100",
+              "point_summary": "CardApplStatusCode then CardApplikationInformation typed CardApplInformations, mandatory within group; no c-spelling alias."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "complexType",
+              "component": "CardApplInformations",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='CardApplInformations']",
+              "line_hint": "111–124",
+              "point_summary": "Exact mandatory length and byte-array data children."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "schema",
+              "component": "Enumerations V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact pinned dependency."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "element",
+              "component": "TicketingService.ValidateTicketResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.ValidateTicketResponse']",
+              "line_hint": "60",
+              "point_summary": "Global response root mapped to exact outer type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidateTicketResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketResponseStructure']/xs:choice",
+              "line_hint": "61–66",
+              "point_summary": "Outer choice contains TicketingService.ValidationResponseData typed exact inner type or OperationErrorMessage."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidateTicketResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketResponseDataStructure']/xs:sequence/xs:group[@ref='CardApplikationValidation']",
+              "line_hint": "67–75",
+              "point_summary": "Optional group ref minOccurs=0, ordered before mandatory CardDataValidation."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "group",
+              "component": "CardApplikationValidation",
+              "xpath_hint": "/xs:schema/xs:group[@name='CardApplikationValidation']/xs:sequence/xs:element[@name='CardApplikationInformation']",
+              "line_hint": "91–100",
+              "point_summary": "CardApplStatusCode then CardApplikationInformation typed CardApplInformations, mandatory within group; no c-spelling alias."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "complexType",
+              "component": "CardApplInformations",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='CardApplInformations']",
+              "line_hint": "111–124",
+              "point_summary": "Exact mandatory length and byte-array data children."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "schema",
+              "component": "Enumerations V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact pinned dependency."
+            }
+          ],
+          "coverage_note": "DE standalone V1.0 07/2016 pp10–11 §1.8.2 Tabellen 7/8 repeats CardApplicationInformation with 1:1 row cardinality. Exact later identical official service and Common/Enums V1.0 at tags 2.0–2.3 enforce CardApplikationInformation after CardApplStatusCode, with optional group. Request CardApplInformation is different and legitimate. Master comparison only, not a release; no earlier publication or corrected later edition established per TKT-001 catalog review. Publication dates do not imply release-tag dates."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_TKT_008_2026-11-28.md",
+        "Reused EV-158 artifact 10336185560 ZIP SHA256 ba5ee246787f58d4cf690421fda683fb1dd072106d5c4e7eb6376c218b717870 integrity PASS; raw DE PDF SHA256 96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43 (627099 bytes); p10 7a1dbb41115b5c7fc910dea754bb20f9b6a525c13073db735b0d69e1494855b4 (235025), p11 d3340f41c706c295971bc47b93d824891fa2576cf74f4ca322ff543c2a4b6aa6 (289394), actual images inspected; seven archived XSD files rehashed as Git blobs matching original/later profiles. Historical EV-158 TKT-008 executable_confirmed, schema_spelling_enforced retained.",
+        "Reused EN fallback artifacts 15263067509 ZIP SHA256 5dd0b1a423fc0ad9af74af0b3b137faaf8fb9e6aa64fe25fa5b8fb941ce7719d and 15259980153 ZIP SHA256 fd1f0b0df80de41da39f1b8f04c549d7323375ae4fa34f173f0ea11369f6f252; source manifests SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 (2403598), p94 aaf798843606b672d0039ec7b997eb9cd1302a760fe519fe751111e6396d47d6 (221771), p95 663b5018e28f32c6faf90dd75d9e8c1055256f4413dbc07afd08cca743128cc9 (289688). ZIP/manifest/PNG hashes and sizes verified; actual images inspected. No new render/raw PDF retrieval needed.",
+        "Exact upstream tag files rechecked independently: original service 017ca64666e25d757fc0cde1f1be817f06a743fc, original aggregate 41289eaed2674a169fdf77a10a2eff293c76d5c4 at VDV-301-1.0; later service 3fda66d872ab0d1c511247f13e715cf3ad56afe7 identical at official tags 2.0–2.3, Common 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c and Enums a9bea5bc73003ed91ded8519db06c32c4067831d identical at all five tags. Complete original 12-file family downloaded and Git blob verified by permanent regression. No candidate promotion; publication boundary retained from TKT-001 catalog review.",
+        "Permanent checker tools/validate_tkt_001_release_context.py expanded at 7e9c2cc01d75c1dcbfc6ec409fbdb75bae570ffd; schema gate 46160960815 and handoff 46160960747 SUCCESS. Artifact 15269975930 SHA256 3d72a8c6756f05948472ddbab431f20af0fdf89765fe192f7fff22de61fd499b downloaded/rehashed, 24/24 status files exit 0. TKT-008 log confirms 4 positives, 2 exact PDF spelling negatives, 12 context controls, 2 isolated historical controls. Independent local later-profile probes confirm exact error path and expected token.",
+        "Active disproof: line-wrapped full identifier is visibly CardApplicationInformation in EN/DE, not CardApplInformation; request tables show legitimate distinct shorter element. Group name is not an XML wrapper; optional group does not make its individual members independently optional. Correct full group and omitted full group PASS. Missing information after status yields expected CardApplikationInformation with actual CardValidationCode; typo without status and duplicate typo yield different expected fields; correct spelling with malformed child yields datatype error. Neither actual name alone nor expected name alone sufficient. Isolated original missing root is packaging error.",
+        "Adjacent observations (not separately resolved): EN Table122 CardApplicationInformation cardinality cell blank, DE Table8 1:1; optional group cardinality not explicitly represented in these rows. XSD group minOccurs=0 established; no independent new finding credited. EN Table121 ErrorMessage vs OperationErrorMessage previously recorded, DE Tabelle7 description mentions tariff information; preserve separately. TKT-009 remains pending."
       ]
     }
   ]

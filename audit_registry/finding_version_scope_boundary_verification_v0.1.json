@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 153,
-    "verified": 153,
+    "tracked_findings": 154,
+    "verified": 154,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -8603,6 +8603,39 @@
           "version": "TicketingService V1.0 later official self-contained revision in VDV-301-2.0 through VDV-301-2.3",
           "role": "independent_german_persistent_official_release_context",
           "language_status": "DE standalone V1.0 07/2016 pp11–12 §1.9.2 Tabellen 9/10 repeats the same correct inner reference and wrong inner table header/caption. Later identical official service and exact Common/Enums V1.0 at tags 2.0–2.3 preserve field ownership. Master comparison only, not a release; no earlier publication or corrected later service edition established per TKT-001 catalog review. Publication dates do not imply release-tag dates.",
+          "source_ids": [
+            "TICKETING_V1.0"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "TKT-008",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_TKT_008_2026-11-28.md",
+        "Reused EV-158 artifact 10336185560 ZIP SHA256 ba5ee246787f58d4cf690421fda683fb1dd072106d5c4e7eb6376c218b717870 integrity PASS; raw DE PDF SHA256 96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43 (627099 bytes); p10 7a1dbb41115b5c7fc910dea754bb20f9b6a525c13073db735b0d69e1494855b4 (235025), p11 d3340f41c706c295971bc47b93d824891fa2576cf74f4ca322ff543c2a4b6aa6 (289394), actual images inspected; seven archived XSD files rehashed as Git blobs matching original/later profiles. Historical EV-158 TKT-008 executable_confirmed, schema_spelling_enforced retained.",
+        "Reused EN fallback artifacts 15263067509 ZIP SHA256 5dd0b1a423fc0ad9af74af0b3b137faaf8fb9e6aa64fe25fa5b8fb941ce7719d and 15259980153 ZIP SHA256 fd1f0b0df80de41da39f1b8f04c549d7323375ae4fa34f173f0ea11369f6f252; source manifests SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 (2403598), p94 aaf798843606b672d0039ec7b997eb9cd1302a760fe519fe751111e6396d47d6 (221771), p95 663b5018e28f32c6faf90dd75d9e8c1055256f4413dbc07afd08cca743128cc9 (289688). ZIP/manifest/PNG hashes and sizes verified; actual images inspected. No new render/raw PDF retrieval needed.",
+        "Exact upstream tag files rechecked independently: original service 017ca64666e25d757fc0cde1f1be817f06a743fc, original aggregate 41289eaed2674a169fdf77a10a2eff293c76d5c4 at VDV-301-1.0; later service 3fda66d872ab0d1c511247f13e715cf3ad56afe7 identical at official tags 2.0–2.3, Common 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c and Enums a9bea5bc73003ed91ded8519db06c32c4067831d identical at all five tags. Complete original 12-file family downloaded and Git blob verified by permanent regression. No candidate promotion; publication boundary retained from TKT-001 catalog review.",
+        "Permanent checker tools/validate_tkt_001_release_context.py expanded at 7e9c2cc01d75c1dcbfc6ec409fbdb75bae570ffd; schema gate 46160960815 and handoff 46160960747 SUCCESS. Artifact 15269975930 SHA256 3d72a8c6756f05948472ddbab431f20af0fdf89765fe192f7fff22de61fd499b downloaded/rehashed, 24/24 status files exit 0. TKT-008 log confirms 4 positives, 2 exact PDF spelling negatives, 12 context controls, 2 isolated historical controls. Independent local later-profile probes confirm exact error path and expected token.",
+        "Active disproof: line-wrapped full identifier is visibly CardApplicationInformation in EN/DE, not CardApplInformation; request tables show legitimate distinct shorter element. Group name is not an XML wrapper; optional group does not make its individual members independently optional. Correct full group and omitted full group PASS. Missing information after status yields expected CardApplikationInformation with actual CardValidationCode; typo without status and duplicate typo yield different expected fields; correct spelling with malformed child yields datatype error. Neither actual name alone nor expected name alone sufficient. Isolated original missing root is packaging error.",
+        "Adjacent observations (not separately resolved): EN Table122 CardApplicationInformation cardinality cell blank, DE Table8 1:1; optional group cardinality not explicitly represented in these rows. XSD group minOccurs=0 established; no independent new finding credited. EN Table121 ErrorMessage vs OperationErrorMessage previously recorded, DE Tabelle7 description mentions tariff information; preserve separately. TKT-009 remains pending."
+      ],
+      "note": "TKT-008 confirmed_pdf_defect, identifier_typo, selected_xsd, error_with_advisory retained. Both EN original and DE standalone show CardApplicationInformation; complete original VDV-301-1.0 aggregate and exact identical later official service family 2.0–2.3 reject it in the correct response position, accept CardApplikationInformation. Entire CardApplikationValidation group is optional, both ordered members mandatory when present. 20 targeted cases PASS; require exact actual offending element and exact expected element at response root/data wrapper after CardApplStatusCode, plus selected profile XSD INVALID. No name-only or expected-token-only matching. Request CardApplInformation, omission, duplicate, wrong order/position, malformed child and isolated original missing root excluded. Only TKT-008 reviewed mapping scope/trigger refined; 77 reviewed / 0 implemented; no XSD/resolver changes. No earlier or corrected later service publication established.",
+      "scope_conclusion": "TKT-008 confirmed_pdf_defect, identifier_typo, selected_xsd, error_with_advisory retained. Both EN original and DE standalone show CardApplicationInformation; complete original VDV-301-1.0 aggregate and exact identical later official service family 2.0–2.3 reject it in the correct response position, accept CardApplikationInformation. Entire CardApplikationValidation group is optional, both ordered members mandatory when present. 20 targeted cases PASS; require exact actual offending element and exact expected element at response root/data wrapper after CardApplStatusCode, plus selected profile XSD INVALID. No name-only or expected-token-only matching. Request CardApplInformation, omission, duplicate, wrong order/position, malformed child and isolated original missing root excluded. Only TKT-008 reviewed mapping scope/trigger refined; 77 reviewed / 0 implemented; no XSD/resolver changes. No earlier or corrected later service publication established.",
+      "boundary_checks": [
+        {
+          "version": "TicketingService V1.0 in complete VDV-301-1.0 original aggregate",
+          "role": "earliest_affected_english_complete_original_aggregate",
+          "language_status": "EN V1.0 01/2014 pp94–95 §9.11.7.2 Tables 121/122: inner response table 122 prints CardApplicationInformation in Card-Application-Validation, not the exact XSD element CardApplikationInformation. Exact original service group is optional as a whole; both ordered members are mandatory when present. Complete original VDV-301-1.0 aggregate supplies response root; isolated original service lacks root and is excluded from advisory scope. EN row cardinality cell for application information is blank; do not infer unconditional obligation.",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "TicketingService V1.0 later official self-contained revision in VDV-301-2.0 through VDV-301-2.3",
+          "role": "independent_german_persistent_official_release_context",
+          "language_status": "DE standalone V1.0 07/2016 pp10–11 §1.8.2 Tabellen 7/8 repeats CardApplicationInformation with 1:1 row cardinality. Exact later identical official service and Common/Enums V1.0 at tags 2.0–2.3 enforce CardApplikationInformation after CardApplStatusCode, with optional group. Request CardApplInformation is different and legitimate. Master comparison only, not a release; no earlier publication or corrected later edition established per TKT-001 catalog review. Publication dates do not imply release-tag dates.",
           "source_ids": [
             "TICKETING_V1.0"
           ]

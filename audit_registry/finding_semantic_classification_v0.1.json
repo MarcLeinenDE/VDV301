@@ -15297,10 +15297,16 @@
       "service": "TicketingService",
       "version_scope": [
         {
-          "version": "V1.0 later official self-contained revision",
+          "version": "TicketingService V1.0 in complete VDV-301-1.0 original aggregate",
           "authority": "official_release",
-          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7",
-          "note": "CardApplikationValidation uses the exact element spelling CardApplikationInformation; the PDF visibly spells CardApplicationInformation."
+          "xsd_profile": "IBIS_IP_V1.0.xsd @ 41289eaed2674a169fdf77a10a2eff293c76d5c4 + IBIS-IP_TicketInformationService_V1.0.xsd @ 017ca64666e25d757fc0cde1f1be817f06a743fc + exact complete historical 12-file family @ f5b53785f703e898632603eec3bfa3555a79fdba",
+          "note": "EN V1.0 01/2014 pp94–95 §9.11.7.2 Tables 121/122: inner response table 122 prints CardApplicationInformation in Card-Application-Validation, not the exact XSD element CardApplikationInformation. Exact original service group is optional as a whole; both ordered members are mandatory when present. Complete original VDV-301-1.0 aggregate supplies response root; isolated original service lacks root and is excluded from advisory scope. EN row cardinality cell for application information is blank; do not infer unconditional obligation."
+        },
+        {
+          "version": "TicketingService V1.0 later official self-contained revision in VDV-301-2.0 through VDV-301-2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7 + Common/Enumerations V1.0 @ 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c/a9bea5bc73003ed91ded8519db06c32c4067831d",
+          "note": "DE standalone V1.0 07/2016 pp10–11 §1.8.2 Tabellen 7/8 repeats CardApplicationInformation with 1:1 row cardinality. Exact later identical official service and Common/Enums V1.0 at tags 2.0–2.3 enforce CardApplikationInformation after CardApplStatusCode, with optional group. Request CardApplInformation is different and legitimate. Master comparison only, not a release; no earlier publication or corrected later edition established per TKT-001 catalog review. Publication dates do not imply release-tag dates."
         }
       ],
       "review_state": "manually_reviewed",
@@ -15311,7 +15317,12 @@
         "CardApplicationInformation_vs_CardApplikationInformation",
         "element_name_spelling",
         "exact_schema_spelling_required",
-        "visual_pdf_evidence"
+        "visual_pdf_evidence",
+        "historical_aggregate_vs_isolated_service",
+        "independent_english_german_publications",
+        "optional_group_mandatory_ordered_members",
+        "distinct_request_identifier",
+        "context_guarded_advisory"
       ],
       "defect_assessment": "confirmed_pdf_defect",
       "confidence": "confirmed",
@@ -15323,41 +15334,42 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "Rendered physical page 11 visibly uses CardApplicationInformation."
+          "note": "EN p95 Table122 (section starts p94) and DE p11 Tabelle8 (section starts p10) visibly show CardApplicationInformation in ValidateTicket response data; request tables EN120/DE6 instead use CardApplInformation."
         },
         {
           "type": "official_xsd_explicit",
-          "note": "The exact XSD CardApplikationValidation group declares CardApplikationInformation."
+          "note": "Exact original and later group declares CardApplStatusCode then CardApplikationInformation typed CardApplInformations; group ref minOccurs=0 in response data type; exact original aggregate and later service declare response root."
         },
         {
           "type": "executable_validation",
-          "note": "EV-158 validates a response using CardApplikationInformation and rejects the same payload when the element is replaced by CardApplicationInformation."
+          "note": "EV-158 retained; permanent exact-profile regression run 46160960815 confirms 4 positives, 2 targeted PDF spelling negatives, 12 context controls, 2 isolated historical controls."
         },
         {
           "type": "technical_inference",
-          "note": "This is a stable single-element spelling boundary suitable for a targeted Known-Issues advisory while preserving the XSD error."
+          "note": "The wrong identifier is not line-wrap shorthand or a request alias. Optional group omission is valid; expected-token-only or actual-name-only matching can misclassify unrelated errors. Preserve selected-XSD INVALID, advisory only at exact context."
         }
       ],
       "diagnostic": {
         "de": {
           "title": "CardApplicationInformation in der PDF, CardApplikationInformation in der XSD",
-          "short": "Die PDF verwendet CardApplicationInformation; die exakte XSD verlangt die Schreibweise CardApplikationInformation.",
-          "long": "TKT-008 ist ein ausführbar bestätigter Bezeichnerfehler der Dokumentation. Auf der gerenderten physischen Seite 11 steht sichtbar CardApplicationInformation. Die exakte TicketingService-V1.0-XSD deklariert im CardApplikationValidation-Kontext dagegen das Element CardApplikationInformation. EV-158 bestätigt die Grenze direkt: die XSD-Schreibweise validiert, die PDF-Schreibweise wird zurückgewiesen.",
-          "recommendation": "Im XML ausschließlich CardApplikationInformation gemäß ausgewählter XSD verwenden. Wenn die XSD exakt CardApplicationInformation zurückweist, den Fehler beibehalten und ergänzend auf den dokumentierten PDF-Schreibfehler hinweisen."
+          "short": "Die PDF verwendet CardApplicationInformation; die ausgewählte XSD verlangt CardApplikationInformation.",
+          "long": "TKT-008 ist ein ausführbar bestätigter Bezeichnerfehler der englischen Originalausgabe und deutschen TicketingService-V1.0-Einzelausgabe. In TicketingService.ValidateTicketResponse unter TicketingService.ValidationResponseData deklariert die XSD die optionale Gruppe CardApplikationValidation. Wenn die Gruppe verwendet wird, folgen auf CardApplStatusCode die Pflichtdaten CardApplikationInformation vom Typ CardApplInformations. Die PDF-Schreibweise CardApplicationInformation wird genau an dieser Position in beiden vollständigen historischen Release-Kontexten zurückgewiesen. Das vollständige Weglassen der Gruppe ist zulässig. Der Request-Bezeichner CardApplInformation ist eigenständig und korrekt.",
+          "recommendation": "CardApplikationInformation gemäß ausgewählter XSD verwenden. Wenn die XSD genau CardApplicationInformation an der angegebenen Position zurückweist und CardApplikationInformation erwartet, den INVALID-Status erhalten und den PDF-Schreibfehler ergänzend erläutern. Keine automatische Korrektur oder Aliasbildung; Auslassungs-, Reihenfolge-, Request- und sonstige Fehler getrennt behandeln."
         },
         "en": {
           "title": "CardApplicationInformation in the PDF, CardApplikationInformation in the XSD",
-          "short": "The PDF uses CardApplicationInformation; the exact XSD requires the spelling CardApplikationInformation.",
-          "long": "TKT-008 is an executably confirmed documentation identifier defect. Rendered physical page 11 visibly shows CardApplicationInformation. The exact TicketingService V1.0 XSD instead declares CardApplikationInformation in the CardApplikationValidation context. EV-158 confirms the boundary directly: the XSD spelling validates, while the PDF spelling is rejected.",
-          "recommendation": "Use only CardApplikationInformation in XML according to the selected XSD. If XSD validation rejects exactly CardApplicationInformation, preserve the error and add an advisory explaining the documented PDF spelling defect."
+          "short": "The PDF uses CardApplicationInformation; the selected XSD requires CardApplikationInformation.",
+          "long": "TKT-008 is an executably confirmed documentation identifier defect in the original English and standalone German TicketingService V1.0 editions. Under TicketingService.ValidateTicketResponse/TicketingService.ValidationResponseData the XSD declares the optional CardApplikationValidation group. If used, CardApplStatusCode must be followed by required CardApplikationInformation of type CardApplInformations. The PDF spelling CardApplicationInformation is rejected at this exact position in both complete historical release contexts. Omitting the whole group is valid. The request identifier CardApplInformation is separate and correct.",
+          "recommendation": "Use CardApplikationInformation according to the selected XSD. If the XSD rejects exactly CardApplicationInformation at the specified position and expects CardApplikationInformation, preserve INVALID and add an advisory explaining the PDF spelling defect. No automatic repair or alias; distinguish omission, ordering, request and other errors."
         }
       },
       "runtime_match": {
         "state": "reviewed",
         "candidate_triggers": [
-          "selected profile is the later official TicketingService V1.0 schema revision",
-          "XSD validation rejects element CardApplicationInformation where CardApplikationInformation is required",
-          "the invalid spelling matches the official PDF label"
+          "selected profile is the complete official original VDV-301-1.0 aggregate with exact pinned dependency family or the exact later official self-contained TicketingService V1.0 family at VDV-301-2.0 through VDV-301-2.3; isolated original service lacks response root and is excluded",
+          "selected XSD result is INVALID and the offending unqualified direct child at /TicketingService.ValidateTicketResponse/TicketingService.ValidationResponseData/CardApplicationInformation is actually spelled CardApplicationInformation, immediately after CardApplStatusCode in the optional CardApplikationValidation group position",
+          "schema rejection is of that actual wrong element where CardApplikationInformation is required (verified SCHEMAV_ELEMENT_CONTENT); require both actual node/path and expected element context, not error-text-only or spelling-only match",
+          "do not trigger for omitted whole optional group, missing information after status, wrong or correct information without status, duplicate/wrong position, request CardApplInformation or malformed children of correctly spelled element; no alias, normalization or result change"
         ]
       },
       "source_references": [
@@ -15380,9 +15392,29 @@
           "kind": "xsd",
           "reference": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7",
           "note": "CardApplikationValidation group declares CardApplikationInformation."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-2_V1.0_EN / sha256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 / printed pp94–95 Tables120–122",
+          "note": "Independent original spelling, response context and request distinction."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS_IP_V1.0.xsd @ 41289eaed2674a169fdf77a10a2eff293c76d5c4 / VDV-301-1.0",
+          "note": "Complete original aggregate declares response root; original service blob 017ca64666e25d757fc0cde1f1be817f06a743fc defines exact spelling."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_TKT_008_2026-11-28.md",
+          "note": "Independent visual and executable scope/context review."
+        },
+        {
+          "kind": "evidence",
+          "reference": "schema-audit-validation run 46160960815 / artifact 15269975930",
+          "note": "20 targeted cases PASS; spelling, optional group and context controls."
         }
       ],
-      "notes": "Confirmed executable spelling mismatch; exact PDF spelling rejection is a robust advisory candidate. Runtime-mapping review 2026-09-21: reviewed for exact later official V1.0/VDV-301-2.0 profile; selected-XSD INVALID remains authoritative, advisory only."
+      "notes": "TKT-008 confirmed_pdf_defect, identifier_typo, selected_xsd, error_with_advisory retained. Both EN original and DE standalone show CardApplicationInformation; complete original VDV-301-1.0 aggregate and exact identical later official service family 2.0–2.3 reject it in the correct response position, accept CardApplikationInformation. Entire CardApplikationValidation group is optional, both ordered members mandatory when present. 20 targeted cases PASS; require exact actual offending element and exact expected element at response root/data wrapper after CardApplStatusCode, plus selected profile XSD INVALID. No name-only or expected-token-only matching. Request CardApplInformation, omission, duplicate, wrong order/position, malformed child and isolated original missing root excluded. Only TKT-008 reviewed mapping scope/trigger refined; 77 reviewed / 0 implemented; no XSD/resolver changes. No earlier or corrected later service publication established."
     },
     {
       "finding_id": "TKT-009",

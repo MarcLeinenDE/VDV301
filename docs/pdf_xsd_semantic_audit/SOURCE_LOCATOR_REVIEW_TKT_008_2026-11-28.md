@@ -1,0 +1,48 @@
+# TKT-008 source locator and card application spelling review — 2026-11-28
+
+Status: original-source evidence and permanent regression complete; full registry gate pending at substantive commit creation. Final gate evidence in CURRENT_STATE.
+
+## Classification and boundary
+
+TKT-008 confirmed_pdf_defect, identifier_typo, selected_xsd, error_with_advisory retained. Both EN original and DE standalone show CardApplicationInformation; complete original VDV-301-1.0 aggregate and exact identical later official service family 2.0–2.3 reject it in the correct response position, accept CardApplikationInformation. Entire CardApplikationValidation group is optional, both ordered members mandatory when present. 20 targeted cases PASS; require exact actual offending element and exact expected element at response root/data wrapper after CardApplStatusCode, plus selected profile XSD INVALID. No name-only or expected-token-only matching. Request CardApplInformation, omission, duplicate, wrong order/position, malformed child and isolated original missing root excluded. Only TKT-008 reviewed mapping scope/trigger refined; 77 reviewed / 0 implemented; no XSD/resolver changes. No earlier or corrected later service publication established.
+
+EN V1.0 01/2014 pp94–95 §9.11.7.2 Tables 121/122: inner response table 122 prints CardApplicationInformation in Card-Application-Validation, not the exact XSD element CardApplikationInformation. Exact original service group is optional as a whole; both ordered members are mandatory when present. Complete original VDV-301-1.0 aggregate supplies response root; isolated original service lacks root and is excluded from advisory scope. EN row cardinality cell for application information is blank; do not infer unconditional obligation.
+
+DE standalone V1.0 07/2016 pp10–11 §1.8.2 Tabellen 7/8 repeats CardApplicationInformation with 1:1 row cardinality. Exact later identical official service and Common/Enums V1.0 at tags 2.0–2.3 enforce CardApplikationInformation after CardApplStatusCode, with optional group. Request CardApplInformation is different and legitimate. Master comparison only, not a release; no earlier publication or corrected later edition established per TKT-001 catalog review. Publication dates do not imply release-tag dates.
+
+## Visible original locators
+
+| Source | Printed pages | Actual section/table | Finding context |
+| --- | --- | --- | --- |
+| VDV301-2_V1.0_EN | 94 | 9.11.7 Data Structure of Operation ValidateTicket / 9.11.7.1 Request, Table 120 | CardApplInformation 0:1, separate request field. |
+| VDV301-2_V1.0_EN | 94–95 | 9.11.7.2 Response, Table 121: Description of the TicketingService.ValidateTicketResponse; Table 122: Description of the TicketingService.ValidateTicketResponseDataStructure | CardApplicationInformation printed after CardApplStatusCode; row cardinality cell blank. |
+| TICKETING_V1.0 | 10 | 1.8 Datenstruktur der Operation ValidateTicket / 1.8.1 Request, Tabelle 6 | CardApplInformation 0:1, separate request field. |
+| TICKETING_V1.0 | 11 | 1.8.2 Response, Tabelle 7 Beschreibung der TicketingService.ValidateTicketResponse; Tabelle 8 Beschreibung der TicketingService.ValidateTicketResponseDataStructure | CardApplicationInformation printed after CardApplStatusCode, row 1:1. |
+
+## Executable authority and active falsification
+
+Original aggregate line 130 and later service line 60 declare TicketingService.ValidateTicketResponse with outer TicketingService.ValidateTicketResponseStructure. Original service lines 93–98 / later 61–66 declare outer choice, data wrapper TicketingService.ValidationResponseData. Original service 99–107 / later 67–75 reference CardApplikationValidation minOccurs=0, before CardDataValidation. Original group 7–16 / later 91–100 declares ordered required CardApplStatusCode and CardApplikationInformation (CardApplInformations); Common V1.0 lines 111–124 define exact child structure. Group is not a serialized XML wrapper. Correct group and omitted group validate. Exact PDF-spelling rejection is SCHEMAV_ELEMENT_CONTENT at /TicketingService.ValidateTicketResponse/TicketingService.ValidationResponseData/CardApplicationInformation, with expected CardApplikationInformation. Omission after status can give same expected token; wrong name without status or after valid group yields different expected token. Correct spelling with bad child datatype fails separately. Request spelling CardApplInformation is correct in request, not response. Isolated original service rejects root regardless of spelling. No historical alias or normalization.
+
+## SDK consequence
+
+Retain error_with_advisory; selected-XSD INVALID remains authoritative. Extend reviewed affected scope to complete original aggregate and exact later official family. Trigger descriptions (not executable matchers):
+
+- selected profile is the complete official original VDV-301-1.0 aggregate with exact pinned dependency family or the exact later official self-contained TicketingService V1.0 family at VDV-301-2.0 through VDV-301-2.3; isolated original service lacks response root and is excluded
+- selected XSD result is INVALID and the offending unqualified direct child at /TicketingService.ValidateTicketResponse/TicketingService.ValidationResponseData/CardApplicationInformation is actually spelled CardApplicationInformation, immediately after CardApplStatusCode in the optional CardApplikationValidation group position
+- schema rejection is of that actual wrong element where CardApplikationInformation is required (verified SCHEMAV_ELEMENT_CONTENT); require both actual node/path and expected element context, not error-text-only or spelling-only match
+- do not trigger for omitted whole optional group, missing information after status, wrong or correct information without status, duplicate/wrong position, request CardApplInformation or malformed children of correctly spelled element; no alias, normalization or result change
+
+No XSD, resolver or executable matcher changes. Only TKT-008 mapping entry changed, 77 reviewed / 0 implemented.
+
+## Reproduction and evidence
+
+- Reused EV-158 artifact 10336185560 ZIP SHA256 ba5ee246787f58d4cf690421fda683fb1dd072106d5c4e7eb6376c218b717870 integrity PASS; raw DE PDF SHA256 96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43 (627099 bytes); p10 7a1dbb41115b5c7fc910dea754bb20f9b6a525c13073db735b0d69e1494855b4 (235025), p11 d3340f41c706c295971bc47b93d824891fa2576cf74f4ca322ff543c2a4b6aa6 (289394), actual images inspected; seven archived XSD files rehashed as Git blobs matching original/later profiles. Historical EV-158 TKT-008 executable_confirmed, schema_spelling_enforced retained.
+- Reused EN fallback artifacts 15263067509 ZIP SHA256 5dd0b1a423fc0ad9af74af0b3b137faaf8fb9e6aa64fe25fa5b8fb941ce7719d and 15259980153 ZIP SHA256 fd1f0b0df80de41da39f1b8f04c549d7323375ae4fa34f173f0ea11369f6f252; source manifests SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 (2403598), p94 aaf798843606b672d0039ec7b997eb9cd1302a760fe519fe751111e6396d47d6 (221771), p95 663b5018e28f32c6faf90dd75d9e8c1055256f4413dbc07afd08cca743128cc9 (289688). ZIP/manifest/PNG hashes and sizes verified; actual images inspected. No new render/raw PDF retrieval needed.
+- Exact upstream tag files rechecked independently: original service 017ca64666e25d757fc0cde1f1be817f06a743fc, original aggregate 41289eaed2674a169fdf77a10a2eff293c76d5c4 at VDV-301-1.0; later service 3fda66d872ab0d1c511247f13e715cf3ad56afe7 identical at official tags 2.0–2.3, Common 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c and Enums a9bea5bc73003ed91ded8519db06c32c4067831d identical at all five tags. Complete original 12-file family downloaded and Git blob verified by permanent regression. No candidate promotion; publication boundary retained from TKT-001 catalog review.
+- Permanent checker tools/validate_tkt_001_release_context.py expanded at 7e9c2cc01d75c1dcbfc6ec409fbdb75bae570ffd; schema gate 46160960815 and handoff 46160960747 SUCCESS. Artifact 15269975930 SHA256 3d72a8c6756f05948472ddbab431f20af0fdf89765fe192f7fff22de61fd499b downloaded/rehashed, 24/24 status files exit 0. TKT-008 log confirms 4 positives, 2 exact PDF spelling negatives, 12 context controls, 2 isolated historical controls. Independent local later-profile probes confirm exact error path and expected token.
+- Active disproof: line-wrapped full identifier is visibly CardApplicationInformation in EN/DE, not CardApplInformation; request tables show legitimate distinct shorter element. Group name is not an XML wrapper; optional group does not make its individual members independently optional. Correct full group and omitted full group PASS. Missing information after status yields expected CardApplikationInformation with actual CardValidationCode; typo without status and duplicate typo yield different expected fields; correct spelling with malformed child yields datatype error. Neither actual name alone nor expected name alone sufficient. Isolated original missing root is packaging error.
+- Adjacent observations (not separately resolved): EN Table122 CardApplicationInformation cardinality cell blank, DE Table8 1:1; optional group cardinality not explicitly represented in these rows. XSD group minOccurs=0 established; no independent new finding credited. EN Table121 ErrorMessage vs OperationErrorMessage previously recorded, DE Tabelle7 description mentions tariff information; preserve separately. TKT-009 remains pending.
+
+## Handoff
+
+154/192 locator/body/boundary entries prepared; 38 remain. Full registry gate and final handoff checks required before terminal closure and reviewed memory PR. TKT-009 next, not started.
