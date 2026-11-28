@@ -476,6 +476,89 @@ def validate_tkt_007_inner_field_ownership(folder, later, aggregate_schema, late
     print("PASSED TKT-007: 6 positives, 2 flattened negatives, 2 wrong-inner-type negatives, 10 content controls, 2 isolated historical controls")
 
 
+
+def validate_tkt_008_card_application_spelling(folder, later, aggregate_schema, later_schema, old_schema):
+    """Distinguish exact PDF spelling rejection from optional-group and request context errors."""
+    root = "TicketingService.ValidateTicketResponse"
+    outer = "TicketingService.ValidateTicketResponseStructure"
+    wrapper = "TicketingService.ValidationResponseData"
+    inner = "TicketingService.ValidateTicketResponseDataStructure"
+    group = "CardApplikationValidation"
+    right = "CardApplikationInformation"
+    wrong = "CardApplicationInformation"
+    for path in (folder / AGG, later):
+        require(parse(path).xpath("/xs:schema/xs:element[@name=$name]/@type",
+                                  namespaces=NS, name=root) == [outer],
+                "TKT-008 exact response root")
+    for path in (folder / FILE, later):
+        doc = parse(path)
+        require(doc.xpath("/xs:schema/xs:complexType[@name=$name]/xs:choice/xs:element[@name=$wrapper]/@type",
+                          namespaces=NS, name=outer, wrapper=wrapper) == [inner],
+                "TKT-008 exact response wrapper")
+        seq = doc.xpath("/xs:schema/xs:complexType[@name=$name]/xs:sequence/xs:group[@ref=$group]",
+                        namespaces=NS, name=inner, group=group)
+        require(len(seq) == 1 and dict(seq[0].attrib) == {"ref": group, "minOccurs": "0"},
+                "TKT-008 optional application group")
+        seq = doc.xpath("/xs:schema/xs:group[@name=$group]/xs:sequence", namespaces=NS, group=group)
+        require(len(seq) == 1 and not seq[0].attrib and [dict(e.attrib) for e in seq[0]] == [
+                    {"name": "CardApplStatusCode", "type": "IBIS-IP.unsignedInt"},
+                    {"name": right, "type": "CardApplInformations"}],
+                "TKT-008 mandatory ordered fields inside optional group")
+        require(not doc.xpath("//xs:element[@name=$wrong]", namespaces=NS, wrong=wrong),
+                "TKT-008 PDF spelling not declared in service")
+        require(doc.xpath("/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketRequestStructure']/xs:sequence/xs:element[@name='CardApplInformation']/@type",
+                          namespaces=NS) == ["CardApplInformations"], "TKT-008 distinct request spelling")
+    pre = ("<TimeStamp><Value>2026-11-28T15:00:00Z</Value></TimeStamp>"
+           "<GlobalCardStatus><GlobalCardStausID><Value>0</Value></GlobalCardStausID></GlobalCardStatus>"
+           "<CardType><CardSerialNumber><Value>S1</Value></CardSerialNumber>"
+           "<CardTypeID><Value>T1</Value></CardTypeID></CardType>")
+    status = "<CardApplStatusCode><Value>0</Value></CardApplStatusCode>"
+    info = (f"<{right}><CardApplInformationLength><Value>1</Value></CardApplInformationLength>"
+            f"<CardApplInformationData><Value>1</Value></CardApplInformationData></{right}>")
+    pdf = info.replace(right, wrong)
+    tail = ("<CardValidationCode><Value>0</Value></CardValidationCode>"
+            "<CardTicketData><CardTicketDataID><Value>1</Value></CardTicketDataID>"
+            "<CardTicketDataLength><Value>1</Value></CardTicketDataLength>"
+            "<CardTicketData><Value>1</Value></CardTicketData></CardTicketData>")
+    def payload(mid):
+        return etree.fromstring(f"<{root}><{wrapper}>{pre}{mid}{tail}</{wrapper}></{root}>".encode())
+    positive = typo = controls = isolated = 0
+    for profile, schema in (("original aggregate", aggregate_schema), ("later service", later_schema)):
+        for mid in (status + info, ""):
+            require(schema.validate(payload(mid)), f"TKT-008 {profile} exact spelling / optional group omitted")
+            positive += 1
+        require(not schema.validate(payload(status + pdf)), f"TKT-008 {profile} PDF spelling rejected")
+        err = list(schema.error_log)
+        require(len(err) == 1 and err[0].type_name == "SCHEMAV_ELEMENT_CONTENT"
+                and f"Element '{wrong}'" in err[0].message and f"Expected is ( {right} )" in err[0].message
+                and err[0].path == f"/{root}/{wrapper}/{wrong}", "TKT-008 exact advisory boundary")
+        typo += 1
+        for mid, actual, expected in (
+                (status, "CardValidationCode", f"Expected is ( {right} )"),
+                (pdf, wrong, "Expected is one of ( CardApplStatusCode, CardValidationCode )"),
+                (info, right, "Expected is one of ( CardApplStatusCode, CardValidationCode )"),
+                (status + info + pdf, wrong, "Expected is ( CardValidationCode )"),
+                (status + info.replace(right, "CardApplInformation"), "CardApplInformation", f"Expected is ( {right} )")):
+            require(not schema.validate(payload(mid)), f"TKT-008 {profile} negative context control")
+            err = list(schema.error_log)
+            require(len(err) == 1 and err[0].type_name == "SCHEMAV_ELEMENT_CONTENT"
+                    and f"Element '{actual}'" in err[0].message and expected in err[0].message,
+                    f"TKT-008 distinct control error: {err}")
+            controls += 1
+        require(not schema.validate(payload(status + info.replace("<Value>1</Value>", "<Value>foo</Value>", 1)))
+                and len(schema.error_log) == 1
+                and schema.error_log[0].type_name == "SCHEMAV_CVC_DATATYPE_VALID_1_2_1",
+                "TKT-008 correct spelling with malformed child not typo")
+        controls += 1
+    for mid in (status + info, status + pdf):
+        require(not old_schema.validate(payload(mid)) and bool(old_schema.error_log)
+                and all(e.type_name == "SCHEMAV_CVC_ELT_1" for e in old_schema.error_log),
+                "TKT-008 isolated original root missing, not spelling boundary")
+        isolated += 1
+    require((positive, typo, controls, isolated) == (4, 2, 12, 2), "TKT-008 exact regression counts")
+    print("PASSED TKT-008: 4 positives, 2 exact PDF spelling negatives, 12 context controls, 2 isolated historical controls")
+
+
 def main():
     later = ROOT / FILE
     require(blob(later) == LATER, "selected later service blob")
@@ -526,6 +609,7 @@ def main():
         validate_tkt_005_response_type(folder, later, aggregate_schema, later_schema, old_schema)
         validate_tkt_006_tariff_sequence(folder, later, aggregate_schema, later_schema, old_schema)
         validate_tkt_007_inner_field_ownership(folder, later, aggregate_schema, later_schema, old_schema)
+        validate_tkt_008_card_application_spelling(folder, later, aggregate_schema, later_schema, old_schema)
     return 0
 
 
