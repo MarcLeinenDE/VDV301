@@ -188,6 +188,82 @@ def validate_tkt_003_response_types(folder, later, aggregate_schema, later_schem
     print("PASSED TKT-003: 16 positives, 8 sibling xsi:type negatives, 8 exclusive choice negatives, 2 isolated later missing-root negatives")
 
 
+
+def validate_tkt_004_pdf_heading(folder, later, aggregate_schema, later_schema, old_schema):
+    """Literal PDF heading is distinct from filename aliases; exact profile evidence only."""
+    canonical = "TicketingService.ValidateTicketRequest"
+    wrong = "TicketInformationService.Validation.GetDataRequest"
+    typename = canonical + "Structure"
+    for path in (folder / AGG, later):
+        doc = parse(path)
+        require(doc.xpath("/xs:schema/xs:element[@name=$root]/@type",
+                          namespaces=NS, root=canonical) == [typename],
+                "TKT-004 authoritative global root/type pair")
+    for path in [folder / n for n in OLD] + [later]:
+        names = set(parse(path).xpath("/xs:schema//@name", namespaces=NS))
+        require(wrong not in names and wrong + "Structure" not in names,
+                "TKT-004 no literal PDF heading root or type declaration")
+    for path in (folder / FILE, later):
+        doc = parse(path)
+        members = doc.xpath("/xs:schema/xs:complexType[@name=$name]/xs:sequence/*",
+                            namespaces=NS, name=typename)
+        require([dict(m.attrib) for m in members] == [
+            {"name": "CardType", "type": "CardType"},
+            {"name": "CardApplInformation", "type": "CardApplInformations", "minOccurs": "0"},
+            {"ref": "CardTicketDataBlocks"}], "TKT-004 exact request member inventory")
+        group = doc.xpath("/xs:schema/xs:group[@name='CardTicketDataBlocks']/xs:sequence/xs:element",
+                          namespaces=NS)
+        require([dict(m.attrib) for m in group] == [
+            {"name": "NumberOfCardTicketDataBlocks", "type": "IBIS-IP.unsignedInt"},
+            {"name": "CardTicketDataBlock", "type": "CardTicketData", "maxOccurs": "unbounded"}],
+            "TKT-004 group expands to exact count and block members")
+    payload = (
+        "<CardType><CardSerialNumber><Value>SERIAL1</Value></CardSerialNumber>"
+        "<CardTypeID><Value>TYPE1</Value></CardTypeID></CardType>"
+        "<NumberOfCardTicketDataBlocks><Value>1</Value></NumberOfCardTicketDataBlocks>"
+        "<CardTicketDataBlock><CardTicketDataID><Value>1</Value></CardTicketDataID>"
+        "<CardTicketDataLength><Value>1</Value></CardTicketDataLength>"
+        "<CardTicketData><Value>1</Value></CardTicketData></CardTicketDataBlock>")
+    xsi = "{http://www.w3.org/2001/XMLSchema-instance}type"
+    positive = wrong_root = wrong_type = other_root = isolated = 0
+    for profile, schema in (("original aggregate", aggregate_schema),
+                            ("later service", later_schema)):
+        node = etree.fromstring(f"<{canonical}>{payload}</{canonical}>".encode())
+        require(schema.validate(node), f"TKT-004 {profile} exact request PASS")
+        positive += 1
+        node.tag = wrong
+        require(not schema.validate(node) and bool(schema.error_log)
+                and all(e.type_name == "SCHEMAV_CVC_ELT_1" for e in schema.error_log),
+                f"TKT-004 {profile} exact PDF heading missing global root")
+        wrong_root += 1
+        node.tag = canonical
+        node.set(xsi, typename)
+        require(schema.validate(node), f"TKT-004 {profile} exact explicit type PASS")
+        positive += 1
+        node.set(xsi, wrong + "Structure")
+        require(not schema.validate(node) and bool(schema.error_log)
+                and all(e.type_name == "SCHEMAV_CVC_ELT_4_2" for e in schema.error_log),
+                f"TKT-004 {profile} invented PDF type unresolved")
+        wrong_type += 1
+        del node.attrib[xsi]
+        for alias in ("TicketInformationService.ValidateTicketRequest",
+                      "TicketingService.Validation.GetDataRequest"):
+            node.tag = alias
+            require(not schema.validate(node) and bool(schema.error_log)
+                    and all(e.type_name == "SCHEMAV_CVC_ELT_1" for e in schema.error_log),
+                    f"TKT-004 {profile} distinct nonliteral alias rejected {alias}")
+            other_root += 1
+    for root in (canonical, wrong):
+        node = etree.fromstring(f"<{root}>{payload}</{root}>".encode())
+        require(not old_schema.validate(node) and bool(old_schema.error_log)
+                and all(e.type_name == "SCHEMAV_CVC_ELT_1" for e in old_schema.error_log),
+                f"TKT-004 isolated original missing both roots {root}")
+        isolated += 1
+    require((positive, wrong_root, wrong_type, other_root, isolated) == (4, 2, 2, 4, 2),
+            "TKT-004 exact regression counts")
+    print("PASSED TKT-004: 4 positives, 2 literal PDF-root negatives, 2 invented-type negatives, 4 distinct alias controls, 2 isolated historical controls")
+
+
 def main():
     later = ROOT / FILE
     require(blob(later) == LATER, "selected later service blob")
@@ -234,6 +310,7 @@ def main():
         print("PASSED TKT-001: 3 exact schema compilations, 4 positive / 2 missing-root negative instances; full historical aggregate")
         validate_tkt_002_identity(folder, later, aggregate_schema, later_schema)
         validate_tkt_003_response_types(folder, later, aggregate_schema, later_schema)
+        validate_tkt_004_pdf_heading(folder, later, aggregate_schema, later_schema, old_schema)
     return 0
 
 
