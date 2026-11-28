@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 142,
-    "verified": 142,
+    "tracked_findings": 143,
+    "verified": 143,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -8090,6 +8090,59 @@
           "version": "After V2.2",
           "role": "no_verified_later_standalone",
           "language_status": "Official catalog earlier same day checked in SMS-001, 2.3/master retain exact SMS family; no corrected separate publication established.",
+          "source_ids": [
+            "SMS_V2.2"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "SMS-003",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_SMS_003_2026-11-28.md",
+        "SMS fallback run 46086066109 SUCCESS, artifact 15239216306 ZIP SHA256 57ea00d63bec79174bfbc29d4711568a920c65a8e74803bfce051b813d670316 (502413 bytes); source SMS_V2.2 SHA256 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4 (847416 bytes), 15 pages, checked by strict CI renderer and second retrieval. ZIP and all five PNG SHA256/size checked locally; pp4,7,8,12,13 visibly inspected.",
+        "HDS comparison fallback run 46086184892 SUCCESS, artifact 15238933417 ZIP SHA256 8b67722667fbda26ab544a1f911a1d20f17b2245b69e4e15dc6395868e68269f (836109 bytes); source HDS_V2.2 SHA256 bf62b7a8b6cfdf654181b48da2d85a805118687c7463a46fadfd32679c9b7577 (802399 bytes), 15 pages. All three PNG SHA256/size checked; pp4,7,9 visibly inspected. HDS p4 Foreword lines 19–20 is word-identical to SMS p4 unrelated paragraph; HDS pp7/9 §1.1 and Figure 1 support legitimate HDS scope. HDS is comparison evidence, not an affected version.",
+        "Nearest historical predecessor BASE V2.1 fallback run 46086331149 SUCCESS, artifact 15239047859 ZIP SHA256 a074ea5d2625b4a1ee93af7fc684b7b738494400a71bb886ffe11e3ea16ccb5f (977774 bytes); source SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a (2671005 bytes). All four PNGs checked; pp4–5 general German foreword and p115 bilingual §7.3 SystemManagementService visibly inspected, p116 Table61 from identical archived PNG also visibly checked. No separate SMS foreword in historical aggregate; no HDS paragraph in the bilingual service description. Scope not back-applied.",
+        "Historical V1.0 DE EV-129 run 33765167655 artifact 9897171006 ZIP SHA256 a410cdc7103b2ed01f61570b6435a5b2319d2b80f4fec2802929359058a51cc7; p67 PNG 2241db5cef5651ee67e2fd80bd1db142df53b00ed13c5817f8c67139c4770bfe rehashed and visibly inspected. V1.0 EN run 38038067682 artifact 11663978950 ZIP SHA256 1bceab49c4a80c9b126234bbfe676111693d136393ab979da369e729a26106eb; p90 Table110 PNG b96ce25f700a7f45da21bb1fc4ad2d593e2a5768fdd67b80a0d092b8f36f6726 rehashed and inspected. Base V2.0 run 38038078632 artifact 11664756069 ZIP SHA256 b1238ac6b748e02c09f70af5ab7033e15bffec053f8e967f34ae297777e33f27; p103 Table36 PNG a0c5dd3357837391448001125a0755ca21a6b9c59d09f4c412974fdcf83d8aa8 rehashed and inspected. Earlier official text search located DE p66, EN p89, V2.0 p101–102 SystemManagementService descriptions, and found no exact HDS foreword sentence in EN/V2.0/V2.1. Earlier foreword and service-description images not freshly inspected (live cache miss); archived operation pages establish distinct historical service context, not proof of entire PDF absence. Prior DR3012-005 reports retained.",
+        "Exact VDVde/VDV301 VDV-301-2.2 / VDV-301-2.3 / master trees checked: SMS d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c, Common 468fee6d177e7185dbcd5d3f90cfb114e29e01ae, Enumerations 2a23b512379b18e8f122ac1272cef8229fb86283 identical to branch. SMS XSD includes lines 5–6 and two Get response roots/group lines 8–16,29; no HDS rule. Earlier VDV-301-2.0/2.1 SystemManagementService blob 2d32630a0f1981e980e6a466e3f6a69136410f24 distinct. Official catalog https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-28: only standalone SMS V2.2, bilingual publication, no independently verified standalone predecessor or corrected successor. HDS V2.2 is a separate non-XSD DNS-SD/HTTP profile.",
+        "SMS-003 confirmed_pdf_defect, contextual_only, editorial_residue, no_runtime_diagnostic, runtime_match not_applicable. SMS p4 English Foreword contains HDS paragraph, German Vorwort omits it; p7/8 §1.1 confirm SMS device/service information scope. HDS p4 lines 19–20 same wording and HDS p7/9 §1.1 confirm service-specific URL/browser role. Likely editorial copy/paste, direction/authoring history not proven. Only official standalone SMS V2.2 affected, English foreword only; predecessor aggregate and HDS comparison not affected. No new XML rule or targeted executable test warranted; existing full gate still required. Semantic and runtime mapping unchanged.",
+        "Live SMS p4 visible; other required live screenshots cache-missed. Local raw retrieval failed DNS; fresh official byte retrieval and verification performed in CI, not local. EV-146 rehashed ZIP 181ff01b16dae43ec2826299e6f14717aef1668d66491b6051ae07661ee607f6 but lacks p4. EV-156 artifact 10145182333, full SMS read artifact 9719396063, HDS old 9718826204 unavailable (404); no claim of fresh inspection of those artifacts."
+      ],
+      "note": "Only standalone SMS V2.2 confirmed; English-only wrong-service paragraph. Historical aggregate predecessor distinct; HDS comparison not affected. No later standalone correction verified.",
+      "scope_conclusion": "SMS-003 confirmed_pdf_defect, contextual_only, editorial_residue, no_runtime_diagnostic, runtime_match not_applicable. SMS p4 English Foreword contains HDS paragraph, German Vorwort omits it; p7/8 §1.1 confirm SMS device/service information scope. HDS p4 lines 19–20 same wording and HDS p7/9 §1.1 confirm service-specific URL/browser role. Likely editorial copy/paste, direction/authoring history not proven. Only official standalone SMS V2.2 affected, English foreword only; predecessor aggregate and HDS comparison not affected. No new XML rule or targeted executable test warranted; existing full gate still required. Semantic and runtime mapping unchanged.",
+      "boundary_checks": [
+        {
+          "version": "Before standalone V2.2",
+          "role": "distinct_historical_base_service_predecessor",
+          "language_status": "Separate V1.0 DE/EN, bilingual Base V2.0/V2.1; closest V2.1 original pp4–5,115,116 byte-pinned and visibly checked. Older service operation original p67 DE/p90 EN/p103 Base V2.0 rechecked; text-only older foreword/description comparison, no earlier standalone SMS.",
+          "source_ids": [
+            "VDV301-2_V1.0_DE",
+            "VDV301-2_V1.0_EN",
+            "VDV301-2_BASE_V2.0",
+            "VDV301-2_BASE_V2.1"
+          ]
+        },
+        {
+          "version": "V2.2 08/2019",
+          "role": "first_last_only_verified_affected_publication",
+          "language_status": "One bilingual SMS publication. Only English Foreword p4 affected, German Vorwort p4 absent; technical p7/8 confirm actual SMS subject. Exact official service/Common/Enum family.",
+          "source_ids": [
+            "SMS_V2.2"
+          ]
+        },
+        {
+          "version": "HDS V2.2 08/2019",
+          "role": "separate_service_comparison_not_affected",
+          "language_status": "Same English paragraph on original HDS p4 lines 19–20 appropriate to separate HDS document; pp7/9 §1.1 support. Not an affected SMS scope lane.",
+          "source_ids": [
+            "HDS_V2.2"
+          ]
+        },
+        {
+          "version": "After V2.2",
+          "role": "no_verified_later_standalone",
+          "language_status": "Official catalog only standalone SMS V2.2; 2.3/master retain exact SMS family. No independently verified corrected successor.",
           "source_ids": [
             "SMS_V2.2"
           ]

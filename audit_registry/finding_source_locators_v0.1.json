@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 142,
-    "coverage_complete_count": 142,
+    "locator_entry_count": 143,
+    "coverage_complete_count": 143,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 50
+    "remaining_finding_count": 49
   },
   "entries": [
     {
@@ -29420,6 +29420,159 @@
         "Exact official VDVde/VDV301@VDV-301-2.2 service d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c, Common 468fee6d177e7185dbcd5d3f90cfb114e29e01ae, Enums 2a23b512379b18e8f122ac1272cef8229fb86283; tag 2.2/2.3/master trees rechecked, same exact blobs. Service lines 5–6 include Common/Enum, group 8–13 two Get response names, global 29 GetServiceStatusResponse, type 30–35 choice service-specific data/OperationErrorMessage, type 36–41 TimeStamp and ServiceIdentificationWithStateList. No GetSystemStatusResponse declaration. Generic Common subscription roots at 875,883,898,906; do not infer service-qualified subscription roots from operation names. Same exact family as SMS-001.",
         "Historical same terminology defect already tracked as DR3012-005: visible original DE V1.0 p67 Table31 vs p69 §§7.3.6/7.3.7, EN V1.0 p90 Table110 vs p91 §§9.10.5–7, Base V2.0 p103 Table36 vs p104 §§7.3.5–7, Base V2.1 p116 Table61 vs p117 §§7.3.5–7. Prior independent body/boundary report docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_REVIEW_DR3012_005_2026-10-10.md and source locator review 2026-10-07 re-read; earlier images not freshly re-opened. Historical SystemManagementService V1.0 distinct profile and existing frozen identity, no duplicate new ID or extension of SMS-002 runtime scope. VDV official catalog verified earlier same day in SMS-001: sole dedicated 301-2-18 V2.2; no separately verified earlier/later standalone publication. Official 2.2/2.3/master exact same SMS/dep files. One bilingual publication with English technical sections. No independent German technical edition established.",
         "Falsification: p9 table has six operation names, only ServiceStatus for second triplet. p10 §2.5.1 and Tables 4–5 directly contradict GetSystemStatus heading; p11 §2.6/2.7 prose does not name alternate operations, only common structures. No XSD basis for alternative Get root or additional service-qualified subscriptions. SMS-001 generic root behavior, DRSMS22-002 device/service prose mix-up, DRSMS22-004 missing table labels, DR3012-005 historical line remain distinct. PDF heading is wrong operation reference, not a normative alternate XML root. Known-issues SMS-002 mapping unchanged xsd_invalid_advisory / reviewed_not_implemented / selected_xsd_result_remains_normative; exact rejected GetSystemStatusResponse root only, not all invalid subscription XML or HTTP operations. Semantic evidence/DE-EN diagnostics narrowed to exact observed text (subscription names in inventory, not prose); no scope, classification, or runtime changes."
+      ]
+    },
+    {
+      "finding_id": "SMS-003",
+      "service": "SystemMonitoringService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_SystemMonitoringService_V2.2.xsd + IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "Official SMS V2.2 publication and its exact XSD family. The finding is confined to the English foreword and does not alter or reinterpret the executable schema."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "first_last_only_verified_dedicated_sms_v2_2",
+          "pdf_locators": [
+            {
+              "source_id": "SMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-18 SystemMonitoringService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx",
+              "sha256": "996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4",
+              "printed_pages": [
+                4
+              ],
+              "section": "Foreword",
+              "table": null,
+              "point_summary": "Actual unnumbered English heading. Fourth paragraph describes HTMLDisplayService URL/webserver/HTML, immediately after correct SystemMonitoringService subject and before language notice. p4 PNG SHA256 21e83af779aaade3babb517d76399be40af77ca47bf25c9fafb7d3cbe15b1ab3."
+            },
+            {
+              "source_id": "SMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-18 SystemMonitoringService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx",
+              "sha256": "996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4",
+              "printed_pages": [
+                4
+              ],
+              "section": "Vorwort",
+              "table": null,
+              "point_summary": "German foreword identifies SMS and moves directly to bilingual-publication notice; no corresponding HDS paragraph."
+            },
+            {
+              "source_id": "SMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-18 SystemMonitoringService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx",
+              "sha256": "996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4",
+              "printed_pages": [
+                7
+              ],
+              "section": "1 Dienst SystemMonitoringService / 1.1 Aufgaben des Dienstes und die Nutzung",
+              "table": null,
+              "point_summary": "German technical purpose is device/service information and HTTP service, not display URL or HTML provision."
+            },
+            {
+              "source_id": "SMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-18 SystemMonitoringService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx",
+              "sha256": "996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4",
+              "printed_pages": [
+                8
+              ],
+              "section": "1 Service SystemMonitoringService / 1.1 Tasks of the Service and its Usage",
+              "table": null,
+              "point_summary": "English technical purpose confirms device/service information; no HDS requirement."
+            },
+            {
+              "source_id": "SMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-18 SystemMonitoringService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx",
+              "sha256": "996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4",
+              "printed_pages": [
+                12
+              ],
+              "section": "3 Versionshistorie / Version History / 3.1 Version 2.2 / 3.1.1 Funktionale Erweiterungen / Functional Upgrade",
+              "table": null,
+              "point_summary": "Standalone split from historical Base Services; wrong 302-2 reference separate SMS-004; not used as actual predecessor locator."
+            },
+            {
+              "source_id": "SMS_V2.2",
+              "document_title": "VDV-Schrift 301-2-18 SystemMonitoringService V2.2 (08/2019)",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-18-sdes-v2-2-systemmonitoringservice.pdfx",
+              "sha256": "996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4",
+              "printed_pages": [
+                13
+              ],
+              "section": "Regelwerke – Normen und Empfehlungen / References",
+              "table": null,
+              "point_summary": "Reference (3) identifies VDV 301-2-0 Base Services V2.0 (02/2018)."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_SystemMonitoringService_V2.2.xsd",
+              "git_blob": "d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c",
+              "authority_detail": "Exact official upstream VDVde/VDV301@VDV-301-2.2 release-tag blob, locally identical; historical V2.2 profile not latest-wins",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "service group; direct V2.2 Common and Enumerations includes",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "4–11",
+              "point_summary": "Selected exact official schema/dependency context only; English wrong-service foreword creates no executable XML rule."
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact official upstream VDVde/VDV301@VDV-301-2.2 release-tag blob, locally identical; historical V2.2 profile not latest-wins",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "direct official Common V2.2 dependency",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "4–5",
+              "point_summary": "Selected exact official schema/dependency context only; English wrong-service foreword creates no executable XML rule."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "Exact official upstream VDVde/VDV301@VDV-301-2.2 release-tag blob, locally identical; historical V2.2 profile not latest-wins",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "direct official Enumerations V2.2 dependency",
+              "xpath_hint": "/xs:schema",
+              "line_hint": "5–6",
+              "point_summary": "Selected exact official schema/dependency context only; English wrong-service foreword creates no executable XML rule."
+            }
+          ],
+          "coverage_note": "SMS-003 confirmed_pdf_defect, contextual_only, editorial_residue, no_runtime_diagnostic, runtime_match not_applicable. SMS p4 English Foreword contains HDS paragraph, German Vorwort omits it; p7/8 §1.1 confirm SMS device/service information scope. HDS p4 lines 19–20 same wording and HDS p7/9 §1.1 confirm service-specific URL/browser role. Likely editorial copy/paste, direction/authoring history not proven. Only official standalone SMS V2.2 affected, English foreword only; predecessor aggregate and HDS comparison not affected. No new XML rule or targeted executable test warranted; existing full gate still required. Semantic and runtime mapping unchanged."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_SMS_003_2026-11-28.md",
+        "SMS fallback run 46086066109 SUCCESS, artifact 15239216306 ZIP SHA256 57ea00d63bec79174bfbc29d4711568a920c65a8e74803bfce051b813d670316 (502413 bytes); source SMS_V2.2 SHA256 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4 (847416 bytes), 15 pages, checked by strict CI renderer and second retrieval. ZIP and all five PNG SHA256/size checked locally; pp4,7,8,12,13 visibly inspected.",
+        "HDS comparison fallback run 46086184892 SUCCESS, artifact 15238933417 ZIP SHA256 8b67722667fbda26ab544a1f911a1d20f17b2245b69e4e15dc6395868e68269f (836109 bytes); source HDS_V2.2 SHA256 bf62b7a8b6cfdf654181b48da2d85a805118687c7463a46fadfd32679c9b7577 (802399 bytes), 15 pages. All three PNG SHA256/size checked; pp4,7,9 visibly inspected. HDS p4 Foreword lines 19–20 is word-identical to SMS p4 unrelated paragraph; HDS pp7/9 §1.1 and Figure 1 support legitimate HDS scope. HDS is comparison evidence, not an affected version.",
+        "Nearest historical predecessor BASE V2.1 fallback run 46086331149 SUCCESS, artifact 15239047859 ZIP SHA256 a074ea5d2625b4a1ee93af7fc684b7b738494400a71bb886ffe11e3ea16ccb5f (977774 bytes); source SHA256 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a (2671005 bytes). All four PNGs checked; pp4–5 general German foreword and p115 bilingual §7.3 SystemManagementService visibly inspected, p116 Table61 from identical archived PNG also visibly checked. No separate SMS foreword in historical aggregate; no HDS paragraph in the bilingual service description. Scope not back-applied.",
+        "Historical V1.0 DE EV-129 run 33765167655 artifact 9897171006 ZIP SHA256 a410cdc7103b2ed01f61570b6435a5b2319d2b80f4fec2802929359058a51cc7; p67 PNG 2241db5cef5651ee67e2fd80bd1db142df53b00ed13c5817f8c67139c4770bfe rehashed and visibly inspected. V1.0 EN run 38038067682 artifact 11663978950 ZIP SHA256 1bceab49c4a80c9b126234bbfe676111693d136393ab979da369e729a26106eb; p90 Table110 PNG b96ce25f700a7f45da21bb1fc4ad2d593e2a5768fdd67b80a0d092b8f36f6726 rehashed and inspected. Base V2.0 run 38038078632 artifact 11664756069 ZIP SHA256 b1238ac6b748e02c09f70af5ab7033e15bffec053f8e967f34ae297777e33f27; p103 Table36 PNG a0c5dd3357837391448001125a0755ca21a6b9c59d09f4c412974fdcf83d8aa8 rehashed and inspected. Earlier official text search located DE p66, EN p89, V2.0 p101–102 SystemManagementService descriptions, and found no exact HDS foreword sentence in EN/V2.0/V2.1. Earlier foreword and service-description images not freshly inspected (live cache miss); archived operation pages establish distinct historical service context, not proof of entire PDF absence. Prior DR3012-005 reports retained.",
+        "Exact VDVde/VDV301 VDV-301-2.2 / VDV-301-2.3 / master trees checked: SMS d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c, Common 468fee6d177e7185dbcd5d3f90cfb114e29e01ae, Enumerations 2a23b512379b18e8f122ac1272cef8229fb86283 identical to branch. SMS XSD includes lines 5–6 and two Get response roots/group lines 8–16,29; no HDS rule. Earlier VDV-301-2.0/2.1 SystemManagementService blob 2d32630a0f1981e980e6a466e3f6a69136410f24 distinct. Official catalog https://www.vdv.de/ip-kom-oev.aspx checked 2026-11-28: only standalone SMS V2.2, bilingual publication, no independently verified standalone predecessor or corrected successor. HDS V2.2 is a separate non-XSD DNS-SD/HTTP profile.",
+        "SMS-003 confirmed_pdf_defect, contextual_only, editorial_residue, no_runtime_diagnostic, runtime_match not_applicable. SMS p4 English Foreword contains HDS paragraph, German Vorwort omits it; p7/8 §1.1 confirm SMS device/service information scope. HDS p4 lines 19–20 same wording and HDS p7/9 §1.1 confirm service-specific URL/browser role. Likely editorial copy/paste, direction/authoring history not proven. Only official standalone SMS V2.2 affected, English foreword only; predecessor aggregate and HDS comparison not affected. No new XML rule or targeted executable test warranted; existing full gate still required. Semantic and runtime mapping unchanged.",
+        "Live SMS p4 visible; other required live screenshots cache-missed. Local raw retrieval failed DNS; fresh official byte retrieval and verification performed in CI, not local. EV-146 rehashed ZIP 181ff01b16dae43ec2826299e6f14717aef1668d66491b6051ae07661ee607f6 but lacks p4. EV-156 artifact 10145182333, full SMS read artifact 9719396063, HDS old 9718826204 unavailable (404); no claim of fresh inspection of those artifacts."
       ]
     }
   ]
