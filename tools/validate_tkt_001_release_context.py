@@ -56,6 +56,71 @@ def groups(doc):
     return {e.get("name"): e.get("type") for e in doc.xpath("/xs:schema/xs:group[@name='TicketingServiceGroup']/xs:sequence/xs:element", namespaces=NS)}
 
 
+
+def validate_tkt_002_identity(folder, later, aggregate_schema, later_schema):
+    """Distinguish a filename token from executable XML names in both profiles."""
+    import json
+    # Inspect the complete historical dependency family and the selected later
+    # service plus its exact pinned Common/Enumerations, not just the root map.
+    paths = [folder / filename for filename in OLD]
+    paths += [later, ROOT / "IBIS-IP_common_V1.0.xsd",
+              ROOT / "IBIS-IP_Enumerations_V1.0.xsd"]
+    for path in paths:
+        doc = parse(path)
+        names = doc.xpath("/xs:schema//@name", namespaces=NS)
+        require(not any(name.startswith("TicketInformationService") for name in names),
+                f"TKT-002 no filename-derived executable declaration: {path.name}")
+    for path in (folder / FILE, folder / AGG, later):
+        require(parse(path).getroot().get("targetNamespace") is None,
+                f"TKT-002 dot names are unqualified: {path.name}")
+    overrides = json.loads((ROOT / "sdk_manifest/routing_overrides_v0.1.json").read_text(encoding="utf-8"))
+    matching = [item for item in overrides["aliases"]
+                if item.get("schema_filename_token") == "TicketInformationService"
+                and item.get("service_version") == "1.0"]
+    require(len(matching) == 1 and matching[0].get("public_service_name") == "TicketingService"
+            and matching[0].get("kind") == "legacy_alias",
+            "TKT-002 exact filename routing metadata, no XML alias inferred")
+    error = "<OperationErrorMessage><Value>test</Value></OperationErrorMessage>"
+    samples = {
+        "SetRazziaRequest": "<TicketInformationRazziaStatus>razzia</TicketInformationRazziaStatus>",
+        "GetTariffInformationResponse": error,
+        "RetrieveTariffInformationRequest": "".join(
+            f"<{name}><Value>1</Value></{name}>" for name in ("TripRef", "LineRef", "StopRef")),
+        "RetrieveTariffInformationResponse": error,
+        "ValidateTicketRequest": (
+            "<CardType><CardSerialNumber><Value>SERIAL1</Value></CardSerialNumber>"
+            "<CardTypeID><Value>TYPE1</Value></CardTypeID></CardType>"
+            "<NumberOfCardTicketDataBlocks><Value>1</Value></NumberOfCardTicketDataBlocks>"
+            "<CardTicketDataBlock><CardTicketDataID><Value>1</Value></CardTicketDataID>"
+            "<CardTicketDataLength><Value>1</Value></CardTicketDataLength>"
+            "<CardTicketData><Value>1</Value></CardTicketData></CardTicketDataBlock>"),
+        "ValidateTicketResponse": error,
+        "GetValidationResult": (
+            "<ValidationResultData><TimeStamp><Value>2026-11-28T07:00:00Z</Value></TimeStamp>"
+            "<ValidationResult>valid</ValidationResult></ValidationResultData>"),
+    }
+    require({"TicketingService." + name for name in samples} == set(EXPECTED),
+            "TKT-002 all seven global roots covered")
+    xsi_type = "{http://www.w3.org/2001/XMLSchema-instance}type"
+    for profile, schema in (("original aggregate", aggregate_schema), ("later service", later_schema)):
+        for suffix, payload in samples.items():
+            root = "TicketingService." + suffix
+            node = etree.fromstring(f"<{root}>{payload}</{root}>".encode())
+            require(schema.validate(node), f"TKT-002 {profile}: canonical root {root} accepted")
+            node.tag = "TicketInformationService." + suffix
+            require(not schema.validate(node), f"TKT-002 {profile}: filename alias root rejected {node.tag}")
+            require(bool(schema.error_log) and all(e.type_name == "SCHEMAV_CVC_ELT_1" for e in schema.error_log),
+                    "TKT-002 rejection is missing global root, not payload shape")
+            node.tag = root
+            node.set(xsi_type, EXPECTED[root])
+            require(schema.validate(node), f"TKT-002 {profile}: exact xsi:type accepted {EXPECTED[root]}")
+            node.set(xsi_type, EXPECTED[root].replace("TicketingService.", "TicketInformationService.", 1))
+            require(not schema.validate(node), f"TKT-002 {profile}: filename alias xsi:type rejected")
+            require(bool(schema.error_log) and all(e.type_name == "SCHEMAV_CVC_ELT_4_2" for e in schema.error_log),
+                    "TKT-002 rejection is unresolved type QName, not payload shape")
+    print("PASSED TKT-002: 14 canonical roots + 14 exact xsi:type positives; 14 missing-root + 14 unresolved-type alias negatives")
+
+
 def main():
     later = ROOT / FILE
     require(blob(later) == LATER, "selected later service blob")
@@ -100,6 +165,7 @@ def main():
             errors = list(old_schema.error_log)
             require(bool(errors) and all(e.type_name == "SCHEMAV_CVC_ELT_1" for e in errors), f"isolated service rejection is missing global declaration, not payload shape: {errors}")
         print("PASSED TKT-001: 3 exact schema compilations, 4 positive / 2 missing-root negative instances; full historical aggregate")
+        validate_tkt_002_identity(folder, later, aggregate_schema, later_schema)
     return 0
 
 

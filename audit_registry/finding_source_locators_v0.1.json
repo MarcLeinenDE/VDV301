@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "2b1074f1f82f3ed2b784262787a30f099bda8c80",
+    "git_blob": "57002d42518d06b0d37d71fc99cd14dbe69806d1",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 147,
-    "coverage_complete_count": 147,
+    "locator_entry_count": 148,
+    "coverage_complete_count": 148,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 45
+    "remaining_finding_count": 44
   },
   "entries": [
     {
@@ -31755,6 +31755,382 @@
         "Exact original official upstream commit f5b53785f703e898632603eec3bfa3555a79fdba tree 729bbe3270e52fed3e0641466048a745d5a09b32 (12 XSDs). Later service and dependencies identical at tags VDV-301-2.0/2.1/2.2/2.3 and master independently checked; master not a release. Official VDV catalog checked, sole 301-2-9 TicketingService V1.0; separate TicketValidationService is distinct, no V2.4 official Ticketing release inferred.",
         "New permanent regression tools/validate_tkt_001_release_context.py at commit 00bc5b35e6130355d91148a32b868bdb0f9243c0, full schema 46122600264 SUCCESS, handoff 46122600254 SUCCESS. Artifact 15254218098 ZIP SHA256 e9c93b69992e853654dca17d7245450641f2e641962b7d8b2c34ba87364a95e0 downloaded/rehashed; log confirms three compilations, four positive and two targeted missing-global-root negative instances. Exact full historic aggregate including all 12 original files, not integration deduplicated copy. No original XSD mutation, no new runtime diagnostic.",
         "Falsification: both profiles supply same seven root/type pairs in correct packaging; two valid messages fail only when original service isolated. Two original unused SetRazzia response types removed in later revision, both PDF tracks specify common DataAcceptedResponseStructure, no service-specific response root synthesized. Generic structures/operation labels not conflated with roots. Existing routing override filename token preserved; strict release-context selection is a design requirement, not a claim of implemented historical resolver."
+      ]
+    },
+    {
+      "finding_id": "TKT-002",
+      "service": "TicketingService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "TicketingService V1.0 in VDV-301-1.0 release context",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 017ca64666e25d757fc0cde1f1be817f06a743fc + IBIS_IP_V1.0.xsd @ 41289eaed2674a169fdf77a10a2eff293c76d5c4 + exact complete historical release family",
+          "note": "EN V1.0 01/2014 pp91–92 §9.11/9.11.1 Table 115 establishes TicketingService identity. Original official service file and complete aggregate use TicketingService names and no TicketInformationService executable declarations. Aggregate filename include is provenance only."
+        },
+        {
+          "version": "TicketingService V1.0 in VDV-301-2.0 through VDV-301-2.3 release contexts",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7 + Common/Enumerations V1.0",
+          "note": "DE standalone V1.0 07/2016 pp7–8 §1.1/1.2 Table 1 establishes TicketingService identity. p10 §1.8.1 Table 6 contains misleading TicketInformationService.Validation.GetDataRequest label (TKT-004 separately); not an executable alias. Official tags 2.0–2.3 carry identical later service and Common/Enums V1.0 blobs; master same, not a release. No official V2.4 TicketingService release established."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "TicketingService V1.0 in VDV-301-1.0 release context",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "earliest_verified_english_and_original_aggregate",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 Interface Specification V1.0 (EN, 01/2014)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                91
+              ],
+              "section": "9.11 TicketingService",
+              "table": null,
+              "point_summary": "Public service explicitly named TicketingService."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 Interface Specification V1.0 (EN, 01/2014)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                91,
+                92
+              ],
+              "section": "9.11.1 Operations of the TicketingService",
+              "table": "Table 115: Operation of the TicketingService",
+              "point_summary": "Service heading and operation/type names use TicketingService; generic Common structures do not establish another service identity."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "017ca64666e25d757fc0cde1f1be817f06a743fc",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; historical source, not interchangeable with later same filename.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "Schema identity inventory",
+              "xpath_hint": "/xs:schema//@name",
+              "line_hint": null,
+              "point_summary": "Exact named declarations use TicketingService; no executable TicketInformationService name. Filename token is not an XML namespace or root prefix."
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; historical source, not interchangeable with later same filename.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "Schema identity inventory",
+              "xpath_hint": "/xs:schema//@name",
+              "line_hint": null,
+              "point_summary": "Exact named declarations use TicketingService; no executable TicketInformationService name. Filename token is not an XML namespace or root prefix."
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; historical source, not interchangeable with later same filename.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "group",
+              "component": "TicketingServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='TicketingServiceGroup']/xs:sequence/xs:element",
+              "line_hint": "132–142",
+              "point_summary": "Exact named declarations use TicketingService; no executable TicketInformationService name. Filename token is not an XML namespace or root prefix."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; historical source, not interchangeable with later same filename.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "Common V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact direct dependency unchanged across all verified release contexts."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; historical source, not interchangeable with later same filename.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "Enumerations V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact direct dependency unchanged across all verified release contexts."
+            }
+          ],
+          "coverage_note": "EN V1.0 01/2014 pp91–92 §9.11/9.11.1 Table 115 establishes TicketingService identity. Original official service file and complete aggregate use TicketingService names and no TicketInformationService executable declarations. Aggregate filename include is provenance only."
+        },
+        {
+          "version": "TicketingService V1.0 in VDV-301-2.0 through VDV-301-2.3 release contexts",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "independent_german_and_persistent_later_official_release",
+          "pdf_locators": [
+            {
+              "source_id": "TICKETING_V1.0",
+              "document_title": "VDV-Schrift 301-2-9 TicketingService V1.0 (DE, 07/2016)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-9sds-v1-0.pdfx",
+              "sha256": "96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43",
+              "printed_pages": [
+                7
+              ],
+              "section": "1 Dienst TicketingService / 1.1 Einleitung",
+              "table": null,
+              "point_summary": "Public service explicitly named TicketingService."
+            },
+            {
+              "source_id": "TICKETING_V1.0",
+              "document_title": "VDV-Schrift 301-2-9 TicketingService V1.0 (DE, 07/2016)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-9sds-v1-0.pdfx",
+              "sha256": "96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43",
+              "printed_pages": [
+                7,
+                8
+              ],
+              "section": "1.2 Operationen des TicketingService",
+              "table": "Tabelle 1 Operationen des TicketingServices",
+              "point_summary": "Service heading and operation/type names use TicketingService; generic Common structures do not establish another service identity."
+            },
+            {
+              "source_id": "TICKETING_V1.0",
+              "document_title": "VDV-Schrift 301-2-9 TicketingService V1.0 (DE, 07/2016)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-9sds-v1-0.pdfx",
+              "sha256": "96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43",
+              "printed_pages": [
+                10
+              ],
+              "section": "1.8 Datenstruktur der Operation ValidateTicket / 1.8.1 Request",
+              "table": "Tabelle 6 Beschreibung der TicketInformationService.Validation.GetDataRequest",
+              "point_summary": "Visible misleading table heading and caption; surrounding operation and service identity remain ValidateTicket/TicketingService. Counterexample investigated, not an executable alias. Separate documentation defect TKT-004."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; historical source, not interchangeable with later same filename.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "Schema identity inventory",
+              "xpath_hint": "/xs:schema//@name",
+              "line_hint": null,
+              "point_summary": "Exact named declarations use TicketingService; no executable TicketInformationService name. Filename token is not an XML namespace or root prefix."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; historical source, not interchangeable with later same filename.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "group",
+              "component": "TicketingServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='TicketingServiceGroup']/xs:sequence/xs:element",
+              "line_hint": null,
+              "point_summary": "Exact named declarations use TicketingService; no executable TicketInformationService name. Filename token is not an XML namespace or root prefix."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; historical source, not interchangeable with later same filename.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "Common V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact direct dependency unchanged across all verified release contexts."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; historical source, not interchangeable with later same filename.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "Enumerations V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact direct dependency unchanged across all verified release contexts."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; historical source, not interchangeable with later same filename.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "schema",
+              "component": "Schema identity inventory",
+              "xpath_hint": "/xs:schema//@name",
+              "line_hint": null,
+              "point_summary": "Exact named declarations use TicketingService; no executable TicketInformationService name. Filename token is not an XML namespace or root prefix."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; historical source, not interchangeable with later same filename.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "group",
+              "component": "TicketingServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='TicketingServiceGroup']/xs:sequence/xs:element",
+              "line_hint": null,
+              "point_summary": "Exact named declarations use TicketingService; no executable TicketInformationService name. Filename token is not an XML namespace or root prefix."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; historical source, not interchangeable with later same filename.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "schema",
+              "component": "Common V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact direct dependency unchanged across all verified release contexts."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; historical source, not interchangeable with later same filename.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "schema",
+              "component": "Enumerations V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact direct dependency unchanged across all verified release contexts."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; historical source, not interchangeable with later same filename.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "schema",
+              "component": "Schema identity inventory",
+              "xpath_hint": "/xs:schema//@name",
+              "line_hint": null,
+              "point_summary": "Exact named declarations use TicketingService; no executable TicketInformationService name. Filename token is not an XML namespace or root prefix."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; historical source, not interchangeable with later same filename.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "group",
+              "component": "TicketingServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='TicketingServiceGroup']/xs:sequence/xs:element",
+              "line_hint": null,
+              "point_summary": "Exact named declarations use TicketingService; no executable TicketInformationService name. Filename token is not an XML namespace or root prefix."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; historical source, not interchangeable with later same filename.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "schema",
+              "component": "Common V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact direct dependency unchanged across all verified release contexts."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; historical source, not interchangeable with later same filename.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "schema",
+              "component": "Enumerations V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact direct dependency unchanged across all verified release contexts."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; historical source, not interchangeable with later same filename.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "schema",
+              "component": "Schema identity inventory",
+              "xpath_hint": "/xs:schema//@name",
+              "line_hint": null,
+              "point_summary": "Exact named declarations use TicketingService; no executable TicketInformationService name. Filename token is not an XML namespace or root prefix."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; historical source, not interchangeable with later same filename.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "group",
+              "component": "TicketingServiceGroup",
+              "xpath_hint": "/xs:schema/xs:group[@name='TicketingServiceGroup']/xs:sequence/xs:element",
+              "line_hint": null,
+              "point_summary": "Exact named declarations use TicketingService; no executable TicketInformationService name. Filename token is not an XML namespace or root prefix."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; historical source, not interchangeable with later same filename.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "schema",
+              "component": "Common V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact direct dependency unchanged across all verified release contexts."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; historical source, not interchangeable with later same filename.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "schema",
+              "component": "Enumerations V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact direct dependency unchanged across all verified release contexts."
+            }
+          ],
+          "coverage_note": "DE standalone V1.0 07/2016 pp7–8 §1.1/1.2 Table 1 establishes TicketingService identity. p10 §1.8.1 Table 6 contains misleading TicketInformationService.Validation.GetDataRequest label (TKT-004 separately); not an executable alias. Official tags 2.0–2.3 carry identical later service and Common/Enums V1.0 blobs; master same, not a release. No official V2.4 TicketingService release established."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_TKT_002_2026-11-28.md",
+        "Reused TKT-001 source archives 10322336797 (SHA256 df661f9444ab7e26b563b0c748fee583314b19d789b316c6405e45e1fe99589c), 10336185560 (ba5ee246787f58d4cf690421fda683fb1dd072106d5c4e7eb6376c218b717870), both ZIP hashes and integrity rechecked; both raw PDFs exact registered SHA256 96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43, 627099 bytes. Actual archived p7 1e3d45fcbf975045fb0d97948dfc3f7148fc43516b28f604e94d3cc844ec357c (185769), p8 191ea4b3948ea2953b0a345996b7651a3f56d689e37515553572a5f7ad4e3246 (190801), p10 7a1dbb41115b5c7fc910dea754bb20f9b6a525c13073db735b0d69e1494855b4 (235025) matched archive bytes and visually inspected. No new raw PDF acquisition.",
+        "EN fallback run 46122547204 artifact 15254386230 ZIP SHA256 6ff41b34a5eb259ee674e6a321ef2620d3d9f422b673c625f56e3dddbff944e3 rehashed and integrity checked; source manifest pin e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 size2403598; p91 5dad76930429c141c66a00d7d2b22d8019e16317f9b0b645f7c99fb815fa68dc (269589), p92 a78ef4241a53ac5818d655d9d694f6466fa4d612b384ceac7487f467e523c4fe (217236), both PNG manifest hashes/size rechecked and actual pages visually inspected.",
+        "Exact upstream tag service blobs rechecked: 1.0 017ca64666e25d757fc0cde1f1be817f06a743fc, 2.0–2.3/master 3fda66d872ab0d1c511247f13e715cf3ad56afe7; original aggregate 41289eaed2674a169fdf77a10a2eff293c76d5c4, no TicketInformationService declaration, only filename include. No targetNamespace in either service. Exact dependency pins and release closure verified by TKT-001 predecessor, no additional official standalone edition established. TKT-001 full gate 46122865133 SUCCESS, EV-158 preserved.",
+        "Existing sdk_manifest/routing_overrides_v0.1.json aliases entry public_service_name=TicketingService, schema_filename_token=TicketInformationService, version1.0, kind=legacy_alias; tools/generate_schema_profile_inventory_v0_1.py consumes filename token mapping, tools/validate_sdk_manifest_v0_1.py checks preservation. No claim of historical resolver runtime implementation. Root map has no Ticketing entry; strict historical profile requirement remains TKT-001, not silently remediated.",
+        "Falsification: DE p10 Table6 literally TicketInformationService.Validation.GetDataRequest, surrounding heading ValidateTicket and overview p7 use TicketingService. Distinct TKT-004 remains unaltered. Legitimate TicketInformationRazziaStatus member is not an alias. Seven actual global root/type pairs in original aggregate/later service; no synthesis from filename, dot names are unqualified.",
+        "Permanent regression expansion in tools/validate_tkt_001_release_context.py: retain existing TKT-001 tests; inventory all named declarations in exact original family and selected later dependencies, check routing metadata only, test seven exact roots and corresponding filename-derived aliases with identical payloads in both complete profiles, and explicit exact versus alias xsi:type for all seven. Local later-profile proof confirms all seven canonical roots and filename root aliases reject SCHEMAV_CVC_ELT_1; explicit type alias probe SCHEMAV_CVC_ELT_4_2. Full gate result pending on this substantive commit."
       ]
     }
   ]
