@@ -15038,10 +15038,16 @@
       "service": "TicketingService",
       "version_scope": [
         {
-          "version": "V1.0 later official self-contained revision",
+          "version": "TicketingService V1.0 in complete VDV-301-1.0 original aggregate",
           "authority": "official_release",
-          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7 + Common/Enumerations V1.0",
-          "note": "GetTariffInformationResponseDataStructure xs:sequence begins DefaultLanguage, then TimeStamp, then the tariff-information group."
+          "xsd_profile": "IBIS_IP_V1.0.xsd @ 41289eaed2674a169fdf77a10a2eff293c76d5c4 + IBIS-IP_TicketInformationService_V1.0.xsd @ 017ca64666e25d757fc0cde1f1be817f06a743fc + exact complete historical 12-file family @ f5b53785f703e898632603eec3bfa3555a79fdba",
+          "note": "EN V1.0 01/2014 pp92–93 §9.11.3 / 9.11.3.2 Tables 117–118: required TimeStamp precedes required DefaultLanguage in data table; p94 §9.11.6.2 explicitly reuses the response structure for RetrieveTariffInformation. Complete original official aggregate declares both roots; original service type requires DefaultLanguage then TimeStamp then TariffInformationGroup. Complete payload regression confirms both roots; isolated historical service lacks both global roots and is excluded from runtime scope."
+        },
+        {
+          "version": "TicketingService V1.0 later official self-contained revision in VDV-301-2.0 through VDV-301-2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7 + Common/Enumerations V1.0 @ 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c/a9bea5bc73003ed91ded8519db06c32c4067831d",
+          "note": "DE standalone V1.0 07/2016 pp8–9 §1.4 / 1.4.2 Tabellen 3–4 repeats TimeStamp before DefaultLanguage; pp9–10 §1.7 / 1.7.2 explicitly reuses the same response for RetrieveTariffInformation. Identical later official service blobs and exact Common/Enums V1.0 at tags 2.0–2.3 enforce the sequence for both roots. Master not inferred release; no earlier publication or corrected later service edition established per TKT-001 catalog review. Publication dates do not imply release-tag dates."
         }
       ],
       "review_state": "manually_reviewed",
@@ -15052,7 +15058,11 @@
         "element_order_mismatch",
         "DefaultLanguage_before_TimeStamp",
         "PDF_TimeStamp_before_DefaultLanguage",
-        "xs_sequence_enforced"
+        "xs_sequence_enforced",
+        "shared_Get_Retrieve_response_type",
+        "historical_aggregate_vs_isolated_service",
+        "missing_field_same_error_excluded",
+        "independent_english_german_publications"
       ],
       "defect_assessment": "confirmed_pdf_defect",
       "confidence": "confirmed",
@@ -15064,41 +15074,45 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "The official PDF tariff-response table lists TimeStamp before DefaultLanguage."
+          "note": "Original EN pp92–93 §9.11.3 / 9.11.3.2 Table118 and standalone DE pp8–9 §1.4 / 1.4.2 Tabelle4 list mandatory TimeStamp then DefaultLanguage, followed by tariff information group. EN p94 §9.11.6.2 and DE p10 §1.7.2 explicitly reuse Get response for Retrieve."
         },
         {
           "type": "official_xsd_explicit",
-          "note": "The exact XSD sequence for TicketingService.GetTariffInformationResponseDataStructure begins DefaultLanguage then TimeStamp."
+          "note": "Both exact original and later service schemas define mandatory xs:sequence DefaultLanguage then TimeStamp then TariffInformationGroup. Original complete aggregate and later self-contained service declare both Get and Retrieve global response roots with shared outer type; isolated original declares neither."
         },
         {
           "type": "xml_schema_semantics",
-          "note": "xs:sequence makes the declared element order significant for validation."
+          "note": "Inner xs:sequence order is significant; two mandatory ordinary rows are not a choice. Outer data-or-error choice is unrelated to inner order."
         },
         {
           "type": "executable_validation",
-          "note": "EV-158 accepts progression with DefaultLanguage before TimeStamp and rejects the PDF-order prefix at the first misplaced field."
+          "note": "EV-158 prefix evidence retained. Full complete-payload regression 46143975271 confirms both roots in both complete profiles, 8 positives, 4 PDF-order negatives, 8 omission negatives and 4 isolated historical controls."
+        },
+        {
+          "type": "technical_inference",
+          "note": "Same error when DefaultLanguage is missing; require actual adjacent TimeStamp then DefaultLanguage, both present inside exact unqualified data wrapper of either canonical root, and matching actual selected-XSD INVALID. No advisory on omission, unrelated errors, other roots or isolated historical packaging; no auto-reorder."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "GetTariffInformationResponse: PDF zeigt TimeStamp und DefaultLanguage in falscher Reihenfolge",
-          "short": "Die PDF listet TimeStamp vor DefaultLanguage; die XSD-Sequenz verlangt DefaultLanguage vor TimeStamp.",
-          "long": "TKT-006 ist ein ausführbar bestätigter Reihenfolgefehler der Dokumentation. Die offizielle TicketingService-V1.0-PDF führt im Tarif-Response TimeStamp vor DefaultLanguage auf. Die exakte XSD deklariert in TicketingService.GetTariffInformationResponseDataStructure jedoch eine xs:sequence mit DefaultLanguage vor TimeStamp. EV-158 bestätigt die praktische Wirkung: ein Prefix in XSD-Reihenfolge kommt bis zur nächsten fachlich erforderlichen Struktur weiter, während die PDF-Reihenfolge bereits an der vertauschten Position zurückgewiesen wird.",
-          "recommendation": "Elemente strikt in der Reihenfolge der ausgewählten XSD serialisieren: DefaultLanguage vor TimeStamp. Bei einer exakt passenden XSD-Rejection der PDF-Reihenfolge den Fehler beibehalten und ergänzend auf den dokumentierten Reihenfolgefehler hinweisen."
+          "title": "Tarifinformationen: PDF zeigt TimeStamp und DefaultLanguage in falscher Reihenfolge",
+          "short": "Die PDF listet TimeStamp vor DefaultLanguage; die XSD verlangt DefaultLanguage vor TimeStamp.",
+          "long": "TKT-006 ist ein ausführbar bestätigter Dokumentationsfehler in der englischen Originalausgabe und deutschen TicketingService-V1.0-Einzelausgabe. Beide Tabellen führen TimeStamp vor DefaultLanguage auf. Die exakten ursprünglichen und späteren XSDs verlangen in TicketingService.GetTariffInformationResponseDataStructure zuerst DefaultLanguage, dann TimeStamp und die Tarifdatengruppe. Das vollständige originale V1.0-Aggregat und die spätere eigenständige Service-XSD verwenden denselben Response-Typ für GetTariffInformationResponse und RetrieveTariffInformationResponse. Beide akzeptieren vollständige Daten in XSD-Reihenfolge und verwerfen die vertauschte Reihenfolge. Die isolierte historische Service-Datei besitzt keine dieser Root-Deklarationen. Ein fehlendes DefaultLanguage kann dieselbe Validatormeldung auslösen.",
+          "recommendation": "Elemente gemäß ausgewählter XSD serialisieren: DefaultLanguage vor TimeStamp. Nur bei tatsächlich vorhandener umgekehrter benachbarter Folge beider Elemente im exakten Daten-Wrapper eines der beiden Response-Roots und passendem XSD-INVALID den unveränderten Fehler um den PDF-Hinweis ergänzen. Fehlende Pflichtfelder, andere Roots und unabhängige Fehler nicht diesem Advisory zuordnen. Keine automatische Umordnung."
         },
         "en": {
-          "title": "GetTariffInformationResponse: PDF shows TimeStamp and DefaultLanguage in the wrong order",
-          "short": "The PDF lists TimeStamp before DefaultLanguage; the XSD sequence requires DefaultLanguage before TimeStamp.",
-          "long": "TKT-006 is an executably confirmed documentation ordering defect. The official TicketingService V1.0 PDF lists TimeStamp before DefaultLanguage in the tariff response. The exact XSD, however, declares an xs:sequence in TicketingService.GetTariffInformationResponseDataStructure with DefaultLanguage before TimeStamp. EV-158 confirms the practical effect: a prefix in XSD order progresses to the next required business structure, while the PDF-order prefix is rejected at the misplaced field.",
-          "recommendation": "Serialize elements strictly in the order defined by the selected XSD: DefaultLanguage before TimeStamp. For an exact XSD rejection matching the PDF order, preserve the validation error and add an advisory explaining the documented ordering defect."
+          "title": "Tariff information: PDF shows TimeStamp and DefaultLanguage in the wrong order",
+          "short": "The PDF lists TimeStamp before DefaultLanguage; the XSD requires DefaultLanguage before TimeStamp.",
+          "long": "TKT-006 is an executably confirmed documentation defect in the original English and standalone German TicketingService V1.0 editions. Both tables list TimeStamp before DefaultLanguage. The exact original and later XSDs require DefaultLanguage, then TimeStamp, then the tariff group in TicketingService.GetTariffInformationResponseDataStructure. The complete original V1.0 aggregate and later self-contained service schema use the same response type for GetTariffInformationResponse and RetrieveTariffInformationResponse. Both accept complete payloads in XSD order and reject the reversed order. The isolated historical service file declares neither global root. Omitting DefaultLanguage can produce the same validator error.",
+          "recommendation": "Serialize in selected-XSD order: DefaultLanguage before TimeStamp. Decorate the existing matching XSD INVALID only when both elements are actually present in adjacent reversed order in the exact data wrapper of either canonical response root. Do not attribute omissions, other roots or unrelated failures to this advisory. Never automatically reorder."
         }
       },
       "runtime_match": {
         "state": "reviewed",
         "candidate_triggers": [
-          "selected profile is the later official TicketingService V1.0 schema revision",
-          "XSD validation of TicketingService.GetTariffInformationResponse fails because TimeStamp appears where DefaultLanguage is required first",
-          "the observed order matches the official PDF table order TimeStamp then DefaultLanguage"
+          "selected exact complete official profile is VDV-301-1.0 aggregate 41289eaed2674a169fdf77a10a2eff293c76d5c4 with exact original 12-file family including service 017ca64666e25d757fc0cde1f1be817f06a743fc, OR exact later self-contained service 3fda66d872ab0d1c511247f13e715cf3ad56afe7 with Common/Enumerations V1.0 at VDV-301-2.0 through 2.3",
+          "actual selected-XSD INVALID is the matching sequence failure (TimeStamp encountered where DefaultLanguage required) inside the exact unqualified TicketingService.GetTariffInformationResponseData child of unqualified TicketingService.GetTariffInformationResponse or TicketingService.RetrieveTariffInformationResponse",
+          "both actual required direct children are present in adjacent order TimeStamp then DefaultLanguage at the beginning of that data wrapper; do not infer order from validator error text, exclude missing field, other namespace/root/type context, isolated original service packaging and unrelated errors; no automatic reordering"
         ]
       },
       "source_references": [
@@ -15121,9 +15135,34 @@
           "kind": "xsd",
           "reference": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7",
           "note": "Defines xs:sequence DefaultLanguage then TimeStamp in the tariff response data structure."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-2_V1.0_EN / sha256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 / printed pp92–94 Table118 and §9.11.6.2",
+          "note": "Original sequence and Retrieve shared-response reference."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TICKETING_V1.0 / sha256 96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43 / printed pp8–10 Tabelle4 and §1.7.2",
+          "note": "Independent German sequence and Retrieve shared-response reference."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS_IP_V1.0.xsd @ 41289eaed2674a169fdf77a10a2eff293c76d5c4 / VDV-301-1.0",
+          "note": "Complete original aggregate declares both global roots, exact original service defines sequence."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_TKT_006_2026-11-28.md",
+          "note": "Independent original PDF review and complete-payload scope expansion; historical runtime review preserved."
+        },
+        {
+          "kind": "evidence",
+          "reference": "schema-audit-validation run 46143975271 / artifact 15263165747",
+          "note": "24 targeted regression tests PASS; same-error omission exclusion."
         }
       ],
-      "notes": "Confirmed PDF sequence-order defect. Exact XSD-order rejection is a robust runtime advisory candidate. Runtime-mapping review 2026-09-21: reviewed for exact later official V1.0/VDV-301-2.0 profile; selected-XSD INVALID remains authoritative, advisory only."
+      "notes": "TKT-006 confirmed_pdf_defect, structure_mismatch, selected_xsd, error_with_advisory retained. EN original and DE standalone both list required TimeStamp before DefaultLanguage; exact original complete aggregate and later official self-contained profiles 2.0–2.3 enforce opposite sequence for both Get and Retrieve response roots. Isolated original service excluded. 24 targeted tests PASS; omission of DefaultLanguage can yield identical validator error, so require actual adjacent TimeStamp then DefaultLanguage inside exact data wrapper, not error text alone. Only TKT-006 mapping scope/trigger refined; no matcher, XSD or resolver changes. Other adjacent EN observations require independent review, no new ID or progress credit. No earlier or corrected later service publication established."
     },
     {
       "finding_id": "TKT-007",
