@@ -407,6 +407,75 @@ def validate_tkt_006_tariff_sequence(folder, later, aggregate_schema, later_sche
     print("PASSED TKT-006: 8 positives, 4 PDF-order negatives, 8 omission controls, 4 isolated historical controls")
 
 
+
+def validate_tkt_007_inner_field_ownership(folder, later, aggregate_schema, later_schema, old_schema):
+    """Test actual field nesting and inner xsi:type, distinct from TKT-005 overview type."""
+    root = "TicketingService.GetValidationResult"
+    outer = "TicketingService.GetValidationResultResponseStructure"
+    inner = "TicketingService.ValidationResultDataStructure"
+    for path in (folder / AGG, later):
+        require(parse(path).xpath("/xs:schema/xs:element[@name=$name]/@type",
+                                  namespaces=NS, name=root) == [outer],
+                "TKT-007 exact root and outer type")
+    for path in (folder / FILE, later):
+        doc = parse(path)
+        choice = doc.xpath("/xs:schema/xs:complexType[@name=$name]/xs:choice", namespaces=NS, name=outer)
+        seq = doc.xpath("/xs:schema/xs:complexType[@name=$name]/xs:sequence", namespaces=NS, name=inner)
+        require(len(choice) == len(seq) == 1 and not choice[0].attrib and not seq[0].attrib,
+                "TKT-007 mandatory outer choice and inner sequence")
+        require([dict(e.attrib) for e in choice[0]] == [
+                    {"name": "ValidationResultData", "type": inner},
+                    {"name": "OperationErrorMessage", "type": "IBIS-IP.string"}],
+                "TKT-007 exact outer field ownership")
+        require([dict(e.attrib) for e in seq[0]] == [
+                    {"name": "TimeStamp", "type": "IBIS-IP.dateTime"},
+                    {"name": "ValidationResult", "type": "TicketValidationEnumeration"}],
+                "TKT-007 exact inner field ownership")
+    stamp = "<TimeStamp><Value>2026-11-28T07:00:00Z</Value></TimeStamp>"
+    result = "<ValidationResult>valid</ValidationResult>"
+    data = f"<ValidationResultData>{stamp}{result}</ValidationResultData>"
+    error = "<OperationErrorMessage><Value>test</Value></OperationErrorMessage>"
+    xsi = "{http://www.w3.org/2001/XMLSchema-instance}type"
+    def payload(body):
+        return etree.fromstring(f"<{root}>{body}</{root}>".encode())
+    positive = flattened = wrong_inner = content = isolated = 0
+    for profile, schema in (("original aggregate", aggregate_schema), ("later service", later_schema)):
+        for body in (data, error):
+            require(schema.validate(payload(body)), f"TKT-007 {profile} valid branch")
+            positive += 1
+        node = payload(data)
+        node[0].set(xsi, inner)
+        require(schema.validate(node), f"TKT-007 {profile} exact explicit inner type")
+        positive += 1
+        node[0].set(xsi, outer)
+        require(not schema.validate(node) and bool(schema.error_log)
+                and all(e.type_name == "SCHEMAV_CVC_ELT_4_3" for e in schema.error_log),
+                f"TKT-007 {profile} outer type cannot replace inner type")
+        wrong_inner += 1
+        node = payload(stamp + result)
+        require(not schema.validate(node) and len(schema.error_log) == 1
+                and schema.error_log[0].type_name == "SCHEMAV_ELEMENT_CONTENT"
+                and "Element 'TimeStamp'" in schema.error_log[0].message
+                and "Expected is one of ( ValidationResultData, OperationErrorMessage )" in schema.error_log[0].message,
+                f"TKT-007 {profile} flattened fields rejected at outer choice")
+        flattened += 1
+        for body in ("", data + error, f"<ValidationResultData>{stamp}</ValidationResultData>",
+                     f"<ValidationResultData>{result}</ValidationResultData>",
+                     f"<ValidationResultData>{result}{stamp}</ValidationResultData>"):
+            require(not schema.validate(payload(body)) and bool(schema.error_log)
+                    and all(e.type_name == "SCHEMAV_ELEMENT_CONTENT" for e in schema.error_log),
+                    f"TKT-007 {profile} mandatory choice/sequence control")
+            content += 1
+    for body in (data, stamp + result):
+        require(not old_schema.validate(payload(body)) and bool(old_schema.error_log)
+                and all(e.type_name == "SCHEMAV_CVC_ELT_1" for e in old_schema.error_log),
+                "TKT-007 isolated original missing root, distinct from field ownership")
+        isolated += 1
+    require((positive, flattened, wrong_inner, content, isolated) == (6, 2, 2, 10, 2),
+            "TKT-007 expected counts")
+    print("PASSED TKT-007: 6 positives, 2 flattened negatives, 2 wrong-inner-type negatives, 10 content controls, 2 isolated historical controls")
+
+
 def main():
     later = ROOT / FILE
     require(blob(later) == LATER, "selected later service blob")
@@ -456,6 +525,7 @@ def main():
         validate_tkt_004_pdf_heading(folder, later, aggregate_schema, later_schema, old_schema)
         validate_tkt_005_response_type(folder, later, aggregate_schema, later_schema, old_schema)
         validate_tkt_006_tariff_sequence(folder, later, aggregate_schema, later_schema, old_schema)
+        validate_tkt_007_inner_field_ownership(folder, later, aggregate_schema, later_schema, old_schema)
     return 0
 
 
