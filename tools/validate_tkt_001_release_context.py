@@ -264,6 +264,72 @@ def validate_tkt_004_pdf_heading(folder, later, aggregate_schema, later_schema, 
     print("PASSED TKT-004: 4 positives, 2 literal PDF-root negatives, 2 invented-type negatives, 4 distinct alias controls, 2 isolated historical controls")
 
 
+
+def validate_tkt_005_response_type(folder, later, aggregate_schema, later_schema, old_schema):
+    """Distinguish the absent overview type from the real response and nested data types."""
+    root = "TicketingService.GetValidationResult"
+    outer = "TicketingService.GetValidationResultResponseStructure"
+    inner = "TicketingService.ValidationResultDataStructure"
+    wrong = "TicketingService.ValidationResultStructure"
+    for path in [folder / n for n in OLD] + [later]:
+        doc = parse(path)
+        require(not doc.xpath("/xs:schema/xs:complexType[@name=$name] | /xs:schema/xs:simpleType[@name=$name]",
+                              namespaces=NS, name=wrong),
+                f"TKT-005 overview type absent: {path.name}")
+    for path in (folder / AGG, later):
+        require(parse(path).xpath("/xs:schema/xs:element[@name=$name]/@type",
+                                  namespaces=NS, name=root) == [outer],
+                "TKT-005 exact global root and outer type")
+    for path in (folder / FILE, later):
+        doc = parse(path)
+        choice = doc.xpath("/xs:schema/xs:complexType[@name=$name]/xs:choice", namespaces=NS, name=outer)
+        require(len(choice) == 1 and not choice[0].attrib and
+                [dict(e.attrib) for e in choice[0]] == [
+                    {"name": "ValidationResultData", "type": inner},
+                    {"name": "OperationErrorMessage", "type": "IBIS-IP.string"}],
+                "TKT-005 exact mandatory outer choice")
+        seq = doc.xpath("/xs:schema/xs:complexType[@name=$name]/xs:sequence", namespaces=NS, name=inner)
+        require(len(seq) == 1 and not seq[0].attrib and
+                [dict(e.attrib) for e in seq[0]] == [
+                    {"name": "TimeStamp", "type": "IBIS-IP.dateTime"},
+                    {"name": "ValidationResult", "type": "TicketValidationEnumeration"}],
+                "TKT-005 exact inner type; distinct TKT-007 context")
+    payloads = (
+        "<ValidationResultData><TimeStamp><Value>2026-11-28T07:00:00Z</Value></TimeStamp>"
+        "<ValidationResult>valid</ValidationResult></ValidationResultData>",
+        "<OperationErrorMessage><Value>test</Value></OperationErrorMessage>",
+    )
+    xsi = "{http://www.w3.org/2001/XMLSchema-instance}type"
+    positive = absent_type = inner_type = isolated = 0
+    for profile, schema in (("original aggregate", aggregate_schema), ("later service", later_schema)):
+        for payload in payloads:
+            node = etree.fromstring(f"<{root}>{payload}</{root}>".encode())
+            require(schema.validate(node), f"TKT-005 {profile} implicit outer type PASS")
+            positive += 1
+            node.set(xsi, outer)
+            require(schema.validate(node), f"TKT-005 {profile} exact explicit outer type PASS")
+            positive += 1
+            node.set(xsi, wrong)
+            require(not schema.validate(node) and bool(schema.error_log) and
+                    all(e.type_name == "SCHEMAV_CVC_ELT_4_2" for e in schema.error_log),
+                    f"TKT-005 {profile} nonexistent PDF type unresolved")
+            absent_type += 1
+            node.set(xsi, inner)
+            # The inner type exists but is not derived from the declared outer type.
+            require(not schema.validate(node) and bool(schema.error_log) and
+                    "SCHEMAV_CVC_ELT_4_3" in {e.type_name for e in schema.error_log},
+                    f"TKT-005 {profile} inner type is not a valid outer substitute")
+            inner_type += 1
+            del node.attrib[xsi]
+            require(not old_schema.validate(node) and bool(old_schema.error_log) and
+                    all(e.type_name == "SCHEMAV_CVC_ELT_1" for e in old_schema.error_log),
+                    "TKT-005 isolated original service missing root, not type-name defect")
+            isolated += 1
+    require((positive, absent_type, inner_type, isolated) == (8, 4, 4, 4),
+            "TKT-005 exact regression counts")
+    print("PASSED TKT-005: 8 positives, 4 absent-type negatives, 4 inner-type substitution controls, 4 isolated historical controls")
+
+
 def main():
     later = ROOT / FILE
     require(blob(later) == LATER, "selected later service blob")
@@ -311,6 +377,7 @@ def main():
         validate_tkt_002_identity(folder, later, aggregate_schema, later_schema)
         validate_tkt_003_response_types(folder, later, aggregate_schema, later_schema)
         validate_tkt_004_pdf_heading(folder, later, aggregate_schema, later_schema, old_schema)
+        validate_tkt_005_response_type(folder, later, aggregate_schema, later_schema, old_schema)
     return 0
 
 
