@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 143,
-    "verified_current_standard": 143,
+    "tracked_findings": 144,
+    "verified_current_standard": 144,
     "pending_current_standard": 0
   },
   "entries": [
@@ -1588,6 +1588,20 @@
         "Live SMS p4 visible; other required live screenshots cache-missed. Local raw retrieval failed DNS; fresh official byte retrieval and verification performed in CI, not local. EV-146 rehashed ZIP 181ff01b16dae43ec2826299e6f14717aef1668d66491b6051ae07661ee607f6 but lacks p4. EV-156 artifact 10145182333, full SMS read artifact 9719396063, HDS old 9718826204 unavailable (404); no claim of fresh inspection of those artifacts."
       ],
       "note": "Actual original p4 unnumbered Foreword and Vorwort visibly verified from newly byte-pinned render; same-page subject positive control, HDS p4 and technical body independently checked; not inferred from TOC."
+    },
+    {
+      "finding_id": "SMS-004",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_SMS_004_2026-11-28.md",
+        "SMS fallback run 46086066109 SUCCESS, artifact 15239216306 ZIP SHA256 57ea00d63bec79174bfbc29d4711568a920c65a8e74803bfce051b813d670316 (502413 bytes); source SMS_V2.2 SHA256 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4 (847416 bytes), 15 pages, originally freshly retrieved and pinned in CI. ZIP integrity and all five PNG SHA256/size freshly verified; p12 28ab414bf724336752e3d339e65b4967725ad0a2bc15732f487f04c40a4c1eda (81807), p13 9ae9ae8875094ebb46aaa948050195afa3bd06c1f736c0af744a217016ebb02d (136709), p7 b56cee2e3126b0ecce1692dff6e447ae6dcd23c45e8d08f8568bd2bf30361779 (97080) visibly re-inspected in this cycle. No fresh SMS raw PDF retrieval.",
+        "Fresh Base V2.0 fallback run 46087372999 SUCCESS artifact 15239418125 ZIP SHA256 62fa791d022ef485ee68acab9385bd05239c14996e58a4557942eca81c14dc9f (812909 bytes). Official source VDV301-2_BASE_V2.0 SHA256 fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37 (2374295 bytes), 115 pages, verified in CI. ZIP integrity and all five PNG hashes/sizes rechecked locally; cover physical p1 f6799f47ee2fac01fbcd884c5cee5f3186f2e345b8e43988dcc24671cf9f9d47 (163310), p3 ed7e098082d8663399328e9de7f96647db26092babad69aefa977a4298e21512 (154086), p101 1dec6703ae95d40a5794dda8ffb6ff5526e9ee62bf4180d1631499f65c5ccb41 (218281), p102 1143b0951726ddff050844b796daf6727a47cd777763c73e55573a2bd100edef (180286), p103 a0c5dd3357837391448001125a0755ca21a6b9c59d09f4c412974fdcf83d8aa8 (182839) visibly checked (p103 from identical separately rehashed archive 11664756069, run 38038078632, ZIP b1238ac6b748e02c09f70af5ab7033e15bffec053f8e967f34ae297777e33f27, 566674 bytes; all three PNGs verified). Cover and p3 literally 301-2, not 301-2-0; date 02/2018, all three service names and version match SMS p13 ref (3). p101/102 §7.3 German/English describes starting, monitoring and publishing status; p103 §7.3.1 Table36 gives same six operation names under historical SystemManagementService.",
+        "Closest historical predecessor Base V2.1: existing local archive run 46086331149 artifact 15239047859 ZIP SHA256 a074ea5d2625b4a1ee93af7fc684b7b738494400a71bb886ffe11e3ea16ccb5f (977774 bytes), source pin 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a (2671005 bytes). ZIP and all four PNG hashes/sizes rechecked; p115 0eb9829d55189ab4b83ad903f1f45d2139bacf3ef11d41f103360bf822de48ee (240460) visibly re-inspected: bilingual §7.3 still SystemManagementService with starting/monitoring/publishing roles, 301-2 07/2018 footer. V1.0 DE/EN distinct historical predecessor reports re-used from SMS-003/DR3012-005 (p67/p90, not fresh visual inspection this cycle). Not other standalone SMS editions.",
+        "Official VDV catalog https://www.vdv.de/ip-kom-oev.aspx read 2026-11-28: historic Base Services V2.0/V2.1 listed as 301-2, SMS only standalone 301-2-18 V2.2, DMS V2.2/V2.4 later under 301-2-0. No earlier or corrected later standalone SMS publication established. A search for 302-2 did not yield an alternate IBIS-IP authority; this is not a universal nonexistence claim. Exact upstream VDVde/VDV301 tags VDV-301-2.2, VDV-301-2.3 and master trees matched local SMS d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c, Common 468fee6d177e7185dbcd5d3f90cfb114e29e01ae, Enum 2a23b512379b18e8f122ac1272cef8229fb86283; old SystemManagementService V1.0 blob 2d32630a0f1981e980e6a466e3f6a69136410f24 in 2.0/2.1 is distinct.",
+        "SMS-004 confirmed_pdf_defect, contextual_only, identifier_typo, no_runtime_diagnostic, runtime_match not_applicable. Both language lines on printed p12 §3.1.1 cite 302-2; p13 References (3) identifies 301-2-0 Base Services V2.0 02/2018. Actual historic source prints 301-2 on cover and p3; use actual publication label when citing it and retain 301-2-0 as literal SMS bibliography label, not a separately established historical edition. The date, title, named service trio and actual §7.3 status duties establish identity; not a new normative route. Separate DRSMS22-003 spelling remains unchanged. Only standalone SMS V2.2 confirmed affected, both language lines; no additional scope or new ID. No new XML rule/test warranted; full existing gates required. Bilingual diagnostic precision and evidence updated only; all 77 runtime mapping entries and XSD bytes unchanged.",
+        "Live PDF screenshots of target pp12/13 and historical cover cache-missed; exact pinned renders provide actual visual evidence. EV-156 artifact previously unavailable (404) per SMS-003; no new retrieval or visual claim about that historical artifact. No new SMS raw PDF retrieval; Base V2.0 official PDF fetched and pin verified in CI. No claim of independent authoring history or nonexistence of all other 302-2 publications."
+      ],
+      "note": "Actual original p12 §3.1.1 both language lines and p13 unnumbered References entry (3) visually re-inspected; independently pinned historical cover/title/body confirm identity, not TOC inference."
     }
   ]
 }

@@ -14120,7 +14120,7 @@
         },
         {
           "type": "official_pdf_explicit",
-          "note": "Physical page 13 of the same official PDF identifies the earlier Base Services source as VDV 301-2-0 and names the relevant DeviceManagementService, SystemManagementService and SystemDocumentationService V2.0 family."
+          "note": "Physical page 13 of the same official PDF identifies the earlier Base Services V2.0 (02/2018) source as VDV 301-2-0 and names the DeviceManagementService, SystemManagementService and SystemDocumentationService family. The independently byte-pinned historical original prints VDV-Schrift 301-2 on its cover and title page, with exactly that date, title and service trio; its §7.3 confirms the historical monitoring functions."
         },
         {
           "type": "technical_inference",
@@ -14131,14 +14131,14 @@
         "de": {
           "title": "SystemMonitoringService V2.2: Versionshistorie nennt VDV 302-2 statt VDV 301-2-0",
           "short": "Seite 12 verweist auf VDV 302-2; Seite 13 derselben Schrift identifiziert die zugrunde liegenden Base Services dagegen als VDV 301-2-0.",
-          "long": "SMS-004 ist ein bestätigter Referenznummernfehler in der Dokumentation. In der Versionshistorie auf der physischen Seite 12 steht in beiden Sprachzeilen, der Dienst sei aus VDV 302-2 herausgelöst worden. Die unmittelbar folgende Seite 13 benennt die frühere Base-Services-Quelle dagegen als VDV 301-2-0 und führt die betroffenen V2.0-Dienste auf. Der 302-2-Verweis ist damit kein alternativer technischer Normpfad, sondern ein redaktioneller Fehler.",
-          "recommendation": "Die historische Quellenangabe als VDV 301-2-0 interpretieren und VDV 302-2 an dieser Stelle als Dokumentationsfehler behandeln. Keine Resolver-, XSD- oder Runtime-Regel daraus ableiten."
+          "long": "SMS-004 ist ein bestätigter Referenznummernfehler in der Dokumentation. Auf Seite 12, § 3.1.1 steht in beiden Sprachzeilen VDV 302-2. Seite 13, Referenz (3), bezeichnet die zugrunde liegenden Basisdienste V2.0 (02/2018) als VDV 301-2-0. Das historische Original selbst trägt auf Titelblatt und Seite 3 die Bezeichnung VDV-Schrift 301-2; Titel, Datum und Dienstetrio stimmen überein. VDV 302-2 ist hier kein alternativer technischer Normpfad.",
+          "recommendation": "Die tatsächlich gemeinte historische Quelle als VDV-Schrift 301-2, Basisdienste V2.0 (02/2018), identifizieren; 301-2-0 als wörtliche Bezeichnung im SMS-Literaturverweis (3) erhalten. 302-2 an dieser Stelle als Dokumentationsfehler behandeln. Keine Resolver-, XSD- oder Runtime-Regel ableiten."
         },
         "en": {
           "title": "SystemMonitoringService V2.2: version history cites VDV 302-2 instead of VDV 301-2-0",
           "short": "Page 12 cites VDV 302-2, while page 13 of the same publication identifies the underlying Base Services source as VDV 301-2-0.",
-          "long": "SMS-004 is a confirmed documentation reference-number error. In the version history on physical page 12, both language lines state that the service was extracted from VDV 302-2. The immediately following page 13 instead identifies the former Base Services source as VDV 301-2-0 and lists the affected V2.0 services. The 302-2 citation is therefore not an alternative technical authority path but an editorial reference error.",
-          "recommendation": "Interpret the historical source reference as VDV 301-2-0 and treat VDV 302-2 at that location as a documentation error. Do not derive a resolver, XSD, or runtime rule from it."
+          "long": "SMS-004 is a confirmed documentation reference-number error. On page 12, section 3.1.1, both language lines cite VDV 302-2. Page 13 reference (3) labels the underlying Base Services V2.0 (02/2018) as VDV 301-2-0. The historical original itself prints VDV-Schrift 301-2 on its cover and title page, with the same title, date and three services. VDV 302-2 is not an alternative technical authority path here.",
+          "recommendation": "Identify the intended historical source as VDV-Schrift 301-2, Base Services V2.0 (02/2018), and retain 301-2-0 as the literal SMS bibliography reference (3) label. Treat 302-2 at this location as a documentation error. Do not derive a resolver, XSD or runtime rule."
         }
       },
       "runtime_match": {
@@ -14165,9 +14165,14 @@
           "kind": "pdf",
           "reference": "SMS V2.2 / sha256 996f639a81cb91ad20a8e78b6213e7c85d41ff0ec42caba4208d6c4652b140f4 / physical pages 12-13",
           "note": "Exact official pages showing VDV 302-2 in version history and VDV 301-2-0 as the Base Services source."
+        },
+        {
+          "kind": "other",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_SMS_004_2026-11-28.md",
+          "note": "Exact original reference and historical title/body comparison; no scope or runtime change."
         }
       ],
-      "notes": "Confirmed documentation-only reference-number error. Same-document evidence resolves the intended source as VDV 301-2-0; no runtime diagnostic is warranted."
+      "notes": "Confirmed documentation-only reference-number error; literal SMS bibliography 301-2-0 versus historical original title 301-2 distinguished. No runtime diagnostic warranted."
     },
     {
       "finding_id": "SUB-001",
