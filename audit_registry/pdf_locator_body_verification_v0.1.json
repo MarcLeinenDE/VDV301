@@ -9,8 +9,8 @@
   "frozen_structural_entry_count": 40,
   "block_new_structural_progress_until_complete": false,
   "counts": {
-    "tracked_findings": 149,
-    "verified_current_standard": 149,
+    "tracked_findings": 150,
+    "verified_current_standard": 150,
     "pending_current_standard": 0
   },
   "entries": [
@@ -1683,6 +1683,21 @@
         "Live renderer cache misses; EN p95 and definition targets and standalone Common rendered by exact-byte fallback. Initial handoff 46135487395 failed due to pending_block minimum length; fixed in 8b673506; handoff 46135552250, 46135658678, 46135697856 SUCCESS. No history rewrite; no premature terminal credit."
       ],
       "note": "Ten visible original pages: EN 91,92,95,108,109; DE 7,8,12; standalone Common 20,22; actual body headings/captions and surrounding counterexamples inspected. No inferred TOC locators."
+    },
+    {
+      "finding_id": "TKT-004",
+      "state": "verified_current_standard",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_TKT_004_2026-11-28.md",
+        "Reused EV-158 artifact 10336185560 ZIP SHA256 ba5ee246787f58d4cf690421fda683fb1dd072106d5c4e7eb6376c218b717870 integrity PASS; raw DE PDF SHA256 96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43 (627099 bytes), archived p7 1e3d45fcbf975045fb0d97948dfc3f7148fc43516b28f604e94d3cc844ec357c (185769), p8 191ea4b3948ea2953b0a345996b7651a3f56d689e37515553572a5f7ad4e3246 (190801), p10 7a1dbb41115b5c7fc910dea754bb20f9b6a525c13073db735b0d69e1494855b4 (235025); actual pages visually inspected. Archived seven XSD files rehashed as Git blobs matching pinned original/later profiles. No new DE raw download.",
+        "Reused EN fallback artifact 15254386230 ZIP SHA256 6ff41b34a5eb259ee674e6a321ef2620d3d9f422b673c625f56e3dddbff944e3 integrity PASS; source manifest pin SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 (2403598); p91 5dad76930429c141c66a00d7d2b22d8019e16317f9b0b645f7c99fb815fa68dc (269589), p92 a78ef4241a53ac5818d655d9d694f6466fa4d612b384ceac7487f467e523c4fe (217236), both actual pages visually inspected.",
+        "New EN fallback render 46140142578 SUCCESS artifact 15261377917 ZIP SHA256 5f08861dcffee1ab535edfc92982a3bc1f410d6e0af8d00909af5dac78be9448; same EN source pin/size, p94 aaf798843606b672d0039ec7b997eb9cd1302a760fe519fe751111e6396d47d6 (221771), ZIP/manifest/source/PNG hashes and sizes verified, actual image inspected. Live screenshots returned cache miss for both PDFs.",
+        "Exact upstream tag files rechecked: original service 017ca64666e25d757fc0cde1f1be817f06a743fc, original aggregate 41289eaed2674a169fdf77a10a2eff293c76d5c4 from EV-158 and exact TKT-001 complete family, later service 3fda66d872ab0d1c511247f13e715cf3ad56afe7 identical at all official tags 2.0–2.3 and master; Common 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c / Enums a9bea5bc73003ed91ded8519db06c32c4067831d unchanged across all those tags and 1.0. No later official standalone TicketingService edition or V2.4 release established per prior catalog check. No candidate promotion.",
+        "Permanent checker tools/validate_tkt_001_release_context.py expanded at ff0d72c12bd3cdcb1f015452873d922b33af1866; schema gate 46140199336 and handoff 46140199332 SUCCESS. Artifact 15261592314 SHA256 4ef5cb4140e8e758d56aa986b55690e29f578e798a080bbd4afddfca2c8263e2 downloaded/rehashed, all 24 *_status.txt exit 0. TKT-004: 4 positives (implicit and exact xsi:type), 2 literal PDF-root negatives SCHEMAV_CVC_ELT_1, 2 invented explicit PDF-type negatives SCHEMAV_CVC_ELT_4_2, 4 distinct nonliteral alias negative controls SCHEMAV_CVC_ELT_1, 2 isolated original controls (both canonical and PDF root missing) SCHEMAV_CVC_ELT_1. Group inventory statically checked in both exact service files. TKT-001/002/003 retained.",
+        "Falsification: both operation overviews explicitly give the canonical type, the correct operation section is ValidateTicket and nearby response naming uses TicketingService; header and caption repeat full wrong name (not a line-wrap artifact). +Structure is document notation, not part of QName. The request member/group model corresponds to the canonical request; this finding does not certify every PDF member type, business count consistency or HTTP endpoint. Exact wrong-root-only matcher scope; invented xsi:type and nonliteral aliases are test controls, not additional advisory triggers.",
+        "Historical runtime review 2026-09-21 limited the advisory to the later official VDV-301-2.0 self-contained service, expressly not the isolated earlier service revision. Original EN evidence plus newly compiled exact complete aggregate now support extending the *declarative* reviewed scope to that full original profile (not isolated old service) and byte-identical verified official 2.1–2.3 later profiles. Historical review preserved. TKT-006/008 had similar later-only historical scope and require independent original-body/profile review; no propagation to those findings now. No matcher implementation, XSD or resolver changes. Counts remain 77 reviewed / 0 implemented."
+      ],
+      "note": "Six visible original pages: EN 91,92,94; DE 7,8,10; actual body headers, captions and correct overview compared. No inferred TOC locators."
     }
   ]
 }
