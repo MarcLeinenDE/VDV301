@@ -1,0 +1,15 @@
+# Correction overlay — TKT-007 / TKT-009 literal ValidationResultData type — 2026-11-28
+
+Status: evidence complete, full registry gate pending. This correction was discovered during TS-001 navigation at EN p96. No extra locator/finding credit.
+
+## Direct visible evidence
+
+Correction docs/pdf_xsd_semantic_audit/CORRECTION_TKT_007_009_VALIDATION_RESULT_TYPE_2026-11-28.md: EN p95 §9.11.8.2 Table123 and DE p12 §1.9.2 Tabelle9 (section starts p11) visibly print TicketingSevice.ValidationResultDataStructure in the type column for correct child ValidationResultData; EN artifact 15259980153 ZIP fd1f0b0df80de41da39f1b8f04c549d7323375ae4fa34f173f0ea11369f6f252 p95 SHA256 663b5018e28f32c6faf90dd75d9e8c1055256f4413dbc07afd08cca743128cc9 (289688 bytes), DE EV158 artifact 10336185560 p12 SHA256 5f6574a3a2f73731d4219b0009f417a0dce6d61c9bf93a715d37a38f6e8f07ff (189100 bytes); both rehashed and actual images inspected.
+
+The correct child is ValidationResultData; exact original and later XSD declaration is TicketingService.ValidationResultDataStructure. The PDF type reference omits the r. Earlier TKT-007 review described the outer choice type reference as correctly spelled; that specific statement is false. The intended inner type is semantically identifiable from the field context, but the literal outer-table type is misspelled TicketingSevice.ValidationResultDataStructure (TKT-009); the separate inner-table header wrongly uses the existing outer type TicketingService.GetValidationResultResponseStructure (TKT-007). TKT-007 field-ownership classification and ordinary XSD errors unchanged; no TKT-007-specific matcher. TKT-009 now additionally covers this exact explicit type error at /TicketingService.GetValidationResult/ValidationResultData, not other errors, not an invented root. Preserve existing selected-XSD INVALID, no alias or automatic repair. Corrected both existing semantic and source/body/boundary records, regenerated declarative TKT-009 mapping, no new mapping ID. Original TKT-007 and TKT-009 reports and memory snapshots retained as historical evidence.
+
+## Executable evidence
+
+Permanent checker commit 7451f173d68174180d4a5ec899758a334be01686 schema 46172608801 and handoff 46172608789 SUCCESS; artifact 15273354954 SHA256 7405f99f0c40e8e3fad5b9ec6e456af6f4de42d48a2674f368bb4caed1543d1b integrity PASS, 24/24 status exit 0. TKT-009 total 72 cases: 24 positive, 4 exact PDF child negatives, 8 exact PDF type negatives, 28 context controls, 8 isolated historical controls. TKT-007 regression unchanged and PASS.
+
+Complete exact original aggregate and later official 2.0–2.3 service family; no isolated original service root. All existing TKT-009 cases retained plus 16 targeted cases for the validation-result response: six positives, two exact explicit wrong-type negatives, six unrelated-context controls, two isolated original controls. No production XSD/resolver/matcher implementation. 78 reviewed / 0 implemented, 114 not applicable; 192 frozen findings, no credit for this correction. TS-001 is the only new locator in this work block.

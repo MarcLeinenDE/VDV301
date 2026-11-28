@@ -15172,13 +15172,13 @@
           "version": "TicketingService V1.0 in complete VDV-301-1.0 original aggregate",
           "authority": "official_release",
           "xsd_profile": "IBIS_IP_V1.0.xsd @ 41289eaed2674a169fdf77a10a2eff293c76d5c4 + IBIS-IP_TicketInformationService_V1.0.xsd @ 017ca64666e25d757fc0cde1f1be817f06a743fc + exact complete historical 12-file family @ f5b53785f703e898632603eec3bfa3555a79fdba",
-          "note": "EN V1.0 01/2014 p95 §9.11.8.2 Tables 123/124: outer choice correctly references TicketingService.ValidationResultDataStructure, but inner field table 124 header and caption incorrectly name outer TicketingService.GetValidationResultResponseStructure. Both mandatory fields belong to the inner type in exact original service; complete original aggregate supplies the actual root. Isolated original service lacks that root and is a distinct packaging issue."
+          "note": "EN V1.0 01/2014 p95 §9.11.8.2 Tables 123/124: outer choice identifies ValidationResultData and prints misspelled intended inner type TicketingSevice.ValidationResultDataStructure (TKT-009); inner field table 124 header/caption incorrectly name existing outer TicketingService.GetValidationResultResponseStructure (TKT-007). Both mandatory fields belong to the inner type in exact original service; complete original aggregate supplies actual root. Isolated original service lacks that root."
         },
         {
           "version": "TicketingService V1.0 later official self-contained revision in VDV-301-2.0 through VDV-301-2.3",
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7 + Common/Enumerations V1.0 @ 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c/a9bea5bc73003ed91ded8519db06c32c4067831d",
-          "note": "DE standalone V1.0 07/2016 pp11–12 §1.9.2 Tabellen 9/10 repeats the same correct inner reference and wrong inner table header/caption. Later identical official service and exact Common/Enums V1.0 at tags 2.0–2.3 preserve field ownership. Master comparison only, not a release; no earlier publication or corrected later service edition established per TKT-001 catalog review. Publication dates do not imply release-tag dates."
+          "note": "DE standalone V1.0 07/2016 pp11–12 §1.9.2 Tabellen 9/10 repeats misspelled inner type reference (TKT-009) and wrong inner table header/caption (TKT-007). Later identical official service and exact Common/Enums V1.0 at tags 2.0–2.3 preserve field ownership. Master comparison only, not a release; no earlier publication or corrected later service edition established per TKT-001 catalog review. Publication dates do not imply release-tag dates."
         }
       ],
       "review_state": "manually_reviewed",
@@ -15206,7 +15206,7 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "EN p95 §9.11.8.2 Tables123/124 and DE pp11–12 §1.9.2 Tabellen9/10 both correctly reference inner ValidationResultDataStructure from outer choice, then print GetValidationResultResponseStructure as the inner field table header/caption."
+          "note": "EN p95 §9.11.8.2 Tables123/124 and DE pp11–12 §1.9.2 Tabellen9/10: The intended inner type is semantically identifiable from the field context, but the literal outer-table type is misspelled TicketingSevice.ValidationResultDataStructure (TKT-009); the separate inner-table header wrongly uses the existing outer type TicketingService.GetValidationResultResponseStructure (TKT-007)."
         },
         {
           "type": "official_xsd_explicit",
@@ -15222,20 +15222,20 @@
         },
         {
           "type": "technical_inference",
-          "note": "Ordinary correctly nested XML unaffected; deriving a flattened response or explicit outer xsi:type on inner element from the wrong table label causes ordinary XSD-INVALID. Neither malformed shape nor type is prescribed as an alternative by the PDF's correctly referenced outer table; no dedicated runtime diagnostic necessary."
+          "note": "Ordinary correctly nested XML unaffected; deriving a flattened response or explicit outer xsi:type on inner element from the wrong table label causes ordinary XSD-INVALID. The outer choice identifies inner data rather than prescribing the flattened shape or outer type. Exact misspelled inner type reference is independently covered by TKT-009, not a TKT-007 trigger."
         }
       ],
       "diagnostic": {
         "de": {
           "title": "GetValidationResult: Detailtabelle verwechselt äußeren Response-Wrapper und innere Datenstruktur",
           "short": "Die Tabelle nennt GetValidationResultResponseStructure, TimeStamp und ValidationResult gehören jedoch zu ValidationResultDataStructure.",
-          "long": "TKT-007 ist ein bestätigter Strukturbezeichnungsfehler in der englischen Originalausgabe und deutschen TicketingService-V1.0-Einzelausgabe. Beide inneren Feldtabellen nennen im Kopf und in der Unterschrift TicketingService.GetValidationResultResponseStructure, obwohl die vorangehende äußere Tabelle korrekt auf TicketingService.ValidationResultDataStructure verweist. Im vollständigen originalen V1.0-Aggregat und der späteren eigenständigen Service-XSD sind TimeStamp und ValidationResult Pflichtfelder der inneren Struktur, nicht direkte Kinder des Response-Roots. Der äußere Typ enthält die Choice ValidationResultData oder OperationErrorMessage. Korrekt verschachtelte Instanzen validieren. Direkt unter dem äußeren Root serialisierte innere Felder oder der äußere Typ als expliziter xsi:type von ValidationResultData werden verworfen. Die isolierte ursprüngliche Service-Datei besitzt den globalen Response-Root nicht.",
+          "long": "TKT-007 ist ein bestätigter Strukturbezeichnungsfehler in der englischen Originalausgabe und deutschen TicketingService-V1.0-Einzelausgabe. Beide inneren Feldtabellen nennen im Kopf und in der Unterschrift TicketingService.GetValidationResultResponseStructure, während die vorangehende äußere Tabelle die inneren Daten ValidationResultData mit dem falsch geschriebenen Typ TicketingSevice.ValidationResultDataStructure bezeichnet (eigenständiger Schreibfehler TKT-009). Im vollständigen originalen V1.0-Aggregat und der späteren eigenständigen Service-XSD sind TimeStamp und ValidationResult Pflichtfelder der inneren Struktur, nicht direkte Kinder des Response-Roots. Der äußere Typ enthält die Choice ValidationResultData oder OperationErrorMessage. Korrekt verschachtelte Instanzen validieren. Direkt unter dem äußeren Root serialisierte innere Felder oder der äußere Typ als expliziter xsi:type von ValidationResultData werden verworfen. Die isolierte ursprüngliche Service-Datei besitzt den globalen Response-Root nicht.",
           "recommendation": "Bei Schemaauflösung und Codegenerierung die exakte Wrapper-/Datenstrukturgrenze der ausgewählten XSD übernehmen. TimeStamp und ValidationResult unter ValidationResultData serialisieren; bei expliziter Typangabe den tatsächlichen inneren Typ verwenden. Keine flache Alternative, Typ-Aliasbildung oder automatische Reparatur. Gewöhnliche XSD-Fehler beibehalten, kein eigenes Runtime-Advisory."
         },
         "en": {
           "title": "GetValidationResult: detail table confuses the outer response wrapper with the inner data structure",
           "short": "The table names GetValidationResultResponseStructure, but TimeStamp and ValidationResult belong to ValidationResultDataStructure.",
-          "long": "TKT-007 is a confirmed documentation structure-label defect in the original English and standalone German TicketingService V1.0 editions. Both inner field tables name TicketingService.GetValidationResultResponseStructure in the header and caption, although the preceding outer table correctly references TicketingService.ValidationResultDataStructure. In the complete original V1.0 aggregate and later self-contained service schema, TimeStamp and ValidationResult are mandatory members of the inner structure, not direct response-root children. The outer type contains the choice of ValidationResultData or OperationErrorMessage. Correctly nested instances validate. Directly serializing inner fields under the outer root or assigning the outer type as explicit xsi:type of ValidationResultData fails. The isolated original service file does not declare the global response root.",
+          "long": "TKT-007 is a confirmed documentation structure-label defect in the original English and standalone German TicketingService V1.0 editions. Both inner field tables name TicketingService.GetValidationResultResponseStructure in the header and caption, while the preceding outer table identifies the inner ValidationResultData with the misspelled type TicketingSevice.ValidationResultDataStructure (distinct spelling defect TKT-009). In the complete original V1.0 aggregate and later self-contained service schema, TimeStamp and ValidationResult are mandatory members of the inner structure, not direct response-root children. The outer type contains the choice of ValidationResultData or OperationErrorMessage. Correctly nested instances validate. Directly serializing inner fields under the outer root or assigning the outer type as explicit xsi:type of ValidationResultData fails. The isolated original service file does not declare the global response root.",
           "recommendation": "Preserve the exact selected-XSD wrapper/data boundary for schema resolution and code generation. Serialize TimeStamp and ValidationResult beneath ValidationResultData and use the actual inner type if explicit typing is needed. No flattened alternative, type alias or automatic repair. Preserve ordinary XSD errors without a dedicated runtime advisory."
         }
       },
@@ -15288,9 +15288,14 @@
           "kind": "evidence",
           "reference": "schema-audit-validation run 46145064106 / artifact 15262414462",
           "note": "22 targeted cases PASS; actual inner type and wrapper boundaries."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/CORRECTION_TKT_007_009_VALIDATION_RESULT_TYPE_2026-11-28.md",
+          "note": "Corrects prior literal type-reference description; field ownership and classification unchanged."
         }
       ],
-      "notes": "TKT-007 confirmed_pdf_defect, selected_xsd, wrong_structure_reference, no_runtime_diagnostic/not_applicable retained. EN original and DE standalone inner field table header/caption wrongly identify existing outer type, despite immediately preceding correct inner type reference. Both exact complete original aggregate and identical later official service profiles 2.0–2.3 enforce outer choice and inner sequence. 6 positives / 16 targeted negatives PASS. Ordinary properly nested XML unaffected; flattening fields or explicitly substituting outer type for inner type is XSD-INVALID. Distinct from TKT-005 nonexistent overview type and opposite substitution. No dedicated runtime advisory, alias, root invention, resolver or XSD changes; all 77 mapping entries unchanged. Isolated original service lacks root. No earlier or corrected later publication established."
+      "notes": "TKT-007 confirmed_pdf_defect, selected_xsd, wrong_structure_reference, no_runtime_diagnostic/not_applicable retained. Earlier 'correctly references inner type' statement is superseded by exact original EN/DE review: outer choice correctly identifies child ValidationResultData but misspells its type (TKT-009). Inner field table header/caption wrongly name the existing outer type (TKT-007). Both complete original aggregate and identical later official service profiles 2.0–2.3 enforce outer choice and inner sequence. 6 positives / 16 targeted negatives retained; no new TKT-007 runtime mapping. Literal misspelled explicit type exclusively belongs to TKT-009. No alias, XSD/resolver changes; no new finding or locator credit."
     },
     {
       "finding_id": "TKT-008",
@@ -15424,13 +15429,13 @@
           "version": "TicketingService V1.0 in complete VDV-301-1.0 original aggregate",
           "authority": "official_release",
           "xsd_profile": "IBIS_IP_V1.0.xsd @ 41289eaed2674a169fdf77a10a2eff293c76d5c4 + IBIS-IP_TicketInformationService_V1.0.xsd @ 017ca64666e25d757fc0cde1f1be817f06a743fc + exact complete historical 12-file family @ f5b53785f703e898632603eec3bfa3555a79fdba",
-          "note": "EN V1.0 01/2014 pp92–94 §9.11.3.2 Tables 117/118 and §9.11.7.2 Table 121: misspelled actual tariff data child and two data type names; RetrieveTariffInformation reuses shared response. Complete original aggregate declares roots; isolated original service missing roots excluded. EN p131 table index repeats caption, not body authority."
+          "note": "EN V1.0 01/2014 pp92–95 §9.11.3.2 Tables 117/118 §9.11.7.2 Table 121 and §9.11.8.2 Table 123: misspelled actual tariff data child and three distinct data type names; RetrieveTariffInformation reuses shared response. Complete original aggregate declares roots; isolated original service missing roots excluded. EN p131 table index repeats caption, not body authority."
         },
         {
           "version": "TicketingService V1.0 later official self-contained revision in VDV-301-2.0 through VDV-301-2.3",
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7 + Common/Enumerations V1.0 @ 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c/a9bea5bc73003ed91ded8519db06c32c4067831d",
-          "note": "DE standalone V1.0 07/2016 pp8–11 §1.4.2 Tabellen 3/4 and §1.8.2 Tabelle 7 independently repeat exact typo; §1.7.2 reuses response. Later service/Common/Enums identical at official tags 2.0–2.3. DE p14 table index repeats caption, not body authority. No earlier or corrected later publication established per TKT-001 catalog; master not a release."
+          "note": "DE standalone V1.0 07/2016 pp8–12 §1.4.2 Tabellen 3/4 §1.8.2 Tabelle 7 and §1.9.2 Tabelle 9 independently repeat exact typo in actual tariff data child and three distinct type references; §1.7.2 reuses response. Later service/Common/Enums identical at official tags 2.0–2.3. DE p14 table index repeats caption, not body authority. No earlier or corrected later publication established per TKT-001 catalog; master not a release."
         }
       ],
       "review_state": "manually_reviewed",
@@ -15459,11 +15464,11 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "EN V1.0 01/2014 pp92–94 §9.11.3.2 Tables 117/118 and §9.11.7.2 Table 121: misspelled actual tariff data child and two data type names; RetrieveTariffInformation reuses shared response. Complete original aggregate declares roots; isolated original service missing roots excluded. EN p131 table index repeats caption, not body authority. DE standalone V1.0 07/2016 pp8–11 §1.4.2 Tabellen 3/4 and §1.8.2 Tabelle 7 independently repeat exact typo; §1.7.2 reuses response. Later service/Common/Enums identical at official tags 2.0–2.3. DE p14 table index repeats caption, not body authority. No earlier or corrected later publication established per TKT-001 catalog; master not a release."
+          "note": "EN V1.0 01/2014 pp92–95 §9.11.3.2 Tables 117/118 §9.11.7.2 Table 121 and §9.11.8.2 Table 123: misspelled actual tariff data child and three distinct data type names; RetrieveTariffInformation reuses shared response. Complete original aggregate declares roots; isolated original service missing roots excluded. EN p131 table index repeats caption, not body authority. DE standalone V1.0 07/2016 pp8–12 §1.4.2 Tabellen 3/4 §1.8.2 Tabelle 7 and §1.9.2 Tabelle 9 independently repeat exact typo in actual tariff data child and three distinct type references; §1.7.2 reuses response. Later service/Common/Enums identical at official tags 2.0–2.3. DE p14 table index repeats caption, not body authority. No earlier or corrected later publication established per TKT-001 catalog; master not a release."
         },
         {
           "type": "official_xsd_explicit",
-          "note": "Exact XSD declares TicketingService.GetTariffInformationResponseData and correctly spelled tariff/validation data types; shared tariff choice accepts correct child or OperationErrorMessage."
+          "note": "Exact XSD declares TicketingService.GetTariffInformationResponseData and correctly spelled tariff data, validation response data and validation-result data types. Exact correct local child ValidationResultData is typed TicketingService.ValidationResultDataStructure under TicketingService.GetValidationResult."
         },
         {
           "type": "executable_validation",
@@ -15472,19 +15477,23 @@
         {
           "type": "technical_inference",
           "note": "Historical EV-158 root-only check retained as historical evidence, not proof of PDF root typo. Exact child and optional explicit xsi:type contexts establish runtime relevance. Prior documentation-only classification superseded."
+        },
+        {
+          "type": "executable_validation",
+          "note": "Permanent checker commit 7451f173d68174180d4a5ec899758a334be01686 schema 46172608801 and handoff 46172608789 SUCCESS; artifact 15273354954 SHA256 7405f99f0c40e8e3fad5b9ec6e456af6f4de42d48a2674f368bb4caed1543d1b integrity PASS, 24/24 status exit 0. TKT-009 total 72 cases: 24 positive, 4 exact PDF child negatives, 8 exact PDF type negatives, 28 context controls, 8 isolated historical controls. TKT-007 regression unchanged and PASS."
         }
       ],
       "diagnostic": {
         "de": {
           "title": "TicketingSevice in PDF-Element und Typreferenzen",
           "short": "Die PDF-Schreibweise TicketingSevice ist an den nachgewiesenen XML-Positionen ungültig.",
-          "long": "TKT-009 betrifft in beiden V1.0-Publikationen die Elementnamenspalte der Tarifantwort und die Typreferenzen für Tarif- und Validierungsdaten. Die ausgewählte XSD verlangt TicketingService.GetTariffInformationResponseData unter GetTariffInformationResponse oder RetrieveTariffInformationResponse sowie die korrekt geschriebenen Datentypen. Eine explizite xsi:type-Angabe ist nicht vorgeschrieben; bei Verwendung der falschen PDF-Form wird sie am betreffenden korrekten Element zurückgewiesen.",
+          "long": "TKT-009 betrifft in beiden V1.0-Publikationen die Elementnamenspalte der Tarifantwort und die Typreferenzen für Tarif- und Validierungsdaten. Die ausgewählte XSD verlangt TicketingService.GetTariffInformationResponseData unter GetTariffInformationResponse oder RetrieveTariffInformationResponse sowie die korrekt geschriebenen Datentypen. Eine explizite xsi:type-Angabe ist nicht vorgeschrieben; bei Verwendung der falschen PDF-Form wird sie am betreffenden korrekten Element zurückgewiesen. Auch in GetValidationResult ist der korrekt geschriebene Daten-Elementname ValidationResultData mit dem PDF-Typ TicketingSevice.ValidationResultDataStructure versehen. Die ausgewählte XSD verlangt TicketingService.ValidationResultDataStructure; die falsche explizite Typangabe wird dort ebenfalls verworfen.",
           "recommendation": "Exakte ausgewählte XSD verwenden. Bei nachgewiesenem falschem Element im erwarteten Choice-Kontext oder falscher expliziter Typreferenz am korrekten Element den INVALID-Status erhalten und den PDF-Fehler erläutern. Keine Aliasbildung oder automatische Korrektur."
         },
         "en": {
           "title": "TicketingSevice in PDF element and type references",
           "short": "The PDF spelling TicketingSevice is invalid at the verified XML positions.",
-          "long": "TKT-009 affects the tariff response element-name column and tariff/validation data type references in both V1.0 publications. The selected XSD requires TicketingService.GetTariffInformationResponseData under GetTariffInformationResponse or RetrieveTariffInformationResponse and correctly spelled data types. Explicit xsi:type is optional; the misspelled PDF form is rejected when used on the relevant correct element.",
+          "long": "TKT-009 affects the tariff response element-name column and tariff/validation data type references in both V1.0 publications. The selected XSD requires TicketingService.GetTariffInformationResponseData under GetTariffInformationResponse or RetrieveTariffInformationResponse and correctly spelled data types. Explicit xsi:type is optional; the misspelled PDF form is rejected when used on the relevant correct element. GetValidationResult also pairs the correctly spelled child ValidationResultData with the PDF type TicketingSevice.ValidationResultDataStructure; the selected XSD requires TicketingService.ValidationResultDataStructure and rejects the wrong explicit type there.",
           "recommendation": "Use the exact selected XSD. For the verified wrong element in its expected choice or wrong explicit type on the correct element, retain INVALID and explain the PDF defect. No alias or automatic correction."
         }
       },
@@ -15493,7 +15502,7 @@
         "candidate_triggers": [
           "selected profile is the complete official original VDV-301-1.0 aggregate with exact pinned dependency family or exact later official self-contained TicketingService V1.0 at VDV-301-2.0 through VDV-301-2.3; isolated original service excluded; selected-XSD result must be INVALID",
           "branch A: actual unqualified direct child TicketingSevice.GetTariffInformationResponseData under exact TicketingService.GetTariffInformationResponse or TicketingService.RetrieveTariffInformationResponse root at the data/error choice position; schema rejection SCHEMAV_ELEMENT_CONTENT expects TicketingService.GetTariffInformationResponseData or OperationErrorMessage; require actual node/path and expected choice together",
-          "OR branch B: actual explicit xsi:type resolves to the exact misspelled unqualified TicketingSevice.GetTariffInformationResponseDataStructure on the correctly spelled TicketingService.GetTariffInformationResponseData child under either exact tariff response root; OR TicketingSevice.ValidateTicketResponseDataStructure on correctly spelled TicketingService.ValidationResponseData under exact TicketingService.ValidateTicketResponse root; verified unresolved-type SCHEMAV_CVC_ELT_4_2; require exact type, node/path and selected declaration context",
+          "OR branch B: actual explicit xsi:type resolves to the exact misspelled unqualified TicketingSevice.GetTariffInformationResponseDataStructure on the correctly spelled TicketingService.GetTariffInformationResponseData child under either exact tariff response root; OR TicketingSevice.ValidateTicketResponseDataStructure on correctly spelled TicketingService.ValidationResponseData under exact TicketingService.ValidateTicketResponse root; OR TicketingSevice.ValidationResultDataStructure on correctly spelled ValidationResultData under exact TicketingService.GetValidationResult root; verified unresolved-type SCHEMAV_CVC_ELT_4_2; require exact type, node/path and selected declaration context",
           "do not trigger for typo in invented root, missing child, unrelated child/type, wrong child position after completed choice, mere table captions or string-only matches; xsi:type optional, not required; no alias, normalization or result change"
         ]
       },
@@ -15537,9 +15546,19 @@
           "kind": "evidence",
           "reference": "schema-audit-validation run 46169309426 / artifact 15273051245",
           "note": "56 targeted cases PASS."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-2_V1.0_EN p95 Table123; TICKETING_V1.0 p12 Tabelle9",
+          "note": "Third exact wrong explicit data type on ValidationResultData."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/CORRECTION_TKT_007_009_VALIDATION_RESULT_TYPE_2026-11-28.md",
+          "note": "Source/body and exact profile regression correction, 72 cases PASS."
         }
       ],
-      "notes": "TKT-009 confirmed_pdf_defect, identifier_typo, selected_xsd retained; supersede prior documentation_only/no_runtime_effect with error_with_advisory. Both EN original and DE standalone show the literal wrong tariff response data element and tariff/validation data type references, not just captions. Complete original V1.0 aggregate and exact later official family 2.0–2.3 enforce correct spelling. 56 targeted cases PASS; only exact child/expected choice or explicit unresolved xsi:type at correct child under exact response root on selected-XSD INVALID can trigger. No invented root, string-only match, alias, waiver, normalization or XSD/resolver/runtime implementation change. 78 reviewed / 0 implemented; 114 not applicable. Publication boundaries unchanged."
+      "notes": "TKT-009 confirmed_pdf_defect, identifier_typo, selected_xsd retained; supersede prior documentation_only/no_runtime_effect with error_with_advisory. Both EN original and DE standalone show the literal wrong tariff response data element and tariff/validation response/validation-result data type references, not just captions. Complete original V1.0 aggregate and exact later official family 2.0–2.3 enforce correct spelling. 72 targeted cases PASS after correction; only exact child/expected choice or explicit unresolved xsi:type at correct child under exact response root on selected-XSD INVALID can trigger. No invented root, string-only match, alias, waiver, normalization or XSD/resolver/runtime implementation change. 78 reviewed / 0 implemented; 114 not applicable. Publication boundaries unchanged. Original 56-case milestone preserved; omitted Table123/Tabelle9 type lane corrected, TKT-007 field-table classification distinct. No new credit."
     },
     {
       "finding_id": "TS-001",
@@ -15549,7 +15568,7 @@
           "version": "V1.0",
           "authority": "official_release",
           "xsd_profile": null,
-          "note": "Official VDV 301-2-10 TimeService V1.0 is an SNTP/RFC-4330 plus DNS-SD discovery/profile service. Exact VDV-301-1.0 and VDV-301-2.0 release trees and the current 50-root integration pool contain no dedicated TimeService XSD by design."
+          "note": "TimeService V1.0 is a non-XSD SNTP/RFC4330 and DNS-SD protocol profile. Earliest verified combined EN 01/2014 p96 §9.12 explicitly excludes own XML and further periodic publication; p29 Table4 specifies mandatory sntp-server IP (unicast example) separately from multicast data. The historical p96 multicast-address wording is inconsistent, not a new cyclic XML obligation. Dedicated bilingual 301-2-10 V1.0 02/2018 p6 confirms server IP, _ibisip_udp._udp, SNTP and timezone reference metadata; DE expressly no additional cyclic time delivery, EN omission tracked as DRTIME10-002. Exact release inventories 1.0–2.3 and integration pool lack dedicated TimeService XSD; shared V1.0 enumeration unchanged. No separate predecessor or successor dedicated edition in official catalog, no official V2.4 tag verified. No XML profile or finding-specific runtime mapping."
         }
       ],
       "review_state": "manually_reviewed",
@@ -15573,7 +15592,7 @@
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "VDV 301-2-10 describes TimeService V1.0 as an SNTP/RFC-4330 profile with DNS-SD discovery metadata rather than a service-specific XML payload family."
+          "note": "TimeService V1.0 is a non-XSD SNTP/RFC4330 and DNS-SD protocol profile. Earliest verified combined EN 01/2014 p96 §9.12 explicitly excludes own XML and further periodic publication; p29 Table4 specifies mandatory sntp-server IP (unicast example) separately from multicast data. The historical p96 multicast-address wording is inconsistent, not a new cyclic XML obligation. Dedicated bilingual 301-2-10 V1.0 02/2018 p6 confirms server IP, _ibisip_udp._udp, SNTP and timezone reference metadata; DE expressly no additional cyclic time delivery, EN omission tracked as DRTIME10-002. Exact release inventories 1.0–2.3 and integration pool lack dedicated TimeService XSD; shared V1.0 enumeration unchanged. No separate predecessor or successor dedicated edition in official catalog, no official V2.4 tag verified. No XML profile or finding-specific runtime mapping."
         },
         {
           "type": "external_protocol_standard",
@@ -15581,11 +15600,11 @@
         },
         {
           "type": "official_release_provenance",
-          "note": "Exact VDV-301-1.0 and VDV-301-2.0 release trees contain no dedicated TimeService XSD, while shared Enumerations V1.0 still includes TimeService in ServiceNameEnumeration."
+          "note": "Official tag root inventories VDV-301-1.0/2.0/2.1/2.2/2.3 contain respectively 12/18/25/26/27 XSDs and no dedicated TimeService file; all five exact V1.0 enum blobs a9bea5bc73003ed91ded8519db06c32c4067831d define ServiceNameEnumeration value TimeService. Current integration root pool contains 50 XSDs and no TimeService file."
         },
         {
           "type": "executable_validation",
-          "note": "EV-159 reruns RV-003, confirming protocol/discovery routing, no synthesized XML operations and the no-cyclic-delivery invariant."
+          "note": "Historical EV-159 remains valid. Current schema gate 46172608801 reruns unchanged RV-003 validator blob ff6e3fcd35d4c2f6bff760b3e86f5adb0e72156c / profile blob acd28ca0bd6ac1917b3d2db29745555b7e17d8dd; 35 OK assertions, PASS, no live socket/clock tests. SDK manifest/profile route remains protocol_discovery_profile."
         },
         {
           "type": "technical_inference",
@@ -15596,13 +15615,13 @@
         "de": {
           "title": "TimeService V1.0 ist absichtlich ein SNTP/DNS-SD-Profil ohne eigene XSD",
           "short": "Für TimeService V1.0 gibt es keine dedizierte XML/XSD-Payload-Familie; Zeitabgleich erfolgt über SNTP und Discovery über DNS-SD.",
-          "long": "TS-001 ist kein Defekt. Die offizielle VDV 301-2-10 beschreibt TimeService V1.0 als Protokoll-/Discovery-Profil: die eigentliche Zeitsynchronisation erfolgt über SNTP gemäß RFC 4330, während DNS-SD den Dienst und Metadaten wie sntp-server bereitstellt. In den exakten offiziellen VDV-301-1.0- und VDV-301-2.0-Releasebäumen sowie im aktuellen 50-XSD-Pool existiert bewusst keine dedizierte TimeService-XSD. Gleichzeitig enthält die gemeinsame ServiceNameEnumeration den Service TimeService. EV-159/RV-003 bestätigt ausführbar, dass keine XML-Operationen synthetisiert und keine zyklischen VDV-Zeitnachrichten erwartet werden.",
+          "long": "TS-001 ist kein Defekt. Schon die englische VDV-301-2-Gesamtausgabe V1.0 §9.12 schließt eine eigene XML-Implementierung ausdrücklich aus. Die eigenständige VDV 301-2-10 V1.0 beschreibt DNS-SD mit _ibisip_udp._udp und sntp-server als Server-IP sowie die Zeitsynchronisation über SNTP gemäß RFC 4330. Die deutsche Fassung schließt zusätzlich zyklische Zeitnachrichten aus; die englische Auslassung ist DRTIME10-002. Die missverständliche Multicast-Formulierung der älteren englischen Gesamtausgabe begründet kein eigenes XML-/Broadcast-Profil. Die exakten offiziellen Release-Inventare 1.0 bis 2.3 und der 50-XSD-Integrationspool enthalten keine eigene TimeService-XSD, während ServiceNameEnumeration V1.0 TimeService enthält. RV-003 bestätigt die deterministische Protokoll-/Discovery-Route ohne XML-Operationen; kein Live-Zeitabgleich nachgewiesen.",
           "recommendation": "TimeService V1.0 in die SNTP/DNS-SD-Protokollprüfung routen. Keine TimeService-XSD oder XML-Operationen erfinden und das Ausbleiben zyklischer XML-Zeittelegramme nicht als Fehler behandeln. Discovery-, Erreichbarkeits- und SNTP-Probleme separat diagnostizieren."
         },
         "en": {
           "title": "TimeService V1.0 is intentionally an SNTP/DNS-SD profile without its own XSD",
           "short": "TimeService V1.0 has no dedicated XML/XSD payload family; time synchronization uses SNTP and discovery uses DNS-SD.",
-          "long": "TS-001 is not a defect. Official VDV 301-2-10 defines TimeService V1.0 as a protocol/discovery profile: actual time synchronization is performed through SNTP according to RFC 4330, while DNS-SD advertises the service and metadata such as sntp-server. The exact official VDV-301-1.0 and VDV-301-2.0 release trees and the current 50-XSD pool intentionally contain no dedicated TimeService XSD. The shared ServiceNameEnumeration nevertheless includes TimeService. EV-159/RV-003 executably confirms that no XML operations are synthesized and no cyclic VDV time messages are expected.",
+          "long": "TS-001 is not a defect. The original combined English VDV 301-2 V1.0 §9.12 explicitly excludes a dedicated XML implementation. The standalone VDV 301-2-10 V1.0 describes DNS-SD with _ibisip_udp._udp and sntp-server as the server IP, and SNTP synchronization under RFC 4330. German expressly excludes additional cyclic time messages; the English omission is DRTIME10-002. The misleading multicast wording in the older combined English publication does not establish a separate XML/broadcast profile. Exact official release inventories 1.0 through 2.3 and the 50-XSD integration pool contain no dedicated TimeService XSD, while shared ServiceNameEnumeration V1.0 includes TimeService. RV-003 confirms deterministic protocol/discovery routing without XML operations; no live synchronization is claimed.",
           "recommendation": "Route TimeService V1.0 to SNTP/DNS-SD protocol checks. Do not invent a TimeService XSD or XML operations, and do not treat the absence of cyclic XML time messages as an error. Diagnose discovery, reachability and SNTP exchange failures separately."
         }
       },
@@ -15630,9 +15649,24 @@
           "kind": "xsd",
           "reference": "IBIS-IP_Enumerations_V1.0.xsd @ a9bea5bc73003ed91ded8519db06c32c4067831d",
           "note": "Shared ServiceNameEnumeration contains TimeService despite no dedicated service XSD."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-2_V1.0_EN pp29 Table4 and 96 §9.12",
+          "note": "Exact historical explicit non-XML architecture; server-address/multicast wording distinguished."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_TS_001_2026-11-28.md",
+          "note": "Exact original visual/body/authority review and current RV003 regression."
+        },
+        {
+          "kind": "external_standard",
+          "reference": "https://www.rfc-editor.org/rfc/rfc4330",
+          "note": "Explicitly referenced by VDV; externally superseded by RFC5905 but not silently substituted."
         }
       ],
-      "notes": "Confirmed intentional non-XSD architecture. Protocol diagnostics belong to the TimeService SNTP/DNS-SD lane, not a fabricated schema finding."
+      "notes": "Non_defect, intentional_design_misread, no_strict_xsd_profile, no_runtime_diagnostic/not_applicable retained. Earliest combined EN and both standalone DE/EN tracks verified. Preserve historical multicast wording as source ambiguity; do not infer multicast requirement, unconditional unicast-only restriction, own XML, or cyclic VDV time messages. RFC4330 explicitly selected; RFC5905 modern control only. 35 deterministic RV003 assertions PASS, no live device/clock validation. No XSD/resolver/runtime changes. Existing DRTIME10-002 and DR3012-006 distinct. 78 reviewed / 0 implemented; 114 not applicable."
     },
     {
       "finding_id": "TS-002",

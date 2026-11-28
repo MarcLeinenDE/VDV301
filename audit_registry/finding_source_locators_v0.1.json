@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "0583b98691b8433b6420da250f4bf1821a635a5e",
+    "git_blob": "05b070d9e8ae0914d87515b56066886ed26ba91e",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 155,
-    "coverage_complete_count": 155,
+    "locator_entry_count": 156,
+    "coverage_complete_count": 156,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 37
+    "remaining_finding_count": 36
   },
   "entries": [
     {
@@ -33958,13 +33958,13 @@
           "version": "TicketingService V1.0 in complete VDV-301-1.0 original aggregate",
           "authority": "official_release",
           "xsd_profile": "IBIS_IP_V1.0.xsd @ 41289eaed2674a169fdf77a10a2eff293c76d5c4 + IBIS-IP_TicketInformationService_V1.0.xsd @ 017ca64666e25d757fc0cde1f1be817f06a743fc + exact complete historical 12-file family @ f5b53785f703e898632603eec3bfa3555a79fdba",
-          "note": "EN V1.0 01/2014 p95 §9.11.8.2 Tables 123/124: outer choice correctly references TicketingService.ValidationResultDataStructure, but inner field table 124 header and caption incorrectly name outer TicketingService.GetValidationResultResponseStructure. Both mandatory fields belong to the inner type in exact original service; complete original aggregate supplies the actual root. Isolated original service lacks that root and is a distinct packaging issue."
+          "note": "EN V1.0 01/2014 p95 §9.11.8.2 Tables 123/124: outer choice identifies ValidationResultData and prints misspelled intended inner type TicketingSevice.ValidationResultDataStructure (TKT-009); inner field table 124 header/caption incorrectly name existing outer TicketingService.GetValidationResultResponseStructure (TKT-007). Both mandatory fields belong to the inner type in exact original service; complete original aggregate supplies actual root. Isolated original service lacks that root."
         },
         {
           "version": "TicketingService V1.0 later official self-contained revision in VDV-301-2.0 through VDV-301-2.3",
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7 + Common/Enumerations V1.0 @ 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c/a9bea5bc73003ed91ded8519db06c32c4067831d",
-          "note": "DE standalone V1.0 07/2016 pp11–12 §1.9.2 Tabellen 9/10 repeats the same correct inner reference and wrong inner table header/caption. Later identical official service and exact Common/Enums V1.0 at tags 2.0–2.3 preserve field ownership. Master comparison only, not a release; no earlier publication or corrected later service edition established per TKT-001 catalog review. Publication dates do not imply release-tag dates."
+          "note": "DE standalone V1.0 07/2016 pp11–12 §1.9.2 Tabellen 9/10 repeats misspelled inner type reference (TKT-009) and wrong inner table header/caption (TKT-007). Later identical official service and exact Common/Enums V1.0 at tags 2.0–2.3 preserve field ownership. Master comparison only, not a release; no earlier publication or corrected later service edition established per TKT-001 catalog review. Publication dates do not imply release-tag dates."
         }
       ],
       "coverage": [
@@ -33986,7 +33986,7 @@
               ],
               "section": "9.11.8 Data Structure of Operation GetValidationResult / 9.11.8.2 Response",
               "table": "Table 123: Description of the TicketingService.GetValidationResultResponse",
-              "point_summary": "Outer choice correctly references inner type TicketingService.ValidationResultDataStructure and Table 124."
+              "point_summary": "Outer choice names child ValidationResultData, misspells intended inner type TicketingSevice.ValidationResultDataStructure (TKT-009), and points to inner field table; TKT-007 remains the wrong existing outer type in that inner table."
             },
             {
               "source_id": "VDV301-2_V1.0_EN",
@@ -34065,7 +34065,7 @@
               "point_summary": "Exact enum dependency for inner ValidationResult."
             }
           ],
-          "coverage_note": "EN V1.0 01/2014 p95 §9.11.8.2 Tables 123/124: outer choice correctly references TicketingService.ValidationResultDataStructure, but inner field table 124 header and caption incorrectly name outer TicketingService.GetValidationResultResponseStructure. Both mandatory fields belong to the inner type in exact original service; complete original aggregate supplies the actual root. Isolated original service lacks that root and is a distinct packaging issue."
+          "coverage_note": "EN V1.0 01/2014 p95 §9.11.8.2 Tables 123/124: outer choice identifies ValidationResultData and prints misspelled intended inner type TicketingSevice.ValidationResultDataStructure (TKT-009); inner field table 124 header/caption incorrectly name existing outer TicketingService.GetValidationResultResponseStructure (TKT-007). Both mandatory fields belong to the inner type in exact original service; complete original aggregate supplies actual root. Isolated original service lacks that root."
         },
         {
           "version": "TicketingService V1.0 later official self-contained revision in VDV-301-2.0 through VDV-301-2.3",
@@ -34086,7 +34086,7 @@
               ],
               "section": "1.9 Datenstruktur der Operation GetValidationResult / 1.9.2 Response",
               "table": "Tabelle 9 Beschreibung der TicketingService.GetValidationResultResponse",
-              "point_summary": "Outer choice correctly references inner type TicketingService.ValidationResultDataStructure and Tabelle 10."
+              "point_summary": "Outer choice names child ValidationResultData, misspells intended inner type TicketingSevice.ValidationResultDataStructure (TKT-009), and points to inner field table; TKT-007 remains the wrong existing outer type in that inner table."
             },
             {
               "source_id": "TICKETING_V1.0",
@@ -34345,7 +34345,7 @@
               "point_summary": "Exact enum dependency for inner ValidationResult."
             }
           ],
-          "coverage_note": "DE standalone V1.0 07/2016 pp11–12 §1.9.2 Tabellen 9/10 repeats the same correct inner reference and wrong inner table header/caption. Later identical official service and exact Common/Enums V1.0 at tags 2.0–2.3 preserve field ownership. Master comparison only, not a release; no earlier publication or corrected later service edition established per TKT-001 catalog review. Publication dates do not imply release-tag dates."
+          "coverage_note": "DE standalone V1.0 07/2016 pp11–12 §1.9.2 Tabellen 9/10 repeats misspelled inner type reference (TKT-009) and wrong inner table header/caption (TKT-007). Later identical official service and exact Common/Enums V1.0 at tags 2.0–2.3 preserve field ownership. Master comparison only, not a release; no earlier publication or corrected later service edition established per TKT-001 catalog review. Publication dates do not imply release-tag dates."
         }
       ],
       "supporting_evidence": [
@@ -34355,7 +34355,9 @@
         "Exact upstream tag files rechecked independently: original service 017ca64666e25d757fc0cde1f1be817f06a743fc, original aggregate 41289eaed2674a169fdf77a10a2eff293c76d5c4 at VDV-301-1.0; later service 3fda66d872ab0d1c511247f13e715cf3ad56afe7 identical at official tags 2.0–2.3, Common 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c and Enums a9bea5bc73003ed91ded8519db06c32c4067831d identical at all five tags. Complete original 12-file family downloaded and Git blob verified by permanent regression. No candidate promotion; later publication boundary retained from TKT-001 catalog review.",
         "Permanent checker tools/validate_tkt_001_release_context.py expanded at 19e32fbec47cddcc169ed3e61649e72b49ce3c40; schema gate 46145064106 and handoff 46145064090 SUCCESS. Artifact 15262414462 SHA256 0c433ee5bc6d26fee8fbeff82064c57de4b3a6e1ff90274480ede8b49175f7d4 downloaded/rehashed, 24/24 status files exit 0. TKT-007: 6 positive (data/error branch and explicit inner type in both complete profiles), 2 flattened field negatives SCHEMAV_ELEMENT_CONTENT, 2 wrong-inner xsi:type negatives SCHEMAV_CVC_ELT_4_3, 10 mandatory choice/sequence controls, 2 isolated original controls SCHEMAV_CVC_ELT_1. TKT-001..006 retained. Independent local later-profile probes also confirm flattening, wrong inner type and omission/order errors.",
         "Active disproof: header could be a description of an outer response rather than a type name, or intentional choice flattening; both tables use +Structure notation, explicit inner type reference and table number, and actual required sequence under inner type, while outer choice has completely different children. Header and caption repeat exact existing outer type on inner table; distinct from TKT-005 absent overview type. Choice minus notation does not flatten nested types. No historical alias or alternative global root inferred. Correctly nested instances unaffected, wrong shape/type ordinary XSD-INVALID; no dedicated advisory.",
-        "Adjacent observation (not a new finding or scope expansion): DE Tabelle 9 outer response description refers to tariff information instead of ticket validation, unlike EN Table 123. Preserve for separate identity/context review; TKT-007 concerns only inner table label and field ownership. TKT-008 and TKT-009 remain pending independently."
+        "Adjacent observation (not a new finding or scope expansion): DE Tabelle 9 outer response description refers to tariff information instead of ticket validation, unlike EN Table 123. Preserve for separate identity/context review; TKT-007 concerns only inner table label and field ownership. TKT-008 and TKT-009 remain pending independently.",
+        "Correction docs/pdf_xsd_semantic_audit/CORRECTION_TKT_007_009_VALIDATION_RESULT_TYPE_2026-11-28.md: EN p95 §9.11.8.2 Table123 and DE p12 §1.9.2 Tabelle9 (section starts p11) visibly print TicketingSevice.ValidationResultDataStructure in the type column for correct child ValidationResultData; EN artifact 15259980153 ZIP fd1f0b0df80de41da39f1b8f04c549d7323375ae4fa34f173f0ea11369f6f252 p95 SHA256 663b5018e28f32c6faf90dd75d9e8c1055256f4413dbc07afd08cca743128cc9 (289688 bytes), DE EV158 artifact 10336185560 p12 SHA256 5f6574a3a2f73731d4219b0009f417a0dce6d61c9bf93a715d37a38f6e8f07ff (189100 bytes); both rehashed and actual images inspected.",
+        "Permanent checker commit 7451f173d68174180d4a5ec899758a334be01686 schema 46172608801 and handoff 46172608789 SUCCESS; artifact 15273354954 SHA256 7405f99f0c40e8e3fad5b9ec6e456af6f4de42d48a2674f368bb4caed1543d1b integrity PASS, 24/24 status exit 0. TKT-009 total 72 cases: 24 positive, 4 exact PDF child negatives, 8 exact PDF type negatives, 28 context controls, 8 isolated historical controls. TKT-007 regression unchanged and PASS."
       ]
     },
     {
@@ -34863,13 +34865,13 @@
           "version": "TicketingService V1.0 in complete VDV-301-1.0 original aggregate",
           "authority": "official_release",
           "xsd_profile": "IBIS_IP_V1.0.xsd @ 41289eaed2674a169fdf77a10a2eff293c76d5c4 + IBIS-IP_TicketInformationService_V1.0.xsd @ 017ca64666e25d757fc0cde1f1be817f06a743fc + exact complete historical 12-file family @ f5b53785f703e898632603eec3bfa3555a79fdba",
-          "note": "EN V1.0 01/2014 pp92–94 §9.11.3.2 Tables 117/118 and §9.11.7.2 Table 121: misspelled actual tariff data child and two data type names; RetrieveTariffInformation reuses shared response. Complete original aggregate declares roots; isolated original service missing roots excluded. EN p131 table index repeats caption, not body authority."
+          "note": "EN V1.0 01/2014 pp92–95 §9.11.3.2 Tables 117/118 §9.11.7.2 Table 121 and §9.11.8.2 Table 123: misspelled actual tariff data child and three distinct data type names; RetrieveTariffInformation reuses shared response. Complete original aggregate declares roots; isolated original service missing roots excluded. EN p131 table index repeats caption, not body authority."
         },
         {
           "version": "TicketingService V1.0 later official self-contained revision in VDV-301-2.0 through VDV-301-2.3",
           "authority": "official_release",
           "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7 + Common/Enumerations V1.0 @ 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c/a9bea5bc73003ed91ded8519db06c32c4067831d",
-          "note": "DE standalone V1.0 07/2016 pp8–11 §1.4.2 Tabellen 3/4 and §1.8.2 Tabelle 7 independently repeat exact typo; §1.7.2 reuses response. Later service/Common/Enums identical at official tags 2.0–2.3. DE p14 table index repeats caption, not body authority. No earlier or corrected later publication established per TKT-001 catalog; master not a release."
+          "note": "DE standalone V1.0 07/2016 pp8–12 §1.4.2 Tabellen 3/4 §1.8.2 Tabelle 7 and §1.9.2 Tabelle 9 independently repeat exact typo in actual tariff data child and three distinct type references; §1.7.2 reuses response. Later service/Common/Enums identical at official tags 2.0–2.3. DE p14 table index repeats caption, not body authority. No earlier or corrected later publication established per TKT-001 catalog; master not a release."
         }
       ],
       "coverage": [
@@ -34937,6 +34939,20 @@
               "section": "9.11.7 Data Structure of Operation ValidateTicket / 9.11.7.2 Response",
               "table": "Table 121: Description of the TicketingService.ValidateTicketResponse",
               "point_summary": "Correct element TicketingService.ValidationResponseData; wrong type TicketingSevice.ValidateTicketResponseDataStructure."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 Interface Specification V1.0 (EN, 01/2014)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                95
+              ],
+              "section": "9.11.8 Data Structure of Operation GetValidationResult / 9.11.8.2 Response",
+              "table": "Table 123: Description of the TicketingService.GetValidationResultResponse",
+              "point_summary": "Correct child ValidationResultData; literal PDF type TicketingSevice.ValidationResultDataStructure; exact selected XSD uses TicketingService.ValidationResultDataStructure."
             }
           ],
           "xsd_locators": [
@@ -35047,9 +35063,45 @@
               "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketResponseDataStructure']",
               "line_hint": "99–107",
               "point_summary": "Correctly spelled validation response data complex type."
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "element",
+              "component": "TicketingService.GetValidationResult",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.GetValidationResult']",
+              "line_hint": "131",
+              "point_summary": "Actual global root mapped to existing outer type, not inner fields."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "017ca64666e25d757fc0cde1f1be817f06a743fc",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "TicketingService.GetValidationResultResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.GetValidationResultResponseStructure']/xs:choice",
+              "line_hint": "108–113",
+              "point_summary": "Required exclusive choice ValidationResultData typed inner or OperationErrorMessage; no direct TimeStamp/ValidationResult."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "017ca64666e25d757fc0cde1f1be817f06a743fc",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidationResultDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidationResultDataStructure']/xs:sequence",
+              "line_hint": "114–119",
+              "point_summary": "Required inner sequence TimeStamp IBIS-IP.dateTime then ValidationResult TicketValidationEnumeration, actual owner of both fields."
             }
           ],
-          "coverage_note": "EN V1.0 01/2014 pp92–94 §9.11.3.2 Tables 117/118 and §9.11.7.2 Table 121: misspelled actual tariff data child and two data type names; RetrieveTariffInformation reuses shared response. Complete original aggregate declares roots; isolated original service missing roots excluded. EN p131 table index repeats caption, not body authority."
+          "coverage_note": "EN V1.0 01/2014 pp92–95 §9.11.3.2 Tables 117/118 §9.11.7.2 Table 121 and §9.11.8.2 Table 123: misspelled actual tariff data child and three distinct data type names; RetrieveTariffInformation reuses shared response. Complete original aggregate declares roots; isolated original service missing roots excluded. EN p131 table index repeats caption, not body authority."
         },
         {
           "version": "TicketingService V1.0 later official self-contained revision in VDV-301-2.0 through VDV-301-2.3",
@@ -35115,6 +35167,21 @@
               "section": "1.8 Datenstruktur der Operation ValidateTicket / 1.8.2 Response",
               "table": "Tabelle 7 Beschreibung der TicketingService.ValidateTicketResponse",
               "point_summary": "Correct element TicketingService.ValidationResponseData; wrong type TicketingSevice.ValidateTicketResponseDataStructure."
+            },
+            {
+              "source_id": "TICKETING_V1.0",
+              "document_title": "VDV-Schrift 301-2-9 TicketingService V1.0 (DE, 07/2016)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-9sds-v1-0.pdfx",
+              "sha256": "96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43",
+              "printed_pages": [
+                11,
+                12
+              ],
+              "section": "1.9 Datenstruktur der Operation GetValidationResult / 1.9.2 Response",
+              "table": "Tabelle 9 Beschreibung der TicketingService.GetValidationResultResponse",
+              "point_summary": "Correct child ValidationResultData; literal PDF type TicketingSevice.ValidationResultDataStructure; exact selected XSD uses TicketingService.ValidationResultDataStructure."
             }
           ],
           "xsd_locators": [
@@ -35549,9 +35616,153 @@
               "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketResponseDataStructure']",
               "line_hint": "67–75",
               "point_summary": "Correctly spelled validation response data complex type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "element",
+              "component": "TicketingService.GetValidationResult",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.GetValidationResult']",
+              "line_hint": "77",
+              "point_summary": "Actual global root mapped to existing outer type, not inner fields."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "TicketingService.GetValidationResultResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.GetValidationResultResponseStructure']/xs:choice",
+              "line_hint": "78–83",
+              "point_summary": "Required exclusive choice ValidationResultData typed inner or OperationErrorMessage; no direct TimeStamp/ValidationResult."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidationResultDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidationResultDataStructure']/xs:sequence",
+              "line_hint": "84–89",
+              "point_summary": "Required inner sequence TimeStamp IBIS-IP.dateTime then ValidationResult TicketValidationEnumeration, actual owner of both fields."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "element",
+              "component": "TicketingService.GetValidationResult",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.GetValidationResult']",
+              "line_hint": "77",
+              "point_summary": "Actual global root mapped to existing outer type, not inner fields."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "complexType",
+              "component": "TicketingService.GetValidationResultResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.GetValidationResultResponseStructure']/xs:choice",
+              "line_hint": "78–83",
+              "point_summary": "Required exclusive choice ValidationResultData typed inner or OperationErrorMessage; no direct TimeStamp/ValidationResult."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidationResultDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidationResultDataStructure']/xs:sequence",
+              "line_hint": "84–89",
+              "point_summary": "Required inner sequence TimeStamp IBIS-IP.dateTime then ValidationResult TicketValidationEnumeration, actual owner of both fields."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "element",
+              "component": "TicketingService.GetValidationResult",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.GetValidationResult']",
+              "line_hint": "77",
+              "point_summary": "Actual global root mapped to existing outer type, not inner fields."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "complexType",
+              "component": "TicketingService.GetValidationResultResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.GetValidationResultResponseStructure']/xs:choice",
+              "line_hint": "78–83",
+              "point_summary": "Required exclusive choice ValidationResultData typed inner or OperationErrorMessage; no direct TimeStamp/ValidationResult."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidationResultDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidationResultDataStructure']/xs:sequence",
+              "line_hint": "84–89",
+              "point_summary": "Required inner sequence TimeStamp IBIS-IP.dateTime then ValidationResult TicketValidationEnumeration, actual owner of both fields."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "element",
+              "component": "TicketingService.GetValidationResult",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.GetValidationResult']",
+              "line_hint": "77",
+              "point_summary": "Actual global root mapped to existing outer type, not inner fields."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "complexType",
+              "component": "TicketingService.GetValidationResultResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.GetValidationResultResponseStructure']/xs:choice",
+              "line_hint": "78–83",
+              "point_summary": "Required exclusive choice ValidationResultData typed inner or OperationErrorMessage; no direct TimeStamp/ValidationResult."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidationResultDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidationResultDataStructure']/xs:sequence",
+              "line_hint": "84–89",
+              "point_summary": "Required inner sequence TimeStamp IBIS-IP.dateTime then ValidationResult TicketValidationEnumeration, actual owner of both fields."
             }
           ],
-          "coverage_note": "DE standalone V1.0 07/2016 pp8–11 §1.4.2 Tabellen 3/4 and §1.8.2 Tabelle 7 independently repeat exact typo; §1.7.2 reuses response. Later service/Common/Enums identical at official tags 2.0–2.3. DE p14 table index repeats caption, not body authority. No earlier or corrected later publication established per TKT-001 catalog; master not a release."
+          "coverage_note": "DE standalone V1.0 07/2016 pp8–12 §1.4.2 Tabellen 3/4 §1.8.2 Tabelle 7 and §1.9.2 Tabelle 9 independently repeat exact typo in actual tariff data child and three distinct type references; §1.7.2 reuses response. Later service/Common/Enums identical at official tags 2.0–2.3. DE p14 table index repeats caption, not body authority. No earlier or corrected later publication established per TKT-001 catalog; master not a release."
         }
       ],
       "supporting_evidence": [
@@ -35560,7 +35771,152 @@
         "EN p131 fallback run 46169309442 artifact 15273186599 ZIP SHA256 329f1c134d63e770bcb8c71d4e3f1a36a365c3923931e9b8f8e7a5e094ec325f, manifest SHA256 508b54e600112c9f4733912f529576737e1de7c324a7c81de661b4ae4aad52bf, PNG SHA256 14147d102037cf01105a84f4ad59f7592da6215898878d2e11082e306ca03229 (263990 bytes); actual image inspected. DE p14 table list also inspected. Navigation repetitions only.",
         "Exact upstream tag files verified; original complete aggregate and later identical 2.0–2.3 profile, Common/Enums pinned. No earlier or corrected later publication established.",
         "Permanent checker c2f16733c641bae84842356b274b06b210eb5511 schema 46169309426 and handoff 46169309429 SUCCESS; artifact 15273051245 ZIP SHA256 eef28865d392d7ab661c2a2f5d229443d45f322f5f773214b3ddb494790cb662 rehashed, 24/24 status exit 0. 18 positive, 4 exact child negative, 6 exact type negative, 22 context and 6 isolated historical controls PASS.",
-        "Same-pattern backcheck of 13 documentation/no-runtime identifier/spelling records; DRTRAINSET21-003 operation label without request payload, DRTVS21-002 shortened display type, DRSMS22-003 historical text distinct. No analogous proven correction among reviewed records; not new full PDF review. Guard: distinguish actual element column, type reference, caption and invented root."
+        "Same-pattern backcheck of 13 documentation/no-runtime identifier/spelling records; DRTRAINSET21-003 operation label without request payload, DRTVS21-002 shortened display type, DRSMS22-003 historical text distinct. No analogous proven correction among reviewed records; not new full PDF review. Guard: distinguish actual element column, type reference, caption and invented root.",
+        "Correction docs/pdf_xsd_semantic_audit/CORRECTION_TKT_007_009_VALIDATION_RESULT_TYPE_2026-11-28.md: EN p95 §9.11.8.2 Table123 and DE p12 §1.9.2 Tabelle9 (section starts p11) visibly print TicketingSevice.ValidationResultDataStructure in the type column for correct child ValidationResultData; EN artifact 15259980153 ZIP fd1f0b0df80de41da39f1b8f04c549d7323375ae4fa34f173f0ea11369f6f252 p95 SHA256 663b5018e28f32c6faf90dd75d9e8c1055256f4413dbc07afd08cca743128cc9 (289688 bytes), DE EV158 artifact 10336185560 p12 SHA256 5f6574a3a2f73731d4219b0009f417a0dce6d61c9bf93a715d37a38f6e8f07ff (189100 bytes); both rehashed and actual images inspected.",
+        "Permanent checker commit 7451f173d68174180d4a5ec899758a334be01686 schema 46172608801 and handoff 46172608789 SUCCESS; artifact 15273354954 SHA256 7405f99f0c40e8e3fad5b9ec6e456af6f4de42d48a2674f368bb4caed1543d1b integrity PASS, 24/24 status exit 0. TKT-009 total 72 cases: 24 positive, 4 exact PDF child negatives, 8 exact PDF type negatives, 28 context controls, 8 isolated historical controls. TKT-007 regression unchanged and PASS."
+      ]
+    },
+    {
+      "finding_id": "TS-001",
+      "service": "TimeService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "V1.0",
+          "authority": "official_release",
+          "xsd_profile": null,
+          "note": "TimeService V1.0 is a non-XSD SNTP/RFC4330 and DNS-SD protocol profile. Earliest verified combined EN 01/2014 p96 §9.12 explicitly excludes own XML and further periodic publication; p29 Table4 specifies mandatory sntp-server IP (unicast example) separately from multicast data. The historical p96 multicast-address wording is inconsistent, not a new cyclic XML obligation. Dedicated bilingual 301-2-10 V1.0 02/2018 p6 confirms server IP, _ibisip_udp._udp, SNTP and timezone reference metadata; DE expressly no additional cyclic time delivery, EN omission tracked as DRTIME10-002. Exact release inventories 1.0–2.3 and integration pool lack dedicated TimeService XSD; shared V1.0 enumeration unchanged. No separate predecessor or successor dedicated edition in official catalog, no official V2.4 tag verified. No XML profile or finding-specific runtime mapping."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "V1.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "earliest_combined_english_and_only_dedicated_bilingual_v1_0_non_xsd_profile",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification V1.0 (EN, 01/2014)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                29
+              ],
+              "section": "5.3.2 Use of TXT Records",
+              "table": "Table 4: Meanings of the TXT record in DNS-SD (including the definitions for IBIS-IP)",
+              "point_summary": "Mandatory sntp-server IP for time synchronization, example 192.168.0.22, distinct from multicast UDP-data key."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification V1.0 (EN, 01/2014)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                96
+              ],
+              "section": "9.12 TimeService",
+              "table": null,
+              "point_summary": "Explicitly no own XML implementation, SNTP RFC4330, TXT server address/timezone; historical multicast wording inconsistent with Table4, no further periodic publishing."
+            },
+            {
+              "source_id": "TIME_V1.0",
+              "document_title": "VDV-Schrift 301-2-10 TimeService V1.0 (02/2018)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-10sds-v-1-01.pdfx",
+              "sha256": "d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3",
+              "printed_pages": [
+                6
+              ],
+              "section": "1 Dienst TimeService / Service TimeService",
+              "table": null,
+              "point_summary": "DE and EN same standalone bilingual document: DNS-SD type _ibisip_udp._udp, sntp-server IP, SNTP RFC4330 and timezone metadata; German additional cyclic sending explicitly not intended, English omission DRTIME10-002."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0 shared V1.0 enumeration, not a dedicated TimeService schema.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "enumeration_value",
+              "component": "ServiceNameEnumeration",
+              "value": "TimeService",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='ServiceNameEnumeration']/xs:restriction/xs:enumeration[@value='TimeService']",
+              "line_hint": "208–220",
+              "point_summary": "Shared service identity; no service-specific payload root or XML operation obligation follows."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0 shared V1.0 enumeration, not a dedicated TimeService schema.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "enumeration_value",
+              "component": "ServiceNameEnumeration",
+              "value": "TimeService",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='ServiceNameEnumeration']/xs:restriction/xs:enumeration[@value='TimeService']",
+              "line_hint": "208–220",
+              "point_summary": "Shared service identity; no service-specific payload root or XML operation obligation follows."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1 shared V1.0 enumeration, not a dedicated TimeService schema.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "enumeration_value",
+              "component": "ServiceNameEnumeration",
+              "value": "TimeService",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='ServiceNameEnumeration']/xs:restriction/xs:enumeration[@value='TimeService']",
+              "line_hint": "208–220",
+              "point_summary": "Shared service identity; no service-specific payload root or XML operation obligation follows."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2 shared V1.0 enumeration, not a dedicated TimeService schema.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "enumeration_value",
+              "component": "ServiceNameEnumeration",
+              "value": "TimeService",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='ServiceNameEnumeration']/xs:restriction/xs:enumeration[@value='TimeService']",
+              "line_hint": "208–220",
+              "point_summary": "Shared service identity; no service-specific payload root or XML operation obligation follows."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3 shared V1.0 enumeration, not a dedicated TimeService schema.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "enumeration_value",
+              "component": "ServiceNameEnumeration",
+              "value": "TimeService",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='ServiceNameEnumeration']/xs:restriction/xs:enumeration[@value='TimeService']",
+              "line_hint": "208–220",
+              "point_summary": "Shared service identity; no service-specific payload root or XML operation obligation follows."
+            }
+          ],
+          "coverage_note": "TimeService V1.0 is a non-XSD SNTP/RFC4330 and DNS-SD protocol profile. Earliest verified combined EN 01/2014 p96 §9.12 explicitly excludes own XML and further periodic publication; p29 Table4 specifies mandatory sntp-server IP (unicast example) separately from multicast data. The historical p96 multicast-address wording is inconsistent, not a new cyclic XML obligation. Dedicated bilingual 301-2-10 V1.0 02/2018 p6 confirms server IP, _ibisip_udp._udp, SNTP and timezone reference metadata; DE expressly no additional cyclic time delivery, EN omission tracked as DRTIME10-002. Exact release inventories 1.0–2.3 and integration pool lack dedicated TimeService XSD; shared V1.0 enumeration unchanged. No separate predecessor or successor dedicated edition in official catalog, no official V2.4 tag verified. No XML profile or finding-specific runtime mapping."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_TS_001_2026-11-28.md",
+        "TIME_V1.0 source pin ZIP 10336172299 SHA256 c24cfc7d8b80652a5caaeafa4d131f31c32fcbe85e45cfb4a6bb5edb2f789c94 and EV159 ZIP 10336194085 SHA256 4d5c36f36c468b92e1a3ca962eb1e76b8670f6460f2ecf667bd1cdc2c2e2d010 rehashed integrity PASS. Recovered exact raw PDF SHA256 d040f503be8e82f5500220ba5cc9b0b41a2fa10db80d9f3980eed191378594d3 (515920 bytes, 10 pages). p6 EV159 PNG SHA256 099a2198df048ef805ea37ac559fc1adec24e9b622fd2e7b421ac31d8bbb0cfd (402182 bytes) rehashed and visibly inspected, both language tracks; live screenshot agrees. No fresh standalone raw acquisition claim.",
+        "EN official pinned fallback run 46172608914 SUCCESS artifact 15274282276 ZIP SHA256 4e0a2f034219e031e4a6f182b3a29fd52da274c8b5e194a61deb056c9d0ead28; manifest SHA256 322b25284b5b84ed24ab93078528e1a19bf5fc59ad9a0f147972377d73d854e9, source SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 (2403598); p29 f4b706fbb80d1cb98513644d40b79c476d604bfe7cc9ab8728fac8d4a39e07a8 (220050), p96 3e65099075a92d7f8bd878d947f2b022a63583f6c475ac4ff8fc04c8b54f72e3 (263748). All ZIP/PNG hashes and sizes verified and both actual pages visually inspected. p96 explicit own XML absence, no periodic publishing; p29 explicit mandatory sntp-server separate from multicast row.",
+        "Official catalog https://www.vdv.de/ip-kom-oev.aspx checked: sole dedicated TimeService V1.0, earliest verified combined EN 01/2014 independent body; later general conventions and German base crossreferences per DR3012-006 historical review not separate TimeService versions. No official VDV-301-2.4 tag found.",
+        "Upstream official refs VDV-301-1.0/2.0/2.1/2.2/2.3 root inventory 12/18/25/26/27 XSDs, no dedicated TimeService filename; exact enum blob a9bea5bc73003ed91ded8519db06c32c4067831d in all five, lines 208–220 value TimeService. Current integration 50 root XSDs, no dedicated TimeService file. Shared enum identity is not own XSD payload authority.",
+        "Current schema gate 46172608801 SUCCESS and handoff 46172608789 SUCCESS at 7451f173d68174180d4a5ec899758a334be01686; artifact 15273354954 SHA256 7405f99f0c40e8e3fad5b9ec6e456af6f4de42d48a2674f368bb4caed1543d1b integrity PASS, 24/24 status exit 0. RV003 log 35 OK assertions and PASS, unchanged validator/profile blobs; no socket/clock change. SDK manifest non-XSD route verified. Historical EV159 old prestate preserved, not re-executed with new prestate.",
+        "Active disproof: historical EN p96 multicast wording exists but p29 describes sntp-server as IP with unicast example, not same as multicast TXT key; 2018 independent DE/EN explicitly server IP and SNTP, no own XML or cyclic VDV stream. RFC4330 includes multiple transport modes; do not infer general unicast-only requirement from deterministic unicast tests. No invented timezone mandatory rule or new runtime matcher.",
+        "docs/pdf_xsd_semantic_audit/CORRECTION_TKT_007_009_VALIDATION_RESULT_TYPE_2026-11-28.md"
       ]
     }
   ]
