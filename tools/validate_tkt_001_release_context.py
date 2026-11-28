@@ -570,6 +570,9 @@ def validate_tkt_009_service_spelling(folder, later, aggregate_schema, later_sch
     tariff_roots = ("TicketingService.GetTariffInformationResponse",
                     "TicketingService.RetrieveTariffInformationResponse")
     validation_root = "TicketingService.ValidateTicketResponse"
+    result_root = "TicketingService.GetValidationResult"
+    result_child = "ValidationResultData"
+    result_type = "TicketingService.ValidationResultDataStructure"
     for path in [folder / filename for filename in OLD] + [
             later, ROOT / "IBIS-IP_common_V1.0.xsd", ROOT / "IBIS-IP_Enumerations_V1.0.xsd"]:
         names = parse(path).xpath("/xs:schema//@name", namespaces=NS)
@@ -582,11 +585,14 @@ def validate_tkt_009_service_spelling(folder, later, aggregate_schema, later_sch
                     "TKT-009 exact shared tariff root/type")
         require(roots(doc).get(validation_root) == "TicketingService.ValidateTicketResponseStructure",
                 "TKT-009 exact validation root/type")
+        require(roots(doc).get(result_root) == "TicketingService.GetValidationResultResponseStructure",
+                "TKT-009 exact validation-result root/type")
     for path in (folder / FILE, later):
         doc = parse(path)
         for outer, child, typ in (
                 ("TicketingService.GetTariffInformationResponseStructure", data, inner),
-                ("TicketingService.ValidateTicketResponseStructure", validation_data, validation_type)):
+                ("TicketingService.ValidateTicketResponseStructure", validation_data, validation_type),
+                ("TicketingService.GetValidationResultResponseStructure", result_child, result_type)):
             choice = doc.xpath("/xs:schema/xs:complexType[@name=$outer]/xs:choice", namespaces=NS, outer=outer)
             require(len(choice) == 1 and not choice[0].attrib and
                     [dict(e.attrib) for e in choice[0]] == [
@@ -620,7 +626,10 @@ def validate_tkt_009_service_spelling(folder, later, aggregate_schema, later_sch
         return etree.fromstring(f"<{root}>{error}</{root}>".encode())
     positive = spelling = type_typo = controls = isolated = 0
     cases = [(root, data, inner, tariff) for root in tariff_roots] + [
-        (validation_root, validation_data, validation_type, validation)]
+        (validation_root, validation_data, validation_type, validation),
+        (result_root, result_child, result_type,
+         "<TimeStamp><Value>2026-11-28T15:00:00Z</Value></TimeStamp>"
+         "<ValidationResult>valid</ValidationResult>")]
     for profile, schema in (("original aggregate", aggregate_schema), ("later service", later_schema)):
         for root, child, typ, content in cases:
             node = payload(root, child, content)
@@ -676,15 +685,15 @@ def validate_tkt_009_service_spelling(folder, later, aggregate_schema, later_sch
     for root, child, typ, content in cases:
         for actual in (child, wrong if root in tariff_roots else child):
             node = payload(root, actual, content)
-            if root == validation_root and isolated % 2:
+            if root in (validation_root, result_root) and isolated % 2:
                 node[0].set(xsi, typ.replace("TicketingService.", "TicketingSevice.", 1))
             require(not old_schema.validate(node) and bool(old_schema.error_log)
                     and all(e.type_name == "SCHEMAV_CVC_ELT_1" for e in old_schema.error_log),
                     "TKT-009 isolated original missing global declaration is separate")
             isolated += 1
-    require((positive, spelling, type_typo, controls, isolated) == (18, 4, 6, 22, 6),
+    require((positive, spelling, type_typo, controls, isolated) == (24, 4, 8, 28, 8),
             "TKT-009 exact regression counts")
-    print("PASSED TKT-009: 18 positives, 4 exact PDF child negatives, 6 exact PDF type negatives, 22 context controls, 6 isolated historical controls")
+    print("PASSED TKT-009: 24 positives, 4 exact PDF child negatives, 8 exact PDF type negatives, 28 context controls, 8 isolated historical controls")
 
 
 def main():
