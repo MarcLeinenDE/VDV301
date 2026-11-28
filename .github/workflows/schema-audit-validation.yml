@@ -21,6 +21,7 @@ on:
       - 'tools/validate_finding_version_boundaries_v0_1.py'
       - 'tools/validate_repository_handoff.py'
       - 'tools/validate_sms_001_generic_subscription_roots.py'
+      - 'tools/validate_sub_001_unsubscribe_type_names.py'
       - 'tools/validate_sms_v22_ev116.py'
       - '.github/workflows/schema-audit-validation.yml'
 
@@ -58,6 +59,8 @@ jobs:
           pcs_status=$?
           python tools/validate_sms_001_generic_subscription_roots.py > audit-results/sms_001_generic_subscription_roots.log 2>&1
           sms001_status=$?
+          python tools/validate_sub_001_unsubscribe_type_names.py > audit-results/sub_001_unsubscribe_type_names.log 2>&1
+          sub001_status=$?
           python tools/validate_ce018_service_identification_with_state_list.py > audit-results/ce_018_cardinality.log 2>&1
           ce018_status=$?
           python tools/validate_video_v20_compositors.py > audit-results/ev_103_video_compositors.log 2>&1
@@ -99,6 +102,7 @@ jobs:
             echo "legacy_v1_root_adapters,official_root_mapping_plus_official_service_xsds,schema_profiles/VDV-301-1.0-root-map.csv,$legacy_status"
             echo "pcs_001_operation_not_supported,official_PCS_V2.1_exact_route_plus_enum_control,PCS_V2.1_Common_V1.0_Enums_V1.0,$pcs_status"
             echo "sms_001_generic_subscription_roots,official_SMS_V2.2_Common_V2.2_Enums_V2.2,generic_roots,$sms001_status"
+            echo "sub_001_unsubscribe_type_names,official_Common_V1.0_to_V2.3_plus_explicit_candidate_V2.4,type_reference_compilation,$sub001_status"
             echo "ce_018_cardinality,Common_V1.0_to_V2.4_exact_declared_dependencies,ServiceIdentificationWithStateListStructure,$ce018_status"
             echo "ev_103_video_compositors,official_video_V2.0_plus_candidate_VRS_V2.4_control,VLS_VRS_VDS,$video_status"
             echo "ev_104_trainset,official_TrainSet_V2.2_exact_contexts,TSM_002_TSD_003,$trainset_status"
@@ -127,6 +131,7 @@ jobs:
           echo "$legacy_status" > audit-results/legacy_status.txt
           echo "$pcs_status" > audit-results/pcs_status.txt
           echo "$sms001_status" > audit-results/sms001_status.txt
+          echo "$sub001_status" > audit-results/sub001_status.txt
           echo "$ce018_status" > audit-results/ce018_status.txt
           echo "$video_status" > audit-results/video_status.txt
           echo "$trainset_status" > audit-results/trainset_status.txt
@@ -160,6 +165,7 @@ jobs:
           legacy_status=$(cat audit-results/legacy_status.txt)
           pcs_status=$(cat audit-results/pcs_status.txt)
           sms001_status=$(cat audit-results/sms001_status.txt)
+          sub001_status=$(cat audit-results/sub001_status.txt)
           ce018_status=$(cat audit-results/ce018_status.txt)
           video_status=$(cat audit-results/video_status.txt)
           trainset_status=$(cat audit-results/trainset_status.txt)
@@ -177,8 +183,8 @@ jobs:
           version_boundary_status=$(cat audit-results/version_boundary_status.txt)
           handoff_status=$(cat audit-results/handoff_status.txt)
           sdk_profile_status=$(cat audit-results/sdk_profile_status.txt)
-          echo "root_status=$root_status legacy_status=$legacy_status pcs_status=$pcs_status sms001_status=$sms001_status ce018_status=$ce018_status video_status=$video_status trainset_status=$trainset_status analog_status=$analog_status common_v23_variant_status=$common_v23_variant_status dms_v22_status=$dms_v22_status dms_v24_status=$dms_v24_status trainset_v21_status=$trainset_v21_status http_status=$http_status discovery_status=$discovery_status time_status=$time_status video_runtime_status=$video_runtime_status sdk_manifest_status=$sdk_manifest_status source_locator_status=$source_locator_status version_boundary_status=$version_boundary_status handoff_status=$handoff_status sdk_profile_status=$sdk_profile_status"
-          if [ "$root_status" -ne 0 ] || [ "$legacy_status" -ne 0 ] || [ "$pcs_status" -ne 0 ] || [ "$sms001_status" -ne 0 ] || [ "$ce018_status" -ne 0 ] || [ "$video_status" -ne 0 ] || [ "$trainset_status" -ne 0 ] || [ "$analog_status" -ne 0 ] || [ "$common_v23_variant_status" -ne 0 ] || [ "$dms_v22_status" -ne 0 ] || [ "$dms_v24_status" -ne 0 ] || [ "$trainset_v21_status" -ne 0 ] || [ "$http_status" -ne 0 ] || [ "$discovery_status" -ne 0 ] || [ "$time_status" -ne 0 ] || [ "$video_runtime_status" -ne 0 ] || [ "$sdk_manifest_status" -ne 0 ] || [ "$source_locator_status" -ne 0 ] || [ "$version_boundary_status" -ne 0 ] || [ "$handoff_status" -ne 0 ] || [ "$sdk_profile_status" -ne 0 ]; then
+          echo "root_status=$root_status legacy_status=$legacy_status pcs_status=$pcs_status sms001_status=$sms001_status sub001_status=$sub001_status ce018_status=$ce018_status video_status=$video_status trainset_status=$trainset_status analog_status=$analog_status common_v23_variant_status=$common_v23_variant_status dms_v22_status=$dms_v22_status dms_v24_status=$dms_v24_status trainset_v21_status=$trainset_v21_status http_status=$http_status discovery_status=$discovery_status time_status=$time_status video_runtime_status=$video_runtime_status sdk_manifest_status=$sdk_manifest_status source_locator_status=$source_locator_status version_boundary_status=$version_boundary_status handoff_status=$handoff_status sdk_profile_status=$sdk_profile_status"
+          if [ "$root_status" -ne 0 ] || [ "$legacy_status" -ne 0 ] || [ "$pcs_status" -ne 0 ] || [ "$sms001_status" -ne 0 ] || [ "$sub001_status" -ne 0 ] || [ "$ce018_status" -ne 0 ] || [ "$video_status" -ne 0 ] || [ "$trainset_status" -ne 0 ] || [ "$analog_status" -ne 0 ] || [ "$common_v23_variant_status" -ne 0 ] || [ "$dms_v22_status" -ne 0 ] || [ "$dms_v24_status" -ne 0 ] || [ "$trainset_v21_status" -ne 0 ] || [ "$http_status" -ne 0 ] || [ "$discovery_status" -ne 0 ] || [ "$time_status" -ne 0 ] || [ "$video_runtime_status" -ne 0 ] || [ "$sdk_manifest_status" -ne 0 ] || [ "$source_locator_status" -ne 0 ] || [ "$version_boundary_status" -ne 0 ] || [ "$handoff_status" -ne 0 ] || [ "$sdk_profile_status" -ne 0 ]; then
             echo "Validation evidence contains failures; inspect uploaded logs."
             exit 1
           else

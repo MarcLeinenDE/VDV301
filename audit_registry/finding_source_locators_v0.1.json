@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "ac3ee836d61133cc30a1cc4482c93b3898b5a9a1",
+    "git_blob": "4f1aaa27b5964b94bcfb1f47ef1d370c82c530aa",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 144,
-    "coverage_complete_count": 144,
+    "locator_entry_count": 145,
+    "coverage_complete_count": 145,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 48
+    "remaining_finding_count": 47
   },
   "entries": [
     {
@@ -29669,6 +29669,739 @@
         "Official VDV catalog https://www.vdv.de/ip-kom-oev.aspx read 2026-11-28: historic Base Services V2.0/V2.1 listed as 301-2, SMS only standalone 301-2-18 V2.2, DMS V2.2/V2.4 later under 301-2-0. No earlier or corrected later standalone SMS publication established. A search for 302-2 did not yield an alternate IBIS-IP authority; this is not a universal nonexistence claim. Exact upstream VDVde/VDV301 tags VDV-301-2.2, VDV-301-2.3 and master trees matched local SMS d8d3011965fcf7c5c15ecd6f0d7e917a3f9e6d3c, Common 468fee6d177e7185dbcd5d3f90cfb114e29e01ae, Enum 2a23b512379b18e8f122ac1272cef8229fb86283; old SystemManagementService V1.0 blob 2d32630a0f1981e980e6a466e3f6a69136410f24 in 2.0/2.1 is distinct.",
         "SMS-004 confirmed_pdf_defect, contextual_only, identifier_typo, no_runtime_diagnostic, runtime_match not_applicable. Both language lines on printed p12 §3.1.1 cite 302-2; p13 References (3) identifies 301-2-0 Base Services V2.0 02/2018. Actual historic source prints 301-2 on cover and p3; use actual publication label when citing it and retain 301-2-0 as literal SMS bibliography label, not a separately established historical edition. The date, title, named service trio and actual §7.3 status duties establish identity; not a new normative route. Separate DRSMS22-003 spelling remains unchanged. Only standalone SMS V2.2 confirmed affected, both language lines; no additional scope or new ID. No new XML rule/test warranted; full existing gates required. Bilingual diagnostic precision and evidence updated only; all 77 runtime mapping entries and XSD bytes unchanged.",
         "Live PDF screenshots of target pp12/13 and historical cover cache-missed; exact pinned renders provide actual visual evidence. EV-156 artifact previously unavailable (404) per SMS-003; no new retrieval or visual claim about that historical artifact. No new SMS raw PDF retrieval; Base V2.0 official PDF fetched and pin verified in CI. No claim of independent authoring history or nonexistence of all other 302-2 publications."
+      ]
+    },
+    {
+      "finding_id": "SUB-001",
+      "service": "Generic Subscription Layer",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "VDV 301-2 V1.0 English original (01/2014)",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "p49/50 Table 5: Example of an operation notation in IBIS-IP; p52 Table 7: Operations of BeaconLocationService. Exact released Common type names are UnsubscribeRequestStructure / UnsubscribeResponseStructure; no TerminateSubscribe type aliases."
+        },
+        {
+          "version": "VDV 301-2 V1.0 German original (07/2016)",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V1.0.xsd + IBIS-IP_Enumerations_V1.0.xsd",
+          "note": "p50/51 Tabelle 4 Beispiel für Operationsnotation in IBIS-IP. Exact released Common type names are UnsubscribeRequestStructure / UnsubscribeResponseStructure; no TerminateSubscribe type aliases."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.0.xsd + IBIS-IP_Enumerations_V2.0.xsd",
+          "note": "p82 Tabelle 7 Beispiel für Operationsnotation in IBIS-IP; p83 Table 8: Example of an operation notation in IBIS-IP; p99 Table 28: Description of Operations at the SystemDocumentationService. Exact released Common type names are UnsubscribeRequestStructure / UnsubscribeResponseStructure; no TerminateSubscribe type aliases."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.1.xsd + IBIS-IP_Enumerations_V2.1.xsd",
+          "note": "p83 Tabelle 7 Beispiel für Operationsnotation in IBIS-IP; p84 Table 8: Example of an operation notation in IBIS-IP; p112 Table 53: Description of Operations at the SystemDocumentationService. Exact released Common type names are UnsubscribeRequestStructure / UnsubscribeResponseStructure; no TerminateSubscribe type aliases."
+        },
+        {
+          "version": "General Conventions V2.2",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.2.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "p63 Tabelle 4 Beispiel für Operationsnotation in IBIS-IP; p67 Table 4: Example of an operation notation in IBIS-IP. Exact released Common type names are UnsubscribeRequestStructure / UnsubscribeResponseStructure; no TerminateSubscribe type aliases."
+        },
+        {
+          "version": "General Conventions V2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_common_V2.3.xsd + IBIS-IP_Enumerations_V2.2.xsd",
+          "note": "p63 Tabelle 4 Beispiel für Operationsnotation in IBIS-IP; p67 Table 4: Example of an operation notation in IBIS-IP. Exact released Common type names are UnsubscribeRequestStructure / UnsubscribeResponseStructure; no TerminateSubscribe type aliases."
+        },
+        {
+          "version": "General Conventions V2.4 official PDF",
+          "authority": "documentation_only",
+          "xsd_profile": null,
+          "note": "p67 Tabelle 4 Beispiel für Operationsnotation in IBIS-IP; p71 Table 4: Example of an operation notation in IBIS-IP; p66 6 Strukturierung der Informationsinhalte; p70 6 Structuring of the information contents. Official PDF only; no official V2.4 Common XSD/tag established."
+        },
+        {
+          "version": "V2.4 candidate/integration schema context",
+          "authority": "candidate_integration",
+          "xsd_profile": "IBIS-IP_common_V2.4.xsd + IBIS-IP_Enumerations_V2.4.xsd",
+          "note": "Exact explicitly selected candidate from VDVde/VDV301#31 draft head f70bea978d3943862f3f51f9f9089d5196eeb2dc; same Unsubscribe type naming, no TerminateSubscribe aliases; not official V2.4 release."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "VDV 301-2 V1.0 English original (01/2014)",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "earliest_available_affected_independent_english",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 V1.0 English original (01/2014)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                49,
+                50
+              ],
+              "section": "8.1.2 Table Notations for Operations",
+              "table": "Table 5: Example of an operation notation in IBIS-IP",
+              "point_summary": "UnsubscribeData Req./Resp. prints TerminateSubscribeRequestStructure / TerminateSubscribeResponseStructure; SubscribeData remains correctly named. Actual operation-notation example, not XML root declaration. Request bottom p49; response and actual table caption top p50."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 V1.0 English original (01/2014)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                52
+              ],
+              "section": "9.1.1 Operations of BeaconLocationService",
+              "table": "Table 7: Operations of BeaconLocationService",
+              "point_summary": "Same operation UnsubscribeData uses correct UnsubscribeRequestStructure / UnsubscribeResponseStructure, disproving intentional alternate type."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-1.0 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "UnsubscribeRequestStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='UnsubscribeRequestStructure']",
+              "line_hint": "869–875",
+              "point_summary": "Exact named type exists; TerminateSubscribeRequestStructure is not a declared type or alias. Test-only schema harness checks type reference compilation; not a production XML root declaration."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-1.0 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "UnsubscribeResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='UnsubscribeResponseStructure']",
+              "line_hint": "876–881",
+              "point_summary": "Exact named type exists; TerminateSubscribeResponseStructure is not a declared type or alias. Test-only schema harness checks type reference compilation; not a production XML root declaration."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-1.0 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "IBIS-IP_Enumerations_V1.0.xsd",
+              "xpath_hint": "/xs:schema/xs:include",
+              "line_hint": "4",
+              "point_summary": "Exact dependency include, no invented version-matched enumerations."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-1.0 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact direct enumeration dependency byte identity; not an alternative Unsubscribe type."
+            }
+          ],
+          "coverage_note": "p49/50 Table 5: Example of an operation notation in IBIS-IP; p52 Table 7: Operations of BeaconLocationService. Exact released Common type names are UnsubscribeRequestStructure / UnsubscribeResponseStructure; no TerminateSubscribe type aliases."
+        },
+        {
+          "version": "VDV 301-2 V1.0 German original (07/2016)",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "persistent_independent_german",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_DE",
+              "document_title": "VDV 301-2 V1.0 German original (07/2016)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2sds-v1-0.pdfx",
+              "sha256": "2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75",
+              "printed_pages": [
+                50,
+                51
+              ],
+              "section": "6.1.2 Tabellennotation für Operationen",
+              "table": "Tabelle 4 Beispiel für Operationsnotation in IBIS-IP",
+              "point_summary": "UnsubscribeData Req./Resp. prints TerminateSubscribeRequestStructure / TerminateSubscribeResponseStructure; SubscribeData remains correctly named. Actual operation-notation example, not XML root declaration. Heading p50, actual table p51."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-1.0 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "UnsubscribeRequestStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='UnsubscribeRequestStructure']",
+              "line_hint": "869–875",
+              "point_summary": "Exact named type exists; TerminateSubscribeRequestStructure is not a declared type or alias. Test-only schema harness checks type reference compilation; not a production XML root declaration."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-1.0 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "UnsubscribeResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='UnsubscribeResponseStructure']",
+              "line_hint": "876–881",
+              "point_summary": "Exact named type exists; TerminateSubscribeResponseStructure is not a declared type or alias. Test-only schema harness checks type reference compilation; not a production XML root declaration."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-1.0 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "IBIS-IP_Enumerations_V1.0.xsd",
+              "xpath_hint": "/xs:schema/xs:include",
+              "line_hint": "4",
+              "point_summary": "Exact dependency include, no invented version-matched enumerations."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-1.0 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact direct enumeration dependency byte identity; not an alternative Unsubscribe type."
+            }
+          ],
+          "coverage_note": "p50/51 Tabelle 4 Beispiel für Operationsnotation in IBIS-IP. Exact released Common type names are UnsubscribeRequestStructure / UnsubscribeResponseStructure; no TerminateSubscribe type aliases."
+        },
+        {
+          "version": "VDV 301-2 Base V2.0",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "affected_persistent",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV 301-2 Base V2.0",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                82
+              ],
+              "section": "6.1.2 Tabellennotation für Operationen",
+              "table": "Tabelle 7 Beispiel für Operationsnotation in IBIS-IP",
+              "point_summary": "UnsubscribeData Req./Resp. prints TerminateSubscribeRequestStructure / TerminateSubscribeResponseStructure; SubscribeData remains correctly named. Actual operation-notation example, not XML root declaration."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV 301-2 Base V2.0",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                83
+              ],
+              "section": "Table Notations for Operations (English continuation of §6.1.2)",
+              "table": "Table 8: Example of an operation notation in IBIS-IP",
+              "point_summary": "UnsubscribeData Req./Resp. prints TerminateSubscribeRequestStructure / TerminateSubscribeResponseStructure; SubscribeData remains correctly named. Actual operation-notation example, not XML root declaration."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.0",
+              "document_title": "VDV 301-2 Base V2.0",
+              "document_version": "2.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v-2-0.pdfx",
+              "sha256": "fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37",
+              "printed_pages": [
+                99
+              ],
+              "section": "7.2.1 Operationen SystemDocumentationService",
+              "table": "Table 28: Description of Operations at the SystemDocumentationService",
+              "point_summary": "Positive control: UnsubscribeSystemConfiguration request/response use the exact UnsubscribeRequestStructure and UnsubscribeResponseStructure names."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.0.xsd",
+              "git_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-2.0 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "UnsubscribeRequestStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='UnsubscribeRequestStructure']",
+              "line_hint": "880–886",
+              "point_summary": "Exact named type exists; TerminateSubscribeRequestStructure is not a declared type or alias. Test-only schema harness checks type reference compilation; not a production XML root declaration."
+            },
+            {
+              "file": "IBIS-IP_common_V2.0.xsd",
+              "git_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-2.0 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "UnsubscribeResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='UnsubscribeResponseStructure']",
+              "line_hint": "887–892",
+              "point_summary": "Exact named type exists; TerminateSubscribeResponseStructure is not a declared type or alias. Test-only schema harness checks type reference compilation; not a production XML root declaration."
+            },
+            {
+              "file": "IBIS-IP_common_V2.0.xsd",
+              "git_blob": "8608e3dcd665c197c34da7f6ec6af5a3758da164",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-2.0 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "IBIS-IP_Enumerations_V2.0.xsd",
+              "xpath_hint": "/xs:schema/xs:include",
+              "line_hint": "4",
+              "point_summary": "Exact dependency include, no invented version-matched enumerations."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.0.xsd",
+              "git_blob": "27e3c183b00381d959622d13c10543123af8eef6",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-2.0 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact direct enumeration dependency byte identity; not an alternative Unsubscribe type."
+            }
+          ],
+          "coverage_note": "p82 Tabelle 7 Beispiel für Operationsnotation in IBIS-IP; p83 Table 8: Example of an operation notation in IBIS-IP; p99 Table 28: Description of Operations at the SystemDocumentationService. Exact released Common type names are UnsubscribeRequestStructure / UnsubscribeResponseStructure; no TerminateSubscribe type aliases."
+        },
+        {
+          "version": "VDV 301-2 Base V2.1",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "affected_persistent",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV 301-2 Base V2.1",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                83
+              ],
+              "section": "6.1.2 Tabellennotation für Operationen",
+              "table": "Tabelle 7 Beispiel für Operationsnotation in IBIS-IP",
+              "point_summary": "UnsubscribeData Req./Resp. prints TerminateSubscribeRequestStructure / TerminateSubscribeResponseStructure; SubscribeData remains correctly named. Actual operation-notation example, not XML root declaration."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV 301-2 Base V2.1",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                84
+              ],
+              "section": "Table Notations for Operations (English continuation of §6.1.2)",
+              "table": "Table 8: Example of an operation notation in IBIS-IP",
+              "point_summary": "UnsubscribeData Req./Resp. prints TerminateSubscribeRequestStructure / TerminateSubscribeResponseStructure; SubscribeData remains correctly named. Actual operation-notation example, not XML root declaration."
+            },
+            {
+              "source_id": "VDV301-2_BASE_V2.1",
+              "document_title": "VDV 301-2 Base V2.1",
+              "document_version": "2.1",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sds-v2-1-basicservices.pdfx",
+              "sha256": "685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a",
+              "printed_pages": [
+                112
+              ],
+              "section": "7.2.1 Operationen SystemDocumentationService",
+              "table": "Table 53: Description of Operations at the SystemDocumentationService",
+              "point_summary": "Positive control: UnsubscribeSystemConfiguration request/response use the exact UnsubscribeRequestStructure and UnsubscribeResponseStructure names."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.1.xsd",
+              "git_blob": "05977c9f86c7c9dd0b48f36a4a4e9be32e94659e",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-2.1 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "complexType",
+              "component": "UnsubscribeRequestStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='UnsubscribeRequestStructure']",
+              "line_hint": "882–888",
+              "point_summary": "Exact named type exists; TerminateSubscribeRequestStructure is not a declared type or alias. Test-only schema harness checks type reference compilation; not a production XML root declaration."
+            },
+            {
+              "file": "IBIS-IP_common_V2.1.xsd",
+              "git_blob": "05977c9f86c7c9dd0b48f36a4a4e9be32e94659e",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-2.1 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "complexType",
+              "component": "UnsubscribeResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='UnsubscribeResponseStructure']",
+              "line_hint": "890–895",
+              "point_summary": "Exact named type exists; TerminateSubscribeResponseStructure is not a declared type or alias. Test-only schema harness checks type reference compilation; not a production XML root declaration."
+            },
+            {
+              "file": "IBIS-IP_common_V2.1.xsd",
+              "git_blob": "05977c9f86c7c9dd0b48f36a4a4e9be32e94659e",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-2.1 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "IBIS-IP_Enumerations_V2.1.xsd",
+              "xpath_hint": "/xs:schema/xs:include",
+              "line_hint": "5",
+              "point_summary": "Exact dependency include, no invented version-matched enumerations."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.1.xsd",
+              "git_blob": "311464690ad60749ed8d326217787e4b8ed0b718",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-2.1 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact direct enumeration dependency byte identity; not an alternative Unsubscribe type."
+            }
+          ],
+          "coverage_note": "p83 Tabelle 7 Beispiel für Operationsnotation in IBIS-IP; p84 Table 8: Example of an operation notation in IBIS-IP; p112 Table 53: Description of Operations at the SystemDocumentationService. Exact released Common type names are UnsubscribeRequestStructure / UnsubscribeResponseStructure; no TerminateSubscribe type aliases."
+        },
+        {
+          "version": "General Conventions V2.2",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "affected_persistent",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "General Conventions V2.2",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                63
+              ],
+              "section": "6.1.2 Tabellennotation für Operationen",
+              "table": "Tabelle 4 Beispiel für Operationsnotation in IBIS-IP",
+              "point_summary": "UnsubscribeData Req./Resp. prints TerminateSubscribeRequestStructure / TerminateSubscribeResponseStructure; SubscribeData remains correctly named. Actual operation-notation example, not XML root declaration."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.2",
+              "document_title": "General Conventions V2.2",
+              "document_version": "2.2",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-2-common-conventions.pdfx",
+              "sha256": "96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051",
+              "printed_pages": [
+                67
+              ],
+              "section": "6.1.2 Table Notations for Operations",
+              "table": "Table 4: Example of an operation notation in IBIS-IP",
+              "point_summary": "UnsubscribeData Req./Resp. prints TerminateSubscribeRequestStructure / TerminateSubscribeResponseStructure; SubscribeData remains correctly named. Actual operation-notation example, not XML root declaration."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-2.2 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "complexType",
+              "component": "UnsubscribeRequestStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='UnsubscribeRequestStructure']",
+              "line_hint": "899–905",
+              "point_summary": "Exact named type exists; TerminateSubscribeRequestStructure is not a declared type or alias. Test-only schema harness checks type reference compilation; not a production XML root declaration."
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-2.2 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "complexType",
+              "component": "UnsubscribeResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='UnsubscribeResponseStructure']",
+              "line_hint": "907–912",
+              "point_summary": "Exact named type exists; TerminateSubscribeResponseStructure is not a declared type or alias. Test-only schema harness checks type reference compilation; not a production XML root declaration."
+            },
+            {
+              "file": "IBIS-IP_common_V2.2.xsd",
+              "git_blob": "468fee6d177e7185dbcd5d3f90cfb114e29e01ae",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-2.2 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "IBIS-IP_Enumerations_V2.2.xsd",
+              "xpath_hint": "/xs:schema/xs:include",
+              "line_hint": "5",
+              "point_summary": "Exact dependency include, no invented version-matched enumerations."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-2.2 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact direct enumeration dependency byte identity; not an alternative Unsubscribe type."
+            }
+          ],
+          "coverage_note": "p63 Tabelle 4 Beispiel für Operationsnotation in IBIS-IP; p67 Table 4: Example of an operation notation in IBIS-IP. Exact released Common type names are UnsubscribeRequestStructure / UnsubscribeResponseStructure; no TerminateSubscribe type aliases."
+        },
+        {
+          "version": "General Conventions V2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "affected_persistent",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "General Conventions V2.3",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                63
+              ],
+              "section": "6.1.2 Tabellennotation für Operationen",
+              "table": "Tabelle 4 Beispiel für Operationsnotation in IBIS-IP",
+              "point_summary": "UnsubscribeData Req./Resp. prints TerminateSubscribeRequestStructure / TerminateSubscribeResponseStructure; SubscribeData remains correctly named. Actual operation-notation example, not XML root declaration."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.3",
+              "document_title": "General Conventions V2.3",
+              "document_version": "2.3",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sdes-v2-3-common-conventions.pdfx",
+              "sha256": "4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603",
+              "printed_pages": [
+                67
+              ],
+              "section": "6.1.2 Table Notations for Operations",
+              "table": "Table 4: Example of an operation notation in IBIS-IP",
+              "point_summary": "UnsubscribeData Req./Resp. prints TerminateSubscribeRequestStructure / TerminateSubscribeResponseStructure; SubscribeData remains correctly named. Actual operation-notation example, not XML root declaration."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.3.xsd",
+              "git_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-2.3 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "complexType",
+              "component": "UnsubscribeRequestStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='UnsubscribeRequestStructure']",
+              "line_hint": "979–985",
+              "point_summary": "Exact named type exists; TerminateSubscribeRequestStructure is not a declared type or alias. Test-only schema harness checks type reference compilation; not a production XML root declaration."
+            },
+            {
+              "file": "IBIS-IP_common_V2.3.xsd",
+              "git_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-2.3 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "complexType",
+              "component": "UnsubscribeResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='UnsubscribeResponseStructure']",
+              "line_hint": "987–992",
+              "point_summary": "Exact named type exists; TerminateSubscribeResponseStructure is not a declared type or alias. Test-only schema harness checks type reference compilation; not a production XML root declaration."
+            },
+            {
+              "file": "IBIS-IP_common_V2.3.xsd",
+              "git_blob": "0d8926c4063c12de9a5e68b6f0addaab35a55dc1",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-2.3 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "IBIS-IP_Enumerations_V2.2.xsd",
+              "xpath_hint": "/xs:schema/xs:include",
+              "line_hint": "5",
+              "point_summary": "Exact dependency include, no invented version-matched enumerations."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.2.xsd",
+              "git_blob": "2a23b512379b18e8f122ac1272cef8229fb86283",
+              "authority_detail": "Exact upstream VDVde/VDV301@VDV-301-2.3 released blob checked identical to branch. No latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact direct enumeration dependency byte identity; not an alternative Unsubscribe type."
+            }
+          ],
+          "coverage_note": "p63 Tabelle 4 Beispiel für Operationsnotation in IBIS-IP; p67 Table 4: Example of an operation notation in IBIS-IP. Exact released Common type names are UnsubscribeRequestStructure / UnsubscribeResponseStructure; no TerminateSubscribe type aliases."
+        },
+        {
+          "version": "General Conventions V2.4 official PDF",
+          "authority": "documentation_only",
+          "coverage_status": "complete",
+          "scope_role": "last_checked_affected_no_corrected_successor",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "General Conventions V2.4 official PDF",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                67
+              ],
+              "section": "6.1.2 Tabellennotation für Operationen",
+              "table": "Tabelle 4 Beispiel für Operationsnotation in IBIS-IP",
+              "point_summary": "UnsubscribeData Req./Resp. prints TerminateSubscribeRequestStructure / TerminateSubscribeResponseStructure; SubscribeData remains correctly named. Actual operation-notation example, not XML root declaration."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "General Conventions V2.4 official PDF",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                71
+              ],
+              "section": "6.1.2 Table Notations for Operations",
+              "table": "Table 4: Example of an operation notation in IBIS-IP",
+              "point_summary": "UnsubscribeData Req./Resp. prints TerminateSubscribeRequestStructure / TerminateSubscribeResponseStructure; SubscribeData remains correctly named. Actual operation-notation example, not XML root declaration."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "General Conventions V2.4 official PDF",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                66
+              ],
+              "section": "6 Strukturierung der Informationsinhalte",
+              "table": null,
+              "point_summary": "Explicit XSD precedence in case of inconsistency; immediately following example remains wrong."
+            },
+            {
+              "source_id": "VDV301-2_GC_V2.4",
+              "document_title": "General Conventions V2.4 official PDF",
+              "document_version": "2.4",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-sde-v2.4-common-conventions.pdfx",
+              "sha256": "048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d",
+              "printed_pages": [
+                70
+              ],
+              "section": "6 Structuring of the information contents",
+              "table": null,
+              "point_summary": "English explicitly states XSD definitions take precedence in case of inconsistency; not a new official XSD release."
+            }
+          ],
+          "xsd_locators": [],
+          "coverage_note": "p67 Tabelle 4 Beispiel für Operationsnotation in IBIS-IP; p71 Table 4: Example of an operation notation in IBIS-IP; p66 6 Strukturierung der Informationsinhalte; p70 6 Structuring of the information contents. Official PDF only; no official V2.4 Common XSD/tag established."
+        },
+        {
+          "version": "V2.4 candidate/integration schema context",
+          "authority": "candidate_integration",
+          "coverage_status": "complete",
+          "scope_role": "candidate_executable_control_not_official",
+          "pdf_locators": [],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_common_V2.4.xsd",
+              "git_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+              "authority_detail": "Exact local candidate/integration from open unmerged draft VDVde/VDV301#31, head f70bea978d3943862f3f51f9f9089d5196eeb2dc; explicitly selected only; not official V2.4.",
+              "component_kind": "complexType",
+              "component": "UnsubscribeRequestStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='UnsubscribeRequestStructure']",
+              "line_hint": "1031–1037",
+              "point_summary": "Exact named type exists; TerminateSubscribeRequestStructure is not a declared type or alias. Test-only schema harness checks type reference compilation; not a production XML root declaration."
+            },
+            {
+              "file": "IBIS-IP_common_V2.4.xsd",
+              "git_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+              "authority_detail": "Exact local candidate/integration from open unmerged draft VDVde/VDV301#31, head f70bea978d3943862f3f51f9f9089d5196eeb2dc; explicitly selected only; not official V2.4.",
+              "component_kind": "complexType",
+              "component": "UnsubscribeResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='UnsubscribeResponseStructure']",
+              "line_hint": "1039–1044",
+              "point_summary": "Exact named type exists; TerminateSubscribeResponseStructure is not a declared type or alias. Test-only schema harness checks type reference compilation; not a production XML root declaration."
+            },
+            {
+              "file": "IBIS-IP_common_V2.4.xsd",
+              "git_blob": "1946fd37e29ced605654f49ea3d98cd2fbbdc8e4",
+              "authority_detail": "Exact local candidate/integration from open unmerged draft VDVde/VDV301#31, head f70bea978d3943862f3f51f9f9089d5196eeb2dc; explicitly selected only; not official V2.4.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "member": "IBIS-IP_Enumerations_V2.4.xsd",
+              "xpath_hint": "/xs:schema/xs:include",
+              "line_hint": "5",
+              "point_summary": "Exact dependency include, no invented version-matched enumerations."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V2.4.xsd",
+              "git_blob": "2afed8cf23afa91db92b0f043cc5b4ad428b0f25",
+              "authority_detail": "Exact local candidate/integration from open unmerged draft VDVde/VDV301#31, head f70bea978d3943862f3f51f9f9089d5196eeb2dc; explicitly selected only; not official V2.4.",
+              "component_kind": "schema",
+              "component": "xs:schema",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact direct enumeration dependency byte identity; not an alternative Unsubscribe type."
+            }
+          ],
+          "coverage_note": "Exact explicitly selected candidate from VDVde/VDV301#31 draft head f70bea978d3943862f3f51f9f9089d5196eeb2dc; same Unsubscribe type naming, no TerminateSubscribe aliases; not official V2.4 release."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_SUB_001_2026-11-28.md",
+        "VDV301-2_V1.0_EN: run 46088125318 SUCCESS, artifact 15240276456, ZIP SHA256 94f68ddd88049759a59d88795e1f9c74d5fe63abf18f11398faff45af932e7b3 (719078 bytes), original pin e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 (2403598 bytes). ZIP integrity and every page PNG SHA256/size checked locally; visibly inspected p49 bb3a4949453f054b6379957e2a10cf01fe477309a298f95103082c0df725d46b (271642); p50 8e99db642e2c479633a5142a6fdf6cfa5ebadf05a8b6b2a9cf7fc792898d3d3e (273693); p52 a97fb7fb5adf570420a714452d0604c563b1aef8a02ad07e85c417b99430c667 (237441).",
+        "VDV301-2_V1.0_DE: run 46088134059 SUCCESS, artifact 15239717475, ZIP SHA256 e5dfc0c54dc8a5788c41f0d25ac3e957d7ee3566d23e676e16a439faa9e732e7 (413581 bytes), original pin 2214b36f83cfcac7fade934fa8b2bfc866a84be85f2f8b615957972238f2ed75 (1790447 bytes). ZIP integrity and every page PNG SHA256/size checked locally; visibly inspected p50 ef2f335d4a78625023e2eeb9c63f77cb9f6f41675563ddef5b51ae5f6f1d9cee (236037); p51 0cd4d816bf1fb2a93f18c9f73bd855bc855fa883db0cf3cd069724c4e061fbef (218522).",
+        "VDV301-2_BASE_V2.0: run 46088141460 SUCCESS, artifact 15239797181, ZIP SHA256 53f5ef11b1b5e60a08d568d3764f8b934aac2ea20cb9f0198e3568016f5e130e (425301 bytes), original pin fc67ed1c028cfc3815fbd03dd10e7027f0babbc21145da930289b93527e77f37 (2374295 bytes). ZIP integrity and every page PNG SHA256/size checked locally; visibly inspected p82 5302382fb15c9f26f16960262ea84ddb875aa468bb5a6b7978874f51726fec36 (218379); p83 1e03a8b51bf053a2dd79a314587c4b345630ae487258a95e9d9fed7595cd019e (73958); p99 c10cadb37413df912f7e73b5d24af62838e6f310d4627950b4583309b21facf0 (188959).",
+        "VDV301-2_BASE_V2.1: run 46088148878 SUCCESS, artifact 15239259853, ZIP SHA256 bf4f18dad27cbc74ea5efa417d74330a2f14acb973856759b28d59e7cf69bac1 (460614 bytes), original pin 685fdca55dbb4f525390bad6bdbb00700be78a408dc4c2fa770b094edf4afe0a (2671005 bytes). ZIP integrity and every page PNG SHA256/size checked locally; visibly inspected p83 b805564c829d07c8172f27a425fe0360f01a4a6371f1f71566531aa38c5dd7ca (216979); p84 4a9a0426f2c27ea55857d7389dcb95839981ccf4bd9796bee72bc3dd4b416957 (74294); p112 81aafe63728781c934231f4f6d30dccfac2336ec38f9e508079b09bb443c5fc2 (224910).",
+        "VDV301-2_GC_V2.2: run 46088155493 SUCCESS, artifact 15240395497, ZIP SHA256 f7135c5980a285d5adb5b810677b317f506dfe2508cfb828e79ac3df833c2cda (790614 bytes), original pin 96cf4a146e0c7bfc12eb21a5701d73ed3c570d7689c9f738450cc783206af051 (1562305 bytes). ZIP integrity and every page PNG SHA256/size checked locally; visibly inspected p62 a3c40dba4ad6868c83a143ac45a956d568b411fdcc4f7d9d370980cf6128b9f0 (226283); p63 2f76c87cdb77aaa42ee609afbc716cd9f216ba2702acf189b1ae8a27290f7768 (214685); p66 577f6aee79e74f1a16c09097bff30b6d60973a5efa53b7735121f29d9c9c5286 (202075); p67 8efe7303448e064c4793d15c53e5c925c519f254f5ad339c5acaa891b739f2fb (227033).",
+        "VDV301-2_GC_V2.3: run 46088178095 SUCCESS, artifact 15240061513, ZIP SHA256 d01486b2640e10d5c8da72241d0569365b380f56e79c5290a804a510a7a1b215 (788637 bytes), original pin 4a59cb71d9559b9c197f39eccf17f38bd2dd315246f5020be3c8d0f45b639603 (1057483 bytes). ZIP integrity and every page PNG SHA256/size checked locally; visibly inspected p62 76d867919aae03026ff317d3b9054b07e20683dc06bfcc260c110361bc324bed (222885); p63 cc0a4e5558e75370454ec3c6393cd807d1b02e02e23c6fdd91ba397ae37fe744 (218448); p66 a6e91f57a7968487f59bc0c6ee917050a831b4c29a46bc78d5b19e20875c2f84 (198246); p67 de0bad5e9a2d1ec9b2a0b468d550b0ae3efc5fd907c21f2837ce5c6b7af36991 (230122).",
+        "VDV301-2_GC_V2.4: run 46088186247 SUCCESS, artifact 15239509154, ZIP SHA256 731f6384d28da02265efb47d6d85b866069fa95c47b09ac4048a2db33e18a902 (815935 bytes), original pin 048f805fe3ddc894556899a94e36ec1b5d93eea31b8cdc5a88fac5ad87235e4d (1767094 bytes). ZIP integrity and every page PNG SHA256/size checked locally; visibly inspected p66 7dbd460c9a092e9c6b26fba695445311995f64668cae61baa8d13bebb0542492 (238221); p67 3c79ad256f1080b6dee452605a564cc601db008ae9e87148a822211ba1630b29 (215210); p70 637c8da3845209bb30099f204169cbb61aac72faf467a4a6c41ed1f0301e4e1c (214338); p71 db13ad9bb89e11662a081889b1b2b8c3e1230622bbe1addd30332b591ab1e0a3 (227605).",
+        "Exact upstream VDVde/VDV301 release trees VDV-301-1.0 through VDV-301-2.3 and master rechecked. Official Common1.0–2.3 and declared Enum dependencies identical to branch. Official Common2.3 uses Enum2.2; no V2.3-named enum. VDV-301-2.4 tree 404; master lacks Common/Enum2.4. Draft PR31 open unmerged, head f70bea978d3943862f3f51f9f9089d5196eeb2dc; exact candidate Common2.4 and Enum2.4 blobs match head. V2.4 official PDF separate documentation-only lane. Catalog https://www.vdv.de/ip-kom-oev.aspx lists V1.0 EN/DE, Base2.0/2.1 and GC2.2/2.3/2.4; no earlier publication or corrected later version established.",
+        "Falsification: EN V1.0 p52 §9.1.1 Table7 names actual UnsubscribeData types correctly; Base V2.0 p99 §7.2.1 Table28 and Base V2.1 p112 §7.2.1 Table53 use correct generic types; GC2.4 pp66/70 chapter6 explicitly prioritizes XSD over documentation. No alias justified. No HTTP endpoint or production-root acceptance claim. Common1.0/2.0 type declarations do not establish global roots; Common2.1+ globals separate from type test. SUB-002 remains separate.",
+        "Live screenshot cache miss except DE p51; seven newly requested pinned original downloads and renders in CI, local ZIP/PNG hashes verified, all 23 pages actually inspected. Old EV-157 archive 10156457016 and acquisition 10155848626 unavailable 404; historical EV-157 job 102906852658 logs re-read and PASS confirmed for V1.0/2.0/2.1 inventory. Historical checker pins old prestate, not rerun or altered. Six intermediate handoff checks failed because render-only commits lacked same-commit CURRENT_STATE updates (46088134061,46088141395,46088148911,46088155476,46088178098,46088186289); confirmed error job 140802462244. Repair b8befa365bfa4191f43b1a856b56deb66ec698c9 handoff 46088261838 SUCCESS; no history rewrite or locator progress credited during repair.",
+        "tools/validate_sub_001_unsubscribe_type_names.py",
+        "SUB-001 confirmed_pdf_defect, selected_xsd, wrong_structure_reference, no_runtime_diagnostic, runtime_match not_applicable. Earliest independently verified EN V1.0 January 2014, later DE V1.0 July 2016, Base V2.0/V2.1 and GC V2.2/V2.3/V2.4 all affected. No earlier nonaffected or corrected later publication established. Scope refined by independent language and authority lanes; V2.4 official PDF is documentation_only and explicit candidate is candidate_integration. No new ID, no runtime mapping, no XSD/Resolver changes. Permanent type resolution regression required in full gate."
       ]
     }
   ]
