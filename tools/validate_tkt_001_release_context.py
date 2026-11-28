@@ -121,6 +121,73 @@ def validate_tkt_002_identity(folder, later, aggregate_schema, later_schema):
     print("PASSED TKT-002: 14 canonical roots + 14 exact xsi:type positives; 14 missing-root + 14 unresolved-type alias negatives")
 
 
+
+def validate_tkt_003_response_types(folder, later, aggregate_schema, later_schema):
+    """Same content model, distinct named types; no synthetic production roots."""
+    names = ("SubscribeResponse", "UnsubscribeResponse")
+    for common in (folder / "IBIS-IP_common_V1.0.xsd",
+                   ROOT / "IBIS-IP_common_V1.0.xsd"):
+        doc = parse(common)
+        for root in names:
+            typ = doc.xpath("/xs:schema/xs:complexType[@name=$name]",
+                            namespaces=NS, name=root + "Structure")
+            require(len(typ) == 1, "TKT-003 exact type declaration")
+            require(len(typ[0]) == 1 and typ[0][0].tag == "{http://www.w3.org/2001/XMLSchema}choice"
+                    and not typ[0][0].attrib, "TKT-003 one required choice")
+            require([dict(e.attrib) for e in typ[0][0]] == [
+                {"name": "Active", "type": "IBIS-IP.boolean"},
+                {"name": "OperationErrorMessage", "type": "IBIS-IP.string"}],
+                "TKT-003 identical choice branches and cardinalities")
+    agg = parse(folder / AGG)
+    for root in names:
+        require(agg.xpath("/xs:schema/xs:element[@name=$name]/@type",
+                          namespaces=NS, name=root) == [root + "Structure"],
+                "TKT-003 original aggregate exact generic root mapping")
+    # Later isolated Ticketing profile has no generic global response roots.
+    # A test-only wrapper exposes its existing types without inventing production declarations.
+    probe = ('<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">'
+             f'<xs:include schemaLocation="{later.name}"/>'
+             + "".join(f'<xs:element name="{root}" type="{root}Structure"/>' for root in names)
+             + '</xs:schema>')
+    test_schema = etree.XMLSchema(etree.fromstring(
+        probe.encode(), base_url=(later.parent / "_tkt003_probe.xsd").as_uri()))
+    active = "<Active><Value>true</Value></Active>"
+    error = "<OperationErrorMessage><Value>test</Value></OperationErrorMessage>"
+    xsi = "{http://www.w3.org/2001/XMLSchema-instance}type"
+    positive = wrong_type = wrong_choice = missing_root = 0
+    for root in names:
+        node = etree.fromstring(f"<{root}>{active}</{root}>".encode())
+        require(not later_schema.validate(node) and bool(later_schema.error_log)
+                and all(e.type_name == "SCHEMAV_CVC_ELT_1" for e in later_schema.error_log),
+                "TKT-003 isolated later service has no generic global root " + root)
+        missing_root += 1
+    for profile, schema in (("original aggregate", aggregate_schema),
+                            ("later type probe only", test_schema)):
+        for root in names:
+            other = next(n for n in names if n != root)
+            for payload in (active, error):
+                node = etree.fromstring(f"<{root}>{payload}</{root}>".encode())
+                require(schema.validate(node), f"TKT-003 {profile} {root} implicit type PASS")
+                positive += 1
+                node.set(xsi, root + "Structure")
+                require(schema.validate(node), f"TKT-003 {profile} {root} exact explicit type PASS")
+                positive += 1
+                node.set(xsi, other + "Structure")
+                require(not schema.validate(node) and bool(schema.error_log)
+                        and all(e.type_name == "SCHEMAV_CVC_ELT_4_3" for e in schema.error_log),
+                        f"TKT-003 {profile} {root} sibling type is not validly derived")
+                wrong_type += 1
+            for payload in ("", active + error):
+                node = etree.fromstring(f"<{root}>{payload}</{root}>".encode())
+                require(not schema.validate(node) and bool(schema.error_log)
+                        and all(e.type_name == "SCHEMAV_ELEMENT_CONTENT" for e in schema.error_log),
+                        f"TKT-003 {profile} {root} required exclusive choice")
+                wrong_choice += 1
+    require((positive, wrong_type, wrong_choice, missing_root) == (16, 8, 8, 2),
+            "TKT-003 expected regression counts")
+    print("PASSED TKT-003: 16 positives, 8 sibling xsi:type negatives, 8 exclusive choice negatives, 2 isolated later missing-root negatives")
+
+
 def main():
     later = ROOT / FILE
     require(blob(later) == LATER, "selected later service blob")
@@ -166,6 +233,7 @@ def main():
             require(bool(errors) and all(e.type_name == "SCHEMAV_CVC_ELT_1" for e in errors), f"isolated service rejection is missing global declaration, not payload shape: {errors}")
         print("PASSED TKT-001: 3 exact schema compilations, 4 positive / 2 missing-root negative instances; full historical aggregate")
         validate_tkt_002_identity(folder, later, aggregate_schema, later_schema)
+        validate_tkt_003_response_types(folder, later, aggregate_schema, later_schema)
     return 0
 
 
