@@ -14912,10 +14912,16 @@
       "service": "TicketingService",
       "version_scope": [
         {
-          "version": "V1.0 later official self-contained revision",
+          "version": "TicketingService V1.0 in complete VDV-301-1.0 original aggregate",
           "authority": "official_release",
-          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7",
-          "note": "Executable GetValidationResult root maps to TicketingService.GetValidationResultResponseStructure; TicketingService.ValidationResultStructure does not exist."
+          "xsd_profile": "IBIS_IP_V1.0.xsd @ 41289eaed2674a169fdf77a10a2eff293c76d5c4 + IBIS-IP_TicketInformationService_V1.0.xsd @ 017ca64666e25d757fc0cde1f1be817f06a743fc + exact complete historical 12-file family @ f5b53785f703e898632603eec3bfa3555a79fdba",
+          "note": "EN V1.0 01/2014 pp91–92 §9.11.1 Table 115, erroneous response type TicketingService.ValidationResultStructure on p92; p95 §9.11.8.2 Table 123 distinguishes outer response and inner data type. Complete original official aggregate declares TicketingService.GetValidationResult with TicketingService.GetValidationResultResponseStructure; original service defines both actual named types but lacks the global root in isolation. Exact absent PDF type fails explicit xsi:type; isolated original root rejection is a distinct packaging issue."
+        },
+        {
+          "version": "TicketingService V1.0 later official self-contained revision in VDV-301-2.0 through VDV-301-2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7 + Common/Enumerations V1.0 @ 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c/a9bea5bc73003ed91ded8519db06c32c4067831d",
+          "note": "DE standalone V1.0 07/2016 pp7–8 §1.2 Tabelle 1 repeats the wrong type on p7; pp11–12 §1.9.2 Tabelle 9 describes the real outer choice and names the inner type. Later identical official service and Common/Enums V1.0 at tags 2.0–2.3 preserve the exact root/type mapping. Master comparison only, not a release; no earlier publication or corrected later service edition established per TKT-001 catalog review. Publication dates are not inferred release-tag dates."
         }
       ],
       "review_state": "manually_reviewed",
@@ -14926,46 +14932,57 @@
         "GetValidationResult_overview",
         "ValidationResultStructure_absent",
         "GetValidationResultResponseStructure",
-        "documentation_type_name_error"
+        "documentation_type_name_error",
+        "historical_aggregate_vs_isolated_service",
+        "explicit_xsi_type_unresolved",
+        "outer_vs_inner_type_identity"
       ],
       "defect_assessment": "confirmed_pdf_defect",
       "confidence": "confirmed",
       "validation_effect": [
         "pdf_can_mislead_implementation",
         "code_generation_or_discovery_affected",
-        "no_runtime_effect"
+        "other"
       ],
       "sdk_behavior": "no_runtime_diagnostic",
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "The official operation overview names TicketingService.ValidationResultStructure as the GetValidationResult response type."
+          "note": "Original EN pp91–92 §9.11.1 Table115 and standalone DE pp7–8 §1.2 Tabelle1 name TicketingService.ValidationResultStructure for GetValidationResult; actual row EN p92, DE p7."
+        },
+        {
+          "type": "official_pdf_explicit",
+          "note": "EN p95 §9.11.8.2 Table123 and DE pp11–12 §1.9.2 Tabelle9 describe the outer response choice and identify inner ValidationResultDataStructure. Mislabelled inner field tables EN124/DE10 remain TKT-007."
         },
         {
           "type": "official_xsd_explicit",
-          "note": "The exact XSD contains no TicketingService.ValidationResultStructure type; the GetValidationResult root maps to TicketingService.GetValidationResultResponseStructure."
+          "note": "Exact original aggregate and later self-contained official service both globally declare TicketingService.GetValidationResult with TicketingService.GetValidationResultResponseStructure; the absent overview type is not declared. Original isolated service defines types, not this root."
+        },
+        {
+          "type": "xsd_internal_consistency",
+          "note": "Outer required choice ValidationResultData or OperationErrorMessage; inner required sequence TimeStamp and ValidationResult. Distinct named types and root roles; no abbreviation creates a type alias."
         },
         {
           "type": "executable_validation",
-          "note": "EV-158 inventories the exact type/root mapping and confirms the PDF overview type is absent."
+          "note": "EV-158 originally established static type/root inventory. New exact full original aggregate and later service regression 46141191648 proves 8 positive and 12 negative controls, including absent explicit xsi:type SCHEMAV_CVC_ELT_4_2, inner substitute SCHEMAV_CVC_ELT_4_3 and isolated historical missing root."
         },
         {
           "type": "technical_inference",
-          "note": "The discrepancy is a documentation type-name defect and is not itself a serialized XML token suitable for stable runtime matching."
+          "note": "The overview does not mandate explicit xsi:type; ordinary correct instances do not serialize the absent type. Keep normal selected-XSD errors without a dedicated advisory, code generation must follow actual declaration."
         }
       ],
       "diagnostic": {
         "de": {
           "title": "GetValidationResult: PDF nennt einen nicht vorhandenen Response-Typ",
           "short": "Die Übersicht nennt TicketingService.ValidationResultStructure; die XSD verwendet TicketingService.GetValidationResultResponseStructure.",
-          "long": "TKT-005 ist ein bestätigter Typnamenfehler der Dokumentation. In der Operationsübersicht der offiziellen TicketingService-V1.0-PDF wird der Response von GetValidationResult als TicketingService.ValidationResultStructure bezeichnet. Dieser Typ existiert in der exakten XSD nicht. Der ausführbare GetValidationResult-Root ist stattdessen TicketingService.GetValidationResult und wird auf TicketingService.GetValidationResultResponseStructure abgebildet.",
-          "recommendation": "Bei Schemaauflösung und Codegenerierung TicketingService.GetValidationResultResponseStructure verwenden. Den PDF-Typ TicketingService.ValidationResultStructure nicht als Alias erzeugen; keine Runtime-Diagnostik aus dem reinen Typnamenfehler ableiten."
+          "long": "TKT-005 ist ein bestätigter Typnamenfehler der englischen Originalausgabe und deutschen TicketingService-V1.0-Einzelausgabe. Die Operationsübersicht nennt für GetValidationResult den nicht existierenden Typ TicketingService.ValidationResultStructure. Im vollständigen originalen V1.0-Aggregat und der späteren eigenständigen V1.0-Service-XSD ist TicketingService.GetValidationResult der globale Root mit TicketingService.GetValidationResultResponseStructure. Die innere TicketingService.ValidationResultDataStructure ist ein anderer Typ. Normale korrekt aufgebaute Instanzen validieren; eine explizite Angabe des nicht existierenden PDF-Typs als xsi:type wird verworfen. Die isolierte ursprüngliche Service-Datei besitzt keine globale Root-Deklaration.",
+          "recommendation": "Für Schemaauflösung und Codegenerierung den tatsächlich deklarierten äußeren Typ und dessen innere Datenstruktur verwenden. Keinen Typ oder Root aus dem PDF-Namen synthetisieren und kein Alias erzeugen. Bei falschem explizitem xsi:type den normalen XSD-Fehler beibehalten; keine eigene Runtime-Diagnostik allein aus diesem Dokumentationsfehler ableiten. TKT-007 betrifft separat die Bezeichnung der inneren Feldtabelle."
         },
         "en": {
           "title": "GetValidationResult: PDF names a response type that does not exist",
           "short": "The overview names TicketingService.ValidationResultStructure; the XSD uses TicketingService.GetValidationResultResponseStructure.",
-          "long": "TKT-005 is a confirmed documentation type-name defect. In the operation overview of the official TicketingService V1.0 PDF, the GetValidationResult response is labelled TicketingService.ValidationResultStructure. That type does not exist in the exact XSD. The executable GetValidationResult root is instead TicketingService.GetValidationResult and maps to TicketingService.GetValidationResultResponseStructure.",
-          "recommendation": "Use TicketingService.GetValidationResultResponseStructure for schema resolution and code generation. Do not create TicketingService.ValidationResultStructure as an alias, and do not derive a runtime diagnostic from the type-name error alone."
+          "long": "TKT-005 is a confirmed type-name defect in the original English and standalone German TicketingService V1.0 documentation. The operation overview names the nonexistent TicketingService.ValidationResultStructure for GetValidationResult. The complete original V1.0 aggregate and later self-contained V1.0 service schema declare TicketingService.GetValidationResult as the global root with TicketingService.GetValidationResultResponseStructure. The inner TicketingService.ValidationResultDataStructure is a different type. Ordinary correct instances validate; an explicit xsi:type using the nonexistent PDF type is rejected. The isolated original service file has no corresponding global root declaration.",
+          "recommendation": "For schema resolution and code generation use the actual declared outer and inner types. Do not synthesize a root or type from the PDF name or create an alias. Preserve ordinary XSD errors for invalid explicit xsi:type; do not infer a dedicated runtime advisory from this documentation defect alone. TKT-007 separately concerns the inner field table label."
         }
       },
       "runtime_match": {
@@ -14992,9 +15009,29 @@
           "kind": "xsd",
           "reference": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7",
           "note": "Maps GetValidationResult to TicketingService.GetValidationResultResponseStructure and contains no ValidationResultStructure type."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-2_V1.0_EN / sha256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 / printed p92 Table115 and p95 Table123",
+          "note": "Original EN erroneous type and outer/inner distinction."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS_IP_V1.0.xsd @ 41289eaed2674a169fdf77a10a2eff293c76d5c4 / VDV-301-1.0",
+          "note": "Exact original aggregate supplies canonical global root and type."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_TKT_005_2026-11-28.md",
+          "note": "Independent visible original sources, exact scope and new explicit type regression."
+        },
+        {
+          "kind": "evidence",
+          "reference": "schema-audit-validation run 46141191648 / artifact 15261837352",
+          "note": "20 targeted tests PASS; historical static EV-158 preserved."
         }
       ],
-      "notes": "Confirmed documentation type-reference defect with no direct runtime token."
+      "notes": "Confirmed PDF type-reference defect. Earlier no_runtime_effect is narrowed: correct payload instances unaffected, but explicit nonexistent xsi:type fails. Keep no_runtime_diagnostic/not_applicable because the overview does not prescribe xsi:type and ordinary XSD rejection suffices. Separate original aggregate/isolated packaging, TKT-007 inner table label and TKT-009 spelling. No aliases, resolver, XSD or mapping entries changed."
     },
     {
       "finding_id": "TKT-006",
