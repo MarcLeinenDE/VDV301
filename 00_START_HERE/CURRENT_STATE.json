@@ -2127,7 +2127,7 @@
     "version_scope_boundary_latest_gate_run_id": 46041038845
   },
   "next_actions": [
-    "SMS-002 terminal closure: p5 contents, p9 Table1, p10 §§2.5/2.5.1/2.5.2 Table4 and p11 Table5, §§2.6–2.7 confirm three SystemStatus heading errors. Correct subscription names from Table1, not §2.6/2.7 prose; DE/EN diagnostic and semantic evidence precision updated, no classification/scope change. Historical DR3012-005 distinct. Exact official SMS V2.2 + Common/Enums V2.2; EV-116 existing permanent gate accepts GetServiceStatusResponse error branch and GetDeviceStatusResponse control, rejects invented GetSystemStatusResponse for absent global declaration. Existing runtime mapping reviewed_not_implemented, xsd_invalid_advisory unchanged except provenance blob pin. Initial gates #46040857601/#46040857766 failed on stale semantic-registry pins; both references repaired in 5cfcd5f5536b06e77c040c55b019280b14cae57c, XML regressions passed. Substantive schema and handoff gates SUCCESS #46041038845/#46041038827 on repaired HEAD. EV-146 renders rehashed and visibly checked, EV-156 historical log read; unavailable EV-156 artifact not rehashed. 142/192 locators/body/boundary entries complete, 50 missing. No XSD, resolver or runtime implementation changes. Verify final HEAD gates and reviewed memory PR. NEXT SMS-003 NOT STARTED."
+    "SMS-003 started: live SMS p4 visibly confirms English-only HDS paragraph; HDS V2.2 p4 text matches, live screenshot cache miss. SMS p7/p8 screenshot cache miss. EV-146 ZIP rehashed but contains no p4; EV-156 and full pinned-read artifacts return 404. Local official PDF download failed DNS. Request exact byte-pinned SMS V2.2 pages 4,7,8,12,13 via existing fallback; no progress credit yet. Inspect fallback run for this commit and download ZIP; check SHA256/size/source pin and PNG hashes, visually inspect pages. Obtain HDS V2.2 p4 byte-pinned comparison via fallback or verified existing render; check historical boundary and exact XSD profile. Then write SMS-003 evidence and registries, run full gate, finalize terminal_clean and verify final gates, then reviewed memory PR."
   ],
   "source_locator_progress": {
     "locator_entry_count": 142,
@@ -2205,12 +2205,25 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": 46041038845,
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": 46041038827,
-    "resume_instruction": "SMS-002 terminal closure: p5 contents, p9 Table1, p10 §§2.5/2.5.1/2.5.2 Table4 and p11 Table5, §§2.6–2.7 confirm three SystemStatus heading errors. Correct subscription names from Table1, not §2.6/2.7 prose; DE/EN diagnostic and semantic evidence precision updated, no classification/scope change. Historical DR3012-005 distinct. Exact official SMS V2.2 + Common/Enums V2.2; EV-116 existing permanent gate accepts GetServiceStatusResponse error branch and GetDeviceStatusResponse control, rejects invented GetSystemStatusResponse for absent global declaration. Existing runtime mapping reviewed_not_implemented, xsd_invalid_advisory unchanged except provenance blob pin. Initial gates #46040857601/#46040857766 failed on stale semantic-registry pins; both references repaired in 5cfcd5f5536b06e77c040c55b019280b14cae57c, XML regressions passed. Substantive schema and handoff gates SUCCESS #46041038845/#46041038827 on repaired HEAD. EV-146 renders rehashed and visibly checked, EV-156 historical log read; unavailable EV-156 artifact not rehashed. 142/192 locators/body/boundary entries complete, 50 missing. No XSD, resolver or runtime implementation changes. Verify final HEAD gates and reviewed memory PR. NEXT SMS-003 NOT STARTED."
+    "resume_instruction": "SMS-003 started: live SMS p4 visibly confirms English-only HDS paragraph; HDS V2.2 p4 text matches, live screenshot cache miss. SMS p7/p8 screenshot cache miss. EV-146 ZIP rehashed but contains no p4; EV-156 and full pinned-read artifacts return 404. Local official PDF download failed DNS. Request exact byte-pinned SMS V2.2 pages 4,7,8,12,13 via existing fallback; no progress credit yet. Inspect fallback run for this commit and download ZIP; check SHA256/size/source pin and PNG hashes, visually inspect pages. Obtain HDS V2.2 p4 byte-pinned comparison via fallback or verified existing render; check historical boundary and exact XSD profile. Then write SMS-003 evidence and registries, run full gate, finalize terminal_clean and verify final gates, then reviewed memory PR.",
+    "pending_block": "SMS-003 source locator and boundary verification",
+    "active_finding": "SMS-003",
+    "active_step": "SMS-003 started: live SMS p4 visibly confirms English-only HDS paragraph; HDS V2.2 p4 text matches, live screenshot cache miss. SMS p7/p8 screenshot cache miss. EV-146 ZIP rehashed but contains no p4; EV-156 and full pinned-read artifacts return 404. Local official PDF download failed DNS. Request exact byte-pinned SMS V2.2 pages 4,7,8,12,13 via existing fallback; no progress credit yet.",
+    "next_step": "Inspect fallback run for this commit and download ZIP; check SHA256/size/source pin and PNG hashes, visually inspect pages. Obtain HDS V2.2 p4 byte-pinned comparison via fallback or verified existing render; check historical boundary and exact XSD profile. Then write SMS-003 evidence and registries, run full gate, finalize terminal_clean and verify final gates, then reviewed memory PR.",
+    "evidence_refs": [
+      "tools/pdf_render_request_v0.1.json",
+      "audit_registry/pdf_source_pins_v0.1.json",
+      "docs/pdf_xsd_semantic_audit/deep_read/SMS_V2.2.md",
+      "docs/pdf_xsd_semantic_audit/FINDING_REVALIDATION_SMS_2026-09-10.md",
+      "EV-146 artifact 9987318510 (p4 absent)",
+      "EV-156 artifact 10145182333 unavailable; full read artifact 9719396063 unavailable"
+    ],
+    "recovery_instruction": "Inspect fallback run for this commit and download ZIP; check SHA256/size/source pin and PNG hashes, visually inspect pages. Obtain HDS V2.2 p4 byte-pinned comparison via fallback or verified existing render; check historical boundary and exact XSD profile. Then write SMS-003 evidence and registries, run full gate, finalize terminal_clean and verify final gates, then reviewed memory PR."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
