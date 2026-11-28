@@ -2211,10 +2211,10 @@
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": 46088908451,
     "resume_instruction": "SUB-002 in progress: recover pinned renders and verify version scope, then complete canonical registers and gates before next finding.",
-    "pending_block": "SUB-002",
+    "pending_block": "SUB-002 source-locator and version-scope evidence",
     "active_finding": "SUB-002",
-    "active_step": "Requested pinned VDV301-2_BASE_V2.1 pages 90-94,116; preserved SUB-001 terminal evidence and unchanged 145/192 counts.",
-    "next_step": "Complete remaining pinned render requests; obtain artifacts and independently verify original body, exact upstream XSD dependency profiles and service-version boundaries; then add permanent regression and synchronize registries, run full gate, finalize terminal handoff and memory PR.",
+    "active_step": "Four exact-source render requests committed; repaired pending_block minimum-length guard after four failed intermediate handoff checks. Reused Base V2.0 p99 and V2.1 p112 archives: ZIP and all PNG hashes verified, both relevant pages visually checked (section 7.2.1, tables 28 and 53).",
+    "next_step": "Verify four render runs, check visible PDF operations and exact version scope, then build regression and canonical registry changes, run full gate, finalize terminal handoff and memory PR.",
     "evidence_refs": [
       "Historical EV-157 job 102906852658 PASS; original artifacts 10156457016 and 10155848626 unavailable (404).",
       "Reusable SUB-001 archive 15239797181 (Base V2.0 p99) and 15239259853 (Base V2.1 p112); ZIP digests matched locally; visual/page-hash check required.",
@@ -2222,7 +2222,8 @@
       "VDV301-2_V1.0_EN pages 62-64,87,89-90 render request (commit is recoverable; retrieve matching workflow artifact by commit and verify SHA256).",
       "VDV301-2_V1.0_DE pages 55-56,64,67 render request (commit is recoverable; retrieve matching workflow artifact by commit and verify SHA256).",
       "VDV301-2_BASE_V2.0 pages 89-92,103 render request (commit is recoverable; retrieve matching workflow artifact by commit and verify SHA256).",
-      "VDV301-2_BASE_V2.1 pages 90-94,116 render request (commit is recoverable; retrieve matching workflow artifact by commit and verify SHA256)."
+      "VDV301-2_BASE_V2.1 pages 90-94,116 render request (commit is recoverable; retrieve matching workflow artifact by commit and verify SHA256).",
+      "Intermediate handoff failures 46120688763, 46120695402, 46120702731, 46120709914: pending_block string was below validator minimum of 12 characters; same-commit CURRENT_STATE and gate_pending checks passed. Corrected without history rewrite."
     ],
     "recovery_instruction": "Resume SUB-002 only. Inspect actual HEAD and all SUB-002 render-request commits/runs. Verify archived or freshly rendered PNG hashes, visible headings/tables and source pins. Recheck V1.0 through Base V2.1 and later DMS comparisons; no scope promotion or new locator credit until complete evidence. Historical EV-157 checker remains unchanged."
   },
