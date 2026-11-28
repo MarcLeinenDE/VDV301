@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "5cbe4253f366be5aa3df1f6bf1cf86eef674fa48",
+    "git_blob": "0583b98691b8433b6420da250f4bf1821a635a5e",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 154,
-    "coverage_complete_count": 154,
+    "locator_entry_count": 155,
+    "coverage_complete_count": 155,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 38
+    "remaining_finding_count": 37
   },
   "entries": [
     {
@@ -34852,6 +34852,715 @@
         "Permanent checker tools/validate_tkt_001_release_context.py expanded at 7e9c2cc01d75c1dcbfc6ec409fbdb75bae570ffd; schema gate 46160960815 and handoff 46160960747 SUCCESS. Artifact 15269975930 SHA256 3d72a8c6756f05948472ddbab431f20af0fdf89765fe192f7fff22de61fd499b downloaded/rehashed, 24/24 status files exit 0. TKT-008 log confirms 4 positives, 2 exact PDF spelling negatives, 12 context controls, 2 isolated historical controls. Independent local later-profile probes confirm exact error path and expected token.",
         "Active disproof: line-wrapped full identifier is visibly CardApplicationInformation in EN/DE, not CardApplInformation; request tables show legitimate distinct shorter element. Group name is not an XML wrapper; optional group does not make its individual members independently optional. Correct full group and omitted full group PASS. Missing information after status yields expected CardApplikationInformation with actual CardValidationCode; typo without status and duplicate typo yield different expected fields; correct spelling with malformed child yields datatype error. Neither actual name alone nor expected name alone sufficient. Isolated original missing root is packaging error.",
         "Adjacent observations (not separately resolved): EN Table122 CardApplicationInformation cardinality cell blank, DE Table8 1:1; optional group cardinality not explicitly represented in these rows. XSD group minOccurs=0 established; no independent new finding credited. EN Table121 ErrorMessage vs OperationErrorMessage previously recorded, DE Tabelle7 description mentions tariff information; preserve separately. TKT-009 remains pending."
+      ]
+    },
+    {
+      "finding_id": "TKT-009",
+      "service": "TicketingService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "TicketingService V1.0 in complete VDV-301-1.0 original aggregate",
+          "authority": "official_release",
+          "xsd_profile": "IBIS_IP_V1.0.xsd @ 41289eaed2674a169fdf77a10a2eff293c76d5c4 + IBIS-IP_TicketInformationService_V1.0.xsd @ 017ca64666e25d757fc0cde1f1be817f06a743fc + exact complete historical 12-file family @ f5b53785f703e898632603eec3bfa3555a79fdba",
+          "note": "EN V1.0 01/2014 pp92–94 §9.11.3.2 Tables 117/118 and §9.11.7.2 Table 121: misspelled actual tariff data child and two data type names; RetrieveTariffInformation reuses shared response. Complete original aggregate declares roots; isolated original service missing roots excluded. EN p131 table index repeats caption, not body authority."
+        },
+        {
+          "version": "TicketingService V1.0 later official self-contained revision in VDV-301-2.0 through VDV-301-2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7 + Common/Enumerations V1.0 @ 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c/a9bea5bc73003ed91ded8519db06c32c4067831d",
+          "note": "DE standalone V1.0 07/2016 pp8–11 §1.4.2 Tabellen 3/4 and §1.8.2 Tabelle 7 independently repeat exact typo; §1.7.2 reuses response. Later service/Common/Enums identical at official tags 2.0–2.3. DE p14 table index repeats caption, not body authority. No earlier or corrected later publication established per TKT-001 catalog; master not a release."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "TicketingService V1.0 in complete VDV-301-1.0 original aggregate",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "earliest_affected_english_complete_original_aggregate",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification V1.0 (EN, 01/2014)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                92,
+                93
+              ],
+              "section": "9.11.3 Data Structure of Operation GetCurrentTariffInformation / 9.11.3.2 Response",
+              "table": "Table 117: Description of the TicketingService.GetTariffInformationResponse",
+              "point_summary": "Choice a literal wrong element TicketingSevice.GetTariffInformationResponseData and wrong type TicketingSevice.GetTariffInformationResponseDataStructure."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification V1.0 (EN, 01/2014)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                92,
+                93
+              ],
+              "section": "9.11.3 Data Structure of Operation GetCurrentTariffInformation / 9.11.3.2 Response",
+              "table": "Table 118: Description of the TicketingSevice.GetTariffInformationResponseDataStructure",
+              "point_summary": "Misspelled data type repeated in table heading/caption."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 IBIS-IP Part 2: Interface Specification V1.0 (EN, 01/2014)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                93,
+                94
+              ],
+              "section": "9.11.6 Data Structure of Operation RetrieveTariffInformation / 9.11.6.2 Response",
+              "table": null,
+              "point_summary": "RetrieveTariffInformation explicitly reuses shared Get tariff response structure."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 Interface Specification V1.0 (EN, 01/2014)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                94
+              ],
+              "section": "9.11.7 Data Structure of Operation ValidateTicket / 9.11.7.2 Response",
+              "table": "Table 121: Description of the TicketingService.ValidateTicketResponse",
+              "point_summary": "Correct element TicketingService.ValidationResponseData; wrong type TicketingSevice.ValidateTicketResponseDataStructure."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "element",
+              "component": "TicketingService.GetTariffInformationResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.GetTariffInformationResponse']",
+              "line_hint": "126",
+              "point_summary": "Global Get response mapped to shared outer type."
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "element",
+              "component": "TicketingService.RetrieveTariffInformationResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.RetrieveTariffInformationResponse']",
+              "line_hint": "128",
+              "point_summary": "Global Retrieve response mapped to same shared outer type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "017ca64666e25d757fc0cde1f1be817f06a743fc",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "TicketingService.GetTariffInformationResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.GetTariffInformationResponseStructure']/xs:choice",
+              "line_hint": "55–60",
+              "point_summary": "Required choice of exact data wrapper or OperationErrorMessage."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "017ca64666e25d757fc0cde1f1be817f06a743fc",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "TicketingService.GetTariffInformationResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.GetTariffInformationResponseDataStructure']/xs:sequence",
+              "line_hint": "61–67",
+              "point_summary": "Required order DefaultLanguage then TimeStamp then TariffInformationGroup."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "Common V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact dependency, required data wrappers and tariff types."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "Enumerations V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact transitive dependency."
+            },
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "element",
+              "component": "TicketingService.ValidateTicketResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.ValidateTicketResponse']",
+              "line_hint": "130",
+              "point_summary": "Global response root mapped to exact outer type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "017ca64666e25d757fc0cde1f1be817f06a743fc",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidateTicketResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketResponseStructure']/xs:choice",
+              "line_hint": "93–98",
+              "point_summary": "Outer choice contains TicketingService.ValidationResponseData typed exact inner type or OperationErrorMessage."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "017ca64666e25d757fc0cde1f1be817f06a743fc",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidateTicketResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketResponseDataStructure']",
+              "line_hint": "99–107",
+              "point_summary": "Correctly spelled validation response data complex type."
+            }
+          ],
+          "coverage_note": "EN V1.0 01/2014 pp92–94 §9.11.3.2 Tables 117/118 and §9.11.7.2 Table 121: misspelled actual tariff data child and two data type names; RetrieveTariffInformation reuses shared response. Complete original aggregate declares roots; isolated original service missing roots excluded. EN p131 table index repeats caption, not body authority."
+        },
+        {
+          "version": "TicketingService V1.0 later official self-contained revision in VDV-301-2.0 through VDV-301-2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "independent_german_persistent_official_release_context",
+          "pdf_locators": [
+            {
+              "source_id": "TICKETING_V1.0",
+              "document_title": "VDV-Schrift 301-2-9 TicketingService V1.0 (DE, 07/2016)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-9sds-v1-0.pdfx",
+              "sha256": "96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43",
+              "printed_pages": [
+                8,
+                9
+              ],
+              "section": "1.4 Datenstruktur der Operation GetCurrentTariffInformation / 1.4.2 Response",
+              "table": "Tabelle 3 Beschreibung der TicketingService.GetTariffInformationResponse",
+              "point_summary": "Choice a literal wrong element TicketingSevice.GetTariffInformationResponseData and wrong type TicketingSevice.GetTariffInformationResponseDataStructure."
+            },
+            {
+              "source_id": "TICKETING_V1.0",
+              "document_title": "VDV-Schrift 301-2-9 TicketingService V1.0 (DE, 07/2016)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-9sds-v1-0.pdfx",
+              "sha256": "96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43",
+              "printed_pages": [
+                8,
+                9
+              ],
+              "section": "1.4 Datenstruktur der Operation GetCurrentTariffInformation / 1.4.2 Response",
+              "table": "Tabelle 4 Beschreibung der TicketingSevice.GetTariffInformationResponseDataStructure",
+              "point_summary": "Misspelled data type repeated in table heading/caption."
+            },
+            {
+              "source_id": "TICKETING_V1.0",
+              "document_title": "VDV-Schrift 301-2-9 TicketingService V1.0 (DE, 07/2016)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-9sds-v1-0.pdfx",
+              "sha256": "96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43",
+              "printed_pages": [
+                9,
+                10
+              ],
+              "section": "1.7 Datenstruktur der Operation RetrieveTariffInformation / 1.7.2 Response",
+              "table": null,
+              "point_summary": "RetrieveTariffInformation explicitly reuses shared Get tariff response structure."
+            },
+            {
+              "source_id": "TICKETING_V1.0",
+              "document_title": "VDV-Schrift 301-2-9 TicketingService V1.0 (DE, 07/2016)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-9sds-v1-0.pdfx",
+              "sha256": "96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43",
+              "printed_pages": [
+                11
+              ],
+              "section": "1.8 Datenstruktur der Operation ValidateTicket / 1.8.2 Response",
+              "table": "Tabelle 7 Beschreibung der TicketingService.ValidateTicketResponse",
+              "point_summary": "Correct element TicketingService.ValidationResponseData; wrong type TicketingSevice.ValidateTicketResponseDataStructure."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "element",
+              "component": "TicketingService.GetTariffInformationResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.GetTariffInformationResponse']",
+              "line_hint": "27",
+              "point_summary": "Global Get response mapped to shared outer type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "element",
+              "component": "TicketingService.RetrieveTariffInformationResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.RetrieveTariffInformationResponse']",
+              "line_hint": "50",
+              "point_summary": "Global Retrieve response mapped to same shared outer type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "TicketingService.GetTariffInformationResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.GetTariffInformationResponseStructure']/xs:choice",
+              "line_hint": "28–33",
+              "point_summary": "Required choice of exact data wrapper or OperationErrorMessage."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "TicketingService.GetTariffInformationResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.GetTariffInformationResponseDataStructure']/xs:sequence",
+              "line_hint": "34–40",
+              "point_summary": "Required order DefaultLanguage then TimeStamp then TariffInformationGroup."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "Common V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact dependency, required data wrappers and tariff types."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "Enumerations V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact transitive dependency."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "element",
+              "component": "TicketingService.GetTariffInformationResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.GetTariffInformationResponse']",
+              "line_hint": "27",
+              "point_summary": "Global Get response mapped to shared outer type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "element",
+              "component": "TicketingService.RetrieveTariffInformationResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.RetrieveTariffInformationResponse']",
+              "line_hint": "50",
+              "point_summary": "Global Retrieve response mapped to same shared outer type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "complexType",
+              "component": "TicketingService.GetTariffInformationResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.GetTariffInformationResponseStructure']/xs:choice",
+              "line_hint": "28–33",
+              "point_summary": "Required choice of exact data wrapper or OperationErrorMessage."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "complexType",
+              "component": "TicketingService.GetTariffInformationResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.GetTariffInformationResponseDataStructure']/xs:sequence",
+              "line_hint": "34–40",
+              "point_summary": "Required order DefaultLanguage then TimeStamp then TariffInformationGroup."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "schema",
+              "component": "Common V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact dependency, required data wrappers and tariff types."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "schema",
+              "component": "Enumerations V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact transitive dependency."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "element",
+              "component": "TicketingService.GetTariffInformationResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.GetTariffInformationResponse']",
+              "line_hint": "27",
+              "point_summary": "Global Get response mapped to shared outer type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "element",
+              "component": "TicketingService.RetrieveTariffInformationResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.RetrieveTariffInformationResponse']",
+              "line_hint": "50",
+              "point_summary": "Global Retrieve response mapped to same shared outer type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "complexType",
+              "component": "TicketingService.GetTariffInformationResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.GetTariffInformationResponseStructure']/xs:choice",
+              "line_hint": "28–33",
+              "point_summary": "Required choice of exact data wrapper or OperationErrorMessage."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "complexType",
+              "component": "TicketingService.GetTariffInformationResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.GetTariffInformationResponseDataStructure']/xs:sequence",
+              "line_hint": "34–40",
+              "point_summary": "Required order DefaultLanguage then TimeStamp then TariffInformationGroup."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "schema",
+              "component": "Common V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact dependency, required data wrappers and tariff types."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "schema",
+              "component": "Enumerations V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact transitive dependency."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "element",
+              "component": "TicketingService.GetTariffInformationResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.GetTariffInformationResponse']",
+              "line_hint": "27",
+              "point_summary": "Global Get response mapped to shared outer type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "element",
+              "component": "TicketingService.RetrieveTariffInformationResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.RetrieveTariffInformationResponse']",
+              "line_hint": "50",
+              "point_summary": "Global Retrieve response mapped to same shared outer type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "complexType",
+              "component": "TicketingService.GetTariffInformationResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.GetTariffInformationResponseStructure']/xs:choice",
+              "line_hint": "28–33",
+              "point_summary": "Required choice of exact data wrapper or OperationErrorMessage."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "complexType",
+              "component": "TicketingService.GetTariffInformationResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.GetTariffInformationResponseDataStructure']/xs:sequence",
+              "line_hint": "34–40",
+              "point_summary": "Required order DefaultLanguage then TimeStamp then TariffInformationGroup."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "schema",
+              "component": "Common V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact dependency, required data wrappers and tariff types."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "schema",
+              "component": "Enumerations V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact transitive dependency."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "element",
+              "component": "TicketingService.ValidateTicketResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.ValidateTicketResponse']",
+              "line_hint": "60",
+              "point_summary": "Global response root mapped to exact outer type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidateTicketResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketResponseStructure']/xs:choice",
+              "line_hint": "61–66",
+              "point_summary": "Outer choice contains TicketingService.ValidationResponseData typed exact inner type or OperationErrorMessage."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidateTicketResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketResponseDataStructure']",
+              "line_hint": "67–75",
+              "point_summary": "Correctly spelled validation response data complex type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "element",
+              "component": "TicketingService.ValidateTicketResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.ValidateTicketResponse']",
+              "line_hint": "60",
+              "point_summary": "Global response root mapped to exact outer type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidateTicketResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketResponseStructure']/xs:choice",
+              "line_hint": "61–66",
+              "point_summary": "Outer choice contains TicketingService.ValidationResponseData typed exact inner type or OperationErrorMessage."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidateTicketResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketResponseDataStructure']",
+              "line_hint": "67–75",
+              "point_summary": "Correctly spelled validation response data complex type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "element",
+              "component": "TicketingService.ValidateTicketResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.ValidateTicketResponse']",
+              "line_hint": "60",
+              "point_summary": "Global response root mapped to exact outer type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidateTicketResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketResponseStructure']/xs:choice",
+              "line_hint": "61–66",
+              "point_summary": "Outer choice contains TicketingService.ValidationResponseData typed exact inner type or OperationErrorMessage."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidateTicketResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketResponseDataStructure']",
+              "line_hint": "67–75",
+              "point_summary": "Correctly spelled validation response data complex type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "element",
+              "component": "TicketingService.ValidateTicketResponse",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.ValidateTicketResponse']",
+              "line_hint": "60",
+              "point_summary": "Global response root mapped to exact outer type."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidateTicketResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketResponseStructure']/xs:choice",
+              "line_hint": "61–66",
+              "point_summary": "Outer choice contains TicketingService.ValidationResponseData typed exact inner type or OperationErrorMessage."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidateTicketResponseDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidateTicketResponseDataStructure']",
+              "line_hint": "67–75",
+              "point_summary": "Correctly spelled validation response data complex type."
+            }
+          ],
+          "coverage_note": "DE standalone V1.0 07/2016 pp8–11 §1.4.2 Tabellen 3/4 and §1.8.2 Tabelle 7 independently repeat exact typo; §1.7.2 reuses response. Later service/Common/Enums identical at official tags 2.0–2.3. DE p14 table index repeats caption, not body authority. No earlier or corrected later publication established per TKT-001 catalog; master not a release."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_TKT_009_2026-11-28.md",
+        "Original EN pp93–94 and DE pp9,11 inspected from hash-verified pinned archives; exact body rows distinguish actual element/type/caption. EN source e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7; DE source 96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43. Detailed page hashes in report.",
+        "EN p131 fallback run 46169309442 artifact 15273186599 ZIP SHA256 329f1c134d63e770bcb8c71d4e3f1a36a365c3923931e9b8f8e7a5e094ec325f, manifest SHA256 508b54e600112c9f4733912f529576737e1de7c324a7c81de661b4ae4aad52bf, PNG SHA256 14147d102037cf01105a84f4ad59f7592da6215898878d2e11082e306ca03229 (263990 bytes); actual image inspected. DE p14 table list also inspected. Navigation repetitions only.",
+        "Exact upstream tag files verified; original complete aggregate and later identical 2.0–2.3 profile, Common/Enums pinned. No earlier or corrected later publication established.",
+        "Permanent checker c2f16733c641bae84842356b274b06b210eb5511 schema 46169309426 and handoff 46169309429 SUCCESS; artifact 15273051245 ZIP SHA256 eef28865d392d7ab661c2a2f5d229443d45f322f5f773214b3ddb494790cb662 rehashed, 24/24 status exit 0. 18 positive, 4 exact child negative, 6 exact type negative, 22 context and 6 isolated historical controls PASS.",
+        "Same-pattern backcheck of 13 documentation/no-runtime identifier/spelling records; DRTRAINSET21-003 operation label without request payload, DRTVS21-002 shortened display type, DRSMS22-003 historical text distinct. No analogous proven correction among reviewed records; not new full PDF review. Guard: distinguish actual element column, type reference, caption and invented root."
       ]
     }
   ]

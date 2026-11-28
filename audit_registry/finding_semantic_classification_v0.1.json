@@ -15421,65 +15421,81 @@
       "service": "TicketingService",
       "version_scope": [
         {
-          "version": "V1.0",
+          "version": "TicketingService V1.0 in complete VDV-301-1.0 original aggregate",
           "authority": "official_release",
-          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd official V1.0 family",
-          "note": "PDF detail labels visibly use TicketingSevice, while the service title and executable schema identity use TicketingService; no TicketingSevice alias exists."
+          "xsd_profile": "IBIS_IP_V1.0.xsd @ 41289eaed2674a169fdf77a10a2eff293c76d5c4 + IBIS-IP_TicketInformationService_V1.0.xsd @ 017ca64666e25d757fc0cde1f1be817f06a743fc + exact complete historical 12-file family @ f5b53785f703e898632603eec3bfa3555a79fdba",
+          "note": "EN V1.0 01/2014 pp92–94 §9.11.3.2 Tables 117/118 and §9.11.7.2 Table 121: misspelled actual tariff data child and two data type names; RetrieveTariffInformation reuses shared response. Complete original aggregate declares roots; isolated original service missing roots excluded. EN p131 table index repeats caption, not body authority."
+        },
+        {
+          "version": "TicketingService V1.0 later official self-contained revision in VDV-301-2.0 through VDV-301-2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7 + Common/Enumerations V1.0 @ 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c/a9bea5bc73003ed91ded8519db06c32c4067831d",
+          "note": "DE standalone V1.0 07/2016 pp8–11 §1.4.2 Tabellen 3/4 and §1.8.2 Tabelle 7 independently repeat exact typo; §1.7.2 reuses response. Later service/Common/Enums identical at official tags 2.0–2.3. DE p14 table index repeats caption, not body authority. No earlier or corrected later publication established per TKT-001 catalog; master not a release."
         }
       ],
       "review_state": "manually_reviewed",
       "normative_authority": "selected_xsd",
-      "primary_surface": "pdf",
+      "primary_surface": "cross_artifact",
       "primary_issue_kind": "identifier_typo",
       "secondary_issue_kinds": [
         "TicketingSevice_vs_TicketingService",
         "missing_r_in_service_name",
         "pdf_label_typo",
-        "no_executable_alias"
+        "no_executable_alias",
+        "literal_pdf_element_name",
+        "explicit_type_reference",
+        "shared_tariff_response",
+        "context_guarded_advisory",
+        "historical_aggregate_vs_isolated_service"
       ],
       "defect_assessment": "confirmed_pdf_defect",
       "confidence": "confirmed",
       "validation_effect": [
+        "xsd_rejects_pdf_documented_form",
         "pdf_can_mislead_implementation",
-        "documentation_only",
-        "no_runtime_effect"
+        "code_generation_or_discovery_affected"
       ],
-      "sdk_behavior": "no_runtime_diagnostic",
+      "sdk_behavior": "error_with_advisory",
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "The official PDF visibly uses TicketingSevice in detailed labels while the same publication identifies the service as TicketingService."
+          "note": "EN V1.0 01/2014 pp92–94 §9.11.3.2 Tables 117/118 and §9.11.7.2 Table 121: misspelled actual tariff data child and two data type names; RetrieveTariffInformation reuses shared response. Complete original aggregate declares roots; isolated original service missing roots excluded. EN p131 table index repeats caption, not body authority. DE standalone V1.0 07/2016 pp8–11 §1.4.2 Tabellen 3/4 and §1.8.2 Tabelle 7 independently repeat exact typo; §1.7.2 reuses response. Later service/Common/Enums identical at official tags 2.0–2.3. DE p14 table index repeats caption, not body authority. No earlier or corrected later publication established per TKT-001 catalog; master not a release."
         },
         {
           "type": "official_xsd_explicit",
-          "note": "The exact schema uses TicketingService identities and declares no TicketingSevice alias."
+          "note": "Exact XSD declares TicketingService.GetTariffInformationResponseData and correctly spelled tariff/validation data types; shared tariff choice accepts correct child or OperationErrorMessage."
         },
         {
           "type": "executable_validation",
-          "note": "EV-158 confirms the schema has no TicketingSevice identity and rejects a deliberately misspelled root."
+          "note": "Permanent checker run 46169309426 / artifact 15273051245: 18 positives, 4 exact PDF child negatives, 6 exact PDF type negatives, 22 context controls, 6 isolated historical controls, all PASS."
         },
         {
           "type": "technical_inference",
-          "note": "The frozen finding is documentation-focused rather than a dedicated executable runtime rule; the typo should remain guidance-only in the Known-Issues layer."
+          "note": "Historical EV-158 root-only check retained as historical evidence, not proof of PDF root typo. Exact child and optional explicit xsi:type contexts establish runtime relevance. Prior documentation-only classification superseded."
         }
       ],
       "diagnostic": {
         "de": {
-          "title": "TicketingService V1.0: TicketingSevice-Schreibfehler in PDF-Labels",
-          "short": "Einige PDF-Labels schreiben TicketingSevice ohne „r“; die korrekte Service-Identität lautet TicketingService.",
-          "long": "TKT-009 ist ein bestätigter lokaler Schreibfehler der Dokumentation. Die offizielle TicketingService-V1.0-PDF verwendet in Detail-Labels die Form TicketingSevice. Der Servicetitel und die exakte XSD verwenden dagegen durchgehend die ausführbare Identität TicketingService; ein TicketingSevice-Alias ist nicht definiert. EV-158 bestätigt zusätzlich, dass ein absichtlich mit diesem Tippfehler gebildeter Root von der XSD abgewiesen wird.",
-          "recommendation": "TicketingSevice in den betroffenen PDF-Labels als TicketingService lesen. Keine Aliasregel erzeugen und den Befund im SDK als Dokumentationswissen ohne eigene Runtime-Diagnostik führen."
+          "title": "TicketingSevice in PDF-Element und Typreferenzen",
+          "short": "Die PDF-Schreibweise TicketingSevice ist an den nachgewiesenen XML-Positionen ungültig.",
+          "long": "TKT-009 betrifft in beiden V1.0-Publikationen die Elementnamenspalte der Tarifantwort und die Typreferenzen für Tarif- und Validierungsdaten. Die ausgewählte XSD verlangt TicketingService.GetTariffInformationResponseData unter GetTariffInformationResponse oder RetrieveTariffInformationResponse sowie die korrekt geschriebenen Datentypen. Eine explizite xsi:type-Angabe ist nicht vorgeschrieben; bei Verwendung der falschen PDF-Form wird sie am betreffenden korrekten Element zurückgewiesen.",
+          "recommendation": "Exakte ausgewählte XSD verwenden. Bei nachgewiesenem falschem Element im erwarteten Choice-Kontext oder falscher expliziter Typreferenz am korrekten Element den INVALID-Status erhalten und den PDF-Fehler erläutern. Keine Aliasbildung oder automatische Korrektur."
         },
         "en": {
-          "title": "TicketingService V1.0: TicketingSevice typo in PDF labels",
-          "short": "Some PDF labels spell TicketingSevice without the “r”; the correct service identity is TicketingService.",
-          "long": "TKT-009 is a confirmed local documentation spelling defect. The official TicketingService V1.0 PDF uses TicketingSevice in detailed labels. The service title and exact XSD instead consistently use the executable identity TicketingService, and no TicketingSevice alias is defined. EV-158 also confirms that a deliberately misspelled root using this form is rejected by the XSD.",
-          "recommendation": "Read TicketingSevice in the affected PDF labels as TicketingService. Do not create an alias rule, and retain the finding as documentation knowledge without a dedicated runtime diagnostic."
+          "title": "TicketingSevice in PDF element and type references",
+          "short": "The PDF spelling TicketingSevice is invalid at the verified XML positions.",
+          "long": "TKT-009 affects the tariff response element-name column and tariff/validation data type references in both V1.0 publications. The selected XSD requires TicketingService.GetTariffInformationResponseData under GetTariffInformationResponse or RetrieveTariffInformationResponse and correctly spelled data types. Explicit xsi:type is optional; the misspelled PDF form is rejected when used on the relevant correct element.",
+          "recommendation": "Use the exact selected XSD. For the verified wrong element in its expected choice or wrong explicit type on the correct element, retain INVALID and explain the PDF defect. No alias or automatic correction."
         }
       },
       "runtime_match": {
-        "state": "not_applicable",
-        "candidate_triggers": []
+        "state": "reviewed",
+        "candidate_triggers": [
+          "selected profile is the complete official original VDV-301-1.0 aggregate with exact pinned dependency family or exact later official self-contained TicketingService V1.0 at VDV-301-2.0 through VDV-301-2.3; isolated original service excluded; selected-XSD result must be INVALID",
+          "branch A: actual unqualified direct child TicketingSevice.GetTariffInformationResponseData under exact TicketingService.GetTariffInformationResponse or TicketingService.RetrieveTariffInformationResponse root at the data/error choice position; schema rejection SCHEMAV_ELEMENT_CONTENT expects TicketingService.GetTariffInformationResponseData or OperationErrorMessage; require actual node/path and expected choice together",
+          "OR branch B: actual explicit xsi:type resolves to the exact misspelled unqualified TicketingSevice.GetTariffInformationResponseDataStructure on the correctly spelled TicketingService.GetTariffInformationResponseData child under either exact tariff response root; OR TicketingSevice.ValidateTicketResponseDataStructure on correctly spelled TicketingService.ValidationResponseData under exact TicketingService.ValidateTicketResponse root; verified unresolved-type SCHEMAV_CVC_ELT_4_2; require exact type, node/path and selected declaration context",
+          "do not trigger for typo in invented root, missing child, unrelated child/type, wrong child position after completed choice, mere table captions or string-only matches; xsi:type optional, not required; no alias, normalization or result change"
+        ]
       },
       "source_references": [
         {
@@ -15501,9 +15517,29 @@
           "kind": "xsd",
           "reference": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7",
           "note": "Executable service identity remains TicketingService."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-2_V1.0_EN pp92–94 Tables117/118/121; TICKETING_V1.0 DE pp8–11 Tabellen3/4/7",
+          "note": "Actual original body element and type references; table-index repetitions separate."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS_IP_V1.0.xsd @ 41289eaed2674a169fdf77a10a2eff293c76d5c4 + IBIS-IP_TicketInformationService_V1.0.xsd @ 017ca64666e25d757fc0cde1f1be817f06a743fc + exact complete historical 12-file family @ f5b53785f703e898632603eec3bfa3555a79fdba",
+          "note": "Exact complete original profile; isolated historical service excluded."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_TKT_009_2026-11-28.md",
+          "note": "Independent visual and executable scope/context review."
+        },
+        {
+          "kind": "evidence",
+          "reference": "schema-audit-validation run 46169309426 / artifact 15273051245",
+          "note": "56 targeted cases PASS."
         }
       ],
-      "notes": "Confirmed documentation spelling typo. No alias and no dedicated runtime diagnostic."
+      "notes": "TKT-009 confirmed_pdf_defect, identifier_typo, selected_xsd retained; supersede prior documentation_only/no_runtime_effect with error_with_advisory. Both EN original and DE standalone show the literal wrong tariff response data element and tariff/validation data type references, not just captions. Complete original V1.0 aggregate and exact later official family 2.0–2.3 enforce correct spelling. 56 targeted cases PASS; only exact child/expected choice or explicit unresolved xsi:type at correct child under exact response root on selected-XSD INVALID can trigger. No invented root, string-only match, alias, waiver, normalization or XSD/resolver/runtime implementation change. 78 reviewed / 0 implemented; 114 not applicable. Publication boundaries unchanged."
     },
     {
       "finding_id": "TS-001",

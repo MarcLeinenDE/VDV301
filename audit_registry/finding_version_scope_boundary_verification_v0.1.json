@@ -20,8 +20,8 @@
     "baseline_locator_count": 70
   },
   "counts": {
-    "tracked_findings": 154,
-    "verified": 154,
+    "tracked_findings": 155,
+    "verified": 155,
     "pending_revalidation": 0
   },
   "next_pending_finding": null,
@@ -8636,6 +8636,38 @@
           "version": "TicketingService V1.0 later official self-contained revision in VDV-301-2.0 through VDV-301-2.3",
           "role": "independent_german_persistent_official_release_context",
           "language_status": "DE standalone V1.0 07/2016 pp10–11 §1.8.2 Tabellen 7/8 repeats CardApplicationInformation with 1:1 row cardinality. Exact later identical official service and Common/Enums V1.0 at tags 2.0–2.3 enforce CardApplikationInformation after CardApplStatusCode, with optional group. Request CardApplInformation is different and legitimate. Master comparison only, not a release; no earlier publication or corrected later edition established per TKT-001 catalog review. Publication dates do not imply release-tag dates.",
+          "source_ids": [
+            "TICKETING_V1.0"
+          ]
+        }
+      ]
+    },
+    {
+      "finding_id": "TKT-009",
+      "state": "verified",
+      "evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_TKT_009_2026-11-28.md",
+        "Original EN pp93–94 and DE pp9,11 inspected from hash-verified pinned archives; exact body rows distinguish actual element/type/caption. EN source e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7; DE source 96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43. Detailed page hashes in report.",
+        "EN p131 fallback run 46169309442 artifact 15273186599 ZIP SHA256 329f1c134d63e770bcb8c71d4e3f1a36a365c3923931e9b8f8e7a5e094ec325f, manifest SHA256 508b54e600112c9f4733912f529576737e1de7c324a7c81de661b4ae4aad52bf, PNG SHA256 14147d102037cf01105a84f4ad59f7592da6215898878d2e11082e306ca03229 (263990 bytes); actual image inspected. DE p14 table list also inspected. Navigation repetitions only.",
+        "Exact upstream tag files verified; original complete aggregate and later identical 2.0–2.3 profile, Common/Enums pinned. No earlier or corrected later publication established.",
+        "Permanent checker c2f16733c641bae84842356b274b06b210eb5511 schema 46169309426 and handoff 46169309429 SUCCESS; artifact 15273051245 ZIP SHA256 eef28865d392d7ab661c2a2f5d229443d45f322f5f773214b3ddb494790cb662 rehashed, 24/24 status exit 0. 18 positive, 4 exact child negative, 6 exact type negative, 22 context and 6 isolated historical controls PASS.",
+        "Same-pattern backcheck of 13 documentation/no-runtime identifier/spelling records; DRTRAINSET21-003 operation label without request payload, DRTVS21-002 shortened display type, DRSMS22-003 historical text distinct. No analogous proven correction among reviewed records; not new full PDF review. Guard: distinguish actual element column, type reference, caption and invented root."
+      ],
+      "note": "TKT-009 confirmed_pdf_defect, identifier_typo, selected_xsd retained; supersede prior documentation_only/no_runtime_effect with error_with_advisory. Both EN original and DE standalone show the literal wrong tariff response data element and tariff/validation data type references, not just captions. Complete original V1.0 aggregate and exact later official family 2.0–2.3 enforce correct spelling. 56 targeted cases PASS; only exact child/expected choice or explicit unresolved xsi:type at correct child under exact response root on selected-XSD INVALID can trigger. No invented root, string-only match, alias, waiver, normalization or XSD/resolver/runtime implementation change. 78 reviewed / 0 implemented; 114 not applicable. Publication boundaries unchanged.",
+      "scope_conclusion": "TKT-009 confirmed_pdf_defect, identifier_typo, selected_xsd retained; supersede prior documentation_only/no_runtime_effect with error_with_advisory. Both EN original and DE standalone show the literal wrong tariff response data element and tariff/validation data type references, not just captions. Complete original V1.0 aggregate and exact later official family 2.0–2.3 enforce correct spelling. 56 targeted cases PASS; only exact child/expected choice or explicit unresolved xsi:type at correct child under exact response root on selected-XSD INVALID can trigger. No invented root, string-only match, alias, waiver, normalization or XSD/resolver/runtime implementation change. 78 reviewed / 0 implemented; 114 not applicable. Publication boundaries unchanged.",
+      "boundary_checks": [
+        {
+          "version": "TicketingService V1.0 in complete VDV-301-1.0 original aggregate",
+          "role": "earliest_affected_english_complete_original_aggregate",
+          "language_status": "EN V1.0 01/2014 pp92–94 §9.11.3.2 Tables 117/118 and §9.11.7.2 Table 121: misspelled actual tariff data child and two data type names; RetrieveTariffInformation reuses shared response. Complete original aggregate declares roots; isolated original service missing roots excluded. EN p131 table index repeats caption, not body authority.",
+          "source_ids": [
+            "VDV301-2_V1.0_EN"
+          ]
+        },
+        {
+          "version": "TicketingService V1.0 later official self-contained revision in VDV-301-2.0 through VDV-301-2.3",
+          "role": "independent_german_persistent_official_release_context",
+          "language_status": "DE standalone V1.0 07/2016 pp8–11 §1.4.2 Tabellen 3/4 and §1.8.2 Tabelle 7 independently repeat exact typo; §1.7.2 reuses response. Later service/Common/Enums identical at official tags 2.0–2.3. DE p14 table index repeats caption, not body authority. No earlier or corrected later publication established per TKT-001 catalog; master not a release.",
           "source_ids": [
             "TICKETING_V1.0"
           ]
