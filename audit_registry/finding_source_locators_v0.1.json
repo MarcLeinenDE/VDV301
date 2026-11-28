@@ -4,7 +4,7 @@
   "state": "in_progress",
   "source_semantic_registry": {
     "path": "audit_registry/finding_semantic_classification_v0.1.json",
-    "git_blob": "ebc108561360fd02c500cd375f5d3036f572653a",
+    "git_blob": "06975d583393a78785d30b9ed6b48d466710180b",
     "finding_count": 192
   },
   "policy": {
@@ -19,10 +19,10 @@
   },
   "counts": {
     "semantic_finding_count": 192,
-    "locator_entry_count": 152,
-    "coverage_complete_count": 152,
+    "locator_entry_count": 153,
+    "coverage_complete_count": 153,
     "coverage_partial_count": 0,
-    "remaining_finding_count": 40
+    "remaining_finding_count": 39
   },
   "entries": [
     {
@@ -33947,6 +33947,415 @@
         "Permanent checker tools/validate_tkt_001_release_context.py expanded at f55d00b5da7129c797d4e377aa83ad7c9b2712d1; schema gate 46143975271 and handoff 46143975294 SUCCESS. Artifact 15263165747 SHA256 404d8333c83ba51fd816aff40692c710c7d1dfbfdffcaf0fc1562708cd8d9d6d downloaded/rehashed, 24 status files exit 0. TKT-006: 8 positives (complete data and error branch for both roots in both complete profiles), 4 exact PDF-order negatives, 8 omission controls, 4 isolated original controls. Independent local later-profile full response probes confirm exact error. Missing DefaultLanguage yields same SCHEMAV_ELEMENT_CONTENT as PDF order; actual two present adjacent fields required for advisory, no error-text-only match.",
         "Active disproof: both rows have ordinary 1:1, not a/b choice or optional fields; outer choice does not make inner sequence unordered. Both exact service revisions define same xs:sequence and group, and both full Get/Retrieve roots validate the complete correctly ordered payload; PDF order fails even with all other required members. Both Retrieve response sections explicitly refer to Get structure. No synthetic roots, no alias, no reordering.",
         "Independent adjacent observations: EN Table 117/121 use ErrorMessage instead of OperationErrorMessage; EN Table 118 shows ShortTripStopList 0:* versus DE Table 4 0:1 and selected service group maxOccurs default 1; EN overview RetrieveTariffInformationResponseStructure label and Table 118 TicketingSevice caption also warrant separate identity/context review. These are not the TKT-006 order claim; no new finding IDs, no closure of other findings or scope propagation. Preserve for separate audit review; TKT-009 already covers service-label typo and DRCOM10-005 is a distinct Common repeating-child issue."
+      ]
+    },
+    {
+      "finding_id": "TKT-007",
+      "service": "TicketingService",
+      "coverage_state": "complete",
+      "scope_claims": [
+        {
+          "version": "TicketingService V1.0 in complete VDV-301-1.0 original aggregate",
+          "authority": "official_release",
+          "xsd_profile": "IBIS_IP_V1.0.xsd @ 41289eaed2674a169fdf77a10a2eff293c76d5c4 + IBIS-IP_TicketInformationService_V1.0.xsd @ 017ca64666e25d757fc0cde1f1be817f06a743fc + exact complete historical 12-file family @ f5b53785f703e898632603eec3bfa3555a79fdba",
+          "note": "EN V1.0 01/2014 p95 §9.11.8.2 Tables 123/124: outer choice correctly references TicketingService.ValidationResultDataStructure, but inner field table 124 header and caption incorrectly name outer TicketingService.GetValidationResultResponseStructure. Both mandatory fields belong to the inner type in exact original service; complete original aggregate supplies the actual root. Isolated original service lacks that root and is a distinct packaging issue."
+        },
+        {
+          "version": "TicketingService V1.0 later official self-contained revision in VDV-301-2.0 through VDV-301-2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7 + Common/Enumerations V1.0 @ 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c/a9bea5bc73003ed91ded8519db06c32c4067831d",
+          "note": "DE standalone V1.0 07/2016 pp11–12 §1.9.2 Tabellen 9/10 repeats the same correct inner reference and wrong inner table header/caption. Later identical official service and exact Common/Enums V1.0 at tags 2.0–2.3 preserve field ownership. Master comparison only, not a release; no earlier publication or corrected later service edition established per TKT-001 catalog review. Publication dates do not imply release-tag dates."
+        }
+      ],
+      "coverage": [
+        {
+          "version": "TicketingService V1.0 in complete VDV-301-1.0 original aggregate",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "earliest_affected_english_complete_original_aggregate",
+          "pdf_locators": [
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 Interface Specification V1.0 (EN, 01/2014)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                95
+              ],
+              "section": "9.11.8 Data Structure of Operation GetValidationResult / 9.11.8.2 Response",
+              "table": "Table 123: Description of the TicketingService.GetValidationResultResponse",
+              "point_summary": "Outer choice correctly references inner type TicketingService.ValidationResultDataStructure and Table 124."
+            },
+            {
+              "source_id": "VDV301-2_V1.0_EN",
+              "document_title": "VDV 301-2 Interface Specification V1.0 (EN, 01/2014)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2ses.pdfx",
+              "sha256": "e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7",
+              "printed_pages": [
+                95
+              ],
+              "section": "9.11.8 Data Structure of Operation GetValidationResult / 9.11.8.2 Response",
+              "table": "Table 124: Description of the TicketingService.GetValidationResultResponseStructure",
+              "point_summary": "Header/caption wrongly name the existing outer type; TimeStamp and ValidationResult both 1:1, actual inner type."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS_IP_V1.0.xsd",
+              "git_blob": "41289eaed2674a169fdf77a10a2eff293c76d5c4",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "element",
+              "component": "TicketingService.GetValidationResult",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.GetValidationResult']",
+              "line_hint": "131",
+              "point_summary": "Actual global root mapped to existing outer type, not inner fields."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "017ca64666e25d757fc0cde1f1be817f06a743fc",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "TicketingService.GetValidationResultResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.GetValidationResultResponseStructure']/xs:choice",
+              "line_hint": "108–113",
+              "point_summary": "Required exclusive choice ValidationResultData typed inner or OperationErrorMessage; no direct TimeStamp/ValidationResult."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "017ca64666e25d757fc0cde1f1be817f06a743fc",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidationResultDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidationResultDataStructure']/xs:sequence",
+              "line_hint": "114–119",
+              "point_summary": "Required inner sequence TimeStamp IBIS-IP.dateTime then ValidationResult TicketValidationEnumeration, actual owner of both fields."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "schema",
+              "component": "Common V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact dependency, IBIS-IP.dateTime and IBIS-IP.string."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-1.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-1.0",
+              "component_kind": "simpleType",
+              "component": "TicketValidationEnumeration",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='TicketValidationEnumeration']",
+              "line_hint": null,
+              "point_summary": "Exact enum dependency for inner ValidationResult."
+            }
+          ],
+          "coverage_note": "EN V1.0 01/2014 p95 §9.11.8.2 Tables 123/124: outer choice correctly references TicketingService.ValidationResultDataStructure, but inner field table 124 header and caption incorrectly name outer TicketingService.GetValidationResultResponseStructure. Both mandatory fields belong to the inner type in exact original service; complete original aggregate supplies the actual root. Isolated original service lacks that root and is a distinct packaging issue."
+        },
+        {
+          "version": "TicketingService V1.0 later official self-contained revision in VDV-301-2.0 through VDV-301-2.3",
+          "authority": "official_release",
+          "coverage_status": "complete",
+          "scope_role": "independent_german_persistent_official_release_context",
+          "pdf_locators": [
+            {
+              "source_id": "TICKETING_V1.0",
+              "document_title": "VDV-Schrift 301-2-9 TicketingService V1.0 (DE, 07/2016)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-9sds-v1-0.pdfx",
+              "sha256": "96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43",
+              "printed_pages": [
+                11,
+                12
+              ],
+              "section": "1.9 Datenstruktur der Operation GetValidationResult / 1.9.2 Response",
+              "table": "Tabelle 9 Beschreibung der TicketingService.GetValidationResultResponse",
+              "point_summary": "Outer choice correctly references inner type TicketingService.ValidationResultDataStructure and Tabelle 10."
+            },
+            {
+              "source_id": "TICKETING_V1.0",
+              "document_title": "VDV-Schrift 301-2-9 TicketingService V1.0 (DE, 07/2016)",
+              "document_version": "1.0",
+              "publication_authority": "official_publication",
+              "url": "https://www.vdv.de/301-2-9sds-v1-0.pdfx",
+              "sha256": "96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43",
+              "printed_pages": [
+                12
+              ],
+              "section": "1.9 Datenstruktur der Operation GetValidationResult / 1.9.2 Response",
+              "table": "Tabelle 10 Beschreibung der TicketingService.GetValidationResultResponseStructure",
+              "point_summary": "Header/caption wrongly name the existing outer type; TimeStamp and ValidationResult both 1:1, actual inner type."
+            }
+          ],
+          "xsd_locators": [
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "element",
+              "component": "TicketingService.GetValidationResult",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.GetValidationResult']",
+              "line_hint": "77",
+              "point_summary": "Actual global root mapped to existing outer type, not inner fields."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "TicketingService.GetValidationResultResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.GetValidationResultResponseStructure']/xs:choice",
+              "line_hint": "78–83",
+              "point_summary": "Required exclusive choice ValidationResultData typed inner or OperationErrorMessage; no direct TimeStamp/ValidationResult."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidationResultDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidationResultDataStructure']/xs:sequence",
+              "line_hint": "84–89",
+              "point_summary": "Required inner sequence TimeStamp IBIS-IP.dateTime then ValidationResult TicketValidationEnumeration, actual owner of both fields."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "schema",
+              "component": "Common V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact dependency, IBIS-IP.dateTime and IBIS-IP.string."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.0; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.0",
+              "component_kind": "simpleType",
+              "component": "TicketValidationEnumeration",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='TicketValidationEnumeration']",
+              "line_hint": null,
+              "point_summary": "Exact enum dependency for inner ValidationResult."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "element",
+              "component": "TicketingService.GetValidationResult",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.GetValidationResult']",
+              "line_hint": "77",
+              "point_summary": "Actual global root mapped to existing outer type, not inner fields."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "complexType",
+              "component": "TicketingService.GetValidationResultResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.GetValidationResultResponseStructure']/xs:choice",
+              "line_hint": "78–83",
+              "point_summary": "Required exclusive choice ValidationResultData typed inner or OperationErrorMessage; no direct TimeStamp/ValidationResult."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidationResultDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidationResultDataStructure']/xs:sequence",
+              "line_hint": "84–89",
+              "point_summary": "Required inner sequence TimeStamp IBIS-IP.dateTime then ValidationResult TicketValidationEnumeration, actual owner of both fields."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "schema",
+              "component": "Common V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact dependency, IBIS-IP.dateTime and IBIS-IP.string."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.1; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.1",
+              "component_kind": "simpleType",
+              "component": "TicketValidationEnumeration",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='TicketValidationEnumeration']",
+              "line_hint": null,
+              "point_summary": "Exact enum dependency for inner ValidationResult."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "element",
+              "component": "TicketingService.GetValidationResult",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.GetValidationResult']",
+              "line_hint": "77",
+              "point_summary": "Actual global root mapped to existing outer type, not inner fields."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "complexType",
+              "component": "TicketingService.GetValidationResultResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.GetValidationResultResponseStructure']/xs:choice",
+              "line_hint": "78–83",
+              "point_summary": "Required exclusive choice ValidationResultData typed inner or OperationErrorMessage; no direct TimeStamp/ValidationResult."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidationResultDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidationResultDataStructure']/xs:sequence",
+              "line_hint": "84–89",
+              "point_summary": "Required inner sequence TimeStamp IBIS-IP.dateTime then ValidationResult TicketValidationEnumeration, actual owner of both fields."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "schema",
+              "component": "Common V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact dependency, IBIS-IP.dateTime and IBIS-IP.string."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.2; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.2",
+              "component_kind": "simpleType",
+              "component": "TicketValidationEnumeration",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='TicketValidationEnumeration']",
+              "line_hint": null,
+              "point_summary": "Exact enum dependency for inner ValidationResult."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "element",
+              "component": "TicketingService.GetValidationResult",
+              "xpath_hint": "/xs:schema/xs:element[@name='TicketingService.GetValidationResult']",
+              "line_hint": "77",
+              "point_summary": "Actual global root mapped to existing outer type, not inner fields."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "complexType",
+              "component": "TicketingService.GetValidationResultResponseStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.GetValidationResultResponseStructure']/xs:choice",
+              "line_hint": "78–83",
+              "point_summary": "Required exclusive choice ValidationResultData typed inner or OperationErrorMessage; no direct TimeStamp/ValidationResult."
+            },
+            {
+              "file": "IBIS-IP_TicketInformationService_V1.0.xsd",
+              "git_blob": "3fda66d872ab0d1c511247f13e715cf3ad56afe7",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "complexType",
+              "component": "TicketingService.ValidationResultDataStructure",
+              "xpath_hint": "/xs:schema/xs:complexType[@name='TicketingService.ValidationResultDataStructure']/xs:sequence",
+              "line_hint": "84–89",
+              "point_summary": "Required inner sequence TimeStamp IBIS-IP.dateTime then ValidationResult TicketValidationEnumeration, actual owner of both fields."
+            },
+            {
+              "file": "IBIS-IP_common_V1.0.xsd",
+              "git_blob": "194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "schema",
+              "component": "Common V1.0",
+              "xpath_hint": "/xs:schema",
+              "line_hint": null,
+              "point_summary": "Exact dependency, IBIS-IP.dateTime and IBIS-IP.string."
+            },
+            {
+              "file": "IBIS-IP_Enumerations_V1.0.xsd",
+              "git_blob": "a9bea5bc73003ed91ded8519db06c32c4067831d",
+              "authority_detail": "Exact official VDVde/VDV301@VDV-301-2.3; selected V1.0 dependency/release context, not latest-wins.",
+              "repository": "VDVde/VDV301",
+              "ref": "VDV-301-2.3",
+              "component_kind": "simpleType",
+              "component": "TicketValidationEnumeration",
+              "xpath_hint": "/xs:schema/xs:simpleType[@name='TicketValidationEnumeration']",
+              "line_hint": null,
+              "point_summary": "Exact enum dependency for inner ValidationResult."
+            }
+          ],
+          "coverage_note": "DE standalone V1.0 07/2016 pp11–12 §1.9.2 Tabellen 9/10 repeats the same correct inner reference and wrong inner table header/caption. Later identical official service and exact Common/Enums V1.0 at tags 2.0–2.3 preserve field ownership. Master comparison only, not a release; no earlier publication or corrected later service edition established per TKT-001 catalog review. Publication dates do not imply release-tag dates."
+        }
+      ],
+      "supporting_evidence": [
+        "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_TKT_007_2026-11-28.md",
+        "Reused EV-158 artifact 10336185560 ZIP SHA256 ba5ee246787f58d4cf690421fda683fb1dd072106d5c4e7eb6376c218b717870 integrity PASS; raw DE PDF SHA256 96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43 (627099 bytes); p11 d3340f41c706c295971bc47b93d824891fa2576cf74f4ca322ff543c2a4b6aa6 (289394), p12 5f6574a3a2f73731d4219b0009f417a0dce6d61c9bf93a715d37a38f6e8f07ff (189100), actual images inspected; seven archived XSD files rehashed as Git blobs matching original/later profiles. Historical EV-158 result for TKT-007 is context_verified, pdf_detailed_heading_targets_outer_wrapper.",
+        "Reused EN fallback run 46135487398 artifact 15259980153 ZIP SHA256 fd1f0b0df80de41da39f1b8f04c549d7323375ae4fa34f173f0ea11369f6f252; source manifest SHA256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 (2403598), p95 663b5018e28f32c6faf90dd75d9e8c1055256f4413dbc07afd08cca743128cc9 (289688). ZIP/source manifest/PNG hashes and sizes verified; actual visible page inspected. No new render/raw PDF retrieval needed.",
+        "Exact upstream tag files rechecked independently: original service 017ca64666e25d757fc0cde1f1be817f06a743fc, original aggregate 41289eaed2674a169fdf77a10a2eff293c76d5c4 at VDV-301-1.0; later service 3fda66d872ab0d1c511247f13e715cf3ad56afe7 identical at official tags 2.0–2.3, Common 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c and Enums a9bea5bc73003ed91ded8519db06c32c4067831d identical at all five tags. Complete original 12-file family downloaded and Git blob verified by permanent regression. No candidate promotion; later publication boundary retained from TKT-001 catalog review.",
+        "Permanent checker tools/validate_tkt_001_release_context.py expanded at 19e32fbec47cddcc169ed3e61649e72b49ce3c40; schema gate 46145064106 and handoff 46145064090 SUCCESS. Artifact 15262414462 SHA256 0c433ee5bc6d26fee8fbeff82064c57de4b3a6e1ff90274480ede8b49175f7d4 downloaded/rehashed, 24/24 status files exit 0. TKT-007: 6 positive (data/error branch and explicit inner type in both complete profiles), 2 flattened field negatives SCHEMAV_ELEMENT_CONTENT, 2 wrong-inner xsi:type negatives SCHEMAV_CVC_ELT_4_3, 10 mandatory choice/sequence controls, 2 isolated original controls SCHEMAV_CVC_ELT_1. TKT-001..006 retained. Independent local later-profile probes also confirm flattening, wrong inner type and omission/order errors.",
+        "Active disproof: header could be a description of an outer response rather than a type name, or intentional choice flattening; both tables use +Structure notation, explicit inner type reference and table number, and actual required sequence under inner type, while outer choice has completely different children. Header and caption repeat exact existing outer type on inner table; distinct from TKT-005 absent overview type. Choice minus notation does not flatten nested types. No historical alias or alternative global root inferred. Correctly nested instances unaffected, wrong shape/type ordinary XSD-INVALID; no dedicated advisory.",
+        "Adjacent observation (not a new finding or scope expansion): DE Tabelle 9 outer response description refers to tariff information instead of ticket validation, unlike EN Table 123. Preserve for separate identity/context review; TKT-007 concerns only inner table label and field ownership. TKT-008 and TKT-009 remain pending independently."
       ]
     }
   ]

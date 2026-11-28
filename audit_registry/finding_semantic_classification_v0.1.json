@@ -15169,10 +15169,16 @@
       "service": "TicketingService",
       "version_scope": [
         {
-          "version": "V1.0 later official self-contained revision",
+          "version": "TicketingService V1.0 in complete VDV-301-1.0 original aggregate",
           "authority": "official_release",
-          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7",
-          "note": "The outer GetValidationResult response wrapper contains ValidationResultData; TimeStamp and ValidationResult belong to TicketingService.ValidationResultDataStructure."
+          "xsd_profile": "IBIS_IP_V1.0.xsd @ 41289eaed2674a169fdf77a10a2eff293c76d5c4 + IBIS-IP_TicketInformationService_V1.0.xsd @ 017ca64666e25d757fc0cde1f1be817f06a743fc + exact complete historical 12-file family @ f5b53785f703e898632603eec3bfa3555a79fdba",
+          "note": "EN V1.0 01/2014 p95 §9.11.8.2 Tables 123/124: outer choice correctly references TicketingService.ValidationResultDataStructure, but inner field table 124 header and caption incorrectly name outer TicketingService.GetValidationResultResponseStructure. Both mandatory fields belong to the inner type in exact original service; complete original aggregate supplies the actual root. Isolated original service lacks that root and is a distinct packaging issue."
+        },
+        {
+          "version": "TicketingService V1.0 later official self-contained revision in VDV-301-2.0 through VDV-301-2.3",
+          "authority": "official_release",
+          "xsd_profile": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7 + Common/Enumerations V1.0 @ 194f73adfb9a62dfff8ce6a7b6a0cdc9b1c6a36c/a9bea5bc73003ed91ded8519db06c32c4067831d",
+          "note": "DE standalone V1.0 07/2016 pp11–12 §1.9.2 Tabellen 9/10 repeats the same correct inner reference and wrong inner table header/caption. Later identical official service and exact Common/Enums V1.0 at tags 2.0–2.3 preserve field ownership. Master comparison only, not a release; no earlier publication or corrected later service edition established per TKT-001 catalog review. Publication dates do not imply release-tag dates."
         }
       ],
       "review_state": "manually_reviewed",
@@ -15183,46 +15189,54 @@
         "GetValidationResult_detail_table",
         "outer_wrapper_vs_inner_data_structure",
         "TimeStamp_and_ValidationResult_field_owner",
-        "documentation_structure_label_error"
+        "documentation_structure_label_error",
+        "historical_aggregate_vs_isolated_service",
+        "independent_english_german_publications",
+        "flattened_outer_field_rejection",
+        "wrong_inner_xsi_type_rejection"
       ],
       "defect_assessment": "confirmed_pdf_defect",
       "confidence": "confirmed",
       "validation_effect": [
         "pdf_can_mislead_implementation",
         "code_generation_or_discovery_affected",
-        "no_runtime_effect"
+        "other"
       ],
       "sdk_behavior": "no_runtime_diagnostic",
       "semantic_basis": [
         {
           "type": "official_pdf_explicit",
-          "note": "The detailed PDF table labels TicketingService.GetValidationResultResponseStructure while listing TimeStamp and ValidationResult fields."
+          "note": "EN p95 §9.11.8.2 Tables123/124 and DE pp11–12 §1.9.2 Tabellen9/10 both correctly reference inner ValidationResultDataStructure from outer choice, then print GetValidationResultResponseStructure as the inner field table header/caption."
         },
         {
           "type": "official_xsd_explicit",
-          "note": "The exact XSD defines those fields in TicketingService.ValidationResultDataStructure, nested beneath the outer GetValidationResult response wrapper."
+          "note": "Exact original and later service schemas declare required outer choice ValidationResultData or OperationErrorMessage, and distinct inner sequence TimeStamp then ValidationResult; complete original aggregate and later service globally declare TicketingService.GetValidationResult with the outer type."
+        },
+        {
+          "type": "xsd_internal_consistency",
+          "note": "The existing outer type and existing inner type are distinct, not aliases; the inner field table lists the exact inner members and does not define a second outer layout."
         },
         {
           "type": "executable_validation",
-          "note": "EV-158 inventories the outer response choice and inner data sequence and confirms the field ownership."
+          "note": "Historical EV-158 static inventory retained. Full complete-profile regression 46145064106 proves 6 positives and 16 targeted negatives including direct field flattening, explicit wrong inner type, exclusive choice/mandatory sequence and isolated historical controls."
         },
         {
           "type": "technical_inference",
-          "note": "The defect is the table's structure label, not an alternative serialized XML shape or executable root."
+          "note": "Ordinary correctly nested XML unaffected; deriving a flattened response or explicit outer xsi:type on inner element from the wrong table label causes ordinary XSD-INVALID. Neither malformed shape nor type is prescribed as an alternative by the PDF's correctly referenced outer table; no dedicated runtime diagnostic necessary."
         }
       ],
       "diagnostic": {
         "de": {
           "title": "GetValidationResult: Detailtabelle verwechselt äußeren Response-Wrapper und innere Datenstruktur",
-          "short": "Die Tabelle ist mit GetValidationResultResponseStructure überschrieben, die gezeigten Felder TimeStamp und ValidationResult gehören aber zu ValidationResultDataStructure.",
-          "long": "TKT-007 ist ein bestätigter Strukturbezeichnungsfehler der Dokumentation. Die Detailtabelle der offiziellen TicketingService-V1.0-PDF trägt die Bezeichnung TicketingService.GetValidationResultResponseStructure, zeigt darunter aber die Felder TimeStamp und ValidationResult. In der exakten XSD gehören diese Felder zur inneren TicketingService.ValidationResultDataStructure; der äußere Response-Wrapper enthält stattdessen die Choice aus ValidationResultData und OperationErrorMessage.",
-          "recommendation": "Bei Schemaauflösung und Codegenerierung die Wrapper-/Datenstrukturgrenze der XSD übernehmen. Die PDF-Tabellenüberschrift nicht als Feldzuordnung interpretieren und daraus keine Runtime-Diagnostik ableiten."
+          "short": "Die Tabelle nennt GetValidationResultResponseStructure, TimeStamp und ValidationResult gehören jedoch zu ValidationResultDataStructure.",
+          "long": "TKT-007 ist ein bestätigter Strukturbezeichnungsfehler in der englischen Originalausgabe und deutschen TicketingService-V1.0-Einzelausgabe. Beide inneren Feldtabellen nennen im Kopf und in der Unterschrift TicketingService.GetValidationResultResponseStructure, obwohl die vorangehende äußere Tabelle korrekt auf TicketingService.ValidationResultDataStructure verweist. Im vollständigen originalen V1.0-Aggregat und der späteren eigenständigen Service-XSD sind TimeStamp und ValidationResult Pflichtfelder der inneren Struktur, nicht direkte Kinder des Response-Roots. Der äußere Typ enthält die Choice ValidationResultData oder OperationErrorMessage. Korrekt verschachtelte Instanzen validieren. Direkt unter dem äußeren Root serialisierte innere Felder oder der äußere Typ als expliziter xsi:type von ValidationResultData werden verworfen. Die isolierte ursprüngliche Service-Datei besitzt den globalen Response-Root nicht.",
+          "recommendation": "Bei Schemaauflösung und Codegenerierung die exakte Wrapper-/Datenstrukturgrenze der ausgewählten XSD übernehmen. TimeStamp und ValidationResult unter ValidationResultData serialisieren; bei expliziter Typangabe den tatsächlichen inneren Typ verwenden. Keine flache Alternative, Typ-Aliasbildung oder automatische Reparatur. Gewöhnliche XSD-Fehler beibehalten, kein eigenes Runtime-Advisory."
         },
         "en": {
           "title": "GetValidationResult: detail table confuses the outer response wrapper with the inner data structure",
-          "short": "The table is labelled GetValidationResultResponseStructure, but the shown TimeStamp and ValidationResult fields belong to ValidationResultDataStructure.",
-          "long": "TKT-007 is a confirmed documentation structure-label defect. The detailed table in the official TicketingService V1.0 PDF is labelled TicketingService.GetValidationResultResponseStructure but lists TimeStamp and ValidationResult beneath it. In the exact XSD, those fields belong to the inner TicketingService.ValidationResultDataStructure; the outer response wrapper instead contains the choice of ValidationResultData and OperationErrorMessage.",
-          "recommendation": "For schema resolution and code generation, preserve the wrapper/data-structure boundary defined by the XSD. Do not treat the PDF table heading as field ownership and do not derive a runtime diagnostic from it."
+          "short": "The table names GetValidationResultResponseStructure, but TimeStamp and ValidationResult belong to ValidationResultDataStructure.",
+          "long": "TKT-007 is a confirmed documentation structure-label defect in the original English and standalone German TicketingService V1.0 editions. Both inner field tables name TicketingService.GetValidationResultResponseStructure in the header and caption, although the preceding outer table correctly references TicketingService.ValidationResultDataStructure. In the complete original V1.0 aggregate and later self-contained service schema, TimeStamp and ValidationResult are mandatory members of the inner structure, not direct response-root children. The outer type contains the choice of ValidationResultData or OperationErrorMessage. Correctly nested instances validate. Directly serializing inner fields under the outer root or assigning the outer type as explicit xsi:type of ValidationResultData fails. The isolated original service file does not declare the global response root.",
+          "recommendation": "Preserve the exact selected-XSD wrapper/data boundary for schema resolution and code generation. Serialize TimeStamp and ValidationResult beneath ValidationResultData and use the actual inner type if explicit typing is needed. No flattened alternative, type alias or automatic repair. Preserve ordinary XSD errors without a dedicated runtime advisory."
         }
       },
       "runtime_match": {
@@ -15249,9 +15263,34 @@
           "kind": "xsd",
           "reference": "IBIS-IP_TicketInformationService_V1.0.xsd @ 3fda66d872ab0d1c511247f13e715cf3ad56afe7",
           "note": "Defines outer GetValidationResultResponseStructure and inner ValidationResultDataStructure."
+        },
+        {
+          "kind": "pdf",
+          "reference": "VDV301-2_V1.0_EN / sha256 e3bbfa9236fbbf5cddcf18bbcfd753b2c01516436e37d9b7d96a5b7c23cf80a7 / printed p95 Tables123–124",
+          "note": "Correct outer reference and erroneous inner header/caption."
+        },
+        {
+          "kind": "pdf",
+          "reference": "TICKETING_V1.0 / sha256 96241226c7a25b0384527dd3de5fcd9448c8e75f38bfb4ffd7b607680bfc6b43 / printed pp11–12 Tabellen9–10",
+          "note": "Independent German publication, same defect."
+        },
+        {
+          "kind": "xsd",
+          "reference": "IBIS_IP_V1.0.xsd @ 41289eaed2674a169fdf77a10a2eff293c76d5c4 / VDV-301-1.0",
+          "note": "Complete original aggregate declares exact global response root; original service blob 017ca64666e25d757fc0cde1f1be817f06a743fc defines both types."
+        },
+        {
+          "kind": "evidence",
+          "reference": "docs/pdf_xsd_semantic_audit/SOURCE_LOCATOR_REVIEW_TKT_007_2026-11-28.md",
+          "note": "Independent visual and executable field ownership scope review."
+        },
+        {
+          "kind": "evidence",
+          "reference": "schema-audit-validation run 46145064106 / artifact 15262414462",
+          "note": "22 targeted cases PASS; actual inner type and wrapper boundaries."
         }
       ],
-      "notes": "Confirmed documentation structure-reference defect with no standalone runtime token."
+      "notes": "TKT-007 confirmed_pdf_defect, selected_xsd, wrong_structure_reference, no_runtime_diagnostic/not_applicable retained. EN original and DE standalone inner field table header/caption wrongly identify existing outer type, despite immediately preceding correct inner type reference. Both exact complete original aggregate and identical later official service profiles 2.0–2.3 enforce outer choice and inner sequence. 6 positives / 16 targeted negatives PASS. Ordinary properly nested XML unaffected; flattening fields or explicitly substituting outer type for inner type is XSD-INVALID. Distinct from TKT-005 nonexistent overview type and opposite substitution. No dedicated runtime advisory, alias, root invention, resolver or XSD changes; all 77 mapping entries unchanged. Isolated original service lacks root. No earlier or corrected later publication established."
     },
     {
       "finding_id": "TKT-008",
