@@ -2127,7 +2127,7 @@
     "version_scope_boundary_latest_gate_run_id": 46123494175
   },
   "next_actions": [
-    "TKT-002 confirmed non_defect; exact original EN pp91–92 and standalone DE pp7/8/10 visually rechecked, three reused archive hashes and raw DE PDF/PNG identities verified. Both exact official V1.0 schema revisions and original complete aggregate use TicketingService unqualified dot names; no executable TicketInformationService alias. DE p10 misleading heading remains TKT-004. Existing metadata maps filename token to public service; no runtime resolver implementation inferred. Expanded permanent regression in TKT-001 checker covers all seven roots in two complete profiles, 14 canonical-root + 14 exact xsi:type positives, 14 missing-root + 14 unresolved-type alias negatives PASS. TKT-001 regression retained. Full gate 46123494175 and handoff 46123494133 SUCCESS on 85acb65d; evidence ZIP 15254517284 SHA256 298354eabd323c77101e6cb10f1560d6b2f519d216a41e3f092cf312dde9ec17 verified, all 24 status files exit 0. No XSD, resolver or runtime mapping changes. 148/192 source/body/boundary verified; 44 missing. Verify final HEAD gates and reviewed memory PR before TKT-003 (NOT STARTED)."
+    "TKT-003: inspect EN V1.0 p95 exact pinned render; compare generic roots and explicit xsi:type behavior in both official V1.0 packaging profiles. Do not advance locator counts until evidence and both gates succeed."
   ],
   "source_locator_progress": {
     "locator_entry_count": 148,
@@ -2205,12 +2205,23 @@
       "docs/pdf_xsd_semantic_audit/validation_backlog.md",
       "docs/superbranch_status.md"
     ],
-    "work_cycle_state": "terminal_clean",
-    "pending_gate": false,
+    "work_cycle_state": "gate_pending",
+    "pending_gate": true,
     "latest_completed_full_gate_run_id": 46123494175,
     "latest_completed_full_gate_status": "success",
     "latest_handoff_check_before_finalization_run_id": 46123494133,
-    "resume_instruction": "TKT-002 confirmed non_defect; exact original EN pp91–92 and standalone DE pp7/8/10 visually rechecked, three reused archive hashes and raw DE PDF/PNG identities verified. Both exact official V1.0 schema revisions and original complete aggregate use TicketingService unqualified dot names; no executable TicketInformationService alias. DE p10 misleading heading remains TKT-004. Existing metadata maps filename token to public service; no runtime resolver implementation inferred. Expanded permanent regression in TKT-001 checker covers all seven roots in two complete profiles, 14 canonical-root + 14 exact xsi:type positives, 14 missing-root + 14 unresolved-type alias negatives PASS. TKT-001 regression retained. Full gate 46123494175 and handoff 46123494133 SUCCESS on 85acb65d; evidence ZIP 15254517284 SHA256 298354eabd323c77101e6cb10f1560d6b2f519d216a41e3f092cf312dde9ec17 verified, all 24 status files exit 0. No XSD, resolver or runtime mapping changes. 148/192 source/body/boundary verified; 44 missing. Verify final HEAD gates and reviewed memory PR before TKT-003 (NOT STARTED)."
+    "resume_instruction": "TKT-003: inspect EN V1.0 p95 exact pinned render; compare generic roots and explicit xsi:type behavior in both official V1.0 packaging profiles. Do not advance locator counts until evidence and both gates succeed.",
+    "pending_block": "TKT-003",
+    "active_finding": "TKT-003",
+    "active_step": "Request exact-byte fallback render of missing EN detail page after live screenshot cache miss.",
+    "next_step": "TKT-003: inspect EN V1.0 p95 exact pinned render; compare generic roots and explicit xsi:type behavior in both official V1.0 packaging profiles. Do not advance locator counts until evidence and both gates succeed.",
+    "evidence_refs": [
+      "tools/pdf_render_request_v0.1.json",
+      "EV-158 artifact 10336185560",
+      "EN original render artifact 15254386230",
+      "audit_registry/pdf_source_pins_v0.1.json"
+    ],
+    "recovery_instruction": "Inspect render and handoff workflows for actual HEAD; verify ZIP, manifest, source pin and visible body before completing TKT-003. Retain all prior completed counts."
   },
   "scope_boundary_progress": {
     "policy": "docs/pdf_xsd_semantic_audit/VERSION_SCOPE_BOUNDARY_POLICY.md",
